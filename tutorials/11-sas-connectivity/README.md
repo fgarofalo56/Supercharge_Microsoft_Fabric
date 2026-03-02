@@ -143,6 +143,10 @@ Before starting this tutorial, ensure you have:
 
 ### 1.1 Download ODBC Driver 18+
 
+![Fabric Warehouse Connectivity](https://learn.microsoft.com/en-us/fabric/data-warehouse/media/connectivity/fabric-data-warehouse-connectivity.png)
+
+*Source: [Connectivity to data warehousing in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/data-warehouse/connectivity)*
+
 > ⚠️ **Important:** Microsoft Fabric requires **ODBC Driver 18 or higher**. Earlier versions will fail to connect.
 
 **Windows:**
@@ -187,6 +191,10 @@ odbcinst -q -d
 ```
 
 ### 1.3 Get Fabric SQL Connection String
+
+![Lakehouse SQL Endpoint](https://learn.microsoft.com/en-us/fabric/data-engineering/media/lakehouse-sql-analytics-endpoint/sql-analytics-endpoint-item.png)
+
+*Source: [Lakehouse SQL analytics endpoint](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-sql-analytics-endpoint)*
 
 1. Open your Fabric workspace
 2. Navigate to your **Lakehouse** or **Warehouse**
@@ -273,6 +281,10 @@ TrustServerCertificate=no;
 ## 🛠️ Step 3: Configure Microsoft Entra ID Authentication
 
 ### 3.1 Authentication Options
+
+![Microsoft Entra ID Authentication](https://learn.microsoft.com/en-us/fabric/security/media/security-fundamentals/authentication-authorization-overview.png)
+
+*Source: [Microsoft Fabric security fundamentals](https://learn.microsoft.com/en-us/fabric/security/security-fundamentals)*
 
 Microsoft Fabric supports multiple authentication methods via ODBC:
 
@@ -525,6 +537,10 @@ QUIT;
 ---
 
 ## 🛠️ Step 6: Writing Data to Fabric Warehouse
+
+![Fabric Warehouse Overview](https://learn.microsoft.com/en-us/fabric/data-warehouse/media/data-warehousing/data-warehouse-overview.png)
+
+*Source: [What is data warehousing in Microsoft Fabric?](https://learn.microsoft.com/en-us/fabric/data-warehouse/data-warehousing)*
 
 > ⚠️ **Important:** The Lakehouse SQL endpoint is **read-only**. To write data from SAS, you must connect to a **Fabric Warehouse** or use file-based ingestion.
 
@@ -1103,4 +1119,4 @@ This tutorial includes the following supplementary files:
 
 ---
 
-> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/your-repo/issues).
+> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).

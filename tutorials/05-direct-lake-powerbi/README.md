@@ -167,9 +167,9 @@ Before starting this tutorial, ensure you have:
 
 6. Click **Create**
 
-> 📸 **Screenshot**: Semantic Model Configuration
-> 
-> _To be added: Navigate to lh_gold Lakehouse > New semantic model and capture the configuration dialog showing selected tables (gold_slot_performance, gold_player_360, dim_date, dim_machine) and model name "Casino Analytics Model"_
+![Direct Lake Overview](https://learn.microsoft.com/en-us/fabric/fundamentals/media/direct-lake-overview/direct-lake-overview.svg)
+
+*Direct Lake semantic models connect directly to Delta tables in OneLake for optimal performance. Source: [Direct Lake overview](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview)*
 
 ### 1.2 Verify Direct Lake Mode
 
@@ -284,9 +284,13 @@ DAX measures provide calculated metrics that respond to filter context in report
 1. In the model view, click **New measure**
 2. Create a "Measures" display folder to organize measures
 
-> 📸 **Screenshot**: DAX Measure Editor
-> 
-> _To be added: Open the semantic model in Model view, click New measure, and capture the DAX formula bar showing a measure like "Hold % = DIVIDE([Net Win], [Total Coin In], 0) * 100" with the measure properties panel visible_
+![DAX Measures in Data Pane](https://learn.microsoft.com/en-us/power-bi/transform-model/media/desktop-measures/data-pane-measures.png)
+
+*Measures appear in the Data pane with a calculator icon. Source: [Create measures in Power BI Desktop](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-measures)*
+
+![Measure Formula Bar](https://learn.microsoft.com/en-us/power-bi/transform-model/media/desktop-measures/net-sales-home-table.png)
+
+*The formula bar displays the DAX expression for the selected measure. Source: [Create measures in Power BI Desktop](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-measures)*
 
 ### 3.2 Slot Performance Measures
 
@@ -608,9 +612,13 @@ AVERAGEX(
 
 #### Create Visuals
 
-> 📸 **Screenshot**: Report Canvas with Visualizations
-> 
-> _To be added: Open the Casino Analytics Model report in edit mode and capture the report canvas showing KPI cards (Net Win, Hold %, Players, Games), a line chart for Net Win trend, a bar chart for zone performance, and a table showing top machines_
+![Power BI Report View](https://learn.microsoft.com/en-us/power-bi/create-reports/media/desktop-report-view/add-visual.png)
+
+*Drag fields from the Data pane to create visualizations on the report canvas. Source: [Report view in Power BI Desktop](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-report-view)*
+
+![Chart with Measures](https://learn.microsoft.com/en-us/power-bi/transform-model/media/desktop-measures/last-year-sales-projected-sales-chart.png)
+
+*Visualizations powered by DAX measures for business analytics. Source: [Create measures in Power BI Desktop](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-measures)*
 
 **1. KPI Cards (Top Row)**
 
@@ -1148,7 +1156,7 @@ Continue your learning journey:
 
 <div align="center">
 
-**Questions or issues?** Open an issue in the [GitHub repository](https://github.com/your-repo/issues)
+**Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues)
 
 *Tutorial 05 of 10 in the Microsoft Fabric Casino POC Series*
 

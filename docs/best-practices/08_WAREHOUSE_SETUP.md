@@ -8,6 +8,19 @@
 
 The Fabric Data Warehouse provides a full T-SQL experience with ACID transactions, ideal for traditional SQL workloads and enterprise analytics. This guide covers schema design, statistics management, query optimization, and best practices.
 
+### Creating a Warehouse
+
+To create a new warehouse in Microsoft Fabric:
+
+1. Navigate to your workspace
+2. Click **+ New** > **Warehouse**
+3. Enter a name following the naming conventions below
+4. Click **Create**
+
+![Creating a New Warehouse in Fabric](https://learn.microsoft.com/en-us/fabric/data-warehouse/media/create-warehouse/new-warehouse.png)
+
+*Source: [Create a Warehouse in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/data-warehouse/create-warehouse)*
+
 ---
 
 ## Warehouse vs Lakehouse SQL Endpoint
@@ -399,6 +412,14 @@ WHEN NOT MATCHED THEN
 ---
 
 ## Checklist
+
+### Warehouse UI Reference
+
+Use the Fabric workspace to manage your warehouse. Access settings via the workspace settings cog:
+
+![Fabric Workspace Settings](https://learn.microsoft.com/en-us/fabric/fundamentals/media/workspaces/workspace-settings-cog.png)
+
+*Source: [Microsoft Fabric Workspaces Documentation](https://learn.microsoft.com/en-us/fabric/fundamentals/workspaces)*
 
 ### Initial Setup
 

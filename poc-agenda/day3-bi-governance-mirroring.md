@@ -159,6 +159,10 @@ timeline
 
 ### 📝 Activity 9.1: Create Semantic Model (30 min)
 
+![Direct Lake Overview](https://learn.microsoft.com/en-us/fabric/fundamentals/media/direct-lake-overview/direct-lake-overview.svg)
+
+*Source: [Direct Lake Overview](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview)*
+
 **Steps:**
 
 1. Open `lh_gold` Lakehouse
@@ -420,6 +424,10 @@ AVERAGEX(
 
 ### 📝 Activity 11.1: Connect Purview to Fabric (20 min)
 
+![Purview Governance Portal](https://learn.microsoft.com/en-us/purview/media/purview-governance-portal/purview-hub.png)
+
+*Source: [Microsoft Purview Governance Portal](https://learn.microsoft.com/en-us/purview/use-microsoft-purview-governance-portal)*
+
 **Steps:**
 
 1. Open [Microsoft Purview Portal](https://purview.microsoft.com)
@@ -536,6 +544,12 @@ Executive Dashboard
 ### 📝 Activity 12.1: Mirroring Overview (20 min)
 
 **What is Database Mirroring?**
+
+Database mirroring in Microsoft Fabric provides near real-time replication of operational databases to OneLake.
+
+![CI/CD and Workspace Git](https://learn.microsoft.com/en-us/fabric/data-factory/media/cicd-data-pipelines/workspace-git-status.png)
+
+*Source: [CI/CD for Data Pipelines](https://learn.microsoft.com/en-us/fabric/data-factory/cicd-data-pipelines)*
 
 ```
 Source Database → Change Data Capture → OneLake → Delta Tables

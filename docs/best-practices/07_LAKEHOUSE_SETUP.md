@@ -8,6 +8,10 @@
 
 The Lakehouse is central to Microsoft Fabric's data architecture, combining data lake flexibility with data warehouse capabilities. This guide covers Delta Lake configuration, medallion architecture implementation, and table maintenance best practices.
 
+![Lakehouse Overview in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/data-engineering/media/lakehouse-overview/lakehouse-overview.gif)
+
+*Source: [Microsoft Learn - Lakehouse Overview](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-overview)*
+
 ---
 
 ## Lakehouse Architecture
@@ -278,6 +282,10 @@ delta_table.vacuum(168)  # 168 hours = 7 days
 
 ### Using Portal UI
 
+![Lakehouse File Operations](https://learn.microsoft.com/en-us/fabric/data-engineering/media/how-to-use-notebook/lakehouse-file-operation.png)
+
+*Source: [Microsoft Learn - How to Use Notebooks](https://learn.microsoft.com/en-us/fabric/data-engineering/how-to-use-notebook)*
+
 1. Open Lakehouse in Fabric portal
 2. In Explorer, right-click table
 3. Select **Maintenance**
@@ -331,6 +339,10 @@ response = requests.post(
 | High-frequency queries | Evaluate (may need local copy) |
 
 ### Creating Shortcuts
+
+![Creating a Lakehouse Shortcut](https://learn.microsoft.com/en-us/fabric/data-engineering/media/lakehouse-shortcuts/create-lakehouse-schortcut.png)
+
+*Source: [Microsoft Learn - Lakehouse Shortcuts](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-shortcuts)*
 
 ```
 Lakehouse > Files > New shortcut > Select source

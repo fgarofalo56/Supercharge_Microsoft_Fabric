@@ -9,7 +9,7 @@ param environment = 'dev'
 param location = 'eastus2'
 param projectPrefix = 'fabricpoc'
 param fabricCapacitySku = 'F64'
-param fabricAdminEmail = 'admin@contoso.com'
+param fabricAdminEmail = 'frgarofa@microsoft.com'
 param enablePrivateEndpoints = false
 param logRetentionDays = 90
 

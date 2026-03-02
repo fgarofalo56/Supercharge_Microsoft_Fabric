@@ -1573,7 +1573,7 @@ Continue to **[Tutorial 04: Real-Time Analytics](../04-real-time-analytics/READM
 
 <div align="center">
 
-**Questions or issues?** Open an issue in the [GitHub repository](https://github.com/your-repo/issues).
+**Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
 
 ---
 

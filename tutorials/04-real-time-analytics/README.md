@@ -46,6 +46,8 @@
 
 ---
 
+> **📸 Note**: This tutorial contains screenshot placeholders with detailed descriptions of what should be captured. When running through this tutorial in your environment, we encourage you to capture your own screenshots at the indicated locations to document your specific implementation.
+
 ## 📋 Overview
 
 This tutorial covers implementing real-time analytics for casino floor monitoring using **Fabric Real-Time Intelligence**. You will create streaming pipelines that process slot machine events in near real-time, enabling instant visibility into floor operations, jackpots, and machine performance.
@@ -411,9 +413,9 @@ An **Eventstream** captures, transforms, and routes streaming data to destinatio
 2. Name: `es_slot_telemetry`
 3. Click **Create**
 
-> 📸 **Screenshot**: Eventstream Creation
-> 
-> _To be added: Navigate to workspace > + New > Eventstream and capture the Eventstream designer canvas showing the source node, transformation node, and Eventhouse destination connected together_
+![Eventstream Editor Canvas](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/includes/media/create-an-eventstream/editor.png)
+
+*The Eventstream editor canvas where you add sources and destinations. Source: [Create and manage an eventstream](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/create-manage-an-eventstream)*
 
 ### 3.2 Add Data Source
 
@@ -493,9 +495,13 @@ flowchart LR
 
 Now write KQL queries to analyze the streaming data.
 
-> 📸 **Screenshot**: Eventhouse with KQL Query
-> 
-> _To be added: Open the casino_floor_monitoring database in Eventhouse, run a KQL query (e.g., SlotEvents | take 10), and capture the query editor showing both the query and the results table with slot machine events_
+![Create KQL Database](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/media/create-database/new-database.png)
+
+*Create a new KQL database to store streaming data. Source: [Create a KQL database](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/create-database)*
+
+![KQL Queryset](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/media/create-database/attached-queryset.png)
+
+*The attached KQL queryset for running queries against your data. Source: [Create a KQL database](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/create-database)*
 
 ### 4.1 Real-Time Slot Activity by Zone
 
@@ -641,9 +647,13 @@ by player_id
 2. Name: `Casino Floor Monitor`
 3. Click **Create**
 
-> 📸 **Screenshot**: Real-Time Dashboard
-> 
-> _To be added: Open the "Casino Floor Monitor" real-time dashboard and capture the dashboard showing stat cards (active machines, players, games/minute), an area chart of zone activity, a jackpot table, and auto-refresh enabled (visible in top toolbar)_
+![New Real-Time Dashboard](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/includes/media/create-real-time-dashboard/dashboard-new.png)
+
+*A newly created Real-Time Dashboard ready for configuration. Source: [Create a Real-Time Dashboard](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/dashboard-real-time-create)*
+
+![Dashboard with Data Source](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/media/real-time-dashboard/dashboard-new-with-source.png)
+
+*Real-Time Dashboard with data source connected and tiles ready. Source: [Create a Real-Time Dashboard](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/dashboard-real-time-create)*
 
 ### 5.2 Configure Dashboard Tiles
 
@@ -1261,7 +1271,7 @@ Continue your learning journey:
 
 <div align="center">
 
-**Questions or issues?** Open an issue in the [GitHub repository](https://github.com/your-repo/issues)
+**Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues)
 
 *Tutorial 04 of 10 in the Microsoft Fabric Casino POC Series*
 

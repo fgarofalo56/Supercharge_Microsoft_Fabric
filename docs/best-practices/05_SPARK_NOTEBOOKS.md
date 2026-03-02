@@ -8,6 +8,10 @@
 
 Apache Spark in Microsoft Fabric provides powerful distributed computing for data engineering and data science workloads. This guide covers Spark optimization, notebook best practices, library management, and performance tuning.
 
+![Notebook Resources and Operations](https://learn.microsoft.com/en-us/fabric/data-engineering/media/how-to-use-notebook/notebook-resources-operations.gif)
+
+*Source: [Microsoft Learn - How to Use Notebooks](https://learn.microsoft.com/en-us/fabric/data-engineering/how-to-use-notebook)*
+
 ---
 
 ## Spark Capacity and Cluster Planning
@@ -69,6 +73,10 @@ SET spark.native.enabled = True
 ### %%configure Magic Command
 
 Configure Spark sessions at the beginning of notebooks:
+
+![Spark Session Information](https://learn.microsoft.com/en-us/fabric/data-engineering/media/author-execute-notebook/session-info.png)
+
+*Source: [Microsoft Learn - Author and Execute Notebooks](https://learn.microsoft.com/en-us/fabric/data-engineering/author-execute-notebook)*
 
 ```python
 %%configure
@@ -233,6 +241,10 @@ Workspace Settings > Spark Settings > High Concurrency Mode: Enabled
 
 ### Using runMultiple()
 
+![Assign Notebook Parameters from Pipeline](https://learn.microsoft.com/en-us/fabric/data-engineering/media/author-execute-notebook/assign-parameter.png)
+
+*Source: [Microsoft Learn - Author and Execute Notebooks](https://learn.microsoft.com/en-us/fabric/data-engineering/author-execute-notebook)*
+
 ```python
 # Run notebooks in parallel
 mssparkutils.notebook.runMultiple(["NotebookA", "NotebookB", "NotebookC"])
@@ -270,6 +282,10 @@ mssparkutils.notebook.runMultiple(dag)
 | Common libraries across items | Environment attached to notebooks |
 | One-time use in interactive | Inline installation (%pip) |
 | Production pipelines | Environment (not inline) |
+
+![Manage Environment Resources](https://learn.microsoft.com/en-us/fabric/data-engineering/media/how-to-use-notebook/manage-environment-resources.png)
+
+*Source: [Microsoft Learn - How to Use Notebooks](https://learn.microsoft.com/en-us/fabric/data-engineering/how-to-use-notebook)*
 
 ### Environment Libraries
 
@@ -319,6 +335,10 @@ Access detailed execution information:
 - Task-level metrics
 - Skew detection
 - Logical and physical plans
+
+![Spark Jobs Progress Details](https://learn.microsoft.com/en-us/fabric/data-engineering/media/author-execute-notebook/spark-progress-details.png)
+
+*Source: [Microsoft Learn - Author and Execute Notebooks](https://learn.microsoft.com/en-us/fabric/data-engineering/author-execute-notebook)*
 
 ### Resource Usage UI
 

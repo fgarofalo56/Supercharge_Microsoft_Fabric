@@ -1686,4 +1686,4 @@ Continue to **[Tutorial 18: Data Sharing and Collaboration](../18-data-sharing/R
 
 ---
 
-> **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/your-repo/issues).
+> **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).

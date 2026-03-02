@@ -207,6 +207,70 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-05-01' = if (e
 }
 
 // =============================================================================
+// Private DNS Zone for DFS (ADLS Gen2)
+// =============================================================================
+// NOTE: For production deployments, Private DNS Zones should be centrally managed
+// in a hub VNet and linked to spoke VNets. This POC deploys them inline for simplicity.
+// See: https://learn.microsoft.com/azure/private-link/private-endpoint-dns
+
+resource privateDnsZoneDfs 'Microsoft.Network/privateDnsZones@2020-06-01' = if (enablePrivateEndpoint) {
+  name: 'privatelink.dfs.${environment().suffixes.storage}'
+  location: 'global'
+  tags: tags
+}
+
+resource privateDnsZoneBlob 'Microsoft.Network/privateDnsZones@2020-06-01' = if (enablePrivateEndpoint) {
+  name: 'privatelink.blob.${environment().suffixes.storage}'
+  location: 'global'
+  tags: tags
+}
+
+// Link DNS zones to VNet (extract VNet ID from subnet ID)
+var vnetId = enablePrivateEndpoint ? substring(privateEndpointSubnetId, 0, lastIndexOf(privateEndpointSubnetId, '/subnets/')) : ''
+
+resource dfsVnetLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = if (enablePrivateEndpoint) {
+  parent: privateDnsZoneDfs
+  name: 'link-${storageAccountName}-dfs'
+  location: 'global'
+  tags: tags
+  properties: {
+    registrationEnabled: false
+    virtualNetwork: {
+      id: vnetId
+    }
+  }
+}
+
+resource blobVnetLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = if (enablePrivateEndpoint) {
+  parent: privateDnsZoneBlob
+  name: 'link-${storageAccountName}-blob'
+  location: 'global'
+  tags: tags
+  properties: {
+    registrationEnabled: false
+    virtualNetwork: {
+      id: vnetId
+    }
+  }
+}
+
+// DNS Zone Groups for automatic DNS registration
+resource privateEndpointDnsGroup 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2023-05-01' = if (enablePrivateEndpoint) {
+  parent: privateEndpoint
+  name: 'default'
+  properties: {
+    privateDnsZoneConfigs: [
+      {
+        name: 'dfs'
+        properties: {
+          privateDnsZoneId: privateDnsZoneDfs.id
+        }
+      }
+    ]
+  }
+}
+
+// =============================================================================
 // Outputs
 // =============================================================================
 

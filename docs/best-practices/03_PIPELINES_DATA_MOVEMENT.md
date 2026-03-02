@@ -8,6 +8,10 @@
 
 This guide covers best practices for data movement in Microsoft Fabric, including ETL vs ELT patterns, copy activity optimization, and different load strategies (full, incremental, CDC).
 
+![Pipeline with Copy Activity](https://learn.microsoft.com/en-us/fabric/data-factory/media/copy-data-activity/pipeline-with-copy-activity.png)
+
+*Source: [Microsoft Learn - Copy Data Activity](https://learn.microsoft.com/en-us/fabric/data-factory/copy-data-activity)*
+
 ---
 
 ## ETL vs ELT Decision Framework
@@ -69,6 +73,10 @@ flowchart TD
 
 ### Parallel Copy Configuration
 
+![Use Copy Assistant](https://learn.microsoft.com/en-us/fabric/data-factory/media/copy-data-activity/use-copy-assistant.png)
+
+*Source: [Microsoft Learn - Copy Data Activity](https://learn.microsoft.com/en-us/fabric/data-factory/copy-data-activity)*
+
 ```json
 {
   "name": "OptimizedCopyActivity",
@@ -123,6 +131,10 @@ flowchart TD
 ---
 
 ## Load Patterns
+
+![Configure Source Connection in Pipeline](https://learn.microsoft.com/en-us/fabric/data-factory/media/copy-data-activity/configure-source-connection-in-pipeline-new.png)
+
+*Source: [Microsoft Learn - Copy Data Activity](https://learn.microsoft.com/en-us/fabric/data-factory/copy-data-activity)*
 
 ### 1. Full Load (Truncate and Load)
 
@@ -300,6 +312,10 @@ delta_table.alias("target").merge(
 
 ### ForEach Parallel Execution
 
+![Schedule Pipeline Run](https://learn.microsoft.com/en-us/fabric/data-factory/media/pipeline-runs/schedule-pipeline-run.png)
+
+*Source: [Microsoft Learn - Pipeline Overview](https://learn.microsoft.com/en-us/fabric/data-factory/pipeline-overview)*
+
 **Use ForEach for parallel table processing:**
 
 ```json
@@ -398,6 +414,10 @@ flowchart LR
 ## Sink Optimization
 
 ### Lakehouse Table Sink
+
+![Configure Lakehouse Destination](https://learn.microsoft.com/en-us/fabric/data-factory/media/create-first-pipeline-with-sample-data/lakehouse-destination.png)
+
+*Source: [Microsoft Learn - Create First Pipeline](https://learn.microsoft.com/en-us/fabric/data-factory/create-first-pipeline-with-sample-data)*
 
 ```json
 {

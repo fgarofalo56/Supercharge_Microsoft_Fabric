@@ -228,6 +228,10 @@ quadrantChart
 
 ### 2.1 Create Teradata Connection in Data Factory
 
+![Data Factory Pipeline Canvas](https://learn.microsoft.com/en-us/fabric/data-factory/media/create-first-pipeline-with-sample-data/select-pipeline-from-new-button.png)
+
+*Source: [Create your first pipeline in Data Factory](https://learn.microsoft.com/en-us/fabric/data-factory/create-first-pipeline-with-sample-data)*
+
 1. Open your Fabric workspace
 2. Navigate to **Data Factory** > **Manage** > **Linked Services**
 3. Click **+ New** > **Teradata**
@@ -490,6 +494,10 @@ df_sample = spark.table("casino.large_table").sample(0.01)
 ## 🛠️ Step 4: Migrate Data Using Data Factory Pipelines
 
 ### 4.1 Create Migration Pipeline
+
+![Copy Activity Configuration](https://learn.microsoft.com/en-us/fabric/data-factory/media/copy-data-activity/copy-data-to-lakehouse-copy-settings.png)
+
+*Source: [Copy activity in Data Factory](https://learn.microsoft.com/en-us/fabric/data-factory/copy-data-activity)*
 
 ```mermaid
 flowchart LR
@@ -796,6 +804,10 @@ WITH (
 
 ### 6.1 Fabric Migration Assistant Overview
 
+![Fabric Migration Assistant](https://learn.microsoft.com/en-us/fabric/data-warehouse/media/migration-assistant/migration-assistant-overview.png)
+
+*Source: [Migration assistant for Fabric data warehouse](https://learn.microsoft.com/en-us/fabric/data-warehouse/migration-assistant)*
+
 The **Fabric Migration Assistant** is a native tool for automating schema and data migration.
 
 ```mermaid
@@ -869,6 +881,10 @@ Raven automates code conversion for SQL, ETL, and stored procedures.
 ---
 
 ## 🛠️ Step 7: Validate Migrated Data
+
+![Lakehouse Explorer](https://learn.microsoft.com/en-us/fabric/data-engineering/media/lakehouse-overview/lakehouse-overview.png)
+
+*Source: [What is a lakehouse in Microsoft Fabric?](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-overview)*
 
 ### 7.1 Row Count Validation
 
@@ -1226,4 +1242,4 @@ This tutorial includes the following supplementary files:
 
 ---
 
-> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/your-repo/issues).
+> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).

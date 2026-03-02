@@ -123,6 +123,10 @@ Before building pipelines, understand these key concepts:
 
 ### 1.1 In Fabric Portal
 
+![Data Factory Integration Stack](https://learn.microsoft.com/en-us/fabric/data-factory/media/data-factory-overview/data-integration-stack.png)
+
+*The Fabric Data Factory integration stack showing connectors, orchestration, and OneLake. Source: [Data Factory overview](https://learn.microsoft.com/en-us/fabric/data-factory/data-factory-overview)*
+
 1. Open workspace `casino-fabric-poc`
 2. Click **+ New** > **Data pipeline**
 3. Name: `pl_medallion_full_load`
@@ -930,4 +934,4 @@ Continue to **[Tutorial 07: Governance & Purview](../07-governance-purview/READM
 
 ---
 
-> **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/your-repo/issues).
+> **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).

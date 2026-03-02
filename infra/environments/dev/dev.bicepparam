@@ -11,8 +11,8 @@ param projectPrefix = 'fabricpoc'
 // Use smaller SKU for dev to reduce costs
 param fabricCapacitySku = 'F64'
 
-// Admin email - update with your email
-param fabricAdminEmail = 'admin@contoso.com'
+// Admin email for Fabric capacity alerts and notifications
+param fabricAdminEmail = 'frgarofa@microsoft.com'
 
 // Dev environment uses public endpoints
 param enablePrivateEndpoints = false

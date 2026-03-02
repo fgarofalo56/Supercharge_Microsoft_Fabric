@@ -479,6 +479,8 @@ df_gold.write \
 
 ### 📝 Activity 7.1: Create Eventhouse (20 min)
 
+The Eventhouse provides real-time intelligence capabilities for streaming data analysis.
+
 **Steps:**
 
 1. In workspace, click **+ New** > **Eventhouse**
@@ -488,6 +490,10 @@ df_gold.write \
 ---
 
 ### 📝 Activity 7.2: Configure Eventstream (40 min)
+
+![Eventstream Editor](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/includes/media/create-an-eventstream/editor.png)
+
+*Source: [Create an Eventstream in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/create-manage-an-eventstream)*
 
 ```
 Eventstream: es_slot_telemetry

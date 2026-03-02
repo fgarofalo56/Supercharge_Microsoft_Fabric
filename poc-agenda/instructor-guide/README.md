@@ -58,6 +58,12 @@
 
 ## 🖥️ Environment Setup Checklist
 
+### Microsoft Fabric Overview
+
+![Lakehouse Overview](https://learn.microsoft.com/en-us/fabric/data-engineering/media/lakehouse-overview/lakehouse-overview.gif)
+
+*Source: [Microsoft Fabric Lakehouse Overview](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-overview)*
+
 ### Azure Resources Required
 
 | Resource | SKU | Purpose | Status |
@@ -322,6 +328,10 @@ for dir_name in data_dirs:
 
 **1. Eventhouse vs Lakehouse**
 
+![Eventstream Editor](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/includes/media/create-an-eventstream/editor.png)
+
+*Source: [Create an Eventstream in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/create-manage-an-eventstream)*
+
 - When to use each
 - Query performance trade-offs
 - Storage patterns
@@ -395,6 +405,10 @@ while True:
 
 **1. Direct Lake Benefits**
 
+![Direct Lake Overview](https://learn.microsoft.com/en-us/fabric/fundamentals/media/direct-lake-overview/direct-lake-overview.svg)
+
+*Source: [Direct Lake Overview](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview)*
+
 - No data import
 - Sub-second queries
 - Automatic refresh
@@ -451,6 +465,10 @@ while True:
 <td width="33%">
 
 **1. Purview Value**
+
+![Purview Governance Portal](https://learn.microsoft.com/en-us/purview/media/purview-governance-portal/purview-hub.png)
+
+*Source: [Microsoft Purview Governance Portal](https://learn.microsoft.com/en-us/purview/use-microsoft-purview-governance-portal)*
 
 - Data discovery
 - Compliance tracking

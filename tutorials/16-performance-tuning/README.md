@@ -148,6 +148,10 @@ Before starting this tutorial, ensure you have:
 
 ### 1.1 Understanding V-Order
 
+![Delta Lake V-Order Optimization](https://learn.microsoft.com/en-us/fabric/data-engineering/media/delta-optimization-and-v-order/v-order-delta-optimization.png)
+
+*Source: [Delta Lake table optimization and V-Order](https://learn.microsoft.com/en-us/fabric/data-engineering/delta-optimization-and-v-order)*
+
 V-Order is a Fabric-specific write optimization that applies special sorting, row group distribution, and compression to Parquet files. It provides:
 
 - **15-50% faster reads** for analytical queries
@@ -725,6 +729,10 @@ print("Hourly summary table created for faster aggregations")
 
 ## Step 5: Lakehouse vs Warehouse Decision Matrix
 
+![OneLake Architecture](https://learn.microsoft.com/en-us/fabric/onelake/media/onelake-overview/onelake-foundation.png)
+
+*Source: [OneLake, the OneDrive for data](https://learn.microsoft.com/en-us/fabric/onelake/onelake-overview)*
+
 ### 5.1 Workload Comparison
 
 | Criteria | Lakehouse | Warehouse |
@@ -845,6 +853,10 @@ flowchart LR
 
 ### 6.1 Direct Lake Architecture
 
+![Direct Lake Overview](https://learn.microsoft.com/en-us/fabric/get-started/media/direct-lake-overview/direct-lake-overview-diagram.png)
+
+*Source: [Direct Lake overview](https://learn.microsoft.com/en-us/fabric/get-started/direct-lake-overview)*
+
 ```mermaid
 flowchart LR
     subgraph OneLake["OneLake Storage"]
@@ -953,6 +965,10 @@ SUMMARIZE(
 ---
 
 ## Step 7: Spark Configuration Tuning
+
+![Spark Compute Configuration](https://learn.microsoft.com/en-us/fabric/data-engineering/media/spark-compute/spark-compute-configuration.png)
+
+*Source: [Configure Apache Spark in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/data-engineering/spark-compute)*
 
 ### 7.1 Key Spark Configurations
 
@@ -1646,4 +1662,4 @@ Continue to **[Tutorial 17: Monitoring & Alerting](../17-monitoring-alerting/REA
 
 ---
 
-> **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/your-repo/issues).
+> **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).

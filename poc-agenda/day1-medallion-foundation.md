@@ -145,6 +145,10 @@ journey
 
 Create three Lakehouses for medallion architecture:
 
+![Lakehouse Overview](https://learn.microsoft.com/en-us/fabric/data-engineering/media/lakehouse-overview/lakehouse-overview.gif)
+
+*Source: [Microsoft Fabric Lakehouse Overview](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-overview)*
+
 | Lakehouse | Purpose | Schema | Status |
 |-----------|---------|--------|:------:|
 | `lh_bronze` | Raw data ingestion | Append-only, schema-on-read | ⬜ |
@@ -209,6 +213,12 @@ python generate.py compliance --records 5000 --days 30 --output ../sample-data/
 ### 📝 Activity 2.1: Bronze Layer Principles (15 min)
 
 > 💡 **Key Concepts**
+
+The Bronze layer is the foundation of the Medallion architecture, serving as the raw data landing zone.
+
+![Lakehouse Architecture](https://learn.microsoft.com/en-us/fabric/data-engineering/media/lakehouse-overview/lakehouse-overview.gif)
+
+*Source: [Microsoft Fabric Lakehouse Overview](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-overview)*
 
 ```
 Bronze Layer Rules:

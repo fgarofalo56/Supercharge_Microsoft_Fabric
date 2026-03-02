@@ -74,6 +74,10 @@ This document provides comprehensive cost estimates for the Microsoft Fabric Cas
 
 Microsoft Fabric capacity is the primary cost driver for this POC. Fabric uses Capacity Units (CUs) for billing, with different SKUs providing different amounts of compute power.
 
+![Fabric Capacity Settings](https://learn.microsoft.com/en-us/fabric/admin/media/service-admin-portal-capacity-settings/capacity-settings.png)
+
+*Source: [Capacity Settings in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/admin/service-admin-portal-capacity-settings)*
+
 #### Fabric SKU Pricing Matrix
 
 | 📊 SKU | ⚡ CUs | 🖥️ vCores | 🧠 Memory | 💰 Monthly (24/7) | 💵 Monthly (8hr/day) | ⏱️ Hourly |
@@ -426,6 +430,12 @@ Use the Azure Pricing Calculator for accurate, up-to-date estimates.
 | **POC Demo (3 Days)** | [Configure in Calculator](https://azure.microsoft.com/pricing/calculator/?service=fabric) |
 | **Development** | [Configure in Calculator](https://azure.microsoft.com/pricing/calculator/?service=fabric) |
 | **Production Pilot** | [Configure in Calculator](https://azure.microsoft.com/pricing/calculator/?service=fabric) |
+
+> **Tip:** Use the Azure Pricing Calculator to get accurate, region-specific pricing. The capacity settings shown below help you understand what you are configuring:
+
+![Fabric Capacity Settings](https://learn.microsoft.com/en-us/fabric/admin/media/service-admin-portal-capacity-settings/capacity-settings.png)
+
+*Source: [Capacity Settings in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/admin/service-admin-portal-capacity-settings)*
 
 ### Components to Configure
 

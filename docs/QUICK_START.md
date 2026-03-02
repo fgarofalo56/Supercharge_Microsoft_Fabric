@@ -100,9 +100,25 @@ docker-compose up data-generator
 3. Import notebook: `notebooks/bronze/01_bronze_slot_telemetry.py`
 4. Click **Run All**
 
+![Fabric Workspace Settings](https://learn.microsoft.com/en-us/fabric/fundamentals/media/workspaces/workspace-settings-cog.png)
+
+*Source: [Microsoft Fabric Workspaces Documentation](https://learn.microsoft.com/en-us/fabric/fundamentals/workspaces)*
+
 ---
 
 ## ✔️ Verify Success
+
+### Create Your Lakehouse
+
+Before running notebooks, create a Lakehouse in your workspace:
+
+1. In your workspace, click **+ New** > **Lakehouse**
+2. Name it `lh_bronze_casino`
+3. Click **Create**
+
+![Creating a New Warehouse in Fabric](https://learn.microsoft.com/en-us/fabric/data-warehouse/media/create-warehouse/new-warehouse.png)
+
+*Source: [Create a Warehouse in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/data-warehouse/create-warehouse)*
 
 ### Check Bronze Layer Created
 

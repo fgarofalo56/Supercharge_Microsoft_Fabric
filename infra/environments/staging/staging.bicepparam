@@ -11,8 +11,8 @@ param projectPrefix = 'fabricpoc'
 // Production-like SKU for staging
 param fabricCapacitySku = 'F64'
 
-// Admin email - update with your email
-param fabricAdminEmail = 'admin@contoso.com'
+// Admin email for Fabric capacity alerts and notifications
+param fabricAdminEmail = 'frgarofa@microsoft.com'
 
 // Staging can test private endpoints
 param enablePrivateEndpoints = false

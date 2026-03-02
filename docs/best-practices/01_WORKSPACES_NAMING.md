@@ -66,6 +66,12 @@ domain-marketing/
 
 ## Workspace Configuration Checklist
 
+Access workspace settings by clicking the settings cog in the workspace:
+
+![Fabric Workspace Settings](https://learn.microsoft.com/en-us/fabric/fundamentals/media/workspaces/workspace-settings-cog.png)
+
+*Source: [Microsoft Fabric Workspaces Documentation](https://learn.microsoft.com/en-us/fabric/fundamentals/workspaces)*
+
 ### Essential Settings
 
 | Setting | Recommendation | Reason |
@@ -82,6 +88,12 @@ Production Workspaces  -> Dedicated capacity (F64+)
 Development Workspaces -> Shared capacity or smaller SKU (F4-F16)
 POC/Sandbox           -> Trial or shared capacity
 ```
+
+Manage your Fabric capacities from the admin portal:
+
+![Fabric Capacity Settings](https://learn.microsoft.com/en-us/fabric/admin/media/service-admin-portal-capacity-settings/capacity-settings.png)
+
+*Source: [Capacity Settings in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/admin/service-admin-portal-capacity-settings)*
 
 ---
 

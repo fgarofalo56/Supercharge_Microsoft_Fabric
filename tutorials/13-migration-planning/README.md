@@ -84,6 +84,10 @@ This guide is designed for Data Platform Architects, Program Managers, and Techn
 
 ## 🏗️ Migration Architecture
 
+![Microsoft Fabric Architecture](https://learn.microsoft.com/en-us/fabric/get-started/media/microsoft-fabric-overview/fabric-architecture.png)
+
+*Source: [What is Microsoft Fabric?](https://learn.microsoft.com/en-us/fabric/get-started/microsoft-fabric-overview)*
+
 ```mermaid
 flowchart TB
     subgraph Source["🏢 Legacy Environment"]
@@ -262,6 +266,10 @@ Week 3:
 ---
 
 ### Sprint 2: Infrastructure Setup (Weeks 4-6)
+
+![Fabric Workspace Management](https://learn.microsoft.com/en-us/fabric/get-started/media/workspaces/workspace-item-list.png)
+
+*Source: [Workspaces in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/get-started/workspaces)*
 
 **Objectives:**
 - Provision Azure and Fabric infrastructure
@@ -716,6 +724,10 @@ def migrate_dimension(
 
 ### Sprint 7: BI & Analytics (Weeks 19-21)
 
+![Power BI Semantic Models](https://learn.microsoft.com/en-us/fabric/data-warehouse/media/semantic-models/semantic-model-overview.png)
+
+*Source: [Semantic models in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/data-warehouse/semantic-models)*
+
 **Objectives:**
 - Build production semantic models
 - Migrate all reports and dashboards
@@ -1015,6 +1027,10 @@ flowchart TB
 ---
 
 ## 🔒 Security & Compliance
+
+![Fabric Security Overview](https://learn.microsoft.com/en-us/fabric/security/media/security-overview/security-overview.png)
+
+*Source: [Microsoft Fabric security overview](https://learn.microsoft.com/en-us/fabric/security/security-overview)*
 
 ### Security Architecture
 

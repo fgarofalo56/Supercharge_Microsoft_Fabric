@@ -179,9 +179,9 @@ Before starting, ensure you have:
 3. Navigate to **Capacity settings**
 4. Confirm your Fabric capacity is available and running
 
-> 📸 **Screenshot**: Azure Portal - Fabric Capacity Creation
-> 
-> _To be added: Navigate to Azure Portal > Create a resource > Microsoft Fabric > Capacity and capture the capacity creation blade showing SKU selection (F64), region, and capacity name fields_
+![Fabric Workspace Contact List](https://learn.microsoft.com/en-us/fabric/get-started/media/create-workspaces/fabric-contact-list.png)
+
+*Source: [Create workspaces in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/get-started/create-workspaces)*
 
 > ⚠️ **Warning:** If your capacity is paused, notebooks and data processing will not work. Ensure the capacity is in "Active" state before proceeding. Resume can take 2-3 minutes.
 
@@ -204,9 +204,9 @@ Before starting, ensure you have:
 
 4. Click **Apply**
 
-> 📸 **Screenshot**: Fabric Portal - Workspace Creation
-> 
-> _To be added: Navigate to Fabric portal > Workspaces > + New workspace and capture the workspace creation dialog showing Name, Description, License mode, and Capacity dropdown fields_
+![Pin Workspace to Favorites](https://learn.microsoft.com/en-us/fabric/get-started/media/create-workspaces/pin-workspace.png)
+
+*Tip: Pin your workspace for quick access. Source: [Create workspaces in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/get-started/create-workspaces)*
 
 ### Configure Workspace Settings
 
@@ -244,6 +244,10 @@ graph TB
 
 ### 🥉 Bronze Lakehouse (Raw Data)
 
+![Lakehouse Card on Data Engineering Homepage](https://learn.microsoft.com/en-us/fabric/data-engineering/media/create-lakehouse/lakehouse-card.png)
+
+*Create a new Lakehouse from the Data Engineering homepage. Source: [Create a Lakehouse](https://learn.microsoft.com/en-us/fabric/data-engineering/create-lakehouse)*
+
 1. In your workspace, click **+ New** > **Lakehouse**
 2. Name: `lh_bronze`
 3. Click **Create**
@@ -279,6 +283,10 @@ If you deployed the ADLS Gen2 storage account via Bicep, connect it as a shortcu
 
 ### Create OneLake Shortcut to ADLS
 
+![New Shortcut in Lake View](https://learn.microsoft.com/en-us/fabric/onelake/media/create-onelake-shortcut/new-shortcut-lake-view.png)
+
+*Right-click to create a new shortcut from the Lake view. Source: [Create an ADLS shortcut](https://learn.microsoft.com/en-us/fabric/onelake/create-adls-shortcut)*
+
 1. Open `lh_bronze`
 2. In the **Explorer** pane, right-click on **Files**
 3. Select **New shortcut**
@@ -294,6 +302,14 @@ If you deployed the ADLS Gen2 storage account via Bicep, connect it as a shortcu
 6. Browse to the `landing` container
 7. Name the shortcut: `landing_zone`
 8. Click **Create**
+
+![Shortcut Connection Details](https://learn.microsoft.com/en-us/fabric/onelake/media/create-adls-shortcut/shortcut-details.png)
+
+*Configure connection details for the ADLS shortcut. Source: [Create an ADLS shortcut](https://learn.microsoft.com/en-us/fabric/onelake/create-adls-shortcut)*
+
+![Browse Storage Account](https://learn.microsoft.com/en-us/fabric/onelake/media/create-adls-shortcut/shortcut-browse.png)
+
+*Browse and select the target folder in your storage account. Source: [Create an ADLS shortcut](https://learn.microsoft.com/en-us/fabric/onelake/create-adls-shortcut)*
 
 > 💡 **Pro Tip:** Shortcuts allow you to access external data without copying it, reducing storage costs and keeping data in sync. Use shortcuts for large archives or shared data sources.
 
@@ -334,9 +350,9 @@ For local development and data generation, install these tools:
 
 > 💡 **Pro Tip:** Use a virtual environment to isolate project dependencies and avoid conflicts with system Python packages.
 
-> 📸 **Screenshot**: VS Code - Extension Installation
-> 
-> _To be added: Open VS Code > Extensions panel and capture the installed extensions including Python, Jupyter, Azure Account, and Microsoft Fabric extensions with their enabled status_
+![Fabric Notebook Interface](https://learn.microsoft.com/en-us/fabric/data-engineering/media/how-to-use-notebook/switch-mode.png)
+
+*The Fabric notebook interface with mode switching options. Source: [How to use notebooks](https://learn.microsoft.com/en-us/fabric/data-engineering/how-to-use-notebook)*
 
 ```bash
 # Create virtual environment
@@ -364,6 +380,10 @@ pip install -r requirements.txt
 4. **Permissions correct:** Team members can access
 
 ### Create a Test Table
+
+![New Notebook Menu Options](https://learn.microsoft.com/en-us/fabric/data-engineering/media/how-to-use-notebook/new-menu-notebook-options.png)
+
+*Create a new notebook from the workspace. Source: [How to use notebooks](https://learn.microsoft.com/en-us/fabric/data-engineering/how-to-use-notebook)*
 
 1. Open `lh_bronze`
 2. Click **Open notebook** > **New notebook**
@@ -527,4 +547,4 @@ Continue to **[Tutorial 01: Bronze Layer](../01-bronze-layer/README.md)** to sta
 
 ---
 
-> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/your-repo/issues).
+> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).

@@ -11,8 +11,8 @@ param projectPrefix = 'fabricpoc'
 // Full capacity for production
 param fabricCapacitySku = 'F64'
 
-// Admin email - update with production admin
-param fabricAdminEmail = 'admin@contoso.com'
+// Admin email for critical Fabric capacity alerts and notifications
+param fabricAdminEmail = 'frgarofa@microsoft.com'
 
 // Production should use private endpoints
 param enablePrivateEndpoints = true

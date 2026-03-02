@@ -8,6 +8,10 @@
 
 The on-premises data gateway is critical for connecting Fabric to on-premises data sources like Oracle, SQL Server, and file systems. Proper configuration dramatically impacts data movement performance.
 
+![On-premises Data Gateway Architecture](https://learn.microsoft.com/en-us/power-bi/connect-data/media/service-gateway-onprem/on-premises-data-gateway.png)
+
+*Source: [Microsoft Learn - On-premises Data Gateway](https://learn.microsoft.com/en-us/power-bi/connect-data/service-gateway-onprem)*
+
 ---
 
 ## Gateway Types
@@ -127,6 +131,10 @@ Default: C:\Users\PBIEgwService\AppData\Local\Microsoft\On-premises data gateway
 ## High Availability Clustering
 
 ### Cluster Configuration
+
+![Gateway Architecture - How it Works](https://learn.microsoft.com/en-us/data-integration/gateway/media/service-gateway-onprem-indepth/on-prem-data-gateway-how-it-works.png)
+
+*Source: [Microsoft Learn - On-premises Data Gateway In-Depth](https://learn.microsoft.com/en-us/data-integration/gateway/service-gateway-onprem-indepth)*
 
 ```mermaid
 flowchart LR

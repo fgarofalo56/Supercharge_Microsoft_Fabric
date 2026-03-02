@@ -90,6 +90,10 @@ az provider list --query "[?namespace=='Microsoft.Fabric'].registrationState" -o
 2. Or [Fabric Admin Portal](https://app.fabric.microsoft.com/admin-portal)
 3. Ensure Fabric is enabled for your organization
 
+![Fabric Admin Center](https://learn.microsoft.com/en-us/fabric/admin/media/admin-center/admin-center.png)
+
+*Source: [Microsoft Fabric Admin Center](https://learn.microsoft.com/en-us/fabric/admin/admin-center)*
+
 > ⚠️ **Warning:** Enabling Fabric requires Azure AD Global Administrator or Fabric Administrator permissions. Contact your tenant admin if you don't have these roles.
 
 ### Quota Verification
@@ -100,6 +104,12 @@ az quota show \
   --scope "/subscriptions/{subscription-id}/providers/Microsoft.Fabric/locations/eastus2" \
   --resource-name "F64"
 ```
+
+You can also view capacity settings in the Azure portal:
+
+![Fabric Capacity Settings in Azure Portal](https://learn.microsoft.com/en-us/fabric/admin/media/service-admin-portal-capacity-settings/capacity-settings.png)
+
+*Source: [Capacity Settings in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/admin/service-admin-portal-capacity-settings)*
 
 ---
 

@@ -211,13 +211,10 @@ Open these tabs in order (left to right):
 3. Expand: Tables folder
 
 **[Screenshot: Lakehouse Explorer - Bronze Tables]**
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                                                                 │
-│   [Place screenshot of Bronze Lakehouse with expanded tables]   │
-│                                                                 │
-└─────────────────────────────────────────────────────────────────┘
-```
+
+![Lakehouse Overview](https://learn.microsoft.com/en-us/fabric/data-engineering/media/lakehouse-overview/lakehouse-overview.gif)
+
+*Source: [Microsoft Fabric Lakehouse Overview](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-overview)*
 
 **Talking Points:**
 
@@ -482,6 +479,10 @@ LIMIT 7;
 
 **[Screenshot: Eventstream visual designer]**
 
+![Eventstream Editor](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/includes/media/create-an-eventstream/editor.png)
+
+*Source: [Create an Eventstream in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/create-manage-an-eventstream)*
+
 **Talking Points:**
 
 > "Here's how data flows in:
@@ -682,6 +683,10 @@ SlotEvents
 1. Click: Model settings (gear icon)
 2. Show storage mode setting
 
+![Direct Lake Overview](https://learn.microsoft.com/en-us/fabric/fundamentals/media/direct-lake-overview/direct-lake-overview.svg)
+
+*Source: [Direct Lake Overview](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview)*
+
 **Talking Points:**
 
 > "See here - Storage mode: Direct Lake. This is different from:
@@ -833,6 +838,10 @@ SlotEvents
 2. Or navigate to: purview.microsoft.com
 
 **[Screenshot: Purview Portal home]**
+
+![Purview Governance Portal](https://learn.microsoft.com/en-us/purview/media/purview-governance-portal/purview-hub.png)
+
+*Source: [Microsoft Purview Governance Portal](https://learn.microsoft.com/en-us/purview/use-microsoft-purview-governance-portal)*
 
 **Talking Points:**
 

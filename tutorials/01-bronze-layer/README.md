@@ -308,9 +308,9 @@ Before starting, ensure you have:
 3. In **Files** section, click **Upload** > **Upload folder**
 4. Upload the `output` folder
 
-> 📸 **Screenshot**: Lakehouse Files Upload Dialog
-> 
-> _To be added: Navigate to lh_bronze Lakehouse > Files section, click Upload > Upload folder, and capture the upload dialog or the files section after upload showing the output folder_
+![Lakehouse File Operations](https://learn.microsoft.com/en-us/fabric/data-engineering/media/how-to-use-notebook/lakehouse-file-operation.png)
+
+*The Lakehouse explorer shows files and folders with context menu options. Source: [How to use notebooks](https://learn.microsoft.com/en-us/fabric/data-engineering/how-to-use-notebook)*
 
 ### Option B: Use Shortcut to ADLS
 
@@ -333,9 +333,9 @@ Files/
 │   └── bronze_compliance.parquet
 ```
 
-> 📸 **Screenshot**: File Explorer Showing Uploaded Files
-> 
-> _To be added: Navigate to lh_bronze Lakehouse > Files > output folder and capture the file explorer showing all uploaded parquet files with their sizes and timestamps_
+![Lakehouse Content Area](https://learn.microsoft.com/en-us/fabric/data-engineering/media/lakehouse-notebook-explore/content-area.png)
+
+*The content area displays file and folder details including size and timestamps. Source: [Explore lakehouse in notebook](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-notebook-explore)*
 
 > ℹ️ **Note:** File names may vary based on your data generation configuration. Adjust the notebook paths accordingly.
 
@@ -468,9 +468,9 @@ delta_table.history(5).select(
 2. Verify the table appears in the **Tables** section of `lh_bronze`
 3. Check the row count matches expected
 
-> 📸 **Screenshot**: Notebook Execution Output
-> 
-> _To be added: Capture the notebook after running all cells, showing the successful output with record counts, table statistics, and the "✅ Successfully wrote" confirmation message_
+![Set Default Lakehouse](https://learn.microsoft.com/en-us/fabric/data-engineering/media/lakehouse-notebook-explore/set-default-lakehouse.png)
+
+*Pin a lakehouse as default to see Tables and Files in the explorer. Source: [Explore lakehouse in notebook](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-notebook-explore)*
 
 ---
 
@@ -926,4 +926,4 @@ Continue to **[Tutorial 02: Silver Layer](../02-silver-layer/README.md)** to lea
 
 ---
 
-> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/your-repo/issues).
+> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).

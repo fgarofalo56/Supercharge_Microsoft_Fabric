@@ -209,8 +209,9 @@ GO
 2. Click **+ New** > **Mirrored database**
 3. Select **Azure SQL Database** or **SQL Server**
 
-<!-- Screenshot placeholder: Create Mirrored Database dialog -->
-> 📸 **Screenshot**: In the Fabric workspace, click **+ New** → **Mirrored database** to open the configuration wizard.
+![Database Mirroring Architecture](https://learn.microsoft.com/en-us/fabric/database/mirrored-database/media/azure-sql-database/fabric-mirroring-sql-database.svg)
+
+*Database mirroring architecture showing Azure SQL Database connected to Fabric OneLake. Source: [Mirror Azure SQL Database](https://learn.microsoft.com/en-us/fabric/database/mirrored-database/azure-sql-database)*
 
 ### 1.4 Configure Connection
 
@@ -793,4 +794,4 @@ Continue to **[Tutorial 09: Advanced AI/ML](../09-advanced-ai-ml/README.md)** to
 
 ---
 
-> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/your-repo/issues).
+> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).

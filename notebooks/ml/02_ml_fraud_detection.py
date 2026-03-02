@@ -22,7 +22,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
 
-from pyspark.sql.functions import *
+from pyspark.sql.functions import col, when, rand, coalesce, lit, count, countDistinct, sum, avg, max, min, stddev, to_date, hour, current_timestamp
 from pyspark.sql.types import *
 from pyspark.sql.window import Window
 
@@ -173,17 +173,35 @@ anomaly_features = [
     "structuring_risk"
 ]
 
-# Convert to pandas for sklearn
-pdf = df_features.select(["player_id", "txn_date"] + anomaly_features).toPandas()
+# Scalable approach: Use sampling for large datasets to avoid memory issues
+# For production with 100K+ records, train on sample and batch-score full data
+MAX_TRAINING_ROWS = 100000
+
+total_rows = df_features.count()
+print(f"Total aggregated rows: {total_rows:,}")
+
+if total_rows > MAX_TRAINING_ROWS:
+    # Sample for training (stratified by structuring_risk for better coverage)
+    sample_fraction = MAX_TRAINING_ROWS / total_rows
+    df_sample = df_features.sampleBy(
+        "structuring_risk",
+        fractions={0.0: sample_fraction, 25.0: min(1.0, sample_fraction * 2),
+                   75.0: 1.0, 100.0: 1.0},  # Over-sample high-risk
+        seed=42
+    )
+    print(f"Using stratified sample of {df_sample.count():,} rows for training")
+    pdf_train = df_sample.select(["player_id", "txn_date"] + anomaly_features).toPandas()
+else:
+    pdf_train = df_features.select(["player_id", "txn_date"] + anomaly_features).toPandas()
 
 # Prepare features
-X = pdf[anomaly_features].fillna(0)
+X_train = pdf_train[anomaly_features].fillna(0)
 
 # Scale features
 scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
+X_scaled = scaler.fit_transform(X_train)
 
-print(f"Feature matrix shape: {X_scaled.shape}")
+print(f"Training feature matrix shape: {X_scaled.shape}")
 
 # COMMAND ----------
 
@@ -206,6 +224,8 @@ with mlflow.start_run(run_name="isolation_forest_fraud"):
     mlflow.log_param("contamination", contamination)
     mlflow.log_param("n_estimators", n_estimators)
     mlflow.log_param("features", anomaly_features)
+    mlflow.log_param("training_rows", len(X_scaled))
+    mlflow.log_param("total_rows", total_rows)
 
     # Train Isolation Forest
     iso_forest = IsolationForest(
@@ -215,27 +235,98 @@ with mlflow.start_run(run_name="isolation_forest_fraud"):
         n_jobs=-1
     )
 
-    # Fit and predict
-    anomaly_scores = iso_forest.fit_predict(X_scaled)
-    anomaly_decision = iso_forest.decision_function(X_scaled)
+    # Fit model on training data
+    iso_forest.fit(X_scaled)
 
-    # Add results to dataframe
-    pdf["anomaly_label"] = anomaly_scores  # -1 = anomaly, 1 = normal
-    pdf["anomaly_score"] = -anomaly_decision  # Higher = more anomalous
-    pdf["is_anomaly"] = (pdf["anomaly_label"] == -1).astype(int)
-
-    # Calculate metrics
-    anomaly_count = (pdf["is_anomaly"] == 1).sum()
-    anomaly_pct = anomaly_count / len(pdf) * 100
-
-    mlflow.log_metric("anomaly_count", anomaly_count)
-    mlflow.log_metric("anomaly_percentage", anomaly_pct)
-
-    # Log model
+    # Log model artifacts
     mlflow.sklearn.log_model(iso_forest, "fraud_detection_model")
     mlflow.sklearn.log_model(scaler, "feature_scaler")
 
-    print(f"Anomalies detected: {anomaly_count:,} ({anomaly_pct:.2f}%)")
+    print(f"Model trained on {len(X_scaled):,} samples")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Batch Scoring (Scalable for Large Datasets)
+
+# COMMAND ----------
+
+# Define UDF for batch scoring using pandas_udf (vectorized for performance)
+from pyspark.sql.functions import pandas_udf
+from pyspark.sql.types import DoubleType, IntegerType
+
+# Broadcast the scaler parameters and model for distributed scoring
+scaler_mean = spark.sparkContext.broadcast(scaler.mean_)
+scaler_scale = spark.sparkContext.broadcast(scaler.scale_)
+model_broadcast = spark.sparkContext.broadcast(iso_forest)
+
+@pandas_udf(DoubleType())
+def score_anomaly(
+    transaction_count: pd.Series, total_amount: pd.Series, avg_amount: pd.Series,
+    max_amount: pd.Series, unique_cages: pd.Series, unique_cashiers: pd.Series,
+    near_ctr_count: pd.Series, unique_hours: pd.Series, hour_span: pd.Series,
+    structuring_risk: pd.Series
+) -> pd.Series:
+    """Vectorized anomaly scoring using Isolation Forest."""
+    # Build feature matrix
+    X = pd.DataFrame({
+        'transaction_count': transaction_count,
+        'total_amount': total_amount,
+        'avg_amount': avg_amount,
+        'max_amount': max_amount,
+        'unique_cages': unique_cages,
+        'unique_cashiers': unique_cashiers,
+        'near_ctr_count': near_ctr_count,
+        'unique_hours': unique_hours,
+        'hour_span': hour_span,
+        'structuring_risk': structuring_risk
+    }).fillna(0)
+
+    # Scale features using broadcast parameters
+    X_scaled = (X - scaler_mean.value) / scaler_scale.value
+
+    # Score using broadcast model (negative decision function = higher anomaly)
+    scores = -model_broadcast.value.decision_function(X_scaled)
+    return pd.Series(scores)
+
+# Apply scoring to full dataset using Spark (no full DataFrame to Pandas conversion)
+df_scored = df_features.withColumn(
+    "anomaly_score",
+    score_anomaly(
+        col("transaction_count"), col("total_amount"), col("avg_amount"),
+        col("max_amount"), col("unique_cages"), col("unique_cashiers"),
+        col("near_ctr_count"), col("unique_hours"), col("hour_span"),
+        col("structuring_risk")
+    )
+)
+
+# Determine anomaly threshold from training data
+threshold = np.percentile(-iso_forest.decision_function(X_scaled), (1 - contamination) * 100)
+
+df_scored = df_scored.withColumn(
+    "is_anomaly",
+    when(col("anomaly_score") > threshold, 1).otherwise(0)
+)
+
+# Cache for downstream operations
+df_scored.cache()
+scored_count = df_scored.count()
+anomaly_count = df_scored.filter(col("is_anomaly") == 1).count()
+anomaly_pct = anomaly_count / scored_count * 100
+
+print(f"Scored {scored_count:,} records")
+print(f"Anomalies detected: {anomaly_count:,} ({anomaly_pct:.2f}%)")
+
+# Log final metrics to MLflow
+with mlflow.start_run(run_name="isolation_forest_fraud", nested=True):
+    mlflow.log_metric("total_scored", scored_count)
+    mlflow.log_metric("final_anomaly_count", anomaly_count)
+    mlflow.log_metric("final_anomaly_percentage", anomaly_pct)
+
+# Convert scored Spark DataFrame to pandas for analysis (only anomalies + sample)
+pdf = df_scored.filter(
+    (col("is_anomaly") == 1) | (rand() < 0.1)  # All anomalies + 10% sample of normal
+).toPandas()
 
 # COMMAND ----------
 
@@ -244,7 +335,7 @@ with mlflow.start_run(run_name="isolation_forest_fraud"):
 
 # COMMAND ----------
 
-# Get anomalous records
+# Get anomalous records from sampled pdf
 anomalies = pdf[pdf["is_anomaly"] == 1].copy()
 anomalies = anomalies.sort_values("anomaly_score", ascending=False)
 
@@ -312,18 +403,16 @@ print(category_counts)
 
 # COMMAND ----------
 
-# Convert back to Spark DataFrame
-df_results = spark.createDataFrame(pdf)
-
-# Add metadata
-df_results = df_results \
+# Use the full scored Spark DataFrame (not pandas subset) for complete results
+df_results = df_scored \
     .withColumn("_analysis_timestamp", current_timestamp()) \
     .withColumn("_model_version", lit("isolation_forest_v1"))
 
-# Save to Gold
+# Save to Gold (full dataset with scores)
 df_results.write \
     .format("delta") \
     .mode("overwrite") \
+    .option("overwriteSchema", "true") \
     .saveAsTable("lh_gold.ml_fraud_detection_scores")
 
 print(f"Saved {df_results.count():,} records to Gold layer")

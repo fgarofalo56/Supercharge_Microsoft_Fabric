@@ -213,12 +213,27 @@ df_windowed = df_stream \
 # COMMAND ----------
 
 # Write aggregated stream to Delta
-# query_agg = df_windowed.writeStream \
-#     .format("delta") \
-#     .outputMode("append") \
-#     .option("checkpointLocation", f"{checkpoint_location}/aggregated") \
-#     .trigger(processingTime=trigger_interval) \
-#     .toTable("lh_gold.gold_realtime_floor_metrics")
+# NOTE: Uncomment for production deployment. The streaming writes persist data to Delta tables.
+# For POC demo purposes, use display() to visualize in-memory only.
+
+ENABLE_STREAMING_WRITES = False  # Set to True for production
+
+if ENABLE_STREAMING_WRITES:
+    try:
+        query_agg = df_windowed.writeStream \
+            .format("delta") \
+            .outputMode("append") \
+            .option("checkpointLocation", f"{checkpoint_location}/aggregated") \
+            .option("mergeSchema", "true") \
+            .trigger(processingTime=trigger_interval) \
+            .queryName("floor_metrics_stream") \
+            .toTable("lh_gold.gold_realtime_floor_metrics")
+        print("Started floor metrics streaming write")
+    except Exception as e:
+        print(f"Error starting floor metrics stream: {e}")
+        print("Ensure lh_gold lakehouse exists and streaming is supported")
+else:
+    print("Streaming writes disabled (POC mode). Set ENABLE_STREAMING_WRITES=True for production.")
 
 # COMMAND ----------
 
@@ -243,12 +258,22 @@ df_jackpots = df_stream \
     )
 
 # Write jackpots to alert table
-# query_jackpots = df_jackpots.writeStream \
-#     .format("delta") \
-#     .outputMode("append") \
-#     .option("checkpointLocation", f"{checkpoint_location}/jackpots") \
-#     .trigger(processingTime=trigger_interval) \
-#     .toTable("lh_gold.gold_realtime_jackpot_alerts")
+if ENABLE_STREAMING_WRITES:
+    try:
+        query_jackpots = df_jackpots.writeStream \
+            .format("delta") \
+            .outputMode("append") \
+            .option("checkpointLocation", f"{checkpoint_location}/jackpots") \
+            .option("mergeSchema", "true") \
+            .trigger(processingTime=trigger_interval) \
+            .queryName("jackpot_alerts_stream") \
+            .toTable("lh_gold.gold_realtime_jackpot_alerts")
+        print("Started jackpot alerts streaming write")
+    except Exception as e:
+        print(f"Error starting jackpot alerts stream: {e}")
+        print("Ensure lh_gold lakehouse exists and streaming is supported")
+else:
+    print("Jackpot alerts streaming disabled (POC mode).")
 
 # COMMAND ----------
 

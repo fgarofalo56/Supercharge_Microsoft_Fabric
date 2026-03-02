@@ -120,6 +120,7 @@ module security 'modules/security/security.bicep' = {
     managedIdentityName: managedIdentityName
     location: location
     logAnalyticsWorkspaceId: monitoring.outputs.workspaceId
+    enablePrivateEndpoints: enablePrivateEndpoints
     tags: defaultTags
   }
 }

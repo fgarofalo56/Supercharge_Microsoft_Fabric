@@ -2322,4 +2322,4 @@ Continue to **[Tutorial 15: Cost Management](../15-cost-management/README.md)** 
 
 ---
 
-> **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/your-repo/issues).
+> **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).

@@ -1270,7 +1270,7 @@ Continue to **[Tutorial 03: Gold Layer](../03-gold-layer/README.md)** to learn:
 
 <div align="center">
 
-**Questions or issues?** Open an issue in the [GitHub repository](https://github.com/your-repo/issues).
+**Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
 
 ---
 

@@ -19,6 +19,9 @@ param logAnalyticsWorkspaceId string
 @description('Tags to apply to resources')
 param tags object = {}
 
+@description('Enable private endpoints - restricts public network access when true')
+param enablePrivateEndpoints bool = false
+
 // =============================================================================
 // Managed Identity
 // =============================================================================
@@ -47,9 +50,10 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
     enableSoftDelete: true
     softDeleteRetentionInDays: 90
     enablePurgeProtection: true
-    publicNetworkAccess: 'Enabled'
+    // Restrict public access when private endpoints are enabled
+    publicNetworkAccess: enablePrivateEndpoints ? 'Disabled' : 'Enabled'
     networkAcls: {
-      defaultAction: 'Allow'
+      defaultAction: enablePrivateEndpoints ? 'Deny' : 'Allow'
       bypass: 'AzureServices'
     }
   }
