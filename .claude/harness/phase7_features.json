@@ -3,22 +3,22 @@
   "phase": 7,
   "phase_name": "Federal Agencies, Migration, RTI, Video Analytics & GeoAnalytics",
   "total_features": 71,
-  "completed": 2,
-  "passing": 2,
+  "completed": 7,
+  "passing": 7,
   "failing": 0,
-  "pending": 69,
-  "last_updated": "2026-03-11T14:30:00Z",
+  "pending": 64,
+  "last_updated": "2026-03-11T15:00:00Z",
   "categories": {
     "federal_agency_readmes": {
       "total": 5,
-      "completed": 0,
+      "completed": 5,
       "wave": 1,
       "items": [
-        {"name": "usda_readme", "file": "future-expansions/federal-usda/README.md", "status": "pending", "description": "USDA planning doc with data domains, open datasets, compliance, medallion tables"},
-        {"name": "sba_readme", "file": "future-expansions/federal-sba/README.md", "status": "pending", "description": "SBA planning doc with PPP loans, 7(a), disaster, SBIR data"},
-        {"name": "noaa_readme", "file": "future-expansions/federal-noaa/README.md", "status": "pending", "description": "NOAA planning doc with weather, storms, ocean, climate data"},
-        {"name": "epa_readme", "file": "future-expansions/federal-epa/README.md", "status": "pending", "description": "EPA planning doc with air quality, water, TRI, Superfund data"},
-        {"name": "doi_readme", "file": "future-expansions/federal-doi/README.md", "status": "pending", "description": "DOI planning doc with USGS earthquakes, water, wildlife, land data"}
+        {"name": "usda_readme", "file": "future-expansions/federal-usda/README.md", "status": "complete", "description": "USDA planning doc with data domains, open datasets, compliance, medallion tables"},
+        {"name": "sba_readme", "file": "future-expansions/federal-sba/README.md", "status": "complete", "description": "SBA planning doc with PPP loans, 7(a), disaster, SBIR data"},
+        {"name": "noaa_readme", "file": "future-expansions/federal-noaa/README.md", "status": "complete", "description": "NOAA planning doc with weather, storms, ocean, climate data"},
+        {"name": "epa_readme", "file": "future-expansions/federal-epa/README.md", "status": "complete", "description": "EPA planning doc with air quality, water, TRI, Superfund data"},
+        {"name": "doi_readme", "file": "future-expansions/federal-doi/README.md", "status": "complete", "description": "DOI planning doc with USGS earthquakes, water, wildlife, land data"}
       ]
     },
     "federal_data_generators": {
