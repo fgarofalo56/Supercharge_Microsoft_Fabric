@@ -1,0 +1,143 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "USGS Earthquake Event Record",
+  "description": "Schema for USGS Earthquake Hazards Program seismic event data sourced from earthquake.usgs.gov GeoJSON feeds",
+  "type": "object",
+  "required": ["event_id", "time", "latitude", "longitude", "magnitude"],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "description": "Unique UUID for this pipeline record",
+      "format": "uuid"
+    },
+    "usgs_id": {
+      "type": ["string", "null"],
+      "description": "USGS authoritative event identifier, e.g. us7000xxxx"
+    },
+    "time": {
+      "type": "string",
+      "description": "UTC date-time of the earthquake origin",
+      "format": "date-time"
+    },
+    "latitude": {
+      "type": "number",
+      "description": "Epicenter latitude in decimal degrees",
+      "minimum": -90,
+      "maximum": 90
+    },
+    "longitude": {
+      "type": "number",
+      "description": "Epicenter longitude in decimal degrees",
+      "minimum": -180,
+      "maximum": 180
+    },
+    "depth_km": {
+      "type": "number",
+      "description": "Depth of the earthquake hypocenter in kilometers below the surface",
+      "minimum": 0
+    },
+    "magnitude": {
+      "type": "number",
+      "description": "Preferred magnitude of the earthquake",
+      "minimum": -1,
+      "maximum": 10
+    },
+    "mag_type": {
+      "type": "string",
+      "description": "Method or algorithm used to calculate the preferred magnitude",
+      "enum": ["ML", "MD", "MB", "MW", "MS", "MWW", "MWC", "MWB"]
+    },
+    "place": {
+      "type": "string",
+      "description": "Textual description of the event location, e.g. '10km SSE of Ridgecrest, CA'"
+    },
+    "event_type": {
+      "type": "string",
+      "description": "Classification of the seismic event",
+      "enum": [
+        "EARTHQUAKE",
+        "QUARRY_BLAST",
+        "EXPLOSION",
+        "VOLCANIC_ERUPTION",
+        "ICE_QUAKE"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "description": "Review status of the event record",
+      "enum": ["AUTOMATIC", "REVIEWED", "DELETED"]
+    },
+    "tsunami": {
+      "type": "boolean",
+      "description": "True if a tsunami advisory or warning was issued for this event"
+    },
+    "significance": {
+      "type": ["integer", "null"],
+      "description": "USGS significance score (0-1000) reflecting combined impact of magnitude, felt reports, and estimated losses",
+      "minimum": 0,
+      "maximum": 1000
+    },
+    "felt": {
+      "type": ["integer", "null"],
+      "description": "Number of Did You Feel It (DYFI) responses submitted for this event",
+      "minimum": 0
+    },
+    "cdi": {
+      "type": ["number", "null"],
+      "description": "Community Decimal Intensity derived from DYFI responses"
+    },
+    "mmi": {
+      "type": ["number", "null"],
+      "description": "Maximum estimated Modified Mercalli Intensity from ShakeMap"
+    },
+    "alert": {
+      "type": ["string", "null"],
+      "description": "PAGER alert level indicating estimated fatalities and economic losses",
+      "enum": ["GREEN", "YELLOW", "ORANGE", "RED", null]
+    },
+    "net": {
+      "type": ["string", "null"],
+      "description": "Contributing seismic network code, e.g. us, ci, nc, ak"
+    },
+    "nst": {
+      "type": ["integer", "null"],
+      "description": "Number of seismic stations used to determine the hypocenter",
+      "minimum": 0
+    },
+    "gap": {
+      "type": ["number", "null"],
+      "description": "Largest azimuthal gap between azimuthally adjacent stations in degrees",
+      "minimum": 0,
+      "maximum": 360
+    },
+    "rms": {
+      "type": ["number", "null"],
+      "description": "Root mean square of travel-time residuals in seconds",
+      "minimum": 0
+    },
+    "url": {
+      "type": ["string", "null"],
+      "description": "Link to the USGS event detail page",
+      "format": "uri"
+    },
+    "load_time": {
+      "type": "string",
+      "description": "Timestamp when the record was loaded into the pipeline",
+      "format": "date-time"
+    },
+    "_ingested_at": {
+      "type": "string",
+      "description": "Timestamp when the record was ingested into the lakehouse",
+      "format": "date-time"
+    },
+    "_source": {
+      "type": "string",
+      "description": "Source system or API identifier for this record"
+    },
+    "_batch_id": {
+      "type": "string",
+      "description": "Batch job identifier that produced this record"
+    }
+  },
+  "additionalProperties": false
+}
