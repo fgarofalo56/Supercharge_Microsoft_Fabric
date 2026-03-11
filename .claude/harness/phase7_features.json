@@ -3,11 +3,11 @@
   "phase": 7,
   "phase_name": "Federal Agencies, Migration, RTI, Video Analytics & GeoAnalytics",
   "total_features": 71,
-  "completed": 45,
+  "completed": 57,
   "passing": 42,
   "failing": 0,
-  "pending": 26,
-  "last_updated": "2026-03-11T19:45:00Z",
+  "pending": 14,
+  "last_updated": "2026-03-11T20:30:00Z",
   "categories": {
     "federal_agency_readmes": {
       "total": 5,
@@ -339,95 +339,95 @@
     },
     "video_analytics": {
       "total": 3,
-      "completed": 0,
+      "completed": 3,
       "wave": 3,
       "items": [
         {
           "name": "video_security_tutorial",
           "file": "tutorials/27-video-security-analytics/README.md",
-          "status": "pending",
+          "status": "complete",
           "description": "Video analytics pipeline tutorial: cameras, AI models, object detection, metadata to Lakehouse"
         },
         {
           "name": "video_analytics_generator",
           "file": "data-generation/generators/analytics/video_analytics_generator.py",
-          "status": "pending",
+          "status": "complete",
           "description": "Video event metadata generator: detections, tracks, anomalies, zone crossings"
         },
         {
           "name": "video_event_schema",
           "file": "data-generation/schemas/analytics/video_event_schema.json",
-          "status": "pending"
+          "status": "complete"
         }
       ]
     },
     "people_movement": {
       "total": 3,
-      "completed": 0,
+      "completed": 3,
       "wave": 3,
       "items": [
         {
           "name": "people_movement_tutorial",
           "file": "tutorials/28-people-movement-analytics/README.md",
-          "status": "pending",
+          "status": "complete",
           "description": "People movement tutorial: foot traffic, heat maps, dwell time, queue detection, Wi-Fi/BLE tracking"
         },
         {
           "name": "people_movement_generator",
           "file": "data-generation/generators/analytics/people_movement_generator.py",
-          "status": "pending",
+          "status": "complete",
           "description": "Movement event generator: coordinates, zones, dwell times, beacon signals"
         },
         {
           "name": "movement_event_schema",
           "file": "data-generation/schemas/analytics/movement_event_schema.json",
-          "status": "pending"
+          "status": "complete"
         }
       ]
     },
     "geolocation_analytics": {
       "total": 3,
-      "completed": 0,
+      "completed": 3,
       "wave": 3,
       "items": [
         {
           "name": "geolocation_tutorial",
           "file": "tutorials/29-geolocation-analytics/README.md",
-          "status": "pending",
+          "status": "complete",
           "description": "Geolocation tutorial: GPS processing, H3 indexing, geofencing, ArcGIS/Sedona spatial analysis"
         },
         {
           "name": "geolocation_generator",
           "file": "data-generation/generators/analytics/geolocation_generator.py",
-          "status": "pending",
+          "status": "complete",
           "description": "Geolocation event generator: GPS coordinates, geofence events, proximity triggers"
         },
         {
           "name": "geolocation_schema",
           "file": "data-generation/schemas/analytics/geolocation_schema.json",
-          "status": "pending"
+          "status": "complete"
         }
       ]
     },
     "analytics_tests": {
       "total": 3,
-      "completed": 0,
+      "completed": 3,
       "wave": 3,
       "items": [
         {
           "name": "test_video_analytics_generator",
           "file": "validation/unit_tests/analytics/test_video_analytics_generator.py",
-          "status": "pending"
+          "status": "complete"
         },
         {
           "name": "test_people_movement_generator",
           "file": "validation/unit_tests/analytics/test_people_movement_generator.py",
-          "status": "pending"
+          "status": "complete"
         },
         {
           "name": "test_geolocation_generator",
           "file": "validation/unit_tests/analytics/test_geolocation_generator.py",
-          "status": "pending"
+          "status": "complete"
         }
       ]
     },
