@@ -1,0 +1,132 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "IoTTelemetry",
+  "description": "Schema for IoT device telemetry messages",
+  "type": "object",
+  "required": [
+    "message_id",
+    "device_id",
+    "device_type",
+    "timestamp",
+    "telemetry"
+  ],
+  "properties": {
+    "message_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the telemetry message"
+    },
+    "device_id": {
+      "type": "string",
+      "pattern": "^[A-Z0-9_-]+$",
+      "description": "Unique device identifier"
+    },
+    "device_type": {
+      "type": "string",
+      "enum": ["SLOT_MACHINE", "TABLE_SENSOR", "HVAC_SENSOR", "DOOR_SENSOR", "CAMERA", "BEACON", "ENVIRONMENTAL"],
+      "description": "Category of IoT device"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the telemetry was generated on the device"
+    },
+    "protocol": {
+      "type": ["string", "null"],
+      "enum": ["MQTT", "AMQP", "HTTPS", null],
+      "description": "Transport protocol used to deliver the message"
+    },
+    "hub_name": {
+      "type": ["string", "null"],
+      "description": "IoT Hub name that received the message"
+    },
+    "enqueued_time": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Timestamp when the message was enqueued in the IoT Hub"
+    },
+    "correlation_id": {
+      "type": ["string", "null"],
+      "description": "Correlation identifier for request/response tracing"
+    },
+    "content_type": {
+      "type": ["string", "null"],
+      "default": "application/json",
+      "description": "MIME type of the message content"
+    },
+    "properties": {
+      "type": ["object", "null"],
+      "description": "Custom message properties"
+    },
+    "telemetry": {
+      "type": "object",
+      "description": "Device-specific telemetry payload",
+      "properties": {
+        "temperature": {
+          "type": ["number", "null"],
+          "description": "Temperature reading in degrees Celsius"
+        },
+        "humidity": {
+          "type": ["number", "null"],
+          "description": "Relative humidity percentage"
+        },
+        "coin_in": {
+          "type": ["number", "null"],
+          "description": "Total coins/credits inserted (slot machines)"
+        },
+        "coin_out": {
+          "type": ["number", "null"],
+          "description": "Total coins/credits paid out (slot machines)"
+        },
+        "status": {
+          "type": ["string", "null"],
+          "description": "Operational status of the device"
+        },
+        "error_code": {
+          "type": ["string", "null"],
+          "description": "Error or fault code reported by the device"
+        },
+        "occupancy": {
+          "type": ["integer", "null"],
+          "description": "Number of occupants detected"
+        },
+        "battery_level": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Remaining battery charge as a percentage"
+        }
+      }
+    },
+    "location_zone": {
+      "type": ["string", "null"],
+      "description": "Physical zone or area where the device is installed"
+    },
+    "firmware_version": {
+      "type": ["string", "null"],
+      "description": "Device firmware version string"
+    },
+    "signal_strength_dbm": {
+      "type": ["integer", "null"],
+      "description": "Wireless signal strength in dBm"
+    },
+    "load_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the message was loaded into the lakehouse"
+    },
+    "_ingested_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Ingestion timestamp added by the pipeline"
+    },
+    "_source": {
+      "type": "string",
+      "description": "Source system identifier for lineage tracking"
+    },
+    "_batch_id": {
+      "type": "string",
+      "description": "Batch identifier for the ingestion run"
+    }
+  }
+}
