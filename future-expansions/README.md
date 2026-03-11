@@ -6,9 +6,10 @@
 
 <div align="center">
 
-**Planned industry expansions beyond the core Casino/Gaming POC**
+**Industry expansions beyond the core Casino/Gaming POC**
 
-Leveraging the proven Microsoft Fabric medallion architecture for new verticals.
+Leveraging the proven Microsoft Fabric medallion architecture for federal agencies,
+real-time intelligence, video analytics, and geospatial processing.
 
 </div>
 
@@ -17,112 +18,194 @@ Leveraging the proven Microsoft Fabric medallion architecture for new verticals.
 ## Expansion Overview
 
 ```
-+---------------------------+
-|    CASINO/GAMING POC      |  <-- Current (Phase 1)
-|    (Reference Impl.)      |
-+---------------------------+
-             |
-             | Patterns & Architecture
-             v
-+------------+------------+------------+
-|            |            |            |
-v            v            v            v
-+----------+ +----------+ +----------+
-| TRIBAL   | | FEDERAL  | | RETAIL   |
-| HEALTH   | | GOV      | | E-COMM   |
-| Phase 2  | | Phase 3  | | Phase 4  |
-+----------+ +----------+ +----------+
-| HIPAA    | | FedRAMP  | | PCI-DSS  |
-| IHS      | | FISMA    | | GDPR     |
-| Tribal   | | NIST     | | CCPA     |
-+----------+ +----------+ +----------+
++-------------------------------+
+|      CASINO/GAMING POC        |  <-- Core (Phases 1-6)
+|      (Reference Impl.)        |
++-------------------------------+
+               |
+               | Patterns & Architecture
+               v
++--------+--------+--------+--------+--------+
+|        |        |        |        |        |
+v        v        v        v        v        v
++------+ +------+ +------+ +------+ +------+ +------+
+| USDA | | SBA  | | NOAA | | EPA  | | DOI  | |TRIBAL|
+|      | |      | |      | |      | |      | |HEALTH|
++------+ +------+ +------+ +------+ +------+ +------+
+| Crop | | PPP  | |Weather| | AQI | |Quake | |HIPAA |
+| Food | | 7(a) | |Storm | |Water | |Land  | | IHS  |
++------+ +------+ +------+ +------+ +------+ +------+
+       \     |       |       |     /         |
+        +----+-------+-------+----+          |
+               |                             |
+               v                             v
+        +-------------+            +-----------+
+        | DOT / FAA   |            | STREAMING |
+        | FedRAMP     |            | VIDEO/GEO |
+        +-------------+            +-----------+
 ```
 
 ---
 
-## Planned Expansions
+## Phase Status
 
-| Phase | Expansion | Status | Target | Documentation |
-|-------|-----------|--------|--------|---------------|
-| Phase 1 | Casino/Gaming | ![Complete](https://img.shields.io/badge/Status-Complete-brightgreen?style=flat-square) | Q1 2026 | [Main README](../README.md) |
-| Phase 2 | Tribal Healthcare | ![Planned](https://img.shields.io/badge/Status-Planned-blue?style=flat-square) | Q3 2026 | [Details](tribal-healthcare/README.md) |
-| Phase 3 | Federal Government | ![Planned](https://img.shields.io/badge/Status-Planned-blue?style=flat-square) | Q4 2026 | [Details](federal-dot-faa/README.md) |
-| Phase 4 | Retail/E-commerce | ![Planned](https://img.shields.io/badge/Status-Planned-blue?style=flat-square) | Q1 2027 | [Details](retail-ecommerce/README.md) |
+| Phase | Expansion | Features | Status | Documentation |
+|-------|-----------|----------|--------|---------------|
+| Phase 1-6 | Casino/Gaming | 92/100 | ![Complete](https://img.shields.io/badge/Status-Complete-brightgreen?style=flat-square) | [Main README](../README.md) |
+| Phase 7 Wave 1 | Federal Agencies (USDA, SBA, NOAA, EPA, DOI) | 26/26 | ![Complete](https://img.shields.io/badge/Status-Complete-brightgreen?style=flat-square) | See below |
+| Phase 7 Wave 2 | Migration & Streaming | 19/19 | ![Complete](https://img.shields.io/badge/Status-Complete-brightgreen?style=flat-square) | [Tutorials 24-26](../tutorials/) |
+| Phase 7 Wave 3 | Video/Movement/Geolocation Analytics | 12/12 | ![Complete](https://img.shields.io/badge/Status-Complete-brightgreen?style=flat-square) | [Tutorials 27-29](../tutorials/) |
+| Phase 7 Wave 4 | Tribal Healthcare + DOT/FAA | 15 | ![In Progress](https://img.shields.io/badge/Status-In_Progress-yellow?style=flat-square) | See below |
+| Phase 7 Wave 5 | Final Regression | 1 | ![Planned](https://img.shields.io/badge/Status-Planned-blue?style=flat-square) | - |
 
 ---
 
-## Phase 2: Tribal/Sovereign Nation Healthcare
+## Federal Agency Expansions
+
+### USDA - United States Department of Agriculture
+
+> **[Full Documentation](federal-usda/README.md)**
+
+| Attribute | Details |
+|-----------|---------|
+| **Directory** | `federal-usda/` |
+| **Data Domains** | Crop Production (NASS), Food Safety (FSIS) |
+| **Generator** | `USDAGenerator` — commodities, yields, recalls |
+| **Schemas** | `usda_crop_schema.json`, `usda_food_safety_schema.json` |
+| **Public Data** | NASS QuickStats API, FSIS Recall Archive |
+
+### SBA - Small Business Administration
+
+> **[Full Documentation](federal-sba/README.md)**
+
+| Attribute | Details |
+|-----------|---------|
+| **Directory** | `federal-sba/` |
+| **Data Domains** | PPP Loans, 7(a) Loans, Disaster Loans, SBIR Awards |
+| **Generator** | `SBAGenerator` — 6 program types, 20 NAICS codes |
+| **Schema** | `sba_loan_schema.json` |
+| **Public Data** | PPP Loan Data (10M+ records), SBA.gov |
+
+### NOAA - National Oceanic and Atmospheric Administration
+
+> **[Full Documentation](federal-noaa/README.md)**
+
+| Attribute | Details |
+|-----------|---------|
+| **Directory** | `federal-noaa/` |
+| **Data Domains** | Weather Observations, Storm Events |
+| **Generator** | `NOAAGenerator` — 18 ICAO stations, Gutenberg-Richter |
+| **Schemas** | `noaa_weather_schema.json`, `noaa_storm_schema.json` |
+| **Public Data** | Climate Data Online API, Storm Events DB (2M records) |
+
+### EPA - Environmental Protection Agency
+
+> **[Full Documentation](federal-epa/README.md)**
+
+| Attribute | Details |
+|-----------|---------|
+| **Directory** | `federal-epa/` |
+| **Data Domains** | Air Quality (AQI), Water Quality (MCL) |
+| **Generator** | `EPAGenerator` — AQI calculation, MCL violation detection |
+| **Schemas** | `epa_air_quality_schema.json`, `epa_water_quality_schema.json` |
+| **Public Data** | AirNow API, TRI Explorer (4M+ records) |
+
+### DOI - Department of the Interior
+
+> **[Full Documentation](federal-doi/README.md)**
+
+| Attribute | Details |
+|-----------|---------|
+| **Directory** | `federal-doi/` |
+| **Data Domains** | Earthquakes (USGS), Land Use (BLM/FWS/NPS) |
+| **Generator** | `DOIGenerator` — seismic zones, agency-land correlations |
+| **Schemas** | `doi_earthquake_schema.json`, `doi_land_use_schema.json` |
+| **Public Data** | USGS Earthquake API (real-time), NWIS Water Data |
+
+---
+
+## Tribal Healthcare Expansion
 
 > **[Full Documentation](tribal-healthcare/README.md)**
 
 | Attribute | Details |
 |-----------|---------|
 | **Directory** | `tribal-healthcare/` |
-| **Target Release** | Q3 2026 |
-| **Compliance** | HIPAA, 42 CFR Part 2, IHS, Tribal Law |
-
-**Target Users:**
-- Tribal health departments
-- Indian Health Service (IHS) partners
-- Native American healthcare facilities
-- Tribal epidemiology centers
-
-**Key Features:**
-- HIPAA-compliant PHI handling
-- IHS RPMS integration patterns
-- Data sovereignty controls
-- Patient 360 views
-- Population health analytics
+| **Compliance** | HIPAA, 42 CFR Part 2, IHS Policy, Tribal Data Sovereignty |
+| **Data Domains** | Encounters, Pharmacy, Laboratory, Behavioral Health, Dental |
+| **Generator** | `TribalHealthcareGenerator` — IHS facilities, ICD-10, FHIR |
+| **Schema** | `tribal_health_schema.json` |
+| **Notebooks** | Bronze/Silver/Gold (07 series) |
+| **Tutorial** | [Tutorial 30: Tribal Healthcare](../tutorials/30-tribal-healthcare/) |
 
 ---
 
-## Phase 3: Federal Government (DOT, FAA, USDA, NOAA)
+## DOT/FAA Expansion
 
 > **[Full Documentation](federal-dot-faa/README.md)**
 
 | Attribute | Details |
 |-----------|---------|
 | **Directory** | `federal-dot-faa/` |
-| **Target Release** | Q4 2026 |
 | **Compliance** | FedRAMP, FISMA, NIST 800-53 |
-
-**Target Agencies:**
-- Department of Transportation (DOT)
-- Federal Aviation Administration (FAA)
-- US Department of Agriculture (USDA)
-- National Oceanic and Atmospheric Administration (NOAA)
-
-**Key Features:**
-- FedRAMP-compliant deployment (GCC/GCC-High)
-- Public dataset integration (data.gov)
-- Transportation/aviation analytics
-- Environmental monitoring dashboards
-- Interagency data sharing
+| **Data Domains** | Flight Operations, Safety Incidents, Traffic Statistics, Infrastructure |
+| **Generator** | `DOTFAAGenerator` — 20 carriers, 30 airports, 9 FAA regions |
+| **Schema** | `dot_faa_schema.json` |
+| **Notebooks** | Bronze/Silver/Gold (08 series) |
+| **Tutorial** | [Tutorial 31: Federal DOT/FAA](../tutorials/31-federal-dot-faa/) |
 
 ---
 
-## Phase 4: Retail/E-commerce
+## Migration & Streaming Expansions
 
-> **[Full Documentation](retail-ecommerce/README.md)**
+### Migration Tutorials
 
-| Attribute | Details |
-|-----------|---------|
-| **Directory** | `retail-ecommerce/` |
-| **Target Release** | Q1 2027 |
-| **Compliance** | PCI-DSS, GDPR, CCPA |
+| Source Platform | Tutorial | Key Topics |
+|----------------|----------|------------|
+| Snowflake | [Tutorial 24](../tutorials/24-snowflake-to-fabric/) | Schema mapping, Snowpipe equiv, UDF migration, cost comparison |
+| IBM DB2 | [Tutorial 25](../tutorials/25-ibm-db2-source/) | z/OS, LUW, CDC patterns, EBCDIC handling, Data Gateway |
+| Teradata | [Tutorial 10](../tutorials/10-teradata-migration/) | BTEQ conversion, SQL translation, performance benchmarks |
 
-**Target Users:**
-- Brick-and-mortar retailers
-- E-commerce platforms
-- Omnichannel retailers
-- Direct-to-consumer brands
+### Real-Time Intelligence (Streaming)
 
-**Key Features:**
-- Customer 360 / CDP patterns
-- Real-time personalization
-- Inventory optimization
-- Demand forecasting
-- Supply chain analytics
+| Source | Notebook | Connector |
+|--------|----------|-----------|
+| SQL Server | [01_sql_server_cdc](../notebooks/streaming/01_sql_server_cdc.py) | Debezium / SHIR |
+| Azure SQL | [02_azure_sql_change_feed](../notebooks/streaming/02_azure_sql_change_feed.py) | Native Change Feed |
+| Cosmos DB | [03_cosmos_db_change_feed](../notebooks/streaming/03_cosmos_db_change_feed.py) | Change Feed Processor |
+| IBM DB2 | [04_ibm_db2_cdc](../notebooks/streaming/04_ibm_db2_cdc.py) | JDBC / ASN Capture |
+| Oracle | [05_oracle_cdc](../notebooks/streaming/05_oracle_cdc.py) | LogMiner / GoldenGate |
+| Apache Kafka | [06_kafka_connector](../notebooks/streaming/06_kafka_connector.py) | Kafka Connect |
+| Azure IoT Hub | [07_iot_hub_ingestion](../notebooks/streaming/07_iot_hub_ingestion.py) | Device-to-Cloud |
+| Custom IoT | [08_slot_machine_iot](../notebooks/streaming/08_slot_machine_iot_simulator.py) | SAS Protocol |
+
+---
+
+## Analytics Expansions
+
+### Video Security Analytics
+
+| Component | File | Description |
+|-----------|------|-------------|
+| Schema | `video_event_schema.json` | 22 properties, 8 event types |
+| Generator | `VideoAnalyticsGenerator` | 50 cameras, YOLO/DeepSORT models |
+| Tutorial | [Tutorial 27](../tutorials/27-video-security-analytics/) | AI pipeline, edge processing |
+
+### People Movement Analytics
+
+| Component | File | Description |
+|-----------|------|-------------|
+| Schema | `movement_event_schema.json` | 23 properties, 6 sensor types |
+| Generator | `PeopleMovementGenerator` | 30 zones, queue detection |
+| Tutorial | [Tutorial 28](../tutorials/28-people-movement-analytics/) | Foot traffic, heat maps |
+
+### Geolocation Analytics
+
+| Component | File | Description |
+|-----------|------|-------------|
+| Schema | `geolocation_schema.json` | 23 properties, H3 indexing |
+| Generator | `GeolocationGenerator` | 200 devices, geofencing |
+| Tutorial | [Tutorial 29](../tutorials/29-geolocation-analytics/) | GPS, H3, proximity triggers |
 
 ---
 
@@ -138,6 +221,8 @@ Each expansion maintains core architectural patterns from the Casino/Gaming POC:
 | **Real-Time Intelligence** | Eventhouse + Eventstreams | Where applicable |
 | **Governance** | Microsoft Purview integration | Yes |
 | **Security** | Industry-specific compliance | Yes |
+| **Data Generation** | BaseGenerator pattern | Yes |
+| **Testing** | pytest unit tests | Yes |
 
 ---
 
@@ -145,82 +230,35 @@ Each expansion maintains core architectural patterns from the Casino/Gaming POC:
 
 ```
 future-expansions/
-|-- README.md                 # This file
-|-- tribal-healthcare/        # Phase 2: Healthcare
-|   +-- README.md             # Detailed planning
-|-- federal-dot-faa/          # Phase 3: Federal Gov
-|   +-- README.md             # Detailed planning
-+-- retail-ecommerce/         # Phase 4: Retail
-    +-- README.md             # Detailed planning
+|-- README.md                  # This file
+|-- federal-usda/              # USDA agriculture & food safety
+|   +-- README.md
+|-- federal-sba/               # SBA small business loans
+|   +-- README.md
+|-- federal-noaa/              # NOAA weather & storms
+|   +-- README.md
+|-- federal-epa/               # EPA air & water quality
+|   +-- README.md
+|-- federal-doi/               # DOI earthquakes & land use
+|   +-- README.md
+|-- tribal-healthcare/         # IHS tribal health (HIPAA)
+|   +-- README.md
+|-- federal-dot-faa/           # DOT/FAA aviation (FedRAMP)
+|   +-- README.md
++-- video-security-geospatial-iot-research.md  # Research findings
 ```
 
 ---
 
-## Getting Started with a New Expansion
+## Test Coverage
 
-When beginning work on a new expansion:
-
-### 1. Study Reference Implementation
-
-Review the Casino/Gaming POC thoroughly:
-- Medallion architecture patterns
-- Data generator structure
-- Notebook organization
-- Tutorial format
-
-### 2. Identify Industry Requirements
-
-| Area | Questions to Answer |
-|------|---------------------|
-| Data Domains | What data entities are needed? |
-| Compliance | What regulatory frameworks apply? |
-| Integration | What source systems to connect? |
-| Analytics | What KPIs and dashboards are needed? |
-| Real-Time | Are streaming requirements present? |
-
-### 3. Create Initial Structure
-
-```bash
-# Create expansion directory
-mkdir future-expansions/new-expansion
-
-# Add README with planning documentation
-touch future-expansions/new-expansion/README.md
-```
-
-### 4. Follow Development Process
-
-1. Document data domains and schemas
-2. Build data generators
-3. Create Bronze layer notebooks
-4. Develop Silver transformations
-5. Build Gold aggregations
-6. Implement Power BI reports
-7. Write step-by-step tutorials
-8. Add validation tests
-
----
-
-## Contributing
-
-> **We welcome contributions from industry experts!**
-
-To contribute to a future expansion:
-
-1. **Create a branch:** `feature/expansion-[name]`
-2. **Add documentation** to the appropriate directory
-3. **Follow existing patterns** from Casino/Gaming
-4. **Submit PR** for review
-
-See our [Contributing Guide](../CONTRIBUTING.md) for detailed instructions.
-
-### Areas Where Help is Needed
-
-| Expansion | Expertise Needed |
-|-----------|------------------|
-| Tribal Healthcare | HIPAA implementation, IHS systems, tribal health |
-| Federal Government | FedRAMP/FISMA, government data systems |
-| Retail/E-commerce | POS systems, customer analytics, supply chain |
+| Category | Tests | Status |
+|----------|-------|--------|
+| Casino/Gaming (Phase 1-6) | 30 | All passing |
+| Federal Generators (Wave 1) | 54 | All passing |
+| Streaming Simulators (Wave 2) | 20 | All passing |
+| Analytics Generators (Wave 3) | 30 | All passing |
+| **Total** | **134** | **All passing** |
 
 ---
 
@@ -229,9 +267,9 @@ See our [Contributing Guide](../CONTRIBUTING.md) for detailed instructions.
 | Resource | Description |
 |----------|-------------|
 | [Casino/Gaming POC](../README.md) | Reference implementation |
-| [Tutorials](../tutorials/) | Step-by-step guides |
-| [Data Generation](../data-generation/) | Synthetic data patterns |
-| [Contributing](../CONTRIBUTING.md) | How to contribute |
+| [Tutorials](../tutorials/) | 32 step-by-step guides |
+| [Data Generation](../data-generation/) | Synthetic data generators |
+| [Validation](../validation/) | Unit tests and data quality |
 
 ---
 
