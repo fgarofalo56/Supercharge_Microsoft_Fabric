@@ -1,0 +1,305 @@
+# Streaming Source Connector Configuration Registry
+# Used by multi-source streaming notebooks and tutorials
+# Covers all 8 streaming sources for the Phase 7 RTI expansion
+
+sources:
+  sql_server:
+    display_name: "SQL Server (On-Premises)"
+    connector_type: "debezium"
+    cdc_mechanism: "SQL Server CDC (Change Data Capture)"
+    gateway_required: true
+    gateway_type: "Self-Hosted Integration Runtime (SHIR) or On-Premises Data Gateway"
+    latency: "seconds to low minutes"
+    throughput: "10,000+ events/sec"
+    fabric_integration:
+      method: "SHIR → Data Pipeline → Eventstreams"
+      alternative: "Debezium → Kafka Connect → Eventstreams Kafka endpoint"
+    prerequisites:
+      - "SQL Server 2016+ with CDC enabled"
+      - "Self-Hosted Integration Runtime installed"
+      - "CDC enabled on source database and tables"
+      - "SQL Server Agent running"
+    configuration:
+      enable_cdc: "EXEC sys.sp_cdc_enable_db; EXEC sys.sp_cdc_enable_table @source_schema='dbo', @source_name='YourTable', @role_name=NULL"
+      connection_string: "Server=<server>;Database=<db>;User Id=<user>;Password=<pwd>;TrustServerCertificate=True"
+    data_types_mapping:
+      "int": "IntegerType"
+      "varchar": "StringType"
+      "datetime": "TimestampType"
+      "decimal": "DecimalType"
+      "bit": "BooleanType"
+    demo_tables:
+      - "dbo.Transactions"
+      - "dbo.Customers"
+      - "dbo.Inventory"
+
+  azure_sql:
+    display_name: "Azure SQL Database"
+    connector_type: "native"
+    cdc_mechanism: "Azure SQL Change Feed / Change Tracking"
+    gateway_required: false
+    latency: "sub-second to seconds"
+    throughput: "5,000+ events/sec"
+    fabric_integration:
+      method: "Fabric Mirroring (native) or Data Pipeline with Change Tracking"
+      alternative: "Azure SQL → Event Hub → Eventstreams"
+    prerequisites:
+      - "Azure SQL Database (S3+ tier recommended for Change Feed)"
+      - "Change Tracking or CDC enabled"
+      - "Firewall rules for Fabric service"
+    configuration:
+      enable_change_tracking: "ALTER DATABASE YourDB SET CHANGE_TRACKING = ON (CHANGE_RETENTION = 7 DAYS, AUTO_CLEANUP = ON)"
+      enable_table_tracking: "ALTER TABLE dbo.YourTable ENABLE CHANGE_TRACKING WITH (TRACK_COLUMNS_UPDATED = ON)"
+    demo_tables:
+      - "dbo.Orders"
+      - "dbo.Products"
+      - "dbo.CustomerActivity"
+
+  cosmos_db:
+    display_name: "Azure Cosmos DB"
+    connector_type: "native"
+    cdc_mechanism: "Change Feed Processor"
+    gateway_required: false
+    latency: "sub-second"
+    throughput: "10,000+ events/sec (scales with RUs)"
+    fabric_integration:
+      method: "Fabric Mirroring for Cosmos DB (GA)"
+      alternative: "Change Feed → Azure Functions → Event Hub → Eventstreams"
+    prerequisites:
+      - "Cosmos DB account (SQL API or MongoDB API)"
+      - "Change Feed enabled (default on all containers)"
+      - "Lease container for tracking"
+    configuration:
+      connection_string: "AccountEndpoint=https://<account>.documents.azure.com:443/;AccountKey=<key>"
+      database: "CasinoOperations"
+      container: "PlayerActivity"
+      lease_container: "leases"
+    partition_strategy: "Per-partition processing with FeedRange"
+    demo_containers:
+      - "PlayerActivity (partition: /playerId)"
+      - "SlotEvents (partition: /machineId)"
+      - "Transactions (partition: /casinoId)"
+
+  ibm_db2:
+    display_name: "IBM DB2"
+    connector_type: "jdbc"
+    cdc_mechanism: "DB2 CDC Tables / InfoSphere CDC / Debezium DB2 Connector"
+    gateway_required: true
+    gateway_type: "On-Premises Data Gateway or SHIR"
+    latency: "seconds to minutes"
+    throughput: "1,000-5,000 events/sec"
+    fabric_integration:
+      method: "JDBC via Data Gateway → Data Pipeline → Lakehouse"
+      alternative: "Debezium DB2 Connector → Kafka → Eventstreams"
+    prerequisites:
+      - "IBM DB2 LUW 11.5+ or DB2 for z/OS v12+"
+      - "DB2 JDBC driver (db2jcc4.jar)"
+      - "On-Premises Data Gateway installed"
+      - "For CDC: ASN capture configured or Debezium"
+    variants:
+      db2_luw:
+        description: "DB2 for Linux/Unix/Windows"
+        cdc_setup: "SQL Replication (ASN tables)"
+        jdbc_driver: "com.ibm.db2.jcc.DB2Driver"
+        connection_url: "jdbc:db2://<host>:50000/<database>"
+      db2_zos:
+        description: "DB2 for z/OS (Mainframe)"
+        cdc_setup: "Classic CDC or IIDR"
+        jdbc_driver: "com.ibm.db2.jcc.DB2Driver"
+        connection_url: "jdbc:db2://<host>:446/<location>"
+        special_considerations:
+          - "EBCDIC to UTF-8 character encoding"
+          - "Packed decimal conversion"
+          - "VSAM dataset integration"
+    demo_tables:
+      - "CASINO.LEGACY_TRANSACTIONS"
+      - "CASINO.PLAYER_HISTORY"
+      - "CASINO.MACHINE_CONFIG"
+
+  oracle:
+    display_name: "Oracle Database"
+    connector_type: "jdbc_with_cdc"
+    cdc_mechanism: "Oracle LogMiner / GoldenGate / Debezium Oracle Connector"
+    gateway_required: true
+    gateway_type: "On-Premises Data Gateway or SHIR"
+    latency: "seconds (LogMiner), sub-second (GoldenGate)"
+    throughput: "5,000-20,000 events/sec (GoldenGate)"
+    fabric_integration:
+      method: "Oracle → GoldenGate → Kafka → Eventstreams"
+      alternative: "JDBC via Data Gateway → Data Pipeline → Lakehouse"
+      debezium: "Debezium Oracle Connector → Kafka → Eventstreams"
+    prerequisites:
+      - "Oracle 12c+ (LogMiner), 19c+ recommended"
+      - "ARCHIVELOG mode enabled"
+      - "Supplemental logging enabled"
+      - "Oracle JDBC driver (ojdbc8.jar)"
+    configuration:
+      enable_archivelog: "ALTER DATABASE ARCHIVELOG"
+      enable_supplemental: "ALTER DATABASE ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS"
+      logminer_user: |
+        CREATE USER fabric_cdc IDENTIFIED BY <pwd>;
+        GRANT CREATE SESSION, SELECT ANY TABLE, LOGMINING TO fabric_cdc;
+        GRANT SELECT ON V_$LOGMNR_CONTENTS TO fabric_cdc;
+    data_types_mapping:
+      "NUMBER": "DecimalType/IntegerType"
+      "VARCHAR2": "StringType"
+      "DATE": "TimestampType"
+      "CLOB": "StringType"
+      "RAW": "BinaryType"
+    demo_tables:
+      - "CASINO.SLOT_TRANSACTIONS"
+      - "CASINO.TABLE_GAME_HANDS"
+      - "CASINO.CAGE_OPERATIONS"
+
+  kafka:
+    display_name: "Apache Kafka"
+    connector_type: "native"
+    cdc_mechanism: "Topic-based event streaming"
+    gateway_required: false
+    latency: "sub-second"
+    throughput: "100,000+ events/sec"
+    fabric_integration:
+      method: "Eventstreams Kafka endpoint (native)"
+      alternative: "Kafka Connect Sink → ADLS → Lakehouse"
+      protocol: "Kafka protocol compatible endpoint"
+    prerequisites:
+      - "Kafka cluster (Apache Kafka, Confluent, Azure Event Hubs with Kafka)"
+      - "Network connectivity (public or VNet)"
+      - "SASL/SSL authentication configured"
+    configuration:
+      bootstrap_servers: "<kafka-cluster>:9093"
+      security_protocol: "SASL_SSL"
+      sasl_mechanism: "PLAIN"
+      topics:
+        - "casino.slot-events"
+        - "casino.player-activity"
+        - "casino.financial-transactions"
+        - "casino.security-alerts"
+    schema_registry:
+      type: "Confluent Schema Registry or Azure Schema Registry"
+      url: "https://<registry>:8081"
+      format: "Avro, JSON Schema, Protobuf"
+    demo_topics:
+      - name: "casino.slot-events"
+        partitions: 12
+        replication: 3
+        schema: "SlotEvent (Avro)"
+      - name: "casino.player-activity"
+        partitions: 6
+        replication: 3
+        schema: "PlayerActivity (JSON)"
+
+  iot_hub:
+    display_name: "Azure IoT Hub"
+    connector_type: "native"
+    cdc_mechanism: "Device-to-Cloud messages"
+    gateway_required: false
+    latency: "sub-second"
+    throughput: "depends on IoT Hub tier (S1: 400K msgs/day per unit)"
+    fabric_integration:
+      method: "IoT Hub → Built-in Event Hub endpoint → Eventstreams"
+      alternative: "IoT Hub → Message Routing → Event Hub → Eventstreams"
+    prerequisites:
+      - "Azure IoT Hub (S1+ tier recommended)"
+      - "Device provisioning configured"
+      - "Message routing rules (optional)"
+    configuration:
+      connection_string: "HostName=<hub>.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=<key>"
+      consumer_group: "$Default or custom"
+      message_routing:
+        - endpoint: "events"
+          condition: "true"
+        - endpoint: "critical-alerts"
+          condition: "severity = 'critical'"
+    device_types:
+      - name: "slot_machine"
+        protocol: "MQTT"
+        telemetry_interval: "1-5 seconds"
+        properties: ["machine_id", "denomination", "coin_in", "coin_out", "jackpot", "status"]
+      - name: "table_sensor"
+        protocol: "MQTT"
+        telemetry_interval: "10 seconds"
+        properties: ["table_id", "game_type", "players_seated", "chips_on_table"]
+      - name: "hvac_sensor"
+        protocol: "AMQP"
+        telemetry_interval: "60 seconds"
+        properties: ["zone_id", "temperature", "humidity", "co2_level"]
+      - name: "door_sensor"
+        protocol: "MQTT"
+        telemetry_interval: "event-driven"
+        properties: ["door_id", "direction", "badge_id", "access_granted"]
+
+  slot_machine_simulator:
+    display_name: "Custom Slot Machine IoT Simulator"
+    connector_type: "custom_python"
+    cdc_mechanism: "SAS Protocol simulation → Event Hub/IoT Hub"
+    gateway_required: false
+    latency: "sub-second"
+    throughput: "50-500 events/sec (configurable)"
+    fabric_integration:
+      method: "Python simulator → Event Hub → Eventstreams"
+      alternative: "Python simulator → IoT Hub → Eventstreams"
+    implementation:
+      file: "data-generation/generators/streaming/iot_device_simulator.py"
+      class: "SlotMachineIoTSimulator"
+    configuration:
+      num_machines: 500
+      events_per_second: 100
+      event_types:
+        - "spin_result"
+        - "coin_in"
+        - "coin_out"
+        - "jackpot"
+        - "door_open"
+        - "tilt"
+        - "power_event"
+        - "meter_read"
+      sas_protocol_fields:
+        - "machine_number"
+        - "denomination"
+        - "game_id"
+        - "coin_in_meter"
+        - "coin_out_meter"
+        - "games_played_meter"
+        - "jackpot_meter"
+        - "bill_in_meter"
+        - "handpay_amount"
+        - "progressive_amount"
+      output_destinations:
+        - "Azure Event Hub"
+        - "Azure IoT Hub"
+        - "Apache Kafka"
+        - "Local file (JSON lines)"
+        - "Console (stdout)"
+
+# Event processing patterns supported
+event_processing:
+  windowed_aggregations:
+    - type: "tumbling"
+      description: "Fixed-size, non-overlapping windows"
+      kql_example: "| summarize count() by bin(Timestamp, 5m)"
+      use_case: "5-minute coin-in totals per machine"
+    - type: "hopping"
+      description: "Fixed-size, overlapping windows"
+      kql_example: "| summarize avg(CoinIn) by bin(Timestamp, 5m, 1m)"
+      use_case: "Rolling average with 1-minute hop"
+    - type: "sliding"
+      description: "Window triggered by events"
+      use_case: "Alert when 3+ jackpots on same machine within 10 minutes"
+    - type: "session"
+      description: "Gap-based windows grouped by key"
+      use_case: "Player session duration (gap > 30 min = new session)"
+
+  late_arriving_events:
+    watermark: "5 minutes default"
+    strategy: "Allow late events within watermark, drop beyond"
+    kql_handling: "Use ingestion_time() for ordering, event_time for business logic"
+
+  deduplication:
+    strategy: "Event ID + source + timestamp composite key"
+    implementation: "Delta Lake MERGE with dedup logic"
+
+  multi_source_correlation:
+    description: "Join events from different sources by common keys"
+    example: "Correlate slot CDC events with IoT telemetry by machine_id"
+    kql_join: "SlotCDC | join kind=inner IoTTelemetry on machine_id"

@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "USDA FSIS Food Safety Recall Record",
+  "description": "Schema for USDA Food Safety and Inspection Service (FSIS) food product recall data, covering Class I through Class III recalls for meat, poultry, and processed food products.",
+  "type": "object",
+  "required": ["recall_id", "recall_date", "product_type", "reason"],
+  "properties": {
+    "recall_id": {
+      "type": "string",
+      "description": "Unique identifier for the recall record (UUID v4)"
+    },
+    "recall_number": {
+      "type": "string",
+      "description": "Official FSIS recall number in the format FSIS-YYYY-NNN",
+      "pattern": "^FSIS-[0-9]{4}-[0-9]{3,4}$"
+    },
+    "recall_date": {
+      "type": "string",
+      "description": "Date the recall was announced or initiated",
+      "format": "date"
+    },
+    "product_type": {
+      "type": "string",
+      "description": "Category of the recalled food product",
+      "enum": ["BEEF", "POULTRY", "PORK", "PROCESSED", "READY-TO-EAT", "IMPORTED", "OTHER"]
+    },
+    "recall_class": {
+      "type": "string",
+      "description": "FSIS recall class: Class I is life-threatening, Class II is remote adverse health consequence, Class III is unlikely to cause adverse health consequences",
+      "enum": ["Class I", "Class II", "Class III"]
+    },
+    "reason": {
+      "type": "string",
+      "description": "Narrative description of the reason for the recall (e.g. undeclared allergen, potential Listeria contamination)"
+    },
+    "risk_level": {
+      "type": "string",
+      "description": "Assessed risk level to consumers",
+      "enum": ["HIGH", "MEDIUM", "LOW"]
+    },
+    "company_name": {
+      "type": "string",
+      "description": "Name of the establishment or company initiating the recall"
+    },
+    "establishment_number": {
+      "type": ["string", "null"],
+      "description": "FSIS establishment grant number for the producing facility, if applicable"
+    },
+    "city": {
+      "type": ["string", "null"],
+      "description": "City where the recalling establishment is located"
+    },
+    "state": {
+      "type": ["string", "null"],
+      "description": "Two-letter US state abbreviation where the recalling establishment is located",
+      "minLength": 2,
+      "maxLength": 2
+    },
+    "pounds_recalled": {
+      "type": ["number", "null"],
+      "description": "Estimated pounds of product subject to the recall",
+      "minimum": 0
+    },
+    "distribution": {
+      "type": ["string", "null"],
+      "description": "Geographic scope of product distribution, e.g. Nationwide or Regional"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the recall action",
+      "enum": ["OPEN", "CLOSED", "EXPANDED"]
+    },
+    "press_release_url": {
+      "type": ["string", "null"],
+      "description": "URL to the official FSIS press release for this recall",
+      "format": "uri"
+    },
+    "load_time": {
+      "type": "string",
+      "description": "Timestamp when the record was loaded from the FSIS data source",
+      "format": "date-time"
+    },
+    "_ingested_at": {
+      "type": "string",
+      "description": "Timestamp when the record was ingested into the Fabric lakehouse",
+      "format": "date-time"
+    },
+    "_source": {
+      "type": "string",
+      "description": "Source system identifier, e.g. fsis_recall_api"
+    },
+    "_batch_id": {
+      "type": "string",
+      "description": "Batch run identifier for lineage and reprocessing traceability"
+    }
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "NOAA Storm Event Record",
+  "description": "Schema for NOAA Storm Events Database records covering significant weather events and their impacts on life and property",
+  "type": "object",
+  "required": ["event_id", "event_type", "state", "begin_date"],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the storm event record"
+    },
+    "episode_id": {
+      "type": ["string", "null"],
+      "description": "NOAA episode identifier grouping related storm events in a single meteorological episode"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "TORNADO",
+        "THUNDERSTORM_WIND",
+        "HAIL",
+        "FLASH_FLOOD",
+        "FLOOD",
+        "WINTER_STORM",
+        "BLIZZARD",
+        "ICE_STORM",
+        "HURRICANE",
+        "TROPICAL_STORM",
+        "WILDFIRE",
+        "DROUGHT",
+        "EXTREME_COLD",
+        "EXTREME_HEAT"
+      ],
+      "description": "Classified type of the storm or severe weather event"
+    },
+    "state": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}$",
+      "description": "Two-letter state abbreviation where the event occurred"
+    },
+    "state_fips": {
+      "type": "string",
+      "pattern": "^[0-9]{2}$",
+      "description": "Two-digit FIPS code for the state where the event occurred"
+    },
+    "county_fips": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9]{5}$",
+      "description": "Five-digit FIPS code (state + county) for the county where the event occurred"
+    },
+    "begin_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time when the storm event began"
+    },
+    "end_date": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Date and time when the storm event ended"
+    },
+    "injuries_direct": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Number of injuries directly caused by the storm event"
+    },
+    "injuries_indirect": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Number of injuries indirectly caused by the storm event"
+    },
+    "deaths_direct": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Number of fatalities directly caused by the storm event"
+    },
+    "deaths_indirect": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Number of fatalities indirectly caused by the storm event"
+    },
+    "damage_property": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "description": "Estimated property damage in USD"
+    },
+    "damage_crops": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "description": "Estimated crop damage in USD"
+    },
+    "magnitude": {
+      "type": ["number", "null"],
+      "description": "Measured or estimated magnitude of the event (e.g., wind speed, hail size)"
+    },
+    "magnitude_type": {
+      "type": ["string", "null"],
+      "enum": ["EF", "MPH", "KTS", "INCHES"],
+      "description": "Unit or scale used to express the event magnitude"
+    },
+    "begin_lat": {
+      "type": ["number", "null"],
+      "minimum": -90,
+      "maximum": 90,
+      "description": "Latitude of the event's starting location in decimal degrees"
+    },
+    "begin_lon": {
+      "type": ["number", "null"],
+      "minimum": -180,
+      "maximum": 180,
+      "description": "Longitude of the event's starting location in decimal degrees"
+    },
+    "end_lat": {
+      "type": ["number", "null"],
+      "minimum": -90,
+      "maximum": 90,
+      "description": "Latitude of the event's ending location in decimal degrees"
+    },
+    "end_lon": {
+      "type": ["number", "null"],
+      "minimum": -180,
+      "maximum": 180,
+      "description": "Longitude of the event's ending location in decimal degrees"
+    },
+    "tor_f_scale": {
+      "type": ["string", "null"],
+      "enum": ["EF0", "EF1", "EF2", "EF3", "EF4", "EF5"],
+      "description": "Enhanced Fujita scale rating for tornado events"
+    },
+    "source": {
+      "type": ["string", "null"],
+      "description": "Reporting source that submitted or verified the event (e.g., NWS, trained spotter, law enforcement)"
+    },
+    "flood_cause": {
+      "type": ["string", "null"],
+      "description": "Primary cause of flooding for flood and flash flood events (e.g., heavy rain, dam failure, ice jam)"
+    },
+    "load_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the record was loaded into the data platform"
+    },
+    "_ingested_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the record was ingested by the pipeline"
+    },
+    "_source": {
+      "type": "string",
+      "description": "Source system or API endpoint that provided the record"
+    },
+    "_batch_id": {
+      "type": "string",
+      "description": "Batch identifier for the ingestion run that produced this record"
+    }
+  },
+  "additionalProperties": false
+}

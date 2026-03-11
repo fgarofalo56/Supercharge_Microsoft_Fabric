@@ -1,0 +1,116 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CDCEvent",
+  "description": "Schema for Change Data Capture events from multiple database sources",
+  "type": "object",
+  "required": [
+    "event_id",
+    "source_type",
+    "operation",
+    "timestamp",
+    "table_name"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the CDC event"
+    },
+    "source_type": {
+      "type": "string",
+      "enum": ["SQL_SERVER", "AZURE_SQL", "COSMOS_DB", "IBM_DB2", "ORACLE"],
+      "description": "Source database system type"
+    },
+    "operation": {
+      "type": "string",
+      "enum": ["INSERT", "UPDATE", "DELETE", "READ"],
+      "description": "Type of database operation captured"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the database operation occurred"
+    },
+    "server_name": {
+      "type": ["string", "null"],
+      "description": "Source server hostname"
+    },
+    "database_name": {
+      "type": ["string", "null"],
+      "description": "Name of the source database"
+    },
+    "schema_name": {
+      "type": ["string", "null"],
+      "default": "dbo",
+      "description": "Database schema name"
+    },
+    "table_name": {
+      "type": "string",
+      "description": "Name of the table where the change occurred"
+    },
+    "primary_key": {
+      "type": "string",
+      "description": "The PK value of the changed row"
+    },
+    "before_image": {
+      "type": ["object", "null"],
+      "description": "Row state before change (UPDATE/DELETE)"
+    },
+    "after_image": {
+      "type": ["object", "null"],
+      "description": "Row state after change (INSERT/UPDATE)"
+    },
+    "transaction_id": {
+      "type": ["string", "null"],
+      "description": "Identifier for the containing transaction"
+    },
+    "lsn": {
+      "type": ["string", "null"],
+      "description": "Log Sequence Number (SQL Server/DB2)"
+    },
+    "scn": {
+      "type": ["string", "null"],
+      "description": "System Change Number (Oracle)"
+    },
+    "partition_key": {
+      "type": ["string", "null"],
+      "description": "Partition key (Cosmos DB)"
+    },
+    "sequence_number": {
+      "type": ["integer", "null"],
+      "description": "Ordered sequence within transaction"
+    },
+    "connector_name": {
+      "type": ["string", "null"],
+      "enum": ["DEBEZIUM", "FABRIC_MIRRORING", "CHANGE_FEED", "LOGMINER", "GOLDEN_GATE", "INFOSPHERE_CDC", null],
+      "description": "CDC connector used to capture the event"
+    },
+    "latency_ms": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "End-to-end capture latency in milliseconds"
+    },
+    "schema_version": {
+      "type": ["string", "null"],
+      "description": "Version of the table schema at time of capture"
+    },
+    "load_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the event was loaded into the lakehouse"
+    },
+    "_ingested_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Ingestion timestamp added by the pipeline"
+    },
+    "_source": {
+      "type": "string",
+      "description": "Source system identifier for lineage tracking"
+    },
+    "_batch_id": {
+      "type": "string",
+      "description": "Batch identifier for the ingestion run"
+    }
+  }
+}

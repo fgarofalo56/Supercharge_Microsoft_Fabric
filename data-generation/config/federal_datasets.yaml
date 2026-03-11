@@ -1,0 +1,327 @@
+# Federal Agency Open Dataset Registry
+# Used by data generators and tutorials for real open data integration
+# All datasets listed are publicly available under US federal open data policies
+
+agencies:
+  usda:
+    name: "US Department of Agriculture"
+    acronym: "USDA"
+    portal: "https://www.usda.gov/topics/data"
+    data_gov: "https://catalog.data.gov/organization/usda-gov"
+    datasets:
+      - name: "NASS QuickStats"
+        description: "Crop production, livestock, economics statistics"
+        url: "https://quickstats.nass.usda.gov/api"
+        api_docs: "https://quickstats.nass.usda.gov/api"
+        format: "JSON, CSV"
+        api_key_required: true
+        api_key_signup: "https://quickstats.nass.usda.gov/api#param_define"
+        domains: ["crop_production", "livestock", "economics", "demographics"]
+        size_estimate: "50GB+ total, queries return subsets"
+        real_time: false
+        update_frequency: "annual (Census), monthly/weekly (surveys)"
+        sample_query: "https://quickstats.nass.usda.gov/api/api_GET/?key=YOUR_KEY&commodity_desc=CORN&year=2023&format=JSON"
+
+      - name: "FSIS Recall Data"
+        description: "Food Safety and Inspection Service recall cases"
+        url: "https://www.fsis.usda.gov/recalls"
+        api_docs: "https://www.fsis.usda.gov/fsis-data-sets"
+        format: "CSV, JSON"
+        api_key_required: false
+        domains: ["food_safety", "recalls", "inspections"]
+        size_estimate: "~50MB (all historical recalls)"
+        real_time: false
+        update_frequency: "as recalls occur"
+
+      - name: "SNAP Retailer Locator"
+        description: "Authorized SNAP/EBT retailers nationwide"
+        url: "https://usda-fns.hub.arcgis.com/datasets/USDA-FNS::snap-store-locations/about"
+        format: "CSV, GeoJSON, Shapefile"
+        api_key_required: false
+        domains: ["snap_retailers", "nutrition", "food_access"]
+        size_estimate: "~500MB (250K+ retailers with geocodes)"
+        real_time: false
+        update_frequency: "monthly"
+        geospatial: true
+
+      - name: "Census of Agriculture"
+        description: "Complete count of US farms and ranches"
+        url: "https://www.nass.usda.gov/AgCensus/"
+        format: "CSV, PDF"
+        api_key_required: false
+        domains: ["farm_operations", "land_use", "economics"]
+        size_estimate: "~2GB per census year"
+        real_time: false
+        update_frequency: "every 5 years"
+
+  sba:
+    name: "Small Business Administration"
+    acronym: "SBA"
+    portal: "https://data.sba.gov"
+    data_gov: "https://catalog.data.gov/organization/sba-gov"
+    datasets:
+      - name: "PPP Loan Data"
+        description: "Paycheck Protection Program loans (COVID-19 relief)"
+        url: "https://data.sba.gov/dataset/ppp-foia"
+        format: "CSV"
+        api_key_required: false
+        domains: ["ppp_loans", "small_business", "covid_relief"]
+        size_estimate: "~10GB (11.8M loans)"
+        real_time: false
+        update_frequency: "static (program ended)"
+        notable: "Includes loan amount, business name, NAICS code, jobs retained, lender"
+
+      - name: "7(a) and 504 Loan Data"
+        description: "SBA-guaranteed business loans"
+        url: "https://data.sba.gov/dataset/7-a-504-foia"
+        format: "CSV"
+        api_key_required: false
+        domains: ["7a_loans", "504_loans", "small_business_lending"]
+        size_estimate: "~5GB (historical loan data)"
+        real_time: false
+        update_frequency: "quarterly"
+        notable: "Loan amounts, terms, NAICS codes, approval/charge-off status"
+
+      - name: "SBIR/STTR Award Data"
+        description: "Small Business Innovation Research awards"
+        url: "https://www.sbir.gov/api"
+        api_docs: "https://www.sbir.gov/api"
+        format: "JSON, CSV"
+        api_key_required: false
+        domains: ["sbir_awards", "innovation", "research_grants"]
+        size_estimate: "~500MB"
+        real_time: false
+        update_frequency: "quarterly"
+
+      - name: "Dynamic Small Business Search"
+        description: "Registered small businesses for federal contracting"
+        url: "https://api.sam.gov/opportunities/v2/search"
+        api_docs: "https://open.gsa.gov/api/sam-api/"
+        format: "JSON"
+        api_key_required: true
+        api_key_signup: "https://api.sam.gov/"
+        domains: ["contracting", "certifications", "hubzone"]
+        size_estimate: "~2GB"
+        real_time: false
+        update_frequency: "daily"
+
+  noaa:
+    name: "National Oceanic and Atmospheric Administration"
+    acronym: "NOAA"
+    portal: "https://www.noaa.gov/information-technology/open-data-dissemination"
+    data_gov: "https://catalog.data.gov/organization/noaa-gov"
+    datasets:
+      - name: "Weather API (api.weather.gov)"
+        description: "Current weather observations and forecasts"
+        url: "https://api.weather.gov"
+        api_docs: "https://www.weather.gov/documentation/services-web-api"
+        format: "GeoJSON, JSON-LD"
+        api_key_required: false
+        domains: ["weather_observations", "forecasts", "alerts"]
+        size_estimate: "streaming (per-request)"
+        real_time: true
+        update_frequency: "hourly observations, alerts as issued"
+        sample_endpoint: "https://api.weather.gov/stations/KJFK/observations/latest"
+        notable: "Free, no API key, rate-limited. User-Agent header required."
+
+      - name: "Storm Events Database"
+        description: "Historical severe weather events since 1950"
+        url: "https://www.ncdc.noaa.gov/stormevents/"
+        bulk_download: "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/"
+        format: "CSV"
+        api_key_required: false
+        domains: ["storm_events", "tornadoes", "hurricanes", "severe_weather"]
+        size_estimate: "~2GB (2M+ events since 1950)"
+        real_time: false
+        update_frequency: "monthly"
+        notable: "Includes fatalities, injuries, damage estimates, coordinates"
+
+      - name: "Climate Data Online (CDO)"
+        description: "Historical climate/weather data"
+        url: "https://www.ncdc.noaa.gov/cdo-web/webservices/v2"
+        api_docs: "https://www.ncdc.noaa.gov/cdo-web/webservices/v2"
+        format: "JSON, CSV"
+        api_key_required: true
+        api_key_signup: "https://www.ncdc.noaa.gov/cdo-web/token"
+        domains: ["climate_normals", "daily_summaries", "monthly_data"]
+        size_estimate: "billions of records total"
+        real_time: false
+        update_frequency: "daily"
+
+      - name: "CO-OPS Tides and Currents"
+        description: "Tide predictions and water levels"
+        url: "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter"
+        api_docs: "https://api.tidesandcurrents.noaa.gov/api/prod/"
+        format: "JSON, CSV, XML"
+        api_key_required: false
+        domains: ["tide_data", "water_levels", "ocean_currents"]
+        size_estimate: "streaming per station"
+        real_time: true
+        update_frequency: "6-minute intervals"
+
+      - name: "National Buoy Data Center"
+        description: "Ocean buoy observations (waves, wind, temperature)"
+        url: "https://www.ndbc.noaa.gov/data/"
+        format: "CSV, TXT"
+        api_key_required: false
+        domains: ["buoy_data", "ocean_observations", "wave_data"]
+        size_estimate: "~5GB historical"
+        real_time: true
+        update_frequency: "hourly"
+
+  epa:
+    name: "Environmental Protection Agency"
+    acronym: "EPA"
+    portal: "https://www.epa.gov/data"
+    data_gov: "https://catalog.data.gov/organization/epa-gov"
+    datasets:
+      - name: "AQS (Air Quality System) API"
+        description: "Air quality monitoring data from 4,000+ stations"
+        url: "https://aqs.epa.gov/data/api"
+        api_docs: "https://aqs.epa.gov/aqsweb/documents/data_api.html"
+        format: "JSON"
+        api_key_required: true
+        api_key_signup: "https://aqs.epa.gov/data/api/signup?email=YOUR_EMAIL"
+        domains: ["air_quality", "aqi", "pollutants", "monitoring"]
+        size_estimate: "~50GB+ total historical"
+        real_time: true
+        update_frequency: "hourly"
+        notable: "Includes PM2.5, PM10, Ozone, CO, SO2, NO2, Lead, AQI"
+
+      - name: "Toxic Release Inventory (TRI)"
+        description: "Industrial chemical releases and waste management"
+        url: "https://www.epa.gov/toxics-release-inventory-tri-program/tri-data-and-tools"
+        bulk_download: "https://www.epa.gov/toxics-release-inventory-tri-program/tri-basic-data-files-calendar-years-1987-present"
+        format: "CSV"
+        api_key_required: false
+        domains: ["toxic_releases", "chemicals", "facilities", "waste_management"]
+        size_estimate: "~5GB (4M+ records since 1987)"
+        real_time: false
+        update_frequency: "annual"
+        notable: "Includes facility info, chemical quantities, release media"
+
+      - name: "ECHO (Enforcement & Compliance History)"
+        description: "Facility-level compliance and enforcement data"
+        url: "https://echo.epa.gov/"
+        api_docs: "https://echo.epa.gov/tools/web-services"
+        format: "JSON, CSV"
+        api_key_required: false
+        domains: ["compliance", "enforcement", "inspections", "violations"]
+        size_estimate: "~10GB"
+        real_time: false
+        update_frequency: "weekly"
+
+      - name: "Safe Drinking Water Information System (SDWIS)"
+        description: "Public water system compliance data"
+        url: "https://www.epa.gov/ground-water-and-drinking-water/safe-drinking-water-information-system-sdwis-federal-reporting"
+        format: "CSV"
+        api_key_required: false
+        domains: ["drinking_water", "water_systems", "violations", "contaminants"]
+        size_estimate: "~2GB"
+        real_time: false
+        update_frequency: "quarterly"
+
+      - name: "Greenhouse Gas Reporting Program (GHGRP)"
+        description: "Facility-level GHG emissions data"
+        url: "https://ghgdata.epa.gov/ghgp/main.do"
+        format: "CSV, Excel"
+        api_key_required: false
+        domains: ["ghg_emissions", "carbon", "facilities"]
+        size_estimate: "~1GB"
+        real_time: false
+        update_frequency: "annual"
+
+  doi:
+    name: "Department of the Interior"
+    acronym: "DOI"
+    portal: "https://www.doi.gov/data"
+    sub_agencies: ["USGS", "BLM", "FWS", "NPS", "BSEE", "BOEM"]
+    datasets:
+      - name: "USGS Earthquake Hazards API"
+        description: "Real-time and historical earthquake catalog"
+        url: "https://earthquake.usgs.gov/fdsnws/event/1/"
+        api_docs: "https://earthquake.usgs.gov/fdsnws/event/1/"
+        format: "GeoJSON, CSV, QuakeML"
+        api_key_required: false
+        domains: ["earthquakes", "seismic", "hazards"]
+        size_estimate: "~10GB historical, streaming current"
+        real_time: true
+        update_frequency: "minutes (real-time seismic data)"
+        sample_endpoint: "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2024-01-01&minmagnitude=4"
+        notable: "Free, no limits. GeoJSON includes magnitude, depth, coordinates, tsunami flag"
+
+      - name: "USGS National Water Information System (NWIS)"
+        description: "Streamflow, groundwater, water quality data"
+        url: "https://waterservices.usgs.gov/nwis/"
+        api_docs: "https://waterservices.usgs.gov/"
+        format: "JSON (WaterML), CSV, RDB"
+        api_key_required: false
+        domains: ["streamflow", "groundwater", "water_quality"]
+        size_estimate: "~100GB+ (1.5M+ monitoring sites)"
+        real_time: true
+        update_frequency: "15-minute intervals for streamflow"
+        sample_endpoint: "https://waterservices.usgs.gov/nwis/iv/?sites=01646500&format=json"
+
+      - name: "FWS ECOS (Environmental Conservation Online System)"
+        description: "Endangered and threatened species data"
+        url: "https://ecos.fws.gov/ecp/"
+        format: "CSV, JSON"
+        api_key_required: false
+        domains: ["endangered_species", "critical_habitat", "recovery_plans"]
+        size_estimate: "~500MB"
+        real_time: false
+        update_frequency: "as listings change"
+
+      - name: "NPS Visitor Use Statistics"
+        description: "National Park visitation data"
+        url: "https://irma.nps.gov/Stats/"
+        api_docs: "https://irma.nps.gov/Stats/SSRSReports"
+        format: "CSV, Excel"
+        api_key_required: false
+        domains: ["park_visitation", "recreation", "tourism"]
+        size_estimate: "~100MB"
+        real_time: false
+        update_frequency: "monthly"
+
+      - name: "USGS National Map / 3DEP"
+        description: "Elevation, hydrography, boundaries, land cover"
+        url: "https://apps.nationalmap.gov/services/"
+        api_docs: "https://apps.nationalmap.gov/tnmaccess/"
+        format: "GeoJSON, Shapefile, GeoTIFF"
+        api_key_required: false
+        domains: ["elevation", "hydrography", "land_cover", "boundaries"]
+        size_estimate: "TB-scale (full national coverage)"
+        real_time: false
+        update_frequency: "periodic"
+        geospatial: true
+
+      - name: "BLM Public Land Statistics"
+        description: "Bureau of Land Management public land data"
+        url: "https://www.blm.gov/about/data"
+        format: "CSV, Shapefile"
+        api_key_required: false
+        domains: ["public_lands", "grazing", "mining", "recreation"]
+        size_estimate: "~5GB"
+        real_time: false
+        update_frequency: "annual"
+        geospatial: true
+
+# Geospatial Reference Datasets (used across agencies)
+geospatial_reference:
+  - name: "US Census TIGER/Line Shapefiles"
+    url: "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html"
+    format: "Shapefile, GeoJSON"
+    domains: ["boundaries", "roads", "water", "census_tracts"]
+    size_estimate: "~50GB (all layers)"
+
+  - name: "OpenStreetMap US Extract"
+    url: "https://download.geofabrik.de/north-america/us.html"
+    format: "PBF, Shapefile"
+    domains: ["roads", "buildings", "points_of_interest"]
+    size_estimate: "~10GB (US extract)"
+
+  - name: "Natural Earth"
+    url: "https://www.naturalearthdata.com/"
+    format: "Shapefile, GeoJSON"
+    domains: ["country_boundaries", "physical_features", "cultural"]
+    size_estimate: "~1GB"

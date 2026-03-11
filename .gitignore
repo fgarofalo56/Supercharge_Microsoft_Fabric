@@ -229,3 +229,12 @@ out/
 # Documentation build
 docs/_build/
 site/
+
+# Serena AI
+.serena/
+
+# Playwright test results
+test-results/
+
+# Windows null device artifacts
+nul

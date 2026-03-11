@@ -1,0 +1,118 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "People Movement Analytics Event",
+  "description": "Schema for people movement tracking events in a casino/gaming environment, capturing foot traffic, dwell times, queue detection, and zone occupancy from various sensor types",
+  "type": "object",
+  "required": ["event_id", "sensor_id", "sensor_type", "zone_id", "zone_name", "timestamp", "person_count", "load_time"],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "description": "Unique UUID for this movement event record",
+      "format": "uuid"
+    },
+    "sensor_id": {
+      "type": "string",
+      "description": "Unique identifier for the sensor device, format SENS-XXXX",
+      "pattern": "^SENS-[A-Z0-9]{4}$"
+    },
+    "sensor_type": {
+      "type": "string",
+      "description": "Type of sensor that generated the movement event",
+      "enum": ["wifi_probe", "ble_beacon", "camera_count", "infrared", "pressure_mat", "lidar"]
+    },
+    "zone_id": {
+      "type": "string",
+      "description": "Unique identifier for the casino zone being monitored"
+    },
+    "zone_name": {
+      "type": "string",
+      "description": "Human-readable name of the casino zone, e.g. 'High Limit Slots', 'Main Entrance'"
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "UTC date-time when the movement event was captured",
+      "format": "date-time"
+    },
+    "person_count": {
+      "type": "integer",
+      "description": "Number of persons detected in the sensor field at event time",
+      "minimum": 0
+    },
+    "direction": {
+      "type": ["string", "null"],
+      "description": "Observed direction of movement relative to the zone boundary",
+      "enum": ["entering", "exiting", "stationary", "passing_through", null]
+    },
+    "dwell_time_seconds": {
+      "type": ["number", "null"],
+      "description": "Duration in seconds a person or group has remained within the zone",
+      "minimum": 0
+    },
+    "velocity_mps": {
+      "type": ["number", "null"],
+      "description": "Estimated walking speed in meters per second"
+    },
+    "x_coordinate": {
+      "type": ["number", "null"],
+      "description": "Horizontal position within the zone coordinate system"
+    },
+    "y_coordinate": {
+      "type": ["number", "null"],
+      "description": "Vertical position within the zone coordinate system"
+    },
+    "floor_level": {
+      "type": ["integer", "null"],
+      "description": "Building floor level where the sensor is located"
+    },
+    "heat_map_cell": {
+      "type": ["string", "null"],
+      "description": "Grid reference for heat map visualization, e.g. 'A1', 'B3'",
+      "pattern": "^[A-Z][0-9]+$"
+    },
+    "occupancy_percentage": {
+      "type": ["number", "null"],
+      "description": "Current zone occupancy as a percentage of maximum capacity",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "queue_detected": {
+      "type": ["boolean", "null"],
+      "description": "True if a queue formation has been detected in the zone"
+    },
+    "queue_length": {
+      "type": ["integer", "null"],
+      "description": "Estimated number of persons in the detected queue",
+      "minimum": 0
+    },
+    "queue_wait_minutes": {
+      "type": ["number", "null"],
+      "description": "Estimated average wait time in minutes for the detected queue",
+      "minimum": 0
+    },
+    "device_mac_hash": {
+      "type": ["string", "null"],
+      "description": "SHA-256 hashed MAC address for Wi-Fi probe tracking, preserving anonymity"
+    },
+    "signal_strength_dbm": {
+      "type": ["integer", "null"],
+      "description": "Received Signal Strength Indicator (RSSI) in dBm for wireless sensors"
+    },
+    "battery_level": {
+      "type": ["number", "null"],
+      "description": "Sensor battery charge level as a percentage",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "calibration_date": {
+      "type": ["string", "null"],
+      "description": "Date when the sensor was last calibrated",
+      "format": "date"
+    },
+    "load_time": {
+      "type": "string",
+      "description": "Timestamp when the record was loaded into the pipeline",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}

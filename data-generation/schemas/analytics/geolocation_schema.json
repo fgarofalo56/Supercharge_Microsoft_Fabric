@@ -1,0 +1,121 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Casino Geolocation Analytics Event",
+  "description": "Schema for geolocation tracking events across casino/gaming properties including patron apps, employee badges, asset tags, and vehicle GPS",
+  "type": "object",
+  "required": ["event_id", "device_id", "device_type", "timestamp", "latitude", "longitude", "source_system", "load_time"],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "description": "Unique UUID for this geolocation event",
+      "format": "uuid"
+    },
+    "device_id": {
+      "type": "string",
+      "description": "Unique identifier of the tracking device or application instance"
+    },
+    "device_type": {
+      "type": "string",
+      "description": "Category of the device emitting the geolocation signal",
+      "enum": ["patron_app", "employee_badge", "asset_tag", "vehicle_gps", "shuttle_tracker", "valet_tag"]
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "ISO 8601 UTC date-time when the location was captured",
+      "format": "date-time"
+    },
+    "latitude": {
+      "type": "number",
+      "description": "WGS84 latitude in decimal degrees",
+      "minimum": -90,
+      "maximum": 90
+    },
+    "longitude": {
+      "type": "number",
+      "description": "WGS84 longitude in decimal degrees",
+      "minimum": -180,
+      "maximum": 180
+    },
+    "altitude_meters": {
+      "type": ["number", "null"],
+      "description": "Altitude above mean sea level in meters"
+    },
+    "accuracy_meters": {
+      "type": ["number", "null"],
+      "description": "Estimated horizontal accuracy radius of the GPS fix in meters",
+      "minimum": 0
+    },
+    "speed_mps": {
+      "type": ["number", "null"],
+      "description": "Speed of the device in meters per second",
+      "minimum": 0
+    },
+    "heading_degrees": {
+      "type": ["number", "null"],
+      "description": "Direction of travel in degrees from true north (0-360)",
+      "minimum": 0,
+      "maximum": 360
+    },
+    "h3_index": {
+      "type": ["string", "null"],
+      "description": "Uber H3 hexagonal hierarchical spatial index for aggregation and geospatial joins"
+    },
+    "geofence_id": {
+      "type": ["string", "null"],
+      "description": "Identifier of the geofence zone the device is within or transitioning"
+    },
+    "geofence_name": {
+      "type": ["string", "null"],
+      "description": "Human-readable name of the geofence zone, e.g. 'Main Casino Floor', 'VIP Lounge'"
+    },
+    "geofence_event": {
+      "type": ["string", "null"],
+      "description": "Type of geofence transition event",
+      "enum": ["enter", "exit", "dwell", null]
+    },
+    "geofence_dwell_seconds": {
+      "type": ["number", "null"],
+      "description": "Cumulative time in seconds the device has remained inside the current geofence",
+      "minimum": 0
+    },
+    "poi_name": {
+      "type": ["string", "null"],
+      "description": "Name of the nearest point of interest, e.g. 'High Limit Slots', 'Buffet Entrance'"
+    },
+    "poi_distance_meters": {
+      "type": ["number", "null"],
+      "description": "Distance in meters from the device to the nearest point of interest",
+      "minimum": 0
+    },
+    "floor_level": {
+      "type": ["integer", "null"],
+      "description": "Indoor floor level for multi-story venue positioning"
+    },
+    "indoor_zone": {
+      "type": ["string", "null"],
+      "description": "Indoor positioning zone identifier for sub-floor granularity, e.g. 'SLOT_ZONE_A3', 'TABLE_PIT_2'"
+    },
+    "proximity_trigger": {
+      "type": ["string", "null"],
+      "description": "Action triggered by the device entering a proximity region",
+      "enum": ["marketing_push", "loyalty_offer", "vip_greeting", "safety_alert", "staff_dispatch", null]
+    },
+    "source_system": {
+      "type": "string",
+      "description": "Positioning technology that produced this location fix",
+      "enum": ["gps", "wifi_triangulation", "ble_trilateration", "uwb", "hybrid"]
+    },
+    "battery_level": {
+      "type": ["number", "null"],
+      "description": "Device battery charge level as a percentage",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "load_time": {
+      "type": "string",
+      "description": "Timestamp when the record was loaded into the pipeline",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}
