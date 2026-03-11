@@ -1,0 +1,176 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DOT/FAA Transportation Data Record",
+  "description": "Schema for U.S. Department of Transportation / Federal Aviation Administration data covering flight operations, safety incidents, traffic statistics, and infrastructure records. Fields align with BTS On-Time Performance, FAA Incident, and T-100 traffic datasets for seamless integration in POC demonstrations.",
+  "type": "object",
+  "required": [
+    "record_id",
+    "data_domain",
+    "carrier_code",
+    "carrier_name",
+    "origin_airport",
+    "destination_airport",
+    "departure_date",
+    "faa_region",
+    "report_year",
+    "report_month",
+    "load_time"
+  ],
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "description": "Unique identifier for the record (UUID v4)",
+      "format": "uuid"
+    },
+    "data_domain": {
+      "type": "string",
+      "description": "Domain classification for the record",
+      "enum": ["flight_operations", "safety_incident", "traffic_statistics", "infrastructure"]
+    },
+    "carrier_code": {
+      "type": "string",
+      "description": "Two-letter IATA airline designator code",
+      "pattern": "^[A-Z0-9]{2}$"
+    },
+    "carrier_name": {
+      "type": "string",
+      "description": "Full airline or carrier name"
+    },
+    "flight_number": {
+      "type": ["string", "null"],
+      "description": "Flight number assigned by the carrier (e.g. 1234)"
+    },
+    "origin_airport": {
+      "type": "string",
+      "description": "Three-letter IATA airport code for the origin",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "destination_airport": {
+      "type": "string",
+      "description": "Three-letter IATA airport code for the destination",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "departure_date": {
+      "type": "string",
+      "description": "Scheduled departure date in ISO 8601 format (YYYY-MM-DD)",
+      "format": "date"
+    },
+    "scheduled_departure": {
+      "type": ["string", "null"],
+      "description": "Scheduled departure time in HH:MM (24-hour) format",
+      "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+    },
+    "actual_departure": {
+      "type": ["string", "null"],
+      "description": "Actual departure time in HH:MM (24-hour) format",
+      "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+    },
+    "delay_minutes": {
+      "type": ["integer", "null"],
+      "description": "Total departure delay in minutes; 0 or negative indicates on-time or early departure",
+      "minimum": 0
+    },
+    "delay_cause": {
+      "type": ["string", "null"],
+      "description": "Primary cause of delay as classified by BTS",
+      "enum": ["carrier", "weather", "nas", "security", "late_aircraft", "none"]
+    },
+    "cancelled": {
+      "type": ["boolean", "null"],
+      "description": "Whether the flight was cancelled"
+    },
+    "diverted": {
+      "type": ["boolean", "null"],
+      "description": "Whether the flight was diverted to an alternate airport"
+    },
+    "aircraft_type": {
+      "type": ["string", "null"],
+      "description": "Aircraft type designator (e.g. B737, A320)"
+    },
+    "tail_number": {
+      "type": ["string", "null"],
+      "description": "Aircraft registration / tail number (e.g. N12345)",
+      "pattern": "^N[0-9A-Z]{1,5}$"
+    },
+    "passengers": {
+      "type": ["integer", "null"],
+      "description": "Number of passengers on board or transported",
+      "minimum": 0
+    },
+    "incident_type": {
+      "type": ["string", "null"],
+      "description": "Type of safety incident reported",
+      "enum": [
+        "runway_incursion",
+        "bird_strike",
+        "turbulence",
+        "mechanical",
+        "fuel_issue",
+        "medical",
+        "security_threat",
+        "near_miss"
+      ]
+    },
+    "incident_severity": {
+      "type": ["string", "null"],
+      "description": "Severity classification of the safety incident",
+      "enum": ["minor", "moderate", "serious", "critical"]
+    },
+    "faa_region": {
+      "type": "string",
+      "description": "FAA regional office identifier",
+      "enum": ["AAL", "ACE", "AEA", "AGL", "ANE", "ANM", "ASO", "ASW", "AWP"]
+    },
+    "airport_category": {
+      "type": ["string", "null"],
+      "description": "Airport hub classification per FAA NPIAS",
+      "enum": ["large_hub", "medium_hub", "small_hub", "non_hub", "general_aviation"]
+    },
+    "runway_id": {
+      "type": ["string", "null"],
+      "description": "Runway designator (e.g. 09L/27R)"
+    },
+    "visibility_miles": {
+      "type": ["number", "null"],
+      "description": "Prevailing visibility in statute miles at the time of operation",
+      "minimum": 0,
+      "maximum": 10
+    },
+    "wind_speed_knots": {
+      "type": ["integer", "null"],
+      "description": "Surface wind speed in knots at the time of operation",
+      "minimum": 0,
+      "maximum": 50
+    },
+    "report_year": {
+      "type": "integer",
+      "description": "Calendar year of the report",
+      "minimum": 2000,
+      "maximum": 2030
+    },
+    "report_month": {
+      "type": "integer",
+      "description": "Calendar month of the report (1-12)",
+      "minimum": 1,
+      "maximum": 12
+    },
+    "load_time": {
+      "type": "string",
+      "description": "Timestamp when the record was loaded into the Fabric lakehouse",
+      "format": "date-time"
+    },
+    "_ingested_at": {
+      "type": "string",
+      "description": "Timestamp when the record was ingested into the Fabric lakehouse",
+      "format": "date-time"
+    },
+    "_source": {
+      "type": "string",
+      "description": "Source system identifier, e.g. bts_ontime_api or faa_incident_api"
+    },
+    "_batch_id": {
+      "type": "string",
+      "description": "Batch run identifier for lineage and reprocessing traceability"
+    }
+  }
+}
