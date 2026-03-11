@@ -2,7 +2,7 @@
 
 > 🏠 [Home](../index.md) > 📖 Tutorials
 
-**Last Updated:** `2026-01-28` | **Version:** 1.1.0
+**Last Updated:** `2026-03-11` | **Version:** 2.0.0
 
 ---
 
@@ -18,7 +18,7 @@
 
 ## 🎯 Overview
 
-This tutorial series guides you through implementing a complete Microsoft Fabric data platform for casino/gaming analytics. Starting from environment setup through advanced AI/ML, you'll learn industry best practices for medallion architecture, real-time analytics, and data governance.
+This tutorial series of 32 tutorials guides you through implementing a complete Microsoft Fabric data platform for casino/gaming analytics. Starting from environment setup through advanced AI/ML, migration, streaming, and federal expansions, you'll learn industry best practices for medallion architecture, real-time analytics, and data governance.
 
 ### What You'll Build
 
@@ -75,6 +75,20 @@ flowchart LR
         T23[23-Gateways]
     end
 
+    subgraph L10["🟢 Migration & Streaming"]
+        T24[24-Snowflake]
+        T25[25-DB2]
+        T26[26-Streaming]
+    end
+
+    subgraph L11["🔴 Analytics & Federal"]
+        T27[27-Video]
+        T28[28-Movement]
+        T29[29-Geo]
+        T30[30-Healthcare]
+        T31[31-DOT/FAA]
+    end
+
     T00 --> T01 --> T02 --> T03 --> T04 --> T05
     T05 --> T06 --> T07 --> T08 --> T09
     T09 --> T10 --> T11
@@ -82,6 +96,8 @@ flowchart LR
     T13 --> T14 --> T15 --> T16 --> T17
     T17 --> T18 --> T19
     T19 --> T20 --> T21 --> T22 --> T23
+    T23 --> T24 --> T25 --> T26
+    T26 --> T27 --> T28 --> T29 --> T30 --> T31
 ```
 
 ---
@@ -113,6 +129,13 @@ Complete tutorials in sequence for the best learning experience:
 ╠════════╬════════╬════════╬════════╣
 ║  ⭐⭐  ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║
 ╚════════╩════════╩════════╩════════╝
+
+╔════════╦════════╦════════╦════════╦════════╦════════╦════════╦════════╗
+║   24   ║   25   ║   26   ║   27   ║   28   ║   29   ║   30   ║   31   ║
+║SNOWFLK ║  DB2   ║STREAMG ║ VIDEO  ║MOVEMNT║  GEO   ║HEALTH ║DOT/FAA ║
+╠════════╬════════╬════════╬════════╬════════╬════════╬════════╬════════╣
+║ ⭐⭐⭐ ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║
+╚════════╩════════╩════════╩════════╩════════╩════════╩════════╩════════╝
  Beginner ──────────────────────────────────────────────────────────────────────► Advanced
 ```
 
@@ -155,6 +178,16 @@ Complete tutorials in sequence for the best learning experience:
 | | [21 - GeoAnalytics & ArcGIS](./21-geoanalytics-arcgis/README.md) | Geospatial analytics, ArcGIS integration, maps | ~3.5 hours |
 | | [22 - Networking Connectivity](./22-networking-connectivity/README.md) | Private endpoints, ExpressRoute, VPN, multi-cloud | ~3.5 hours |
 | | [23 - SHIR & Data Gateways](./23-shir-data-gateways/README.md) | Self-hosted runtime, on-premises gateways, hybrid | ~2.5 hours |
+| 🟢 **Migration & Streaming** | | | |
+| | [24 - Snowflake to Fabric](./24-snowflake-to-fabric/README.md) | Snowflake migration, schema mapping, cost comparison | ~3 hours |
+| | [25 - IBM DB2 Source](./25-ibm-db2-source/README.md) | DB2 connectivity, CDC, EBCDIC handling | ~3 hours |
+| | [26 - Multi-Source Streaming](./26-multi-source-streaming/README.md) | 8 CDC & IoT streaming connectors | ~3 hours |
+| 🔴 **Analytics & Federal Expansions** | | | |
+| | [27 - Video Security Analytics](./27-video-security-analytics/README.md) | AI video pipeline, YOLO/DeepSORT, edge processing | ~2.5 hours |
+| | [28 - People Movement Analytics](./28-people-movement-analytics/README.md) | Foot traffic, queue detection, heat maps | ~2 hours |
+| | [29 - Geolocation Analytics](./29-geolocation-analytics/README.md) | H3 spatial indexing, geofencing, proximity | ~2.5 hours |
+| | [30 - Tribal Healthcare](./30-tribal-healthcare/README.md) | HIPAA-compliant IHS analytics, PHI masking | ~3 hours |
+| | [31 - Federal DOT/FAA](./31-federal-dot-faa/README.md) | FedRAMP aviation analytics, safety dashboards | ~2.5 hours |
 
 ---
 
@@ -173,7 +206,9 @@ Complete tutorials in sequence for the best learning experience:
 | ⚪ Operations & Governance | 14-17 | ~9 hours |
 | 🟤 Collaboration & AI | 18-19 | ~3 hours |
 | 🟡 Infrastructure & GeoAnalytics | 20-23 | ~12 hours |
-| **Total** | All 24 | **~55 hours** |
+| 🟢 Migration & Streaming | 24-26 | ~9 hours |
+| 🔴 Analytics & Federal Expansions | 27-31 | ~13.5 hours |
+| **Total** | All 32 | **~77.5 hours** |
 
 ### By Format
 

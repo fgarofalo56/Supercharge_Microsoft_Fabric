@@ -1,8 +1,8 @@
-# :slot_machine: Data Generation
+# 🎲 Data Generation
 
 > **[Home](../README.md)** | **[Tutorials](../tutorials/)** | **[Notebooks](../notebooks/)** | **[Validation](../validation/)**
 
-Synthetic data generators for creating realistic casino/gaming data for the Microsoft Fabric POC.
+Synthetic data generators for casino/gaming, federal agencies, streaming CDC, and analytics scenarios in the Microsoft Fabric POC.
 
 ---
 
@@ -12,12 +12,12 @@ Synthetic data generators for creating realistic casino/gaming data for the Micr
 +------------------+     +------------------+     +------------------+
 |  Configuration   |     |    Generators    |     |     Output       |
 +------------------+     +------------------+     +------------------+
-|  - Date range    | --> | SlotMachine      | --> | Parquet (default)|
-|  - Volume        |     | TableGame        |     | CSV              |
-|  - Seed          |     | Player           |     | JSON             |
-|  - PII handling  |     | Financial        |     |                  |
-|                  |     | Security         |     | Bronze Layer     |
-|                  |     | Compliance       |     | Ready            |
+|  - Date range    | --> | Casino (6)       | --> | Parquet (default)|
+|  - Volume        |     | Federal (7)      |     | CSV              |
+|  - Seed          |     | Streaming (3)    |     | JSON             |
+|  - PII handling  |     | Analytics (3)    |     |                  |
+|                  |     |                  |     | Bronze Layer     |
+|                  |     | 16 generators    |     | Ready            |
 +------------------+     +------------------+     +------------------+
 ```
 
@@ -87,6 +87,37 @@ See [Sample Data](#sample-data) section for details.
 | `FinancialGenerator` | `bronze_financial_txn` | Cage transactions, markers | `txn_id`, `amount`, `ctr_flag` |
 | `SecurityGenerator` | `bronze_security_events` | Access control, surveillance | `event_id`, `location`, `threat_level` |
 | `ComplianceGenerator` | `bronze_compliance` | CTR, SAR, W-2G filings | `filing_type`, `amount`, `status` |
+
+### 🏛️ Federal Agency Generators
+
+| Generator | Output Table | Description | Key Fields |
+|-----------|--------------|-------------|------------|
+| `USDAGenerator` | `bronze_usda_crop_production` | Crop yields, food safety recalls | `commodity`, `yield_per_acre`, `recall_class` |
+| `SBAGenerator` | `bronze_sba_loans` | PPP, 7(a), disaster, SBIR loans | `program_type`, `loan_amount`, `naics_code` |
+| `NOAAGenerator` | `bronze_noaa_weather` | Weather observations, storm events | `station_id`, `parameter`, `event_type` |
+| `EPAGenerator` | `bronze_epa_air_quality` | Air quality (AQI), water quality (MCL) | `aqi_value`, `pollutant`, `mcl_violation` |
+| `DOIGenerator` | `bronze_doi_earthquakes` | Earthquakes, land use management | `magnitude`, `depth_km`, `managing_agency` |
+| `TribalHealthcareGenerator` | `bronze_tribal_health` | IHS encounters, pharmacy, lab | `icd10_code`, `tribal_affiliation`, `encounter_type` |
+| `DOTFAAGenerator` | `bronze_dot_flight_ops` | Flight operations, safety incidents | `carrier_code`, `delay_minutes`, `incident_type` |
+
+### 🔄 Streaming Generators
+
+| Generator | Output Table | Description | Key Fields |
+|-----------|--------------|-------------|------------|
+| `MultiSourceSimulator` | CDC events | 5 CDC sources (SQL Server, Azure SQL, Cosmos DB, DB2, Oracle) | `source_type`, `operation`, `before_image` |
+| `IoTDeviceSimulator` | IoT telemetry | 7 device types (slot, roulette, HVAC, camera, elevator, etc.) | `device_type`, `telemetry`, `protocol` |
+| `EventHubProducer` | Event Hub | Real-time event streaming to Azure Event Hub | `event_hub_name`, `connection_string` |
+
+### 📊 Analytics Generators
+
+| Generator | Output Table | Description | Key Fields |
+|-----------|--------------|-------------|------------|
+| `VideoAnalyticsGenerator` | `bronze_video_events` | 50 cameras, 8 event types, YOLO/DeepSORT | `camera_id`, `event_type`, `confidence_score` |
+| `PeopleMovementGenerator` | `bronze_movement_events` | 30 zones, 6 sensor types, queue detection | `sensor_id`, `person_count`, `dwell_time_seconds` |
+| `GeolocationGenerator` | `bronze_geolocation` | 200 devices, H3 indexing, geofencing | `device_id`, `h3_index`, `geofence_event` |
+
+> [!NOTE]
+> All generators inherit from `BaseGenerator` and support `seed` for reproducibility, `generate_record()` for single records, and `generate_batch(count)` for bulk generation.
 
 ---
 
@@ -300,18 +331,43 @@ account_status, _ingested_at, _source, _batch_id
 
 ```
 data-generation/
-|-- generators/
-|   |-- __init__.py
-|   |-- slot_machine.py      # Slot telemetry generator
-|   |-- table_game.py        # Table games generator
-|   |-- player.py            # Player profile generator
-|   |-- financial.py         # Financial transaction generator
-|   |-- security.py          # Security events generator
-|   |-- compliance.py        # Compliance filing generator
-|   +-- base.py              # Base generator class
-|-- output/                   # Default output directory
-|-- generate.py               # Main CLI entry point
-+-- README.md
+├── 📁 generators/
+│   ├── __init__.py
+│   ├── base_generator.py              # Base class for all generators
+│   ├── slot_machine.py                # 🎰 Slot telemetry
+│   ├── table_game.py                  # 🎲 Table games
+│   ├── player.py                      # 👤 Player profiles
+│   ├── financial.py                   # 💰 Financial transactions
+│   ├── security.py                    # 🔒 Security events
+│   ├── compliance.py                  # 📋 Compliance filings
+│   ├── 📁 federal/                    # 🏛️ Federal agency generators
+│   │   ├── usda_generator.py          # USDA agriculture
+│   │   ├── sba_generator.py           # SBA small business
+│   │   ├── noaa_generator.py          # NOAA weather
+│   │   ├── epa_generator.py           # EPA environment
+│   │   ├── doi_generator.py           # DOI interior
+│   │   ├── tribal_healthcare_generator.py  # IHS healthcare
+│   │   └── dot_faa_generator.py       # DOT/FAA aviation
+│   ├── 📁 streaming/                  # 🔄 Streaming simulators
+│   │   ├── multi_source_simulator.py  # CDC from 5 sources
+│   │   ├── iot_device_simulator.py    # IoT device fleet
+│   │   └── event_hub_producer.py      # Event Hub streaming
+│   └── 📁 analytics/                  # 📊 Analytics generators
+│       ├── video_analytics_generator.py    # Video security
+│       ├── people_movement_generator.py    # Foot traffic
+│       └── geolocation_generator.py        # Geolocation/H3
+├── 📁 schemas/                        # JSON Schema definitions
+│   ├── slot_telemetry_schema.json     # Casino schemas (5)
+│   ├── 📁 federal/                    # Federal schemas (11)
+│   ├── 📁 streaming/                  # Streaming schemas (3)
+│   └── 📁 analytics/                  # Analytics schemas (3)
+├── 📁 config/                         # Configuration files
+│   ├── generator_config.yaml
+│   ├── federal_datasets.yaml          # Federal open dataset catalog
+│   └── streaming_sources.yaml         # Streaming source config
+├── 📁 output/                         # Default output directory
+├── generate.py                        # Main CLI entry point
+└── README.md
 ```
 
 ---
@@ -387,6 +443,22 @@ docker build -t fabric-data-generator:v1.1.0 .
 # Run without docker-compose
 docker run -v ./output:/app/output fabric-data-generator --all --days 7
 ```
+
+---
+
+## 📑 JSON Schemas
+
+All generators have matching JSON Schema (draft-07) definitions:
+
+| Category | Schemas | Total Properties |
+|----------|---------|-----------------|
+| Casino/Gaming | 5 | 85 |
+| Federal Agencies | 11 | 297 |
+| Streaming | 3 | 62 |
+| Analytics | 3 | 68 |
+| **Total** | **22** | **512** |
+
+Schema files are in `schemas/` with subdirectories for each category.
 
 ---
 

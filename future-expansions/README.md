@@ -55,8 +55,8 @@ v        v        v        v        v        v
 | Phase 7 Wave 1 | Federal Agencies (USDA, SBA, NOAA, EPA, DOI) | 26/26 | ![Complete](https://img.shields.io/badge/Status-Complete-brightgreen?style=flat-square) | See below |
 | Phase 7 Wave 2 | Migration & Streaming | 19/19 | ![Complete](https://img.shields.io/badge/Status-Complete-brightgreen?style=flat-square) | [Tutorials 24-26](../tutorials/) |
 | Phase 7 Wave 3 | Video/Movement/Geolocation Analytics | 12/12 | ![Complete](https://img.shields.io/badge/Status-Complete-brightgreen?style=flat-square) | [Tutorials 27-29](../tutorials/) |
-| Phase 7 Wave 4 | Tribal Healthcare + DOT/FAA | 15 | ![In Progress](https://img.shields.io/badge/Status-In_Progress-yellow?style=flat-square) | See below |
-| Phase 7 Wave 5 | Final Regression | 1 | ![Planned](https://img.shields.io/badge/Status-Planned-blue?style=flat-square) | - |
+| Phase 7 Wave 4 | Tribal Healthcare + DOT/FAA | 15/15 | ![Complete](https://img.shields.io/badge/Status-Complete-brightgreen?style=flat-square) | [Tutorials 30-31](../tutorials/) |
+| Phase 7 Wave 5 | Final Regression | 1/1 | ![Complete](https://img.shields.io/badge/Status-Complete-brightgreen?style=flat-square) | [Regression Report](../validation/phase7_regression_report.md) |
 
 ---
 

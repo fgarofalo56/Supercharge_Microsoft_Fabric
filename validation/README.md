@@ -2,18 +2,25 @@
 
 > **[Home](../README.md)** | **[Data Generation](../data-generation/)** | **[Notebooks](../notebooks/)** | **[Tutorials](../tutorials/)**
 
-Comprehensive data quality validation and testing resources for the Microsoft Fabric Casino POC.
+Comprehensive data quality validation and testing for the Microsoft Fabric Casino POC and Phase 7 federal, streaming, and analytics expansions.
 
 ---
 
-## Test Coverage Summary
+## 🧪 Test Coverage Summary
 
-| Test Type | Framework | Coverage | Status |
-|-----------|-----------|----------|--------|
-| Unit Tests | pytest | Generators, Utilities | Active |
-| Integration Tests | pytest | Pipeline End-to-End | Active |
-| Data Quality | Great Expectations | Bronze/Silver/Gold | Active |
-| Schema Validation | Delta Lake | All Layers | Active |
+| Test Category | Framework | Tests | Coverage | Status |
+|:--------------|:----------|:------|:---------|:-------|
+| Casino/Gaming Unit Tests | pytest | 30 | 6 generators | `🟢 Passing` |
+| Federal Agency Unit Tests | pytest | 54 | 7 generators (USDA, SBA, NOAA, EPA, DOI, Tribal, DOT/FAA) | `🟢 Passing` |
+| Streaming Simulator Tests | pytest | 20 | 2 simulators (CDC, IoT) | `🟢 Passing` |
+| Analytics Generator Tests | pytest | 30 | 3 generators (Video, Movement, Geolocation) | `🟢 Passing` |
+| Integration Tests | pytest | — | Pipeline E2E | `🟢 Active` |
+| Data Quality | Great Expectations | — | Bronze/Silver/Gold | `🟢 Active` |
+| Schema Validation | Delta Lake | — | All Layers | `🟢 Active` |
+| **Total Unit Tests** | | **134** | **16 generators** | **All Passing** |
+
+> [!NOTE]
+> All 134 unit tests pass with zero regressions. See the [Phase 7 Regression Report](phase7_regression_report.md) for full details.
 
 ---
 
@@ -25,15 +32,16 @@ Comprehensive data quality validation and testing resources for the Microsoft Fa
 |   TESTS     | --> |     TESTS        | --> |    VALIDATION     |
 +-------------+     +------------------+     +-------------------+
 |             |     |                  |     |                   |
-| Generators  |     | Pipeline E2E     |     | Great Expectations|
-| Utilities   |     | Data Flow        |     | Checkpoints       |
-| Business    |     | Layer Integrity  |     | Production DQ     |
-| Logic       |     |                  |     |                   |
+| Casino (30) |     | Pipeline E2E     |     | Great Expectations|
+| Federal (54)|     | Data Flow        |     | Checkpoints       |
+| Stream (20) |     | Layer Integrity  |     | Production DQ     |
+| Analytics   |     |                  |     |                   |
+|       (30)  |     |                  |     |                   |
 +-------------+     +------------------+     +-------------------+
       |                    |                        |
       v                    v                        v
    pytest              pytest                  GE Framework
-   --cov               --slow                  Checkpoints
+   134 pass            --slow                  Checkpoints
 ```
 
 ---
@@ -42,39 +50,44 @@ Comprehensive data quality validation and testing resources for the Microsoft Fa
 
 ```
 validation/
-|-- great_expectations/           # Data quality validation framework
-|   |-- great_expectations.yml    # Main GX configuration
-|   |-- validate_data.py          # Python validation utilities
-|   |-- README.md                 # Detailed GX documentation
-|   |-- expectations/             # Expectation suite definitions
-|   |   |-- slot_machine_suite.json
-|   |   |-- player_suite.json
-|   |   |-- compliance_suite.json
-|   |   |-- compliance_ctr_conditional_suite.json
-|   |   |-- compliance_w2g_conditional_suite.json
-|   |   |-- compliance_sar_conditional_suite.json
-|   |   |-- financial_suite.json
-|   |   |-- security_suite.json
-|   |   |-- table_games_suite.json
-|   |   |-- bronze_slot_telemetry_suite.json
-|   |   |-- silver_slot_cleansed_suite.json
-|   |   +-- gold_slot_performance_suite.json
-|   +-- checkpoints/              # Validation checkpoints
-|       |-- slot_machine_checkpoint.yml
-|       |-- player_checkpoint.yml
-|       |-- compliance_checkpoint.yml
-|       |-- financial_checkpoint.yml
-|       |-- security_checkpoint.yml
-|       |-- table_games_checkpoint.yml
-|       +-- all_domains_checkpoint.yml
-|-- unit_tests/                   # Unit tests for generators
-|   |-- conftest.py
-|   +-- test_generators.py
-|-- integration_tests/            # End-to-end tests
-|   +-- test_pipeline.py
-|-- deployment_tests/             # Infrastructure tests
-|   +-- test_bicep_deployment.py
-+-- README.md
+├── 📁 great_expectations/           # Data quality validation framework
+│   ├── great_expectations.yml       # Main GX configuration
+│   ├── validate_data.py             # Python validation utilities
+│   ├── README.md                    # Detailed GX documentation
+│   ├── 📁 expectations/            # Expectation suite definitions
+│   │   ├── slot_machine_suite.json
+│   │   ├── player_suite.json
+│   │   ├── compliance_suite.json
+│   │   ├── financial_suite.json
+│   │   ├── security_suite.json
+│   │   └── table_games_suite.json
+│   └── 📁 checkpoints/             # Validation checkpoints
+│       └── all_domains_checkpoint.yml
+├── 📁 unit_tests/                   # Unit tests (134 total)
+│   ├── conftest.py                  # Casino test fixtures
+│   ├── test_generators.py           # Casino generator tests (30)
+│   ├── 📁 federal/                  # Federal agency tests (54)
+│   │   ├── conftest.py
+│   │   ├── test_usda_generator.py   # 11 tests
+│   │   ├── test_sba_generator.py    # 11 tests
+│   │   ├── test_noaa_generator.py   # 10 tests
+│   │   ├── test_epa_generator.py    # 10 tests
+│   │   └── test_doi_generator.py    # 12 tests
+│   ├── 📁 streaming/               # Streaming simulator tests (20)
+│   │   ├── conftest.py
+│   │   ├── test_multi_source_simulator.py  # 10 tests
+│   │   └── test_iot_simulator.py           # 10 tests
+│   └── 📁 analytics/               # Analytics generator tests (30)
+│       ├── conftest.py
+│       ├── test_video_analytics_generator.py    # 10 tests
+│       ├── test_people_movement_generator.py    # 10 tests
+│       └── test_geolocation_generator.py        # 10 tests
+├── 📁 integration_tests/           # End-to-end tests
+│   └── test_pipeline.py
+├── 📁 deployment_tests/            # Infrastructure tests
+│   └── test_bicep_deployment.py
+├── 📄 phase7_regression_report.md  # Phase 7 full regression report
+└── README.md
 ```
 
 ---
@@ -216,12 +229,13 @@ pytest validation/unit_tests/ --cov=data-generation/generators --cov-report=html
 
 ### Test Categories
 
-| Category | Description | Files |
-|----------|-------------|-------|
-| Generator Tests | Validate synthetic data generation | `test_generators.py` |
-| Schema Tests | Verify output schemas match expectations | `test_schemas.py` |
-| Business Logic Tests | Test compliance calculations (CTR, SAR) | `test_compliance.py` |
-| Utility Tests | Test helper functions | `test_utils.py` |
+| Category | Tests | Files | Domains |
+|:---------|:------|:------|:--------|
+| Casino/Gaming | 30 | `test_generators.py` | Slot, Table, Player, Financial, Security, Compliance |
+| Federal Agencies | 54 | `federal/test_*.py` | USDA, SBA, NOAA, EPA, DOI |
+| Streaming | 20 | `streaming/test_*.py` | Multi-source CDC, IoT devices |
+| Analytics | 30 | `analytics/test_*.py` | Video, People Movement, Geolocation |
+| **Total** | **134** | **10 test files** | **16 generators** |
 
 ---
 
@@ -488,6 +502,20 @@ Common fixtures available in `conftest.py`:
 | GE checkpoint fails | Check data source connection settings |
 | Import errors | Ensure `PYTHONPATH` includes project root |
 | Spark not found | Install PySpark: `pip install pyspark` |
+
+---
+
+## 📊 Phase 7 Regression Report
+
+The [Phase 7 Regression Report](phase7_regression_report.md) provides comprehensive validation:
+
+| Validation | Count | Status |
+|:-----------|:------|:-------|
+| Unit Tests | 134/134 | `🟢 All Passing` |
+| JSON Schemas | 23/23 | `🟢 All Valid` |
+| Python Generators | 16/16 | `🟢 All Compile` |
+| Notebooks | 35/35 | `🟢 All Compile` |
+| Regressions | 0 | `🟢 None` |
 
 ---
 
