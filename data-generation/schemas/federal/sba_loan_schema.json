@@ -1,0 +1,122 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SBA Loan Record",
+  "description": "Schema for Small Business Administration loan data including PPP, 7(a), 504, disaster, SBIR, and STTR programs",
+  "type": "object",
+  "required": ["loan_id", "program_type", "loan_amount", "approval_date"],
+  "properties": {
+    "loan_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the loan record"
+    },
+    "program_type": {
+      "type": "string",
+      "enum": ["PPP", "7A", "504", "DISASTER", "SBIR", "STTR"],
+      "description": "SBA loan program type"
+    },
+    "loan_amount": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Approved loan amount in USD"
+    },
+    "approval_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the loan was approved"
+    },
+    "borrower_name": {
+      "type": "string",
+      "description": "Legal name of the borrowing business or individual"
+    },
+    "borrower_city": {
+      "type": ["string", "null"],
+      "description": "City of the borrower"
+    },
+    "borrower_state": {
+      "type": ["string", "null"],
+      "pattern": "^[A-Z]{2}$",
+      "description": "Two-letter state abbreviation of the borrower"
+    },
+    "borrower_zip": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9]{5}$",
+      "description": "Five-digit ZIP code of the borrower"
+    },
+    "naics_code": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9]{6}$",
+      "description": "NAICS industry code for the borrower's primary business activity"
+    },
+    "naics_description": {
+      "type": ["string", "null"],
+      "description": "Human-readable description of the NAICS industry code"
+    },
+    "jobs_retained": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Number of jobs retained as reported by the borrower"
+    },
+    "lender_name": {
+      "type": ["string", "null"],
+      "description": "Name of the lending institution"
+    },
+    "sba_office": {
+      "type": ["string", "null"],
+      "description": "SBA district office that processed the loan"
+    },
+    "loan_status": {
+      "type": "string",
+      "enum": ["APPROVED", "ACTIVE", "PAID_IN_FULL", "CHARGED_OFF", "CANCELLED"],
+      "description": "Current status of the loan"
+    },
+    "forgiveness_amount": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "description": "Amount forgiven under PPP forgiveness program (PPP only)"
+    },
+    "forgiveness_date": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Date forgiveness was granted (PPP only)"
+    },
+    "term_months": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Loan term in months"
+    },
+    "interest_rate": {
+      "type": ["number", "null"],
+      "description": "Annual interest rate as a decimal (e.g., 0.035 for 3.5%)"
+    },
+    "rural_urban": {
+      "type": ["string", "null"],
+      "enum": ["RURAL", "URBAN", "UNDEFINED"],
+      "description": "Rural or urban classification of the borrower location"
+    },
+    "business_type": {
+      "type": ["string", "null"],
+      "enum": ["SOLE_PROPRIETORSHIP", "LLC", "CORPORATION", "PARTNERSHIP", "NON_PROFIT", "OTHER"],
+      "description": "Legal entity type of the borrowing business"
+    },
+    "load_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the record was loaded into the data platform"
+    },
+    "_ingested_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the record was ingested by the pipeline"
+    },
+    "_source": {
+      "type": "string",
+      "description": "Source system or API endpoint that provided the record"
+    },
+    "_batch_id": {
+      "type": "string",
+      "description": "Batch identifier for the ingestion run that produced this record"
+    }
+  },
+  "additionalProperties": false
+}
