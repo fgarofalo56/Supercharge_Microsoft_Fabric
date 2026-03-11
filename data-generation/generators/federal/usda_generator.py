@@ -234,9 +234,12 @@ class USDAGenerator(BaseGenerator):
         Returns:
             Dictionary with domain-specific fields plus standard metadata columns.
         """
-        if domain == "food_safety":
+        if domain == "crop_production":
+            return self._generate_crop_production_record()
+        elif domain == "food_safety":
             return self._generate_food_safety_record()
-        return self._generate_crop_production_record()
+        else:
+            raise ValueError(f"Unknown domain '{domain}'. Must be 'crop_production' or 'food_safety'.")
 
     # ------------------------------------------------------------------
     # Batch helper
