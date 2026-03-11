@@ -1,0 +1,108 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "KafkaMessage",
+  "description": "Schema for Apache Kafka messages",
+  "type": "object",
+  "required": [
+    "message_id",
+    "topic",
+    "partition",
+    "offset",
+    "timestamp"
+  ],
+  "properties": {
+    "message_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the Kafka message"
+    },
+    "topic": {
+      "type": "string",
+      "description": "Kafka topic name"
+    },
+    "partition": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Kafka topic partition number"
+    },
+    "offset": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Message offset within the partition"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Message timestamp"
+    },
+    "timestamp_type": {
+      "type": "string",
+      "enum": ["CREATE_TIME", "LOG_APPEND_TIME"],
+      "description": "Semantics of the timestamp field"
+    },
+    "key": {
+      "type": ["string", "null"],
+      "description": "Message key for partitioning"
+    },
+    "value": {
+      "type": ["object", "null"],
+      "description": "Message payload (deserialized)"
+    },
+    "headers": {
+      "type": ["object", "null"],
+      "description": "Kafka message headers"
+    },
+    "schema_id": {
+      "type": ["integer", "null"],
+      "description": "Schema Registry schema ID"
+    },
+    "schema_format": {
+      "type": ["string", "null"],
+      "enum": ["AVRO", "JSON_SCHEMA", "PROTOBUF", null],
+      "description": "Serialization format used for the message value"
+    },
+    "producer_id": {
+      "type": ["string", "null"],
+      "description": "Identifier of the Kafka producer that sent the message"
+    },
+    "consumer_group": {
+      "type": ["string", "null"],
+      "description": "Consumer group reading this message"
+    },
+    "source_connector": {
+      "type": ["string", "null"],
+      "description": "Kafka Connect source connector name"
+    },
+    "event_type": {
+      "type": ["string", "null"],
+      "description": "Application-level event type"
+    },
+    "correlation_id": {
+      "type": ["string", "null"],
+      "description": "Correlation identifier for distributed tracing"
+    },
+    "serialization_errors": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Number of serialization errors encountered for this message"
+    },
+    "load_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the message was loaded into the lakehouse"
+    },
+    "_ingested_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Ingestion timestamp added by the pipeline"
+    },
+    "_source": {
+      "type": "string",
+      "description": "Source system identifier for lineage tracking"
+    },
+    "_batch_id": {
+      "type": "string",
+      "description": "Batch identifier for the ingestion run"
+    }
+  }
+}
