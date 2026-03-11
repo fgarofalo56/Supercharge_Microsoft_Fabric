@@ -3,11 +3,11 @@
   "phase": 7,
   "phase_name": "Federal Agencies, Migration, RTI, Video Analytics & GeoAnalytics",
   "total_features": 71,
-  "completed": 16,
-  "passing": 16,
+  "completed": 21,
+  "passing": 21,
   "failing": 0,
-  "pending": 55,
-  "last_updated": "2026-03-11T15:30:00Z",
+  "pending": 50,
+  "last_updated": "2026-03-11T16:00:00Z",
   "categories": {
     "federal_agency_readmes": {
       "total": 5,
@@ -23,14 +23,14 @@
     },
     "federal_data_generators": {
       "total": 5,
-      "completed": 0,
+      "completed": 5,
       "wave": 1,
       "items": [
-        {"name": "usda_generator", "file": "data-generation/generators/federal/usda_generator.py", "status": "pending", "description": "USDA data generator: crop production, food inspections, SNAP retailers, farm payments"},
-        {"name": "sba_generator", "file": "data-generation/generators/federal/sba_generator.py", "status": "pending", "description": "SBA data generator: PPP loans, 7(a) loans, disaster loans, SBIR awards"},
-        {"name": "noaa_generator", "file": "data-generation/generators/federal/noaa_generator.py", "status": "pending", "description": "NOAA data generator: weather observations, storm events, tide data, climate normals"},
-        {"name": "epa_generator", "file": "data-generation/generators/federal/epa_generator.py", "status": "pending", "description": "EPA data generator: AQI readings, water quality, TRI releases, Superfund sites"},
-        {"name": "doi_generator", "file": "data-generation/generators/federal/doi_generator.py", "status": "pending", "description": "DOI data generator: earthquakes, water resources, species data, land parcels"}
+        {"name": "usda_generator", "file": "data-generation/generators/federal/usda_generator.py", "status": "complete", "description": "USDA data generator: crop production, food inspections, SNAP retailers, farm payments"},
+        {"name": "sba_generator", "file": "data-generation/generators/federal/sba_generator.py", "status": "complete", "description": "SBA data generator: PPP loans, 7(a) loans, disaster loans, SBIR awards"},
+        {"name": "noaa_generator", "file": "data-generation/generators/federal/noaa_generator.py", "status": "complete", "description": "NOAA data generator: weather observations, storm events, tide data, climate normals"},
+        {"name": "epa_generator", "file": "data-generation/generators/federal/epa_generator.py", "status": "complete", "description": "EPA data generator: AQI readings, water quality, TRI releases, Superfund sites"},
+        {"name": "doi_generator", "file": "data-generation/generators/federal/doi_generator.py", "status": "complete", "description": "DOI data generator: earthquakes, water resources, species data, land parcels"}
       ]
     },
     "federal_schemas": {
