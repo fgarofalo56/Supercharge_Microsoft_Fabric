@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "USDA NASS Crop Production Record",
+  "description": "Schema for USDA National Agricultural Statistics Service (NASS) QuickStats crop production data, covering planted/harvested area, yield, production, and price statistics at national, state, and county levels.",
+  "type": "object",
+  "required": ["record_id", "commodity", "year", "state_fips"],
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "description": "Unique identifier for the record (UUID v4)"
+    },
+    "commodity": {
+      "type": "string",
+      "description": "Agricultural commodity name",
+      "enum": ["CORN", "SOYBEANS", "WHEAT", "COTTON", "RICE", "BARLEY", "OATS", "SORGHUM", "HAY", "POTATOES"]
+    },
+    "year": {
+      "type": "integer",
+      "description": "Crop year",
+      "minimum": 1900,
+      "maximum": 2030
+    },
+    "state_fips": {
+      "type": "string",
+      "description": "Two-digit state FIPS code",
+      "pattern": "^[0-9]{2}$"
+    },
+    "state_name": {
+      "type": ["string", "null"],
+      "description": "Full state name corresponding to state_fips"
+    },
+    "county_fips": {
+      "type": ["string", "null"],
+      "description": "Five-digit county FIPS code (state + county digits)",
+      "pattern": "^[0-9]{5}$"
+    },
+    "county_name": {
+      "type": ["string", "null"],
+      "description": "County name corresponding to county_fips"
+    },
+    "statisticcat_desc": {
+      "type": "string",
+      "description": "Statistical category describing what is being measured",
+      "enum": ["AREA PLANTED", "AREA HARVESTED", "YIELD", "PRODUCTION", "PRICE RECEIVED"]
+    },
+    "unit_desc": {
+      "type": "string",
+      "description": "Unit of measure for the reported value",
+      "enum": ["ACRES", "BU / ACRE", "BU", "$ / BU", "CWT", "TONS"]
+    },
+    "value": {
+      "type": "number",
+      "description": "The statistical value for the given commodity, category, and unit"
+    },
+    "cv_percent": {
+      "type": ["number", "null"],
+      "description": "Coefficient of variation expressed as a percentage; null when not applicable or suppressed"
+    },
+    "source_desc": {
+      "type": "string",
+      "description": "Source of the data: sample survey or decennial census",
+      "enum": ["SURVEY", "CENSUS"]
+    },
+    "agg_level_desc": {
+      "type": "string",
+      "description": "Geographic aggregation level of the record",
+      "enum": ["NATIONAL", "STATE", "COUNTY"]
+    },
+    "domain_desc": {
+      "type": "string",
+      "description": "Domain classification for the record (e.g. chemical applied, irrigation practice)",
+      "default": "TOTAL"
+    },
+    "reference_period_desc": {
+      "type": "string",
+      "description": "Time period the value references, such as YEAR, MAR, or MARKETING YEAR"
+    },
+    "load_time": {
+      "type": "string",
+      "description": "Timestamp when the record was loaded from the NASS API",
+      "format": "date-time"
+    },
+    "_ingested_at": {
+      "type": "string",
+      "description": "Timestamp when the record was ingested into the Fabric lakehouse",
+      "format": "date-time"
+    },
+    "_source": {
+      "type": "string",
+      "description": "Source system identifier, e.g. nass_quickstats_api"
+    },
+    "_batch_id": {
+      "type": "string",
+      "description": "Batch run identifier for lineage and reprocessing traceability"
+    }
+  }
+}
