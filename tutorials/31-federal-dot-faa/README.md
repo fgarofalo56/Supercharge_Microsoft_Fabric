@@ -247,27 +247,6 @@ Federal agencies must operate within authorized cloud environments. Microsoft Fa
 | **GCC** | FedRAMP Moderate | CUI, FOUO, most federal workloads | GA (feature parity evolving) |
 | **GCC-High** | FedRAMP High | DoD IL4/IL5, ITAR, classified-adjacent | GA (limited features) |
 
-```
-┌─────────────────────────────────────────────────────┐
-│          Azure Government Cloud (GCC-High)          │
-│  ┌───────────────────────────────────────────────┐  │
-│  │          Microsoft Fabric Instance            │  │
-│  │  ┌─────────┐  ┌─────────┐  ┌─────────────┐   │  │
-│  │  │Lakehouse│  │Warehouse│  │ Eventstreams │   │  │
-│  │  │(Delta)  │  │  (SQL)  │  │ (Real-Time)  │   │  │
-│  │  └────┬────┘  └────┬────┘  └──────┬───────┘   │  │
-│  │       │            │              │            │  │
-│  │  ┌────▼────────────▼──────────────▼────────┐   │  │
-│  │  │     OneLake (Encrypted at Rest)         │   │  │
-│  │  │     AES-256 / Customer-Managed Keys     │   │  │
-│  │  └─────────────────────────────────────────┘   │  │
-│  └───────────────────────────────────────────────┘  │
-│                                                     │
-│  FedRAMP Controls: AC, AU, CA, CM, IA, SC, SI      │
-│  Continuous Monitoring: ConMon via CISA             │
-└─────────────────────────────────────────────────────┘
-```
-
 ### 2.2 FedRAMP Authorization Requirements
 
 | Requirement | FedRAMP Moderate | FedRAMP High |
@@ -297,27 +276,12 @@ Understanding data sensitivity determines which environment to deploy in and wha
 
 ### 2.4 Network Security Architecture
 
-```python
-# Network security configuration for federal deployments
-network_security = {
-    "private_endpoints": {
-        "description": "Fabric Lakehouse accessible only via Private Link",
-        "vnet": "vnet-fabric-gov-eastus2",
-        "subnet": "snet-fabric-private",
-        "dns_zone": "privatelink.dfs.fabric.microsoft.com"
-    },
-    "nsg_rules": [
-        {"name": "Allow_DataFactory", "source": "DataFactory.EastUS2", "dest": "VirtualNetwork", "port": 443, "action": "Allow"},
-        {"name": "Allow_PowerBI", "source": "PowerBI.EastUS2", "dest": "VirtualNetwork", "port": 443, "action": "Allow"},
-        {"name": "Deny_Internet", "source": "Internet", "dest": "VirtualNetwork", "port": "*", "action": "Deny"}
-    ],
-    "conditional_access": {
-        "mfa_required": True,
-        "compliant_device_required": True,
-        "location_restriction": "US_only"
-    }
-}
-```
+| Control | Configuration |
+|---------|--------------|
+| **Private Endpoints** | Fabric Lakehouse via Private Link (`privatelink.dfs.fabric.microsoft.com`) |
+| **NSG Rules** | Allow DataFactory + PowerBI service tags on 443; Deny Internet inbound |
+| **Conditional Access** | MFA required, compliant device required, US-only location restriction |
+| **VNet** | `vnet-fabric-gov-eastus2` / `snet-fabric-private` |
 
 ---
 
@@ -336,37 +300,7 @@ The Bronze layer captures raw DOT/FAA data across four domains: flight operation
 
 ### 3.2 Schema Definition
 
-The ingestion schema is defined in `data-generation/schemas/federal/dot_faa_schema.json` and covers all four domains with a unified record structure. Key fields include:
-
-```python
-# Core schema fields from dot_faa_schema.json
-# See: data-generation/schemas/federal/dot_faa_schema.json
-
-schema_domains = {
-    "flight_operations": [
-        "record_id", "carrier_code", "carrier_name",
-        "flight_number", "origin_airport", "destination_airport",
-        "departure_date", "scheduled_departure", "actual_departure",
-        "delay_minutes", "delay_cause", "cancelled", "diverted",
-        "aircraft_type", "tail_number", "passengers"
-    ],
-    "safety_incident": [
-        "record_id", "incident_type", "incident_severity",
-        "origin_airport", "carrier_code", "aircraft_type",
-        "visibility_miles", "wind_speed_knots",
-        "faa_region", "runway_id"
-    ],
-    "traffic_statistics": [
-        "record_id", "carrier_code", "origin_airport",
-        "destination_airport", "passengers",
-        "report_year", "report_month"
-    ],
-    "infrastructure": [
-        "record_id", "origin_airport", "airport_category",
-        "faa_region", "runway_id"
-    ]
-}
-```
+The ingestion schema is defined in `data-generation/schemas/federal/dot_faa_schema.json`. It uses a `data_domain` enum (`flight_operations`, `safety_incident`, `traffic_statistics`, `infrastructure`) to classify records. Key required fields: `record_id`, `carrier_code`, `origin_airport`, `destination_airport`, `departure_date`, `faa_region`, `report_year`, `report_month`. Safety-specific fields include `incident_type`, `incident_severity`, `visibility_miles`, and `wind_speed_knots`.
 
 ### 3.3 Bronze Ingestion (PySpark)
 
@@ -444,50 +378,7 @@ print(f"Batch: {BATCH_ID}")
 
 ### 3.4 Safety Incident Ingestion
 
-```python
-# Safety incident schema and ingestion
-safety_schema = StructType([
-    StructField("incident_id", StringType(), False),
-    StructField("incident_date", TimestampType(), True),
-    StructField("incident_type", StringType(), True),
-    StructField("severity", StringType(), True),
-    StructField("airport_code", StringType(), True),
-    StructField("carrier_code", StringType(), True),
-    StructField("aircraft_type", StringType(), True),
-    StructField("species", StringType(), True),
-    StructField("phase_of_flight", StringType(), True),
-    StructField("damage_level", StringType(), True),
-    StructField("height_ft", IntegerType(), True),
-    StructField("speed_knots", IntegerType(), True),
-    StructField("cost_repairs", DoubleType(), True),
-    StructField("cost_other", DoubleType(), True),
-    StructField("faa_region", StringType(), True),
-    StructField("state", StringType(), True),
-])
-
-df_raw_safety = (
-    spark.read
-    .option("header", True)
-    .schema(safety_schema)
-    .csv(f"{LANDING_BASE_PATH}/safety_incidents/")
-)
-
-df_bronze_safety = (
-    df_raw_safety
-    .withColumn("_ingested_at", current_timestamp())
-    .withColumn("_source", lit("faa_wildlife_sdrs"))
-    .withColumn("_batch_id", lit(BATCH_ID))
-)
-
-(
-    df_bronze_safety.write
-    .format("delta")
-    .mode("append")
-    .saveAsTable("bronze_dot_safety")
-)
-
-print(f"Bronze safety incidents: {df_bronze_safety.count():,} records ingested")
-```
+The same pattern applies for safety data. Define an explicit schema for incident fields (`incident_id`, `incident_date`, `incident_type`, `severity`, `airport_code`, `species`, `damage_level`, `cost_repairs`, etc.), read from `Files/landing/dot_faa/safety_incidents/`, add ingestion metadata (`_ingested_at`, `_source`, `_batch_id`), and append to `bronze_dot_safety`. See `notebooks/bronze/08_bronze_dot_faa.py` for the full implementation.
 
 > **:bulb: Verification**
 >
@@ -643,39 +534,9 @@ safety_correlated = df_flights_with_safety.filter(col("has_safety_incident")).co
 print(f"Flights correlated with safety incidents: {safety_correlated:,}")
 ```
 
-### 4.5 Data Quality Scoring
+### 4.5 Data Quality Scoring and Silver Write
 
-```python
-# Compute a quality score per record (0-100)
-df_silver_scored = (
-    df_flights_with_safety
-    .withColumn("_dq_airport_valid", when(col("_valid_origin") & col("_valid_destination"), 25).otherwise(0))
-    .withColumn("_dq_delay_present", when(col("departure_delay_minutes").isNotNull(), 25).otherwise(0))
-    .withColumn("_dq_carrier_known", when(col("carrier_name_std").isNotNull() & ~col("carrier_name_std").startswith("Other"), 25).otherwise(0))
-    .withColumn("_dq_date_valid", when(col("flight_date").isNotNull(), 25).otherwise(0))
-    .withColumn("data_quality_score",
-        col("_dq_airport_valid") + col("_dq_delay_present") +
-        col("_dq_carrier_known") + col("_dq_date_valid")
-    )
-)
-
-# Write Silver table
-(
-    df_silver_scored
-    .drop("_valid_origin", "_valid_destination",
-          "_dq_airport_valid", "_dq_delay_present",
-          "_dq_carrier_known", "_dq_date_valid")
-    .write
-    .format("delta")
-    .mode("overwrite")
-    .partitionBy("faa_region")
-    .saveAsTable("lh_silver.silver_dot_flight_performance")
-)
-
-print(f"Silver flight performance: {df_silver_scored.count():,} records")
-avg_quality = df_silver_scored.agg(avg("data_quality_score")).collect()[0][0]
-print(f"Average data quality score: {avg_quality:.1f}/100")
-```
+Each record receives a `data_quality_score` (0-100) based on four 25-point checks: valid airport codes, delay value present, known carrier mapping, and valid date. The scored DataFrame is written to `lh_silver.silver_dot_flight_performance`, partitioned by `faa_region`, with internal quality columns dropped before write. See `notebooks/silver/08_silver_dot_faa.py` for the full scoring implementation.
 
 ---
 
@@ -874,17 +735,6 @@ SUMX(
     )
 )
 
-// Year-over-Year Incident Change
-YoY Incident Change =
-VAR CurrentYear = SUM(gold_dot_safety_analytics[incident_count])
-VAR PriorYear =
-    CALCULATE(
-        SUM(gold_dot_safety_analytics[incident_count]),
-        SAMEPERIODLASTYEAR('Calendar'[Date])
-    )
-RETURN
-    DIVIDE(CurrentYear - PriorYear, PriorYear, 0) * 100
-
 // Airport Utilization Index
 Airport Utilization Index =
 DIVIDE(
@@ -892,17 +742,6 @@ DIVIDE(
     DISTINCTCOUNT(gold_dot_airport_metrics[origin_airport]),
     0
 )
-
-// Delay Cause Breakdown (for selected carrier)
-Carrier Delay Share =
-DIVIDE(
-    SUM(gold_dot_carrier_performance[carrier_delay_total_min]),
-    SUM(gold_dot_carrier_performance[carrier_delay_total_min])
-    + SUM(gold_dot_carrier_performance[weather_delay_total_min])
-    + SUM(gold_dot_carrier_performance[nas_delay_total_min])
-    + SUM(gold_dot_carrier_performance[late_aircraft_delay_total_min]),
-    0
-) * 100
 ```
 
 ---
@@ -979,32 +818,7 @@ Build a decomposition tree visual that lets analysts drill from total delay down
 
 ### 6.4 Route Performance Comparison
 
-```python
-# Gold layer: top delayed routes for Power BI
-df_route_performance = (
-    df_flights
-    .withColumn("route", concat(col("origin_airport"), lit(" → "), col("destination_airport")))
-    .groupBy("route", "origin_airport", "destination_airport")
-    .agg(
-        count("*").alias("total_flights"),
-        round(avg("departure_delay_minutes"), 1).alias("avg_delay_min"),
-        sum(when(col("delay_category") == "on_time", 1).otherwise(0)).alias("on_time_count"),
-        sum(when(col("cancelled") == True, 1).otherwise(0)).alias("cancellations"),
-    )
-    .withColumn("on_time_pct", round(col("on_time_count") / col("total_flights") * 100, 1))
-    .filter(col("total_flights") >= 100)  # Minimum flight threshold
-    .orderBy(col("avg_delay_min").desc())
-)
-
-(
-    df_route_performance.write
-    .format("delta")
-    .mode("overwrite")
-    .saveAsTable("lh_gold.gold_dot_route_performance")
-)
-
-display(df_route_performance.limit(20))
-```
+Build a `gold_dot_route_performance` table by grouping Silver flights on `origin_airport + destination_airport`, computing `avg_delay_min`, `on_time_pct`, and `cancellations`. Filter to routes with 100+ flights to eliminate statistical noise. Use a **Scatter Chart** in Power BI with `total_flights` on X, `avg_delay_min` on Y, and `route` as the detail -- this lets analysts immediately spot high-volume, high-delay routes that need attention.
 
 ---
 
@@ -1016,122 +830,21 @@ Federal aviation analytics must feed into several reporting channels: NTSB safet
 
 The National Transportation Safety Board requires structured safety data for accident and incident investigations. Generate NTSB-compatible extracts from Gold layer safety analytics.
 
-```python
-# Generate NTSB-compatible safety extract
-from pyspark.sql.functions import date_format
-
-df_ntsb_extract = (
-    spark.table("lh_gold.gold_dot_safety_analytics")
-    .filter(col("severity").isin("serious", "critical"))
-    .withColumn("ntsb_report_date", date_format(current_date(), "yyyy-MM-dd"))
-    .withColumn("data_source", lit("Fabric-DOT-FAA-Analytics"))
-    .select(
-        col("report_year"),
-        col("report_month"),
-        col("incident_type").alias("event_type"),
-        col("severity").alias("highest_injury_level"),
-        col("incident_count").alias("event_count"),
-        col("airports_affected"),
-        col("total_repair_cost").alias("damage_estimate_usd"),
-        col("ntsb_report_date"),
-        col("data_source")
-    )
-)
-
-# Write to export location for NTSB submission
-(
-    df_ntsb_extract.write
-    .format("csv")
-    .mode("overwrite")
-    .option("header", True)
-    .save("Files/exports/ntsb/safety_extract/")
-)
-
-print(f"NTSB extract: {df_ntsb_extract.count():,} records exported")
-```
+Filter `gold_dot_safety_analytics` for `severity IN ('serious', 'critical')`, rename columns to NTSB-standard names (`event_type`, `highest_injury_level`, `event_count`, `damage_estimate_usd`), add `ntsb_report_date` and `data_source` metadata, and export as CSV to `Files/exports/ntsb/safety_extract/`.
 
 ### 7.2 Congressional Report Generation
 
-Generate summary statistics formatted for Congressional oversight reporting.
-
-```python
-# Congressional report: carrier performance summary
-df_congressional = (
-    spark.table("lh_gold.gold_dot_carrier_performance")
-    .groupBy("carrier_name_std")
-    .agg(
-        sum("total_flights").alias("annual_flights"),
-        round(avg("on_time_pct"), 1).alias("avg_on_time_pct"),
-        round(avg("avg_delay_minutes"), 1).alias("avg_delay_min"),
-        round(sum("cancelled_flights") / sum("total_flights") * 100, 2).alias("cancel_rate_pct"),
-        sum("total_passengers").alias("passengers_carried"),
-    )
-    .orderBy(col("annual_flights").desc())
-)
-
-# Write summary for Congressional briefing
-(
-    df_congressional.write
-    .format("csv")
-    .mode("overwrite")
-    .option("header", True)
-    .save("Files/exports/congressional/carrier_performance_summary/")
-)
-
-display(df_congressional)
-print("\nCongressional carrier performance summary exported.")
-```
+Aggregate Gold carrier performance into annual summaries grouped by `carrier_name_std` with fields for `annual_flights`, `avg_on_time_pct`, `avg_delay_min`, `cancel_rate_pct`, and `passengers_carried`. Export as CSV to `Files/exports/congressional/carrier_performance_summary/` for briefing packages.
 
 ### 7.3 Public Data Portal Publishing
 
-Prepare anonymized, aggregated datasets for publishing on data.gov or agency open data portals.
-
-```python
-# Public portal dataset: monthly aviation statistics
-df_public_portal = (
-    spark.table("lh_gold.gold_dot_carrier_performance")
-    .select(
-        "carrier_code", "carrier_name_std",
-        "report_year", "report_month",
-        "total_flights", "on_time_pct",
-        "avg_delay_minutes", "cancellation_rate_pct",
-        "total_passengers"
-    )
-    .withColumn("dataset_name", lit("Monthly Aviation On-Time Performance"))
-    .withColumn("publisher", lit("Bureau of Transportation Statistics"))
-    .withColumn("license", lit("Public Domain (US Government Work)"))
-    .withColumn("published_date", current_date())
-)
-
-# Export as Parquet for data.gov ingestion
-(
-    df_public_portal.write
-    .format("parquet")
-    .mode("overwrite")
-    .save("Files/exports/public_portal/monthly_aviation_stats/")
-)
-
-# Also export as CSV for broader accessibility
-(
-    df_public_portal.write
-    .format("csv")
-    .mode("overwrite")
-    .option("header", True)
-    .save("Files/exports/public_portal/monthly_aviation_stats_csv/")
-)
-
-print(f"Public portal dataset: {df_public_portal.count():,} records published")
-print("Formats: Parquet + CSV")
-print("License: Public Domain (US Government Work)")
-```
+Prepare aggregated, anonymized datasets for data.gov by selecting non-PII columns from `gold_dot_carrier_performance` and adding metadata fields (`dataset_name`, `publisher`, `license: Public Domain (US Government Work)`, `published_date`). Export in both Parquet (for analysts) and CSV (for broad accessibility) to `Files/exports/public_portal/`.
 
 > **:bulb: Open Data Best Practices**
 >
-> - Always include metadata fields (`dataset_name`, `publisher`, `license`, `published_date`)
-> - Publish in both Parquet (for analysts) and CSV (for broad accessibility)
 > - Never include PII or SSI in public datasets
 > - Version datasets with `report_year` and `report_month` for reproducibility
-> - Include a data dictionary alongside the published files
+> - Include a data dictionary alongside published files
 
 ---
 

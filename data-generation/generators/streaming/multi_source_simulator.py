@@ -456,7 +456,7 @@ class MultiSourceSimulator(BaseGenerator):
 
     def _generate_scn(self) -> str:
         """Generate an Oracle-style System Change Number (large integer string)."""
-        return str(np.random.randint(10_000_000_000, 99_999_999_999))
+        return str(np.random.randint(10_000_000_000, 99_999_999_999, dtype=np.int64))
 
     def _generate_partition_key(self, cfg: dict[str, Any]) -> str:
         """Generate a Cosmos DB-style partition key path with a realistic value."""
