@@ -3,11 +3,11 @@
   "phase": 7,
   "phase_name": "Federal Agencies, Migration, RTI, Video Analytics & GeoAnalytics",
   "total_features": 71,
-  "completed": 7,
-  "passing": 7,
+  "completed": 16,
+  "passing": 16,
   "failing": 0,
-  "pending": 64,
-  "last_updated": "2026-03-11T15:00:00Z",
+  "pending": 55,
+  "last_updated": "2026-03-11T15:30:00Z",
   "categories": {
     "federal_agency_readmes": {
       "total": 5,
@@ -35,18 +35,18 @@
     },
     "federal_schemas": {
       "total": 9,
-      "completed": 0,
+      "completed": 9,
       "wave": 1,
       "items": [
-        {"name": "usda_crop_schema", "file": "data-generation/schemas/federal/usda_crop_schema.json", "status": "pending"},
-        {"name": "usda_food_safety_schema", "file": "data-generation/schemas/federal/usda_food_safety_schema.json", "status": "pending"},
-        {"name": "sba_loan_schema", "file": "data-generation/schemas/federal/sba_loan_schema.json", "status": "pending"},
-        {"name": "noaa_weather_schema", "file": "data-generation/schemas/federal/noaa_weather_schema.json", "status": "pending"},
-        {"name": "noaa_storm_schema", "file": "data-generation/schemas/federal/noaa_storm_schema.json", "status": "pending"},
-        {"name": "epa_air_quality_schema", "file": "data-generation/schemas/federal/epa_air_quality_schema.json", "status": "pending"},
-        {"name": "epa_water_quality_schema", "file": "data-generation/schemas/federal/epa_water_quality_schema.json", "status": "pending"},
-        {"name": "doi_earthquake_schema", "file": "data-generation/schemas/federal/doi_earthquake_schema.json", "status": "pending"},
-        {"name": "doi_land_use_schema", "file": "data-generation/schemas/federal/doi_land_use_schema.json", "status": "pending"}
+        {"name": "usda_crop_schema", "file": "data-generation/schemas/federal/usda_crop_schema.json", "status": "complete"},
+        {"name": "usda_food_safety_schema", "file": "data-generation/schemas/federal/usda_food_safety_schema.json", "status": "complete"},
+        {"name": "sba_loan_schema", "file": "data-generation/schemas/federal/sba_loan_schema.json", "status": "complete"},
+        {"name": "noaa_weather_schema", "file": "data-generation/schemas/federal/noaa_weather_schema.json", "status": "complete"},
+        {"name": "noaa_storm_schema", "file": "data-generation/schemas/federal/noaa_storm_schema.json", "status": "complete"},
+        {"name": "epa_air_quality_schema", "file": "data-generation/schemas/federal/epa_air_quality_schema.json", "status": "complete"},
+        {"name": "epa_water_quality_schema", "file": "data-generation/schemas/federal/epa_water_quality_schema.json", "status": "complete"},
+        {"name": "doi_earthquake_schema", "file": "data-generation/schemas/federal/doi_earthquake_schema.json", "status": "complete"},
+        {"name": "doi_land_use_schema", "file": "data-generation/schemas/federal/doi_land_use_schema.json", "status": "complete"}
       ]
     },
     "federal_unit_tests": {

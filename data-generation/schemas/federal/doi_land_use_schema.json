@@ -1,0 +1,129 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DOI/BLM Land Use Parcel Record",
+  "description": "Schema for Department of the Interior Bureau of Land Management (BLM) and federal land use parcel data including permits, designations, and environmental attributes",
+  "type": "object",
+  "required": ["parcel_id", "managing_agency", "state", "land_type"],
+  "properties": {
+    "parcel_id": {
+      "type": "string",
+      "description": "Unique UUID for this parcel record",
+      "format": "uuid"
+    },
+    "blm_serial_number": {
+      "type": ["string", "null"],
+      "description": "BLM Land Serial Number (LSN) assigned to the parcel or case file"
+    },
+    "managing_agency": {
+      "type": "string",
+      "description": "Federal agency with primary land management responsibility",
+      "enum": ["BLM", "NPS", "FWS", "USFS", "BOR", "DOD", "OTHER"]
+    },
+    "state": {
+      "type": "string",
+      "description": "Two-letter USPS state abbreviation where the parcel is located",
+      "pattern": "^[A-Z]{2}$"
+    },
+    "county": {
+      "type": ["string", "null"],
+      "description": "County name where the parcel is located"
+    },
+    "land_type": {
+      "type": "string",
+      "description": "Primary designated use classification for the parcel",
+      "enum": [
+        "GRAZING",
+        "MINING",
+        "TIMBER",
+        "RECREATION",
+        "WILDERNESS",
+        "CONSERVATION",
+        "MIXED_USE"
+      ]
+    },
+    "total_acres": {
+      "type": "number",
+      "description": "Total area of the parcel in acres",
+      "minimum": 0
+    },
+    "latitude": {
+      "type": ["number", "null"],
+      "description": "Centroid latitude of the parcel in decimal degrees",
+      "minimum": -90,
+      "maximum": 90
+    },
+    "longitude": {
+      "type": ["number", "null"],
+      "description": "Centroid longitude of the parcel in decimal degrees",
+      "minimum": -180,
+      "maximum": 180
+    },
+    "designation": {
+      "type": ["string", "null"],
+      "description": "Official designation name, e.g. National Monument, Wilderness Area, National Recreation Area"
+    },
+    "designation_date": {
+      "type": ["string", "null"],
+      "description": "Date the land was officially designated or classified",
+      "format": "date"
+    },
+    "permit_type": {
+      "type": ["string", "null"],
+      "description": "Type of use authorization or permit associated with the parcel",
+      "enum": [
+        "GRAZING_PERMIT",
+        "MINING_CLAIM",
+        "SPECIAL_USE",
+        "RIGHT_OF_WAY",
+        "NONE",
+        null
+      ]
+    },
+    "permit_holder": {
+      "type": ["string", "null"],
+      "description": "Name of the individual, company, or entity holding the permit"
+    },
+    "annual_revenue": {
+      "type": ["number", "null"],
+      "description": "Annual revenue generated from permitted activities on this parcel in USD",
+      "minimum": 0
+    },
+    "environmental_assessment": {
+      "type": ["boolean", "null"],
+      "description": "True if a NEPA environmental assessment or EIS has been completed for this parcel"
+    },
+    "protected_species_present": {
+      "type": ["boolean", "null"],
+      "description": "True if federally listed threatened or endangered species have been identified on the parcel"
+    },
+    "fire_risk_level": {
+      "type": ["string", "null"],
+      "description": "Wildfire risk classification based on fuels, terrain, and weather patterns",
+      "enum": ["LOW", "MODERATE", "HIGH", "VERY_HIGH", "EXTREME", null]
+    },
+    "last_inspection_date": {
+      "type": ["string", "null"],
+      "description": "Date of the most recent field inspection of the parcel",
+      "format": "date"
+    },
+    "load_time": {
+      "type": "string",
+      "description": "Timestamp when the record was loaded into the pipeline",
+      "format": "date-time"
+    },
+    "_ingested_at": {
+      "type": "string",
+      "description": "Timestamp when the record was ingested into the lakehouse",
+      "format": "date-time"
+    },
+    "_source": {
+      "type": "string",
+      "description": "Source system or API identifier for this record"
+    },
+    "_batch_id": {
+      "type": "string",
+      "description": "Batch job identifier that produced this record"
+    }
+  },
+  "additionalProperties": false
+}
