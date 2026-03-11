@@ -3,11 +3,11 @@
   "phase": 7,
   "phase_name": "Federal Agencies, Migration, RTI, Video Analytics & GeoAnalytics",
   "total_features": 71,
-  "completed": 21,
-  "passing": 21,
+  "completed": 26,
+  "passing": 26,
   "failing": 0,
-  "pending": 50,
-  "last_updated": "2026-03-11T16:00:00Z",
+  "pending": 45,
+  "last_updated": "2026-03-11T16:30:00Z",
   "categories": {
     "federal_agency_readmes": {
       "total": 5,
@@ -51,14 +51,14 @@
     },
     "federal_unit_tests": {
       "total": 5,
-      "completed": 0,
+      "completed": 5,
       "wave": 1,
       "items": [
-        {"name": "test_usda_generator", "file": "validation/unit_tests/federal/test_usda_generator.py", "status": "pending"},
-        {"name": "test_sba_generator", "file": "validation/unit_tests/federal/test_sba_generator.py", "status": "pending"},
-        {"name": "test_noaa_generator", "file": "validation/unit_tests/federal/test_noaa_generator.py", "status": "pending"},
-        {"name": "test_epa_generator", "file": "validation/unit_tests/federal/test_epa_generator.py", "status": "pending"},
-        {"name": "test_doi_generator", "file": "validation/unit_tests/federal/test_doi_generator.py", "status": "pending"}
+        {"name": "test_usda_generator", "file": "validation/unit_tests/federal/test_usda_generator.py", "status": "complete"},
+        {"name": "test_sba_generator", "file": "validation/unit_tests/federal/test_sba_generator.py", "status": "complete"},
+        {"name": "test_noaa_generator", "file": "validation/unit_tests/federal/test_noaa_generator.py", "status": "complete"},
+        {"name": "test_epa_generator", "file": "validation/unit_tests/federal/test_epa_generator.py", "status": "complete"},
+        {"name": "test_doi_generator", "file": "validation/unit_tests/federal/test_doi_generator.py", "status": "complete"}
       ]
     },
     "open_dataset_config": {
