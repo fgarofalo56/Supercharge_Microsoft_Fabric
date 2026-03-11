@@ -1,0 +1,132 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EPA Air Quality (AQI) Record",
+  "description": "Schema for EPA Air Quality System (AQS) daily AQI observations per monitoring site and parameter",
+  "type": "object",
+  "required": ["record_id", "site_id", "parameter", "date_local", "aqi_value"],
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "description": "Unique UUID for this record",
+      "format": "uuid"
+    },
+    "site_id": {
+      "type": "string",
+      "description": "AQS site identifier in state-county-site format",
+      "pattern": "^[0-9]{2}-[0-9]{3}-[0-9]{4}$"
+    },
+    "site_name": {
+      "type": ["string", "null"],
+      "description": "Human-readable name of the monitoring site"
+    },
+    "parameter": {
+      "type": "string",
+      "description": "The pollutant parameter being measured",
+      "enum": ["PM2.5", "PM10", "OZONE", "CO", "SO2", "NO2", "LEAD"]
+    },
+    "parameter_code": {
+      "type": "string",
+      "description": "EPA AQS numeric code for the parameter",
+      "enum": ["88101", "81102", "44201", "42101", "42401", "42602", "14129"]
+    },
+    "date_local": {
+      "type": "string",
+      "description": "Local date of the observation",
+      "format": "date"
+    },
+    "time_local": {
+      "type": ["string", "null"],
+      "description": "Local time of the observation in HH:MM format",
+      "pattern": "^[0-9]{2}:[0-9]{2}$"
+    },
+    "aqi_value": {
+      "type": "integer",
+      "description": "Calculated Air Quality Index value",
+      "minimum": 0,
+      "maximum": 500
+    },
+    "aqi_category": {
+      "type": "string",
+      "description": "EPA AQI category label corresponding to aqi_value range",
+      "enum": [
+        "GOOD",
+        "MODERATE",
+        "UNHEALTHY_SENSITIVE",
+        "UNHEALTHY",
+        "VERY_UNHEALTHY",
+        "HAZARDOUS"
+      ]
+    },
+    "concentration": {
+      "type": "number",
+      "description": "Raw measured concentration of the pollutant"
+    },
+    "units": {
+      "type": "string",
+      "description": "Unit of measure for the concentration value",
+      "enum": ["UG/M3", "PPM", "PPB"]
+    },
+    "sample_duration": {
+      "type": ["string", "null"],
+      "description": "Duration over which the sample was collected",
+      "enum": ["1 HOUR", "8 HOUR", "24 HOUR", null]
+    },
+    "latitude": {
+      "type": "number",
+      "description": "Latitude of the monitoring site in decimal degrees",
+      "minimum": -90,
+      "maximum": 90
+    },
+    "longitude": {
+      "type": "number",
+      "description": "Longitude of the monitoring site in decimal degrees",
+      "minimum": -180,
+      "maximum": 180
+    },
+    "state_code": {
+      "type": "string",
+      "description": "Two-digit FIPS state code",
+      "pattern": "^[0-9]{2}$"
+    },
+    "county_code": {
+      "type": "string",
+      "description": "Three-digit FIPS county code",
+      "pattern": "^[0-9]{3}$"
+    },
+    "state_name": {
+      "type": ["string", "null"],
+      "description": "Full name of the state"
+    },
+    "county_name": {
+      "type": ["string", "null"],
+      "description": "Full name of the county"
+    },
+    "cbsa_name": {
+      "type": ["string", "null"],
+      "description": "Core-Based Statistical Area (metro area) name"
+    },
+    "method_code": {
+      "type": ["string", "null"],
+      "description": "AQS collection method code"
+    },
+    "load_time": {
+      "type": "string",
+      "description": "Timestamp when the record was loaded into the pipeline",
+      "format": "date-time"
+    },
+    "_ingested_at": {
+      "type": "string",
+      "description": "Timestamp when the record was ingested into the lakehouse",
+      "format": "date-time"
+    },
+    "_source": {
+      "type": "string",
+      "description": "Source system or API identifier for this record"
+    },
+    "_batch_id": {
+      "type": "string",
+      "description": "Batch job identifier that produced this record"
+    }
+  },
+  "additionalProperties": false
+}
