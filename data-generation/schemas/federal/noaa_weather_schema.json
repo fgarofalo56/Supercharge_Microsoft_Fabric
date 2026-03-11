@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "NOAA Weather Observation Record",
+  "description": "Schema for NOAA weather station observation data including surface, aviation, and cooperative network reports",
+  "type": "object",
+  "required": ["observation_id", "station_id", "timestamp", "parameter"],
+  "properties": {
+    "observation_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the observation record"
+    },
+    "station_id": {
+      "type": "string",
+      "pattern": "^[A-Z0-9]{4,11}$",
+      "description": "NOAA weather station identifier (ICAO, WBAN, or COOP ID)"
+    },
+    "station_name": {
+      "type": ["string", "null"],
+      "description": "Human-readable name of the weather station"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time of the observation in UTC"
+    },
+    "latitude": {
+      "type": "number",
+      "minimum": -90,
+      "maximum": 90,
+      "description": "Latitude of the weather station in decimal degrees"
+    },
+    "longitude": {
+      "type": "number",
+      "minimum": -180,
+      "maximum": 180,
+      "description": "Longitude of the weather station in decimal degrees"
+    },
+    "elevation_m": {
+      "type": ["number", "null"],
+      "description": "Elevation of the weather station in meters above sea level"
+    },
+    "parameter": {
+      "type": "string",
+      "enum": [
+        "TEMPERATURE",
+        "DEWPOINT",
+        "HUMIDITY",
+        "WIND_SPEED",
+        "WIND_DIRECTION",
+        "PRESSURE",
+        "VISIBILITY",
+        "PRECIPITATION",
+        "CLOUD_COVER"
+      ],
+      "description": "Meteorological parameter being observed"
+    },
+    "value": {
+      "type": "number",
+      "description": "The observed measurement value in the specified unit"
+    },
+    "unit": {
+      "type": "string",
+      "enum": ["F", "C", "PCT", "MPH", "KTS", "DEG", "IN_HG", "MI", "IN"],
+      "description": "Unit of measure for the observed value"
+    },
+    "quality_flag": {
+      "type": ["string", "null"],
+      "enum": ["PASS", "SUSPECT", "ERRONEOUS", "MISSING"],
+      "description": "Quality control flag indicating data reliability"
+    },
+    "data_source": {
+      "type": "string",
+      "enum": ["ASOS", "AWOS", "METAR", "SYNOP", "COOP"],
+      "description": "Observing network or reporting format that produced this record"
+    },
+    "report_type": {
+      "type": ["string", "null"],
+      "description": "Sub-type or category of the weather report (e.g., routine, special, corrections)"
+    },
+    "load_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the record was loaded into the data platform"
+    },
+    "_ingested_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the record was ingested by the pipeline"
+    },
+    "_source": {
+      "type": "string",
+      "description": "Source system or API endpoint that provided the record"
+    },
+    "_batch_id": {
+      "type": "string",
+      "description": "Batch identifier for the ingestion run that produced this record"
+    }
+  },
+  "additionalProperties": false
+}
