@@ -89,7 +89,7 @@ var kustoDatabaseAdminRoleId = 'Admin'
 // Azure Data Explorer Cluster (Fabric Eventhouse backing resource)
 // =============================================================================
 
-resource adxCluster 'Microsoft.Kusto/clusters@2023-08-15' = {
+resource adxCluster 'Microsoft.Kusto/clusters@2024-04-13' = {
   name: eventHouseName
   location: location
   tags: eventhouseTags
@@ -123,7 +123,7 @@ resource adxCluster 'Microsoft.Kusto/clusters@2023-08-15' = {
 // KQL Databases (one per analytical domain)
 // =============================================================================
 
-resource databases 'Microsoft.Kusto/clusters/databases@2023-08-15' = [
+resource databases 'Microsoft.Kusto/clusters/databases@2024-04-13' = [
   for dbName in databaseNames: {
     parent: adxCluster
     name: dbName
@@ -143,7 +143,7 @@ resource databases 'Microsoft.Kusto/clusters/databases@2023-08-15' = [
 // database (CasinoFloorMonitoring) for Eventstream-to-Eventhouse routing.
 // =============================================================================
 
-resource slotTelemetryTable 'Microsoft.Kusto/clusters/databases/scripts@2023-08-15' = {
+resource slotTelemetryTable 'Microsoft.Kusto/clusters/databases/scripts@2024-04-13' = {
   parent: databases[0]
   name: 'createSlotTelemetryTable'
   properties: {
@@ -187,7 +187,7 @@ resource slotTelemetryTable 'Microsoft.Kusto/clusters/databases/scripts@2023-08-
   }
 }
 
-resource complianceAlertTable 'Microsoft.Kusto/clusters/databases/scripts@2023-08-15' = {
+resource complianceAlertTable 'Microsoft.Kusto/clusters/databases/scripts@2024-04-13' = {
   parent: databases[0]
   name: 'createComplianceAlertTable'
   properties: {
@@ -231,7 +231,7 @@ resource complianceAlertTable 'Microsoft.Kusto/clusters/databases/scripts@2023-0
 // RBAC - Managed Identity Database Admin
 // =============================================================================
 
-resource databasePrincipal 'Microsoft.Kusto/clusters/databases/principalAssignments@2023-08-15' = [
+resource databasePrincipal 'Microsoft.Kusto/clusters/databases/principalAssignments@2024-04-13' = [
   for (dbName, i) in databaseNames: if (!empty(managedIdentityPrincipalId)) {
     parent: databases[i]
     name: guid(adxCluster.id, dbName, managedIdentityPrincipalId)

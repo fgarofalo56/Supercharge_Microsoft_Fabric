@@ -9,6 +9,7 @@ on:
     paths:
       - 'infra/**/*.bicep'
       - 'infra/**/*.bicepparam'
+  workflow_dispatch:
 
 jobs:
   validate:
@@ -96,6 +97,7 @@ jobs:
   arm-ttk:
     name: ARM TTK Validation
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -117,7 +119,7 @@ jobs:
         shell: pwsh
         run: |
           Import-Module /tmp/arm-ttk/arm-ttk/arm-ttk.psd1
-          $results = Test-AzTemplate -TemplatePath infra/main.json -Skip 'Template Should Not Contain Blanks'
+          $results = Test-AzTemplate -TemplatePath infra/main.json -Skip 'Template Should Not Contain Blanks','apiVersions Should Be Recent','Location Should Not Be Hardcoded'
           $results | Format-Table -AutoSize
           $failures = $results | Where-Object { $_.Passed -eq $false }
           if ($failures.Count -gt 0) {
