@@ -46,7 +46,9 @@ jobs:
         run: python -m black --check --diff data-generation/ validation/
 
       - name: Run mypy type checking
-        run: python -m mypy data-generation/generators/ --ignore-missing-imports
+        env:
+          MYPYPATH: data-generation
+        run: python -m mypy data-generation/generators/ --ignore-missing-imports --namespace-packages --explicit-package-bases
 
   security-scan:
     name: Security Scanning

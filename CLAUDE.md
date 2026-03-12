@@ -6,7 +6,7 @@
 **Type:** Infrastructure + Documentation + Data Engineering
 **Primary Stack:** Bicep, Python, PySpark, KQL, DAX
 **Target Platform:** Microsoft Fabric (F64 SKU)
-**Phase Status:** Phase 7 Complete (71 features, 134 tests, 5 waves)
+**Phase Status:** Phase 7 Complete (71 features, 197 tests, 5 waves)
 
 ## Key Technologies
 
@@ -24,9 +24,9 @@ infra/              - Bicep IaC modules and deployments
 docs/               - Architecture and deployment documentation
 tutorials/          - 32 step-by-step tutorials (00-31)
 poc-agenda/         - 3-day workshop materials
-data-generation/    - 16 Python data generators (casino, federal, streaming, analytics)
-notebooks/          - 35 Fabric-importable notebooks (medallion + streaming)
-validation/         - 134 unit tests + Great Expectations data quality
+data-generation/    - 19 Python data generators (casino, federal, streaming, analytics)
+notebooks/          - 45 Fabric-importable notebooks (medallion + streaming)
+validation/         - 197 unit tests + Great Expectations data quality
 future-expansions/  - Federal agency & industry expansion documentation
 ```
 
@@ -91,14 +91,15 @@ future-expansions/  - Federal agency & industry expansion documentation
 # Validate Bicep
 az bicep build --file infra/main.bicep
 
-# Run all 134 unit tests
+# Run all 197 unit tests
 pytest validation/unit_tests/ -v
 
 # Run by category
 pytest validation/unit_tests/test_generators.py -v      # Casino (30 tests)
-pytest validation/unit_tests/federal/ -v                 # Federal (54 tests)
-pytest validation/unit_tests/streaming/ -v               # Streaming (20 tests)
+pytest validation/unit_tests/federal/ -v                 # Federal (78 tests)
+pytest validation/unit_tests/streaming/ -v               # Streaming (32 tests)
 pytest validation/unit_tests/analytics/ -v               # Analytics (30 tests)
+pytest validation/unit_tests/geo/ -v                     # Geospatial (27 tests)
 
 # Run data quality tests
 great_expectations checkpoint run bronze_checkpoint
@@ -128,7 +129,7 @@ Phase 7 delivered 71 features across 5 waves with zero regressions:
 | Wave 2 | Migration & Streaming | 19 | 20 |
 | Wave 3 | Video, Movement, Geolocation Analytics | 12 | 30 |
 | Wave 4 | Tribal Healthcare + DOT/FAA | 15 | — |
-| Wave 5 | Final Regression | 1 | 134 (full) |
+| Wave 5 | Final Regression | 1 | 197 (full) |
 
 ## Context Notes
 

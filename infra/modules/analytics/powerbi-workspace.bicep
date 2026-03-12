@@ -59,7 +59,7 @@ var workspaceTags = union(tags, {
 // Power BI Embedded Capacity (Fabric Workspace backing resource)
 // =============================================================================
 
-resource pbiCapacity 'Microsoft.PowerBIDedicated/capacities@2021-01-01' = {
+resource pbiCapacity 'Microsoft.PowerBIDedicated/capacities@2024-01-01' = {
   name: workspaceName
   location: location
   tags: workspaceTags
