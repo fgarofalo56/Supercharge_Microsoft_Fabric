@@ -1,9 +1,11 @@
 """
 Pytest configuration and fixtures for Casino Fabric POC unit tests.
 """
-import pytest
+
 import sys
 from pathlib import Path
+
+import pytest
 
 # Add data-generation to path
 PROJECT_ROOT = Path(__file__).parent.parent.parent
@@ -26,6 +28,7 @@ def test_date_range():
 def slot_generator():
     """Fixture for slot machine generator."""
     from generators.slot_machine_generator import SlotMachineGenerator
+
     return SlotMachineGenerator(seed=42)
 
 
@@ -33,6 +36,7 @@ def slot_generator():
 def player_generator():
     """Fixture for player generator."""
     from generators.player_generator import PlayerGenerator
+
     return PlayerGenerator(seed=42)
 
 
@@ -40,6 +44,7 @@ def player_generator():
 def compliance_generator():
     """Fixture for compliance generator."""
     from generators.compliance_generator import ComplianceGenerator
+
     return ComplianceGenerator(seed=42)
 
 
@@ -47,6 +52,7 @@ def compliance_generator():
 def financial_generator():
     """Fixture for financial generator."""
     from generators.financial_generator import FinancialGenerator
+
     return FinancialGenerator(seed=42)
 
 
@@ -54,6 +60,7 @@ def financial_generator():
 def security_generator():
     """Fixture for security generator."""
     from generators.security_generator import SecurityGenerator
+
     return SecurityGenerator(seed=42)
 
 
@@ -61,6 +68,7 @@ def security_generator():
 def table_games_generator():
     """Fixture for table games generator."""
     from generators.table_games_generator import TableGamesGenerator
+
     return TableGamesGenerator(seed=42)
 
 
@@ -76,9 +84,7 @@ def pytest_configure(config):
     config.addinivalue_line(
         "markers", "slow: marks tests as slow (deselect with '-m \"not slow\"')"
     )
-    config.addinivalue_line(
-        "markers", "integration: marks tests as integration tests"
-    )
+    config.addinivalue_line("markers", "integration: marks tests as integration tests")
     config.addinivalue_line(
         "markers", "compliance: marks tests related to compliance logic"
     )

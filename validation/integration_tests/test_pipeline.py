@@ -3,10 +3,11 @@ Integration tests for the full data pipeline.
 
 These tests validate end-to-end data flow through Bronze, Silver, and Gold layers.
 """
-import pytest
+
 import os
 from pathlib import Path
 
+import pytest
 
 # Skip integration tests if not in appropriate environment
 pytestmark = pytest.mark.integration
@@ -68,8 +69,9 @@ class TestDataQuality:
 
     def test_timestamp_ordering(self):
         """Test that timestamps can be reasonably ordered."""
-        from generators.slot_machine_generator import SlotMachineGenerator
         from datetime import datetime
+
+        from generators.slot_machine_generator import SlotMachineGenerator
 
         generator = SlotMachineGenerator(seed=42)
         records = generator.generate_batch(100)
@@ -195,8 +197,9 @@ class TestVolumeGeneration:
     @pytest.mark.slow
     def test_generate_full_day_activity(self):
         """Test generation of a full day's worth of activity."""
-        from generators.slot_machine_generator import SlotMachineGenerator
         from datetime import datetime, timedelta
+
+        from generators.slot_machine_generator import SlotMachineGenerator
 
         generator = SlotMachineGenerator(seed=42)
 

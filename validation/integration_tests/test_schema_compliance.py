@@ -8,11 +8,13 @@ Tests for validating generated data against JSON schemas:
 - Field types match schema definitions
 - Enum values are valid
 """
-import pytest
+
 import json
 import re
 from datetime import datetime
 from typing import Any
+
+import pytest
 
 pytestmark = [pytest.mark.integration, pytest.mark.schema]
 
@@ -36,7 +38,9 @@ class TestSlotTelemetrySchemaCompliance:
         if pattern:
             regex = re.compile(pattern)
             for machine_id in sample_slot_data["machine_id"].dropna().head(100):
-                assert regex.match(machine_id), f"machine_id '{machine_id}' doesn't match pattern {pattern}"
+                assert regex.match(
+                    machine_id
+                ), f"machine_id '{machine_id}' doesn't match pattern {pattern}"
 
     def test_event_type_enum(self, sample_slot_data, slot_telemetry_schema):
         """Verify event_type values are from schema enum."""
@@ -79,7 +83,9 @@ class TestSlotTelemetrySchemaCompliance:
             if field in sample_slot_data.columns:
                 values = sample_slot_data[field].dropna()
                 violations = values[values < min_val]
-                assert len(violations) == 0, f"{field} has values below minimum {min_val}"
+                assert (
+                    len(violations) == 0
+                ), f"{field} has values below minimum {min_val}"
 
     def test_player_id_pattern(self, sample_slot_data, slot_telemetry_schema):
         """Verify player_id matches schema pattern when present."""
@@ -89,7 +95,9 @@ class TestSlotTelemetrySchemaCompliance:
         if pattern:
             regex = re.compile(pattern)
             for player_id in sample_slot_data["player_id"].dropna().head(100):
-                assert regex.match(player_id), f"player_id '{player_id}' doesn't match pattern"
+                assert regex.match(
+                    player_id
+                ), f"player_id '{player_id}' doesn't match pattern"
 
 
 class TestPlayerProfileSchemaCompliance:
@@ -105,7 +113,9 @@ class TestPlayerProfileSchemaCompliance:
 
     def test_loyalty_tier_enum(self, sample_player_data, player_profile_schema):
         """Verify loyalty_tier values are from schema enum."""
-        valid_tiers = player_profile_schema["properties"]["loyalty_tier"].get("enum", [])
+        valid_tiers = player_profile_schema["properties"]["loyalty_tier"].get(
+            "enum", []
+        )
 
         if valid_tiers:
             for tier in sample_player_data["loyalty_tier"].dropna().unique():
@@ -122,7 +132,9 @@ class TestPlayerProfileSchemaCompliance:
         if "ssn_hash" in sample_player_data.columns:
             hex_pattern = re.compile(r"^[a-fA-F0-9]+$")
             for ssn_hash in sample_player_data["ssn_hash"].dropna().head(100):
-                assert hex_pattern.match(ssn_hash), f"ssn_hash contains non-hex: {ssn_hash}"
+                assert hex_pattern.match(
+                    ssn_hash
+                ), f"ssn_hash contains non-hex: {ssn_hash}"
 
     def test_no_raw_ssn_exposed(self, sample_player_data):
         """Verify no raw SSN is exposed in any field."""
@@ -143,13 +155,17 @@ class TestPlayerProfileSchemaCompliance:
         if "marketing_opt_in" in sample_player_data.columns:
             values = sample_player_data["marketing_opt_in"].dropna()
             for val in values.head(100):
-                assert isinstance(val, (bool, np.bool_)), f"marketing_opt_in not boolean: {val}"
+                assert isinstance(
+                    val, (bool, np.bool_)
+                ), f"marketing_opt_in not boolean: {val}"
 
 
 class TestComplianceFilingSchemaCompliance:
     """Tests for compliance filing schema compliance."""
 
-    def test_required_fields_present(self, sample_compliance_data, compliance_filing_schema):
+    def test_required_fields_present(
+        self, sample_compliance_data, compliance_filing_schema
+    ):
         """Verify all required fields are present."""
         required = compliance_filing_schema.get("required", [])
 
@@ -159,7 +175,9 @@ class TestComplianceFilingSchemaCompliance:
 
     def test_filing_type_enum(self, sample_compliance_data, compliance_filing_schema):
         """Verify filing_type values are from schema enum."""
-        valid_types = compliance_filing_schema["properties"]["filing_type"].get("enum", [])
+        valid_types = compliance_filing_schema["properties"]["filing_type"].get(
+            "enum", []
+        )
 
         if valid_types:
             for filing_type in sample_compliance_data["filing_type"].dropna().unique():
@@ -172,7 +190,9 @@ class TestComplianceFilingSchemaCompliance:
 
         amounts = sample_compliance_data["amount"].dropna()
         violations = amounts[amounts < min_amount]
-        assert len(violations) == 0, f"Found {len(violations)} amounts below {min_amount}"
+        assert (
+            len(violations) == 0
+        ), f"Found {len(violations)} amounts below {min_amount}"
 
     def test_filing_status_enum(self, sample_compliance_data, compliance_filing_schema):
         """Verify filing_status values are valid."""
@@ -181,7 +201,7 @@ class TestComplianceFilingSchemaCompliance:
 
         if valid_statuses and "status" in sample_compliance_data.columns:
             # Generator may use 'status' instead of 'filing_status'
-            for status in sample_compliance_data["status"].dropna().unique():
+            for _status in sample_compliance_data["status"].dropna().unique():
                 # Allow generator's broader status values or schema statuses
                 pass  # Schema uses different field name
 
@@ -189,7 +209,9 @@ class TestComplianceFilingSchemaCompliance:
 class TestFinancialTransactionSchemaCompliance:
     """Tests for financial transaction schema compliance."""
 
-    def test_required_fields_present(self, sample_financial_data, financial_transaction_schema):
+    def test_required_fields_present(
+        self, sample_financial_data, financial_transaction_schema
+    ):
         """Verify all required fields are present."""
         required = financial_transaction_schema.get("required", [])
 
@@ -197,15 +219,19 @@ class TestFinancialTransactionSchemaCompliance:
             for field in required:
                 assert field in record, f"Missing required field: {field}"
 
-    def test_transaction_type_enum(self, sample_financial_data, financial_transaction_schema):
+    def test_transaction_type_enum(
+        self, sample_financial_data, financial_transaction_schema
+    ):
         """Verify transaction_type values are valid."""
-        valid_types = financial_transaction_schema["properties"]["transaction_type"].get("enum", [])
+        valid_types = financial_transaction_schema["properties"][
+            "transaction_type"
+        ].get("enum", [])
 
         if valid_types:
             actual_types = sample_financial_data["transaction_type"].dropna().unique()
             # Generator may have extended types beyond schema
             # Verify core types are subset
-            for txn_type in actual_types[:10]:  # Check sample
+            for _txn_type in actual_types[:10]:  # Check sample
                 pass  # Generator has extended types
 
     def test_amount_positive(self, sample_financial_data, financial_transaction_schema):
@@ -221,17 +247,21 @@ class TestFinancialTransactionSchemaCompliance:
 
         for _, row in sample_financial_data.head(100).iterrows():
             if row["amount"] >= 10000:
-                assert row["ctr_required"] == True, (
-                    f"ctr_required not set for amount ${row['amount']}"
-                )
+                assert row[
+                    "ctr_required"
+                ], f"ctr_required not set for amount ${row['amount']}"
 
-    def test_payment_method_enum(self, sample_financial_data, financial_transaction_schema):
+    def test_payment_method_enum(
+        self, sample_financial_data, financial_transaction_schema
+    ):
         """Verify payment_method values are valid."""
-        method_schema = financial_transaction_schema["properties"].get("payment_method", {})
+        method_schema = financial_transaction_schema["properties"].get(
+            "payment_method", {}
+        )
         valid_methods = method_schema.get("enum", [])
 
         if valid_methods and "payment_method" in sample_financial_data.columns:
-            for method in sample_financial_data["payment_method"].dropna().unique():
+            for _method in sample_financial_data["payment_method"].dropna().unique():
                 # Generator may use different case
                 pass  # Allow generator flexibility
 
@@ -242,28 +272,31 @@ class TestSchemaFieldTypes:
     def test_string_fields_are_strings(self, sample_slot_data, slot_telemetry_schema):
         """Verify string-typed fields contain strings."""
         string_fields = [
-            field for field, props in slot_telemetry_schema.get("properties", {}).items()
-            if props.get("type") == "string" or (
-                isinstance(props.get("type"), list) and "string" in props.get("type")
-            )
+            field
+            for field, props in slot_telemetry_schema.get("properties", {}).items()
+            if props.get("type") == "string"
+            or (isinstance(props.get("type"), list) and "string" in props.get("type"))
         ]
 
         for field in string_fields:
             if field in sample_slot_data.columns:
                 non_null = sample_slot_data[field].dropna()
                 for val in non_null.head(50):
-                    assert isinstance(val, str), f"{field} contains non-string: {type(val)}"
+                    assert isinstance(
+                        val, str
+                    ), f"{field} contains non-string: {type(val)}"
 
     def test_number_fields_are_numeric(self, sample_slot_data, slot_telemetry_schema):
         """Verify number-typed fields contain numbers."""
         import numpy as np
 
         number_fields = [
-            field for field, props in slot_telemetry_schema.get("properties", {}).items()
-            if props.get("type") in ["number", "integer"] or (
-                isinstance(props.get("type"), list) and (
-                    "number" in props.get("type") or "integer" in props.get("type")
-                )
+            field
+            for field, props in slot_telemetry_schema.get("properties", {}).items()
+            if props.get("type") in ["number", "integer"]
+            or (
+                isinstance(props.get("type"), list)
+                and ("number" in props.get("type") or "integer" in props.get("type"))
             )
         ]
 
@@ -271,21 +304,26 @@ class TestSchemaFieldTypes:
             if field in sample_slot_data.columns:
                 non_null = sample_slot_data[field].dropna()
                 for val in non_null.head(50):
-                    assert isinstance(val, (int, float, np.integer, np.floating)), (
-                        f"{field} contains non-numeric: {type(val)}"
-                    )
+                    assert isinstance(
+                        val, (int, float, np.integer, np.floating)
+                    ), f"{field} contains non-numeric: {type(val)}"
 
-    def test_datetime_fields_valid(self, sample_slot_data, slot_telemetry_schema, validate_iso_datetime):
+    def test_datetime_fields_valid(
+        self, sample_slot_data, slot_telemetry_schema, validate_iso_datetime
+    ):
         """Verify datetime-typed fields contain valid datetimes."""
         datetime_fields = [
-            field for field, props in slot_telemetry_schema.get("properties", {}).items()
+            field
+            for field, props in slot_telemetry_schema.get("properties", {}).items()
             if props.get("format") == "date-time"
         ]
 
         for field in datetime_fields:
             if field in sample_slot_data.columns:
                 for val in sample_slot_data[field].dropna().head(50):
-                    assert validate_iso_datetime(val), f"{field} has invalid datetime: {val}"
+                    assert validate_iso_datetime(
+                        val
+                    ), f"{field} has invalid datetime: {val}"
 
 
 class TestSchemaEnumValidation:
@@ -293,11 +331,15 @@ class TestSchemaEnumValidation:
 
     def test_all_event_types_valid(self, sample_slot_data, slot_telemetry_schema):
         """Verify all generated event types are schema-valid."""
-        valid_types = set(slot_telemetry_schema["properties"]["event_type"].get("enum", []))
+        valid_types = set(
+            slot_telemetry_schema["properties"]["event_type"].get("enum", [])
+        )
         generated_types = set(sample_slot_data["event_type"].dropna().unique())
 
         invalid_types = generated_types - valid_types
-        assert len(invalid_types) == 0, f"Invalid event types generated: {invalid_types}"
+        assert (
+            len(invalid_types) == 0
+        ), f"Invalid event types generated: {invalid_types}"
 
     def test_all_zones_valid(self, sample_slot_data, slot_telemetry_schema):
         """Verify all generated zones are schema-valid."""
@@ -314,15 +356,21 @@ class TestSchemaEnumValidation:
 
     def test_all_loyalty_tiers_valid(self, sample_player_data, player_profile_schema):
         """Verify all generated loyalty tiers are schema-valid."""
-        valid_tiers = set(player_profile_schema["properties"]["loyalty_tier"].get("enum", []))
+        valid_tiers = set(
+            player_profile_schema["properties"]["loyalty_tier"].get("enum", [])
+        )
         generated_tiers = set(sample_player_data["loyalty_tier"].dropna().unique())
 
         invalid_tiers = generated_tiers - valid_tiers
         assert len(invalid_tiers) == 0, f"Invalid loyalty tiers: {invalid_tiers}"
 
-    def test_all_filing_types_valid(self, sample_compliance_data, compliance_filing_schema):
+    def test_all_filing_types_valid(
+        self, sample_compliance_data, compliance_filing_schema
+    ):
         """Verify all generated filing types are schema-valid."""
-        valid_types = set(compliance_filing_schema["properties"]["filing_type"].get("enum", []))
+        valid_types = set(
+            compliance_filing_schema["properties"]["filing_type"].get("enum", [])
+        )
         generated_types = set(sample_compliance_data["filing_type"].dropna().unique())
 
         invalid_types = generated_types - valid_types
@@ -344,13 +392,19 @@ class TestSchemaConstraintValidation:
         # Financial amounts should be positive
         if "amount" in sample_financial_data.columns:
             min_amount = sample_financial_data["amount"].dropna().min()
-            assert min_amount > 0, f"Financial amount has non-positive value: {min_amount}"
+            assert (
+                min_amount > 0
+            ), f"Financial amount has non-positive value: {min_amount}"
 
     def test_id_patterns_match_schema(self, sample_slot_data, slot_telemetry_schema):
         """Verify ID fields match schema patterns."""
         id_patterns = {
-            "machine_id": slot_telemetry_schema["properties"]["machine_id"].get("pattern"),
-            "player_id": slot_telemetry_schema["properties"].get("player_id", {}).get("pattern"),
+            "machine_id": slot_telemetry_schema["properties"]["machine_id"].get(
+                "pattern"
+            ),
+            "player_id": slot_telemetry_schema["properties"]
+            .get("player_id", {})
+            .get("pattern"),
         }
 
         for field, pattern in id_patterns.items():

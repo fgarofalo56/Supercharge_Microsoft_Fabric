@@ -56,7 +56,14 @@ class FinancialGenerator(BaseGenerator):
     ]
 
     PAYMENT_METHODS = ["Cash", "Check", "Wire", "Chip", "TITO", "Marker"]
-    CAGE_WINDOWS = ["Main Cage", "High Limit", "VIP", "Poker Cage", "Satellite 1", "Satellite 2"]
+    CAGE_WINDOWS = [
+        "Main Cage",
+        "High Limit",
+        "VIP",
+        "Poker Cage",
+        "Satellite 1",
+        "Satellite 2",
+    ]
 
     def __init__(
         self,
@@ -146,9 +153,7 @@ class FinancialGenerator(BaseGenerator):
             "ctr_required": ctr_required,
             "ctr_filed": ctr_required and np.random.random() > 0.02,  # 98% compliance
             "ctr_reference": (
-                f"CTR-{np.random.randint(1000000, 9999999)}"
-                if ctr_required
-                else None
+                f"CTR-{np.random.randint(1000000, 9999999)}" if ctr_required else None
             ),
             "suspicious_activity_flag": self._check_suspicious(txn_type, amount),
             "shift": self._get_shift(timestamp),
@@ -245,7 +250,9 @@ class FinancialGenerator(BaseGenerator):
             )
 
         elif txn_type in ["WIRE_TRANSFER_IN", "WIRE_TRANSFER_OUT"]:
-            record["wire_reference"] = f"WIRE-{np.random.randint(100000000, 999999999)}{np.random.randint(0, 9)}"
+            record["wire_reference"] = (
+                f"WIRE-{np.random.randint(100000000, 999999999)}{np.random.randint(0, 9)}"
+            )
 
         elif txn_type in ["MARKER_ISSUE", "MARKER_PAYMENT"]:
             record["marker_number"] = f"MKR-{np.random.randint(100000, 999999)}"

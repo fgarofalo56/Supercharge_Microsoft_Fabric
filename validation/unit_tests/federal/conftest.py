@@ -1,7 +1,9 @@
 """Pytest fixtures for federal data generator tests."""
-import pytest
+
 import sys
 from pathlib import Path
+
+import pytest
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT / "data-generation"))
@@ -11,6 +13,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "data-generation"))
 def usda_generator():
     """Fixture for USDA data generator."""
     from generators.federal.usda_generator import USDAGenerator
+
     return USDAGenerator(seed=42)
 
 
@@ -18,6 +21,7 @@ def usda_generator():
 def sba_generator():
     """Fixture for SBA data generator."""
     from generators.federal.sba_generator import SBAGenerator
+
     return SBAGenerator(seed=42)
 
 
@@ -25,6 +29,7 @@ def sba_generator():
 def noaa_generator():
     """Fixture for NOAA data generator."""
     from generators.federal.noaa_generator import NOAAGenerator
+
     return NOAAGenerator(seed=42)
 
 
@@ -32,6 +37,7 @@ def noaa_generator():
 def epa_generator():
     """Fixture for EPA data generator."""
     from generators.federal.epa_generator import EPAGenerator
+
     return EPAGenerator(seed=42)
 
 
@@ -39,7 +45,24 @@ def epa_generator():
 def doi_generator():
     """Fixture for DOI data generator."""
     from generators.federal.doi_generator import DOIGenerator
+
     return DOIGenerator(seed=42)
+
+
+@pytest.fixture
+def tribal_healthcare_generator():
+    """Fixture for Tribal Healthcare (IHS) data generator."""
+    from generators.federal.tribal_healthcare_generator import TribalHealthcareGenerator
+
+    return TribalHealthcareGenerator(seed=42)
+
+
+@pytest.fixture
+def dot_faa_generator():
+    """Fixture for DOT/FAA data generator."""
+    from generators.federal.dot_faa_generator import DOTFAAGenerator
+
+    return DOTFAAGenerator(seed=42)
 
 
 @pytest.fixture

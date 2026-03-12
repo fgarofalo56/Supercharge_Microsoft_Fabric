@@ -43,9 +43,20 @@ CAMERA_LOCATIONS = [
 ]
 
 CAMERA_LOCATION_WEIGHTS = [
-    0.14, 0.12, 0.15, 0.10, 0.08, 0.06,
-    0.07, 0.04, 0.05, 0.05, 0.03, 0.03,
-    0.05, 0.03,
+    0.14,
+    0.12,
+    0.15,
+    0.10,
+    0.08,
+    0.06,
+    0.07,
+    0.04,
+    0.05,
+    0.05,
+    0.03,
+    0.03,
+    0.05,
+    0.03,
 ]
 
 # ---------------------------------------------------------------------------
@@ -155,10 +166,12 @@ class VideoAnalyticsGenerator(BaseGenerator):
         for i in range(NUM_CAMERAS):
             cam_id = f"CAM-{i + 1:04d}"
             location = self.weighted_choice(CAMERA_LOCATIONS, CAMERA_LOCATION_WEIGHTS)
-            self._cameras.append({
-                "camera_id": cam_id,
-                "camera_location": str(location),
-            })
+            self._cameras.append(
+                {
+                    "camera_id": cam_id,
+                    "camera_location": str(location),
+                }
+            )
 
         self._schema: dict[str, str] = {
             "event_id": "string",
@@ -208,20 +221,26 @@ class VideoAnalyticsGenerator(BaseGenerator):
         timestamp = self.random_datetime()
 
         # Confidence score: normally distributed around 0.85, clamped to [0.5, 0.99]
-        confidence_score = float(np.clip(
-            np.random.normal(loc=0.85, scale=0.08),
-            0.50,
-            0.99,
-        ))
+        confidence_score = float(
+            np.clip(
+                np.random.normal(loc=0.85, scale=0.08),
+                0.50,
+                0.99,
+            )
+        )
         confidence_score = round(confidence_score, 4)
 
         # Object class (depends on event_type)
         object_class: str | None = None
         if event_type in ("object_detection", "zone_crossing"):
-            object_class = str(self.weighted_choice(OBJECT_CLASSES, OBJECT_CLASS_WEIGHTS))
+            object_class = str(
+                self.weighted_choice(OBJECT_CLASSES, OBJECT_CLASS_WEIGHTS)
+            )
         elif event_type != "anomaly":
             # face_match, crowd_density, loitering, tailgating, abandoned_object
-            object_class = str(self.weighted_choice(OBJECT_CLASSES, OBJECT_CLASS_WEIGHTS))
+            object_class = str(
+                self.weighted_choice(OBJECT_CLASSES, OBJECT_CLASS_WEIGHTS)
+            )
 
         # Object count
         object_count: int | None = None
@@ -250,11 +269,17 @@ class VideoAnalyticsGenerator(BaseGenerator):
         zone_from: str | None = None
         zone_to: str | None = None
         if event_type == "zone_crossing":
-            zone_from = str(self.weighted_choice(CAMERA_LOCATIONS, CAMERA_LOCATION_WEIGHTS))
-            zone_to = str(self.weighted_choice(CAMERA_LOCATIONS, CAMERA_LOCATION_WEIGHTS))
+            zone_from = str(
+                self.weighted_choice(CAMERA_LOCATIONS, CAMERA_LOCATION_WEIGHTS)
+            )
+            zone_to = str(
+                self.weighted_choice(CAMERA_LOCATIONS, CAMERA_LOCATION_WEIGHTS)
+            )
             # Ensure zone_to differs from zone_from
             while zone_to == zone_from:
-                zone_to = str(self.weighted_choice(CAMERA_LOCATIONS, CAMERA_LOCATION_WEIGHTS))
+                zone_to = str(
+                    self.weighted_choice(CAMERA_LOCATIONS, CAMERA_LOCATION_WEIGHTS)
+                )
 
         # Dwell time
         dwell_time_seconds: float | None = None
@@ -266,14 +291,18 @@ class VideoAnalyticsGenerator(BaseGenerator):
         # Anomaly type
         anomaly_type: str | None = None
         if event_type == "anomaly":
-            anomaly_type = str(self.weighted_choice(ANOMALY_TYPES, ANOMALY_TYPE_WEIGHTS))
+            anomaly_type = str(
+                self.weighted_choice(ANOMALY_TYPES, ANOMALY_TYPE_WEIGHTS)
+            )
 
         # Alert level
         alert_level = ALERT_LEVEL_MAP[event_type]
 
         # Frame / video metadata
         frame_number = int(np.random.randint(0, 1_000_000))
-        video_resolution = str(self.weighted_choice(VIDEO_RESOLUTIONS, VIDEO_RESOLUTION_WEIGHTS))
+        video_resolution = str(
+            self.weighted_choice(VIDEO_RESOLUTIONS, VIDEO_RESOLUTION_WEIGHTS)
+        )
         fps = int(np.random.choice(FPS_OPTIONS))
 
         # Model metadata

@@ -6,8 +6,6 @@ enum membership, domain-specific business rules (e.g., tornadoes have F-scale),
 and standard metadata columns.
 Fixtures are provided by the federal conftest.py (noaa_generator, sample_size).
 """
-import pytest
-
 
 VALID_PARAMETERS = {
     "TEMPERATURE",
@@ -59,29 +57,29 @@ class TestNOAAGenerator:
         """Weather parameter is always a member of the defined parameter set."""
         for _ in range(100):
             record = noaa_generator.generate_record(domain="weather")
-            assert record["parameter"] in VALID_PARAMETERS, (
-                f"Unexpected parameter '{record['parameter']}'"
-            )
+            assert (
+                record["parameter"] in VALID_PARAMETERS
+            ), f"Unexpected parameter '{record['parameter']}'"
 
     def test_weather_station_format(self, noaa_generator):
         """Weather station_id follows ICAO convention: starts with 'K' and is 4 characters."""
         for _ in range(100):
             record = noaa_generator.generate_record(domain="weather")
             station_id = record["station_id"]
-            assert len(station_id) == 4, (
-                f"Expected 4-character station ID, got '{station_id}'"
-            )
-            assert station_id.startswith("K"), (
-                f"US ASOS station ID must start with 'K', got '{station_id}'"
-            )
+            assert (
+                len(station_id) == 4
+            ), f"Expected 4-character station ID, got '{station_id}'"
+            assert station_id.startswith(
+                "K"
+            ), f"US ASOS station ID must start with 'K', got '{station_id}'"
 
     def test_weather_quality_flag(self, noaa_generator):
         """quality_flag is always one of the four defined QC values."""
         for _ in range(100):
             record = noaa_generator.generate_record(domain="weather")
-            assert record["quality_flag"] in VALID_QUALITY_FLAGS, (
-                f"Unexpected quality flag '{record['quality_flag']}'"
-            )
+            assert (
+                record["quality_flag"] in VALID_QUALITY_FLAGS
+            ), f"Unexpected quality flag '{record['quality_flag']}'"
 
     def test_generate_storm_record(self, noaa_generator):
         """Generated storm record contains required event identification fields."""
@@ -96,9 +94,9 @@ class TestNOAAGenerator:
         """Storm event_type is always a member of the defined event type set."""
         for _ in range(100):
             record = noaa_generator.generate_record(domain="storm")
-            assert record["event_type"] in VALID_EVENT_TYPES, (
-                f"Unexpected event type '{record['event_type']}'"
-            )
+            assert (
+                record["event_type"] in VALID_EVENT_TYPES
+            ), f"Unexpected event type '{record['event_type']}'"
 
     def test_storm_damage_non_negative(self, noaa_generator):
         """damage_property is non-negative when present."""
@@ -106,9 +104,9 @@ class TestNOAAGenerator:
             record = noaa_generator.generate_record(domain="storm")
             damage = record.get("damage_property")
             if damage is not None:
-                assert damage >= 0, (
-                    f"damage_property must be non-negative, got {damage}"
-                )
+                assert (
+                    damage >= 0
+                ), f"damage_property must be non-negative, got {damage}"
 
     def test_tornado_has_fscale(self, noaa_generator):
         """TORNADO events always carry a valid EF-scale rating in tor_f_scale."""
@@ -117,12 +115,12 @@ class TestNOAAGenerator:
         for _ in range(2000):
             record = noaa_generator.generate_record(domain="storm")
             if record["event_type"] == "TORNADO":
-                assert record.get("tor_f_scale") is not None, (
-                    "TORNADO event must have tor_f_scale set"
-                )
-                assert record["tor_f_scale"] in VALID_TOR_F_SCALES, (
-                    f"Unexpected tor_f_scale '{record['tor_f_scale']}'"
-                )
+                assert (
+                    record.get("tor_f_scale") is not None
+                ), "TORNADO event must have tor_f_scale set"
+                assert (
+                    record["tor_f_scale"] in VALID_TOR_F_SCALES
+                ), f"Unexpected tor_f_scale '{record['tor_f_scale']}'"
                 tornado_records_found += 1
                 if tornado_records_found >= 5:
                     break
@@ -135,8 +133,7 @@ class TestNOAAGenerator:
     def test_generate_batch(self, noaa_generator, sample_size):
         """generate_record called sample_size times yields the correct number of records."""
         records = [
-            noaa_generator.generate_record(domain="weather")
-            for _ in range(sample_size)
+            noaa_generator.generate_record(domain="weather") for _ in range(sample_size)
         ]
 
         assert len(records) == sample_size
@@ -147,12 +144,6 @@ class TestNOAAGenerator:
         """Every record includes the standard metadata columns added by BaseGenerator."""
         for domain in ("weather", "storm"):
             record = noaa_generator.generate_record(domain=domain)
-            assert "_ingested_at" in record, (
-                f"Missing _ingested_at in {domain} record"
-            )
-            assert "_source" in record, (
-                f"Missing _source in {domain} record"
-            )
-            assert "_batch_id" in record, (
-                f"Missing _batch_id in {domain} record"
-            )
+            assert "_ingested_at" in record, f"Missing _ingested_at in {domain} record"
+            assert "_source" in record, f"Missing _source in {domain} record"
+            assert "_batch_id" in record, f"Missing _batch_id in {domain} record"

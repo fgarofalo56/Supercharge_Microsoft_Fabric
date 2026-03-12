@@ -1,7 +1,9 @@
 """Pytest fixtures for streaming generator tests."""
-import pytest
+
 import sys
 from pathlib import Path
+
+import pytest
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT / "data-generation"))
@@ -11,6 +13,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "data-generation"))
 def multi_source_simulator():
     """Fixture for the multi-source CDC event simulator."""
     from generators.streaming.multi_source_simulator import MultiSourceSimulator
+
     return MultiSourceSimulator(seed=42)
 
 
@@ -18,7 +21,16 @@ def multi_source_simulator():
 def iot_simulator():
     """Fixture for the IoT device fleet simulator (50-device fleet)."""
     from generators.streaming.iot_device_simulator import IoTDeviceSimulator
+
     return IoTDeviceSimulator(num_devices=50, seed=42)
+
+
+@pytest.fixture
+def event_hub_producer():
+    """Fixture for Event Hub producer in stdout mode (no Azure connection)."""
+    from generators.streaming.event_hub_producer import EventHubProducer
+
+    return EventHubProducer(seed=42, events_per_second=100)
 
 
 @pytest.fixture

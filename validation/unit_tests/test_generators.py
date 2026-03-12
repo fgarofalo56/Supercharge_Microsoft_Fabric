@@ -1,8 +1,10 @@
 """
 Unit tests for casino data generators.
 """
+
+from datetime import datetime
+
 import pytest
-from datetime import datetime, timedelta
 
 
 class TestSlotMachineGenerator:
@@ -26,9 +28,18 @@ class TestSlotMachineGenerator:
 
     def test_event_type_valid(self, slot_generator):
         """Test event type is from valid set."""
-        valid_types = ["GAME_PLAY", "JACKPOT", "METER_UPDATE", "DOOR_OPEN",
-                       "DOOR_CLOSE", "POWER_ON", "POWER_OFF", "BILL_IN",
-                       "TICKET_OUT", "TILT"]
+        valid_types = [
+            "GAME_PLAY",
+            "JACKPOT",
+            "METER_UPDATE",
+            "DOOR_OPEN",
+            "DOOR_CLOSE",
+            "POWER_ON",
+            "POWER_OFF",
+            "BILL_IN",
+            "TICKET_OUT",
+            "TILT",
+        ]
 
         for _ in range(100):
             record = slot_generator.generate_record()
@@ -44,15 +55,14 @@ class TestSlotMachineGenerator:
     def test_generate_batch(self, slot_generator, sample_size):
         """Test batch generation."""
         df = slot_generator.generate(sample_size, show_progress=False)
-        records = df.to_dict('records')
+        records = df.to_dict("records")
 
         assert len(records) == sample_size
         assert all("machine_id" in r for r in records)
 
     def test_zone_valid(self, slot_generator):
         """Test zone is from valid set."""
-        valid_zones = ["North", "South", "East", "West", "VIP",
-                       "High Limit", "Penny"]
+        valid_zones = ["North", "South", "East", "West", "VIP", "High Limit", "Penny"]
 
         for _ in range(100):
             record = slot_generator.generate_record()
@@ -61,8 +71,7 @@ class TestSlotMachineGenerator:
 
     def test_denomination_valid(self, slot_generator):
         """Test denomination is valid."""
-        valid_denoms = [0.01, 0.05, 0.25, 0.50, 1.00, 2.00,
-                        5.00, 10.00, 25.00, 100.00]
+        valid_denoms = [0.01, 0.05, 0.25, 0.50, 1.00, 2.00, 5.00, 10.00, 25.00, 100.00]
 
         for _ in range(100):
             record = slot_generator.generate_record()
@@ -250,13 +259,26 @@ class TestSecurityGenerator:
     def test_event_type_valid(self, security_generator):
         """Test event type is valid per security_events_schema.json."""
         valid_types = [
-            "BADGE_SWIPE", "DOOR_ENTRY", "ACCESS_GRANTED", "ACCESS_DENIED",
-            "CAMERA_ALERT", "MOTION_DETECTED", "CAMERA_OBSTRUCTION",
-            "EXCLUSION_CHECK", "EXCLUSION_VIOLATION", "INCIDENT_REPORT",
-            "ALTERCATION", "MEDICAL_EMERGENCY", "THREAT_DETECTED",
-            "WEAPON_DETECTED", "TRESPASS", "UNAUTHORIZED_ACCESS",
-            "SUSPICIOUS_ACTIVITY", "PATRON_COMPLAINT", "ESCORT_REQUEST",
-            "SECURITY_PATROL"
+            "BADGE_SWIPE",
+            "DOOR_ENTRY",
+            "ACCESS_GRANTED",
+            "ACCESS_DENIED",
+            "CAMERA_ALERT",
+            "MOTION_DETECTED",
+            "CAMERA_OBSTRUCTION",
+            "EXCLUSION_CHECK",
+            "EXCLUSION_VIOLATION",
+            "INCIDENT_REPORT",
+            "ALTERCATION",
+            "MEDICAL_EMERGENCY",
+            "THREAT_DETECTED",
+            "WEAPON_DETECTED",
+            "TRESPASS",
+            "UNAUTHORIZED_ACCESS",
+            "SUSPICIOUS_ACTIVITY",
+            "PATRON_COMPLAINT",
+            "ESCORT_REQUEST",
+            "SECURITY_PATROL",
         ]
 
         for _ in range(100):
@@ -287,8 +309,15 @@ class TestTableGamesGenerator:
 
     def test_game_type_valid(self, table_games_generator):
         """Test game type is valid."""
-        valid_types = ["Blackjack", "Roulette", "Craps", "Baccarat",
-                       "Poker", "Pai Gow", "Three Card Poker"]
+        valid_types = [
+            "Blackjack",
+            "Roulette",
+            "Craps",
+            "Baccarat",
+            "Poker",
+            "Pai Gow",
+            "Three Card Poker",
+        ]
 
         for _ in range(100):
             record = table_games_generator.generate_record()
@@ -307,24 +336,25 @@ class TestGeneratorReproducibility:
 
     def test_same_seed_same_results(self):
         """Test that same seed produces deterministic results within a generator."""
-        from generators.slot_machine_generator import SlotMachineGenerator
         import numpy as np
         from faker import Faker
+
+        from generators.slot_machine_generator import SlotMachineGenerator
 
         # Reset global random state and create generator
         np.random.seed(12345)
         Faker.seed(12345)
         gen1 = SlotMachineGenerator(seed=12345)
-        records1 = gen1.generate(10, show_progress=False).to_dict('records')
+        records1 = gen1.generate(10, show_progress=False).to_dict("records")
 
         # Reset global random state and create new generator
         np.random.seed(12345)
         Faker.seed(12345)
         gen2 = SlotMachineGenerator(seed=12345)
-        records2 = gen2.generate(10, show_progress=False).to_dict('records')
+        records2 = gen2.generate(10, show_progress=False).to_dict("records")
 
         # Compare key fields
-        for r1, r2 in zip(records1, records2):
+        for r1, r2 in zip(records1, records2, strict=False):
             assert r1["machine_id"] == r2["machine_id"]
             assert r1["event_type"] == r2["event_type"]
 
@@ -335,12 +365,13 @@ class TestGeneratorReproducibility:
         gen1 = SlotMachineGenerator(seed=11111)
         gen2 = SlotMachineGenerator(seed=22222)
 
-        records1 = gen1.generate(100, show_progress=False).to_dict('records')
-        records2 = gen2.generate(100, show_progress=False).to_dict('records')
+        records1 = gen1.generate(100, show_progress=False).to_dict("records")
+        records2 = gen2.generate(100, show_progress=False).to_dict("records")
 
         # At least some records should be different
         differences = sum(
-            1 for r1, r2 in zip(records1, records2)
+            1
+            for r1, r2 in zip(records1, records2, strict=False)
             if r1["machine_id"] != r2["machine_id"]
         )
         assert differences > 0

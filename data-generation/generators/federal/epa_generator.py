@@ -11,12 +11,11 @@ Data mirrors real EPA public datasets documented in federal_datasets.yaml.
 """
 
 from datetime import datetime
-from typing import Any, Optional
+from typing import Any
 
 import numpy as np
 
 from ..base_generator import BaseGenerator
-
 
 # ---------------------------------------------------------------------------
 # Reference tables
@@ -152,28 +151,117 @@ CONTAMINANT_SPECS: dict[str, dict[str, Any]] = {
 
 # US state codes (FIPS 2-digit) paired with abbreviated name for site_id construction
 _STATE_CODES = [
-    "01", "02", "04", "05", "06", "08", "09", "10", "11", "12",
-    "13", "15", "16", "17", "18", "19", "20", "21", "22", "23",
-    "24", "25", "26", "27", "28", "29", "30", "31", "32", "33",
-    "34", "35", "36", "37", "38", "39", "40", "41", "42", "44",
-    "45", "46", "47", "48", "49", "50", "51", "53", "54", "55",
+    "01",
+    "02",
+    "04",
+    "05",
+    "06",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12",
+    "13",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+    "21",
+    "22",
+    "23",
+    "24",
+    "25",
+    "26",
+    "27",
+    "28",
+    "29",
+    "30",
+    "31",
+    "32",
+    "33",
+    "34",
+    "35",
+    "36",
+    "37",
+    "38",
+    "39",
+    "40",
+    "41",
+    "42",
+    "44",
+    "45",
+    "46",
+    "47",
+    "48",
+    "49",
+    "50",
+    "51",
+    "53",
+    "54",
+    "55",
     "56",
 ]
 
 _STATE_NAMES = [
-    "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado",
-    "Connecticut", "Delaware", "District of Columbia", "Florida", "Georgia",
-    "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
-    "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota",
-    "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire",
-    "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota",
-    "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina",
-    "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia",
-    "Washington", "West Virginia", "Wisconsin", "Wyoming",
+    "Alabama",
+    "Alaska",
+    "Arizona",
+    "Arkansas",
+    "California",
+    "Colorado",
+    "Connecticut",
+    "Delaware",
+    "District of Columbia",
+    "Florida",
+    "Georgia",
+    "Hawaii",
+    "Idaho",
+    "Illinois",
+    "Indiana",
+    "Iowa",
+    "Kansas",
+    "Kentucky",
+    "Louisiana",
+    "Maine",
+    "Maryland",
+    "Massachusetts",
+    "Michigan",
+    "Minnesota",
+    "Mississippi",
+    "Missouri",
+    "Montana",
+    "Nebraska",
+    "Nevada",
+    "New Hampshire",
+    "New Jersey",
+    "New Mexico",
+    "New York",
+    "North Carolina",
+    "North Dakota",
+    "Ohio",
+    "Oklahoma",
+    "Oregon",
+    "Pennsylvania",
+    "Rhode Island",
+    "South Carolina",
+    "South Dakota",
+    "Tennessee",
+    "Texas",
+    "Utah",
+    "Vermont",
+    "Virginia",
+    "Washington",
+    "West Virginia",
+    "Wisconsin",
+    "Wyoming",
 ]
 
 # Zip-aligned state code → name mapping (index-matched to _STATE_CODES)
-_STATE_CODE_TO_NAME: dict[str, str] = dict(zip(_STATE_CODES, _STATE_NAMES))
+_STATE_CODE_TO_NAME: dict[str, str] = dict(
+    zip(_STATE_CODES, _STATE_NAMES, strict=False)
+)
 
 
 def _aqi_category(aqi_value: int) -> str:
@@ -273,16 +361,14 @@ class EPAGenerator(BaseGenerator):
         }
 
         self._schema = (
-            self._air_schema
-            if domain == "air_quality"
-            else self._water_schema
+            self._air_schema if domain == "air_quality" else self._water_schema
         )
 
     # ------------------------------------------------------------------
     # Public API
     # ------------------------------------------------------------------
 
-    def generate_record(self, domain: Optional[str] = None) -> dict[str, Any]:
+    def generate_record(self, domain: str | None = None) -> dict[str, Any]:
         """
         Generate a single EPA environmental monitoring record.
 
@@ -328,14 +414,16 @@ class EPAGenerator(BaseGenerator):
         # Sample duration
         durations: list[str] = spec["durations"]
         dur_weights: list[float] = spec["duration_weights"]
-        sample_duration: Optional[str] = str(
-            np.random.choice(durations, p=dur_weights)
-        ) if np.random.random() > 0.05 else None
+        sample_duration: str | None = (
+            str(np.random.choice(durations, p=dur_weights))
+            if np.random.random() > 0.05
+            else None
+        )
 
         # Time: 1-HOUR readings have an explicit time; 24-HOUR often null
         if sample_duration == "1 HOUR":
             hour = np.random.randint(0, 24)
-            time_local: Optional[str] = f"{hour:02d}:00"
+            time_local: str | None = f"{hour:02d}:00"
         elif sample_duration == "8 HOUR":
             start_hour = np.random.choice([0, 8, 16])
             time_local = f"{start_hour:02d}:00"
@@ -371,12 +459,14 @@ class EPAGenerator(BaseGenerator):
             "state_code": state_code,
             "county_code": county_code,
             "state_name": _STATE_CODE_TO_NAME.get(state_code),
-            "county_name": self.faker.city() + " County"
-            if np.random.random() > 0.1
-            else None,
-            "cbsa_name": self.faker.city() + "-" + self.faker.city() + " MSA"
-            if np.random.random() > 0.3
-            else None,
+            "county_name": (
+                self.faker.city() + " County" if np.random.random() > 0.1 else None
+            ),
+            "cbsa_name": (
+                self.faker.city() + "-" + self.faker.city() + " MSA"
+                if np.random.random() > 0.3
+                else None
+            ),
             "method_code": None,
             "load_time": datetime.now().isoformat(),
         }
@@ -436,7 +526,7 @@ class EPAGenerator(BaseGenerator):
         # Clamp to spec range
         result_value = float(np.clip(result_value, lo, hi * 1.5))
 
-        violation_type: Optional[str] = "MCL" if is_violation else None
+        violation_type: str | None = "MCL" if is_violation else None
 
         # System type weighted 70/20/10
         system_type = str(

@@ -40,11 +40,20 @@ ignore = [
     "E501",   # line too long (handled by black)
     "B008",   # do not perform function call in argument defaults
     "SIM108", # use ternary operator
+    "N999",   # invalid module name (data-generation has hyphen, can't rename)
+    "RUF001", # ambiguous unicode character in string (intentional en-dashes)
+    "RUF002", # ambiguous unicode character in docstring (intentional en-dashes)
+    "RUF003", # ambiguous unicode character in comment (intentional en-dashes)
+    "RUF012", # mutable class default (generator class attributes are intentional)
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"validation/unit_tests/**" = ["N802", "N803"]  # allow non-PEP8 names in tests
-"notebooks/**" = ["E402", "F401"]              # allow late imports in notebooks
+"validation/unit_tests/**" = ["N802", "N803"]      # allow non-PEP8 names in tests
+"notebooks/**" = ["E402", "F401"]                  # allow late imports in notebooks
+"**/__init__.py" = ["F401"]                        # re-exports in __init__ files
+"validation/integration_tests/**" = ["F401", "UP035", "N806", "E402", "E741", "SIM102"]
+"validation/deployment_tests/**" = ["F401", "UP035"]
+"validation/great_expectations/**" = ["F401"]
 
 [tool.ruff.lint.isort]
 known-first-party = ["generators", "validation"]

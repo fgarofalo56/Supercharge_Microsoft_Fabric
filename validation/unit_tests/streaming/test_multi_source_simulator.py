@@ -8,16 +8,14 @@ Covers all five CDC source types:
 - ibm_db2     : InfoSphere CDC / ASN Capture
 - oracle      : LogMiner / GoldenGate
 """
+
 from generators.streaming.multi_source_simulator import (
-    MultiSourceSimulator,
     SOURCE_CONFIG,
 )
 
 # All valid connector names across all source types
 _ALL_CONNECTORS = {
-    connector
-    for cfg in SOURCE_CONFIG.values()
-    for connector in cfg["connectors"]
+    connector for cfg in SOURCE_CONFIG.values() for connector in cfg["connectors"]
 }
 
 _VALID_OPERATIONS = {"INSERT", "UPDATE", "DELETE", "READ"}
@@ -51,9 +49,9 @@ class TestMultiSourceSimulator:
         """Generating with source_type='sql_server' must yield source_type='SQL_SERVER'."""
         record = multi_source_simulator.generate_record(source_type="sql_server")
 
-        assert record["source_type"] == "SQL_SERVER", (
-            f"Expected SQL_SERVER, got {record['source_type']}"
-        )
+        assert (
+            record["source_type"] == "SQL_SERVER"
+        ), f"Expected SQL_SERVER, got {record['source_type']}"
 
     def test_all_source_types(self, multi_source_simulator):
         """Each of the five source types must produce a valid record with the correct enum."""
@@ -66,7 +64,9 @@ class TestMultiSourceSimulator:
         }
         for source_key, expected_enum in expected_enums.items():
             record = multi_source_simulator.generate_record(source_type=source_key)
-            assert record is not None, f"No record returned for source_type='{source_key}'"
+            assert (
+                record is not None
+            ), f"No record returned for source_type='{source_key}'"
             assert record["source_type"] == expected_enum, (
                 f"source_type='{source_key}' should yield enum '{expected_enum}', "
                 f"got '{record['source_type']}'"
@@ -80,9 +80,9 @@ class TestMultiSourceSimulator:
         """All generated operations across 100 records must be INSERT, UPDATE, DELETE, or READ."""
         for _ in range(sample_size):
             record = multi_source_simulator.generate_record()
-            assert record["operation"] in _VALID_OPERATIONS, (
-                f"Unexpected operation '{record['operation']}'"
-            )
+            assert (
+                record["operation"] in _VALID_OPERATIONS
+            ), f"Unexpected operation '{record['operation']}'"
 
     # ------------------------------------------------------------------
     # Before/after image logic
@@ -106,12 +106,18 @@ class TestMultiSourceSimulator:
 
             if op == "INSERT":
                 assert record["after_image"] is not None, "INSERT must have after_image"
-                assert record["before_image"] is None, "INSERT must not have before_image"
+                assert (
+                    record["before_image"] is None
+                ), "INSERT must not have before_image"
             elif op == "DELETE":
-                assert record["before_image"] is not None, "DELETE must have before_image"
+                assert (
+                    record["before_image"] is not None
+                ), "DELETE must have before_image"
                 assert record["after_image"] is None, "DELETE must not have after_image"
             elif op == "UPDATE":
-                assert record["before_image"] is not None, "UPDATE must have before_image"
+                assert (
+                    record["before_image"] is not None
+                ), "UPDATE must have before_image"
                 assert record["after_image"] is not None, "UPDATE must have after_image"
             elif op == "READ":
                 assert record["after_image"] is not None, "READ must have after_image"
@@ -144,12 +150,12 @@ class TestMultiSourceSimulator:
         for source_key in _SOURCE_TYPE_KEYS:
             for _ in range(20):
                 record = multi_source_simulator.generate_record(source_type=source_key)
-                assert isinstance(record["latency_ms"], int), (
-                    f"latency_ms must be int, got {type(record['latency_ms'])}"
-                )
-                assert record["latency_ms"] >= 0, (
-                    f"latency_ms must be >= 0, got {record['latency_ms']}"
-                )
+                assert isinstance(
+                    record["latency_ms"], int
+                ), f"latency_ms must be int, got {type(record['latency_ms'])}"
+                assert (
+                    record["latency_ms"] >= 0
+                ), f"latency_ms must be >= 0, got {record['latency_ms']}"
 
     # ------------------------------------------------------------------
     # Batch generation
@@ -162,17 +168,17 @@ class TestMultiSourceSimulator:
         )
 
         assert isinstance(batch, list), "generate_batch must return a list"
-        assert len(batch) == sample_size, (
-            f"Expected {sample_size} records, got {len(batch)}"
-        )
+        assert (
+            len(batch) == sample_size
+        ), f"Expected {sample_size} records, got {len(batch)}"
 
     def test_generate_mixed_batch(self, multi_source_simulator, sample_size):
         """generate_mixed_batch produces the correct count and spans multiple source types."""
         batch = multi_source_simulator.generate_mixed_batch(count=sample_size)
 
-        assert len(batch) == sample_size, (
-            f"Expected {sample_size} records, got {len(batch)}"
-        )
+        assert (
+            len(batch) == sample_size
+        ), f"Expected {sample_size} records, got {len(batch)}"
 
         observed_types = {record["source_type"] for record in batch}
         assert len(observed_types) > 1, (
@@ -199,6 +205,6 @@ class TestMultiSourceSimulator:
             assert "schema_version" in record, "schema_version metadata field missing"
             assert "sequence_number" in record, "sequence_number metadata field missing"
 
-        assert record2["sequence_number"] > record1["sequence_number"], (
-            "sequence_number must increment between successive generate_record calls"
-        )
+        assert (
+            record2["sequence_number"] > record1["sequence_number"]
+        ), "sequence_number must increment between successive generate_record calls"

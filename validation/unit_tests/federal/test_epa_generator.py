@@ -5,9 +5,8 @@ Covers both the air_quality and water_quality domains, including field
 presence, value range validation, categorical consistency, ID format, and
 the MCL violation logic.
 """
-import re
 
-import pytest
+import re
 
 
 class TestEPAGenerator:
@@ -33,9 +32,9 @@ class TestEPAGenerator:
 
         for _ in range(100):
             record = epa_generator.generate_record(domain="air_quality")
-            assert record["parameter"] in valid_parameters, (
-                f"Unexpected parameter: {record['parameter']}"
-            )
+            assert (
+                record["parameter"] in valid_parameters
+            ), f"Unexpected parameter: {record['parameter']}"
 
     def test_aqi_range(self, epa_generator):
         """AQI values must fall within the EPA-defined 0–500 scale."""
@@ -47,12 +46,12 @@ class TestEPAGenerator:
     def test_aqi_category_matches_value(self, epa_generator):
         """aqi_category must correctly reflect aqi_value per EPA breakpoints."""
         category_ranges = {
-            "GOOD":                (0,   50),
-            "MODERATE":            (51,  100),
+            "GOOD": (0, 50),
+            "MODERATE": (51, 100),
             "UNHEALTHY_SENSITIVE": (101, 150),
-            "UNHEALTHY":           (151, 200),
-            "VERY_UNHEALTHY":      (201, 300),
-            "HAZARDOUS":           (301, 500),
+            "UNHEALTHY": (151, 200),
+            "VERY_UNHEALTHY": (201, 300),
+            "HAZARDOUS": (301, 500),
         }
 
         for _ in range(100):
@@ -60,9 +59,7 @@ class TestEPAGenerator:
             aqi = record["aqi_value"]
             category = record["aqi_category"]
 
-            assert category in category_ranges, (
-                f"Unknown aqi_category: {category}"
-            )
+            assert category in category_ranges, f"Unknown aqi_category: {category}"
             lo, hi = category_ranges[category]
             assert lo <= aqi <= hi, (
                 f"aqi_category '{category}' does not match aqi_value {aqi} "
@@ -75,9 +72,9 @@ class TestEPAGenerator:
 
         for _ in range(50):
             record = epa_generator.generate_record(domain="air_quality")
-            assert pattern.match(record["site_id"]), (
-                f"site_id '{record['site_id']}' does not match pattern SS-CCC-SSSS"
-            )
+            assert pattern.match(
+                record["site_id"]
+            ), f"site_id '{record['site_id']}' does not match pattern SS-CCC-SSSS"
 
     # ------------------------------------------------------------------ #
     # Water quality                                                        #
@@ -98,9 +95,9 @@ class TestEPAGenerator:
 
         for _ in range(100):
             record = epa_generator.generate_record(domain="water_quality")
-            assert record["system_type"] in valid_types, (
-                f"Unexpected system_type: {record['system_type']}"
-            )
+            assert (
+                record["system_type"] in valid_types
+            ), f"Unexpected system_type: {record['system_type']}"
 
     def test_mcl_violation_logic(self, epa_generator):
         """When mcl_violation is True, result_value must exceed the MCL."""
@@ -120,9 +117,9 @@ class TestEPAGenerator:
                         f"got {result}"
                     )
                 else:
-                    assert result > mcl, (
-                        f"MCL violation expected result_value ({result}) > MCL ({mcl})"
-                    )
+                    assert (
+                        result > mcl
+                    ), f"MCL violation expected result_value ({result}) > MCL ({mcl})"
             if violation_records_found >= 3:
                 break
 

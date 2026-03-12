@@ -17,13 +17,12 @@ before/after images, and connector metadata drawn from the casino/gaming domain.
 
 import random
 import uuid
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import Any
 
 import numpy as np
 
 from ..base_generator import BaseGenerator
-
 
 # ---------------------------------------------------------------------------
 # Source configuration registry
@@ -206,7 +205,14 @@ _OPERATION_WEIGHTS = [0.40, 0.35, 0.15, 0.10]
 _AMOUNT_STATUSES = ["PENDING", "APPROVED", "SETTLED", "REVERSED", "VOIDED"]
 _GAME_STATUSES = ["ACTIVE", "INACTIVE", "SUSPENDED", "MAINTENANCE", "CLOSED"]
 _PLAYER_TIERS = ["Bronze", "Silver", "Gold", "Platinum", "Diamond"]
-_TRANSACTION_TYPES = ["COIN_IN", "COIN_OUT", "JACKPOT", "TICKET_OUT", "CASH_IN", "CASH_OUT"]
+_TRANSACTION_TYPES = [
+    "COIN_IN",
+    "COIN_OUT",
+    "JACKPOT",
+    "TICKET_OUT",
+    "CASH_IN",
+    "CASH_OUT",
+]
 _PAYMENT_METHODS = ["CASH", "CHIP", "VOUCHER", "CREDIT_CARD", "CHECK", "WIRE"]
 
 
@@ -389,9 +395,7 @@ class MultiSourceSimulator(BaseGenerator):
     # Private helpers
     # ------------------------------------------------------------------
 
-    def _build_image(
-        self, operation: str, side: str
-    ) -> dict[str, Any] | None:
+    def _build_image(self, operation: str, side: str) -> dict[str, Any] | None:
         """
         Build a before or after image dict with 3-5 casino-domain fields.
 

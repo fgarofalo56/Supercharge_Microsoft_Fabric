@@ -38,7 +38,6 @@ import numpy as np
 
 from ..base_generator import BaseGenerator
 
-
 # ---------------------------------------------------------------------------
 # Fleet configuration
 # ---------------------------------------------------------------------------
@@ -111,14 +110,27 @@ DEVICE_CONFIG: dict[str, dict[str, Any]] = {
 
 # Slot-machine game library for realistic telemetry
 _SLOT_GAME_IDS = [
-    "WMS-BBAR-01", "IGT-WOLF-02", "ARN-BUFF-03", "KNM-DRFT-04",
-    "SGS-ZEUS-05", "EVR-FIRE-06", "IGT-CLEO-07", "ARN-QUEN-08",
+    "WMS-BBAR-01",
+    "IGT-WOLF-02",
+    "ARN-BUFF-03",
+    "KNM-DRFT-04",
+    "SGS-ZEUS-05",
+    "EVR-FIRE-06",
+    "IGT-CLEO-07",
+    "ARN-QUEN-08",
 ]
 
 _SLOT_STATUSES = ["ACTIVE", "IDLE", "ERROR", "MAINTENANCE", "DOOR_OPEN"]
 _SLOT_STATUS_WEIGHTS = [0.70, 0.15, 0.05, 0.05, 0.05]
 
-_TABLE_GAME_TYPES = ["Blackjack", "Baccarat", "Roulette", "Craps", "Poker", "Let It Ride"]
+_TABLE_GAME_TYPES = [
+    "Blackjack",
+    "Baccarat",
+    "Roulette",
+    "Craps",
+    "Poker",
+    "Let It Ride",
+]
 
 _DOOR_AREAS = ["MAIN", "VIP", "STAFF", "VAULT", "CAGE", "KITCHEN", "SERVICE"]
 
@@ -198,7 +210,7 @@ class IoTDeviceSimulator(BaseGenerator):
         """Generate static device records for one device type."""
         cfg = DEVICE_CONFIG[device_type]
         zones: list[str] = cfg["zones"]
-        fw_prefix: str = cfg["firmware_prefix"]
+        cfg["firmware_prefix"]
         devices = []
 
         for n in range(1, count + 1):
@@ -264,9 +276,7 @@ class IoTDeviceSimulator(BaseGenerator):
         properties = self._make_properties(device_type, device)
 
         # Correlation ID present ~40 % of messages
-        correlation_id = (
-            self.generate_uuid() if np.random.random() < 0.40 else None
-        )
+        correlation_id = self.generate_uuid() if np.random.random() < 0.40 else None
 
         record: dict[str, Any] = {
             "message_id": self.generate_uuid(),
@@ -365,9 +375,7 @@ class IoTDeviceSimulator(BaseGenerator):
 
     def _telemetry_slot_machine(self, device: dict[str, Any]) -> dict[str, Any]:
         """Slot machine meter snapshot and status."""
-        status = str(
-            self.weighted_choice(_SLOT_STATUSES, _SLOT_STATUS_WEIGHTS)
-        )
+        status = str(self.weighted_choice(_SLOT_STATUSES, _SLOT_STATUS_WEIGHTS))
         error_code = None
         if status == "ERROR":
             error_code = f"E{np.random.randint(1, 8):03d}"

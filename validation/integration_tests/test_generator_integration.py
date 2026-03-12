@@ -8,10 +8,12 @@ Tests for verifying all generators work together correctly:
 - Date ranges are consistent across generators
 - Seed reproducibility across all generators
 """
-import pytest
-import numpy as np
-from faker import Faker
+
 from datetime import datetime, timedelta
+
+import numpy as np
+import pytest
+from faker import Faker
 
 pytestmark = [pytest.mark.integration]
 
@@ -32,28 +34,32 @@ class TestGeneratorInstantiation:
     def test_generators_have_schemas(self, all_generators):
         """Verify all generators expose schema definitions."""
         for name, generator in all_generators.items():
-            assert hasattr(generator, "schema") or hasattr(generator, "_schema"), (
-                f"{name} generator missing schema"
+            assert hasattr(generator, "schema") or hasattr(
+                generator, "_schema"
+            ), f"{name} generator missing schema"
+            schema = (
+                generator.schema if hasattr(generator, "schema") else generator._schema
             )
-            schema = generator.schema if hasattr(generator, "schema") else generator._schema
             assert isinstance(schema, dict), f"{name} schema is not a dict"
             assert len(schema) > 0, f"{name} schema is empty"
 
     def test_generators_have_generate_record(self, all_generators):
         """Verify all generators have generate_record method."""
         for name, generator in all_generators.items():
-            assert hasattr(generator, "generate_record"), (
-                f"{name} generator missing generate_record method"
-            )
+            assert hasattr(
+                generator, "generate_record"
+            ), f"{name} generator missing generate_record method"
             record = generator.generate_record()
-            assert isinstance(record, dict), f"{name} generate_record doesn't return dict"
+            assert isinstance(
+                record, dict
+            ), f"{name} generate_record doesn't return dict"
 
     def test_generators_have_generate_batch(self, all_generators):
         """Verify all generators can generate batches."""
         for name, generator in all_generators.items():
-            assert hasattr(generator, "generate"), (
-                f"{name} generator missing generate method"
-            )
+            assert hasattr(
+                generator, "generate"
+            ), f"{name} generator missing generate method"
             df = generator.generate(10, show_progress=False)
             assert len(df) == 10, f"{name} generate didn't return expected count"
 
@@ -72,28 +78,36 @@ class TestPlayerIdCompatibility:
         for pid in player_ids[:100]:  # Check first 100
             assert validate_player_id_format(pid), f"Invalid player_id format: {pid}"
 
-    def test_player_generator_id_format(self, sample_player_data, validate_player_id_format):
+    def test_player_generator_id_format(
+        self, sample_player_data, validate_player_id_format
+    ):
         """Verify player generator produces valid player IDs."""
         player_ids = sample_player_data["player_id"].tolist()
 
         for pid in player_ids[:100]:
             assert validate_player_id_format(pid), f"Invalid player_id format: {pid}"
 
-    def test_compliance_player_id_format(self, sample_compliance_data, validate_player_id_format):
+    def test_compliance_player_id_format(
+        self, sample_compliance_data, validate_player_id_format
+    ):
         """Verify compliance generator produces compatible player IDs."""
         player_ids = sample_compliance_data["player_id"].dropna().tolist()
 
         for pid in player_ids[:100]:
             assert validate_player_id_format(pid), f"Invalid player_id format: {pid}"
 
-    def test_financial_player_id_format(self, sample_financial_data, validate_player_id_format):
+    def test_financial_player_id_format(
+        self, sample_financial_data, validate_player_id_format
+    ):
         """Verify financial generator produces compatible player IDs."""
         player_ids = sample_financial_data["player_id"].dropna().tolist()
 
         for pid in player_ids[:100]:
             assert validate_player_id_format(pid), f"Invalid player_id format: {pid}"
 
-    def test_table_games_player_id_format(self, sample_table_games_data, validate_player_id_format):
+    def test_table_games_player_id_format(
+        self, sample_table_games_data, validate_player_id_format
+    ):
         """Verify table games generator produces compatible player IDs."""
         player_ids = sample_table_games_data["player_id"].dropna().tolist()
 
@@ -136,10 +150,14 @@ class TestPlayerIdCompatibility:
             assert prefix in valid_prefixes, f"Slot uses unexpected prefix: {prefix}"
 
         for prefix in financial_prefixes:
-            assert prefix in valid_prefixes, f"Financial uses unexpected prefix: {prefix}"
+            assert (
+                prefix in valid_prefixes
+            ), f"Financial uses unexpected prefix: {prefix}"
 
         for prefix in compliance_prefixes:
-            assert prefix in valid_prefixes, f"Compliance uses unexpected prefix: {prefix}"
+            assert (
+                prefix in valid_prefixes
+            ), f"Compliance uses unexpected prefix: {prefix}"
 
 
 class TestDateRangeConsistency:
@@ -154,9 +172,13 @@ class TestDateRangeConsistency:
             if ts is not None:
                 # Handle both datetime objects and ISO strings
                 if isinstance(ts, str):
-                    ts = datetime.fromisoformat(ts.replace("Z", "+00:00").replace("+00:00", ""))
+                    ts = datetime.fromisoformat(
+                        ts.replace("Z", "+00:00").replace("+00:00", "")
+                    )
                 # Allow some tolerance for timezone differences
-                assert ts >= start_date - timedelta(days=1), f"Date {ts} before range start"
+                assert ts >= start_date - timedelta(
+                    days=1
+                ), f"Date {ts} before range start"
                 assert ts <= end_date + timedelta(days=1), f"Date {ts} after range end"
 
     def test_compliance_dates_in_range(self, sample_compliance_data, fixed_date_range):
@@ -164,14 +186,22 @@ class TestDateRangeConsistency:
         start_date, end_date = fixed_date_range
 
         # Check filing_timestamp or report_timestamp
-        ts_col = "filing_timestamp" if "filing_timestamp" in sample_compliance_data.columns else "report_timestamp"
+        ts_col = (
+            "filing_timestamp"
+            if "filing_timestamp" in sample_compliance_data.columns
+            else "report_timestamp"
+        )
         timestamps = sample_compliance_data[ts_col].tolist()
 
         for ts in timestamps:
             if ts is not None:
                 if isinstance(ts, str):
-                    ts = datetime.fromisoformat(ts.replace("Z", "+00:00").replace("+00:00", ""))
-                assert ts >= start_date - timedelta(days=1), f"Date {ts} before range start"
+                    ts = datetime.fromisoformat(
+                        ts.replace("Z", "+00:00").replace("+00:00", "")
+                    )
+                assert ts >= start_date - timedelta(
+                    days=1
+                ), f"Date {ts} before range start"
                 assert ts <= end_date + timedelta(days=1), f"Date {ts} after range end"
 
     def test_financial_dates_in_range(self, sample_financial_data, fixed_date_range):
@@ -182,11 +212,17 @@ class TestDateRangeConsistency:
         for ts in timestamps:
             if ts is not None:
                 if isinstance(ts, str):
-                    ts = datetime.fromisoformat(ts.replace("Z", "+00:00").replace("+00:00", ""))
-                assert ts >= start_date - timedelta(days=1), f"Date {ts} before range start"
+                    ts = datetime.fromisoformat(
+                        ts.replace("Z", "+00:00").replace("+00:00", "")
+                    )
+                assert ts >= start_date - timedelta(
+                    days=1
+                ), f"Date {ts} before range start"
                 assert ts <= end_date + timedelta(days=1), f"Date {ts} after range end"
 
-    def test_table_games_dates_in_range(self, sample_table_games_data, fixed_date_range):
+    def test_table_games_dates_in_range(
+        self, sample_table_games_data, fixed_date_range
+    ):
         """Verify table games data dates are within configured range."""
         start_date, end_date = fixed_date_range
 
@@ -194,8 +230,12 @@ class TestDateRangeConsistency:
         for ts in timestamps:
             if ts is not None:
                 if isinstance(ts, str):
-                    ts = datetime.fromisoformat(ts.replace("Z", "+00:00").replace("+00:00", ""))
-                assert ts >= start_date - timedelta(days=1), f"Date {ts} before range start"
+                    ts = datetime.fromisoformat(
+                        ts.replace("Z", "+00:00").replace("+00:00", "")
+                    )
+                assert ts >= start_date - timedelta(
+                    days=1
+                ), f"Date {ts} before range start"
                 assert ts <= end_date + timedelta(days=1), f"Date {ts} after range end"
 
     def test_all_generators_same_date_range(self, all_generators, fixed_date_range):
@@ -203,12 +243,12 @@ class TestDateRangeConsistency:
         start_date, end_date = fixed_date_range
 
         for name, generator in all_generators.items():
-            assert generator.start_date == start_date, (
-                f"{name} generator has different start_date"
-            )
-            assert generator.end_date == end_date, (
-                f"{name} generator has different end_date"
-            )
+            assert (
+                generator.start_date == start_date
+            ), f"{name} generator has different start_date"
+            assert (
+                generator.end_date == end_date
+            ), f"{name} generator has different end_date"
 
 
 class TestSeedReproducibility:
@@ -298,9 +338,7 @@ class TestSeedReproducibility:
         types2 = df2["event_type"].value_counts().to_dict()
 
         # Not all counts should be identical
-        differences = sum(
-            1 for k in types1 if types1.get(k, 0) != types2.get(k, 0)
-        )
+        differences = sum(1 for k in types1 if types1.get(k, 0) != types2.get(k, 0))
         assert differences > 0, "Different seeds produced identical distributions"
 
 
@@ -315,9 +353,9 @@ class TestGeneratorMetadataColumns:
             record = generator.generate_record()
 
             for meta_col in expected_metadata:
-                assert meta_col in record, (
-                    f"{name} generator missing metadata column: {meta_col}"
-                )
+                assert (
+                    meta_col in record
+                ), f"{name} generator missing metadata column: {meta_col}"
 
     def test_source_metadata_matches_generator(self, all_generators):
         """Verify _source metadata matches generator class name."""
@@ -349,9 +387,9 @@ class TestGeneratorOutputFormats:
 
         for name, generator in all_generators.items():
             df = generator.generate(10, show_progress=False)
-            assert isinstance(df, pd.DataFrame), (
-                f"{name} generator did not produce DataFrame"
-            )
+            assert isinstance(
+                df, pd.DataFrame
+            ), f"{name} generator did not produce DataFrame"
 
     def test_generators_support_parquet_output(self, slot_generator, temp_output_dir):
         """Verify generators can output to Parquet format."""
@@ -380,17 +418,19 @@ class TestGeneratorBatchProcessing:
         """Test batch generation yields correct batch sizes."""
         total_records = 500
         batch_size = 100
-        batches = list(slot_generator.generate_batches(
-            total_records,
-            batch_size=batch_size,
-            show_progress=False,
-        ))
+        batches = list(
+            slot_generator.generate_batches(
+                total_records,
+                batch_size=batch_size,
+                show_progress=False,
+            )
+        )
 
         # Should have 5 batches
         assert len(batches) == 5
 
         # Each batch should have correct size (except possibly last)
-        for i, batch in enumerate(batches[:-1]):
+        for _i, batch in enumerate(batches[:-1]):
             assert len(batch) == batch_size
 
         # Total records should match
@@ -401,11 +441,13 @@ class TestGeneratorBatchProcessing:
         """Test batch generation handles non-divisible counts."""
         total_records = 250
         batch_size = 100
-        batches = list(slot_generator.generate_batches(
-            total_records,
-            batch_size=batch_size,
-            show_progress=False,
-        ))
+        batches = list(
+            slot_generator.generate_batches(
+                total_records,
+                batch_size=batch_size,
+                show_progress=False,
+            )
+        )
 
         # Should have 3 batches (100, 100, 50)
         assert len(batches) == 3

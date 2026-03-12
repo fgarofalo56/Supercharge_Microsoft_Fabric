@@ -84,6 +84,9 @@ var routingTags = {
 }
 var mergedTags = union(tags, routingTags)
 
+// Consumer group count: sources × groups (flat index for cross-product loop)
+var consumerGroupCount = length(inputSources) * length(consumerGroups)
+
 // =============================================================================
 // Event Hubs Namespace (Fabric Eventstream backing resource)
 // =============================================================================
@@ -129,19 +132,11 @@ resource eventHubs 'Microsoft.EventHub/namespaces/eventhubs@2024-01-01' = [
 // =============================================================================
 
 resource consumerGroupResources 'Microsoft.EventHub/namespaces/eventhubs/consumergroups@2024-01-01' = [
-  for pair in flatten([
-    for (source, sourceIdx) in inputSources: [
-      for group in consumerGroups: {
-        hubName: source.name
-        groupName: group
-        sourceIndex: sourceIdx
-      }
-    ]
-  ]): {
-    parent: eventHubs[pair.sourceIndex]
-    name: pair.groupName
+  for i in range(0, consumerGroupCount): {
+    parent: eventHubs[i / length(consumerGroups)]
+    name: consumerGroups[i % length(consumerGroups)]
     properties: {
-      userMetadata: 'Fabric Eventstream consumer group for ${pair.groupName} processing'
+      userMetadata: 'Fabric Eventstream consumer group for ${consumerGroups[i % length(consumerGroups)]} processing'
     }
   }
 ]

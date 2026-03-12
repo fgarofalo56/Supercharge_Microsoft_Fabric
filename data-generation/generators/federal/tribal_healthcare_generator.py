@@ -45,8 +45,18 @@ AREA_OFFICES = [
 ]
 
 AREA_OFFICE_WEIGHTS = [
-    0.06, 0.10, 0.06, 0.06, 0.06, 0.08,
-    0.16, 0.14, 0.10, 0.08, 0.05, 0.05,
+    0.06,
+    0.10,
+    0.06,
+    0.06,
+    0.06,
+    0.08,
+    0.16,
+    0.14,
+    0.10,
+    0.08,
+    0.05,
+    0.05,
 ]
 
 # ---------------------------------------------------------------------------
@@ -86,35 +96,162 @@ TRIBAL_AFFILIATIONS = [
 ]
 
 TRIBAL_WEIGHTS = [
-    0.14, 0.10, 0.07, 0.06, 0.05, 0.04, 0.03, 0.05, 0.04, 0.03,
-    0.03, 0.03, 0.02, 0.02, 0.04, 0.03, 0.02, 0.02, 0.03, 0.01,
-    0.02, 0.02, 0.01, 0.02, 0.02, 0.01, 0.01, 0.01, 0.01, 0.01,
+    0.14,
+    0.10,
+    0.07,
+    0.06,
+    0.05,
+    0.04,
+    0.03,
+    0.05,
+    0.04,
+    0.03,
+    0.03,
+    0.03,
+    0.02,
+    0.02,
+    0.04,
+    0.03,
+    0.02,
+    0.02,
+    0.03,
+    0.01,
+    0.02,
+    0.02,
+    0.01,
+    0.02,
+    0.02,
+    0.01,
+    0.01,
+    0.01,
+    0.01,
+    0.01,
 ]
 
 # ---------------------------------------------------------------------------
 # IHS Facilities (20 health centers / hospitals)
 # ---------------------------------------------------------------------------
 FACILITIES: list[dict[str, str]] = [
-    {"id": "IHS-NAV-001", "name": "Shiprock Northern Navajo Medical Center", "area": "Navajo", "service_unit": "Shiprock Service Unit"},
-    {"id": "IHS-NAV-002", "name": "Chinle Comprehensive Health Care Facility", "area": "Navajo", "service_unit": "Chinle Service Unit"},
-    {"id": "IHS-NAV-003", "name": "Gallup Indian Medical Center", "area": "Navajo", "service_unit": "Gallup Service Unit"},
-    {"id": "IHS-NAV-004", "name": "Crownpoint Health Care Facility", "area": "Navajo", "service_unit": "Crownpoint Service Unit"},
-    {"id": "IHS-NAV-005", "name": "Kayenta Health Center", "area": "Navajo", "service_unit": "Kayenta Service Unit"},
-    {"id": "IHS-PHX-001", "name": "Phoenix Indian Medical Center", "area": "Phoenix", "service_unit": "Phoenix Service Unit"},
-    {"id": "IHS-PHX-002", "name": "Hu Hu Kam Memorial Hospital", "area": "Phoenix", "service_unit": "Gila River Service Unit"},
-    {"id": "IHS-PHX-003", "name": "Salt River Health Center", "area": "Phoenix", "service_unit": "Salt River Service Unit"},
-    {"id": "IHS-TUC-001", "name": "Sells Indian Hospital", "area": "Tucson", "service_unit": "Sells Service Unit"},
-    {"id": "IHS-ABQ-001", "name": "Albuquerque Indian Health Center", "area": "Albuquerque", "service_unit": "Albuquerque Service Unit"},
-    {"id": "IHS-ABQ-002", "name": "Zuni Comprehensive Health Center", "area": "Albuquerque", "service_unit": "Zuni-Ramah Service Unit"},
-    {"id": "IHS-OKC-001", "name": "Claremore Indian Hospital", "area": "Oklahoma City", "service_unit": "Claremore Service Unit"},
-    {"id": "IHS-OKC-002", "name": "Lawton Indian Hospital", "area": "Oklahoma City", "service_unit": "Lawton Service Unit"},
-    {"id": "IHS-OKC-003", "name": "Chickasaw Nation Medical Center", "area": "Oklahoma City", "service_unit": "Ada Service Unit"},
-    {"id": "IHS-ABD-001", "name": "Pine Ridge Hospital", "area": "Great Plains", "service_unit": "Pine Ridge Service Unit"},
-    {"id": "IHS-ABD-002", "name": "Rosebud Hospital", "area": "Great Plains", "service_unit": "Rosebud Service Unit"},
-    {"id": "IHS-BIL-001", "name": "Blackfeet Community Hospital", "area": "Billings", "service_unit": "Blackfeet Service Unit"},
-    {"id": "IHS-BMJ-001", "name": "Red Lake Hospital", "area": "Bemidji", "service_unit": "Red Lake Service Unit"},
-    {"id": "IHS-NSH-001", "name": "Cherokee Indian Hospital", "area": "Nashville", "service_unit": "Cherokee Service Unit"},
-    {"id": "IHS-POR-001", "name": "Yakama Indian Health Center", "area": "Portland", "service_unit": "Yakama Service Unit"},
+    {
+        "id": "IHS-NAV-001",
+        "name": "Shiprock Northern Navajo Medical Center",
+        "area": "Navajo",
+        "service_unit": "Shiprock Service Unit",
+    },
+    {
+        "id": "IHS-NAV-002",
+        "name": "Chinle Comprehensive Health Care Facility",
+        "area": "Navajo",
+        "service_unit": "Chinle Service Unit",
+    },
+    {
+        "id": "IHS-NAV-003",
+        "name": "Gallup Indian Medical Center",
+        "area": "Navajo",
+        "service_unit": "Gallup Service Unit",
+    },
+    {
+        "id": "IHS-NAV-004",
+        "name": "Crownpoint Health Care Facility",
+        "area": "Navajo",
+        "service_unit": "Crownpoint Service Unit",
+    },
+    {
+        "id": "IHS-NAV-005",
+        "name": "Kayenta Health Center",
+        "area": "Navajo",
+        "service_unit": "Kayenta Service Unit",
+    },
+    {
+        "id": "IHS-PHX-001",
+        "name": "Phoenix Indian Medical Center",
+        "area": "Phoenix",
+        "service_unit": "Phoenix Service Unit",
+    },
+    {
+        "id": "IHS-PHX-002",
+        "name": "Hu Hu Kam Memorial Hospital",
+        "area": "Phoenix",
+        "service_unit": "Gila River Service Unit",
+    },
+    {
+        "id": "IHS-PHX-003",
+        "name": "Salt River Health Center",
+        "area": "Phoenix",
+        "service_unit": "Salt River Service Unit",
+    },
+    {
+        "id": "IHS-TUC-001",
+        "name": "Sells Indian Hospital",
+        "area": "Tucson",
+        "service_unit": "Sells Service Unit",
+    },
+    {
+        "id": "IHS-ABQ-001",
+        "name": "Albuquerque Indian Health Center",
+        "area": "Albuquerque",
+        "service_unit": "Albuquerque Service Unit",
+    },
+    {
+        "id": "IHS-ABQ-002",
+        "name": "Zuni Comprehensive Health Center",
+        "area": "Albuquerque",
+        "service_unit": "Zuni-Ramah Service Unit",
+    },
+    {
+        "id": "IHS-OKC-001",
+        "name": "Claremore Indian Hospital",
+        "area": "Oklahoma City",
+        "service_unit": "Claremore Service Unit",
+    },
+    {
+        "id": "IHS-OKC-002",
+        "name": "Lawton Indian Hospital",
+        "area": "Oklahoma City",
+        "service_unit": "Lawton Service Unit",
+    },
+    {
+        "id": "IHS-OKC-003",
+        "name": "Chickasaw Nation Medical Center",
+        "area": "Oklahoma City",
+        "service_unit": "Ada Service Unit",
+    },
+    {
+        "id": "IHS-ABD-001",
+        "name": "Pine Ridge Hospital",
+        "area": "Great Plains",
+        "service_unit": "Pine Ridge Service Unit",
+    },
+    {
+        "id": "IHS-ABD-002",
+        "name": "Rosebud Hospital",
+        "area": "Great Plains",
+        "service_unit": "Rosebud Service Unit",
+    },
+    {
+        "id": "IHS-BIL-001",
+        "name": "Blackfeet Community Hospital",
+        "area": "Billings",
+        "service_unit": "Blackfeet Service Unit",
+    },
+    {
+        "id": "IHS-BMJ-001",
+        "name": "Red Lake Hospital",
+        "area": "Bemidji",
+        "service_unit": "Red Lake Service Unit",
+    },
+    {
+        "id": "IHS-NSH-001",
+        "name": "Cherokee Indian Hospital",
+        "area": "Nashville",
+        "service_unit": "Cherokee Service Unit",
+    },
+    {
+        "id": "IHS-POR-001",
+        "name": "Yakama Indian Health Center",
+        "area": "Portland",
+        "service_unit": "Yakama Service Unit",
+    },
 ]
 
 # ---------------------------------------------------------------------------
@@ -138,57 +275,78 @@ ENCOUNTER_WEIGHTS = [0.35, 0.08, 0.10, 0.07, 0.12, 0.08, 0.12, 0.08]
 # ---------------------------------------------------------------------------
 ICD10_CODES: list[dict[str, str]] = [
     # Diabetes (15%)
-    {"code": "E11.9",  "desc": "Type 2 diabetes mellitus without complications"},
+    {"code": "E11.9", "desc": "Type 2 diabetes mellitus without complications"},
     {"code": "E11.65", "desc": "Type 2 diabetes mellitus with hyperglycemia"},
     {"code": "E11.22", "desc": "Type 2 diabetes with diabetic chronic kidney disease"},
     {"code": "E11.40", "desc": "Type 2 diabetes with diabetic neuropathy, unspecified"},
-    {"code": "E11.311", "desc": "Type 2 diabetes with unspecified diabetic retinopathy with macular edema"},
+    {
+        "code": "E11.311",
+        "desc": "Type 2 diabetes with unspecified diabetic retinopathy with macular edema",
+    },
     # Respiratory (12%)
-    {"code": "J06.9",  "desc": "Acute upper respiratory infection, unspecified"},
+    {"code": "J06.9", "desc": "Acute upper respiratory infection, unspecified"},
     {"code": "J45.20", "desc": "Mild intermittent asthma, uncomplicated"},
     {"code": "J45.40", "desc": "Moderate persistent asthma, uncomplicated"},
     # Cardiovascular (10%)
-    {"code": "I10",    "desc": "Essential (primary) hypertension"},
-    {"code": "E78.5",  "desc": "Hyperlipidemia, unspecified"},
-    {"code": "I25.10", "desc": "Atherosclerotic heart disease of native coronary artery without angina pectoris"},
+    {"code": "I10", "desc": "Essential (primary) hypertension"},
+    {"code": "E78.5", "desc": "Hyperlipidemia, unspecified"},
+    {
+        "code": "I25.10",
+        "desc": "Atherosclerotic heart disease of native coronary artery without angina pectoris",
+    },
     # Behavioral Health (10%)
-    {"code": "F32.1",  "desc": "Major depressive disorder, single episode, moderate"},
-    {"code": "F32.9",  "desc": "Major depressive disorder, single episode, unspecified"},
+    {"code": "F32.1", "desc": "Major depressive disorder, single episode, moderate"},
+    {"code": "F32.9", "desc": "Major depressive disorder, single episode, unspecified"},
     {"code": "F10.20", "desc": "Alcohol dependence, uncomplicated"},
     {"code": "F10.10", "desc": "Alcohol abuse, uncomplicated"},
     # Metabolic / Obesity (8%)
     {"code": "E66.01", "desc": "Morbid (severe) obesity due to excess calories"},
-    {"code": "E66.9",  "desc": "Obesity, unspecified"},
+    {"code": "E66.9", "desc": "Obesity, unspecified"},
     # Musculoskeletal (8%)
-    {"code": "M54.5",  "desc": "Low back pain"},
-    {"code": "M54.2",  "desc": "Cervicalgia"},
+    {"code": "M54.5", "desc": "Low back pain"},
+    {"code": "M54.2", "desc": "Cervicalgia"},
     {"code": "M25.50", "desc": "Pain in unspecified joint"},
     # Gastrointestinal (6%)
-    {"code": "K21.0",  "desc": "Gastro-esophageal reflux disease with esophagitis"},
-    {"code": "K58.9",  "desc": "Irritable bowel syndrome without diarrhea"},
+    {"code": "K21.0", "desc": "Gastro-esophageal reflux disease with esophagitis"},
+    {"code": "K58.9", "desc": "Irritable bowel syndrome without diarrhea"},
     # Genitourinary (5%)
-    {"code": "N39.0",  "desc": "Urinary tract infection, site not specified"},
+    {"code": "N39.0", "desc": "Urinary tract infection, site not specified"},
     # Dental (4%)
-    {"code": "K02.9",  "desc": "Dental caries, unspecified"},
+    {"code": "K02.9", "desc": "Dental caries, unspecified"},
     # Pregnancy-related (2%)
     {"code": "O24.11", "desc": "Pre-existing type 2 diabetes mellitus in pregnancy"},
 ]
 
 ICD10_WEIGHTS = [
     # Diabetes (17%) - 5 codes
-    0.07, 0.04, 0.03, 0.02, 0.01,
+    0.07,
+    0.04,
+    0.03,
+    0.02,
+    0.01,
     # Respiratory (14%) - 3 codes
-    0.07, 0.04, 0.03,
+    0.07,
+    0.04,
+    0.03,
     # Cardiovascular (12%) - 3 codes
-    0.06, 0.04, 0.02,
+    0.06,
+    0.04,
+    0.02,
     # Behavioral Health (12%) - 4 codes
-    0.04, 0.03, 0.03, 0.02,
+    0.04,
+    0.03,
+    0.03,
+    0.02,
     # Metabolic / Obesity (10%) - 2 codes
-    0.06, 0.04,
+    0.06,
+    0.04,
     # Musculoskeletal (10%) - 3 codes
-    0.05, 0.03, 0.02,
+    0.05,
+    0.03,
+    0.02,
     # Gastrointestinal (8%) - 2 codes
-    0.05, 0.03,
+    0.05,
+    0.03,
     # Genitourinary (7%) - 1 code
     0.07,
     # Dental (6%) - 1 code
@@ -222,8 +380,24 @@ CPT_CODES: list[dict[str, str]] = [
 ]
 
 CPT_WEIGHTS = [
-    0.15, 0.12, 0.05, 0.06, 0.05, 0.06, 0.03, 0.04,
-    0.08, 0.06, 0.06, 0.04, 0.05, 0.03, 0.04, 0.04, 0.02, 0.02,
+    0.15,
+    0.12,
+    0.05,
+    0.06,
+    0.05,
+    0.06,
+    0.03,
+    0.04,
+    0.08,
+    0.06,
+    0.06,
+    0.04,
+    0.05,
+    0.03,
+    0.04,
+    0.04,
+    0.02,
+    0.02,
 ]
 
 # ---------------------------------------------------------------------------
@@ -246,47 +420,152 @@ PROVIDER_WEIGHTS = [0.30, 0.20, 0.12, 0.10, 0.10, 0.06, 0.05, 0.07]
 # Medications (20 common prescriptions for prevalent conditions)
 # ---------------------------------------------------------------------------
 MEDICATIONS: list[dict[str, str]] = [
-    {"name": "Metformin 500mg",       "ndc": "00093-7214-01"},
-    {"name": "Metformin 1000mg",      "ndc": "00093-7267-01"},
-    {"name": "Insulin Glargine",      "ndc": "00088-2220-33"},
-    {"name": "Glipizide 5mg",         "ndc": "00093-0317-01"},
-    {"name": "Lisinopril 10mg",       "ndc": "00093-1044-01"},
-    {"name": "Lisinopril 20mg",       "ndc": "00093-1045-01"},
-    {"name": "Amlodipine 5mg",        "ndc": "00093-3170-01"},
-    {"name": "Atorvastatin 20mg",     "ndc": "00093-5058-01"},
-    {"name": "Atorvastatin 40mg",     "ndc": "00093-5059-01"},
+    {"name": "Metformin 500mg", "ndc": "00093-7214-01"},
+    {"name": "Metformin 1000mg", "ndc": "00093-7267-01"},
+    {"name": "Insulin Glargine", "ndc": "00088-2220-33"},
+    {"name": "Glipizide 5mg", "ndc": "00093-0317-01"},
+    {"name": "Lisinopril 10mg", "ndc": "00093-1044-01"},
+    {"name": "Lisinopril 20mg", "ndc": "00093-1045-01"},
+    {"name": "Amlodipine 5mg", "ndc": "00093-3170-01"},
+    {"name": "Atorvastatin 20mg", "ndc": "00093-5058-01"},
+    {"name": "Atorvastatin 40mg", "ndc": "00093-5059-01"},
     {"name": "Hydrochlorothiazide 25mg", "ndc": "00093-0314-01"},
-    {"name": "Omeprazole 20mg",       "ndc": "00093-5287-01"},
-    {"name": "Ibuprofen 600mg",       "ndc": "00093-0618-01"},
-    {"name": "Amoxicillin 500mg",     "ndc": "00093-4150-01"},
-    {"name": "Azithromycin 250mg",    "ndc": "00093-7169-01"},
-    {"name": "Albuterol Inhaler",     "ndc": "59310-0579-22"},
-    {"name": "Fluoxetine 20mg",       "ndc": "00093-0731-01"},
-    {"name": "Sertraline 50mg",       "ndc": "00093-7196-01"},
-    {"name": "Gabapentin 300mg",      "ndc": "00093-0215-01"},
-    {"name": "Levothyroxine 50mcg",   "ndc": "00378-1805-01"},
-    {"name": "Prednisone 10mg",       "ndc": "00093-0817-01"},
+    {"name": "Omeprazole 20mg", "ndc": "00093-5287-01"},
+    {"name": "Ibuprofen 600mg", "ndc": "00093-0618-01"},
+    {"name": "Amoxicillin 500mg", "ndc": "00093-4150-01"},
+    {"name": "Azithromycin 250mg", "ndc": "00093-7169-01"},
+    {"name": "Albuterol Inhaler", "ndc": "59310-0579-22"},
+    {"name": "Fluoxetine 20mg", "ndc": "00093-0731-01"},
+    {"name": "Sertraline 50mg", "ndc": "00093-7196-01"},
+    {"name": "Gabapentin 300mg", "ndc": "00093-0215-01"},
+    {"name": "Levothyroxine 50mcg", "ndc": "00378-1805-01"},
+    {"name": "Prednisone 10mg", "ndc": "00093-0817-01"},
 ]
 
 # ---------------------------------------------------------------------------
 # Lab tests (common panels and individual tests)
 # ---------------------------------------------------------------------------
 LAB_TESTS: list[dict[str, Any]] = [
-    {"name": "Hemoglobin A1c",      "unit": "%",     "low": 4.0,  "high": 14.0,  "normal_low": 4.0,  "normal_high": 5.6},
-    {"name": "Fasting Glucose",     "unit": "mg/dL", "low": 60,   "high": 400,   "normal_low": 70,   "normal_high": 100},
-    {"name": "Total Cholesterol",   "unit": "mg/dL", "low": 100,  "high": 350,   "normal_low": 100,  "normal_high": 200},
-    {"name": "LDL Cholesterol",     "unit": "mg/dL", "low": 40,   "high": 250,   "normal_low": 40,   "normal_high": 100},
-    {"name": "HDL Cholesterol",     "unit": "mg/dL", "low": 20,   "high": 100,   "normal_low": 40,   "normal_high": 60},
-    {"name": "Triglycerides",       "unit": "mg/dL", "low": 50,   "high": 500,   "normal_low": 50,   "normal_high": 150},
-    {"name": "Serum Creatinine",    "unit": "mg/dL", "low": 0.5,  "high": 5.0,   "normal_low": 0.7,  "normal_high": 1.3},
-    {"name": "BUN",                 "unit": "mg/dL", "low": 5,    "high": 60,    "normal_low": 7,    "normal_high": 20},
-    {"name": "WBC Count",           "unit": "K/uL",  "low": 2.0,  "high": 20.0,  "normal_low": 4.5,  "normal_high": 11.0},
-    {"name": "Hemoglobin",          "unit": "g/dL",  "low": 7.0,  "high": 18.0,  "normal_low": 12.0, "normal_high": 17.5},
-    {"name": "ALT",                 "unit": "U/L",   "low": 5,    "high": 200,   "normal_low": 7,    "normal_high": 56},
-    {"name": "AST",                 "unit": "U/L",   "low": 5,    "high": 200,   "normal_low": 10,   "normal_high": 40},
-    {"name": "TSH",                 "unit": "mIU/L", "low": 0.1,  "high": 15.0,  "normal_low": 0.4,  "normal_high": 4.0},
-    {"name": "Urinalysis pH",       "unit": "pH",    "low": 4.5,  "high": 8.5,   "normal_low": 4.5,  "normal_high": 8.0},
-    {"name": "Blood Alcohol Level", "unit": "mg/dL", "low": 0.0,  "high": 400.0, "normal_low": 0.0,  "normal_high": 0.0},
+    {
+        "name": "Hemoglobin A1c",
+        "unit": "%",
+        "low": 4.0,
+        "high": 14.0,
+        "normal_low": 4.0,
+        "normal_high": 5.6,
+    },
+    {
+        "name": "Fasting Glucose",
+        "unit": "mg/dL",
+        "low": 60,
+        "high": 400,
+        "normal_low": 70,
+        "normal_high": 100,
+    },
+    {
+        "name": "Total Cholesterol",
+        "unit": "mg/dL",
+        "low": 100,
+        "high": 350,
+        "normal_low": 100,
+        "normal_high": 200,
+    },
+    {
+        "name": "LDL Cholesterol",
+        "unit": "mg/dL",
+        "low": 40,
+        "high": 250,
+        "normal_low": 40,
+        "normal_high": 100,
+    },
+    {
+        "name": "HDL Cholesterol",
+        "unit": "mg/dL",
+        "low": 20,
+        "high": 100,
+        "normal_low": 40,
+        "normal_high": 60,
+    },
+    {
+        "name": "Triglycerides",
+        "unit": "mg/dL",
+        "low": 50,
+        "high": 500,
+        "normal_low": 50,
+        "normal_high": 150,
+    },
+    {
+        "name": "Serum Creatinine",
+        "unit": "mg/dL",
+        "low": 0.5,
+        "high": 5.0,
+        "normal_low": 0.7,
+        "normal_high": 1.3,
+    },
+    {
+        "name": "BUN",
+        "unit": "mg/dL",
+        "low": 5,
+        "high": 60,
+        "normal_low": 7,
+        "normal_high": 20,
+    },
+    {
+        "name": "WBC Count",
+        "unit": "K/uL",
+        "low": 2.0,
+        "high": 20.0,
+        "normal_low": 4.5,
+        "normal_high": 11.0,
+    },
+    {
+        "name": "Hemoglobin",
+        "unit": "g/dL",
+        "low": 7.0,
+        "high": 18.0,
+        "normal_low": 12.0,
+        "normal_high": 17.5,
+    },
+    {
+        "name": "ALT",
+        "unit": "U/L",
+        "low": 5,
+        "high": 200,
+        "normal_low": 7,
+        "normal_high": 56,
+    },
+    {
+        "name": "AST",
+        "unit": "U/L",
+        "low": 5,
+        "high": 200,
+        "normal_low": 10,
+        "normal_high": 40,
+    },
+    {
+        "name": "TSH",
+        "unit": "mIU/L",
+        "low": 0.1,
+        "high": 15.0,
+        "normal_low": 0.4,
+        "normal_high": 4.0,
+    },
+    {
+        "name": "Urinalysis pH",
+        "unit": "pH",
+        "low": 4.5,
+        "high": 8.5,
+        "normal_low": 4.5,
+        "normal_high": 8.0,
+    },
+    {
+        "name": "Blood Alcohol Level",
+        "unit": "mg/dL",
+        "low": 0.0,
+        "high": 400.0,
+        "normal_low": 0.0,
+        "normal_high": 0.0,
+    },
 ]
 
 # ---------------------------------------------------------------------------
@@ -460,7 +739,10 @@ class TribalHealthcareGenerator(BaseGenerator):
                     lab_abnormal_flag = "L"
             elif lab_result_value > lab["normal_high"]:
                 # Check if critically high (more than 20% above normal)
-                if lab["normal_high"] > 0 and lab_result_value > lab["normal_high"] * 1.2:
+                if (
+                    lab["normal_high"] > 0
+                    and lab_result_value > lab["normal_high"] * 1.2
+                ):
                     lab_abnormal_flag = "HH"
                 else:
                     lab_abnormal_flag = "H"

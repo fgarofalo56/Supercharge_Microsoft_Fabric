@@ -15,11 +15,10 @@ Data shapes mirror the ``movement_event_schema.json`` schema so generated
 records can feed directly into Bronze-layer ingestion pipelines.
 """
 
-from datetime import datetime, timedelta
-from typing import Any
-
 import hashlib
 import string
+from datetime import datetime, timedelta
+from typing import Any
 
 import numpy as np
 
@@ -55,7 +54,7 @@ FLOOR_LEVEL_WEIGHTS = [0.60, 0.30, 0.10]
 # Heat map grid dimensions (columns A-J, rows 1-10)
 # ---------------------------------------------------------------------------
 HEAT_MAP_COLUMNS = list(string.ascii_uppercase[:10])  # A-J
-HEAT_MAP_ROWS = list(range(1, 11))                    # 1-10
+HEAT_MAP_ROWS = list(range(1, 11))  # 1-10
 
 # ---------------------------------------------------------------------------
 # Zone configuration
@@ -68,41 +67,215 @@ HEAT_MAP_ROWS = list(range(1, 11))                    # 1-10
 #   queue_eligible  – True if queue detection is meaningful (cage, restaurant)
 # ---------------------------------------------------------------------------
 _ZONE_CONFIG: dict[str, dict[str, Any]] = {
-    "Main Slot Floor":       {"capacity": 400, "person_count": (20, 200), "dwell_range": (300, 3600),  "floor": 1, "queue_eligible": False},
-    "High-Limit Slots":      {"capacity": 60,  "person_count": (5, 40),   "dwell_range": (600, 3600),  "floor": 1, "queue_eligible": False},
-    "Poker Room":            {"capacity": 120, "person_count": (10, 80),  "dwell_range": (1800, 7200), "floor": 1, "queue_eligible": False},
-    "Blackjack Pit A":       {"capacity": 100, "person_count": (10, 70),  "dwell_range": (600, 3600),  "floor": 1, "queue_eligible": False},
-    "Blackjack Pit B":       {"capacity": 100, "person_count": (10, 70),  "dwell_range": (600, 3600),  "floor": 1, "queue_eligible": False},
-    "Craps Area":            {"capacity": 80,  "person_count": (8, 50),   "dwell_range": (600, 3600),  "floor": 1, "queue_eligible": False},
-    "Roulette Section":      {"capacity": 60,  "person_count": (5, 35),   "dwell_range": (300, 2400),  "floor": 1, "queue_eligible": False},
-    "VIP Lounge":            {"capacity": 30,  "person_count": (2, 20),   "dwell_range": (1200, 5400), "floor": 2, "queue_eligible": False},
-    "Sports Book":           {"capacity": 150, "person_count": (15, 100), "dwell_range": (900, 5400),  "floor": 1, "queue_eligible": False},
-    "Buffet":                {"capacity": 200, "person_count": (10, 80),  "dwell_range": (1200, 5400), "floor": 1, "queue_eligible": True},
-    "Steakhouse":            {"capacity": 80,  "person_count": (10, 60),  "dwell_range": (2400, 5400), "floor": 2, "queue_eligible": True},
-    "Main Bar":              {"capacity": 60,  "person_count": (5, 40),   "dwell_range": (600, 3600),  "floor": 1, "queue_eligible": True},
-    "Cage Window 1":         {"capacity": 20,  "person_count": (2, 15),   "dwell_range": (60, 600),    "floor": 1, "queue_eligible": True},
-    "Cage Window 2":         {"capacity": 20,  "person_count": (2, 15),   "dwell_range": (60, 600),    "floor": 1, "queue_eligible": True},
-    "Cage Window 3":         {"capacity": 20,  "person_count": (2, 15),   "dwell_range": (60, 600),    "floor": 1, "queue_eligible": True},
-    "Cage Window 4":         {"capacity": 20,  "person_count": (2, 15),   "dwell_range": (60, 600),    "floor": 1, "queue_eligible": True},
-    "Cage Window 5":         {"capacity": 20,  "person_count": (2, 15),   "dwell_range": (60, 600),    "floor": 1, "queue_eligible": True},
-    "Entrance North":        {"capacity": 50,  "person_count": (5, 50),   "dwell_range": (5, 30),      "floor": 1, "queue_eligible": False},
-    "Entrance South":        {"capacity": 50,  "person_count": (5, 50),   "dwell_range": (5, 30),      "floor": 1, "queue_eligible": False},
-    "Entrance Valet":        {"capacity": 40,  "person_count": (5, 30),   "dwell_range": (5, 30),      "floor": 1, "queue_eligible": False},
-    "Elevator Bank A":       {"capacity": 25,  "person_count": (2, 15),   "dwell_range": (10, 120),    "floor": 1, "queue_eligible": False},
-    "Elevator Bank B":       {"capacity": 25,  "person_count": (2, 15),   "dwell_range": (10, 120),    "floor": 2, "queue_eligible": False},
-    "Hotel Check-In":        {"capacity": 40,  "person_count": (3, 25),   "dwell_range": (120, 900),   "floor": 1, "queue_eligible": True},
-    "Pool Deck":             {"capacity": 100, "person_count": (5, 60),   "dwell_range": (1800, 7200), "floor": 3, "queue_eligible": False},
-    "Convention Hall A":     {"capacity": 300, "person_count": (10, 150), "dwell_range": (1800, 7200), "floor": 2, "queue_eligible": False},
-    "Convention Hall B":     {"capacity": 300, "person_count": (10, 150), "dwell_range": (1800, 7200), "floor": 2, "queue_eligible": False},
-    "Back of House Corridor": {"capacity": 30, "person_count": (1, 10),   "dwell_range": (10, 300),    "floor": 1, "queue_eligible": False},
-    "Baccarat Salon":        {"capacity": 40,  "person_count": (2, 25),   "dwell_range": (900, 5400),  "floor": 2, "queue_eligible": False},
-    "Race Book":             {"capacity": 60,  "person_count": (5, 35),   "dwell_range": (600, 3600),  "floor": 1, "queue_eligible": False},
+    "Main Slot Floor": {
+        "capacity": 400,
+        "person_count": (20, 200),
+        "dwell_range": (300, 3600),
+        "floor": 1,
+        "queue_eligible": False,
+    },
+    "High-Limit Slots": {
+        "capacity": 60,
+        "person_count": (5, 40),
+        "dwell_range": (600, 3600),
+        "floor": 1,
+        "queue_eligible": False,
+    },
+    "Poker Room": {
+        "capacity": 120,
+        "person_count": (10, 80),
+        "dwell_range": (1800, 7200),
+        "floor": 1,
+        "queue_eligible": False,
+    },
+    "Blackjack Pit A": {
+        "capacity": 100,
+        "person_count": (10, 70),
+        "dwell_range": (600, 3600),
+        "floor": 1,
+        "queue_eligible": False,
+    },
+    "Blackjack Pit B": {
+        "capacity": 100,
+        "person_count": (10, 70),
+        "dwell_range": (600, 3600),
+        "floor": 1,
+        "queue_eligible": False,
+    },
+    "Craps Area": {
+        "capacity": 80,
+        "person_count": (8, 50),
+        "dwell_range": (600, 3600),
+        "floor": 1,
+        "queue_eligible": False,
+    },
+    "Roulette Section": {
+        "capacity": 60,
+        "person_count": (5, 35),
+        "dwell_range": (300, 2400),
+        "floor": 1,
+        "queue_eligible": False,
+    },
+    "VIP Lounge": {
+        "capacity": 30,
+        "person_count": (2, 20),
+        "dwell_range": (1200, 5400),
+        "floor": 2,
+        "queue_eligible": False,
+    },
+    "Sports Book": {
+        "capacity": 150,
+        "person_count": (15, 100),
+        "dwell_range": (900, 5400),
+        "floor": 1,
+        "queue_eligible": False,
+    },
+    "Buffet": {
+        "capacity": 200,
+        "person_count": (10, 80),
+        "dwell_range": (1200, 5400),
+        "floor": 1,
+        "queue_eligible": True,
+    },
+    "Steakhouse": {
+        "capacity": 80,
+        "person_count": (10, 60),
+        "dwell_range": (2400, 5400),
+        "floor": 2,
+        "queue_eligible": True,
+    },
+    "Main Bar": {
+        "capacity": 60,
+        "person_count": (5, 40),
+        "dwell_range": (600, 3600),
+        "floor": 1,
+        "queue_eligible": True,
+    },
+    "Cage Window 1": {
+        "capacity": 20,
+        "person_count": (2, 15),
+        "dwell_range": (60, 600),
+        "floor": 1,
+        "queue_eligible": True,
+    },
+    "Cage Window 2": {
+        "capacity": 20,
+        "person_count": (2, 15),
+        "dwell_range": (60, 600),
+        "floor": 1,
+        "queue_eligible": True,
+    },
+    "Cage Window 3": {
+        "capacity": 20,
+        "person_count": (2, 15),
+        "dwell_range": (60, 600),
+        "floor": 1,
+        "queue_eligible": True,
+    },
+    "Cage Window 4": {
+        "capacity": 20,
+        "person_count": (2, 15),
+        "dwell_range": (60, 600),
+        "floor": 1,
+        "queue_eligible": True,
+    },
+    "Cage Window 5": {
+        "capacity": 20,
+        "person_count": (2, 15),
+        "dwell_range": (60, 600),
+        "floor": 1,
+        "queue_eligible": True,
+    },
+    "Entrance North": {
+        "capacity": 50,
+        "person_count": (5, 50),
+        "dwell_range": (5, 30),
+        "floor": 1,
+        "queue_eligible": False,
+    },
+    "Entrance South": {
+        "capacity": 50,
+        "person_count": (5, 50),
+        "dwell_range": (5, 30),
+        "floor": 1,
+        "queue_eligible": False,
+    },
+    "Entrance Valet": {
+        "capacity": 40,
+        "person_count": (5, 30),
+        "dwell_range": (5, 30),
+        "floor": 1,
+        "queue_eligible": False,
+    },
+    "Elevator Bank A": {
+        "capacity": 25,
+        "person_count": (2, 15),
+        "dwell_range": (10, 120),
+        "floor": 1,
+        "queue_eligible": False,
+    },
+    "Elevator Bank B": {
+        "capacity": 25,
+        "person_count": (2, 15),
+        "dwell_range": (10, 120),
+        "floor": 2,
+        "queue_eligible": False,
+    },
+    "Hotel Check-In": {
+        "capacity": 40,
+        "person_count": (3, 25),
+        "dwell_range": (120, 900),
+        "floor": 1,
+        "queue_eligible": True,
+    },
+    "Pool Deck": {
+        "capacity": 100,
+        "person_count": (5, 60),
+        "dwell_range": (1800, 7200),
+        "floor": 3,
+        "queue_eligible": False,
+    },
+    "Convention Hall A": {
+        "capacity": 300,
+        "person_count": (10, 150),
+        "dwell_range": (1800, 7200),
+        "floor": 2,
+        "queue_eligible": False,
+    },
+    "Convention Hall B": {
+        "capacity": 300,
+        "person_count": (10, 150),
+        "dwell_range": (1800, 7200),
+        "floor": 2,
+        "queue_eligible": False,
+    },
+    "Back of House Corridor": {
+        "capacity": 30,
+        "person_count": (1, 10),
+        "dwell_range": (10, 300),
+        "floor": 1,
+        "queue_eligible": False,
+    },
+    "Baccarat Salon": {
+        "capacity": 40,
+        "person_count": (2, 25),
+        "dwell_range": (900, 5400),
+        "floor": 2,
+        "queue_eligible": False,
+    },
+    "Race Book": {
+        "capacity": 60,
+        "person_count": (5, 35),
+        "dwell_range": (600, 3600),
+        "floor": 1,
+        "queue_eligible": False,
+    },
 }
 
 # Ordered zone names and their IDs, derived at import time
 _ZONE_NAMES: list[str] = list(_ZONE_CONFIG.keys())
 _ZONE_IDS: list[str] = [f"Z-{i:03d}" for i in range(1, len(_ZONE_NAMES) + 1)]
-_ZONE_ID_TO_NAME: dict[str, str] = dict(zip(_ZONE_IDS, _ZONE_NAMES))
+_ZONE_ID_TO_NAME: dict[str, str] = dict(zip(_ZONE_IDS, _ZONE_NAMES, strict=False))
 
 # Number of pre-generated sensors
 NUM_SENSORS = 80
@@ -145,18 +318,22 @@ class PeopleMovementGenerator(BaseGenerator):
             zone_idx = (i - 1) % len(_ZONE_IDS)
             zone_id = _ZONE_IDS[zone_idx]
             sensor_type = str(self.weighted_choice(SENSOR_TYPES, SENSOR_TYPE_WEIGHTS))
-            self._sensors.append({
-                "sensor_id": sensor_id,
-                "zone_id": zone_id,
-                "sensor_type": sensor_type,
-            })
+            self._sensors.append(
+                {
+                    "sensor_id": sensor_id,
+                    "zone_id": zone_id,
+                    "sensor_type": sensor_type,
+                }
+            )
 
         # Pre-generate calibration dates for each sensor (80 % present)
         self._calibration_dates: dict[str, str | None] = {}
         for s in self._sensors:
             if np.random.random() < 0.80:
                 days_ago = int(np.random.randint(1, 365))
-                cal_date = (datetime.now() - timedelta(days=days_ago)).strftime("%Y-%m-%d")
+                cal_date = (datetime.now() - timedelta(days=days_ago)).strftime(
+                    "%Y-%m-%d"
+                )
                 self._calibration_dates[s["sensor_id"]] = cal_date
             else:
                 self._calibration_dates[s["sensor_id"]] = None
@@ -247,9 +424,9 @@ class PeopleMovementGenerator(BaseGenerator):
         queue_length: int | None = None
         queue_wait_minutes: float | None = None
 
-        if zone_cfg["queue_eligible"] and occupancy_percentage > 70.0:
-            queue_detected = True
-        elif np.random.random() < 0.05:
+        if (
+            zone_cfg["queue_eligible"] and occupancy_percentage > 70.0
+        ) or np.random.random() < 0.05:
             queue_detected = True
 
         if queue_detected:

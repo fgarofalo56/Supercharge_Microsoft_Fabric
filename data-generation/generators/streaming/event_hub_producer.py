@@ -4,18 +4,20 @@ Event Hub Producer for streaming slot machine telemetry.
 This module provides real-time event streaming capabilities for
 casino floor monitoring scenarios.
 """
-import json
-import time
+
 import asyncio
-from datetime import datetime
-from collections.abc import Callable
-from typing import Any
+import json
 import logging
+import time
+from collections.abc import Callable
+from datetime import datetime
+from typing import Any
 
 # Optional Azure Event Hubs SDK
 try:
-    from azure.eventhub import EventHubProducerClient, EventData
+    from azure.eventhub import EventData, EventHubProducerClient
     from azure.eventhub.aio import EventHubProducerClient as AsyncEventHubProducerClient
+
     EVENTHUB_AVAILABLE = True
 except ImportError:
     EVENTHUB_AVAILABLE = False
@@ -40,7 +42,7 @@ class EventHubProducer:
         connection_string: str | None = None,
         eventhub_name: str | None = None,
         events_per_second: float = 10,
-        seed: int | None = None
+        seed: int | None = None,
     ):
         """
         Initialize the producer.
@@ -75,6 +77,7 @@ class EventHubProducer:
 
     def _event_to_json(self, event: dict[str, Any]) -> str:
         """Convert event to JSON string."""
+
         # Handle datetime serialization
         def json_serializer(obj):
             if isinstance(obj, datetime):
@@ -87,7 +90,7 @@ class EventHubProducer:
         self,
         duration_seconds: int | None = None,
         max_events: int | None = None,
-        callback: Callable[[dict[str, Any]], None] | None = None
+        callback: Callable[[dict[str, Any]], None] | None = None,
     ):
         """
         Run the producer synchronously.
@@ -141,8 +144,7 @@ class EventHubProducer:
             return
 
         producer = EventHubProducerClient.from_connection_string(
-            self.connection_string,
-            eventhub_name=self.eventhub_name
+            self.connection_string, eventhub_name=self.eventhub_name
         )
 
         try:
@@ -156,7 +158,7 @@ class EventHubProducer:
         self,
         duration_seconds: int | None = None,
         max_events: int | None = None,
-        batch_size: int = 100
+        batch_size: int = 100,
     ):
         """
         Run the producer asynchronously with batching.
@@ -175,8 +177,7 @@ class EventHubProducer:
         start_time = time.time()
 
         async with AsyncEventHubProducerClient.from_connection_string(
-            self.connection_string,
-            eventhub_name=self.eventhub_name
+            self.connection_string, eventhub_name=self.eventhub_name
         ) as producer:
 
             while self._running:
@@ -234,13 +235,10 @@ def main():
         connection_string=args.connection_string,
         eventhub_name=args.eventhub_name,
         events_per_second=args.rate,
-        seed=args.seed
+        seed=args.seed,
     )
 
-    producer.run_sync(
-        duration_seconds=args.duration,
-        max_events=args.max_events
-    )
+    producer.run_sync(duration_seconds=args.duration, max_events=args.max_events)
 
 
 if __name__ == "__main__":

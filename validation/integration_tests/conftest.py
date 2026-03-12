@@ -7,12 +7,14 @@ This module provides:
 - Schema loaders for validation
 - Path configuration
 """
-import pytest
-import sys
+
 import json
-from pathlib import Path
+import sys
 from datetime import datetime, timedelta
+from pathlib import Path
 from typing import Any
+
+import pytest
 
 # Add data-generation to path
 PROJECT_ROOT = Path(__file__).parent.parent.parent
@@ -32,26 +34,21 @@ GENERATORS_DIR = PROJECT_ROOT / "data-generation" / "generators"
 # Pytest Configuration
 # =============================================================================
 
+
 def pytest_configure(config):
     """Configure custom pytest markers for integration tests."""
-    config.addinivalue_line(
-        "markers", "integration: marks tests as integration tests"
-    )
+    config.addinivalue_line("markers", "integration: marks tests as integration tests")
     config.addinivalue_line(
         "markers", "compliance: marks tests related to compliance rules"
     )
     config.addinivalue_line(
         "markers", "streaming: marks tests related to streaming functionality"
     )
-    config.addinivalue_line(
-        "markers", "pipeline: marks tests related to data pipeline"
-    )
+    config.addinivalue_line("markers", "pipeline: marks tests related to data pipeline")
     config.addinivalue_line(
         "markers", "schema: marks tests related to schema validation"
     )
-    config.addinivalue_line(
-        "markers", "slow: marks tests as slow running"
-    )
+    config.addinivalue_line("markers", "slow: marks tests as slow running")
 
 
 # =============================================================================
@@ -79,10 +76,12 @@ def fixed_date_range():
 # Generator Fixtures
 # =============================================================================
 
+
 @pytest.fixture(scope="session")
 def slot_generator():
     """Session-scoped slot machine generator with fixed seed."""
     from generators.slot_machine_generator import SlotMachineGenerator
+
     return SlotMachineGenerator(
         seed=FIXED_SEED,
         start_date=FIXED_START_DATE,
@@ -94,6 +93,7 @@ def slot_generator():
 def player_generator():
     """Session-scoped player generator with fixed seed."""
     from generators.player_generator import PlayerGenerator
+
     return PlayerGenerator(
         seed=FIXED_SEED,
         start_date=FIXED_START_DATE,
@@ -105,6 +105,7 @@ def player_generator():
 def compliance_generator():
     """Session-scoped compliance generator with fixed seed."""
     from generators.compliance_generator import ComplianceGenerator
+
     return ComplianceGenerator(
         seed=FIXED_SEED,
         start_date=FIXED_START_DATE,
@@ -116,6 +117,7 @@ def compliance_generator():
 def financial_generator():
     """Session-scoped financial generator with fixed seed."""
     from generators.financial_generator import FinancialGenerator
+
     return FinancialGenerator(
         seed=FIXED_SEED,
         start_date=FIXED_START_DATE,
@@ -127,6 +129,7 @@ def financial_generator():
 def security_generator():
     """Session-scoped security generator with fixed seed."""
     from generators.security_generator import SecurityGenerator
+
     return SecurityGenerator(
         seed=FIXED_SEED,
         start_date=FIXED_START_DATE,
@@ -138,6 +141,7 @@ def security_generator():
 def table_games_generator():
     """Session-scoped table games generator with fixed seed."""
     from generators.table_games_generator import TableGamesGenerator
+
     return TableGamesGenerator(
         seed=FIXED_SEED,
         start_date=FIXED_START_DATE,
@@ -168,6 +172,7 @@ def all_generators(
 # =============================================================================
 # Sample Data Fixtures
 # =============================================================================
+
 
 @pytest.fixture(scope="session")
 def sample_slot_data(slot_generator):
@@ -209,6 +214,7 @@ def sample_table_games_data(table_games_generator):
 # Schema Fixtures
 # =============================================================================
 
+
 @pytest.fixture(scope="session")
 def schema_dir():
     """Path to schema directory."""
@@ -219,7 +225,7 @@ def schema_dir():
 def slot_telemetry_schema():
     """Load slot telemetry JSON schema."""
     schema_path = SCHEMAS_DIR / "slot_telemetry_schema.json"
-    with open(schema_path, "r") as f:
+    with open(schema_path) as f:
         return json.load(f)
 
 
@@ -227,7 +233,7 @@ def slot_telemetry_schema():
 def player_profile_schema():
     """Load player profile JSON schema."""
     schema_path = SCHEMAS_DIR / "player_profile_schema.json"
-    with open(schema_path, "r") as f:
+    with open(schema_path) as f:
         return json.load(f)
 
 
@@ -235,7 +241,7 @@ def player_profile_schema():
 def compliance_filing_schema():
     """Load compliance filing JSON schema."""
     schema_path = SCHEMAS_DIR / "compliance_filing_schema.json"
-    with open(schema_path, "r") as f:
+    with open(schema_path) as f:
         return json.load(f)
 
 
@@ -243,7 +249,7 @@ def compliance_filing_schema():
 def financial_transaction_schema():
     """Load financial transaction JSON schema."""
     schema_path = SCHEMAS_DIR / "financial_transaction_schema.json"
-    with open(schema_path, "r") as f:
+    with open(schema_path) as f:
         return json.load(f)
 
 
@@ -252,7 +258,7 @@ def table_games_schema():
     """Load table games JSON schema."""
     schema_path = SCHEMAS_DIR / "table_games_schema.json"
     if schema_path.exists():
-        with open(schema_path, "r") as f:
+        with open(schema_path) as f:
             return json.load(f)
     return None
 
@@ -262,7 +268,7 @@ def security_events_schema():
     """Load security events JSON schema."""
     schema_path = SCHEMAS_DIR / "security_events_schema.json"
     if schema_path.exists():
-        with open(schema_path, "r") as f:
+        with open(schema_path) as f:
             return json.load(f)
     return None
 
@@ -294,6 +300,7 @@ def all_schemas(
 # Directory Fixtures
 # =============================================================================
 
+
 @pytest.fixture(scope="session")
 def project_root():
     """Project root directory."""
@@ -315,6 +322,7 @@ def temp_output_dir(tmp_path_factory):
 # =============================================================================
 # Helper Functions Available as Fixtures
 # =============================================================================
+
 
 @pytest.fixture(scope="session")
 def validate_player_id_format():

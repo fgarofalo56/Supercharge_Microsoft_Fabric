@@ -8,11 +8,13 @@ Tests for data pipeline transformations:
 - Data type consistency through layers
 - Null handling through pipeline
 """
-import pytest
-import pandas as pd
-import numpy as np
+
 from datetime import datetime
 from decimal import Decimal
+
+import numpy as np
+import pandas as pd
+import pytest
 
 pytestmark = [pytest.mark.integration, pytest.mark.pipeline]
 
@@ -49,7 +51,9 @@ class TestBronzeToSilverTransformation:
 
         # No negative values should remain
         negative_count = (df_silver["coin_in"].dropna() < 0).sum()
-        assert negative_count == 0, f"Silver layer has {negative_count} negative coin_in values"
+        assert (
+            negative_count == 0
+        ), f"Silver layer has {negative_count} negative coin_in values"
 
     def test_timestamp_to_date_extraction(self, sample_slot_data):
         """Verify event_date is correctly extracted from event_timestamp."""
@@ -62,7 +66,9 @@ class TestBronzeToSilverTransformation:
             if ts is None:
                 return None
             if isinstance(ts, str):
-                ts = datetime.fromisoformat(ts.replace("Z", "+00:00").replace("+00:00", ""))
+                ts = datetime.fromisoformat(
+                    ts.replace("Z", "+00:00").replace("+00:00", "")
+                )
             return ts.date()
 
         df_silver["event_date"] = df_silver["event_timestamp"].apply(extract_date)
@@ -70,7 +76,9 @@ class TestBronzeToSilverTransformation:
         # Verify event_date is populated
         valid_timestamps = df_bronze["event_timestamp"].notna().sum()
         valid_dates = df_silver["event_date"].notna().sum()
-        assert valid_dates == valid_timestamps, "Date extraction failed for some timestamps"
+        assert (
+            valid_dates == valid_timestamps
+        ), "Date extraction failed for some timestamps"
 
     def test_hour_extraction(self, sample_slot_data):
         """Verify event_hour is correctly extracted from event_timestamp."""
@@ -83,7 +91,9 @@ class TestBronzeToSilverTransformation:
             if ts is None:
                 return None
             if isinstance(ts, str):
-                ts = datetime.fromisoformat(ts.replace("Z", "+00:00").replace("+00:00", ""))
+                ts = datetime.fromisoformat(
+                    ts.replace("Z", "+00:00").replace("+00:00", "")
+                )
             return ts.hour
 
         df_silver["event_hour"] = df_silver["event_timestamp"].apply(extract_hour)
@@ -106,8 +116,12 @@ class TestBronzeToSilverTransformation:
         df_silver["event_type"] = df_silver["event_type"].str.upper().str.strip()
 
         # All should be uppercase
-        lowercase_count = df_silver["event_type"].str.contains("[a-z]", regex=True, na=False).sum()
-        assert lowercase_count == 0, f"Silver layer has {lowercase_count} lowercase event_types"
+        lowercase_count = (
+            df_silver["event_type"].str.contains("[a-z]", regex=True, na=False).sum()
+        )
+        assert (
+            lowercase_count == 0
+        ), f"Silver layer has {lowercase_count} lowercase event_types"
 
     def test_deduplication(self, sample_slot_data):
         """Verify deduplication removes exact duplicates."""
@@ -133,22 +147,34 @@ class TestBronzeToSilverTransformation:
 
         # Define valid values (from Silver notebook)
         VALID_EVENT_TYPES = [
-            "GAME_PLAY", "JACKPOT", "METER_UPDATE", "DOOR_OPEN", "DOOR_CLOSE",
-            "POWER_ON", "POWER_OFF", "BILL_IN", "TICKET_OUT", "TILT"
+            "GAME_PLAY",
+            "JACKPOT",
+            "METER_UPDATE",
+            "DOOR_OPEN",
+            "DOOR_CLOSE",
+            "POWER_ON",
+            "POWER_OFF",
+            "BILL_IN",
+            "TICKET_OUT",
+            "TILT",
         ]
         VALID_ZONES = ["North", "South", "East", "West", "VIP", "High Limit", "Penny"]
 
         # Calculate DQ score
         df_silver = df_bronze.copy()
-        df_silver["is_valid_event_type"] = df_silver["event_type"].isin(VALID_EVENT_TYPES)
-        df_silver["is_valid_zone"] = df_silver["zone"].isin(VALID_ZONES) | df_silver["zone"].isna()
+        df_silver["is_valid_event_type"] = df_silver["event_type"].isin(
+            VALID_EVENT_TYPES
+        )
+        df_silver["is_valid_zone"] = (
+            df_silver["zone"].isin(VALID_ZONES) | df_silver["zone"].isna()
+        )
 
         df_silver["_dq_score"] = (
-            (df_silver["is_valid_event_type"].astype(int) * 20) +
-            (df_silver["is_valid_zone"].astype(int) * 20) +
-            (df_silver["coin_in"].notna().astype(int) * 20) +
-            (df_silver["player_id"].notna().astype(int) * 20) +
-            20  # Base score for having required fields
+            (df_silver["is_valid_event_type"].astype(int) * 20)
+            + (df_silver["is_valid_zone"].astype(int) * 20)
+            + (df_silver["coin_in"].notna().astype(int) * 20)
+            + (df_silver["player_id"].notna().astype(int) * 20)
+            + 20  # Base score for having required fields
         )
 
         # Scores should be 0-100
@@ -168,21 +194,35 @@ class TestSilverToGoldAggregation:
             if ts is None:
                 return None
             if isinstance(ts, str):
-                ts = datetime.fromisoformat(ts.replace("Z", "+00:00").replace("+00:00", ""))
+                ts = datetime.fromisoformat(
+                    ts.replace("Z", "+00:00").replace("+00:00", "")
+                )
             return ts.strftime("%Y-%m-%d")
 
         df_silver["event_date"] = df_silver["event_timestamp"].apply(extract_date)
 
         # Gold aggregation
-        df_gold = df_silver.groupby(["machine_id", "event_date"]).agg({
-            "coin_in": "sum",
-            "coin_out": "sum",
-            "games_played": "sum",
-            "event_type": "count",
-        }).reset_index()
+        df_gold = (
+            df_silver.groupby(["machine_id", "event_date"])
+            .agg(
+                {
+                    "coin_in": "sum",
+                    "coin_out": "sum",
+                    "games_played": "sum",
+                    "event_type": "count",
+                }
+            )
+            .reset_index()
+        )
 
-        df_gold.columns = ["machine_id", "business_date", "total_coin_in", "total_coin_out",
-                          "total_games", "total_events"]
+        df_gold.columns = [
+            "machine_id",
+            "business_date",
+            "total_coin_in",
+            "total_coin_out",
+            "total_games",
+            "total_events",
+        ]
 
         # Verify aggregations
         assert len(df_gold) > 0, "No aggregated records produced"
@@ -198,16 +238,24 @@ class TestSilverToGoldAggregation:
             if ts is None:
                 return None
             if isinstance(ts, str):
-                ts = datetime.fromisoformat(ts.replace("Z", "+00:00").replace("+00:00", ""))
+                ts = datetime.fromisoformat(
+                    ts.replace("Z", "+00:00").replace("+00:00", "")
+                )
             return ts.strftime("%Y-%m-%d")
 
         df_silver["event_date"] = df_silver["event_timestamp"].apply(extract_date)
 
         # Gold aggregation
-        df_gold = df_silver.groupby(["machine_id", "event_date"]).agg({
-            "coin_in": "sum",
-            "coin_out": "sum",
-        }).reset_index()
+        df_gold = (
+            df_silver.groupby(["machine_id", "event_date"])
+            .agg(
+                {
+                    "coin_in": "sum",
+                    "coin_out": "sum",
+                }
+            )
+            .reset_index()
+        )
 
         df_gold["total_coin_in"] = df_gold["coin_in"].fillna(0)
         df_gold["total_coin_out"] = df_gold["coin_out"].fillna(0)
@@ -216,7 +264,9 @@ class TestSilverToGoldAggregation:
         # Verify calculation
         for _, row in df_gold.head(10).iterrows():
             expected_net_win = row["total_coin_in"] - row["total_coin_out"]
-            assert abs(row["net_win"] - expected_net_win) < 0.01, "Net win calculation error"
+            assert (
+                abs(row["net_win"] - expected_net_win) < 0.01
+            ), "Net win calculation error"
 
     def test_hold_percentage_calculation(self, sample_slot_data):
         """Verify hold percentage is calculated correctly."""
@@ -247,14 +297,18 @@ class TestSilverToGoldAggregation:
         theoretical_win = total_coin_in * THEORETICAL_HOLD
 
         assert theoretical_win >= 0, "Theoretical win should not be negative"
-        assert theoretical_win == total_coin_in * 0.08, "Theoretical win calculation error"
+        assert (
+            theoretical_win == total_coin_in * 0.08
+        ), "Theoretical win calculation error"
 
     def test_unique_player_count(self, sample_slot_data):
         """Verify unique player count is calculated correctly."""
         df_silver = sample_slot_data.copy()
 
         # Count unique players per machine
-        unique_players = df_silver.groupby("machine_id")["player_id"].nunique().reset_index()
+        unique_players = (
+            df_silver.groupby("machine_id")["player_id"].nunique().reset_index()
+        )
         unique_players.columns = ["machine_id", "unique_players"]
 
         # Each machine should have >= 0 unique players
@@ -288,9 +342,9 @@ class TestDataTypeConsistency:
                 non_null = df[col].dropna()
                 if len(non_null) > 0:
                     # All non-null values should be numeric
-                    assert pd.api.types.is_numeric_dtype(non_null), (
-                        f"{col} is not numeric type"
-                    )
+                    assert pd.api.types.is_numeric_dtype(
+                        non_null
+                    ), f"{col} is not numeric type"
 
     def test_string_types_preserved(self, sample_slot_data):
         """Verify string types are preserved through transformations."""
@@ -303,9 +357,9 @@ class TestDataTypeConsistency:
                 non_null = df[col].dropna()
                 if len(non_null) > 0:
                     # All non-null values should be string-like
-                    assert all(isinstance(v, str) for v in non_null), (
-                        f"{col} contains non-string values"
-                    )
+                    assert all(
+                        isinstance(v, str) for v in non_null
+                    ), f"{col} contains non-string values"
 
     def test_decimal_precision_maintained(self, sample_slot_data):
         """Verify decimal precision is maintained for currency values."""
@@ -377,7 +431,9 @@ class TestNullHandling:
 
         # net_win should not have nulls after coalescing
         null_net_wins = df["net_win"].isna().sum()
-        assert null_net_wins == 0, f"Net win has {null_net_wins} null values after coalescing"
+        assert (
+            null_net_wins == 0
+        ), f"Net win has {null_net_wins} null values after coalescing"
 
 
 class TestCrossLayerConsistency:
@@ -409,9 +465,10 @@ class TestCrossLayerConsistency:
         transformed_total = df_transformed["coin_in"].sum()
 
         # Total should be >= original (negative values set to 0)
-        assert transformed_total >= original_total or abs(
-            transformed_total - original_total
-        ) < 1, "Value corruption detected"
+        assert (
+            transformed_total >= original_total
+            or abs(transformed_total - original_total) < 1
+        ), "Value corruption detected"
 
     def test_aggregation_math_correctness(self, sample_slot_data):
         """Verify aggregation math is correct."""
@@ -422,18 +479,20 @@ class TestCrossLayerConsistency:
         direct_coin_out = df["coin_out"].sum()
 
         # Calculate via groupby
-        grouped = df.groupby("machine_id").agg({
-            "coin_in": "sum",
-            "coin_out": "sum",
-        })
+        grouped = df.groupby("machine_id").agg(
+            {
+                "coin_in": "sum",
+                "coin_out": "sum",
+            }
+        )
 
         grouped_coin_in = grouped["coin_in"].sum()
         grouped_coin_out = grouped["coin_out"].sum()
 
         # Should match (with floating point tolerance)
-        assert abs(direct_coin_in - grouped_coin_in) < 0.01, (
-            "Aggregation coin_in mismatch"
-        )
-        assert abs(direct_coin_out - grouped_coin_out) < 0.01, (
-            "Aggregation coin_out mismatch"
-        )
+        assert (
+            abs(direct_coin_in - grouped_coin_in) < 0.01
+        ), "Aggregation coin_in mismatch"
+        assert (
+            abs(direct_coin_out - grouped_coin_out) < 0.01
+        ), "Aggregation coin_out mismatch"

@@ -12,19 +12,19 @@ Provides synthetic data generators for casino/gaming domain:
 """
 
 from .base_generator import BaseGenerator
+from .compliance_generator import ComplianceGenerator
+from .financial_generator import FinancialGenerator
+from .player_generator import PlayerGenerator
+from .security_generator import SecurityGenerator
 from .slot_machine_generator import SlotMachineGenerator
 from .table_games_generator import TableGamesGenerator as TableGameGenerator
-from .player_generator import PlayerGenerator
-from .financial_generator import FinancialGenerator
-from .security_generator import SecurityGenerator
-from .compliance_generator import ComplianceGenerator
 
 __all__ = [
     "BaseGenerator",
+    "ComplianceGenerator",
+    "FinancialGenerator",
+    "PlayerGenerator",
+    "SecurityGenerator",
     "SlotMachineGenerator",
     "TableGameGenerator",
-    "PlayerGenerator",
-    "FinancialGenerator",
-    "SecurityGenerator",
-    "ComplianceGenerator",
 ]

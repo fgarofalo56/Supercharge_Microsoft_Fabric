@@ -8,10 +8,12 @@ Tests for business/regulatory compliance rules:
 - SAR pattern detection
 - PII masking (SSN hash, no raw PII)
 """
-import pytest
-import re
+
 import hashlib
+import re
 from datetime import datetime
+
+import pytest
 
 pytestmark = [pytest.mark.integration, pytest.mark.compliance]
 
@@ -29,9 +31,9 @@ class TestCTRThreshold:
 
         # All CTR records should have amount >= $10,000
         for _, record in ctr_records.iterrows():
-            assert record["amount"] >= self.CTR_THRESHOLD, (
-                f"CTR generated for amount ${record['amount']} (below threshold)"
-            )
+            assert (
+                record["amount"] >= self.CTR_THRESHOLD
+            ), f"CTR generated for amount ${record['amount']} (below threshold)"
 
     def test_ctr_not_generated_for_small_amounts(self, sample_compliance_data):
         """Verify CTR records are NOT generated for amounts < $10,000."""
@@ -41,9 +43,9 @@ class TestCTRThreshold:
 
         # Should not find any CTR with amount < $10,000
         invalid_ctrs = ctr_records[ctr_records["amount"] < self.CTR_THRESHOLD]
-        assert len(invalid_ctrs) == 0, (
-            f"Found {len(invalid_ctrs)} CTR records below threshold"
-        )
+        assert (
+            len(invalid_ctrs) == 0
+        ), f"Found {len(invalid_ctrs)} CTR records below threshold"
 
     def test_ctr_required_flag_in_financial(self, sample_financial_data):
         """Verify ctr_required flag is set correctly in financial transactions."""
@@ -56,9 +58,9 @@ class TestCTRThreshold:
         ]
 
         for _, txn in large_txns.iterrows():
-            assert txn["ctr_required"] == True, (
-                f"ctr_required not set for ${txn['amount']} transaction"
-            )
+            assert txn[
+                "ctr_required"
+            ], f"ctr_required not set for ${txn['amount']} transaction"
 
     def test_ctr_not_required_for_small_amounts(self, sample_financial_data):
         """Verify ctr_required is not set for amounts < $10,000."""
@@ -71,9 +73,9 @@ class TestCTRThreshold:
         ]
 
         for _, txn in small_txns.iterrows():
-            assert txn["ctr_required"] == False, (
-                f"ctr_required incorrectly set for ${txn['amount']} transaction"
-            )
+            assert not txn[
+                "ctr_required"
+            ], f"ctr_required incorrectly set for ${txn['amount']} transaction"
 
 
 class TestW2GThreshold:
@@ -100,9 +102,9 @@ class TestW2GThreshold:
 
         # All W-2G records should be >= $600 (minimum for any game)
         for _, record in w2g_records.iterrows():
-            assert record["amount"] >= self.MINIMUM_W2G_THRESHOLD, (
-                f"W-2G generated for ${record['amount']} (below minimum)"
-            )
+            assert (
+                record["amount"] >= self.MINIMUM_W2G_THRESHOLD
+            ), f"W-2G generated for ${record['amount']} (below minimum)"
 
     def test_slot_w2g_threshold(self, sample_compliance_data):
         """Verify slot W-2G records are >= $1,200."""
@@ -116,9 +118,9 @@ class TestW2GThreshold:
         ]
 
         for _, record in slot_w2g.iterrows():
-            assert record["amount"] >= 1200, (
-                f"Slot W-2G for ${record['amount']} (threshold is $1,200)"
-            )
+            assert (
+                record["amount"] >= 1200
+            ), f"Slot W-2G for ${record['amount']} (threshold is $1,200)"
 
     def test_w2g_has_jackpot_details(self, sample_compliance_data):
         """Verify W-2G records include jackpot details."""
@@ -152,8 +154,8 @@ class TestSARPatternDetection:
         # SAR should have a category/suspicious activity type
         for _, record in sar_records.iterrows():
             has_category = (
-                record.get("sar_category") is not None or
-                record.get("suspicious_activity_type") is not None
+                record.get("sar_category") is not None
+                or record.get("suspicious_activity_type") is not None
             )
             assert has_category, "SAR missing suspicion category"
 
@@ -168,8 +170,8 @@ class TestSARPatternDetection:
 
         for _, record in sar_records.iterrows():
             has_narrative = (
-                record.get("sar_narrative") is not None or
-                record.get("narrative") is not None
+                record.get("sar_narrative") is not None
+                or record.get("narrative") is not None
             )
             assert has_narrative, "SAR missing narrative"
 
@@ -177,9 +179,7 @@ class TestSARPatternDetection:
         """Test that structuring patterns can be generated for testing."""
         # Generate a structuring pattern
         pattern = compliance_generator.generate_structuring_pattern(
-            player_id="P12345",
-            num_transactions=5,
-            target_total=25000
+            player_id="P12345", num_transactions=5, target_total=25000
         )
 
         # Verify pattern characteristics
@@ -200,8 +200,8 @@ class TestSARPatternDetection:
 
         # Transactions in $8,000-$10,000 range are higher risk for structuring
         suspicious_range = sample_financial_data[
-            (sample_financial_data["amount"] >= 8000) &
-            (sample_financial_data["amount"] < 10000)
+            (sample_financial_data["amount"] >= 8000)
+            & (sample_financial_data["amount"] < 10000)
         ]
 
         if len(suspicious_range) > 0:
@@ -232,9 +232,9 @@ class TestPIIMasking:
         masked_pattern = re.compile(r"^XXX-XX-\d{4}$")
 
         for ssn_masked in sample_player_data["ssn_masked"].dropna().head(100):
-            assert masked_pattern.match(ssn_masked), (
-                f"SSN mask format invalid: {ssn_masked}"
-            )
+            assert masked_pattern.match(
+                ssn_masked
+            ), f"SSN mask format invalid: {ssn_masked}"
 
     def test_no_raw_ssn_in_data(self, sample_player_data):
         """Verify no raw SSN (###-##-####) appears in any field."""
@@ -271,45 +271,49 @@ class TestPIIMasking:
         """Test email is masked when include_pii is False."""
         # Generator with PII disabled (default)
         from generators.player_generator import PlayerGenerator
+
         gen = PlayerGenerator(seed=42, include_pii=False)
 
         record = gen.generate_record()
 
         # Email should be masked (contains @masked.com or similar)
-        assert "@masked.com" in record["email"] or not "@" in record["email"][:10], (
-            f"Email may not be masked: {record['email']}"
-        )
+        assert (
+            "@masked.com" in record["email"] or "@" not in record["email"][:10]
+        ), f"Email may not be masked: {record['email']}"
 
     def test_address_masking_when_disabled(self, player_generator):
         """Test address is masked when include_pii is False."""
         from generators.player_generator import PlayerGenerator
+
         gen = PlayerGenerator(seed=42, include_pii=False)
 
         record = gen.generate_record()
 
         # Address should contain masked indicator
-        assert "Masked" in record["address"] or "***" in record["address"], (
-            f"Address may not be masked: {record['address']}"
-        )
+        assert (
+            "Masked" in record["address"] or "***" in record["address"]
+        ), f"Address may not be masked: {record['address']}"
 
     def test_names_partially_masked(self, player_generator):
         """Test names are partially masked when include_pii is False."""
         from generators.player_generator import PlayerGenerator
+
         gen = PlayerGenerator(seed=42, include_pii=False)
 
         record = gen.generate_record()
 
         # Names should show only first initial
-        assert "***" in record["first_name"], (
-            f"First name may not be masked: {record['first_name']}"
-        )
-        assert "***" in record["last_name"], (
-            f"Last name may not be masked: {record['last_name']}"
-        )
+        assert (
+            "***" in record["first_name"]
+        ), f"First name may not be masked: {record['first_name']}"
+        assert (
+            "***" in record["last_name"]
+        ), f"Last name may not be masked: {record['last_name']}"
 
     def test_phone_masked(self, player_generator):
         """Test phone is masked when include_pii is False."""
         from generators.player_generator import PlayerGenerator
+
         gen = PlayerGenerator(seed=42, include_pii=False)
 
         record = gen.generate_record()
@@ -399,8 +403,8 @@ class TestComplianceFieldPresence:
         # SAR should have suspicion details
         for _, record in sar_records.head(10).iterrows():
             has_details = (
-                record.get("sar_category") is not None or
-                record.get("sar_narrative") is not None
+                record.get("sar_category") is not None
+                or record.get("sar_narrative") is not None
             )
             assert has_details, "SAR missing suspicion details"
 
@@ -417,4 +421,6 @@ class TestComplianceFieldPresence:
             assert record["amount"] is not None, "W-2G missing amount"
             # W-2G should have jackpot amount
             if "jackpot_amount" in record:
-                assert record["jackpot_amount"] is not None or record["amount"] is not None
+                assert (
+                    record["jackpot_amount"] is not None or record["amount"] is not None
+                )

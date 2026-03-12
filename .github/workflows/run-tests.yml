@@ -40,7 +40,7 @@ jobs:
           pip install -r requirements-dev.txt
 
       - name: Run ruff linter
-        run: python -m ruff check data-generation/ validation/ --output-format=github
+        run: python -m ruff check data-generation/ validation/ --config pyproject.toml --output-format=github
 
       - name: Run black formatter check
         run: python -m black --check --diff data-generation/ validation/
@@ -111,11 +111,13 @@ jobs:
           pip install -r requirements-dev.txt
 
       - name: Run Unit Tests
+        env:
+          PYTHONPATH: data-generation
         run: |
           pytest validation/unit_tests/ \
             -v \
             --tb=short \
-            --cov=data-generation \
+            --cov=data-generation/generators \
             --cov-report=xml \
             --cov-report=html \
             --junitxml=test-results.xml
@@ -154,12 +156,14 @@ jobs:
           pip install -r requirements-dev.txt
 
       - name: Test Generators
+        env:
+          PYTHONPATH: data-generation
         run: |
           # Test each generator can produce valid output
           python -c "
-          from data_generation.generators.slot_machine_generator import SlotMachineGenerator
-          from data_generation.generators.player_generator import PlayerGenerator
-          from data_generation.generators.financial_generator import FinancialGenerator
+          from generators.slot_machine_generator import SlotMachineGenerator
+          from generators.player_generator import PlayerGenerator
+          from generators.financial_generator import FinancialGenerator
 
           # Generate small samples to validate
           slot_gen = SlotMachineGenerator()

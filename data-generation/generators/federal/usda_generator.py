@@ -14,7 +14,7 @@ Data shapes mirror the USDA NASS QuickStats API response and the FSIS recall dat
 so generated records can be joined with real public data for POC demonstrations.
 """
 
-from datetime import datetime, date
+from datetime import datetime
 from typing import Any, Literal
 
 import numpy as np
@@ -60,11 +60,31 @@ STATE_FIPS: dict[str, str] = {
 
 # Abbreviated state codes used in food-safety records
 STATE_ABBR: dict[str, str] = {
-    "01": "AL", "04": "AZ", "05": "AR", "06": "CA", "08": "CO",
-    "17": "IL", "18": "IN", "19": "IA", "20": "KS", "21": "KY",
-    "27": "MN", "28": "MS", "29": "MO", "31": "NE", "37": "NC",
-    "38": "ND", "39": "OH", "40": "OK", "42": "PA", "45": "SC",
-    "46": "SD", "47": "TN", "48": "TX", "55": "WI", "56": "WY",
+    "01": "AL",
+    "04": "AZ",
+    "05": "AR",
+    "06": "CA",
+    "08": "CO",
+    "17": "IL",
+    "18": "IN",
+    "19": "IA",
+    "20": "KS",
+    "21": "KY",
+    "27": "MN",
+    "28": "MS",
+    "29": "MO",
+    "31": "NE",
+    "37": "NC",
+    "38": "ND",
+    "39": "OH",
+    "40": "OK",
+    "42": "PA",
+    "45": "SC",
+    "46": "SD",
+    "47": "TN",
+    "48": "TX",
+    "55": "WI",
+    "56": "WY",
 }
 
 _FIPS_KEYS = list(STATE_FIPS.keys())
@@ -73,8 +93,16 @@ _FIPS_KEYS = list(STATE_FIPS.keys())
 # Crop production configuration
 # ---------------------------------------------------------------------------
 COMMODITIES = [
-    "CORN", "SOYBEANS", "WHEAT", "COTTON", "RICE",
-    "BARLEY", "OATS", "SORGHUM", "HAY", "POTATOES",
+    "CORN",
+    "SOYBEANS",
+    "WHEAT",
+    "COTTON",
+    "RICE",
+    "BARLEY",
+    "OATS",
+    "SORGHUM",
+    "HAY",
+    "POTATOES",
 ]
 
 # Weighted distribution: corn and soybeans dominate US cropland
@@ -92,11 +120,11 @@ STATISTIC_WEIGHTS = [0.25, 0.25, 0.20, 0.20, 0.10]
 
 # Unit and realistic value range per statistic category
 _STAT_META: dict[str, dict[str, Any]] = {
-    "AREA PLANTED":   {"unit": "ACRES",    "low": 50_000,   "high": 12_000_000},
-    "AREA HARVESTED": {"unit": "ACRES",    "low": 40_000,   "high": 11_500_000},
-    "YIELD":          {"unit": "BU / ACRE","low": 10.0,     "high": 250.0},
-    "PRODUCTION":     {"unit": "BU",       "low": 500_000,  "high": 2_000_000_000},
-    "PRICE RECEIVED": {"unit": "$ / BU",   "low": 2.50,     "high": 18.00},
+    "AREA PLANTED": {"unit": "ACRES", "low": 50_000, "high": 12_000_000},
+    "AREA HARVESTED": {"unit": "ACRES", "low": 40_000, "high": 11_500_000},
+    "YIELD": {"unit": "BU / ACRE", "low": 10.0, "high": 250.0},
+    "PRODUCTION": {"unit": "BU", "low": 500_000, "high": 2_000_000_000},
+    "PRICE RECEIVED": {"unit": "$ / BU", "low": 2.50, "high": 18.00},
 }
 
 SOURCE_DESCS = ["SURVEY", "CENSUS"]
@@ -106,18 +134,36 @@ AGG_LEVELS = ["NATIONAL", "STATE", "COUNTY"]
 AGG_WEIGHTS = [0.10, 0.50, 0.40]
 
 MONTHS = [
-    "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
-    "JUL", "AUG", "SEP", "OCT", "NOV", "DEC",
+    "JAN",
+    "FEB",
+    "MAR",
+    "APR",
+    "MAY",
+    "JUN",
+    "JUL",
+    "AUG",
+    "SEP",
+    "OCT",
+    "NOV",
+    "DEC",
 ]
 
 # ---------------------------------------------------------------------------
 # Food safety configuration
 # ---------------------------------------------------------------------------
-PRODUCT_TYPES = ["BEEF", "POULTRY", "PORK", "PROCESSED", "READY-TO-EAT", "IMPORTED", "OTHER"]
+PRODUCT_TYPES = [
+    "BEEF",
+    "POULTRY",
+    "PORK",
+    "PROCESSED",
+    "READY-TO-EAT",
+    "IMPORTED",
+    "OTHER",
+]
 PRODUCT_WEIGHTS = [0.28, 0.22, 0.18, 0.14, 0.10, 0.05, 0.03]
 
 RECALL_CLASSES = ["Class I", "Class II", "Class III"]
-RECALL_CLASS_WEIGHTS = [0.55, 0.35, 0.10]   # Class I (health hazard) is most common
+RECALL_CLASS_WEIGHTS = [0.55, 0.35, 0.10]  # Class I (health hazard) is most common
 
 RECALL_REASONS = [
     "E. coli O157:H7 contamination",
@@ -138,16 +184,26 @@ RECALL_REASONS = [
 ]
 
 REASON_WEIGHTS = [
-    0.14, 0.14, 0.12,
-    0.08, 0.07, 0.07, 0.06,
-    0.07, 0.05, 0.04,
-    0.05, 0.04, 0.03,
-    0.03, 0.01,
+    0.14,
+    0.14,
+    0.12,
+    0.08,
+    0.07,
+    0.07,
+    0.06,
+    0.07,
+    0.05,
+    0.04,
+    0.05,
+    0.04,
+    0.03,
+    0.03,
+    0.01,
 ]
 
 RECALL_RISK: dict[str, str] = {
-    "Class I":   "HIGH",
-    "Class II":  "MEDIUM",
+    "Class I": "HIGH",
+    "Class II": "MEDIUM",
     "Class III": "LOW",
 }
 
@@ -239,7 +295,9 @@ class USDAGenerator(BaseGenerator):
         elif domain == "food_safety":
             return self._generate_food_safety_record()
         else:
-            raise ValueError(f"Unknown domain '{domain}'. Must be 'crop_production' or 'food_safety'.")
+            raise ValueError(
+                f"Unknown domain '{domain}'. Must be 'crop_production' or 'food_safety'."
+            )
 
     # ------------------------------------------------------------------
     # Batch helper
@@ -299,9 +357,7 @@ class USDAGenerator(BaseGenerator):
 
         # Reference period: annual or a specific month
         use_month = np.random.random() < 0.25
-        reference_period_desc = (
-            str(np.random.choice(MONTHS)) if use_month else "YEAR"
-        )
+        reference_period_desc = str(np.random.choice(MONTHS)) if use_month else "YEAR"
 
         record: dict[str, Any] = {
             "record_id": self.generate_uuid(),
@@ -370,7 +426,9 @@ class USDAGenerator(BaseGenerator):
         elif dist_roll < 0.85:
             # 2–6 state abbreviations
             n_states = int(np.random.randint(2, 7))
-            sampled = np.random.choice(list(STATE_ABBR.values()), size=n_states, replace=False)
+            sampled = np.random.choice(
+                list(STATE_ABBR.values()), size=n_states, replace=False
+            )
             distribution = ", ".join(sorted(str(s) for s in sampled))
         # else: None (distribution unknown)
 

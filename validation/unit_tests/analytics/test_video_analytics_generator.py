@@ -11,8 +11,8 @@ Covers video security analytics event generation including:
 - tailgating          : Unauthorized access following
 - abandoned_object    : Unattended item detection
 """
+
 from generators.analytics.video_analytics_generator import (
-    VideoAnalyticsGenerator,
     EVENT_TYPES,
     OBJECT_CLASSES,
 )
@@ -50,13 +50,13 @@ class TestVideoAnalyticsGenerator:
         record = video_analytics_generator.generate_record()
         camera_id = record["camera_id"]
 
-        assert camera_id.startswith("CAM-"), (
-            f"camera_id must start with 'CAM-', got '{camera_id}'"
-        )
+        assert camera_id.startswith(
+            "CAM-"
+        ), f"camera_id must start with 'CAM-', got '{camera_id}'"
         suffix = camera_id[4:]
-        assert len(suffix) == 4 and suffix.isdigit(), (
-            f"camera_id suffix must be 4 digits, got '{suffix}'"
-        )
+        assert (
+            len(suffix) == 4 and suffix.isdigit()
+        ), f"camera_id suffix must be 4 digits, got '{suffix}'"
 
     # ------------------------------------------------------------------
     # event_type enum
@@ -66,9 +66,9 @@ class TestVideoAnalyticsGenerator:
         """All generated event_type values must be one of the 8 known types."""
         for _ in range(sample_size):
             record = video_analytics_generator.generate_record()
-            assert record["event_type"] in _VALID_EVENT_TYPES, (
-                f"Unexpected event_type '{record['event_type']}'"
-            )
+            assert (
+                record["event_type"] in _VALID_EVENT_TYPES
+            ), f"Unexpected event_type '{record['event_type']}'"
 
     # ------------------------------------------------------------------
     # confidence_score range
@@ -79,9 +79,9 @@ class TestVideoAnalyticsGenerator:
         for _ in range(sample_size):
             record = video_analytics_generator.generate_record()
             score = record["confidence_score"]
-            assert 0.0 <= score <= 1.0, (
-                f"confidence_score must be in [0.0, 1.0], got {score}"
-            )
+            assert (
+                0.0 <= score <= 1.0
+            ), f"confidence_score must be in [0.0, 1.0], got {score}"
 
     # ------------------------------------------------------------------
     # alert_level enum
@@ -91,9 +91,9 @@ class TestVideoAnalyticsGenerator:
         """alert_level must be one of INFO, WARNING, CRITICAL, or EMERGENCY."""
         for _ in range(sample_size):
             record = video_analytics_generator.generate_record()
-            assert record["alert_level"] in _VALID_ALERT_LEVELS, (
-                f"Unexpected alert_level '{record['alert_level']}'"
-            )
+            assert (
+                record["alert_level"] in _VALID_ALERT_LEVELS
+            ), f"Unexpected alert_level '{record['alert_level']}'"
 
     # ------------------------------------------------------------------
     # object_class enum
@@ -105,9 +105,9 @@ class TestVideoAnalyticsGenerator:
             record = video_analytics_generator.generate_record()
             obj_class = record["object_class"]
             if obj_class is not None:
-                assert obj_class in _VALID_OBJECT_CLASSES, (
-                    f"Unexpected object_class '{obj_class}'"
-                )
+                assert (
+                    obj_class in _VALID_OBJECT_CLASSES
+                ), f"Unexpected object_class '{obj_class}'"
 
     # ------------------------------------------------------------------
     # Zone crossing logic
@@ -120,15 +120,13 @@ class TestVideoAnalyticsGenerator:
             record = video_analytics_generator.generate_record()
             if record["event_type"] == "zone_crossing":
                 found = True
-                assert record["zone_from"] is not None, (
-                    "zone_crossing must have zone_from"
-                )
-                assert record["zone_to"] is not None, (
-                    "zone_crossing must have zone_to"
-                )
-                assert record["zone_from"] != record["zone_to"], (
-                    "zone_from and zone_to must differ"
-                )
+                assert (
+                    record["zone_from"] is not None
+                ), "zone_crossing must have zone_from"
+                assert record["zone_to"] is not None, "zone_crossing must have zone_to"
+                assert (
+                    record["zone_from"] != record["zone_to"]
+                ), "zone_from and zone_to must differ"
 
         assert found, "No zone_crossing events seen in 500 records"
 
@@ -143,9 +141,9 @@ class TestVideoAnalyticsGenerator:
             record = video_analytics_generator.generate_record()
             if record["event_type"] == "anomaly":
                 found = True
-                assert record["anomaly_type"] is not None, (
-                    "anomaly event must have anomaly_type"
-                )
+                assert (
+                    record["anomaly_type"] is not None
+                ), "anomaly event must have anomaly_type"
 
         assert found, "No anomaly events seen in 500 records"
 
@@ -158,9 +156,9 @@ class TestVideoAnalyticsGenerator:
         batch = video_analytics_generator.generate_batch(count=sample_size)
 
         assert isinstance(batch, list), "generate_batch must return a list"
-        assert len(batch) == sample_size, (
-            f"Expected {sample_size} records, got {len(batch)}"
-        )
+        assert (
+            len(batch) == sample_size
+        ), f"Expected {sample_size} records, got {len(batch)}"
 
     # ------------------------------------------------------------------
     # Metadata columns
@@ -173,6 +171,6 @@ class TestVideoAnalyticsGenerator:
         assert "_ingested_at" in record, "_ingested_at metadata field missing"
         assert "_source" in record, "_source metadata field missing"
         assert "_batch_id" in record, "_batch_id metadata field missing"
-        assert record["_source"] == "VideoAnalyticsGenerator", (
-            f"Expected _source='VideoAnalyticsGenerator', got '{record['_source']}'"
-        )
+        assert (
+            record["_source"] == "VideoAnalyticsGenerator"
+        ), f"Expected _source='VideoAnalyticsGenerator', got '{record['_source']}'"

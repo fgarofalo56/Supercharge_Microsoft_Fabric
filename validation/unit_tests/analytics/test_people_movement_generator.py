@@ -9,10 +9,10 @@ Covers people movement / foot traffic event generation including:
 - pressure_mat    : Weight-based step detection
 - lidar           : LiDAR-based 3D people tracking
 """
+
 from generators.analytics.people_movement_generator import (
-    PeopleMovementGenerator,
-    SENSOR_TYPES,
     DIRECTIONS,
+    SENSOR_TYPES,
 )
 
 _VALID_SENSOR_TYPES = set(SENSOR_TYPES)
@@ -46,9 +46,9 @@ class TestPeopleMovementGenerator:
         record = people_movement_generator.generate_record()
         sensor_id = record["sensor_id"]
 
-        assert sensor_id.startswith("SENS-"), (
-            f"sensor_id must start with 'SENS-', got '{sensor_id}'"
-        )
+        assert sensor_id.startswith(
+            "SENS-"
+        ), f"sensor_id must start with 'SENS-', got '{sensor_id}'"
 
     # ------------------------------------------------------------------
     # sensor_type enum
@@ -58,9 +58,9 @@ class TestPeopleMovementGenerator:
         """All generated sensor_type values must be one of the 6 known types."""
         for _ in range(sample_size):
             record = people_movement_generator.generate_record()
-            assert record["sensor_type"] in _VALID_SENSOR_TYPES, (
-                f"Unexpected sensor_type '{record['sensor_type']}'"
-            )
+            assert (
+                record["sensor_type"] in _VALID_SENSOR_TYPES
+            ), f"Unexpected sensor_type '{record['sensor_type']}'"
 
     # ------------------------------------------------------------------
     # person_count non-negative
@@ -70,9 +70,9 @@ class TestPeopleMovementGenerator:
         """person_count must be >= 0 for every record."""
         for _ in range(sample_size):
             record = people_movement_generator.generate_record()
-            assert record["person_count"] >= 0, (
-                f"person_count must be >= 0, got {record['person_count']}"
-            )
+            assert (
+                record["person_count"] >= 0
+            ), f"person_count must be >= 0, got {record['person_count']}"
 
     # ------------------------------------------------------------------
     # direction enum
@@ -84,9 +84,9 @@ class TestPeopleMovementGenerator:
             record = people_movement_generator.generate_record()
             direction = record["direction"]
             if direction is not None:
-                assert direction in _VALID_DIRECTIONS, (
-                    f"Unexpected direction '{direction}'"
-                )
+                assert (
+                    direction in _VALID_DIRECTIONS
+                ), f"Unexpected direction '{direction}'"
 
     # ------------------------------------------------------------------
     # occupancy_percentage range
@@ -98,9 +98,9 @@ class TestPeopleMovementGenerator:
             record = people_movement_generator.generate_record()
             occ = record["occupancy_percentage"]
             if occ is not None:
-                assert 0 <= occ <= 100, (
-                    f"occupancy_percentage must be in [0, 100], got {occ}"
-                )
+                assert (
+                    0 <= occ <= 100
+                ), f"occupancy_percentage must be in [0, 100], got {occ}"
 
     # ------------------------------------------------------------------
     # Queue logic
@@ -113,9 +113,9 @@ class TestPeopleMovementGenerator:
             record = people_movement_generator.generate_record()
             if record["queue_detected"] is True:
                 found = True
-                assert record["queue_length"] is not None, (
-                    "queue_detected=True must have queue_length"
-                )
+                assert (
+                    record["queue_length"] is not None
+                ), "queue_detected=True must have queue_length"
                 assert record["queue_length"] > 0, (
                     f"queue_length must be > 0 when queue_detected, "
                     f"got {record['queue_length']}"
@@ -135,9 +135,9 @@ class TestPeopleMovementGenerator:
             signal = record["signal_strength_dbm"]
             if signal is not None:
                 found = True
-                assert -90 <= signal <= 0, (
-                    f"signal_strength_dbm must be in [-90, 0], got {signal}"
-                )
+                assert (
+                    -90 <= signal <= 0
+                ), f"signal_strength_dbm must be in [-90, 0], got {signal}"
 
         assert found, "No records with signal_strength_dbm seen in 500 records"
 
@@ -150,9 +150,9 @@ class TestPeopleMovementGenerator:
         batch = people_movement_generator.generate_batch(count=sample_size)
 
         assert isinstance(batch, list), "generate_batch must return a list"
-        assert len(batch) == sample_size, (
-            f"Expected {sample_size} records, got {len(batch)}"
-        )
+        assert (
+            len(batch) == sample_size
+        ), f"Expected {sample_size} records, got {len(batch)}"
 
     # ------------------------------------------------------------------
     # Metadata columns
@@ -165,6 +165,6 @@ class TestPeopleMovementGenerator:
         assert "_ingested_at" in record, "_ingested_at metadata field missing"
         assert "_source" in record, "_source metadata field missing"
         assert "_batch_id" in record, "_batch_id metadata field missing"
-        assert record["_source"] == "PeopleMovementGenerator", (
-            f"Expected _source='PeopleMovementGenerator', got '{record['_source']}'"
-        )
+        assert (
+            record["_source"] == "PeopleMovementGenerator"
+        ), f"Expected _source='PeopleMovementGenerator', got '{record['_source']}'"

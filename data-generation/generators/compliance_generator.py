@@ -139,10 +139,20 @@ class ComplianceGenerator(BaseGenerator):
 
         # Add nullable defaults
         for field in [
-            "game_type", "machine_id", "table_id", "jackpot_amount",
-            "withholding_amount", "withholding_rate", "sar_category",
-            "sar_narrative", "suspicious_activity_date", "fincen_reference",
-            "irs_reference", "review_notes", "amended_from", "cash_in_amount",
+            "game_type",
+            "machine_id",
+            "table_id",
+            "jackpot_amount",
+            "withholding_amount",
+            "withholding_rate",
+            "sar_category",
+            "sar_narrative",
+            "suspicious_activity_date",
+            "fincen_reference",
+            "irs_reference",
+            "review_notes",
+            "amended_from",
+            "cash_in_amount",
             "cash_out_amount",
         ]:
             record.setdefault(field, None)
@@ -171,7 +181,9 @@ class ComplianceGenerator(BaseGenerator):
 
         return record
 
-    def _generate_ctr(self, record: dict[str, Any], timestamp: datetime) -> dict[str, Any]:
+    def _generate_ctr(
+        self, record: dict[str, Any], timestamp: datetime
+    ) -> dict[str, Any]:
         """Generate Currency Transaction Report data."""
         # CTR required for cash transactions >= $10,000
         total_amount = round(np.random.uniform(10000, 100000), 2)
@@ -198,11 +210,15 @@ class ComplianceGenerator(BaseGenerator):
         )
 
         if record["status"] == "Filed":
-            record["fincen_reference"] = f"FINCEN-CTR-{np.random.randint(100000000, 999999999)}"
+            record["fincen_reference"] = (
+                f"FINCEN-CTR-{np.random.randint(100000000, 999999999)}"
+            )
 
         return record
 
-    def _generate_sar(self, record: dict[str, Any], timestamp: datetime) -> dict[str, Any]:
+    def _generate_sar(
+        self, record: dict[str, Any], timestamp: datetime
+    ) -> dict[str, Any]:
         """Generate Suspicious Activity Report data."""
         record["transaction_date"] = timestamp.strftime("%Y-%m-%d")
         record["suspicious_activity_date"] = timestamp.strftime("%Y-%m-%d")
@@ -233,7 +249,9 @@ class ComplianceGenerator(BaseGenerator):
         )
 
         if record["status"] == "Filed":
-            record["fincen_reference"] = f"FINCEN-SAR-{np.random.randint(100000000, 999999999)}"
+            record["fincen_reference"] = (
+                f"FINCEN-SAR-{np.random.randint(100000000, 999999999)}"
+            )
 
         return record
 
@@ -251,18 +269,20 @@ class ComplianceGenerator(BaseGenerator):
             "Credit Abuse": "Subject exhibited pattern of marker draws followed by minimal play.",
             "Other Suspicious Activity": "Activity observed that warrants further review and documentation.",
         }
-        return narratives.get(category, "Suspicious activity detected requiring review.")
+        return narratives.get(
+            category, "Suspicious activity detected requiring review."
+        )
 
-    def _generate_w2g(self, record: dict[str, Any], timestamp: datetime) -> dict[str, Any]:
+    def _generate_w2g(
+        self, record: dict[str, Any], timestamp: datetime
+    ) -> dict[str, Any]:
         """Generate W-2G Gambling Winnings form data."""
         # Select game type and calculate winnings above threshold
         game_type = np.random.choice(list(self.W2G_THRESHOLDS.keys()))
         threshold = self.W2G_THRESHOLDS[game_type]
 
         # Generate winning amount above threshold
-        jackpot_amount = round(
-            threshold * np.random.uniform(1.0, 100.0), 2
-        )
+        jackpot_amount = round(threshold * np.random.uniform(1.0, 100.0), 2)
 
         record["game_type"] = game_type
         record["transaction_date"] = timestamp.strftime("%Y-%m-%d")
@@ -294,11 +314,15 @@ class ComplianceGenerator(BaseGenerator):
         record["due_date"] = f"{timestamp.year + 1}-01-31"  # Due by Jan 31 next year
 
         record["status"] = "Filed"
-        record["irs_reference"] = f"W2G-{timestamp.strftime('%Y')}-{np.random.randint(100000, 999999)}"
+        record["irs_reference"] = (
+            f"W2G-{timestamp.strftime('%Y')}-{np.random.randint(100000, 999999)}"
+        )
 
         return record
 
-    def _generate_mtlap(self, record: dict[str, Any], timestamp: datetime) -> dict[str, Any]:
+    def _generate_mtlap(
+        self, record: dict[str, Any], timestamp: datetime
+    ) -> dict[str, Any]:
         """Generate Multiple Transaction Log - Annual Patron report."""
         # MTLAP tracks cumulative transactions for patrons
         record["transaction_date"] = timestamp.strftime("%Y-%m-%d")
@@ -318,25 +342,33 @@ class ComplianceGenerator(BaseGenerator):
 
         return record
 
-    def _generate_ctrc(self, record: dict[str, Any], timestamp: datetime) -> dict[str, Any]:
+    def _generate_ctrc(
+        self, record: dict[str, Any], timestamp: datetime
+    ) -> dict[str, Any]:
         """Generate CTR Correction/Amendment data."""
         record["transaction_date"] = timestamp.strftime("%Y-%m-%d")
         record["transaction_amount"] = round(np.random.uniform(10000, 100000), 2)
 
-        record["amended_from"] = f"CTR-{(timestamp - timedelta(days=30)).strftime('%Y%m%d')}-{np.random.randint(10000, 99999)}"
-        record["review_notes"] = np.random.choice([
-            "Corrected SSN entry",
-            "Updated address information",
-            "Corrected transaction amount",
-            "Added missing identification",
-        ])
+        record["amended_from"] = (
+            f"CTR-{(timestamp - timedelta(days=30)).strftime('%Y%m%d')}-{np.random.randint(10000, 99999)}"
+        )
+        record["review_notes"] = np.random.choice(
+            [
+                "Corrected SSN entry",
+                "Updated address information",
+                "Corrected transaction amount",
+                "Added missing identification",
+            ]
+        )
 
         record["filing_date"] = timestamp.strftime("%Y-%m-%d")
         record["due_date"] = timestamp.strftime("%Y-%m-%d")
         record["status"] = "Filed"
 
         if np.random.random() > 0.1:
-            record["fincen_reference"] = f"FINCEN-CTRC-{np.random.randint(100000000, 999999999)}"
+            record["fincen_reference"] = (
+                f"FINCEN-CTRC-{np.random.randint(100000000, 999999999)}"
+            )
 
         return record
 

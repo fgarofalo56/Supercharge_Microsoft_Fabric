@@ -9,15 +9,16 @@ Abstract base class for all data generators providing common functionality:
 - Progress tracking
 """
 
-from abc import ABC, abstractmethod
-from datetime import datetime, timedelta
-from pathlib import Path
-from typing import Any, Iterator
 import hashlib
 import uuid
+from abc import ABC, abstractmethod
+from collections.abc import Iterator
+from datetime import datetime, timedelta
+from pathlib import Path
+from typing import Any
 
-import pandas as pd
 import numpy as np
+import pandas as pd
 from faker import Faker
 from tqdm import tqdm
 
@@ -95,7 +96,9 @@ class BaseGenerator(ABC):
             ValueError: If num_records is not a positive integer
         """
         if not isinstance(num_records, int) or num_records <= 0:
-            raise ValueError(f"num_records must be a positive integer, got {num_records}")
+            raise ValueError(
+                f"num_records must be a positive integer, got {num_records}"
+            )
 
         records = []
         iterator = range(num_records)
@@ -129,7 +132,9 @@ class BaseGenerator(ABC):
             ValueError: If num_records or batch_size is not positive
         """
         if not isinstance(num_records, int) or num_records <= 0:
-            raise ValueError(f"num_records must be a positive integer, got {num_records}")
+            raise ValueError(
+                f"num_records must be a positive integer, got {num_records}"
+            )
         if not isinstance(batch_size, int) or batch_size <= 0:
             raise ValueError(f"batch_size must be a positive integer, got {batch_size}")
 
@@ -166,7 +171,9 @@ class BaseGenerator(ABC):
         try:
             output_path.parent.mkdir(parents=True, exist_ok=True)
         except OSError as e:
-            raise OSError(f"Cannot create output directory {output_path.parent}: {e}") from e
+            raise OSError(
+                f"Cannot create output directory {output_path.parent}: {e}"
+            ) from e
 
         try:
             if partition_cols:
@@ -204,7 +211,9 @@ class BaseGenerator(ABC):
         try:
             output_path.parent.mkdir(parents=True, exist_ok=True)
         except OSError as e:
-            raise OSError(f"Cannot create output directory {output_path.parent}: {e}") from e
+            raise OSError(
+                f"Cannot create output directory {output_path.parent}: {e}"
+            ) from e
 
         try:
             df.to_json(output_path, orient=orient, lines=lines, date_format="iso")
