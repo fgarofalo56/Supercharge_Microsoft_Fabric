@@ -1,0 +1,153 @@
+{
+  "expectation_suite_name": "doi_park_visitation_suite",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "park_code"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "year"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "month"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "total_visitors"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "park_name"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "park_code"
+      },
+      "meta": {
+        "notes": "Park code is the primary identifier for NPS units"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "year"
+      },
+      "meta": {
+        "notes": "Year is required for temporal tracking of visitation"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "month"
+      },
+      "meta": {
+        "notes": "Month is required for seasonal analysis"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "year",
+        "min_value": 1900,
+        "max_value": 2030
+      },
+      "meta": {
+        "notes": "NPS visitation records span from early 1900s to present"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "month",
+        "min_value": 1,
+        "max_value": 12
+      },
+      "meta": {
+        "notes": "Month must be between 1 (January) and 12 (December)"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "total_visitors",
+        "min_value": 0,
+        "max_value": null
+      },
+      "meta": {
+        "notes": "Total visitor count must be non-negative"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "park_code",
+        "regex": "^[A-Z]{2,4}$",
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "NPS park codes are typically 2-4 uppercase letters"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "park_type",
+        "value_set": [
+          "National Park",
+          "National Monument",
+          "National Seashore",
+          "National Recreation Area",
+          "National Historic Site",
+          "National Battlefield",
+          "National Memorial",
+          "National Lakeshore",
+          "National Preserve",
+          "National Parkway",
+          null
+        ]
+      },
+      "meta": {
+        "notes": "Park type must be a valid NPS unit designation"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "region",
+        "value_set": [
+          "NORTHEAST",
+          "SOUTHEAST",
+          "MIDWEST",
+          "INTERMOUNTAIN",
+          "PACIFIC_WEST",
+          "ALASKA",
+          "NATIONAL_CAPITAL",
+          null
+        ]
+      },
+      "meta": {
+        "notes": "NPS region must be a valid organizational region"
+      }
+    }
+  ],
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "notes": "Data quality expectations for DOI/NPS park visitation statistics",
+    "domain": "Department of the Interior / National Park Service",
+    "data_source": "NPS Integrated Resource Management Applications (IRMA) Portal"
+  }
+}

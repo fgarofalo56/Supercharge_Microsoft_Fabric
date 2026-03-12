@@ -1,0 +1,136 @@
+{
+  "expectation_suite_name": "usda_crop_production_suite",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "commodity"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "year"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "state_fips"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "value"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "commodity"
+      },
+      "meta": {
+        "notes": "Commodity is required for all crop production records"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "year"
+      },
+      "meta": {
+        "notes": "Year is required for temporal tracking"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "commodity",
+        "value_set": [
+          "CORN",
+          "SOYBEANS",
+          "WHEAT",
+          "COTTON",
+          "RICE",
+          "BARLEY",
+          "OATS",
+          "SORGHUM",
+          "HAY",
+          "POTATOES"
+        ]
+      },
+      "meta": {
+        "notes": "Commodity must be one of the 10 supported NASS crop types"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "year",
+        "min_value": 2000,
+        "max_value": 2030
+      },
+      "meta": {
+        "notes": "Year must be within a reasonable range for NASS data"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "agg_level_desc",
+        "value_set": [
+          "NATIONAL",
+          "STATE",
+          "COUNTY"
+        ]
+      },
+      "meta": {
+        "notes": "Aggregation level must be NATIONAL, STATE, or COUNTY"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "statisticcat_desc",
+        "value_set": [
+          "AREA PLANTED",
+          "AREA HARVESTED",
+          "YIELD",
+          "PRODUCTION",
+          "PRICE RECEIVED"
+        ]
+      },
+      "meta": {
+        "notes": "Statistic category must be a valid NASS measure"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "state_fips",
+        "regex": "^\\d{2}$"
+      },
+      "meta": {
+        "notes": "State FIPS must be a 2-digit zero-padded numeric code"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "value",
+        "min_value": 0,
+        "max_value": 999999999999
+      },
+      "meta": {
+        "notes": "Crop production value must be non-negative"
+      }
+    }
+  ],
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "notes": "Data quality expectations for USDA NASS crop production records",
+    "domain": "United States Department of Agriculture",
+    "data_source": "NASS QuickStats API"
+  }
+}

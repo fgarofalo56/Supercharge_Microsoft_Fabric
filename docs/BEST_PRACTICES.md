@@ -17,6 +17,29 @@
 - [📊 Naming Conventions](#-naming-conventions)
 - [⚡ Performance Optimization](#-performance-optimization)
 - [💰 Cost Management](#-cost-management)
+- [📖 Deep-Dive Guides](#-deep-dive-guides)
+
+---
+
+## 📖 Deep-Dive Guides
+
+For expanded best practices in specific areas, see the deep-dive documents:
+
+| Guide | Description |
+|:------|:------------|
+| [Error Handling & Monitoring](./best-practices/error-handling-monitoring.md) | Pipeline error architecture, production error table design, stored procedures, error classification, PySpark patterns |
+| [Alerting & Data Activator](./best-practices/alerting-data-activator.md) | Data Activator setup, alert patterns (DQ, pipeline, SLA, anomaly), Teams/email integration, runbook templates |
+| [Performance & Parallelism](./best-practices/performance-parallelism.md) | Copy activity DIU optimization, Spark tuning, pipeline parallelism, Direct Lake performance, KQL optimization |
+| [Data Governance Deep Dive](./best-practices/data-governance-deep-dive.md) | Purview integration, federal data classification (CUI/FOUO/PII/PHI), RLS/CLS patterns, compliance frameworks |
+
+### New Fabric Features
+
+| Guide | Description |
+|:------|:------------|
+| [Fabric IQ](./features/fabric-iq.md) | Natural language analytics, setup, per-agency use cases, semantic model optimization |
+| [Real-Time Intelligence](./features/real-time-intelligence.md) | Eventstreams, Eventhouse, real-time dashboards, KQL patterns, streaming architecture |
+| [AI Copilot Configuration](./features/ai-copilot-configuration.md) | Per-workload Copilot setup, enterprise rollout, security considerations |
+| [Data Mesh & Enterprise Patterns](./features/data-mesh-enterprise-patterns.md) | Domain ownership, multi-agency workspace topology, data product contracts, federated governance |
 
 ---
 

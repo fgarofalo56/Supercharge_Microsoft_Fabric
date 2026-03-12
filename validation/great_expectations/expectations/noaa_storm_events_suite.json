@@ -1,0 +1,181 @@
+{
+  "expectation_suite_name": "noaa_storm_events_suite",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "event_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "event_type"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "state"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "begin_date"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "damage_property"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "event_id"
+      },
+      "meta": {
+        "notes": "Event ID is the primary identifier for storm events"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "event_type"
+      },
+      "meta": {
+        "notes": "Event type is required for storm classification"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "state"
+      },
+      "meta": {
+        "notes": "State is required for geographic attribution"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "begin_date"
+      },
+      "meta": {
+        "notes": "Begin date is required for temporal tracking"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "event_type",
+        "value_set": [
+          "THUNDERSTORM_WIND",
+          "HAIL",
+          "FLASH_FLOOD",
+          "TORNADO",
+          "FLOOD",
+          "WINTER_STORM",
+          "BLIZZARD",
+          "ICE_STORM",
+          "HURRICANE",
+          "TROPICAL_STORM",
+          "WILDFIRE",
+          "DROUGHT",
+          "EXTREME_COLD",
+          "EXTREME_HEAT"
+        ]
+      },
+      "meta": {
+        "notes": "Event type must be a valid NOAA Storm Events Database category"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "damage_property",
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 0.99
+      },
+      "meta": {
+        "notes": "Property damage must be non-negative"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "damage_crops",
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 0.99
+      },
+      "meta": {
+        "notes": "Crop damage must be non-negative"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "injuries_direct",
+        "min_value": 0,
+        "max_value": null
+      },
+      "meta": {
+        "notes": "Direct injuries count must be non-negative"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "deaths_direct",
+        "min_value": 0,
+        "max_value": null
+      },
+      "meta": {
+        "notes": "Direct deaths count must be non-negative"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "tor_f_scale",
+        "value_set": [
+          "EF0",
+          "EF1",
+          "EF2",
+          "EF3",
+          "EF4",
+          "EF5",
+          null
+        ]
+      },
+      "meta": {
+        "notes": "EF-scale rating applies only to TORNADO events; null for others"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "source",
+        "value_set": [
+          "TRAINED SPOTTER",
+          "LAW ENFORCEMENT",
+          "NWS EMPLOYEE",
+          "PUBLIC"
+        ]
+      },
+      "meta": {
+        "notes": "Storm event source must be a valid NWS reporting channel"
+      }
+    }
+  ],
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "notes": "Data quality expectations for NOAA Storm Events Database records",
+    "domain": "National Oceanic and Atmospheric Administration",
+    "data_source": "NOAA Storm Events Database"
+  }
+}

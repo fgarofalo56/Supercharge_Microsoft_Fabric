@@ -1,0 +1,177 @@
+{
+  "expectation_suite_name": "sba_ppp_loans_suite",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "loan_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "loan_amount"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "naics_code"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "borrower_state"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "jobs_retained"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "forgiveness_amount"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "loan_id"
+      },
+      "meta": {
+        "notes": "Loan ID is the primary identifier and must be present"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "loan_amount"
+      },
+      "meta": {
+        "notes": "Loan amount is required for all SBA loan records"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": {
+        "column": "loan_id"
+      },
+      "meta": {
+        "notes": "Loan ID must be unique across all records"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "loan_amount",
+        "min_value": 0,
+        "max_value": null,
+        "strictly": true
+      },
+      "meta": {
+        "notes": "Loan amount must be strictly positive"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "naics_code",
+        "regex": "^\\d{2,6}$"
+      },
+      "meta": {
+        "notes": "NAICS code must be 2-6 digits"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "borrower_state",
+        "regex": "^[A-Z]{2}$"
+      },
+      "meta": {
+        "notes": "Borrower state must be a 2-character uppercase abbreviation"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "jobs_retained",
+        "min_value": 0,
+        "max_value": null
+      },
+      "meta": {
+        "notes": "Jobs retained must be non-negative"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "forgiveness_amount",
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "Forgiveness amount must be non-negative when present"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "program_type",
+        "value_set": [
+          "PPP",
+          "7A",
+          "DISASTER",
+          "SBIR"
+        ]
+      },
+      "meta": {
+        "notes": "Program type must be one of the four SBA programs"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "loan_status",
+        "value_set": [
+          "APPROVED",
+          "ACTIVE",
+          "PAID_IN_FULL",
+          "CHARGED_OFF",
+          "CANCELLED"
+        ]
+      },
+      "meta": {
+        "notes": "Loan status must be a valid SBA loan lifecycle state"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "business_type",
+        "value_set": [
+          "SOLE_PROPRIETORSHIP",
+          "LLC",
+          "CORPORATION",
+          "PARTNERSHIP",
+          "NON_PROFIT",
+          "OTHER"
+        ]
+      },
+      "meta": {
+        "notes": "Business type must match SBA classification categories"
+      }
+    }
+  ],
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "notes": "Data quality expectations for SBA loan records (PPP, 7a, Disaster, SBIR)",
+    "domain": "Small Business Administration",
+    "data_source": "SBA FOIA / data.sba.gov"
+  }
+}

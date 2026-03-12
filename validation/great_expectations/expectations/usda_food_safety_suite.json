@@ -1,0 +1,156 @@
+{
+  "expectation_suite_name": "usda_food_safety_suite",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "recall_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "recall_class"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "product_type"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "risk_level"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "status"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "recall_number"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "recall_id"
+      },
+      "meta": {
+        "notes": "Recall ID is the primary identifier and must be present"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "recall_class"
+      },
+      "meta": {
+        "notes": "Recall classification is required for risk assessment"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "product_type"
+      },
+      "meta": {
+        "notes": "Product type is required for categorization"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "recall_class",
+        "value_set": [
+          "Class I",
+          "Class II",
+          "Class III"
+        ]
+      },
+      "meta": {
+        "notes": "FSIS recall classes follow a three-tier system"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "product_type",
+        "value_set": [
+          "BEEF",
+          "POULTRY",
+          "PORK",
+          "PROCESSED",
+          "READY-TO-EAT",
+          "IMPORTED",
+          "OTHER"
+        ]
+      },
+      "meta": {
+        "notes": "Product type must be a valid FSIS-regulated product category"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "risk_level",
+        "value_set": [
+          "HIGH",
+          "MEDIUM",
+          "LOW"
+        ]
+      },
+      "meta": {
+        "notes": "Risk level corresponds to recall class: I=HIGH, II=MEDIUM, III=LOW"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "pounds_recalled",
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 0.90
+      },
+      "meta": {
+        "notes": "Pounds recalled must be non-negative when present (~90% of records)"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "status",
+        "value_set": [
+          "OPEN",
+          "CLOSED",
+          "EXPANDED"
+        ]
+      },
+      "meta": {
+        "notes": "Recall status must be one of the three valid FSIS states"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "recall_number",
+        "regex": "^FSIS-\\d{4}-\\d{3}$"
+      },
+      "meta": {
+        "notes": "Recall number must follow the FSIS-YYYY-NNN pattern"
+      }
+    }
+  ],
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "notes": "Data quality expectations for USDA FSIS food safety recall records",
+    "domain": "United States Department of Agriculture",
+    "data_source": "FSIS Recall Dataset"
+  }
+}

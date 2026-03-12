@@ -18,6 +18,16 @@ The Silver layer transforms raw Bronze data into cleansed, validated datasets. T
 | `04_silver_financial_reconciled.py` | Reconcile transactions, detect anomalies | `bronze.financial_transactions` | `silver.financial_reconciled` |
 | `05_silver_security_enriched.py` | Enrich security events with location/zone data | `bronze.security_events` | `silver.security_enriched` |
 | `06_silver_compliance_validated.py` | Validate compliance rules, flag violations | `bronze.compliance_events` | `silver.compliance_validated` |
+| `07_silver_tribal_health.py` | HIPAA-compliant healthcare data cleansing, PHI masking | `bronze.tribal_health` | `silver.tribal_health` |
+| `08_silver_dot_faa.py` | Aviation safety data validation and standardization | `bronze.dot_faa` | `silver.dot_faa` |
+| `09_silver_video_analytics.py` | Video analytics event cleansing and enrichment | `bronze.video_analytics` | `silver.video_analytics` |
+| `10_silver_people_movement.py` | Movement data validation and zone assignment | `bronze.people_movement` | `silver.people_movement` |
+| `11_silver_geolocation.py` | Geolocation data cleansing, H3 indexing | `bronze.geolocation` | `silver.geolocation` |
+| `12_silver_usda.py` | USDA crop production & food safety validation | `bronze.usda_*` | `silver.usda_crop_production`, `silver.usda_food_safety` |
+| `13_silver_sba.py` | SBA loan data cleansing, NAICS validation | `bronze.sba_*` | `silver.sba_ppp_loans`, `silver.sba_7a_504_loans` |
+| `14_silver_noaa.py` | NOAA weather/storm/climate data validation | `bronze.noaa_*` | `silver.noaa_weather`, `silver.noaa_storm_events`, `silver.noaa_climate` |
+| `15_silver_epa.py` | EPA environmental data validation, AQI classification | `bronze.epa_*` | `silver.epa_air_quality`, `silver.epa_toxic_releases`, `silver.epa_water_quality` |
+| `16_silver_doi.py` | DOI natural resources data validation | `bronze.doi_*` | `silver.doi_earthquakes`, `silver.doi_water_data`, `silver.doi_park_visitation` |
 
 ---
 

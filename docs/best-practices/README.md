@@ -25,6 +25,10 @@ This comprehensive guide provides best practices for all aspects of Microsoft Fa
 | [Oracle & SQL Server Patterns](./09_SOURCE_SPECIFIC_PATTERNS.md) | Large table loads, parallel extraction, incremental patterns |
 | [Decision Guide](./10_DECISION_GUIDE.md) | When to use pipeline vs dataflow vs Spark vs lakehouse vs warehouse |
 | [Oracle Gateway Troubleshooting](./11_ORACLE_GATEWAY_TROUBLESHOOTING.md) | Gateway config, ForEach parallelism, Oracle optimization |
+| [Error Handling & Monitoring](./error-handling-monitoring.md) | Pipeline error architecture, error tables, PySpark error handling, KQL analysis |
+| [Alerting & Data Activator](./alerting-data-activator.md) | Data Activator setup, alert patterns, Teams/Email integration, runbooks |
+| [Performance & Parallelism](./performance-parallelism.md) | Copy Activity DIUs, Spark tuning, pipeline parallelism, Direct Lake, KQL |
+| [Data Governance Deep Dive](./data-governance-deep-dive.md) | Purview, classification, RLS/CLS, compliance frameworks, retention |
 
 ---
 
