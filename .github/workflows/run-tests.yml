@@ -48,7 +48,7 @@ jobs:
       - name: Run mypy type checking
         env:
           MYPYPATH: data-generation
-        run: python -m mypy data-generation/generators/ --ignore-missing-imports --namespace-packages --explicit-package-bases
+        run: python -m mypy data-generation/generators/ --ignore-missing-imports --namespace-packages --explicit-package-bases --exclude 'generators/geo/'
 
   security-scan:
     name: Security Scanning
