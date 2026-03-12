@@ -18,6 +18,16 @@ The Bronze layer captures raw data from slot machines, player systems, financial
 | `04_bronze_compliance.py` | Ingest compliance-related events | Compliance monitoring system | `bronze.compliance_events` |
 | `05_bronze_table_games.py` | Load table game session data | Table management system | `bronze.table_games` |
 | `06_bronze_security_events.py` | Capture security and surveillance events | Security systems, CCTV | `bronze.security_events` |
+| `07_bronze_tribal_health.py` | Ingest IHS healthcare encounter data | IHS RPMS, FHIR feeds | `bronze.tribal_health` |
+| `08_bronze_dot_faa.py` | Load DOT/FAA aviation safety data | FAA ASRS, BTS datasets | `bronze.dot_faa` |
+| `09_bronze_video_analytics.py` | Capture video analytics events | AI video pipeline | `bronze.video_analytics` |
+| `10_bronze_people_movement.py` | Load people movement/foot traffic data | IoT sensors, cameras | `bronze.people_movement` |
+| `11_bronze_geolocation.py` | Ingest geolocation tracking data | Mobile, beacons, GPS | `bronze.geolocation` |
+| `12_bronze_usda.py` | Ingest USDA crop production & food safety data | NASS API, FSIS downloads, generator | `bronze.usda_crop_production`, `bronze.usda_food_safety` |
+| `13_bronze_sba.py` | Ingest SBA loan program data | PPP/7a/504 datasets, generator | `bronze.sba_ppp_loans`, `bronze.sba_7a_504_loans` |
+| `14_bronze_noaa.py` | Ingest NOAA weather, storms, climate data | Weather API, storm DB, CDO | `bronze.noaa_weather`, `bronze.noaa_storm_events`, `bronze.noaa_climate` |
+| `15_bronze_epa.py` | Ingest EPA environmental monitoring data | AQS API, TRI, SDWIS | `bronze.epa_air_quality`, `bronze.epa_toxic_releases`, `bronze.epa_water_quality` |
+| `16_bronze_doi.py` | Ingest DOI natural resources data | USGS, NWIS, NPS | `bronze.doi_earthquakes`, `bronze.doi_water_data`, `bronze.doi_park_visitation` |
 
 ---
 

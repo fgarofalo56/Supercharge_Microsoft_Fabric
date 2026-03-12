@@ -1,0 +1,147 @@
+{
+  "expectation_suite_name": "noaa_weather_suite",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "observation_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "station_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "latitude"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "longitude"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "parameter"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "value"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "station_id"
+      },
+      "meta": {
+        "notes": "Station ID is required for all weather observations"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "observation_id"
+      },
+      "meta": {
+        "notes": "Observation ID is the primary identifier"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "parameter"
+      },
+      "meta": {
+        "notes": "Observed parameter is required"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "latitude",
+        "min_value": -90,
+        "max_value": 90
+      },
+      "meta": {
+        "notes": "Latitude must be within valid geographic range"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "longitude",
+        "min_value": -180,
+        "max_value": 180
+      },
+      "meta": {
+        "notes": "Longitude must be within valid geographic range"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "parameter",
+        "value_set": [
+          "TEMPERATURE",
+          "DEWPOINT",
+          "HUMIDITY",
+          "WIND_SPEED",
+          "WIND_DIRECTION",
+          "PRESSURE",
+          "VISIBILITY",
+          "PRECIPITATION",
+          "CLOUD_COVER"
+        ]
+      },
+      "meta": {
+        "notes": "Parameter must be a valid NOAA surface observation type"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "quality_flag",
+        "value_set": [
+          "PASS",
+          "SUSPECT",
+          "ERRONEOUS",
+          "MISSING"
+        ]
+      },
+      "meta": {
+        "notes": "Quality flag must be a valid QC status"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "data_source",
+        "value_set": [
+          "ASOS",
+          "AWOS",
+          "METAR",
+          "SYNOP",
+          "COOP"
+        ]
+      },
+      "meta": {
+        "notes": "Data source must be a valid observation network"
+      }
+    }
+  ],
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "notes": "Data quality expectations for NOAA surface weather observations",
+    "domain": "National Oceanic and Atmospheric Administration",
+    "data_source": "NOAA Climate Data Online (CDO) / GHCND / LCD"
+  }
+}

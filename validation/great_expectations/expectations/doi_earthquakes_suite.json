@@ -1,0 +1,192 @@
+{
+  "expectation_suite_name": "doi_earthquakes_suite",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "event_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "magnitude"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "depth_km"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "latitude"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "longitude"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "time"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "event_id"
+      },
+      "meta": {
+        "notes": "Event ID is the primary identifier for seismic events"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "magnitude"
+      },
+      "meta": {
+        "notes": "Magnitude is required for all earthquake records"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "time"
+      },
+      "meta": {
+        "notes": "Event time is required for temporal tracking"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": {
+        "column": "event_id"
+      },
+      "meta": {
+        "notes": "Event ID must be unique"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "magnitude",
+        "min_value": -1.0,
+        "max_value": 10.0
+      },
+      "meta": {
+        "notes": "Magnitude ranges from -1 (micro) to ~9.5 (largest recorded)"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "depth_km",
+        "min_value": 0,
+        "max_value": null
+      },
+      "meta": {
+        "notes": "Hypocenter depth in km must be non-negative"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "latitude",
+        "min_value": -90,
+        "max_value": 90
+      },
+      "meta": {
+        "notes": "Latitude must be within valid geographic range"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "longitude",
+        "min_value": -180,
+        "max_value": 180
+      },
+      "meta": {
+        "notes": "Longitude must be within valid geographic range"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "mag_type",
+        "value_set": [
+          "ML",
+          "MD",
+          "MB",
+          "MW",
+          "MS",
+          "MWW",
+          "MWC",
+          "MWB"
+        ]
+      },
+      "meta": {
+        "notes": "Magnitude type must be a valid seismological scale"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "event_type",
+        "value_set": [
+          "EARTHQUAKE",
+          "QUARRY_BLAST",
+          "EXPLOSION",
+          "VOLCANIC_ERUPTION",
+          "ICE_QUAKE"
+        ]
+      },
+      "meta": {
+        "notes": "Event type must be a valid USGS seismic event classification"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "status",
+        "value_set": [
+          "AUTOMATIC",
+          "REVIEWED",
+          "DELETED"
+        ]
+      },
+      "meta": {
+        "notes": "Review status must be a valid USGS processing state"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "alert",
+        "value_set": [
+          "GREEN",
+          "YELLOW",
+          "ORANGE",
+          "RED",
+          null
+        ]
+      },
+      "meta": {
+        "notes": "PAGER alert level; null for events below alert threshold"
+      }
+    }
+  ],
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "notes": "Data quality expectations for DOI/USGS earthquake event records",
+    "domain": "Department of the Interior / USGS",
+    "data_source": "USGS Earthquake Catalog (ComCat)"
+  }
+}

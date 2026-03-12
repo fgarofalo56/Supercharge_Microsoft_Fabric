@@ -1,0 +1,165 @@
+{
+  "expectation_suite_name": "epa_air_quality_suite",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "record_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "aqi_value"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "parameter"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "latitude"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "longitude"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "aqi_category"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "record_id"
+      },
+      "meta": {
+        "notes": "Measurement ID is the primary identifier"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "parameter"
+      },
+      "meta": {
+        "notes": "Air quality parameter must be specified"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": {
+        "column": "record_id"
+      },
+      "meta": {
+        "notes": "Record ID must be unique"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "aqi_value",
+        "min_value": 0,
+        "max_value": 500
+      },
+      "meta": {
+        "notes": "AQI value ranges from 0 (Good) to 500 (Hazardous)"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "parameter",
+        "value_set": [
+          "PM2.5",
+          "PM10",
+          "OZONE",
+          "CO",
+          "SO2",
+          "NO2",
+          "LEAD"
+        ]
+      },
+      "meta": {
+        "notes": "Parameter must be one of the EPA criteria pollutants"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "latitude",
+        "min_value": -90,
+        "max_value": 90
+      },
+      "meta": {
+        "notes": "Latitude must be within valid geographic range"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "longitude",
+        "min_value": -180,
+        "max_value": 180
+      },
+      "meta": {
+        "notes": "Longitude must be within valid geographic range"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "aqi_category",
+        "value_set": [
+          "GOOD",
+          "MODERATE",
+          "UNHEALTHY_SENSITIVE",
+          "UNHEALTHY",
+          "VERY_UNHEALTHY",
+          "HAZARDOUS"
+        ]
+      },
+      "meta": {
+        "notes": "AQI category must follow standard EPA breakpoints"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "concentration",
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 0.99
+      },
+      "meta": {
+        "notes": "Pollutant concentration must be non-negative"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "state_code",
+        "regex": "^\\d{2}$",
+        "mostly": 0.99
+      },
+      "meta": {
+        "notes": "State code must be a 2-digit FIPS code"
+      }
+    }
+  ],
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "notes": "Data quality expectations for EPA AQS air quality monitoring records",
+    "domain": "Environmental Protection Agency",
+    "data_source": "EPA Air Quality System (AQS)"
+  }
+}

@@ -6,7 +6,7 @@
 **Type:** Infrastructure + Documentation + Data Engineering
 **Primary Stack:** Bicep, Python, PySpark, KQL, DAX
 **Target Platform:** Microsoft Fabric (F64 SKU)
-**Phase Status:** Phase 7 Complete (71 features, 134 tests, 5 waves)
+**Phase Status:** Phase 8 In Progress (Federal POC Parity + Best Practices Expansion)
 
 ## Key Technologies
 
@@ -16,17 +16,24 @@
 - **BI:** Power BI, Direct Lake, DAX
 - **Governance:** Microsoft Purview
 - **Testing:** pytest, Great Expectations
+- **New Features:** Fabric IQ, Real-Time Intelligence, AI Copilot, Data Mesh
 
 ## Directory Structure
 
 ```
 infra/              - Bicep IaC modules and deployments
-docs/               - Architecture and deployment documentation
-tutorials/          - 32 step-by-step tutorials (00-31)
+docs/               - Architecture, deployment, best practices, feature docs
+  best-practices/   - Error handling, alerting, performance, governance deep dives
+  features/         - Fabric IQ, RTI, Copilot, Data Mesh guides
+tutorials/          - 37 step-by-step tutorials (00-36)
 poc-agenda/         - 3-day workshop materials
 data-generation/    - 16 Python data generators (casino, federal, streaming, analytics)
-notebooks/          - 35 Fabric-importable notebooks (medallion + streaming)
-validation/         - 134 unit tests + Great Expectations data quality
+  open_data/        - Real federal dataset download scripts (USDA, SBA, NOAA, EPA, DOI)
+notebooks/          - 50+ Fabric-importable notebooks (medallion + streaming + federal)
+  bronze/           - 16 Bronze ingestion notebooks (casino + 5 federal agencies)
+  silver/           - 16 Silver transformation notebooks
+  gold/             - 16 Gold KPI/analytics notebooks
+validation/         - 134+ unit tests + 9 Great Expectations suites
 future-expansions/  - Federal agency & industry expansion documentation
 ```
 
@@ -130,6 +137,17 @@ Phase 7 delivered 71 features across 5 waves with zero regressions:
 | Wave 4 | Tribal Healthcare + DOT/FAA | 15 | — |
 | Wave 5 | Final Regression | 1 | 134 (full) |
 
+## Phase 8 Progress (2026-03-12)
+
+Phase 8 expands all 5 federal agencies (USDA, SBA, NOAA, EPA, DOI) to full POC parity with Casino/Gaming:
+
+| Wave | Scope | Status |
+|------|-------|--------|
+| Wave 1 | Federal POC Parity (5 agencies x Bronze/Silver/Gold + tutorials) | In Progress |
+| Wave 2 | Best Practices (error handling, alerting, performance, governance) | In Progress |
+| Wave 3 | New Features (Fabric IQ, RTI, Copilot, Data Mesh) | In Progress |
+| Wave 4 | Open data download framework + documentation updates | In Progress |
+
 ## Context Notes
 
 - Target SKU is F64 (P1 equivalent) for POC
@@ -138,7 +156,9 @@ Phase 7 delivered 71 features across 5 waves with zero regressions:
 - Direct Lake is the primary BI connectivity method
 - Purview provides governance and lineage
 - Phase 7 adds HIPAA (Tribal Healthcare), FedRAMP (DOT/FAA), 42 CFR Part 2 compliance
+- Phase 8 adds full medallion notebooks, tutorials, open data scripts, and GE suites for all federal agencies
 - All federal datasets use real, publicly available APIs documented in `data-generation/config/federal_datasets.yaml`
+- Each agency supports BOTH synthetic data generation AND real open data downloads
 
 ## Archon Project ID
 

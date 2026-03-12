@@ -88,6 +88,49 @@ datasources:
           - table_name
           - layer
 
+  # Federal agency data sources - Bronze layer validation
+  federal_bronze:
+    class_name: Datasource
+    module_name: great_expectations.datasource
+    execution_engine:
+      class_name: PandasExecutionEngine
+      module_name: great_expectations.execution_engine
+    data_connectors:
+      default_inferred_data_connector_name:
+        class_name: InferredAssetFilesystemDataConnector
+        base_directory: ../data-generation/output/
+        default_regex:
+          group_names:
+            - data_asset_name
+          pattern: (.*)\.parquet
+      runtime_data_connector:
+        class_name: RuntimeDataConnector
+        batch_identifiers:
+          - default_identifier_name
+          - agency
+
+  # Federal agency open data downloads validation
+  federal_open_data:
+    class_name: Datasource
+    module_name: great_expectations.datasource
+    execution_engine:
+      class_name: PandasExecutionEngine
+      module_name: great_expectations.execution_engine
+    data_connectors:
+      default_inferred_data_connector_name:
+        class_name: InferredAssetFilesystemDataConnector
+        base_directory: ../data-generation/output/open_data/
+        default_regex:
+          group_names:
+            - data_asset_name
+          pattern: (.*)\.parquet
+      runtime_data_connector:
+        class_name: RuntimeDataConnector
+        batch_identifiers:
+          - default_identifier_name
+          - agency
+          - dataset
+
   # Pandas source for local testing
   casino_pandas:
     class_name: Datasource

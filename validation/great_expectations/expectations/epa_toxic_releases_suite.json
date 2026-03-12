@@ -1,0 +1,175 @@
+{
+  "expectation_suite_name": "epa_toxic_releases_suite",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "record_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "facility_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "state_code"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "reporting_year"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "contaminant"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "record_id"
+      },
+      "meta": {
+        "notes": "Release ID is the primary identifier"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "facility_id"
+      },
+      "meta": {
+        "notes": "Facility ID is required to link releases to reporting facilities"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": {
+        "column": "record_id"
+      },
+      "meta": {
+        "notes": "Release ID must be unique across all records"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "reporting_year",
+        "min_value": 1987,
+        "max_value": 2030
+      },
+      "meta": {
+        "notes": "TRI reporting began in 1987 under EPCRA Section 313"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "state_code",
+        "regex": "^\\d{2}$"
+      },
+      "meta": {
+        "notes": "State code must be a 2-digit FIPS code"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "total_releases_lbs",
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 0.99
+      },
+      "meta": {
+        "notes": "Total releases in pounds must be non-negative"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "fugitive_air_lbs",
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "Fugitive air releases must be non-negative when present"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "stack_air_lbs",
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "Stack air releases must be non-negative when present"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "water_lbs",
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "Water releases must be non-negative when present"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "land_lbs",
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "Land releases must be non-negative when present"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "industry_sector",
+        "value_set": [
+          "MANUFACTURING",
+          "MINING",
+          "ELECTRIC_UTILITIES",
+          "CHEMICAL",
+          "PETROLEUM",
+          "METALS",
+          "FOOD_PROCESSING",
+          "WASTE_MANAGEMENT",
+          "OTHER",
+          null
+        ]
+      },
+      "meta": {
+        "notes": "Industry sector must be a valid TRI reporting category"
+      }
+    }
+  ],
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "notes": "Data quality expectations for EPA Toxics Release Inventory (TRI) records",
+    "domain": "Environmental Protection Agency",
+    "data_source": "EPA Toxics Release Inventory (TRI)",
+    "compliance_requirements": [
+      "EPCRA Section 313 reporting",
+      "Clean Air Act Section 112",
+      "Clean Water Act Section 304"
+    ]
+  }
+}

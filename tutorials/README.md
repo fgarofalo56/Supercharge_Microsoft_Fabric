@@ -18,7 +18,7 @@
 
 ## 🎯 Overview
 
-This tutorial series of 32 tutorials guides you through implementing a complete Microsoft Fabric data platform for casino/gaming analytics. Starting from environment setup through advanced AI/ML, migration, streaming, and federal expansions, you'll learn industry best practices for medallion architecture, real-time analytics, and data governance.
+This tutorial series of 37 tutorials guides you through implementing a complete Microsoft Fabric data platform for casino/gaming and federal agency analytics. Starting from environment setup through advanced AI/ML, migration, streaming, federal agency POCs, and enterprise best practices, you'll learn industry best practices for medallion architecture, real-time analytics, and data governance.
 
 ### What You'll Build
 
@@ -89,6 +89,14 @@ flowchart LR
         T31[31-DOT/FAA]
     end
 
+    subgraph L12["🌿 Federal Agency POCs"]
+        T32[32-USDA]
+        T33[33-SBA]
+        T34[34-NOAA]
+        T35[35-EPA]
+        T36[36-DOI]
+    end
+
     T00 --> T01 --> T02 --> T03 --> T04 --> T05
     T05 --> T06 --> T07 --> T08 --> T09
     T09 --> T10 --> T11
@@ -98,6 +106,7 @@ flowchart LR
     T19 --> T20 --> T21 --> T22 --> T23
     T23 --> T24 --> T25 --> T26
     T26 --> T27 --> T28 --> T29 --> T30 --> T31
+    T31 --> T32 --> T33 --> T34 --> T35 --> T36
 ```
 
 ---
@@ -136,6 +145,13 @@ Complete tutorials in sequence for the best learning experience:
 ╠════════╬════════╬════════╬════════╬════════╬════════╬════════╬════════╣
 ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║
 ╚════════╩════════╩════════╩════════╩════════╩════════╩════════╩════════╝
+
+╔════════╦════════╦════════╦════════╦════════╗
+║   32   ║   33   ║   34   ║   35   ║   36   ║
+║  USDA  ║  SBA   ║  NOAA  ║  EPA   ║  DOI   ║
+╠════════╬════════╬════════╬════════╬════════╣
+║  ⭐⭐  ║  ⭐⭐  ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║
+╚════════╩════════╩════════╩════════╩════════╝
  Beginner ──────────────────────────────────────────────────────────────────────► Advanced
 ```
 
@@ -188,6 +204,12 @@ Complete tutorials in sequence for the best learning experience:
 | | [29 - Geolocation Analytics](./29-geolocation-analytics/README.md) | H3 spatial indexing, geofencing, proximity | ~2.5 hours |
 | | [30 - Tribal Healthcare](./30-tribal-healthcare/README.md) | HIPAA-compliant IHS analytics, PHI masking | ~3 hours |
 | | [31 - Federal DOT/FAA](./31-federal-dot-faa/README.md) | FedRAMP aviation analytics, safety dashboards | ~2.5 hours |
+| 🌿 **Federal Agency POCs** | | | |
+| | [32 - USDA Agriculture](./32-usda-agriculture/README.md) | Crop production & food safety analytics | ~2 hours |
+| | [33 - SBA Small Business](./33-sba-small-business/README.md) | PPP/7a/504 loan portfolio analytics | ~2 hours |
+| | [34 - NOAA Weather & Climate](./34-noaa-weather-climate/README.md) | Weather, storms, climate trends & real-time | ~2.5 hours |
+| | [35 - EPA Environment](./35-epa-environment/README.md) | Air quality, toxic releases, water compliance | ~2.5 hours |
+| | [36 - DOI Natural Resources](./36-doi-interior/README.md) | Earthquakes, water, parks, species analytics | ~2.5 hours |
 
 ---
 
@@ -208,7 +230,8 @@ Complete tutorials in sequence for the best learning experience:
 | 🟡 Infrastructure & GeoAnalytics | 20-23 | ~12 hours |
 | 🟢 Migration & Streaming | 24-26 | ~9 hours |
 | 🔴 Analytics & Federal Expansions | 27-31 | ~13.5 hours |
-| **Total** | All 32 | **~77.5 hours** |
+| 🌿 Federal Agency POCs | 32-36 | ~11.5 hours |
+| **Total** | All 37 | **~89 hours** |
 
 ### By Format
 

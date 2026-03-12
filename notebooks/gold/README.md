@@ -18,6 +18,16 @@ The Gold layer transforms cleansed Silver data into business intelligence assets
 | `04_gold_table_analytics.py` | Table game profitability, dealer performance | `silver.table_enriched` | `gold.fact_table_performance` |
 | `05_gold_financial_summary.py` | Revenue, drop, cage operations summary | `silver.financial_reconciled` | `gold.fact_financial_summary` |
 | `06_gold_security_dashboard.py` | Security incidents, response times, zone analysis | `silver.security_enriched` | `gold.fact_security_metrics` |
+| `07_gold_tribal_health_360.py` | Population health KPIs, health equity metrics | `silver.tribal_health` | `gold.tribal_health_360` |
+| `08_gold_dot_faa_analytics.py` | Aviation safety KPIs, delay analysis | `silver.dot_faa` | `gold.dot_faa_analytics` |
+| `09_gold_video_security_kpis.py` | Video security KPIs, incident patterns | `silver.video_analytics` | `gold.video_security_kpis` |
+| `10_gold_movement_analytics.py` | Foot traffic KPIs, zone performance | `silver.people_movement` | `gold.movement_analytics` |
+| `11_gold_geolocation_insights.py` | Geospatial KPIs, proximity analytics | `silver.geolocation` | `gold.geolocation_insights` |
+| `12_gold_usda_analytics.py` | Agricultural KPIs: crop rankings, yields, food safety index | `silver.usda_*` | `gold.usda_crop_summary`, `gold.usda_state_agriculture`, `gold.usda_food_safety_dashboard`, `gold.usda_executive_summary` |
+| `13_gold_sba_analytics.py` | Small business KPIs: loan portfolio, economic impact, lender scorecards | `silver.sba_*` | `gold.sba_loan_portfolio`, `gold.sba_economic_impact`, `gold.sba_lender_scorecard` |
+| `14_gold_noaa_analytics.py` | Weather/climate KPIs: storm impact, climate trends, severe weather risk | `silver.noaa_*` | `gold.noaa_weather_summary`, `gold.noaa_storm_impact`, `gold.noaa_climate_trends`, `gold.noaa_severe_weather_risk` |
+| `15_gold_epa_analytics.py` | Environmental KPIs: AQI index, facility risk, water compliance, environmental scorecard | `silver.epa_*` | `gold.epa_air_quality_index`, `gold.epa_facility_risk`, `gold.epa_water_compliance`, `gold.epa_environmental_scorecard` |
+| `16_gold_doi_analytics.py` | Natural resources KPIs: seismic risk, water resources, park performance | `silver.doi_*` | `gold.doi_seismic_risk`, `gold.doi_water_resources`, `gold.doi_park_performance`, `gold.doi_natural_resources_dashboard` |
 
 ---
 
