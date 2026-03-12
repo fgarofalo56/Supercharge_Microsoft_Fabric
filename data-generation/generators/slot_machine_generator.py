@@ -11,7 +11,7 @@ Generates synthetic slot machine telemetry data including:
 Based on SAS Protocol standards used in gaming industry.
 """
 
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import Any
 
 import numpy as np
@@ -98,7 +98,9 @@ class SlotMachineGenerator(BaseGenerator):
                 "denomination": np.random.choice(self.DENOMINATIONS),
                 "machine_type": np.random.choice(self.MACHINE_TYPES),
                 "manufacturer": np.random.choice(self.MANUFACTURERS),
-                "game_theme": self.faker.word().title() + " " + np.random.choice(
+                "game_theme": self.faker.word().title()
+                + " "
+                + np.random.choice(
                     ["Fortune", "Riches", "Gold", "Diamond", "Wild", "Bonus"]
                 ),
                 "theoretical_hold": round(np.random.uniform(0.04, 0.12), 4),
@@ -192,7 +194,9 @@ class SlotMachineGenerator(BaseGenerator):
         """Add jackpot event data."""
         # Jackpot amounts vary by denomination
         base_jackpot = machine["denomination"] * 1000
-        multiplier = self.weighted_choice([1, 2, 5, 10, 50], [0.50, 0.25, 0.15, 0.08, 0.02])
+        multiplier = self.weighted_choice(
+            [1, 2, 5, 10, 50], [0.50, 0.25, 0.15, 0.08, 0.02]
+        )
         jackpot_amount = round(base_jackpot * multiplier, 2)
 
         record["jackpot_amount"] = jackpot_amount

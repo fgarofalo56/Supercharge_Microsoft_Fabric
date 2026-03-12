@@ -1559,12 +1559,12 @@ Continue to **[Tutorial 16: Performance Tuning](../16-performance-tuning/README.
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [14-Security & Compliance](../14-security-networking/README.md) | [Tutorials Index](../index.md) | [16-Performance Tuning](../16-performance-tuning/README.md) |
+| [⬅️ 14-Security & Networking](../14-security-networking/README.md) | [📖 Tutorials Index](../index.md) | [16-Performance Tuning](../16-performance-tuning/README.md) ➡️ |
 
 ---
 
-> **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
+> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).

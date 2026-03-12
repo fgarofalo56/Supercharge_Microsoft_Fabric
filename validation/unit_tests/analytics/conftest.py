@@ -1,7 +1,9 @@
 """Pytest fixtures for analytics generator tests."""
-import pytest
+
 import sys
 from pathlib import Path
+
+import pytest
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT / "data-generation"))
@@ -11,6 +13,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "data-generation"))
 def video_analytics_generator():
     """Fixture for the video analytics generator."""
     from generators.analytics.video_analytics_generator import VideoAnalyticsGenerator
+
     return VideoAnalyticsGenerator(seed=42)
 
 
@@ -18,6 +21,7 @@ def video_analytics_generator():
 def people_movement_generator():
     """Fixture for the people movement generator."""
     from generators.analytics.people_movement_generator import PeopleMovementGenerator
+
     return PeopleMovementGenerator(seed=42)
 
 
@@ -25,6 +29,7 @@ def people_movement_generator():
 def geolocation_generator():
     """Fixture for the geolocation generator."""
     from generators.analytics.geolocation_generator import GeolocationGenerator
+
     return GeolocationGenerator(seed=42)
 
 

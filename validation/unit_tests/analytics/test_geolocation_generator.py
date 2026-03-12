@@ -9,11 +9,11 @@ Covers geolocation analytics event generation including:
 - shuttle_tracker   : Resort shuttle route tracking
 - valet_tag        : Valet vehicle location tags
 """
+
 from generators.analytics.geolocation_generator import (
-    GeolocationGenerator,
     DEVICE_TYPES,
-    SOURCE_SYSTEMS,
     GEOFENCE_EVENTS,
+    SOURCE_SYSTEMS,
 )
 
 _VALID_DEVICE_TYPES = set(DEVICE_TYPES)
@@ -49,9 +49,9 @@ class TestGeolocationGenerator:
         """All generated device_type values must be one of the 6 known types."""
         for _ in range(sample_size):
             record = geolocation_generator.generate_record()
-            assert record["device_type"] in _VALID_DEVICE_TYPES, (
-                f"Unexpected device_type '{record['device_type']}'"
-            )
+            assert (
+                record["device_type"] in _VALID_DEVICE_TYPES
+            ), f"Unexpected device_type '{record['device_type']}'"
 
     # ------------------------------------------------------------------
     # Latitude range (Las Vegas area)
@@ -62,9 +62,9 @@ class TestGeolocationGenerator:
         for _ in range(sample_size):
             record = geolocation_generator.generate_record()
             lat = record["latitude"]
-            assert 36.15 <= lat <= 36.19, (
-                f"latitude must be in Las Vegas range [36.15, 36.19], got {lat}"
-            )
+            assert (
+                36.15 <= lat <= 36.19
+            ), f"latitude must be in Las Vegas range [36.15, 36.19], got {lat}"
 
     # ------------------------------------------------------------------
     # Longitude range (Las Vegas area)
@@ -75,9 +75,9 @@ class TestGeolocationGenerator:
         for _ in range(sample_size):
             record = geolocation_generator.generate_record()
             lon = record["longitude"]
-            assert -115.16 <= lon <= -115.12, (
-                f"longitude must be in Las Vegas range [-115.16, -115.12], got {lon}"
-            )
+            assert (
+                -115.16 <= lon <= -115.12
+            ), f"longitude must be in Las Vegas range [-115.16, -115.12], got {lon}"
 
     # ------------------------------------------------------------------
     # source_system enum
@@ -87,9 +87,9 @@ class TestGeolocationGenerator:
         """source_system must be one of the 5 known positioning systems."""
         for _ in range(sample_size):
             record = geolocation_generator.generate_record()
-            assert record["source_system"] in _VALID_SOURCE_SYSTEMS, (
-                f"Unexpected source_system '{record['source_system']}'"
-            )
+            assert (
+                record["source_system"] in _VALID_SOURCE_SYSTEMS
+            ), f"Unexpected source_system '{record['source_system']}'"
 
     # ------------------------------------------------------------------
     # geofence_event enum
@@ -103,9 +103,9 @@ class TestGeolocationGenerator:
             gf_event = record["geofence_event"]
             if gf_event is not None:
                 found = True
-                assert gf_event in _VALID_GEOFENCE_EVENTS, (
-                    f"Unexpected geofence_event '{gf_event}'"
-                )
+                assert (
+                    gf_event in _VALID_GEOFENCE_EVENTS
+                ), f"Unexpected geofence_event '{gf_event}'"
 
         assert found, "No records with geofence_event seen in 500 records"
 
@@ -121,12 +121,12 @@ class TestGeolocationGenerator:
             h3 = record["h3_index"]
             if h3 is not None:
                 found = True
-                assert len(h3) == 15, (
-                    f"h3_index must be 15 characters, got {len(h3)}: '{h3}'"
-                )
-                assert all(c in "0123456789abcdef" for c in h3), (
-                    f"h3_index must be a hex string, got '{h3}'"
-                )
+                assert (
+                    len(h3) == 15
+                ), f"h3_index must be 15 characters, got {len(h3)}: '{h3}'"
+                assert all(
+                    c in "0123456789abcdef" for c in h3
+                ), f"h3_index must be a hex string, got '{h3}'"
 
         assert found, "No records with h3_index seen in 500 records"
 
@@ -140,9 +140,7 @@ class TestGeolocationGenerator:
             record = geolocation_generator.generate_record()
             speed = record["speed_mps"]
             if speed is not None:
-                assert speed >= 0.0, (
-                    f"speed_mps must be >= 0.0, got {speed}"
-                )
+                assert speed >= 0.0, f"speed_mps must be >= 0.0, got {speed}"
 
     # ------------------------------------------------------------------
     # Batch generation
@@ -153,9 +151,9 @@ class TestGeolocationGenerator:
         batch = geolocation_generator.generate_batch(count=sample_size)
 
         assert isinstance(batch, list), "generate_batch must return a list"
-        assert len(batch) == sample_size, (
-            f"Expected {sample_size} records, got {len(batch)}"
-        )
+        assert (
+            len(batch) == sample_size
+        ), f"Expected {sample_size} records, got {len(batch)}"
 
     # ------------------------------------------------------------------
     # Metadata columns
@@ -168,6 +166,6 @@ class TestGeolocationGenerator:
         assert "_ingested_at" in record, "_ingested_at metadata field missing"
         assert "_source" in record, "_source metadata field missing"
         assert "_batch_id" in record, "_batch_id metadata field missing"
-        assert record["_source"] == "GeolocationGenerator", (
-            f"Expected _source='GeolocationGenerator', got '{record['_source']}'"
-        )
+        assert (
+            record["_source"] == "GeolocationGenerator"
+        ), f"Expected _source='GeolocationGenerator', got '{record['_source']}'"

@@ -9,15 +9,16 @@ Abstract base class for all data generators providing common functionality:
 - Progress tracking
 """
 
-from abc import ABC, abstractmethod
-from datetime import datetime, timedelta
-from pathlib import Path
-from typing import Any, Iterator
 import hashlib
 import uuid
+from abc import ABC, abstractmethod
+from collections.abc import Iterator
+from datetime import datetime, timedelta
+from pathlib import Path
+from typing import Any
 
-import pandas as pd
 import numpy as np
+import pandas as pd
 from faker import Faker
 from tqdm import tqdm
 
@@ -36,15 +37,27 @@ class BaseGenerator(ABC):
         Initialize the generator.
 
         Args:
-            seed: Random seed for reproducibility
+            seed: Random seed for reproducibility (non-negative integer)
             locale: Faker locale
             start_date: Start date for generated data
             end_date: End date for generated data
+
+        Raises:
+            ValueError: If seed is negative or start_date > end_date
         """
+        if seed is not None and seed < 0:
+            raise ValueError(f"seed must be non-negative, got {seed}")
+
         self.seed = seed or 42
         self.locale = locale
         self.start_date = start_date or datetime.now() - timedelta(days=30)
         self.end_date = end_date or datetime.now()
+
+        if self.start_date > self.end_date:
+            raise ValueError(
+                f"start_date ({self.start_date}) must be before "
+                f"end_date ({self.end_date})"
+            )
 
         # Initialize random generators
         self.faker = Faker(locale)
@@ -73,12 +86,20 @@ class BaseGenerator(ABC):
         Generate multiple records.
 
         Args:
-            num_records: Number of records to generate
+            num_records: Number of records to generate (must be positive)
             show_progress: Show progress bar
 
         Returns:
             DataFrame containing generated records
+
+        Raises:
+            ValueError: If num_records is not a positive integer
         """
+        if not isinstance(num_records, int) or num_records <= 0:
+            raise ValueError(
+                f"num_records must be a positive integer, got {num_records}"
+            )
+
         records = []
         iterator = range(num_records)
 
@@ -100,13 +121,23 @@ class BaseGenerator(ABC):
         Generate records in batches (memory efficient).
 
         Args:
-            num_records: Total number of records
-            batch_size: Records per batch
+            num_records: Total number of records (must be positive)
+            batch_size: Records per batch (must be positive)
             show_progress: Show progress bar
 
         Yields:
             DataFrame batches
+
+        Raises:
+            ValueError: If num_records or batch_size is not positive
         """
+        if not isinstance(num_records, int) or num_records <= 0:
+            raise ValueError(
+                f"num_records must be a positive integer, got {num_records}"
+            )
+        if not isinstance(batch_size, int) or batch_size <= 0:
+            raise ValueError(f"batch_size must be a positive integer, got {batch_size}")
+
         remaining = num_records
         batch_num = 0
 
@@ -132,19 +163,30 @@ class BaseGenerator(ABC):
             df: DataFrame to save
             output_path: Output file or directory path
             partition_cols: Columns to partition by
+
+        Raises:
+            OSError: If the output path is not writable
         """
         output_path = Path(output_path)
-        output_path.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+        except OSError as e:
+            raise OSError(
+                f"Cannot create output directory {output_path.parent}: {e}"
+            ) from e
 
-        if partition_cols:
-            df.to_parquet(
-                output_path,
-                partition_cols=partition_cols,
-                engine="pyarrow",
-                index=False,
-            )
-        else:
-            df.to_parquet(output_path, engine="pyarrow", index=False)
+        try:
+            if partition_cols:
+                df.to_parquet(
+                    output_path,
+                    partition_cols=partition_cols,
+                    engine="pyarrow",
+                    index=False,
+                )
+            else:
+                df.to_parquet(output_path, engine="pyarrow", index=False)
+        except Exception as e:
+            raise OSError(f"Failed to write Parquet to {output_path}: {e}") from e
 
     def to_json(
         self,
@@ -161,10 +203,22 @@ class BaseGenerator(ABC):
             output_path: Output file path
             orient: JSON orientation
             lines: Write as JSON lines
+
+        Raises:
+            OSError: If the output path is not writable
         """
         output_path = Path(output_path)
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-        df.to_json(output_path, orient=orient, lines=lines, date_format="iso")
+        try:
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+        except OSError as e:
+            raise OSError(
+                f"Cannot create output directory {output_path.parent}: {e}"
+            ) from e
+
+        try:
+            df.to_json(output_path, orient=orient, lines=lines, date_format="iso")
+        except Exception as e:
+            raise OSError(f"Failed to write JSON to {output_path}: {e}") from e
 
     # ==========================================================================
     # Helper Methods
@@ -190,8 +244,14 @@ class BaseGenerator(ABC):
         """Generate SHA-256 hash of a value."""
         return hashlib.sha256(f"{salt}{value}".encode()).hexdigest()
 
-    def mask_ssn(self, ssn: str) -> str:
-        """Mask SSN showing only last 4 digits."""
+    def mask_ssn(self, ssn: str | None) -> str:
+        """Mask SSN showing only last 4 digits.
+
+        Raises:
+            ValueError: If ssn is None or has fewer than 4 characters
+        """
+        if not ssn or len(ssn) < 4:
+            raise ValueError(f"SSN must be at least 4 characters, got {ssn!r}")
         return f"XXX-XX-{ssn[-4:]}"
 
     def mask_card_number(self, card_number: str) -> str:
@@ -203,7 +263,21 @@ class BaseGenerator(ABC):
         choices: list[Any],
         weights: list[float],
     ) -> Any:
-        """Make a weighted random choice."""
+        """Make a weighted random choice.
+
+        Raises:
+            ValueError: If choices/weights are empty or weights don't sum to ~1.0
+        """
+        if not choices or not weights:
+            raise ValueError("choices and weights must be non-empty")
+        if len(choices) != len(weights):
+            raise ValueError(
+                f"choices ({len(choices)}) and weights ({len(weights)}) "
+                f"must have the same length"
+            )
+        weight_sum = sum(weights)
+        if not (0.99 <= weight_sum <= 1.01):
+            raise ValueError(f"weights must sum to ~1.0, got {weight_sum:.4f}")
         return np.random.choice(choices, p=weights)
 
     def add_metadata_columns(self, record: dict[str, Any]) -> dict[str, Any]:

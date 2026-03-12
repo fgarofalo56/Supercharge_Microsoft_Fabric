@@ -8,12 +8,14 @@ Tests for streaming functionality:
 - Rate limiting works correctly
 - Graceful shutdown
 """
-import pytest
+
 import json
-import time
 import threading
+import time
 from datetime import datetime
-from unittest.mock import Mock, patch, MagicMock
+from unittest.mock import MagicMock, Mock, patch
+
+import pytest
 
 pytestmark = [pytest.mark.integration, pytest.mark.streaming]
 
@@ -29,7 +31,7 @@ class TestEventHubProducerInitialization:
 
         assert producer is not None
         assert producer.connection_string is None
-        assert producer._use_eventhub == False
+        assert not producer._use_eventhub
         assert producer.events_per_second == 10  # Default
 
     def test_producer_initializes_with_custom_rate(self):
@@ -51,8 +53,8 @@ class TestEventHubProducerInitialization:
 
     def test_producer_creates_slot_generator(self):
         """Verify producer creates internal SlotMachineGenerator."""
-        from generators.streaming.event_hub_producer import EventHubProducer
         from generators.slot_machine_generator import SlotMachineGenerator
+        from generators.streaming.event_hub_producer import EventHubProducer
 
         producer = EventHubProducer(seed=42)
 
@@ -167,7 +169,7 @@ class TestRateLimiting:
         """Verify rate limiting interval is calculated correctly."""
         from generators.streaming.event_hub_producer import EventHubProducer
 
-        producer = EventHubProducer(events_per_second=10, seed=42)
+        EventHubProducer(events_per_second=10, seed=42)
 
         # Expected interval: 1/10 = 0.1 seconds
         expected_interval = 1.0 / 10
@@ -217,7 +219,7 @@ class TestGracefulShutdown:
 
         producer.stop()
 
-        assert producer._running == False
+        assert not producer._running
 
     def test_producer_stops_on_stop_call(self):
         """Verify producer stops when stop() is called."""
@@ -227,6 +229,7 @@ class TestGracefulShutdown:
 
         # Start producer in thread
         events = []
+
         def run_producer():
             producer.run_sync(callback=lambda e: events.append(e))
 
@@ -266,7 +269,7 @@ class TestGracefulShutdown:
         producer.run_sync(max_events=100)
 
         # Should have stopped cleanly
-        assert producer._running == False
+        assert not producer._running
 
 
 class TestEventCount:
@@ -346,7 +349,7 @@ class TestStdoutMode:
 
         producer = EventHubProducer(seed=42)
 
-        assert producer._use_eventhub == False
+        assert not producer._use_eventhub
 
     def test_stdout_mode_prints_json(self, capsys):
         """Verify stdout mode prints JSON to stdout."""
@@ -372,12 +375,15 @@ class TestEventHubModeSetup:
 
     def test_eventhub_mode_requires_sdk(self):
         """Verify Event Hub mode checks for SDK availability."""
-        from generators.streaming.event_hub_producer import EventHubProducer, EVENTHUB_AVAILABLE
+        from generators.streaming.event_hub_producer import (
+            EVENTHUB_AVAILABLE,
+            EventHubProducer,
+        )
 
         producer = EventHubProducer(
             connection_string="Endpoint=sb://test.servicebus.windows.net/",
             eventhub_name="test-hub",
-            seed=42
+            seed=42,
         )
 
         # Should only enable if SDK available
@@ -385,18 +391,22 @@ class TestEventHubModeSetup:
 
     def test_warning_logged_without_sdk(self, caplog):
         """Verify warning logged when SDK not available but connection provided."""
-        from generators.streaming.event_hub_producer import EventHubProducer, EVENTHUB_AVAILABLE
+        from generators.streaming.event_hub_producer import (
+            EVENTHUB_AVAILABLE,
+            EventHubProducer,
+        )
 
         if EVENTHUB_AVAILABLE:
             pytest.skip("azure-eventhub is installed")
 
         import logging
+
         caplog.set_level(logging.WARNING)
 
-        producer = EventHubProducer(
+        EventHubProducer(
             connection_string="Endpoint=sb://test.servicebus.windows.net/",
             eventhub_name="test-hub",
-            seed=42
+            seed=42,
         )
 
         # Should have logged warning
@@ -421,11 +431,13 @@ class TestEventValidation:
                 assert field in event, f"Event missing required field: {field}"
 
             # Check event_type is valid
-            valid_types = slot_telemetry_schema["properties"]["event_type"].get("enum", [])
+            valid_types = slot_telemetry_schema["properties"]["event_type"].get(
+                "enum", []
+            )
             if valid_types:
-                assert event["event_type"] in valid_types, (
-                    f"Invalid event_type: {event['event_type']}"
-                )
+                assert (
+                    event["event_type"] in valid_types
+                ), f"Invalid event_type: {event['event_type']}"
 
     def test_machine_id_format_in_stream(self, validate_machine_id_format):
         """Verify streamed events have valid machine IDs."""
@@ -435,9 +447,9 @@ class TestEventValidation:
 
         for _ in range(50):
             event = producer.generate_event()
-            assert validate_machine_id_format(event["machine_id"]), (
-                f"Invalid machine_id: {event['machine_id']}"
-            )
+            assert validate_machine_id_format(
+                event["machine_id"]
+            ), f"Invalid machine_id: {event['machine_id']}"
 
 
 class TestAsyncMode:

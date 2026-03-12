@@ -1,8 +1,8 @@
-# :notebook: Fabric Notebooks
+# 📓 Fabric Notebooks
 
 > **[Home](../README.md)** | **[Data Generation](../data-generation/)** | **[Validation](../validation/)** | **[Tutorials](../tutorials/)**
 
-Production-ready notebooks designed for Microsoft Fabric, implementing the medallion architecture for casino/gaming data.
+Production-ready notebooks designed for Microsoft Fabric, implementing the medallion architecture for casino/gaming, federal agency, and streaming data.
 
 ---
 
@@ -18,19 +18,27 @@ Production-ready notebooks designed for Microsoft Fabric, implementing the medal
 | 04_compliance    | --> | 04_financial_rec | --> | 04_table_analytics|
 | 05_table_games   | --> | 05_security_enr  | --> | 05_financial_sum |
 | 06_security_events| --> | 06_compliance_val| --> | 06_security_dash |
+| 07_tribal_health | --> | 07_tribal_health | --> | 07_tribal_360    |
+| 08_dot_faa       | --> | 08_dot_faa       | --> | 08_dot_faa_anlyt |
+| 09_video_analytic| --> | 09_video_analytic| --> | 09_video_sec_kpi |
+| 10_people_movemnt| --> | 10_people_movemnt| --> | 10_movement_anlyt|
+| 11_geolocation   | --> | 11_geolocation   | --> | 11_geo_insights  |
 +------------------+     +------------------+     +------------------+
-                                                          |
-                              +----------------------------+
-                              |
-        +---------------------+---------------------+
-        |                                           |
-+-------v--------+                          +-------v--------+
-|   REAL-TIME    |                          |   MACHINE      |
-|   ANALYTICS    |                          |   LEARNING     |
-+----------------+                          +----------------+
-| Eventstream    |                          | Churn Model    |
-| KQL Queries    |                          | Fraud Detection|
-+----------------+                          +----------------+
+        |                                                 |
+        |        +---------------------------------------+
+        |        |
++-------v--------v-+                          +----------------+
+|   STREAMING (8)  |                          |   MACHINE      |
++------------------+                          |   LEARNING     |
+| 01_sql_server_cdc|                          +----------------+
+| 02_azure_sql     |                          | Churn Model    |
+| 03_cosmos_db     |                          | Fraud Detection|
+| 04_ibm_db2_cdc   |                          +----------------+
+| 05_oracle_cdc    |
+| 06_kafka         |
+| 07_iot_hub       |
+| 08_slot_iot      |
++------------------+
 ```
 
 ---
@@ -49,6 +57,11 @@ Raw data ingestion from landing zone to Bronze tables.
 | 04 | `bronze_compliance.py` | Regulatory filings (CTR, SAR, W2G) | Parquet | `bronze_compliance` |
 | 05 | `bronze_table_games.py` | Table game transactions | Parquet | `bronze_table_games` |
 | 06 | `bronze_security_events.py` | Security/surveillance logs | Parquet | `bronze_security_events` |
+| 07 | `07_bronze_tribal_health.py` | IHS tribal health encounters with HIPAA audit | Parquet | `bronze_tribal_health_encounters` |
+| 08 | `08_bronze_dot_faa.py` | DOT/FAA multi-domain ingestion (flights, safety, traffic) | Parquet | `bronze_dot_flight_ops` |
+| 09 | `09_bronze_video_analytics.py` | Video analytics events ingestion | Parquet | `bronze_video_analytics` |
+| 10 | `10_bronze_people_movement.py` | People movement tracking ingestion | Parquet | `bronze_people_movement` |
+| 11 | `11_bronze_geolocation.py` | Geolocation events ingestion | Parquet | `bronze_geolocation` |
 
 ### Silver Layer Notebooks
 
@@ -62,6 +75,11 @@ Data cleansing, validation, and enrichment.
 | 04 | `silver_financial_reconciled.py` | Reconciled transactions | CTR validation, structuring detection |
 | 05 | `silver_security_enriched.py` | Enriched security events | Threat scoring, correlation |
 | 06 | `silver_compliance_validated.py` | Validated compliance filings | Threshold validation, deadlines |
+| 07 | `07_silver_tribal_health.py` | PHI masking, FHIR R4 mapping, ICD-10 validation | HIPAA compliance, deduplication |
+| 08 | `08_silver_dot_faa.py` | IATA validation, delay categorization, carrier standardization | Data quality, cross-source correlation |
+| 09 | `09_silver_video_analytics.py` | Video event deduplication, confidence scoring | Threat classification, anomaly flagging |
+| 10 | `10_silver_people_movement.py` | Movement path validation, zone enrichment | Dwell time calculation, flow analysis |
+| 11 | `11_silver_geolocation.py` | H3 indexing, geofence validation | Location clustering, proximity analysis |
 
 ### Gold Layer Notebooks
 
@@ -75,6 +93,11 @@ Business-ready aggregations and KPIs.
 | 04 | `gold_table_analytics.py` | Table games analytics | Drop, Win, Hold% |
 | 05 | `gold_financial_summary.py` | Financial summary | Daily P&L, cash flow |
 | 06 | `gold_security_dashboard.py` | Security dashboard | Incidents, threats, response |
+| 07 | `07_gold_tribal_health_360.py` | Patient 360, population health KPIs | Encounters/year, ED utilization, diabetes prevalence |
+| 08 | `08_gold_dot_faa_analytics.py` | Carrier performance, safety analytics | On-time rate, incident trends, airport metrics |
+| 09 | `09_gold_video_security_kpis.py` | Video security KPIs and dashboards | Detection rates, response times, threat trends |
+| 10 | `10_gold_movement_analytics.py` | People movement analytics | Zone occupancy, flow patterns, peak analysis |
+| 11 | `11_gold_geolocation_insights.py` | Geolocation business insights | Hotspot analysis, visit patterns, geo-attribution |
 
 ### Real-Time Notebooks
 
@@ -84,6 +107,21 @@ Streaming and real-time analytics.
 |----------|-------------|------------|
 | `realtime_slot_streaming.py` | Eventstream to Lakehouse streaming | Spark Structured Streaming |
 | `kql_casino_floor.kql` | KQL queries for Eventhouse monitoring | KQL |
+
+### 🔄 Streaming Notebooks
+
+CDC and IoT streaming connectors for real-time data ingestion.
+
+| # | Notebook | Description | Source | Connector |
+|:--|:---------|:------------|:-------|:----------|
+| 01 | `01_sql_server_cdc.py` | SQL Server CDC via Debezium | SQL Server | Eventstreams |
+| 02 | `02_azure_sql_change_feed.py` | Azure SQL Change Tracking v2 | Azure SQL | Native Change Feed |
+| 03 | `03_cosmos_db_change_feed.py` | Cosmos DB change feed processing | Cosmos DB | Change Feed Processor |
+| 04 | `04_ibm_db2_cdc.py` | IBM DB2 CDC with EBCDIC handling | DB2 z/OS & LUW | JDBC / ASN Capture |
+| 05 | `05_oracle_cdc.py` | Oracle LogMiner CDC | Oracle | LogMiner / GoldenGate |
+| 06 | `06_kafka_connector.py` | Multi-topic Kafka with Avro/JSON | Apache Kafka | Kafka Connect |
+| 07 | `07_iot_hub_ingestion.py` | Azure IoT Hub device-to-cloud | IoT Hub | Native Connector |
+| 08 | `08_slot_machine_iot_simulator.py` | Casino IoT slot machine telemetry | Custom IoT | SAS Protocol |
 
 ### Machine Learning Notebooks
 
@@ -250,7 +288,12 @@ Notebooks use standard Fabric libraries (no additional packages required):
    |-- 03_bronze_financial_txn.py
    |-- 04_bronze_compliance.py
    |-- 05_bronze_table_games.py
-   +-- 06_bronze_security_events.py
+   |-- 06_bronze_security_events.py
+   |-- 07_bronze_tribal_health.py
+   |-- 08_bronze_dot_faa.py
+   |-- 09_bronze_video_analytics.py
+   |-- 10_bronze_people_movement.py
+   +-- 11_bronze_geolocation.py
 
 2. Silver Notebooks (run after Bronze, in order)
    |-- 01_silver_slot_cleansed.py
@@ -258,7 +301,12 @@ Notebooks use standard Fabric libraries (no additional packages required):
    |-- 03_silver_table_enriched.py
    |-- 04_silver_financial_reconciled.py
    |-- 05_silver_security_enriched.py
-   +-- 06_silver_compliance_validated.py
+   |-- 06_silver_compliance_validated.py
+   |-- 07_silver_tribal_health.py
+   |-- 08_silver_dot_faa.py
+   |-- 09_silver_video_analytics.py
+   |-- 10_silver_people_movement.py
+   +-- 11_silver_geolocation.py
 
 3. Gold Notebooks (run after Silver)
    |-- 01_gold_slot_performance.py
@@ -266,7 +314,22 @@ Notebooks use standard Fabric libraries (no additional packages required):
    |-- 03_gold_compliance_reporting.py
    |-- 04_gold_table_analytics.py
    |-- 05_gold_financial_summary.py
-   +-- 06_gold_security_dashboard.py
+   |-- 06_gold_security_dashboard.py
+   |-- 07_gold_tribal_health_360.py
+   |-- 08_gold_dot_faa_analytics.py
+   |-- 09_gold_video_security_kpis.py
+   |-- 10_gold_movement_analytics.py
+   +-- 11_gold_geolocation_insights.py
+
+4. Streaming Notebooks (independent of medallion)
+   |-- 01_sql_server_cdc.py
+   |-- 02_azure_sql_change_feed.py
+   |-- 03_cosmos_db_change_feed.py
+   |-- 04_ibm_db2_cdc.py
+   |-- 05_oracle_cdc.py
+   |-- 06_kafka_connector.py
+   |-- 07_iot_hub_ingestion.py
+   +-- 08_slot_machine_iot_simulator.py
 ```
 
 ### Incremental Processing
@@ -314,28 +377,57 @@ Before running in production:
 
 ```
 notebooks/
-|-- bronze/                   # Bronze layer ingestion notebooks
-|   |-- 01_bronze_slot_telemetry.py
-|   |-- 02_bronze_player_profile.py
-|   |-- 03_bronze_financial_txn.py
-|   |-- 04_bronze_compliance.py
-|   |-- 05_bronze_table_games.py
-|   +-- 06_bronze_security_events.py
-|-- silver/                   # Silver layer transformation notebooks
-|   |-- 01_silver_slot_cleansed.py
-|   |-- 02_silver_player_master.py
-|   +-- ...
-|-- gold/                     # Gold layer aggregation notebooks
-|   |-- 01_gold_slot_performance.py
-|   |-- 02_gold_player_360.py
-|   +-- ...
-|-- real-time/                # Real-time analytics notebooks
-|   |-- 01_realtime_slot_streaming.py
-|   +-- 02_kql_casino_floor.kql
-|-- ml/                       # Machine learning notebooks
-|   |-- 01_ml_player_churn_prediction.py
-|   +-- 02_ml_fraud_detection.py
-+-- README.md
+├── 📁 bronze/                   # Bronze layer ingestion (11 notebooks)
+│   ├── 01_bronze_slot_telemetry.py
+│   ├── 02_bronze_player_profile.py
+│   ├── 03_bronze_financial_txn.py
+│   ├── 04_bronze_compliance.py
+│   ├── 05_bronze_table_games.py
+│   ├── 06_bronze_security_events.py
+│   ├── 07_bronze_tribal_health.py       # 🏥 HIPAA-compliant
+│   ├── 08_bronze_dot_faa.py             # ✈️ Multi-domain
+│   ├── 09_bronze_video_analytics.py     # 📹 Video events
+│   ├── 10_bronze_people_movement.py     # 🚶 Movement tracking
+│   └── 11_bronze_geolocation.py         # 📍 Geolocation
+├── 📁 silver/                   # Silver layer transformation (11 notebooks)
+│   ├── 01_silver_slot_cleansed.py
+│   ├── 02_silver_player_master.py
+│   ├── 03_silver_table_enriched.py
+│   ├── 04_silver_financial_reconciled.py
+│   ├── 05_silver_security_enriched.py
+│   ├── 06_silver_compliance_validated.py
+│   ├── 07_silver_tribal_health.py       # PHI masking, FHIR
+│   ├── 08_silver_dot_faa.py             # IATA validation
+│   ├── 09_silver_video_analytics.py     # Threat classification
+│   ├── 10_silver_people_movement.py     # Flow analysis
+│   └── 11_silver_geolocation.py         # H3 indexing
+├── 📁 gold/                     # Gold layer aggregation (11 notebooks)
+│   ├── 01_gold_slot_performance.py
+│   ├── 02_gold_player_360.py
+│   ├── 03_gold_compliance_reporting.py
+│   ├── 04_gold_table_analytics.py
+│   ├── 05_gold_financial_summary.py
+│   ├── 06_gold_security_dashboard.py
+│   ├── 07_gold_tribal_health_360.py     # Patient 360
+│   ├── 08_gold_dot_faa_analytics.py     # Carrier performance
+│   ├── 09_gold_video_security_kpis.py   # 📹 Security KPIs
+│   ├── 10_gold_movement_analytics.py    # 🚶 Movement analytics
+│   └── 11_gold_geolocation_insights.py  # 📍 Geo insights
+├── 📁 streaming/                # 🔄 Streaming notebooks (8)
+│   ├── 01_sql_server_cdc.py
+│   ├── 02_azure_sql_change_feed.py
+│   ├── 03_cosmos_db_change_feed.py
+│   ├── 04_ibm_db2_cdc.py
+│   ├── 05_oracle_cdc.py
+│   ├── 06_kafka_connector.py
+│   ├── 07_iot_hub_ingestion.py
+│   └── 08_slot_machine_iot_simulator.py
+├── 📁 real-time/                # Real-time analytics
+│   └── 01_realtime_slot_streaming.py
+├── 📁 ml/                       # Machine learning
+│   ├── 01_ml_player_churn_prediction.py
+│   └── 02_ml_fraud_detection.py
+└── README.md
 ```
 
 ---

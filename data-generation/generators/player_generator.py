@@ -9,7 +9,7 @@ Generates synthetic player profile and loyalty data including:
 - Gaming history summary
 """
 
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import Any
 
 import numpy as np
@@ -110,25 +110,19 @@ class PlayerGenerator(BaseGenerator):
         # Calculate points and metrics based on tier
         base_points = [1000, 5000, 25000, 100000, 500000]
         points_balance = int(np.random.uniform(0.1, 2.0) * base_points[tier_idx])
-        lifetime_points = int(
-            points_balance * np.random.uniform(3, 20)
-        )
+        lifetime_points = int(points_balance * np.random.uniform(3, 20))
         tier_credits = int(lifetime_points * 0.1)
 
         # Calculate gaming metrics
         enrollment_date = self.faker.date_between(start_date="-10y", end_date="-30d")
-        days_enrolled = (datetime.now().date() - enrollment_date).days
+        _days_as_member = (datetime.now().date() - enrollment_date).days
         total_visits = int(np.random.uniform(1, 500) * (tier_idx + 1) / 3)
 
         # Theoretical and actual based on tier
         base_theo = [500, 2500, 15000, 75000, 500000]
-        total_theo = round(
-            np.random.uniform(0.5, 2.0) * base_theo[tier_idx], 2
-        )
+        total_theo = round(np.random.uniform(0.5, 2.0) * base_theo[tier_idx], 2)
         # Actual win/loss (house edge means usually negative)
-        actual_wl = round(
-            total_theo * np.random.uniform(-0.15, 0.05), 2
-        )
+        actual_wl = round(total_theo * np.random.uniform(-0.15, 0.05), 2)
 
         # Generate dates
         last_visit = self.faker.date_between(
@@ -176,7 +170,9 @@ class PlayerGenerator(BaseGenerator):
             "total_actual_win_loss": actual_wl,
             "average_daily_theo": round(total_theo / max(total_visits, 1), 2),
             "preferred_game": np.random.choice(self.PREFERRED_GAMES),
-            "communication_preference": np.random.choice(self.COMMUNICATION_PREFERENCES),
+            "communication_preference": np.random.choice(
+                self.COMMUNICATION_PREFERENCES
+            ),
             "marketing_opt_in": np.random.random() > 0.3,
             "marketing_channel": np.random.choice(self.MARKETING_CHANNELS),
             "host_assigned": (
@@ -225,8 +221,7 @@ class PlayerGenerator(BaseGenerator):
                     "visit_duration_minutes": np.random.randint(30, 480),
                     "games_played": np.random.randint(1, 10),
                     "theo_for_visit": round(
-                        player["average_daily_theo"]
-                        * np.random.uniform(0.5, 2.0),
+                        player["average_daily_theo"] * np.random.uniform(0.5, 2.0),
                         2,
                     ),
                 }

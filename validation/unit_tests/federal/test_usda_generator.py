@@ -5,13 +5,18 @@ Covers both supported domains:
 - crop_production: NASS QuickStats-style records
 - food_safety:     FSIS recall-style records
 """
-import pytest
-
-from generators.federal.usda_generator import USDAGenerator
 
 VALID_COMMODITIES = [
-    "CORN", "SOYBEANS", "WHEAT", "COTTON", "RICE",
-    "BARLEY", "OATS", "SORGHUM", "HAY", "POTATOES",
+    "CORN",
+    "SOYBEANS",
+    "WHEAT",
+    "COTTON",
+    "RICE",
+    "BARLEY",
+    "OATS",
+    "SORGHUM",
+    "HAY",
+    "POTATOES",
 ]
 VALID_RECALL_CLASSES = ["Class I", "Class II", "Class III"]
 VALID_RISK_LEVELS = ["HIGH", "MEDIUM", "LOW"]
@@ -101,9 +106,7 @@ class TestUSDAGenerator:
         """generate_batch returns a DataFrame with the requested number of rows."""
         df = usda_generator.generate_batch(count=sample_size, domain="crop_production")
 
-        assert len(df) == sample_size, (
-            f"Expected {sample_size} rows, got {len(df)}"
-        )
+        assert len(df) == sample_size, f"Expected {sample_size} rows, got {len(df)}"
 
     # ------------------------------------------------------------------
     # Metadata columns

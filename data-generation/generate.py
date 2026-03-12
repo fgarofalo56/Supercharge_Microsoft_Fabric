@@ -17,12 +17,12 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 from generators import (
+    ComplianceGenerator,
+    FinancialGenerator,
+    PlayerGenerator,
+    SecurityGenerator,
     SlotMachineGenerator,
     TableGameGenerator,
-    PlayerGenerator,
-    FinancialGenerator,
-    SecurityGenerator,
-    ComplianceGenerator,
 )
 
 
@@ -33,81 +33,74 @@ def parse_args():
     )
 
     parser.add_argument(
-        "--output", "-o",
+        "--output",
+        "-o",
         type=str,
         default="./output",
-        help="Output directory for generated data (default: ./output)"
+        help="Output directory for generated data (default: ./output)",
     )
 
     parser.add_argument(
-        "--format", "-f",
+        "--format",
+        "-f",
         type=str,
         choices=["parquet", "json", "csv"],
         default="parquet",
-        help="Output format (default: parquet)"
+        help="Output format (default: parquet)",
     )
 
     parser.add_argument(
-        "--days", "-d",
+        "--days",
+        "-d",
         type=int,
         default=30,
-        help="Number of days of historical data (default: 30)"
+        help="Number of days of historical data (default: 30)",
     )
 
     parser.add_argument(
-        "--seed", "-s",
+        "--seed",
+        "-s",
         type=int,
         default=42,
-        help="Random seed for reproducibility (default: 42)"
+        help="Random seed for reproducibility (default: 42)",
     )
 
     # Data volume flags
     parser.add_argument(
-        "--all", "-a",
+        "--all",
+        "-a",
         action="store_true",
-        help="Generate all data types with default volumes"
+        help="Generate all data types with default volumes",
     )
 
     parser.add_argument(
-        "--slots",
-        type=int,
-        help="Number of slot machine events to generate"
+        "--slots", type=int, help="Number of slot machine events to generate"
     )
 
     parser.add_argument(
-        "--tables",
-        type=int,
-        help="Number of table game events to generate"
+        "--tables", type=int, help="Number of table game events to generate"
     )
 
     parser.add_argument(
-        "--players",
-        type=int,
-        help="Number of player profiles to generate"
+        "--players", type=int, help="Number of player profiles to generate"
     )
 
     parser.add_argument(
-        "--financial",
-        type=int,
-        help="Number of financial transactions to generate"
+        "--financial", type=int, help="Number of financial transactions to generate"
     )
 
     parser.add_argument(
-        "--security",
-        type=int,
-        help="Number of security events to generate"
+        "--security", type=int, help="Number of security events to generate"
     )
 
     parser.add_argument(
-        "--compliance",
-        type=int,
-        help="Number of compliance records to generate"
+        "--compliance", type=int, help="Number of compliance records to generate"
     )
 
     parser.add_argument(
         "--include-pii",
         action="store_true",
-        help="Include unhashed PII (for testing only)"
+        help="Include unhashed PII (for testing only)",
     )
 
     return parser.parse_args()
@@ -151,7 +144,9 @@ def generate_data(args):
         )
         df = gen.generate(count)
         save_data(df, output_dir / f"bronze_slot_telemetry.{args.format}", args.format)
-        generated.append(("Slot Machine Events", count, df.memory_usage(deep=True).sum() / 1e6))
+        generated.append(
+            ("Slot Machine Events", count, df.memory_usage(deep=True).sum() / 1e6)
+        )
 
     # Table Game Events
     if args.all or args.tables:
@@ -165,7 +160,9 @@ def generate_data(args):
         )
         df = gen.generate(count)
         save_data(df, output_dir / f"bronze_table_games.{args.format}", args.format)
-        generated.append(("Table Game Events", count, df.memory_usage(deep=True).sum() / 1e6))
+        generated.append(
+            ("Table Game Events", count, df.memory_usage(deep=True).sum() / 1e6)
+        )
 
     # Player Profiles
     if args.all or args.players:
@@ -180,7 +177,9 @@ def generate_data(args):
         )
         df = gen.generate(count)
         save_data(df, output_dir / f"bronze_player_profile.{args.format}", args.format)
-        generated.append(("Player Profiles", count, df.memory_usage(deep=True).sum() / 1e6))
+        generated.append(
+            ("Player Profiles", count, df.memory_usage(deep=True).sum() / 1e6)
+        )
 
     # Financial Transactions
     if args.all or args.financial:
@@ -194,7 +193,9 @@ def generate_data(args):
         )
         df = gen.generate(count)
         save_data(df, output_dir / f"bronze_financial_txn.{args.format}", args.format)
-        generated.append(("Financial Transactions", count, df.memory_usage(deep=True).sum() / 1e6))
+        generated.append(
+            ("Financial Transactions", count, df.memory_usage(deep=True).sum() / 1e6)
+        )
 
     # Security Events
     if args.all or args.security:
@@ -208,7 +209,9 @@ def generate_data(args):
         )
         df = gen.generate(count)
         save_data(df, output_dir / f"bronze_security_events.{args.format}", args.format)
-        generated.append(("Security Events", count, df.memory_usage(deep=True).sum() / 1e6))
+        generated.append(
+            ("Security Events", count, df.memory_usage(deep=True).sum() / 1e6)
+        )
 
     # Compliance Records
     if args.all or args.compliance:
@@ -222,7 +225,9 @@ def generate_data(args):
         )
         df = gen.generate(count)
         save_data(df, output_dir / f"bronze_compliance.{args.format}", args.format)
-        generated.append(("Compliance Records", count, df.memory_usage(deep=True).sum() / 1e6))
+        generated.append(
+            ("Compliance Records", count, df.memory_usage(deep=True).sum() / 1e6)
+        )
 
     # Print summary
     if generated:

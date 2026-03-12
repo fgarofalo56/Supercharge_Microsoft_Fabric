@@ -891,12 +891,12 @@ Continue to **[Tutorial 08: Database Mirroring](../08-database-mirroring/README.
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [06-Data Pipelines](../06-data-pipelines/README.md) | [Tutorials Index](../index.md) | [08-Database Mirroring](../08-database-mirroring/README.md) |
+| [⬅️ 06-Data Pipelines](../06-data-pipelines/README.md) | [📖 Tutorials Index](../index.md) | [08-Database Mirroring](../08-database-mirroring/README.md) ➡️ |
 
 ---
 
-> **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
+> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).

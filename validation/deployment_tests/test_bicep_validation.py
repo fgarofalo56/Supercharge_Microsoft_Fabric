@@ -11,7 +11,7 @@ Tests that validate Bicep templates for:
 import re
 import subprocess
 from pathlib import Path
-from typing import Dict, List, Any
+from typing import Any, Dict, List
 
 import pytest
 
@@ -28,15 +28,24 @@ class TestBicepSyntaxValidation:
         content = main_bicep_path.read_text(encoding="utf-8")
         assert len(content) > 0, "main.bicep is empty"
 
-    def test_all_bicep_files_exist(self, all_bicep_files: List[Path]):
+    def test_all_bicep_files_exist(self, all_bicep_files: list[Path]):
         """Test that all expected Bicep files exist."""
-        expected_modules = ["fabric-capacity", "storage-account", "security", "vnet", "log-analytics", "purview"]
+        expected_modules = [
+            "fabric-capacity",
+            "storage-account",
+            "security",
+            "vnet",
+            "log-analytics",
+            "purview",
+        ]
         found_modules = [f.stem for f in all_bicep_files]
 
         for expected in expected_modules:
-            assert expected in found_modules, f"Missing expected Bicep module: {expected}"
+            assert (
+                expected in found_modules
+            ), f"Missing expected Bicep module: {expected}"
 
-    def test_bicep_files_have_valid_utf8_encoding(self, all_bicep_files: List[Path]):
+    def test_bicep_files_have_valid_utf8_encoding(self, all_bicep_files: list[Path]):
         """Test that all Bicep files use valid UTF-8 encoding."""
         for bicep_file in all_bicep_files:
             try:
@@ -44,12 +53,14 @@ class TestBicepSyntaxValidation:
             except UnicodeDecodeError:
                 pytest.fail(f"File {bicep_file} is not valid UTF-8 encoded")
 
-    def test_bicep_files_have_no_bom(self, all_bicep_files: List[Path]):
+    def test_bicep_files_have_no_bom(self, all_bicep_files: list[Path]):
         """Test that Bicep files don't have BOM (Byte Order Mark)."""
         for bicep_file in all_bicep_files:
             with open(bicep_file, "rb") as f:
                 first_bytes = f.read(3)
-            assert first_bytes != b"\xef\xbb\xbf", f"File {bicep_file} has UTF-8 BOM which may cause issues"
+            assert (
+                first_bytes != b"\xef\xbb\xbf"
+            ), f"File {bicep_file} has UTF-8 BOM which may cause issues"
 
 
 class TestBicepCompilation:
@@ -71,7 +82,9 @@ class TestBicepCompilation:
         if arm_template.exists():
             arm_template.unlink()
 
-    def test_all_modules_compile(self, require_bicep_cli, module_bicep_files: Dict[str, Path]):
+    def test_all_modules_compile(
+        self, require_bicep_cli, module_bicep_files: dict[str, Path]
+    ):
         """Test that all Bicep modules compile without errors."""
         failed_modules = []
 
@@ -92,7 +105,9 @@ class TestBicepCompilation:
                 arm_template.unlink()
 
         if failed_modules:
-            error_msg = "\n".join([f"- {name}: {error}" for name, error in failed_modules])
+            error_msg = "\n".join(
+                [f"- {name}: {error}" for name, error in failed_modules]
+            )
             pytest.fail(f"The following modules failed to compile:\n{error_msg}")
 
     def test_bicep_lint_no_errors(self, require_bicep_cli, main_bicep_path: Path):
@@ -118,8 +133,9 @@ class TestParameterValidation:
         required_params = ["environment", "location", "fabricAdminEmail"]
 
         for param in required_params:
-            assert param in parsed_main_bicep.parameters, \
-                f"Required parameter '{param}' not found in main.bicep"
+            assert (
+                param in parsed_main_bicep.parameters
+            ), f"Required parameter '{param}' not found in main.bicep"
 
     def test_environment_has_allowed_values(self, parsed_main_bicep):
         """Test that environment parameter has correct allowed values."""
@@ -130,8 +146,9 @@ class TestParameterValidation:
         actual_values = env_param.get("allowed", [])
 
         for expected in expected_values:
-            assert expected in actual_values, \
-                f"Environment parameter missing allowed value: {expected}"
+            assert (
+                expected in actual_values
+            ), f"Environment parameter missing allowed value: {expected}"
 
     def test_fabric_sku_has_allowed_values(self, parsed_main_bicep):
         """Test that fabricCapacitySku parameter has valid allowed values."""
@@ -188,7 +205,9 @@ class TestParameterValidation:
                 missing_descriptions.append(param)
 
         if missing_descriptions:
-            pytest.fail(f"Parameters missing @description: {', '.join(missing_descriptions)}")
+            pytest.fail(
+                f"Parameters missing @description: {', '.join(missing_descriptions)}"
+            )
 
 
 class TestModuleReferences:
@@ -242,31 +261,42 @@ class TestModuleReferences:
 class TestParameterFiles:
     """Tests for Bicep parameter files."""
 
-    def test_all_environment_param_files_exist(self, environment_params: Dict[str, Path]):
+    def test_all_environment_param_files_exist(
+        self, environment_params: dict[str, Path]
+    ):
         """Test that parameter files exist for all environments."""
         expected_envs = ["dev", "staging", "prod"]
 
         for env in expected_envs:
-            assert env in environment_params, f"Missing parameter file for environment: {env}"
-            assert environment_params[env].exists(), f"Parameter file doesn't exist: {env}"
+            assert (
+                env in environment_params
+            ), f"Missing parameter file for environment: {env}"
+            assert environment_params[
+                env
+            ].exists(), f"Parameter file doesn't exist: {env}"
 
-    def test_param_files_reference_main_bicep(self, all_bicepparam_files: List[Path]):
+    def test_param_files_reference_main_bicep(self, all_bicepparam_files: list[Path]):
         """Test that all param files use 'using' directive."""
         for param_file in all_bicepparam_files:
             content = param_file.read_text(encoding="utf-8")
-            assert "using" in content, f"Parameter file {param_file.name} should have 'using' directive"
+            assert (
+                "using" in content
+            ), f"Parameter file {param_file.name} should have 'using' directive"
 
-    def test_dev_params_have_required_values(self, parsed_param_files: Dict[str, Any]):
+    def test_dev_params_have_required_values(self, parsed_param_files: dict[str, Any]):
         """Test that dev parameter file has required values."""
         dev_params = parsed_param_files.get("dev")
         assert dev_params is not None, "Dev parameters not found"
 
         required = ["environment", "location", "fabricCapacitySku", "fabricAdminEmail"]
         for param in required:
-            assert param in dev_params.parameters, \
-                f"Dev params missing required parameter: {param}"
+            assert (
+                param in dev_params.parameters
+            ), f"Dev params missing required parameter: {param}"
 
-    def test_prod_params_enable_private_endpoints(self, parsed_param_files: Dict[str, Any]):
+    def test_prod_params_enable_private_endpoints(
+        self, parsed_param_files: dict[str, Any]
+    ):
         """Test that production parameters enable private endpoints."""
         prod_params = parsed_param_files.get("prod")
         assert prod_params is not None, "Prod parameters not found"
@@ -274,18 +304,22 @@ class TestParameterFiles:
         pe_param = prod_params.parameters.get("enablePrivateEndpoints")
         if pe_param:
             # Should be true for production
-            assert pe_param.lower() == "true", \
-                "Production should enable private endpoints"
+            assert (
+                pe_param.lower() == "true"
+            ), "Production should enable private endpoints"
 
-    def test_param_environments_match_filenames(self, parsed_param_files: Dict[str, Any]):
+    def test_param_environments_match_filenames(
+        self, parsed_param_files: dict[str, Any]
+    ):
         """Test that environment param value matches the filename."""
         for env_name, param_file in parsed_param_files.items():
             env_value = param_file.parameters.get("environment")
             if env_value:
                 # Remove quotes if present
                 env_value = env_value.strip("'\"")
-                assert env_value == env_name, \
-                    f"Parameter file {env_name} has mismatched environment value: {env_value}"
+                assert (
+                    env_value == env_name
+                ), f"Parameter file {env_name} has mismatched environment value: {env_value}"
 
 
 class TestBicepBestPractices:
@@ -295,17 +329,19 @@ class TestBicepBestPractices:
         """Test that targetScope is explicitly set in main.bicep."""
         content = main_bicep_path.read_text(encoding="utf-8")
         assert "targetScope" in content, "main.bicep should explicitly set targetScope"
-        assert "targetScope = 'subscription'" in content, \
-            "main.bicep should target subscription scope for resource group creation"
+        assert (
+            "targetScope = 'subscription'" in content
+        ), "main.bicep should target subscription scope for resource group creation"
 
-    def test_resources_have_tags_parameter(self, module_bicep_files: Dict[str, Path]):
+    def test_resources_have_tags_parameter(self, module_bicep_files: dict[str, Path]):
         """Test that all modules accept a tags parameter."""
         for module_name, bicep_path in module_bicep_files.items():
             content = bicep_path.read_text(encoding="utf-8")
-            assert "param tags object" in content, \
-                f"Module {module_name} should accept tags parameter"
+            assert (
+                "param tags object" in content
+            ), f"Module {module_name} should accept tags parameter"
 
-    def test_no_hardcoded_locations(self, module_bicep_files: Dict[str, Path]):
+    def test_no_hardcoded_locations(self, module_bicep_files: dict[str, Path]):
         """Test that modules don't hardcode locations."""
         hardcoded_locations = ["'eastus'", "'westus'", "'eastus2'", "'centralus'"]
 
@@ -316,9 +352,11 @@ class TestBicepBestPractices:
                 pattern = rf"(?<!param location string = ){location}"
                 matches = re.findall(pattern, content)
                 if matches and "param location string" not in content:
-                    pytest.fail(f"Module {module_name} has hardcoded location: {location}")
+                    pytest.fail(
+                        f"Module {module_name} has hardcoded location: {location}"
+                    )
 
-    def test_modules_use_latest_api_versions(self, module_bicep_files: Dict[str, Path]):
+    def test_modules_use_latest_api_versions(self, module_bicep_files: dict[str, Path]):
         """Test that modules use reasonably recent API versions."""
         # Minimum API version year to check
         min_year = 2022
@@ -338,7 +376,7 @@ class TestBicepBestPractices:
                         f"Consider updating to {min_year} or later."
                     )
 
-    def test_outputs_have_descriptions(self, module_bicep_files: Dict[str, Path]):
+    def test_outputs_have_descriptions(self, module_bicep_files: dict[str, Path]):
         """Test that module outputs have @description decorators."""
         for module_name, bicep_path in module_bicep_files.items():
             content = bicep_path.read_text(encoding="utf-8")
@@ -355,7 +393,9 @@ class TestBicepBestPractices:
                     missing.append(output)
 
             if missing:
-                pytest.fail(f"Module {module_name} outputs missing @description: {', '.join(missing)}")
+                pytest.fail(
+                    f"Module {module_name} outputs missing @description: {', '.join(missing)}"
+                )
 
 
 if __name__ == "__main__":

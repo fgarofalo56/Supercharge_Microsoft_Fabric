@@ -1594,8 +1594,12 @@ Continue to **[Tutorial 19: Fabric Copilot & AI Features](../19-copilot-ai/READM
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 | Previous | Up | Next |
-|----------|------|--------|
-| [17-Monitoring & Alerting](../17-monitoring-alerting/README.md) | [Tutorials Index](../index.md) | [19-Fabric Copilot & AI Features](../19-copilot-ai/README.md) |
+|----------|-----|------|
+| [⬅️ 17-Monitoring & Alerting](../17-monitoring-alerting/README.md) | [📖 Tutorials Index](../index.md) | [19-Copilot & AI](../19-copilot-ai/README.md) ➡️ |
+
+---
+
+> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).

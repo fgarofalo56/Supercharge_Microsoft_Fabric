@@ -19,7 +19,6 @@ import numpy as np
 
 from ..base_generator import BaseGenerator
 
-
 # ---------------------------------------------------------------------------
 # NAICS reference table (code -> description)
 # ---------------------------------------------------------------------------
@@ -52,22 +51,116 @@ NAICS_LIST = list(NAICS_CODES.keys())
 # US state codes
 # ---------------------------------------------------------------------------
 US_STATES = [
-    "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
-    "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
-    "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
-    "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
-    "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY",
-    "DC", "PR", "GU",
+    "AL",
+    "AK",
+    "AZ",
+    "AR",
+    "CA",
+    "CO",
+    "CT",
+    "DE",
+    "FL",
+    "GA",
+    "HI",
+    "ID",
+    "IL",
+    "IN",
+    "IA",
+    "KS",
+    "KY",
+    "LA",
+    "ME",
+    "MD",
+    "MA",
+    "MI",
+    "MN",
+    "MS",
+    "MO",
+    "MT",
+    "NE",
+    "NV",
+    "NH",
+    "NJ",
+    "NM",
+    "NY",
+    "NC",
+    "ND",
+    "OH",
+    "OK",
+    "OR",
+    "PA",
+    "RI",
+    "SC",
+    "SD",
+    "TN",
+    "TX",
+    "UT",
+    "VT",
+    "VA",
+    "WA",
+    "WV",
+    "WI",
+    "WY",
+    "DC",
+    "PR",
+    "GU",
 ]
 
 # Weighted toward the largest states by small-business count
 STATE_WEIGHTS: list[float] = [
-    0.015, 0.005, 0.022, 0.012, 0.111, 0.020, 0.013, 0.004, 0.065, 0.038,
-    0.005, 0.006, 0.040, 0.020, 0.010, 0.009, 0.013, 0.016, 0.005, 0.020,
-    0.022, 0.025, 0.018, 0.009, 0.018, 0.004, 0.007, 0.011, 0.005, 0.028,
-    0.007, 0.055, 0.032, 0.003, 0.035, 0.012, 0.013, 0.038, 0.004, 0.015,
-    0.003, 0.019, 0.065, 0.009, 0.003, 0.027, 0.023, 0.006, 0.017, 0.002,
-    0.008, 0.006, 0.002,
+    0.015,
+    0.005,
+    0.022,
+    0.012,
+    0.111,
+    0.020,
+    0.013,
+    0.004,
+    0.065,
+    0.038,
+    0.005,
+    0.006,
+    0.040,
+    0.020,
+    0.010,
+    0.009,
+    0.013,
+    0.016,
+    0.005,
+    0.020,
+    0.022,
+    0.025,
+    0.018,
+    0.009,
+    0.018,
+    0.004,
+    0.007,
+    0.011,
+    0.005,
+    0.028,
+    0.007,
+    0.055,
+    0.032,
+    0.003,
+    0.035,
+    0.012,
+    0.013,
+    0.038,
+    0.004,
+    0.015,
+    0.003,
+    0.019,
+    0.065,
+    0.009,
+    0.003,
+    0.027,
+    0.023,
+    0.006,
+    0.017,
+    0.002,
+    0.008,
+    0.006,
+    0.002,
 ]
 
 # ---------------------------------------------------------------------------
@@ -97,8 +190,26 @@ LENDERS = [
 ]
 
 LENDER_WEIGHTS: list[float] = [
-    0.12, 0.11, 0.10, 0.07, 0.07, 0.06, 0.05, 0.05, 0.04, 0.04,
-    0.04, 0.04, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.02, 0.01,
+    0.12,
+    0.11,
+    0.10,
+    0.07,
+    0.07,
+    0.06,
+    0.05,
+    0.05,
+    0.04,
+    0.04,
+    0.04,
+    0.04,
+    0.03,
+    0.03,
+    0.03,
+    0.03,
+    0.03,
+    0.03,
+    0.02,
+    0.01,
 ]
 
 BUSINESS_TYPES = [
@@ -129,7 +240,13 @@ _DOMAIN_CONFIG: dict[str, dict[str, Any]] = {
     },
     "7a": {
         "program_type": "7A",
-        "loan_status_choices": ["APPROVED", "ACTIVE", "PAID_IN_FULL", "CHARGED_OFF", "CANCELLED"],
+        "loan_status_choices": [
+            "APPROVED",
+            "ACTIVE",
+            "PAID_IN_FULL",
+            "CHARGED_OFF",
+            "CANCELLED",
+        ],
         "loan_status_weights": [0.05, 0.40, 0.42, 0.08, 0.05],
         "term_min": 60,
         "term_max": 300,
@@ -138,7 +255,13 @@ _DOMAIN_CONFIG: dict[str, dict[str, Any]] = {
     },
     "disaster": {
         "program_type": "DISASTER",
-        "loan_status_choices": ["APPROVED", "ACTIVE", "PAID_IN_FULL", "CHARGED_OFF", "CANCELLED"],
+        "loan_status_choices": [
+            "APPROVED",
+            "ACTIVE",
+            "PAID_IN_FULL",
+            "CHARGED_OFF",
+            "CANCELLED",
+        ],
         "loan_status_weights": [0.08, 0.45, 0.35, 0.07, 0.05],
         "term_choices": [360],
         "term_weights": [1.0],
@@ -363,9 +486,7 @@ class SBAGenerator(BaseGenerator):
     def _generate_term(self, domain: str, cfg: dict[str, Any]) -> int:
         """Return loan term in months appropriate for the domain."""
         if "term_choices" in cfg:
-            return int(
-                self.weighted_choice(cfg["term_choices"], cfg["term_weights"])
-            )
+            return int(self.weighted_choice(cfg["term_choices"], cfg["term_weights"]))
         # Continuous range
         return int(np.random.randint(cfg["term_min"], cfg["term_max"] + 1))
 

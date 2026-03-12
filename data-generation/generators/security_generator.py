@@ -9,7 +9,7 @@ Generates synthetic security and surveillance data including:
 - Badge swipes
 """
 
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import Any
 
 import numpy as np
@@ -201,13 +201,11 @@ class SecurityGenerator(BaseGenerator):
 
         for zone in self.ZONES:
             num_cams = np.random.randint(5, 20)
-            for i in range(num_cams):
+            for _i in range(num_cams):
                 camera = {
                     "camera_id": f"CAM-{cam_id:04d}",
                     "zone": zone,
-                    "camera_type": np.random.choice(
-                        ["PTZ", "Fixed", "Dome", "Bullet"]
-                    ),
+                    "camera_type": np.random.choice(["PTZ", "Fixed", "Dome", "Bullet"]),
                     "resolution": np.random.choice(["1080p", "4K", "720p"]),
                 }
                 cameras.append(camera)
@@ -251,8 +249,18 @@ class SecurityGenerator(BaseGenerator):
     def _get_severity_level(self, event_type: str) -> str:
         """Get severity level based on event type (uppercase per schema)."""
         critical_events = ["WEAPON_DETECTED", "THREAT_DETECTED", "EXCLUSION_VIOLATION"]
-        high_events = ["ALTERCATION", "MEDICAL_EMERGENCY", "TRESPASS", "UNAUTHORIZED_ACCESS"]
-        medium_events = ["INCIDENT_REPORT", "SUSPICIOUS_ACTIVITY", "ACCESS_DENIED", "CAMERA_OBSTRUCTION"]
+        high_events = [
+            "ALTERCATION",
+            "MEDICAL_EMERGENCY",
+            "TRESPASS",
+            "UNAUTHORIZED_ACCESS",
+        ]
+        medium_events = [
+            "INCIDENT_REPORT",
+            "SUSPICIOUS_ACTIVITY",
+            "ACCESS_DENIED",
+            "CAMERA_OBSTRUCTION",
+        ]
 
         if event_type in critical_events:
             return "CRITICAL"
@@ -282,7 +290,12 @@ class SecurityGenerator(BaseGenerator):
         }
 
         # Event-specific data based on updated event types
-        if event_type in ["BADGE_SWIPE", "DOOR_ENTRY", "ACCESS_GRANTED", "ACCESS_DENIED"]:
+        if event_type in [
+            "BADGE_SWIPE",
+            "DOOR_ENTRY",
+            "ACCESS_GRANTED",
+            "ACCESS_DENIED",
+        ]:
             record = self._add_access_event(record, zone)
         elif event_type in ["CAMERA_ALERT", "MOTION_DETECTED", "CAMERA_OBSTRUCTION"]:
             record = self._add_camera_alert(record, zone)
@@ -290,7 +303,12 @@ class SecurityGenerator(BaseGenerator):
             record = self._add_incident(record)
         elif event_type in ["EXCLUSION_CHECK", "EXCLUSION_VIOLATION"]:
             record = self._add_exclusion_event(record)
-        elif event_type in ["THREAT_DETECTED", "WEAPON_DETECTED", "TRESPASS", "UNAUTHORIZED_ACCESS"]:
+        elif event_type in [
+            "THREAT_DETECTED",
+            "WEAPON_DETECTED",
+            "TRESPASS",
+            "UNAUTHORIZED_ACCESS",
+        ]:
             record = self._add_threat_event(record)
         elif event_type == "SECURITY_PATROL":
             record = self._add_patrol_event(record)
@@ -303,11 +321,21 @@ class SecurityGenerator(BaseGenerator):
 
         # Add nullable defaults
         for field in [
-            "employee_id", "badge_number", "visitor_id", "camera_id",
-            "access_granted", "access_denied_reason", "incident_number",
-            "incident_category", "incident_severity", "incident_description",
-            "responding_officer_id", "resolution_status", "vehicle_license_plate",
-            "alarm_type", "patrol_route",
+            "employee_id",
+            "badge_number",
+            "visitor_id",
+            "camera_id",
+            "access_granted",
+            "access_denied_reason",
+            "incident_number",
+            "incident_category",
+            "incident_severity",
+            "incident_description",
+            "responding_officer_id",
+            "resolution_status",
+            "vehicle_license_plate",
+            "alarm_type",
+            "patrol_route",
         ]:
             record.setdefault(field, None)
 
@@ -340,11 +368,13 @@ class SecurityGenerator(BaseGenerator):
         # 5% random access issues
         if has_access and np.random.random() < 0.05:
             has_access = False
-            record["access_denied_reason"] = np.random.choice([
-                "Badge Read Error",
-                "Door Sensor Malfunction",
-                "Expired Badge",
-            ])
+            record["access_denied_reason"] = np.random.choice(
+                [
+                    "Badge Read Error",
+                    "Door Sensor Malfunction",
+                    "Expired Badge",
+                ]
+            )
         elif not has_access:
             record["access_denied_reason"] = "Insufficient Access Level"
 
@@ -373,7 +403,9 @@ class SecurityGenerator(BaseGenerator):
 
     def _add_incident(self, record: dict[str, Any]) -> dict[str, Any]:
         """Add incident report data."""
-        record["incident_number"] = f"INC-{datetime.now().strftime('%Y%m%d')}-{np.random.randint(1, 999):03d}"
+        record["incident_number"] = (
+            f"INC-{datetime.now().strftime('%Y%m%d')}-{np.random.randint(1, 999):03d}"
+        )
         record["incident_category"] = np.random.choice(self.INCIDENT_CATEGORIES)
         record["incident_severity"] = self.weighted_choice(
             ["Low", "Medium", "High", "Critical"],
@@ -395,22 +427,28 @@ class SecurityGenerator(BaseGenerator):
 
     def _add_alarm_event(self, record: dict[str, Any]) -> dict[str, Any]:
         """Add alarm event data."""
-        record["alarm_type"] = np.random.choice([
-            "Motion Sensor",
-            "Door Sensor",
-            "Glass Break",
-            "Panic Button",
-            "Fire Alarm",
-            "Vault Alarm",
-        ])
+        record["alarm_type"] = np.random.choice(
+            [
+                "Motion Sensor",
+                "Door Sensor",
+                "Glass Break",
+                "Panic Button",
+                "Fire Alarm",
+                "Vault Alarm",
+            ]
+        )
         record["responding_officer_id"] = f"SEC-{np.random.randint(1, 50):03d}"
         return record
 
     def _add_patrol_event(self, record: dict[str, Any]) -> dict[str, Any]:
         """Add patrol checkpoint data."""
-        officer = np.random.choice(
-            [e for e in self._employees if "Security" in e.get("department", "")]
-        ) if any("Security" in e.get("department", "") for e in self._employees) else self._employees[0]
+        officer = (
+            np.random.choice(
+                [e for e in self._employees if "Security" in e.get("department", "")]
+            )
+            if any("Security" in e.get("department", "") for e in self._employees)
+            else self._employees[0]
+        )
 
         record["employee_id"] = officer["employee_id"]
         record["patrol_route"] = f"Route-{np.random.choice(['A', 'B', 'C', 'D', 'E'])}"
@@ -423,27 +461,35 @@ class SecurityGenerator(BaseGenerator):
 
     def _add_suspicious_activity(self, record: dict[str, Any]) -> dict[str, Any]:
         """Add suspicious activity report."""
-        record["incident_number"] = f"SAR-{datetime.now().strftime('%Y%m%d')}-{np.random.randint(1, 99):02d}"
-        record["incident_description"] = np.random.choice([
-            "Patron observed photographing gaming areas",
-            "Individual appears to be counting cards",
-            "Unusual pattern of small cash transactions",
-            "Known advantage player identified",
-            "Possible chip passing detected",
-            "Individual matching exclusion list description",
-        ])
+        record["incident_number"] = (
+            f"SAR-{datetime.now().strftime('%Y%m%d')}-{np.random.randint(1, 99):02d}"
+        )
+        record["incident_description"] = np.random.choice(
+            [
+                "Patron observed photographing gaming areas",
+                "Individual appears to be counting cards",
+                "Unusual pattern of small cash transactions",
+                "Known advantage player identified",
+                "Possible chip passing detected",
+                "Individual matching exclusion list description",
+            ]
+        )
         record["responding_officer_id"] = f"SEC-{np.random.randint(1, 50):03d}"
         return record
 
     def _add_exclusion_event(self, record: dict[str, Any]) -> dict[str, Any]:
         """Add exclusion check/violation event data."""
-        record["incident_number"] = f"EXC-{datetime.now().strftime('%Y%m%d')}-{np.random.randint(1, 99):02d}"
-        record["incident_description"] = np.random.choice([
-            "Self-exclusion list match detected",
-            "State exclusion list match",
-            "Casino exclusion match - previous incident",
-            "Gaming commission exclusion match",
-        ])
+        record["incident_number"] = (
+            f"EXC-{datetime.now().strftime('%Y%m%d')}-{np.random.randint(1, 99):02d}"
+        )
+        record["incident_description"] = np.random.choice(
+            [
+                "Self-exclusion list match detected",
+                "State exclusion list match",
+                "Casino exclusion match - previous incident",
+                "Gaming commission exclusion match",
+            ]
+        )
         record["responding_officer_id"] = f"SEC-{np.random.randint(1, 50):03d}"
         record["resolution_status"] = self.weighted_choice(
             ["Open", "Investigating", "Resolved", "Closed"],
@@ -453,14 +499,18 @@ class SecurityGenerator(BaseGenerator):
 
     def _add_threat_event(self, record: dict[str, Any]) -> dict[str, Any]:
         """Add threat/weapon/trespass event data."""
-        record["incident_number"] = f"THR-{datetime.now().strftime('%Y%m%d')}-{np.random.randint(1, 99):02d}"
-        record["incident_description"] = np.random.choice([
-            "Verbal threat reported",
-            "Suspicious package detected",
-            "Unauthorized individual in restricted area",
-            "Previous trespass warning violation",
-            "Potential weapon detected by screening",
-        ])
+        record["incident_number"] = (
+            f"THR-{datetime.now().strftime('%Y%m%d')}-{np.random.randint(1, 99):02d}"
+        )
+        record["incident_description"] = np.random.choice(
+            [
+                "Verbal threat reported",
+                "Suspicious package detected",
+                "Unauthorized individual in restricted area",
+                "Previous trespass warning violation",
+                "Potential weapon detected by screening",
+            ]
+        )
         record["responding_officer_id"] = f"SEC-{np.random.randint(1, 50):03d}"
         record["resolution_status"] = self.weighted_choice(
             ["Open", "Investigating", "Resolved", "Closed"],
@@ -470,15 +520,19 @@ class SecurityGenerator(BaseGenerator):
 
     def _add_medical_emergency(self, record: dict[str, Any]) -> dict[str, Any]:
         """Add medical emergency event data."""
-        record["incident_number"] = f"MED-{datetime.now().strftime('%Y%m%d')}-{np.random.randint(1, 99):02d}"
+        record["incident_number"] = (
+            f"MED-{datetime.now().strftime('%Y%m%d')}-{np.random.randint(1, 99):02d}"
+        )
         record["incident_category"] = "Medical"
-        record["incident_description"] = np.random.choice([
-            "Patron experiencing chest pain",
-            "Slip and fall incident",
-            "Intoxicated patron requiring assistance",
-            "Diabetic emergency",
-            "Patron fainted on gaming floor",
-        ])
+        record["incident_description"] = np.random.choice(
+            [
+                "Patron experiencing chest pain",
+                "Slip and fall incident",
+                "Intoxicated patron requiring assistance",
+                "Diabetic emergency",
+                "Patron fainted on gaming floor",
+            ]
+        )
         record["responding_officer_id"] = f"SEC-{np.random.randint(1, 50):03d}"
         record["resolution_status"] = self.weighted_choice(
             ["Open", "Investigating", "Resolved", "Closed"],
@@ -488,11 +542,13 @@ class SecurityGenerator(BaseGenerator):
 
     def _add_escort_event(self, record: dict[str, Any]) -> dict[str, Any]:
         """Add escort request event data."""
-        record["incident_description"] = np.random.choice([
-            "VIP escort to vehicle",
-            "Large cash out escort",
-            "Patron requested security escort",
-            "Employee escort to parking",
-        ])
+        record["incident_description"] = np.random.choice(
+            [
+                "VIP escort to vehicle",
+                "Large cash out escort",
+                "Patron requested security escort",
+                "Employee escort to parking",
+            ]
+        )
         record["responding_officer_id"] = f"SEC-{np.random.randint(1, 50):03d}"
         return record

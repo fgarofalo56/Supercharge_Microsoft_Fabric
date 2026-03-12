@@ -1,0 +1,237 @@
+{
+  "expectation_suite_name": "geolocation_suite",
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "notes": "Data quality expectations for geolocation and spatial analytics data",
+    "domain": "Geolocation & Spatial Analytics",
+    "compliance_requirements": [
+      "GPS coordinate validity",
+      "H3 spatial indexing integrity",
+      "Device tracking accuracy",
+      "Location data privacy compliance"
+    ]
+  },
+  "expectations": [
+    {
+      "expectation_type": "expect_table_row_count_to_be_between",
+      "kwargs": {
+        "min_value": 0,
+        "max_value": null
+      },
+      "meta": {
+        "notes": "Table may have zero records during inactive periods"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "event_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "device_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "latitude"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "longitude"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "timestamp"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "h3_index"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "event_id"
+      },
+      "meta": {
+        "notes": "Event ID is required - primary identifier"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "device_id"
+      },
+      "meta": {
+        "notes": "Device ID is required for source tracking"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "latitude"
+      },
+      "meta": {
+        "notes": "Latitude is required for spatial positioning"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "longitude"
+      },
+      "meta": {
+        "notes": "Longitude is required for spatial positioning"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "timestamp"
+      },
+      "meta": {
+        "notes": "Timestamp is required for temporal tracking"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "h3_index",
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "H3 index should be present for spatial aggregation"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": {
+        "column": "event_id"
+      },
+      "meta": {
+        "notes": "Event ID must be unique"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "event_id",
+        "regex": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "Event ID should be UUID format"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "latitude",
+        "min_value": -90.0,
+        "max_value": 90.0
+      },
+      "meta": {
+        "notes": "Latitude must be between -90 and 90 degrees"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "longitude",
+        "min_value": -180.0,
+        "max_value": 180.0
+      },
+      "meta": {
+        "notes": "Longitude must be between -180 and 180 degrees"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "h3_index",
+        "regex": "^[0-9a-f]{15}$",
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "H3 index should be a 15-character hexadecimal string"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_dateutil_parseable",
+      "kwargs": {
+        "column": "timestamp"
+      },
+      "meta": {
+        "notes": "Timestamp must be parseable"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "accuracy_meters",
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "GPS accuracy in meters must be non-negative when present"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "altitude",
+        "min_value": -500,
+        "max_value": 50000,
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "Altitude in meters must be within reasonable bounds when present"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "speed_mps",
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "Speed in meters per second must be non-negative when present"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "heading",
+        "min_value": 0,
+        "max_value": 360,
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "Heading in degrees must be between 0 and 360 when present"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "fix_type",
+        "value_set": ["GPS", "GLONASS", "GALILEO", "BEIDOU", "WIFI", "CELL", "HYBRID", null]
+      },
+      "meta": {
+        "notes": "Valid geolocation fix types"
+      }
+    }
+  ]
+}

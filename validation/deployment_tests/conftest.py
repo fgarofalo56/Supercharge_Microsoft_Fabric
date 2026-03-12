@@ -12,12 +12,11 @@ import json
 import os
 import re
 import subprocess
-from pathlib import Path
-from typing import Dict, List, Optional, Any
 from dataclasses import dataclass
+from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 import pytest
-
 
 # =============================================================================
 # Path Configuration
@@ -33,18 +32,20 @@ ENVIRONMENTS_ROOT = INFRA_ROOT / "environments"
 # Data Classes
 # =============================================================================
 
+
 @dataclass
 class BicepFile:
     """Represents a Bicep file with parsed metadata."""
+
     path: Path
     name: str
     content: str
-    parameters: Dict[str, Any]
-    resources: List[str]
-    outputs: List[str]
+    parameters: dict[str, Any]
+    resources: list[str]
+    outputs: list[str]
 
     @property
-    def module_name(self) -> Optional[str]:
+    def module_name(self) -> str | None:
         """Get module name from path."""
         parts = self.path.relative_to(INFRA_ROOT).parts
         if len(parts) > 2 and parts[0] == "modules":
@@ -55,15 +56,17 @@ class BicepFile:
 @dataclass
 class BicepParamFile:
     """Represents a Bicep parameter file."""
+
     path: Path
     environment: str
     content: str
-    parameters: Dict[str, Any]
+    parameters: dict[str, Any]
 
 
 # =============================================================================
 # Bicep File Fixtures
 # =============================================================================
+
 
 @pytest.fixture(scope="session")
 def project_root() -> Path:
@@ -90,13 +93,13 @@ def main_bicep_path() -> Path:
 
 
 @pytest.fixture(scope="session")
-def all_bicep_files() -> List[Path]:
+def all_bicep_files() -> list[Path]:
     """Get all Bicep files in the infrastructure."""
     return list(INFRA_ROOT.rglob("*.bicep"))
 
 
 @pytest.fixture(scope="session")
-def module_bicep_files() -> Dict[str, Path]:
+def module_bicep_files() -> dict[str, Path]:
     """Get Bicep files organized by module name."""
     modules = {}
     for bicep_file in MODULES_ROOT.rglob("*.bicep"):
@@ -106,13 +109,13 @@ def module_bicep_files() -> Dict[str, Path]:
 
 
 @pytest.fixture(scope="session")
-def all_bicepparam_files() -> List[Path]:
+def all_bicepparam_files() -> list[Path]:
     """Get all Bicep parameter files."""
     return list(INFRA_ROOT.rglob("*.bicepparam"))
 
 
 @pytest.fixture(scope="session")
-def environment_params() -> Dict[str, Path]:
+def environment_params() -> dict[str, Path]:
     """Get parameter files organized by environment."""
     params = {}
     for env in ["dev", "staging", "prod"]:
@@ -126,7 +129,8 @@ def environment_params() -> Dict[str, Path]:
 # Parsed Bicep Fixtures
 # =============================================================================
 
-def parse_bicep_parameters(content: str) -> Dict[str, Any]:
+
+def parse_bicep_parameters(content: str) -> dict[str, Any]:
     """Parse parameters from Bicep file content."""
     params = {}
     # Match parameter declarations like: param paramName string = 'value'
@@ -184,7 +188,7 @@ def parse_bicep_parameters(content: str) -> Dict[str, Any]:
     return params
 
 
-def parse_bicep_resources(content: str) -> List[str]:
+def parse_bicep_resources(content: str) -> list[str]:
     """Parse resource types from Bicep file content."""
     resources = []
     # Match resource declarations like: resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01'
@@ -197,7 +201,7 @@ def parse_bicep_resources(content: str) -> List[str]:
     return resources
 
 
-def parse_bicep_outputs(content: str) -> List[str]:
+def parse_bicep_outputs(content: str) -> list[str]:
     """Parse outputs from Bicep file content."""
     outputs = []
     # Match output declarations like: output storageAccountName string = storageAccount.name
@@ -210,18 +214,18 @@ def parse_bicep_outputs(content: str) -> List[str]:
     return outputs
 
 
-def parse_bicepparam_values(content: str) -> Dict[str, Any]:
+def parse_bicepparam_values(content: str) -> dict[str, Any]:
     """Parse parameter values from Bicep parameter file content."""
     params = {}
     # Split content into lines for line-by-line parsing
-    lines = content.split('\n')
+    lines = content.split("\n")
 
     i = 0
     while i < len(lines):
         line = lines[i].strip()
 
         # Skip comments and empty lines
-        if not line or line.startswith('//') or line.startswith('using'):
+        if not line or line.startswith("//") or line.startswith("using"):
             i += 1
             continue
 
@@ -232,14 +236,14 @@ def parse_bicepparam_values(content: str) -> Dict[str, Any]:
             param_value = param_match.group(2).strip()
 
             # Handle multi-line object values (e.g., tags = { ... })
-            if param_value.startswith('{') and not param_value.endswith('}'):
+            if param_value.startswith("{") and not param_value.endswith("}"):
                 # Collect lines until closing brace
-                brace_count = param_value.count('{') - param_value.count('}')
+                brace_count = param_value.count("{") - param_value.count("}")
                 while brace_count > 0 and i + 1 < len(lines):
                     i += 1
                     next_line = lines[i]
-                    param_value += '\n' + next_line
-                    brace_count += next_line.count('{') - next_line.count('}')
+                    param_value += "\n" + next_line
+                    brace_count += next_line.count("{") - next_line.count("}")
 
             params[param_name] = param_value
 
@@ -263,7 +267,7 @@ def parsed_main_bicep(main_bicep_path: Path) -> BicepFile:
 
 
 @pytest.fixture(scope="session")
-def parsed_module_files(module_bicep_files: Dict[str, Path]) -> Dict[str, BicepFile]:
+def parsed_module_files(module_bicep_files: dict[str, Path]) -> dict[str, BicepFile]:
     """Parse all module Bicep files."""
     parsed = {}
     for module_name, path in module_bicep_files.items():
@@ -280,7 +284,9 @@ def parsed_module_files(module_bicep_files: Dict[str, Path]) -> Dict[str, BicepF
 
 
 @pytest.fixture(scope="session")
-def parsed_param_files(environment_params: Dict[str, Path]) -> Dict[str, BicepParamFile]:
+def parsed_param_files(
+    environment_params: dict[str, Path],
+) -> dict[str, BicepParamFile]:
     """Parse all environment parameter files."""
     parsed = {}
     for env, path in environment_params.items():
@@ -297,6 +303,7 @@ def parsed_param_files(environment_params: Dict[str, Path]) -> Dict[str, BicepPa
 # =============================================================================
 # Azure Context Fixtures
 # =============================================================================
+
 
 @pytest.fixture(scope="session")
 def azure_cli_available() -> bool:
@@ -332,7 +339,7 @@ def azure_logged_in(azure_cli_available: bool) -> bool:
 
 
 @pytest.fixture(scope="session")
-def azure_subscription_id(azure_logged_in: bool) -> Optional[str]:
+def azure_subscription_id(azure_logged_in: bool) -> str | None:
     """Get current Azure subscription ID."""
     if not azure_logged_in:
         return None
@@ -371,8 +378,9 @@ def bicep_cli_available() -> bool:
 # Mock Azure Context
 # =============================================================================
 
+
 @pytest.fixture
-def mock_azure_context() -> Dict[str, Any]:
+def mock_azure_context() -> dict[str, Any]:
     """Provide mock Azure context for tests that don't require real Azure access."""
     return {
         "subscription_id": "00000000-0000-0000-0000-000000000000",
@@ -383,21 +391,28 @@ def mock_azure_context() -> Dict[str, Any]:
 
 
 @pytest.fixture
-def mock_deployment_outputs() -> Dict[str, Any]:
+def mock_deployment_outputs() -> dict[str, Any]:
     """Provide mock deployment outputs for testing."""
     return {
         "resourceGroupName": {"type": "string", "value": "rg-fabricpoc-dev"},
         "fabricCapacityName": {"type": "string", "value": "fabricfabricpocdev"},
         "storageAccountName": {"type": "string", "value": "stfabricpocdev"},
         "keyVaultName": {"type": "string", "value": "kv-fabricpoc-dev"},
-        "keyVaultUri": {"type": "string", "value": "https://kv-fabricpoc-dev.vault.azure.net/"},
-        "logAnalyticsWorkspaceId": {"type": "string", "value": "/subscriptions/xxx/resourceGroups/rg-fabricpoc-dev/providers/Microsoft.OperationalInsights/workspaces/log-fabricpoc-dev"},
+        "keyVaultUri": {
+            "type": "string",
+            "value": "https://kv-fabricpoc-dev.vault.azure.net/",
+        },
+        "logAnalyticsWorkspaceId": {
+            "type": "string",
+            "value": "/subscriptions/xxx/resourceGroups/rg-fabricpoc-dev/providers/Microsoft.OperationalInsights/workspaces/log-fabricpoc-dev",
+        },
     }
 
 
 # =============================================================================
 # Utility Functions
 # =============================================================================
+
 
 def skip_if_no_azure_cli(azure_cli_available: bool):
     """Pytest skip decorator for tests requiring Azure CLI."""
@@ -483,19 +498,19 @@ AZURE_RESOURCE_MIN_LENGTHS = {
 
 
 @pytest.fixture(scope="session")
-def resource_prefixes() -> Dict[str, str]:
+def resource_prefixes() -> dict[str, str]:
     """Get Azure resource naming prefixes."""
     return AZURE_RESOURCE_PREFIXES
 
 
 @pytest.fixture(scope="session")
-def resource_max_lengths() -> Dict[str, int]:
+def resource_max_lengths() -> dict[str, int]:
     """Get Azure resource max name lengths."""
     return AZURE_RESOURCE_MAX_LENGTHS
 
 
 @pytest.fixture(scope="session")
-def resource_min_lengths() -> Dict[str, int]:
+def resource_min_lengths() -> dict[str, int]:
     """Get Azure resource min name lengths."""
     return AZURE_RESOURCE_MIN_LENGTHS
 
@@ -504,36 +519,70 @@ def resource_min_lengths() -> Dict[str, int]:
 # Valid SKUs and Configurations
 # =============================================================================
 
-VALID_FABRIC_SKUS = ["F2", "F4", "F8", "F16", "F32", "F64", "F128", "F256", "F512", "F1024", "F2048"]
+VALID_FABRIC_SKUS = [
+    "F2",
+    "F4",
+    "F8",
+    "F16",
+    "F32",
+    "F64",
+    "F128",
+    "F256",
+    "F512",
+    "F1024",
+    "F2048",
+]
 VALID_ENVIRONMENTS = ["dev", "staging", "prod"]
 VALID_LOCATIONS = [
-    "eastus", "eastus2", "westus", "westus2", "westus3",
-    "centralus", "northcentralus", "southcentralus", "westcentralus",
-    "northeurope", "westeurope", "uksouth", "ukwest",
-    "australiaeast", "australiasoutheast",
-    "southeastasia", "eastasia", "japaneast", "japanwest",
-    "brazilsouth", "canadacentral", "canadaeast",
-    "francecentral", "germanywestcentral",
-    "norwayeast", "switzerlandnorth",
-    "uaenorth", "southafricanorth",
-    "koreacentral", "koreasouth",
-    "centralindia", "westindia", "southindia",
+    "eastus",
+    "eastus2",
+    "westus",
+    "westus2",
+    "westus3",
+    "centralus",
+    "northcentralus",
+    "southcentralus",
+    "westcentralus",
+    "northeurope",
+    "westeurope",
+    "uksouth",
+    "ukwest",
+    "australiaeast",
+    "australiasoutheast",
+    "southeastasia",
+    "eastasia",
+    "japaneast",
+    "japanwest",
+    "brazilsouth",
+    "canadacentral",
+    "canadaeast",
+    "francecentral",
+    "germanywestcentral",
+    "norwayeast",
+    "switzerlandnorth",
+    "uaenorth",
+    "southafricanorth",
+    "koreacentral",
+    "koreasouth",
+    "centralindia",
+    "westindia",
+    "southindia",
 ]
 
 
 @pytest.fixture(scope="session")
-def valid_fabric_skus() -> List[str]:
+def valid_fabric_skus() -> list[str]:
     """Get list of valid Fabric SKUs."""
     return VALID_FABRIC_SKUS
 
 
 @pytest.fixture(scope="session")
-def valid_environments() -> List[str]:
+def valid_environments() -> list[str]:
     """Get list of valid environments."""
     return VALID_ENVIRONMENTS
 
 
 @pytest.fixture(scope="session")
-def valid_locations() -> List[str]:
+def valid_locations() -> list[str]:
     """Get list of valid Azure locations."""
     return VALID_LOCATIONS

@@ -1654,12 +1654,12 @@ Continue to **[Tutorial 17: Monitoring & Alerting](../17-monitoring-alerting/REA
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [15-Cost Management](../15-cost-optimization/README.md) | [Tutorials Index](../index.md) | [17-Monitoring & Alerting](../17-monitoring-alerting/README.md) |
+| [⬅️ 15-Cost Optimization](../15-cost-optimization/README.md) | [📖 Tutorials Index](../index.md) | [17-Monitoring & Alerting](../17-monitoring-alerting/README.md) ➡️ |
 
 ---
 
-> **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
+> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).

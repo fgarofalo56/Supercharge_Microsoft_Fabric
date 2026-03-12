@@ -9,7 +9,7 @@ Generates synthetic table game data including:
 - Ratings and player tracking
 """
 
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import Any
 
 import numpy as np
@@ -175,14 +175,10 @@ class TableGamesGenerator(BaseGenerator):
 
         # Select dealer for table
         eligible_dealers = [
-            d
-            for d in self._dealers
-            if table["game_type"] in d["certifications"]
+            d for d in self._dealers if table["game_type"] in d["certifications"]
         ]
         dealer = (
-            np.random.choice(eligible_dealers)
-            if eligible_dealers
-            else self._dealers[0]
+            np.random.choice(eligible_dealers) if eligible_dealers else self._dealers[0]
         )
 
         record = {
@@ -266,7 +262,9 @@ class TableGamesGenerator(BaseGenerator):
         self, record: dict[str, Any], table: dict[str, Any], event_type: str
     ) -> dict[str, Any]:
         """Add fill or credit slip data."""
-        record["fill_slip_number"] = f"{'FIL' if event_type == 'FILL' else 'CRD'}-{np.random.randint(100000, 999999)}"
+        record["fill_slip_number"] = (
+            f"{'FIL' if event_type == 'FILL' else 'CRD'}-{np.random.randint(100000, 999999)}"
+        )
         record["amount"] = round(
             np.random.choice([5000, 10000, 25000, 50000, 100000]), 0
         )

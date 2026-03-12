@@ -5,7 +5,6 @@ Covers both the earthquake (USGS ComCat-style) and land_use (BLM/NPS/FWS)
 domains, including field presence, geophysical range validation, categorical
 consistency, and the tsunami/magnitude correlation.
 """
-import pytest
 
 
 class TestDOIGenerator:
@@ -31,18 +30,16 @@ class TestDOIGenerator:
         for _ in range(100):
             record = doi_generator.generate_record(domain="earthquake")
             mag = record["magnitude"]
-            assert -1 <= mag <= 10, (
-                f"Magnitude {mag} is outside the expected -1 to 10 range"
-            )
+            assert (
+                -1 <= mag <= 10
+            ), f"Magnitude {mag} is outside the expected -1 to 10 range"
 
     def test_earthquake_depth_positive(self, doi_generator):
         """Earthquake depth in kilometres must be non-negative."""
         for _ in range(100):
             record = doi_generator.generate_record(domain="earthquake")
             depth = record["depth_km"]
-            assert depth >= 0, (
-                f"depth_km {depth} is negative; depth must be >= 0"
-            )
+            assert depth >= 0, f"depth_km {depth} is negative; depth must be >= 0"
 
     def test_earthquake_mag_type_valid(self, doi_generator):
         """mag_type must be one of the USGS-recognised magnitude scale codes."""
@@ -50,9 +47,9 @@ class TestDOIGenerator:
 
         for _ in range(100):
             record = doi_generator.generate_record(domain="earthquake")
-            assert record["mag_type"] in valid_mag_types, (
-                f"Unexpected mag_type: {record['mag_type']}"
-            )
+            assert (
+                record["mag_type"] in valid_mag_types
+            ), f"Unexpected mag_type: {record['mag_type']}"
 
     def test_earthquake_coordinates(self, doi_generator):
         """Earthquake coordinates must be within valid geographic bounds."""
@@ -60,12 +57,8 @@ class TestDOIGenerator:
             record = doi_generator.generate_record(domain="earthquake")
             lat = record["latitude"]
             lon = record["longitude"]
-            assert -90 <= lat <= 90, (
-                f"latitude {lat} is outside -90 to 90 range"
-            )
-            assert -180 <= lon <= 180, (
-                f"longitude {lon} is outside -180 to 180 range"
-            )
+            assert -90 <= lat <= 90, f"latitude {lat} is outside -90 to 90 range"
+            assert -180 <= lon <= 180, f"longitude {lon} is outside -180 to 180 range"
 
     def test_tsunami_only_large_quakes(self, doi_generator):
         """When tsunami is True, the magnitude should be at or above M6.0 approximately."""
@@ -107,17 +100,17 @@ class TestDOIGenerator:
 
         for _ in range(100):
             record = doi_generator.generate_record(domain="land_use")
-            assert record["managing_agency"] in valid_agencies, (
-                f"Unexpected managing_agency: {record['managing_agency']}"
-            )
+            assert (
+                record["managing_agency"] in valid_agencies
+            ), f"Unexpected managing_agency: {record['managing_agency']}"
 
     def test_land_acres_positive(self, doi_generator):
         """total_acres must be strictly greater than zero."""
         for _ in range(100):
             record = doi_generator.generate_record(domain="land_use")
-            assert record["total_acres"] > 0, (
-                f"total_acres {record['total_acres']} is not positive"
-            )
+            assert (
+                record["total_acres"] > 0
+            ), f"total_acres {record['total_acres']} is not positive"
 
     def test_land_fire_risk_valid(self, doi_generator):
         """fire_risk_level must be one of the five NIFC levels or None."""
@@ -125,9 +118,9 @@ class TestDOIGenerator:
 
         for _ in range(100):
             record = doi_generator.generate_record(domain="land_use")
-            assert record["fire_risk_level"] in valid_levels, (
-                f"Unexpected fire_risk_level: {record['fire_risk_level']}"
-            )
+            assert (
+                record["fire_risk_level"] in valid_levels
+            ), f"Unexpected fire_risk_level: {record['fire_risk_level']}"
 
     # ------------------------------------------------------------------ #
     # Batch / metadata                                                     #

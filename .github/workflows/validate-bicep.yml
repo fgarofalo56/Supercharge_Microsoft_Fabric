@@ -100,15 +100,31 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
+      - name: Setup Bicep
+        run: |
+          az bicep install
+          az bicep version
+
       - name: Build ARM from Bicep
         run: |
           az bicep build --file infra/main.bicep --outfile infra/main.json
 
+      - name: Install ARM-TTK
+        run: |
+          git clone https://github.com/Azure/arm-ttk.git /tmp/arm-ttk --depth 1
+
       - name: Run ARM-TTK
-        uses: microsoft/action-armttk@v1
-        with:
-          input_path: infra/main.json
-          skip_tests: 'Template Should Not Contain Blanks'
+        shell: pwsh
+        run: |
+          Import-Module /tmp/arm-ttk/arm-ttk/arm-ttk.psd1
+          $results = Test-AzTemplate -TemplatePath infra/main.json -Skip 'Template Should Not Contain Blanks'
+          $results | Format-Table -AutoSize
+          $failures = $results | Where-Object { $_.Passed -eq $false }
+          if ($failures.Count -gt 0) {
+            Write-Error "$($failures.Count) ARM-TTK tests failed"
+            exit 1
+          }
+          Write-Output "All ARM-TTK tests passed"
 
   documentation:
     name: Generate Documentation

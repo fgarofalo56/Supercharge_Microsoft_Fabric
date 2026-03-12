@@ -6,17 +6,16 @@ This module provides helper functions for running data quality validations
 across all casino data domains using Great Expectations.
 """
 
-import os
-import sys
-from pathlib import Path
-from typing import Optional, Dict, Any, List, Union
-from datetime import datetime
 import json
+import sys
+from datetime import datetime
+from pathlib import Path
+from typing import Any
 
 try:
     import great_expectations as gx
-    from great_expectations.core.batch import RuntimeBatchRequest
     from great_expectations.checkpoint import Checkpoint
+    from great_expectations.core.batch import RuntimeBatchRequest
 except ImportError:
     print("Great Expectations not installed. Run: pip install great_expectations")
     sys.exit(1)
@@ -66,7 +65,7 @@ class CasinoDataValidator:
         "all_domains": "all_domains_checkpoint",
     }
 
-    def __init__(self, context_root_dir: Optional[str] = None):
+    def __init__(self, context_root_dir: str | None = None):
         """
         Initialize the validator with Great Expectations context.
 
@@ -76,11 +75,11 @@ class CasinoDataValidator:
         self.context_root_dir = context_root_dir or str(SCRIPT_DIR)
         self.context = gx.get_context(context_root_dir=self.context_root_dir)
 
-    def list_available_suites(self) -> List[str]:
+    def list_available_suites(self) -> list[str]:
         """List all available expectation suites."""
         return list(self.SUITES.keys())
 
-    def list_available_checkpoints(self) -> List[str]:
+    def list_available_checkpoints(self) -> list[str]:
         """List all available checkpoints."""
         return list(self.CHECKPOINTS.keys())
 
@@ -89,9 +88,9 @@ class CasinoDataValidator:
         df: Any,
         suite_name: str,
         data_asset_name: str = "validation_data",
-        run_name: Optional[str] = None,
-        result_format: str = "COMPLETE"
-    ) -> Dict[str, Any]:
+        run_name: str | None = None,
+        result_format: str = "COMPLETE",
+    ) -> dict[str, Any]:
         """
         Validate a DataFrame against an expectation suite.
 
@@ -113,6 +112,7 @@ class CasinoDataValidator:
         # Determine datasource based on DataFrame type
         try:
             import pandas as pd
+
             if isinstance(df, pd.DataFrame):
                 datasource_name = "casino_pandas"
             else:
@@ -126,13 +126,12 @@ class CasinoDataValidator:
             data_connector_name="runtime_data_connector",
             data_asset_name=data_asset_name,
             runtime_parameters={"batch_data": df},
-            batch_identifiers={"default_identifier_name": run_name}
+            batch_identifiers={"default_identifier_name": run_name},
         )
 
         # Get validator
         validator = self.context.get_validator(
-            batch_request=batch_request,
-            expectation_suite_name=suite_full_name
+            batch_request=batch_request, expectation_suite_name=suite_full_name
         )
 
         # Run validation
@@ -143,9 +142,9 @@ class CasinoDataValidator:
     def run_checkpoint(
         self,
         checkpoint_name: str,
-        batch_data: Optional[Any] = None,
-        run_name: Optional[str] = None
-    ) -> Dict[str, Any]:
+        batch_data: Any | None = None,
+        run_name: str | None = None,
+    ) -> dict[str, Any]:
         """
         Run a validation checkpoint.
 
@@ -170,17 +169,14 @@ class CasinoDataValidator:
                 data_connector_name="runtime_data_connector",
                 data_asset_name="runtime_data",
                 runtime_parameters={"batch_data": batch_data},
-                batch_identifiers={"default_identifier_name": run_name}
+                batch_identifiers={"default_identifier_name": run_name},
             )
 
             results = self.context.run_checkpoint(
-                checkpoint_name=checkpoint_full_name,
-                batch_request=batch_request
+                checkpoint_name=checkpoint_full_name, batch_request=batch_request
             )
         else:
-            results = self.context.run_checkpoint(
-                checkpoint_name=checkpoint_full_name
-            )
+            results = self.context.run_checkpoint(checkpoint_name=checkpoint_full_name)
 
         return {
             "success": results.success,
@@ -188,14 +184,12 @@ class CasinoDataValidator:
             "checkpoint": checkpoint_full_name,
             "validation_results": [
                 self._format_results(r) for r in results.run_results.values()
-            ]
+            ],
         }
 
     def validate_compliance_filing(
-        self,
-        df: Any,
-        filing_type: Optional[str] = None
-    ) -> Dict[str, Any]:
+        self, df: Any, filing_type: str | None = None
+    ) -> dict[str, Any]:
         """
         Validate compliance filing data with type-specific rules.
 
@@ -211,7 +205,7 @@ class CasinoDataValidator:
             suite_map = {
                 "CTR": "compliance_ctr",
                 "SAR": "compliance_sar",
-                "W2G": "compliance_w2g"
+                "W2G": "compliance_w2g",
             }
             suite = suite_map.get(filing_type.upper(), "compliance")
         else:
@@ -220,10 +214,10 @@ class CasinoDataValidator:
         return self.validate_dataframe(
             df=df,
             suite_name=suite,
-            data_asset_name=f"compliance_{filing_type or 'all'}"
+            data_asset_name=f"compliance_{filing_type or 'all'}",
         )
 
-    def validate_ctr_threshold(self, df: Any) -> Dict[str, Any]:
+    def validate_ctr_threshold(self, df: Any) -> dict[str, Any]:
         """
         Validate CTR filings meet the $10,000 threshold.
 
@@ -234,12 +228,10 @@ class CasinoDataValidator:
             Validation results
         """
         return self.validate_dataframe(
-            df=df,
-            suite_name="compliance_ctr",
-            data_asset_name="ctr_threshold_check"
+            df=df, suite_name="compliance_ctr", data_asset_name="ctr_threshold_check"
         )
 
-    def validate_w2g_threshold(self, df: Any) -> Dict[str, Any]:
+    def validate_w2g_threshold(self, df: Any) -> dict[str, Any]:
         """
         Validate W-2G filings meet the $600 threshold.
 
@@ -250,9 +242,7 @@ class CasinoDataValidator:
             Validation results
         """
         return self.validate_dataframe(
-            df=df,
-            suite_name="compliance_w2g",
-            data_asset_name="w2g_threshold_check"
+            df=df, suite_name="compliance_w2g", data_asset_name="w2g_threshold_check"
         )
 
     def build_data_docs(self) -> str:
@@ -263,10 +253,16 @@ class CasinoDataValidator:
             Path to the generated Data Docs index
         """
         self.context.build_data_docs()
-        docs_path = Path(self.context_root_dir) / "uncommitted" / "data_docs" / "local_site" / "index.html"
+        docs_path = (
+            Path(self.context_root_dir)
+            / "uncommitted"
+            / "data_docs"
+            / "local_site"
+            / "index.html"
+        )
         return str(docs_path)
 
-    def _format_results(self, results: Any) -> Dict[str, Any]:
+    def _format_results(self, results: Any) -> dict[str, Any]:
         """Format validation results into a clean dictionary."""
         return {
             "success": results.success,
@@ -276,15 +272,19 @@ class CasinoDataValidator:
                     "expectation": r.expectation_config.expectation_type,
                     "success": r.success,
                     "column": r.expectation_config.kwargs.get("column"),
-                    "unexpected_count": r.result.get("unexpected_count", 0) if r.result else 0,
-                    "unexpected_percent": r.result.get("unexpected_percent", 0) if r.result else 0,
+                    "unexpected_count": (
+                        r.result.get("unexpected_count", 0) if r.result else 0
+                    ),
+                    "unexpected_percent": (
+                        r.result.get("unexpected_percent", 0) if r.result else 0
+                    ),
                 }
                 for r in results.results
-            ]
+            ],
         }
 
 
-def validate_all_domains(data_dir: str) -> Dict[str, Any]:
+def validate_all_domains(data_dir: str) -> dict[str, Any]:
     """
     Validate all data domains from a directory.
 
@@ -306,14 +306,16 @@ def validate_all_domains(data_dir: str) -> Dict[str, Any]:
         "compliance": "compliance",
         "financial": "financial",
         "security": "security",
-        "table": "table_games"
+        "table": "table_games",
     }
 
     data_path = Path(data_dir)
 
     for pattern, suite in file_suite_map.items():
         # Find matching files
-        files = list(data_path.glob(f"*{pattern}*.parquet")) + list(data_path.glob(f"*{pattern}*.csv"))
+        files = list(data_path.glob(f"*{pattern}*.parquet")) + list(
+            data_path.glob(f"*{pattern}*.csv")
+        )
 
         for file_path in files:
             print(f"Validating {file_path.name} with {suite} suite...")
@@ -325,18 +327,13 @@ def validate_all_domains(data_dir: str) -> Dict[str, Any]:
                     df = pd.read_csv(file_path)
 
                 result = validator.validate_dataframe(
-                    df=df,
-                    suite_name=suite,
-                    data_asset_name=file_path.stem
+                    df=df, suite_name=suite, data_asset_name=file_path.stem
                 )
 
                 results[file_path.name] = result
 
             except Exception as e:
-                results[file_path.name] = {
-                    "success": False,
-                    "error": str(e)
-                }
+                results[file_path.name] = {"success": False, "error": str(e)}
 
     return results
 
@@ -349,37 +346,25 @@ def main():
     parser.add_argument(
         "--checkpoint",
         choices=CasinoDataValidator.CHECKPOINTS.keys(),
-        help="Run a specific checkpoint"
+        help="Run a specific checkpoint",
     )
     parser.add_argument(
         "--suite",
         choices=CasinoDataValidator.SUITES.keys(),
-        help="Validate using a specific suite"
+        help="Validate using a specific suite",
+    )
+    parser.add_argument("--data-file", type=str, help="Path to data file to validate")
+    parser.add_argument(
+        "--data-dir", type=str, help="Directory with data files to validate"
     )
     parser.add_argument(
-        "--data-file",
-        type=str,
-        help="Path to data file to validate"
+        "--build-docs", action="store_true", help="Build Data Docs after validation"
     )
     parser.add_argument(
-        "--data-dir",
-        type=str,
-        help="Directory with data files to validate"
+        "--list-suites", action="store_true", help="List available expectation suites"
     )
     parser.add_argument(
-        "--build-docs",
-        action="store_true",
-        help="Build Data Docs after validation"
-    )
-    parser.add_argument(
-        "--list-suites",
-        action="store_true",
-        help="List available expectation suites"
-    )
-    parser.add_argument(
-        "--list-checkpoints",
-        action="store_true",
-        help="List available checkpoints"
+        "--list-checkpoints", action="store_true", help="List available checkpoints"
     )
 
     args = parser.parse_args()

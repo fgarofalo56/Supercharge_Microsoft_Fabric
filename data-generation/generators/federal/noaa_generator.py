@@ -14,12 +14,14 @@ Data mirrors the NOAA Climate Data Online (CDO) and Storm Events APIs.
 from __future__ import annotations
 
 from datetime import datetime, timedelta
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import numpy as np
 
-from ..base_generator import BaseGenerator
+if TYPE_CHECKING:
+    import pandas as pd
 
+from ..base_generator import BaseGenerator
 
 # ---------------------------------------------------------------------------
 # Reference data
@@ -166,12 +168,31 @@ STATE_FIPS: dict[str, str] = {
 # Storm-prone states get higher probability
 _STORM_STATES = list(STATE_FIPS.keys())
 _STORM_WEIGHTS_RAW = [
-    10, 9, 8, 7, 6, 6, 6, 5,  # TX, OK, KS, FL, AL, MS, LA, GA
-    4, 4, 4, 3, 3, 3, 3,       # AR, MO, TN, NC, SC, NE, IA
-    3, 3, 3, 2, 2,              # IL, IN, OH, MN, CO
+    10,
+    9,
+    8,
+    7,
+    6,
+    6,
+    6,
+    5,  # TX, OK, KS, FL, AL, MS, LA, GA
+    4,
+    4,
+    4,
+    3,
+    3,
+    3,
+    3,  # AR, MO, TN, NC, SC, NE, IA
+    3,
+    3,
+    3,
+    2,
+    2,  # IL, IN, OH, MN, CO
 ]
 _STORM_WEIGHTS_TOTAL = sum(_STORM_WEIGHTS_RAW)
-STORM_STATE_WEIGHTS: list[float] = [w / _STORM_WEIGHTS_TOTAL for w in _STORM_WEIGHTS_RAW]
+STORM_STATE_WEIGHTS: list[float] = [
+    w / _STORM_WEIGHTS_TOTAL for w in _STORM_WEIGHTS_RAW
+]
 
 # Weather observation parameters and their realistic value ranges / units
 PARAMETER_CONFIG: dict[str, dict[str, Any]] = {
@@ -350,7 +371,7 @@ class NOAAGenerator(BaseGenerator):
         num_records: int,
         show_progress: bool = True,
         domain: str = "weather",
-    ) -> "pd.DataFrame":
+    ) -> pd.DataFrame:
         """
         Generate multiple records for the specified domain.
 
@@ -457,9 +478,7 @@ class NOAAGenerator(BaseGenerator):
 
         # episode_id: present ~70% of the time
         episode_id: str | None = (
-            f"EP-{self.generate_uuid()[:8]}"
-            if np.random.random() < 0.70
-            else None
+            f"EP-{self.generate_uuid()[:8]}" if np.random.random() < 0.70 else None
         )
 
         event_type: str = str(self.weighted_choice(EVENT_TYPES, EVENT_WEIGHTS))
@@ -554,9 +573,7 @@ class NOAAGenerator(BaseGenerator):
         raw = np.random.lognormal(mean=7.0, sigma=2.5)
         return float(np.clip(raw, 0.0, max_val))
 
-    def _sample_magnitude(
-        self, event_type: str
-    ) -> tuple[float | None, str | None]:
+    def _sample_magnitude(self, event_type: str) -> tuple[float | None, str | None]:
         """Return (magnitude, magnitude_type) appropriate to the event type."""
         if event_type == "TORNADO":
             # Wind speed in mph for tornado vortex

@@ -739,12 +739,12 @@ az keyvault set-policy --name "kv-fabric-gateway" `
 
 ---
 
-## Next Steps
+## 🧭 Navigation
 
-- [Tutorial 14: Security & Networking](../14-security-networking/README.md)
-- [Tutorial 06: Data Pipelines](../06-data-pipelines/README.md)
-- [Tutorial 12: CI/CD & DevOps](../12-cicd-devops/README.md)
+| Previous | Up | Next |
+|----------|-----|------|
+| [⬅️ 22-Networking & Connectivity](../22-networking-connectivity/README.md) | [📖 Tutorials Index](../index.md) | [24-Snowflake to Fabric](../24-snowflake-to-fabric/README.md) ➡️ |
 
 ---
 
-[Back to Tutorials](../index.md) | [Back to Main](../../index.md)
+> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).

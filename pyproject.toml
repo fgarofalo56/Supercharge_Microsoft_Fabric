@@ -1,0 +1,101 @@
+[project]
+name = "supercharge-microsoft-fabric"
+version = "2.0.0"
+description = "Casino & Gaming Industry POC + Federal Expansions on Microsoft Fabric"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+readme = "README.md"
+
+[tool.black]
+line-length = 88
+target-version = ["py310", "py311", "py312"]
+extend-exclude = '''
+/(
+    \.git
+    | \.venv
+    | __pycache__
+    | notebooks
+    | temp
+)/
+'''
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = [
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "F",      # pyflakes
+    "I",      # isort
+    "N",      # pep8-naming
+    "UP",     # pyupgrade
+    "B",      # flake8-bugbear
+    "SIM",    # flake8-simplify
+    "TCH",    # flake8-type-checking
+    "RUF",    # ruff-specific rules
+]
+ignore = [
+    "E501",   # line too long (handled by black)
+    "B008",   # do not perform function call in argument defaults
+    "SIM108", # use ternary operator
+    "N999",   # invalid module name (data-generation has hyphen, can't rename)
+    "RUF001", # ambiguous unicode character in string (intentional en-dashes)
+    "RUF002", # ambiguous unicode character in docstring (intentional en-dashes)
+    "RUF003", # ambiguous unicode character in comment (intentional en-dashes)
+    "RUF012", # mutable class default (generator class attributes are intentional)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"validation/unit_tests/**" = ["N802", "N803"]      # allow non-PEP8 names in tests
+"notebooks/**" = ["E402", "F401"]                  # allow late imports in notebooks
+"**/__init__.py" = ["F401"]                        # re-exports in __init__ files
+"validation/integration_tests/**" = ["F401", "UP035", "N806", "E402", "E741", "SIM102"]
+"validation/deployment_tests/**" = ["F401", "UP035"]
+"validation/great_expectations/**" = ["F401"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["generators", "validation"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+check_untyped_defs = true
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "generators.*"
+disallow_untyped_defs = true
+
+[[tool.mypy.overrides]]
+module = "validation.unit_tests.*"
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+testpaths = ["validation/unit_tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "compliance: marks tests related to compliance logic",
+]
+addopts = "-v --tb=short"
+
+[tool.coverage.run]
+source = ["data-generation/generators"]
+omit = ["*/tests/*", "*/unit_tests/*", "*/__pycache__/*"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 70
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.",
+    "if TYPE_CHECKING:",
+    "pass",
+]

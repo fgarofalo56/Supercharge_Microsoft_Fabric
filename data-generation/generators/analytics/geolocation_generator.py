@@ -65,11 +65,11 @@ SOURCE_SYSTEM_WEIGHTS = [0.35, 0.25, 0.20, 0.10, 0.10]
 
 # Accuracy ranges (meters) by source system
 ACCURACY_RANGES: dict[str, tuple[float, float]] = {
-    "gps":                (3.0, 15.0),
+    "gps": (3.0, 15.0),
     "wifi_triangulation": (5.0, 30.0),
-    "ble_trilateration":  (1.0, 5.0),
-    "uwb":                (0.1, 1.0),
-    "hybrid":             (1.0, 10.0),
+    "ble_trilateration": (1.0, 5.0),
+    "uwb": (0.1, 1.0),
+    "hybrid": (1.0, 10.0),
 }
 
 # ---------------------------------------------------------------------------
@@ -188,7 +188,7 @@ class GeolocationGenerator(BaseGenerator):
 
         # Pre-generate device fleet: device_id -> device_type
         self._device_fleet: dict[str, str] = {}
-        for i in range(NUM_DEVICES):
+        for _i in range(NUM_DEVICES):
             dev_id = f"DEV-{np.random.randint(10_000_000, 99_999_999):08d}"
             dev_type = str(self.weighted_choice(DEVICE_TYPES, DEVICE_TYPE_WEIGHTS))
             self._device_fleet[dev_id] = dev_type
@@ -253,11 +253,17 @@ class GeolocationGenerator(BaseGenerator):
 
         # Coordinates: Las Vegas base + small random offset
         latitude = round(
-            BASE_LATITUDE + float(np.random.uniform(-COORDINATE_OFFSET_RANGE, COORDINATE_OFFSET_RANGE)),
+            BASE_LATITUDE
+            + float(
+                np.random.uniform(-COORDINATE_OFFSET_RANGE, COORDINATE_OFFSET_RANGE)
+            ),
             6,
         )
         longitude = round(
-            BASE_LONGITUDE + float(np.random.uniform(-COORDINATE_OFFSET_RANGE, COORDINATE_OFFSET_RANGE)),
+            BASE_LONGITUDE
+            + float(
+                np.random.uniform(-COORDINATE_OFFSET_RANGE, COORDINATE_OFFSET_RANGE)
+            ),
             6,
         )
 
@@ -300,7 +306,9 @@ class GeolocationGenerator(BaseGenerator):
         if np.random.random() < 0.40:
             geofence_id = str(np.random.choice(self._geofence_ids))
             geofence_name = self._geofences[geofence_id]
-            geofence_event = str(self.weighted_choice(GEOFENCE_EVENTS, GEOFENCE_EVENT_WEIGHTS))
+            geofence_event = str(
+                self.weighted_choice(GEOFENCE_EVENTS, GEOFENCE_EVENT_WEIGHTS)
+            )
             if geofence_event == "dwell":
                 geofence_dwell_seconds = int(np.random.randint(30, 7201))
 

@@ -4,17 +4,20 @@ Event Hub Producer for streaming slot machine telemetry.
 This module provides real-time event streaming capabilities for
 casino floor monitoring scenarios.
 """
-import json
-import time
+
 import asyncio
-from datetime import datetime
-from typing import Optional, Callable
+import json
 import logging
+import time
+from collections.abc import Callable
+from datetime import datetime
+from typing import Any
 
 # Optional Azure Event Hubs SDK
 try:
-    from azure.eventhub import EventHubProducerClient, EventData
+    from azure.eventhub import EventData, EventHubProducerClient
     from azure.eventhub.aio import EventHubProducerClient as AsyncEventHubProducerClient
+
     EVENTHUB_AVAILABLE = True
 except ImportError:
     EVENTHUB_AVAILABLE = False
@@ -36,10 +39,10 @@ class EventHubProducer:
 
     def __init__(
         self,
-        connection_string: Optional[str] = None,
-        eventhub_name: Optional[str] = None,
+        connection_string: str | None = None,
+        eventhub_name: str | None = None,
         events_per_second: float = 10,
-        seed: Optional[int] = None
+        seed: int | None = None,
     ):
         """
         Initialize the producer.
@@ -68,12 +71,13 @@ class EventHubProducer:
                     "Install with: pip install azure-eventhub"
                 )
 
-    def generate_event(self) -> dict:
+    def generate_event(self) -> dict[str, Any]:
         """Generate a single slot machine event."""
         return self.generator.generate_record()
 
-    def _event_to_json(self, event: dict) -> str:
+    def _event_to_json(self, event: dict[str, Any]) -> str:
         """Convert event to JSON string."""
+
         # Handle datetime serialization
         def json_serializer(obj):
             if isinstance(obj, datetime):
@@ -84,9 +88,9 @@ class EventHubProducer:
 
     def run_sync(
         self,
-        duration_seconds: Optional[int] = None,
-        max_events: Optional[int] = None,
-        callback: Optional[Callable[[dict], None]] = None
+        duration_seconds: int | None = None,
+        max_events: int | None = None,
+        callback: Callable[[dict[str, Any]], None] | None = None,
     ):
         """
         Run the producer synchronously.
@@ -134,14 +138,13 @@ class EventHubProducer:
             self._running = False
             logger.info(f"Generated {self._event_count} events")
 
-    def _send_to_eventhub(self, event: dict):
+    def _send_to_eventhub(self, event: dict[str, Any]) -> None:
         """Send event to Azure Event Hub."""
         if not EVENTHUB_AVAILABLE:
             return
 
         producer = EventHubProducerClient.from_connection_string(
-            self.connection_string,
-            eventhub_name=self.eventhub_name
+            self.connection_string, eventhub_name=self.eventhub_name
         )
 
         try:
@@ -153,9 +156,9 @@ class EventHubProducer:
 
     async def run_async(
         self,
-        duration_seconds: Optional[int] = None,
-        max_events: Optional[int] = None,
-        batch_size: int = 100
+        duration_seconds: int | None = None,
+        max_events: int | None = None,
+        batch_size: int = 100,
     ):
         """
         Run the producer asynchronously with batching.
@@ -174,8 +177,7 @@ class EventHubProducer:
         start_time = time.time()
 
         async with AsyncEventHubProducerClient.from_connection_string(
-            self.connection_string,
-            eventhub_name=self.eventhub_name
+            self.connection_string, eventhub_name=self.eventhub_name
         ) as producer:
 
             while self._running:
@@ -233,13 +235,10 @@ def main():
         connection_string=args.connection_string,
         eventhub_name=args.eventhub_name,
         events_per_second=args.rate,
-        seed=args.seed
+        seed=args.seed,
     )
 
-    producer.run_sync(
-        duration_seconds=args.duration,
-        max_events=args.max_events
-    )
+    producer.run_sync(duration_seconds=args.duration, max_events=args.max_events)
 
 
 if __name__ == "__main__":

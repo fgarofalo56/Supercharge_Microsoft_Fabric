@@ -9,6 +9,9 @@
 // - Log Analytics Workspace
 // - Virtual Network (optional, for private endpoints)
 // - Managed Identity
+// - Eventstream / Event Hubs (optional, for real-time ingestion)
+// - Eventhouse / Azure Data Explorer (optional, for KQL analytics)
+// - Power BI Workspace / Embedded Capacity (optional, for BI)
 // =============================================================================
 
 targetScope = 'subscription'
@@ -56,6 +59,30 @@ param owner string = ''
 @description('Deployment timestamp (auto-generated)')
 param deployedAt string = utcNow()
 
+// --- Real-Time Intelligence (RTI) Parameters ---
+
+@description('Enable Eventstream (Event Hubs) deployment for real-time ingestion')
+param enableEventstream bool = false
+
+@description('Enable Eventhouse (Azure Data Explorer) deployment for KQL analytics')
+param enableEventhouse bool = false
+
+@description('Enable Power BI Embedded capacity deployment')
+param enablePowerBIWorkspace bool = false
+
+@description('Admin members (UPNs) for Power BI workspace')
+param powerBIAdminMembers array = []
+
+@description('Eventhouse data retention in days')
+@minValue(1)
+@maxValue(36500)
+param eventhouseRetentionDays int = 365
+
+@description('Eventhouse hot cache period in days')
+@minValue(1)
+@maxValue(365)
+param eventhouseHotCacheDays int = 31
+
 // =============================================================================
 // Variables
 // =============================================================================
@@ -68,6 +95,9 @@ var keyVaultName = 'kv-${projectPrefix}-${environment}'
 var logAnalyticsName = 'log-${projectPrefix}-${environment}'
 var managedIdentityName = 'id-${projectPrefix}-${environment}'
 var vnetName = 'vnet-${projectPrefix}-${environment}'
+var eventStreamName = 'evtns-${projectPrefix}-${environment}'
+var eventHouseName = 'adx${projectPrefix}${environment}'
+var powerBICapacityName = 'pbi${projectPrefix}${environment}'
 
 // Cost allocation tags (using cost-tags module pattern)
 var costAllocationTags = union(
@@ -192,6 +222,72 @@ module governance 'modules/governance/purview.bicep' = {
 }
 
 // =============================================================================
+// Eventstream Module (Real-Time Ingestion - Optional)
+// =============================================================================
+// Deploys Event Hubs namespace as the backing resource for Fabric Eventstream.
+// Enable by setting enableEventstream = true in your parameter file.
+// =============================================================================
+
+module eventstream 'modules/fabric/fabric-eventstream.bicep' = if (enableEventstream) {
+  name: 'eventstream-deployment'
+  scope: resourceGroup
+  params: {
+    eventStreamName: eventStreamName
+    fabricCapacityId: fabric.outputs.capacityId
+    location: location
+    logAnalyticsWorkspaceId: monitoring.outputs.workspaceId
+    enablePrivateEndpoint: enablePrivateEndpoints
+    privateEndpointSubnetId: enablePrivateEndpoints ? networking.outputs.privateEndpointSubnetId : ''
+    tags: defaultTags
+  }
+}
+
+// =============================================================================
+// Eventhouse Module (KQL Real-Time Analytics - Optional)
+// =============================================================================
+// Deploys Azure Data Explorer cluster as the backing resource for Fabric
+// Eventhouse with KQL databases, ingestion mappings, and retention policies.
+// Enable by setting enableEventhouse = true in your parameter file.
+// =============================================================================
+
+module eventhouse 'modules/fabric/fabric-eventhouse.bicep' = if (enableEventhouse) {
+  name: 'eventhouse-deployment'
+  scope: resourceGroup
+  params: {
+    eventHouseName: eventHouseName
+    fabricCapacityId: fabric.outputs.capacityId
+    location: location
+    retentionDays: eventhouseRetentionDays
+    hotCacheDays: eventhouseHotCacheDays
+    logAnalyticsWorkspaceId: monitoring.outputs.workspaceId
+    managedIdentityPrincipalId: security.outputs.managedIdentityPrincipalId
+    enablePrivateEndpoint: enablePrivateEndpoints
+    privateEndpointSubnetId: enablePrivateEndpoints ? networking.outputs.privateEndpointSubnetId : ''
+    tags: defaultTags
+  }
+}
+
+// =============================================================================
+// Power BI Workspace Module (BI & Direct Lake - Optional)
+// =============================================================================
+// Deploys Power BI Embedded capacity for Fabric workspace analytics.
+// Enable by setting enablePowerBIWorkspace = true in your parameter file.
+// =============================================================================
+
+module powerBIWorkspace 'modules/analytics/powerbi-workspace.bicep' = if (enablePowerBIWorkspace) {
+  name: 'powerbi-workspace-deployment'
+  scope: resourceGroup
+  params: {
+    workspaceName: powerBICapacityName
+    fabricCapacityId: fabric.outputs.capacityId
+    location: location
+    adminMembers: powerBIAdminMembers
+    logAnalyticsWorkspaceId: monitoring.outputs.workspaceId
+    tags: defaultTags
+  }
+}
+
+// =============================================================================
 // Outputs
 // =============================================================================
 
@@ -217,6 +313,18 @@ output logAnalyticsWorkspaceName string = monitoring.outputs.workspaceName
 output managedIdentityId string = security.outputs.managedIdentityId
 output managedIdentityPrincipalId string = security.outputs.managedIdentityPrincipalId
 output managedIdentityClientId string = security.outputs.managedIdentityClientId
+
+// --- Real-Time Intelligence Outputs (conditional) ---
+
+output eventStreamId string = enableEventstream ? eventstream.outputs.eventStreamId : ''
+output eventStreamEndpoint string = enableEventstream ? eventstream.outputs.eventStreamEndpoint : ''
+
+output eventHouseId string = enableEventhouse ? eventhouse.outputs.eventHouseId : ''
+output kqlEndpoint string = enableEventhouse ? eventhouse.outputs.kqlEndpoint : ''
+output eventHouseDatabaseIds array = enableEventhouse ? eventhouse.outputs.databaseIds : []
+
+output powerBIWorkspaceId string = enablePowerBIWorkspace ? powerBIWorkspace.outputs.workspaceId : ''
+output powerBIWorkspaceUrl string = enablePowerBIWorkspace ? powerBIWorkspace.outputs.workspaceUrl : ''
 
 // Cost tracking reference
 output appliedTags object = defaultTags

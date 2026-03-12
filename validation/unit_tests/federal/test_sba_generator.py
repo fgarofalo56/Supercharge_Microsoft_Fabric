@@ -5,8 +5,6 @@ Tests cover all four SBA program domains (ppp, 7a, disaster, sbir) and validate
 field presence, value constraints, business rules, and metadata columns.
 Fixtures are provided by the federal conftest.py (sba_generator, sample_size).
 """
-import pytest
-
 
 VALID_LOAN_STATUSES = {"APPROVED", "ACTIVE", "PAID_IN_FULL", "CHARGED_OFF", "CANCELLED"}
 

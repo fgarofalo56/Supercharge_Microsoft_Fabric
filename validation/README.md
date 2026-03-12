@@ -2,18 +2,26 @@
 
 > **[Home](../README.md)** | **[Data Generation](../data-generation/)** | **[Notebooks](../notebooks/)** | **[Tutorials](../tutorials/)**
 
-Comprehensive data quality validation and testing resources for the Microsoft Fabric Casino POC.
+Comprehensive data quality validation and testing for the Microsoft Fabric Casino POC and Phase 7 federal, streaming, and analytics expansions.
 
 ---
 
-## Test Coverage Summary
+## 🧪 Test Coverage Summary
 
-| Test Type | Framework | Coverage | Status |
-|-----------|-----------|----------|--------|
-| Unit Tests | pytest | Generators, Utilities | Active |
-| Integration Tests | pytest | Pipeline End-to-End | Active |
-| Data Quality | Great Expectations | Bronze/Silver/Gold | Active |
-| Schema Validation | Delta Lake | All Layers | Active |
+| Test Category | Framework | Tests | Coverage | Status |
+|:--------------|:----------|:------|:---------|:-------|
+| Casino/Gaming Unit Tests | pytest | 30 | 6 generators | `🟢 Passing` |
+| Federal Agency Unit Tests | pytest | 78 | 7 generators (USDA, SBA, NOAA, EPA, DOI, Tribal, DOT/FAA) | `🟢 Passing` |
+| Streaming Tests | pytest | 32 | 3 components (CDC, IoT, Event Hub) | `🟢 Passing` |
+| Analytics Generator Tests | pytest | 30 | 3 generators (Video, Movement, Geolocation) | `🟢 Passing` |
+| Geospatial Tests | pytest | 27 | 2 modules (Casino Locations, Player Demographics) | `🟢 Passing` |
+| Integration Tests | pytest | — | Pipeline E2E | `🟢 Active` |
+| Data Quality | Great Expectations | — | Bronze/Silver/Gold | `🟢 Active` |
+| Schema Validation | Delta Lake | — | All Layers | `🟢 Active` |
+| **Total Unit Tests** | | **197** | **19 generators** | **All Passing** |
+
+> [!NOTE]
+> All 197 unit tests pass with zero regressions. See the [Phase 7 Regression Report](phase7_regression_report.md) for full details.
 
 ---
 
@@ -25,15 +33,17 @@ Comprehensive data quality validation and testing resources for the Microsoft Fa
 |   TESTS     | --> |     TESTS        | --> |    VALIDATION     |
 +-------------+     +------------------+     +-------------------+
 |             |     |                  |     |                   |
-| Generators  |     | Pipeline E2E     |     | Great Expectations|
-| Utilities   |     | Data Flow        |     | Checkpoints       |
-| Business    |     | Layer Integrity  |     | Production DQ     |
-| Logic       |     |                  |     |                   |
+| Casino (30) |     | Pipeline E2E     |     | Great Expectations|
+| Federal (78)|     | Data Flow        |     | Checkpoints       |
+| Stream (32) |     | Layer Integrity  |     | Production DQ     |
+| Analytics   |     |                  |     |                   |
+|       (30)  |     |                  |     |                   |
+| Geo    (27) |     |                  |     |                   |
 +-------------+     +------------------+     +-------------------+
       |                    |                        |
       v                    v                        v
    pytest              pytest                  GE Framework
-   --cov               --slow                  Checkpoints
+   197 pass            --slow                  Checkpoints
 ```
 
 ---
@@ -42,39 +52,58 @@ Comprehensive data quality validation and testing resources for the Microsoft Fa
 
 ```
 validation/
-|-- great_expectations/           # Data quality validation framework
-|   |-- great_expectations.yml    # Main GX configuration
-|   |-- validate_data.py          # Python validation utilities
-|   |-- README.md                 # Detailed GX documentation
-|   |-- expectations/             # Expectation suite definitions
-|   |   |-- slot_machine_suite.json
-|   |   |-- player_suite.json
-|   |   |-- compliance_suite.json
-|   |   |-- compliance_ctr_conditional_suite.json
-|   |   |-- compliance_w2g_conditional_suite.json
-|   |   |-- compliance_sar_conditional_suite.json
-|   |   |-- financial_suite.json
-|   |   |-- security_suite.json
-|   |   |-- table_games_suite.json
-|   |   |-- bronze_slot_telemetry_suite.json
-|   |   |-- silver_slot_cleansed_suite.json
-|   |   +-- gold_slot_performance_suite.json
-|   +-- checkpoints/              # Validation checkpoints
-|       |-- slot_machine_checkpoint.yml
-|       |-- player_checkpoint.yml
-|       |-- compliance_checkpoint.yml
-|       |-- financial_checkpoint.yml
-|       |-- security_checkpoint.yml
-|       |-- table_games_checkpoint.yml
-|       +-- all_domains_checkpoint.yml
-|-- unit_tests/                   # Unit tests for generators
-|   |-- conftest.py
-|   +-- test_generators.py
-|-- integration_tests/            # End-to-end tests
-|   +-- test_pipeline.py
-|-- deployment_tests/             # Infrastructure tests
-|   +-- test_bicep_deployment.py
-+-- README.md
+├── 📁 great_expectations/           # Data quality validation framework
+│   ├── great_expectations.yml       # Main GX configuration
+│   ├── validate_data.py             # Python validation utilities
+│   ├── README.md                    # Detailed GX documentation
+│   ├── 📁 expectations/            # Expectation suite definitions
+│   │   ├── slot_machine_suite.json
+│   │   ├── player_suite.json
+│   │   ├── compliance_suite.json
+│   │   ├── financial_suite.json
+│   │   ├── security_suite.json
+│   │   ├── table_games_suite.json
+│   │   ├── video_analytics_suite.json
+│   │   ├── people_movement_suite.json
+│   │   ├── geolocation_suite.json
+│   │   ├── tribal_healthcare_suite.json
+│   │   └── dot_faa_suite.json
+│   └── 📁 checkpoints/             # Validation checkpoints
+│       ├── all_domains_checkpoint.yml
+│       ├── analytics_checkpoint.yml
+│       └── federal_expansion_checkpoint.yml
+├── 📁 unit_tests/                   # Unit tests (197 total)
+│   ├── conftest.py                  # Casino test fixtures
+│   ├── test_generators.py           # Casino generator tests (30)
+│   ├── 📁 federal/                  # Federal agency tests (78)
+│   │   ├── conftest.py
+│   │   ├── test_usda_generator.py   # 11 tests
+│   │   ├── test_sba_generator.py    # 11 tests
+│   │   ├── test_noaa_generator.py   # 10 tests
+│   │   ├── test_epa_generator.py    # 10 tests
+│   │   ├── test_doi_generator.py    # 12 tests
+│   │   ├── test_tribal_healthcare_generator.py  # 12 tests
+│   │   └── test_dot_faa_generator.py            # 12 tests
+│   ├── 📁 streaming/               # Streaming tests (32)
+│   │   ├── conftest.py
+│   │   ├── test_multi_source_simulator.py  # 10 tests
+│   │   ├── test_iot_simulator.py           # 10 tests
+│   │   └── test_event_hub_producer.py      # 12 tests
+│   ├── 📁 geo/                      # Geospatial tests (27)
+│   │   ├── conftest.py
+│   │   ├── test_casino_locations.py        # 12 tests
+│   │   └── test_player_demographics.py     # 15 tests
+│   └── 📁 analytics/               # Analytics generator tests (30)
+│       ├── conftest.py
+│       ├── test_video_analytics_generator.py    # 10 tests
+│       ├── test_people_movement_generator.py    # 10 tests
+│       └── test_geolocation_generator.py        # 10 tests
+├── 📁 integration_tests/           # End-to-end tests
+│   └── test_pipeline.py
+├── 📁 deployment_tests/            # Infrastructure tests
+│   └── test_bicep_deployment.py
+├── 📄 phase7_regression_report.md  # Phase 7 full regression report
+└── README.md
 ```
 
 ---
@@ -216,12 +245,14 @@ pytest validation/unit_tests/ --cov=data-generation/generators --cov-report=html
 
 ### Test Categories
 
-| Category | Description | Files |
-|----------|-------------|-------|
-| Generator Tests | Validate synthetic data generation | `test_generators.py` |
-| Schema Tests | Verify output schemas match expectations | `test_schemas.py` |
-| Business Logic Tests | Test compliance calculations (CTR, SAR) | `test_compliance.py` |
-| Utility Tests | Test helper functions | `test_utils.py` |
+| Category | Tests | Files | Domains |
+|:---------|:------|:------|:--------|
+| Casino/Gaming | 30 | `test_generators.py` | Slot, Table, Player, Financial, Security, Compliance |
+| Federal Agencies | 78 | `federal/test_*.py` | USDA, SBA, NOAA, EPA, DOI, Tribal Healthcare, DOT/FAA |
+| Streaming | 32 | `streaming/test_*.py` | Multi-source CDC, IoT devices, Event Hub Producer |
+| Analytics | 30 | `analytics/test_*.py` | Video, People Movement, Geolocation |
+| Geospatial | 27 | `geo/test_*.py` | Casino Locations, Player Demographics |
+| **Total** | **197** | **16 test files** | **19 generators** |
 
 ---
 
@@ -488,6 +519,20 @@ Common fixtures available in `conftest.py`:
 | GE checkpoint fails | Check data source connection settings |
 | Import errors | Ensure `PYTHONPATH` includes project root |
 | Spark not found | Install PySpark: `pip install pyspark` |
+
+---
+
+## 📊 Phase 7 Regression Report
+
+The [Phase 7 Regression Report](phase7_regression_report.md) provides comprehensive validation:
+
+| Validation | Count | Status |
+|:-----------|:------|:-------|
+| Unit Tests | 197/197 | `🟢 All Passing` |
+| JSON Schemas | 23/23 | `🟢 All Valid` |
+| Python Generators | 19/19 | `🟢 All Compile` |
+| Notebooks | 45/45 | `🟢 All Compile` |
+| Regressions | 0 | `🟢 None` |
 
 ---
 

@@ -33,7 +33,9 @@ from ..base_generator import BaseGenerator
 # ---------------------------------------------------------------------------
 # Domain type alias
 # ---------------------------------------------------------------------------
-DomainType = Literal["flight_operations", "safety_incident", "traffic_statistics", "infrastructure"]
+DomainType = Literal[
+    "flight_operations", "safety_incident", "traffic_statistics", "infrastructure"
+]
 
 # ---------------------------------------------------------------------------
 # Airlines: 20 major US carriers with IATA codes
@@ -63,44 +65,182 @@ CARRIERS: list[dict[str, str]] = [
 
 # Weighted distribution: majors get more traffic than regionals
 CARRIER_WEIGHTS: list[float] = [
-    0.14, 0.13, 0.12, 0.12, 0.06, 0.05, 0.05, 0.04, 0.03, 0.03,
-    0.02, 0.02, 0.02, 0.02, 0.04, 0.03, 0.03, 0.02, 0.02, 0.01,
+    0.14,
+    0.13,
+    0.12,
+    0.12,
+    0.06,
+    0.05,
+    0.05,
+    0.04,
+    0.03,
+    0.03,
+    0.02,
+    0.02,
+    0.02,
+    0.02,
+    0.04,
+    0.03,
+    0.03,
+    0.02,
+    0.02,
+    0.01,
 ]
 
 # ---------------------------------------------------------------------------
 # Airports: 30 major US airports with IATA codes
 # ---------------------------------------------------------------------------
 AIRPORTS: list[dict[str, str]] = [
-    {"code": "ATL", "name": "Hartsfield-Jackson Atlanta Intl", "region": "ASO", "category": "large_hub"},
-    {"code": "ORD", "name": "Chicago O'Hare Intl", "region": "AGL", "category": "large_hub"},
-    {"code": "DFW", "name": "Dallas/Fort Worth Intl", "region": "ASW", "category": "large_hub"},
+    {
+        "code": "ATL",
+        "name": "Hartsfield-Jackson Atlanta Intl",
+        "region": "ASO",
+        "category": "large_hub",
+    },
+    {
+        "code": "ORD",
+        "name": "Chicago O'Hare Intl",
+        "region": "AGL",
+        "category": "large_hub",
+    },
+    {
+        "code": "DFW",
+        "name": "Dallas/Fort Worth Intl",
+        "region": "ASW",
+        "category": "large_hub",
+    },
     {"code": "DEN", "name": "Denver Intl", "region": "ANM", "category": "large_hub"},
-    {"code": "LAX", "name": "Los Angeles Intl", "region": "AWP", "category": "large_hub"},
-    {"code": "JFK", "name": "John F. Kennedy Intl", "region": "AEA", "category": "large_hub"},
-    {"code": "SFO", "name": "San Francisco Intl", "region": "AWP", "category": "large_hub"},
-    {"code": "SEA", "name": "Seattle-Tacoma Intl", "region": "ANM", "category": "large_hub"},
+    {
+        "code": "LAX",
+        "name": "Los Angeles Intl",
+        "region": "AWP",
+        "category": "large_hub",
+    },
+    {
+        "code": "JFK",
+        "name": "John F. Kennedy Intl",
+        "region": "AEA",
+        "category": "large_hub",
+    },
+    {
+        "code": "SFO",
+        "name": "San Francisco Intl",
+        "region": "AWP",
+        "category": "large_hub",
+    },
+    {
+        "code": "SEA",
+        "name": "Seattle-Tacoma Intl",
+        "region": "ANM",
+        "category": "large_hub",
+    },
     {"code": "MCO", "name": "Orlando Intl", "region": "ASO", "category": "large_hub"},
     {"code": "MIA", "name": "Miami Intl", "region": "ASO", "category": "large_hub"},
-    {"code": "LAS", "name": "Harry Reid Intl", "region": "AWP", "category": "large_hub"},
-    {"code": "PHX", "name": "Phoenix Sky Harbor Intl", "region": "AWP", "category": "large_hub"},
-    {"code": "IAH", "name": "George Bush Intercontinental", "region": "ASW", "category": "large_hub"},
-    {"code": "CLT", "name": "Charlotte Douglas Intl", "region": "ASO", "category": "large_hub"},
-    {"code": "EWR", "name": "Newark Liberty Intl", "region": "AEA", "category": "large_hub"},
-    {"code": "MSP", "name": "Minneapolis-Saint Paul Intl", "region": "AGL", "category": "large_hub"},
-    {"code": "DTW", "name": "Detroit Metropolitan Wayne County", "region": "AGL", "category": "large_hub"},
-    {"code": "BOS", "name": "Boston Logan Intl", "region": "ANE", "category": "large_hub"},
-    {"code": "PHL", "name": "Philadelphia Intl", "region": "AEA", "category": "large_hub"},
+    {
+        "code": "LAS",
+        "name": "Harry Reid Intl",
+        "region": "AWP",
+        "category": "large_hub",
+    },
+    {
+        "code": "PHX",
+        "name": "Phoenix Sky Harbor Intl",
+        "region": "AWP",
+        "category": "large_hub",
+    },
+    {
+        "code": "IAH",
+        "name": "George Bush Intercontinental",
+        "region": "ASW",
+        "category": "large_hub",
+    },
+    {
+        "code": "CLT",
+        "name": "Charlotte Douglas Intl",
+        "region": "ASO",
+        "category": "large_hub",
+    },
+    {
+        "code": "EWR",
+        "name": "Newark Liberty Intl",
+        "region": "AEA",
+        "category": "large_hub",
+    },
+    {
+        "code": "MSP",
+        "name": "Minneapolis-Saint Paul Intl",
+        "region": "AGL",
+        "category": "large_hub",
+    },
+    {
+        "code": "DTW",
+        "name": "Detroit Metropolitan Wayne County",
+        "region": "AGL",
+        "category": "large_hub",
+    },
+    {
+        "code": "BOS",
+        "name": "Boston Logan Intl",
+        "region": "ANE",
+        "category": "large_hub",
+    },
+    {
+        "code": "PHL",
+        "name": "Philadelphia Intl",
+        "region": "AEA",
+        "category": "large_hub",
+    },
     {"code": "LGA", "name": "LaGuardia", "region": "AEA", "category": "large_hub"},
-    {"code": "FLL", "name": "Fort Lauderdale-Hollywood Intl", "region": "ASO", "category": "large_hub"},
-    {"code": "BWI", "name": "Baltimore/Washington Intl", "region": "AEA", "category": "medium_hub"},
-    {"code": "DCA", "name": "Ronald Reagan Washington National", "region": "AEA", "category": "medium_hub"},
-    {"code": "SAN", "name": "San Diego Intl", "region": "AWP", "category": "medium_hub"},
+    {
+        "code": "FLL",
+        "name": "Fort Lauderdale-Hollywood Intl",
+        "region": "ASO",
+        "category": "large_hub",
+    },
+    {
+        "code": "BWI",
+        "name": "Baltimore/Washington Intl",
+        "region": "AEA",
+        "category": "medium_hub",
+    },
+    {
+        "code": "DCA",
+        "name": "Ronald Reagan Washington National",
+        "region": "AEA",
+        "category": "medium_hub",
+    },
+    {
+        "code": "SAN",
+        "name": "San Diego Intl",
+        "region": "AWP",
+        "category": "medium_hub",
+    },
     {"code": "TPA", "name": "Tampa Intl", "region": "ASO", "category": "medium_hub"},
     {"code": "PDX", "name": "Portland Intl", "region": "ANM", "category": "medium_hub"},
-    {"code": "SLC", "name": "Salt Lake City Intl", "region": "ANM", "category": "medium_hub"},
-    {"code": "STL", "name": "St. Louis Lambert Intl", "region": "ACE", "category": "medium_hub"},
-    {"code": "BNA", "name": "Nashville Intl", "region": "ASO", "category": "medium_hub"},
-    {"code": "AUS", "name": "Austin-Bergstrom Intl", "region": "ASW", "category": "medium_hub"},
+    {
+        "code": "SLC",
+        "name": "Salt Lake City Intl",
+        "region": "ANM",
+        "category": "medium_hub",
+    },
+    {
+        "code": "STL",
+        "name": "St. Louis Lambert Intl",
+        "region": "ACE",
+        "category": "medium_hub",
+    },
+    {
+        "code": "BNA",
+        "name": "Nashville Intl",
+        "region": "ASO",
+        "category": "medium_hub",
+    },
+    {
+        "code": "AUS",
+        "name": "Austin-Bergstrom Intl",
+        "region": "ASW",
+        "category": "medium_hub",
+    },
 ]
 
 # Build lookup dicts for quick access
@@ -118,15 +258,28 @@ FAA_REGION_WEIGHTS: list[float] = [0.02, 0.06, 0.16, 0.12, 0.08, 0.10, 0.18, 0.1
 # ---------------------------------------------------------------------------
 # Delay cause distribution (65% on-time)
 # ---------------------------------------------------------------------------
-DELAY_CAUSES: list[str] = ["none", "carrier", "weather", "nas", "security", "late_aircraft"]
+DELAY_CAUSES: list[str] = [
+    "none",
+    "carrier",
+    "weather",
+    "nas",
+    "security",
+    "late_aircraft",
+]
 DELAY_CAUSE_WEIGHTS: list[float] = [0.65, 0.15, 0.10, 0.05, 0.03, 0.02]
 
 # ---------------------------------------------------------------------------
 # Safety incident configuration
 # ---------------------------------------------------------------------------
 INCIDENT_TYPES: list[str] = [
-    "bird_strike", "turbulence", "mechanical", "runway_incursion",
-    "fuel_issue", "medical", "security_threat", "near_miss",
+    "bird_strike",
+    "turbulence",
+    "mechanical",
+    "runway_incursion",
+    "fuel_issue",
+    "medical",
+    "security_threat",
+    "near_miss",
 ]
 INCIDENT_TYPE_WEIGHTS: list[float] = [0.30, 0.25, 0.20, 0.08, 0.06, 0.05, 0.03, 0.03]
 
@@ -155,25 +308,54 @@ AIRCRAFT_TYPES: list[dict[str, Any]] = [
 
 # Weighted distribution: narrowbodies dominate domestic flights
 AIRCRAFT_WEIGHTS: list[float] = [
-    0.22, 0.04, 0.06, 0.05, 0.03,
-    0.15, 0.10, 0.06, 0.04,
-    0.10, 0.06, 0.04, 0.02, 0.03,
+    0.22,
+    0.04,
+    0.06,
+    0.05,
+    0.03,
+    0.15,
+    0.10,
+    0.06,
+    0.04,
+    0.10,
+    0.06,
+    0.04,
+    0.02,
+    0.03,
 ]
 
 # ---------------------------------------------------------------------------
 # Airport categories
 # ---------------------------------------------------------------------------
-AIRPORT_CATEGORIES: list[str] = ["large_hub", "medium_hub", "small_hub", "non_hub", "general_aviation"]
+AIRPORT_CATEGORIES: list[str] = [
+    "large_hub",
+    "medium_hub",
+    "small_hub",
+    "non_hub",
+    "general_aviation",
+]
 AIRPORT_CATEGORY_WEIGHTS: list[float] = [0.45, 0.25, 0.15, 0.10, 0.05]
 
 # ---------------------------------------------------------------------------
 # Runway identifiers (common patterns)
 # ---------------------------------------------------------------------------
 RUNWAY_IDS: list[str] = [
-    "09L/27R", "09R/27L", "10L/28R", "10R/28L",
-    "04R/22L", "04L/22R", "08L/26R", "08R/26L",
-    "13L/31R", "13R/31L", "17L/35R", "17R/35L",
-    "01/19", "06/24", "14/32", "18/36",
+    "09L/27R",
+    "09R/27L",
+    "10L/28R",
+    "10R/28L",
+    "04R/22L",
+    "04L/22R",
+    "08L/26R",
+    "08R/26L",
+    "13L/31R",
+    "13R/31L",
+    "17L/35R",
+    "17R/35L",
+    "01/19",
+    "06/24",
+    "14/32",
+    "18/36",
 ]
 
 
@@ -246,7 +428,9 @@ class DOTFAAGenerator(BaseGenerator):
     # Abstract method implementation (default domain: flight_operations)
     # ------------------------------------------------------------------
 
-    def generate_record(self, domain: DomainType = "flight_operations") -> dict[str, Any]:
+    def generate_record(
+        self, domain: DomainType = "flight_operations"
+    ) -> dict[str, Any]:
         """
         Generate a single DOT/FAA record for the specified domain.
 
@@ -352,7 +536,9 @@ class DOTFAAGenerator(BaseGenerator):
             "origin_airport": origin["code"],
             "destination_airport": destination["code"],
             "departure_date": dep_dt.strftime("%Y-%m-%d"),
-            "faa_region": origin.get("region", str(np.random.choice(FAA_REGIONS, p=FAA_REGION_WEIGHTS))),
+            "faa_region": origin.get(
+                "region", str(np.random.choice(FAA_REGIONS, p=FAA_REGION_WEIGHTS))
+            ),
             "report_year": dep_dt.year,
             "report_month": dep_dt.month,
             "load_time": datetime.now().isoformat(),
@@ -369,7 +555,9 @@ class DOTFAAGenerator(BaseGenerator):
         dep_dt = self._generate_departure_date()
         aircraft = self._pick_aircraft()
 
-        record = self._build_common_fields("flight_operations", carrier, origin, destination, dep_dt)
+        record = self._build_common_fields(
+            "flight_operations", carrier, origin, destination, dep_dt
+        )
 
         # Flight number
         record["flight_number"] = str(int(np.random.randint(100, 9999)))
@@ -391,7 +579,9 @@ class DOTFAAGenerator(BaseGenerator):
             delay_minutes = int(np.random.exponential(scale=30.0)) + 1
             delay_minutes = min(delay_minutes, 600)  # Cap at 10 hours
             record["delay_minutes"] = delay_minutes
-            record["actual_departure"] = self._add_delay_to_time(scheduled, delay_minutes)
+            record["actual_departure"] = self._add_delay_to_time(
+                scheduled, delay_minutes
+            )
 
         # Cancellation (5% of flights)
         cancelled = bool(np.random.random() < 0.05)
@@ -406,15 +596,19 @@ class DOTFAAGenerator(BaseGenerator):
         # Aircraft details
         record["aircraft_type"] = aircraft["type"]
         record["tail_number"] = self._generate_tail_number()
-        record["passengers"] = int(np.random.randint(aircraft["pax_min"], aircraft["pax_max"] + 1))
+        record["passengers"] = int(
+            np.random.randint(aircraft["pax_min"], aircraft["pax_max"] + 1)
+        )
 
         # Safety incident fields are null for flight operations
         record["incident_type"] = None
         record["incident_severity"] = None
 
         # Airport and weather context
-        record["airport_category"] = origin.get("category", self.weighted_choice(
-            AIRPORT_CATEGORIES, AIRPORT_CATEGORY_WEIGHTS))
+        record["airport_category"] = origin.get(
+            "category",
+            self.weighted_choice(AIRPORT_CATEGORIES, AIRPORT_CATEGORY_WEIGHTS),
+        )
         record["runway_id"] = str(np.random.choice(RUNWAY_IDS))
         record["visibility_miles"] = round(float(np.random.uniform(1.0, 10.0)), 1)
         record["wind_speed_knots"] = int(np.random.randint(0, 35))
@@ -432,29 +626,43 @@ class DOTFAAGenerator(BaseGenerator):
         dep_dt = self._generate_departure_date()
         aircraft = self._pick_aircraft()
 
-        record = self._build_common_fields("safety_incident", carrier, origin, destination, dep_dt)
+        record = self._build_common_fields(
+            "safety_incident", carrier, origin, destination, dep_dt
+        )
 
         # Flight context
         record["flight_number"] = str(int(np.random.randint(100, 9999)))
         record["scheduled_departure"] = self._generate_time()
-        record["actual_departure"] = None  # Incident records may not have actual departure
+        record["actual_departure"] = (
+            None  # Incident records may not have actual departure
+        )
         record["delay_minutes"] = None
         record["delay_cause"] = None
         record["cancelled"] = None
-        record["diverted"] = bool(np.random.random() < 0.15)  # Higher diversion rate for incidents
+        record["diverted"] = bool(
+            np.random.random() < 0.15
+        )  # Higher diversion rate for incidents
 
         # Aircraft details
         record["aircraft_type"] = aircraft["type"]
         record["tail_number"] = self._generate_tail_number()
-        record["passengers"] = int(np.random.randint(aircraft["pax_min"], aircraft["pax_max"] + 1))
+        record["passengers"] = int(
+            np.random.randint(aircraft["pax_min"], aircraft["pax_max"] + 1)
+        )
 
         # Incident-specific fields
-        record["incident_type"] = self.weighted_choice(INCIDENT_TYPES, INCIDENT_TYPE_WEIGHTS)
-        record["incident_severity"] = self.weighted_choice(INCIDENT_SEVERITIES, INCIDENT_SEVERITY_WEIGHTS)
+        record["incident_type"] = self.weighted_choice(
+            INCIDENT_TYPES, INCIDENT_TYPE_WEIGHTS
+        )
+        record["incident_severity"] = self.weighted_choice(
+            INCIDENT_SEVERITIES, INCIDENT_SEVERITY_WEIGHTS
+        )
 
         # Airport and weather context (weather often matters for incidents)
-        record["airport_category"] = origin.get("category", self.weighted_choice(
-            AIRPORT_CATEGORIES, AIRPORT_CATEGORY_WEIGHTS))
+        record["airport_category"] = origin.get(
+            "category",
+            self.weighted_choice(AIRPORT_CATEGORIES, AIRPORT_CATEGORY_WEIGHTS),
+        )
         record["runway_id"] = str(np.random.choice(RUNWAY_IDS))
         # Incidents more likely in poor visibility
         record["visibility_miles"] = round(float(np.random.uniform(0.0, 10.0)), 1)
@@ -473,7 +681,9 @@ class DOTFAAGenerator(BaseGenerator):
         dep_dt = self._generate_departure_date()
         aircraft = self._pick_aircraft()
 
-        record = self._build_common_fields("traffic_statistics", carrier, origin, destination, dep_dt)
+        record = self._build_common_fields(
+            "traffic_statistics", carrier, origin, destination, dep_dt
+        )
 
         # Traffic stats are aggregated -- no individual flight details
         record["flight_number"] = None
@@ -495,8 +705,10 @@ class DOTFAAGenerator(BaseGenerator):
         record["incident_severity"] = None
 
         # Airport context (no weather for aggregate stats)
-        record["airport_category"] = origin.get("category", self.weighted_choice(
-            AIRPORT_CATEGORIES, AIRPORT_CATEGORY_WEIGHTS))
+        record["airport_category"] = origin.get(
+            "category",
+            self.weighted_choice(AIRPORT_CATEGORIES, AIRPORT_CATEGORY_WEIGHTS),
+        )
         record["runway_id"] = None
         record["visibility_miles"] = None
         record["wind_speed_knots"] = None
@@ -513,7 +725,9 @@ class DOTFAAGenerator(BaseGenerator):
         origin, destination = self._pick_airports()
         dep_dt = self._generate_departure_date()
 
-        record = self._build_common_fields("infrastructure", carrier, origin, destination, dep_dt)
+        record = self._build_common_fields(
+            "infrastructure", carrier, origin, destination, dep_dt
+        )
 
         # Infrastructure records focus on airport, not flights
         record["flight_number"] = None
@@ -534,8 +748,10 @@ class DOTFAAGenerator(BaseGenerator):
         record["incident_severity"] = None
 
         # Infrastructure-specific fields
-        record["airport_category"] = origin.get("category", self.weighted_choice(
-            AIRPORT_CATEGORIES, AIRPORT_CATEGORY_WEIGHTS))
+        record["airport_category"] = origin.get(
+            "category",
+            self.weighted_choice(AIRPORT_CATEGORIES, AIRPORT_CATEGORY_WEIGHTS),
+        )
         record["runway_id"] = str(np.random.choice(RUNWAY_IDS))
         record["visibility_miles"] = None
         record["wind_speed_knots"] = None

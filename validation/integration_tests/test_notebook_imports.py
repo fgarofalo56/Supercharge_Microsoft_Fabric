@@ -7,11 +7,13 @@ Tests for notebook dependencies and imports:
 - No circular dependencies
 - Required packages are documented
 """
-import pytest
+
 import ast
 import sys
 from pathlib import Path
-from typing import Set, List, Dict
+from typing import Dict, List, Set
+
+import pytest
 
 pytestmark = [pytest.mark.integration]
 
@@ -19,16 +21,16 @@ pytestmark = [pytest.mark.integration]
 class TestNotebookImportValidity:
     """Tests for validating notebook imports."""
 
-    def get_notebook_files(self, notebooks_dir: Path) -> List[Path]:
+    def get_notebook_files(self, notebooks_dir: Path) -> list[Path]:
         """Get all Python notebook files."""
         return list(notebooks_dir.rglob("*.py"))
 
-    def extract_imports(self, file_path: Path) -> Set[str]:
+    def extract_imports(self, file_path: Path) -> set[str]:
         """Extract import statements from a Python file."""
         imports = set()
 
         try:
-            with open(file_path, "r", encoding="utf-8") as f:
+            with open(file_path, encoding="utf-8") as f:
                 content = f.read()
 
             # Handle Databricks notebook format (# COMMAND ----------)
@@ -39,23 +41,23 @@ class TestNotebookImportValidity:
                 if isinstance(node, ast.Import):
                     for alias in node.names:
                         imports.add(alias.name.split(".")[0])
-                elif isinstance(node, ast.ImportFrom):
-                    if node.module:
-                        imports.add(node.module.split(".")[0])
+                elif isinstance(node, ast.ImportFrom) and node.module:
+                    imports.add(node.module.split(".")[0])
 
-        except SyntaxError as e:
+        except SyntaxError:
             # Some notebooks may have Databricks magic commands
             # Fall back to regex-based extraction
             imports.update(self._extract_imports_regex(file_path))
 
         return imports
 
-    def _extract_imports_regex(self, file_path: Path) -> Set[str]:
+    def _extract_imports_regex(self, file_path: Path) -> set[str]:
         """Extract imports using regex (fallback for syntax errors)."""
         import re
+
         imports = set()
 
-        with open(file_path, "r", encoding="utf-8") as f:
+        with open(file_path, encoding="utf-8") as f:
             content = f.read()
 
         # Match import statements
@@ -138,24 +140,40 @@ class TestStandardLibraryImports:
     """Tests for standard library imports in notebooks."""
 
     STANDARD_LIBS = {
-        "datetime", "json", "os", "sys", "pathlib", "typing",
-        "re", "hashlib", "uuid", "time", "logging", "collections",
-        "functools", "itertools", "abc", "decimal",
+        "datetime",
+        "json",
+        "os",
+        "sys",
+        "pathlib",
+        "typing",
+        "re",
+        "hashlib",
+        "uuid",
+        "time",
+        "logging",
+        "collections",
+        "functools",
+        "itertools",
+        "abc",
+        "decimal",
     }
 
     def test_datetime_import_available(self, notebooks_dir):
         """Verify datetime is importable (standard library)."""
         import datetime
+
         assert datetime is not None
 
     def test_json_import_available(self):
         """Verify json is importable (standard library)."""
         import json
+
         assert json is not None
 
     def test_pathlib_import_available(self):
         """Verify pathlib is importable (standard library)."""
         from pathlib import Path
+
         assert Path is not None
 
 
@@ -174,7 +192,7 @@ class TestSparkImports:
         all_imports = set()
 
         for notebook in notebooks_dir.rglob("*.py"):
-            with open(notebook, "r", encoding="utf-8") as f:
+            with open(notebook, encoding="utf-8") as f:
                 content = f.read()
 
             if "pyspark" in content:
@@ -186,12 +204,15 @@ class TestSparkImports:
 
         # If any notebook uses Spark, verify standard patterns
         if all_imports:
-            assert "pyspark.sql.functions" in all_imports or "pyspark.sql.types" in all_imports
+            assert (
+                "pyspark.sql.functions" in all_imports
+                or "pyspark.sql.types" in all_imports
+            )
 
     def test_spark_session_creation_pattern(self, notebooks_dir):
         """Verify SparkSession is obtained correctly in notebooks."""
         for notebook in notebooks_dir.rglob("*.py"):
-            with open(notebook, "r", encoding="utf-8") as f:
+            with open(notebook, encoding="utf-8") as f:
                 content = f.read()
 
             # Check for SparkSession patterns
@@ -200,9 +221,9 @@ class TestSparkImports:
                 has_builder = "SparkSession.builder" in content
                 has_spark_var = "spark" in content.lower()
 
-                assert has_builder or has_spark_var, (
-                    f"{notebook.name} has SparkSession but unclear initialization"
-                )
+                assert (
+                    has_builder or has_spark_var
+                ), f"{notebook.name} has SparkSession but unclear initialization"
 
 
 class TestDeltaImports:
@@ -213,7 +234,7 @@ class TestDeltaImports:
         delta_notebooks = []
 
         for notebook in notebooks_dir.rglob("*.py"):
-            with open(notebook, "r", encoding="utf-8") as f:
+            with open(notebook, encoding="utf-8") as f:
                 content = f.read()
 
             if "delta" in content.lower():
@@ -227,7 +248,7 @@ class TestDeltaImports:
 class TestNoCircularDependencies:
     """Tests for circular dependency detection."""
 
-    def build_dependency_graph(self, notebooks_dir: Path) -> Dict[str, Set[str]]:
+    def build_dependency_graph(self, notebooks_dir: Path) -> dict[str, set[str]]:
         """Build a dependency graph from notebook imports."""
         graph = {}
 
@@ -235,7 +256,7 @@ class TestNoCircularDependencies:
             notebook_name = notebook.stem
             deps = set()
 
-            with open(notebook, "r", encoding="utf-8") as f:
+            with open(notebook, encoding="utf-8") as f:
                 content = f.read()
 
             # Look for cross-notebook references
@@ -249,7 +270,7 @@ class TestNoCircularDependencies:
 
         return graph
 
-    def detect_cycles(self, graph: Dict[str, Set[str]]) -> List[List[str]]:
+    def detect_cycles(self, graph: dict[str, set[str]]) -> list[list[str]]:
         """Detect cycles in dependency graph using DFS."""
         cycles = []
         visited = set()
@@ -268,7 +289,7 @@ class TestNoCircularDependencies:
                 elif neighbor in rec_stack:
                     # Found cycle
                     cycle_start = path.index(neighbor)
-                    cycles.append(path[cycle_start:] + [neighbor])
+                    cycles.append([*path[cycle_start:], neighbor])
                     return True
 
             path.pop()
@@ -299,7 +320,7 @@ class TestNoCircularDependencies:
 
         gold_tables = set()
         for notebook in gold_dir.glob("*.py"):
-            with open(notebook, "r", encoding="utf-8") as f:
+            with open(notebook, encoding="utf-8") as f:
                 content = f.read()
             # Extract table names
             if "gold_" in content:
@@ -307,7 +328,7 @@ class TestNoCircularDependencies:
 
         # Silver should not reference Gold
         for notebook in silver_dir.glob("*.py"):
-            with open(notebook, "r", encoding="utf-8") as f:
+            with open(notebook, encoding="utf-8") as f:
                 content = f.read()
 
             for gold_table in gold_tables:
@@ -326,16 +347,12 @@ class TestRequiredPackagesDocumented:
         # Data processing
         "pandas": "Data manipulation and analysis",
         "numpy": "Numerical computing",
-
         # Generators
         "faker": "Synthetic data generation",
-
         # Microsoft Fabric / PySpark
         "pyspark": "Apache Spark for distributed processing",
-
         # Testing
         "pytest": "Testing framework",
-
         # Optional - streaming
         "azure-eventhub": "Azure Event Hubs SDK (optional)",
     }
@@ -381,15 +398,15 @@ class TestNotebookStructure:
     def test_notebooks_have_docstring(self, notebooks_dir):
         """Verify notebooks have documentation."""
         for notebook in notebooks_dir.rglob("*.py"):
-            with open(notebook, "r", encoding="utf-8") as f:
+            with open(notebook, encoding="utf-8") as f:
                 content = f.read()
 
             # Check for markdown header or docstring
             has_doc = (
-                "# MAGIC %md" in content or  # Databricks markdown
-                '"""' in content[:500] or  # Python docstring
-                "'''" in content[:500] or
-                "# " in content[:100]  # Comment header
+                "# MAGIC %md" in content  # Databricks markdown
+                or '"""' in content[:500]  # Python docstring
+                or "'''" in content[:500]
+                or "# " in content[:100]  # Comment header
             )
 
             assert has_doc, f"{notebook.name} lacks documentation"
@@ -406,9 +423,9 @@ class TestNotebookStructure:
             if notebook.name.startswith("_"):
                 continue
 
-            assert pattern.match(notebook.name), (
-                f"{notebook.name} doesn't follow naming convention"
-            )
+            assert pattern.match(
+                notebook.name
+            ), f"{notebook.name} doesn't follow naming convention"
 
     def test_layer_directories_exist(self, notebooks_dir):
         """Verify expected layer directories exist."""
