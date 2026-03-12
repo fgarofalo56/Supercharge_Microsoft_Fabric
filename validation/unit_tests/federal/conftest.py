@@ -43,20 +43,6 @@ def doi_generator():
 
 
 @pytest.fixture
-def tribal_healthcare_generator():
-    """Fixture for Tribal Healthcare (IHS) data generator."""
-    from generators.federal.tribal_healthcare_generator import TribalHealthcareGenerator
-    return TribalHealthcareGenerator(seed=42)
-
-
-@pytest.fixture
-def dot_faa_generator():
-    """Fixture for DOT/FAA data generator."""
-    from generators.federal.dot_faa_generator import DOTFAAGenerator
-    return DOTFAAGenerator(seed=42)
-
-
-@pytest.fixture
 def sample_size():
     """Default sample size for batch tests."""
     return 100

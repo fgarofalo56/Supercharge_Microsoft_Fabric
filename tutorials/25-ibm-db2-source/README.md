@@ -956,12 +956,12 @@ Continue to **[Tutorial 26: Multi-Source Real-Time Intelligence](../26-multi-sou
 
 ---
 
-## 🧭 Navigation
+## :compass: Navigation
 
-| Previous | Up | Next |
-|----------|-----|------|
-| [⬅️ 24-Snowflake to Fabric](../24-snowflake-to-fabric/README.md) | [📖 Tutorials Index](../index.md) | [26-Multi-Source Streaming](../26-multi-source-streaming/README.md) ➡️ |
+| :arrow_left: Previous | :arrow_up: Up | :arrow_right: Next |
+|------------|------|--------|
+| [24-Snowflake to Fabric](../24-snowflake-to-fabric/README.md) | [Tutorials Index](../index.md) | [26-Multi-Source Streaming](../26-multi-source-streaming/README.md) |
 
 ---
 
-> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
+> :speech_balloon: **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
