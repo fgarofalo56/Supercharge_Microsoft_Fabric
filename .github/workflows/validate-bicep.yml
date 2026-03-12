@@ -9,6 +9,7 @@ on:
     paths:
       - 'infra/**/*.bicep'
       - 'infra/**/*.bicepparam'
+  workflow_dispatch:
 
 jobs:
   validate:
