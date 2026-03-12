@@ -955,18 +955,12 @@ Congratulations! You have built a complete DOT/FAA aviation analytics pipeline o
 
 ---
 
-## :compass: Navigation
+## 🧭 Navigation
 
 | Previous | Up | Next |
-|:---------|:--:|-----:|
-| [:arrow_left: 30-Tribal Healthcare Analytics](../30-tribal-healthcare/README.md) | [:book: Tutorials Index](../index.md) | Phase Complete :tada: |
+|----------|-----|------|
+| [⬅️ 30-Tribal Healthcare Analytics](../30-tribal-healthcare/README.md) | [📖 Tutorials Index](../index.md) | N/A |
 
 ---
 
-<div align="center">
-
-**Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues)
-
-*Tutorial 31 of 31 in the Microsoft Fabric Casino & Federal Analytics POC Series*
-
-</div>
+> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).

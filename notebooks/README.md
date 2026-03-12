@@ -20,6 +20,9 @@ Production-ready notebooks designed for Microsoft Fabric, implementing the medal
 | 06_security_events| --> | 06_compliance_val| --> | 06_security_dash |
 | 07_tribal_health | --> | 07_tribal_health | --> | 07_tribal_360    |
 | 08_dot_faa       | --> | 08_dot_faa       | --> | 08_dot_faa_anlyt |
+| 09_video_analytic| --> | 09_video_analytic| --> | 09_video_sec_kpi |
+| 10_people_movemnt| --> | 10_people_movemnt| --> | 10_movement_anlyt|
+| 11_geolocation   | --> | 11_geolocation   | --> | 11_geo_insights  |
 +------------------+     +------------------+     +------------------+
         |                                                 |
         |        +---------------------------------------+
@@ -56,6 +59,9 @@ Raw data ingestion from landing zone to Bronze tables.
 | 06 | `bronze_security_events.py` | Security/surveillance logs | Parquet | `bronze_security_events` |
 | 07 | `07_bronze_tribal_health.py` | IHS tribal health encounters with HIPAA audit | Parquet | `bronze_tribal_health_encounters` |
 | 08 | `08_bronze_dot_faa.py` | DOT/FAA multi-domain ingestion (flights, safety, traffic) | Parquet | `bronze_dot_flight_ops` |
+| 09 | `09_bronze_video_analytics.py` | Video analytics events ingestion | Parquet | `bronze_video_analytics` |
+| 10 | `10_bronze_people_movement.py` | People movement tracking ingestion | Parquet | `bronze_people_movement` |
+| 11 | `11_bronze_geolocation.py` | Geolocation events ingestion | Parquet | `bronze_geolocation` |
 
 ### Silver Layer Notebooks
 
@@ -71,6 +77,9 @@ Data cleansing, validation, and enrichment.
 | 06 | `silver_compliance_validated.py` | Validated compliance filings | Threshold validation, deadlines |
 | 07 | `07_silver_tribal_health.py` | PHI masking, FHIR R4 mapping, ICD-10 validation | HIPAA compliance, deduplication |
 | 08 | `08_silver_dot_faa.py` | IATA validation, delay categorization, carrier standardization | Data quality, cross-source correlation |
+| 09 | `09_silver_video_analytics.py` | Video event deduplication, confidence scoring | Threat classification, anomaly flagging |
+| 10 | `10_silver_people_movement.py` | Movement path validation, zone enrichment | Dwell time calculation, flow analysis |
+| 11 | `11_silver_geolocation.py` | H3 indexing, geofence validation | Location clustering, proximity analysis |
 
 ### Gold Layer Notebooks
 
@@ -86,6 +95,9 @@ Business-ready aggregations and KPIs.
 | 06 | `gold_security_dashboard.py` | Security dashboard | Incidents, threats, response |
 | 07 | `07_gold_tribal_health_360.py` | Patient 360, population health KPIs | Encounters/year, ED utilization, diabetes prevalence |
 | 08 | `08_gold_dot_faa_analytics.py` | Carrier performance, safety analytics | On-time rate, incident trends, airport metrics |
+| 09 | `09_gold_video_security_kpis.py` | Video security KPIs and dashboards | Detection rates, response times, threat trends |
+| 10 | `10_gold_movement_analytics.py` | People movement analytics | Zone occupancy, flow patterns, peak analysis |
+| 11 | `11_gold_geolocation_insights.py` | Geolocation business insights | Hotspot analysis, visit patterns, geo-attribution |
 
 ### Real-Time Notebooks
 
@@ -278,7 +290,10 @@ Notebooks use standard Fabric libraries (no additional packages required):
    |-- 05_bronze_table_games.py
    |-- 06_bronze_security_events.py
    |-- 07_bronze_tribal_health.py
-   +-- 08_bronze_dot_faa.py
+   |-- 08_bronze_dot_faa.py
+   |-- 09_bronze_video_analytics.py
+   |-- 10_bronze_people_movement.py
+   +-- 11_bronze_geolocation.py
 
 2. Silver Notebooks (run after Bronze, in order)
    |-- 01_silver_slot_cleansed.py
@@ -288,7 +303,10 @@ Notebooks use standard Fabric libraries (no additional packages required):
    |-- 05_silver_security_enriched.py
    |-- 06_silver_compliance_validated.py
    |-- 07_silver_tribal_health.py
-   +-- 08_silver_dot_faa.py
+   |-- 08_silver_dot_faa.py
+   |-- 09_silver_video_analytics.py
+   |-- 10_silver_people_movement.py
+   +-- 11_silver_geolocation.py
 
 3. Gold Notebooks (run after Silver)
    |-- 01_gold_slot_performance.py
@@ -298,7 +316,10 @@ Notebooks use standard Fabric libraries (no additional packages required):
    |-- 05_gold_financial_summary.py
    |-- 06_gold_security_dashboard.py
    |-- 07_gold_tribal_health_360.py
-   +-- 08_gold_dot_faa_analytics.py
+   |-- 08_gold_dot_faa_analytics.py
+   |-- 09_gold_video_security_kpis.py
+   |-- 10_gold_movement_analytics.py
+   +-- 11_gold_geolocation_insights.py
 
 4. Streaming Notebooks (independent of medallion)
    |-- 01_sql_server_cdc.py
@@ -356,7 +377,7 @@ Before running in production:
 
 ```
 notebooks/
-├── 📁 bronze/                   # Bronze layer ingestion (8 notebooks)
+├── 📁 bronze/                   # Bronze layer ingestion (11 notebooks)
 │   ├── 01_bronze_slot_telemetry.py
 │   ├── 02_bronze_player_profile.py
 │   ├── 03_bronze_financial_txn.py
@@ -364,8 +385,11 @@ notebooks/
 │   ├── 05_bronze_table_games.py
 │   ├── 06_bronze_security_events.py
 │   ├── 07_bronze_tribal_health.py       # 🏥 HIPAA-compliant
-│   └── 08_bronze_dot_faa.py             # ✈️ Multi-domain
-├── 📁 silver/                   # Silver layer transformation (7 notebooks)
+│   ├── 08_bronze_dot_faa.py             # ✈️ Multi-domain
+│   ├── 09_bronze_video_analytics.py     # 📹 Video events
+│   ├── 10_bronze_people_movement.py     # 🚶 Movement tracking
+│   └── 11_bronze_geolocation.py         # 📍 Geolocation
+├── 📁 silver/                   # Silver layer transformation (11 notebooks)
 │   ├── 01_silver_slot_cleansed.py
 │   ├── 02_silver_player_master.py
 │   ├── 03_silver_table_enriched.py
@@ -373,8 +397,11 @@ notebooks/
 │   ├── 05_silver_security_enriched.py
 │   ├── 06_silver_compliance_validated.py
 │   ├── 07_silver_tribal_health.py       # PHI masking, FHIR
-│   └── 08_silver_dot_faa.py             # IATA validation
-├── 📁 gold/                     # Gold layer aggregation (8 notebooks)
+│   ├── 08_silver_dot_faa.py             # IATA validation
+│   ├── 09_silver_video_analytics.py     # Threat classification
+│   ├── 10_silver_people_movement.py     # Flow analysis
+│   └── 11_silver_geolocation.py         # H3 indexing
+├── 📁 gold/                     # Gold layer aggregation (11 notebooks)
 │   ├── 01_gold_slot_performance.py
 │   ├── 02_gold_player_360.py
 │   ├── 03_gold_compliance_reporting.py
@@ -382,7 +409,10 @@ notebooks/
 │   ├── 05_gold_financial_summary.py
 │   ├── 06_gold_security_dashboard.py
 │   ├── 07_gold_tribal_health_360.py     # Patient 360
-│   └── 08_gold_dot_faa_analytics.py     # Carrier performance
+│   ├── 08_gold_dot_faa_analytics.py     # Carrier performance
+│   ├── 09_gold_video_security_kpis.py   # 📹 Security KPIs
+│   ├── 10_gold_movement_analytics.py    # 🚶 Movement analytics
+│   └── 11_gold_geolocation_insights.py  # 📍 Geo insights
 ├── 📁 streaming/                # 🔄 Streaming notebooks (8)
 │   ├── 01_sql_server_cdc.py
 │   ├── 02_azure_sql_change_feed.py

@@ -22,6 +22,13 @@ def iot_simulator():
 
 
 @pytest.fixture
+def event_hub_producer():
+    """Fixture for Event Hub producer in stdout mode (no Azure connection)."""
+    from generators.streaming.event_hub_producer import EventHubProducer
+    return EventHubProducer(seed=42, events_per_second=100)
+
+
+@pytest.fixture
 def sample_size():
     """Default sample size for batch tests."""
     return 100

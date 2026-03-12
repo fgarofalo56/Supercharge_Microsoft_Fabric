@@ -1,0 +1,216 @@
+# Master Orchestration Configuration
+# ===================================
+# Coordinates all data generators across casino, federal, streaming, and analytics domains.
+# References: generator_config.yaml, federal_datasets.yaml, streaming_sources.yaml
+
+version: "2.0.0"
+description: "Supercharge Microsoft Fabric - Unified Data Generation Orchestration"
+
+# ---------------------------------------------------------------------------
+# Config file references
+# ---------------------------------------------------------------------------
+config_files:
+  casino: "generator_config.yaml"
+  federal: "federal_datasets.yaml"
+  streaming: "streaming_sources.yaml"
+
+# ---------------------------------------------------------------------------
+# Generation order (dependencies flow top-to-bottom)
+# ---------------------------------------------------------------------------
+generation_order:
+  # Phase 1: Foundation data (no dependencies)
+  - stage: 1
+    name: "Foundation"
+    parallel: true
+    generators:
+      - generator: "PlayerGenerator"
+        domain: "casino"
+        depends_on: []
+      - generator: "USDAGenerator"
+        domain: "federal"
+        depends_on: []
+      - generator: "SBAGenerator"
+        domain: "federal"
+        depends_on: []
+      - generator: "NOAAGenerator"
+        domain: "federal"
+        depends_on: []
+      - generator: "EPAGenerator"
+        domain: "federal"
+        depends_on: []
+      - generator: "DOIGenerator"
+        domain: "federal"
+        depends_on: []
+      - generator: "TribalHealthcareGenerator"
+        domain: "federal"
+        depends_on: []
+      - generator: "DOTFAAGenerator"
+        domain: "federal"
+        depends_on: []
+
+  # Phase 2: Casino operations (depend on players)
+  - stage: 2
+    name: "Casino Operations"
+    parallel: true
+    generators:
+      - generator: "SlotMachineGenerator"
+        domain: "casino"
+        depends_on: ["PlayerGenerator"]
+      - generator: "TableGamesGenerator"
+        domain: "casino"
+        depends_on: ["PlayerGenerator"]
+      - generator: "SecurityGenerator"
+        domain: "casino"
+        depends_on: []
+
+  # Phase 3: Financial & compliance (depend on operations)
+  - stage: 3
+    name: "Financial & Compliance"
+    parallel: true
+    generators:
+      - generator: "FinancialGenerator"
+        domain: "casino"
+        depends_on: ["SlotMachineGenerator", "TableGamesGenerator"]
+      - generator: "ComplianceGenerator"
+        domain: "casino"
+        depends_on: ["FinancialGenerator"]
+
+  # Phase 4: Analytics (depend on operations data)
+  - stage: 4
+    name: "Analytics"
+    parallel: true
+    generators:
+      - generator: "VideoAnalyticsGenerator"
+        domain: "analytics"
+        depends_on: ["SecurityGenerator"]
+      - generator: "PeopleMovementGenerator"
+        domain: "analytics"
+        depends_on: []
+      - generator: "GeolocationGenerator"
+        domain: "analytics"
+        depends_on: ["PlayerGenerator"]
+
+# ---------------------------------------------------------------------------
+# Volume ratios by environment
+# ---------------------------------------------------------------------------
+volume_profiles:
+  demo:
+    casino:
+      slot_telemetry: 500000
+      player_profiles: 10000
+      table_games: 100000
+      financial: 50000
+      security: 10000
+      compliance: 5000
+    federal:
+      usda_crop: 10000
+      usda_food_safety: 5000
+      sba_loans: 20000
+      noaa_weather: 15000
+      noaa_storms: 5000
+      epa_air: 10000
+      epa_water: 8000
+      doi_earthquakes: 5000
+      doi_land_use: 8000
+      tribal_health: 10000
+      dot_faa: 15000
+    analytics:
+      video_events: 50000
+      movement_events: 30000
+      geolocation_events: 40000
+    streaming:
+      events_per_second: 50
+      duration_seconds: 60
+
+  small:
+    casino:
+      slot_telemetry: 10000
+      player_profiles: 1000
+      table_games: 5000
+      financial: 2000
+      security: 500
+      compliance: 200
+    federal:
+      usda_crop: 1000
+      usda_food_safety: 500
+      sba_loans: 2000
+      noaa_weather: 1500
+      noaa_storms: 500
+      epa_air: 1000
+      epa_water: 800
+      doi_earthquakes: 500
+      doi_land_use: 800
+      tribal_health: 1000
+      dot_faa: 1500
+    analytics:
+      video_events: 5000
+      movement_events: 3000
+      geolocation_events: 4000
+    streaming:
+      events_per_second: 10
+      duration_seconds: 30
+
+  production:
+    casino:
+      slot_telemetry: 5000000
+      player_profiles: 100000
+      table_games: 1000000
+      financial: 500000
+      security: 100000
+      compliance: 50000
+    federal:
+      usda_crop: 100000
+      usda_food_safety: 50000
+      sba_loans: 200000
+      noaa_weather: 150000
+      noaa_storms: 50000
+      epa_air: 100000
+      epa_water: 80000
+      doi_earthquakes: 50000
+      doi_land_use: 80000
+      tribal_health: 100000
+      dot_faa: 150000
+    analytics:
+      video_events: 500000
+      movement_events: 300000
+      geolocation_events: 400000
+    streaming:
+      events_per_second: 500
+      duration_seconds: 3600
+
+# ---------------------------------------------------------------------------
+# Cross-domain relationships
+# ---------------------------------------------------------------------------
+cross_domain_rules:
+  # Player geolocation events should reference valid player IDs
+  geolocation_to_players:
+    source: "GeolocationGenerator"
+    target: "PlayerGenerator"
+    relationship: "device_owner references player_id"
+
+  # Video events should reference valid camera zones from security
+  video_to_security:
+    source: "VideoAnalyticsGenerator"
+    target: "SecurityGenerator"
+    relationship: "camera zones align with security zones"
+
+  # Compliance filings reference financial transactions
+  compliance_to_financial:
+    source: "ComplianceGenerator"
+    target: "FinancialGenerator"
+    relationship: "filing references transaction_id"
+
+# ---------------------------------------------------------------------------
+# Output configuration
+# ---------------------------------------------------------------------------
+output:
+  default_format: "parquet"
+  supported_formats: ["parquet", "json", "csv"]
+  base_path: "output"
+  partitioning:
+    time_column: "event_timestamp"
+    partition_by: "date"
+  delta_lake:
+    enabled: true
+    optimization: "ZORDER"
+    vacuum_days: 7

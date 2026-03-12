@@ -830,12 +830,12 @@ def generate_global_casinos(count: int = 50) -> List[dict]:
 
 ---
 
-## Next Steps
+## 🧭 Navigation
 
-Continue to:
-- [Tutorial 22: Networking Connectivity](../22-networking-connectivity/README.md)
-- [Tutorial 23: SHIR & Data Gateways](../23-shir-data-gateways/README.md)
+| Previous | Up | Next |
+|----------|-----|------|
+| [⬅️ 20-Workspace Best Practices](../20-workspace-best-practices/README.md) | [📖 Tutorials Index](../index.md) | [22-Networking & Connectivity](../22-networking-connectivity/README.md) ➡️ |
 
 ---
 
-[Back to Tutorials](../index.md) | [Back to Main](../../index.md)
+> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).

@@ -1,0 +1,70 @@
+# Analytics Data Validation Checkpoint
+# Validates video analytics, people movement, and geolocation data
+# Covers Wave 3 analytics domains: video security, movement tracking, spatial analysis
+
+name: analytics_checkpoint
+config_version: 1.0
+template_name:
+module_name: great_expectations.checkpoint
+class_name: Checkpoint
+
+# Execution behavior
+run_name_template: "%Y%m%d-%H%M%S-analytics-validation"
+
+# Action list
+action_list:
+  - name: store_validation_result
+    action:
+      class_name: StoreValidationResultAction
+  - name: store_evaluation_params
+    action:
+      class_name: StoreEvaluationParametersAction
+  - name: update_data_docs
+    action:
+      class_name: UpdateDataDocsAction
+      site_names:
+        - local_site
+
+# Batch request configuration
+batch_request: {}
+
+# Evaluation parameters
+evaluation_parameters: {}
+
+# Runtime configuration
+runtime_configuration:
+  result_format:
+    result_format: COMPLETE
+    include_unexpected_rows: true
+    partial_unexpected_count: 50
+    unexpected_index_column_names:
+      - event_id
+
+# Validations list - analytics domains
+validations:
+  # Video Analytics Data
+  - batch_request:
+      datasource_name: analytics_bronze
+      data_connector_name: runtime_data_connector
+      data_asset_name: video_analytics_events
+      batch_identifiers:
+        default_identifier_name: bronze_video_analytics_data
+    expectation_suite_name: video_analytics_suite
+
+  # People Movement Data
+  - batch_request:
+      datasource_name: analytics_bronze
+      data_connector_name: runtime_data_connector
+      data_asset_name: people_movement_events
+      batch_identifiers:
+        default_identifier_name: bronze_people_movement_data
+    expectation_suite_name: people_movement_suite
+
+  # Geolocation Data
+  - batch_request:
+      datasource_name: analytics_bronze
+      data_connector_name: runtime_data_connector
+      data_asset_name: geolocation_events
+      batch_identifiers:
+        default_identifier_name: bronze_geolocation_data
+    expectation_suite_name: geolocation_suite

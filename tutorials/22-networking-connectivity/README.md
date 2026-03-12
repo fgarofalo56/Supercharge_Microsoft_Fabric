@@ -784,12 +784,12 @@ az network express-route show \
 
 ---
 
-## Next Steps
+## 🧭 Navigation
 
-Continue to:
-- [Tutorial 23: SHIR & Data Gateways](../23-shir-data-gateways/README.md)
-- [Tutorial 14: Security & Networking](../14-security-networking/README.md)
+| Previous | Up | Next |
+|----------|-----|------|
+| [⬅️ 21-GeoAnalytics & ArcGIS](../21-geoanalytics-arcgis/README.md) | [📖 Tutorials Index](../index.md) | [23-SHIR & Data Gateways](../23-shir-data-gateways/README.md) ➡️ |
 
 ---
 
-[Back to Tutorials](../index.md) | [Back to Main](../../index.md)
+> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).

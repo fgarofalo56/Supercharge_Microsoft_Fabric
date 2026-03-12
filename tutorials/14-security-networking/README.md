@@ -2314,12 +2314,12 @@ Continue to **[Tutorial 15: Cost Management](../15-cost-management/README.md)** 
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [13-Migration Planning](../13-migration-planning/README.md) | [Tutorials Index](../index.md) | [15-Cost Optimization](../15-cost-optimization/README.md) |
+| [⬅️ 13-Migration Planning](../13-migration-planning/README.md) | [📖 Tutorials Index](../index.md) | [15-Cost Optimization](../15-cost-optimization/README.md) ➡️ |
 
 ---
 
-> **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
+> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).

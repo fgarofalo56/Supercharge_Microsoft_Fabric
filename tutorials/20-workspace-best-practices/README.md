@@ -594,13 +594,12 @@ tags = {
 
 ---
 
-## Next Steps
+## 🧭 Navigation
 
-Continue to:
-- [Tutorial 21: GeoAnalytics with ArcGIS](../21-geoanalytics-arcgis/README.md)
-- [Tutorial 22: Networking Connectivity](../22-networking-connectivity/README.md)
-- [Tutorial 12: CI/CD & DevOps](../12-cicd-devops/README.md)
+| Previous | Up | Next |
+|----------|-----|------|
+| [⬅️ 19-Copilot & AI](../19-copilot-ai/README.md) | [📖 Tutorials Index](../index.md) | [21-GeoAnalytics & ArcGIS](../21-geoanalytics-arcgis/README.md) ➡️ |
 
 ---
 
-[Back to Tutorials](../index.md) | [Back to Main](../../index.md)
+> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).

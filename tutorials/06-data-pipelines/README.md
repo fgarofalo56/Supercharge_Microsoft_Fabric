@@ -926,12 +926,12 @@ Continue to **[Tutorial 07: Governance & Purview](../07-governance-purview/READM
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [05-Direct Lake & Power BI](../05-direct-lake-powerbi/README.md) | [Tutorials Index](../index.md) | [07-Governance & Purview](../07-governance-purview/README.md) |
+| [⬅️ 05-Direct Lake & Power BI](../05-direct-lake-powerbi/README.md) | [📖 Tutorials Index](../index.md) | [07-Governance & Purview](../07-governance-purview/README.md) ➡️ |
 
 ---
 
-> **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
+> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).

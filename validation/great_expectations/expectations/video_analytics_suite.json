@@ -1,0 +1,264 @@
+{
+  "expectation_suite_name": "video_analytics_suite",
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "notes": "Data quality expectations for video analytics and computer vision event data",
+    "domain": "Video Analytics & Surveillance AI",
+    "compliance_requirements": [
+      "Camera coverage verification",
+      "Alert escalation accuracy",
+      "Detection confidence thresholds",
+      "Privacy-compliant event logging"
+    ]
+  },
+  "expectations": [
+    {
+      "expectation_type": "expect_table_row_count_to_be_between",
+      "kwargs": {
+        "min_value": 0,
+        "max_value": null
+      },
+      "meta": {
+        "notes": "Table may have zero records during quiet periods"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "event_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "camera_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "event_type"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "timestamp"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "confidence_score"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "alert_level"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "event_id"
+      },
+      "meta": {
+        "notes": "Event ID is required - primary identifier"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "camera_id"
+      },
+      "meta": {
+        "notes": "Camera ID is required for source attribution"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "event_type"
+      },
+      "meta": {
+        "notes": "Event type is required for classification"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "timestamp"
+      },
+      "meta": {
+        "notes": "Timestamp is required for event timeline"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "confidence_score"
+      },
+      "meta": {
+        "notes": "Confidence score is required for detection quality assessment"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "alert_level"
+      },
+      "meta": {
+        "notes": "Alert level is required for incident prioritization"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": {
+        "column": "event_id"
+      },
+      "meta": {
+        "notes": "Event ID must be unique"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "event_id",
+        "regex": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "Event ID should be UUID format"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "camera_id",
+        "regex": "^CAM-[0-9]{4}$"
+      },
+      "meta": {
+        "notes": "Camera ID format: CAM-NNNN (e.g., CAM-0001)"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "event_type",
+        "value_set": [
+          "object_detection",
+          "zone_crossing",
+          "anomaly",
+          "face_match",
+          "crowd_density",
+          "loitering",
+          "tailgating",
+          "abandoned_object"
+        ]
+      },
+      "meta": {
+        "notes": "Valid video analytics event types"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "confidence_score",
+        "min_value": 0.0,
+        "max_value": 1.0
+      },
+      "meta": {
+        "notes": "Confidence score must be between 0.0 and 1.0"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "alert_level",
+        "value_set": ["INFO", "WARNING", "CRITICAL", "EMERGENCY"]
+      },
+      "meta": {
+        "notes": "Valid alert levels for incident escalation"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_dateutil_parseable",
+      "kwargs": {
+        "column": "timestamp"
+      },
+      "meta": {
+        "notes": "Timestamp must be parseable"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "zone_name",
+        "value_set": [
+          "GAMING_FLOOR",
+          "ENTRANCE",
+          "EXIT",
+          "CAGE",
+          "COUNT_ROOM",
+          "VAULT",
+          "PARKING",
+          "LOBBY",
+          "RESTAURANT",
+          "HOTEL",
+          "BACK_OF_HOUSE",
+          null
+        ]
+      },
+      "meta": {
+        "notes": "Valid zone names for camera locations"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "bounding_box_x",
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "Bounding box X coordinate must be non-negative when present"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "bounding_box_y",
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "Bounding box Y coordinate must be non-negative when present"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_of_type",
+      "kwargs": {
+        "column": "requires_review",
+        "type_": "BOOLEAN"
+      },
+      "meta": {
+        "notes": "Review flag must be boolean"
+      }
+    },
+    {
+      "expectation_type": "expect_column_value_lengths_to_be_between",
+      "kwargs": {
+        "column": "description",
+        "min_value": 0,
+        "max_value": 1000,
+        "mostly": 0.99
+      },
+      "meta": {
+        "notes": "Description should not exceed 1000 characters"
+      }
+    }
+  ]
+}

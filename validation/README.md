@@ -11,16 +11,17 @@ Comprehensive data quality validation and testing for the Microsoft Fabric Casin
 | Test Category | Framework | Tests | Coverage | Status |
 |:--------------|:----------|:------|:---------|:-------|
 | Casino/Gaming Unit Tests | pytest | 30 | 6 generators | `🟢 Passing` |
-| Federal Agency Unit Tests | pytest | 54 | 7 generators (USDA, SBA, NOAA, EPA, DOI, Tribal, DOT/FAA) | `🟢 Passing` |
-| Streaming Simulator Tests | pytest | 20 | 2 simulators (CDC, IoT) | `🟢 Passing` |
+| Federal Agency Unit Tests | pytest | 78 | 7 generators (USDA, SBA, NOAA, EPA, DOI, Tribal, DOT/FAA) | `🟢 Passing` |
+| Streaming Tests | pytest | 32 | 3 components (CDC, IoT, Event Hub) | `🟢 Passing` |
 | Analytics Generator Tests | pytest | 30 | 3 generators (Video, Movement, Geolocation) | `🟢 Passing` |
+| Geospatial Tests | pytest | 27 | 2 modules (Casino Locations, Player Demographics) | `🟢 Passing` |
 | Integration Tests | pytest | — | Pipeline E2E | `🟢 Active` |
 | Data Quality | Great Expectations | — | Bronze/Silver/Gold | `🟢 Active` |
 | Schema Validation | Delta Lake | — | All Layers | `🟢 Active` |
-| **Total Unit Tests** | | **134** | **16 generators** | **All Passing** |
+| **Total Unit Tests** | | **197** | **19 generators** | **All Passing** |
 
 > [!NOTE]
-> All 134 unit tests pass with zero regressions. See the [Phase 7 Regression Report](phase7_regression_report.md) for full details.
+> All 197 unit tests pass with zero regressions. See the [Phase 7 Regression Report](phase7_regression_report.md) for full details.
 
 ---
 
@@ -33,15 +34,16 @@ Comprehensive data quality validation and testing for the Microsoft Fabric Casin
 +-------------+     +------------------+     +-------------------+
 |             |     |                  |     |                   |
 | Casino (30) |     | Pipeline E2E     |     | Great Expectations|
-| Federal (54)|     | Data Flow        |     | Checkpoints       |
-| Stream (20) |     | Layer Integrity  |     | Production DQ     |
+| Federal (78)|     | Data Flow        |     | Checkpoints       |
+| Stream (32) |     | Layer Integrity  |     | Production DQ     |
 | Analytics   |     |                  |     |                   |
 |       (30)  |     |                  |     |                   |
+| Geo    (27) |     |                  |     |                   |
 +-------------+     +------------------+     +-------------------+
       |                    |                        |
       v                    v                        v
    pytest              pytest                  GE Framework
-   134 pass            --slow                  Checkpoints
+   197 pass            --slow                  Checkpoints
 ```
 
 ---
@@ -60,23 +62,37 @@ validation/
 │   │   ├── compliance_suite.json
 │   │   ├── financial_suite.json
 │   │   ├── security_suite.json
-│   │   └── table_games_suite.json
+│   │   ├── table_games_suite.json
+│   │   ├── video_analytics_suite.json
+│   │   ├── people_movement_suite.json
+│   │   ├── geolocation_suite.json
+│   │   ├── tribal_healthcare_suite.json
+│   │   └── dot_faa_suite.json
 │   └── 📁 checkpoints/             # Validation checkpoints
-│       └── all_domains_checkpoint.yml
-├── 📁 unit_tests/                   # Unit tests (134 total)
+│       ├── all_domains_checkpoint.yml
+│       ├── analytics_checkpoint.yml
+│       └── federal_expansion_checkpoint.yml
+├── 📁 unit_tests/                   # Unit tests (197 total)
 │   ├── conftest.py                  # Casino test fixtures
 │   ├── test_generators.py           # Casino generator tests (30)
-│   ├── 📁 federal/                  # Federal agency tests (54)
+│   ├── 📁 federal/                  # Federal agency tests (78)
 │   │   ├── conftest.py
 │   │   ├── test_usda_generator.py   # 11 tests
 │   │   ├── test_sba_generator.py    # 11 tests
 │   │   ├── test_noaa_generator.py   # 10 tests
 │   │   ├── test_epa_generator.py    # 10 tests
-│   │   └── test_doi_generator.py    # 12 tests
-│   ├── 📁 streaming/               # Streaming simulator tests (20)
+│   │   ├── test_doi_generator.py    # 12 tests
+│   │   ├── test_tribal_healthcare_generator.py  # 12 tests
+│   │   └── test_dot_faa_generator.py            # 12 tests
+│   ├── 📁 streaming/               # Streaming tests (32)
 │   │   ├── conftest.py
 │   │   ├── test_multi_source_simulator.py  # 10 tests
-│   │   └── test_iot_simulator.py           # 10 tests
+│   │   ├── test_iot_simulator.py           # 10 tests
+│   │   └── test_event_hub_producer.py      # 12 tests
+│   ├── 📁 geo/                      # Geospatial tests (27)
+│   │   ├── conftest.py
+│   │   ├── test_casino_locations.py        # 12 tests
+│   │   └── test_player_demographics.py     # 15 tests
 │   └── 📁 analytics/               # Analytics generator tests (30)
 │       ├── conftest.py
 │       ├── test_video_analytics_generator.py    # 10 tests
@@ -232,10 +248,11 @@ pytest validation/unit_tests/ --cov=data-generation/generators --cov-report=html
 | Category | Tests | Files | Domains |
 |:---------|:------|:------|:--------|
 | Casino/Gaming | 30 | `test_generators.py` | Slot, Table, Player, Financial, Security, Compliance |
-| Federal Agencies | 54 | `federal/test_*.py` | USDA, SBA, NOAA, EPA, DOI |
-| Streaming | 20 | `streaming/test_*.py` | Multi-source CDC, IoT devices |
+| Federal Agencies | 78 | `federal/test_*.py` | USDA, SBA, NOAA, EPA, DOI, Tribal Healthcare, DOT/FAA |
+| Streaming | 32 | `streaming/test_*.py` | Multi-source CDC, IoT devices, Event Hub Producer |
 | Analytics | 30 | `analytics/test_*.py` | Video, People Movement, Geolocation |
-| **Total** | **134** | **10 test files** | **16 generators** |
+| Geospatial | 27 | `geo/test_*.py` | Casino Locations, Player Demographics |
+| **Total** | **197** | **16 test files** | **19 generators** |
 
 ---
 
@@ -511,10 +528,10 @@ The [Phase 7 Regression Report](phase7_regression_report.md) provides comprehens
 
 | Validation | Count | Status |
 |:-----------|:------|:-------|
-| Unit Tests | 134/134 | `🟢 All Passing` |
+| Unit Tests | 197/197 | `🟢 All Passing` |
 | JSON Schemas | 23/23 | `🟢 All Valid` |
-| Python Generators | 16/16 | `🟢 All Compile` |
-| Notebooks | 35/35 | `🟢 All Compile` |
+| Python Generators | 19/19 | `🟢 All Compile` |
+| Notebooks | 45/45 | `🟢 All Compile` |
 | Regressions | 0 | `🟢 None` |
 
 ---

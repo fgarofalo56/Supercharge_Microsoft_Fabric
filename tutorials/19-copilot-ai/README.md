@@ -1213,16 +1213,12 @@ You are now ready to implement Microsoft Fabric in production!
 
 ---
 
-## Navigation
+## 🧭 Navigation
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [18-Data Sharing](../18-data-sharing/README.md) | [Tutorials Index](../index.md) | [Tutorials Home](../index.md) - Complete! |
+| [⬅️ 18-Data Sharing](../18-data-sharing/README.md) | [📖 Tutorials Index](../index.md) | [20-Workspace Best Practices](../20-workspace-best-practices/README.md) ➡️ |
 
 ---
 
-> **Congratulations on completing the Microsoft Fabric tutorial series!**
->
-> You now have the knowledge and skills to build enterprise-grade data platforms using Microsoft Fabric. Take what you have learned and apply it to real-world challenges in your organization.
->
-> **Questions or feedback?** Open an issue in the [GitHub repository](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/issues).
+> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).

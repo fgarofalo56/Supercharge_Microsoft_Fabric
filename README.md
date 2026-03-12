@@ -12,7 +12,7 @@
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Dev Container](https://img.shields.io/badge/Dev%20Container-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)
 ![Tutorials](https://img.shields.io/badge/Tutorials-32-blue?style=for-the-badge)
-![Tests](https://img.shields.io/badge/Tests-134_Passing-brightgreen?style=for-the-badge)
+![Tests](https://img.shields.io/badge/Tests-197_Passing-brightgreen?style=for-the-badge)
 ![Phase](https://img.shields.io/badge/Phase_7-Complete-brightgreen?style=for-the-badge)
 
 **Transform your casino operations with enterprise-grade analytics powered by Microsoft Fabric**
@@ -420,7 +420,7 @@ flowchart TB
 ## 🏛️ Phase 7: Industry Expansions
 
 > [!NOTE]
-> **Phase 7 Complete** — 71 features delivered across 5 waves with 134/134 tests passing and zero regressions.
+> **Phase 7 Complete** — 71 features delivered across 5 waves with 197/197 tests passing and zero regressions.
 
 Phase 7 expanded the Casino/Gaming POC to cover federal agencies, migration paths, streaming connectors, analytics pipelines, tribal healthcare, and DOT/FAA transportation.
 
@@ -474,8 +474,8 @@ flowchart TD
 | **Wave 2** | Migration & Streaming | 19 | 20 | `🟢 Complete` |
 | **Wave 3** | Video, Movement, Geolocation Analytics | 12 | 30 | `🟢 Complete` |
 | **Wave 4** | Tribal Healthcare + DOT/FAA | 15 | — | `🟢 Complete` |
-| **Wave 5** | Final Regression | 1 | 134 | `🟢 Complete` |
-| **Total** | | **71** | **134** | **All Complete** |
+| **Wave 5** | Final Regression | 1 | 197 | `🟢 Complete` |
+| **Total** | | **71** | **197** | **All Complete** |
 
 > 👉 See [Future Expansions](future-expansions/README.md) for detailed documentation on each expansion.
 

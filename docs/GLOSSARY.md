@@ -2,7 +2,7 @@
 
 > 🏠 [Home](index.md) > 📚 [Docs](./) > 📖 Glossary
 
-**Last Updated:** `2025-01-21` | **Version:** 1.0.0
+**Last Updated:** `2026-03-11` | **Version:** 2.0.0
 
 ---
 
@@ -16,6 +16,7 @@
 - [☁️ Azure/Cloud Terms](#️-azurecloud-terms)
 - [🔐 Security Terms](#-security-terms)
 - [📊 Analytics & BI Terms](#-analytics--bi-terms)
+- [🏛️ Federal Agency Terms](#️-federal-agency-terms)
 
 ---
 
@@ -291,11 +292,43 @@ Found a missing term or see an opportunity for improvement? Please:
 
 ---
 
+## 🏛️ Federal Agency Terms
+
+| Term | Definition | Category | Related Terms |
+|------|------------|----------|---------------|
+| **BLM** | Bureau of Land Management — manages public lands and mineral resources under the Department of the Interior. | Agency | DOI, NPS, FWS |
+| **DOI** | Department of the Interior — federal agency managing natural resources, including USGS earthquakes and BLM land use. | Agency | USGS, BLM, NPS, FWS |
+| **DOT** | Department of Transportation — federal agency overseeing transportation infrastructure, highways, and aviation. | Agency | FAA, NHTSA |
+| **EPA** | Environmental Protection Agency — federal agency protecting human health and the environment through AQI and water quality standards. | Agency | AQI, MCL, TRI |
+| **FAA** | Federal Aviation Administration — division of DOT regulating civil aviation, flight operations, and airport safety. | Agency | DOT, FISMA, FedRAMP |
+| **FedRAMP** | Federal Risk and Authorization Management Program — standardized security assessment for cloud services used by federal agencies. | Compliance | FISMA, NIST 800-53, ATO |
+| **FIPS** | Federal Information Processing Standards — codes identifying US states and counties, used in USDA and Census data. | Standard | State FIPS, County FIPS |
+| **FISMA** | Federal Information Security Modernization Act — requires federal agencies to develop and maintain information security programs. | Compliance | FedRAMP, NIST 800-53 |
+| **FSIS** | Food Safety and Inspection Service — USDA division responsible for food safety recalls and inspections. | Agency | USDA, NASS |
+| **HHS** | Department of Health and Human Services — oversees IHS and administers HIPAA regulations. | Agency | IHS, HIPAA |
+| **HIPAA** | Health Insurance Portability and Accountability Act — federal law protecting patient health information. Used in tribal healthcare. | Compliance | PHI, IHS, 42 CFR Part 2 |
+| **IHS** | Indian Health Service — HHS agency providing health services to American Indians and Alaska Natives. | Agency | HHS, HIPAA, Tribal Health |
+| **MCL** | Maximum Contaminant Level — EPA threshold for allowable contaminant levels in drinking water. | Standard | EPA, Safe Drinking Water Act |
+| **NAICS** | North American Industry Classification System — standard codes classifying business establishments, used in SBA loan data. | Standard | SBA, PPP |
+| **NASS** | National Agricultural Statistics Service — USDA division providing crop production statistics via QuickStats API. | Agency | USDA, FSIS |
+| **NIGC** | National Indian Gaming Commission — federal agency regulating gaming on Indian lands under IGRA. | Agency | MICS, IGRA, Tribal Gaming |
+| **NIST 800-53** | National Institute of Standards and Technology Special Publication 800-53 — security and privacy controls for federal information systems. | Standard | FedRAMP, FISMA |
+| **NOAA** | National Oceanic and Atmospheric Administration — federal agency providing weather observations, storm events, and climate data. | Agency | NWS, Climate Data Online |
+| **PPP** | Paycheck Protection Program — SBA loan program providing forgivable loans to small businesses. | Program | SBA, 7(a) Loans |
+| **SBA** | Small Business Administration — federal agency supporting small businesses through loans (PPP, 7(a), Disaster) and SBIR awards. | Agency | PPP, NAICS |
+| **TRI** | Toxics Release Inventory — EPA program tracking release of toxic chemicals by industrial facilities. | Program | EPA, AQI |
+| **USDA** | United States Department of Agriculture — federal agency overseeing agriculture, food safety, and rural development. | Agency | NASS, FSIS, Crop Production |
+| **USGS** | United States Geological Survey — DOI science agency monitoring earthquakes, water resources, and land use. | Agency | DOI, Seismic Data |
+| **42 CFR Part 2** | Code of Federal Regulations governing confidentiality of substance use disorder patient records. | Compliance | HIPAA, IHS, Behavioral Health |
+
+---
+
 ## 📈 Document History
 
 | Version | Date | Changes | Author |
 |---------|------|---------|--------|
 | 1.0.0 | 2025-01-21 | Initial glossary creation with 150+ terms across 8 categories | Documentation Team |
+| 2.0.0 | 2026-03-11 | Added Federal Agency Terms section (24 entries) for Phase 7 expansions | Claude Code |
 
 ---
 

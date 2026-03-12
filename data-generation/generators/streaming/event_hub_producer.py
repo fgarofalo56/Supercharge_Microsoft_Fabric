@@ -8,7 +8,8 @@ import json
 import time
 import asyncio
 from datetime import datetime
-from typing import Optional, Callable
+from collections.abc import Callable
+from typing import Any
 import logging
 
 # Optional Azure Event Hubs SDK
@@ -36,10 +37,10 @@ class EventHubProducer:
 
     def __init__(
         self,
-        connection_string: Optional[str] = None,
-        eventhub_name: Optional[str] = None,
+        connection_string: str | None = None,
+        eventhub_name: str | None = None,
         events_per_second: float = 10,
-        seed: Optional[int] = None
+        seed: int | None = None
     ):
         """
         Initialize the producer.
@@ -68,11 +69,11 @@ class EventHubProducer:
                     "Install with: pip install azure-eventhub"
                 )
 
-    def generate_event(self) -> dict:
+    def generate_event(self) -> dict[str, Any]:
         """Generate a single slot machine event."""
         return self.generator.generate_record()
 
-    def _event_to_json(self, event: dict) -> str:
+    def _event_to_json(self, event: dict[str, Any]) -> str:
         """Convert event to JSON string."""
         # Handle datetime serialization
         def json_serializer(obj):
@@ -84,9 +85,9 @@ class EventHubProducer:
 
     def run_sync(
         self,
-        duration_seconds: Optional[int] = None,
-        max_events: Optional[int] = None,
-        callback: Optional[Callable[[dict], None]] = None
+        duration_seconds: int | None = None,
+        max_events: int | None = None,
+        callback: Callable[[dict[str, Any]], None] | None = None
     ):
         """
         Run the producer synchronously.
@@ -134,7 +135,7 @@ class EventHubProducer:
             self._running = False
             logger.info(f"Generated {self._event_count} events")
 
-    def _send_to_eventhub(self, event: dict):
+    def _send_to_eventhub(self, event: dict[str, Any]) -> None:
         """Send event to Azure Event Hub."""
         if not EVENTHUB_AVAILABLE:
             return
@@ -153,8 +154,8 @@ class EventHubProducer:
 
     async def run_async(
         self,
-        duration_seconds: Optional[int] = None,
-        max_events: Optional[int] = None,
+        duration_seconds: int | None = None,
+        max_events: int | None = None,
         batch_size: int = 100
     ):
         """
