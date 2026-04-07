@@ -18,8 +18,24 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    col,
+    concat,
+    count,
+    countDistinct,
+    current_timestamp,
+    exists,
+    filter,
+    floor,
+    lit,
+    minute,
+    rand,
+    round,
+    sum,
+    when,
+    window,
+)
+from pyspark.sql.types import DecimalType, IntegerType, StringType, StructField, StructType, TimestampType
 from datetime import datetime
 
 # Streaming parameters

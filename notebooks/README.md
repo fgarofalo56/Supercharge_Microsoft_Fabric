@@ -1,6 +1,6 @@
 # 📓 Fabric Notebooks
 
-> **[Home](../README.md)** | **[Data Generation](../data-generation/)** | **[Validation](../validation/)** | **[Tutorials](../tutorials/)**
+> **[Home](../README.md)** | **[Data Generation](../data_generation/)** | **[Validation](../validation/)** | **[Tutorials](../tutorials/)**
 
 Production-ready notebooks designed for Microsoft Fabric, implementing the medallion architecture for casino/gaming, federal agency, and streaming data.
 
@@ -437,7 +437,7 @@ notebooks/
 | Resource | Description |
 |----------|-------------|
 | [Tutorials](../tutorials/README.md) | Step-by-step implementation guides |
-| [Data Generation](../data-generation/README.md) | Generate test data for notebooks |
+| [Data Generation](../data_generation/README.md) | Generate test data for notebooks |
 | [Validation](../validation/README.md) | Test notebook outputs |
 | [Fabric Documentation](https://learn.microsoft.com/fabric/) | Official Microsoft Fabric docs |
 

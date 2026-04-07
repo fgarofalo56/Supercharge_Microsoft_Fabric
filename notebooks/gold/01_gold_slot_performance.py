@@ -17,8 +17,22 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    array,
+    array_compact,
+    avg,
+    coalesce,
+    col,
+    count,
+    countDistinct,
+    current_timestamp,
+    lit,
+    max,
+    min,
+    sum,
+    unix_timestamp,
+    when,
+)
 from datetime import datetime
 
 # Parameters
@@ -201,43 +215,47 @@ df_gold = df_flagged \
 # COMMAND ----------
 
 # Select and order columns
-final_columns = [
-    # Dimensions
-    "machine_id", "zone", "denomination", "manufacturer", "machine_type", "business_date",
-
-    # Volume metrics
-    "total_coin_in", "total_coin_out", "total_games", "total_events",
-
-    # Financial KPIs
-    "net_win", "actual_hold_pct", "theoretical_win", "hold_variance", "hold_variance_pct",
-
-    # Jackpot metrics
-    "jackpot_payouts", "jackpot_count",
-
-    # Player metrics
-    "unique_players", "unique_sessions", "games_per_player",
-
-    # Operational metrics
-    "avg_bet", "win_per_unit", "operating_hours",
-
-    # Quality & Status
-    "avg_data_quality", "performance_status", "alert_flags",
-
-    # Metadata
-    "_gold_timestamp", "_batch_id", "_theoretical_hold_used"
-]
-
-df_final = df_gold.select([col(c) for c in final_columns if c in df_gold.columns])
-
-# Write to Gold
-df_final.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("business_date") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(target_table)
-
-print(f"Written {df_final.count():,} records to {target_table}")
+try:
+    final_columns = [
+        # Dimensions
+        "machine_id", "zone", "denomination", "manufacturer", "machine_type", "business_date",
+    
+        # Volume metrics
+        "total_coin_in", "total_coin_out", "total_games", "total_events",
+    
+        # Financial KPIs
+        "net_win", "actual_hold_pct", "theoretical_win", "hold_variance", "hold_variance_pct",
+    
+        # Jackpot metrics
+        "jackpot_payouts", "jackpot_count",
+    
+        # Player metrics
+        "unique_players", "unique_sessions", "games_per_player",
+    
+        # Operational metrics
+        "avg_bet", "win_per_unit", "operating_hours",
+    
+        # Quality & Status
+        "avg_data_quality", "performance_status", "alert_flags",
+    
+        # Metadata
+        "_gold_timestamp", "_batch_id", "_theoretical_hold_used"
+    ]
+    
+    df_final = df_gold.select([col(c) for c in final_columns if c in df_gold.columns])
+    
+    # Write to Gold
+    df_final.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .partitionBy("business_date") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(target_table)
+    
+    print(f"Written {df_final.count():,} records to {target_table}")
+except Exception as e:
+    print(f"ERROR in lh_gold.gold_slot_performance (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

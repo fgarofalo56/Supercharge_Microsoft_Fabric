@@ -15,7 +15,7 @@
       "name": "Generate: Slot Events",
       "type": "debugpy",
       "request": "launch",
-      "module": "data-generation.generate",
+      "module": "data_generation.generate",
       "args": [
         "--type", "slot_events",
         "--records", "100",
@@ -32,7 +32,7 @@
       "name": "Generate: Player Profiles",
       "type": "debugpy",
       "request": "launch",
-      "module": "data-generation.generate",
+      "module": "data_generation.generate",
       "args": [
         "--type", "player_profiles",
         "--records", "100",
@@ -49,7 +49,7 @@
       "name": "Generate: Financial Transactions",
       "type": "debugpy",
       "request": "launch",
-      "module": "data-generation.generate",
+      "module": "data_generation.generate",
       "args": [
         "--type", "financial_transactions",
         "--records", "100",
@@ -66,7 +66,7 @@
       "name": "Generate: All Data Types",
       "type": "debugpy",
       "request": "launch",
-      "module": "data-generation.generate",
+      "module": "data_generation.generate",
       "args": [
         "--type", "all",
         "--records", "500",
@@ -87,7 +87,7 @@
       "name": "Stream: Event Hub Producer",
       "type": "debugpy",
       "request": "launch",
-      "program": "${workspaceFolder}/data-generation/generators/streaming/event_hub_producer.py",
+      "program": "${workspaceFolder}/data_generation/generators/streaming/event_hub_producer.py",
       "args": [
         "--events-per-second", "10",
         "--duration", "60"
@@ -199,7 +199,7 @@
       "args": [
         "validation/",
         "-v",
-        "--cov=data-generation",
+        "--cov=data_generation",
         "--cov-report=html",
         "--cov-report=term-missing"
       ],

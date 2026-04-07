@@ -21,8 +21,29 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    array,
+    array_compact,
+    coalesce,
+    col,
+    concat,
+    count,
+    current_date,
+    current_timestamp,
+    desc,
+    filter,
+    lit,
+    max,
+    min,
+    round,
+    sum,
+    to_date,
+    trim,
+    upper,
+    when,
+    window,
+)
+from pyspark.sql.types import IntegerType
 from datetime import datetime
 
 # Parameters
@@ -389,40 +410,44 @@ df_flights_silver = df_flights_final \
 
 # COMMAND ----------
 
-flight_perf_columns = [
-    # Identifiers
-    "flight_id", "flight_number", "carrier_code", "carrier_name_std", "route",
-    # Airports
-    "origin_airport", "destination_airport",
-    # Schedule
-    "flight_date_parsed", "scheduled_departure", "actual_departure",
-    "scheduled_arrival", "actual_arrival",
-    # Delay metrics
-    "departure_delay_minutes", "arrival_delay_minutes",
-    "delay_category", "delay_cause", "is_on_time",
-    # Flight details
-    "cancelled", "cancellation_code", "diverted",
-    "aircraft_type", "tail_number", "distance_miles",
-    "air_time_minutes", "taxi_out_minutes", "taxi_in_minutes",
-    # Region & performance
-    "faa_region", "faa_region_name",
-    "carrier_on_time_rate",
-    # Quality & metadata
-    "_dq_score", "_dq_flags", "_silver_timestamp", "_batch_id"
-]
-
-df_flight_out = df_flights_silver.select(
-    [col(c) for c in flight_perf_columns if c in df_flights_silver.columns]
-)
-
-df_flight_out.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("flight_date_parsed") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_FLIGHT_PERF)
-
-print(f"Written {df_flight_out.count():,} records to {TARGET_FLIGHT_PERF}")
+try:
+    flight_perf_columns = [
+        # Identifiers
+        "flight_id", "flight_number", "carrier_code", "carrier_name_std", "route",
+        # Airports
+        "origin_airport", "destination_airport",
+        # Schedule
+        "flight_date_parsed", "scheduled_departure", "actual_departure",
+        "scheduled_arrival", "actual_arrival",
+        # Delay metrics
+        "departure_delay_minutes", "arrival_delay_minutes",
+        "delay_category", "delay_cause", "is_on_time",
+        # Flight details
+        "cancelled", "cancellation_code", "diverted",
+        "aircraft_type", "tail_number", "distance_miles",
+        "air_time_minutes", "taxi_out_minutes", "taxi_in_minutes",
+        # Region & performance
+        "faa_region", "faa_region_name",
+        "carrier_on_time_rate",
+        # Quality & metadata
+        "_dq_score", "_dq_flags", "_silver_timestamp", "_batch_id"
+    ]
+    
+    df_flight_out = df_flights_silver.select(
+        [col(c) for c in flight_perf_columns if c in df_flights_silver.columns]
+    )
+    
+    df_flight_out.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .partitionBy("flight_date_parsed") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(TARGET_FLIGHT_PERF)
+    
+    print(f"Written {df_flight_out.count():,} records to {TARGET_FLIGHT_PERF}")
+except Exception as e:
+    print(f"ERROR in unknown (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

@@ -24,8 +24,31 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    asc,
+    avg,
+    coalesce,
+    col,
+    collect_set,
+    count,
+    countDistinct,
+    current_timestamp,
+    days,
+    desc,
+    filter,
+    first,
+    lag,
+    lit,
+    max,
+    min,
+    round,
+    row_number,
+    struct,
+    sum,
+    when,
+    window,
+    year,
+)
 from pyspark.sql.window import Window
 from datetime import datetime
 
@@ -172,14 +195,18 @@ df_aqi_final = df_aqi_with_rolling \
 
 # COMMAND ----------
 
-df_aqi_final.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("state") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_AIR_QUALITY)
-
-print(f"Written {df_aqi_final.count():,} records to {TARGET_AIR_QUALITY}")
+try:
+    df_aqi_final.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .partitionBy("state") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(TARGET_AIR_QUALITY)
+    
+    print(f"Written {df_aqi_final.count():,} records to {TARGET_AIR_QUALITY}")
+except Exception as e:
+    print(f"ERROR in unknown (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

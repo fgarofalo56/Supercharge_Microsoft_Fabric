@@ -222,7 +222,7 @@ Before starting this tutorial, ensure you have:
 > **📋 Data Source Options**
 >
 > This tutorial supports two data ingestion paths:
-> 1. **Synthetic Generator** (recommended for learning): Use [`doi_generator.py`](../../data-generation/generators/federal/doi_generator.py) to generate realistic DOI data locally
+> 1. **Synthetic Generator** (recommended for learning): Use [`doi_generator.py`](../../data_generation/generators/federal/doi_generator.py) to generate realistic DOI data locally
 > 2. **DOI APIs**: Connect directly to USGS Earthquake API, NWIS, NPS Stats, and FWS ECOS for real data
 >
 > Both paths converge at the same Bronze schema. The real-time earthquake streaming component uses the USGS GeoJSON API.
@@ -248,7 +248,7 @@ DOI sub-agencies maintain independent data systems. This tutorial integrates the
 ```python
 # Generate synthetic DOI data for development
 import sys
-sys.path.append("../../data-generation")
+sys.path.append("../../data_generation")
 
 from generators.federal.doi_generator import DOIGenerator
 
@@ -1224,9 +1224,9 @@ Continue your learning journey:
 | FWS ECOS Species | [ecos.fws.gov](https://ecos.fws.gov/ecp/) |
 | BLM Public Land Statistics | [blm.gov/about/data](https://www.blm.gov/about/data) |
 | USGS Data Citation Guide | [usgs.gov/data-management/data-citation](https://www.usgs.gov/data-management/data-citation) |
-| Earthquake Schema | [`data-generation/schemas/federal/doi_earthquake_schema.json`](../../data-generation/schemas/federal/doi_earthquake_schema.json) |
-| Land Use Schema | [`data-generation/schemas/federal/doi_land_use_schema.json`](../../data-generation/schemas/federal/doi_land_use_schema.json) |
-| Data Generator | [`data-generation/generators/federal/doi_generator.py`](../../data-generation/generators/federal/doi_generator.py) |
+| Earthquake Schema | [`data_generation/schemas/federal/doi_earthquake_schema.json`](../../data_generation/schemas/federal/doi_earthquake_schema.json) |
+| Land Use Schema | [`data_generation/schemas/federal/doi_land_use_schema.json`](../../data_generation/schemas/federal/doi_land_use_schema.json) |
+| Data Generator | [`data_generation/generators/federal/doi_generator.py`](../../data_generation/generators/federal/doi_generator.py) |
 
 ---
 

@@ -69,6 +69,9 @@ param enablePrivateEndpoint bool = false
 @description('Subnet ID for private endpoint')
 param privateEndpointSubnetId string = ''
 
+@description('Key Vault resource ID for storing connection strings securely (optional)')
+param keyVaultId string = ''
+
 @description('Tags to apply to resources')
 param tags object = {}
 
@@ -230,11 +233,9 @@ output eventStreamEndpoint string = eventHubNamespace.properties.serviceBusEndpo
 @description('The name of the Event Hubs namespace')
 output eventStreamName string = eventHubNamespace.name
 
-@description('The primary connection string for Send/Listen/Manage access')
-output eventStreamConnectionString string = sendListenRule.listKeys().primaryConnectionString
-
-@description('The read-only connection string for Listen access')
-output eventStreamReadOnlyConnectionString string = listenOnlyRule.listKeys().primaryConnectionString
+// SECURITY: Connection strings are NOT exposed as outputs.
+// They are stored in Key Vault via the secrets below (if keyVaultId is provided).
+// Retrieve them at runtime using Key Vault references or managed identity.
 
 @description('The names of all created Event Hubs (input sources)')
 output eventHubNames array = [for (source, i) in inputSources: eventHubs[i].name]

@@ -53,31 +53,31 @@
       "items": [
         {
           "name": "usda_generator",
-          "file": "data-generation/generators/federal/usda_generator.py",
+          "file": "data_generation/generators/federal/usda_generator.py",
           "status": "complete",
           "description": "USDA data generator: crop production, food inspections, SNAP retailers, farm payments"
         },
         {
           "name": "sba_generator",
-          "file": "data-generation/generators/federal/sba_generator.py",
+          "file": "data_generation/generators/federal/sba_generator.py",
           "status": "complete",
           "description": "SBA data generator: PPP loans, 7(a) loans, disaster loans, SBIR awards"
         },
         {
           "name": "noaa_generator",
-          "file": "data-generation/generators/federal/noaa_generator.py",
+          "file": "data_generation/generators/federal/noaa_generator.py",
           "status": "complete",
           "description": "NOAA data generator: weather observations, storm events, tide data, climate normals"
         },
         {
           "name": "epa_generator",
-          "file": "data-generation/generators/federal/epa_generator.py",
+          "file": "data_generation/generators/federal/epa_generator.py",
           "status": "complete",
           "description": "EPA data generator: AQI readings, water quality, TRI releases, Superfund sites"
         },
         {
           "name": "doi_generator",
-          "file": "data-generation/generators/federal/doi_generator.py",
+          "file": "data_generation/generators/federal/doi_generator.py",
           "status": "complete",
           "description": "DOI data generator: earthquakes, water resources, species data, land parcels"
         }
@@ -90,47 +90,47 @@
       "items": [
         {
           "name": "usda_crop_schema",
-          "file": "data-generation/schemas/federal/usda_crop_schema.json",
+          "file": "data_generation/schemas/federal/usda_crop_schema.json",
           "status": "complete"
         },
         {
           "name": "usda_food_safety_schema",
-          "file": "data-generation/schemas/federal/usda_food_safety_schema.json",
+          "file": "data_generation/schemas/federal/usda_food_safety_schema.json",
           "status": "complete"
         },
         {
           "name": "sba_loan_schema",
-          "file": "data-generation/schemas/federal/sba_loan_schema.json",
+          "file": "data_generation/schemas/federal/sba_loan_schema.json",
           "status": "complete"
         },
         {
           "name": "noaa_weather_schema",
-          "file": "data-generation/schemas/federal/noaa_weather_schema.json",
+          "file": "data_generation/schemas/federal/noaa_weather_schema.json",
           "status": "complete"
         },
         {
           "name": "noaa_storm_schema",
-          "file": "data-generation/schemas/federal/noaa_storm_schema.json",
+          "file": "data_generation/schemas/federal/noaa_storm_schema.json",
           "status": "complete"
         },
         {
           "name": "epa_air_quality_schema",
-          "file": "data-generation/schemas/federal/epa_air_quality_schema.json",
+          "file": "data_generation/schemas/federal/epa_air_quality_schema.json",
           "status": "complete"
         },
         {
           "name": "epa_water_quality_schema",
-          "file": "data-generation/schemas/federal/epa_water_quality_schema.json",
+          "file": "data_generation/schemas/federal/epa_water_quality_schema.json",
           "status": "complete"
         },
         {
           "name": "doi_earthquake_schema",
-          "file": "data-generation/schemas/federal/doi_earthquake_schema.json",
+          "file": "data_generation/schemas/federal/doi_earthquake_schema.json",
           "status": "complete"
         },
         {
           "name": "doi_land_use_schema",
-          "file": "data-generation/schemas/federal/doi_land_use_schema.json",
+          "file": "data_generation/schemas/federal/doi_land_use_schema.json",
           "status": "complete"
         }
       ]
@@ -174,13 +174,13 @@
       "items": [
         {
           "name": "federal_datasets_yaml",
-          "file": "data-generation/config/federal_datasets.yaml",
+          "file": "data_generation/config/federal_datasets.yaml",
           "status": "complete",
           "description": "Open dataset registry with URLs, APIs, formats, sizes for all federal agencies"
         },
         {
           "name": "streaming_sources_yaml",
-          "file": "data-generation/config/streaming_sources.yaml",
+          "file": "data_generation/config/streaming_sources.yaml",
           "status": "complete",
           "description": "Streaming source connector configurations for all 8 sources"
         }
@@ -273,17 +273,17 @@
       "items": [
         {
           "name": "cdc_event_schema",
-          "file": "data-generation/schemas/streaming/cdc_event_schema.json",
+          "file": "data_generation/schemas/streaming/cdc_event_schema.json",
           "status": "complete"
         },
         {
           "name": "iot_telemetry_schema",
-          "file": "data-generation/schemas/streaming/iot_telemetry_schema.json",
+          "file": "data_generation/schemas/streaming/iot_telemetry_schema.json",
           "status": "complete"
         },
         {
           "name": "kafka_message_schema",
-          "file": "data-generation/schemas/streaming/kafka_message_schema.json",
+          "file": "data_generation/schemas/streaming/kafka_message_schema.json",
           "status": "complete"
         }
       ]
@@ -295,13 +295,13 @@
       "items": [
         {
           "name": "multi_source_simulator",
-          "file": "data-generation/generators/streaming/multi_source_simulator.py",
+          "file": "data_generation/generators/streaming/multi_source_simulator.py",
           "status": "complete",
           "description": "Unified simulator generating CDC events from SQL, Cosmos, DB2, Oracle, Kafka sources"
         },
         {
           "name": "iot_device_simulator",
-          "file": "data-generation/generators/streaming/iot_device_simulator.py",
+          "file": "data_generation/generators/streaming/iot_device_simulator.py",
           "status": "complete",
           "description": "IoT device fleet simulator with configurable device types, telemetry schemas, throughput"
         }
@@ -350,13 +350,13 @@
         },
         {
           "name": "video_analytics_generator",
-          "file": "data-generation/generators/analytics/video_analytics_generator.py",
+          "file": "data_generation/generators/analytics/video_analytics_generator.py",
           "status": "complete",
           "description": "Video event metadata generator: detections, tracks, anomalies, zone crossings"
         },
         {
           "name": "video_event_schema",
-          "file": "data-generation/schemas/analytics/video_event_schema.json",
+          "file": "data_generation/schemas/analytics/video_event_schema.json",
           "status": "complete"
         }
       ]
@@ -374,13 +374,13 @@
         },
         {
           "name": "people_movement_generator",
-          "file": "data-generation/generators/analytics/people_movement_generator.py",
+          "file": "data_generation/generators/analytics/people_movement_generator.py",
           "status": "complete",
           "description": "Movement event generator: coordinates, zones, dwell times, beacon signals"
         },
         {
           "name": "movement_event_schema",
-          "file": "data-generation/schemas/analytics/movement_event_schema.json",
+          "file": "data_generation/schemas/analytics/movement_event_schema.json",
           "status": "complete"
         }
       ]
@@ -398,13 +398,13 @@
         },
         {
           "name": "geolocation_generator",
-          "file": "data-generation/generators/analytics/geolocation_generator.py",
+          "file": "data_generation/generators/analytics/geolocation_generator.py",
           "status": "complete",
           "description": "Geolocation event generator: GPS coordinates, geofence events, proximity triggers"
         },
         {
           "name": "geolocation_schema",
-          "file": "data-generation/schemas/analytics/geolocation_schema.json",
+          "file": "data_generation/schemas/analytics/geolocation_schema.json",
           "status": "complete"
         }
       ]
@@ -444,7 +444,7 @@
         },
         {
           "name": "tribal_data_generator",
-          "file": "data-generation/generators/federal/tribal_healthcare_generator.py",
+          "file": "data_generation/generators/federal/tribal_healthcare_generator.py",
           "status": "complete",
           "description": "Healthcare data generator: patient records, clinical, pharmacy, lab, behavioral health"
         },
@@ -474,7 +474,7 @@
         },
         {
           "name": "tribal_health_schema",
-          "file": "data-generation/schemas/federal/tribal_health_schema.json",
+          "file": "data_generation/schemas/federal/tribal_health_schema.json",
           "status": "complete"
         }
       ]
@@ -492,7 +492,7 @@
         },
         {
           "name": "dot_faa_data_generator",
-          "file": "data-generation/generators/federal/dot_faa_generator.py",
+          "file": "data_generation/generators/federal/dot_faa_generator.py",
           "status": "complete",
           "description": "DOT/FAA data generator: flight data, safety incidents, traffic stats, infrastructure"
         },
@@ -522,7 +522,7 @@
         },
         {
           "name": "dot_faa_schema",
-          "file": "data-generation/schemas/federal/dot_faa_schema.json",
+          "file": "data_generation/schemas/federal/dot_faa_schema.json",
           "status": "complete"
         }
       ]

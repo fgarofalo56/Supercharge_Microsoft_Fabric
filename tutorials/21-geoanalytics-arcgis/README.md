@@ -42,7 +42,7 @@ First, let's create synthetic casino location data across the US:
 
 ```python
 # Casino Location Data Generator
-# Save as: data-generation/generators/geo/casino_locations.py
+# Save as: data_generation/generators/geo/casino_locations.py
 
 import random
 from dataclasses import dataclass
@@ -203,7 +203,7 @@ if __name__ == "__main__":
 
 ```python
 # Player Demographics with Location Data
-# Save as: data-generation/generators/geo/player_demographics.py
+# Save as: data_generation/generators/geo/player_demographics.py
 
 import random
 from dataclasses import dataclass

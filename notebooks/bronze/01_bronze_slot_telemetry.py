@@ -26,7 +26,7 @@ from pyspark.sql.functions import (
     current_timestamp, lit, input_file_name,
     col, to_timestamp, when
 )
-from pyspark.sql.types import *
+from pyspark.sql.types import DoubleType, IntegerType, StringType, StructField, StructType, TimestampType
 from datetime import datetime
 
 # Configuration

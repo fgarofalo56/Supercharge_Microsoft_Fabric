@@ -80,7 +80,7 @@ Supercharge_Microsoft_Fabric/
 │   ├── day3-bi-governance-mirroring.md
 │   └── instructor-guide/
 │
-├── data-generation/                       # Data generators
+├── data_generation/                       # Data generators
 │   ├── generators/
 │   │   ├── base_generator.py
 │   │   ├── slot_machine_generator.py

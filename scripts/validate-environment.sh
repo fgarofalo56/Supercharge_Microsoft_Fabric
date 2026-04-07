@@ -30,7 +30,7 @@ VERBOSE=false
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
-DATA_GEN_PATH="$PROJECT_ROOT/data-generation"
+DATA_GEN_PATH="$PROJECT_ROOT/data_generation"
 ENV_FILE="$PROJECT_ROOT/.env"
 
 MIN_PYTHON_VERSION="3.10"
@@ -345,7 +345,7 @@ if [ "$QUICK" = false ] && [ -n "$PYTHON_CMD" ]; then
     for gen in "${GENERATORS[@]}"; do
         if $PYTHON_CMD -c "
 import sys
-sys.path.insert(0, 'data-generation')
+sys.path.insert(0, 'data_generation')
 from generators import $gen
 print('OK')
 " 2>/dev/null | grep -q "OK"; then
@@ -368,7 +368,7 @@ if [ "$QUICK" = false ] && [ -n "$PYTHON_CMD" ]; then
 
     SMOKE_RESULT=$($PYTHON_CMD << 'EOF' 2>&1
 import sys
-sys.path.insert(0, 'data-generation')
+sys.path.insert(0, 'data_generation')
 from generators import SlotMachineGenerator
 
 try:

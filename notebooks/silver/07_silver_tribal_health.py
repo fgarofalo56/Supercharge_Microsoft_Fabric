@@ -20,8 +20,28 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    array,
+    array_compact,
+    coalesce,
+    col,
+    count,
+    create_map,
+    current_date,
+    current_timestamp,
+    filter,
+    initcap,
+    length,
+    like,
+    lit,
+    max,
+    min,
+    sha2,
+    trim,
+    upper,
+    when,
+)
+from pyspark.sql.types import StringType
 from datetime import datetime
 
 # Parameters (set by pipeline or manual)
@@ -420,60 +440,64 @@ df_silver = df_standardized \
 # COMMAND ----------
 
 # Select final columns for Silver output
-final_columns = [
-    # Core encounter fields
-    "encounter_id", "patient_id_hash", "encounter_date",
-    "encounter_type_std", "fhir_encounter_class", "fhir_resource_type",
-    "fhir_encounter_status", "fhir_service_type",
-
-    # Facility and location
-    "facility_id", "facility_name_std", "service_unit_std", "area_office_std",
-
-    # Provider
-    "provider_id", "provider_type_std",
-
-    # Diagnosis
-    "icd10_code_clean", "icd10_description", "icd10_chapter",
-    "diagnosis_category", "icd10_valid",
-    "is_diabetes_related", "is_behavioral_health", "is_substance_use",
-
-    # Procedure and medication
-    "procedure_code", "procedure_description",
-    "medication_prescribed", "medication_ndc",
-
-    # Insurance
-    "insurance_type_std", "insurance_id",
-
-    # Visit details
-    "visit_duration_minutes", "referral_flag", "referral_destination",
-    "follow_up_required", "follow_up_date",
-    "telehealth_flag", "emergency_flag",
-
-    # Demographics (non-PHI)
-    "tribal_affiliation", "community_health_rep_id",
-
-    # HIPAA
-    "phi_masked", "hipaa_consent",
-
-    # Data quality
-    "_dq_score", "_dq_flags",
-
-    # Metadata
-    "_silver_timestamp", "_batch_id"
-]
-
-df_final = df_silver.select([col(c) for c in final_columns if c in df_silver.columns])
-
-# Write to Silver layer
-df_final.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .partitionBy("encounter_date") \
-    .saveAsTable(target_table)
-
-silver_count = df_final.count()
-print(f"Written {silver_count:,} records to {target_table}")
+try:
+    final_columns = [
+        # Core encounter fields
+        "encounter_id", "patient_id_hash", "encounter_date",
+        "encounter_type_std", "fhir_encounter_class", "fhir_resource_type",
+        "fhir_encounter_status", "fhir_service_type",
+    
+        # Facility and location
+        "facility_id", "facility_name_std", "service_unit_std", "area_office_std",
+    
+        # Provider
+        "provider_id", "provider_type_std",
+    
+        # Diagnosis
+        "icd10_code_clean", "icd10_description", "icd10_chapter",
+        "diagnosis_category", "icd10_valid",
+        "is_diabetes_related", "is_behavioral_health", "is_substance_use",
+    
+        # Procedure and medication
+        "procedure_code", "procedure_description",
+        "medication_prescribed", "medication_ndc",
+    
+        # Insurance
+        "insurance_type_std", "insurance_id",
+    
+        # Visit details
+        "visit_duration_minutes", "referral_flag", "referral_destination",
+        "follow_up_required", "follow_up_date",
+        "telehealth_flag", "emergency_flag",
+    
+        # Demographics (non-PHI)
+        "tribal_affiliation", "community_health_rep_id",
+    
+        # HIPAA
+        "phi_masked", "hipaa_consent",
+    
+        # Data quality
+        "_dq_score", "_dq_flags",
+    
+        # Metadata
+        "_silver_timestamp", "_batch_id"
+    ]
+    
+    df_final = df_silver.select([col(c) for c in final_columns if c in df_silver.columns])
+    
+    # Write to Silver layer
+    df_final.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .option("overwriteSchema", "true") \
+        .partitionBy("encounter_date") \
+        .saveAsTable(target_table)
+    
+    silver_count = df_final.count()
+    print(f"Written {silver_count:,} records to {target_table}")
+except Exception as e:
+    print(f"ERROR in lh_silver.silver_tribal_health_encounters (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

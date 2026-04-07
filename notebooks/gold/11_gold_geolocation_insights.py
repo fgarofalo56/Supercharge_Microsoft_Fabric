@@ -24,8 +24,22 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    avg,
+    col,
+    count,
+    countDistinct,
+    current_timestamp,
+    filter,
+    lit,
+    max,
+    min,
+    round,
+    sum,
+    unix_timestamp,
+    when,
+    window,
+)
 from pyspark.sql.window import Window
 from datetime import datetime
 
@@ -162,17 +176,21 @@ print(f"Geofence summary records: {df_geofence_summary.count():,}")
 
 # COMMAND ----------
 
-df_geofence_summary.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .partitionBy("event_date") \
-    .saveAsTable(geofence_summary_table)
-
-print(f"Written {df_geofence_summary.count():,} records to {geofence_summary_table}")
-
-spark.sql(f"OPTIMIZE {geofence_summary_table} ZORDER BY (geofence_id, geofence_name)")
-print("Geofence summary table optimized")
+try:
+    df_geofence_summary.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .option("overwriteSchema", "true") \
+        .partitionBy("event_date") \
+        .saveAsTable(geofence_summary_table)
+    
+    print(f"Written {df_geofence_summary.count():,} records to {geofence_summary_table}")
+    
+    spark.sql(f"OPTIMIZE {geofence_summary_table} ZORDER BY (geofence_id, geofence_name)")
+    print("Geofence summary table optimized")
+except Exception as e:
+    print(f"ERROR in unknown (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

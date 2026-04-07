@@ -570,7 +570,7 @@ print("RPMS Query configured for encounter extraction")
 print(f"Query targets: PCC_ENCOUNTER, PCC_DIAGNOSIS, PCC_PROVIDER")
 ```
 
-> **⚠️ Production Note**: For this tutorial, we use the included synthetic data generator ([`tribal_healthcare_generator.py`](../../data-generation/generators/federal/tribal_healthcare_generator.py)) rather than connecting to a live RPMS system. The generator produces realistic IHS encounter data with proper schema compliance. See [Tutorial 23: SHIR & Data Gateways](../23-shir-data-gateways/README.md) for production SHIR setup.
+> **⚠️ Production Note**: For this tutorial, we use the included synthetic data generator ([`tribal_healthcare_generator.py`](../../data_generation/generators/federal/tribal_healthcare_generator.py)) rather than connecting to a live RPMS system. The generator produces realistic IHS encounter data with proper schema compliance. See [Tutorial 23: SHIR & Data Gateways](../23-shir-data-gateways/README.md) for production SHIR setup.
 
 ---
 
@@ -582,7 +582,7 @@ The Bronze layer ingests raw encounter data with **two non-negotiable gates**: P
 
 ### 3.1 Schema Definition
 
-The schema aligns with the tribal health encounter schema defined in [`data-generation/schemas/federal/tribal_health_schema.json`](../../data-generation/schemas/federal/tribal_health_schema.json).
+The schema aligns with the tribal health encounter schema defined in [`data_generation/schemas/federal/tribal_health_schema.json`](../../data_generation/schemas/federal/tribal_health_schema.json).
 
 ```python
 # Schema definition for Bronze layer ingestion
@@ -1420,11 +1420,11 @@ Continue your learning journey:
 | HL7 FHIR R4 Encounter | [hl7.org/fhir/encounter.html](https://hl7.org/fhir/encounter.html) |
 | HIPAA Compliance on Azure | [Microsoft Learn](https://learn.microsoft.com/en-us/compliance/regulatory/offering-hipaa-hitech) |
 | Fabric Row-Level Security | [Microsoft Learn](https://learn.microsoft.com/en-us/fabric/security/service-admin-row-level-security) |
-| Tribal Health Schema | [`data-generation/schemas/federal/tribal_health_schema.json`](../../data-generation/schemas/federal/tribal_health_schema.json) |
+| Tribal Health Schema | [`data_generation/schemas/federal/tribal_health_schema.json`](../../data_generation/schemas/federal/tribal_health_schema.json) |
 | Bronze Notebook | [`notebooks/bronze/07_bronze_tribal_health.py`](../../notebooks/bronze/07_bronze_tribal_health.py) |
 | Silver Notebook | [`notebooks/silver/07_silver_tribal_health.py`](../../notebooks/silver/07_silver_tribal_health.py) |
 | Gold Notebook | [`notebooks/gold/07_gold_tribal_health_360.py`](../../notebooks/gold/07_gold_tribal_health_360.py) |
-| Data Generator | [`data-generation/generators/federal/tribal_healthcare_generator.py`](../../data-generation/generators/federal/tribal_healthcare_generator.py) |
+| Data Generator | [`data_generation/generators/federal/tribal_healthcare_generator.py`](../../data_generation/generators/federal/tribal_healthcare_generator.py) |
 
 ---
 

@@ -389,7 +389,7 @@ python generate_samples.py --slots 500 --players 100 --tables 200 \
 
 ## Schema Reference
 
-JSON schema definitions are available in the `../data-generation/schemas/` directory:
+JSON schema definitions are available in the `../data_generation/schemas/` directory:
 
 - `slot_telemetry_schema.json`
 - `player_profile_schema.json`

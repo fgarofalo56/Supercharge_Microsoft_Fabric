@@ -383,7 +383,7 @@ class TestRequiredPackagesDocumented:
             project_root / "requirements.txt",
             project_root / "pyproject.toml",
             project_root / "setup.py",
-            project_root / "data-generation" / "requirements.txt",
+            project_root / "data_generation" / "requirements.txt",
         ]
 
         found = any(f.exists() for f in req_files)

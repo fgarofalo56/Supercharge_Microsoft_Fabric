@@ -67,8 +67,8 @@ ENV PATH="/opt/venv/bin:$PATH"
 # Set working directory
 WORKDIR /app
 
-# Copy application code (rename to use underscores for valid Python module)
-COPY --chown=appuser:appgroup data-generation/ ./data_generation/
+# Copy application code
+COPY --chown=appuser:appgroup data_generation/ ./data_generation/
 COPY --chown=appuser:appgroup docker/entrypoint.sh ./entrypoint.sh
 COPY --chown=appuser:appgroup docker/generate-all.sh ./generate-all.sh
 

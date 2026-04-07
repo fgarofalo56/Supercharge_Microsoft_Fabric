@@ -24,8 +24,34 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    asc,
+    avg,
+    coalesce,
+    col,
+    collect_list,
+    collect_set,
+    count,
+    countDistinct,
+    current_date,
+    current_timestamp,
+    datediff,
+    desc,
+    filter,
+    lit,
+    max,
+    min,
+    rank,
+    round,
+    row_number,
+    slice,
+    sort_array,
+    struct,
+    sum,
+    when,
+    window,
+    year,
+)
 from datetime import datetime
 
 # Parameters
@@ -254,17 +280,21 @@ print(f"Patient 360 records: {df_patient_360.count():,}")
 
 # COMMAND ----------
 
-df_patient_360.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(patient_360_table)
-
-print(f"Written {df_patient_360.count():,} records to {patient_360_table}")
-
-# Optimize for Direct Lake
-spark.sql(f"OPTIMIZE {patient_360_table} ZORDER BY (patient_id_hash, primary_area_office)")
-print("Patient 360 table optimized")
+try:
+    df_patient_360.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(patient_360_table)
+    
+    print(f"Written {df_patient_360.count():,} records to {patient_360_table}")
+    
+    # Optimize for Direct Lake
+    spark.sql(f"OPTIMIZE {patient_360_table} ZORDER BY (patient_id_hash, primary_area_office)")
+    print("Patient 360 table optimized")
+except Exception as e:
+    print(f"ERROR in unknown (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

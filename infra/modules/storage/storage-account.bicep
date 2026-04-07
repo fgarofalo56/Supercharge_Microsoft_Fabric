@@ -35,7 +35,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   tags: tags
   kind: 'StorageV2'
   sku: {
-    name: 'Standard_LRS'
+    name: 'Standard_ZRS'
   }
   properties: {
     accessTier: 'Hot'
@@ -43,7 +43,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
     minimumTlsVersion: 'TLS1_2'
     supportsHttpsTrafficOnly: true
     allowBlobPublicAccess: false
-    allowSharedKeyAccess: true // Required for some Fabric scenarios
+    allowSharedKeyAccess: false // Use Azure AD/Entra ID auth via managed identity RBAC
     networkAcls: {
       defaultAction: enablePrivateEndpoint ? 'Deny' : 'Allow'
       bypass: 'AzureServices'
@@ -72,11 +72,11 @@ resource blobService 'Microsoft.Storage/storageAccounts/blobServices@2023-01-01'
   properties: {
     deleteRetentionPolicy: {
       enabled: true
-      days: 7
+      days: 30
     }
     containerDeleteRetentionPolicy: {
       enabled: true
-      days: 7
+      days: 30
     }
   }
 }
@@ -128,6 +128,64 @@ resource landingContainer 'Microsoft.Storage/storageAccounts/blobServices/contai
     publicAccess: 'None'
     metadata: {
       description: 'Landing zone for external data'
+    }
+  }
+}
+
+// =============================================================================
+// Lifecycle Management Policy
+// =============================================================================
+// Automatically tier and clean up data to control storage costs.
+// Bronze data moves to cool after 90 days, archive after 365 days.
+// Landing zone data is deleted after 30 days (temporary staging area).
+// =============================================================================
+
+resource lifecyclePolicy 'Microsoft.Storage/storageAccounts/managementPolicies@2023-01-01' = {
+  parent: storageAccount
+  name: 'default'
+  properties: {
+    policy: {
+      rules: [
+        {
+          name: 'bronze-tiering'
+          enabled: true
+          type: 'Lifecycle'
+          definition: {
+            filters: {
+              blobTypes: ['blockBlob']
+              prefixMatch: ['bronze/']
+            }
+            actions: {
+              baseBlob: {
+                tierToCool: {
+                  daysAfterModificationGreaterThan: 90
+                }
+                tierToArchive: {
+                  daysAfterModificationGreaterThan: 365
+                }
+              }
+            }
+          }
+        }
+        {
+          name: 'landing-cleanup'
+          enabled: true
+          type: 'Lifecycle'
+          definition: {
+            filters: {
+              blobTypes: ['blockBlob']
+              prefixMatch: ['landing/']
+            }
+            actions: {
+              baseBlob: {
+                delete: {
+                  daysAfterModificationGreaterThan: 30
+                }
+              }
+            }
+          }
+        }
+      ]
     }
   }
 }

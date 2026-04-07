@@ -18,8 +18,31 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    array,
+    array_compact,
+    col,
+    count,
+    current_timestamp,
+    filter,
+    hour,
+    initcap,
+    lit,
+    to_date,
+    to_timestamp,
+    trim,
+    upper,
+    when,
+)
+from pyspark.sql.types import (
+    DateType,
+    DecimalType,
+    IntegerType,
+    StringType,
+    StructField,
+    StructType,
+    TimestampType,
+)
 from datetime import datetime
 
 # Parameters (set by pipeline or manual)
@@ -206,25 +229,29 @@ df_silver = df_deduped \
 # COMMAND ----------
 
 # Select final columns
-final_columns = [
-    "machine_id", "event_type", "event_timestamp", "event_date", "event_hour",
-    "coin_in", "coin_out", "games_played", "jackpot_amount",
-    "zone", "denomination", "manufacturer", "machine_type",
-    "player_id", "session_id",
-    "_dq_score", "_dq_flags", "_silver_timestamp", "_batch_id"
-]
-
-df_final = df_silver.select([col(c) for c in final_columns if c in df_silver.columns])
-
-# Write to Silver layer
-df_final.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("event_date") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(target_table)
-
-print(f"Written {df_final.count():,} records to {target_table}")
+try:
+    final_columns = [
+        "machine_id", "event_type", "event_timestamp", "event_date", "event_hour",
+        "coin_in", "coin_out", "games_played", "jackpot_amount",
+        "zone", "denomination", "manufacturer", "machine_type",
+        "player_id", "session_id",
+        "_dq_score", "_dq_flags", "_silver_timestamp", "_batch_id"
+    ]
+    
+    df_final = df_silver.select([col(c) for c in final_columns if c in df_silver.columns])
+    
+    # Write to Silver layer
+    df_final.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .partitionBy("event_date") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(target_table)
+    
+    print(f"Written {df_final.count():,} records to {target_table}")
+except Exception as e:
+    print(f"ERROR in lh_silver.silver_slot_cleansed (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

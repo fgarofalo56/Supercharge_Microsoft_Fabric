@@ -244,3 +244,80 @@ output tagNames array = [
 //    - Regular tag compliance audits
 //    - Document tagging standards
 // =============================================================================
+
+// =============================================================================
+// Budget Alert Resource (Optional)
+// =============================================================================
+// Deploy this module at the resource group scope to create a monthly budget
+// with percentage-based alerts.  Pass the resource group name and a contact
+// email to receive notifications when spending crosses thresholds.
+//
+// Usage (from main.bicep after the resource group is created):
+//
+//   module budget 'cost-tags.bicep' = {
+//     name: 'budget-deployment'
+//     scope: resourceGroup
+//     params: {
+//       costCenter:      costCenter
+//       environment:     environment
+//       owner:           owner
+//       enableBudget:    true
+//       budgetAmount:    10000     // $10,000/month
+//       contactEmails:   [ owner ]
+//     }
+//   }
+// =============================================================================
+
+@description('Enable monthly budget alert creation')
+param enableBudget bool = false
+
+@description('Monthly budget amount in USD')
+param budgetAmount int = 10000
+
+@description('Contact emails for budget alerts')
+param contactEmails array = []
+
+@description('Start date for the budget period (YYYY-MM-01). Defaults to current month.')
+param budgetStartDate string = '${substring(utcNow(), 0, 7)}-01'
+
+resource monthlyBudget 'Microsoft.Consumption/budgets@2023-11-01' = if (enableBudget && !empty(contactEmails)) {
+  name: 'budget-${project}-${environment}'
+  properties: {
+    category: 'Cost'
+    amount: budgetAmount
+    timeGrain: 'Monthly'
+    timePeriod: {
+      startDate: budgetStartDate
+    }
+    notifications: {
+      actual_GreaterThan_50_Percent: {
+        enabled: true
+        operator: 'GreaterThan'
+        threshold: 50
+        contactEmails: contactEmails
+        thresholdType: 'Actual'
+      }
+      actual_GreaterThan_80_Percent: {
+        enabled: true
+        operator: 'GreaterThan'
+        threshold: 80
+        contactEmails: contactEmails
+        thresholdType: 'Actual'
+      }
+      actual_GreaterThan_100_Percent: {
+        enabled: true
+        operator: 'GreaterThan'
+        threshold: 100
+        contactEmails: contactEmails
+        thresholdType: 'Actual'
+      }
+      forecasted_GreaterThan_100_Percent: {
+        enabled: true
+        operator: 'GreaterThan'
+        threshold: 100
+        contactEmails: contactEmails
+        thresholdType: 'Forecasted'
+      }
+    }
+  }
+}

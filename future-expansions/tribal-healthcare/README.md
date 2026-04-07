@@ -162,7 +162,7 @@ Publicly available datasets from IHS that supplement facility-level data with na
 
 ## Schema Overview
 
-All encounter records conform to the schema defined in `data-generation/schemas/federal/tribal_health_schema.json`. The following table lists every field, its type, constraints, and description.
+All encounter records conform to the schema defined in `data_generation/schemas/federal/tribal_health_schema.json`. The following table lists every field, its type, constraints, and description.
 
 ### Required Fields
 
@@ -207,9 +207,9 @@ All encounter records conform to the schema defined in `data-generation/schemas/
 
 ### TribalHealthcareGenerator
 
-**Location:** `data-generation/generators/federal/tribal_healthcare_generator.py`
+**Location:** `data_generation/generators/federal/tribal_healthcare_generator.py`
 **Base Class:** `BaseGenerator`
-**Schema:** `data-generation/schemas/federal/tribal_health_schema.json`
+**Schema:** `data_generation/schemas/federal/tribal_health_schema.json`
 
 The `TribalHealthcareGenerator` class produces synthetic IHS encounter data with epidemiologically weighted distributions reflecting documented Native American and Alaska Native health disparities.
 
@@ -542,7 +542,7 @@ graph TD
 
 ## IHS Facilities Reference
 
-The generator includes 20 IHS health centers and hospitals spanning all 12 Area Offices. Facility IDs follow the pattern `IHS-{AREA}-{SEQ}` (e.g., `IHS-NAV-001` for Shiprock Northern Navajo Medical Center). See the full facility list in [`tribal_healthcare_generator.py`](../../data-generation/generators/federal/tribal_healthcare_generator.py).
+The generator includes 20 IHS health centers and hospitals spanning all 12 Area Offices. Facility IDs follow the pattern `IHS-{AREA}-{SEQ}` (e.g., `IHS-NAV-001` for Shiprock Northern Navajo Medical Center). See the full facility list in [`tribal_healthcare_generator.py`](../../data_generation/generators/federal/tribal_healthcare_generator.py).
 
 ---
 
@@ -581,8 +581,8 @@ Please see our [Contributing Guide](../../CONTRIBUTING.md) to get involved.
 |----------|-------------|
 | [Casino/Gaming POC](../../README.md) | Reference architecture for the medallion pattern |
 | [Federal Government Expansion](../federal-dot-faa/README.md) | Government agency analytics patterns |
-| [TribalHealthcareGenerator](../../data-generation/generators/federal/tribal_healthcare_generator.py) | Data generator source code |
-| [Tribal Health Schema](../../data-generation/schemas/federal/tribal_health_schema.json) | JSON Schema for encounter records |
+| [TribalHealthcareGenerator](../../data_generation/generators/federal/tribal_healthcare_generator.py) | Data generator source code |
+| [Tribal Health Schema](../../data_generation/schemas/federal/tribal_health_schema.json) | JSON Schema for encounter records |
 | [IHS Official Site](https://www.ihs.gov/) | Indian Health Service public resources |
 | [HIPAA Security Rule](https://www.hhs.gov/hipaa/for-professionals/security/) | HHS HIPAA Security Rule guidance |
 | [42 CFR Part 2 Final Rule](https://www.federalregister.gov/documents/2024/02/16/2024-02544/confidentiality-of-substance-use-disorder-sud-patient-records) | 2024 Final Rule updates |

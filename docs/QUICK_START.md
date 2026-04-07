@@ -85,7 +85,7 @@ az deployment sub create \
 pip install -r requirements.txt
 
 # Generate 1 hour of casino data
-python data-generation/run_generators.py --duration 1h
+python data_generation/run_generators.py --duration 1h
 
 # Or use Docker
 docker-compose up data-generator

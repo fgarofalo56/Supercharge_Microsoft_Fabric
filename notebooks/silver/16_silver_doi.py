@@ -20,8 +20,33 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    array,
+    array_compact,
+    coalesce,
+    col,
+    count,
+    create_map,
+    current_date,
+    current_timestamp,
+    desc,
+    filter,
+    lit,
+    max,
+    min,
+    month,
+    months,
+    regexp_replace,
+    round,
+    to_date,
+    to_timestamp,
+    trim,
+    upper,
+    when,
+    year,
+    years,
+)
+from pyspark.sql.types import DoubleType, IntegerType, LongType
 from datetime import datetime
 
 # Parameters (set by pipeline or manual)
@@ -329,45 +354,49 @@ df_eq_dq = df_eq_derived \
 
 # COMMAND ----------
 
-df_eq_silver = df_eq_dq \
-    .withColumn("_silver_timestamp", current_timestamp()) \
-    .withColumn("_batch_id", lit(batch_id))
-
-eq_columns = [
-    # Identifiers
-    "event_id",
-    # Event details
-    "event_time", "event_date", "event_year", "event_month",
-    "event_type_clean", "event_type_valid",
-    # Magnitude
-    "magnitude", "magnitude_valid", "magnitude_type_std",
-    "magnitude_class", "is_significant",
-    # Location
-    "latitude", "longitude", "coords_valid",
-    "depth_km", "depth_valid",
-    "place", "region_classification",
-    # Source
-    "source", "status", "net",
-    "nst", "gap", "dmin", "rms",
-    # Impact
-    "felt", "cdi", "mmi", "tsunami", "sig",
-    # Quality & metadata
-    "_dq_score", "_dq_flags", "_silver_timestamp", "_batch_id",
-]
-
-df_eq_out = df_eq_silver.select(
-    [col(c) for c in eq_columns if c in df_eq_silver.columns]
-)
-
-df_eq_out.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("event_year") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_EARTHQUAKES)
-
-eq_silver_count = df_eq_out.count()
-print(f"Written {eq_silver_count:,} records to {TARGET_EARTHQUAKES}")
+try:
+    df_eq_silver = df_eq_dq \
+        .withColumn("_silver_timestamp", current_timestamp()) \
+        .withColumn("_batch_id", lit(batch_id))
+    
+    eq_columns = [
+        # Identifiers
+        "event_id",
+        # Event details
+        "event_time", "event_date", "event_year", "event_month",
+        "event_type_clean", "event_type_valid",
+        # Magnitude
+        "magnitude", "magnitude_valid", "magnitude_type_std",
+        "magnitude_class", "is_significant",
+        # Location
+        "latitude", "longitude", "coords_valid",
+        "depth_km", "depth_valid",
+        "place", "region_classification",
+        # Source
+        "source", "status", "net",
+        "nst", "gap", "dmin", "rms",
+        # Impact
+        "felt", "cdi", "mmi", "tsunami", "sig",
+        # Quality & metadata
+        "_dq_score", "_dq_flags", "_silver_timestamp", "_batch_id",
+    ]
+    
+    df_eq_out = df_eq_silver.select(
+        [col(c) for c in eq_columns if c in df_eq_silver.columns]
+    )
+    
+    df_eq_out.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .partitionBy("event_year") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(TARGET_EARTHQUAKES)
+    
+    eq_silver_count = df_eq_out.count()
+    print(f"Written {eq_silver_count:,} records to {TARGET_EARTHQUAKES}")
+except Exception as e:
+    print(f"ERROR in unknown (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

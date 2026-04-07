@@ -24,8 +24,29 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    avg,
+    coalesce,
+    col,
+    count,
+    countDistinct,
+    current_timestamp,
+    desc,
+    greatest,
+    lag,
+    lit,
+    max,
+    min,
+    month,
+    round,
+    row_number,
+    stddev,
+    sum,
+    to_date,
+    when,
+    window,
+    year,
+)
 from pyspark.sql.window import Window
 from datetime import datetime
 
@@ -198,14 +219,18 @@ df_seismic_final = df_seismic_risk \
 
 # COMMAND ----------
 
-df_seismic_final.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("event_year") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_SEISMIC_RISK)
-
-print(f"Written {df_seismic_final.count():,} records to {TARGET_SEISMIC_RISK}")
+try:
+    df_seismic_final.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .partitionBy("event_year") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(TARGET_SEISMIC_RISK)
+    
+    print(f"Written {df_seismic_final.count():,} records to {TARGET_SEISMIC_RISK}")
+except Exception as e:
+    print(f"ERROR in unknown (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

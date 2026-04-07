@@ -21,8 +21,29 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    array,
+    array_compact,
+    coalesce,
+    col,
+    count,
+    create_map,
+    current_timestamp,
+    filter,
+    hours,
+    lit,
+    month,
+    regexp_extract,
+    regexp_replace,
+    round,
+    to_date,
+    to_timestamp,
+    trim,
+    upper,
+    when,
+    year,
+)
+from pyspark.sql.types import DoubleType, IntegerType
 from datetime import datetime
 
 # Parameters (set by pipeline or manual)
@@ -274,43 +295,47 @@ df_weather_dq = df_weather_deduped \
 
 # COMMAND ----------
 
-df_weather_silver = df_weather_dq \
-    .withColumn("_silver_timestamp", current_timestamp()) \
-    .withColumn("_batch_id", lit(batch_id)) \
-    .withColumn("observation_date", to_date(col("observation_time")))
-
-weather_columns = [
-    # Identifiers
-    "station_id", "station_name",
-    # Observation
-    "observation_time", "observation_date",
-    # Weather values
-    "temperature_c", "temp_valid",
-    "humidity", "humidity_valid",
-    "pressure_hpa", "pressure_valid",
-    "wind_speed_ms", "wind_direction_deg",
-    "precipitation_mm", "visibility_km",
-    "weather_condition_std",
-    # Location
-    "latitude", "longitude", "coords_valid",
-    "elevation_m", "state", "country",
-    # Quality & metadata
-    "_dq_score", "_dq_flags", "_silver_timestamp", "_batch_id",
-]
-
-df_weather_out = df_weather_silver.select(
-    [col(c) for c in weather_columns if c in df_weather_silver.columns]
-)
-
-df_weather_out.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("observation_date") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_WEATHER)
-
-weather_silver_count = df_weather_out.count()
-print(f"Written {weather_silver_count:,} records to {TARGET_WEATHER}")
+try:
+    df_weather_silver = df_weather_dq \
+        .withColumn("_silver_timestamp", current_timestamp()) \
+        .withColumn("_batch_id", lit(batch_id)) \
+        .withColumn("observation_date", to_date(col("observation_time")))
+    
+    weather_columns = [
+        # Identifiers
+        "station_id", "station_name",
+        # Observation
+        "observation_time", "observation_date",
+        # Weather values
+        "temperature_c", "temp_valid",
+        "humidity", "humidity_valid",
+        "pressure_hpa", "pressure_valid",
+        "wind_speed_ms", "wind_direction_deg",
+        "precipitation_mm", "visibility_km",
+        "weather_condition_std",
+        # Location
+        "latitude", "longitude", "coords_valid",
+        "elevation_m", "state", "country",
+        # Quality & metadata
+        "_dq_score", "_dq_flags", "_silver_timestamp", "_batch_id",
+    ]
+    
+    df_weather_out = df_weather_silver.select(
+        [col(c) for c in weather_columns if c in df_weather_silver.columns]
+    )
+    
+    df_weather_out.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .partitionBy("observation_date") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(TARGET_WEATHER)
+    
+    weather_silver_count = df_weather_out.count()
+    print(f"Written {weather_silver_count:,} records to {TARGET_WEATHER}")
+except Exception as e:
+    print(f"ERROR in unknown (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

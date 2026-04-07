@@ -506,7 +506,7 @@ LIMIT 7;
 
 **Note:** If starting the producer live:
 ```bash
-cd data-generation
+cd data_generation
 python generators/streaming/event_hub_producer.py
 ```
 

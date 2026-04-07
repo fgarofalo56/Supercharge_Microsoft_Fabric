@@ -227,7 +227,7 @@ The zone configuration below models a three-floor casino property with 30 distin
 
 ```python
 # Zone configuration for people movement analytics
-# File: data-generation/generators/analytics/zone_config.py
+# File: data_generation/generators/analytics/zone_config.py
 
 ZONE_CONFIG = {
     # --- Floor 1: Main Gaming Floor ---
@@ -360,7 +360,7 @@ Each sensor reading conforms to the `movement_event_schema.json` schema defined 
 | `calibration_date` | date/null | Last sensor calibration date |
 | `load_time` | datetime | Pipeline ingestion timestamp |
 
-> 📸 **Schema Reference:** The full JSON Schema is at [`data-generation/schemas/analytics/movement_event_schema.json`](../../data-generation/schemas/analytics/movement_event_schema.json).
+> 📸 **Schema Reference:** The full JSON Schema is at [`data_generation/schemas/analytics/movement_event_schema.json`](../../data_generation/schemas/analytics/movement_event_schema.json).
 
 ### 3.2 Eventstream Configuration
 
@@ -1122,9 +1122,9 @@ The people movement analytics pipeline gives casino operations a spatial awarene
 
 | Resource | Description |
 |----------|-------------|
-| [`data-generation/schemas/analytics/movement_event_schema.json`](../../data-generation/schemas/analytics/movement_event_schema.json) | JSON Schema for movement events |
-| [`data-generation/generators/analytics/people_movement_generator.py`](../../data-generation/generators/analytics/people_movement_generator.py) | Synthetic movement data generator |
-| [`data-generation/generators/analytics/zone_config.py`](../../data-generation/generators/analytics/zone_config.py) | Zone configuration model |
+| [`data_generation/schemas/analytics/movement_event_schema.json`](../../data_generation/schemas/analytics/movement_event_schema.json) | JSON Schema for movement events |
+| [`data_generation/generators/analytics/people_movement_generator.py`](../../data_generation/generators/analytics/people_movement_generator.py) | Synthetic movement data generator |
+| [`data_generation/generators/analytics/zone_config.py`](../../data_generation/generators/analytics/zone_config.py) | Zone configuration model |
 
 **External Documentation:**
 

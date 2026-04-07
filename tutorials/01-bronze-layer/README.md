@@ -287,7 +287,7 @@ graph TB
 Before starting, ensure you have:
 
 - [ ] Completed [Tutorial 00: Environment Setup](../00-environment-setup/README.md)
-- [ ] Generated sample data (see `data-generation/` folder in repo)
+- [ ] Generated sample data (see `data_generation/` folder in repo)
 - [ ] Access to `lh_bronze` Lakehouse
 
 > ⚠️ **Warning:** If you haven't generated sample data yet, do so before continuing. The notebooks in this tutorial expect data files to exist.
@@ -300,7 +300,7 @@ Before starting, ensure you have:
 
 1. Generate sample data locally:
    ```bash
-   cd data-generation
+   cd data_generation
    python generate.py --all --days 30 --output ./output
    ```
 

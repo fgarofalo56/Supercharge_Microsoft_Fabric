@@ -372,7 +372,7 @@ ls -lh output/bronze/
 
 1. ✅ **Verify data generated**: Check `./output/bronze/` directory
 2. 📤 **Upload to Azure**: Follow [Tutorial 01: Bronze Layer](tutorials/01-bronze-layer/README.md)
-3. 🎓 **Learn more**: Explore [Data Generation Guide](data-generation/README.md)
+3. 🎓 **Learn more**: Explore [Data Generation Guide](data_generation/README.md)
 
 ### Troubleshooting
 

@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Financial Transaction",
+  "description": "Schema for casino cage financial transactions",
+  "type": "object",
+  "required": ["transaction_id", "transaction_type", "amount", "transaction_timestamp"],
+  "properties": {
+    "transaction_id": {
+      "type": "string",
+      "description": "Unique transaction identifier"
+    },
+    "transaction_type": {
+      "type": "string",
+      "enum": ["CASH_IN", "CASH_OUT", "CHIP_PURCHASE", "CHIP_REDEMPTION", "WIRE_TRANSFER_IN", "WIRE_TRANSFER_OUT", "CHECK_CASHING", "MARKER_ISSUE", "MARKER_PAYMENT", "FRONT_MONEY_DEPOSIT", "FRONT_MONEY_WITHDRAWAL", "JACKPOT_PAYOUT", "SAFEKEEPING_DEPOSIT", "SAFEKEEPING_WITHDRAWAL"],
+      "description": "Type of financial transaction"
+    },
+    "amount": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Transaction amount in dollars"
+    },
+    "transaction_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of transaction"
+    },
+    "player_id": {
+      "type": ["string", "null"],
+      "description": "Associated player ID"
+    },
+    "cage_location": {
+      "type": ["string", "null"],
+      "description": "Cage location"
+    },
+    "cashier_id": {
+      "type": ["string", "null"],
+      "description": "Cashier processing transaction"
+    },
+    "source_amount": {
+      "type": ["number", "null"],
+      "description": "Source amount for reconciliation"
+    },
+    "destination_amount": {
+      "type": ["number", "null"],
+      "description": "Destination amount for reconciliation"
+    },
+    "currency": {
+      "type": "string",
+      "default": "USD",
+      "description": "Transaction currency"
+    },
+    "payment_method": {
+      "type": ["string", "null"],
+      "enum": ["CASH", "CHECK", "WIRE", "CHIP", "TICKET", null],
+      "description": "Payment method used"
+    },
+    "ctr_required": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether CTR filing is required (amount >= $10,000)"
+    },
+    "ctr_filed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether CTR has been filed"
+    },
+    "marker_number": {
+      "type": ["string", "null"],
+      "description": "Marker number if marker transaction"
+    },
+    "approval_code": {
+      "type": ["string", "null"],
+      "description": "Approval code if applicable"
+    },
+    "notes": {
+      "type": ["string", "null"],
+      "description": "Additional notes"
+    }
+  }
+}

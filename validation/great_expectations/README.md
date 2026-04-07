@@ -276,7 +276,7 @@ name: Data Quality Validation
 on:
   push:
     paths:
-      - 'data-generation/**'
+      - 'data_generation/**'
       - 'validation/**'
   schedule:
     - cron: '0 6 * * *'  # Daily at 6 AM

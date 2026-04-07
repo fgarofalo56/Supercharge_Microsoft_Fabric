@@ -21,8 +21,30 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    abs,
+    array,
+    array_compact,
+    coalesce,
+    col,
+    count,
+    create_map,
+    current_timestamp,
+    desc,
+    filter,
+    greatest,
+    initcap,
+    length,
+    lit,
+    max,
+    round,
+    to_date,
+    trim,
+    upper,
+    when,
+    year,
+)
+from pyspark.sql.types import DoubleType, IntegerType
 from datetime import datetime
 
 # Parameters (set by pipeline or manual)
@@ -277,38 +299,42 @@ df_air_dq = df_air_deduped \
 
 # COMMAND ----------
 
-df_air_silver = df_air_dq \
-    .withColumn("_silver_timestamp", current_timestamp()) \
-    .withColumn("_batch_id", lit(batch_id))
-
-air_columns = [
-    # Identifiers
-    "station_id", "station_name", "site_number",
-    # Measurement
-    "parameter_name_clean", "parameter_valid",
-    "aqi_value", "aqi_valid", "aqi_category_final",
-    "measurement_value", "units_of_measure",
-    "measurement_date", "measurement_hour", "timestamp_complete",
-    # Location
-    "latitude", "longitude", "coords_valid",
-    "state_code", "county_code", "city", "state",
-    # Quality & metadata
-    "_dq_score", "_dq_flags", "_silver_timestamp", "_batch_id",
-]
-
-df_air_out = df_air_silver.select(
-    [col(c) for c in air_columns if c in df_air_silver.columns]
-)
-
-df_air_out.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("measurement_date") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_AIR)
-
-air_silver_count = df_air_out.count()
-print(f"Written {air_silver_count:,} records to {TARGET_AIR}")
+try:
+    df_air_silver = df_air_dq \
+        .withColumn("_silver_timestamp", current_timestamp()) \
+        .withColumn("_batch_id", lit(batch_id))
+    
+    air_columns = [
+        # Identifiers
+        "station_id", "station_name", "site_number",
+        # Measurement
+        "parameter_name_clean", "parameter_valid",
+        "aqi_value", "aqi_valid", "aqi_category_final",
+        "measurement_value", "units_of_measure",
+        "measurement_date", "measurement_hour", "timestamp_complete",
+        # Location
+        "latitude", "longitude", "coords_valid",
+        "state_code", "county_code", "city", "state",
+        # Quality & metadata
+        "_dq_score", "_dq_flags", "_silver_timestamp", "_batch_id",
+    ]
+    
+    df_air_out = df_air_silver.select(
+        [col(c) for c in air_columns if c in df_air_silver.columns]
+    )
+    
+    df_air_out.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .partitionBy("measurement_date") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(TARGET_AIR)
+    
+    air_silver_count = df_air_out.count()
+    print(f"Written {air_silver_count:,} records to {TARGET_AIR}")
+except Exception as e:
+    print(f"ERROR in unknown (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

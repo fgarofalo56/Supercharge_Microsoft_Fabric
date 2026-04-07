@@ -17,8 +17,19 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    coalesce,
+    col,
+    concat_ws,
+    count,
+    current_date,
+    current_timestamp,
+    exists,
+    filter,
+    first,
+    lit,
+    sha2,
+)
 from delta.tables import DeltaTable
 from datetime import datetime
 
@@ -109,84 +120,88 @@ df_new = df_new \
 # COMMAND ----------
 
 # Check if target table exists
-table_exists = spark.catalog.tableExists(target_table)
-
-if table_exists:
-    print("Target table exists - performing SCD Type 2 merge")
-
-    # Get current records from Silver
-    silver_table = DeltaTable.forName(spark, target_table)
-    df_current = silver_table.toDF().filter(col("is_current") == True)
-
-    # Create hash of tracked attributes for comparison
-    df_new_hashed = df_new.withColumn(
-        "_attribute_hash",
-        sha2(concat_ws("||", *[coalesce(col(c), lit("")) for c in TRACKED_ATTRIBUTES]), 256)
-    )
-
-    df_current_hashed = df_current.withColumn(
-        "_attribute_hash",
-        sha2(concat_ws("||", *[coalesce(col(c), lit("")) for c in TRACKED_ATTRIBUTES]), 256)
-    )
-
-    # Find records that have changed
-    df_changed = df_new_hashed.alias("new") \
-        .join(df_current_hashed.alias("current"), KEY_COLUMN, "left") \
-        .filter(
-            (col("current.player_id").isNull()) |  # New player
-            (col("new._attribute_hash") != col("current._attribute_hash"))  # Changed attributes
-        ) \
-        .select("new.*")
-
-    changed_count = df_changed.count()
-    print(f"Records to process (new + changed): {changed_count:,}")
-
-    if changed_count > 0:
-        # Get list of changed player IDs
-        changed_ids = [row.player_id for row in df_changed.select("player_id").distinct().collect()]
-
-        # Close current records for changed players
-        silver_table.update(
-            condition = (col("player_id").isin(changed_ids)) & (col("is_current") == True),
-            set = {
-                "end_date": current_date(),
-                "is_current": lit(False)
-            }
+try:
+    table_exists = spark.catalog.tableExists(target_table)
+    
+    if table_exists:
+        print("Target table exists - performing SCD Type 2 merge")
+    
+        # Get current records from Silver
+        silver_table = DeltaTable.forName(spark, target_table)
+        df_current = silver_table.toDF().filter(col("is_current") == True)
+    
+        # Create hash of tracked attributes for comparison
+        df_new_hashed = df_new.withColumn(
+            "_attribute_hash",
+            sha2(concat_ws("||", *[coalesce(col(c), lit("")) for c in TRACKED_ATTRIBUTES]), 256)
         )
-
-        # Calculate next version number for each player
-        df_versions = spark.sql(f"""
-            SELECT player_id, COALESCE(MAX(version), 0) as max_version
-            FROM {target_table}
-            GROUP BY player_id
-        """)
-
-        # Add version numbers to new records
-        df_to_insert = df_changed.drop("_attribute_hash") \
-            .join(df_versions, "player_id", "left") \
-            .withColumn("version", coalesce(col("max_version"), lit(0)) + 1) \
-            .drop("max_version")
-
-        # Insert new versions
-        df_to_insert.write \
-            .format("delta") \
-            .mode("append") \
-            .saveAsTable(target_table)
-
-        print(f"Inserted {df_to_insert.count():,} new versions")
+    
+        df_current_hashed = df_current.withColumn(
+            "_attribute_hash",
+            sha2(concat_ws("||", *[coalesce(col(c), lit("")) for c in TRACKED_ATTRIBUTES]), 256)
+        )
+    
+        # Find records that have changed
+        df_changed = df_new_hashed.alias("new") \
+            .join(df_current_hashed.alias("current"), KEY_COLUMN, "left") \
+            .filter(
+                (col("current.player_id").isNull()) |  # New player
+                (col("new._attribute_hash") != col("current._attribute_hash"))  # Changed attributes
+            ) \
+            .select("new.*")
+    
+        changed_count = df_changed.count()
+        print(f"Records to process (new + changed): {changed_count:,}")
+    
+        if changed_count > 0:
+            # Get list of changed player IDs
+            changed_ids = [row.player_id for row in df_changed.select("player_id").distinct().collect()]
+    
+            # Close current records for changed players
+            silver_table.update(
+                condition = (col("player_id").isin(changed_ids)) & (col("is_current") == True),
+                set = {
+                    "end_date": current_date(),
+                    "is_current": lit(False)
+                }
+            )
+    
+            # Calculate next version number for each player
+            df_versions = spark.sql(f"""
+                SELECT player_id, COALESCE(MAX(version), 0) as max_version
+                FROM {target_table}
+                GROUP BY player_id
+            """)
+    
+            # Add version numbers to new records
+            df_to_insert = df_changed.drop("_attribute_hash") \
+                .join(df_versions, "player_id", "left") \
+                .withColumn("version", coalesce(col("max_version"), lit(0)) + 1) \
+                .drop("max_version")
+    
+            # Insert new versions
+            df_to_insert.write \
+                .format("delta") \
+                .mode("append") \
+                .saveAsTable(target_table)
+    
+            print(f"Inserted {df_to_insert.count():,} new versions")
+        else:
+            print("No changes detected")
+    
     else:
-        print("No changes detected")
-
-else:
-    print("Target table does not exist - performing initial load")
-
-    # Initial load
-    df_new.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .saveAsTable(target_table)
-
-    print(f"Initial load: {df_new.count():,} records")
+        print("Target table does not exist - performing initial load")
+    
+        # Initial load
+        df_new.write \
+            .format("delta") \
+            .mode("overwrite") \
+            .saveAsTable(target_table)
+    
+        print(f"Initial load: {df_new.count():,} records")
+except Exception as e:
+    print(f"ERROR in lh_silver.silver_player_master (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

@@ -23,7 +23,7 @@ import numpy as np
 from datetime import datetime, timedelta
 
 from pyspark.sql.functions import col, when, rand, coalesce, lit, count, countDistinct, sum, avg, max, min, stddev, to_date, hour, current_timestamp
-from pyspark.sql.types import *
+from pyspark.sql.types import DoubleType, IntegerType, Row
 from pyspark.sql.window import Window
 
 # For sklearn-based anomaly detection

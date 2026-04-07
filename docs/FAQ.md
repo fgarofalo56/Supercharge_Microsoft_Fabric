@@ -11,7 +11,7 @@
 - [🎯 General Questions](#-general-questions)
 - [📋 Prerequisites & Setup](#-prerequisites--setup)
 - [🚀 Deployment Questions](#-deployment-questions)
-- [🎲 Data Generation](#-data-generation)
+- [🎲 Data Generation](#-data_generation)
 - [📖 Tutorial Questions](#-tutorial-questions)
 - [📊 Power BI & Reporting](#-power-bi--reporting)
 - [🔐 Security & Compliance](#-security--compliance)
@@ -400,10 +400,10 @@ docker-compose run --rm data-generator --slots 100000 --players 5000 --days 14
 pip install -r requirements.txt
 
 # Generate all data
-python data-generation/generate.py --all --days 30
+python data_generation/generate.py --all --days 30
 
 # Generate specific domains
-python data-generation/generate.py --slots 50000 --players 2000
+python data_generation/generate.py --slots 50000 --players 2000
 ```
 
 **Option 3: Use Pre-Generated Samples**
@@ -416,7 +416,7 @@ ls sample-data/bronze/
 
 Output location: `./output` directory
 
-See [Data Generation Guide](../data-generation/README.md) for complete documentation.
+See [Data Generation Guide](../data_generation/README.md) for complete documentation.
 
 </details>
 
@@ -461,7 +461,7 @@ docker-compose run --rm demo-generator  # 7 days, smaller volumes
 - Peak gaming hours: 7pm-2am (weekends higher)
 - CTR generation: ~0.5% of transactions
 
-See [Data Generation - Data Quality Features](../data-generation/README.md#data-quality-features).
+See [Data Generation - Data Quality Features](../data_generation/README.md#data-quality-features).
 
 ---
 
@@ -501,7 +501,7 @@ df = generator.generate(100000)
 ```
 
 **Configuration Files:**
-Edit `data-generation/config/` YAML files for domain-specific customization.
+Edit `data_generation/config/` YAML files for domain-specific customization.
 
 </details>
 
@@ -1460,7 +1460,7 @@ docker-compose pull
 | 🔐 **Security** | [SECURITY.md](SECURITY.md) |
 | 💰 **Cost Estimation** | [COST_ESTIMATION.md](COST_ESTIMATION.md) |
 | 📖 **Tutorials** | [tutorials/](tutorials/) |
-| 🎲 **Data Generation** | [data-generation/](../data-generation/) |
+| 🎲 **Data Generation** | [data_generation/](../data_generation/) |
 | 📊 **Reports** | [reports/](../reports/) |
 | 📅 **POC Agenda** | [poc-agenda/](poc-agenda/) |
 

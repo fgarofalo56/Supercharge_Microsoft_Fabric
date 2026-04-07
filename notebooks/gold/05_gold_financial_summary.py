@@ -12,8 +12,23 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    array,
+    array_compact,
+    avg,
+    coalesce,
+    col,
+    count,
+    countDistinct,
+    current_timestamp,
+    exists,
+    lit,
+    max,
+    round,
+    sum,
+    when,
+)
+from pyspark.sql.types import DateType, DecimalType, LongType, StructField, StructType
 from datetime import datetime
 
 # Parameters
@@ -221,13 +236,27 @@ df_gold = df_with_status \
 
 # COMMAND ----------
 
-df_gold.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(target_table)
+try:
+    df_gold.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(target_table)
+    
+    print(f"Written {df_gold.count():,} records to {target_table}")
+except Exception as e:
+    print(f"ERROR in lh_gold.gold_financial_summary (batch_id={batch_id}): {e}")
+    raise
 
-print(f"Written {df_gold.count():,} records to {target_table}")
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Optimize for Direct Lake
+
+# COMMAND ----------
+
+spark.sql(f"OPTIMIZE {target_table} ZORDER BY (report_date)")
+print("Table optimized with Z-Order on report_date")
 
 # COMMAND ----------
 

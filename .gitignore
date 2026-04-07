@@ -2,6 +2,9 @@
 .claude/settings.local.json
 .mcp.json
 
+# Bicep build artifacts (generated from .bicep source)
+infra/main.json
+
 # Environment and secrets
 .env
 .env.*
@@ -110,7 +113,7 @@ coverage.xml
 great_expectations/uncommitted/
 
 # Generated data (large files)
-data-generation/output/
+data_generation/output/
 output/
 .data/
 *.parquet

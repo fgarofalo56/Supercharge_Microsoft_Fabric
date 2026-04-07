@@ -21,8 +21,28 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    array,
+    array_compact,
+    coalesce,
+    col,
+    count,
+    create_map,
+    current_timestamp,
+    filter,
+    initcap,
+    lit,
+    max,
+    months,
+    round,
+    substring,
+    to_date,
+    trim,
+    upper,
+    when,
+    year,
+)
+from pyspark.sql.types import DateType, DecimalType, IntegerType
 from datetime import datetime
 
 # Parameters (set by pipeline or manual)
@@ -297,40 +317,44 @@ df_ppp_dq = df_ppp_derived \
 
 # COMMAND ----------
 
-df_ppp_silver = df_ppp_dq \
-    .withColumn("_silver_timestamp", current_timestamp()) \
-    .withColumn("_batch_id", lit(batch_id))
-
-ppp_columns = [
-    # Identifiers
-    "loan_id", "sba_office_code",
-    # Borrower
-    "business_name", "business_type_std", "naics_code_clean", "naics_sector", "naics_valid",
-    "state_clean", "state_valid", "city", "zip_code",
-    # Loan details
-    "loan_amount", "forgiveness_amount", "forgiveness_rate", "is_fully_forgiven",
-    "loan_status_clean", "loan_status_valid",
-    "approval_date", "forgiveness_date", "approval_year",
-    "lender_name", "lender_state",
-    # Jobs
-    "jobs_retained",
-    # Quality & metadata
-    "_dq_score", "_dq_flags", "_silver_timestamp", "_batch_id",
-]
-
-df_ppp_out = df_ppp_silver.select(
-    [col(c) for c in ppp_columns if c in df_ppp_silver.columns]
-)
-
-df_ppp_out.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("approval_year") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_PPP)
-
-ppp_silver_count = df_ppp_out.count()
-print(f"Written {ppp_silver_count:,} records to {TARGET_PPP}")
+try:
+    df_ppp_silver = df_ppp_dq \
+        .withColumn("_silver_timestamp", current_timestamp()) \
+        .withColumn("_batch_id", lit(batch_id))
+    
+    ppp_columns = [
+        # Identifiers
+        "loan_id", "sba_office_code",
+        # Borrower
+        "business_name", "business_type_std", "naics_code_clean", "naics_sector", "naics_valid",
+        "state_clean", "state_valid", "city", "zip_code",
+        # Loan details
+        "loan_amount", "forgiveness_amount", "forgiveness_rate", "is_fully_forgiven",
+        "loan_status_clean", "loan_status_valid",
+        "approval_date", "forgiveness_date", "approval_year",
+        "lender_name", "lender_state",
+        # Jobs
+        "jobs_retained",
+        # Quality & metadata
+        "_dq_score", "_dq_flags", "_silver_timestamp", "_batch_id",
+    ]
+    
+    df_ppp_out = df_ppp_silver.select(
+        [col(c) for c in ppp_columns if c in df_ppp_silver.columns]
+    )
+    
+    df_ppp_out.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .partitionBy("approval_year") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(TARGET_PPP)
+    
+    ppp_silver_count = df_ppp_out.count()
+    print(f"Written {ppp_silver_count:,} records to {TARGET_PPP}")
+except Exception as e:
+    print(f"ERROR in unknown (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

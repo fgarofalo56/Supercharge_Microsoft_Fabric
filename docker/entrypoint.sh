@@ -148,7 +148,7 @@ run_generate() {
     echo ""
 
     # Build command with defaults if not overridden
-    # Note: In Docker, data-generation is copied as data_generation for valid Python imports
+    # Note: In Docker, data_generation is copied as data_generation for valid Python imports
     CMD="python /app/data_generation/generate.py"
 
     # Pass all arguments to the generator
@@ -186,7 +186,7 @@ run_stream() {
     echo "=============================================="
     echo ""
 
-    # Note: In Docker, data-generation is copied as data_generation for valid Python imports
+    # Note: In Docker, data_generation is copied as data_generation for valid Python imports
     CMD="python /app/data_generation/generators/streaming/event_hub_producer.py"
 
     # Add Event Hub config from environment if present

@@ -136,7 +136,7 @@ assert spark.sql("SELECT COUNT(*) FROM bronze.slot_telemetry WHERE machine_id IS
 
 - **Tutorial**: [Day 1: Bronze Ingestion Tutorial](../../tutorials/day1-bronze-ingestion/README.md)
 - **Architecture**: [Medallion Architecture Overview](../../docs/architecture/medallion-architecture.md)
-- **Data Generation**: [Bronze Data Generators](../../data-generation/generators/)
+- **Data Generation**: [Bronze Data Generators](../../data_generation/generators/)
 - **Next Layer**: [Silver Layer Notebooks](../silver/README.md)
 
 ---

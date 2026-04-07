@@ -12,8 +12,22 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    array,
+    array_compact,
+    coalesce,
+    col,
+    concat,
+    count,
+    current_date,
+    current_timestamp,
+    date_add,
+    datediff,
+    filter,
+    lit,
+    size,
+    when,
+)
 from datetime import datetime
 
 # Parameters
@@ -228,14 +242,18 @@ df_silver = df_with_agency \
 
 # COMMAND ----------
 
-df_silver.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("filing_date", "filing_type") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(target_table)
-
-print(f"Written {df_silver.count():,} records to {target_table}")
+try:
+    df_silver.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .partitionBy("filing_date", "filing_type") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(target_table)
+    
+    print(f"Written {df_silver.count():,} records to {target_table}")
+except Exception as e:
+    print(f"ERROR in lh_silver.silver_compliance_validated (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

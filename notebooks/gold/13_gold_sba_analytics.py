@@ -24,8 +24,28 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    array,
+    array_compact,
+    asc,
+    avg,
+    coalesce,
+    col,
+    count,
+    countDistinct,
+    current_timestamp,
+    desc,
+    lag,
+    lit,
+    max,
+    min,
+    round,
+    row_number,
+    sum,
+    when,
+    window,
+    year,
+)
 from pyspark.sql.window import Window
 from datetime import datetime
 
@@ -205,14 +225,18 @@ df_portfolio_flagged = df_portfolio \
 
 # COMMAND ----------
 
-df_portfolio_flagged.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("approval_year") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_LOAN_PORTFOLIO)
-
-print(f"Written {df_portfolio_flagged.count():,} records to {TARGET_LOAN_PORTFOLIO}")
+try:
+    df_portfolio_flagged.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .partitionBy("approval_year") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(TARGET_LOAN_PORTFOLIO)
+    
+    print(f"Written {df_portfolio_flagged.count():,} records to {TARGET_LOAN_PORTFOLIO}")
+except Exception as e:
+    print(f"ERROR in unknown (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

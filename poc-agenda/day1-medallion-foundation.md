@@ -169,8 +169,8 @@ Create three Lakehouses for medallion architecture:
 Use the data generators to create realistic casino data:
 
 ```bash
-# Navigate to data-generation folder
-cd data-generation
+# Navigate to data_generation folder
+cd data_generation
 
 # Install dependencies
 pip install -r requirements.txt

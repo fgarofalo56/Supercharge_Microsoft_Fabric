@@ -1,6 +1,6 @@
 # :rocket: Future Expansions
 
-> **[Home](../README.md)** | **[Tutorials](../tutorials/)** | **[Notebooks](../notebooks/)** | **[Data Generation](../data-generation/)**
+> **[Home](../README.md)** | **[Tutorials](../tutorials/)** | **[Notebooks](../notebooks/)** | **[Data Generation](../data_generation/)**
 
 ---
 
@@ -268,7 +268,7 @@ future-expansions/
 |----------|-------------|
 | [Casino/Gaming POC](../README.md) | Reference implementation |
 | [Tutorials](../tutorials/) | 32 step-by-step guides |
-| [Data Generation](../data-generation/) | Synthetic data generators |
+| [Data Generation](../data_generation/) | Synthetic data generators |
 | [Validation](../validation/) | Unit tests and data quality |
 
 ---

@@ -39,7 +39,7 @@ $ErrorActionPreference = "Continue"
 
 $ScriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $ProjectRoot = Split-Path -Parent $ScriptRoot
-$DataGenPath = Join-Path $ProjectRoot "data-generation"
+$DataGenPath = Join-Path $ProjectRoot "data_generation"
 $EnvFile = Join-Path $ProjectRoot ".env"
 
 $MinPythonVersion = [Version]"3.10.0"
@@ -335,7 +335,7 @@ if (-not $Quick -and $PythonCmd) {
         try {
             $code = @"
 import sys
-sys.path.insert(0, 'data-generation')
+sys.path.insert(0, 'data_generation')
 from generators import $gen
 print('OK')
 "@
@@ -364,7 +364,7 @@ if (-not $Quick -and $PythonCmd) {
 
     $smokeTestCode = @"
 import sys
-sys.path.insert(0, 'data-generation')
+sys.path.insert(0, 'data_generation')
 from generators import SlotMachineGenerator
 
 try:

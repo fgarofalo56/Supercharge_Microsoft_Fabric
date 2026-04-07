@@ -16,18 +16,18 @@ from typing import Any
 
 import pytest
 
-# Add data-generation to path
+# Add data_generation to path
 PROJECT_ROOT = Path(__file__).parent.parent.parent
-sys.path.insert(0, str(PROJECT_ROOT / "data-generation"))
+sys.path.insert(0, str(PROJECT_ROOT / "data_generation"))
 
 
 # =============================================================================
 # Path Constants
 # =============================================================================
 
-SCHEMAS_DIR = PROJECT_ROOT / "data-generation" / "schemas"
+SCHEMAS_DIR = PROJECT_ROOT / "data_generation" / "schemas"
 NOTEBOOKS_DIR = PROJECT_ROOT / "notebooks"
-GENERATORS_DIR = PROJECT_ROOT / "data-generation" / "generators"
+GENERATORS_DIR = PROJECT_ROOT / "data_generation" / "generators"
 
 
 # =============================================================================

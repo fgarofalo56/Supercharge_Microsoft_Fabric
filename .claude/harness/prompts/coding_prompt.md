@@ -20,7 +20,7 @@ For each task assigned by the Initializer Agent:
 Read: [file_path]
 
 # Read related schema if applicable
-Read: data-generation/schemas/[relevant_schema].json
+Read: data_generation/schemas/[relevant_schema].json
 
 # Read existing tests
 Read: validation/unit_tests/test_generators.py
@@ -58,7 +58,7 @@ pytest validation/unit_tests/test_generators.py -v -k [test_name]
 pytest validation/unit_tests/ -v
 
 # Run with coverage
-pytest --cov=data-generation/generators --cov-report=term-missing
+pytest --cov=data_generation/generators --cov-report=term-missing
 ```
 
 ### Phase 5: Fix Issues

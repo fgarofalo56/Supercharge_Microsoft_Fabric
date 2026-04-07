@@ -296,7 +296,7 @@ Geofences define virtual boundaries around physical zones. When a tracked device
 
 ```python
 # Geofence zone definitions for a Las Vegas casino resort
-# Save as: data-generation/config/geofences.py
+# Save as: data_generation/config/geofences.py
 
 CASINO_GEOFENCES = [
     # ----- Gaming Floor -----
@@ -607,7 +607,7 @@ Location devices emit high-frequency telemetry that must be ingested with sub-se
 
 ### 4.1 Event Schema
 
-The ingestion schema matches the project's `geolocation_schema.json` (see `data-generation/schemas/analytics/geolocation_schema.json`):
+The ingestion schema matches the project's `geolocation_schema.json` (see `data_generation/schemas/analytics/geolocation_schema.json`):
 
 ```json
 {
@@ -1562,7 +1562,7 @@ Continue your learning journey:
 | Fabric Lakehouse Overview | [Microsoft Learn](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-overview) |
 | ArcGIS for Microsoft Fabric | [esri.com](https://www.esri.com/en-us/arcgis/products/arcgis-for-microsoft-fabric) |
 | Azure IoT Hub Documentation | [Microsoft Learn](https://learn.microsoft.com/en-us/azure/iot-hub/) |
-| Geolocation Schema Reference | `data-generation/schemas/analytics/geolocation_schema.json` |
+| Geolocation Schema Reference | `data_generation/schemas/analytics/geolocation_schema.json` |
 
 ---
 

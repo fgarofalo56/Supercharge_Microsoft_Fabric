@@ -35,7 +35,7 @@ from pyspark.sql.functions import (
     col, to_date, hour, when, coalesce,
     sum as _sum, count as _count, avg as _avg
 )
-from pyspark.sql.types import *
+from pyspark.sql.types import DecimalType, IntegerType, StringType, StructField, StructType, TimestampType
 from datetime import datetime
 
 # Configuration
@@ -65,7 +65,7 @@ print(f"Valid Game Types: {VALID_GAME_TYPES}")
 # MAGIC %md
 # MAGIC ## Define Schema
 # MAGIC
-# MAGIC Explicit schema matching `data-generation/schemas/table_games_schema.json`.
+# MAGIC Explicit schema matching `data_generation/schemas/table_games_schema.json`.
 # MAGIC Includes all fields from the JSON schema for validation and performance.
 
 # COMMAND ----------

@@ -24,8 +24,22 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    avg,
+    col,
+    count,
+    countDistinct,
+    current_timestamp,
+    lit,
+    max,
+    min,
+    percentile_approx,
+    round,
+    sum,
+    unix_timestamp,
+    when,
+    window,
+)
 from pyspark.sql.window import Window
 from datetime import datetime
 
@@ -141,17 +155,21 @@ print(f"Alert summary records: {df_alert_summary.count():,}")
 
 # COMMAND ----------
 
-df_alert_summary.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .partitionBy("event_date") \
-    .saveAsTable(alert_summary_table)
-
-print(f"Written {df_alert_summary.count():,} records to {alert_summary_table}")
-
-spark.sql(f"OPTIMIZE {alert_summary_table} ZORDER BY (camera_id, event_type_clean)")
-print("Alert summary table optimized")
+try:
+    df_alert_summary.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .option("overwriteSchema", "true") \
+        .partitionBy("event_date") \
+        .saveAsTable(alert_summary_table)
+    
+    print(f"Written {df_alert_summary.count():,} records to {alert_summary_table}")
+    
+    spark.sql(f"OPTIMIZE {alert_summary_table} ZORDER BY (camera_id, event_type_clean)")
+    print("Alert summary table optimized")
+except Exception as e:
+    print(f"ERROR in unknown (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

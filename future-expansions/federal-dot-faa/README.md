@@ -183,7 +183,7 @@ graph LR
 
 ## Schema Overview
 
-All fields are defined in `data-generation/schemas/federal/dot_faa_schema.json`. The schema represents a union of all four data domains; fields not applicable to a specific domain are set to null.
+All fields are defined in `data_generation/schemas/federal/dot_faa_schema.json`. The schema represents a union of all four data domains; fields not applicable to a specific domain are set to null.
 
 ### Required Fields
 
@@ -249,7 +249,7 @@ All fields are defined in `data-generation/schemas/federal/dot_faa_schema.json`.
 
 ## Generator Details
 
-The `DOTFAAGenerator` class (`data-generation/generators/federal/dot_faa_generator.py`) inherits from `BaseGenerator` and produces synthetic records across all four domains.
+The `DOTFAAGenerator` class (`data_generation/generators/federal/dot_faa_generator.py`) inherits from `BaseGenerator` and produces synthetic records across all four domains.
 
 ### Capabilities
 
@@ -567,9 +567,9 @@ Please see our [Contributing Guide](../../CONTRIBUTING.md) to get involved.
 |----------|-------------|
 | [Casino/Gaming POC](../../README.md) | Reference architecture for the primary POC |
 | [Healthcare Expansion](../tribal-healthcare/README.md) | HIPAA-compliant tribal healthcare patterns |
-| [Federal Datasets Config](../../data-generation/config/federal_datasets.yaml) | Complete registry of federal open data sources |
-| [DOT/FAA Schema](../../data-generation/schemas/federal/dot_faa_schema.json) | JSON Schema for all DOT/FAA record fields |
-| [DOT/FAA Generator](../../data-generation/generators/federal/dot_faa_generator.py) | Python data generator source code |
+| [Federal Datasets Config](../../data_generation/config/federal_datasets.yaml) | Complete registry of federal open data sources |
+| [DOT/FAA Schema](../../data_generation/schemas/federal/dot_faa_schema.json) | JSON Schema for all DOT/FAA record fields |
+| [DOT/FAA Generator](../../data_generation/generators/federal/dot_faa_generator.py) | Python data generator source code |
 | [Azure Government](https://azure.microsoft.com/en-us/global-infrastructure/government/) | GCC/GCC-High documentation |
 | [BTS Data Library](https://www.transtats.bts.gov/databases.asp) | Bureau of Transportation Statistics datasets |
 | [FAA Data & Research](https://www.faa.gov/data_research) | FAA safety, activity, and certification data |

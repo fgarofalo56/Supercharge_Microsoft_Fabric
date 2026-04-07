@@ -19,8 +19,34 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    avg,
+    coalesce,
+    col,
+    count,
+    countDistinct,
+    current_date,
+    current_timestamp,
+    datediff,
+    filter,
+    greatest,
+    hour,
+    least,
+    lit,
+    max,
+    min,
+    sum,
+    when,
+)
+from pyspark.sql.types import (
+    DecimalType,
+    IntegerType,
+    LongType,
+    StringType,
+    StructField,
+    StructType,
+    TimestampType,
+)
 from datetime import datetime
 
 # Parameters
@@ -340,48 +366,52 @@ df_gold = df_segmented \
 # COMMAND ----------
 
 # Select and order columns
-final_columns = [
-    # Player dimensions
-    "player_id", "first_name", "last_name", "date_of_birth", "gender",
-    "email", "phone", "city", "state",
-    "loyalty_tier", "enrollment_date", "marketing_opt_in",
-
-    # Slot activity
-    "slot_coin_in", "slot_coin_out", "slot_games_played",
-    "slot_machines_played", "slot_visit_days", "slot_theo_win",
-    "first_slot_play", "last_slot_play",
-
-    # Table activity
-    "table_buy_in", "table_cash_out", "table_hours_played",
-    "tables_played", "table_visit_days", "table_theo_win",
-    "first_table_play", "last_table_play",
-
-    # Financial
-    "total_transactions", "total_cash_in", "total_cash_out",
-    "total_markers", "total_marker_payments", "ctr_transaction_count",
-
-    # Calculated metrics
-    "total_gaming_activity", "total_theo_win", "total_visits",
-    "first_visit", "last_visit", "days_since_visit", "account_age_days",
-
-    # Scoring
-    "player_value_score", "churn_risk", "churn_risk_score",
-    "player_segment", "vip_flag", "preferred_game_type",
-
-    # Metadata
-    "_gold_timestamp", "_batch_id"
-]
-
-df_final = df_gold.select([col(c) for c in final_columns if c in df_gold.columns])
-
-# Write to Gold
-df_final.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(target_table)
-
-print(f"Written {df_final.count():,} records to {target_table}")
+try:
+    final_columns = [
+        # Player dimensions
+        "player_id", "first_name", "last_name", "date_of_birth", "gender",
+        "email", "phone", "city", "state",
+        "loyalty_tier", "enrollment_date", "marketing_opt_in",
+    
+        # Slot activity
+        "slot_coin_in", "slot_coin_out", "slot_games_played",
+        "slot_machines_played", "slot_visit_days", "slot_theo_win",
+        "first_slot_play", "last_slot_play",
+    
+        # Table activity
+        "table_buy_in", "table_cash_out", "table_hours_played",
+        "tables_played", "table_visit_days", "table_theo_win",
+        "first_table_play", "last_table_play",
+    
+        # Financial
+        "total_transactions", "total_cash_in", "total_cash_out",
+        "total_markers", "total_marker_payments", "ctr_transaction_count",
+    
+        # Calculated metrics
+        "total_gaming_activity", "total_theo_win", "total_visits",
+        "first_visit", "last_visit", "days_since_visit", "account_age_days",
+    
+        # Scoring
+        "player_value_score", "churn_risk", "churn_risk_score",
+        "player_segment", "vip_flag", "preferred_game_type",
+    
+        # Metadata
+        "_gold_timestamp", "_batch_id"
+    ]
+    
+    df_final = df_gold.select([col(c) for c in final_columns if c in df_gold.columns])
+    
+    # Write to Gold
+    df_final.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(target_table)
+    
+    print(f"Written {df_final.count():,} records to {target_table}")
+except Exception as e:
+    print(f"ERROR in lh_gold.gold_player_360 (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

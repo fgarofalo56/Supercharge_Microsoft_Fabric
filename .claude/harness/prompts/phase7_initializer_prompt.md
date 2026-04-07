@@ -89,12 +89,12 @@ brave_web_search(query="[agency] open datasets API download")
 #### For Data Generators:
 ```bash
 # Study existing generator pattern
-Read: data-generation/generators/base_generator.py
-Read: data-generation/generators/slot_machine_generator.py
-Read: data-generation/generators/compliance_generator.py
+Read: data_generation/generators/base_generator.py
+Read: data_generation/generators/slot_machine_generator.py
+Read: data_generation/generators/compliance_generator.py
 
 # Understand schema requirements
-Read: data-generation/schemas/slot_telemetry_schema.json
+Read: data_generation/schemas/slot_telemetry_schema.json
 ```
 
 #### For Tutorials:

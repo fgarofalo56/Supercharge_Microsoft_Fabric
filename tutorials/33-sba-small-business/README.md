@@ -218,7 +218,7 @@ Before starting this tutorial, ensure you have:
 > **📋 Data Source Options**
 >
 > This tutorial supports two data ingestion paths:
-> 1. **Synthetic Generator** (recommended for learning): Use [`sba_generator.py`](../../data-generation/generators/federal/sba_generator.py) to generate realistic SBA loan data locally
+> 1. **Synthetic Generator** (recommended for learning): Use [`sba_generator.py`](../../data_generation/generators/federal/sba_generator.py) to generate realistic SBA loan data locally
 > 2. **Open Data Download**: Download real PPP, 7(a), and 504 data from [data.sba.gov](https://data.sba.gov/) for production-grade analytics
 >
 > Both paths converge at the same Bronze schema. The tutorial walks through both options.
@@ -240,14 +240,14 @@ SBA provides some of the most comprehensive open data in the federal government.
 
 ### 1.2 Option A: Synthetic Data Generator
 
-The synthetic generator produces realistic SBA loan data matching the schema defined in [`sba_loan_schema.json`](../../data-generation/schemas/federal/sba_loan_schema.json).
+The synthetic generator produces realistic SBA loan data matching the schema defined in [`sba_loan_schema.json`](../../data_generation/schemas/federal/sba_loan_schema.json).
 
 ```python
 # Generate synthetic SBA loan data for development
-# Reference: data-generation/generators/federal/sba_generator.py
+# Reference: data_generation/generators/federal/sba_generator.py
 
 import sys
-sys.path.append("../../data-generation")
+sys.path.append("../../data_generation")
 
 from generators.federal.sba_generator import SBAGenerator
 
@@ -1207,11 +1207,11 @@ Continue your learning journey:
 | 7(a)/504 FOIA Data | [SBA 7a/504 FOIA](https://data.sba.gov/dataset/7-a-504-foia) |
 | SBIR/STTR Awards | [sbir.gov](https://www.sbir.gov/) |
 | NAICS Code Reference | [Census Bureau NAICS](https://www.census.gov/naics/) |
-| SBA Loan Schema | [`data-generation/schemas/federal/sba_loan_schema.json`](../../data-generation/schemas/federal/sba_loan_schema.json) |
+| SBA Loan Schema | [`data_generation/schemas/federal/sba_loan_schema.json`](../../data_generation/schemas/federal/sba_loan_schema.json) |
 | Bronze Notebook | [`notebooks/bronze/13_bronze_sba.py`](../../notebooks/bronze/13_bronze_sba.py) |
 | Silver Notebook | [`notebooks/silver/13_silver_sba.py`](../../notebooks/silver/13_silver_sba.py) |
 | Gold Notebook | [`notebooks/gold/13_gold_sba_analytics.py`](../../notebooks/gold/13_gold_sba_analytics.py) |
-| Data Generator | [`data-generation/generators/federal/sba_generator.py`](../../data-generation/generators/federal/sba_generator.py) |
+| Data Generator | [`data_generation/generators/federal/sba_generator.py`](../../data_generation/generators/federal/sba_generator.py) |
 
 ---
 

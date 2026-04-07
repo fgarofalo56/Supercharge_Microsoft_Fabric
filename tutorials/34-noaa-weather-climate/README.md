@@ -221,7 +221,7 @@ Before starting this tutorial, ensure you have:
 > **📋 Data Source Options**
 >
 > This tutorial supports two data ingestion paths:
-> 1. **Synthetic Generator** (recommended for learning): Use [`noaa_generator.py`](../../data-generation/generators/federal/noaa_generator.py) to generate realistic NOAA weather data locally
+> 1. **Synthetic Generator** (recommended for learning): Use [`noaa_generator.py`](../../data_generation/generators/federal/noaa_generator.py) to generate realistic NOAA weather data locally
 > 2. **NOAA API + Bulk Downloads**: Connect to real NOAA data for production-grade analytics
 >
 > Both paths converge at the same Bronze schema. The real-time Eventstream component requires the NOAA Weather API token.
@@ -246,10 +246,10 @@ NOAA operates dozens of data systems. This tutorial focuses on the five most ana
 
 ```python
 # Generate synthetic NOAA weather data for development
-# Reference: data-generation/generators/federal/noaa_generator.py
+# Reference: data_generation/generators/federal/noaa_generator.py
 
 import sys
-sys.path.append("../../data-generation")
+sys.path.append("../../data_generation")
 
 from generators.federal.noaa_generator import NOAAGenerator
 
@@ -1155,9 +1155,9 @@ Continue your learning journey:
 | Climate Data Online | [NCEI CDO](https://www.ncdc.noaa.gov/cdo-web/) |
 | CO-OPS Tides & Currents | [tidesandcurrents.noaa.gov](https://tidesandcurrents.noaa.gov/) |
 | NDBC Buoy Data | [ndbc.noaa.gov](https://www.ndbc.noaa.gov/) |
-| Weather Schema | [`data-generation/schemas/federal/noaa_weather_schema.json`](../../data-generation/schemas/federal/noaa_weather_schema.json) |
-| Storm Schema | [`data-generation/schemas/federal/noaa_storm_schema.json`](../../data-generation/schemas/federal/noaa_storm_schema.json) |
-| Data Generator | [`data-generation/generators/federal/noaa_generator.py`](../../data-generation/generators/federal/noaa_generator.py) |
+| Weather Schema | [`data_generation/schemas/federal/noaa_weather_schema.json`](../../data_generation/schemas/federal/noaa_weather_schema.json) |
+| Storm Schema | [`data_generation/schemas/federal/noaa_storm_schema.json`](../../data_generation/schemas/federal/noaa_storm_schema.json) |
+| Data Generator | [`data_generation/generators/federal/noaa_generator.py`](../../data_generation/generators/federal/noaa_generator.py) |
 
 ---
 

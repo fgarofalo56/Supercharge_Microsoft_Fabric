@@ -24,8 +24,23 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    avg,
+    col,
+    count,
+    countDistinct,
+    current_timestamp,
+    desc,
+    lit,
+    max,
+    min,
+    percentile_approx,
+    round,
+    row_number,
+    sum,
+    when,
+    window,
+)
 from pyspark.sql.window import Window
 from datetime import datetime
 
@@ -149,17 +164,21 @@ print(f"Zone heat map records: {df_zone_heatmap.count():,}")
 
 # COMMAND ----------
 
-df_zone_heatmap.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .partitionBy("event_date") \
-    .saveAsTable(zone_heatmap_table)
-
-print(f"Written {df_zone_heatmap.count():,} records to {zone_heatmap_table}")
-
-spark.sql(f"OPTIMIZE {zone_heatmap_table} ZORDER BY (zone_id, event_hour)")
-print("Zone heat map table optimized")
+try:
+    df_zone_heatmap.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .option("overwriteSchema", "true") \
+        .partitionBy("event_date") \
+        .saveAsTable(zone_heatmap_table)
+    
+    print(f"Written {df_zone_heatmap.count():,} records to {zone_heatmap_table}")
+    
+    spark.sql(f"OPTIMIZE {zone_heatmap_table} ZORDER BY (zone_id, event_hour)")
+    print("Zone heat map table optimized")
+except Exception as e:
+    print(f"ERROR in unknown (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

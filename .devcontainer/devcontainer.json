@@ -260,7 +260,7 @@
   "initializeCommand": "echo 'Initializing Fabric Casino POC Dev Container...'",
   "onCreateCommand": "echo 'Container created successfully'",
   "updateContentCommand": "pip install --upgrade pip",
-  "postStartCommand": "echo 'Dev Container is ready! Run: python data-generation/generate.py --help'",
+  "postStartCommand": "echo 'Dev Container is ready! Run: python data_generation/generate.py --help'",
 
   // Host requirements (optional)
   "hostRequirements": {

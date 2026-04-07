@@ -46,6 +46,9 @@ jobs:
     name: What-If Analysis
     runs-on: ubuntu-latest
     needs: validate
+    # Environment protection: configure required reviewers in GitHub Settings
+    # Settings > Environments > "infra-preview" > Add protection rules
+    environment: infra-preview
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6

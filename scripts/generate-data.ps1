@@ -91,7 +91,7 @@ $ErrorActionPreference = "Stop"
 
 $ScriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $ProjectRoot = Split-Path -Parent $ScriptRoot
-$DataGenPath = Join-Path $ProjectRoot "data-generation"
+$DataGenPath = Join-Path $ProjectRoot "data_generation"
 
 # =============================================================================
 # Helper Functions
@@ -215,9 +215,9 @@ if (-not $PythonCmd) {
 }
 Write-Info "Using Python: $PythonCmd"
 
-# Verify data-generation module
+# Verify data_generation module
 if (-not (Test-Path (Join-Path $DataGenPath "generate.py"))) {
-    Write-Failure "data-generation/generate.py not found"
+    Write-Failure "data_generation/generate.py not found"
     exit 1
 }
 

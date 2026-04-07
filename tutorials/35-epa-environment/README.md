@@ -224,7 +224,7 @@ Before starting this tutorial, ensure you have:
 > **📋 Data Source Options**
 >
 > This tutorial supports two data ingestion paths:
-> 1. **Synthetic Generator** (recommended for learning): Use [`epa_generator.py`](../../data-generation/generators/federal/epa_generator.py) to generate realistic EPA environmental data locally
+> 1. **Synthetic Generator** (recommended for learning): Use [`epa_generator.py`](../../data_generation/generators/federal/epa_generator.py) to generate realistic EPA environmental data locally
 > 2. **EPA APIs + Bulk Downloads**: Connect to real EPA data from AQS, Envirofacts, TRI, and ECHO for production analytics
 >
 > Both paths converge at the same Bronze schema.
@@ -251,7 +251,7 @@ EPA operates dozens of environmental data systems. This tutorial integrates the 
 ```python
 # Generate synthetic EPA environmental data for development
 import sys
-sys.path.append("../../data-generation")
+sys.path.append("../../data_generation")
 
 from generators.federal.epa_generator import EPAGenerator
 
@@ -1184,9 +1184,9 @@ Continue your learning journey:
 | ECHO Compliance | [echo.epa.gov](https://echo.epa.gov/) |
 | EJScreen | [epa.gov/ejscreen](https://www.epa.gov/ejscreen) |
 | GHGRP | [epa.gov/ghgreporting](https://www.epa.gov/ghgreporting) |
-| Air Quality Schema | [`data-generation/schemas/federal/epa_air_quality_schema.json`](../../data-generation/schemas/federal/epa_air_quality_schema.json) |
-| Water Quality Schema | [`data-generation/schemas/federal/epa_water_quality_schema.json`](../../data-generation/schemas/federal/epa_water_quality_schema.json) |
-| Data Generator | [`data-generation/generators/federal/epa_generator.py`](../../data-generation/generators/federal/epa_generator.py) |
+| Air Quality Schema | [`data_generation/schemas/federal/epa_air_quality_schema.json`](../../data_generation/schemas/federal/epa_air_quality_schema.json) |
+| Water Quality Schema | [`data_generation/schemas/federal/epa_water_quality_schema.json`](../../data_generation/schemas/federal/epa_water_quality_schema.json) |
+| Data Generator | [`data_generation/generators/federal/epa_generator.py`](../../data_generation/generators/federal/epa_generator.py) |
 
 ---
 

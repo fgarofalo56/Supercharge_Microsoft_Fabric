@@ -67,7 +67,7 @@ GEN_COMPLIANCE=false
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
-DATA_GEN_PATH="$PROJECT_ROOT/data-generation"
+DATA_GEN_PATH="$PROJECT_ROOT/data_generation"
 
 # =============================================================================
 # Color Output
@@ -289,9 +289,9 @@ if [ -z "$PYTHON_CMD" ]; then
 fi
 write_info "Using Python: $PYTHON_CMD"
 
-# Verify data-generation module
+# Verify data_generation module
 if [ ! -f "$DATA_GEN_PATH/generate.py" ]; then
-    write_failure "data-generation/generate.py not found"
+    write_failure "data_generation/generate.py not found"
     exit 1
 fi
 

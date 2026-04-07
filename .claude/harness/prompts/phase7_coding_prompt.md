@@ -67,8 +67,8 @@ The README must include:
 #### Research Phase:
 ```bash
 # 1. Study base generator pattern
-Read: data-generation/generators/base_generator.py
-Read: data-generation/generators/slot_machine_generator.py
+Read: data_generation/generators/base_generator.py
+Read: data_generation/generators/slot_machine_generator.py
 
 # 2. Study open dataset schemas for realistic field names/types
 # (Use the actual API responses to understand real data shapes)
@@ -143,7 +143,7 @@ python -c "from data_generation.generators.federal.[name] import [Class]; g = [C
 #### Creation Phase:
 Study existing schema pattern:
 ```bash
-Read: data-generation/schemas/slot_telemetry_schema.json
+Read: data_generation/schemas/slot_telemetry_schema.json
 ```
 
 The schema must:

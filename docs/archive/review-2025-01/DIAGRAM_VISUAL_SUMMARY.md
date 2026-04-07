@@ -302,7 +302,7 @@ graph LR
 | Cost Tree | ⭐⭐⭐ | 🔨🔨 | 🟡 Medium | docs/COST_ESTIMATION.md |
 | Direct Lake | ⭐⭐⭐ | 🔨🔨 | 🟡 Medium | tutorials/05-direct-lake/ |
 | Mirroring Flow | ⭐⭐⭐ | 🔨🔨🔨 | 🟡 Medium | tutorials/08-mirroring/ |
-| Data Gen Flow | ⭐⭐ | 🔨🔨 | 🟡 Medium | data-generation/ |
+| Data Gen Flow | ⭐⭐ | 🔨🔨 | 🟡 Medium | data_generation/ |
 
 **Legend:**
 - Value: ⭐ = Low to ⭐⭐⭐⭐⭐ = Critical

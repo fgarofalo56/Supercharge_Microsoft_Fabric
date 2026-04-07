@@ -6,19 +6,6 @@ requires-python = ">=3.10"
 license = {text = "MIT"}
 readme = "README.md"
 
-[tool.black]
-line-length = 88
-target-version = ["py310", "py311", "py312"]
-extend-exclude = '''
-/(
-    \.git
-    | \.venv
-    | __pycache__
-    | notebooks
-    | temp
-)/
-'''
-
 [tool.ruff]
 line-length = 88
 target-version = "py310"
@@ -37,10 +24,10 @@ select = [
     "RUF",    # ruff-specific rules
 ]
 ignore = [
-    "E501",   # line too long (handled by black)
+    "E501",   # line too long (handled by ruff format)
     "B008",   # do not perform function call in argument defaults
     "SIM108", # use ternary operator
-    "N999",   # invalid module name (data-generation has hyphen, can't rename)
+    "N999",   # invalid module name (reserved for future edge cases)
     "RUF001", # ambiguous unicode character in string (intentional en-dashes)
     "RUF002", # ambiguous unicode character in docstring (intentional en-dashes)
     "RUF003", # ambiguous unicode character in comment (intentional en-dashes)
@@ -57,6 +44,9 @@ ignore = [
 
 [tool.ruff.lint.isort]
 known-first-party = ["generators", "validation"]
+
+[tool.ruff.format]
+exclude = ["notebooks/**", "temp/**"]
 
 [tool.mypy]
 python_version = "3.10"
@@ -87,7 +77,7 @@ markers = [
 addopts = "-v --tb=short"
 
 [tool.coverage.run]
-source = ["data-generation/generators"]
+source = ["data_generation/generators"]
 omit = ["*/tests/*", "*/unit_tests/*", "*/__pycache__/*"]
 
 [tool.coverage.report]

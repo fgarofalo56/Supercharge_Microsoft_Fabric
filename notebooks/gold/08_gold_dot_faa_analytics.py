@@ -18,8 +18,31 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    avg,
+    coalesce,
+    col,
+    count,
+    countDistinct,
+    current_timestamp,
+    date_format,
+    desc,
+    filter,
+    lag,
+    lit,
+    max,
+    min,
+    month,
+    months,
+    rank,
+    round,
+    row_number,
+    sum,
+    upper,
+    when,
+    window,
+    year,
+)
 from pyspark.sql.window import Window
 from datetime import datetime
 
@@ -226,14 +249,18 @@ df_carrier_final = df_carrier_perf \
 
 # COMMAND ----------
 
-df_carrier_final.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("report_year") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_CARRIER_PERF)
-
-print(f"Written {df_carrier_final.count():,} records to {TARGET_CARRIER_PERF}")
+try:
+    df_carrier_final.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .partitionBy("report_year") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(TARGET_CARRIER_PERF)
+    
+    print(f"Written {df_carrier_final.count():,} records to {TARGET_CARRIER_PERF}")
+except Exception as e:
+    print(f"ERROR in unknown (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

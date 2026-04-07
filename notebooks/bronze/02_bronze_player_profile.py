@@ -33,7 +33,7 @@ from pyspark.sql.functions import (
     current_timestamp, lit, input_file_name,
     col, to_date, when, sha2, coalesce, length, regexp_extract
 )
-from pyspark.sql.types import *
+from pyspark.sql.types import BooleanType, StringType, StructField, StructType
 from datetime import datetime
 
 # Configuration
@@ -56,7 +56,7 @@ print(f"Batch ID: {BATCH_ID}")
 # MAGIC %md
 # MAGIC ## Define Schema
 # MAGIC
-# MAGIC Explicit schema matching `data-generation/schemas/player_profile_schema.json`.
+# MAGIC Explicit schema matching `data_generation/schemas/player_profile_schema.json`.
 # MAGIC Ensures type safety and documents expected fields at ingestion.
 
 # COMMAND ----------

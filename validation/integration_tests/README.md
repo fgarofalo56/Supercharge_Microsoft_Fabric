@@ -105,7 +105,7 @@ pytest validation/integration_tests/ -m "not slow" -v
 
 ### Run with Coverage
 ```bash
-pytest validation/integration_tests/ --cov=data-generation --cov-report=html
+pytest validation/integration_tests/ --cov=data_generation --cov-report=html
 ```
 
 ## Test Markers
@@ -236,16 +236,16 @@ Optional:
 ## Troubleshooting
 
 ### Import Errors
-Ensure the data-generation directory is in PYTHONPATH:
+Ensure the data_generation directory is in PYTHONPATH:
 ```bash
-set PYTHONPATH=%PYTHONPATH%;E:\Repos\GitHub\MyDemoRepos\Supercharge_Microsoft_Fabric\data-generation
+set PYTHONPATH=%PYTHONPATH%;E:\Repos\GitHub\MyDemoRepos\Supercharge_Microsoft_Fabric\data_generation
 ```
 
 ### Fixture Not Found
 Verify `conftest.py` is in the test directory and contains the required fixture.
 
 ### Schema Not Found
-Ensure JSON schemas exist in `data-generation/schemas/`.
+Ensure JSON schemas exist in `data_generation/schemas/`.
 
 ### Slow Test Timeout
 Use `-s` flag to see output and increase timeout:

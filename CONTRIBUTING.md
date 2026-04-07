@@ -1,6 +1,6 @@
 # :handshake: Contributing Guide
 
-> **[Home](README.md)** | **[Tutorials](tutorials/)** | **[Data Generation](data-generation/)** | **[Validation](validation/)**
+> **[Home](README.md)** | **[Tutorials](tutorials/)** | **[Data Generation](data_generation/)** | **[Validation](validation/)**
 
 ---
 
@@ -137,7 +137,7 @@ ruff check .
 pytest validation/unit_tests/ -v
 
 # Run with coverage
-pytest validation/unit_tests/ --cov=data-generation --cov-report=html
+pytest validation/unit_tests/ --cov=data_generation --cov-report=html
 
 # Run specific test file
 pytest validation/unit_tests/test_generators.py -v
@@ -186,7 +186,7 @@ ruff check .
 ruff check . --fix
 
 # Type check with MyPy
-mypy data-generation/
+mypy data_generation/
 ```
 
 ### Style Guidelines
@@ -268,7 +268,7 @@ Supercharge_Microsoft_Fabric/
 |   +-- ...
 |
 |-- poc-agenda/                # 3-Day POC workshop materials
-|-- data-generation/           # Sample data generators
+|-- data_generation/           # Sample data generators
 |-- notebooks/                 # Fabric-importable notebooks
 |-- validation/                # Tests & data quality
 +-- future-expansions/         # Industry expansion plans

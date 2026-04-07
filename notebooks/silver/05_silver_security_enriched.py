@@ -12,8 +12,19 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    col,
+    count,
+    current_timestamp,
+    expr,
+    filter,
+    hour,
+    least,
+    lit,
+    sum,
+    when,
+    window,
+)
 from pyspark.sql.window import Window
 from datetime import datetime
 
@@ -190,14 +201,18 @@ df_silver = df_with_response \
 
 # COMMAND ----------
 
-df_silver.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("event_date", "severity_level") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(target_table)
-
-print(f"Written {df_silver.count():,} records to {target_table}")
+try:
+    df_silver.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .partitionBy("event_date", "severity_level") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(target_table)
+    
+    print(f"Written {df_silver.count():,} records to {target_table}")
+except Exception as e:
+    print(f"ERROR in lh_silver.silver_security_enriched (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

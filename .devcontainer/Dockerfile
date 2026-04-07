@@ -139,7 +139,7 @@ alias l="ls -CF"\n\
 alias py="python"\n\
 alias pip="pip3"\n\
 alias pytest="python -m pytest"\n\
-alias generate="python data-generation/generate.py"\n\
+alias generate="python data_generation/generate.py"\n\
 alias validate="python -m pytest validation/ -v"\n\
 alias bicep-lint="az bicep build --file infra/main.bicep"\n\
 \n\
@@ -148,7 +148,7 @@ alias azlogin="az login --use-device-code"\n\
 alias azaccount="az account show"\n\
 \n\
 # Project navigation\n\
-alias cddata="cd /workspaces/Supercharge_Microsoft_Fabric/data-generation"\n\
+alias cddata="cd /workspaces/Supercharge_Microsoft_Fabric/data_generation"\n\
 alias cdinfra="cd /workspaces/Supercharge_Microsoft_Fabric/infra"\n\
 alias cdnotebooks="cd /workspaces/Supercharge_Microsoft_Fabric/notebooks"\n\
 alias cdvalidation="cd /workspaces/Supercharge_Microsoft_Fabric/validation"\n\

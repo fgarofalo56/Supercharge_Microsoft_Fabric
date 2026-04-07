@@ -22,8 +22,26 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    array,
+    array_compact,
+    coalesce,
+    col,
+    count,
+    create_map,
+    current_timestamp,
+    dayofweek,
+    filter,
+    hour,
+    lit,
+    lower,
+    round,
+    to_date,
+    to_timestamp,
+    trim,
+    when,
+)
+from pyspark.sql.types import DoubleType, FloatType, IntegerType
 from datetime import datetime
 
 # Parameters (set by pipeline or manual)
@@ -341,55 +359,59 @@ df_silver = df_deduped \
 # COMMAND ----------
 
 # Select final columns for Silver output
-final_columns = [
-    # Core event fields
-    "event_id", "device_id", "device_type_clean",
-    "timestamp", "event_date", "event_hour", "day_of_week", "is_weekend",
-
-    # Location
-    "latitude", "longitude", "altitude_meters",
-    "accuracy_meters", "accuracy_tier",
-    "h3_index", "has_h3_index",
-
-    # Movement
-    "speed_mps", "speed_kmh", "heading_degrees",
-    "mobility_class", "is_stationary", "is_walking", "is_vehicle_speed",
-
-    # Geofence
-    "geofence_id", "geofence_name", "geofence_event_clean",
-    "geofence_dwell_seconds", "geofence_dwell_minutes",
-
-    # Points of interest
-    "poi_name", "poi_distance_meters",
-
-    # Indoor positioning
-    "floor_level", "indoor_zone_clean", "location_type",
-
-    # Triggers
-    "proximity_trigger",
-
-    # Source and device metadata
-    "source_system_clean", "battery_level",
-
-    # Data quality
-    "_dq_score", "_dq_flags",
-
-    # Metadata
-    "_silver_timestamp", "_batch_id"
-]
-
-df_final = df_silver.select([col(c) for c in final_columns if c in df_silver.columns])
-
-# Write to Silver layer
-df_final.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .partitionBy("event_date") \
-    .saveAsTable(target_table)
-
-silver_count = df_final.count()
-print(f"Written {silver_count:,} records to {target_table}")
+try:
+    final_columns = [
+        # Core event fields
+        "event_id", "device_id", "device_type_clean",
+        "timestamp", "event_date", "event_hour", "day_of_week", "is_weekend",
+    
+        # Location
+        "latitude", "longitude", "altitude_meters",
+        "accuracy_meters", "accuracy_tier",
+        "h3_index", "has_h3_index",
+    
+        # Movement
+        "speed_mps", "speed_kmh", "heading_degrees",
+        "mobility_class", "is_stationary", "is_walking", "is_vehicle_speed",
+    
+        # Geofence
+        "geofence_id", "geofence_name", "geofence_event_clean",
+        "geofence_dwell_seconds", "geofence_dwell_minutes",
+    
+        # Points of interest
+        "poi_name", "poi_distance_meters",
+    
+        # Indoor positioning
+        "floor_level", "indoor_zone_clean", "location_type",
+    
+        # Triggers
+        "proximity_trigger",
+    
+        # Source and device metadata
+        "source_system_clean", "battery_level",
+    
+        # Data quality
+        "_dq_score", "_dq_flags",
+    
+        # Metadata
+        "_silver_timestamp", "_batch_id"
+    ]
+    
+    df_final = df_silver.select([col(c) for c in final_columns if c in df_silver.columns])
+    
+    # Write to Silver layer
+    df_final.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .option("overwriteSchema", "true") \
+        .partitionBy("event_date") \
+        .saveAsTable(target_table)
+    
+    silver_count = df_final.count()
+    print(f"Written {silver_count:,} records to {target_table}")
+except Exception as e:
+    print(f"ERROR in lh_silver.silver_geolocation (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

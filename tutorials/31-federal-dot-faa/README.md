@@ -300,7 +300,7 @@ The Bronze layer captures raw DOT/FAA data across four domains: flight operation
 
 ### 3.2 Schema Definition
 
-The ingestion schema is defined in `data-generation/schemas/federal/dot_faa_schema.json`. It uses a `data_domain` enum (`flight_operations`, `safety_incident`, `traffic_statistics`, `infrastructure`) to classify records. Key required fields: `record_id`, `carrier_code`, `origin_airport`, `destination_airport`, `departure_date`, `faa_region`, `report_year`, `report_month`. Safety-specific fields include `incident_type`, `incident_severity`, `visibility_miles`, and `wind_speed_knots`.
+The ingestion schema is defined in `data_generation/schemas/federal/dot_faa_schema.json`. It uses a `data_domain` enum (`flight_operations`, `safety_incident`, `traffic_statistics`, `infrastructure`) to classify records. Key required fields: `record_id`, `carrier_code`, `origin_airport`, `destination_airport`, `departure_date`, `faa_region`, `report_year`, `report_month`. Safety-specific fields include `incident_type`, `incident_severity`, `visibility_miles`, and `wind_speed_knots`.
 
 ### 3.3 Bronze Ingestion (PySpark)
 
@@ -948,7 +948,7 @@ Congratulations! You have built a complete DOT/FAA aviation analytics pipeline o
 | Azure Government Cloud | [azure.microsoft.com/government](https://azure.microsoft.com/en-us/global-infrastructure/government/) |
 | NIST 800-53 Security Controls | [csrc.nist.gov](https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final) |
 | Fabric Lakehouse Overview | [Microsoft Learn](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-overview) |
-| DOT/FAA Schema Reference | `data-generation/schemas/federal/dot_faa_schema.json` |
+| DOT/FAA Schema Reference | `data_generation/schemas/federal/dot_faa_schema.json` |
 | Bronze Notebook | `notebooks/bronze/08_bronze_dot_faa.py` |
 | Silver Notebook | `notebooks/silver/08_silver_dot_faa.py` |
 | Gold Notebook | `notebooks/gold/08_gold_dot_faa_analytics.py` |

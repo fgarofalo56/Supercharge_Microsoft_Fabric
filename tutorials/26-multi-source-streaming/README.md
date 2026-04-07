@@ -847,7 +847,7 @@ The **Slot Accounting System (SAS)** protocol is the industry standard for slot 
 pip install azure-eventhub faker python-dateutil
 
 # Run the simulator (from repo root)
-python data-generation/generators/streaming/iot_device_simulator.py \
+python data_generation/generators/streaming/iot_device_simulator.py \
     --num-machines 500 \
     --events-per-second 100 \
     --destination eventhub \
@@ -859,7 +859,7 @@ python data-generation/generators/streaming/iot_device_simulator.py \
 ### 8.3 Simulator Configuration
 
 ```python
-# data-generation/generators/streaming/simulator_config.py
+# data_generation/generators/streaming/simulator_config.py
 from dataclasses import dataclass
 from typing import Literal
 
@@ -1196,8 +1196,8 @@ The unified view from all eight sources gives casino operations unprecedented si
 
 | Resource | Description |
 |----------|-------------|
-| [`data-generation/config/streaming_sources.yaml`](../../data-generation/config/streaming_sources.yaml) | Full connector registry for all 8 sources |
-| [`data-generation/generators/streaming/`](../../data-generation/generators/streaming/) | Slot machine IoT simulator implementation |
+| [`data_generation/config/streaming_sources.yaml`](../../data_generation/config/streaming_sources.yaml) | Full connector registry for all 8 sources |
+| [`data_generation/generators/streaming/`](../../data_generation/generators/streaming/) | Slot machine IoT simulator implementation |
 | [`validation/unit_tests/streaming/`](../../validation/unit_tests/streaming/) | Unit tests for streaming generators |
 
 **External Documentation:**

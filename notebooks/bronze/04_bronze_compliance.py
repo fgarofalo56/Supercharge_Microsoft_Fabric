@@ -33,7 +33,7 @@ from pyspark.sql.functions import (
     col, to_date, to_timestamp, when, coalesce,
     datediff, sum as _sum, count as _count
 )
-from pyspark.sql.types import *
+from pyspark.sql.types import DoubleType, StringType, StructField, StructType, TimestampType
 from datetime import datetime
 
 # Configuration
@@ -63,7 +63,7 @@ print(f"Valid Filing Types: {VALID_FILING_TYPES}")
 # MAGIC %md
 # MAGIC ## Define Schema
 # MAGIC
-# MAGIC Explicit schema matching `data-generation/schemas/compliance_filing_schema.json`.
+# MAGIC Explicit schema matching `data_generation/schemas/compliance_filing_schema.json`.
 
 # COMMAND ----------
 

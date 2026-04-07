@@ -288,6 +288,23 @@ module powerBIWorkspace 'modules/analytics/powerbi-workspace.bicep' = if (enable
 }
 
 // =============================================================================
+// Resource Locks (Prevent accidental deletion of critical resources)
+// =============================================================================
+
+module resourceLocks 'modules/security/resource-locks.bicep' = {
+  name: 'resource-locks-deployment'
+  scope: resourceGroup
+  dependsOn: [security, storage, fabric, monitoring, governance]
+  params: {
+    keyVaultName: keyVaultName
+    storageAccountName: storageAccountName
+    fabricCapacityName: fabricCapacityName
+    logAnalyticsName: logAnalyticsName
+    purviewAccountName: purviewAccountName
+  }
+}
+
+// =============================================================================
 // Outputs
 // =============================================================================
 

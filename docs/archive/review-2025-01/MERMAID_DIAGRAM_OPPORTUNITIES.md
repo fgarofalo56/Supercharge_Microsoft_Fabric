@@ -651,7 +651,7 @@ sequenceDiagram
 
 ---
 
-### 15. **data-generation/README.md** - Data Generation Process
+### 15. **data_generation/README.md** - Data Generation Process
 **Diagram Type:** Flowchart  
 **Location:** Data generation overview  
 **Rationale:** Show synthetic data generation workflow.

@@ -133,7 +133,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Docker Desktop as optional tool
   - Dev Containers extension
   - Dev Container quick start guide
-- **data-generation/README.md** - Added:
+- **data_generation/README.md** - Added:
   - Docker quick start (primary option)
   - Sample data usage guide
   - Docker reference section
@@ -185,7 +185,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - 09-advanced-ai-ml
 
 #### Data Generation
-- **data-generation/** - Synthetic data generators
+- **data_generation/** - Synthetic data generators
   - Slot Machine telemetry generator
   - Table Game transaction generator
   - Player Profile generator

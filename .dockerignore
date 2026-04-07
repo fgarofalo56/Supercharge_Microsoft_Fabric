@@ -103,7 +103,7 @@ desktop.ini
 # Generated Data (Large Files)
 # -----------------------------------------------------------------------------
 output/
-data-generation/output/
+data_generation/output/
 sample-data/
 *.parquet
 *.csv

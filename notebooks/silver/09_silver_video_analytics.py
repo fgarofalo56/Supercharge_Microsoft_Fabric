@@ -21,8 +21,28 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    array,
+    array_compact,
+    coalesce,
+    col,
+    count,
+    create_map,
+    current_timestamp,
+    dayofweek,
+    filter,
+    grouping,
+    hour,
+    lit,
+    lower,
+    minute,
+    to_date,
+    to_timestamp,
+    trim,
+    upper,
+    when,
+)
+from pyspark.sql.types import FloatType
 from datetime import datetime
 
 # Parameters (set by pipeline or manual)
@@ -270,52 +290,56 @@ df_silver = df_deduped \
 # COMMAND ----------
 
 # Select final columns for Silver output
-final_columns = [
-    # Core event fields
-    "event_id", "camera_id", "camera_location_clean", "event_type_clean",
-    "timestamp", "event_date", "event_hour", "event_minute",
-    "day_of_week", "is_weekend",
-
-    # Detection fields
-    "confidence_score", "object_class_clean", "object_count",
-    "bounding_box", "track_id",
-
-    # Zone crossing
-    "zone_from", "zone_to",
-
-    # Temporal
-    "dwell_time_seconds",
-
-    # Anomaly
-    "anomaly_type_clean",
-
-    # Alert and severity
-    "alert_level_clean", "alert_severity_score",
-    "is_security_event", "is_critical",
-
-    # Video metadata
-    "frame_number", "video_resolution", "fps",
-    "model_name", "model_version",
-
-    # Data quality
-    "_dq_score", "_dq_flags",
-
-    # Metadata
-    "_silver_timestamp", "_batch_id"
-]
-
-df_final = df_silver.select([col(c) for c in final_columns if c in df_silver.columns])
-
-# Write to Silver layer
-df_final.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .partitionBy("event_date") \
-    .saveAsTable(target_table)
-
-silver_count = df_final.count()
-print(f"Written {silver_count:,} records to {target_table}")
+try:
+    final_columns = [
+        # Core event fields
+        "event_id", "camera_id", "camera_location_clean", "event_type_clean",
+        "timestamp", "event_date", "event_hour", "event_minute",
+        "day_of_week", "is_weekend",
+    
+        # Detection fields
+        "confidence_score", "object_class_clean", "object_count",
+        "bounding_box", "track_id",
+    
+        # Zone crossing
+        "zone_from", "zone_to",
+    
+        # Temporal
+        "dwell_time_seconds",
+    
+        # Anomaly
+        "anomaly_type_clean",
+    
+        # Alert and severity
+        "alert_level_clean", "alert_severity_score",
+        "is_security_event", "is_critical",
+    
+        # Video metadata
+        "frame_number", "video_resolution", "fps",
+        "model_name", "model_version",
+    
+        # Data quality
+        "_dq_score", "_dq_flags",
+    
+        # Metadata
+        "_silver_timestamp", "_batch_id"
+    ]
+    
+    df_final = df_silver.select([col(c) for c in final_columns if c in df_silver.columns])
+    
+    # Write to Silver layer
+    df_final.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .option("overwriteSchema", "true") \
+        .partitionBy("event_date") \
+        .saveAsTable(target_table)
+    
+    silver_count = df_final.count()
+    print(f"Written {silver_count:,} records to {target_table}")
+except Exception as e:
+    print(f"ERROR in lh_silver.silver_video_analytics (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

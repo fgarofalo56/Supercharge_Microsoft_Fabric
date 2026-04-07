@@ -5,14 +5,14 @@ on:
     branches:
       - main
     paths:
-      - 'data-generation/**'
+      - 'data_generation/**'
       - 'validation/**'
       - 'notebooks/**'
       - '*.py'
       - 'requirements*.txt'
   pull_request:
     paths:
-      - 'data-generation/**'
+      - 'data_generation/**'
       - 'validation/**'
       - 'notebooks/**'
       - '*.py'
@@ -40,16 +40,16 @@ jobs:
           pip install -r requirements-dev.txt
 
       - name: Run ruff linter
-        run: python -m ruff check data-generation/ validation/ --config pyproject.toml --output-format=github
+        run: python -m ruff check data_generation/ validation/ --config pyproject.toml --output-format=github
 
-      - name: Run black formatter check
-        run: python -m black --check --diff data-generation/ validation/
+      - name: Run ruff formatter check
+        run: python -m ruff format --check --diff data_generation/ validation/
 
       - name: Run mypy type checking
         continue-on-error: true
         env:
-          MYPYPATH: data-generation
-        run: python -m mypy data-generation/generators/ --ignore-missing-imports --namespace-packages --explicit-package-bases
+          MYPYPATH: data_generation
+        run: python -m mypy data_generation/generators/ --ignore-missing-imports --namespace-packages --explicit-package-bases
 
   security-scan:
     name: Security Scanning
@@ -72,11 +72,11 @@ jobs:
 
       - name: Run bandit security linter
         run: |
-          python -m bandit -r data-generation/generators/ \
+          python -m bandit -r data_generation/generators/ \
             -c bandit.yml \
             --severity-level medium \
             --format json --output bandit-report.json || true
-          python -m bandit -r data-generation/generators/ \
+          python -m bandit -r data_generation/generators/ \
             -c bandit.yml \
             --severity-level high
 
@@ -115,12 +115,12 @@ jobs:
 
       - name: Run Unit Tests
         env:
-          PYTHONPATH: data-generation
+          PYTHONPATH: data_generation
         run: |
           pytest validation/unit_tests/ \
             -v \
             --tb=short \
-            --cov=data-generation/generators \
+            --cov=data_generation/generators \
             --cov-report=xml \
             --cov-report=html \
             --junitxml=test-results.xml
@@ -160,7 +160,7 @@ jobs:
 
       - name: Test Generators
         env:
-          PYTHONPATH: data-generation
+          PYTHONPATH: data_generation
         run: |
           # Test each generator can produce valid output
           python -c "
@@ -191,7 +191,7 @@ jobs:
           import json
           from pathlib import Path
 
-          schema_dir = Path('data-generation/schemas')
+          schema_dir = Path('data_generation/schemas')
           for schema_file in schema_dir.glob('*.json'):
               with open(schema_file) as f:
                   schema = json.load(f)
@@ -210,33 +210,29 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
-        run: |
-          pip install nbformat nbconvert
-
-      - name: Validate Notebook Syntax
+      - name: Validate Notebook Python Syntax
         run: |
           python -c "
-          import nbformat
+          import py_compile
           from pathlib import Path
 
-          notebooks = list(Path('notebooks').rglob('*.ipynb'))
+          # Notebooks are .py files with Databricks magic commands
+          notebooks = list(Path('notebooks').rglob('*.py'))
           errors = []
 
           for nb_path in notebooks:
               try:
-                  with open(nb_path) as f:
-                      nb = nbformat.read(f, as_version=4)
+                  py_compile.compile(str(nb_path), doraise=True)
                   print(f'✅ Valid: {nb_path}')
-              except Exception as e:
-                  errors.append(f'❌ Invalid: {nb_path} - {e}')
+              except py_compile.PyCompileError as e:
+                  errors.append(f'❌ Syntax error: {nb_path} - {e}')
 
           if errors:
               for e in errors:
                   print(e)
               exit(1)
 
-          print(f'All {len(notebooks)} notebooks are valid')
+          print(f'All {len(notebooks)} notebook .py files have valid syntax')
           "
 
   great-expectations:
@@ -255,13 +251,40 @@ jobs:
       - name: Install dependencies
         run: |
           pip install great-expectations pandas
+          pip install -r requirements.txt
+
+      - name: Generate sample data for validation
+        env:
+          PYTHONPATH: data_generation
+        run: |
+          python -c "
+          from generators.slot_machine_generator import SlotMachineGenerator
+          from generators.player_generator import PlayerGenerator
+          from generators.financial_generator import FinancialGenerator
+          from pathlib import Path
+
+          output_dir = Path('data_generation/output')
+          output_dir.mkdir(parents=True, exist_ok=True)
+
+          # Generate small samples for GE validation
+          slot_gen = SlotMachineGenerator(seed=42)
+          slot_gen.to_parquet(slot_gen.generate(200, show_progress=False), output_dir / 'bronze_slot_telemetry.parquet')
+
+          player_gen = PlayerGenerator(seed=42)
+          player_gen.to_parquet(player_gen.generate(100, show_progress=False), output_dir / 'bronze_player_profiles.parquet')
+
+          fin_gen = FinancialGenerator(seed=42)
+          fin_gen.to_parquet(fin_gen.generate(200, show_progress=False), output_dir / 'bronze_financial_transactions.parquet')
+
+          print('Generated sample data for GE validation')
+          "
 
       - name: Run GE Checkpoints
         run: |
           cd validation/great_expectations
 
           # Run validation if sample data exists
-          if [ -d "../../data-generation/output" ]; then
+          if [ -d "../../data_generation/output" ]; then
             great_expectations checkpoint run bronze_checkpoint || echo "No data to validate"
           else
             echo "No sample data found - skipping GE validation"

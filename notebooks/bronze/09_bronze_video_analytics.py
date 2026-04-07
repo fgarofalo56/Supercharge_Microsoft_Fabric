@@ -29,12 +29,19 @@ from pyspark.sql.functions import (
     current_timestamp, lit, input_file_name,
     col, to_timestamp, when, count
 )
-from pyspark.sql.types import *
+from pyspark.sql.types import (
+    FloatType,
+    IntegerType,
+    Row,
+    StringType,
+    StructField,
+    StructType,
+    TimestampType,
+)
 from datetime import datetime
 import uuid
 
 # Configuration
-LAKEHOUSE_PATH = "abfss://lh_bronze@onelake.dfs.fabric.microsoft.com"
 SOURCE_PATH = "Files/landing/video_analytics/"
 TARGET_TABLE = "lh_bronze.bronze_video_analytics"
 BATCH_ID = datetime.now().strftime("%Y%m%d_%H%M%S")

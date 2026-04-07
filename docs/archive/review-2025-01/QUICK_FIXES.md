@@ -36,7 +36,7 @@ git grep -l "Supercharge" | xargs sed -i 's/Supercharge/Supercharge/g'
 - **Line 150:** Cuts off at "Option A: Generate and Upload"
 - **Missing:** Remaining upload steps, notebook instructions, verification
 
-#### data-generation/README.md
+#### data_generation/README.md
 - **Line 100:** Default Volumes table incomplete
 - **Missing:** Remaining table rows, example outputs
 
@@ -51,7 +51,7 @@ git grep -l "Supercharge" | xargs sed -i 's/Supercharge/Supercharge/g'
 **Example:**
 ```markdown
 # Current (CONTRIBUTING.md line 3)
-> **[Home](README.md)** | **[Tutorials](tutorials/)** | **[Data Generation](data-generation/)** | **[Validation](validation/)**
+> **[Home](README.md)** | **[Tutorials](tutorials/)** | **[Data Generation](data_generation/)** | **[Validation](validation/)**
 
 # Current (poc-agenda/README.md line 3)
 > 🏠 Home > 📆 POC Agenda
@@ -76,7 +76,7 @@ git grep -l "Supercharge" | xargs sed -i 's/Supercharge/Supercharge/g'
 - `docs/DEPLOYMENT.md` - Deployment troubleshooting
 - `tutorials/00-environment-setup/README.md` - Setup issues
 - `tutorials/01-bronze-layer/README.md` - Ingestion issues
-- `data-generation/README.md` - Generation errors
+- `data_generation/README.md` - Generation errors
 
 **Template:**
 ```markdown
@@ -137,7 +137,7 @@ git grep -l "Supercharge" | xargs sed -i 's/Supercharge/Supercharge/g'
 # CONTRIBUTING.md line 1
 # :handshake: Contributing Guide
 
-# data-generation/README.md line 1
+# data_generation/README.md line 1
 # :slot_machine: Data Generation
 ```
 
@@ -153,7 +153,7 @@ git grep -l "Supercharge" | xargs sed -i 's/Supercharge/Supercharge/g'
 
 ### 7. Add Missing Headers
 
-**data-generation/README.md** - Complete the table at line 100:
+**data_generation/README.md** - Complete the table at line 100:
 
 ```markdown
 | Data Type | Records | Est. Size | Bronze Table |

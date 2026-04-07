@@ -16,11 +16,10 @@ import sys
 from pathlib import Path
 
 import pandas as pd
-import pytest
 
-# Ensure the data-generation package is importable
+# Ensure the data_generation package is importable
 PROJECT_ROOT = Path(__file__).parent.parent.parent.parent
-sys.path.insert(0, str(PROJECT_ROOT / "data-generation"))
+sys.path.insert(0, str(PROJECT_ROOT / "data_generation"))
 
 
 # ---------------------------------------------------------------------------

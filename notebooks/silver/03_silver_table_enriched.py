@@ -12,8 +12,24 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    abs,
+    array,
+    array_compact,
+    coalesce,
+    col,
+    count,
+    current_timestamp,
+    filter,
+    lag,
+    lit,
+    row_number,
+    session_window,
+    sum,
+    unix_timestamp,
+    when,
+    window,
+)
 from pyspark.sql.window import Window
 from datetime import datetime
 
@@ -151,14 +167,18 @@ df_silver = df_with_flags \
 # COMMAND ----------
 
 # Write to Silver (merge for idempotency)
-df_silver.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("event_date", "game_type") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(target_table)
-
-print(f"Written {df_silver.count():,} records to {target_table}")
+try:
+    df_silver.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .partitionBy("event_date", "game_type") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(target_table)
+    
+    print(f"Written {df_silver.count():,} records to {target_table}")
+except Exception as e:
+    print(f"ERROR in lh_silver.silver_table_enriched (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

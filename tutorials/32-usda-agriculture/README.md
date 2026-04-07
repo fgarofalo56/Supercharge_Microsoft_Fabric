@@ -260,10 +260,10 @@ print(f"Recall classes: {food_df['recall_class'].value_counts().to_dict()}")
 print(f"Product types: {food_df['product_type'].nunique()} unique")
 
 # Export to Parquet for notebook consumption
-crop_df.to_parquet("data-generation/output/usda_crop_production.parquet", index=False)
-food_df.to_parquet("data-generation/output/usda_food_safety.parquet", index=False)
+crop_df.to_parquet("data_generation/output/usda_crop_production.parquet", index=False)
+food_df.to_parquet("data_generation/output/usda_food_safety.parquet", index=False)
 
-print("\nParquet files written to data-generation/output/")
+print("\nParquet files written to data_generation/output/")
 ```
 
 **Expected output:**
@@ -279,7 +279,7 @@ Food safety records: 5,000
 Recall classes: {'Class I': ~2750, 'Class II': ~1750, 'Class III': ~500}
 Product types: 7 unique
 
-Parquet files written to data-generation/output/
+Parquet files written to data_generation/output/
 ```
 
 > **💡 Generator Details**
@@ -288,7 +288,7 @@ Parquet files written to data-generation/output/
 > - `crop_production` -- NASS QuickStats-style records with commodity, year, state FIPS, county FIPS (for county-level aggregation), statistic category (AREA PLANTED, AREA HARVESTED, YIELD, PRODUCTION, PRICE RECEIVED), value, unit, source (SURVEY/CENSUS), and aggregation level (NATIONAL/STATE/COUNTY)
 > - `food_safety` -- FSIS recall-style records with recall number (FSIS-YYYY-NNN format), recall date, product type, recall class (I/II/III), reason (15 possible reasons including pathogen contamination and undeclared allergens), risk level, company, establishment number, pounds recalled, and distribution scope
 >
-> See [`data-generation/generators/federal/usda_generator.py`](../../data-generation/generators/federal/usda_generator.py) for the full implementation.
+> See [`data_generation/generators/federal/usda_generator.py`](../../data_generation/generators/federal/usda_generator.py) for the full implementation.
 
 ### Option B: Real Open Data Download
 
@@ -314,16 +314,16 @@ The NASS QuickStats API requires a free API key:
 # Download NASS crop production data (requires API key)
 python -m data_generation.open_data.usda_download --dataset nass \
     --api-key YOUR_NASS_API_KEY \
-    --output-dir data-generation/output/
+    --output-dir data_generation/output/
 
 # Download FSIS recall data (no API key required)
 python -m data_generation.open_data.usda_download --dataset fsis \
-    --output-dir data-generation/output/
+    --output-dir data_generation/output/
 
 # Or download both at once
 python -m data_generation.open_data.usda_download --dataset all \
     --api-key YOUR_NASS_API_KEY \
-    --output-dir data-generation/output/
+    --output-dir data_generation/output/
 ```
 
 The download script produces Parquet files with the same column names and types as the synthetic generator, so all downstream notebooks work with either data source.
@@ -333,8 +333,8 @@ The download script produces Parquet files with the same column names and types 
 ```python
 import pandas as pd
 
-crop_df = pd.read_parquet("data-generation/output/usda_crop_production.parquet")
-food_df = pd.read_parquet("data-generation/output/usda_food_safety.parquet")
+crop_df = pd.read_parquet("data_generation/output/usda_crop_production.parquet")
+food_df = pd.read_parquet("data_generation/output/usda_food_safety.parquet")
 
 print(f"Crop production: {len(crop_df):,} records, {crop_df['commodity'].nunique()} commodities")
 print(f"Food safety: {len(food_df):,} records, {food_df['recall_class'].nunique()} recall classes")
@@ -342,11 +342,11 @@ print(f"Food safety: {len(food_df):,} records, {food_df['recall_class'].nunique(
 
 > **💡 Data Source Configuration**
 >
-> Full details on available USDA datasets, API endpoints, and download options are documented in [`data-generation/config/federal_datasets.yaml`](../../data-generation/config/federal_datasets.yaml) under the `usda` agency section.
+> Full details on available USDA datasets, API endpoints, and download options are documented in [`data_generation/config/federal_datasets.yaml`](../../data_generation/config/federal_datasets.yaml) under the `usda` agency section.
 
 ### Verification Checkpoint
 
-Before proceeding, confirm you have two Parquet files in `data-generation/output/`:
+Before proceeding, confirm you have two Parquet files in `data_generation/output/`:
 
 | File | Expected Records | Key Columns |
 |------|-----------------|-------------|
@@ -1248,9 +1248,9 @@ Continue your learning journey:
 | Bronze Notebook | [`notebooks/bronze/12_bronze_usda.py`](../../notebooks/bronze/12_bronze_usda.py) |
 | Silver Notebook | [`notebooks/silver/12_silver_usda.py`](../../notebooks/silver/12_silver_usda.py) |
 | Gold Notebook | [`notebooks/gold/12_gold_usda_analytics.py`](../../notebooks/gold/12_gold_usda_analytics.py) |
-| Data Generator | [`data-generation/generators/federal/usda_generator.py`](../../data-generation/generators/federal/usda_generator.py) |
-| Open Data Download | [`data-generation/open_data/usda_download.py`](../../data-generation/open_data/usda_download.py) |
-| Dataset Config | [`data-generation/config/federal_datasets.yaml`](../../data-generation/config/federal_datasets.yaml) |
+| Data Generator | [`data_generation/generators/federal/usda_generator.py`](../../data_generation/generators/federal/usda_generator.py) |
+| Open Data Download | [`data_generation/open_data/usda_download.py`](../../data_generation/open_data/usda_download.py) |
+| Dataset Config | [`data_generation/config/federal_datasets.yaml`](../../data_generation/config/federal_datasets.yaml) |
 | Unit Tests | [`validation/unit_tests/federal/test_usda_generator.py`](../../validation/unit_tests/federal/test_usda_generator.py) |
 
 ---

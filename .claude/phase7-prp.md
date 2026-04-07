@@ -69,7 +69,7 @@ notebooks/
     ├── 07_iot_hub_ingestion.py
     └── 08_slot_machine_iot_simulator.py
 
-data-generation/
+data_generation/
 ├── generators/
 │   ├── federal/                      # Agency-specific generators
 │   │   ├── usda_generator.py         # Crop data, food safety, SNAP

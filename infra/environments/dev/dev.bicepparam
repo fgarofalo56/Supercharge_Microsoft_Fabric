@@ -8,8 +8,8 @@ param environment = 'dev'
 param location = 'eastus2'
 param projectPrefix = 'fabricpoc'
 
-// Use smaller SKU for dev to reduce costs
-param fabricCapacitySku = 'F64'
+// Use smaller SKU for dev to reduce costs (~$250/month vs ~$8,000/month for F64)
+param fabricCapacitySku = 'F2'
 
 // Admin email for Fabric capacity alerts and notifications
 param fabricAdminEmail = 'frgarofa@microsoft.com'

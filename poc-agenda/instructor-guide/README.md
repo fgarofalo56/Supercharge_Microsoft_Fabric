@@ -102,7 +102,7 @@ Workloads:
 ### Generate All Data
 
 ```bash
-cd data-generation
+cd data_generation
 
 # Install dependencies
 pip install -r requirements.txt

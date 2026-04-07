@@ -24,8 +24,32 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    avg,
+    coalesce,
+    col,
+    collect_set,
+    count,
+    countDistinct,
+    current_timestamp,
+    days,
+    desc,
+    filter,
+    greatest,
+    lag,
+    least,
+    lit,
+    max,
+    min,
+    rank,
+    round,
+    row_number,
+    slice,
+    sum,
+    when,
+    window,
+    year,
+)
 from pyspark.sql.window import Window
 from datetime import datetime
 
@@ -164,14 +188,18 @@ df_weather_summary = df_weather_daily \
 
 # COMMAND ----------
 
-df_weather_summary.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("station_state") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_WEATHER_SUMMARY)
-
-print(f"Written {df_weather_summary.count():,} records to {TARGET_WEATHER_SUMMARY}")
+try:
+    df_weather_summary.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .partitionBy("station_state") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(TARGET_WEATHER_SUMMARY)
+    
+    print(f"Written {df_weather_summary.count():,} records to {TARGET_WEATHER_SUMMARY}")
+except Exception as e:
+    print(f"ERROR in unknown (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

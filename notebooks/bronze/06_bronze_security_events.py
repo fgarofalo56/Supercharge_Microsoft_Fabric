@@ -35,7 +35,7 @@ from pyspark.sql.functions import (
     col, to_date, hour, when, coalesce,
     sum as _sum, count as _count
 )
-from pyspark.sql.types import *
+from pyspark.sql.types import BooleanType, DoubleType, StringType, StructField, StructType, TimestampType
 from datetime import datetime
 
 # Configuration
@@ -74,7 +74,7 @@ print(f"Valid Event Types: {len(VALID_EVENT_TYPES)} types defined")
 # MAGIC %md
 # MAGIC ## Define Schema
 # MAGIC
-# MAGIC Explicit schema matching `data-generation/schemas/security_events_schema.json`.
+# MAGIC Explicit schema matching `data_generation/schemas/security_events_schema.json`.
 # MAGIC Comprehensive field definitions for the security domain.
 
 # COMMAND ----------

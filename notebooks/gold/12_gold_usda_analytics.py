@@ -24,8 +24,35 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    avg,
+    coalesce,
+    col,
+    collect_list,
+    concat_ws,
+    count,
+    countDistinct,
+    current_timestamp,
+    date_format,
+    desc,
+    desc_nulls_last,
+    explode,
+    filter,
+    lag,
+    lit,
+    max,
+    min,
+    months,
+    quarter,
+    round,
+    row_number,
+    sum,
+    to_date,
+    when,
+    window,
+    year,
+    years,
+)
 from pyspark.sql.window import Window
 from datetime import datetime
 
@@ -211,25 +238,29 @@ df_crop_flagged = df_crop_ranked \
 
 # COMMAND ----------
 
-df_crop_summary = df_crop_flagged \
-    .withColumn("_gold_timestamp", current_timestamp()) \
-    .withColumn("_batch_id", lit(batch_id)) \
-    .select(
-        "commodity", "year", "state_name", "agg_level_desc",
-        "total_production", "avg_yield", "total_area_planted",
-        "total_area_harvested", "avg_price_received",
-        "year_over_year_change_pct", "commodity_rank", "performance_flag",
-        "avg_data_quality", "source_record_count",
-        "_gold_timestamp", "_batch_id"
-    )
-
-df_crop_summary.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_CROP_SUMMARY)
-
-print(f"Written {df_crop_summary.count():,} records to {TARGET_CROP_SUMMARY}")
+try:
+    df_crop_summary = df_crop_flagged \
+        .withColumn("_gold_timestamp", current_timestamp()) \
+        .withColumn("_batch_id", lit(batch_id)) \
+        .select(
+            "commodity", "year", "state_name", "agg_level_desc",
+            "total_production", "avg_yield", "total_area_planted",
+            "total_area_harvested", "avg_price_received",
+            "year_over_year_change_pct", "commodity_rank", "performance_flag",
+            "avg_data_quality", "source_record_count",
+            "_gold_timestamp", "_batch_id"
+        )
+    
+    df_crop_summary.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(TARGET_CROP_SUMMARY)
+    
+    print(f"Written {df_crop_summary.count():,} records to {TARGET_CROP_SUMMARY}")
+except Exception as e:
+    print(f"ERROR in unknown (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

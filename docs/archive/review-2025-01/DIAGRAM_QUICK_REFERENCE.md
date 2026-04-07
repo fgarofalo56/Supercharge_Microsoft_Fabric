@@ -29,7 +29,7 @@
 | 12 | `docs/COST_ESTIMATION.md` | Decision Tree | **Cost Optimization Flow** | Choose right cost strategy |
 | 13 | `tutorials/05-direct-lake-powerbi/README.md` | Architecture | **Direct Lake Architecture** | Zero-copy Power BI connection |
 | 14 | `tutorials/08-database-mirroring/README.md` | Sequence | **CDC Mirroring Flow** | SQL Server to Fabric replication |
-| 15 | `data-generation/README.md` | Flowchart | **Data Generation Process** | Synthetic data creation workflow |
+| 15 | `data_generation/README.md` | Flowchart | **Data Generation Process** | Synthetic data creation workflow |
 
 ---
 
@@ -130,7 +130,7 @@ docs/diagrams/
 │   └── mirroring-flow.md
 ├── pipelines/
 │   ├── etl-schedule.md
-│   └── data-generation.md
+│   └── data_generation.md
 ├── workshop/
 │   ├── 3-day-overview.md
 │   ├── day1-journey.md
@@ -163,7 +163,7 @@ docs/diagrams/
 - [ ] Create cost optimization tree (COST_ESTIMATION.md)
 - [ ] Add Direct Lake architecture (Tutorial 05)
 - [ ] Design mirroring flow (Tutorial 08)
-- [ ] Build data generation flowchart (data-generation/)
+- [ ] Build data generation flowchart (data_generation/)
 
 ### Phase 4: Enhancements (As Needed)
 - [ ] ML pipeline diagrams

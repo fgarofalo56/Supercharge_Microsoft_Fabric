@@ -8,7 +8,6 @@ pytest-asyncio>=0.23.0
 
 # Linting & Formatting
 ruff>=0.2.0
-black>=24.0.0
 mypy>=1.8.0
 
 # Security Scanning
@@ -23,3 +22,6 @@ types-python-dateutil>=2.8.0
 jupyter>=1.0.0
 ipykernel>=6.29.0
 nbformat>=5.9.0
+
+# Dependency Management
+pip-tools>=7.0.0

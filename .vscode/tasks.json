@@ -15,7 +15,7 @@
       "type": "shell",
       "command": "python",
       "args": [
-        "data-generation/generate.py",
+        "data_generation/generate.py",
         "--type", "all",
         "--records", "1000",
         "--output", ".data/raw"
@@ -34,7 +34,7 @@
       "type": "shell",
       "command": "python",
       "args": [
-        "data-generation/generate.py",
+        "data_generation/generate.py",
         "--type", "slot_events",
         "--records", "${input:recordCount}",
         "--output", ".data/raw"
@@ -52,7 +52,7 @@
       "type": "shell",
       "command": "python",
       "args": [
-        "data-generation/generate.py",
+        "data_generation/generate.py",
         "--type", "player_profiles",
         "--records", "${input:recordCount}",
         "--output", ".data/raw"
@@ -70,7 +70,7 @@
       "type": "shell",
       "command": "python",
       "args": [
-        "data-generation/generate.py",
+        "data_generation/generate.py",
         "--type", "financial_transactions",
         "--records", "${input:recordCount}",
         "--output", ".data/raw"
@@ -88,7 +88,7 @@
       "type": "shell",
       "command": "python",
       "args": [
-        "data-generation/generate.py",
+        "data_generation/generate.py",
         "--type", "table_games",
         "--records", "${input:recordCount}",
         "--output", ".data/raw"
@@ -190,7 +190,7 @@
         "-m", "pytest",
         "validation/",
         "-v",
-        "--cov=data-generation",
+        "--cov=data_generation",
         "--cov-report=html",
         "--cov-report=term-missing"
       ],
@@ -397,7 +397,7 @@
       "command": "python",
       "args": [
         "-m", "mypy",
-        "data-generation/",
+        "data_generation/",
         "--ignore-missing-imports"
       ],
       "group": "build",

@@ -27,7 +27,7 @@ docs/               - Architecture, deployment, best practices, feature docs
   features/         - Fabric IQ, RTI, Copilot, Data Mesh guides
 tutorials/          - 37 step-by-step tutorials (00-36)
 poc-agenda/         - 3-day workshop materials
-data-generation/    - 16 Python data generators (casino, federal, streaming, analytics)
+data_generation/    - 16 Python data generators (casino, federal, streaming, analytics)
   open_data/        - Real federal dataset download scripts (USDA, SBA, NOAA, EPA, DOI)
 notebooks/          - 50+ Fabric-importable notebooks (medallion + streaming + federal)
   bronze/           - 16 Bronze ingestion notebooks (casino + 5 federal agencies)
@@ -89,7 +89,7 @@ future-expansions/  - Federal agency & industry expansion documentation
 |------|---------|
 | `infra/main.bicep` | Root IaC orchestration |
 | `infra/modules/fabric/fabric-capacity.bicep` | Fabric F64 deployment |
-| `data-generation/generators/base_generator.py` | Generator base class |
+| `data_generation/generators/base_generator.py` | Generator base class |
 | `notebooks/bronze/01_bronze_slot_telemetry.ipynb` | Primary Bronze pattern |
 
 ## Testing Commands
@@ -157,7 +157,7 @@ Phase 8 expands all 5 federal agencies (USDA, SBA, NOAA, EPA, DOI) to full POC p
 - Purview provides governance and lineage
 - Phase 7 adds HIPAA (Tribal Healthcare), FedRAMP (DOT/FAA), 42 CFR Part 2 compliance
 - Phase 8 adds full medallion notebooks, tutorials, open data scripts, and GE suites for all federal agencies
-- All federal datasets use real, publicly available APIs documented in `data-generation/config/federal_datasets.yaml`
+- All federal datasets use real, publicly available APIs documented in `data_generation/config/federal_datasets.yaml`
 - Each agency supports BOTH synthetic data generation AND real open data downloads
 
 ## Archon Project ID

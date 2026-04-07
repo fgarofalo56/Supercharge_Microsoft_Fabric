@@ -33,7 +33,7 @@ from pyspark.sql.functions import (
     current_timestamp, lit, input_file_name,
     col, to_date, to_timestamp, when, coalesce, sum as _sum, count as _count
 )
-from pyspark.sql.types import *
+from pyspark.sql.types import BooleanType, DoubleType, StringType, StructField, StructType, TimestampType
 from datetime import datetime
 
 # Configuration
@@ -67,7 +67,7 @@ print(f"Near-CTR Range: ${NEAR_CTR_LOW:,} - ${CTR_THRESHOLD - 0.01:,.2f}")
 # MAGIC %md
 # MAGIC ## Define Schema
 # MAGIC
-# MAGIC Explicit schema matching `data-generation/schemas/financial_transaction_schema.json`.
+# MAGIC Explicit schema matching `data_generation/schemas/financial_transaction_schema.json`.
 
 # COMMAND ----------
 

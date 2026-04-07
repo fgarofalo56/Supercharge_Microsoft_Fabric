@@ -687,7 +687,7 @@ Sample data includes matching schema definitions in `sample-data/schemas/` that 
 
 > 💡 **Pro Tip:** Sample data is perfect for initial exploration and testing notebooks without waiting for data generation. Use it to validate your environment setup before generating full datasets.
 
-For generating larger custom datasets, see [data-generation/README.md](data-generation/README.md).
+For generating larger custom datasets, see [data_generation/README.md](data_generation/README.md).
 
 ---
 
@@ -826,7 +826,7 @@ Supercharge_Microsoft_Fabric/
 │   └── federal-dot-faa/               # DOT/FAA aviation (FedRAMP)
 │
 ├── 📁 poc-agenda/                     # 📅 3-Day workshop materials
-├── 📁 data-generation/                # 🎲 Synthetic data generators
+├── 📁 data_generation/                # 🎲 Synthetic data generators
 ├── 📁 notebooks/                      # 📓 Fabric-importable notebooks
 ├── 📁 validation/                     # ✅ Testing & data quality
 │

@@ -29,8 +29,25 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    array,
+    array_compact,
+    coalesce,
+    col,
+    count,
+    create_map,
+    current_timestamp,
+    desc,
+    filter,
+    lit,
+    max,
+    to_date,
+    trim,
+    upper,
+    when,
+    year,
+)
+from pyspark.sql.types import DecimalType, IntegerType
 from datetime import datetime
 
 # Parameters (set by pipeline or manual)
@@ -364,33 +381,37 @@ df_crop_silver = df_crop_dq \
 
 # COMMAND ----------
 
-crop_columns = [
-    # Core fields
-    "record_id", "commodity", "year",
-    # Geography
-    "state_fips", "state_name_normalized", "county_fips", "county_name",
-    # Statistics
-    "statisticcat_desc", "unit_desc", "value", "cv_percent",
-    "source_desc", "agg_level_desc", "domain_desc", "reference_period_desc",
-    # Data quality
-    "_dq_score", "_dq_flags",
-    # Metadata
-    "_silver_timestamp", "_batch_id",
-]
-
-df_crop_out = df_crop_silver.select(
-    [col(c) for c in crop_columns if c in df_crop_silver.columns]
-)
-
-df_crop_out.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .partitionBy("year") \
-    .saveAsTable(TARGET_CROP)
-
-crop_silver_count = df_crop_out.count()
-print(f"Written {crop_silver_count:,} records to {TARGET_CROP}")
+try:
+    crop_columns = [
+        # Core fields
+        "record_id", "commodity", "year",
+        # Geography
+        "state_fips", "state_name_normalized", "county_fips", "county_name",
+        # Statistics
+        "statisticcat_desc", "unit_desc", "value", "cv_percent",
+        "source_desc", "agg_level_desc", "domain_desc", "reference_period_desc",
+        # Data quality
+        "_dq_score", "_dq_flags",
+        # Metadata
+        "_silver_timestamp", "_batch_id",
+    ]
+    
+    df_crop_out = df_crop_silver.select(
+        [col(c) for c in crop_columns if c in df_crop_silver.columns]
+    )
+    
+    df_crop_out.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .option("overwriteSchema", "true") \
+        .partitionBy("year") \
+        .saveAsTable(TARGET_CROP)
+    
+    crop_silver_count = df_crop_out.count()
+    print(f"Written {crop_silver_count:,} records to {TARGET_CROP}")
+except Exception as e:
+    print(f"ERROR in unknown (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

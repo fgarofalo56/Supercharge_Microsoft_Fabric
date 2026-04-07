@@ -369,7 +369,7 @@
 
 ---
 
-### 10. data-generation/README.md ⭐⭐⭐⭐
+### 10. data_generation/README.md ⭐⭐⭐⭐
 
 **Strengths:**
 - Clear quick start with multiple options
@@ -502,7 +502,7 @@
    - DEPLOYMENT.md (stops at line 100)
    - Tutorial 00 (stops at line 150)
    - Tutorial 01 (stops at line 150)
-   - data-generation/README.md (incomplete table)
+   - data_generation/README.md (incomplete table)
 
 2. **Fix typo:** "Supercharge" → "Supercharge" throughout repository
 
@@ -639,7 +639,7 @@ Create a new `docs/STYLE_GUIDE.md` file with these standards:
 - [ ] Complete DEPLOYMENT.md (section cuts off at line 100)
 - [ ] Complete Tutorial 00 (section cuts off at line 150)
 - [ ] Complete Tutorial 01 (section cuts off at line 150)
-- [ ] Complete data-generation/README.md table
+- [ ] Complete data_generation/README.md table
 - [ ] Link all breadcrumb navigation
 - [ ] Add troubleshooting sections to key documents
 

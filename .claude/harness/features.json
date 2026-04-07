@@ -11,14 +11,14 @@
       "total": 8,
       "completed": 0,
       "items": [
-        {"name": "base_generator", "file": "data-generation/generators/base_generator.py", "status": "pending", "task_id": "2c6a6388-152f-4794-943b-8c2a8429c5d5"},
-        {"name": "slot_machine_generator", "file": "data-generation/generators/slot_machine_generator.py", "status": "pending", "task_id": "1f6d2bf6-1efc-47a2-bfa0-4973fccbfc59"},
-        {"name": "player_generator", "file": "data-generation/generators/player_generator.py", "status": "pending", "task_id": "6e384bc3-1164-4a3c-a5cd-702c9d7c68fc"},
-        {"name": "table_games_generator", "file": "data-generation/generators/table_games_generator.py", "status": "pending", "task_id": "c9e6d325-adcc-4e66-b778-c0b561757b70"},
-        {"name": "financial_generator", "file": "data-generation/generators/financial_generator.py", "status": "pending", "task_id": "ea82e748-9e8c-4513-afb7-ef1972a14248"},
-        {"name": "security_generator", "file": "data-generation/generators/security_generator.py", "status": "pending", "task_id": "00c25fab-78a9-4b76-aa0d-62a3f612824e"},
-        {"name": "compliance_generator", "file": "data-generation/generators/compliance_generator.py", "status": "pending", "task_id": "c6ba3e17-a672-4b41-949b-2c2620269116"},
-        {"name": "event_hub_producer", "file": "data-generation/generators/streaming/event_hub_producer.py", "status": "pending", "task_id": "618bdbbb-58c4-4739-98b1-eee3465a5747"}
+        {"name": "base_generator", "file": "data_generation/generators/base_generator.py", "status": "pending", "task_id": "2c6a6388-152f-4794-943b-8c2a8429c5d5"},
+        {"name": "slot_machine_generator", "file": "data_generation/generators/slot_machine_generator.py", "status": "pending", "task_id": "1f6d2bf6-1efc-47a2-bfa0-4973fccbfc59"},
+        {"name": "player_generator", "file": "data_generation/generators/player_generator.py", "status": "pending", "task_id": "6e384bc3-1164-4a3c-a5cd-702c9d7c68fc"},
+        {"name": "table_games_generator", "file": "data_generation/generators/table_games_generator.py", "status": "pending", "task_id": "c9e6d325-adcc-4e66-b778-c0b561757b70"},
+        {"name": "financial_generator", "file": "data_generation/generators/financial_generator.py", "status": "pending", "task_id": "ea82e748-9e8c-4513-afb7-ef1972a14248"},
+        {"name": "security_generator", "file": "data_generation/generators/security_generator.py", "status": "pending", "task_id": "00c25fab-78a9-4b76-aa0d-62a3f612824e"},
+        {"name": "compliance_generator", "file": "data_generation/generators/compliance_generator.py", "status": "pending", "task_id": "c6ba3e17-a672-4b41-949b-2c2620269116"},
+        {"name": "event_hub_producer", "file": "data_generation/generators/streaming/event_hub_producer.py", "status": "pending", "task_id": "618bdbbb-58c4-4739-98b1-eee3465a5747"}
       ]
     },
     "notebooks_bronze": {
@@ -123,12 +123,12 @@
       "total": 6,
       "completed": 0,
       "items": [
-        {"name": "slot_telemetry_schema", "file": "data-generation/schemas/slot_telemetry_schema.json", "status": "pending"},
-        {"name": "player_profile_schema", "file": "data-generation/schemas/player_profile_schema.json", "status": "pending"},
-        {"name": "compliance_filing_schema", "file": "data-generation/schemas/compliance_filing_schema.json", "status": "pending"},
-        {"name": "financial_transaction_schema", "file": "data-generation/schemas/financial_transaction_schema.json", "status": "pending"},
-        {"name": "table_games_schema", "file": "data-generation/schemas/table_games_schema.json", "status": "pending"},
-        {"name": "security_events_schema", "file": "data-generation/schemas/security_events_schema.json", "status": "pending"}
+        {"name": "slot_telemetry_schema", "file": "data_generation/schemas/slot_telemetry_schema.json", "status": "pending"},
+        {"name": "player_profile_schema", "file": "data_generation/schemas/player_profile_schema.json", "status": "pending"},
+        {"name": "compliance_filing_schema", "file": "data_generation/schemas/compliance_filing_schema.json", "status": "pending"},
+        {"name": "financial_transaction_schema", "file": "data_generation/schemas/financial_transaction_schema.json", "status": "pending"},
+        {"name": "table_games_schema", "file": "data_generation/schemas/table_games_schema.json", "status": "pending"},
+        {"name": "security_events_schema", "file": "data_generation/schemas/security_events_schema.json", "status": "pending"}
       ],
       "task_id": "9eec129c-1c01-4f41-8a21-b8b8aaf25b88"
     }

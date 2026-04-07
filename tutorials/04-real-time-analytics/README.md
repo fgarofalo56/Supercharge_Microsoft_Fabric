@@ -801,7 +801,7 @@ For testing without real Event Hub data, use this Python script to simulate slot
 
 ### 6.1 Create Event Producer
 
-Create file: `data-generation/generators/streaming/event_producer.py`
+Create file: `data_generation/generators/streaming/event_producer.py`
 
 ```python
 """
@@ -950,7 +950,7 @@ if __name__ == "__main__":
 pip install azure-eventhub
 
 # Run the producer
-python data-generation/generators/streaming/event_producer.py
+python data_generation/generators/streaming/event_producer.py
 ```
 
 > **⚠️ Security Note**

@@ -21,8 +21,27 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
+from pyspark.sql.functions import (
+    array,
+    array_compact,
+    coalesce,
+    col,
+    count,
+    create_map,
+    current_timestamp,
+    dayofweek,
+    filter,
+    hour,
+    least,
+    lit,
+    lower,
+    round,
+    to_date,
+    to_timestamp,
+    trim,
+    when,
+)
+from pyspark.sql.types import FloatType, IntegerType
 from datetime import datetime
 
 # Parameters (set by pipeline or manual)
@@ -304,44 +323,48 @@ df_silver = df_deduped \
 # COMMAND ----------
 
 # Select final columns for Silver output
-final_columns = [
-    # Core event fields
-    "event_id", "sensor_id", "sensor_type_clean", "zone_id", "zone_name_clean",
-    "timestamp", "event_date", "event_hour", "day_of_week", "is_weekend",
-
-    # Movement metrics
-    "person_count", "direction_clean", "dwell_time_seconds", "dwell_time_minutes",
-    "velocity_mps", "x_coordinate", "y_coordinate",
-
-    # Zone enrichment
-    "floor_level", "heat_map_cell", "zone_capacity", "zone_category",
-    "occupancy_pct_recalculated", "occupancy_status",
-
-    # Queue metrics
-    "queue_detected", "queue_length", "queue_wait_minutes",
-
-    # Sensor metadata
-    "device_mac_hash", "signal_strength_dbm", "battery_level", "calibration_date",
-
-    # Data quality
-    "_dq_score", "_dq_flags",
-
-    # Metadata
-    "_silver_timestamp", "_batch_id"
-]
-
-df_final = df_silver.select([col(c) for c in final_columns if c in df_silver.columns])
-
-# Write to Silver layer
-df_final.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .partitionBy("event_date") \
-    .saveAsTable(target_table)
-
-silver_count = df_final.count()
-print(f"Written {silver_count:,} records to {target_table}")
+try:
+    final_columns = [
+        # Core event fields
+        "event_id", "sensor_id", "sensor_type_clean", "zone_id", "zone_name_clean",
+        "timestamp", "event_date", "event_hour", "day_of_week", "is_weekend",
+    
+        # Movement metrics
+        "person_count", "direction_clean", "dwell_time_seconds", "dwell_time_minutes",
+        "velocity_mps", "x_coordinate", "y_coordinate",
+    
+        # Zone enrichment
+        "floor_level", "heat_map_cell", "zone_capacity", "zone_category",
+        "occupancy_pct_recalculated", "occupancy_status",
+    
+        # Queue metrics
+        "queue_detected", "queue_length", "queue_wait_minutes",
+    
+        # Sensor metadata
+        "device_mac_hash", "signal_strength_dbm", "battery_level", "calibration_date",
+    
+        # Data quality
+        "_dq_score", "_dq_flags",
+    
+        # Metadata
+        "_silver_timestamp", "_batch_id"
+    ]
+    
+    df_final = df_silver.select([col(c) for c in final_columns if c in df_silver.columns])
+    
+    # Write to Silver layer
+    df_final.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .option("overwriteSchema", "true") \
+        .partitionBy("event_date") \
+        .saveAsTable(target_table)
+    
+    silver_count = df_final.count()
+    print(f"Written {silver_count:,} records to {target_table}")
+except Exception as e:
+    print(f"ERROR in lh_silver.silver_people_movement (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

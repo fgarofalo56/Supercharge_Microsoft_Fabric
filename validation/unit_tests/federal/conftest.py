@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent.parent
-sys.path.insert(0, str(PROJECT_ROOT / "data-generation"))
+sys.path.insert(0, str(PROJECT_ROOT / "data_generation"))
 
 
 @pytest.fixture

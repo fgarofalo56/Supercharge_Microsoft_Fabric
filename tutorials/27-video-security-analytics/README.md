@@ -571,7 +571,7 @@ The Bronze layer stores **raw video analytics events** exactly as received from 
 
 ### 4.1 Bronze Table Schema
 
-The schema aligns with the project's [`video_event_schema.json`](../../data-generation/schemas/analytics/video_event_schema.json):
+The schema aligns with the project's [`video_event_schema.json`](../../data_generation/schemas/analytics/video_event_schema.json):
 
 ```python
 # Fabric Notebook: 01_bronze_video_security_events.py
@@ -592,7 +592,7 @@ from pyspark.sql.types import (
 spark = SparkSession.builder.getOrCreate()
 
 # ------------------------------------------------------------
-# Schema: matches data-generation/schemas/analytics/video_event_schema.json
+# Schema: matches data_generation/schemas/analytics/video_event_schema.json
 # ------------------------------------------------------------
 BRONZE_SCHEMA = StructType([
     StructField("event_id", StringType(), nullable=False),
@@ -1332,7 +1332,7 @@ VideoSecurityEvents
 
 9. **Retain Bronze data for compliance.** Casino surveillance footage retention requirements vary by jurisdiction (typically 7-30 days for video, 1 year for metadata). Configure Bronze Delta table retention to meet your state gaming commission requirements.
 
-10. **Test with the data generator.** Use the included [`video_analytics_generator.py`](../../data-generation/generators/analytics/video_analytics_generator.py) to produce realistic synthetic events for development and testing without requiring physical camera infrastructure.
+10. **Test with the data generator.** Use the included [`video_analytics_generator.py`](../../data_generation/generators/analytics/video_analytics_generator.py) to produce realistic synthetic events for development and testing without requiring physical camera infrastructure.
 
 ---
 
@@ -1409,8 +1409,8 @@ Continue your learning journey:
 
 | Resource | Description |
 |----------|-------------|
-| [`data-generation/schemas/analytics/video_event_schema.json`](../../data-generation/schemas/analytics/video_event_schema.json) | Video event JSON schema definition |
-| [`data-generation/generators/analytics/video_analytics_generator.py`](../../data-generation/generators/analytics/video_analytics_generator.py) | Synthetic video event generator |
+| [`data_generation/schemas/analytics/video_event_schema.json`](../../data_generation/schemas/analytics/video_event_schema.json) | Video event JSON schema definition |
+| [`data_generation/generators/analytics/video_analytics_generator.py`](../../data_generation/generators/analytics/video_analytics_generator.py) | Synthetic video event generator |
 | [`validation/unit_tests/analytics/test_video_analytics_generator.py`](../../validation/unit_tests/analytics/test_video_analytics_generator.py) | Unit tests for video generator |
 | [`future-expansions/video-security-geospatial-iot-research.md`](../../future-expansions/video-security-geospatial-iot-research.md) | Research notes and dataset references |
 

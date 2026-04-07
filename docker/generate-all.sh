@@ -142,7 +142,7 @@ START_TIME=$(date +%s)
 # -----------------------------------------------------------------------------
 # Generate Data
 # -----------------------------------------------------------------------------
-# Note: In Docker, data-generation is copied as data_generation for valid Python imports
+# Note: In Docker, data_generation is copied as data_generation for valid Python imports
 GENERATE_SCRIPT="/app/data_generation/generate.py"
 
 echo "[1/6] Generating Slot Machine Telemetry..."

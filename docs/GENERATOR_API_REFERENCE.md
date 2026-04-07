@@ -4,7 +4,7 @@
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue) ![Python](https://img.shields.io/badge/python-3.11%2B-green) ![Generators](https://img.shields.io/badge/generators-19-orange)
 
-**TL;DR** -- This document covers all 19 data generators in the `data-generation/generators/` package. Every generator inherits from `BaseGenerator`, which provides reproducible seeding, output serialization (DataFrame, Parquet, JSON), batch iteration, and PII masking helpers. Generators span four domains: Casino/Gaming (6), Federal Agency (7), Analytics (3), and Streaming (3).
+**TL;DR** -- This document covers all 19 data generators in the `data_generation/generators/` package. Every generator inherits from `BaseGenerator`, which provides reproducible seeding, output serialization (DataFrame, Parquet, JSON), batch iteration, and PII masking helpers. Generators span four domains: Casino/Gaming (6), Federal Agency (7), Analytics (3), and Streaming (3).
 
 ---
 
@@ -41,7 +41,7 @@
 
 ## # BaseGenerator Interface
 
-**Module:** `data-generation/generators/base_generator.py`
+**Module:** `data_generation/generators/base_generator.py`
 **Type:** Abstract base class (ABC)
 
 All generators inherit from `BaseGenerator`. It provides seed management, output serialization, batch iteration, and helper utilities.
@@ -158,7 +158,7 @@ Six generators covering the core casino/gaming domain: slot telemetry, player pr
 
 ### SlotMachineGenerator
 
-**Module:** `data-generation/generators/slot_machine_generator.py`
+**Module:** `data_generation/generators/slot_machine_generator.py`
 **Purpose:** Generates SAS-protocol slot machine telemetry events.
 
 #### Constructor
@@ -211,7 +211,7 @@ gen.to_parquet(df, "output/slot_telemetry.parquet", partition_cols=["zone"])
 
 ### PlayerGenerator
 
-**Module:** `data-generation/generators/player_generator.py`
+**Module:** `data_generation/generators/player_generator.py`
 **Purpose:** Generates player profiles with loyalty tiers and PII handling.
 
 #### Constructor
@@ -261,7 +261,7 @@ players_df, visits_df = gen.generate_with_history(500, history_days=60)
 
 ### FinancialGenerator
 
-**Module:** `data-generation/generators/financial_generator.py`
+**Module:** `data_generation/generators/financial_generator.py`
 **Purpose:** Generates cage and financial transaction data with CTR and SAR flagging.
 
 #### Constructor
@@ -290,7 +290,7 @@ No additional parameters beyond `BaseGenerator`.
 
 ### ComplianceGenerator
 
-**Module:** `data-generation/generators/compliance_generator.py`
+**Module:** `data_generation/generators/compliance_generator.py`
 **Purpose:** Generates CTR, SAR, and W-2G regulatory filings.
 
 #### Constructor
@@ -340,7 +340,7 @@ def generate_structuring_pattern(
 
 ### SecurityGenerator
 
-**Module:** `data-generation/generators/security_generator.py`
+**Module:** `data_generation/generators/security_generator.py`
 **Purpose:** Generates security and surveillance events including access control, camera alerts, and incident reports.
 
 #### Constructor
@@ -374,7 +374,7 @@ SecurityGenerator(
 
 ### TableGamesGenerator
 
-**Module:** `data-generation/generators/table_games_generator.py`
+**Module:** `data_generation/generators/table_games_generator.py`
 **Purpose:** Generates table game transactions, player ratings, and dealer assignments.
 
 #### Constructor
@@ -417,7 +417,7 @@ Seven generators covering federal agency data: USDA, SBA, NOAA, EPA, DOI, Tribal
 
 ### USDAGenerator
 
-**Module:** `data-generation/generators/federal/usda_generator.py`
+**Module:** `data_generation/generators/federal/usda_generator.py`
 **Domains:** `crop_production` (default), `food_safety`
 
 #### Constructor
@@ -448,7 +448,7 @@ Key fields: `recall_id`, `recall_number`, `recall_date`, `product_type`, `recall
 
 ### SBAGenerator
 
-**Module:** `data-generation/generators/federal/sba_generator.py`
+**Module:** `data_generation/generators/federal/sba_generator.py`
 **Domains:** `ppp`, `7a`, `disaster`, `sbir`
 
 #### Constructor
@@ -480,7 +480,7 @@ Key fields: `loan_id`, `program_type`, `loan_amount`, `approval_date`, `borrower
 
 ### NOAAGenerator
 
-**Module:** `data-generation/generators/federal/noaa_generator.py`
+**Module:** `data_generation/generators/federal/noaa_generator.py`
 **Domains:** `weather` (default), `storm`
 
 #### Constructor
@@ -511,7 +511,7 @@ The `generate()` method accepts a `domain` parameter (unlike base class).
 
 ### EPAGenerator
 
-**Module:** `data-generation/generators/federal/epa_generator.py`
+**Module:** `data_generation/generators/federal/epa_generator.py`
 **Domains:** `air_quality` (default), `water_quality`
 
 #### Constructor
@@ -553,7 +553,7 @@ Contaminants: `Arsenic`, `Lead`, `Nitrate`, `Fluoride`, `Copper`, `Coliform`, `T
 
 ### DOIGenerator
 
-**Module:** `data-generation/generators/federal/doi_generator.py`
+**Module:** `data_generation/generators/federal/doi_generator.py`
 **Domains:** `earthquake` (default), `land_use`
 
 #### Constructor
@@ -588,7 +588,7 @@ Managing agencies: `BLM` (35%), `USFS` (25%), `NPS` (15%), `FWS` (10%), `BOR` (8
 
 ### TribalHealthcareGenerator
 
-**Module:** `data-generation/generators/federal/tribal_healthcare_generator.py`
+**Module:** `data_generation/generators/federal/tribal_healthcare_generator.py`
 **Domains:** Single domain (IHS healthcare encounters)
 
 #### Constructor
@@ -634,7 +634,7 @@ Key fields: `record_id`, `patient_id`, `facility_id`, `facility_name`, `encounte
 
 ### DOTFAAGenerator
 
-**Module:** `data-generation/generators/federal/dot_faa_generator.py`
+**Module:** `data_generation/generators/federal/dot_faa_generator.py`
 **Domains:** `flight_operations` (default), `safety_incident`, `traffic_statistics`, `infrastructure`
 
 #### Constructor
@@ -677,7 +677,7 @@ Three generators producing event-level data for video security analytics, people
 
 ### VideoAnalyticsGenerator
 
-**Module:** `data-generation/generators/analytics/video_analytics_generator.py`
+**Module:** `data_generation/generators/analytics/video_analytics_generator.py`
 **Purpose:** Generates video security analytics events from 50 cameras across 14 casino zones.
 
 #### Constructor
@@ -717,7 +717,7 @@ Model names: `YOLOv8` (35%), `DeepSORT` (25%), `RetinaNet` (20%), `SSD-MobileNet
 
 ### PeopleMovementGenerator
 
-**Module:** `data-generation/generators/analytics/people_movement_generator.py`
+**Module:** `data_generation/generators/analytics/people_movement_generator.py`
 **Purpose:** Generates foot traffic sensor readings from 80 sensors across 29 casino zones on 3 floors.
 
 #### Constructor
@@ -750,7 +750,7 @@ PeopleMovementGenerator(
 
 ### GeolocationGenerator
 
-**Module:** `data-generation/generators/analytics/geolocation_generator.py`
+**Module:** `data_generation/generators/analytics/geolocation_generator.py`
 **Purpose:** Generates GPS/indoor positioning events from a 200-device fleet across a Las Vegas casino resort campus.
 
 #### Constructor
@@ -797,7 +797,7 @@ Three generators designed for real-time and near-real-time event streaming scena
 
 ### EventHubProducer
 
-**Module:** `data-generation/generators/streaming/event_hub_producer.py`
+**Module:** `data_generation/generators/streaming/event_hub_producer.py`
 **Purpose:** Streams slot machine telemetry events to Azure Event Hub or stdout.
 
 > **Note:** This generator does NOT inherit from `BaseGenerator` in the typical way. It wraps a `SlotMachineGenerator` internally.
@@ -848,7 +848,7 @@ python -m data_generation.generators.streaming.event_hub_producer \
 
 ### MultiSourceSimulator
 
-**Module:** `data-generation/generators/streaming/multi_source_simulator.py`
+**Module:** `data_generation/generators/streaming/multi_source_simulator.py`
 **Purpose:** Generates CDC (Change Data Capture) events from 5 database source types for Eventstreams demos.
 
 #### Constructor
@@ -893,7 +893,7 @@ def generate_mixed_batch(count=1000) -> list[dict]:
 
 ### IoTDeviceSimulator
 
-**Module:** `data-generation/generators/streaming/iot_device_simulator.py`
+**Module:** `data_generation/generators/streaming/iot_device_simulator.py`
 **Purpose:** Simulates telemetry from a heterogeneous fleet of casino IoT devices via Azure IoT Hub conventions.
 
 #### Constructor
@@ -1023,18 +1023,18 @@ def generate_record(self, domain: str = "default") -> dict[str, Any]:
 
 ## # Return Value Schemas
 
-Each casino generator has a corresponding JSON schema file in `data-generation/schemas/`. Federal, analytics, and streaming generators define their schemas inline via the `_schema` property.
+Each casino generator has a corresponding JSON schema file in `data_generation/schemas/`. Federal, analytics, and streaming generators define their schemas inline via the `_schema` property.
 
 ### Casino Generator Schema Mapping
 
 | Generator                | Schema File                                            |
 |-------------------------|--------------------------------------------------------|
-| `SlotMachineGenerator`   | `data-generation/schemas/slot_telemetry_schema.json`    |
-| `PlayerGenerator`        | `data-generation/schemas/player_profile_schema.json`    |
-| `FinancialGenerator`     | `data-generation/schemas/financial_transaction_schema.json` |
-| `ComplianceGenerator`    | `data-generation/schemas/compliance_filing_schema.json` |
-| `SecurityGenerator`      | `data-generation/schemas/security_events_schema.json`   |
-| `TableGamesGenerator`    | `data-generation/schemas/table_games_schema.json`       |
+| `SlotMachineGenerator`   | `data_generation/schemas/slot_telemetry_schema.json`    |
+| `PlayerGenerator`        | `data_generation/schemas/player_profile_schema.json`    |
+| `FinancialGenerator`     | `data_generation/schemas/financial_transaction_schema.json` |
+| `ComplianceGenerator`    | `data_generation/schemas/compliance_filing_schema.json` |
+| `SecurityGenerator`      | `data_generation/schemas/security_events_schema.json`   |
+| `TableGamesGenerator`    | `data_generation/schemas/table_games_schema.json`       |
 
 ### Federal / Analytics / Streaming Schema Access
 

@@ -39,7 +39,7 @@ test-geo: ## Run geolocation module tests
 	$(PYTEST) validation/unit_tests/geo/ $(PYTEST_OPTS)
 
 test-cov: ## Run tests with coverage report
-	$(PYTEST) validation/unit_tests/ --cov=data-generation/generators --cov-report=term-missing $(PYTEST_OPTS)
+	$(PYTEST) validation/unit_tests/ --cov=data_generation/generators --cov-report=term-missing $(PYTEST_OPTS)
 
 test-compliance: ## Run compliance-specific tests
 	$(PYTEST) validation/unit_tests/ -m compliance $(PYTEST_OPTS)
@@ -48,19 +48,19 @@ test-compliance: ## Run compliance-specific tests
 # Code Quality
 # ==========================================================================
 
-lint: ## Check code style with ruff and black
-	$(PYTHON) -m ruff check data-generation/ validation/
-	$(PYTHON) -m black --check data-generation/ validation/
+lint: ## Check code style with ruff
+	$(PYTHON) -m ruff check data_generation/ validation/
+	$(PYTHON) -m ruff format --check data_generation/ validation/
 
-format: ## Auto-format code with ruff and black
-	$(PYTHON) -m ruff check --fix data-generation/ validation/
-	$(PYTHON) -m black data-generation/ validation/
+format: ## Auto-format code with ruff
+	$(PYTHON) -m ruff check --fix data_generation/ validation/
+	$(PYTHON) -m ruff format data_generation/ validation/
 
 typecheck: ## Run mypy type checking
-	$(PYTHON) -m mypy data-generation/generators/ --ignore-missing-imports
+	$(PYTHON) -m mypy data_generation/generators/ --ignore-missing-imports
 
 security-scan: ## Run bandit security scan
-	$(PYTHON) -m bandit -r data-generation/generators/ -c bandit.yml
+	$(PYTHON) -m bandit -r data_generation/generators/ -c bandit.yml
 	$(PYTHON) -m pip_audit
 
 # ==========================================================================
@@ -70,7 +70,7 @@ security-scan: ## Run bandit security scan
 validate-schemas: ## Validate all JSON schemas
 	$(PYTHON) -c "\
 	import json, glob; \
-	schemas = glob.glob('data-generation/schemas/**/*.json', recursive=True); \
+	schemas = glob.glob('data_generation/schemas/**/*.json', recursive=True); \
 	[json.load(open(s)) for s in schemas]; \
 	print(f'Validated {len(schemas)} schemas successfully')"
 
@@ -84,7 +84,7 @@ validate-notebooks: ## Compile-check all notebooks
 validate-generators: ## Compile-check all generators
 	$(PYTHON) -c "\
 	import py_compile, glob; \
-	gens = glob.glob('data-generation/generators/**/*.py', recursive=True); \
+	gens = glob.glob('data_generation/generators/**/*.py', recursive=True); \
 	[py_compile.compile(g, doraise=True) for g in gens]; \
 	print(f'Compiled {len(gens)} generators successfully')"
 
@@ -95,7 +95,7 @@ validate-all: validate-schemas validate-notebooks validate-generators ## Run all
 # ==========================================================================
 
 generate-sample: ## Generate sample data (1000 records)
-	cd data-generation && $(PYTHON) generate.py --records 1000 --format parquet --output temp/sample
+	cd data_generation && $(PYTHON) generate.py --records 1000 --format parquet --output temp/sample
 
 # ==========================================================================
 # Infrastructure

@@ -1,6 +1,6 @@
 # :white_check_mark: Validation & Testing Framework
 
-> **[Home](../README.md)** | **[Data Generation](../data-generation/)** | **[Notebooks](../notebooks/)** | **[Tutorials](../tutorials/)**
+> **[Home](../README.md)** | **[Data Generation](../data_generation/)** | **[Notebooks](../notebooks/)** | **[Tutorials](../tutorials/)**
 
 Comprehensive data quality validation and testing for the Microsoft Fabric Casino POC and Phase 7 federal, streaming, and analytics expansions.
 
@@ -135,7 +135,7 @@ pytest validation/unit_tests/ -v
 pytest validation/integration_tests/ -v --slow
 
 # Run with coverage report
-pytest validation/unit_tests/ --cov=data-generation/generators --cov-report=html
+pytest validation/unit_tests/ --cov=data_generation/generators --cov-report=html
 
 # Run Great Expectations checkpoints
 great_expectations checkpoint run all_checkpoints
@@ -240,7 +240,7 @@ pytest validation/unit_tests/ -v
 pytest validation/unit_tests/test_generators.py -v
 
 # Run with coverage
-pytest validation/unit_tests/ --cov=data-generation/generators --cov-report=html
+pytest validation/unit_tests/ --cov=data_generation/generators --cov-report=html
 ```
 
 ### Test Categories
@@ -540,7 +540,7 @@ The [Phase 7 Regression Report](phase7_regression_report.md) provides comprehens
 
 | Resource | Description |
 |----------|-------------|
-| [Data Generation](../data-generation/README.md) | Generate test data |
+| [Data Generation](../data_generation/README.md) | Generate test data |
 | [Notebooks](../notebooks/README.md) | Fabric notebooks to test |
 | [CI/CD Workflows](../.github/workflows/) | Automated testing pipelines |
 

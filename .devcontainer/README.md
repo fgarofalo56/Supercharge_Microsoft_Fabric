@@ -26,7 +26,7 @@ A Dev Container is a Docker container specifically configured for development. I
 
 4. **Start Coding:**
    - All dependencies are pre-installed
-   - Run `python data-generation/generate.py --help` to verify
+   - Run `python data_generation/generate.py --help` to verify
 
 ### Using GitHub Codespaces
 
@@ -145,13 +145,13 @@ jupyter lab --no-browser --port 8888
 
 ```bash
 # Show help
-python data-generation/generate.py --help
+python data_generation/generate.py --help
 
 # Generate slot machine events
-python data-generation/generate.py --type slot_events --records 1000
+python data_generation/generate.py --type slot_events --records 1000
 
 # Generate all data types
-python data-generation/generate.py --type all --records 5000
+python data_generation/generate.py --type all --records 5000
 ```
 
 ### Run Tests
@@ -166,7 +166,7 @@ pytest validation/integration_tests/ -v
 pytest validation/deployment_tests/ -v
 
 # With coverage
-pytest validation/ --cov=data-generation --cov-report=html
+pytest validation/ --cov=data_generation --cov-report=html
 ```
 
 ### Validate Infrastructure
