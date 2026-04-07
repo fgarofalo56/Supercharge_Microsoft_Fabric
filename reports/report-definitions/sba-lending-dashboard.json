@@ -1,0 +1,593 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/reportDefinition/1.0.0/schema.json",
+  "metadata": {
+    "name": "SBA Lending Dashboard",
+    "description": "Loan portfolio analytics, economic impact tracking, and lender performance monitoring",
+    "version": "1.0.0",
+    "lastModified": "2026-03-12",
+    "author": "Fabric POC Team",
+    "tags": ["sba", "lending", "loan-portfolio", "economic-impact", "federal"]
+  },
+  "datasetBinding": {
+    "semantic_model": "Federal Lending Analytics Model",
+    "workspace": "federal-fabric-poc",
+    "connection_mode": "Direct Lake"
+  },
+  "theme": {
+    "name": "SBA Blue",
+    "primaryColor": "#002E6D",
+    "secondaryColor": "#0050AA",
+    "accentColor": "#1976D2",
+    "highlightColor": "#42A5F5",
+    "fontFamily": "Segoe UI"
+  },
+  "pages": [
+    {
+      "name": "Portfolio Overview",
+      "displayName": "Portfolio Overview",
+      "displayOption": "FitToPage",
+      "width": 1280,
+      "height": 720,
+      "background": {
+        "color": "#F5F8FC",
+        "transparency": 0
+      },
+      "visuals": [
+        {
+          "name": "Title",
+          "type": "textbox",
+          "position": { "x": 20, "y": 10, "width": 500, "height": 50 },
+          "config": {
+            "text": "SBA LENDING DASHBOARD",
+            "fontSize": 24,
+            "fontWeight": "bold",
+            "fontColor": "#002E6D"
+          }
+        },
+        {
+          "name": "DateSlicer",
+          "type": "slicer",
+          "position": { "x": 1000, "y": 10, "width": 260, "height": 50 },
+          "config": {
+            "field": "dim_date[Date]",
+            "selectionType": "between",
+            "defaultSelection": "Last 12 Months",
+            "orientation": "horizontal"
+          }
+        },
+        {
+          "name": "KPI_TotalLoans",
+          "type": "card",
+          "position": { "x": 20, "y": 70, "width": 200, "height": 100 },
+          "config": {
+            "measure": "[Total Loan Amount]",
+            "title": "Total Loans Approved",
+            "displayUnits": "auto",
+            "decimalPlaces": 0,
+            "calloutValue": {
+              "fontSize": 32,
+              "fontColor": "#0050AA"
+            },
+            "categoryLabel": {
+              "show": true,
+              "fontSize": 12,
+              "fontColor": "#666666"
+            }
+          }
+        },
+        {
+          "name": "KPI_ApprovalRate",
+          "type": "card",
+          "position": { "x": 230, "y": 70, "width": 200, "height": 100 },
+          "config": {
+            "measure": "[Loan Approval Rate]",
+            "title": "Approval Rate",
+            "displayUnits": "none",
+            "decimalPlaces": 1,
+            "suffix": "%",
+            "calloutValue": {
+              "fontSize": 32,
+              "fontColor": "#1976D2"
+            },
+            "conditionalFormatting": {
+              "rules": [
+                { "condition": "value >= 70", "color": "#2E7D32" },
+                { "condition": "value >= 50", "color": "#FFC107" },
+                { "condition": "value < 50", "color": "#FF6B6B" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "KPI_DefaultRate",
+          "type": "card",
+          "position": { "x": 440, "y": 70, "width": 200, "height": 100 },
+          "config": {
+            "measure": "[Default Rate]",
+            "title": "Default Rate",
+            "displayUnits": "none",
+            "decimalPlaces": 2,
+            "suffix": "%",
+            "calloutValue": {
+              "fontSize": 32,
+              "fontColor": "#FF6B6B"
+            },
+            "conditionalFormatting": {
+              "rules": [
+                { "condition": "value <= 3", "color": "#2E7D32" },
+                { "condition": "value <= 7", "color": "#FFC107" },
+                { "condition": "value > 7", "color": "#FF6B6B" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "KPI_EconomicImpact",
+          "type": "card",
+          "position": { "x": 650, "y": 70, "width": 200, "height": 100 },
+          "config": {
+            "measure": "[Economic Impact Score]",
+            "title": "Economic Impact",
+            "displayUnits": "auto",
+            "decimalPlaces": 0,
+            "calloutValue": {
+              "fontSize": 32,
+              "fontColor": "#42A5F5"
+            }
+          }
+        },
+        {
+          "name": "ProgramSlicer",
+          "type": "slicer",
+          "position": { "x": 870, "y": 70, "width": 180, "height": 100 },
+          "config": {
+            "field": "gold.sba_loan_portfolio[program_name]",
+            "selectionType": "multiSelect",
+            "searchEnabled": true,
+            "orientation": "vertical",
+            "title": "Loan Program"
+          }
+        },
+        {
+          "name": "YoYGrowth",
+          "type": "kpi",
+          "position": { "x": 1060, "y": 70, "width": 200, "height": 100 },
+          "config": {
+            "indicator": "[Total Loan Amount]",
+            "trendAxis": "dim_date[Date]",
+            "targetGoal": "[Loan Amount PY]",
+            "title": "YoY Growth",
+            "showTrendLine": true,
+            "goalDirection": "increase"
+          }
+        },
+        {
+          "name": "LoanVolumeTrend",
+          "type": "lineChart",
+          "position": { "x": 20, "y": 180, "width": 800, "height": 250 },
+          "config": {
+            "title": "Loan Approval Volume Trend",
+            "xAxis": {
+              "field": "dim_date[Date]",
+              "dateHierarchy": ["Year", "Quarter", "Month"],
+              "title": ""
+            },
+            "yAxis": {
+              "field": "[Total Loan Amount]",
+              "title": "Loan Amount ($)",
+              "startFromZero": false
+            },
+            "legend": {
+              "field": "gold.sba_loan_portfolio[program_name]",
+              "position": "top"
+            },
+            "dataLabels": false,
+            "markers": false,
+            "referenceLine": {
+              "measure": "[Avg Loan Amount 12M]",
+              "label": "12M Avg",
+              "style": "dashed",
+              "color": "#FFC107"
+            }
+          }
+        },
+        {
+          "name": "PortfolioHealth",
+          "type": "multiRowCard",
+          "position": { "x": 830, "y": 180, "width": 430, "height": 120 },
+          "config": {
+            "title": "Portfolio Health",
+            "measures": [
+              { "field": "[Active Loans]", "label": "Active Loans" },
+              { "field": "[Total Disbursed]", "label": "Disbursed" },
+              { "field": "[Avg Loan Size]", "label": "Avg Loan" },
+              { "field": "[Jobs Supported]", "label": "Jobs Created" }
+            ]
+          }
+        },
+        {
+          "name": "DefaultRateGauge",
+          "type": "gauge",
+          "position": { "x": 830, "y": 310, "width": 200, "height": 120 },
+          "config": {
+            "value": "[Default Rate]",
+            "minimum": 0,
+            "maximum": 15,
+            "target": 5,
+            "title": "Default Rate %",
+            "calloutValue": {
+              "fontSize": 24
+            },
+            "colorRanges": [
+              { "min": 0, "max": 3, "color": "#2E7D32" },
+              { "min": 3, "max": 7, "color": "#FFC107" },
+              { "min": 7, "max": 15, "color": "#FF6B6B" }
+            ]
+          }
+        },
+        {
+          "name": "LoanByState",
+          "type": "clusteredBarChart",
+          "position": { "x": 20, "y": 440, "width": 400, "height": 260 },
+          "config": {
+            "title": "Top States by Loan Volume",
+            "yAxis": {
+              "field": "gold.sba_loan_portfolio[borrower_state]",
+              "sort": "descending",
+              "sortBy": "[Total Loan Amount]"
+            },
+            "xAxis": {
+              "field": "[Total Loan Amount]",
+              "title": "Loan Amount ($)"
+            },
+            "dataLabels": {
+              "show": true,
+              "displayUnits": "millions",
+              "labelPosition": "outsideEnd"
+            },
+            "colorSaturation": {
+              "measure": "[Loan Approval Rate]",
+              "min": "#BBDEFB",
+              "max": "#0D47A1"
+            }
+          }
+        },
+        {
+          "name": "LenderScorecard",
+          "type": "table",
+          "position": { "x": 430, "y": 440, "width": 400, "height": 260 },
+          "config": {
+            "title": "Top Lenders by Volume",
+            "columns": [
+              { "field": "gold.sba_lender_scorecard[lender_name]", "width": 140, "title": "Lender" },
+              { "field": "[Total Loan Amount]", "width": 90, "title": "Volume", "format": "$#,##0" },
+              { "field": "[Loan Count]", "width": 60, "title": "# Loans", "format": "#,##0" },
+              { "field": "[Default Rate]", "width": 70, "title": "Default %", "format": "0.0%" },
+              { "field": "[Avg Processing Days]", "width": 70, "title": "Avg Days", "format": "#,##0" }
+            ],
+            "topN": {
+              "enabled": true,
+              "topN": 10,
+              "by": "[Total Loan Amount]",
+              "direction": "top"
+            },
+            "conditionalFormatting": {
+              "[Default Rate]": {
+                "backgroundScale": {
+                  "min": "#2E7D32",
+                  "mid": "#FFC107",
+                  "max": "#FF6B6B",
+                  "minValue": 0,
+                  "midValue": 5,
+                  "maxValue": 15
+                }
+              }
+            },
+            "totals": {
+              "show": true,
+              "label": "Total"
+            }
+          }
+        },
+        {
+          "name": "ProgramDistribution",
+          "type": "donutChart",
+          "position": { "x": 840, "y": 440, "width": 210, "height": 260 },
+          "config": {
+            "title": "Loans by Program",
+            "legend": {
+              "field": "gold.sba_loan_portfolio[program_name]",
+              "position": "right"
+            },
+            "values": {
+              "measure": "[Total Loan Amount]"
+            },
+            "detailLabels": {
+              "show": true,
+              "labelStyle": "category, percent"
+            },
+            "innerRadius": 50,
+            "colors": {
+              "7(a)": "#0050AA",
+              "504": "#1976D2",
+              "Microloan": "#42A5F5",
+              "Disaster": "#FF6B6B",
+              "Express": "#90CAF9"
+            }
+          }
+        },
+        {
+          "name": "IndustryBreakdown",
+          "type": "stackedBarChart",
+          "position": { "x": 1060, "y": 440, "width": 200, "height": 260 },
+          "config": {
+            "title": "By Industry",
+            "yAxis": {
+              "field": "gold.sba_loan_portfolio[naics_sector]"
+            },
+            "xAxis": {
+              "field": "[Total Loan Amount]",
+              "title": "Amount ($)"
+            },
+            "legend": false,
+            "dataLabels": true,
+            "colors": {
+              "Manufacturing": "#0050AA",
+              "Retail": "#1976D2",
+              "Healthcare": "#42A5F5",
+              "Construction": "#90CAF9",
+              "Other": "#BBDEFB"
+            }
+          }
+        }
+      ],
+      "filters": [
+        {
+          "type": "page",
+          "field": "dim_date[Date]",
+          "filterType": "relativeDateRange",
+          "relativeDateRange": {
+            "timeUnitCount": 12,
+            "timeUnit": "months"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Economic Impact",
+      "displayName": "Economic Impact",
+      "displayOption": "FitToPage",
+      "width": 1280,
+      "height": 720,
+      "visuals": [
+        {
+          "name": "ImpactMatrix",
+          "type": "matrix",
+          "position": { "x": 20, "y": 70, "width": 800, "height": 400 },
+          "config": {
+            "title": "Economic Impact by State and Program",
+            "rows": "gold.sba_economic_impact[state]",
+            "columns": "gold.sba_economic_impact[program_name]",
+            "values": [
+              { "measure": "[Total Loan Amount]", "format": "$#,##0" },
+              { "measure": "[Jobs Supported]", "format": "#,##0" },
+              { "measure": "[Economic Multiplier]", "format": "0.00x" }
+            ],
+            "subtotals": {
+              "rowSubtotals": true,
+              "columnSubtotals": true
+            },
+            "conditionalFormatting": {
+              "[Economic Multiplier]": {
+                "dataBar": {
+                  "positive": "#1976D2",
+                  "negative": "#FF6B6B"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "JobsCreatedMap",
+          "type": "filledMap",
+          "position": { "x": 830, "y": 70, "width": 430, "height": 300 },
+          "config": {
+            "title": "Jobs Supported by State",
+            "location": {
+              "field": "gold.sba_economic_impact[state]",
+              "type": "state"
+            },
+            "colorSaturation": {
+              "measure": "[Jobs Supported]",
+              "min": "#E3F2FD",
+              "max": "#0D47A1"
+            },
+            "tooltips": [
+              "[Total Loan Amount]",
+              "[Jobs Supported]",
+              "[Economic Multiplier]"
+            ]
+          }
+        },
+        {
+          "name": "ImpactTrend",
+          "type": "areaChart",
+          "position": { "x": 830, "y": 380, "width": 430, "height": 160 },
+          "config": {
+            "title": "Quarterly Economic Impact",
+            "xAxis": {
+              "field": "dim_date[Date]"
+            },
+            "yAxis": {
+              "field": "[Economic Impact Score]"
+            },
+            "legend": {
+              "field": "gold.sba_economic_impact[program_name]"
+            },
+            "stacked": true
+          }
+        },
+        {
+          "name": "SmallBusinessGrowth",
+          "type": "scatterChart",
+          "position": { "x": 20, "y": 480, "width": 800, "height": 220 },
+          "config": {
+            "title": "Loan Amount vs Jobs Created by State",
+            "xAxis": {
+              "field": "[Total Loan Amount]",
+              "title": "Total Loan Amount ($)"
+            },
+            "yAxis": {
+              "field": "[Jobs Supported]",
+              "title": "Jobs Created/Retained"
+            },
+            "size": {
+              "field": "[Economic Multiplier]"
+            },
+            "legend": {
+              "field": "gold.sba_economic_impact[state]"
+            },
+            "trendLine": {
+              "show": true,
+              "type": "linear"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Lender Performance",
+      "displayName": "Lender Performance",
+      "displayOption": "FitToPage",
+      "width": 1280,
+      "height": 720,
+      "visuals": [
+        {
+          "name": "LenderRanking",
+          "type": "table",
+          "position": { "x": 20, "y": 70, "width": 620, "height": 400 },
+          "config": {
+            "title": "Lender Performance Scorecard",
+            "columns": [
+              { "field": "gold.sba_lender_scorecard[lender_name]", "width": 160, "title": "Lender" },
+              { "field": "[Total Loan Amount]", "width": 100, "title": "Portfolio", "format": "$#,##0" },
+              { "field": "[Loan Count]", "width": 70, "title": "Loans", "format": "#,##0" },
+              { "field": "[Loan Approval Rate]", "width": 80, "title": "Approval %", "format": "0.0%" },
+              { "field": "[Default Rate]", "width": 70, "title": "Default %", "format": "0.0%" },
+              { "field": "[Avg Processing Days]", "width": 80, "title": "Processing", "format": "#,##0 days" }
+            ],
+            "conditionalFormatting": {
+              "[Default Rate]": {
+                "backgroundScale": {
+                  "min": "#2E7D32",
+                  "mid": "#FFC107",
+                  "max": "#FF6B6B",
+                  "minValue": 0,
+                  "midValue": 5,
+                  "maxValue": 15
+                }
+              }
+            },
+            "totals": { "show": true, "label": "Overall" }
+          }
+        },
+        {
+          "name": "ProcessingTimeDistribution",
+          "type": "clusteredColumnChart",
+          "position": { "x": 650, "y": 70, "width": 610, "height": 200 },
+          "config": {
+            "title": "Processing Time Distribution",
+            "xAxis": { "field": "gold.sba_lender_scorecard[processing_time_bucket]" },
+            "yAxis": { "field": "[Loan Count]" },
+            "legend": false,
+            "dataLabels": true
+          }
+        },
+        {
+          "name": "DefaultByLender",
+          "type": "clusteredBarChart",
+          "position": { "x": 650, "y": 280, "width": 610, "height": 200 },
+          "config": {
+            "title": "Default Rate by Lender",
+            "yAxis": {
+              "field": "gold.sba_lender_scorecard[lender_name]",
+              "sort": "descending",
+              "sortBy": "[Default Rate]"
+            },
+            "xAxis": { "field": "[Default Rate]", "title": "Default %" },
+            "dataLabels": { "show": true, "labelPosition": "outsideEnd" }
+          }
+        },
+        {
+          "name": "LenderTrend",
+          "type": "areaChart",
+          "position": { "x": 20, "y": 480, "width": 1240, "height": 220 },
+          "config": {
+            "title": "Monthly Lending Activity by Top Lenders",
+            "xAxis": { "field": "dim_date[Date]" },
+            "yAxis": { "field": "[Total Loan Amount]" },
+            "legend": { "field": "gold.sba_lender_scorecard[lender_name]" },
+            "stacked": false
+          }
+        }
+      ]
+    }
+  ],
+  "bookmarks": [
+    {
+      "name": "CurrentFY",
+      "displayName": "Current Fiscal Year",
+      "filters": [
+        {
+          "field": "dim_date[FiscalYear]",
+          "filterType": "basicFilter",
+          "value": "FY2026"
+        }
+      ]
+    },
+    {
+      "name": "Last12Months",
+      "displayName": "Last 12 Months",
+      "filters": [
+        {
+          "field": "dim_date[Date]",
+          "filterType": "relativeDateRange",
+          "relativeDateRange": { "timeUnitCount": 12, "timeUnit": "months" }
+        }
+      ]
+    },
+    {
+      "name": "7aLoansOnly",
+      "displayName": "7(a) Loans Only",
+      "filters": [
+        {
+          "field": "gold.sba_loan_portfolio[program_name]",
+          "filterType": "basicFilter",
+          "value": "7(a)"
+        }
+      ]
+    }
+  ],
+  "drillthrough": [
+    {
+      "name": "LenderDetails",
+      "targetPage": "Lender Drillthrough",
+      "fields": ["gold.sba_lender_scorecard[lender_name]"],
+      "keepAllFilters": true
+    }
+  ],
+  "subscriptions": [
+    {
+      "name": "Monthly Lending Summary",
+      "schedule": {
+        "frequency": "monthly",
+        "dayOfMonth": 1,
+        "time": "08:00",
+        "timezone": "America/New_York"
+      },
+      "recipients": ["lending-analytics@sba.gov"],
+      "format": "pdf",
+      "pages": ["Portfolio Overview", "Economic Impact"]
+    }
+  ]
+}

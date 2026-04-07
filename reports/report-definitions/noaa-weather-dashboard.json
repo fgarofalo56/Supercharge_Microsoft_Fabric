@@ -1,0 +1,521 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/reportDefinition/1.0.0/schema.json",
+  "metadata": {
+    "name": "NOAA Weather Dashboard",
+    "description": "Storm impact analysis, climate trend monitoring, and severe weather risk assessment",
+    "version": "1.0.0",
+    "lastModified": "2026-03-12",
+    "author": "Fabric POC Team",
+    "tags": ["noaa", "weather", "storm-impact", "climate-trends", "severe-weather", "federal"]
+  },
+  "datasetBinding": {
+    "semantic_model": "Federal Weather Analytics Model",
+    "workspace": "federal-fabric-poc",
+    "connection_mode": "Direct Lake"
+  },
+  "theme": {
+    "name": "NOAA Teal",
+    "primaryColor": "#003B5C",
+    "secondaryColor": "#005E8A",
+    "accentColor": "#0097A7",
+    "highlightColor": "#26C6DA",
+    "fontFamily": "Segoe UI"
+  },
+  "pages": [
+    {
+      "name": "Storm Impact",
+      "displayName": "Storm Impact",
+      "displayOption": "FitToPage",
+      "width": 1280,
+      "height": 720,
+      "background": {
+        "color": "#F0F7FA",
+        "transparency": 0
+      },
+      "visuals": [
+        {
+          "name": "Title",
+          "type": "textbox",
+          "position": { "x": 20, "y": 10, "width": 500, "height": 50 },
+          "config": {
+            "text": "NOAA WEATHER DASHBOARD",
+            "fontSize": 24,
+            "fontWeight": "bold",
+            "fontColor": "#003B5C"
+          }
+        },
+        {
+          "name": "DateSlicer",
+          "type": "slicer",
+          "position": { "x": 1000, "y": 10, "width": 260, "height": 50 },
+          "config": {
+            "field": "dim_date[Date]",
+            "selectionType": "between",
+            "defaultSelection": "Last 12 Months",
+            "orientation": "horizontal"
+          }
+        },
+        {
+          "name": "KPI_TotalStorms",
+          "type": "card",
+          "position": { "x": 20, "y": 70, "width": 200, "height": 100 },
+          "config": {
+            "measure": "[Total Storm Events]",
+            "title": "Storm Events",
+            "displayUnits": "thousands",
+            "decimalPlaces": 1,
+            "calloutValue": {
+              "fontSize": 32,
+              "fontColor": "#005E8A"
+            },
+            "categoryLabel": {
+              "show": true,
+              "fontSize": 12,
+              "fontColor": "#666666"
+            }
+          }
+        },
+        {
+          "name": "KPI_TotalDamage",
+          "type": "card",
+          "position": { "x": 230, "y": 70, "width": 200, "height": 100 },
+          "config": {
+            "measure": "[Total Damage Estimate]",
+            "title": "Total Damage",
+            "displayUnits": "auto",
+            "decimalPlaces": 0,
+            "calloutValue": {
+              "fontSize": 32,
+              "fontColor": "#FF6B6B"
+            },
+            "conditionalFormatting": {
+              "rules": [
+                { "condition": "value >= 1000000000", "color": "#FF6B6B" },
+                { "condition": "value >= 100000000", "color": "#FFC107" },
+                { "condition": "value < 100000000", "color": "#0097A7" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "KPI_SevereCount",
+          "type": "card",
+          "position": { "x": 440, "y": 70, "width": 200, "height": 100 },
+          "config": {
+            "measure": "[Severe Weather Count]",
+            "title": "Severe Events",
+            "displayUnits": "none",
+            "decimalPlaces": 0,
+            "calloutValue": {
+              "fontSize": 32,
+              "fontColor": "#E65100"
+            }
+          }
+        },
+        {
+          "name": "KPI_Fatalities",
+          "type": "card",
+          "position": { "x": 650, "y": 70, "width": 200, "height": 100 },
+          "config": {
+            "measure": "[Total Fatalities]",
+            "title": "Fatalities",
+            "displayUnits": "none",
+            "decimalPlaces": 0,
+            "calloutValue": {
+              "fontSize": 32,
+              "fontColor": "#B71C1C"
+            }
+          }
+        },
+        {
+          "name": "EventTypeSlicer",
+          "type": "slicer",
+          "position": { "x": 870, "y": 70, "width": 180, "height": 100 },
+          "config": {
+            "field": "gold.noaa_storm_impact[event_type]",
+            "selectionType": "multiSelect",
+            "searchEnabled": true,
+            "orientation": "vertical",
+            "title": "Event Type"
+          }
+        },
+        {
+          "name": "StormTrendKPI",
+          "type": "kpi",
+          "position": { "x": 1060, "y": 70, "width": 200, "height": 100 },
+          "config": {
+            "indicator": "[Total Storm Events]",
+            "trendAxis": "dim_date[Date]",
+            "targetGoal": "[Storm Events PY]",
+            "title": "YoY Storm Trend",
+            "showTrendLine": true,
+            "goalDirection": "decrease"
+          }
+        },
+        {
+          "name": "StormDamageTrend",
+          "type": "lineChart",
+          "position": { "x": 20, "y": 180, "width": 800, "height": 250 },
+          "config": {
+            "title": "Storm Damage Over Time",
+            "xAxis": {
+              "field": "dim_date[Date]",
+              "dateHierarchy": ["Year", "Quarter", "Month"],
+              "title": ""
+            },
+            "yAxis": {
+              "field": "[Total Damage Estimate]",
+              "title": "Damage ($)",
+              "startFromZero": true
+            },
+            "legend": {
+              "field": "gold.noaa_storm_impact[event_type]",
+              "position": "top"
+            },
+            "dataLabels": false,
+            "markers": false,
+            "referenceLine": {
+              "measure": "[Avg Damage 5Y]",
+              "label": "5Y Avg",
+              "style": "dashed",
+              "color": "#FFC107"
+            }
+          }
+        },
+        {
+          "name": "StormSummary",
+          "type": "multiRowCard",
+          "position": { "x": 830, "y": 180, "width": 430, "height": 120 },
+          "config": {
+            "title": "Impact Summary",
+            "measures": [
+              { "field": "[Total Injuries]", "label": "Injuries" },
+              { "field": "[Property Damage]", "label": "Property $" },
+              { "field": "[Crop Damage]", "label": "Crop $" },
+              { "field": "[Avg Warning Lead Time]", "label": "Avg Warning (min)" }
+            ]
+          }
+        },
+        {
+          "name": "SeverityGauge",
+          "type": "gauge",
+          "position": { "x": 830, "y": 310, "width": 200, "height": 120 },
+          "config": {
+            "value": "[Severe Weather Risk Score]",
+            "minimum": 0,
+            "maximum": 100,
+            "target": 30,
+            "title": "Risk Level",
+            "calloutValue": { "fontSize": 24 },
+            "colorRanges": [
+              { "min": 0, "max": 30, "color": "#0097A7" },
+              { "min": 30, "max": 60, "color": "#FFC107" },
+              { "min": 60, "max": 100, "color": "#FF6B6B" }
+            ]
+          }
+        },
+        {
+          "name": "StormsByState",
+          "type": "filledMap",
+          "position": { "x": 20, "y": 440, "width": 500, "height": 260 },
+          "config": {
+            "title": "Storm Impact by State",
+            "location": {
+              "field": "gold.noaa_storm_impact[state]",
+              "type": "state"
+            },
+            "colorSaturation": {
+              "measure": "[Total Damage Estimate]",
+              "min": "#E0F7FA",
+              "max": "#B71C1C"
+            },
+            "tooltips": [
+              "[Total Storm Events]",
+              "[Total Damage Estimate]",
+              "[Total Fatalities]"
+            ]
+          }
+        },
+        {
+          "name": "EventTypeBreakdown",
+          "type": "table",
+          "position": { "x": 530, "y": 440, "width": 400, "height": 260 },
+          "config": {
+            "title": "Events by Type",
+            "columns": [
+              { "field": "gold.noaa_storm_impact[event_type]", "width": 120, "title": "Event Type" },
+              { "field": "[Total Storm Events]", "width": 70, "title": "Count", "format": "#,##0" },
+              { "field": "[Total Damage Estimate]", "width": 90, "title": "Damage", "format": "$#,##0" },
+              { "field": "[Total Fatalities]", "width": 60, "title": "Deaths", "format": "#,##0" },
+              { "field": "[Avg Warning Lead Time]", "width": 70, "title": "Warning", "format": "#,##0 min" }
+            ],
+            "topN": {
+              "enabled": true,
+              "topN": 10,
+              "by": "[Total Storm Events]",
+              "direction": "top"
+            },
+            "conditionalFormatting": {
+              "[Total Damage Estimate]": {
+                "backgroundScale": {
+                  "min": "#E0F7FA",
+                  "mid": "#FFC107",
+                  "max": "#FF6B6B",
+                  "minValue": 0,
+                  "midValue": 50000000,
+                  "maxValue": 500000000
+                }
+              }
+            },
+            "totals": { "show": true, "label": "Total" }
+          }
+        },
+        {
+          "name": "SeasonalPattern",
+          "type": "stackedBarChart",
+          "position": { "x": 940, "y": 440, "width": 320, "height": 260 },
+          "config": {
+            "title": "Seasonal Distribution",
+            "yAxis": { "field": "dim_date[MonthName]" },
+            "xAxis": { "field": "[Total Storm Events]", "title": "Events" },
+            "legend": {
+              "field": "gold.noaa_storm_impact[event_type]",
+              "position": "bottom"
+            },
+            "dataLabels": false
+          }
+        }
+      ],
+      "filters": [
+        {
+          "type": "page",
+          "field": "dim_date[Date]",
+          "filterType": "relativeDateRange",
+          "relativeDateRange": {
+            "timeUnitCount": 12,
+            "timeUnit": "months"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Climate Trends",
+      "displayName": "Climate Trends",
+      "displayOption": "FitToPage",
+      "width": 1280,
+      "height": 720,
+      "visuals": [
+        {
+          "name": "TempTrend",
+          "type": "lineChart",
+          "position": { "x": 20, "y": 70, "width": 620, "height": 300 },
+          "config": {
+            "title": "Temperature Anomaly Trend",
+            "xAxis": { "field": "dim_date[Date]", "dateHierarchy": ["Year", "Month"] },
+            "yAxis": { "field": "[Avg Temperature Anomaly]", "title": "Temp Anomaly (F)" },
+            "legend": { "field": "gold.noaa_climate_trends[region]", "position": "top" },
+            "dataLabels": false,
+            "markers": false,
+            "referenceLine": { "value": 0, "label": "Baseline", "style": "solid", "color": "#999999" }
+          }
+        },
+        {
+          "name": "PrecipTrend",
+          "type": "areaChart",
+          "position": { "x": 650, "y": 70, "width": 610, "height": 300 },
+          "config": {
+            "title": "Precipitation Trends",
+            "xAxis": { "field": "dim_date[Date]" },
+            "yAxis": { "field": "[Total Precipitation]", "title": "Precipitation (in)" },
+            "legend": { "field": "gold.noaa_climate_trends[region]" },
+            "stacked": false
+          }
+        },
+        {
+          "name": "ClimateMatrix",
+          "type": "matrix",
+          "position": { "x": 20, "y": 380, "width": 800, "height": 320 },
+          "config": {
+            "title": "Climate Summary by Region and Season",
+            "rows": "gold.noaa_climate_trends[region]",
+            "columns": "gold.noaa_climate_trends[season]",
+            "values": [
+              { "measure": "[Avg Temperature]", "format": "0.0 F" },
+              { "measure": "[Total Precipitation]", "format": "0.0 in" },
+              { "measure": "[Avg Temperature Anomaly]", "format": "+0.0;-0.0" }
+            ],
+            "subtotals": { "rowSubtotals": true, "columnSubtotals": true },
+            "conditionalFormatting": {
+              "[Avg Temperature Anomaly]": {
+                "dataBar": { "positive": "#FF6B6B", "negative": "#42A5F5" }
+              }
+            }
+          }
+        },
+        {
+          "name": "ExtremeEvents",
+          "type": "clusteredColumnChart",
+          "position": { "x": 830, "y": 380, "width": 430, "height": 320 },
+          "config": {
+            "title": "Extreme Weather Events by Year",
+            "xAxis": { "field": "dim_date[Year]" },
+            "yAxis": { "field": "[Severe Weather Count]" },
+            "legend": { "field": "gold.noaa_severe_weather_risk[severity_level]" },
+            "dataLabels": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Severe Weather Risk",
+      "displayName": "Severe Weather Risk",
+      "displayOption": "FitToPage",
+      "width": 1280,
+      "height": 720,
+      "visuals": [
+        {
+          "name": "RiskMap",
+          "type": "filledMap",
+          "position": { "x": 20, "y": 70, "width": 620, "height": 350 },
+          "config": {
+            "title": "Severe Weather Risk by County",
+            "location": {
+              "field": "gold.noaa_severe_weather_risk[county]",
+              "type": "county"
+            },
+            "colorSaturation": {
+              "measure": "[Severe Weather Risk Score]",
+              "min": "#E0F7FA",
+              "max": "#B71C1C"
+            },
+            "tooltips": [
+              "[Severe Weather Count]",
+              "[Severe Weather Risk Score]",
+              "[Avg Warning Lead Time]"
+            ]
+          }
+        },
+        {
+          "name": "RiskByCategory",
+          "type": "clusteredBarChart",
+          "position": { "x": 650, "y": 70, "width": 610, "height": 350 },
+          "config": {
+            "title": "Risk Score by Event Category",
+            "yAxis": {
+              "field": "gold.noaa_severe_weather_risk[event_category]",
+              "sort": "descending",
+              "sortBy": "[Severe Weather Risk Score]"
+            },
+            "xAxis": { "field": "[Severe Weather Risk Score]", "title": "Risk Score" },
+            "dataLabels": { "show": true, "labelPosition": "outsideEnd" }
+          }
+        },
+        {
+          "name": "WarningEffectiveness",
+          "type": "scatterChart",
+          "position": { "x": 20, "y": 430, "width": 620, "height": 270 },
+          "config": {
+            "title": "Warning Lead Time vs Fatalities",
+            "xAxis": { "field": "[Avg Warning Lead Time]", "title": "Warning Time (min)" },
+            "yAxis": { "field": "[Total Fatalities]", "title": "Fatalities" },
+            "size": { "field": "[Total Storm Events]" },
+            "legend": { "field": "gold.noaa_severe_weather_risk[event_category]" },
+            "trendLine": { "show": true, "type": "linear" }
+          }
+        },
+        {
+          "name": "TopRiskAreas",
+          "type": "table",
+          "position": { "x": 650, "y": 430, "width": 610, "height": 270 },
+          "config": {
+            "title": "Highest Risk Areas",
+            "columns": [
+              { "field": "gold.noaa_severe_weather_risk[state]", "width": 80, "title": "State" },
+              { "field": "gold.noaa_severe_weather_risk[county]", "width": 120, "title": "County" },
+              { "field": "[Severe Weather Risk Score]", "width": 80, "title": "Risk", "format": "0.0" },
+              { "field": "[Total Storm Events]", "width": 70, "title": "Events", "format": "#,##0" },
+              { "field": "[Total Damage Estimate]", "width": 90, "title": "Damage", "format": "$#,##0" },
+              { "field": "[Total Fatalities]", "width": 60, "title": "Deaths", "format": "#,##0" }
+            ],
+            "topN": { "enabled": true, "topN": 20, "by": "[Severe Weather Risk Score]", "direction": "top" },
+            "conditionalFormatting": {
+              "[Severe Weather Risk Score]": {
+                "backgroundScale": {
+                  "min": "#E0F7FA",
+                  "mid": "#FFC107",
+                  "max": "#B71C1C",
+                  "minValue": 0,
+                  "midValue": 50,
+                  "maxValue": 100
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bookmarks": [
+    {
+      "name": "Last12Months",
+      "displayName": "Last 12 Months",
+      "filters": [
+        {
+          "field": "dim_date[Date]",
+          "filterType": "relativeDateRange",
+          "relativeDateRange": { "timeUnitCount": 12, "timeUnit": "months" }
+        }
+      ]
+    },
+    {
+      "name": "HurricaneSeason",
+      "displayName": "Hurricane Season (Jun-Nov)",
+      "filters": [
+        {
+          "field": "dim_date[MonthNum]",
+          "filterType": "advancedFilter",
+          "conditions": [
+            { "operator": "greaterThanOrEqual", "value": 6 },
+            { "operator": "lessThanOrEqual", "value": 11 }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TornadoSeason",
+      "displayName": "Tornado Season (Mar-Jun)",
+      "filters": [
+        {
+          "field": "dim_date[MonthNum]",
+          "filterType": "advancedFilter",
+          "conditions": [
+            { "operator": "greaterThanOrEqual", "value": 3 },
+            { "operator": "lessThanOrEqual", "value": 6 }
+          ]
+        }
+      ]
+    }
+  ],
+  "drillthrough": [
+    {
+      "name": "StormDetails",
+      "targetPage": "Storm Event Drillthrough",
+      "fields": ["gold.noaa_storm_impact[event_id]"],
+      "keepAllFilters": true
+    }
+  ],
+  "subscriptions": [
+    {
+      "name": "Weekly Storm Impact Report",
+      "schedule": {
+        "frequency": "weekly",
+        "dayOfWeek": "Monday",
+        "time": "07:00",
+        "timezone": "America/New_York"
+      },
+      "recipients": ["weather-ops@noaa.gov"],
+      "format": "pdf",
+      "pages": ["Storm Impact"]
+    }
+  ]
+}

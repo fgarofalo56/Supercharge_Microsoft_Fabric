@@ -1,0 +1,635 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/reportDefinition/1.0.0/schema.json",
+  "metadata": {
+    "name": "USDA Agriculture Dashboard",
+    "description": "Crop production analytics, food safety monitoring, and agricultural yield analysis",
+    "version": "1.0.0",
+    "lastModified": "2026-03-12",
+    "author": "Fabric POC Team",
+    "tags": ["usda", "agriculture", "crop-production", "food-safety", "federal"]
+  },
+  "datasetBinding": {
+    "semantic_model": "Federal Agriculture Analytics Model",
+    "workspace": "federal-fabric-poc",
+    "connection_mode": "Direct Lake"
+  },
+  "theme": {
+    "name": "USDA Green",
+    "primaryColor": "#205B2C",
+    "secondaryColor": "#2E7D32",
+    "accentColor": "#4CAF50",
+    "highlightColor": "#8BC34A",
+    "fontFamily": "Segoe UI"
+  },
+  "pages": [
+    {
+      "name": "Executive Summary",
+      "displayName": "Executive Summary",
+      "displayOption": "FitToPage",
+      "width": 1280,
+      "height": 720,
+      "background": {
+        "color": "#FAFDF6",
+        "transparency": 0
+      },
+      "visuals": [
+        {
+          "name": "Title",
+          "type": "textbox",
+          "position": { "x": 20, "y": 10, "width": 500, "height": 50 },
+          "config": {
+            "text": "USDA AGRICULTURE DASHBOARD",
+            "fontSize": 24,
+            "fontWeight": "bold",
+            "fontColor": "#205B2C"
+          }
+        },
+        {
+          "name": "DateSlicer",
+          "type": "slicer",
+          "position": { "x": 1000, "y": 10, "width": 260, "height": 50 },
+          "config": {
+            "field": "dim_date[Date]",
+            "selectionType": "between",
+            "defaultSelection": "Last 12 Months",
+            "orientation": "horizontal"
+          }
+        },
+        {
+          "name": "KPI_TotalProduction",
+          "type": "card",
+          "position": { "x": 20, "y": 70, "width": 200, "height": 100 },
+          "config": {
+            "measure": "[Total Production Volume]",
+            "title": "Total Production",
+            "displayUnits": "millions",
+            "decimalPlaces": 1,
+            "calloutValue": {
+              "fontSize": 32,
+              "fontColor": "#2E7D32"
+            },
+            "categoryLabel": {
+              "show": true,
+              "fontSize": 12,
+              "fontColor": "#666666"
+            }
+          }
+        },
+        {
+          "name": "KPI_AvgYield",
+          "type": "card",
+          "position": { "x": 230, "y": 70, "width": 200, "height": 100 },
+          "config": {
+            "measure": "[Avg Yield Per Acre]",
+            "title": "Avg Yield/Acre",
+            "displayUnits": "none",
+            "decimalPlaces": 1,
+            "suffix": " bu",
+            "calloutValue": {
+              "fontSize": 32,
+              "fontColor": "#4CAF50"
+            },
+            "conditionalFormatting": {
+              "rules": [
+                { "condition": "value >= 180", "color": "#2E7D32" },
+                { "condition": "value >= 150", "color": "#8BC34A" },
+                { "condition": "value < 150", "color": "#FF6B6B" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "KPI_ProductionValue",
+          "type": "card",
+          "position": { "x": 440, "y": 70, "width": 200, "height": 100 },
+          "config": {
+            "measure": "[Total Production Value]",
+            "title": "Production Value",
+            "displayUnits": "auto",
+            "decimalPlaces": 0,
+            "calloutValue": {
+              "fontSize": 32,
+              "fontColor": "#1B5E20"
+            }
+          }
+        },
+        {
+          "name": "KPI_FoodSafetyIndex",
+          "type": "card",
+          "position": { "x": 650, "y": 70, "width": 200, "height": 100 },
+          "config": {
+            "measure": "[Food Safety Index]",
+            "title": "Food Safety Index",
+            "displayUnits": "none",
+            "decimalPlaces": 1,
+            "calloutValue": {
+              "fontSize": 32,
+              "fontColor": "#388E3C"
+            },
+            "conditionalFormatting": {
+              "rules": [
+                { "condition": "value >= 90", "color": "#2E7D32" },
+                { "condition": "value >= 75", "color": "#FFC107" },
+                { "condition": "value < 75", "color": "#FF6B6B" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "StateSlicer",
+          "type": "slicer",
+          "position": { "x": 870, "y": 70, "width": 180, "height": 100 },
+          "config": {
+            "field": "gold.usda_state_agriculture[state_name]",
+            "selectionType": "multiSelect",
+            "searchEnabled": true,
+            "orientation": "vertical",
+            "title": "State Filter"
+          }
+        },
+        {
+          "name": "YoYGrowth",
+          "type": "kpi",
+          "position": { "x": 1060, "y": 70, "width": 200, "height": 100 },
+          "config": {
+            "indicator": "[Total Production Volume]",
+            "trendAxis": "dim_date[Date]",
+            "targetGoal": "[Production Volume PY]",
+            "title": "YoY Growth",
+            "showTrendLine": true,
+            "goalDirection": "increase"
+          }
+        },
+        {
+          "name": "ProductionTrend",
+          "type": "lineChart",
+          "position": { "x": 20, "y": 180, "width": 800, "height": 250 },
+          "config": {
+            "title": "Crop Production Trend",
+            "xAxis": {
+              "field": "dim_date[Date]",
+              "dateHierarchy": ["Year", "Quarter", "Month"],
+              "title": ""
+            },
+            "yAxis": {
+              "field": "[Total Production Volume]",
+              "title": "Production (bushels)",
+              "startFromZero": false
+            },
+            "legend": {
+              "field": "gold.usda_crop_summary[commodity_name]",
+              "position": "top"
+            },
+            "dataLabels": false,
+            "markers": false,
+            "referenceLine": {
+              "measure": "[Avg Production 5Y]",
+              "label": "5Y Avg",
+              "style": "dashed",
+              "color": "#FFC107"
+            }
+          }
+        },
+        {
+          "name": "FoodSafetySummary",
+          "type": "multiRowCard",
+          "position": { "x": 830, "y": 180, "width": 430, "height": 120 },
+          "config": {
+            "title": "Food Safety Summary",
+            "measures": [
+              { "field": "[Recall Count]", "label": "Active Recalls" },
+              { "field": "[Inspection Pass Rate]", "label": "Pass Rate %" },
+              { "field": "[Violation Count]", "label": "Violations" },
+              { "field": "[Critical Findings]", "label": "Critical" }
+            ],
+            "conditionalFormatting": {
+              "[Critical Findings]": {
+                "rules": [
+                  { "condition": "value > 5", "color": "#FF6B6B" },
+                  { "condition": "value > 0", "color": "#FFC107" },
+                  { "condition": "value == 0", "color": "#2E7D32" }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "name": "FoodSafetyGauge",
+          "type": "gauge",
+          "position": { "x": 830, "y": 310, "width": 200, "height": 120 },
+          "config": {
+            "value": "[Food Safety Index]",
+            "minimum": 0,
+            "maximum": 100,
+            "target": 90,
+            "title": "Safety Compliance",
+            "calloutValue": {
+              "fontSize": 24
+            },
+            "colorRanges": [
+              { "min": 0, "max": 69, "color": "#FF6B6B" },
+              { "min": 70, "max": 89, "color": "#FFC107" },
+              { "min": 90, "max": 100, "color": "#2E7D32" }
+            ]
+          }
+        },
+        {
+          "name": "StateProduction",
+          "type": "clusteredBarChart",
+          "position": { "x": 20, "y": 440, "width": 400, "height": 260 },
+          "config": {
+            "title": "Top States by Production",
+            "yAxis": {
+              "field": "gold.usda_state_agriculture[state_name]",
+              "sort": "descending",
+              "sortBy": "[Total Production Volume]"
+            },
+            "xAxis": {
+              "field": "[Total Production Volume]",
+              "title": "Production (M bushels)"
+            },
+            "dataLabels": {
+              "show": true,
+              "displayUnits": "millions",
+              "labelPosition": "outsideEnd"
+            },
+            "colorSaturation": {
+              "measure": "[Avg Yield Per Acre]",
+              "min": "#C8E6C9",
+              "max": "#1B5E20"
+            }
+          }
+        },
+        {
+          "name": "CropBreakdown",
+          "type": "table",
+          "position": { "x": 430, "y": 440, "width": 400, "height": 260 },
+          "config": {
+            "title": "Crop Summary",
+            "columns": [
+              { "field": "gold.usda_crop_summary[commodity_name]", "width": 120, "title": "Commodity" },
+              { "field": "[Total Production Volume]", "width": 100, "title": "Production", "format": "#,##0" },
+              { "field": "[Avg Yield Per Acre]", "width": 80, "title": "Yield/Acre", "format": "#,##0.0" },
+              { "field": "[Total Production Value]", "width": 100, "title": "Value", "format": "$#,##0" },
+              { "field": "[YoY Change %]", "width": 80, "title": "YoY %", "format": "0.0%" }
+            ],
+            "topN": {
+              "enabled": true,
+              "topN": 10,
+              "by": "[Total Production Value]",
+              "direction": "top"
+            },
+            "conditionalFormatting": {
+              "[YoY Change %]": {
+                "backgroundScale": {
+                  "min": "#FF6B6B",
+                  "mid": "#FFFFFF",
+                  "max": "#2E7D32",
+                  "minValue": -20,
+                  "midValue": 0,
+                  "maxValue": 20
+                }
+              }
+            },
+            "totals": {
+              "show": true,
+              "label": "Total"
+            }
+          }
+        },
+        {
+          "name": "CommodityDistribution",
+          "type": "donutChart",
+          "position": { "x": 840, "y": 440, "width": 210, "height": 260 },
+          "config": {
+            "title": "Production by Commodity",
+            "legend": {
+              "field": "gold.usda_crop_summary[commodity_name]",
+              "position": "right"
+            },
+            "values": {
+              "measure": "[Total Production Value]"
+            },
+            "detailLabels": {
+              "show": true,
+              "labelStyle": "category, percent"
+            },
+            "innerRadius": 50,
+            "colors": {
+              "Corn": "#FFC107",
+              "Soybeans": "#4CAF50",
+              "Wheat": "#D4A574",
+              "Cotton": "#E0E0E0",
+              "Rice": "#8BC34A"
+            }
+          }
+        },
+        {
+          "name": "SeasonalComparison",
+          "type": "stackedBarChart",
+          "position": { "x": 1060, "y": 440, "width": 200, "height": 260 },
+          "config": {
+            "title": "Seasonal Production",
+            "yAxis": {
+              "field": "gold.usda_crop_summary[crop_season]"
+            },
+            "xAxis": {
+              "field": "[Total Production Volume]",
+              "title": "Production"
+            },
+            "legend": {
+              "field": "gold.usda_crop_summary[commodity_name]",
+              "position": "bottom"
+            },
+            "dataLabels": true
+          }
+        }
+      ],
+      "filters": [
+        {
+          "type": "page",
+          "field": "dim_date[Date]",
+          "filterType": "relativeDateRange",
+          "relativeDateRange": {
+            "timeUnitCount": 12,
+            "timeUnit": "months"
+          }
+        }
+      ]
+    },
+    {
+      "name": "State Analysis",
+      "displayName": "State Analysis",
+      "displayOption": "FitToPage",
+      "width": 1280,
+      "height": 720,
+      "visuals": [
+        {
+          "name": "StateMatrix",
+          "type": "matrix",
+          "position": { "x": 20, "y": 70, "width": 800, "height": 400 },
+          "config": {
+            "title": "Production by State and Commodity",
+            "rows": "gold.usda_state_agriculture[state_name]",
+            "columns": "gold.usda_crop_summary[commodity_name]",
+            "values": [
+              { "measure": "[Total Production Volume]", "format": "#,##0" },
+              { "measure": "[Avg Yield Per Acre]", "format": "#,##0.0" },
+              { "measure": "[Total Production Value]", "format": "$#,##0" }
+            ],
+            "subtotals": {
+              "rowSubtotals": true,
+              "columnSubtotals": true
+            },
+            "conditionalFormatting": {
+              "[Avg Yield Per Acre]": {
+                "dataBar": {
+                  "positive": "#4CAF50",
+                  "negative": "#FF6B6B"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "YieldMap",
+          "type": "filledMap",
+          "position": { "x": 830, "y": 70, "width": 430, "height": 300 },
+          "config": {
+            "title": "Yield by State",
+            "location": {
+              "field": "gold.usda_state_agriculture[state_name]",
+              "type": "state"
+            },
+            "colorSaturation": {
+              "measure": "[Avg Yield Per Acre]",
+              "min": "#E8F5E9",
+              "max": "#1B5E20"
+            },
+            "tooltips": [
+              "[Total Production Volume]",
+              "[Avg Yield Per Acre]",
+              "[Total Production Value]"
+            ]
+          }
+        },
+        {
+          "name": "AcreageTrend",
+          "type": "areaChart",
+          "position": { "x": 830, "y": 380, "width": 430, "height": 160 },
+          "config": {
+            "title": "Planted Acreage Over Time",
+            "xAxis": {
+              "field": "dim_date[Date]"
+            },
+            "yAxis": {
+              "field": "[Total Acres Planted]"
+            },
+            "legend": {
+              "field": "gold.usda_crop_summary[commodity_name]"
+            },
+            "stacked": true
+          }
+        },
+        {
+          "name": "YieldDistribution",
+          "type": "scatterChart",
+          "position": { "x": 20, "y": 480, "width": 800, "height": 220 },
+          "config": {
+            "title": "Yield vs Production Value by State",
+            "xAxis": {
+              "field": "[Avg Yield Per Acre]",
+              "title": "Yield (bushels/acre)"
+            },
+            "yAxis": {
+              "field": "[Total Production Value]",
+              "title": "Production Value ($)"
+            },
+            "size": {
+              "field": "[Total Acres Planted]"
+            },
+            "legend": {
+              "field": "gold.usda_state_agriculture[state_name]"
+            },
+            "trendLine": {
+              "show": true,
+              "type": "linear"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Food Safety",
+      "displayName": "Food Safety",
+      "displayOption": "FitToPage",
+      "width": 1280,
+      "height": 720,
+      "visuals": [
+        {
+          "name": "SafetyKPI_Recalls",
+          "type": "card",
+          "position": { "x": 20, "y": 70, "width": 200, "height": 100 },
+          "config": {
+            "measure": "[Recall Count]",
+            "title": "Active Recalls",
+            "displayUnits": "none",
+            "decimalPlaces": 0,
+            "calloutValue": { "fontSize": 32, "fontColor": "#FF6B6B" }
+          }
+        },
+        {
+          "name": "SafetyKPI_PassRate",
+          "type": "card",
+          "position": { "x": 230, "y": 70, "width": 200, "height": 100 },
+          "config": {
+            "measure": "[Inspection Pass Rate]",
+            "title": "Inspection Pass Rate",
+            "displayUnits": "none",
+            "decimalPlaces": 1,
+            "suffix": "%",
+            "calloutValue": { "fontSize": 32, "fontColor": "#4CAF50" }
+          }
+        },
+        {
+          "name": "SafetyKPI_Violations",
+          "type": "card",
+          "position": { "x": 440, "y": 70, "width": 200, "height": 100 },
+          "config": {
+            "measure": "[Violation Count]",
+            "title": "Total Violations",
+            "displayUnits": "none",
+            "decimalPlaces": 0,
+            "calloutValue": { "fontSize": 32, "fontColor": "#FFC107" }
+          }
+        },
+        {
+          "name": "RecallTrend",
+          "type": "lineChart",
+          "position": { "x": 20, "y": 180, "width": 620, "height": 250 },
+          "config": {
+            "title": "Recall and Violation Trends",
+            "xAxis": { "field": "dim_date[Date]", "dateHierarchy": ["Month"] },
+            "yAxis": { "field": "[Recall Count]", "title": "Count" },
+            "legend": { "position": "top" },
+            "dataLabels": false,
+            "markers": true
+          }
+        },
+        {
+          "name": "ViolationByCategory",
+          "type": "clusteredBarChart",
+          "position": { "x": 650, "y": 180, "width": 610, "height": 250 },
+          "config": {
+            "title": "Violations by Category",
+            "yAxis": {
+              "field": "gold.usda_food_safety_dashboard[violation_category]",
+              "sort": "descending",
+              "sortBy": "[Violation Count]"
+            },
+            "xAxis": { "field": "[Violation Count]", "title": "Count" },
+            "dataLabels": { "show": true, "labelPosition": "outsideEnd" }
+          }
+        },
+        {
+          "name": "SafetyByState",
+          "type": "filledMap",
+          "position": { "x": 20, "y": 440, "width": 620, "height": 260 },
+          "config": {
+            "title": "Food Safety Index by State",
+            "location": {
+              "field": "gold.usda_food_safety_dashboard[state]",
+              "type": "state"
+            },
+            "colorSaturation": {
+              "measure": "[Food Safety Index]",
+              "min": "#FFCDD2",
+              "max": "#1B5E20"
+            }
+          }
+        },
+        {
+          "name": "InspectionResults",
+          "type": "table",
+          "position": { "x": 650, "y": 440, "width": 610, "height": 260 },
+          "config": {
+            "title": "Recent Inspection Results",
+            "columns": [
+              { "field": "gold.usda_food_safety_dashboard[facility_name]", "width": 150, "title": "Facility" },
+              { "field": "gold.usda_food_safety_dashboard[inspection_date]", "width": 90, "title": "Date" },
+              { "field": "gold.usda_food_safety_dashboard[result]", "width": 80, "title": "Result" },
+              { "field": "gold.usda_food_safety_dashboard[violation_count]", "width": 70, "title": "Violations" },
+              { "field": "gold.usda_food_safety_dashboard[severity]", "width": 80, "title": "Severity" }
+            ],
+            "topN": {
+              "enabled": true,
+              "topN": 20,
+              "by": "gold.usda_food_safety_dashboard[inspection_date]",
+              "direction": "top"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bookmarks": [
+    {
+      "name": "CurrentYear",
+      "displayName": "Current Year",
+      "filters": [
+        {
+          "field": "dim_date[Date]",
+          "filterType": "relativeDateRange",
+          "relativeDateRange": { "timeUnitCount": 1, "timeUnit": "years", "includeToday": true }
+        }
+      ]
+    },
+    {
+      "name": "Last12Months",
+      "displayName": "Last 12 Months",
+      "filters": [
+        {
+          "field": "dim_date[Date]",
+          "filterType": "relativeDateRange",
+          "relativeDateRange": { "timeUnitCount": 12, "timeUnit": "months" }
+        }
+      ]
+    },
+    {
+      "name": "GrowingSeason",
+      "displayName": "Growing Season (Apr-Oct)",
+      "filters": [
+        {
+          "field": "dim_date[MonthNum]",
+          "filterType": "advancedFilter",
+          "conditions": [
+            { "operator": "greaterThanOrEqual", "value": 4 },
+            { "operator": "lessThanOrEqual", "value": 10 }
+          ]
+        }
+      ]
+    }
+  ],
+  "drillthrough": [
+    {
+      "name": "StateDetails",
+      "targetPage": "State Drillthrough",
+      "fields": ["gold.usda_state_agriculture[state_name]"],
+      "keepAllFilters": true
+    }
+  ],
+  "subscriptions": [
+    {
+      "name": "Weekly Agriculture Summary",
+      "schedule": {
+        "frequency": "weekly",
+        "dayOfWeek": "Monday",
+        "time": "08:00",
+        "timezone": "America/New_York"
+      },
+      "recipients": ["agriculture-analytics@usda.gov"],
+      "format": "pdf",
+      "pages": ["Executive Summary"]
+    }
+  ]
+}

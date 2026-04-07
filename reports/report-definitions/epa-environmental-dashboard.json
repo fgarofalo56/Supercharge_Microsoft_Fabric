@@ -1,0 +1,569 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/reportDefinition/1.0.0/schema.json",
+  "metadata": {
+    "name": "EPA Environmental Dashboard",
+    "description": "Air quality monitoring, toxic release tracking, water compliance, and environmental scorecard",
+    "version": "1.0.0",
+    "lastModified": "2026-03-12",
+    "author": "Fabric POC Team",
+    "tags": ["epa", "environment", "air-quality", "toxic-releases", "water-compliance", "federal"]
+  },
+  "datasetBinding": {
+    "semantic_model": "Federal Environmental Analytics Model",
+    "workspace": "federal-fabric-poc",
+    "connection_mode": "Direct Lake"
+  },
+  "theme": {
+    "name": "EPA Blue-Green",
+    "primaryColor": "#00467F",
+    "secondaryColor": "#005B96",
+    "accentColor": "#00838F",
+    "highlightColor": "#26A69A",
+    "fontFamily": "Segoe UI"
+  },
+  "pages": [
+    {
+      "name": "Air Quality",
+      "displayName": "Air Quality",
+      "displayOption": "FitToPage",
+      "width": 1280,
+      "height": 720,
+      "background": {
+        "color": "#F0F9FA",
+        "transparency": 0
+      },
+      "visuals": [
+        {
+          "name": "Title",
+          "type": "textbox",
+          "position": { "x": 20, "y": 10, "width": 500, "height": 50 },
+          "config": {
+            "text": "EPA ENVIRONMENTAL DASHBOARD",
+            "fontSize": 24,
+            "fontWeight": "bold",
+            "fontColor": "#00467F"
+          }
+        },
+        {
+          "name": "DateSlicer",
+          "type": "slicer",
+          "position": { "x": 1000, "y": 10, "width": 260, "height": 50 },
+          "config": {
+            "field": "dim_date[Date]",
+            "selectionType": "between",
+            "defaultSelection": "Last 30 Days",
+            "orientation": "horizontal"
+          }
+        },
+        {
+          "name": "KPI_AQIAvg",
+          "type": "card",
+          "position": { "x": 20, "y": 70, "width": 200, "height": 100 },
+          "config": {
+            "measure": "[Avg AQI]",
+            "title": "Average AQI",
+            "displayUnits": "none",
+            "decimalPlaces": 0,
+            "calloutValue": {
+              "fontSize": 32,
+              "fontColor": "#00838F"
+            },
+            "conditionalFormatting": {
+              "rules": [
+                { "condition": "value <= 50", "color": "#2E7D32" },
+                { "condition": "value <= 100", "color": "#FFC107" },
+                { "condition": "value <= 150", "color": "#FF9800" },
+                { "condition": "value > 150", "color": "#FF6B6B" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "KPI_ViolationRate",
+          "type": "card",
+          "position": { "x": 230, "y": 70, "width": 200, "height": 100 },
+          "config": {
+            "measure": "[Violation Rate]",
+            "title": "Violation Rate",
+            "displayUnits": "none",
+            "decimalPlaces": 1,
+            "suffix": "%",
+            "calloutValue": {
+              "fontSize": 32,
+              "fontColor": "#FF6B6B"
+            },
+            "conditionalFormatting": {
+              "rules": [
+                { "condition": "value <= 2", "color": "#2E7D32" },
+                { "condition": "value <= 5", "color": "#FFC107" },
+                { "condition": "value > 5", "color": "#FF6B6B" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "KPI_ComplianceScore",
+          "type": "card",
+          "position": { "x": 440, "y": 70, "width": 200, "height": 100 },
+          "config": {
+            "measure": "[Compliance Score]",
+            "title": "Compliance Score",
+            "displayUnits": "none",
+            "decimalPlaces": 1,
+            "calloutValue": {
+              "fontSize": 32,
+              "fontColor": "#26A69A"
+            },
+            "conditionalFormatting": {
+              "rules": [
+                { "condition": "value >= 90", "color": "#2E7D32" },
+                { "condition": "value >= 70", "color": "#FFC107" },
+                { "condition": "value < 70", "color": "#FF6B6B" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "KPI_ToxicReleases",
+          "type": "card",
+          "position": { "x": 650, "y": 70, "width": 200, "height": 100 },
+          "config": {
+            "measure": "[Total Toxic Releases]",
+            "title": "Toxic Releases (lbs)",
+            "displayUnits": "auto",
+            "decimalPlaces": 0,
+            "calloutValue": {
+              "fontSize": 32,
+              "fontColor": "#E65100"
+            }
+          }
+        },
+        {
+          "name": "PollutantSlicer",
+          "type": "slicer",
+          "position": { "x": 870, "y": 70, "width": 180, "height": 100 },
+          "config": {
+            "field": "gold.epa_air_quality_index[pollutant]",
+            "selectionType": "multiSelect",
+            "searchEnabled": true,
+            "orientation": "vertical",
+            "title": "Pollutant"
+          }
+        },
+        {
+          "name": "AQITrendKPI",
+          "type": "kpi",
+          "position": { "x": 1060, "y": 70, "width": 200, "height": 100 },
+          "config": {
+            "indicator": "[Avg AQI]",
+            "trendAxis": "dim_date[Date]",
+            "targetGoal": "[AQI Target]",
+            "title": "AQI Trend",
+            "showTrendLine": true,
+            "goalDirection": "decrease"
+          }
+        },
+        {
+          "name": "AQITrend",
+          "type": "lineChart",
+          "position": { "x": 20, "y": 180, "width": 800, "height": 250 },
+          "config": {
+            "title": "Air Quality Index Trend",
+            "xAxis": {
+              "field": "dim_date[Date]",
+              "dateHierarchy": ["Month", "Day"],
+              "title": ""
+            },
+            "yAxis": {
+              "field": "[Avg AQI]",
+              "title": "AQI Value",
+              "startFromZero": true
+            },
+            "legend": {
+              "field": "gold.epa_air_quality_index[pollutant]",
+              "position": "top"
+            },
+            "dataLabels": false,
+            "markers": false,
+            "referenceLine": {
+              "value": 100,
+              "label": "Unhealthy Threshold",
+              "style": "dashed",
+              "color": "#FF6B6B"
+            }
+          }
+        },
+        {
+          "name": "EnvironmentalSummary",
+          "type": "multiRowCard",
+          "position": { "x": 830, "y": 180, "width": 430, "height": 120 },
+          "config": {
+            "title": "Environmental Summary",
+            "measures": [
+              { "field": "[Active Facilities]", "label": "Facilities Monitored" },
+              { "field": "[Exceedance Days]", "label": "Exceedance Days" },
+              { "field": "[Enforcement Actions]", "label": "Enforcements" },
+              { "field": "[Penalties Assessed]", "label": "Penalties ($)" }
+            ],
+            "conditionalFormatting": {
+              "[Exceedance Days]": {
+                "rules": [
+                  { "condition": "value > 30", "color": "#FF6B6B" },
+                  { "condition": "value > 10", "color": "#FFC107" },
+                  { "condition": "value <= 10", "color": "#2E7D32" }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "name": "ComplianceGauge",
+          "type": "gauge",
+          "position": { "x": 830, "y": 310, "width": 200, "height": 120 },
+          "config": {
+            "value": "[Compliance Score]",
+            "minimum": 0,
+            "maximum": 100,
+            "target": 90,
+            "title": "Compliance Score",
+            "calloutValue": { "fontSize": 24 },
+            "colorRanges": [
+              { "min": 0, "max": 69, "color": "#FF6B6B" },
+              { "min": 70, "max": 89, "color": "#FFC107" },
+              { "min": 90, "max": 100, "color": "#2E7D32" }
+            ]
+          }
+        },
+        {
+          "name": "AQIMap",
+          "type": "filledMap",
+          "position": { "x": 20, "y": 440, "width": 500, "height": 260 },
+          "config": {
+            "title": "AQI by State",
+            "location": {
+              "field": "gold.epa_air_quality_index[state]",
+              "type": "state"
+            },
+            "colorSaturation": {
+              "measure": "[Avg AQI]",
+              "min": "#E0F2F1",
+              "max": "#B71C1C"
+            },
+            "tooltips": [
+              "[Avg AQI]",
+              "[Exceedance Days]",
+              "[Violation Rate]"
+            ]
+          }
+        },
+        {
+          "name": "PollutantTable",
+          "type": "table",
+          "position": { "x": 530, "y": 440, "width": 400, "height": 260 },
+          "config": {
+            "title": "Air Quality by Pollutant",
+            "columns": [
+              { "field": "gold.epa_air_quality_index[pollutant]", "width": 100, "title": "Pollutant" },
+              { "field": "[Avg AQI]", "width": 60, "title": "Avg AQI", "format": "#,##0" },
+              { "field": "[Max AQI]", "width": 60, "title": "Max AQI", "format": "#,##0" },
+              { "field": "[Exceedance Days]", "width": 80, "title": "Exceed Days", "format": "#,##0" },
+              { "field": "[Monitoring Stations]", "width": 70, "title": "Stations", "format": "#,##0" }
+            ],
+            "conditionalFormatting": {
+              "[Avg AQI]": {
+                "backgroundScale": {
+                  "min": "#2E7D32",
+                  "mid": "#FFC107",
+                  "max": "#FF6B6B",
+                  "minValue": 0,
+                  "midValue": 100,
+                  "maxValue": 200
+                }
+              }
+            },
+            "totals": { "show": false }
+          }
+        },
+        {
+          "name": "AQICategoryBreakdown",
+          "type": "donutChart",
+          "position": { "x": 940, "y": 440, "width": 320, "height": 260 },
+          "config": {
+            "title": "Days by AQI Category",
+            "legend": {
+              "field": "gold.epa_air_quality_index[aqi_category]",
+              "position": "right"
+            },
+            "values": {
+              "measure": "[Day Count]"
+            },
+            "detailLabels": { "show": true, "labelStyle": "category, percent" },
+            "innerRadius": 50,
+            "colors": {
+              "Good": "#2E7D32",
+              "Moderate": "#FFC107",
+              "Unhealthy for Sensitive": "#FF9800",
+              "Unhealthy": "#FF6B6B",
+              "Very Unhealthy": "#9C27B0",
+              "Hazardous": "#B71C1C"
+            }
+          }
+        }
+      ],
+      "filters": [
+        {
+          "type": "page",
+          "field": "dim_date[Date]",
+          "filterType": "relativeDateRange",
+          "relativeDateRange": {
+            "timeUnitCount": 30,
+            "timeUnit": "days"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Facility Risk",
+      "displayName": "Facility Risk",
+      "displayOption": "FitToPage",
+      "width": 1280,
+      "height": 720,
+      "visuals": [
+        {
+          "name": "FacilityMatrix",
+          "type": "matrix",
+          "position": { "x": 20, "y": 70, "width": 800, "height": 400 },
+          "config": {
+            "title": "Facility Risk Assessment",
+            "rows": "gold.epa_facility_risk[facility_name]",
+            "columns": "gold.epa_facility_risk[risk_category]",
+            "values": [
+              { "measure": "[Total Toxic Releases]", "format": "#,##0 lbs" },
+              { "measure": "[Violation Count]", "format": "#,##0" },
+              { "measure": "[Risk Score]", "format": "0.0" }
+            ],
+            "subtotals": { "rowSubtotals": true, "columnSubtotals": true },
+            "conditionalFormatting": {
+              "[Risk Score]": {
+                "dataBar": { "positive": "#FF6B6B", "negative": "#2E7D32" }
+              }
+            }
+          }
+        },
+        {
+          "name": "ToxicReleasesTrend",
+          "type": "areaChart",
+          "position": { "x": 830, "y": 70, "width": 430, "height": 200 },
+          "config": {
+            "title": "Toxic Releases Over Time",
+            "xAxis": { "field": "dim_date[Date]" },
+            "yAxis": { "field": "[Total Toxic Releases]" },
+            "legend": { "field": "gold.epa_facility_risk[chemical_category]" },
+            "stacked": true
+          }
+        },
+        {
+          "name": "ViolationsByType",
+          "type": "clusteredBarChart",
+          "position": { "x": 830, "y": 280, "width": 430, "height": 200 },
+          "config": {
+            "title": "Violations by Type",
+            "yAxis": {
+              "field": "gold.epa_facility_risk[violation_type]",
+              "sort": "descending",
+              "sortBy": "[Violation Count]"
+            },
+            "xAxis": { "field": "[Violation Count]", "title": "Count" },
+            "dataLabels": { "show": true, "labelPosition": "outsideEnd" }
+          }
+        },
+        {
+          "name": "RiskScatter",
+          "type": "scatterChart",
+          "position": { "x": 20, "y": 480, "width": 1240, "height": 220 },
+          "config": {
+            "title": "Releases vs Violations by Facility",
+            "xAxis": { "field": "[Total Toxic Releases]", "title": "Total Releases (lbs)" },
+            "yAxis": { "field": "[Violation Count]", "title": "Violations" },
+            "size": { "field": "[Risk Score]" },
+            "legend": { "field": "gold.epa_facility_risk[industry_sector]" },
+            "trendLine": { "show": true, "type": "linear" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Water Compliance",
+      "displayName": "Water Compliance",
+      "displayOption": "FitToPage",
+      "width": 1280,
+      "height": 720,
+      "visuals": [
+        {
+          "name": "WaterKPI_Compliance",
+          "type": "card",
+          "position": { "x": 20, "y": 70, "width": 200, "height": 100 },
+          "config": {
+            "measure": "[Water Compliance Rate]",
+            "title": "Compliance Rate",
+            "displayUnits": "none",
+            "decimalPlaces": 1,
+            "suffix": "%",
+            "calloutValue": { "fontSize": 32, "fontColor": "#00838F" }
+          }
+        },
+        {
+          "name": "WaterKPI_Violations",
+          "type": "card",
+          "position": { "x": 230, "y": 70, "width": 200, "height": 100 },
+          "config": {
+            "measure": "[Water Violation Count]",
+            "title": "Water Violations",
+            "displayUnits": "none",
+            "decimalPlaces": 0,
+            "calloutValue": { "fontSize": 32, "fontColor": "#FF6B6B" }
+          }
+        },
+        {
+          "name": "WaterKPI_Systems",
+          "type": "card",
+          "position": { "x": 440, "y": 70, "width": 200, "height": 100 },
+          "config": {
+            "measure": "[Water Systems Monitored]",
+            "title": "Systems Monitored",
+            "displayUnits": "thousands",
+            "decimalPlaces": 1,
+            "calloutValue": { "fontSize": 32, "fontColor": "#005B96" }
+          }
+        },
+        {
+          "name": "WaterComplianceTrend",
+          "type": "lineChart",
+          "position": { "x": 20, "y": 180, "width": 620, "height": 250 },
+          "config": {
+            "title": "Water Compliance Rate Over Time",
+            "xAxis": { "field": "dim_date[Date]", "dateHierarchy": ["Year", "Quarter"] },
+            "yAxis": { "field": "[Water Compliance Rate]", "title": "Compliance %" },
+            "legend": { "field": "gold.epa_water_compliance[water_system_type]", "position": "top" },
+            "dataLabels": false
+          }
+        },
+        {
+          "name": "WaterViolationMap",
+          "type": "filledMap",
+          "position": { "x": 650, "y": 180, "width": 610, "height": 250 },
+          "config": {
+            "title": "Water Violations by State",
+            "location": {
+              "field": "gold.epa_water_compliance[state]",
+              "type": "state"
+            },
+            "colorSaturation": {
+              "measure": "[Water Violation Count]",
+              "min": "#E0F7FA",
+              "max": "#B71C1C"
+            }
+          }
+        },
+        {
+          "name": "ContaminantTable",
+          "type": "table",
+          "position": { "x": 20, "y": 440, "width": 620, "height": 260 },
+          "config": {
+            "title": "Top Contaminants",
+            "columns": [
+              { "field": "gold.epa_water_compliance[contaminant]", "width": 150, "title": "Contaminant" },
+              { "field": "[Water Violation Count]", "width": 80, "title": "Violations", "format": "#,##0" },
+              { "field": "[Max Contaminant Level]", "width": 80, "title": "Max Level", "format": "0.000" },
+              { "field": "[Systems Affected]", "width": 80, "title": "Systems", "format": "#,##0" },
+              { "field": "[Population Affected]", "width": 90, "title": "Population", "format": "#,##0" }
+            ],
+            "topN": { "enabled": true, "topN": 15, "by": "[Water Violation Count]", "direction": "top" }
+          }
+        },
+        {
+          "name": "SystemTypeBreakdown",
+          "type": "donutChart",
+          "position": { "x": 650, "y": 440, "width": 300, "height": 260 },
+          "config": {
+            "title": "Violations by System Type",
+            "legend": {
+              "field": "gold.epa_water_compliance[water_system_type]",
+              "position": "right"
+            },
+            "values": { "measure": "[Water Violation Count]" },
+            "detailLabels": { "show": true, "labelStyle": "category, percent" },
+            "innerRadius": 50
+          }
+        },
+        {
+          "name": "EnforcementActions",
+          "type": "clusteredColumnChart",
+          "position": { "x": 960, "y": 440, "width": 300, "height": 260 },
+          "config": {
+            "title": "Enforcement Actions",
+            "xAxis": { "field": "gold.epa_water_compliance[enforcement_type]" },
+            "yAxis": { "field": "[Enforcement Actions]" },
+            "dataLabels": true
+          }
+        }
+      ]
+    }
+  ],
+  "bookmarks": [
+    {
+      "name": "Last30Days",
+      "displayName": "Last 30 Days",
+      "filters": [
+        {
+          "field": "dim_date[Date]",
+          "filterType": "relativeDateRange",
+          "relativeDateRange": { "timeUnitCount": 30, "timeUnit": "days" }
+        }
+      ]
+    },
+    {
+      "name": "CurrentYear",
+      "displayName": "Current Year",
+      "filters": [
+        {
+          "field": "dim_date[Date]",
+          "filterType": "relativeDateRange",
+          "relativeDateRange": { "timeUnitCount": 1, "timeUnit": "years", "includeToday": true }
+        }
+      ]
+    },
+    {
+      "name": "OzoneFocus",
+      "displayName": "Ozone Focus",
+      "filters": [
+        {
+          "field": "gold.epa_air_quality_index[pollutant]",
+          "filterType": "basicFilter",
+          "value": "Ozone"
+        }
+      ]
+    }
+  ],
+  "drillthrough": [
+    {
+      "name": "FacilityDetails",
+      "targetPage": "Facility Drillthrough",
+      "fields": ["gold.epa_facility_risk[facility_id]"],
+      "keepAllFilters": true
+    }
+  ],
+  "subscriptions": [
+    {
+      "name": "Daily Air Quality Alert",
+      "schedule": {
+        "frequency": "daily",
+        "time": "07:00",
+        "timezone": "America/New_York"
+      },
+      "recipients": ["air-quality-team@epa.gov"],
+      "format": "pdf",
+      "pages": ["Air Quality"]
+    }
+  ]
+}

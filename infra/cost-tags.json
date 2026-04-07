@@ -1,0 +1,239 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.40.2.10011",
+      "templateHash": "1614818791816765516"
+    }
+  },
+  "parameters": {
+    "costCenter": {
+      "type": "string",
+      "metadata": {
+        "description": "Cost center code for billing allocation"
+      }
+    },
+    "project": {
+      "type": "string",
+      "defaultValue": "fabric-casino-poc",
+      "metadata": {
+        "description": "Project name for cost tracking"
+      }
+    },
+    "environment": {
+      "type": "string",
+      "allowedValues": [
+        "dev",
+        "staging",
+        "prod",
+        "demo",
+        "sandbox"
+      ],
+      "metadata": {
+        "description": "Environment name (dev, staging, prod)"
+      }
+    },
+    "owner": {
+      "type": "string",
+      "metadata": {
+        "description": "Owner email or team name responsible for the resources"
+      }
+    },
+    "department": {
+      "type": "string",
+      "defaultValue": "Data Engineering",
+      "metadata": {
+        "description": "Department name for organizational cost allocation"
+      }
+    },
+    "application": {
+      "type": "string",
+      "defaultValue": "Microsoft Fabric POC",
+      "metadata": {
+        "description": "Application name for workload identification"
+      }
+    },
+    "businessUnit": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Business unit for enterprise chargeback"
+      }
+    },
+    "budgetCode": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Budget code for financial tracking"
+      }
+    },
+    "startDate": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Start date for the project (YYYY-MM-DD)"
+      }
+    },
+    "endDate": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Expected end date for the project (YYYY-MM-DD)"
+      }
+    },
+    "criticality": {
+      "type": "string",
+      "defaultValue": "medium",
+      "allowedValues": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ],
+      "metadata": {
+        "description": "Criticality level of the workload"
+      }
+    },
+    "managedBy": {
+      "type": "string",
+      "defaultValue": "Bicep",
+      "metadata": {
+        "description": "Whether the resource is managed by automation"
+      }
+    },
+    "additionalTags": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "Additional custom tags"
+      }
+    },
+    "enableBudget": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Enable monthly budget alert creation"
+      }
+    },
+    "budgetAmount": {
+      "type": "int",
+      "defaultValue": 10000,
+      "metadata": {
+        "description": "Monthly budget amount in USD"
+      }
+    },
+    "contactEmails": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "Contact emails for budget alerts"
+      }
+    },
+    "budgetStartDate": {
+      "type": "string",
+      "defaultValue": "[format('{0}-01', substring(utcNow(), 0, 7))]",
+      "metadata": {
+        "description": "Start date for the budget period (YYYY-MM-01). Defaults to current month."
+      }
+    }
+  },
+  "variables": {
+    "coreTags": {
+      "CostCenter": "[parameters('costCenter')]",
+      "Project": "[parameters('project')]",
+      "Environment": "[parameters('environment')]",
+      "Owner": "[parameters('owner')]",
+      "Department": "[parameters('department')]",
+      "Application": "[parameters('application')]",
+      "ManagedBy": "[parameters('managedBy')]",
+      "Criticality": "[parameters('criticality')]"
+    },
+    "financialTags": "[union(if(not(empty(parameters('businessUnit'))), createObject('BusinessUnit', parameters('businessUnit')), createObject()), if(not(empty(parameters('budgetCode'))), createObject('BudgetCode', parameters('budgetCode')), createObject()))]",
+    "lifecycleTags": "[union(if(not(empty(parameters('startDate'))), createObject('StartDate', parameters('startDate')), createObject()), if(not(empty(parameters('endDate'))), createObject('EndDate', parameters('endDate')), createObject()))]",
+    "allTags": "[union(variables('coreTags'), variables('financialTags'), variables('lifecycleTags'), parameters('additionalTags'))]"
+  },
+  "resources": [
+    {
+      "condition": "[and(parameters('enableBudget'), not(empty(parameters('contactEmails'))))]",
+      "type": "Microsoft.Consumption/budgets",
+      "apiVersion": "2023-11-01",
+      "name": "[format('budget-{0}-{1}', parameters('project'), parameters('environment'))]",
+      "properties": {
+        "category": "Cost",
+        "amount": "[parameters('budgetAmount')]",
+        "timeGrain": "Monthly",
+        "timePeriod": {
+          "startDate": "[parameters('budgetStartDate')]"
+        },
+        "notifications": {
+          "actual_GreaterThan_50_Percent": {
+            "enabled": true,
+            "operator": "GreaterThan",
+            "threshold": 50,
+            "contactEmails": "[parameters('contactEmails')]",
+            "thresholdType": "Actual"
+          },
+          "actual_GreaterThan_80_Percent": {
+            "enabled": true,
+            "operator": "GreaterThan",
+            "threshold": 80,
+            "contactEmails": "[parameters('contactEmails')]",
+            "thresholdType": "Actual"
+          },
+          "actual_GreaterThan_100_Percent": {
+            "enabled": true,
+            "operator": "GreaterThan",
+            "threshold": 100,
+            "contactEmails": "[parameters('contactEmails')]",
+            "thresholdType": "Actual"
+          },
+          "forecasted_GreaterThan_100_Percent": {
+            "enabled": true,
+            "operator": "GreaterThan",
+            "threshold": 100,
+            "contactEmails": "[parameters('contactEmails')]",
+            "thresholdType": "Forecasted"
+          }
+        }
+      }
+    }
+  ],
+  "outputs": {
+    "tags": {
+      "type": "object",
+      "metadata": {
+        "description": "Complete set of cost allocation tags to apply to resources"
+      },
+      "value": "[variables('allTags')]"
+    },
+    "coreTags": {
+      "type": "object",
+      "metadata": {
+        "description": "Core tags only (without optional/custom tags)"
+      },
+      "value": "[variables('coreTags')]"
+    },
+    "tagNames": {
+      "type": "array",
+      "metadata": {
+        "description": "Tag names for documentation"
+      },
+      "value": [
+        "CostCenter",
+        "Project",
+        "Environment",
+        "Owner",
+        "Department",
+        "Application",
+        "ManagedBy",
+        "Criticality",
+        "BusinessUnit",
+        "BudgetCode",
+        "StartDate",
+        "EndDate"
+      ]
+    }
+  }
+}
