@@ -1,3 +1,0 @@
-# AdGuard Home Skill Dependencies
-requests>=2.28.0
-paramiko>=3.0.0

@@ -1,2 +1,0 @@
-# Microsoft 365 Agents Toolkit Helper Dependencies
-# No dependencies required - this skill uses MCP tools directly

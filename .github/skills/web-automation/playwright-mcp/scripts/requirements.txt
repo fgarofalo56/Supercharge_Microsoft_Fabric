@@ -1,5 +1,0 @@
-# Playwright MCP Helper Dependencies
-# These are optional - only needed if using playwright_helper.py directly
-
-# No external dependencies required
-# The helper script uses only Python standard library

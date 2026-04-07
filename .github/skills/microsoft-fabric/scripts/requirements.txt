@@ -1,2 +1,0 @@
-# Microsoft Fabric Helper Dependencies
-# No dependencies required - this skill uses MCP tools directly

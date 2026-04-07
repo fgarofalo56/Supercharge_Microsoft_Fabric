@@ -1,2 +1,0 @@
-# Fabric RTI MCP Helper Dependencies
-# No dependencies required - this skill uses MCP tools directly
