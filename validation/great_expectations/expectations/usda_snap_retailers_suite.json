@@ -1,0 +1,129 @@
+{
+  "expectation_suite_name": "usda_snap_retailers_suite",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "record_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "store_name"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "state"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "latitude"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "longitude"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "record_id"
+      },
+      "meta": {
+        "notes": "Record ID is the primary identifier for each retailer"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "store_name",
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "Store name should be present for most SNAP retailer records"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": {
+        "column": "record_id"
+      },
+      "meta": {
+        "notes": "Record ID must be unique across all retailer records"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "store_type",
+        "value_set": [
+          "Convenience Store",
+          "Supermarket",
+          "Super Store",
+          "Small Grocery Store",
+          "Medium Grocery Store",
+          "Large Grocery Store",
+          "Combination Grocery/Other",
+          "Farmers' Market",
+          "Specialty Food Store",
+          "Military Commissary",
+          "Wholesale Club",
+          "Other",
+          null
+        ],
+        "mostly": 0.80
+      },
+      "meta": {
+        "notes": "SNAP retailer store types as classified by USDA FNS"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "latitude",
+        "min_value": 17.0,
+        "max_value": 72.0,
+        "mostly": 0.90
+      },
+      "meta": {
+        "notes": "SNAP retailers are located within US territory"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "longitude",
+        "min_value": -180.0,
+        "max_value": -64.0,
+        "mostly": 0.90
+      },
+      "meta": {
+        "notes": "SNAP retailers are located within US territory"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "zip_code",
+        "regex": "^\\d{5}(-\\d{4})?$",
+        "mostly": 0.85
+      },
+      "meta": {
+        "notes": "ZIP code must be 5-digit or ZIP+4 format"
+      }
+    }
+  ],
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "notes": "Data quality expectations for USDA SNAP/EBT retailer location records",
+    "domain": "United States Department of Agriculture",
+    "data_source": "USDA Food and Nutrition Service (FNS) SNAP Retailer ArcGIS Hub"
+  }
+}

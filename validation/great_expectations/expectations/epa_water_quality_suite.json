@@ -1,0 +1,114 @@
+{
+  "expectation_suite_name": "epa_water_quality_suite",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "system_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "record_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "contaminant"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "state_code"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "system_id"
+      },
+      "meta": {
+        "notes": "Public water system ID (PWSID) is the primary identifier"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "record_id"
+      },
+      "meta": {
+        "notes": "Violation ID uniquely identifies each violation record"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": {
+        "column": "record_id"
+      },
+      "meta": {
+        "notes": "Violation ID must be unique across all records"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "state_code",
+        "regex": "^[A-Z]{2}$",
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "State/primacy agency code should be a 2-letter abbreviation"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "contaminant",
+        "mostly": 0.90
+      },
+      "meta": {
+        "notes": "Contaminant name should be present for most violations"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "system_type",
+        "value_set": [
+          "CWS",
+          "NTNCWS",
+          "TNCWS",
+          null
+        ]
+      },
+      "meta": {
+        "notes": "Water system type: Community (CWS), Non-Transient Non-Community (NTNCWS), Transient Non-Community (TNCWS)"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "population_served",
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 0.90
+      },
+      "meta": {
+        "notes": "Population served must be non-negative when present"
+      }
+    }
+  ],
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "notes": "Data quality expectations for EPA Safe Drinking Water Information System (SDWIS) violation records",
+    "domain": "Environmental Protection Agency",
+    "data_source": "EPA Envirofacts SDWIS",
+    "compliance_requirements": [
+      "Safe Drinking Water Act (SDWA)",
+      "National Primary Drinking Water Regulations"
+    ]
+  }
+}

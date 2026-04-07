@@ -1,0 +1,89 @@
+{
+  "expectation_suite_name": "noaa_tide_data_suite",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "timestamp"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "water_level_m"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "quality_flag"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "timestamp"
+      },
+      "meta": {
+        "notes": "Observation timestamp is required for time-series analysis"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "water_level_m",
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "Water level measurement should be present for most observations"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "water_level_m",
+        "min_value": -20.0,
+        "max_value": 20.0,
+        "mostly": 0.99
+      },
+      "meta": {
+        "notes": "Water level in meters relative to station datum; extreme tides rarely exceed +/-15m"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "sigma",
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 0.90
+      },
+      "meta": {
+        "notes": "Standard deviation (sigma) of observations must be non-negative"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "quality_flag",
+        "value_set": [
+          "0,0,0,0",
+          "1,0,0,0",
+          "0,0,1,0",
+          "1,0,1,0",
+          null
+        ],
+        "mostly": 0.80
+      },
+      "meta": {
+        "notes": "CO-OPS quality flags: comma-separated flags for preliminary/verified data"
+      }
+    }
+  ],
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "notes": "Data quality expectations for NOAA CO-OPS tide and water level observations",
+    "domain": "National Oceanic and Atmospheric Administration",
+    "data_source": "NOAA Center for Operational Oceanographic Products and Services (CO-OPS)"
+  }
+}

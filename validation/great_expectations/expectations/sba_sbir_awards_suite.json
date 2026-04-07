@@ -1,0 +1,138 @@
+{
+  "expectation_suite_name": "sba_sbir_awards_suite",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "loan_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "loan_amount"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "agency"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "program_type"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "phase"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "loan_id"
+      },
+      "meta": {
+        "notes": "Award ID is the primary identifier for SBIR/STTR awards"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "loan_amount",
+        "mostly": 0.90
+      },
+      "meta": {
+        "notes": "Award amount should be present for most records"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": {
+        "column": "loan_id"
+      },
+      "meta": {
+        "notes": "Award ID must be unique across all SBIR records"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "loan_amount",
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "Award amount must be non-negative"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "program_type",
+        "value_set": [
+          "SBIR",
+          "STTR"
+        ]
+      },
+      "meta": {
+        "notes": "Program type must be SBIR or STTR"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "phase",
+        "value_set": [
+          "Phase I",
+          "Phase II",
+          "Phase III",
+          "1",
+          "2",
+          "3",
+          null
+        ],
+        "mostly": 0.85
+      },
+      "meta": {
+        "notes": "SBIR/STTR awards are made in Phases I, II, and III"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "borrower_state",
+        "regex": "^[A-Z]{2}$",
+        "mostly": 0.90
+      },
+      "meta": {
+        "notes": "Awardee state should be a 2-letter abbreviation"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "agency",
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "Sponsoring federal agency is required for tracking"
+      }
+    }
+  ],
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "notes": "Data quality expectations for SBIR/STTR innovation award records",
+    "domain": "Small Business Administration",
+    "data_source": "SBIR.gov API",
+    "compliance_requirements": [
+      "Small Business Innovation Research (SBIR) Program",
+      "Small Business Technology Transfer (STTR) Program"
+    ]
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "expectation_suite_name": "epa_echo_compliance_suite",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "registry_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "facility_name"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "state_code"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "latitude"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "longitude"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "registry_id"
+      },
+      "meta": {
+        "notes": "EPA FRS Registry ID is the primary facility identifier"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "facility_name",
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "Facility name should be present for most records"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": {
+        "column": "registry_id"
+      },
+      "meta": {
+        "notes": "Registry ID must be unique across all facility records"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "state_code",
+        "regex": "^[A-Z]{2}$",
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "State code must be a 2-letter uppercase abbreviation"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "latitude",
+        "min_value": 17.0,
+        "max_value": 72.0,
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "Latitude must be within the US range (including territories)"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "longitude",
+        "min_value": -180.0,
+        "max_value": -64.0,
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "Longitude must be within the US range (including territories)"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "inspection_count",
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "Inspection count must be non-negative"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "quarters_in_noncompliance",
+        "min_value": 0,
+        "max_value": 12,
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "Quarters in noncompliance tracks the last 12 quarters (3 years)"
+      }
+    }
+  ],
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "notes": "Data quality expectations for EPA ECHO facility compliance records",
+    "domain": "Environmental Protection Agency",
+    "data_source": "EPA ECHO (Enforcement and Compliance History Online)",
+    "compliance_requirements": [
+      "Clean Air Act (CAA)",
+      "Clean Water Act (CWA)",
+      "Resource Conservation and Recovery Act (RCRA)"
+    ]
+  }
+}

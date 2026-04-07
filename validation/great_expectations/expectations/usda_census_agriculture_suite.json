@@ -1,0 +1,156 @@
+{
+  "expectation_suite_name": "usda_census_agriculture_suite",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "commodity"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "year"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "state_fips"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "value"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "source_desc"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "commodity"
+      },
+      "meta": {
+        "notes": "Commodity is required for all Census of Agriculture records"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "year"
+      },
+      "meta": {
+        "notes": "Census year is required for temporal identification"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "year",
+        "value_set": [
+          2002,
+          2007,
+          2012,
+          2017,
+          2022
+        ]
+      },
+      "meta": {
+        "notes": "Census of Agriculture is conducted every 5 years"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "commodity",
+        "value_set": [
+          "CORN",
+          "SOYBEANS",
+          "WHEAT",
+          "COTTON",
+          "CATTLE",
+          "HOGS",
+          "RICE",
+          "BARLEY",
+          "OATS",
+          "SORGHUM",
+          "HAY",
+          "POTATOES"
+        ],
+        "mostly": 0.85
+      },
+      "meta": {
+        "notes": "Commodity must be a supported NASS commodity type"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "source_desc",
+        "value_set": [
+          "CENSUS",
+          "Census_of_Agriculture_API",
+          "Census_of_Agriculture_Bulk",
+          null
+        ]
+      },
+      "meta": {
+        "notes": "Source descriptor identifies how data was obtained"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "state_fips",
+        "regex": "^\\d{2}$",
+        "mostly": 0.90
+      },
+      "meta": {
+        "notes": "State FIPS must be a 2-digit zero-padded numeric code"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "agg_level_desc",
+        "value_set": [
+          "NATIONAL",
+          "STATE",
+          "COUNTY",
+          null
+        ]
+      },
+      "meta": {
+        "notes": "Aggregation level: NATIONAL, STATE, or COUNTY"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "value",
+        "min_value": 0,
+        "max_value": 999999999999,
+        "mostly": 0.90
+      },
+      "meta": {
+        "notes": "Census values must be non-negative"
+      }
+    }
+  ],
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "notes": "Data quality expectations for USDA Census of Agriculture records",
+    "domain": "United States Department of Agriculture",
+    "data_source": "NASS QuickStats API (source_desc=CENSUS)",
+    "compliance_requirements": [
+      "Census of Agriculture Act (Title 7, Chapter 55)",
+      "Conducted every 5 years per USDA mandate"
+    ]
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "expectation_suite_name": "sba_7a_504_loans_suite",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "loan_amount"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "program_type"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "borrower_state"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "approval_date"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "sba_guaranteed_amount"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "loan_amount"
+      },
+      "meta": {
+        "notes": "Loan amount is required for all 7(a) and 504 loan records"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "program_type",
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "Program type identifies 7(a) vs 504 loan program"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "loan_amount",
+        "min_value": 0,
+        "max_value": null,
+        "strictly": true,
+        "mostly": 0.99
+      },
+      "meta": {
+        "notes": "Loan amount must be strictly positive"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "borrower_state",
+        "regex": "^[A-Z]{2}$",
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "Borrower state must be a 2-character uppercase abbreviation"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "sba_guaranteed_amount",
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "SBA guaranteed portion must be non-negative"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "interest_rate",
+        "min_value": 0,
+        "max_value": 25.0,
+        "mostly": 0.90
+      },
+      "meta": {
+        "notes": "Interest rate should be between 0% and 25%"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "term_months",
+        "min_value": 0,
+        "max_value": 600,
+        "mostly": 0.90
+      },
+      "meta": {
+        "notes": "Loan term in months; 504 loans can be up to 25 years (300 months)"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "approval_fiscal_year",
+        "min_value": 1990,
+        "max_value": 2030,
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "Approval fiscal year should be within a reasonable range"
+      }
+    }
+  ],
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "notes": "Data quality expectations for SBA 7(a) and 504 loan FOIA records",
+    "domain": "Small Business Administration",
+    "data_source": "SBA 7(a)/504 FOIA data (data.sba.gov)"
+  }
+}

@@ -27,7 +27,7 @@ PROJECT_ROOT = SCRIPT_DIR.parent.parent
 
 class CasinoDataValidator:
     """
-    Validator class for casino data quality checks.
+    Validator class for casino and federal agency data quality checks.
 
     Supports validation of:
     - Slot machine telemetry
@@ -36,10 +36,13 @@ class CasinoDataValidator:
     - Financial transactions
     - Security events
     - Table games events
+    - Federal agencies: USDA, SBA, NOAA, EPA, DOI, Tribal Health, DOT/FAA
+    - Analytics: geolocation, people movement, video analytics
     """
 
     # Available expectation suites
     SUITES = {
+        # Casino domain
         "slot_machine": "slot_machine_suite",
         "player": "player_suite",
         "compliance": "compliance_suite",
@@ -52,6 +55,37 @@ class CasinoDataValidator:
         "bronze_slot": "bronze_slot_telemetry_suite",
         "silver_slot": "silver_slot_cleansed_suite",
         "gold_slot": "gold_slot_performance_suite",
+        # USDA
+        "usda_crop_production": "usda_crop_production_suite",
+        "usda_food_safety": "usda_food_safety_suite",
+        "usda_snap_retailers": "usda_snap_retailers_suite",
+        "usda_census_agriculture": "usda_census_agriculture_suite",
+        # SBA
+        "sba_ppp_loans": "sba_ppp_loans_suite",
+        "sba_7a_504_loans": "sba_7a_504_loans_suite",
+        "sba_sbir_awards": "sba_sbir_awards_suite",
+        # NOAA
+        "noaa_weather": "noaa_weather_suite",
+        "noaa_storm_events": "noaa_storm_events_suite",
+        "noaa_climate_data": "noaa_climate_data_suite",
+        "noaa_tide_data": "noaa_tide_data_suite",
+        # EPA
+        "epa_air_quality": "epa_air_quality_suite",
+        "epa_toxic_releases": "epa_toxic_releases_suite",
+        "epa_water_quality": "epa_water_quality_suite",
+        "epa_echo_compliance": "epa_echo_compliance_suite",
+        # DOI
+        "doi_earthquakes": "doi_earthquakes_suite",
+        "doi_park_visitation": "doi_park_visitation_suite",
+        "doi_water_data": "doi_water_data_suite",
+        "doi_species_data": "doi_species_data_suite",
+        # Tribal Health & DOT/FAA
+        "tribal_healthcare": "tribal_healthcare_suite",
+        "dot_faa": "dot_faa_suite",
+        # Analytics
+        "geolocation": "geolocation_suite",
+        "people_movement": "people_movement_suite",
+        "video_analytics": "video_analytics_suite",
     }
 
     # Available checkpoints

@@ -1,0 +1,113 @@
+{
+  "expectation_suite_name": "doi_species_data_suite",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "common_name"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "scientific_name"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "listing_status"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "scientific_name",
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "Scientific name is the authoritative identifier for listed species"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "listing_status",
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "ESA listing status is required for all listed species"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "listing_status",
+        "value_set": [
+          "Endangered",
+          "Threatened",
+          "Candidate",
+          "Proposed Endangered",
+          "Proposed Threatened",
+          "Under Review",
+          "Delisted",
+          "Experimental Population, Non-Essential",
+          "Similarity of Appearance to a Threatened Taxon",
+          null
+        ],
+        "mostly": 0.85
+      },
+      "meta": {
+        "notes": "ESA listing statuses as defined by the Endangered Species Act"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "species_group",
+        "value_set": [
+          "Mammals",
+          "Birds",
+          "Reptiles",
+          "Amphibians",
+          "Fishes",
+          "Clams",
+          "Snails",
+          "Insects",
+          "Arachnids",
+          "Crustaceans",
+          "Flowering Plants",
+          "Conifers and Cycads",
+          "Ferns and Allies",
+          "Lichens",
+          "Corals",
+          null
+        ],
+        "mostly": 0.80
+      },
+      "meta": {
+        "notes": "FWS species group taxonomy classification"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "common_name",
+        "mostly": 0.90
+      },
+      "meta": {
+        "notes": "Common name should be available for most listed species"
+      }
+    }
+  ],
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "notes": "Data quality expectations for FWS ECOS endangered and threatened species listings",
+    "domain": "Department of the Interior / US Fish and Wildlife Service",
+    "data_source": "FWS Environmental Conservation Online System (ECOS)",
+    "compliance_requirements": [
+      "Endangered Species Act (ESA) Section 4",
+      "IUCN Red List criteria alignment"
+    ]
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "expectation_suite_name": "doi_water_data_suite",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "site_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "timestamp"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "parameter_code"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "value"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "unit"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "site_id"
+      },
+      "meta": {
+        "notes": "USGS site number is the primary identifier for gage stations"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "timestamp"
+      },
+      "meta": {
+        "notes": "Observation datetime is required for time-series analysis"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "parameter_code"
+      },
+      "meta": {
+        "notes": "NWIS parameter code identifies the measurement type"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "site_id",
+        "regex": "^\\d{8,15}$"
+      },
+      "meta": {
+        "notes": "USGS site numbers are 8-15 digit numeric codes"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "parameter_code",
+        "value_set": [
+          "00060",
+          "00065",
+          "00010",
+          "00045",
+          "00300",
+          "00400",
+          "00095"
+        ],
+        "mostly": 0.90
+      },
+      "meta": {
+        "notes": "Common NWIS parameters: discharge (60), gage height (65), temp (10), precip (45), DO (300), pH (400), conductance (95)"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "latitude",
+        "min_value": 17.0,
+        "max_value": 72.0,
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "USGS gage stations are located within US territory"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "longitude",
+        "min_value": -180.0,
+        "max_value": -64.0,
+        "mostly": 0.95
+      },
+      "meta": {
+        "notes": "USGS gage stations are located within US territory"
+      }
+    }
+  ],
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "notes": "Data quality expectations for USGS National Water Information System (NWIS) records",
+    "domain": "Department of the Interior / US Geological Survey",
+    "data_source": "USGS NWIS Instantaneous Values and Daily Values services"
+  }
+}

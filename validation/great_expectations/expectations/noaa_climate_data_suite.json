@@ -1,0 +1,107 @@
+{
+  "expectation_suite_name": "noaa_climate_data_suite",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "station_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "timestamp"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "parameter"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "value"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "station_id"
+      },
+      "meta": {
+        "notes": "CDO station ID is required to link observations to a location"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "timestamp"
+      },
+      "meta": {
+        "notes": "Observation date is required for temporal analysis"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "parameter"
+      },
+      "meta": {
+        "notes": "Data type/parameter identifies what is being measured"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "parameter",
+        "value_set": [
+          "TMAX",
+          "TMIN",
+          "TAVG",
+          "PRCP",
+          "SNOW",
+          "SNWD",
+          "AWND",
+          "WSF2",
+          "WSF5",
+          "WT01",
+          "WT03",
+          "WT08"
+        ],
+        "mostly": 0.90
+      },
+      "meta": {
+        "notes": "Common GHCND data types: temperatures, precipitation, snow, wind"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "station_id",
+        "regex": "^GHCND:",
+        "mostly": 0.80
+      },
+      "meta": {
+        "notes": "CDO station IDs typically start with dataset prefix (e.g., GHCND:)"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "value",
+        "mostly": 0.85
+      },
+      "meta": {
+        "notes": "Observation values should be present for most records"
+      }
+    }
+  ],
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "notes": "Data quality expectations for NOAA Climate Data Online (CDO) observations",
+    "domain": "National Oceanic and Atmospheric Administration",
+    "data_source": "NOAA CDO API v2 (GHCND, GSOM, GSOY datasets)"
+  }
+}
