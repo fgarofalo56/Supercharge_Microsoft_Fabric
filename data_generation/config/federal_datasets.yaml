@@ -306,6 +306,47 @@ agencies:
         update_frequency: "annual"
         geospatial: true
 
+  dot_faa:
+    name: "Department of Transportation / Federal Aviation Administration"
+    acronym: "DOT/FAA"
+    portal: "https://www.transportation.gov/data"
+    sub_agencies: ["FAA", "BTS", "FMCSA", "NHTSA", "FRA"]
+    datasets:
+      - name: "BTS On-Time Performance"
+        description: "Airline flight delay/cancellation data from Bureau of Transportation Statistics"
+        url: "https://www.transtats.bts.gov/DL_SelectFields.aspx?gnoession_VQ=FGJ"
+        api_docs: "https://www.transtats.bts.gov/DatabaseInfo.asp?QO_VQ=EFD"
+        format: "CSV, ZIP"
+        api_key_required: false
+        domains: ["flight_operations", "delays", "cancellations", "carriers"]
+        size_estimate: "~500MB per year"
+        real_time: false
+        update_frequency: "monthly"
+        notable: "Includes carrier, origin/dest, departure/arrival times, delay causes, cancellation codes"
+
+      - name: "FAA ASRS (Aviation Safety Reporting System)"
+        description: "Confidential voluntary safety incident reports from pilots and controllers"
+        url: "https://asrs.arc.nasa.gov/search/database.html"
+        format: "CSV, PDF"
+        api_key_required: false
+        domains: ["safety_incidents", "human_factors", "near_misses"]
+        size_estimate: "~2GB (200K+ reports since 1988)"
+        real_time: false
+        update_frequency: "monthly"
+        notable: "De-identified reports covering incidents, near misses, operational anomalies"
+
+      - name: "FAA Airport Data (ADIP)"
+        description: "Airport facilities, runways, operations, and infrastructure data"
+        url: "https://adip.faa.gov/agis/public/"
+        api_docs: "https://nfdc.faa.gov/nfdcApps/services/ajv5/airportDisplay.jsp"
+        format: "CSV, JSON"
+        api_key_required: false
+        domains: ["infrastructure", "airports", "runways", "operations"]
+        size_estimate: "~200MB"
+        real_time: false
+        update_frequency: "56-day AIRAC cycle"
+        notable: "19,000+ airports including elevation, runway length, operations count"
+
 # Geospatial Reference Datasets (used across agencies)
 geospatial_reference:
   - name: "US Census TIGER/Line Shapefiles"

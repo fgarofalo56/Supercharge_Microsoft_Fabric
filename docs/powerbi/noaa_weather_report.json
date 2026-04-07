@@ -1,0 +1,124 @@
+{
+  "report_name": "NOAA Weather & Climate Analytics",
+  "description": "National Oceanic and Atmospheric Administration data analytics covering weather observations, storm events, climate data, and tide measurements.",
+  "version": "1.0.0",
+  "dataset": {
+    "tables": [
+      {
+        "name": "gold_noaa_weather",
+        "source": "lh_gold.gold_noaa_weather",
+        "columns": ["station_id", "station_name", "state", "observation_date", "temperature", "humidity", "wind_speed", "wind_direction", "precipitation", "pressure", "visibility", "weather_condition"]
+      },
+      {
+        "name": "gold_noaa_storm_events",
+        "source": "lh_gold.gold_noaa_storm_events",
+        "columns": ["event_id", "event_type", "state", "begin_date", "end_date", "injuries_direct", "deaths_direct", "damage_property", "damage_crops", "magnitude", "latitude", "longitude"]
+      },
+      {
+        "name": "gold_noaa_climate_data",
+        "source": "lh_gold.gold_noaa_climate_data",
+        "columns": ["station_id", "date", "data_type", "value", "measurement_flag", "quality_flag", "source_flag"]
+      },
+      {
+        "name": "gold_noaa_tide_data",
+        "source": "lh_gold.gold_noaa_tide_data",
+        "columns": ["station_id", "station_name", "date_time", "water_level", "prediction", "tide_type", "latitude", "longitude"]
+      }
+    ],
+    "measures": [
+      {
+        "name": "Avg Temperature",
+        "expression": "AVERAGE(gold_noaa_weather[temperature])",
+        "format": "#,##0.0",
+        "description": "Average temperature across all stations"
+      },
+      {
+        "name": "Total Storm Events",
+        "expression": "COUNTROWS(gold_noaa_storm_events)",
+        "format": "#,##0",
+        "description": "Total number of storm events"
+      },
+      {
+        "name": "Total Property Damage",
+        "expression": "SUM(gold_noaa_storm_events[damage_property])",
+        "format": "$#,##0",
+        "description": "Total property damage from storms"
+      },
+      {
+        "name": "Total Storm Fatalities",
+        "expression": "SUM(gold_noaa_storm_events[deaths_direct])",
+        "format": "#,##0",
+        "description": "Total direct fatalities from storms"
+      },
+      {
+        "name": "Avg Wind Speed",
+        "expression": "AVERAGE(gold_noaa_weather[wind_speed])",
+        "format": "#,##0.0",
+        "description": "Average wind speed across stations"
+      },
+      {
+        "name": "Avg Water Level",
+        "expression": "AVERAGE(gold_noaa_tide_data[water_level])",
+        "format": "#,##0.00",
+        "description": "Average water level across tide stations"
+      }
+    ],
+    "relationships": [
+      {
+        "from_table": "gold_noaa_weather",
+        "from_column": "state",
+        "to_table": "gold_noaa_storm_events",
+        "to_column": "state",
+        "cardinality": "many-to-many",
+        "cross_filter": "both"
+      }
+    ]
+  },
+  "pages": [
+    {
+      "name": "Weather Observations",
+      "visuals": [
+        {"type": "card", "measure": "Avg Temperature", "title": "Average Temperature"},
+        {"type": "card", "measure": "Avg Wind Speed", "title": "Average Wind Speed"},
+        {"type": "line_chart", "axis": "observation_date", "values": ["Avg Temperature"], "title": "Temperature Trends"},
+        {"type": "map", "latitude": "latitude", "longitude": "longitude", "tooltip": ["station_name", "temperature", "weather_condition"], "title": "Station Observations"},
+        {"type": "bar_chart", "axis": "weather_condition", "values": ["observation_count"], "title": "Weather Conditions Distribution"}
+      ]
+    },
+    {
+      "name": "Storm Events",
+      "visuals": [
+        {"type": "card", "measure": "Total Storm Events", "title": "Total Storm Events"},
+        {"type": "card", "measure": "Total Property Damage", "title": "Total Property Damage"},
+        {"type": "card", "measure": "Total Storm Fatalities", "title": "Total Fatalities"},
+        {"type": "bar_chart", "axis": "event_type", "values": ["Total Storm Events"], "title": "Events by Type"},
+        {"type": "filled_map", "location": "state", "color_saturation": "Total Property Damage", "title": "Storm Damage by State"},
+        {"type": "line_chart", "axis": "begin_date", "values": ["Total Storm Events"], "title": "Storm Event Trends"}
+      ]
+    },
+    {
+      "name": "Climate Data",
+      "visuals": [
+        {"type": "line_chart", "axis": "date", "values": ["value"], "legend": "data_type", "title": "Climate Measurement Trends"},
+        {"type": "bar_chart", "axis": "data_type", "values": ["avg_value"], "title": "Average by Data Type"},
+        {"type": "table", "columns": ["station_id", "date", "data_type", "value", "quality_flag"], "title": "Climate Observations Detail"}
+      ]
+    },
+    {
+      "name": "Tide & Water Levels",
+      "visuals": [
+        {"type": "card", "measure": "Avg Water Level", "title": "Average Water Level"},
+        {"type": "line_chart", "axis": "date_time", "values": ["water_level", "prediction"], "title": "Water Level vs Prediction"},
+        {"type": "map", "latitude": "latitude", "longitude": "longitude", "size": "water_level", "title": "Tide Station Locations"},
+        {"type": "bar_chart", "axis": "tide_type", "values": ["station_count"], "title": "Stations by Tide Type"}
+      ]
+    }
+  ],
+  "direct_lake_config": {
+    "workspace": "ws_supercharge_fabric",
+    "lakehouse": "lh_gold",
+    "semantic_model": "sm_noaa_weather",
+    "refresh_policy": "on_demand",
+    "default_mode": "DirectLake"
+  }
+}

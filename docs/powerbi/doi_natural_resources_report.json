@@ -1,0 +1,117 @@
+{
+  "report_name": "DOI Natural Resources Analytics",
+  "description": "Department of the Interior data analytics covering earthquake events, national park visitation, water resources, and species data.",
+  "version": "1.0.0",
+  "dataset": {
+    "tables": [
+      {
+        "name": "gold_doi_earthquakes",
+        "source": "lh_gold.gold_doi_earthquakes",
+        "columns": ["event_id", "time", "latitude", "longitude", "depth", "magnitude", "magnitude_type", "place", "status", "tsunami", "felt", "significance"]
+      },
+      {
+        "name": "gold_doi_park_visitation",
+        "source": "lh_gold.gold_doi_park_visitation",
+        "columns": ["park_name", "park_code", "state", "year", "month", "recreation_visitors", "non_recreation_visitors", "total_visitors", "overnight_stays", "camping"]
+      },
+      {
+        "name": "gold_doi_water_data",
+        "source": "lh_gold.gold_doi_water_data",
+        "columns": ["site_id", "site_name", "state_code", "datetime", "parameter_code", "value", "qualification_code", "latitude", "longitude"]
+      },
+      {
+        "name": "gold_doi_species_data",
+        "source": "lh_gold.gold_doi_species_data",
+        "columns": ["species_code", "scientific_name", "common_name", "listing_status", "listing_date", "state", "critical_habitat", "recovery_plan", "taxonomic_group"]
+      }
+    ],
+    "measures": [
+      {
+        "name": "Total Earthquakes",
+        "expression": "COUNTROWS(gold_doi_earthquakes)",
+        "format": "#,##0",
+        "description": "Total earthquake events"
+      },
+      {
+        "name": "Avg Magnitude",
+        "expression": "AVERAGE(gold_doi_earthquakes[magnitude])",
+        "format": "#,##0.0",
+        "description": "Average earthquake magnitude"
+      },
+      {
+        "name": "Significant Quakes (M5+)",
+        "expression": "CALCULATE(COUNTROWS(gold_doi_earthquakes), gold_doi_earthquakes[magnitude] >= 5)",
+        "format": "#,##0",
+        "description": "Earthquakes with magnitude 5.0 or greater"
+      },
+      {
+        "name": "Total Park Visitors",
+        "expression": "SUM(gold_doi_park_visitation[total_visitors])",
+        "format": "#,##0",
+        "description": "Total park visitation"
+      },
+      {
+        "name": "Endangered Species Count",
+        "expression": "CALCULATE(COUNTROWS(gold_doi_species_data), gold_doi_species_data[listing_status] = \"Endangered\")",
+        "format": "#,##0",
+        "description": "Count of species listed as Endangered"
+      },
+      {
+        "name": "Threatened Species Count",
+        "expression": "CALCULATE(COUNTROWS(gold_doi_species_data), gold_doi_species_data[listing_status] = \"Threatened\")",
+        "format": "#,##0",
+        "description": "Count of species listed as Threatened"
+      }
+    ],
+    "relationships": []
+  },
+  "pages": [
+    {
+      "name": "Earthquake Monitor",
+      "visuals": [
+        {"type": "card", "measure": "Total Earthquakes", "title": "Total Earthquakes"},
+        {"type": "card", "measure": "Avg Magnitude", "title": "Average Magnitude"},
+        {"type": "card", "measure": "Significant Quakes (M5+)", "title": "Significant (M5+)"},
+        {"type": "map", "latitude": "latitude", "longitude": "longitude", "size": "magnitude", "color": "depth", "title": "Earthquake Locations"},
+        {"type": "line_chart", "axis": "time", "values": ["Total Earthquakes"], "title": "Earthquake Frequency Over Time"},
+        {"type": "bar_chart", "axis": "place", "values": ["Total Earthquakes"], "title": "Top Seismic Regions", "top_n": 15}
+      ]
+    },
+    {
+      "name": "National Park Visitation",
+      "visuals": [
+        {"type": "card", "measure": "Total Park Visitors", "title": "Total Visitors"},
+        {"type": "bar_chart", "axis": "park_name", "values": ["Total Park Visitors"], "title": "Top Parks by Visitation", "top_n": 20},
+        {"type": "line_chart", "axis": "month", "values": ["Total Park Visitors"], "title": "Monthly Visitation Trends"},
+        {"type": "filled_map", "location": "state", "color_saturation": "Total Park Visitors", "title": "Visitation by State"},
+        {"type": "bar_chart", "axis": "year", "values": ["Total Park Visitors"], "title": "Annual Visitation Trends"}
+      ]
+    },
+    {
+      "name": "Water Resources",
+      "visuals": [
+        {"type": "line_chart", "axis": "datetime", "values": ["value"], "legend": "parameter_code", "title": "Water Data Trends"},
+        {"type": "map", "latitude": "latitude", "longitude": "longitude", "tooltip": ["site_name", "value"], "title": "Monitoring Sites"},
+        {"type": "table", "columns": ["site_name", "state_code", "datetime", "parameter_code", "value"], "title": "Water Data Detail"}
+      ]
+    },
+    {
+      "name": "Endangered Species",
+      "visuals": [
+        {"type": "card", "measure": "Endangered Species Count", "title": "Endangered Species"},
+        {"type": "card", "measure": "Threatened Species Count", "title": "Threatened Species"},
+        {"type": "bar_chart", "axis": "taxonomic_group", "values": ["species_count"], "title": "Species by Taxonomic Group"},
+        {"type": "bar_chart", "axis": "listing_status", "values": ["species_count"], "title": "Species by Listing Status"},
+        {"type": "bar_chart", "axis": "state", "values": ["Endangered Species Count"], "title": "Endangered Species by State", "top_n": 20},
+        {"type": "table", "columns": ["common_name", "scientific_name", "listing_status", "state", "critical_habitat"], "title": "Species List"}
+      ]
+    }
+  ],
+  "direct_lake_config": {
+    "workspace": "ws_supercharge_fabric",
+    "lakehouse": "lh_gold",
+    "semantic_model": "sm_doi_natural_resources",
+    "refresh_policy": "on_demand",
+    "default_mode": "DirectLake"
+  }
+}

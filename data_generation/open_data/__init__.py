@@ -23,6 +23,9 @@ Usage:
 
     # Download Tribal Health data
     from data_generation.open_data import download_hrsa_health_centers, download_ihs_statistics
+
+    # Download DOT/FAA data
+    from data_generation.open_data import download_bts_flight_data, download_faa_safety_reports
 """
 
 # USDA
@@ -78,6 +81,14 @@ from .tribal_health_download import (
     validate_download as validate_tribal_download,
 )
 
+# DOT/FAA
+from .dot_faa_download import (
+    download_bts_flight_data,
+    download_faa_airport_data,
+    download_faa_safety_reports,
+    validate_download as validate_dot_faa_download,
+)
+
 __all__ = [
     # USDA
     "download_nass_quickstats",
@@ -114,4 +125,9 @@ __all__ = [
     "download_cdc_tribal_health",
     "download_cms_medicaid_tribal",
     "validate_tribal_download",
+    # DOT/FAA
+    "download_bts_flight_data",
+    "download_faa_safety_reports",
+    "download_faa_airport_data",
+    "validate_dot_faa_download",
 ]

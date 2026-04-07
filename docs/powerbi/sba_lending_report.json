@@ -1,0 +1,116 @@
+{
+  "report_name": "SBA Lending Analytics",
+  "description": "Small Business Administration lending analysis covering PPP loans, 7(a)/504 loans, and SBIR/STTR innovation awards.",
+  "version": "1.0.0",
+  "dataset": {
+    "tables": [
+      {
+        "name": "gold_sba_ppp_loans",
+        "source": "lh_gold.gold_sba_ppp_loans",
+        "columns": ["loan_id", "loan_amount", "borrower_name", "borrower_state", "borrower_city", "naics_code", "business_type", "jobs_retained", "lender_name", "loan_status", "approval_date", "forgiveness_amount"]
+      },
+      {
+        "name": "gold_sba_7a_504_loans",
+        "source": "lh_gold.gold_sba_7a_504_loans",
+        "columns": ["loan_id", "loan_amount", "program_type", "borrower_state", "naics_code", "term_months", "interest_rate", "approval_date", "loan_status", "charge_off_date"]
+      },
+      {
+        "name": "gold_sba_sbir_awards",
+        "source": "lh_gold.gold_sba_sbir_awards",
+        "columns": ["loan_id", "loan_amount", "agency", "program_type", "phase", "borrower_state", "company_name", "award_year"]
+      }
+    ],
+    "measures": [
+      {
+        "name": "Total PPP Loan Amount",
+        "expression": "SUM(gold_sba_ppp_loans[loan_amount])",
+        "format": "$#,##0",
+        "description": "Total PPP loan dollars disbursed"
+      },
+      {
+        "name": "PPP Loan Count",
+        "expression": "COUNTROWS(gold_sba_ppp_loans)",
+        "format": "#,##0",
+        "description": "Number of PPP loans"
+      },
+      {
+        "name": "Total Jobs Retained",
+        "expression": "SUM(gold_sba_ppp_loans[jobs_retained])",
+        "format": "#,##0",
+        "description": "Total jobs retained through PPP"
+      },
+      {
+        "name": "Avg PPP Loan Size",
+        "expression": "AVERAGE(gold_sba_ppp_loans[loan_amount])",
+        "format": "$#,##0",
+        "description": "Average PPP loan size"
+      },
+      {
+        "name": "Total 7a/504 Loan Amount",
+        "expression": "SUM(gold_sba_7a_504_loans[loan_amount])",
+        "format": "$#,##0",
+        "description": "Total 7(a) and 504 loan dollars"
+      },
+      {
+        "name": "SBIR Award Total",
+        "expression": "SUM(gold_sba_sbir_awards[loan_amount])",
+        "format": "$#,##0",
+        "description": "Total SBIR/STTR award dollars"
+      },
+      {
+        "name": "SBIR Award Count",
+        "expression": "COUNTROWS(gold_sba_sbir_awards)",
+        "format": "#,##0",
+        "description": "Number of SBIR/STTR awards"
+      },
+      {
+        "name": "Forgiveness Rate",
+        "expression": "DIVIDE(CALCULATE(COUNTROWS(gold_sba_ppp_loans), NOT(ISBLANK(gold_sba_ppp_loans[forgiveness_amount]))), COUNTROWS(gold_sba_ppp_loans))",
+        "format": "0.0%",
+        "description": "Percentage of PPP loans with forgiveness"
+      }
+    ],
+    "relationships": []
+  },
+  "pages": [
+    {
+      "name": "PPP Loan Overview",
+      "visuals": [
+        {"type": "card", "measure": "Total PPP Loan Amount", "title": "Total PPP Disbursed"},
+        {"type": "card", "measure": "PPP Loan Count", "title": "Total PPP Loans"},
+        {"type": "card", "measure": "Total Jobs Retained", "title": "Jobs Retained"},
+        {"type": "card", "measure": "Forgiveness Rate", "title": "Forgiveness Rate"},
+        {"type": "filled_map", "location": "borrower_state", "color_saturation": "Total PPP Loan Amount", "title": "PPP Distribution by State"},
+        {"type": "bar_chart", "axis": "business_type", "values": ["PPP Loan Count"], "title": "Loans by Business Type"},
+        {"type": "bar_chart", "axis": "lender_name", "values": ["Total PPP Loan Amount"], "title": "Top Lenders by Volume", "top_n": 15}
+      ]
+    },
+    {
+      "name": "7(a) & 504 Programs",
+      "visuals": [
+        {"type": "card", "measure": "Total 7a/504 Loan Amount", "title": "Total 7(a)/504 Lending"},
+        {"type": "bar_chart", "axis": "program_type", "values": ["loan_count", "total_amount"], "title": "7(a) vs 504 Comparison"},
+        {"type": "line_chart", "axis": "approval_date", "values": ["Total 7a/504 Loan Amount"], "title": "Lending Trends Over Time"},
+        {"type": "bar_chart", "axis": "borrower_state", "values": ["Total 7a/504 Loan Amount"], "title": "Lending by State", "top_n": 20}
+      ]
+    },
+    {
+      "name": "SBIR/STTR Innovation Awards",
+      "visuals": [
+        {"type": "card", "measure": "SBIR Award Total", "title": "Total Award Dollars"},
+        {"type": "card", "measure": "SBIR Award Count", "title": "Total Awards"},
+        {"type": "bar_chart", "axis": "agency", "values": ["SBIR Award Total"], "title": "Awards by Federal Agency"},
+        {"type": "bar_chart", "axis": "phase", "values": ["SBIR Award Count"], "title": "Awards by Phase"},
+        {"type": "bar_chart", "axis": "program_type", "values": ["SBIR Award Total"], "title": "SBIR vs STTR"},
+        {"type": "filled_map", "location": "borrower_state", "color_saturation": "SBIR Award Total", "title": "Awards by State"}
+      ]
+    }
+  ],
+  "direct_lake_config": {
+    "workspace": "ws_supercharge_fabric",
+    "lakehouse": "lh_gold",
+    "semantic_model": "sm_sba_lending",
+    "refresh_policy": "on_demand",
+    "default_mode": "DirectLake"
+  }
+}

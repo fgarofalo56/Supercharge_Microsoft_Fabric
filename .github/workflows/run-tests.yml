@@ -72,11 +72,11 @@ jobs:
 
       - name: Run bandit security linter
         run: |
-          python -m bandit -r data_generation/generators/ \
+          python -m bandit -r data_generation/generators/ data_generation/open_data/ \
             -c bandit.yml \
             --severity-level medium \
             --format json --output bandit-report.json || true
-          python -m bandit -r data_generation/generators/ \
+          python -m bandit -r data_generation/generators/ data_generation/open_data/ \
             -c bandit.yml \
             --severity-level high
 
@@ -120,7 +120,7 @@ jobs:
           pytest validation/unit_tests/ \
             -v \
             --tb=short \
-            --cov=data_generation/generators \
+            --cov=data_generation \
             --cov-report=xml \
             --cov-report=html \
             --junitxml=test-results.xml
@@ -158,31 +158,76 @@ jobs:
           pip install -r requirements.txt
           pip install -r requirements-dev.txt
 
-      - name: Test Generators
+      - name: Test Casino Generators
         env:
           PYTHONPATH: data_generation
         run: |
-          # Test each generator can produce valid output
           python -c "
           from generators.slot_machine_generator import SlotMachineGenerator
           from generators.player_generator import PlayerGenerator
           from generators.financial_generator import FinancialGenerator
 
-          # Generate small samples to validate
           slot_gen = SlotMachineGenerator()
           slots = slot_gen.generate(100)
           assert len(slots) == 100, 'Slot generator failed'
-          print('✅ Slot generator: OK')
+          print('  Slot generator: OK')
 
           player_gen = PlayerGenerator()
           players = player_gen.generate(50)
           assert len(players) == 50, 'Player generator failed'
-          print('✅ Player generator: OK')
+          print('  Player generator: OK')
 
           fin_gen = FinancialGenerator()
           txns = fin_gen.generate(100)
           assert len(txns) == 100, 'Financial generator failed'
-          print('✅ Financial generator: OK')
+          print('  Financial generator: OK')
+          "
+
+      - name: Test Federal Generators
+        env:
+          PYTHONPATH: data_generation
+        run: |
+          python -c "
+          from generators.federal import (
+              USDAGenerator, SBAGenerator, NOAAGenerator,
+              EPAGenerator, DOIGenerator, DOTFAAGenerator,
+              TribalHealthcareGenerator,
+          )
+
+          usda = USDAGenerator(seed=42)
+          data = usda.generate(10, show_progress=False)
+          assert len(data) == 10, 'USDA generator failed'
+          print('  USDA generator: OK')
+
+          sba = SBAGenerator(seed=42)
+          data = sba.generate(10, show_progress=False)
+          assert len(data) == 10, 'SBA generator failed'
+          print('  SBA generator: OK')
+
+          noaa = NOAAGenerator(seed=42)
+          data = noaa.generate(10, show_progress=False)
+          assert len(data) == 10, 'NOAA generator failed'
+          print('  NOAA generator: OK')
+
+          epa = EPAGenerator(seed=42)
+          data = epa.generate(10, show_progress=False)
+          assert len(data) == 10, 'EPA generator failed'
+          print('  EPA generator: OK')
+
+          doi = DOIGenerator(seed=42)
+          data = doi.generate(10, show_progress=False)
+          assert len(data) == 10, 'DOI generator failed'
+          print('  DOI generator: OK')
+
+          dot_faa = DOTFAAGenerator(seed=42)
+          data = dot_faa.generate(10, show_progress=False)
+          assert len(data) == 10, 'DOT/FAA generator failed'
+          print('  DOT/FAA generator: OK')
+
+          tribal = TribalHealthcareGenerator(seed=42)
+          data = tribal.generate(10, show_progress=False)
+          assert len(data) == 10, 'Tribal Healthcare generator failed'
+          print('  Tribal Healthcare generator: OK')
           "
 
       - name: Validate Output Schemas
@@ -195,7 +240,85 @@ jobs:
           for schema_file in schema_dir.glob('*.json'):
               with open(schema_file) as f:
                   schema = json.load(f)
-              print(f'✅ Schema valid: {schema_file.name}')
+              print(f'  Schema valid: {schema_file.name}')
+          "
+
+  open-data-syntax:
+    name: Open Data Script Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Validate Open Data Script Syntax
+        run: |
+          python -c "
+          import py_compile
+          from pathlib import Path
+
+          scripts = list(Path('data_generation/open_data').glob('*.py'))
+          errors = []
+
+          for script_path in scripts:
+              try:
+                  py_compile.compile(str(script_path), doraise=True)
+                  print(f'  Syntax OK: {script_path.name}')
+              except py_compile.PyCompileError as e:
+                  errors.append(f'  Syntax error: {script_path} - {e}')
+
+          if errors:
+              for e in errors:
+                  print(e)
+              exit(1)
+
+          print(f'All {len(scripts)} open data scripts have valid syntax')
+          "
+
+      - name: Verify Package Imports
+        env:
+          PYTHONPATH: .
+        run: |
+          python -c "
+          from data_generation.open_data import (
+              download_nass_quickstats, download_fsis_recalls,
+              download_snap_retailers, download_census_of_agriculture,
+              download_ppp_loans, download_7a_504_loans, download_sbir_awards,
+              download_weather_observations, download_storm_events,
+              download_climate_data, download_tide_data,
+              download_air_quality, download_tri_data,
+              download_echo_compliance, download_water_quality,
+              download_earthquakes, download_water_data,
+              download_park_visitation, download_species_data,
+              download_hrsa_health_centers, download_ihs_statistics,
+              download_cdc_tribal_health, download_cms_medicaid_tribal,
+              download_bts_flight_data, download_faa_safety_reports,
+              download_faa_airport_data,
+          )
+          print('All 26 open data download functions importable')
+          "
+
+      - name: Validate Federal Dataset Config
+        run: |
+          python -c "
+          import yaml
+          with open('data_generation/config/federal_datasets.yaml') as f:
+              config = yaml.safe_load(f)
+          agencies = config.get('agencies', {})
+          print(f'Federal dataset config valid: {len(agencies)} agencies')
+          for name in agencies:
+              datasets = agencies[name].get('datasets', [])
+              print(f'  {name}: {len(datasets)} datasets')
           "
 
   notebook-validation:
@@ -223,9 +346,9 @@ jobs:
           for nb_path in notebooks:
               try:
                   py_compile.compile(str(nb_path), doraise=True)
-                  print(f'✅ Valid: {nb_path}')
+                  print(f'  Valid: {nb_path}')
               except py_compile.PyCompileError as e:
-                  errors.append(f'❌ Syntax error: {nb_path} - {e}')
+                  errors.append(f'  Syntax error: {nb_path} - {e}')
 
           if errors:
               for e in errors:
@@ -234,6 +357,42 @@ jobs:
 
           print(f'All {len(notebooks)} notebook .py files have valid syntax')
           "
+
+  integration-tests:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+
+      - name: Run Integration Tests
+        env:
+          PYTHONPATH: data_generation
+        run: |
+          pytest validation/integration_tests/ \
+            -v \
+            --tb=short \
+            -m "integration or pipeline" \
+            --junitxml=integration-test-results.xml
+
+      - name: Upload Integration Test Results
+        uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: integration-test-results
+          path: integration-test-results.xml
 
   great-expectations:
     name: Data Quality Tests
@@ -261,12 +420,13 @@ jobs:
           from generators.slot_machine_generator import SlotMachineGenerator
           from generators.player_generator import PlayerGenerator
           from generators.financial_generator import FinancialGenerator
+          from generators.federal import USDAGenerator, SBAGenerator
           from pathlib import Path
 
           output_dir = Path('data_generation/output')
           output_dir.mkdir(parents=True, exist_ok=True)
 
-          # Generate small samples for GE validation
+          # Casino generators
           slot_gen = SlotMachineGenerator(seed=42)
           slot_gen.to_parquet(slot_gen.generate(200, show_progress=False), output_dir / 'bronze_slot_telemetry.parquet')
 
@@ -276,7 +436,39 @@ jobs:
           fin_gen = FinancialGenerator(seed=42)
           fin_gen.to_parquet(fin_gen.generate(200, show_progress=False), output_dir / 'bronze_financial_transactions.parquet')
 
+          # Federal generators
+          usda_gen = USDAGenerator(seed=42)
+          usda_gen.to_parquet(usda_gen.generate(100, show_progress=False), output_dir / 'bronze_usda_data.parquet')
+
+          sba_gen = SBAGenerator(seed=42)
+          sba_gen.to_parquet(sba_gen.generate(100, show_progress=False), output_dir / 'bronze_sba_data.parquet')
+
           print('Generated sample data for GE validation')
+          "
+
+      - name: Validate GE Suite JSON Files
+        run: |
+          python -c "
+          import json
+          from pathlib import Path
+
+          suites = list(Path('validation/great_expectations/expectations').glob('*.json'))
+          errors = []
+          for suite_path in suites:
+              try:
+                  with open(suite_path) as f:
+                      data = json.load(f)
+                  exp_count = len(data.get('expectations', []))
+                  print(f'  Valid: {suite_path.name} ({exp_count} expectations)')
+              except json.JSONDecodeError as e:
+                  errors.append(f'  Invalid JSON: {suite_path.name} - {e}')
+
+          if errors:
+              for e in errors:
+                  print(e)
+              exit(1)
+
+          print(f'All {len(suites)} GE suites are valid JSON')
           "
 
       - name: Run GE Checkpoints
@@ -293,7 +485,7 @@ jobs:
   test-summary:
     name: Test Summary
     runs-on: ubuntu-latest
-    needs: [lint-and-typecheck, security-scan, unit-tests, data-generator-tests, notebook-validation, great-expectations]
+    needs: [lint-and-typecheck, security-scan, unit-tests, data-generator-tests, open-data-syntax, notebook-validation, integration-tests, great-expectations]
     if: always()
     steps:
       - name: Generate Summary
@@ -306,5 +498,7 @@ jobs:
           echo "| Security Scan | ${{ needs.security-scan.result == 'success' && '✅ Passed' || '⚠️ Warning' }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Unit Tests | ${{ needs.unit-tests.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Data Generators | ${{ needs.data-generator-tests.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Open Data Scripts | ${{ needs.open-data-syntax.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Notebook Validation | ${{ needs.notebook-validation.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Integration Tests | ${{ needs.integration-tests.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Data Quality | ${{ needs.great-expectations.result == 'success' && '✅ Passed' || '⚠️ Skipped' }} |" >> $GITHUB_STEP_SUMMARY

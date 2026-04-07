@@ -1,0 +1,132 @@
+{
+  "report_name": "Tribal Health Analytics",
+  "description": "Tribal Healthcare data analytics covering HRSA health centers, IHS facility statistics, CDC health indicators, and CMS Medicaid data for Native American/Alaska Native populations.",
+  "version": "1.0.0",
+  "dataset": {
+    "tables": [
+      {
+        "name": "gold_tribal_healthcare_access",
+        "source": "lh_gold.gold_tribal_healthcare_access",
+        "columns": ["facility_id", "facility_name", "facility_type", "tribal_affiliation", "state", "county", "ihs_area", "service_population", "total_encounters", "latitude", "longitude"]
+      },
+      {
+        "name": "gold_tribal_ihs_statistics",
+        "source": "lh_gold.gold_tribal_ihs_statistics",
+        "columns": ["area_name", "fiscal_year", "total_users", "inpatient_admissions", "outpatient_visits", "dental_services", "mental_health_contacts", "pharmacy_prescriptions", "contract_health_referrals"]
+      },
+      {
+        "name": "gold_tribal_cdc_health",
+        "source": "lh_gold.gold_tribal_cdc_health",
+        "columns": ["indicator_name", "category", "year", "value", "unit", "data_source", "geographic_level", "state", "confidence_interval_low", "confidence_interval_high"]
+      },
+      {
+        "name": "gold_tribal_medicaid",
+        "source": "lh_gold.gold_tribal_medicaid",
+        "columns": ["state", "fiscal_year", "enrollment_count", "expenditure_total", "managed_care_enrollment", "fee_for_service_enrollment", "tribal_managed_care"]
+      }
+    ],
+    "measures": [
+      {
+        "name": "Total Health Centers",
+        "expression": "COUNTROWS(gold_tribal_healthcare_access)",
+        "format": "#,##0",
+        "description": "Total number of tribal health facilities"
+      },
+      {
+        "name": "Total Service Population",
+        "expression": "SUM(gold_tribal_healthcare_access[service_population])",
+        "format": "#,##0",
+        "description": "Total population served by tribal health facilities"
+      },
+      {
+        "name": "Total Patient Encounters",
+        "expression": "SUM(gold_tribal_healthcare_access[total_encounters])",
+        "format": "#,##0",
+        "description": "Total patient encounters across all facilities"
+      },
+      {
+        "name": "Total IHS Users",
+        "expression": "SUM(gold_tribal_ihs_statistics[total_users])",
+        "format": "#,##0",
+        "description": "Total IHS user population"
+      },
+      {
+        "name": "Total Outpatient Visits",
+        "expression": "SUM(gold_tribal_ihs_statistics[outpatient_visits])",
+        "format": "#,##0",
+        "description": "Total outpatient visits across IHS"
+      },
+      {
+        "name": "Total Medicaid Enrollment",
+        "expression": "SUM(gold_tribal_medicaid[enrollment_count])",
+        "format": "#,##0",
+        "description": "Total tribal Medicaid enrollment"
+      },
+      {
+        "name": "Total Medicaid Expenditure",
+        "expression": "SUM(gold_tribal_medicaid[expenditure_total])",
+        "format": "$#,##0",
+        "description": "Total tribal Medicaid expenditure"
+      }
+    ],
+    "relationships": [
+      {
+        "from_table": "gold_tribal_healthcare_access",
+        "from_column": "state",
+        "to_table": "gold_tribal_medicaid",
+        "to_column": "state",
+        "cardinality": "many-to-many",
+        "cross_filter": "both"
+      }
+    ]
+  },
+  "pages": [
+    {
+      "name": "Healthcare Access Overview",
+      "visuals": [
+        {"type": "card", "measure": "Total Health Centers", "title": "Health Facilities"},
+        {"type": "card", "measure": "Total Service Population", "title": "Population Served"},
+        {"type": "card", "measure": "Total Patient Encounters", "title": "Patient Encounters"},
+        {"type": "map", "latitude": "latitude", "longitude": "longitude", "size": "total_encounters", "title": "Tribal Health Facility Locations"},
+        {"type": "bar_chart", "axis": "facility_type", "values": ["Total Health Centers"], "title": "Facilities by Type"},
+        {"type": "bar_chart", "axis": "ihs_area", "values": ["Total Service Population"], "title": "Service Population by IHS Area"}
+      ]
+    },
+    {
+      "name": "IHS Statistics",
+      "visuals": [
+        {"type": "card", "measure": "Total IHS Users", "title": "Total IHS Users"},
+        {"type": "card", "measure": "Total Outpatient Visits", "title": "Outpatient Visits"},
+        {"type": "bar_chart", "axis": "area_name", "values": ["total_users"], "title": "Users by IHS Area"},
+        {"type": "line_chart", "axis": "fiscal_year", "values": ["Total Outpatient Visits"], "title": "Visit Trends"},
+        {"type": "bar_chart", "axis": "area_name", "values": ["dental_services", "mental_health_contacts", "pharmacy_prescriptions"], "title": "Services by Area"}
+      ]
+    },
+    {
+      "name": "CDC Health Indicators",
+      "visuals": [
+        {"type": "bar_chart", "axis": "indicator_name", "values": ["value"], "title": "Health Indicators Overview"},
+        {"type": "line_chart", "axis": "year", "values": ["value"], "legend": "indicator_name", "title": "Health Indicator Trends"},
+        {"type": "table", "columns": ["indicator_name", "category", "year", "value", "unit", "confidence_interval_low", "confidence_interval_high"], "title": "Health Indicator Detail"}
+      ]
+    },
+    {
+      "name": "Medicaid & CMS",
+      "visuals": [
+        {"type": "card", "measure": "Total Medicaid Enrollment", "title": "Medicaid Enrollment"},
+        {"type": "card", "measure": "Total Medicaid Expenditure", "title": "Medicaid Expenditure"},
+        {"type": "filled_map", "location": "state", "color_saturation": "Total Medicaid Enrollment", "title": "Enrollment by State"},
+        {"type": "line_chart", "axis": "fiscal_year", "values": ["Total Medicaid Enrollment", "Total Medicaid Expenditure"], "title": "Medicaid Trends"},
+        {"type": "bar_chart", "axis": "state", "values": ["enrollment_count"], "title": "Enrollment by State", "top_n": 20}
+      ]
+    }
+  ],
+  "direct_lake_config": {
+    "workspace": "ws_supercharge_fabric",
+    "lakehouse": "lh_gold",
+    "semantic_model": "sm_tribal_health",
+    "refresh_policy": "on_demand",
+    "default_mode": "DirectLake",
+    "compliance": ["HIPAA", "42 CFR Part 2", "IHS Privacy Act"]
+  }
+}
