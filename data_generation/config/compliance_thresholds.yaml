@@ -1,0 +1,54 @@
+# =============================================================================
+# Compliance Thresholds Configuration
+# =============================================================================
+# Centralizes all regulatory thresholds for casino/gaming compliance.
+# Modify these values to match jurisdiction-specific requirements.
+# Reference: NIGC MICS, FinCEN BSA, IRS Publication 3908
+# =============================================================================
+
+# Currency Transaction Report (CTR)
+# FinCEN Form 103 - Cash transactions at or above this amount
+ctr:
+  threshold: 10000
+  filing_deadline_days: 15
+  description: "Cash transactions aggregating $10,000 or more in a gaming day"
+
+# Suspicious Activity Report (SAR)
+# FinCEN Form 102 - No fixed threshold, but structuring detection targets these ranges
+sar:
+  structuring_lower: 8000
+  structuring_upper: 9900
+  filing_deadline_days: 30
+  categories:
+    - "Structuring"
+    - "Unusual Transaction Pattern"
+    - "Third Party Activity"
+    - "Identity Concerns"
+    - "Employee Involvement"
+    - "Counterfeit Currency"
+    - "Wire Transfer Anomaly"
+    - "Chip Walking"
+    - "Credit Abuse"
+    - "Other Suspicious Activity"
+
+# W-2G Gambling Winnings (IRS Form W-2G)
+# Thresholds vary by game type per IRS regulations
+w2g:
+  thresholds:
+    Slots: 1200
+    Video Poker: 1200
+    Keno: 1500
+    Bingo: 1200
+    Poker Tournament: 5000
+    Table Games: 600  # At 300:1 odds or greater
+  withholding:
+    federal_rate: 0.24
+    state_rate: 0.06
+    mandatory_withholding_threshold: 5000
+  filing_deadline: "January 31 of the following year"
+
+# Enhanced Due Diligence (EDD) triggers
+edd:
+  high_value_transaction: 25000
+  multiple_transaction_window_hours: 24
+  suspicious_pattern_count: 3

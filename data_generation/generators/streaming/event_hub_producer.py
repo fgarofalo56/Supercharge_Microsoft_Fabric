@@ -2,7 +2,8 @@
 Event Hub Producer for streaming slot machine telemetry.
 
 This module provides real-time event streaming capabilities for
-casino floor monitoring scenarios.
+casino floor monitoring scenarios. Includes retry logic with
+exponential backoff for resilient event delivery.
 """
 
 import asyncio
@@ -27,6 +28,12 @@ from ..slot_machine_generator import SlotMachineGenerator
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# Retry configuration defaults
+DEFAULT_MAX_RETRIES = 3
+DEFAULT_BASE_DELAY = 1.0  # seconds
+DEFAULT_MAX_DELAY = 30.0  # seconds
+DEFAULT_BACKOFF_FACTOR = 2.0
+
 
 class EventHubProducer:
     """
@@ -43,6 +50,9 @@ class EventHubProducer:
         eventhub_name: str | None = None,
         events_per_second: float = 10,
         seed: int | None = None,
+        max_retries: int = DEFAULT_MAX_RETRIES,
+        base_delay: float = DEFAULT_BASE_DELAY,
+        max_delay: float = DEFAULT_MAX_DELAY,
     ):
         """
         Initialize the producer.
@@ -52,14 +62,24 @@ class EventHubProducer:
             eventhub_name: Event Hub name (optional)
             events_per_second: Target rate of events per second
             seed: Random seed for reproducibility
+            max_retries: Maximum retry attempts for failed sends
+            base_delay: Base delay in seconds for exponential backoff
+            max_delay: Maximum delay cap in seconds
         """
         self.connection_string = connection_string
         self.eventhub_name = eventhub_name
         self.events_per_second = events_per_second
         self.generator = SlotMachineGenerator(seed=seed)
 
+        # Retry configuration
+        self.max_retries = max_retries
+        self.base_delay = base_delay
+        self.max_delay = max_delay
+
         self._running = False
         self._event_count = 0
+        self._retry_count = 0
+        self._failed_count = 0
         self._sync_producer: EventHubProducerClient | None = None
 
         if connection_string and EVENTHUB_AVAILABLE:
@@ -146,16 +166,42 @@ class EventHubProducer:
             if self._sync_producer:
                 self._sync_producer.close()
                 self._sync_producer = None
-            logger.info(f"Generated {self._event_count} events")
+            logger.info(
+                f"Generated {self._event_count} events "
+                f"(retries: {self._retry_count}, failed: {self._failed_count})"
+            )
 
     def _send_to_eventhub(self, event: dict[str, Any]) -> None:
-        """Send event to Azure Event Hub using the reusable producer."""
+        """Send event to Azure Event Hub with retry and exponential backoff."""
         if not EVENTHUB_AVAILABLE or not self._sync_producer:
             return
 
-        event_data_batch = self._sync_producer.create_batch()
-        event_data_batch.add(EventData(self._event_to_json(event)))
-        self._sync_producer.send_batch(event_data_batch)
+        last_exception = None
+        for attempt in range(self.max_retries + 1):
+            try:
+                event_data_batch = self._sync_producer.create_batch()
+                event_data_batch.add(EventData(self._event_to_json(event)))
+                self._sync_producer.send_batch(event_data_batch)
+                return  # Success
+            except Exception as e:
+                last_exception = e
+                if attempt < self.max_retries:
+                    delay = min(
+                        self.base_delay * (DEFAULT_BACKOFF_FACTOR ** attempt),
+                        self.max_delay,
+                    )
+                    self._retry_count += 1
+                    logger.warning(
+                        f"Send failed (attempt {attempt + 1}/{self.max_retries + 1}), "
+                        f"retrying in {delay:.1f}s: {e}"
+                    )
+                    time.sleep(delay)
+
+        # All retries exhausted
+        self._failed_count += 1
+        logger.error(
+            f"Failed to send event after {self.max_retries + 1} attempts: {last_exception}"
+        )
 
     async def run_async(
         self,
@@ -202,13 +248,42 @@ class EventHubProducer:
                         # Batch is full
                         break
 
-                # Send batch
-                await producer.send_batch(batch)
+                # Send batch with retry
+                await self._send_batch_async(producer, batch)
 
                 # Rate limiting
                 await asyncio.sleep(batch_size / self.events_per_second)
 
-        logger.info(f"Generated {self._event_count} events")
+        logger.info(
+            f"Generated {self._event_count} events "
+            f"(retries: {self._retry_count}, failed: {self._failed_count})"
+        )
+
+    async def _send_batch_async(self, producer, batch) -> None:
+        """Send a batch asynchronously with retry and exponential backoff."""
+        last_exception = None
+        for attempt in range(self.max_retries + 1):
+            try:
+                await producer.send_batch(batch)
+                return  # Success
+            except Exception as e:
+                last_exception = e
+                if attempt < self.max_retries:
+                    delay = min(
+                        self.base_delay * (DEFAULT_BACKOFF_FACTOR ** attempt),
+                        self.max_delay,
+                    )
+                    self._retry_count += 1
+                    logger.warning(
+                        f"Async send failed (attempt {attempt + 1}/{self.max_retries + 1}), "
+                        f"retrying in {delay:.1f}s: {e}"
+                    )
+                    await asyncio.sleep(delay)
+
+        self._failed_count += 1
+        logger.error(
+            f"Failed to send batch after {self.max_retries + 1} attempts: {last_exception}"
+        )
 
     def stop(self):
         """Stop the producer."""
@@ -218,6 +293,16 @@ class EventHubProducer:
     def event_count(self) -> int:
         """Return number of events generated."""
         return self._event_count
+
+    @property
+    def retry_count(self) -> int:
+        """Return number of retry attempts made."""
+        return self._retry_count
+
+    @property
+    def failed_count(self) -> int:
+        """Return number of permanently failed sends."""
+        return self._failed_count
 
 
 def main():

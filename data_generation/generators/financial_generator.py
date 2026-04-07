@@ -14,6 +14,10 @@ from datetime import datetime, timedelta
 from typing import Any
 
 from .base_generator import BaseGenerator
+from .compliance_generator import get_threshold
+
+# Load CTR threshold from shared config
+_CTR_THRESHOLD = get_threshold("ctr", "threshold", 10000)
 
 
 class FinancialGenerator(BaseGenerator):
@@ -130,8 +134,8 @@ class FinancialGenerator(BaseGenerator):
         # Generate amount based on transaction type
         amount = self._get_amount_for_type(txn_type)
 
-        # Determine if CTR required ($10,000 threshold)
-        ctr_required = bool(amount >= 10000)
+        # Determine if CTR required (threshold from config)
+        ctr_required = bool(amount >= _CTR_THRESHOLD)
 
         record = {
             "transaction_id": f"TXN-{self.generate_uuid()[:12]}",
@@ -195,7 +199,7 @@ class FinancialGenerator(BaseGenerator):
 
     def _get_cage_location(self, txn_type: str, amount: float) -> str:
         """Determine cage location based on transaction."""
-        if amount >= 10000 or txn_type in ["MARKER_ISSUE", "WIRE_TRANSFER_IN"]:
+        if amount >= _CTR_THRESHOLD or txn_type in ["MARKER_ISSUE", "WIRE_TRANSFER_IN"]:
             return self.rng.choice(["High Limit", "VIP"])
         elif txn_type == "JACKPOT_PAYOUT":
             return "Main Cage"
@@ -224,8 +228,9 @@ class FinancialGenerator(BaseGenerator):
 
     def _check_suspicious(self, txn_type: str, amount: float) -> bool:
         """Flag potentially suspicious transactions for SAR review."""
-        # Structuring pattern: multiple transactions just under $10K
-        if 8000 <= amount < 10000:
+        # Structuring pattern: multiple transactions just under CTR threshold
+        _sar_lower = get_threshold("sar", "structuring_lower", 8000)
+        if _sar_lower <= amount < _CTR_THRESHOLD:
             return self.rng.random() < 0.1  # 10% flagged for review
 
         # Unusual transaction patterns

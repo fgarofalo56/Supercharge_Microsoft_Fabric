@@ -7,12 +7,41 @@ Generates synthetic compliance and regulatory data including:
 - SAR (Suspicious Activity Reports)
 - W-2G (Gambling Winnings) - $1,200+ for slots, $600+ for keno/bingo
 - Title 31 compliance records
+
+Thresholds are loaded from config/compliance_thresholds.yaml for easy
+customization across jurisdictions.
 """
 
+import os
 from datetime import datetime, timedelta
+from pathlib import Path
 from typing import Any
 
+import yaml
+
 from .base_generator import BaseGenerator
+
+# Load compliance thresholds from config
+_CONFIG_PATH = Path(__file__).parent.parent / "config" / "compliance_thresholds.yaml"
+_THRESHOLDS: dict[str, Any] = {}
+
+if _CONFIG_PATH.exists():
+    with open(_CONFIG_PATH) as f:
+        _THRESHOLDS = yaml.safe_load(f) or {}
+
+
+def get_threshold(section: str, key: str, default: Any = None) -> Any:
+    """Get a compliance threshold value from config.
+
+    Args:
+        section: Config section (ctr, sar, w2g, edd)
+        key: Key within the section
+        default: Default value if not found
+
+    Returns:
+        The configured threshold value
+    """
+    return _THRESHOLDS.get(section, {}).get(key, default)
 
 
 class ComplianceGenerator(BaseGenerator):
@@ -21,17 +50,26 @@ class ComplianceGenerator(BaseGenerator):
     # filing_type enum values per schema (CTR, SAR, W2G only)
     FILING_TYPES = ["CTR", "SAR", "W2G"]
 
-    # W-2G thresholds by game type
-    W2G_THRESHOLDS = {
+    # W-2G thresholds by game type (loaded from config or defaults)
+    W2G_THRESHOLDS = get_threshold("w2g", "thresholds", {
         "Slots": 1200,
         "Video Poker": 1200,
         "Keno": 1500,
         "Bingo": 1200,
         "Poker Tournament": 5000,
-        "Table Games": 600,  # At 300:1 odds or greater
-    }
+        "Table Games": 600,
+    })
 
-    SAR_CATEGORIES = [
+    # CTR threshold (loaded from config or default)
+    CTR_THRESHOLD = get_threshold("ctr", "threshold", 10000)
+    CTR_FILING_DEADLINE_DAYS = get_threshold("ctr", "filing_deadline_days", 15)
+
+    # SAR configuration (loaded from config or defaults)
+    SAR_STRUCTURING_LOWER = get_threshold("sar", "structuring_lower", 8000)
+    SAR_STRUCTURING_UPPER = get_threshold("sar", "structuring_upper", 9900)
+    SAR_FILING_DEADLINE_DAYS = get_threshold("sar", "filing_deadline_days", 30)
+
+    SAR_CATEGORIES = get_threshold("sar", "categories", [
         "Structuring",
         "Unusual Transaction Pattern",
         "Third Party Activity",
@@ -42,7 +80,14 @@ class ComplianceGenerator(BaseGenerator):
         "Chip Walking",
         "Credit Abuse",
         "Other Suspicious Activity",
-    ]
+    ])
+
+    # Withholding rates
+    FEDERAL_WITHHOLDING_RATE = get_threshold("w2g", "withholding", {}).get("federal_rate", 0.24)
+    STATE_WITHHOLDING_RATE = get_threshold("w2g", "withholding", {}).get("state_rate", 0.06)
+    MANDATORY_WITHHOLDING_THRESHOLD = get_threshold(
+        "w2g", "withholding", {}
+    ).get("mandatory_withholding_threshold", 5000)
 
     FILING_STATUS = ["Draft", "Pending Review", "Filed", "Rejected", "Amended"]
 
@@ -179,8 +224,8 @@ class ComplianceGenerator(BaseGenerator):
         self, record: dict[str, Any], timestamp: datetime
     ) -> dict[str, Any]:
         """Generate Currency Transaction Report data."""
-        # CTR required for cash transactions >= $10,000
-        total_amount = round(self.rng.uniform(10000, 100000), 2)
+        # CTR required for cash transactions >= threshold (default $10,000)
+        total_amount = round(self.rng.uniform(self.CTR_THRESHOLD, 100000), 2)
 
         # Split between cash in and cash out
         cash_in = round(total_amount * self.rng.uniform(0, 1), 2)
@@ -192,11 +237,11 @@ class ComplianceGenerator(BaseGenerator):
         record["cash_in_amount"] = cash_in
         record["cash_out_amount"] = cash_out
 
-        # CTR must be filed within 15 days
+        # CTR must be filed within configured deadline
         record["filing_date"] = (
-            timestamp + timedelta(days=int(self.rng.integers(1, 15)))
+            timestamp + timedelta(days=int(self.rng.integers(1, self.CTR_FILING_DEADLINE_DAYS)))
         ).strftime("%Y-%m-%d")
-        record["due_date"] = (timestamp + timedelta(days=15)).strftime("%Y-%m-%d")
+        record["due_date"] = (timestamp + timedelta(days=self.CTR_FILING_DEADLINE_DAYS)).strftime("%Y-%m-%d")
 
         record["status"] = self.weighted_choice(
             self.FILING_STATUS,
@@ -231,11 +276,11 @@ class ComplianceGenerator(BaseGenerator):
         record["sar_category"] = self.rng.choice(self.SAR_CATEGORIES)
         record["sar_narrative"] = self._generate_sar_narrative(record["sar_category"])
 
-        # SAR must be filed within 30 days
+        # SAR must be filed within configured deadline
         record["filing_date"] = (
-            timestamp + timedelta(days=int(self.rng.integers(1, 30)))
+            timestamp + timedelta(days=int(self.rng.integers(1, self.SAR_FILING_DEADLINE_DAYS)))
         ).strftime("%Y-%m-%d")
-        record["due_date"] = (timestamp + timedelta(days=30)).strftime("%Y-%m-%d")
+        record["due_date"] = (timestamp + timedelta(days=self.SAR_FILING_DEADLINE_DAYS)).strftime("%Y-%m-%d")
 
         record["status"] = self.weighted_choice(
             ["Draft", "Pending Review", "Filed"],
@@ -252,7 +297,7 @@ class ComplianceGenerator(BaseGenerator):
     def _generate_sar_narrative(self, category: str) -> str:
         """Generate SAR narrative text based on category."""
         narratives = {
-            "Structuring": "Subject conducted multiple cash transactions just below $10,000 reporting threshold within a 24-hour period.",
+            "Structuring": f"Subject conducted multiple cash transactions just below ${self.CTR_THRESHOLD:,.0f} reporting threshold within a 24-hour period.",
             "Unusual Transaction Pattern": "Subject exhibited unusual betting patterns inconsistent with documented income level.",
             "Third Party Activity": "Observed third party providing chips/cash to subject for gaming purposes.",
             "Identity Concerns": "Subject presented identification documents with inconsistent information.",
@@ -290,13 +335,11 @@ class ComplianceGenerator(BaseGenerator):
         else:
             record["table_id"] = f"TBL-{self.rng.integers(1, 100):04d}"
 
-        # Calculate withholding (24% federal, 6% state typical)
+        # Calculate withholding using configured rates
         # Backup withholding required if no SSN provided
-        federal_rate = 0.24
-        state_rate = 0.06
-        total_rate = federal_rate + state_rate
+        total_rate = self.FEDERAL_WITHHOLDING_RATE + self.STATE_WITHHOLDING_RATE
 
-        if jackpot_amount >= 5000:  # Withholding required
+        if jackpot_amount >= self.MANDATORY_WITHHOLDING_THRESHOLD:
             record["withholding_rate"] = total_rate
             record["withholding_amount"] = round(jackpot_amount * total_rate, 2)
         else:
@@ -333,8 +376,11 @@ class ComplianceGenerator(BaseGenerator):
         remaining = target_total
 
         for i in range(num_transactions):
-            # Keep each transaction just under $10K
-            amount = min(remaining, round(self.rng.uniform(8000, 9900), 2))
+            # Keep each transaction just under CTR threshold
+            amount = min(
+                remaining,
+                round(self.rng.uniform(self.SAR_STRUCTURING_LOWER, self.SAR_STRUCTURING_UPPER), 2),
+            )
             remaining -= amount
 
             timestamp = base_date + timedelta(hours=int(self.rng.integers(1, 8)) * i)
