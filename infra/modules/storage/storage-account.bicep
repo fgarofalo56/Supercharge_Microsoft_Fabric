@@ -25,6 +25,15 @@ param privateEndpointSubnetId string = ''
 @description('Tags to apply to resources')
 param tags object = {}
 
+@description('Enable Customer-Managed Keys for storage encryption')
+param enableCmk bool = false
+
+@description('Key Vault key URI for CMK encryption (required when enableCmk is true)')
+param keyVaultKeyUri string = ''
+
+@description('User-assigned managed identity resource ID for Key Vault access (required when enableCmk is true)')
+param keyVaultIdentityId string = ''
+
 // =============================================================================
 // Storage Account
 // =============================================================================
@@ -37,6 +46,12 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   sku: {
     name: 'Standard_ZRS'
   }
+  identity: enableCmk ? {
+    type: 'UserAssigned'
+    userAssignedIdentities: {
+      '${keyVaultIdentityId}': {}
+    }
+  } : { type: 'None' }
   properties: {
     accessTier: 'Hot'
     isHnsEnabled: true // Enable hierarchical namespace (ADLS Gen2)
@@ -49,15 +64,17 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
       bypass: 'AzureServices'
     }
     encryption: {
+      keySource: enableCmk ? 'Microsoft.Keyvault' : 'Microsoft.Storage'
+      keyvaultproperties: enableCmk ? {
+        keyname: last(split(keyVaultKeyUri, '/'))
+        keyvaulturi: substring(keyVaultKeyUri, 0, lastIndexOf(keyVaultKeyUri, '/keys/'))
+      } : null
       services: {
-        blob: {
-          enabled: true
-        }
-        file: {
-          enabled: true
-        }
+        blob: { enabled: true, keyType: 'Account' }
+        file: { enabled: true, keyType: 'Account' }
+        table: { enabled: true, keyType: 'Account' }
+        queue: { enabled: true, keyType: 'Account' }
       }
-      keySource: 'Microsoft.Storage'
     }
   }
 }

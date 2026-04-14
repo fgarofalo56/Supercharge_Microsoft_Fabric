@@ -20,6 +20,7 @@ Data governance in Microsoft Fabric spans classification, protection, access con
 - [Compliance Frameworks](#compliance-frameworks)
 - [Data Sharing and External Access](#data-sharing-and-external-access)
 - [Audit and Monitoring](#audit-and-monitoring)
+- [Default Domain Sensitivity Labels (GA 2026)](#default-domain-sensitivity-labels-ga-2026)
 - [Data Retention and Lifecycle Management](#data-retention-and-lifecycle-management)
 
 ---
@@ -987,6 +988,102 @@ DIVIDE(
     0
 )
 ```
+
+---
+
+## Default Domain Sensitivity Labels (GA 2026)
+
+Default Domain Sensitivity Labels (GA, February 2026) automatically apply sensitivity labels to new Fabric items based on the domain they belong to. This eliminates the risk of unclassified data items in production workspaces and ensures consistent data classification from creation.
+
+### How Default Domain Labels Work
+
+When a Fabric domain is configured with a default sensitivity label, every new item created within that domain automatically inherits the label. This includes lakehouses, warehouses, notebooks, semantic models, reports, and all other Fabric item types.
+
+```mermaid
+flowchart LR
+    subgraph Domain["📋 Fabric Domain"]
+        DL["Default Label:<br/>Confidential"]
+    end
+
+    subgraph Items["🆕 New Items"]
+        LH["Lakehouse"]
+        WH["Warehouse"]
+        NB["Notebook"]
+        SM["Semantic Model"]
+    end
+
+    Domain -->|"Auto-apply"| Items
+
+    style Domain fill:#6C3483,stroke:#4A235A,color:#fff
+```
+
+### Domain-to-Label Mapping for This POC
+
+| Domain | Default Label | Justification |
+|--------|-------------|---------------|
+| **Casino Gaming** | Confidential | PII, financial data, compliance filings |
+| **Casino Development** | Internal | Non-production data, synthetic datasets |
+| **Federal - USDA** | Internal | Publicly available agricultural statistics |
+| **Federal - NOAA** | Internal | Public weather/climate data |
+| **Federal - EPA** | Internal | Environmental monitoring data |
+| **Federal - DOI** | Internal | Public lands and resource data |
+| **Federal - SBA** | Internal | Loan program aggregate data |
+| **Tribal Healthcare** | Highly Confidential | HIPAA PHI, 42 CFR Part 2 substance abuse records |
+| **DOT/FAA** | Confidential | Flight operations, security-sensitive |
+| **Shared Gold / BI** | Confidential | Cross-domain aggregations may contain sensitive data |
+
+### Configuration via Admin Portal
+
+```
+Fabric Admin Portal → Domains → [Select Domain]
+  → Governance Settings
+    → Default Sensitivity Label: [Select Label]
+    → Override Allowed: [Yes/No]
+    → Label Inheritance: [Downstream items inherit from source]
+```
+
+### Configuration via PowerShell
+
+```powershell
+# Set default sensitivity label for a Fabric domain
+# Requires: Microsoft.PowerBI.Admin module
+
+Connect-PowerBIServiceAccount
+
+# Get domain ID
+$domain = Get-PowerBIDomain -Name "Casino Gaming"
+
+# Set default label (label GUID from Microsoft Purview)
+Set-PowerBIDomainDefaultSensitivityLabel `
+    -DomainId $domain.Id `
+    -LabelId "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+
+# Verify configuration
+Get-PowerBIDomainDefaultSensitivityLabel -DomainId $domain.Id
+```
+
+### Label Inheritance Rules
+
+| Scenario | Behavior |
+|----------|----------|
+| New item in domain | Automatically gets domain default label |
+| Item moved to domain | Label updated to domain default (if less restrictive) |
+| Item moved out of domain | Label retained (never downgraded automatically) |
+| Child item from labeled parent | Inherits parent label (downstream inheritance) |
+| User manually sets higher label | Manual label takes precedence |
+| User tries to set lower label | Blocked unless user has override permission |
+
+### Integration with OneLake Security
+
+Default domain labels work in conjunction with OneLake Security (Preview) to provide layered protection:
+
+1. **Domain label** ensures all items are classified from creation
+2. **OneLake Security roles** enforce access based on classification
+3. **Purview policies** can auto-apply additional protections based on label
+
+> 💡 **Tip**: For this POC, configure the Tribal Healthcare domain with "Highly Confidential" default label and set Override Allowed to "No". This ensures PHI data can never be downgraded, satisfying HIPAA minimum necessary requirements.
+
+> ⚠️ **Warning**: Changing a domain's default label does NOT retroactively update existing items. Only new items receive the updated default. Run a bulk relabeling script for existing items when changing domain label policies.
 
 ---
 

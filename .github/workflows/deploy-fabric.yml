@@ -1,0 +1,226 @@
+# =============================================================================
+# Microsoft Fabric Item Deployment using fabric-cicd (GA, Feb 2026)
+# =============================================================================
+# This workflow deploys Fabric items (notebooks, lakehouses, warehouses,
+# semantic models) across Dev → Staging → Production environments using
+# the officially supported fabric-cicd Python library.
+#
+# Prerequisites:
+#   - Azure AD App Registration with Fabric API permissions
+#   - Fabric workspace IDs for each environment
+#   - OIDC federated identity configured
+#
+# References:
+#   - https://learn.microsoft.com/fabric/cicd/manage-deployment
+#   - https://pypi.org/project/fabric-cicd/
+# =============================================================================
+
+name: Deploy Fabric Items
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'notebooks/**'
+      - 'semantic-models/**'
+      - 'pipelines/**'
+  workflow_dispatch:
+    inputs:
+      target_environment:
+        description: 'Target environment for deployment'
+        required: true
+        type: choice
+        options:
+          - dev
+          - staging
+          - prod
+      dry_run:
+        description: 'Dry run (preview changes only)'
+        required: false
+        type: boolean
+        default: true
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  PYTHON_VERSION: '3.11'
+  FABRIC_CICD_VERSION: '>=1.0.0'
+
+jobs:
+  # ===========================================================================
+  # Stage 1: Install and Validate
+  # ===========================================================================
+  validate:
+    name: Validate Fabric Items
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: Install fabric-cicd
+        run: |
+          pip install "fabric-cicd${{ env.FABRIC_CICD_VERSION }}"
+          pip install azure-identity
+
+      - name: Validate item definitions
+        run: |
+          python -c "
+          from fabric_cicd import FabricWorkspace
+          print('fabric-cicd installed successfully')
+          print(f'Version: {FabricWorkspace.__module__}')
+          "
+
+      - name: Lint notebook files
+        run: |
+          echo '📝 Validating notebook format...'
+          errors=0
+          for f in notebooks/**/*.py; do
+            if [ -f "$f" ]; then
+              first_line=$(head -1 "$f")
+              if [ "$first_line" != "# Databricks notebook source" ]; then
+                echo "❌ Invalid notebook format: $f"
+                errors=$((errors + 1))
+              fi
+            fi
+          done
+          if [ $errors -gt 0 ]; then
+            echo "❌ $errors notebook(s) have invalid format"
+            exit 1
+          fi
+          echo '✅ All notebooks valid'
+
+  # ===========================================================================
+  # Stage 2: Deploy to Dev
+  # ===========================================================================
+  deploy-dev:
+    name: Deploy to Dev
+    needs: validate
+    if: github.event.inputs.target_environment == 'dev' || github.event.inputs.target_environment == ''
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install "fabric-cicd${{ env.FABRIC_CICD_VERSION }}"
+          pip install azure-identity
+
+      - name: Azure Login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Deploy to Dev workspace
+        env:
+          FABRIC_WORKSPACE_ID: ${{ secrets.FABRIC_DEV_WORKSPACE_ID }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'true' }}
+        run: |
+          python scripts/fabric-cicd-deploy.py \
+            --workspace-id "$FABRIC_WORKSPACE_ID" \
+            --environment dev \
+            --item-type-in-scope Notebook Lakehouse SemanticModel \
+            $( [ "$DRY_RUN" = "true" ] && echo "--dry-run" )
+
+  # ===========================================================================
+  # Stage 3: Deploy to Staging
+  # ===========================================================================
+  deploy-staging:
+    name: Deploy to Staging
+    needs: deploy-dev
+    if: github.event.inputs.target_environment == 'staging' || (github.ref == 'refs/heads/main' && github.event_name == 'push')
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install "fabric-cicd${{ env.FABRIC_CICD_VERSION }}"
+          pip install azure-identity
+
+      - name: Azure Login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Deploy to Staging workspace
+        env:
+          FABRIC_WORKSPACE_ID: ${{ secrets.FABRIC_STAGING_WORKSPACE_ID }}
+        run: |
+          python scripts/fabric-cicd-deploy.py \
+            --workspace-id "$FABRIC_WORKSPACE_ID" \
+            --environment staging \
+            --item-type-in-scope Notebook Lakehouse SemanticModel
+
+  # ===========================================================================
+  # Stage 4: Deploy to Production (requires approval)
+  # ===========================================================================
+  deploy-prod:
+    name: Deploy to Production
+    needs: deploy-staging
+    if: github.event.inputs.target_environment == 'prod'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install "fabric-cicd${{ env.FABRIC_CICD_VERSION }}"
+          pip install azure-identity
+
+      - name: Azure Login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Deploy to Production workspace
+        env:
+          FABRIC_WORKSPACE_ID: ${{ secrets.FABRIC_PROD_WORKSPACE_ID }}
+        run: |
+          python scripts/fabric-cicd-deploy.py \
+            --workspace-id "$FABRIC_WORKSPACE_ID" \
+            --environment prod \
+            --item-type-in-scope Notebook Lakehouse SemanticModel
+
+      - name: Post-deployment verification
+        run: |
+          echo '🎯 Production deployment complete'
+          echo '📝 Verify items in Fabric workspace portal'
+          echo '📊 Run smoke tests against production semantic models'

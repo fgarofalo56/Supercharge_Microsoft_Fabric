@@ -9,8 +9,94 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Planned
 - Additional Power BI report templates
-- Azure Data Factory pipeline integration
 - Enhanced compliance reporting
+
+---
+
+## [2.0.0] - 2026-04-13
+
+### Added — Phase 9: New Fabric Experience Modernization
+
+#### Feature Documentation (7 new docs)
+- **docs/features/digital-twin-builder.md** — IoT digital twin modeling and simulation
+- **docs/features/data-agents.md** — Autonomous AI agents for data workflows
+- **docs/features/onelake-security.md** — Workspace identity, managed VNet, trusted access
+- **docs/features/onelake-iceberg-interop.md** — Apache Iceberg read/write for cross-platform analytics
+- **docs/features/dbt-fabric-integration.md** — dbt Core/Cloud with Fabric SQL & Spark
+- **docs/features/materialized-lake-views.md** — Pre-computed views for Direct Lake performance
+- **docs/features/eventhouse-vector-database.md** — Vector search in KQL for AI/RAG workloads
+
+#### Best Practices (5 new guides)
+- **docs/best-practices/fabric-cicd-deployment.md** — fabric-cicd Python library, GitHub Actions, environment promotion
+- **docs/best-practices/sql-audit-logs-compliance.md** — SQL analytics endpoint audit logs
+- **docs/best-practices/outbound-access-protection.md** — Data exfiltration prevention
+- **docs/best-practices/customer-managed-keys.md** — BYOK encryption key management
+- **docs/best-practices/spark-runtime-migration.md** — Runtime 2.0 migration guide
+
+#### Infrastructure
+- **infra/modules/security/workspace-identity.bicep** — Workspace Identity (GA 2026) module
+- **scripts/fabric-cicd-deploy.py** — fabric-cicd deployment script
+- **.github/workflows/deploy-fabric.yml** — 4-stage CI/CD pipeline
+
+#### Notebooks (3 new notebooks)
+- **notebooks/gold/17_gold_digital_twin_demo.py** — Digital twin demo notebook
+- **notebooks/bronze/17_bronze_shortcut_transformations.py** — Shortcut transformations
+- **notebooks/gold/17_gold_ai_functions_compliance.py** — AI Functions compliance notebook
+
+### Changed — Phase 9
+- **infra/main.bicep** — Added Workspace Identity module, workspace governance tags, CMK support
+- **infra/modules/storage/storage-account.bicep** — Added CMK configuration parameters
+- **docs/features/fabric-iq.md** — Added Ontology, Plan, and Graph layers
+- **docs/features/real-time-intelligence.md** — Added Business Events, Maps, SQL Operator
+- **docs/best-practices/data-governance-deep-dive.md** — Added default domain sensitivity labels
+- **notebooks/bronze/01_bronze_slot_telemetry.py** — Added Lakehouse Schema section
+- **notebooks/silver/01_silver_slot_cleansed.py** — Added Lakehouse Schema section
+- **notebooks/gold/01_gold_slot_performance.py** — Added Lakehouse Schema section
+
+### Added — Phase 10: Full Fabric Landscape Coverage
+
+#### Feature Documentation (11 new docs)
+- **docs/features/mirroring.md** — Near-real-time DB replication (Oracle, SAP, BigQuery, MySQL)
+- **docs/features/direct-lake.md** — Power BI reads Delta directly from OneLake
+- **docs/features/fabric-sql-database.md** — OLTP workload with auto-replication to OneLake
+- **docs/features/api-for-graphql.md** — GraphQL API layer over Fabric data items
+- **docs/features/semantic-link.md** — SemPy library bridging notebooks and semantic models
+- **docs/features/onelake-catalog.md** — Unified data discovery and governance hub
+- **docs/features/automl-model-endpoints.md** — Automated ML training and REST model deployment
+- **docs/features/translytical-task-flows.md** — Write-back from Power BI reports to Lakehouse
+- **docs/features/fabric-mcp.md** — Model Context Protocol for AI agent interaction
+- **docs/features/workspace-monitoring.md** — Queryable system tables for activity tracking
+- **docs/features/copy-job-cdc.md** — Low-code continuous ingestion with change data capture
+
+#### Best Practices (11 new guides)
+- **docs/best-practices/capacity-planning-cost-optimization.md** — SKU selection, CU cost model
+- **docs/best-practices/disaster-recovery-bcdr.md** — RTO/RPO targets, failover procedures
+- **docs/best-practices/testing-strategies.md** — Testing pyramid, unit/integration/DQ testing
+- **docs/best-practices/network-security.md** — Private endpoints, managed VNet, IP firewall
+- **docs/best-practices/identity-rbac-patterns.md** — Workspace roles, item permissions, RLS/CLS/OLS
+- **docs/best-practices/medallion-architecture-deep-dive.md** — SCD patterns, table maintenance
+- **docs/best-practices/monitoring-observability.md** — Capacity monitoring, dashboards, alerting
+- **docs/best-practices/migration-patterns.md** — Source-specific migration and validation
+- **docs/best-practices/multi-tenant-workspace-architecture.md** — Topology and isolation patterns
+- **docs/best-practices/data-sharing-federation.md** — Shortcuts, data sharing, federation
+- **docs/best-practices/incremental-refresh-cdc.md** — Delta MERGE, watermark management
+
+#### Infrastructure (4 new Bicep modules)
+- **infra/modules/fabric/fabric-warehouse.bicep** — Fabric Warehouse configuration metadata
+- **infra/modules/fabric/fabric-sql-database.bicep** — SQL Database with DDM & CMK
+- **infra/modules/fabric/fabric-pipeline.bicep** — Data Factory Pipeline with scheduling
+- **infra/modules/monitoring/alerts-and-budgets.bicep** — Capacity alerts & budget management
+
+#### Notebooks (1 new notebook)
+- **notebooks/ml/03_ml_automl_weather_forecasting.py** — AutoML weather forecasting demo
+
+### Changed — Phase 10
+- **infra/main.bicep** — Added Warehouse, SQL Database, Pipeline, and Alerts modules with conditional flags
+- **docs/index.md** — Added Feature Documentation section with 22 feature docs
+- **docs/best-practices/README.md** — Added Phase 9 and Phase 10 best practices sections
+- **README.md** — Updated Phase badge to 10, added Phase 9-10 section, updated test count
+- **CLAUDE.md** — Updated phase status to Phase 10 Complete
+- **CHANGELOG.md** — Added [2.0.0] section
 
 ---
 

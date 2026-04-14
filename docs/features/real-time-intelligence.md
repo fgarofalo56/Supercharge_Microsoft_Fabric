@@ -8,13 +8,13 @@
 
 ![Category](https://img.shields.io/badge/Category-Real_Time_Analytics-orange?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
-![Last Updated](https://img.shields.io/badge/Updated-March_2026-blue?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
 
 </div>
 
 ---
 
-**Last Updated:** `2026-03-12` | **Version:** 1.0.0
+**Last Updated:** `2026-04-13` | **Version:** 2.0.0
 
 ---
 
@@ -28,6 +28,15 @@
 - [🔍 KQL Query Patterns](#-kql-query-patterns)
 - [📊 Real-Time Dashboards](#-real-time-dashboards)
 - [🔔 Data Activator](#-data-activator)
+- [📡 Business Events](#-business-events)
+- [🔮 Anomaly Detection](#-anomaly-detection)
+- [🗺️ Fabric Maps](#️-fabric-maps)
+- [💻 Eventstream SQL Operator](#-eventstream-sql-operator)
+- [📋 Schema Registry](#-schema-registry)
+- [🔺 DeltaFlow Transformation](#-deltaflow-transformation)
+- [🏭 Digital Twin Builder](#-digital-twin-builder)
+- [🤖 MCP for Real-Time Intelligence](#-mcp-for-real-time-intelligence)
+- [🔌 New Connectors (2025-2026)](#-new-connectors-2025-2026)
 - [🏛️ Domain Use Cases](#️-domain-use-cases)
 - [⚡ Performance Tuning](#-performance-tuning)
 - [💰 Cost Management](#-cost-management)
@@ -1164,6 +1173,465 @@ flowchart TB
 
 ---
 
+## 📡 Business Events
+
+Business Events (Preview, 2026) introduce a new paradigm for event-driven architectures in RTI. Unlike traditional Eventstream sources that originate from external systems, Business Events are generated from within Fabric itself -- from notebooks, User Data Functions, or pipeline activities.
+
+### How Business Events Work
+
+```mermaid
+flowchart LR
+    subgraph Generators["📝 Event Generators"]
+        NB["Fabric Notebook"]
+        UDF["User Data Function"]
+        PA["Pipeline Activity"]
+    end
+
+    subgraph Hub["📡 Real-Time Hub"]
+        BE["Business Events"]
+    end
+
+    subgraph Consumers["🎯 Consumers"]
+        ACT["Data Activator"]
+        ES["Eventstream"]
+        PBI["Power BI Dashboard"]
+        PWA["Power Automate"]
+    end
+
+    Generators -->|"Publish"| Hub -->|"Subscribe"| Consumers
+
+    style Hub fill:#E67E22,stroke:#CA6F1E,color:#fff
+    style Generators fill:#6C3483,stroke:#4A235A,color:#fff
+```
+
+### Business Event Use Cases
+
+| Domain | Event | Trigger | Action |
+|--------|-------|---------|--------|
+| **Casino** | Revenue threshold crossed | Gold notebook aggregation | Alert floor manager via Teams |
+| **Casino** | Compliance filing generated | CTR/SAR pipeline completion | Notify compliance officer |
+| **USDA** | Crop yield anomaly detected | ML model prediction | Trigger investigation workflow |
+| **NOAA** | Severe weather threshold | Weather data processing | Activate emergency protocol |
+| **EPA** | Violation score exceeded | Water quality analysis | Generate enforcement alert |
+
+### Publishing Business Events from Notebooks
+
+```python
+# Publish a business event from a Fabric notebook
+from notebookutils import mssparkutils
+
+event_payload = {
+    "eventType": "ComplianceAlert",
+    "source": "gold_compliance_pipeline",
+    "data": {
+        "player_id": "P-12345",
+        "alert_type": "SAR_PATTERN",
+        "total_amount": 28500.00,
+        "transaction_count": 3,
+        "time_window_hours": 4
+    }
+}
+
+mssparkutils.notification.publishBusinessEvent(
+    event_name="casino-compliance-alert",
+    payload=event_payload
+)
+```
+
+> 📝 **Note**: Business Events integrate with the Real-Time Hub, making them discoverable and subscribable by any authorized consumer in the Fabric tenant.
+
+---
+
+## 🔮 Anomaly Detection
+
+Anomaly Detection (Preview) provides a no-code interface for detecting outliers and unusual patterns in streaming data. Previously, anomaly detection required writing KQL queries using `series_decompose_anomalies()` -- the new feature automates model selection and configuration.
+
+### No-Code Anomaly Detection Setup
+
+| Step | Action | Details |
+|------|--------|---------|
+| 1 | Select data source | Choose Eventhouse table or materialized view |
+| 2 | Configure metric | Select numeric column to monitor (e.g., revenue, error_rate) |
+| 3 | Set granularity | Time bucket for analysis (1 min, 5 min, 1 hour) |
+| 4 | Choose sensitivity | Low (fewer alerts), Medium, High (more alerts) |
+| 5 | Configure alerts | Email, Teams, Power Automate, or Data Activator trigger |
+
+### Anomaly Detection for Casino Operations
+
+```
+Monitor: Slot machine revenue per hour
+Metric: sum(HoldAmount) per FloorLocation
+Granularity: 1 hour
+Sensitivity: Medium
+Alert: Teams notification to floor manager when anomaly detected
+
+Monitor: Player transaction patterns
+Metric: count() per PlayerId where Amount > 5000
+Granularity: 15 minutes
+Sensitivity: High
+Alert: Email compliance team + Data Activator trigger
+```
+
+### Anomaly Detection for Federal Agencies
+
+| Agency | Metric | Granularity | Sensitivity | Alert Action |
+|--------|--------|-------------|-------------|-------------|
+| NOAA | Temperature deviation from historical average | 1 hour | Medium | Dashboard highlight |
+| EPA | PM2.5 concentration spike | 30 min | High | Email regional office |
+| DOI | Earthquake event frequency | 1 hour | Low | Map overlay |
+| DOT/FAA | Flight delay rate deviation | 15 min | Medium | Operations dashboard |
+
+> 💡 **Tip**: Use no-code anomaly detection for straightforward metrics. For complex multi-variate analysis (e.g., CTR structuring patterns), continue using the KQL `series_decompose_anomalies()` and `scan` operator approaches documented in the KQL Query Patterns section above.
+
+---
+
+## 🗺️ Fabric Maps
+
+Fabric Maps (GA, March 2026) provides native geospatial visualization directly within Real-Time Intelligence. This replaces the need for custom mapping solutions or external GIS tools for many scenarios.
+
+### Capabilities
+
+| Feature | Description |
+|---------|-------------|
+| **Real-Time Location Tracking** | Visualize live entity positions (vehicles, assets, people) |
+| **Historical Path Analysis** | Replay movement patterns over time |
+| **Geofencing Visualization** | Display defined geographic boundaries with event triggers |
+| **Heat Maps** | Density visualization for concentration analysis |
+| **Cluster Rendering** | Automatic grouping of nearby points at zoom levels |
+| **KQL-Powered** | Data sourced from Eventhouse via KQL queries |
+
+### Casino Floor Mapping
+
+```kql
+// Feed Fabric Maps with real-time slot machine utilization by location
+SlotTelemetryRaw
+| where Timestamp > ago(15m)
+| join kind=inner MachineLocations on MachineId
+| summarize
+    ActiveSpins = count(),
+    Revenue = sum(Wager) - sum(Payout)
+    by MachineId, Latitude, Longitude, ZoneName
+| extend MarkerSize = case(
+    Revenue > 1000, "large",
+    Revenue > 500, "medium",
+    "small")
+```
+
+### Federal Agency Map Use Cases
+
+| Agency | Map Application | Data Source | Update Frequency |
+|--------|----------------|-------------|-----------------|
+| **NOAA** | Live weather station network | NOAAObservations table | 5 min |
+| **EPA** | AQI monitoring station map | EPASensorData table | 30 min |
+| **DOI** | Earthquake event map (last 24h) | EarthquakeEvents table | Real-time |
+| **DOT/FAA** | Airport delay status map | FlightEvents table | 15 min |
+| **USDA** | Crop condition by county | AgricultureData table | Daily |
+
+> 📝 **Note**: Fabric Maps integrates directly with Data Activator for geofence-triggered alerts (e.g., alert when an asset leaves a defined zone or when AQI exceeds thresholds in a monitored area).
+
+---
+
+## 💻 Eventstream SQL Operator
+
+The Eventstream SQL Operator (GA, March 2026) enables SQL-based stream processing directly within Eventstreams. This is a significant enhancement over the previous no-code transformation approach, providing familiar SQL syntax for complex real-time transformations.
+
+### Key Capabilities
+
+| Feature | Description |
+|---------|-------------|
+| **SQL Syntax** | Standard SQL for stream transformations |
+| **Multiple Destinations** | Route transformed data to multiple outputs from single SQL operator |
+| **Event Ordering** | Configurable event ordering policies |
+| **Late Event Handling** | Define rules for late-arriving events |
+| **Windowing** | Tumbling, hopping, sliding, and session windows |
+| **Joins** | Stream-to-stream and stream-to-reference joins |
+
+### SQL Operator Examples
+
+```sql
+-- Casino: Real-time revenue aggregation with tumbling window
+SELECT
+    FloorLocation,
+    TUMBLE_START(EventTime, INTERVAL '5' MINUTE) AS WindowStart,
+    COUNT(*) AS SpinCount,
+    SUM(Wager) AS TotalWager,
+    SUM(Payout) AS TotalPayout,
+    SUM(Wager) - SUM(Payout) AS NetRevenue,
+    AVG(CAST(Wager AS FLOAT)) AS AvgWager
+FROM SlotEvents
+GROUP BY
+    FloorLocation,
+    TUMBLE(EventTime, INTERVAL '5' MINUTE)
+
+-- Casino: Detect high-value transactions in real-time
+SELECT
+    PlayerId,
+    TransactionId,
+    Amount,
+    TransactionType,
+    EventTime,
+    CASE
+        WHEN Amount >= 10000 THEN 'CTR_REQUIRED'
+        WHEN Amount BETWEEN 8000 AND 9999.99 THEN 'SAR_REVIEW'
+        ELSE 'NORMAL'
+    END AS ComplianceFlag
+FROM PlayerTransactionStream
+WHERE Amount >= 5000
+
+-- Federal: NOAA weather alert aggregation with session window
+SELECT
+    State,
+    SESSION_START(EventTime, INTERVAL '30' MINUTE) AS AlertSessionStart,
+    COUNT(*) AS AlertCount,
+    MAX(Severity) AS MaxSeverity,
+    COLLECT(DISTINCT EventType) AS AlertTypes
+FROM NOAAAlertStream
+WHERE Severity IN ('Extreme', 'Severe')
+GROUP BY
+    State,
+    SESSION(EventTime, INTERVAL '30' MINUTE)
+```
+
+### SQL Operator vs No-Code Transformations
+
+| Criteria | No-Code | SQL Operator |
+|----------|---------|-------------|
+| **Learning Curve** | Low | Medium (SQL knowledge) |
+| **Complexity** | Simple transforms only | Complex joins, windows, aggregations |
+| **Multi-destination** | Limited | Full support |
+| **Late Events** | Basic | Configurable policies |
+| **Use When** | Simple field mapping, filtering | Complex analytics, compliance logic |
+
+> 💡 **Tip**: For this POC, use the SQL Operator for compliance-critical stream processing (CTR detection, SAR pattern aggregation) where precise windowing and ordering matter. Use no-code transforms for simpler routing and field mapping.
+
+---
+
+## 📋 Schema Registry
+
+The Schema Registry (Preview) enables contract-based event schema definition and validation for real-time pipelines. This ensures type-safe, reliable data flow through Eventstreams.
+
+### Schema Registry Concepts
+
+| Concept | Description |
+|---------|-------------|
+| **Schema Set** | Collection of related schemas (e.g., all casino event types) |
+| **Schema Version** | Versioned schema definition with compatibility rules |
+| **Compatibility Mode** | Forward, backward, or full compatibility enforcement |
+| **Validation** | Automatic validation of incoming events against registered schemas |
+
+### Casino Event Schemas
+
+```json
+{
+    "schemaSet": "casino-events",
+    "schemas": [
+        {
+            "name": "SlotTelemetryEvent",
+            "version": 1,
+            "fields": [
+                {"name": "MachineId", "type": "string", "required": true},
+                {"name": "EventType", "type": "string", "required": true, "allowed": ["spin", "payout", "error", "maintenance"]},
+                {"name": "Wager", "type": "decimal", "required": false},
+                {"name": "Payout", "type": "decimal", "required": false},
+                {"name": "Timestamp", "type": "datetime", "required": true}
+            ]
+        },
+        {
+            "name": "PlayerTransactionEvent",
+            "version": 1,
+            "fields": [
+                {"name": "PlayerId", "type": "string", "required": true},
+                {"name": "Amount", "type": "decimal", "required": true},
+                {"name": "TransactionType", "type": "string", "required": true},
+                {"name": "Timestamp", "type": "datetime", "required": true}
+            ]
+        }
+    ]
+}
+```
+
+### Confluent Schema Registry Support
+
+Eventstream also supports decoding data from Confluent Schema Registry topics, enabling seamless migration from Kafka-native streaming architectures. This is relevant for organizations migrating from Confluent Cloud or on-premises Kafka deployments.
+
+---
+
+## 🔺 DeltaFlow Transformation
+
+DeltaFlow (Preview) transforms raw Change Data Capture (CDC) events into flattened, analytics-ready format. This is particularly valuable for mirroring and CDC streaming scenarios.
+
+### How DeltaFlow Works
+
+```mermaid
+flowchart LR
+    subgraph Input["📥 CDC Events"]
+        CDC["Debezium/CDC<br/>Insert, Update, Delete<br/>Before/After images"]
+    end
+
+    subgraph Transform["🔺 DeltaFlow"]
+        FLAT["Flatten CDC envelope"]
+        META["Add metadata columns"]
+        TAB["Produce tabular rows"]
+    end
+
+    subgraph Output["📤 Analytics-Ready"]
+        DT["Delta Table<br/>Standard row format<br/>_operation, _timestamp"]
+    end
+
+    Input --> Transform --> Output
+
+    style Transform fill:#E67E22,stroke:#CA6F1E,color:#fff
+```
+
+### DeltaFlow Output Columns
+
+| Column | Description |
+|--------|-------------|
+| `_operation` | Type of change: INSERT, UPDATE, DELETE |
+| `_timestamp` | When the change occurred |
+| `_source_table` | Original source table name |
+| `_transaction_id` | Source transaction identifier |
+| All source columns | Flattened from the CDC `after` image |
+
+> 📝 **Note**: DeltaFlow complements the existing CDC streaming notebooks in this POC (e.g., `01_sql_server_cdc.py`, `05_oracle_cdc.py`). It provides a no-code alternative for simple CDC flattening, while the notebook approach remains better for complex transformation logic.
+
+---
+
+## 🏭 Digital Twin Builder
+
+Digital Twin Builder (Preview) is a new Real-Time Intelligence item for creating data-driven, real-time representations of physical entities. It enables organizations to model physical environments as digital entities with real-time data bindings.
+
+For comprehensive documentation, see the dedicated [Digital Twin Builder Guide](digital-twin-builder.md).
+
+### Quick Overview
+
+| Aspect | Details |
+|--------|---------|
+| **What** | Real-time digital representations of physical entities |
+| **Where** | New item type within RTI workload |
+| **Data Source** | Eventhouse tables and materialized views |
+| **Entity Types** | Custom-defined (machines, zones, facilities, sensors) |
+| **Properties** | Static (metadata) and dynamic (real-time telemetry) |
+| **Relationships** | Parent-child, monitors, contains, serves |
+
+### Casino Floor Twin Example
+
+```
+Casino
+  └── Floor (Floor 1, Floor 2)
+        └── Zone (High Limit, Penny Slots, Table Games)
+              └── Machine (SM-001, SM-002, ...)
+                    Properties: utilization, revenue/hr, error_rate, temperature
+```
+
+### Federal Facility Twin Example
+
+```
+USDA Regional Office
+  └── Warehouse (Storage Facility A)
+        └── Storage Unit (Cold Storage 1)
+              └── Sensor (Temp-001, Humidity-001)
+                    Properties: temperature, humidity, inventory_count
+```
+
+---
+
+## 🤖 MCP for Real-Time Intelligence
+
+Model Context Protocol (MCP) support for RTI (Preview) enables AI agents and applications to interact directly with Eventhouse and Data Activator through standardized MCP interfaces.
+
+### MCP Remote Servers
+
+| Server | Capabilities |
+|--------|-------------|
+| **Eventhouse MCP** | Execute KQL queries, browse databases, list tables, get schema information |
+| **Activator MCP** | Create/modify alert rules, check alert status, manage triggers |
+
+### AI Agent Integration Pattern
+
+```mermaid
+flowchart LR
+    subgraph Agent["🤖 AI Agent"]
+        LLM["Language Model"]
+        MCP_C["MCP Client"]
+    end
+
+    subgraph RTI["⚡ RTI MCP Servers"]
+        EH_MCP["Eventhouse<br/>MCP Server"]
+        ACT_MCP["Activator<br/>MCP Server"]
+    end
+
+    subgraph Data["📊 RTI Data"]
+        KQL_DB["KQL Databases"]
+        ALERTS["Alert Rules"]
+    end
+
+    Agent -->|"MCP Protocol"| RTI --> Data
+
+    style RTI fill:#E67E22,stroke:#CA6F1E,color:#fff
+    style Agent fill:#6C3483,stroke:#4A235A,color:#fff
+```
+
+### Use Cases
+
+| Scenario | MCP Action | Example |
+|----------|-----------|---------|
+| Natural language KQL | Agent translates question to KQL, executes via MCP | "What's the slot revenue for Floor 2 in the last hour?" |
+| Alert management | Agent creates/modifies Activator rules via MCP | "Set up an alert when Floor 3 utilization drops below 20%" |
+| Incident investigation | Agent queries multiple tables to correlate events | "Why did Machine SM-1042 go offline at 3:15 PM?" |
+
+> 📝 **Note**: MCP for RTI connects directly with [Fabric Data Agents](data-agents.md), enabling agents to answer questions about real-time operational data.
+
+---
+
+## 🔌 New Connectors (2025-2026)
+
+Several new Eventstream connectors have been added since the original release:
+
+| Connector | Status | Description |
+|-----------|--------|-------------|
+| **Cribl Stream** (Preview) | New | Receive data from diverse telemetry and log sources through Cribl Stream. Supports Syslog, Datadog Agent, Splunk, OpenTelemetry, and edge-based sources. |
+| **Solace PubSub+** (Preview) | New | Connect Fabric Eventstream with Solace PubSub+ event brokers for enterprise messaging integration. |
+| **Confluent Schema Registry** (Preview) | New | Decode data from Confluent Schema Registry topics for Avro/Protobuf/JSON Schema encoded data. |
+| **Azure Monitor** (Preview) | New | Route VM telemetry via Azure Monitor Agent and Data Collection Rules directly to Eventhouse. |
+| **Private Network Streaming** (Preview) | New | Azure VNet bridge for on-premises/private cloud sources via VPN, ExpressRoute, or private endpoints. |
+| **Azure Blob Storage Shortcut** (Preview) | New | Create shortcuts to Azure Blob Storage for direct data access. |
+
+### Connector Architecture Updates
+
+```mermaid
+flowchart TB
+    subgraph NewSources["🆕 New Sources (2025-2026)"]
+        CR["Cribl Stream<br/>Syslog, Splunk, OTEL"]
+        SO["Solace PubSub+"]
+        AZ["Azure Monitor<br/>VM Telemetry"]
+        PN["Private Network<br/>VPN/ExpressRoute"]
+    end
+
+    subgraph ExistingSources["📡 Existing Sources"]
+        EH["Azure Event Hub"]
+        KF["Apache Kafka"]
+        IO["IoT Hub"]
+        DB["CDC Sources"]
+    end
+
+    subgraph Eventstream["📥 Eventstream"]
+        SR["Schema Registry<br/>(Optional)"]
+        SQL["SQL Operator<br/>(GA)"]
+        NC["No-Code Transform"]
+    end
+
+    NewSources --> Eventstream
+    ExistingSources --> Eventstream
+
+    style NewSources fill:#27AE60,stroke:#1E8449,color:#fff
+    style Eventstream fill:#E67E22,stroke:#CA6F1E,color:#fff
+```
+
+> 💡 **Tip**: The Private Network Streaming connector is particularly relevant for federal agencies with on-premises data sources that cannot be exposed to the public internet. Use VNet data gateways with ExpressRoute for secure, high-throughput streaming from agency data centers.
+
+---
+
 ## 📚 References
 
 | Resource | URL |
@@ -1184,6 +1652,14 @@ flowchart TB
 - [Fabric IQ](fabric-iq.md) -- Natural language querying for RTI data
 - [AI Copilot Configuration](ai-copilot-configuration.md) -- KQL Copilot for Eventhouse
 - [Data Mesh Enterprise Patterns](data-mesh-enterprise-patterns.md) -- Cross-domain RTI architecture
+- [Digital Twin Builder](digital-twin-builder.md) -- Entity modeling with real-time data bindings
+- [Data Agents](data-agents.md) -- AI agents powered by RTI data via MCP
+- [OneLake Security](onelake-security.md) -- Fine-grained security for RTI data in OneLake
+- [Eventhouse Vector Database](eventhouse-vector-database.md) -- Vector search and AI embeddings in Eventhouse
+- [Copy Job CDC](copy-job-cdc.md) -- Change data capture for continuous ingestion into RTI
+- [Workspace Monitoring](workspace-monitoring.md) -- System tables for monitoring RTI workloads
+- [Mirroring](mirroring.md) -- Near-real-time DB replication as alternative to streaming
+- [Direct Lake](direct-lake.md) -- Direct Lake semantic models over RTI-landed data
 - [Architecture](../ARCHITECTURE.md) -- System architecture overview
 - [Migration & RTI Research](../MIGRATION_AND_RTI_RESEARCH.md) -- Migration paths and RTI research notes
 

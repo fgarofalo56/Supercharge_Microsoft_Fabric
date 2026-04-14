@@ -120,6 +120,35 @@ az deployment sub create \
 
 ---
 
+## 🔧 Feature Documentation (New Fabric Experience)
+
+| Feature | Description | Status |
+|:--------|:------------|:-------|
+| [Fabric IQ](features/fabric-iq.md) | Natural language data exploration with Ontology & Plan layers | GA |
+| [Real-Time Intelligence](features/real-time-intelligence.md) | Eventstreams, Eventhouse, KQL, Business Events, Maps | GA |
+| [AI Copilot](features/ai-copilot-configuration.md) | Copilot Studio integration and governance | GA |
+| [Data Mesh](features/data-mesh-enterprise-patterns.md) | Enterprise data mesh patterns with Fabric domains | GA |
+| [Digital Twin Builder](features/digital-twin-builder.md) | IoT digital twin modeling and simulation | Preview |
+| [Data Agents](features/data-agents.md) | Autonomous AI agents for data workflows | Preview |
+| [OneLake Security](features/onelake-security.md) | Workspace identity, managed VNet, trusted access | GA |
+| [OneLake Iceberg Interop](features/onelake-iceberg-interop.md) | Apache Iceberg read/write for cross-platform analytics | GA |
+| [dbt Integration](features/dbt-fabric-integration.md) | dbt Core/Cloud with Fabric SQL & Spark | GA |
+| [Materialized Lake Views](features/materialized-lake-views.md) | Pre-computed views for Direct Lake performance | Preview |
+| [Eventhouse Vector Database](features/eventhouse-vector-database.md) | Vector search in KQL for AI/RAG workloads | GA |
+| [Mirroring](features/mirroring.md) | Near-real-time DB replication (Oracle, SAP, BigQuery, MySQL) | GA |
+| [Direct Lake](features/direct-lake.md) | Power BI reads Delta directly from OneLake | GA |
+| [Fabric SQL Database](features/fabric-sql-database.md) | OLTP workload with auto-replication to OneLake | GA |
+| [API for GraphQL](features/api-for-graphql.md) | GraphQL API layer over Fabric data items | GA |
+| [Semantic Link](features/semantic-link.md) | SemPy library bridging notebooks and semantic models | GA |
+| [OneLake Catalog](features/onelake-catalog.md) | Unified data discovery and governance hub | GA |
+| [AutoML & Model Endpoints](features/automl-model-endpoints.md) | Automated ML training and REST model deployment | GA/Preview |
+| [Translytical Task Flows](features/translytical-task-flows.md) | Write-back from Power BI reports to Lakehouse | GA |
+| [Fabric MCP](features/fabric-mcp.md) | Model Context Protocol for AI agent interaction | Preview |
+| [Workspace Monitoring](features/workspace-monitoring.md) | Queryable system tables for activity tracking | GA |
+| [Copy Job CDC](features/copy-job-cdc.md) | Low-code continuous ingestion with change data capture | GA |
+
+---
+
 ## 🛠️ Developer Resources
 
 | Resource | Description |

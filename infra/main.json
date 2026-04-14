@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.40.2.10011",
-      "templateHash": "13818448149579531691"
+      "templateHash": "4826125843619129894"
     }
   },
   "parameters": {
@@ -152,6 +152,174 @@
       "metadata": {
         "description": "Eventhouse hot cache period in days"
       }
+    },
+    "enableWorkspaceIdentity": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Enable Fabric Workspace Identity (GA 2026) for credential-free authentication"
+      }
+    },
+    "fabricDomain": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Fabric data domain for workspace tag governance (e.g., Casino, Federal-USDA)"
+      }
+    },
+    "dataClassification": {
+      "type": "string",
+      "defaultValue": "",
+      "allowedValues": [
+        "Public",
+        "Internal",
+        "Confidential",
+        "HighlyConfidential",
+        ""
+      ],
+      "metadata": {
+        "description": "Data classification level for workspace tag governance"
+      }
+    },
+    "complianceFramework": {
+      "type": "string",
+      "defaultValue": "",
+      "allowedValues": [
+        "NIGC-MICS",
+        "HIPAA",
+        "FedRAMP",
+        "FISMA",
+        "42CFR-Part2",
+        "CIPSEA",
+        "None",
+        ""
+      ],
+      "metadata": {
+        "description": "Compliance framework applicable to this deployment"
+      }
+    },
+    "agencyCode": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Federal agency code for workspace tag governance (e.g., USDA, SBA, NOAA, EPA, DOI)"
+      }
+    },
+    "enableWarehouse": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Enable Fabric Warehouse configuration deployment"
+      }
+    },
+    "warehouseName": {
+      "type": "string",
+      "defaultValue": "fabric-warehouse",
+      "metadata": {
+        "description": "Warehouse display name"
+      }
+    },
+    "enableSqlDatabase": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Enable Fabric SQL Database configuration deployment"
+      }
+    },
+    "sqlDatabaseName": {
+      "type": "string",
+      "defaultValue": "fabric-sqldb",
+      "metadata": {
+        "description": "SQL Database display name"
+      }
+    },
+    "enableDDM": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "Enable Dynamic Data Masking for SQL Database"
+      }
+    },
+    "enableSqlDbCMK": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Enable Customer-Managed Keys for SQL Database"
+      }
+    },
+    "sqlDbKeyVaultKeyUri": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Key Vault key URI for SQL Database CMK"
+      }
+    },
+    "enablePipeline": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Enable Fabric Data Factory Pipeline configuration deployment"
+      }
+    },
+    "pipelineName": {
+      "type": "string",
+      "defaultValue": "fabric-pipeline",
+      "metadata": {
+        "description": "Pipeline display name"
+      }
+    },
+    "enablePipelineSchedule": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Enable schedule trigger for pipeline"
+      }
+    },
+    "pipelineScheduleFrequency": {
+      "type": "string",
+      "defaultValue": "Day",
+      "allowedValues": [
+        "Minute",
+        "Hour",
+        "Day",
+        "Week",
+        "Month"
+      ],
+      "metadata": {
+        "description": "Pipeline schedule frequency"
+      }
+    },
+    "enableMonitoringAlerts": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Enable monitoring alerts and budget tracking"
+      }
+    },
+    "monthlyBudgetAmount": {
+      "type": "int",
+      "defaultValue": 10000,
+      "minValue": 100,
+      "maxValue": 1000000,
+      "metadata": {
+        "description": "Monthly budget amount in USD for cost alerts"
+      }
+    },
+    "capacityAlertThreshold": {
+      "type": "int",
+      "defaultValue": 80,
+      "minValue": 50,
+      "maxValue": 100,
+      "metadata": {
+        "description": "Capacity utilization threshold percentage for alerts"
+      }
+    },
+    "alertEmailRecipients": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "Email addresses for alert notifications"
+      }
     }
   },
   "variables": {
@@ -167,7 +335,8 @@
     "eventHouseName": "[format('adx{0}{1}', parameters('projectPrefix'), parameters('environment'))]",
     "powerBICapacityName": "[format('pbi{0}{1}', parameters('projectPrefix'), parameters('environment'))]",
     "costAllocationTags": "[union(if(not(empty(parameters('costCenter'))), createObject('CostCenter', parameters('costCenter')), createObject()), if(not(empty(parameters('owner'))), createObject('Owner', parameters('owner')), createObject()))]",
-    "defaultTags": "[union(parameters('tags'), variables('costAllocationTags'), createObject('Environment', parameters('environment'), 'Project', 'Microsoft Fabric POC', 'Application', 'fabric-casino-poc', 'ManagedBy', 'Bicep', 'DeployedAt', parameters('deployedAt')))]"
+    "workspaceGovernanceTags": "[union(if(not(empty(parameters('fabricDomain'))), createObject('FabricDomain', parameters('fabricDomain')), createObject()), if(not(empty(parameters('dataClassification'))), createObject('DataClassification', parameters('dataClassification')), createObject()), if(not(empty(parameters('complianceFramework'))), createObject('ComplianceFramework', parameters('complianceFramework')), createObject()), if(not(empty(parameters('agencyCode'))), createObject('AgencyCode', parameters('agencyCode')), createObject()))]",
+    "defaultTags": "[union(parameters('tags'), variables('costAllocationTags'), variables('workspaceGovernanceTags'), createObject('Environment', parameters('environment'), 'Project', 'Microsoft Fabric POC', 'Application', 'fabric-casino-poc', 'ManagedBy', 'Bicep', 'DeployedAt', parameters('deployedAt')))]"
   },
   "resources": [
     {
@@ -820,7 +989,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.40.2.10011",
-              "templateHash": "6337580725947114776"
+              "templateHash": "17302229157172633504"
             }
           },
           "parameters": {
@@ -868,6 +1037,27 @@
               "metadata": {
                 "description": "Tags to apply to resources"
               }
+            },
+            "enableCmk": {
+              "type": "bool",
+              "defaultValue": false,
+              "metadata": {
+                "description": "Enable Customer-Managed Keys for storage encryption"
+              }
+            },
+            "keyVaultKeyUri": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Key Vault key URI for CMK encryption (required when enableCmk is true)"
+              }
+            },
+            "keyVaultIdentityId": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "User-assigned managed identity resource ID for Key Vault access (required when enableCmk is true)"
+              }
             }
           },
           "variables": {
@@ -883,29 +1073,41 @@
               "tags": "[parameters('tags')]",
               "kind": "StorageV2",
               "sku": {
-                "name": "Standard_LRS"
+                "name": "Standard_ZRS"
               },
+              "identity": "[if(parameters('enableCmk'), createObject('type', 'UserAssigned', 'userAssignedIdentities', createObject(format('{0}', parameters('keyVaultIdentityId')), createObject())), createObject('type', 'None'))]",
               "properties": {
                 "accessTier": "Hot",
                 "isHnsEnabled": true,
                 "minimumTlsVersion": "TLS1_2",
                 "supportsHttpsTrafficOnly": true,
                 "allowBlobPublicAccess": false,
-                "allowSharedKeyAccess": true,
+                "allowSharedKeyAccess": false,
                 "networkAcls": {
                   "defaultAction": "[if(parameters('enablePrivateEndpoint'), 'Deny', 'Allow')]",
                   "bypass": "AzureServices"
                 },
                 "encryption": {
+                  "keySource": "[if(parameters('enableCmk'), 'Microsoft.Keyvault', 'Microsoft.Storage')]",
+                  "keyvaultproperties": "[if(parameters('enableCmk'), createObject('keyname', last(split(parameters('keyVaultKeyUri'), '/')), 'keyvaulturi', substring(parameters('keyVaultKeyUri'), 0, lastIndexOf(parameters('keyVaultKeyUri'), '/keys/'))), null())]",
                   "services": {
                     "blob": {
-                      "enabled": true
+                      "enabled": true,
+                      "keyType": "Account"
                     },
                     "file": {
-                      "enabled": true
+                      "enabled": true,
+                      "keyType": "Account"
+                    },
+                    "table": {
+                      "enabled": true,
+                      "keyType": "Account"
+                    },
+                    "queue": {
+                      "enabled": true,
+                      "keyType": "Account"
                     }
-                  },
-                  "keySource": "Microsoft.Storage"
+                  }
                 }
               }
             },
@@ -916,11 +1118,11 @@
               "properties": {
                 "deleteRetentionPolicy": {
                   "enabled": true,
-                  "days": 7
+                  "days": 30
                 },
                 "containerDeleteRetentionPolicy": {
                   "enabled": true,
-                  "days": 7
+                  "days": 30
                 }
               },
               "dependsOn": [
@@ -984,6 +1186,67 @@
               },
               "dependsOn": [
                 "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageAccountName'), 'default')]"
+              ]
+            },
+            {
+              "type": "Microsoft.Storage/storageAccounts/managementPolicies",
+              "apiVersion": "2023-01-01",
+              "name": "[format('{0}/{1}', parameters('storageAccountName'), 'default')]",
+              "properties": {
+                "policy": {
+                  "rules": [
+                    {
+                      "name": "bronze-tiering",
+                      "enabled": true,
+                      "type": "Lifecycle",
+                      "definition": {
+                        "filters": {
+                          "blobTypes": [
+                            "blockBlob"
+                          ],
+                          "prefixMatch": [
+                            "bronze/"
+                          ]
+                        },
+                        "actions": {
+                          "baseBlob": {
+                            "tierToCool": {
+                              "daysAfterModificationGreaterThan": 90
+                            },
+                            "tierToArchive": {
+                              "daysAfterModificationGreaterThan": 365
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "landing-cleanup",
+                      "enabled": true,
+                      "type": "Lifecycle",
+                      "definition": {
+                        "filters": {
+                          "blobTypes": [
+                            "blockBlob"
+                          ],
+                          "prefixMatch": [
+                            "landing/"
+                          ]
+                        },
+                        "actions": {
+                          "baseBlob": {
+                            "delete": {
+                              "daysAfterModificationGreaterThan": 30
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
               ]
             },
             {
@@ -2424,6 +2687,1467 @@
       ]
     },
     {
+      "condition": "[parameters('enableWorkspaceIdentity')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2025-04-01",
+      "name": "workspace-identity-deployment",
+      "resourceGroup": "[variables('resourceGroupName')]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "projectPrefix": {
+            "value": "[parameters('projectPrefix')]"
+          },
+          "environment": {
+            "value": "[parameters('environment')]"
+          },
+          "tags": {
+            "value": "[variables('defaultTags')]"
+          },
+          "enableKeyVaultAccess": {
+            "value": true
+          },
+          "keyVaultId": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'security-deployment'), '2025-04-01').outputs.keyVaultId.value]"
+          },
+          "enableStorageAccess": {
+            "value": true
+          },
+          "storageAccountId": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'storage-deployment'), '2025-04-01').outputs.storageAccountId.value]"
+          },
+          "enablePurviewAccess": {
+            "value": true
+          },
+          "purviewAccountId": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'governance-deployment'), '2025-04-01').outputs.purviewAccountId.value]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.40.2.10011",
+              "templateHash": "6317820004372776674"
+            }
+          },
+          "parameters": {
+            "location": {
+              "type": "string",
+              "metadata": {
+                "description": "Azure region for the managed identity resource"
+              }
+            },
+            "projectPrefix": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 10,
+              "metadata": {
+                "description": "Project prefix for resource naming (3-10 characters)"
+              }
+            },
+            "environment": {
+              "type": "string",
+              "allowedValues": [
+                "dev",
+                "staging",
+                "prod"
+              ],
+              "metadata": {
+                "description": "Deployment environment"
+              }
+            },
+            "tags": {
+              "type": "object",
+              "defaultValue": {},
+              "metadata": {
+                "description": "Tags to apply to resources"
+              }
+            },
+            "enableKeyVaultAccess": {
+              "type": "bool",
+              "defaultValue": true,
+              "metadata": {
+                "description": "Enable Key Vault Secrets User role assignment for the workspace identity"
+              }
+            },
+            "keyVaultId": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Key Vault resource ID for role assignment (required when enableKeyVaultAccess is true)"
+              }
+            },
+            "enableStorageAccess": {
+              "type": "bool",
+              "defaultValue": true,
+              "metadata": {
+                "description": "Enable Storage Blob Data Contributor role assignment"
+              }
+            },
+            "storageAccountId": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Storage account resource ID for role assignment (required when enableStorageAccess is true)"
+              }
+            },
+            "enablePurviewAccess": {
+              "type": "bool",
+              "defaultValue": false,
+              "metadata": {
+                "description": "Enable Purview Data Curator role assignment"
+              }
+            },
+            "purviewAccountId": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Purview account resource ID for role assignment (required when enablePurviewAccess is true)"
+              }
+            }
+          },
+          "variables": {
+            "identityName": "[format('id-fabric-ws-{0}-{1}', parameters('projectPrefix'), parameters('environment'))]",
+            "keyVaultSecretsUserRoleId": "4633458b-17de-408a-b874-0445c86b69e6",
+            "storageBlobDataContributorRoleId": "ba92f5b4-2d11-453d-a403-e96b0029c9fe",
+            "purviewDataCuratorRoleId": "af8bf84c-4de3-462a-b576-41e6c7478f52"
+          },
+          "resources": [
+            {
+              "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
+              "apiVersion": "2023-01-31",
+              "name": "[variables('identityName')]",
+              "location": "[parameters('location')]",
+              "tags": "[union(parameters('tags'), createObject('Purpose', 'Fabric Workspace Identity', 'FabricFeature', 'WorkspaceIdentity-GA-2026'))]",
+              "metadata": {
+                "description": "User-assigned managed identity for Fabric workspace"
+              }
+            },
+            {
+              "condition": "[and(parameters('enableKeyVaultAccess'), not(empty(parameters('keyVaultId'))))]",
+              "type": "Microsoft.Authorization/roleAssignments",
+              "apiVersion": "2022-04-01",
+              "scope": "[resourceId('Microsoft.KeyVault/vaults', last(split(parameters('keyVaultId'), '/')))]",
+              "name": "[guid(parameters('keyVaultId'), resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityName')), variables('keyVaultSecretsUserRoleId'))]",
+              "properties": {
+                "roleDefinitionId": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', variables('keyVaultSecretsUserRoleId'))]",
+                "principalId": "[reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityName')), '2023-01-31').principalId]",
+                "principalType": "ServicePrincipal"
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityName'))]"
+              ],
+              "metadata": {
+                "description": "Key Vault Secrets User role for workspace identity"
+              }
+            },
+            {
+              "condition": "[and(parameters('enableStorageAccess'), not(empty(parameters('storageAccountId'))))]",
+              "type": "Microsoft.Authorization/roleAssignments",
+              "apiVersion": "2022-04-01",
+              "scope": "[resourceId('Microsoft.Storage/storageAccounts', last(split(parameters('storageAccountId'), '/')))]",
+              "name": "[guid(parameters('storageAccountId'), resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityName')), variables('storageBlobDataContributorRoleId'))]",
+              "properties": {
+                "roleDefinitionId": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', variables('storageBlobDataContributorRoleId'))]",
+                "principalId": "[reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityName')), '2023-01-31').principalId]",
+                "principalType": "ServicePrincipal"
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityName'))]"
+              ],
+              "metadata": {
+                "description": "Storage Blob Data Contributor role for workspace identity"
+              }
+            },
+            {
+              "condition": "[and(parameters('enablePurviewAccess'), not(empty(parameters('purviewAccountId'))))]",
+              "type": "Microsoft.Authorization/roleAssignments",
+              "apiVersion": "2022-04-01",
+              "scope": "[resourceId('Microsoft.Purview/accounts', last(split(parameters('purviewAccountId'), '/')))]",
+              "name": "[guid(parameters('purviewAccountId'), resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityName')), variables('purviewDataCuratorRoleId'))]",
+              "properties": {
+                "roleDefinitionId": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', variables('purviewDataCuratorRoleId'))]",
+                "principalId": "[reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityName')), '2023-01-31').principalId]",
+                "principalType": "ServicePrincipal"
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityName'))]"
+              ],
+              "metadata": {
+                "description": "Purview Data Curator role for workspace identity"
+              }
+            }
+          ],
+          "outputs": {
+            "identityId": {
+              "type": "string",
+              "metadata": {
+                "description": "Resource ID of the workspace managed identity"
+              },
+              "value": "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityName'))]"
+            },
+            "principalId": {
+              "type": "string",
+              "metadata": {
+                "description": "Principal ID (Object ID) of the workspace managed identity"
+              },
+              "value": "[reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityName')), '2023-01-31').principalId]"
+            },
+            "clientId": {
+              "type": "string",
+              "metadata": {
+                "description": "Client ID of the workspace managed identity"
+              },
+              "value": "[reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('identityName')), '2023-01-31').clientId]"
+            },
+            "identityName": {
+              "type": "string",
+              "metadata": {
+                "description": "Name of the workspace managed identity"
+              },
+              "value": "[variables('identityName')]"
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'governance-deployment')]",
+        "[subscriptionResourceId('Microsoft.Resources/resourceGroups', variables('resourceGroupName'))]",
+        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'security-deployment')]",
+        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'storage-deployment')]"
+      ]
+    },
+    {
+      "condition": "[parameters('enableWarehouse')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2025-04-01",
+      "name": "warehouse-deployment",
+      "resourceGroup": "[variables('resourceGroupName')]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "projectPrefix": {
+            "value": "[parameters('projectPrefix')]"
+          },
+          "environment": {
+            "value": "[parameters('environment')]"
+          },
+          "warehouseName": {
+            "value": "[parameters('warehouseName')]"
+          },
+          "capacityId": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'fabric-deployment'), '2025-04-01').outputs.capacityId.value]"
+          },
+          "logAnalyticsWorkspaceId": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'monitoring-deployment'), '2025-04-01').outputs.workspaceId.value]"
+          },
+          "managedIdentityPrincipalId": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'security-deployment'), '2025-04-01').outputs.managedIdentityPrincipalId.value]"
+          },
+          "tags": {
+            "value": "[variables('defaultTags')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.40.2.10011",
+              "templateHash": "8004286472911804268"
+            }
+          },
+          "parameters": {
+            "location": {
+              "type": "string",
+              "metadata": {
+                "description": "Azure region for deployment"
+              }
+            },
+            "projectPrefix": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 10,
+              "metadata": {
+                "description": "Project prefix for resource naming"
+              }
+            },
+            "environment": {
+              "type": "string",
+              "defaultValue": "dev",
+              "allowedValues": [
+                "dev",
+                "staging",
+                "prod"
+              ],
+              "metadata": {
+                "description": "Environment name"
+              }
+            },
+            "tags": {
+              "type": "object",
+              "defaultValue": {},
+              "metadata": {
+                "description": "Tags to apply to resources"
+              }
+            },
+            "warehouseName": {
+              "type": "string",
+              "defaultValue": "fabric-warehouse",
+              "metadata": {
+                "description": "Warehouse display name (for tagging and documentation)"
+              }
+            },
+            "capacityId": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Resource ID of the Fabric capacity to associate with"
+              }
+            },
+            "enableResultCaching": {
+              "type": "bool",
+              "defaultValue": true,
+              "metadata": {
+                "description": "Enable result set caching for improved query performance"
+              }
+            },
+            "enableStatisticsAutoCreation": {
+              "type": "bool",
+              "defaultValue": true,
+              "metadata": {
+                "description": "Enable automatic statistics creation for query optimization"
+              }
+            },
+            "logAnalyticsWorkspaceId": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Log Analytics workspace ID for diagnostics"
+              }
+            },
+            "managedIdentityPrincipalId": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Managed Identity principal ID for RBAC assignments"
+              }
+            },
+            "enablePrivateEndpoint": {
+              "type": "bool",
+              "defaultValue": false,
+              "metadata": {
+                "description": "Enable private endpoint for the SQL endpoint"
+              }
+            },
+            "privateEndpointSubnetId": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Subnet ID for private endpoint"
+              }
+            }
+          },
+          "variables": {
+            "warehouseConfigName": "[format('{0}-wh-{1}', parameters('projectPrefix'), parameters('environment'))]",
+            "warehouseTags": "[union(parameters('tags'), createObject('FabricComponent', 'Warehouse', 'FabricCapacityId', parameters('capacityId'), 'WarehouseName', parameters('warehouseName'), 'ResultCaching', string(parameters('enableResultCaching')), 'StatisticsAutoCreation', string(parameters('enableStatisticsAutoCreation'))))]",
+            "warehouseConfig": {
+              "name": "[parameters('warehouseName')]",
+              "environment": "[parameters('environment')]",
+              "settings": {
+                "resultCaching": "[parameters('enableResultCaching')]",
+                "statisticsAutoCreation": "[parameters('enableStatisticsAutoCreation')]"
+              },
+              "endpoints": {
+                "sqlEndpoint": "[format('{0}.datawarehouse.fabric.microsoft.com', variables('warehouseConfigName'))]"
+              }
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Resources/deploymentScripts",
+              "apiVersion": "2023-08-01",
+              "name": "[format('wh-config-{0}', variables('warehouseConfigName'))]",
+              "location": "[parameters('location')]",
+              "tags": "[variables('warehouseTags')]",
+              "kind": "AzurePowerShell",
+              "properties": {
+                "azPowerShellVersion": "9.7",
+                "retentionInterval": "P1D",
+                "scriptContent": "      $config = @{\n        warehouseName = $env:WAREHOUSE_NAME\n        environment = $env:ENVIRONMENT\n        resultCaching = $env:RESULT_CACHING\n        statisticsAutoCreation = $env:STATS_AUTO_CREATE\n        timestamp = Get-Date -Format \"yyyy-MM-ddTHH:mm:ssZ\"\n      }\n      $DeploymentScriptOutputs = @{\n        configuration = ($config | ConvertTo-Json -Compress)\n      }\n    ",
+                "environmentVariables": [
+                  {
+                    "name": "WAREHOUSE_NAME",
+                    "value": "[parameters('warehouseName')]"
+                  },
+                  {
+                    "name": "ENVIRONMENT",
+                    "value": "[parameters('environment')]"
+                  },
+                  {
+                    "name": "RESULT_CACHING",
+                    "value": "[string(parameters('enableResultCaching'))]"
+                  },
+                  {
+                    "name": "STATS_AUTO_CREATE",
+                    "value": "[string(parameters('enableStatisticsAutoCreation'))]"
+                  }
+                ],
+                "timeout": "PT5M",
+                "cleanupPreference": "OnSuccess"
+              }
+            }
+          ],
+          "outputs": {
+            "warehouseName": {
+              "type": "string",
+              "metadata": {
+                "description": "The warehouse configuration name"
+              },
+              "value": "[variables('warehouseConfigName')]"
+            },
+            "sqlEndpoint": {
+              "type": "string",
+              "metadata": {
+                "description": "The expected SQL endpoint for the warehouse"
+              },
+              "value": "[variables('warehouseConfig').endpoints.sqlEndpoint]"
+            },
+            "warehouseConfiguration": {
+              "type": "string",
+              "metadata": {
+                "description": "The warehouse configuration as JSON"
+              },
+              "value": "[string(variables('warehouseConfig'))]"
+            },
+            "metadataResourceId": {
+              "type": "string",
+              "metadata": {
+                "description": "The deployment script resource ID (for CI/CD reference)"
+              },
+              "value": "[resourceId('Microsoft.Resources/deploymentScripts', format('wh-config-{0}', variables('warehouseConfigName')))]"
+            },
+            "appliedTags": {
+              "type": "object",
+              "metadata": {
+                "description": "Tags applied to warehouse resources"
+              },
+              "value": "[variables('warehouseTags')]"
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'fabric-deployment')]",
+        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'monitoring-deployment')]",
+        "[subscriptionResourceId('Microsoft.Resources/resourceGroups', variables('resourceGroupName'))]",
+        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'security-deployment')]"
+      ]
+    },
+    {
+      "condition": "[parameters('enableSqlDatabase')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2025-04-01",
+      "name": "sql-database-deployment",
+      "resourceGroup": "[variables('resourceGroupName')]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "projectPrefix": {
+            "value": "[parameters('projectPrefix')]"
+          },
+          "environment": {
+            "value": "[parameters('environment')]"
+          },
+          "databaseName": {
+            "value": "[parameters('sqlDatabaseName')]"
+          },
+          "capacityId": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'fabric-deployment'), '2025-04-01').outputs.capacityId.value]"
+          },
+          "enableDDM": {
+            "value": "[parameters('enableDDM')]"
+          },
+          "enableCMK": {
+            "value": "[parameters('enableSqlDbCMK')]"
+          },
+          "keyVaultKeyUri": {
+            "value": "[parameters('sqlDbKeyVaultKeyUri')]"
+          },
+          "logAnalyticsWorkspaceId": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'monitoring-deployment'), '2025-04-01').outputs.workspaceId.value]"
+          },
+          "managedIdentityPrincipalId": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'security-deployment'), '2025-04-01').outputs.managedIdentityPrincipalId.value]"
+          },
+          "tags": {
+            "value": "[variables('defaultTags')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.40.2.10011",
+              "templateHash": "6269051707008372381"
+            }
+          },
+          "parameters": {
+            "location": {
+              "type": "string",
+              "metadata": {
+                "description": "Azure region for deployment"
+              }
+            },
+            "projectPrefix": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 10,
+              "metadata": {
+                "description": "Project prefix for resource naming"
+              }
+            },
+            "environment": {
+              "type": "string",
+              "defaultValue": "dev",
+              "allowedValues": [
+                "dev",
+                "staging",
+                "prod"
+              ],
+              "metadata": {
+                "description": "Environment name"
+              }
+            },
+            "tags": {
+              "type": "object",
+              "defaultValue": {},
+              "metadata": {
+                "description": "Tags to apply to resources"
+              }
+            },
+            "databaseName": {
+              "type": "string",
+              "defaultValue": "fabric-sqldb",
+              "metadata": {
+                "description": "SQL Database display name"
+              }
+            },
+            "capacityId": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Resource ID of the Fabric capacity to associate with"
+              }
+            },
+            "enableDDM": {
+              "type": "bool",
+              "defaultValue": true,
+              "metadata": {
+                "description": "Enable Dynamic Data Masking (DDM) configuration tracking"
+              }
+            },
+            "enableCMK": {
+              "type": "bool",
+              "defaultValue": false,
+              "metadata": {
+                "description": "Enable Customer-Managed Keys (CMK) for encryption at rest"
+              }
+            },
+            "keyVaultKeyUri": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Key Vault key URI for CMK (required when enableCMK = true)"
+              }
+            },
+            "logAnalyticsWorkspaceId": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Log Analytics workspace ID for diagnostics"
+              }
+            },
+            "managedIdentityPrincipalId": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Managed Identity principal ID for RBAC assignments"
+              }
+            },
+            "enableOneLakeReplication": {
+              "type": "bool",
+              "defaultValue": true,
+              "metadata": {
+                "description": "Enable auto-replication to OneLake (always true for Fabric SQL DB)"
+              }
+            },
+            "dataVirtualizationMode": {
+              "type": "string",
+              "defaultValue": "ReadOnly",
+              "allowedValues": [
+                "ReadOnly",
+                "ReadWrite",
+                "Disabled"
+              ],
+              "metadata": {
+                "description": "Data virtualization mode"
+              }
+            }
+          },
+          "variables": {
+            "sqlDbConfigName": "[format('{0}-sqldb-{1}', parameters('projectPrefix'), parameters('environment'))]",
+            "sqlDbTags": "[union(parameters('tags'), createObject('FabricComponent', 'SQLDatabase', 'FabricCapacityId', parameters('capacityId'), 'DatabaseName', parameters('databaseName'), 'DDMEnabled', string(parameters('enableDDM')), 'CMKEnabled', string(parameters('enableCMK')), 'OneLakeReplication', string(parameters('enableOneLakeReplication')), 'DataVirtualization', parameters('dataVirtualizationMode')))]",
+            "sqlDbConfig": {
+              "name": "[parameters('databaseName')]",
+              "environment": "[parameters('environment')]",
+              "features": {
+                "dynamicDataMasking": "[parameters('enableDDM')]",
+                "customerManagedKeys": "[parameters('enableCMK')]",
+                "oneLakeReplication": "[parameters('enableOneLakeReplication')]",
+                "dataVirtualization": "[parameters('dataVirtualizationMode')]"
+              },
+              "endpoints": {
+                "tdsEndpoint": "[format('{0}.database.fabric.microsoft.com', variables('sqlDbConfigName'))]",
+                "oneLakePath": "[format('Tables/{0}', parameters('databaseName'))]"
+              }
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Resources/deploymentScripts",
+              "apiVersion": "2023-08-01",
+              "name": "[format('sqldb-config-{0}', variables('sqlDbConfigName'))]",
+              "location": "[parameters('location')]",
+              "tags": "[variables('sqlDbTags')]",
+              "kind": "AzurePowerShell",
+              "properties": {
+                "azPowerShellVersion": "9.7",
+                "retentionInterval": "P1D",
+                "scriptContent": "      $config = @{\n        databaseName = $env:DATABASE_NAME\n        environment = $env:ENVIRONMENT\n        ddmEnabled = $env:DDM_ENABLED\n        cmkEnabled = $env:CMK_ENABLED\n        oneLakeReplication = $env:ONELAKE_REPLICATION\n        dataVirtualization = $env:DATA_VIRTUALIZATION\n        timestamp = Get-Date -Format \"yyyy-MM-ddTHH:mm:ssZ\"\n      }\n      $DeploymentScriptOutputs = @{\n        configuration = ($config | ConvertTo-Json -Compress)\n      }\n    ",
+                "environmentVariables": [
+                  {
+                    "name": "DATABASE_NAME",
+                    "value": "[parameters('databaseName')]"
+                  },
+                  {
+                    "name": "ENVIRONMENT",
+                    "value": "[parameters('environment')]"
+                  },
+                  {
+                    "name": "DDM_ENABLED",
+                    "value": "[string(parameters('enableDDM'))]"
+                  },
+                  {
+                    "name": "CMK_ENABLED",
+                    "value": "[string(parameters('enableCMK'))]"
+                  },
+                  {
+                    "name": "ONELAKE_REPLICATION",
+                    "value": "[string(parameters('enableOneLakeReplication'))]"
+                  },
+                  {
+                    "name": "DATA_VIRTUALIZATION",
+                    "value": "[parameters('dataVirtualizationMode')]"
+                  }
+                ],
+                "timeout": "PT5M",
+                "cleanupPreference": "OnSuccess"
+              }
+            }
+          ],
+          "outputs": {
+            "databaseName": {
+              "type": "string",
+              "metadata": {
+                "description": "The SQL Database configuration name"
+              },
+              "value": "[variables('sqlDbConfigName')]"
+            },
+            "tdsEndpoint": {
+              "type": "string",
+              "metadata": {
+                "description": "The expected TDS endpoint for SQL connectivity"
+              },
+              "value": "[variables('sqlDbConfig').endpoints.tdsEndpoint]"
+            },
+            "oneLakeReplicationEnabled": {
+              "type": "bool",
+              "metadata": {
+                "description": "Whether OneLake auto-replication is enabled"
+              },
+              "value": "[parameters('enableOneLakeReplication')]"
+            },
+            "sqlDbConfiguration": {
+              "type": "string",
+              "metadata": {
+                "description": "The SQL Database configuration as JSON"
+              },
+              "value": "[string(variables('sqlDbConfig'))]"
+            },
+            "metadataResourceId": {
+              "type": "string",
+              "metadata": {
+                "description": "The deployment script resource ID"
+              },
+              "value": "[resourceId('Microsoft.Resources/deploymentScripts', format('sqldb-config-{0}', variables('sqlDbConfigName')))]"
+            },
+            "appliedTags": {
+              "type": "object",
+              "metadata": {
+                "description": "Tags applied to SQL Database resources"
+              },
+              "value": "[variables('sqlDbTags')]"
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'fabric-deployment')]",
+        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'monitoring-deployment')]",
+        "[subscriptionResourceId('Microsoft.Resources/resourceGroups', variables('resourceGroupName'))]",
+        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'security-deployment')]"
+      ]
+    },
+    {
+      "condition": "[parameters('enablePipeline')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2025-04-01",
+      "name": "pipeline-deployment",
+      "resourceGroup": "[variables('resourceGroupName')]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "projectPrefix": {
+            "value": "[parameters('projectPrefix')]"
+          },
+          "environment": {
+            "value": "[parameters('environment')]"
+          },
+          "pipelineName": {
+            "value": "[parameters('pipelineName')]"
+          },
+          "capacityId": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'fabric-deployment'), '2025-04-01').outputs.capacityId.value]"
+          },
+          "enableScheduleTrigger": {
+            "value": "[parameters('enablePipelineSchedule')]"
+          },
+          "scheduleFrequency": {
+            "value": "[parameters('pipelineScheduleFrequency')]"
+          },
+          "logAnalyticsWorkspaceId": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'monitoring-deployment'), '2025-04-01').outputs.workspaceId.value]"
+          },
+          "tags": {
+            "value": "[variables('defaultTags')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.40.2.10011",
+              "templateHash": "2372356468526627430"
+            }
+          },
+          "parameters": {
+            "location": {
+              "type": "string",
+              "metadata": {
+                "description": "Azure region for deployment"
+              }
+            },
+            "projectPrefix": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 10,
+              "metadata": {
+                "description": "Project prefix for resource naming"
+              }
+            },
+            "environment": {
+              "type": "string",
+              "defaultValue": "dev",
+              "allowedValues": [
+                "dev",
+                "staging",
+                "prod"
+              ],
+              "metadata": {
+                "description": "Environment name"
+              }
+            },
+            "tags": {
+              "type": "object",
+              "defaultValue": {},
+              "metadata": {
+                "description": "Tags to apply to resources"
+              }
+            },
+            "pipelineName": {
+              "type": "string",
+              "defaultValue": "fabric-pipeline",
+              "metadata": {
+                "description": "Pipeline display name"
+              }
+            },
+            "capacityId": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Resource ID of the Fabric capacity to associate with"
+              }
+            },
+            "enableScheduleTrigger": {
+              "type": "bool",
+              "defaultValue": false,
+              "metadata": {
+                "description": "Enable schedule trigger for automated execution"
+              }
+            },
+            "scheduleFrequency": {
+              "type": "string",
+              "defaultValue": "Day",
+              "allowedValues": [
+                "Minute",
+                "Hour",
+                "Day",
+                "Week",
+                "Month"
+              ],
+              "metadata": {
+                "description": "Schedule frequency for the trigger"
+              }
+            },
+            "scheduleInterval": {
+              "type": "int",
+              "defaultValue": 1,
+              "minValue": 1,
+              "maxValue": 1440,
+              "metadata": {
+                "description": "Schedule interval (e.g., 1 = every 1 day, 15 = every 15 minutes)"
+              }
+            },
+            "scheduleStartTime": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Schedule start time (ISO 8601)"
+              }
+            },
+            "activities": {
+              "type": "array",
+              "defaultValue": [],
+              "metadata": {
+                "description": "Pipeline activities list (for documentation/tagging)"
+              }
+            },
+            "logAnalyticsWorkspaceId": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Log Analytics workspace ID for diagnostics"
+              }
+            },
+            "enableRetryOnFailure": {
+              "type": "bool",
+              "defaultValue": true,
+              "metadata": {
+                "description": "Enable retry on failure"
+              }
+            },
+            "maxRetryAttempts": {
+              "type": "int",
+              "defaultValue": 3,
+              "minValue": 0,
+              "maxValue": 10,
+              "metadata": {
+                "description": "Maximum retry attempts"
+              }
+            },
+            "retryIntervalSeconds": {
+              "type": "int",
+              "defaultValue": 30,
+              "minValue": 10,
+              "maxValue": 3600,
+              "metadata": {
+                "description": "Retry interval in seconds"
+              }
+            }
+          },
+          "variables": {
+            "pipelineConfigName": "[format('{0}-pipe-{1}', parameters('projectPrefix'), parameters('environment'))]",
+            "pipelineTags": "[union(parameters('tags'), createObject('FabricComponent', 'Pipeline', 'FabricCapacityId', parameters('capacityId'), 'PipelineName', parameters('pipelineName'), 'ScheduleEnabled', string(parameters('enableScheduleTrigger')), 'ScheduleFrequency', if(parameters('enableScheduleTrigger'), format('{0} {1}', parameters('scheduleInterval'), parameters('scheduleFrequency')), 'Manual'), 'RetryEnabled', string(parameters('enableRetryOnFailure'))))]",
+            "pipelineConfig": {
+              "name": "[parameters('pipelineName')]",
+              "environment": "[parameters('environment')]",
+              "schedule": {
+                "enabled": "[parameters('enableScheduleTrigger')]",
+                "frequency": "[parameters('scheduleFrequency')]",
+                "interval": "[parameters('scheduleInterval')]",
+                "startTime": "[parameters('scheduleStartTime')]"
+              },
+              "retry": {
+                "enabled": "[parameters('enableRetryOnFailure')]",
+                "maxAttempts": "[parameters('maxRetryAttempts')]",
+                "intervalSeconds": "[parameters('retryIntervalSeconds')]"
+              },
+              "activities": "[parameters('activities')]"
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Resources/deploymentScripts",
+              "apiVersion": "2023-08-01",
+              "name": "[format('pipe-config-{0}', variables('pipelineConfigName'))]",
+              "location": "[parameters('location')]",
+              "tags": "[variables('pipelineTags')]",
+              "kind": "AzurePowerShell",
+              "properties": {
+                "azPowerShellVersion": "9.7",
+                "retentionInterval": "P1D",
+                "scriptContent": "      $config = @{\n        pipelineName = $env:PIPELINE_NAME\n        environment = $env:ENVIRONMENT\n        scheduleEnabled = $env:SCHEDULE_ENABLED\n        scheduleFrequency = $env:SCHEDULE_FREQUENCY\n        scheduleInterval = $env:SCHEDULE_INTERVAL\n        retryEnabled = $env:RETRY_ENABLED\n        maxRetry = $env:MAX_RETRY\n        timestamp = Get-Date -Format \"yyyy-MM-ddTHH:mm:ssZ\"\n      }\n      $DeploymentScriptOutputs = @{\n        configuration = ($config | ConvertTo-Json -Compress)\n      }\n    ",
+                "environmentVariables": [
+                  {
+                    "name": "PIPELINE_NAME",
+                    "value": "[parameters('pipelineName')]"
+                  },
+                  {
+                    "name": "ENVIRONMENT",
+                    "value": "[parameters('environment')]"
+                  },
+                  {
+                    "name": "SCHEDULE_ENABLED",
+                    "value": "[string(parameters('enableScheduleTrigger'))]"
+                  },
+                  {
+                    "name": "SCHEDULE_FREQUENCY",
+                    "value": "[parameters('scheduleFrequency')]"
+                  },
+                  {
+                    "name": "SCHEDULE_INTERVAL",
+                    "value": "[string(parameters('scheduleInterval'))]"
+                  },
+                  {
+                    "name": "RETRY_ENABLED",
+                    "value": "[string(parameters('enableRetryOnFailure'))]"
+                  },
+                  {
+                    "name": "MAX_RETRY",
+                    "value": "[string(parameters('maxRetryAttempts'))]"
+                  }
+                ],
+                "timeout": "PT5M",
+                "cleanupPreference": "OnSuccess"
+              }
+            }
+          ],
+          "outputs": {
+            "pipelineName": {
+              "type": "string",
+              "metadata": {
+                "description": "The pipeline configuration name"
+              },
+              "value": "[variables('pipelineConfigName')]"
+            },
+            "pipelineConfiguration": {
+              "type": "string",
+              "metadata": {
+                "description": "The pipeline configuration as JSON"
+              },
+              "value": "[string(variables('pipelineConfig'))]"
+            },
+            "triggerStatus": {
+              "type": "string",
+              "metadata": {
+                "description": "Whether the schedule trigger is enabled"
+              },
+              "value": "[if(parameters('enableScheduleTrigger'), 'Enabled', 'Disabled')]"
+            },
+            "metadataResourceId": {
+              "type": "string",
+              "metadata": {
+                "description": "The deployment script resource ID"
+              },
+              "value": "[resourceId('Microsoft.Resources/deploymentScripts', format('pipe-config-{0}', variables('pipelineConfigName')))]"
+            },
+            "appliedTags": {
+              "type": "object",
+              "metadata": {
+                "description": "Tags applied to pipeline resources"
+              },
+              "value": "[variables('pipelineTags')]"
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'fabric-deployment')]",
+        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'monitoring-deployment')]",
+        "[subscriptionResourceId('Microsoft.Resources/resourceGroups', variables('resourceGroupName'))]"
+      ]
+    },
+    {
+      "condition": "[parameters('enableMonitoringAlerts')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2025-04-01",
+      "name": "monitoring-alerts-deployment",
+      "resourceGroup": "[variables('resourceGroupName')]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "logAnalyticsWorkspaceId": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'monitoring-deployment'), '2025-04-01').outputs.workspaceId.value]"
+          },
+          "enableCapacityAlerts": {
+            "value": true
+          },
+          "capacityThresholdPercent": {
+            "value": "[parameters('capacityAlertThreshold')]"
+          },
+          "enableBudgetAlerts": {
+            "value": true
+          },
+          "monthlyBudgetAmount": {
+            "value": "[parameters('monthlyBudgetAmount')]"
+          },
+          "alertEmailRecipients": {
+            "value": "[parameters('alertEmailRecipients')]"
+          },
+          "fabricCapacityResourceId": {
+            "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'fabric-deployment'), '2025-04-01').outputs.capacityId.value]"
+          },
+          "tags": {
+            "value": "[variables('defaultTags')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.40.2.10011",
+              "templateHash": "14168298473469056326"
+            }
+          },
+          "parameters": {
+            "location": {
+              "type": "string",
+              "defaultValue": "[resourceGroup().location]",
+              "metadata": {
+                "description": "Azure region for deployment"
+              }
+            },
+            "logAnalyticsWorkspaceId": {
+              "type": "string",
+              "metadata": {
+                "description": "Log Analytics workspace ID for alert queries"
+              }
+            },
+            "enableCapacityAlerts": {
+              "type": "bool",
+              "defaultValue": true,
+              "metadata": {
+                "description": "Enable capacity utilization alerts"
+              }
+            },
+            "capacityThresholdPercent": {
+              "type": "int",
+              "defaultValue": 80,
+              "minValue": 50,
+              "maxValue": 100,
+              "metadata": {
+                "description": "Capacity utilization threshold (percentage) to trigger alert"
+              }
+            },
+            "enableBudgetAlerts": {
+              "type": "bool",
+              "defaultValue": true,
+              "metadata": {
+                "description": "Enable budget alerts for cost management"
+              }
+            },
+            "monthlyBudgetAmount": {
+              "type": "int",
+              "defaultValue": 10000,
+              "minValue": 100,
+              "maxValue": 1000000,
+              "metadata": {
+                "description": "Monthly budget amount in USD"
+              }
+            },
+            "budgetThresholds": {
+              "type": "array",
+              "defaultValue": [
+                {
+                  "threshold": 50,
+                  "contactEmails": []
+                },
+                {
+                  "threshold": 75,
+                  "contactEmails": []
+                },
+                {
+                  "threshold": 90,
+                  "contactEmails": []
+                },
+                {
+                  "threshold": 100,
+                  "contactEmails": []
+                }
+              ],
+              "metadata": {
+                "description": "Budget alert thresholds (percentages)"
+              }
+            },
+            "alertActionGroupId": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Action group resource ID for alert notifications (optional)"
+              }
+            },
+            "alertEmailRecipients": {
+              "type": "array",
+              "defaultValue": [],
+              "metadata": {
+                "description": "Email addresses for alert notifications"
+              }
+            },
+            "enableWebhook": {
+              "type": "bool",
+              "defaultValue": false,
+              "metadata": {
+                "description": "Enable webhook notifications"
+              }
+            },
+            "webhookUrl": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Webhook URL for alert notifications"
+              }
+            },
+            "fabricCapacityResourceId": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Fabric capacity resource ID (for metric alerts)"
+              }
+            },
+            "tags": {
+              "type": "object",
+              "defaultValue": {},
+              "metadata": {
+                "description": "Tags to apply to resources"
+              }
+            },
+            "alertSeverity": {
+              "type": "int",
+              "defaultValue": 2,
+              "minValue": 0,
+              "maxValue": 4,
+              "metadata": {
+                "description": "Alert severity (0=Critical, 1=Error, 2=Warning, 3=Info, 4=Verbose)"
+              }
+            },
+            "budgetStartDate": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Budget start date in yyyy-MM-dd format (defaults to first of current month)"
+              }
+            },
+            "deployedAt": {
+              "type": "string",
+              "defaultValue": "[utcNow()]",
+              "metadata": {
+                "description": "Deployment timestamp for budget calculation (auto-generated)"
+              }
+            }
+          },
+          "variables": {
+            "alertTags": "[union(parameters('tags'), createObject('FabricComponent', 'Monitoring', 'AlertType', 'CapacityAndBudget'))]",
+            "hasActionGroup": "[not(empty(parameters('alertActionGroupId')))]",
+            "hasEmailRecipients": "[not(empty(parameters('alertEmailRecipients')))]",
+            "hasCapacityResource": "[not(empty(parameters('fabricCapacityResourceId')))]",
+            "resolvedBudgetStartDate": "[if(not(empty(parameters('budgetStartDate'))), parameters('budgetStartDate'), format('{0}-01', substring(parameters('deployedAt'), 0, 7)))]",
+            "resolvedActionGroupId": "[if(variables('hasActionGroup'), parameters('alertActionGroupId'), if(variables('hasEmailRecipients'), resourceId('Microsoft.Insights/actionGroups', 'ag-fabric-alerts'), ''))]"
+          },
+          "resources": [
+            {
+              "condition": "[and(not(variables('hasActionGroup')), variables('hasEmailRecipients'))]",
+              "type": "Microsoft.Insights/actionGroups",
+              "apiVersion": "2023-01-01",
+              "name": "ag-fabric-alerts",
+              "location": "global",
+              "tags": "[variables('alertTags')]",
+              "properties": {
+                "copy": [
+                  {
+                    "name": "emailReceivers",
+                    "count": "[length(parameters('alertEmailRecipients'))]",
+                    "input": {
+                      "name": "[format('recipient-{0}', copyIndex('emailReceivers'))]",
+                      "emailAddress": "[parameters('alertEmailRecipients')[copyIndex('emailReceivers')]]",
+                      "useCommonAlertSchema": true
+                    }
+                  }
+                ],
+                "groupShortName": "FabricAlert",
+                "enabled": true,
+                "webhookReceivers": "[if(and(parameters('enableWebhook'), not(empty(parameters('webhookUrl')))), createArray(createObject('name', 'webhook-notification', 'serviceUri', parameters('webhookUrl'), 'useCommonAlertSchema', true())), createArray())]"
+              }
+            },
+            {
+              "condition": "[and(parameters('enableCapacityAlerts'), not(empty(parameters('logAnalyticsWorkspaceId'))))]",
+              "type": "Microsoft.Insights/scheduledQueryRules",
+              "apiVersion": "2023-03-15-preview",
+              "name": "alert-fabric-capacity-utilization",
+              "location": "[parameters('location')]",
+              "tags": "[variables('alertTags')]",
+              "properties": {
+                "displayName": "Fabric Capacity Utilization Alert",
+                "description": "[format('Fires when Fabric capacity utilization exceeds {0}%. Review workload distribution and consider scaling or smoothing.', parameters('capacityThresholdPercent'))]",
+                "severity": "[parameters('alertSeverity')]",
+                "enabled": true,
+                "evaluationFrequency": "PT5M",
+                "windowSize": "PT15M",
+                "scopes": [
+                  "[parameters('logAnalyticsWorkspaceId')]"
+                ],
+                "criteria": {
+                  "allOf": [
+                    {
+                      "query": "            // Fabric Capacity Utilization Query\n            // Monitors CU (Capacity Unit) consumption from workspace monitoring tables\n            // Adjust table name based on your workspace monitoring configuration\n            let threshold = ${capacityThresholdPercent};\n            FabricCapacityMetrics_CL\n            | where TimeGenerated > ago(15m)\n            | summarize AvgUtilization = avg(CapacityUtilizationPercent_d) by bin(TimeGenerated, 5m)\n            | where AvgUtilization > threshold\n          ",
+                      "timeAggregation": "Count",
+                      "operator": "GreaterThan",
+                      "threshold": 0,
+                      "failingPeriods": {
+                        "numberOfEvaluationPeriods": 3,
+                        "minFailingPeriodsToAlert": 2
+                      }
+                    }
+                  ]
+                },
+                "actions": "[if(not(empty(variables('resolvedActionGroupId'))), createObject('actionGroups', createArray(variables('resolvedActionGroupId'))), createObject())]"
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Insights/actionGroups', 'ag-fabric-alerts')]"
+              ]
+            },
+            {
+              "condition": "[and(parameters('enableCapacityAlerts'), not(empty(parameters('logAnalyticsWorkspaceId'))))]",
+              "type": "Microsoft.Insights/scheduledQueryRules",
+              "apiVersion": "2023-03-15-preview",
+              "name": "alert-fabric-capacity-throttling",
+              "location": "[parameters('location')]",
+              "tags": "[variables('alertTags')]",
+              "properties": {
+                "displayName": "Fabric Capacity Throttling Alert",
+                "description": "Fires when Fabric capacity is throttling requests due to overload. Immediate action required: scale up or reduce concurrent workloads.",
+                "severity": 1,
+                "enabled": true,
+                "evaluationFrequency": "PT5M",
+                "windowSize": "PT5M",
+                "scopes": [
+                  "[parameters('logAnalyticsWorkspaceId')]"
+                ],
+                "criteria": {
+                  "allOf": [
+                    {
+                      "query": "            // Fabric Capacity Throttling Detection\n            FabricCapacityMetrics_CL\n            | where TimeGenerated > ago(5m)\n            | where ThrottlingState_s == \"Active\" or CapacityUtilizationPercent_d >= 100\n            | summarize ThrottleEvents = count() by bin(TimeGenerated, 1m)\n            | where ThrottleEvents > 0\n          ",
+                      "timeAggregation": "Count",
+                      "operator": "GreaterThan",
+                      "threshold": 0,
+                      "failingPeriods": {
+                        "numberOfEvaluationPeriods": 1,
+                        "minFailingPeriodsToAlert": 1
+                      }
+                    }
+                  ]
+                },
+                "actions": "[if(not(empty(variables('resolvedActionGroupId'))), createObject('actionGroups', createArray(variables('resolvedActionGroupId'))), createObject())]"
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Insights/actionGroups', 'ag-fabric-alerts')]"
+              ]
+            },
+            {
+              "condition": "[parameters('enableBudgetAlerts')]",
+              "type": "Microsoft.Consumption/budgets",
+              "apiVersion": "2023-11-01",
+              "name": "budget-fabric-monthly",
+              "properties": {
+                "category": "Cost",
+                "amount": "[parameters('monthlyBudgetAmount')]",
+                "timeGrain": "Monthly",
+                "timePeriod": {
+                  "startDate": "[variables('resolvedBudgetStartDate')]"
+                },
+                "notifications": {
+                  "notification50": {
+                    "enabled": "[greater(length(parameters('budgetThresholds')), 0)]",
+                    "operator": "GreaterThanOrEqualTo",
+                    "threshold": 50,
+                    "contactEmails": "[if(variables('hasEmailRecipients'), parameters('alertEmailRecipients'), createArray())]",
+                    "thresholdType": "Actual"
+                  },
+                  "notification75": {
+                    "enabled": "[greater(length(parameters('budgetThresholds')), 1)]",
+                    "operator": "GreaterThanOrEqualTo",
+                    "threshold": 75,
+                    "contactEmails": "[if(variables('hasEmailRecipients'), parameters('alertEmailRecipients'), createArray())]",
+                    "thresholdType": "Actual"
+                  },
+                  "notification90": {
+                    "enabled": "[greater(length(parameters('budgetThresholds')), 2)]",
+                    "operator": "GreaterThanOrEqualTo",
+                    "threshold": 90,
+                    "contactEmails": "[if(variables('hasEmailRecipients'), parameters('alertEmailRecipients'), createArray())]",
+                    "thresholdType": "Actual"
+                  },
+                  "notification100": {
+                    "enabled": "[greater(length(parameters('budgetThresholds')), 3)]",
+                    "operator": "GreaterThanOrEqualTo",
+                    "threshold": 100,
+                    "contactEmails": "[if(variables('hasEmailRecipients'), parameters('alertEmailRecipients'), createArray())]",
+                    "thresholdType": "Forecasted"
+                  }
+                }
+              }
+            },
+            {
+              "condition": "[and(parameters('enableCapacityAlerts'), not(empty(parameters('logAnalyticsWorkspaceId'))))]",
+              "type": "Microsoft.Insights/scheduledQueryRules",
+              "apiVersion": "2023-03-15-preview",
+              "name": "alert-fabric-long-running-jobs",
+              "location": "[parameters('location')]",
+              "tags": "[variables('alertTags')]",
+              "properties": {
+                "displayName": "Fabric Long-Running Job Alert",
+                "description": "Fires when Spark or SQL jobs exceed 2 hours. Investigate for inefficient queries or data skew.",
+                "severity": 3,
+                "enabled": true,
+                "evaluationFrequency": "PT15M",
+                "windowSize": "PT30M",
+                "scopes": [
+                  "[parameters('logAnalyticsWorkspaceId')]"
+                ],
+                "criteria": {
+                  "allOf": [
+                    {
+                      "query": "            // Long-running Fabric job detection\n            FabricJobMetrics_CL\n            | where TimeGenerated > ago(30m)\n            | where Status_s == \"Running\"\n            | where DurationMinutes_d > 120\n            | project JobName_s, ItemType_s, DurationMinutes_d, WorkspaceName_s\n          ",
+                      "timeAggregation": "Count",
+                      "operator": "GreaterThan",
+                      "threshold": 0,
+                      "failingPeriods": {
+                        "numberOfEvaluationPeriods": 2,
+                        "minFailingPeriodsToAlert": 1
+                      }
+                    }
+                  ]
+                },
+                "actions": "[if(not(empty(variables('resolvedActionGroupId'))), createObject('actionGroups', createArray(variables('resolvedActionGroupId'))), createObject())]"
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Insights/actionGroups', 'ag-fabric-alerts')]"
+              ]
+            }
+          ],
+          "outputs": {
+            "actionGroupId": {
+              "type": "string",
+              "metadata": {
+                "description": "The action group resource ID"
+              },
+              "value": "[if(and(not(variables('hasActionGroup')), variables('hasEmailRecipients')), resourceId('Microsoft.Insights/actionGroups', 'ag-fabric-alerts'), parameters('alertActionGroupId'))]"
+            },
+            "capacityAlertRuleId": {
+              "type": "string",
+              "metadata": {
+                "description": "The capacity alert rule resource ID"
+              },
+              "value": "[if(and(parameters('enableCapacityAlerts'), not(empty(parameters('logAnalyticsWorkspaceId')))), resourceId('Microsoft.Insights/scheduledQueryRules', 'alert-fabric-capacity-utilization'), '')]"
+            },
+            "throttlingAlertRuleId": {
+              "type": "string",
+              "metadata": {
+                "description": "The throttling alert rule resource ID"
+              },
+              "value": "[if(and(parameters('enableCapacityAlerts'), not(empty(parameters('logAnalyticsWorkspaceId')))), resourceId('Microsoft.Insights/scheduledQueryRules', 'alert-fabric-capacity-throttling'), '')]"
+            },
+            "budgetId": {
+              "type": "string",
+              "metadata": {
+                "description": "The budget resource ID"
+              },
+              "value": "[if(parameters('enableBudgetAlerts'), resourceId('Microsoft.Consumption/budgets', 'budget-fabric-monthly'), '')]"
+            },
+            "longRunningJobAlertId": {
+              "type": "string",
+              "metadata": {
+                "description": "The long-running job alert resource ID"
+              },
+              "value": "[if(and(parameters('enableCapacityAlerts'), not(empty(parameters('logAnalyticsWorkspaceId')))), resourceId('Microsoft.Insights/scheduledQueryRules', 'alert-fabric-long-running-jobs'), '')]"
+            },
+            "appliedTags": {
+              "type": "object",
+              "metadata": {
+                "description": "Tags applied to monitoring resources"
+              },
+              "value": "[variables('alertTags')]"
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'fabric-deployment')]",
+        "[extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'monitoring-deployment')]",
+        "[subscriptionResourceId('Microsoft.Resources/resourceGroups', variables('resourceGroupName'))]"
+      ]
+    },
+    {
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2025-04-01",
       "name": "resource-locks-deployment",
@@ -2644,9 +4368,53 @@
       "type": "string",
       "value": "[if(parameters('enablePowerBIWorkspace'), reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'powerbi-workspace-deployment'), '2025-04-01').outputs.workspaceUrl.value, '')]"
     },
+    "workspaceIdentityId": {
+      "type": "string",
+      "value": "[if(parameters('enableWorkspaceIdentity'), reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'workspace-identity-deployment'), '2025-04-01').outputs.identityId.value, '')]"
+    },
+    "workspaceIdentityPrincipalId": {
+      "type": "string",
+      "value": "[if(parameters('enableWorkspaceIdentity'), reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'workspace-identity-deployment'), '2025-04-01').outputs.principalId.value, '')]"
+    },
+    "workspaceIdentityClientId": {
+      "type": "string",
+      "value": "[if(parameters('enableWorkspaceIdentity'), reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'workspace-identity-deployment'), '2025-04-01').outputs.clientId.value, '')]"
+    },
     "appliedTags": {
       "type": "object",
       "value": "[variables('defaultTags')]"
+    },
+    "warehouseName": {
+      "type": "string",
+      "value": "[if(parameters('enableWarehouse'), reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'warehouse-deployment'), '2025-04-01').outputs.warehouseName.value, '')]"
+    },
+    "warehouseSqlEndpoint": {
+      "type": "string",
+      "value": "[if(parameters('enableWarehouse'), reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'warehouse-deployment'), '2025-04-01').outputs.sqlEndpoint.value, '')]"
+    },
+    "sqlDatabaseEndpoint": {
+      "type": "string",
+      "value": "[if(parameters('enableSqlDatabase'), reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'sql-database-deployment'), '2025-04-01').outputs.tdsEndpoint.value, '')]"
+    },
+    "sqlDatabaseOneLakeEnabled": {
+      "type": "bool",
+      "value": "[if(parameters('enableSqlDatabase'), reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'sql-database-deployment'), '2025-04-01').outputs.oneLakeReplicationEnabled.value, false())]"
+    },
+    "fabricPipelineName": {
+      "type": "string",
+      "value": "[if(parameters('enablePipeline'), reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'pipeline-deployment'), '2025-04-01').outputs.pipelineName.value, '')]"
+    },
+    "fabricPipelineTriggerStatus": {
+      "type": "string",
+      "value": "[if(parameters('enablePipeline'), reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'pipeline-deployment'), '2025-04-01').outputs.triggerStatus.value, '')]"
+    },
+    "monitoringActionGroupId": {
+      "type": "string",
+      "value": "[if(parameters('enableMonitoringAlerts'), reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'monitoring-alerts-deployment'), '2025-04-01').outputs.actionGroupId.value, '')]"
+    },
+    "monitoringBudgetId": {
+      "type": "string",
+      "value": "[if(parameters('enableMonitoringAlerts'), reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, variables('resourceGroupName')), 'Microsoft.Resources/deployments', 'monitoring-alerts-deployment'), '2025-04-01').outputs.budgetId.value, '')]"
     }
   }
 }

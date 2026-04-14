@@ -83,6 +83,77 @@ param eventhouseRetentionDays int = 365
 @maxValue(365)
 param eventhouseHotCacheDays int = 31
 
+// --- Phase 9: Workspace Identity & Governance Parameters ---
+
+@description('Enable Fabric Workspace Identity (GA 2026) for credential-free authentication')
+param enableWorkspaceIdentity bool = false
+
+@description('Fabric data domain for workspace tag governance (e.g., Casino, Federal-USDA)')
+param fabricDomain string = ''
+
+@description('Data classification level for workspace tag governance')
+@allowed(['Public', 'Internal', 'Confidential', 'HighlyConfidential', ''])
+param dataClassification string = ''
+
+@description('Compliance framework applicable to this deployment')
+@allowed(['NIGC-MICS', 'HIPAA', 'FedRAMP', 'FISMA', '42CFR-Part2', 'CIPSEA', 'None', ''])
+param complianceFramework string = ''
+
+@description('Federal agency code for workspace tag governance (e.g., USDA, SBA, NOAA, EPA, DOI)')
+param agencyCode string = ''
+
+// --- Phase 10: Warehouse, SQL Database, Pipeline & Monitoring Parameters ---
+
+@description('Enable Fabric Warehouse configuration deployment')
+param enableWarehouse bool = false
+
+@description('Warehouse display name')
+param warehouseName string = 'fabric-warehouse'
+
+@description('Enable Fabric SQL Database configuration deployment')
+param enableSqlDatabase bool = false
+
+@description('SQL Database display name')
+param sqlDatabaseName string = 'fabric-sqldb'
+
+@description('Enable Dynamic Data Masking for SQL Database')
+param enableDDM bool = true
+
+@description('Enable Customer-Managed Keys for SQL Database')
+param enableSqlDbCMK bool = false
+
+@description('Key Vault key URI for SQL Database CMK')
+param sqlDbKeyVaultKeyUri string = ''
+
+@description('Enable Fabric Data Factory Pipeline configuration deployment')
+param enablePipeline bool = false
+
+@description('Pipeline display name')
+param pipelineName string = 'fabric-pipeline'
+
+@description('Enable schedule trigger for pipeline')
+param enablePipelineSchedule bool = false
+
+@description('Pipeline schedule frequency')
+@allowed(['Minute', 'Hour', 'Day', 'Week', 'Month'])
+param pipelineScheduleFrequency string = 'Day'
+
+@description('Enable monitoring alerts and budget tracking')
+param enableMonitoringAlerts bool = false
+
+@description('Monthly budget amount in USD for cost alerts')
+@minValue(100)
+@maxValue(1000000)
+param monthlyBudgetAmount int = 10000
+
+@description('Capacity utilization threshold percentage for alerts')
+@minValue(50)
+@maxValue(100)
+param capacityAlertThreshold int = 80
+
+@description('Email addresses for alert notifications')
+param alertEmailRecipients array = []
+
 // =============================================================================
 // Variables
 // =============================================================================
@@ -105,7 +176,15 @@ var costAllocationTags = union(
   !empty(owner) ? { Owner: owner } : {}
 )
 
-var defaultTags = union(tags, costAllocationTags, {
+// Phase 9: Workspace governance tags (GA 2026)
+var workspaceGovernanceTags = union(
+  !empty(fabricDomain) ? { FabricDomain: fabricDomain } : {},
+  !empty(dataClassification) ? { DataClassification: dataClassification } : {},
+  !empty(complianceFramework) ? { ComplianceFramework: complianceFramework } : {},
+  !empty(agencyCode) ? { AgencyCode: agencyCode } : {}
+)
+
+var defaultTags = union(tags, costAllocationTags, workspaceGovernanceTags, {
   Environment: environment
   Project: 'Microsoft Fabric POC'
   Application: 'fabric-casino-poc'
@@ -288,6 +367,121 @@ module powerBIWorkspace 'modules/analytics/powerbi-workspace.bicep' = if (enable
 }
 
 // =============================================================================
+// Workspace Identity (Phase 9 - GA 2026: Credential-free authentication)
+// =============================================================================
+
+module workspaceIdentity 'modules/security/workspace-identity.bicep' = if (enableWorkspaceIdentity) {
+  name: 'workspace-identity-deployment'
+  scope: resourceGroup
+  dependsOn: [security, storage, governance]
+  params: {
+    location: location
+    projectPrefix: projectPrefix
+    environment: environment
+    tags: defaultTags
+    enableKeyVaultAccess: true
+    keyVaultId: security.outputs.keyVaultId
+    enableStorageAccess: true
+    storageAccountId: storage.outputs.storageAccountId
+    enablePurviewAccess: true
+    purviewAccountId: governance.outputs.purviewAccountId
+  }
+}
+
+// =============================================================================
+// Fabric Warehouse Module (Phase 10 - Optional)
+// =============================================================================
+// Deploys configuration metadata for Fabric Warehouse (Synapse Data Warehouse).
+// Enable by setting enableWarehouse = true in your parameter file.
+// =============================================================================
+
+module warehouse 'modules/fabric/fabric-warehouse.bicep' = if (enableWarehouse) {
+  name: 'warehouse-deployment'
+  scope: resourceGroup
+  params: {
+    location: location
+    projectPrefix: projectPrefix
+    environment: environment
+    warehouseName: warehouseName
+    capacityId: fabric.outputs.capacityId
+    logAnalyticsWorkspaceId: monitoring.outputs.workspaceId
+    managedIdentityPrincipalId: security.outputs.managedIdentityPrincipalId
+    tags: defaultTags
+  }
+}
+
+// =============================================================================
+// Fabric SQL Database Module (Phase 10 - Optional)
+// =============================================================================
+// Deploys configuration metadata for Fabric SQL Database (OLTP + OneLake).
+// Enable by setting enableSqlDatabase = true in your parameter file.
+// =============================================================================
+
+module sqlDatabase 'modules/fabric/fabric-sql-database.bicep' = if (enableSqlDatabase) {
+  name: 'sql-database-deployment'
+  scope: resourceGroup
+  params: {
+    location: location
+    projectPrefix: projectPrefix
+    environment: environment
+    databaseName: sqlDatabaseName
+    capacityId: fabric.outputs.capacityId
+    enableDDM: enableDDM
+    enableCMK: enableSqlDbCMK
+    keyVaultKeyUri: sqlDbKeyVaultKeyUri
+    logAnalyticsWorkspaceId: monitoring.outputs.workspaceId
+    managedIdentityPrincipalId: security.outputs.managedIdentityPrincipalId
+    tags: defaultTags
+  }
+}
+
+// =============================================================================
+// Fabric Data Factory Pipeline Module (Phase 10 - Optional)
+// =============================================================================
+// Deploys configuration metadata for Fabric Data Factory pipelines.
+// Enable by setting enablePipeline = true in your parameter file.
+// =============================================================================
+
+module pipeline 'modules/fabric/fabric-pipeline.bicep' = if (enablePipeline) {
+  name: 'pipeline-deployment'
+  scope: resourceGroup
+  params: {
+    location: location
+    projectPrefix: projectPrefix
+    environment: environment
+    pipelineName: pipelineName
+    capacityId: fabric.outputs.capacityId
+    enableScheduleTrigger: enablePipelineSchedule
+    scheduleFrequency: pipelineScheduleFrequency
+    logAnalyticsWorkspaceId: monitoring.outputs.workspaceId
+    tags: defaultTags
+  }
+}
+
+// =============================================================================
+// Monitoring Alerts & Budgets Module (Phase 10 - Optional)
+// =============================================================================
+// Deploys capacity utilization alerts and budget tracking.
+// Enable by setting enableMonitoringAlerts = true in your parameter file.
+// =============================================================================
+
+module monitoringAlerts 'modules/monitoring/alerts-and-budgets.bicep' = if (enableMonitoringAlerts) {
+  name: 'monitoring-alerts-deployment'
+  scope: resourceGroup
+  params: {
+    location: location
+    logAnalyticsWorkspaceId: monitoring.outputs.workspaceId
+    enableCapacityAlerts: true
+    capacityThresholdPercent: capacityAlertThreshold
+    enableBudgetAlerts: true
+    monthlyBudgetAmount: monthlyBudgetAmount
+    alertEmailRecipients: alertEmailRecipients
+    fabricCapacityResourceId: fabric.outputs.capacityId
+    tags: defaultTags
+  }
+}
+
+// =============================================================================
 // Resource Locks (Prevent accidental deletion of critical resources)
 // =============================================================================
 
@@ -343,8 +537,28 @@ output eventHouseDatabaseIds array = enableEventhouse ? eventhouse.outputs.datab
 output powerBIWorkspaceId string = enablePowerBIWorkspace ? powerBIWorkspace.outputs.workspaceId : ''
 output powerBIWorkspaceUrl string = enablePowerBIWorkspace ? powerBIWorkspace.outputs.workspaceUrl : ''
 
+// --- Phase 9: Workspace Identity Outputs (conditional) ---
+
+output workspaceIdentityId string = enableWorkspaceIdentity ? workspaceIdentity.outputs.identityId : ''
+output workspaceIdentityPrincipalId string = enableWorkspaceIdentity ? workspaceIdentity.outputs.principalId : ''
+output workspaceIdentityClientId string = enableWorkspaceIdentity ? workspaceIdentity.outputs.clientId : ''
+
 // Cost tracking reference
 output appliedTags object = defaultTags
+
+// --- Phase 10: Warehouse, SQL Database, Pipeline & Monitoring Outputs ---
+
+output warehouseName string = enableWarehouse ? warehouse.outputs.warehouseName : ''
+output warehouseSqlEndpoint string = enableWarehouse ? warehouse.outputs.sqlEndpoint : ''
+
+output sqlDatabaseEndpoint string = enableSqlDatabase ? sqlDatabase.outputs.tdsEndpoint : ''
+output sqlDatabaseOneLakeEnabled bool = enableSqlDatabase ? sqlDatabase.outputs.oneLakeReplicationEnabled : false
+
+output fabricPipelineName string = enablePipeline ? pipeline.outputs.pipelineName : ''
+output fabricPipelineTriggerStatus string = enablePipeline ? pipeline.outputs.triggerStatus : ''
+
+output monitoringActionGroupId string = enableMonitoringAlerts ? monitoringAlerts.outputs.actionGroupId : ''
+output monitoringBudgetId string = enableMonitoringAlerts ? monitoringAlerts.outputs.budgetId : ''
 
 // =============================================================================
 // Cost Documentation Reference

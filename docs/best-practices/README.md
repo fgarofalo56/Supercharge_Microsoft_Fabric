@@ -30,6 +30,32 @@ This comprehensive guide provides best practices for all aspects of Microsoft Fa
 | [Performance & Parallelism](./performance-parallelism.md) | Copy Activity DIUs, Spark tuning, pipeline parallelism, Direct Lake, KQL |
 | [Data Governance Deep Dive](./data-governance-deep-dive.md) | Purview, classification, RLS/CLS, compliance frameworks, retention |
 
+### Phase 9: New Fabric Experience Best Practices
+
+| Document | Description |
+|----------|-------------|
+| [CI/CD with fabric-cicd](./fabric-cicd-deployment.md) | fabric-cicd Python library, GitHub Actions, environment promotion |
+| [SQL Audit Logs Compliance](./sql-audit-logs-compliance.md) | SQL analytics endpoint audit logs for SOX/PCI/gaming compliance |
+| [Outbound Access Protection](./outbound-access-protection.md) | Data exfiltration prevention, managed private endpoints |
+| [Customer-Managed Keys](./customer-managed-keys.md) | BYOK encryption key management for Fabric |
+| [Spark Runtime Migration](./spark-runtime-migration.md) | Runtime 2.0 migration guide, breaking changes, compatibility |
+
+### Phase 10: Enterprise Readiness Best Practices
+
+| Document | Description |
+|----------|-------------|
+| [Capacity Planning & Cost Optimization](./capacity-planning-cost-optimization.md) | SKU selection, CU cost model, 15+ optimization techniques |
+| [Disaster Recovery & BCDR](./disaster-recovery-bcdr.md) | RTO/RPO targets, OneLake BCDR, failover procedures |
+| [Testing Strategies](./testing-strategies.md) | Testing pyramid, unit/integration/DQ testing, CI/CD integration |
+| [Network Security](./network-security.md) | Private endpoints, managed VNet, IP firewall, TIC 3.0 |
+| [Identity & RBAC Patterns](./identity-rbac-patterns.md) | Workspace roles, item permissions, RLS/CLS/OLS, PIV/CAC |
+| [Medallion Architecture Deep Dive](./medallion-architecture-deep-dive.md) | Bronze/Silver/Gold patterns, SCD Type 1/2, table maintenance |
+| [Monitoring & Observability](./monitoring-observability.md) | Capacity monitoring, custom dashboards, alerting, runbooks |
+| [Migration Patterns](./migration-patterns.md) | Source-specific migration, schema migration, validation |
+| [Multi-Tenant Workspace Architecture](./multi-tenant-workspace-architecture.md) | Topology patterns, isolation strategies, automation |
+| [Data Sharing & Federation](./data-sharing-federation.md) | Shortcut patterns, Fabric Data Sharing, external federation |
+| [Incremental Refresh & CDC](./incremental-refresh-cdc.md) | Delta MERGE, watermark management, semantic model refresh |
+
 ---
 
 ## Quick Reference: Key Principles

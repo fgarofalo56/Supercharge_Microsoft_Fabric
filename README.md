@@ -12,8 +12,8 @@
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Dev Container](https://img.shields.io/badge/Dev%20Container-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)
 ![Tutorials](https://img.shields.io/badge/Tutorials-32-blue?style=for-the-badge)
-![Tests](https://img.shields.io/badge/Tests-197_Passing-brightgreen?style=for-the-badge)
-![Phase](https://img.shields.io/badge/Phase_7-Complete-brightgreen?style=for-the-badge)
+![Tests](https://img.shields.io/badge/Tests-269_Passing-brightgreen?style=for-the-badge)
+![Phase](https://img.shields.io/badge/Phase_10-Complete-brightgreen?style=for-the-badge)
 
 **Transform your casino operations with enterprise-grade analytics powered by Microsoft Fabric**
 
@@ -53,6 +53,7 @@
 | [📚 Documentation Site](#-documentation-site) | Full docs with search |
 | [📜 Compliance](#-compliance-frameworks) | Regulatory coverage |
 | [🏛️ Phase 7 Expansions](#️-phase-7-industry-expansions) | Federal, streaming, analytics expansions |
+| [🆕 Phase 9-10 New Fabric Experience](#-phase-9-10-new-fabric-experience) | 40+ new feature docs, best practices, Bicep modules |
 
 ---
 
@@ -478,6 +479,48 @@ flowchart TD
 | **Total** | | **71** | **197** | **All Complete** |
 
 > 👉 See [Future Expansions](future-expansions/README.md) for detailed documentation on each expansion.
+
+---
+
+## 🆕 Phase 9-10: New Fabric Experience
+
+> [!NOTE]
+> **Phases 9-10 Complete** — Full coverage of the new Microsoft Fabric experience (July 2025 – April 2026 GA wave) with 40+ new documents, 8 Bicep modules, and 269/269 tests passing.
+
+Phases 9 and 10 modernize the POC for the new Fabric experience, covering every major feature and enterprise best practice.
+
+### New Feature Documentation (22 features)
+
+| Category | Features |
+|:---------|:---------|
+| **AI & Intelligence** | Fabric IQ, AI Copilot, Data Agents, AutoML & Model Endpoints, Fabric MCP |
+| **Data Integration** | Mirroring (Oracle/SAP/BigQuery/MySQL), Copy Job CDC, dbt Integration |
+| **Analytics** | Direct Lake, Real-Time Intelligence, Semantic Link, Eventhouse Vector DB |
+| **Platform** | Fabric SQL Database, API for GraphQL, Translytical Task Flows, Digital Twin Builder |
+| **Governance** | OneLake Security, OneLake Catalog, Workspace Monitoring, Data Mesh, Iceberg Interop |
+| **Performance** | Materialized Lake Views, Lakehouse Schemas, Shortcut Transformations |
+
+### Enterprise Best Practices (16 guides)
+
+| Category | Guides |
+|:---------|:-------|
+| **Operations** | Capacity Planning & Cost Optimization, Monitoring & Observability, Testing Strategies |
+| **Security** | Network Security (PE/VNet/IP Firewall), Identity & RBAC, Customer-Managed Keys, Outbound Access Protection |
+| **Architecture** | Medallion Deep Dive, Multi-Tenant Workspace, Data Sharing & Federation, Migration Patterns |
+| **Data Engineering** | Incremental Refresh & CDC, fabric-cicd CI/CD, Spark Runtime Migration, SQL Audit Logs |
+| **Resilience** | Disaster Recovery & BCDR, Alerting & Data Activator |
+
+### Infrastructure (Bicep)
+
+| Module | Purpose |
+|:-------|:--------|
+| `fabric-warehouse.bicep` | Fabric Warehouse configuration metadata |
+| `fabric-sql-database.bicep` | Fabric SQL Database with DDM & CMK |
+| `fabric-pipeline.bicep` | Data Factory Pipeline with scheduling |
+| `alerts-and-budgets.bicep` | Capacity alerts & budget management |
+| `workspace-identity.bicep` | Workspace Identity (GA 2026) |
+
+> 👉 See [Feature Documentation](docs/features/) and [Best Practices](docs/best-practices/README.md) for the complete guides.
 
 ---
 

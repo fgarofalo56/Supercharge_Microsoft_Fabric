@@ -8,13 +8,13 @@
 
 ![Category](https://img.shields.io/badge/Category-AI_Analytics-purple?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
-![Last Updated](https://img.shields.io/badge/Updated-March_2026-blue?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
 
 </div>
 
 ---
 
-**Last Updated:** `2026-03-12` | **Version:** 1.0.0
+**Last Updated:** `2026-04-13` | **Version:** 2.0.0
 
 ---
 
@@ -31,6 +31,11 @@
 - [⚠️ Limitations and Workarounds](#️-limitations-and-workarounds)
 - [🔐 Security Considerations](#-security-considerations)
 - [📚 References](#-references)
+- [🧬 Ontology Items](#-ontology-items)
+- [📋 Plan Items](#-plan-items)
+- [🕸️ Knowledge Graph](#️-knowledge-graph)
+- [🤖 Data Agents Integration](#-data-agents-integration)
+- [🔄 Fabric IQ Evolution](#-fabric-iq-evolution)
 
 ---
 
@@ -747,6 +752,305 @@ FabricAuditLogs
 | Semantic Model Best Practices | https://learn.microsoft.com/fabric/fundamentals/semantic-models-best-practices |
 | Row-Level Security in Fabric | https://learn.microsoft.com/fabric/security/service-admin-row-level-security |
 | Fabric Admin Settings for Copilot | https://learn.microsoft.com/fabric/admin/service-admin-portal-copilot |
+
+---
+
+## 🧬 Ontology Items
+
+> **Status:** Preview | **Introduced:** April 2026
+
+Ontology Items are a new Preview capability in Fabric IQ that allow you to define **entity types, relationships, properties, and constraints** over your data. Rather than treating tables and columns as raw schema objects, ontology items transform them into meaningful business concepts that both humans and AI agents can understand.
+
+### What Ontology Items Do
+
+An ontology elevates your data from a technical schema into a **semantic data layer**. For example, a column named `player_id` in a Lakehouse table becomes a **Player** entity with rich properties like `name`, `tier`, `lifetime_value`, and `preferred_denomination`. This mapping enables Fabric IQ to reason about your data at a business level rather than a column level.
+
+### Casino/Gaming Ontology Example
+
+| Entity | Properties | Relationships |
+|--------|-----------|---------------|
+| **Player** | name, loyalty_tier, lifetime_value, signup_date | plays_on → Machine, triggers → Compliance_Filing |
+| **Machine** | machine_id, game_title, denomination, manufacturer | located_at → Floor_Location, generates → Performance_Record |
+| **Transaction** | amount, type, timestamp, method | initiated_by → Player, processed_at → Machine |
+| **Compliance_Filing** | filing_type (CTR/SAR/W-2G), threshold, status | filed_for → Player, reviewed_by → Compliance_Officer |
+
+### Federal Agency Ontology Example
+
+| Entity | Properties | Relationships |
+|--------|-----------|---------------|
+| **Agency** | name, acronym, budget, jurisdiction | manages → Program, publishes → Report |
+| **Program** | program_name, funding_level, start_date, status | serves → Beneficiary, funded_by → Agency |
+| **Beneficiary** | beneficiary_type, location, demographics | enrolled_in → Program |
+| **Report** | report_type, period, publication_date | produced_by → Agency, covers → Program |
+
+### Ontology Structure
+
+```mermaid
+flowchart TB
+    subgraph Ontology["🧬 Ontology Layer"]
+        ET["Entity Types<br/>(Player, Machine, Agency)"]
+        REL["Relationships<br/>(plays_on, manages)"]
+        PROP["Properties<br/>(name, tier, budget)"]
+        CON["Constraints<br/>(CTR >= $10K, tier IN tiers)"]
+    end
+
+    subgraph Schema["💾 Physical Schema"]
+        TBL["Delta Tables"]
+        COL["Columns"]
+        FK["Foreign Keys"]
+    end
+
+    subgraph Consumers["🧠 Consumers"]
+        IQ["Fabric IQ NL Engine"]
+        AGT["Data Agents"]
+        SM["Semantic Models"]
+    end
+
+    ET --> TBL
+    REL --> FK
+    PROP --> COL
+    Ontology --> Consumers
+
+    style Ontology fill:#8E44AD,stroke:#6C3483,color:#fff
+    style Schema fill:#2E86C1,stroke:#1A5276,color:#fff
+    style Consumers fill:#27AE60,stroke:#1E8449,color:#fff
+```
+
+### Configuring Ontology Items
+
+Navigate to the Fabric IQ experience in your workspace and select **Ontology Items (Preview)** from the item creation menu. From there you can:
+
+1. **Auto-discover entities** -- Fabric IQ scans your Lakehouse or Warehouse tables and proposes entity types based on naming patterns, foreign keys, and column types
+2. **Manually define entities** -- Create entity types, map them to tables, assign properties to columns, and define relationships
+3. **Add business rules** -- Attach constraints (e.g., CTR threshold = $10,000) and validation logic to entity properties
+4. **Publish** -- Once published, the ontology is available to all Fabric IQ consumers in the workspace
+
+> 💡 **Tip**: Start with auto-discovery and then refine. The auto-discovery engine handles 70-80% of common patterns, and manual refinement brings accuracy to 95%+ for domain-specific concepts.
+
+---
+
+## 📋 Plan Items
+
+> **Status:** Preview | **Introduced:** April 2026
+
+Plan Items introduce a **unified, no-code collaborative planning surface** within Fabric IQ. A Plan brings together reporting, analytics, data integration, and management into a single view, enabling business teams to plan and execute data-driven initiatives without switching between tools.
+
+### Key Capabilities
+
+| Capability | Description |
+|-----------|-------------|
+| **Unified Canvas** | Combine Power BI visuals, data tables, text annotations, and action items in one planning surface |
+| **Collaborative Editing** | Multiple users can edit the same plan simultaneously with real-time sync and commenting |
+| **Semantic Model Integration** | Plans connect directly to Power BI semantic models for live data, measures, and calculations |
+| **Scenario Modeling** | Create what-if scenarios by adjusting parameters and seeing projected outcomes in real time |
+| **Action Tracking** | Assign follow-up actions to team members with due dates and status tracking |
+| **Version History** | Full audit trail of plan changes, who made them, and when |
+
+### Use Cases
+
+#### Casino Revenue Forecasting Plan
+
+A revenue planning surface that combines:
+- Live slot and table game revenue from the Gold semantic model
+- Projected revenue scenarios based on seasonal patterns and events
+- Floor layout optimization recommendations with expected lift
+- Action items for floor managers (machine moves, denomination changes)
+- Compliance checkpoints (CTR filing targets, audit readiness)
+
+#### Federal Budget Allocation Planning
+
+A multi-agency budget planning surface that combines:
+- Current budget utilization by program from agency Gold tables
+- Grant disbursement forecasts with historical trend baselines
+- Scenario modeling for budget reallocation across programs
+- Cross-agency comparison dashboards with USDA, SBA, EPA, NOAA, and DOI data
+- Action tracking for program managers and budget officers
+
+### Creating a Plan Item
+
+```
+Workspace → New Item → Plan (Preview)
+  ├── Connect to Semantic Model → Select model(s)
+  ├── Add Planning Sections → Revenue, Operations, Compliance
+  ├── Configure Scenarios → Baseline, Optimistic, Conservative
+  └── Invite Collaborators → Assign roles (Editor, Viewer, Contributor)
+```
+
+> 📝 **Note**: Plan Items require the same Fabric capacity as Copilot features (F2+). Collaborative editing requires all participants to have at least a Viewer role in the workspace.
+
+---
+
+## 🕸️ Knowledge Graph
+
+> **Status:** Preview | **Introduced:** April 2026
+
+Fabric IQ now builds **knowledge graphs** from ontology definitions, enabling complex relationship traversal and graph-powered insights that go far beyond simple SQL joins. The knowledge graph connects entities across tables, lakehouses, and even workspaces, allowing users to ask questions that span multiple domains.
+
+### How the Knowledge Graph Works
+
+When you define ontology items with entities and relationships, Fabric IQ automatically constructs a navigable knowledge graph. This graph enables:
+
+1. **Multi-Hop Queries** -- Traverse relationships across several entities in a single natural language question
+2. **Implicit Joins** -- IQ infers the join path from the graph without requiring users to know the schema
+3. **Cross-Domain Discovery** -- Find connections between entities that exist in different lakehouses or semantic models
+4. **Pattern Detection** -- Identify recurring relationship patterns that indicate business insights or risks
+
+### Casino Example: Multi-Hop Query
+
+**User Question:** "Which high-value players visited properties with compliance flags in the last 90 days?"
+
+This question requires traversing: **Player** → (plays_at) → **Property** → (has_filing) → **Compliance_Filing**, filtering by `player.lifetime_value > threshold` and `compliance_filing.status = 'flagged'` and `date >= 90 days ago`.
+
+Without the knowledge graph, this would require the user to know three tables and their join keys. With the graph, Fabric IQ resolves the path automatically.
+
+### Federal Example: Cross-Agency Query
+
+**User Question:** "Show me EPA facilities near SBA-funded businesses in flood-prone NOAA zones"
+
+This traverses across three agency ontologies: **EPA_Facility** → (geo_near) → **SBA_Business** → (located_in) → **NOAA_Flood_Zone**, combining geospatial proximity with relationship traversal.
+
+### Knowledge Graph Architecture
+
+```mermaid
+flowchart TB
+    subgraph Graph["🕸️ Knowledge Graph"]
+        N1["🎰 Player<br/>Entity"]
+        N2["🎰 Machine<br/>Entity"]
+        N3["🎰 Property<br/>Entity"]
+        N4["📋 Compliance<br/>Filing"]
+        N5["🌾 USDA<br/>Program"]
+        N6["🌊 EPA<br/>Facility"]
+        N7["💼 SBA<br/>Business"]
+    end
+
+    N1 -->|plays_on| N2
+    N1 -->|visits| N3
+    N1 -->|triggers| N4
+    N3 -->|has_filing| N4
+    N6 -->|near| N7
+    N5 -->|funds| N7
+
+    style Graph fill:#1A1A2E,stroke:#16213E,color:#fff
+    style N1 fill:#E74C3C,stroke:#C0392B,color:#fff
+    style N2 fill:#E74C3C,stroke:#C0392B,color:#fff
+    style N3 fill:#E74C3C,stroke:#C0392B,color:#fff
+    style N4 fill:#F39C12,stroke:#D68910,color:#fff
+    style N5 fill:#27AE60,stroke:#1E8449,color:#fff
+    style N6 fill:#2E86C1,stroke:#1A5276,color:#fff
+    style N7 fill:#8E44AD,stroke:#6C3483,color:#fff
+```
+
+### Query Performance
+
+The knowledge graph uses indexed adjacency lists and materialized relationship paths to ensure graph traversal queries execute within Power BI's interactive latency expectations:
+
+| Traversal Depth | Expected Latency | Use Case |
+|----------------|------------------|----------|
+| 1 hop | < 1 second | Direct relationships (Player → Sessions) |
+| 2 hops | 1-3 seconds | Indirect relationships (Player → Machine → Location) |
+| 3+ hops | 3-10 seconds | Cross-domain discovery (Player → Property → Compliance → Reviewer) |
+
+> ⚠️ **Note**: Graph queries beyond 3 hops may require pre-materialized paths for interactive performance. Consider creating Gold-layer summary tables for frequently traversed paths.
+
+---
+
+## 🤖 Data Agents Integration
+
+> **Status:** Preview | **Introduced:** April 2026
+
+Fabric IQ serves as the **semantic backbone** for [Data Agents](data-agents.md), providing the ontology, knowledge graph, and natural language understanding that agents need to deliver accurate, context-aware responses. Rather than operating on raw schema alone, agents leverage the full Fabric IQ semantic layer.
+
+### How Agents Use Fabric IQ
+
+| Component | Agent Benefit |
+|-----------|--------------|
+| **Ontology** | Agents understand that `player_id` is a Player with a tier and value, not just an integer column |
+| **Knowledge Graph** | Agents traverse relationships to answer multi-step questions without explicit join instructions |
+| **NL Translation** | Agents delegate query generation to the IQ engine for optimized SQL/DAX/KQL |
+| **Semantic Metadata** | Descriptions, synonyms, and business rules guide agent responses toward domain-accurate answers |
+| **Confidence Scoring** | Agents can decide whether to execute a query or ask for clarification based on IQ confidence |
+
+### Agent-Powered Use Case
+
+**User to Agent:** "What's the revenue trend for downtown properties over the last quarter?"
+
+The agent workflow:
+
+1. **Entity Resolution (via Ontology):** Maps "downtown properties" to `Property` entities where `location_zone = 'Downtown'`
+2. **Metric Resolution (via Semantic Model):** Identifies "revenue" as the `[Total Revenue]` DAX measure
+3. **Time Resolution:** Interprets "last quarter" as the most recent completed fiscal quarter
+4. **Query Generation (via IQ Engine):** Generates an optimized DAX query with time intelligence
+5. **Graph Enhancement:** Uses the knowledge graph to include related metrics (occupancy, player visits) that add context
+6. **Response Formatting:** Returns a trend chart with narrative summary and anomaly callouts
+
+### Configuration
+
+To enable agent access to Fabric IQ capabilities:
+
+```
+Workspace Settings → Fabric IQ → Data Agent Access
+  ├── Allow agents to use Ontology definitions → On
+  ├── Allow agents to traverse Knowledge Graph → On
+  ├── Agent query confidence threshold → 70% (recommended)
+  └── Agent audit logging → On (required for compliance workloads)
+```
+
+> 📝 **Cross-Reference:** For full Data Agent setup, capabilities, and deployment patterns, see [Data Agents](data-agents.md).
+
+---
+
+## 🔄 Fabric IQ Evolution
+
+Fabric IQ has evolved significantly from its initial release as a natural language query tool to a comprehensive **semantic platform** that powers ontology, planning, knowledge graphs, and intelligent agents.
+
+### Version Comparison: v1 vs v2
+
+| Aspect | Fabric IQ v1 (NL-to-SQL) | Fabric IQ v2 (Semantic Platform) |
+|--------|--------------------------|----------------------------------|
+| **Core Function** | Translate natural language to SQL/DAX/KQL | Full semantic understanding with entity awareness |
+| **Data Model Understanding** | Schema-level (tables, columns, relationships) | Ontology-level (entities, properties, constraints, business rules) |
+| **Query Scope** | Single-source queries within one Lakehouse or Semantic Model | Cross-source, cross-domain queries via knowledge graph |
+| **Planning** | Not available | Unified Plan items with scenario modeling |
+| **Agent Support** | Limited (basic NL query delegation) | Full semantic backbone for Data Agents |
+| **Relationship Traversal** | Explicit joins based on foreign keys | Implicit multi-hop traversal via knowledge graph |
+| **Business Rules** | External (defined in notebooks or pipelines) | Embedded in ontology constraints |
+| **Confidence Model** | Score based on schema match | Score based on ontology + graph + semantic context |
+
+### Feature Availability Matrix
+
+| Feature | v1 (GA) | v2 (Preview) | Expected GA |
+|---------|---------|-------------|-------------|
+| Natural Language Queries | ✅ | ✅ | -- |
+| SQL/DAX/KQL Translation | ✅ | ✅ | -- |
+| Conversational Follow-ups | ✅ | ✅ | -- |
+| Semantic Model Integration | ✅ | ✅ | -- |
+| Ontology Items | -- | ✅ | H2 2026 |
+| Plan Items | -- | ✅ | H2 2026 |
+| Knowledge Graph | -- | ✅ | H2 2026 |
+| Data Agents Backbone | -- | ✅ | H2 2026 |
+| Cross-Domain Graph Queries | -- | ✅ | 2027 |
+
+### Roadmap: Preview to GA
+
+The v2 Preview features are expected to progress through the following stages:
+
+1. **Private Preview (Current):** Available to tenants with Fabric capacity F64+ and explicit opt-in via Admin Portal
+2. **Public Preview (H2 2026):** Available to all Fabric tenants with F2+ capacity
+3. **General Availability (Late 2026 / Early 2027):** Full production support with SLAs and compliance certifications (FedRAMP, HIPAA)
+
+### Migration Path for Existing Configurations
+
+If you already have Fabric IQ v1 configured with semantic model metadata, synonyms, and descriptions:
+
+| Existing Configuration | Migration to v2 |
+|----------------------|-----------------|
+| **Table/Column Descriptions** | Automatically imported into ontology as entity/property descriptions |
+| **Synonyms** | Carried forward; can be enriched with ontology aliases |
+| **Q&A Linguistic Schema** | Mapped to ontology entity types and relationships |
+| **RLS / CLS Rules** | Fully preserved; ontology respects existing security definitions |
+| **Feedback History** | Training data is retained and applied to the v2 confidence model |
+
+> 💡 **Tip**: No breaking changes. All v1 NL query functionality continues to work as-is. v2 features are additive -- you can adopt ontology, plans, and knowledge graph incrementally without disrupting existing IQ configurations.
 
 ---
 

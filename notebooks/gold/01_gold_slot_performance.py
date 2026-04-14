@@ -343,3 +343,52 @@ spark.sql(f"""
     ORDER BY total_net_win DESC
     LIMIT 10
 """).show()
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Lakehouse Schemas (GA Dec 2025)
+# MAGIC
+# MAGIC Fabric Lakehouse now supports **schema-based table organization** (GA).
+# MAGIC Instead of flat Lakehouse-qualified naming (`lh_gold.gold_slot_performance`),
+# MAGIC tables can be organized into schemas for better discovery, access control,
+# MAGIC and multi-domain isolation.
+# MAGIC
+# MAGIC ### Schema Pattern (Alternative to flat naming)
+# MAGIC ```
+# MAGIC Flat naming:   lh_gold.gold_slot_performance
+# MAGIC Schema naming:  lh_gold.casino.gold_slot_performance
+# MAGIC ```
+# MAGIC
+# MAGIC To adopt schemas, create the schema first, then save tables into it.
+# MAGIC Both patterns coexist -- existing flat-named tables remain accessible.
+
+# COMMAND ----------
+
+# --- Lakehouse Schema Pattern (Optional, GA Dec 2025) ---
+# Uncomment the following to organize Gold tables within Lakehouse schemas.
+# This enables domain-based table isolation and finer-grained access control.
+#
+# Create schema (idempotent):
+# spark.sql("CREATE SCHEMA IF NOT EXISTS casino")
+#
+# Write to schema-qualified table:
+# df_kpis.write \
+#     .format("delta") \
+#     .mode("overwrite") \
+#     .option("overwriteSchema", "true") \
+#     .saveAsTable("casino.gold_slot_performance")
+#
+# For federal agency isolation:
+# spark.sql("CREATE SCHEMA IF NOT EXISTS usda")
+# spark.sql("CREATE SCHEMA IF NOT EXISTS noaa")
+# spark.sql("CREATE SCHEMA IF NOT EXISTS epa")
+# spark.sql("CREATE SCHEMA IF NOT EXISTS doi")
+# spark.sql("CREATE SCHEMA IF NOT EXISTS sba")
+#
+# Schema-based access control:
+# GRANT SELECT ON SCHEMA casino TO `casino-analysts@contoso.com`
+# GRANT SELECT ON SCHEMA usda TO `usda-data-team@contoso.com`
+
+print("Lakehouse Schema pattern available (see comments above)")
+print("Current table uses flat naming for backward compatibility")

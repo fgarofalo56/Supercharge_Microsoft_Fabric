@@ -6,7 +6,7 @@
 **Type:** Infrastructure + Documentation + Data Engineering
 **Primary Stack:** Bicep, Python, PySpark, KQL, DAX
 **Target Platform:** Microsoft Fabric (F64 SKU)
-**Phase Status:** Phase 8 In Progress (Federal POC Parity + Best Practices Expansion)
+**Phase Status:** Phase 10 Complete (Full Fabric Landscape Coverage)
 
 ## Key Technologies
 
@@ -16,23 +16,24 @@
 - **BI:** Power BI, Direct Lake, DAX
 - **Governance:** Microsoft Purview
 - **Testing:** pytest, Great Expectations
-- **New Features:** Fabric IQ, Real-Time Intelligence, AI Copilot, Data Mesh
+- **New Features:** Fabric IQ, Real-Time Intelligence, AI Copilot, Data Mesh, Digital Twin Builder, Data Agents, OneLake Security, Iceberg Interop, Mirroring, Direct Lake, SQL Database, GraphQL, Semantic Link, OneLake Catalog, AutoML, Translytical, MCP, Workspace Monitoring, Copy Job CDC
 
 ## Directory Structure
 
 ```
 infra/              - Bicep IaC modules and deployments
 docs/               - Architecture, deployment, best practices, feature docs
-  best-practices/   - Error handling, alerting, performance, governance deep dives
-  features/         - Fabric IQ, RTI, Copilot, Data Mesh guides
+  best-practices/   - Error handling, alerting, performance, governance, CI/CD, CMK, OAP, capacity, BCDR, testing, RBAC, network, medallion, migration, observability, multi-tenant, sharing, CDC
+  features/         - 22 feature docs: Fabric IQ, RTI, Copilot, Data Mesh, DTB, Data Agents, OneLake Security, Mirroring, Direct Lake, SQL DB, GraphQL, Semantic Link, Catalog, AutoML, Translytical, MCP, Monitoring, Copy Job, Iceberg, dbt, MLV, Vector DB
 tutorials/          - 37 step-by-step tutorials (00-36)
 poc-agenda/         - 3-day workshop materials
 data_generation/    - 16 Python data generators (casino, federal, streaming, analytics)
   open_data/        - Real federal dataset download scripts (USDA, SBA, NOAA, EPA, DOI)
-notebooks/          - 50+ Fabric-importable notebooks (medallion + streaming + federal)
-  bronze/           - 16 Bronze ingestion notebooks (casino + 5 federal agencies)
+notebooks/          - 55+ Fabric-importable notebooks (medallion + streaming + federal + AI)
+  bronze/           - 17 Bronze ingestion notebooks (casino + 5 federal agencies + shortcuts)
   silver/           - 16 Silver transformation notebooks
-  gold/             - 16 Gold KPI/analytics notebooks
+  gold/             - 18 Gold KPI/analytics notebooks (+ digital twin, AI functions)
+scripts/            - Deployment scripts (fabric-cicd)
 validation/         - 134+ unit tests + 9 Great Expectations suites
 future-expansions/  - Federal agency & industry expansion documentation
 ```
@@ -87,10 +88,13 @@ future-expansions/  - Federal agency & industry expansion documentation
 
 | File | Purpose |
 |------|---------|
-| `infra/main.bicep` | Root IaC orchestration |
+| `infra/main.bicep` | Root IaC orchestration (+ Workspace Identity, Tags) |
 | `infra/modules/fabric/fabric-capacity.bicep` | Fabric F64 deployment |
+| `infra/modules/security/workspace-identity.bicep` | Workspace Identity (GA 2026) |
 | `data_generation/generators/base_generator.py` | Generator base class |
-| `notebooks/bronze/01_bronze_slot_telemetry.ipynb` | Primary Bronze pattern |
+| `notebooks/bronze/01_bronze_slot_telemetry.py` | Primary Bronze pattern |
+| `scripts/fabric-cicd-deploy.py` | fabric-cicd deployment script |
+| `.github/workflows/deploy-fabric.yml` | CI/CD pipeline for Fabric items |
 
 ## Testing Commands
 
@@ -143,10 +147,65 @@ Phase 8 expands all 5 federal agencies (USDA, SBA, NOAA, EPA, DOI) to full POC p
 
 | Wave | Scope | Status |
 |------|-------|--------|
-| Wave 1 | Federal POC Parity (5 agencies x Bronze/Silver/Gold + tutorials) | In Progress |
-| Wave 2 | Best Practices (error handling, alerting, performance, governance) | In Progress |
-| Wave 3 | New Features (Fabric IQ, RTI, Copilot, Data Mesh) | In Progress |
-| Wave 4 | Open data download framework + documentation updates | In Progress |
+| Wave 1 | Federal POC Parity (5 agencies x Bronze/Silver/Gold + tutorials) | Complete |
+| Wave 2 | Best Practices (error handling, alerting, performance, governance) | Complete |
+| Wave 3 | New Features (Fabric IQ, RTI, Copilot, Data Mesh) | Complete |
+| Wave 4 | Open data download framework + documentation updates | Complete |
+
+## Phase 9 Completion (2026-04-13)
+
+Phase 9 modernizes the POC for the new Microsoft Fabric experience (July 2025 - April 2026 GA wave):
+
+| Item | Feature | Type | Status |
+|------|---------|------|--------|
+| 1 | Digital Twin Builder | Doc + Notebook | Complete |
+| 2 | Data Agents | Doc | Complete |
+| 3 | Fabric IQ Update (Ontology/Plan/Graph) | Doc Update | Complete |
+| 4 | RTI Update (Business Events, Maps, SQL Operator) | Doc Update | Complete |
+| 5 | OneLake Security | Doc | Complete |
+| 6 | Workspace Identity | Bicep Module | Complete |
+| 7 | Lakehouse Schemas | Notebook Updates (Bronze/Silver/Gold) | Complete |
+| 8 | Shortcut Transformations | Notebook | Complete |
+| 9 | fabric-cicd CI/CD | Workflow + Script + Doc | Complete |
+| 10 | SQL Audit Logs Compliance | Doc | Complete |
+| 11 | Workspace Tags | Bicep Update | Complete |
+| 12 | Default Domain Sensitivity Labels | Doc Update | Complete |
+| 13 | Outbound Access Protection | Doc | Complete |
+| 14 | Customer-Managed Keys | Bicep Update + Doc | Complete |
+| 15 | Iceberg Interoperability | Doc | Complete |
+| 16 | dbt Integration | Doc | Complete |
+| 17 | AI Functions Compliance | Notebook | Complete |
+| 18 | Materialized Lake Views | Doc | Complete |
+| 19 | Spark Runtime 2.0 Migration | Doc | Complete |
+| 20 | Vector Database in Eventhouse | Doc | Complete |
+
+### Phase 9 New Files (18 files, ~12,000+ lines)
+
+**Feature Docs:** digital-twin-builder.md, data-agents.md, onelake-security.md, onelake-iceberg-interop.md, dbt-fabric-integration.md, materialized-lake-views.md, eventhouse-vector-database.md
+**Best Practice Docs:** sql-audit-logs-compliance.md, outbound-access-protection.md, customer-managed-keys.md, spark-runtime-migration.md, fabric-cicd-deployment.md
+**Notebooks:** 17_gold_digital_twin_demo.py, 17_bronze_shortcut_transformations.py, 17_gold_ai_functions_compliance.py
+**Infrastructure:** workspace-identity.bicep, deploy-fabric.yml, fabric-cicd-deploy.py
+**Modified Files:** main.bicep, fabric-iq.md, real-time-intelligence.md, data-governance-deep-dive.md, storage-account.bicep, 01_bronze_slot_telemetry.py, 01_silver_slot_cleansed.py, 01_gold_slot_performance.py
+
+## Phase 10 Completion (2026-04-13)
+
+Phase 10 achieves full Fabric landscape coverage — every major feature and enterprise best practice documented:
+
+| Category | Items | Type | Status |
+|----------|-------|------|--------|
+| Feature Docs (11) | Mirroring, Direct Lake, SQL Database, GraphQL, Semantic Link, OneLake Catalog, AutoML, Translytical, MCP, Workspace Monitoring, Copy Job CDC | Docs | Complete |
+| Best Practices (11) | Capacity Planning, BCDR, Testing, Network Security, RBAC, Medallion Deep Dive, Observability, Migration, Multi-Tenant, Data Sharing, Incremental CDC | Docs | Complete |
+| Bicep Modules (4) | Warehouse, SQL Database, Pipeline, Alerts & Budgets | IaC | Complete |
+| Notebooks (1) | AutoML Weather Forecasting | Notebook | Complete |
+| Root Updates (6) | index.md, README.md, CHANGELOG.md, CLAUDE.md, best-practices/README.md, cross-references | Updates | Complete |
+
+### Phase 10 New Files (27 files, ~21,000+ lines)
+
+**Feature Docs:** mirroring.md, direct-lake.md, fabric-sql-database.md, api-for-graphql.md, semantic-link.md, onelake-catalog.md, automl-model-endpoints.md, translytical-task-flows.md, fabric-mcp.md, workspace-monitoring.md, copy-job-cdc.md
+**Best Practice Docs:** capacity-planning-cost-optimization.md, disaster-recovery-bcdr.md, testing-strategies.md, network-security.md, identity-rbac-patterns.md, medallion-architecture-deep-dive.md, monitoring-observability.md, migration-patterns.md, multi-tenant-workspace-architecture.md, data-sharing-federation.md, incremental-refresh-cdc.md
+**Bicep Modules:** fabric-warehouse.bicep, fabric-sql-database.bicep, fabric-pipeline.bicep, alerts-and-budgets.bicep
+**Notebooks:** 03_ml_automl_weather_forecasting.py
+**Modified Files:** main.bicep, index.md, README.md, CHANGELOG.md, CLAUDE.md, best-practices/README.md
 
 ## Context Notes
 
@@ -157,6 +216,8 @@ Phase 8 expands all 5 federal agencies (USDA, SBA, NOAA, EPA, DOI) to full POC p
 - Purview provides governance and lineage
 - Phase 7 adds HIPAA (Tribal Healthcare), FedRAMP (DOT/FAA), 42 CFR Part 2 compliance
 - Phase 8 adds full medallion notebooks, tutorials, open data scripts, and GE suites for all federal agencies
+- Phase 9 adds new Fabric experience features: Digital Twin Builder, Data Agents, OneLake Security, Workspace Identity, Lakehouse Schemas, Shortcut Transformations, Iceberg Interop, fabric-cicd CI/CD, CMK, OAP, SQL Audit Logs, Workspace Tags, dbt Integration, AI Functions, Materialized Views, Vector DB, Spark Runtime 2.0
+- Phase 10 adds full landscape coverage: Mirroring, Direct Lake, SQL Database, GraphQL, Semantic Link, OneLake Catalog, AutoML, Translytical, MCP, Workspace Monitoring, Copy Job CDC + 11 enterprise best practices + 4 Bicep modules
 - All federal datasets use real, publicly available APIs documented in `data_generation/config/federal_datasets.yaml`
 - Each agency supports BOTH synthetic data generation AND real open data downloads
 
