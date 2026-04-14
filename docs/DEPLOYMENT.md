@@ -499,7 +499,7 @@ sequenceDiagram
     autonumber
     actor User
     participant CLI as Azure CLI
-    participant AAD as Azure AD
+    participant AAD as Entra ID
     participant ARM as Azure Resource Manager
     participant Fabric as Fabric Capacity
     participant Storage as Storage Account
@@ -582,7 +582,7 @@ sequenceDiagram
 <details>
 <summary><b>🔍 Click to expand: OIDC Setup Commands</b></summary>
 
-#### 1. Create Azure AD Application
+#### 1. Create Microsoft Entra ID Application
 
 ```bash
 # Create app registration
@@ -636,7 +636,7 @@ Navigate to **Repository Settings** > **Secrets and variables** > **Actions**:
 | Secret Name | Value | Description |
 |-------------|-------|-------------|
 | `AZURE_CLIENT_ID` | Application (client) ID | From app registration |
-| `AZURE_TENANT_ID` | Directory (tenant) ID | Azure AD tenant |
+| `AZURE_TENANT_ID` | Directory (tenant) ID | Microsoft Entra ID tenant |
 | `AZURE_SUBSCRIPTION_ID` | Subscription ID | Target subscription |
 
 </details>

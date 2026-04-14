@@ -43,6 +43,7 @@ from pyspark.sql.functions import (
     sum,
     when,
 )
+from delta.tables import DeltaTable
 from datetime import datetime
 
 # Parameters
@@ -62,10 +63,10 @@ WAREHOUSE_JDBC_URL = (
 )
 
 # Source tables (Silver)
-SOURCE_COMPLIANCE_FILINGS = "lh_silver.silver_compliance_filings"
-SOURCE_USDA_INSPECTIONS = "lh_silver.silver_usda_inspection_reports"
-SOURCE_EPA_VIOLATIONS = "lh_silver.silver_epa_tri_releases"
-SOURCE_DOI_CORRESPONDENCE = "lh_silver.silver_doi_correspondence"
+SOURCE_COMPLIANCE_FILINGS = "lh_silver.silver_compliance_validated"
+SOURCE_USDA_INSPECTIONS = "lh_silver.silver_usda_crop_production"
+SOURCE_EPA_VIOLATIONS = "lh_silver.silver_epa_toxic_releases"
+SOURCE_DOI_CORRESPONDENCE = "lh_silver.silver_doi_earthquakes"
 
 # Target table (Gold)
 TARGET_AI_ANALYSIS = "lh_gold.gold_compliance_ai_analysis"
@@ -114,7 +115,7 @@ sentiment_sql = """
             WHEN ai.sentiment(narrative_text) < 0.2  THEN 'STANDARD'
             ELSE 'LOW_URGENCY'
         END AS urgency_level
-    FROM silver_compliance_filings
+    FROM silver_compliance_validated
     WHERE narrative_text IS NOT NULL
         AND narrative_text <> ''
 """
@@ -164,7 +165,7 @@ classification_sql = """
             'Currency Transaction Report (CTR)|Suspicious Activity Report (SAR)|W-2G Gambling Winnings|Internal Compliance Audit|Anti-Money Laundering Review',
             'confidence'
         ) AS classification_confidence
-    FROM silver_compliance_filings
+    FROM silver_compliance_validated
     WHERE narrative_text IS NOT NULL
         AND narrative_text <> ''
 """
@@ -215,7 +216,7 @@ usda_extraction_sql = """
             report_text,
             'agency, program_name, inspection_type, finding_severity, corrective_action, dollar_amount, inspection_date'
         ) AS extracted_entities
-    FROM silver_usda_inspection_reports
+    FROM silver_usda_crop_production
     WHERE report_text IS NOT NULL
         AND LEN(report_text) > 50
 """
@@ -239,7 +240,7 @@ epa_extraction_sql = """
             violation_narrative,
             'facility_name, chemical_name, release_quantity_lbs, release_medium, violation_type, enforcement_action, penalty_amount'
         ) AS extracted_entities
-    FROM silver_epa_tri_releases
+    FROM silver_epa_toxic_releases
     WHERE violation_narrative IS NOT NULL
         AND LEN(violation_narrative) > 50
 """
@@ -285,7 +286,7 @@ language_sql = """
             THEN 1
             ELSE 0
         END AS was_translated
-    FROM silver_doi_correspondence
+    FROM silver_doi_earthquakes
     WHERE original_text IS NOT NULL
         AND LEN(original_text) > 20
 """
@@ -381,16 +382,24 @@ df_risk_scored = df_risk_base \
     .withColumn("_ai_model_version", lit("fabric-ai-functions-preview")) \
     .withColumn("_analysis_date", current_timestamp())
 
-# Write to Gold table
+# Write to Gold table (Delta MERGE - incremental)
 try:
-    df_risk_scored.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .option("overwriteSchema", "true") \
-        .saveAsTable(TARGET_AI_ANALYSIS)
+    if spark.catalog.tableExists(TARGET_AI_ANALYSIS):
+        deltaTable = DeltaTable.forName(spark, TARGET_AI_ANALYSIS)
+        deltaTable.alias("target").merge(
+            df_risk_scored.alias("source"),
+            "target.filing_id = source.filing_id"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_risk_scored.write.format("delta") \
+            .mode("overwrite") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_AI_ANALYSIS)
 
     written_count = df_risk_scored.count()
-    print(f"Written {written_count:,} records to {TARGET_AI_ANALYSIS}")
+    print(f"Merged {written_count:,} records into {TARGET_AI_ANALYSIS}")
 except Exception as e:
     print(f"ERROR writing AI analysis (batch_id={batch_id}): {e}")
     raise

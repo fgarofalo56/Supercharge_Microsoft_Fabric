@@ -52,6 +52,7 @@ from pyspark.sql.functions import (
     window,
     year,
 )
+from delta.tables import DeltaTable
 from datetime import datetime
 
 # Parameters
@@ -281,14 +282,22 @@ print(f"Patient 360 records: {df_patient_360.count():,}")
 # COMMAND ----------
 
 try:
-    df_patient_360.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .option("overwriteSchema", "true") \
-        .saveAsTable(patient_360_table)
-    
-    print(f"Written {df_patient_360.count():,} records to {patient_360_table}")
-    
+    if spark.catalog.tableExists(patient_360_table):
+        deltaTable = DeltaTable.forName(spark, patient_360_table)
+        deltaTable.alias("target").merge(
+            df_patient_360.alias("source"),
+            "target.patient_id_hash = source.patient_id_hash"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_patient_360.write.format("delta") \
+            .mode("overwrite") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(patient_360_table)
+
+    print(f"Merged {df_patient_360.count():,} records into {patient_360_table}")
+
     # Optimize for Direct Lake
     spark.sql(f"OPTIMIZE {patient_360_table} ZORDER BY (patient_id_hash, primary_area_office)")
     print("Patient 360 table optimized")
@@ -437,13 +446,21 @@ print(f"Population health records: {df_pop_health.count():,}")
 
 # COMMAND ----------
 
-df_pop_health.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(population_health_table)
+if spark.catalog.tableExists(population_health_table):
+    deltaTable = DeltaTable.forName(spark, population_health_table)
+    deltaTable.alias("target").merge(
+        df_pop_health.alias("source"),
+        "target.service_unit_std = source.service_unit_std"
+    ).whenMatchedUpdateAll(
+    ).whenNotMatchedInsertAll(
+    ).execute()
+else:
+    df_pop_health.write.format("delta") \
+        .mode("overwrite") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(population_health_table)
 
-print(f"Written {df_pop_health.count():,} records to {population_health_table}")
+print(f"Merged {df_pop_health.count():,} records into {population_health_table}")
 
 # Optimize
 spark.sql(f"OPTIMIZE {population_health_table} ZORDER BY (service_unit_std, area_office_std)")
@@ -635,13 +652,21 @@ print(f"Community KPI records: {df_area_kpis.count():,}")
 
 # COMMAND ----------
 
-df_area_kpis.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(community_kpi_table)
+if spark.catalog.tableExists(community_kpi_table):
+    deltaTable = DeltaTable.forName(spark, community_kpi_table)
+    deltaTable.alias("target").merge(
+        df_area_kpis.alias("source"),
+        "target.area_office_std = source.area_office_std"
+    ).whenMatchedUpdateAll(
+    ).whenNotMatchedInsertAll(
+    ).execute()
+else:
+    df_area_kpis.write.format("delta") \
+        .mode("overwrite") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(community_kpi_table)
 
-print(f"Written {df_area_kpis.count():,} records to {community_kpi_table}")
+print(f"Merged {df_area_kpis.count():,} records into {community_kpi_table}")
 
 # Optimize
 spark.sql(f"OPTIMIZE {community_kpi_table} ZORDER BY (area_office_std)")

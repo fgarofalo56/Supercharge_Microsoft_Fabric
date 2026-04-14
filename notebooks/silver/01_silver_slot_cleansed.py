@@ -43,6 +43,7 @@ from pyspark.sql.types import (
     StructType,
     TimestampType,
 )
+from delta.tables import DeltaTable
 from datetime import datetime
 
 # Parameters (set by pipeline or manual)
@@ -237,18 +238,31 @@ try:
         "player_id", "session_id",
         "_dq_score", "_dq_flags", "_silver_timestamp", "_batch_id"
     ]
-    
+
     df_final = df_silver.select([col(c) for c in final_columns if c in df_silver.columns])
-    
-    # Write to Silver layer
-    df_final.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .partitionBy("event_date") \
-        .option("overwriteSchema", "true") \
-        .saveAsTable(target_table)
-    
-    print(f"Written {df_final.count():,} records to {target_table}")
+
+    # Delta MERGE upsert — deduplicate on natural composite key
+    if spark.catalog.tableExists(target_table):
+        deltaTable = DeltaTable.forName(spark, target_table)
+        deltaTable.alias("target").merge(
+            df_final.alias("source"),
+            "target.machine_id = source.machine_id "
+            "AND target.event_timestamp = source.event_timestamp "
+            "AND target.event_type = source.event_type"
+        ).whenMatchedUpdateAll(
+            condition="target._silver_timestamp < source._silver_timestamp"
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        # First run — create the table
+        df_final.write.format("delta") \
+            .mode("overwrite") \
+            .partitionBy("event_date") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(target_table)
+
+    record_count = spark.table(target_table).count()
+    print(f"Merged {df_final.count():,} source records into {target_table} (total: {record_count:,})")
 except Exception as e:
     print(f"ERROR in lh_silver.silver_slot_cleansed (batch_id={batch_id}): {e}")
     raise

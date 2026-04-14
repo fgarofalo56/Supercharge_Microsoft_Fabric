@@ -42,6 +42,7 @@ from pyspark.sql.functions import (
     window,
 )
 from pyspark.sql.window import Window
+from delta.tables import DeltaTable
 from datetime import datetime
 
 # Parameters
@@ -165,19 +166,27 @@ print(f"Zone heat map records: {df_zone_heatmap.count():,}")
 # COMMAND ----------
 
 try:
-    df_zone_heatmap.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .option("overwriteSchema", "true") \
-        .partitionBy("event_date") \
-        .saveAsTable(zone_heatmap_table)
-    
-    print(f"Written {df_zone_heatmap.count():,} records to {zone_heatmap_table}")
-    
+    if spark.catalog.tableExists(zone_heatmap_table):
+        deltaTable = DeltaTable.forName(spark, zone_heatmap_table)
+        deltaTable.alias("target").merge(
+            df_zone_heatmap.alias("source"),
+            "target.zone_id = source.zone_id AND target.zone_name_clean = source.zone_name_clean AND target.zone_category = source.zone_category AND target.zone_capacity = source.zone_capacity AND target.floor_level = source.floor_level AND target.event_date = source.event_date AND target.event_hour = source.event_hour"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_zone_heatmap.write.format("delta") \
+            .mode("overwrite") \
+            .option("overwriteSchema", "true") \
+            .partitionBy("event_date") \
+            .saveAsTable(zone_heatmap_table)
+
+    print(f"Merged {df_zone_heatmap.count():,} records into {zone_heatmap_table}")
+
     spark.sql(f"OPTIMIZE {zone_heatmap_table} ZORDER BY (zone_id, event_hour)")
     print("Zone heat map table optimized")
 except Exception as e:
-    print(f"ERROR in unknown (batch_id={batch_id}): {e}")
+    print(f"ERROR writing zone heatmap (batch_id={batch_id}): {e}")
     raise
 
 # COMMAND ----------
@@ -268,16 +277,28 @@ print(f"Peak traffic records: {df_peak_traffic.count():,}")
 
 # COMMAND ----------
 
-df_peak_traffic.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(peak_traffic_table)
+try:
+    if spark.catalog.tableExists(peak_traffic_table):
+        deltaTable = DeltaTable.forName(spark, peak_traffic_table)
+        deltaTable.alias("target").merge(
+            df_peak_traffic.alias("source"),
+            "target.zone_id = source.zone_id AND target.zone_name_clean = source.zone_name_clean AND target.zone_category = source.zone_category AND target.zone_capacity = source.zone_capacity AND target.floor_level = source.floor_level AND target.day_of_week = source.day_of_week AND target.is_weekend = source.is_weekend AND target.event_hour = source.event_hour"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_peak_traffic.write.format("delta") \
+            .mode("overwrite") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(peak_traffic_table)
 
-print(f"Written {df_peak_traffic.count():,} records to {peak_traffic_table}")
+    print(f"Merged {df_peak_traffic.count():,} records into {peak_traffic_table}")
 
-spark.sql(f"OPTIMIZE {peak_traffic_table} ZORDER BY (zone_id, day_of_week)")
-print("Peak traffic table optimized")
+    spark.sql(f"OPTIMIZE {peak_traffic_table} ZORDER BY (zone_id, day_of_week)")
+    print("Peak traffic table optimized")
+except Exception as e:
+    print(f"ERROR writing peak traffic (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 
@@ -372,17 +393,29 @@ print(f"Dwell summary records: {df_dwell_summary.count():,}")
 
 # COMMAND ----------
 
-df_dwell_summary.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .partitionBy("event_date") \
-    .saveAsTable(dwell_summary_table)
+try:
+    if spark.catalog.tableExists(dwell_summary_table):
+        deltaTable = DeltaTable.forName(spark, dwell_summary_table)
+        deltaTable.alias("target").merge(
+            df_dwell_summary.alias("source"),
+            "target.zone_id = source.zone_id AND target.zone_name_clean = source.zone_name_clean AND target.zone_category = source.zone_category AND target.floor_level = source.floor_level AND target.event_date = source.event_date"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_dwell_summary.write.format("delta") \
+            .mode("overwrite") \
+            .option("overwriteSchema", "true") \
+            .partitionBy("event_date") \
+            .saveAsTable(dwell_summary_table)
 
-print(f"Written {df_dwell_summary.count():,} records to {dwell_summary_table}")
+    print(f"Merged {df_dwell_summary.count():,} records into {dwell_summary_table}")
 
-spark.sql(f"OPTIMIZE {dwell_summary_table} ZORDER BY (zone_id, zone_category)")
-print("Dwell summary table optimized")
+    spark.sql(f"OPTIMIZE {dwell_summary_table} ZORDER BY (zone_id, zone_category)")
+    print("Dwell summary table optimized")
+except Exception as e:
+    print(f"ERROR writing dwell summary (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

@@ -1,41 +1,41 @@
-# ⚡ Quick Start Guide
+# Quick Start Guide
 
-> 🏠 [Home](index.md) > 📚 [Docs](./) > ⚡ Quick Start
+> [Home](index.md) > [Docs](./) > Quick Start
 
-**Get your Microsoft Fabric Casino Analytics POC running in 5 minutes.**
+**Get your Microsoft Fabric Casino Analytics POC running in under 15 minutes.**
+
+> For the full walkthrough with screenshots and explanations, see [Tutorial 00: Environment Setup](../tutorials/00-environment-setup/README.md).
 
 ---
 
-## ✅ What You Need
+## Prerequisites
 
 | Requirement | Details |
-|------------|---------|
+|-------------|---------|
 | **Azure Subscription** | With Contributor access |
-| **Fabric Capacity** | F64 SKU (or F2 for testing) |
-| **Fabric Enabled** | In your Azure AD tenant |
-| **Tools** | Azure CLI + Bicep installed |
+| **Fabric Capacity** | F64 SKU (or F2 for testing) — must be **Running**, not paused |
+| **Fabric Enabled** | In your Microsoft Entra ID tenant |
+| **Python 3.10+** | For data generation (local path only) |
 
-> 💡 **No Fabric capacity yet?** Use a [Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) to get started free.
+> No Fabric capacity yet? Start a [60-day Fabric trial](https://learn.microsoft.com/fabric/get-started/fabric-trial) for free.
 
 ---
 
-## 🚀 5 Steps to Running
-
-### Step 1: Clone & Configure
+## Step 1: Clone and Configure
 
 ```bash
-# Clone the repository
-git clone https://github.com/YOUR_ORG/Supercharge_Microsoft_Fabric.git
+git clone https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric.git
 cd Supercharge_Microsoft_Fabric
+```
 
-# Copy environment template
+Copy the environment template and fill in your values:
+
+```bash
 cp .env.sample .env
-
-# Edit with your values
-code .env
 ```
 
 **Required `.env` values:**
+
 ```bash
 AZURE_SUBSCRIPTION_ID=<your-subscription-id>
 AZURE_TENANT_ID=<your-tenant-id>
@@ -44,144 +44,145 @@ FABRIC_CAPACITY_SKU=F64
 PROJECT_PREFIX=casinopoc
 ```
 
+**Checkpoint:** You should be in the `Supercharge_Microsoft_Fabric/` directory with a populated `.env` file.
+
 ---
 
-### Step 2: Login & Register Providers
+## Step 2: Deploy Infrastructure
 
 ```bash
-# Login to Azure
 az login
 
-# Register required providers (one-time)
+# Register providers (first time only — takes ~2 minutes)
 az provider register --namespace Microsoft.Fabric
-az provider register --namespace Microsoft.Purview
 az provider register --namespace Microsoft.Storage
-```
 
----
-
-### Step 3: Deploy Infrastructure
-
-```bash
-# Validate the deployment
+# Preview what will be created
 az deployment sub what-if \
   --location eastus2 \
   --template-file infra/main.bicep \
   --parameters infra/environments/dev/dev.bicepparam
 
-# Deploy (takes ~10 minutes)
+# Deploy (~10 minutes)
 az deployment sub create \
   --location eastus2 \
   --template-file infra/main.bicep \
   --parameters infra/environments/dev/dev.bicepparam
 ```
 
+**Checkpoint:** Run `az deployment sub show --name main --query properties.provisioningState` — should return `"Succeeded"`.
+
 ---
 
-### Step 4: Generate Sample Data
+## Step 3: Create Workspace and Lakehouses
+
+This step is done in the **Fabric portal** — Bicep deploys the capacity, but you create the workspace manually.
+
+1. Open [app.fabric.microsoft.com](https://app.fabric.microsoft.com)
+2. Click **Workspaces** in the left nav, then **+ New workspace**
+3. Set the name to **`casino-fabric-poc`**, assign your Fabric capacity, click **Apply**
+4. Inside the workspace, create three Lakehouses (**+ New** > **Lakehouse**):
+
+| Lakehouse | Purpose |
+|-----------|---------|
+| `lh_bronze` | Raw ingested data (append-only) |
+| `lh_silver` | Cleansed, validated, deduplicated data |
+| `lh_gold` | Business aggregations and KPIs |
+
+**Checkpoint:** Your workspace item list shows `lh_bronze`, `lh_silver`, and `lh_gold`.
+
+---
+
+## Step 4: Generate Sample Data
+
+Choose **one** of the three paths below.
+
+### Option A: Local Python
 
 ```bash
-# Install Python dependencies
+# From the repo root (Supercharge_Microsoft_Fabric/)
+python -m venv .venv
+
+# Windows
+.venv\Scripts\activate
+# macOS / Linux
+source .venv/bin/activate
+
 pip install -r requirements.txt
 
-# Generate 1 hour of casino data
-python data_generation/run_generators.py --duration 1h
-
-# Or use Docker
-docker-compose up data-generator
+# Generate 1 day of casino data — outputs to data_generation/output/
+python data_generation/generate.py --all --days 1
 ```
 
+### Option B: Docker
+
+```bash
+# Uses the v2 'docker compose' command (not the deprecated docker-compose)
+docker compose up data-generator
+```
+
+### Option C: Skip (use Fabric notebooks directly)
+
+The Bronze notebooks can generate synthetic data inline. Skip this step and proceed to Step 5.
+
+**Checkpoint (Options A/B):** The `data_generation/output/` directory contains CSV/Parquet files for slots, players, and transactions.
+
 ---
 
-### Step 5: Run Your First Notebook
+## Step 5: Run Your First Notebook
 
-1. Open [Microsoft Fabric](https://app.fabric.microsoft.com)
-2. Navigate to your workspace: `ws-casinopoc-dev`
-3. Import notebook: `notebooks/bronze/01_bronze_slot_telemetry.py`
-4. Click **Run All**
+Fabric notebooks are **not imported as files**. You create a new notebook and paste the code.
 
-![Fabric Workspace Settings](https://learn.microsoft.com/en-us/fabric/fundamentals/media/workspaces/workspace-settings-cog.png)
+1. Open [app.fabric.microsoft.com](https://app.fabric.microsoft.com) and navigate to the **`casino-fabric-poc`** workspace
+2. Click **+ New** > **Notebook**
+3. In the notebook's **Lakehouse explorer** panel (left side), click **Add** and attach **`lh_bronze`**
+4. Open `notebooks/bronze/01_bronze_slot_telemetry.py` from this repo in any text editor
+5. Copy the cell contents into the notebook cells (each `# COMMAND ----------` separator marks a new cell)
+6. Click **Run All**
 
-*Source: [Microsoft Fabric Workspaces Documentation](https://learn.microsoft.com/en-us/fabric/fundamentals/workspaces)*
+> First-time notebook execution takes 2-3 minutes while Fabric provisions a Spark cluster. Subsequent runs are faster.
 
----
+**Checkpoint:** After the run completes, expand **Tables** in the Lakehouse explorer — you should see `bronze_slot_telemetry` with data.
 
-## ✔️ Verify Success
+### Verify with a query
 
-### Create Your Lakehouse
-
-Before running notebooks, create a Lakehouse in your workspace:
-
-1. In your workspace, click **+ New** > **Lakehouse**
-2. Name it `lh_bronze_casino`
-3. Click **Create**
-
-![Creating a New Warehouse in Fabric](https://learn.microsoft.com/en-us/fabric/data-warehouse/media/create-warehouse/new-warehouse.png)
-
-*Source: [Create a Warehouse in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/data-warehouse/create-warehouse)*
-
-### Check Bronze Layer Created
+Create a new cell in the same notebook and run:
 
 ```python
-# Run in Fabric notebook
 df = spark.read.format("delta").load("Tables/bronze_slot_telemetry")
-display(df.limit(10))
+print(f"Row count: {df.count()}")
+display(df.limit(5))
 ```
 
-**Expected Output:**
-| machine_id | casino_id | event_type | amount | timestamp |
-|------------|-----------|------------|--------|-----------|
-| SLOT-001 | VENUE-A | SPIN | 2.50 | 2025-01-22T10:00:00 |
-| SLOT-001 | VENUE-A | WIN | 15.00 | 2025-01-22T10:00:05 |
-
-### Verify Tables Exist
-
-```sql
--- Run in Fabric SQL endpoint
-SHOW TABLES IN bronze;
-```
-
-**Expected:** `bronze_slot_telemetry`, `bronze_player_profile`, `bronze_financial_txn`
+You should see rows with columns like `machine_id`, `casino_id`, `event_type`, `amount`, and `timestamp`.
 
 ---
 
-## 📍 Where to Go Next
+## Where to Go Next
 
 | Task | Tutorial |
 |------|----------|
-| **Build Silver Layer** | [02-silver-layer](tutorials/02-silver-layer/) |
-| **Create Gold Aggregations** | [03-gold-layer](tutorials/03-gold-layer/) |
-| **Set Up Real-Time** | [04-real-time-analytics](tutorials/04-real-time-analytics/) |
-| **Connect Power BI** | [05-direct-lake-powerbi](tutorials/05-direct-lake-powerbi/) |
-
-### Quick Commands Reference
-
-```bash
-# View deployment status
-az deployment sub show --name main --query properties.provisioningState
-
-# Check Fabric workspace
-az fabric workspace list --output table
-
-# Tail data generator logs
-docker-compose logs -f data-generator
-```
+| **Detailed environment setup** | [Tutorial 00: Environment Setup](../tutorials/00-environment-setup/README.md) |
+| **Build Silver Layer** | [Tutorial 02: Silver Layer](../tutorials/02-silver-layer/README.md) |
+| **Create Gold Aggregations** | [Tutorial 03: Gold Layer](../tutorials/03-gold-layer/README.md) |
+| **Set Up Real-Time Analytics** | [Tutorial 04: Real-Time Analytics](../tutorials/04-real-time-analytics/README.md) |
+| **Connect Power BI** | [Tutorial 05: Direct Lake & Power BI](../tutorials/05-direct-lake-powerbi/README.md) |
 
 ---
 
-## ❓ Quick Troubleshooting
+## Troubleshooting
 
-| Issue | Solution |
-|-------|----------|
-| **Deployment fails** | Check quota: `az quota show --scope /subscriptions/{id}/providers/Microsoft.Fabric/locations/eastus2 --resource-name F64` |
-| **No tables appear** | Wait 2-3 minutes after notebook run; refresh Lakehouse |
-| **Permission denied** | Verify Fabric workspace access in Fabric portal |
-| **Notebook timeout** | Increase capacity SKU or reduce data volume |
-
----
-
-> 📚 **Full Documentation:** [Prerequisites](PREREQUISITES.md) | [Architecture](ARCHITECTURE.md) | [Deployment](DEPLOYMENT.md)
+| Error / Symptom | Cause | Fix |
+|-----------------|-------|-----|
+| `Deployment failed — QuotaExceeded` | Not enough Fabric CU quota in the region | Request a quota increase in Azure Portal > Quotas, or use a smaller SKU (F2) |
+| Notebook cell hangs for 5+ minutes | Spark cold start on first run | Wait up to 3 minutes. If it exceeds 5 minutes, cancel and re-run — the cluster may have failed to provision |
+| `Table not found` or empty Tables folder | Notebook not attached to the correct Lakehouse | Click the Lakehouse icon in the notebook sidebar, remove the wrong one, and attach `lh_bronze` |
+| `Capacity is paused` or notebook won't start | Fabric capacity is paused or deallocated | Go to Azure Portal > your Fabric capacity resource > click **Resume** (takes 1-2 minutes) |
+| `pip install` fails on Windows | No virtual environment activated | Run `.venv\Scripts\activate` before `pip install` |
+| `docker compose` not recognized | Using the deprecated `docker-compose` binary | Install Docker Desktop 4.x+ which includes the `docker compose` plugin |
 
 ---
 
-**Total Time:** ~10-15 minutes (mostly deployment wait time)
+> **Full Documentation:** [Prerequisites](PREREQUISITES.md) | [Architecture](ARCHITECTURE.md) | [Deployment](DEPLOYMENT.md)
+
+**Total Time:** ~15 minutes (mostly waiting for Bicep deployment and Spark cold start).

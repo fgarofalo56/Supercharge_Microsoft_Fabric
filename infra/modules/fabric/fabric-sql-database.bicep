@@ -1,30 +1,31 @@
 // =============================================================================
-// Microsoft Fabric SQL Database Module
+// Microsoft Fabric SQL Database Module (Metadata-Only)
 // =============================================================================
-// Deploys configuration for Fabric SQL Database (GA Feb 2026) -- an OLTP
-// workload inside Fabric with auto-replication to OneLake as Delta tables.
+// This module does NOT deploy any Azure resources. Fabric SQL Database is a
+// workspace-level item without a dedicated ARM resource type.
 //
-// Since Fabric SQL Database is a workspace-level item without a dedicated ARM
-// resource type, this module provisions metadata and tagging for governance,
-// along with supporting Azure infrastructure (Key Vault for CMK, diagnostics).
+// Purpose:
+// - Documents the SQL Database configuration as Bicep parameters
+// - Emits outputs consumed by main.bicep and CI/CD pipelines
+// - Serves as the IaC "contract" for what the SQL Database looks like
 //
-// Key features supported:
-// - Dynamic Data Masking (DDM) -- GA
-// - Customer-Managed Keys (CMK) -- GA
+// Key features documented:
+// - Dynamic Data Masking (DDM) — GA
+// - Customer-Managed Keys (CMK) — GA
 // - Auto-replication to OneLake (always-on)
 // - Data virtualization via SQL endpoint
 //
-// The actual SQL Database item is created via:
-// - Fabric portal / workspace UI
-// - fabric-cicd Python library (CI/CD pipeline)
-// - Fabric REST API (programmatic creation)
+// Actual SQL Database items are deployed via:
+// - fabric-cicd Python library  (scripts/fabric-cicd-deploy.py)
+// - Fabric REST API
+// - Fabric portal UI
 // =============================================================================
 
 // =============================================================================
-// Parameters
+// Parameters (kept for documentation / contract purposes)
 // =============================================================================
 
-@description('Azure region for deployment')
+@description('Azure region (unused — no resources deployed)')
 param location string
 
 @description('Project prefix for resource naming')
@@ -36,7 +37,7 @@ param projectPrefix string
 @allowed(['dev', 'staging', 'prod'])
 param environment string = 'dev'
 
-@description('Tags to apply to resources')
+@description('Tags (passed through to outputs)')
 param tags object = {}
 
 @description('SQL Database display name')
@@ -73,23 +74,15 @@ param dataVirtualizationMode string = 'ReadOnly'
 
 var sqlDbConfigName = '${projectPrefix}-sqldb-${environment}'
 
-var sqlDbTags = union(tags, {
-  FabricComponent: 'SQLDatabase'
-  FabricCapacityId: capacityId
-  DatabaseName: databaseName
-  DDMEnabled: string(enableDDM)
-  CMKEnabled: string(enableCMK)
-  OneLakeReplication: string(enableOneLakeReplication)
-  DataVirtualization: dataVirtualizationMode
-})
-
-// SQL Database configuration for downstream automation
 var sqlDbConfig = {
   name: databaseName
+  configName: sqlDbConfigName
   environment: environment
+  capacityId: capacityId
   features: {
     dynamicDataMasking: enableDDM
     customerManagedKeys: enableCMK
+    keyVaultKeyUri: enableCMK ? keyVaultKeyUri : ''
     oneLakeReplication: enableOneLakeReplication
     dataVirtualization: dataVirtualizationMode
   }
@@ -97,57 +90,15 @@ var sqlDbConfig = {
     tdsEndpoint: '${sqlDbConfigName}.database.fabric.microsoft.com'
     oneLakePath: 'Tables/${databaseName}'
   }
-}
-
-// =============================================================================
-// SQL Database Configuration Metadata
-// =============================================================================
-
-resource sqlDbMetadata 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
-  name: 'sqldb-config-${sqlDbConfigName}'
-  location: location
-  tags: sqlDbTags
-  kind: 'AzurePowerShell'
-  properties: {
-    azPowerShellVersion: '9.7'
-    retentionInterval: 'P1D'
-    scriptContent: '''
-      $config = @{
-        databaseName = $env:DATABASE_NAME
-        environment = $env:ENVIRONMENT
-        ddmEnabled = $env:DDM_ENABLED
-        cmkEnabled = $env:CMK_ENABLED
-        oneLakeReplication = $env:ONELAKE_REPLICATION
-        dataVirtualization = $env:DATA_VIRTUALIZATION
-        timestamp = Get-Date -Format "yyyy-MM-ddTHH:mm:ssZ"
-      }
-      $DeploymentScriptOutputs = @{
-        configuration = ($config | ConvertTo-Json -Compress)
-      }
-    '''
-    environmentVariables: [
-      { name: 'DATABASE_NAME', value: databaseName }
-      { name: 'ENVIRONMENT', value: environment }
-      { name: 'DDM_ENABLED', value: string(enableDDM) }
-      { name: 'CMK_ENABLED', value: string(enableCMK) }
-      { name: 'ONELAKE_REPLICATION', value: string(enableOneLakeReplication) }
-      { name: 'DATA_VIRTUALIZATION', value: dataVirtualizationMode }
-    ]
-    timeout: 'PT5M'
-    cleanupPreference: 'OnSuccess'
+  governance: {
+    logAnalyticsWorkspaceId: logAnalyticsWorkspaceId
+    managedIdentityPrincipalId: managedIdentityPrincipalId
   }
 }
 
 // =============================================================================
-// CMK Key Vault Access Policy (conditional)
-// =============================================================================
-// When CMK is enabled, the Fabric workspace identity needs access to the
-// Key Vault key used for encryption. This is documented here for reference;
-// the actual Key Vault access policy is managed in the security module.
-// =============================================================================
-
-// =============================================================================
-// Outputs
+// OUTPUT-ONLY — No resources deployed
+// Actual Fabric SQL Database items are deployed via fabric-cicd library.
 // =============================================================================
 
 @description('The SQL Database configuration name')
@@ -159,11 +110,14 @@ output tdsEndpoint string = sqlDbConfig.endpoints.tdsEndpoint
 @description('Whether OneLake auto-replication is enabled')
 output oneLakeReplicationEnabled bool = enableOneLakeReplication
 
-@description('The SQL Database configuration as JSON')
-output sqlDbConfiguration string = string(sqlDbConfig)
+@description('The full SQL Database configuration as JSON')
+output configurationJson string = string(sqlDbConfig)
 
-@description('The deployment script resource ID')
-output metadataResourceId string = sqlDbMetadata.id
-
-@description('Tags applied to SQL Database resources')
-output appliedTags object = sqlDbTags
+@description('Tags that would be applied to SQL Database resources')
+output appliedTags object = union(tags, {
+  FabricComponent: 'SQLDatabase'
+  FabricCapacityId: capacityId
+  DatabaseName: databaseName
+  DDMEnabled: string(enableDDM)
+  CMKEnabled: string(enableCMK)
+})

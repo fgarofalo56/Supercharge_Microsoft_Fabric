@@ -181,7 +181,7 @@ Start-Process $installerPath -ArgumentList "/quiet" -Wait
 
 1. **Launch Gateway Configuration:**
    - Start menu > **On-premises data gateway**
-   - Sign in with your Azure AD account
+   - Sign in with your Microsoft Entra ID account
 
 2. **Register Gateway:**
    - Enter gateway name: `GW-Casino-Analytics-01`
@@ -713,7 +713,7 @@ az keyvault set-policy --name "kv-fabric-gateway" `
 
 ### Data Gateway Setup
 - [ ] Downloaded and installed gateway
-- [ ] Registered with Azure AD
+- [ ] Registered with Microsoft Entra ID
 - [ ] Added to gateway cluster
 - [ ] Configured data sources
 - [ ] Tested connections

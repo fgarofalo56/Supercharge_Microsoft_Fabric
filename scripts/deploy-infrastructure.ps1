@@ -314,7 +314,7 @@ Write-Host ""
 
 # Build deployment command
 $deployArgs = @(
-    "deployment", "group", "create",
+    "deployment", "sub", "create",
     "--resource-group", $resourceGroupName,
     "--template-file", $mainBicep,
     "--parameters", $bicepParams,
@@ -375,8 +375,7 @@ if (-not $WhatIfPreference) {
 
     Write-Step "Fetching deployment outputs..."
 
-    $outputs = az deployment group show `
-        --resource-group $resourceGroupName `
+    $outputs = az deployment sub show `
         --name $deploymentName `
         --query "properties.outputs" `
         --output json 2>$null | ConvertFrom-Json

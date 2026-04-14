@@ -12,7 +12,7 @@ This document provides an overview of the Mermaid diagrams added to SECURITY.md.
 
 **Key Features:**
 - 🔵 Development: Basic controls, local auth, test data
-- 🟡 Test: Enhanced controls, Azure AD, masked PII
+- 🟡 Test: Enhanced controls, Microsoft Entra ID, masked PII
 - 🟠 Staging: Production-like controls, MFA, full encryption
 - 🔴 Production: Maximum controls, CMK, 24/7 monitoring
 
@@ -60,7 +60,7 @@ This document provides an overview of the Mermaid diagrams added to SECURITY.md.
 
 ### 3. Authentication & Authorization Flow (Sequence Diagram)
 
-**Location:** Identity and Access Management section, after Azure AD Integration table
+**Location:** Identity and Access Management section, after Microsoft Entra ID Integration table
 
 **Purpose:** Illustrates the complete authentication and authorization flow for accessing Microsoft Fabric resources.
 
@@ -68,7 +68,7 @@ This document provides an overview of the Mermaid diagrams added to SECURITY.md.
 
 **Phase 1 - Authentication (Blue Background):**
 1. User navigates to Fabric
-2. Redirect to Azure AD login
+2. Redirect to Microsoft Entra ID login
 3. Conditional Access evaluation
 4. MFA challenge (if required)
 5. JWT token generation
@@ -90,7 +90,7 @@ This document provides an overview of the Mermaid diagrams added to SECURITY.md.
 - 👤 User
 - 🌐 Browser
 - 📊 Fabric Portal
-- 🔐 Azure AD
+- 🔐 Microsoft Entra ID
 - 🛡️ Conditional Access
 - 📱 MFA Service
 - ⚡ Fabric API

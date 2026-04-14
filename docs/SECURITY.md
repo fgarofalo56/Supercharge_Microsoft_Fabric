@@ -52,7 +52,7 @@ Our security architecture implements multiple layers of protection:
 ```mermaid
 flowchart TB
     subgraph L1["🔑 IDENTITY LAYER"]
-        A1["Azure AD"]
+        A1["Entra ID"]
         A2["Conditional Access"]
         A3["MFA"]
         A4["PIM"]
@@ -94,7 +94,7 @@ flowchart TB
 
 | Layer | Controls | Tools |
 |-------|----------|-------|
-| **Identity** | Authentication, Authorization | Azure AD, MFA, PIM |
+| **Identity** | Authentication, Authorization | Microsoft Entra ID, MFA, PIM |
 | **Network** | Segmentation, Filtering | VNet, NSG, Private Endpoints |
 | **Application** | Access Control | Workspace Security, RLS |
 | **Data** | Encryption, Classification | Key Vault, Purview |
@@ -125,7 +125,7 @@ stateDiagram-v2
     state Test {
         [*] --> TestControls
         TestControls: 🟡 Enhanced Controls
-        TestControls: • Azure AD Auth
+        TestControls: • Entra ID Auth
         TestControls: • Masked PII
         TestControls: • TLS 1.2+
         TestControls: • Audit Logging Enabled
@@ -135,7 +135,7 @@ stateDiagram-v2
     state Staging {
         [*] --> StagingControls
         StagingControls: 🟠 Production-Like Controls
-        StagingControls: • Azure AD + MFA
+        StagingControls: • Entra ID + MFA
         StagingControls: • Full Encryption (Rest & Transit)
         StagingControls: • RLS Configured
         StagingControls: • Private Endpoints
@@ -173,11 +173,11 @@ stateDiagram-v2
 
 ## 👤 Identity and Access Management
 
-### Azure AD Integration
+### Microsoft Entra ID Integration
 
 | Feature | Configuration | Status |
 |---------|--------------|--------|
-| Authentication | Azure AD SSO | Required |
+| Authentication | Microsoft Entra ID SSO | Required |
 | MFA | Required for all users | Required |
 | Conditional Access | Location + device compliance | Recommended |
 | Session timeout | 8 hours (configurable) | Default |
@@ -193,7 +193,7 @@ sequenceDiagram
     actor User as 👤 User
     participant Browser as 🌐 Browser
     participant FabricUI as 📊 Fabric Portal
-    participant AAD as 🔐 Azure AD
+    participant AAD as 🔐 Entra ID
     participant CA as 🛡️ Conditional Access
     participant MFA as 📱 MFA Service
     participant Fabric as ⚡ Fabric API
@@ -662,7 +662,7 @@ def detect_structuring(df, window_hours=24):
 |-------------|---------|----------------|
 | 3.4 | Render PAN unreadable | Hash/encrypt card numbers |
 | 7.1 | Limit access | RBAC + need-to-know |
-| 8.2 | MFA | Azure AD Conditional Access |
+| 8.2 | MFA | Microsoft Entra ID Conditional Access |
 | 10.1 | Audit trails | Comprehensive logging |
 | 12.3 | Security policies | Documented procedures |
 
@@ -780,7 +780,7 @@ flowchart LR
 
 | Task | Status | Owner |
 |------|--------|-------|
-| Azure AD tenant hardened | ☐ | Identity Team |
+| Microsoft Entra ID tenant hardened | ☐ | Identity Team |
 | Conditional Access policies configured | ☐ | Identity Team |
 | Key Vault created with proper access policies | ☐ | Security Team |
 | Network security groups defined | ☐ | Network Team |

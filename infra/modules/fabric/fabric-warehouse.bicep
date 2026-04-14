@@ -1,25 +1,25 @@
 // =============================================================================
-// Microsoft Fabric Warehouse Module
+// Microsoft Fabric Warehouse Module (Metadata-Only)
 // =============================================================================
-// Deploys a Fabric Warehouse (Synapse Data Warehouse) configuration.
-// Since Fabric Warehouse is a workspace-level item without a dedicated ARM
-// resource type, this module provisions metadata and tagging for governance,
-// along with supporting Azure resources (diagnostics, role assignments).
+// This module does NOT deploy any Azure resources. Fabric Warehouse is a
+// workspace-level item without a dedicated ARM resource type.
 //
-// The actual Warehouse item is created via:
-// - Fabric portal / workspace UI
-// - fabric-cicd Python library (CI/CD pipeline)
-// - Fabric REST API (programmatic creation)
+// Purpose:
+// - Documents the Warehouse configuration as Bicep parameters
+// - Emits outputs consumed by main.bicep and CI/CD pipelines
+// - Serves as the IaC "contract" for what the Warehouse looks like
 //
-// This module ensures the Azure infrastructure layer (monitoring, identity,
-// network) is configured to support the Warehouse workload.
+// Actual Warehouse items are deployed via:
+// - fabric-cicd Python library  (scripts/fabric-cicd-deploy.py)
+// - Fabric REST API
+// - Fabric portal UI
 // =============================================================================
 
 // =============================================================================
-// Parameters
+// Parameters (kept for documentation / contract purposes)
 // =============================================================================
 
-@description('Azure region for deployment')
+@description('Azure region (unused — no resources deployed)')
 param location string
 
 @description('Project prefix for resource naming')
@@ -31,10 +31,10 @@ param projectPrefix string
 @allowed(['dev', 'staging', 'prod'])
 param environment string = 'dev'
 
-@description('Tags to apply to resources')
+@description('Tags (passed through to outputs)')
 param tags object = {}
 
-@description('Warehouse display name (for tagging and documentation)')
+@description('Warehouse display name')
 param warehouseName string = 'fabric-warehouse'
 
 @description('Resource ID of the Fabric capacity to associate with')
@@ -64,19 +64,11 @@ param privateEndpointSubnetId string = ''
 
 var warehouseConfigName = '${projectPrefix}-wh-${environment}'
 
-var warehouseTags = union(tags, {
-  FabricComponent: 'Warehouse'
-  FabricCapacityId: capacityId
-  WarehouseName: warehouseName
-  ResultCaching: string(enableResultCaching)
-  StatisticsAutoCreation: string(enableStatisticsAutoCreation)
-})
-
-// Warehouse configuration stored as a deployment script output
-// This enables CI/CD pipelines to retrieve the configuration
 var warehouseConfig = {
   name: warehouseName
+  configName: warehouseConfigName
   environment: environment
+  capacityId: capacityId
   settings: {
     resultCaching: enableResultCaching
     statisticsAutoCreation: enableStatisticsAutoCreation
@@ -84,57 +76,17 @@ var warehouseConfig = {
   endpoints: {
     sqlEndpoint: '${warehouseConfigName}.datawarehouse.fabric.microsoft.com'
   }
-}
-
-// =============================================================================
-// Warehouse Configuration Metadata (ARM deployment output)
-// =============================================================================
-// Fabric Warehouse does not have a native ARM resource provider.
-// This resource stores configuration metadata for use by downstream
-// automation (fabric-cicd, REST API, GitHub Actions).
-// =============================================================================
-
-resource warehouseMetadata 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
-  name: 'wh-config-${warehouseConfigName}'
-  location: location
-  tags: warehouseTags
-  kind: 'AzurePowerShell'
-  properties: {
-    azPowerShellVersion: '9.7'
-    retentionInterval: 'P1D'
-    scriptContent: '''
-      $config = @{
-        warehouseName = $env:WAREHOUSE_NAME
-        environment = $env:ENVIRONMENT
-        resultCaching = $env:RESULT_CACHING
-        statisticsAutoCreation = $env:STATS_AUTO_CREATE
-        timestamp = Get-Date -Format "yyyy-MM-ddTHH:mm:ssZ"
-      }
-      $DeploymentScriptOutputs = @{
-        configuration = ($config | ConvertTo-Json -Compress)
-      }
-    '''
-    environmentVariables: [
-      { name: 'WAREHOUSE_NAME', value: warehouseName }
-      { name: 'ENVIRONMENT', value: environment }
-      { name: 'RESULT_CACHING', value: string(enableResultCaching) }
-      { name: 'STATS_AUTO_CREATE', value: string(enableStatisticsAutoCreation) }
-    ]
-    timeout: 'PT5M'
-    cleanupPreference: 'OnSuccess'
+  governance: {
+    logAnalyticsWorkspaceId: logAnalyticsWorkspaceId
+    managedIdentityPrincipalId: managedIdentityPrincipalId
+    privateEndpoint: enablePrivateEndpoint
+    privateEndpointSubnetId: privateEndpointSubnetId
   }
 }
 
 // =============================================================================
-// Diagnostic Settings (Log Analytics integration)
-// =============================================================================
-// Note: Fabric Warehouse diagnostics are configured at the workspace level
-// via Fabric Admin Portal or Workspace Monitoring system tables.
-// This section documents the recommended Log Analytics integration pattern.
-// =============================================================================
-
-// =============================================================================
-// Outputs
+// OUTPUT-ONLY — No resources deployed
+// Actual Fabric Warehouse items are deployed via fabric-cicd library.
 // =============================================================================
 
 @description('The warehouse configuration name')
@@ -143,11 +95,12 @@ output warehouseName string = warehouseConfigName
 @description('The expected SQL endpoint for the warehouse')
 output sqlEndpoint string = warehouseConfig.endpoints.sqlEndpoint
 
-@description('The warehouse configuration as JSON')
-output warehouseConfiguration string = string(warehouseConfig)
+@description('The full warehouse configuration as JSON')
+output configurationJson string = string(warehouseConfig)
 
-@description('The deployment script resource ID (for CI/CD reference)')
-output metadataResourceId string = warehouseMetadata.id
-
-@description('Tags applied to warehouse resources')
-output appliedTags object = warehouseTags
+@description('Tags that would be applied to warehouse resources')
+output appliedTags object = union(tags, {
+  FabricComponent: 'Warehouse'
+  FabricCapacityId: capacityId
+  WarehouseName: warehouseName
+})

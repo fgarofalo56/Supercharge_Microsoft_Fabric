@@ -453,7 +453,7 @@ az network nsg rule create \
     --destination-address-prefixes "Storage" \
     --destination-port-ranges 443
 
-# Allow outbound to Azure AD
+# Allow outbound to Microsoft Entra ID
 az network nsg rule create \
     --resource-group $RESOURCE_GROUP \
     --nsg-name "nsg-fabric-access" \

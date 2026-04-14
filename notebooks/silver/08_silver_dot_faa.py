@@ -44,6 +44,7 @@ from pyspark.sql.functions import (
     window,
 )
 from pyspark.sql.types import IntegerType
+from delta.tables import DeltaTable
 from datetime import datetime
 
 # Parameters
@@ -437,14 +438,25 @@ try:
         [col(c) for c in flight_perf_columns if c in df_flights_silver.columns]
     )
     
-    df_flight_out.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .partitionBy("flight_date_parsed") \
-        .option("overwriteSchema", "true") \
-        .saveAsTable(TARGET_FLIGHT_PERF)
-    
-    print(f"Written {df_flight_out.count():,} records to {TARGET_FLIGHT_PERF}")
+    # Write to Silver layer using Delta MERGE (incremental upsert)
+    if spark.catalog.tableExists(TARGET_FLIGHT_PERF):
+        deltaTable = DeltaTable.forName(spark, TARGET_FLIGHT_PERF)
+        deltaTable.alias("target").merge(
+            df_flight_out.alias("source"),
+            "target.flight_id = source.flight_id"
+        ).whenMatchedUpdateAll(
+            condition="target._silver_timestamp < source._silver_timestamp"
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_flight_out.write \
+            .format("delta") \
+            .mode("overwrite") \
+            .partitionBy("flight_date_parsed") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_FLIGHT_PERF)
+
+    print(f"Written/merged records to {TARGET_FLIGHT_PERF} (total: {spark.table(TARGET_FLIGHT_PERF).count():,})")
 except Exception as e:
     print(f"ERROR in unknown (batch_id={batch_id}): {e}")
     raise
@@ -471,14 +483,25 @@ df_safety_out = df_safety_enriched.select(
     [col(c) for c in safety_columns if c in df_safety_enriched.columns]
 )
 
-df_safety_out.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("incident_date_parsed") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_SAFETY)
+# Write to Silver layer using Delta MERGE (incremental upsert)
+if spark.catalog.tableExists(TARGET_SAFETY):
+    deltaTable = DeltaTable.forName(spark, TARGET_SAFETY)
+    deltaTable.alias("target").merge(
+        df_safety_out.alias("source"),
+        "target.incident_id = source.incident_id"
+    ).whenMatchedUpdateAll(
+        condition="target._silver_timestamp < source._silver_timestamp"
+    ).whenNotMatchedInsertAll(
+    ).execute()
+else:
+    df_safety_out.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .partitionBy("incident_date_parsed") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(TARGET_SAFETY)
 
-print(f"Written {df_safety_out.count():,} records to {TARGET_SAFETY}")
+print(f"Written/merged records to {TARGET_SAFETY} (total: {spark.table(TARGET_SAFETY).count():,})")
 
 # COMMAND ----------
 

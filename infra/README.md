@@ -65,7 +65,6 @@ infra/
 ├── main.bicep              # 🎯 Main orchestration template
 ├── main.bicepparam         # 📝 Default parameters
 ├── main.json               # 📦 Compiled ARM template
-├── cost-tags.bicep         # 💰 Cost allocation tags
 ├── environments/           # 🌍 Environment-specific configs
 │   ├── dev/               #    Development
 │   ├── staging/           #    Staging

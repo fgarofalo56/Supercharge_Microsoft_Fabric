@@ -9,6 +9,7 @@ Generates synthetic player profile and loyalty data including:
 - Gaming history summary
 """
 
+import os
 from datetime import datetime
 from typing import Any
 
@@ -52,7 +53,7 @@ class PlayerGenerator(BaseGenerator):
         """
         super().__init__(seed=seed, start_date=start_date, end_date=end_date)
         self.include_pii = include_pii
-        self._salt = "fabric-poc-2024"  # Salt for hashing
+        self._salt = os.environ.get("FABRIC_POC_HASH_SALT", "fabric-poc-2024")  # Salt for hashing - use env var in production
 
         self._schema = {
             "player_id": "string",

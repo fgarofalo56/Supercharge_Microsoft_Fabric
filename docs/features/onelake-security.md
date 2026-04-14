@@ -1183,7 +1183,7 @@ Rollback is instant because:
 | Object-Level Security | ✅ Available in PBI | ⏳ Not yet announced |
 | Dynamic membership | ✅ `USERPRINCIPALNAME()` in DAX | ✅ `SESSION_CONTEXT()` |
 | Service principal support | ✅ Varies by engine | ⚠️ Limited in preview |
-| Conditional access | ✅ Via Azure AD policies | ✅ Inherited from Entra ID |
+| Conditional access | ✅ Via Microsoft Entra ID policies | ✅ Inherited from Entra ID |
 
 ### Performance Considerations
 

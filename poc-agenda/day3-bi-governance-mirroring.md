@@ -598,7 +598,7 @@ EXEC sys.sp_cdc_enable_table
 4. Configure connection:
    - Server: `your-sql-server.database.windows.net`
    - Database: `CasinoOperational`
-   - Authentication: SQL or Azure AD
+   - Authentication: SQL or Microsoft Entra ID
 5. Select tables to mirror
 6. Click **Mirror database**
 

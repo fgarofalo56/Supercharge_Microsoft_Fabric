@@ -44,6 +44,7 @@ from pyspark.sql.functions import (
     year,
 )
 from pyspark.sql.types import DoubleType, IntegerType
+from delta.tables import DeltaTable
 from datetime import datetime
 
 # Parameters (set by pipeline or manual)
@@ -324,15 +325,26 @@ try:
         [col(c) for c in weather_columns if c in df_weather_silver.columns]
     )
     
-    df_weather_out.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .partitionBy("observation_date") \
-        .option("overwriteSchema", "true") \
-        .saveAsTable(TARGET_WEATHER)
-    
-    weather_silver_count = df_weather_out.count()
-    print(f"Written {weather_silver_count:,} records to {TARGET_WEATHER}")
+    # Write to Silver layer using Delta MERGE (incremental upsert)
+    if spark.catalog.tableExists(TARGET_WEATHER):
+        deltaTable = DeltaTable.forName(spark, TARGET_WEATHER)
+        deltaTable.alias("target").merge(
+            df_weather_out.alias("source"),
+            "target.station_id = source.station_id AND target.observation_time = source.observation_time"
+        ).whenMatchedUpdateAll(
+            condition="target._silver_timestamp < source._silver_timestamp"
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_weather_out.write \
+            .format("delta") \
+            .mode("overwrite") \
+            .partitionBy("observation_date") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_WEATHER)
+
+    weather_silver_count = spark.table(TARGET_WEATHER).count()
+    print(f"Written/merged records to {TARGET_WEATHER} (total: {weather_silver_count:,})")
 except Exception as e:
     print(f"ERROR in unknown (batch_id={batch_id}): {e}")
     raise
@@ -570,15 +582,26 @@ df_storm_out = df_storm_silver.select(
     [col(c) for c in storm_columns if c in df_storm_silver.columns]
 )
 
-df_storm_out.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("event_year") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_STORM)
+# Write to Silver layer using Delta MERGE (incremental upsert)
+if spark.catalog.tableExists(TARGET_STORM):
+    deltaTable = DeltaTable.forName(spark, TARGET_STORM)
+    deltaTable.alias("target").merge(
+        df_storm_out.alias("source"),
+        "target.event_id = source.event_id"
+    ).whenMatchedUpdateAll(
+        condition="target._silver_timestamp < source._silver_timestamp"
+    ).whenNotMatchedInsertAll(
+    ).execute()
+else:
+    df_storm_out.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .partitionBy("event_year") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(TARGET_STORM)
 
-storm_silver_count = df_storm_out.count()
-print(f"Written {storm_silver_count:,} records to {TARGET_STORM}")
+storm_silver_count = spark.table(TARGET_STORM).count()
+print(f"Written/merged records to {TARGET_STORM} (total: {storm_silver_count:,})")
 
 # COMMAND ----------
 
@@ -719,15 +742,26 @@ df_climate_out = df_climate_silver.select(
     [col(c) for c in climate_columns if c in df_climate_silver.columns]
 )
 
-df_climate_out.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("observation_year") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_CLIMATE)
+# Write to Silver layer using Delta MERGE (incremental upsert)
+if spark.catalog.tableExists(TARGET_CLIMATE):
+    deltaTable = DeltaTable.forName(spark, TARGET_CLIMATE)
+    deltaTable.alias("target").merge(
+        df_climate_out.alias("source"),
+        "target.station_id = source.station_id AND target.date_parsed = source.date_parsed"
+    ).whenMatchedUpdateAll(
+        condition="target._silver_timestamp < source._silver_timestamp"
+    ).whenNotMatchedInsertAll(
+    ).execute()
+else:
+    df_climate_out.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .partitionBy("observation_year") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(TARGET_CLIMATE)
 
-climate_silver_count = df_climate_out.count()
-print(f"Written {climate_silver_count:,} records to {TARGET_CLIMATE}")
+climate_silver_count = spark.table(TARGET_CLIMATE).count()
+print(f"Written/merged records to {TARGET_CLIMATE} (total: {climate_silver_count:,})")
 
 # COMMAND ----------
 

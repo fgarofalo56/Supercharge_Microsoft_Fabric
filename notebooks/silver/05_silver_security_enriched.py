@@ -26,6 +26,7 @@ from pyspark.sql.functions import (
     window,
 )
 from pyspark.sql.window import Window
+from delta.tables import DeltaTable
 from datetime import datetime
 
 # Parameters
@@ -202,14 +203,26 @@ df_silver = df_with_response \
 # COMMAND ----------
 
 try:
-    df_silver.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .partitionBy("event_date", "severity_level") \
-        .option("overwriteSchema", "true") \
-        .saveAsTable(target_table)
-    
-    print(f"Written {df_silver.count():,} records to {target_table}")
+    # Delta MERGE upsert — deduplicate on event_id
+    if spark.catalog.tableExists(target_table):
+        deltaTable = DeltaTable.forName(spark, target_table)
+        deltaTable.alias("target").merge(
+            df_silver.alias("source"),
+            "target.event_id = source.event_id"
+        ).whenMatchedUpdateAll(
+            condition="target._silver_timestamp < source._silver_timestamp"
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        # First run — create the table
+        df_silver.write.format("delta") \
+            .mode("overwrite") \
+            .partitionBy("event_date", "severity_level") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(target_table)
+
+    record_count = spark.table(target_table).count()
+    print(f"Merged {df_silver.count():,} source records into {target_table} (total: {record_count:,})")
 except Exception as e:
     print(f"ERROR in lh_silver.silver_security_enriched (batch_id={batch_id}): {e}")
     raise

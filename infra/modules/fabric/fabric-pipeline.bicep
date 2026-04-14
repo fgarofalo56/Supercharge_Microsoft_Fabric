@@ -1,29 +1,25 @@
 // =============================================================================
-// Microsoft Fabric Data Factory Pipeline Module
+// Microsoft Fabric Data Factory Pipeline Module (Metadata-Only)
 // =============================================================================
-// Deploys configuration for Fabric Data Factory pipelines (orchestration).
+// This module does NOT deploy any Azure resources. Fabric Pipelines are
+// workspace-level items without a dedicated ARM resource type.
 //
-// Since Fabric pipelines are workspace-level items without dedicated ARM
-// resource types, this module provisions metadata, tagging, and supporting
-// infrastructure (scheduling via Logic Apps or Azure Functions).
+// Purpose:
+// - Documents the Pipeline configuration as Bicep parameters
+// - Emits outputs consumed by main.bicep and CI/CD pipelines
+// - Serves as the IaC "contract" for what the Pipeline looks like
 //
-// Key features supported:
-// - Pipeline orchestration metadata
-// - Schedule trigger configuration
-// - Monitoring integration
-// - CI/CD via fabric-cicd library
-//
-// The actual Pipeline items are created via:
-// - Fabric portal / workspace UI
-// - fabric-cicd Python library (CI/CD pipeline)
-// - Fabric REST API (programmatic creation)
+// Actual Pipeline items are deployed via:
+// - fabric-cicd Python library  (scripts/fabric-cicd-deploy.py)
+// - Fabric REST API
+// - Fabric portal UI
 // =============================================================================
 
 // =============================================================================
-// Parameters
+// Parameters (kept for documentation / contract purposes)
 // =============================================================================
 
-@description('Azure region for deployment')
+@description('Azure region (unused — no resources deployed)')
 param location string
 
 @description('Project prefix for resource naming')
@@ -35,7 +31,7 @@ param projectPrefix string
 @allowed(['dev', 'staging', 'prod'])
 param environment string = 'dev'
 
-@description('Tags to apply to resources')
+@description('Tags (passed through to outputs)')
 param tags object = {}
 
 @description('Pipeline display name')
@@ -84,19 +80,11 @@ param retryIntervalSeconds int = 30
 
 var pipelineConfigName = '${projectPrefix}-pipe-${environment}'
 
-var pipelineTags = union(tags, {
-  FabricComponent: 'Pipeline'
-  FabricCapacityId: capacityId
-  PipelineName: pipelineName
-  ScheduleEnabled: string(enableScheduleTrigger)
-  ScheduleFrequency: enableScheduleTrigger ? '${scheduleInterval} ${scheduleFrequency}' : 'Manual'
-  RetryEnabled: string(enableRetryOnFailure)
-})
-
-// Pipeline configuration for downstream automation
 var pipelineConfig = {
   name: pipelineName
+  configName: pipelineConfigName
   environment: environment
+  capacityId: capacityId
   schedule: {
     enabled: enableScheduleTrigger
     frequency: scheduleFrequency
@@ -109,64 +97,29 @@ var pipelineConfig = {
     intervalSeconds: retryIntervalSeconds
   }
   activities: activities
-}
-
-// =============================================================================
-// Pipeline Configuration Metadata
-// =============================================================================
-
-resource pipelineMetadata 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
-  name: 'pipe-config-${pipelineConfigName}'
-  location: location
-  tags: pipelineTags
-  kind: 'AzurePowerShell'
-  properties: {
-    azPowerShellVersion: '9.7'
-    retentionInterval: 'P1D'
-    scriptContent: '''
-      $config = @{
-        pipelineName = $env:PIPELINE_NAME
-        environment = $env:ENVIRONMENT
-        scheduleEnabled = $env:SCHEDULE_ENABLED
-        scheduleFrequency = $env:SCHEDULE_FREQUENCY
-        scheduleInterval = $env:SCHEDULE_INTERVAL
-        retryEnabled = $env:RETRY_ENABLED
-        maxRetry = $env:MAX_RETRY
-        timestamp = Get-Date -Format "yyyy-MM-ddTHH:mm:ssZ"
-      }
-      $DeploymentScriptOutputs = @{
-        configuration = ($config | ConvertTo-Json -Compress)
-      }
-    '''
-    environmentVariables: [
-      { name: 'PIPELINE_NAME', value: pipelineName }
-      { name: 'ENVIRONMENT', value: environment }
-      { name: 'SCHEDULE_ENABLED', value: string(enableScheduleTrigger) }
-      { name: 'SCHEDULE_FREQUENCY', value: scheduleFrequency }
-      { name: 'SCHEDULE_INTERVAL', value: string(scheduleInterval) }
-      { name: 'RETRY_ENABLED', value: string(enableRetryOnFailure) }
-      { name: 'MAX_RETRY', value: string(maxRetryAttempts) }
-    ]
-    timeout: 'PT5M'
-    cleanupPreference: 'OnSuccess'
+  governance: {
+    logAnalyticsWorkspaceId: logAnalyticsWorkspaceId
   }
 }
 
 // =============================================================================
-// Outputs
+// OUTPUT-ONLY — No resources deployed
+// Actual Fabric Pipeline items are deployed via fabric-cicd library.
 // =============================================================================
 
 @description('The pipeline configuration name')
 output pipelineName string = pipelineConfigName
 
-@description('The pipeline configuration as JSON')
-output pipelineConfiguration string = string(pipelineConfig)
-
 @description('Whether the schedule trigger is enabled')
 output triggerStatus string = enableScheduleTrigger ? 'Enabled' : 'Disabled'
 
-@description('The deployment script resource ID')
-output metadataResourceId string = pipelineMetadata.id
+@description('The full pipeline configuration as JSON')
+output configurationJson string = string(pipelineConfig)
 
-@description('Tags applied to pipeline resources')
-output appliedTags object = pipelineTags
+@description('Tags that would be applied to pipeline resources')
+output appliedTags object = union(tags, {
+  FabricComponent: 'Pipeline'
+  FabricCapacityId: capacityId
+  PipelineName: pipelineName
+  ScheduleEnabled: string(enableScheduleTrigger)
+})

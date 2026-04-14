@@ -345,7 +345,7 @@ echo ""
 
 # Build deployment command
 DEPLOY_CMD=(
-    az deployment group create
+    az deployment sub create
     --resource-group "$RESOURCE_GROUP"
     --template-file "$MAIN_BICEP"
     --parameters "$BICEP_PARAMS"
@@ -397,8 +397,7 @@ if [ "$WHAT_IF" = false ]; then
 
     write_step "Fetching deployment outputs..."
 
-    OUTPUTS=$(az deployment group show \
-        --resource-group "$RESOURCE_GROUP" \
+    OUTPUTS=$(az deployment sub show \
         --name "$DEPLOYMENT_NAME" \
         --query "properties.outputs" \
         --output json 2>/dev/null)

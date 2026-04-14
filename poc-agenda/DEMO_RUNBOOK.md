@@ -1232,8 +1232,8 @@ If time is cut, prioritize:
 
 | System | Credential Location |
 |--------|---------------------|
-| Azure/Fabric | Azure AD - use corporate SSO |
-| Purview | Same Azure AD account |
+| Azure/Fabric | Microsoft Entra ID - use corporate SSO |
+| Purview | Same Microsoft Entra ID account |
 | SQL endpoints | Managed by Fabric - no separate creds |
 | Event Hub (if used) | Azure Key Vault: `kv-casino-poc/eventhub-connection` |
 

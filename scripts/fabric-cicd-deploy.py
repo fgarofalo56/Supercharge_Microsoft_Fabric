@@ -75,7 +75,7 @@ def create_workspace_client(workspace_id: str) -> FabricWorkspace:
     workspace = FabricWorkspace(
         workspace_id=workspace_id,
         repository_directory=str(repo_root),
-        item_type_in_scope=["Notebook", "Lakehouse", "SemanticModel"],
+        item_type_in_scope=["Notebook", "Lakehouse", "SemanticModel", "Pipeline"],
         credential=credential,
     )
 
@@ -161,8 +161,8 @@ def main():
     parser.add_argument(
         "--item-type-in-scope",
         nargs="+",
-        default=["Notebook", "Lakehouse", "SemanticModel"],
-        help="Fabric item types to deploy (default: Notebook Lakehouse SemanticModel)",
+        default=["Notebook", "Lakehouse", "SemanticModel", "Pipeline"],
+        help="Fabric item types to deploy (default: Notebook Lakehouse SemanticModel Pipeline)",
     )
     parser.add_argument(
         "--dry-run",

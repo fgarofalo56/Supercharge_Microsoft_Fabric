@@ -359,10 +359,10 @@ Business aggregations optimized for Power BI Direct Lake connectivity. All table
 
 | NIST 800-53 Family | Control ID | Implementation in Fabric |
 |-------------------|-----------|------------------------|
-| Access Control | AC-2, AC-3, AC-6 | Azure AD Conditional Access, RBAC, Row-Level Security |
+| Access Control | AC-2, AC-3, AC-6 | Microsoft Entra ID Conditional Access, RBAC, Row-Level Security |
 | Audit & Accountability | AU-2, AU-3, AU-6 | Fabric Activity Logs, Azure Monitor, SIEM integration |
 | Configuration Management | CM-2, CM-6, CM-8 | Bicep IaC, Azure Policy, asset inventory |
-| Identification & Auth | IA-2, IA-5, IA-8 | MFA via Azure AD, PIV/CAC support in GCC-High |
+| Identification & Auth | IA-2, IA-5, IA-8 | MFA via Microsoft Entra ID, PIV/CAC support in GCC-High |
 | System & Comms Protection | SC-8, SC-12, SC-28 | TLS 1.3 in transit, AES-256 at rest, BYOK |
 | System & Info Integrity | SI-2, SI-3, SI-4 | Microsoft Defender, Purview DLP, Threat Detection |
 
@@ -371,7 +371,7 @@ Business aggregations optimized for Power BI Direct Lake connectivity. All table
 | Layer | Controls |
 |-------|----------|
 | Network | Private endpoints, NSGs, Azure Firewall, no public internet exposure |
-| Identity | Azure AD with Conditional Access, MFA enforced, PIV/CAC for GCC-High |
+| Identity | Microsoft Entra ID with Conditional Access, MFA enforced, PIV/CAC for GCC-High |
 | Data at Rest | AES-256, customer-managed keys (CMK) for Delta Lake storage |
 | Data in Transit | TLS 1.3 for all connections including Direct Lake |
 | Application | Workspace-level RBAC, object-level permissions, row-level security in Power BI |

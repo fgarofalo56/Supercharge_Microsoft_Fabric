@@ -24,7 +24,7 @@
 
 - [☁️ Azure Requirements](#️-azure-requirements)
 - [💻 Local Development Environment](#-local-development-environment)
-- [🔑 Azure AD Configuration](#-azure-ad-configuration)
+- [🔑 Microsoft Entra ID Configuration](#-microsoft-entra-id-configuration)
 - [🌐 Network Requirements](#-network-requirements)
 - [✅ Pre-Deployment Checklist](#-pre-deployment-checklist)
 - [📝 Environment Variables Reference](#-environment-variables-reference)
@@ -80,7 +80,7 @@ az provider list --query "[?namespace=='Microsoft.Fabric'].registrationState" -o
 
 | Requirement | Details |
 |-------------|---------|
-| **Fabric enabled** | Must be enabled in Azure AD tenant |
+| **Fabric enabled** | Must be enabled in Microsoft Entra ID tenant |
 | **Capacity available** | F64 SKU recommended for POC |
 | **Region support** | Check [region availability](https://learn.microsoft.com/fabric/enterprise/region-availability) |
 
@@ -94,7 +94,7 @@ az provider list --query "[?namespace=='Microsoft.Fabric'].registrationState" -o
 
 *Source: [Microsoft Fabric Admin Center](https://learn.microsoft.com/en-us/fabric/admin/admin-center)*
 
-> ⚠️ **Warning:** Enabling Fabric requires Azure AD Global Administrator or Fabric Administrator permissions. Contact your tenant admin if you don't have these roles.
+> ⚠️ **Warning:** Enabling Fabric requires Microsoft Entra ID Global Administrator or Fabric Administrator permissions. Contact your tenant admin if you don't have these roles.
 
 ### Quota Verification
 
@@ -263,7 +263,7 @@ Python: Python 3.11.7
 
 ---
 
-## 🔑 Azure AD Configuration
+## 🔑 Microsoft Entra ID Configuration
 
 ### Required Permissions
 
@@ -320,7 +320,7 @@ Ensure these endpoints are accessible from your deployment environment:
 | Service | Endpoints | Ports |
 |---------|-----------|-------|
 | Azure Management | `management.azure.com` | 443 |
-| Azure AD | `login.microsoftonline.com` | 443 |
+| Microsoft Entra ID | `login.microsoftonline.com` | 443 |
 | Fabric | `*.fabric.microsoft.com` | 443 |
 | Power BI | `*.powerbi.com` | 443 |
 | Storage | `*.blob.core.windows.net` | 443 |
@@ -385,7 +385,7 @@ Create a `.env` file from `.env.sample` with the following values:
 ```bash
 # Azure Configuration
 AZURE_SUBSCRIPTION_ID=        # Your Azure subscription ID
-AZURE_TENANT_ID=              # Your Azure AD tenant ID
+AZURE_TENANT_ID=              # Your Microsoft Entra ID tenant ID
 AZURE_LOCATION=eastus2        # Deployment region
 ENVIRONMENT=dev               # dev, staging, or prod
 PROJECT_PREFIX=fabricpoc      # 3-10 char prefix for naming

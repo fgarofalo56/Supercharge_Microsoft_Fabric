@@ -44,6 +44,7 @@ from pyspark.sql.functions import (
     year,
 )
 from pyspark.sql.window import Window
+from delta.tables import DeltaTable
 from datetime import datetime
 
 # Parameters
@@ -250,14 +251,22 @@ df_carrier_final = df_carrier_perf \
 # COMMAND ----------
 
 try:
-    df_carrier_final.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .partitionBy("report_year") \
-        .option("overwriteSchema", "true") \
-        .saveAsTable(TARGET_CARRIER_PERF)
-    
-    print(f"Written {df_carrier_final.count():,} records to {TARGET_CARRIER_PERF}")
+    if spark.catalog.tableExists(TARGET_CARRIER_PERF):
+        deltaTable = DeltaTable.forName(spark, TARGET_CARRIER_PERF)
+        deltaTable.alias("target").merge(
+            df_carrier_final.alias("source"),
+            "target.carrier_code = source.carrier_code AND target.report_year = source.report_year AND target.report_month = source.report_month"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_carrier_final.write.format("delta") \
+            .mode("overwrite") \
+            .partitionBy("report_year") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_CARRIER_PERF)
+
+    print(f"Merged {df_carrier_final.count():,} records into {TARGET_CARRIER_PERF}")
 except Exception as e:
     print(f"ERROR in unknown (batch_id={batch_id}): {e}")
     raise
@@ -396,14 +405,22 @@ df_safety_final = df_safety_trends \
     .withColumn("_gold_timestamp", current_timestamp()) \
     .withColumn("_batch_id", lit(batch_id))
 
-df_safety_final.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("incident_year") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_SAFETY_ANALYTICS)
+if spark.catalog.tableExists(TARGET_SAFETY_ANALYTICS):
+    deltaTable = DeltaTable.forName(spark, TARGET_SAFETY_ANALYTICS)
+    deltaTable.alias("target").merge(
+        df_safety_final.alias("source"),
+        "target.incident_period = source.incident_period AND target.incident_year = source.incident_year AND target.incident_month = source.incident_month"
+    ).whenMatchedUpdateAll(
+    ).whenNotMatchedInsertAll(
+    ).execute()
+else:
+    df_safety_final.write.format("delta") \
+        .mode("overwrite") \
+        .partitionBy("incident_year") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(TARGET_SAFETY_ANALYTICS)
 
-print(f"Written {df_safety_final.count():,} records to {TARGET_SAFETY_ANALYTICS}")
+print(f"Merged {df_safety_final.count():,} records into {TARGET_SAFETY_ANALYTICS}")
 
 # COMMAND ----------
 
@@ -560,13 +577,21 @@ df_airport_final = df_airport_with_safety \
 
 # COMMAND ----------
 
-df_airport_final.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_AIRPORT_METRICS)
+if spark.catalog.tableExists(TARGET_AIRPORT_METRICS):
+    deltaTable = DeltaTable.forName(spark, TARGET_AIRPORT_METRICS)
+    deltaTable.alias("target").merge(
+        df_airport_final.alias("source"),
+        "target.airport_code = source.airport_code"
+    ).whenMatchedUpdateAll(
+    ).whenNotMatchedInsertAll(
+    ).execute()
+else:
+    df_airport_final.write.format("delta") \
+        .mode("overwrite") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(TARGET_AIRPORT_METRICS)
 
-print(f"Written {df_airport_final.count():,} records to {TARGET_AIRPORT_METRICS}")
+print(f"Merged {df_airport_final.count():,} records into {TARGET_AIRPORT_METRICS}")
 
 # COMMAND ----------
 

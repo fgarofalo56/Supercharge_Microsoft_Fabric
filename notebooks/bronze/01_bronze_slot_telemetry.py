@@ -83,6 +83,7 @@ slot_schema = StructType([
 
 # Read parquet file
 df_raw = spark.read \
+    .schema(slot_schema) \
     .parquet(SOURCE_PATH)
 
 # Display statistics

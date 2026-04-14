@@ -54,6 +54,7 @@ from pyspark.sql.functions import (
     years,
 )
 from pyspark.sql.window import Window
+from delta.tables import DeltaTable
 from datetime import datetime
 
 # Parameters
@@ -250,16 +251,24 @@ try:
             "avg_data_quality", "source_record_count",
             "_gold_timestamp", "_batch_id"
         )
-    
-    df_crop_summary.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .option("overwriteSchema", "true") \
-        .saveAsTable(TARGET_CROP_SUMMARY)
-    
-    print(f"Written {df_crop_summary.count():,} records to {TARGET_CROP_SUMMARY}")
+
+    if spark.catalog.tableExists(TARGET_CROP_SUMMARY):
+        deltaTable = DeltaTable.forName(spark, TARGET_CROP_SUMMARY)
+        deltaTable.alias("target").merge(
+            df_crop_summary.alias("source"),
+            "target.commodity = source.commodity AND target.year = source.year AND target.state_name = source.state_name AND target.agg_level_desc = source.agg_level_desc"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_crop_summary.write.format("delta") \
+            .mode("overwrite") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_CROP_SUMMARY)
+
+    print(f"Merged {df_crop_summary.count():,} records into {TARGET_CROP_SUMMARY}")
 except Exception as e:
-    print(f"ERROR in unknown (batch_id={batch_id}): {e}")
+    print(f"ERROR writing crop summary (batch_id={batch_id}): {e}")
     raise
 
 # COMMAND ----------
@@ -412,14 +421,26 @@ df_state_agriculture = df_state_base.alias("b") \
     .withColumn("_gold_timestamp", current_timestamp()) \
     .withColumn("_batch_id", lit(batch_id))
 
-df_state_agriculture.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("year") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_STATE_AGRICULTURE)
+try:
+    if spark.catalog.tableExists(TARGET_STATE_AGRICULTURE):
+        deltaTable = DeltaTable.forName(spark, TARGET_STATE_AGRICULTURE)
+        deltaTable.alias("target").merge(
+            df_state_agriculture.alias("source"),
+            "target.state_name = source.state_name AND target.state_fips = source.state_fips AND target.year = source.year"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_state_agriculture.write.format("delta") \
+            .mode("overwrite") \
+            .partitionBy("year") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_STATE_AGRICULTURE)
 
-print(f"Written {df_state_agriculture.count():,} records to {TARGET_STATE_AGRICULTURE}")
+    print(f"Merged {df_state_agriculture.count():,} records into {TARGET_STATE_AGRICULTURE}")
+except Exception as e:
+    print(f"ERROR writing state agriculture (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 
@@ -608,13 +629,25 @@ df_food_safety_dashboard = df_recall_trends \
         "_gold_timestamp", "_batch_id"
     )
 
-df_food_safety_dashboard.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_FOOD_SAFETY_DASHBOARD)
+try:
+    if spark.catalog.tableExists(TARGET_FOOD_SAFETY_DASHBOARD):
+        deltaTable = DeltaTable.forName(spark, TARGET_FOOD_SAFETY_DASHBOARD)
+        deltaTable.alias("target").merge(
+            df_food_safety_dashboard.alias("source"),
+            "target.recall_year = source.recall_year AND target.recall_quarter = source.recall_quarter AND target.recall_class = source.recall_class AND target.product_type = source.product_type"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_food_safety_dashboard.write.format("delta") \
+            .mode("overwrite") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_FOOD_SAFETY_DASHBOARD)
 
-print(f"Written {df_food_safety_dashboard.count():,} records to {TARGET_FOOD_SAFETY_DASHBOARD}")
+    print(f"Merged {df_food_safety_dashboard.count():,} records into {TARGET_FOOD_SAFETY_DASHBOARD}")
+except Exception as e:
+    print(f"ERROR writing food safety dashboard (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 
@@ -740,13 +773,25 @@ df_executive_summary = df_annual_crop.alias("c") \
     .withColumn("_gold_timestamp", current_timestamp()) \
     .withColumn("_batch_id", lit(batch_id))
 
-df_executive_summary.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_EXECUTIVE_SUMMARY)
+try:
+    if spark.catalog.tableExists(TARGET_EXECUTIVE_SUMMARY):
+        deltaTable = DeltaTable.forName(spark, TARGET_EXECUTIVE_SUMMARY)
+        deltaTable.alias("target").merge(
+            df_executive_summary.alias("source"),
+            "target.year = source.year"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_executive_summary.write.format("delta") \
+            .mode("overwrite") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_EXECUTIVE_SUMMARY)
 
-print(f"Written {df_executive_summary.count():,} records to {TARGET_EXECUTIVE_SUMMARY}")
+    print(f"Merged {df_executive_summary.count():,} records into {TARGET_EXECUTIVE_SUMMARY}")
+except Exception as e:
+    print(f"ERROR writing executive summary (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

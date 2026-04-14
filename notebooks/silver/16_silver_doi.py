@@ -47,6 +47,7 @@ from pyspark.sql.functions import (
     years,
 )
 from pyspark.sql.types import DoubleType, IntegerType, LongType
+from delta.tables import DeltaTable
 from datetime import datetime
 
 # Parameters (set by pipeline or manual)
@@ -385,15 +386,26 @@ try:
         [col(c) for c in eq_columns if c in df_eq_silver.columns]
     )
     
-    df_eq_out.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .partitionBy("event_year") \
-        .option("overwriteSchema", "true") \
-        .saveAsTable(TARGET_EARTHQUAKES)
-    
-    eq_silver_count = df_eq_out.count()
-    print(f"Written {eq_silver_count:,} records to {TARGET_EARTHQUAKES}")
+    # Write to Silver layer using Delta MERGE (incremental upsert)
+    if spark.catalog.tableExists(TARGET_EARTHQUAKES):
+        deltaTable = DeltaTable.forName(spark, TARGET_EARTHQUAKES)
+        deltaTable.alias("target").merge(
+            df_eq_out.alias("source"),
+            "target.event_id = source.event_id"
+        ).whenMatchedUpdateAll(
+            condition="target._silver_timestamp < source._silver_timestamp"
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_eq_out.write \
+            .format("delta") \
+            .mode("overwrite") \
+            .partitionBy("event_year") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_EARTHQUAKES)
+
+    eq_silver_count = spark.table(TARGET_EARTHQUAKES).count()
+    print(f"Written/merged records to {TARGET_EARTHQUAKES} (total: {eq_silver_count:,})")
 except Exception as e:
     print(f"ERROR in unknown (batch_id={batch_id}): {e}")
     raise
@@ -552,15 +564,26 @@ df_water_out = df_water_silver.select(
     [col(c) for c in water_columns if c in df_water_silver.columns]
 )
 
-df_water_out.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("measurement_year") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_WATER)
+# Write to Silver layer using Delta MERGE (incremental upsert)
+if spark.catalog.tableExists(TARGET_WATER):
+    deltaTable = DeltaTable.forName(spark, TARGET_WATER)
+    deltaTable.alias("target").merge(
+        df_water_out.alias("source"),
+        "target.site_id = source.site_id AND target.measurement_date_parsed = source.measurement_date_parsed AND target.parameter_code_clean = source.parameter_code_clean"
+    ).whenMatchedUpdateAll(
+        condition="target._silver_timestamp < source._silver_timestamp"
+    ).whenNotMatchedInsertAll(
+    ).execute()
+else:
+    df_water_out.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .partitionBy("measurement_year") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(TARGET_WATER)
 
-water_silver_count = df_water_out.count()
-print(f"Written {water_silver_count:,} records to {TARGET_WATER}")
+water_silver_count = spark.table(TARGET_WATER).count()
+print(f"Written/merged records to {TARGET_WATER} (total: {water_silver_count:,})")
 
 # COMMAND ----------
 
@@ -731,15 +754,26 @@ df_parks_out = df_parks_silver.select(
     [col(c) for c in parks_columns if c in df_parks_silver.columns]
 )
 
-df_parks_out.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("year_val") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_PARKS)
+# Write to Silver layer using Delta MERGE (incremental upsert)
+if spark.catalog.tableExists(TARGET_PARKS):
+    deltaTable = DeltaTable.forName(spark, TARGET_PARKS)
+    deltaTable.alias("target").merge(
+        df_parks_out.alias("source"),
+        "target.park_code_clean = source.park_code_clean AND target.year_val = source.year_val AND target.month_val = source.month_val"
+    ).whenMatchedUpdateAll(
+        condition="target._silver_timestamp < source._silver_timestamp"
+    ).whenNotMatchedInsertAll(
+    ).execute()
+else:
+    df_parks_out.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .partitionBy("year_val") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(TARGET_PARKS)
 
-parks_silver_count = df_parks_out.count()
-print(f"Written {parks_silver_count:,} records to {TARGET_PARKS}")
+parks_silver_count = spark.table(TARGET_PARKS).count()
+print(f"Written/merged records to {TARGET_PARKS} (total: {parks_silver_count:,})")
 
 # COMMAND ----------
 

@@ -51,6 +51,7 @@ from pyspark.sql.functions import (
     year,
 )
 from pyspark.sql.window import Window
+from delta.tables import DeltaTable
 from datetime import datetime
 
 # Parameters
@@ -189,16 +190,24 @@ df_weather_summary = df_weather_daily \
 # COMMAND ----------
 
 try:
-    df_weather_summary.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .partitionBy("station_state") \
-        .option("overwriteSchema", "true") \
-        .saveAsTable(TARGET_WEATHER_SUMMARY)
-    
-    print(f"Written {df_weather_summary.count():,} records to {TARGET_WEATHER_SUMMARY}")
+    if spark.catalog.tableExists(TARGET_WEATHER_SUMMARY):
+        deltaTable = DeltaTable.forName(spark, TARGET_WEATHER_SUMMARY)
+        deltaTable.alias("target").merge(
+            df_weather_summary.alias("source"),
+            "target.station_id = source.station_id AND target.date = source.date"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_weather_summary.write.format("delta") \
+            .mode("overwrite") \
+            .partitionBy("station_state") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_WEATHER_SUMMARY)
+
+    print(f"Merged {df_weather_summary.count():,} records into {TARGET_WEATHER_SUMMARY}")
 except Exception as e:
-    print(f"ERROR in unknown (batch_id={batch_id}): {e}")
+    print(f"ERROR writing weather summary (batch_id={batch_id}): {e}")
     raise
 
 # COMMAND ----------
@@ -338,14 +347,26 @@ df_storm_final = df_storm_enriched \
 
 # COMMAND ----------
 
-df_storm_final.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("event_year") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_STORM_IMPACT)
+try:
+    if spark.catalog.tableExists(TARGET_STORM_IMPACT):
+        deltaTable = DeltaTable.forName(spark, TARGET_STORM_IMPACT)
+        deltaTable.alias("target").merge(
+            df_storm_final.alias("source"),
+            "target.state = source.state AND target.event_year = source.event_year AND target.event_type = source.event_type"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_storm_final.write.format("delta") \
+            .mode("overwrite") \
+            .partitionBy("event_year") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_STORM_IMPACT)
 
-print(f"Written {df_storm_final.count():,} records to {TARGET_STORM_IMPACT}")
+    print(f"Merged {df_storm_final.count():,} records into {TARGET_STORM_IMPACT}")
+except Exception as e:
+    print(f"ERROR writing storm impact (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 
@@ -449,14 +470,26 @@ df_climate_trends = df_annual_climate \
 
 # COMMAND ----------
 
-df_climate_trends.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("station_state") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_CLIMATE_TRENDS)
+try:
+    if spark.catalog.tableExists(TARGET_CLIMATE_TRENDS):
+        deltaTable = DeltaTable.forName(spark, TARGET_CLIMATE_TRENDS)
+        deltaTable.alias("target").merge(
+            df_climate_trends.alias("source"),
+            "target.station_id = source.station_id AND target.obs_year = source.obs_year"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_climate_trends.write.format("delta") \
+            .mode("overwrite") \
+            .partitionBy("station_state") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_CLIMATE_TRENDS)
 
-print(f"Written {df_climate_trends.count():,} records to {TARGET_CLIMATE_TRENDS}")
+    print(f"Merged {df_climate_trends.count():,} records into {TARGET_CLIMATE_TRENDS}")
+except Exception as e:
+    print(f"ERROR writing climate trends (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 
@@ -610,14 +643,26 @@ df_risk_final = df_risk_scored \
 
 # COMMAND ----------
 
-df_risk_final.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("state") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_SEVERE_WEATHER_RISK)
+try:
+    if spark.catalog.tableExists(TARGET_SEVERE_WEATHER_RISK):
+        deltaTable = DeltaTable.forName(spark, TARGET_SEVERE_WEATHER_RISK)
+        deltaTable.alias("target").merge(
+            df_risk_final.alias("source"),
+            "target.state = source.state AND target.county_fips = source.county_fips"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_risk_final.write.format("delta") \
+            .mode("overwrite") \
+            .partitionBy("state") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_SEVERE_WEATHER_RISK)
 
-print(f"Written {df_risk_final.count():,} records to {TARGET_SEVERE_WEATHER_RISK}")
+    print(f"Merged {df_risk_final.count():,} records into {TARGET_SEVERE_WEATHER_RISK}")
+except Exception as e:
+    print(f"ERROR writing severe weather risk (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

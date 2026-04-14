@@ -43,6 +43,7 @@ from pyspark.sql.functions import (
     year,
 )
 from pyspark.sql.types import DateType, DecimalType, IntegerType
+from delta.tables import DeltaTable
 from datetime import datetime
 
 # Parameters (set by pipeline or manual)
@@ -343,15 +344,26 @@ try:
         [col(c) for c in ppp_columns if c in df_ppp_silver.columns]
     )
     
-    df_ppp_out.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .partitionBy("approval_year") \
-        .option("overwriteSchema", "true") \
-        .saveAsTable(TARGET_PPP)
-    
-    ppp_silver_count = df_ppp_out.count()
-    print(f"Written {ppp_silver_count:,} records to {TARGET_PPP}")
+    # Write to Silver layer using Delta MERGE (incremental upsert)
+    if spark.catalog.tableExists(TARGET_PPP):
+        deltaTable = DeltaTable.forName(spark, TARGET_PPP)
+        deltaTable.alias("target").merge(
+            df_ppp_out.alias("source"),
+            "target.loan_id = source.loan_id"
+        ).whenMatchedUpdateAll(
+            condition="target._silver_timestamp < source._silver_timestamp"
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_ppp_out.write \
+            .format("delta") \
+            .mode("overwrite") \
+            .partitionBy("approval_year") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_PPP)
+
+    ppp_silver_count = spark.table(TARGET_PPP).count()
+    print(f"Written/merged records to {TARGET_PPP} (total: {ppp_silver_count:,})")
 except Exception as e:
     print(f"ERROR in unknown (batch_id={batch_id}): {e}")
     raise
@@ -552,15 +564,26 @@ df_7a_out = df_7a_silver.select(
     [col(c) for c in columns_7a if c in df_7a_silver.columns]
 )
 
-df_7a_out.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("approval_year") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_7A_504)
+# Write to Silver layer using Delta MERGE (incremental upsert)
+if spark.catalog.tableExists(TARGET_7A_504):
+    deltaTable = DeltaTable.forName(spark, TARGET_7A_504)
+    deltaTable.alias("target").merge(
+        df_7a_out.alias("source"),
+        "target.loan_id = source.loan_id"
+    ).whenMatchedUpdateAll(
+        condition="target._silver_timestamp < source._silver_timestamp"
+    ).whenNotMatchedInsertAll(
+    ).execute()
+else:
+    df_7a_out.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .partitionBy("approval_year") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable(TARGET_7A_504)
 
-silver_7a_count = df_7a_out.count()
-print(f"Written {silver_7a_count:,} records to {TARGET_7A_504}")
+silver_7a_count = spark.table(TARGET_7A_504).count()
+print(f"Written/merged records to {TARGET_7A_504} (total: {silver_7a_count:,})")
 
 # COMMAND ----------
 

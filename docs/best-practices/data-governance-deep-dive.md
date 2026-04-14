@@ -311,7 +311,7 @@ TRUE()
 
 **Role-to-group mapping:**
 
-| RLS Role | Azure AD Group | Data Access |
+| RLS Role | Microsoft Entra ID Group | Data Access |
 |----------|---------------|-------------|
 | USDA Team | sg-fabric-usda | USDA rows only |
 | NOAA Team | sg-fabric-noaa | NOAA rows only |
@@ -722,10 +722,10 @@ Applies to all federal agency data in this project (USDA, SBA, NOAA, EPA, DOI).
 
 | Control Family | Implementation |
 |---------------|---------------|
-| Access Control (AC) | Azure AD + Conditional Access + RLS |
+| Access Control (AC) | Microsoft Entra ID + Conditional Access + RLS |
 | Audit and Accountability (AU) | Purview audit logs + pipeline error table |
 | Configuration Management (CM) | Bicep IaC, version-controlled configuration |
-| Identification and Authentication (IA) | Azure AD MFA, service principals |
+| Identification and Authentication (IA) | Microsoft Entra ID MFA, service principals |
 | System and Communications Protection (SC) | Private endpoints, encryption at rest/transit |
 | System and Information Integrity (SI) | Data quality checks, anomaly detection |
 
@@ -739,7 +739,7 @@ Applies to DOT/FAA workloads processed in Fabric (a FedRAMP authorized cloud ser
 |-------------|----------------------|
 | Data encryption at rest | OneLake encryption (Microsoft-managed keys) |
 | Data encryption in transit | TLS 1.2+ for all API/data traffic |
-| Multi-factor authentication | Azure AD Conditional Access with MFA |
+| Multi-factor authentication | Microsoft Entra ID Conditional Access with MFA |
 | Audit logging | Fabric admin audit logs, Purview |
 | Incident response | Data Activator alerts + runbooks |
 | Continuous monitoring | Pipeline error table + KQL dashboards |
@@ -754,11 +754,11 @@ Applies to all tribal healthcare data.
 | Safeguard | Category | Fabric Implementation |
 |-----------|----------|----------------------|
 | Administrative | Security management | Purview policies, access reviews |
-| Administrative | Workforce security | Azure AD groups, JIT access |
+| Administrative | Workforce security | Microsoft Entra ID groups, JIT access |
 | Administrative | Information access management | RLS + Column masking |
 | Physical | Facility access | Azure datacenter controls (inherited) |
 | Physical | Workstation security | Intune device management |
-| Technical | Access control | Azure AD + Conditional Access |
+| Technical | Access control | Microsoft Entra ID + Conditional Access |
 | Technical | Audit controls | Fabric audit logs, Purview |
 | Technical | Integrity controls | Data quality framework, checksums |
 | Technical | Transmission security | TLS 1.2+, private endpoints |
@@ -871,7 +871,7 @@ flowchart LR
 | No shortcuts to PHI data outside healthcare workspace | Workspace admin policy |
 | No shortcuts to SAR filing data | BSA officer approval required |
 | Shortcuts inherit source sensitivity labels | Purview label inheritance |
-| Shortcut access requires workspace membership | Azure AD group membership |
+| Shortcut access requires workspace membership | Microsoft Entra ID group membership |
 | Audit shortcut creation and access | Purview audit logs |
 
 ### Cross-Workspace Access Patterns
@@ -896,7 +896,7 @@ Tier 1: Public Data
   - Security: No PII, pre-aggregated only
 
 Tier 2: Partner Access
-  - Method: Azure AD B2B guest accounts
+  - Method: Microsoft Entra ID B2B guest accounts
   - Data: Agency-specific Gold layer views
   - Security: RLS + column masking + MFA required
   - Audit: Full access logging

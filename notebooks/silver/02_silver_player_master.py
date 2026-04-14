@@ -9,6 +9,11 @@
 # MAGIC - Track changes to key attributes (tier, email, address)
 # MAGIC - Maintain history with effective dates
 # MAGIC - Current record flagged with is_current = True
+# MAGIC
+# MAGIC ## Implementation:
+# MAGIC - **Delta MERGE** for scalable SCD2 (no `.collect()` calls)
+# MAGIC - Two-step merge: expire old rows, then insert new versions
+# MAGIC - Row-hash comparison for efficient change detection
 
 # COMMAND ----------
 
@@ -21,45 +26,28 @@ from pyspark.sql.functions import (
     coalesce,
     col,
     concat_ws,
-    count,
     current_date,
     current_timestamp,
-    exists,
-    filter,
-    first,
     lit,
+    max as spark_max,
     sha2,
+    when,
 )
+from pyspark.sql.types import DateType
 from delta.tables import DeltaTable
 from datetime import datetime
 
 # Parameters
-batch_id = dbutils.widgets.get("batch_id") if "batch_id" in [w.name for w in dbutils.widgets.getAll()] else datetime.now().strftime("%Y%m%d_%H%M%S")
+batch_id = (
+    dbutils.widgets.get("batch_id")
+    if "batch_id" in [w.name for w in dbutils.widgets.getAll()]
+    else datetime.now().strftime("%Y%m%d_%H%M%S")
+)
 
 # Source and target
-source_table = "lh_bronze.bronze_player_profile"
-target_table = "lh_silver.silver_player_master"
-
-print(f"Processing batch: {batch_id}")
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC ## Read Bronze Data
-
-# COMMAND ----------
-
-df_bronze = spark.table(source_table)
-
-print(f"Bronze player records: {df_bronze.count():,}")
-df_bronze.printSchema()
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC ## Define SCD Type 2 Tracked Attributes
-
-# COMMAND ----------
+SOURCE_TABLE = "lh_bronze.bronze_player_profile"
+TARGET_TABLE = "lh_silver.silver_player_master"
+KEY_COLUMN = "player_id"
 
 # Attributes that trigger a new version when changed
 TRACKED_ATTRIBUTES = [
@@ -70,152 +58,221 @@ TRACKED_ATTRIBUTES = [
     "city",
     "state",
     "zip_code",
-    "marketing_opt_in"
+    "marketing_opt_in",
 ]
 
-# Key column
-KEY_COLUMN = "player_id"
+# All columns to carry through from bronze
+COLUMN_LIST = [
+    "player_id",
+    "first_name",
+    "last_name",
+    "date_of_birth",
+    "gender",
+    "email",
+    "phone",
+    "address",
+    "city",
+    "state",
+    "zip_code",
+    "loyalty_tier",
+    "enrollment_date",
+    "marketing_opt_in",
+    "ssn_hash",
+]
+
+print(f"Processing batch: {batch_id}")
+print(f"Source: {SOURCE_TABLE}")
+print(f"Target: {TARGET_TABLE}")
 
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## Prepare New Data
+# MAGIC ## Read Bronze Data
 
 # COMMAND ----------
 
-# Select and clean new records
-df_new = df_bronze.select(
-    col("player_id"),
-    col("first_name"),
-    col("last_name"),
-    col("date_of_birth"),
-    col("gender"),
-    col("email"),
-    col("phone"),
-    col("address"),
-    col("city"),
-    col("state"),
-    col("zip_code"),
-    col("loyalty_tier"),
-    col("enrollment_date"),
-    col("marketing_opt_in"),
-    col("ssn_hash"),
-    col("_ingestion_timestamp").alias("source_timestamp")
+df_bronze = spark.table(SOURCE_TABLE)
+
+df_bronze.printSchema()
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Prepare Incoming Data with Row Hash
+
+# COMMAND ----------
+
+# Select relevant columns from bronze and compute a hash over tracked attributes
+df_incoming = (
+    df_bronze
+    .select(
+        *[col(c) for c in COLUMN_LIST],
+        col("_bronze_ingested_at").alias("source_timestamp"),
+    )
+    .withColumn(
+        "row_hash",
+        sha2(
+            concat_ws("||", *[coalesce(col(c), lit("")) for c in TRACKED_ATTRIBUTES]),
+            256,
+        ),
+    )
 )
 
-# Add SCD columns for new records
-df_new = df_new \
-    .withColumn("effective_date", current_date()) \
-    .withColumn("end_date", lit(None).cast("date")) \
-    .withColumn("is_current", lit(True)) \
-    .withColumn("version", lit(1)) \
-    .withColumn("_silver_timestamp", current_timestamp()) \
-    .withColumn("_batch_id", lit(batch_id))
-
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## SCD Type 2 Merge Logic
+# MAGIC ## SCD Type 2 Merge Logic (Delta MERGE - No .collect())
 
 # COMMAND ----------
 
-# Check if target table exists
 try:
-    table_exists = spark.catalog.tableExists(target_table)
-    
-    if table_exists:
-        print("Target table exists - performing SCD Type 2 merge")
-    
-        # Get current records from Silver
-        silver_table = DeltaTable.forName(spark, target_table)
-        df_current = silver_table.toDF().filter(col("is_current") == True)
-    
-        # Create hash of tracked attributes for comparison
-        df_new_hashed = df_new.withColumn(
-            "_attribute_hash",
-            sha2(concat_ws("||", *[coalesce(col(c), lit("")) for c in TRACKED_ATTRIBUTES]), 256)
+    table_exists = spark.catalog.tableExists(TARGET_TABLE)
+except Exception:
+    table_exists = False
+
+if not table_exists:
+    # ---------------------------------------------------------------
+    # Initial Load: target table does not exist yet
+    # ---------------------------------------------------------------
+    print("Target table does not exist - performing initial load")
+
+    df_initial = (
+        df_incoming
+        .withColumn("effective_date", current_date())
+        .withColumn("end_date", lit(None).cast(DateType()))
+        .withColumn("is_current", lit(True))
+        .withColumn("version", lit(1))
+        .withColumn("_silver_timestamp", current_timestamp())
+        .withColumn("_silver_updated_at", current_timestamp())
+        .withColumn("_batch_id", lit(batch_id))
+    )
+
+    df_initial.write.format("delta").mode("overwrite").saveAsTable(TARGET_TABLE)
+    record_count = spark.table(TARGET_TABLE).count()
+    print(f"Initial load complete: {record_count:,} records")
+
+else:
+    # ---------------------------------------------------------------
+    # Incremental Load: SCD2 via Delta MERGE (two-step)
+    # ---------------------------------------------------------------
+    print("Target table exists - performing SCD Type 2 merge")
+
+    deltaTable = DeltaTable.forName(spark, TARGET_TABLE)
+
+    # Get current-state rows from silver with their hashes
+    df_current = (
+        deltaTable.toDF()
+        .filter(col("is_current") == True)
+        .select(
+            col(KEY_COLUMN).alias("existing_player_id"),
+            col("row_hash").alias("existing_hash"),
+            col("version").alias("existing_version"),
         )
-    
-        df_current_hashed = df_current.withColumn(
-            "_attribute_hash",
-            sha2(concat_ws("||", *[coalesce(col(c), lit("")) for c in TRACKED_ATTRIBUTES]), 256)
+    )
+
+    # Join incoming against current state to detect changes and new records.
+    # Broadcast the current-state side when it is expected to be smaller than
+    # the incoming feed; for very large dimensions remove the hint.
+    from pyspark.sql.functions import broadcast
+
+    df_compared = (
+        df_incoming.alias("inc")
+        .join(
+            broadcast(df_current).alias("cur"),
+            col("inc.player_id") == col("cur.existing_player_id"),
+            "left",
         )
-    
-        # Find records that have changed
-        df_changed = df_new_hashed.alias("new") \
-            .join(df_current_hashed.alias("current"), KEY_COLUMN, "left") \
-            .filter(
-                (col("current.player_id").isNull()) |  # New player
-                (col("new._attribute_hash") != col("current._attribute_hash"))  # Changed attributes
-            ) \
-            .select("new.*")
-    
-        changed_count = df_changed.count()
-        print(f"Records to process (new + changed): {changed_count:,}")
-    
-        if changed_count > 0:
-            # Get list of changed player IDs
-            changed_ids = [row.player_id for row in df_changed.select("player_id").distinct().collect()]
-    
-            # Close current records for changed players
-            silver_table.update(
-                condition = (col("player_id").isin(changed_ids)) & (col("is_current") == True),
-                set = {
-                    "end_date": current_date(),
-                    "is_current": lit(False)
-                }
+        .withColumn(
+            "_change_type",
+            when(col("cur.existing_player_id").isNull(), lit("new"))
+            .when(col("inc.row_hash") != col("cur.existing_hash"), lit("changed"))
+            .otherwise(lit("unchanged")),
+        )
+    )
+
+    # Filter to only new + changed records and cache (used in two steps)
+    df_changed = (
+        df_compared
+        .filter(col("_change_type") != "unchanged")
+        .select(
+            *[col(f"inc.{c}") for c in COLUMN_LIST],
+            col("inc.source_timestamp"),
+            col("inc.row_hash"),
+            col("_change_type"),
+            col("cur.existing_version"),
+        )
+    ).cache()
+
+    changed_count = df_changed.count()
+    print(f"Records to process (new + changed): {changed_count:,}")
+
+    if changed_count > 0:
+        # ---- Step 1: Expire existing current rows where hash changed ----
+        # Build a DataFrame of only changed (not new) player_ids + hashes
+        df_expire_source = (
+            df_changed
+            .filter(col("_change_type") == "changed")
+            .select(
+                col("player_id"),
+                col("row_hash"),
             )
-    
-            # Calculate next version number for each player
-            df_versions = spark.sql(f"""
-                SELECT player_id, COALESCE(MAX(version), 0) as max_version
-                FROM {target_table}
-                GROUP BY player_id
-            """)
-    
-            # Add version numbers to new records
-            df_to_insert = df_changed.drop("_attribute_hash") \
-                .join(df_versions, "player_id", "left") \
-                .withColumn("version", coalesce(col("max_version"), lit(0)) + 1) \
-                .drop("max_version")
-    
-            # Insert new versions
-            df_to_insert.write \
-                .format("delta") \
-                .mode("append") \
-                .saveAsTable(target_table)
-    
-            print(f"Inserted {df_to_insert.count():,} new versions")
-        else:
-            print("No changes detected")
-    
+        )
+
+        if df_expire_source.head(1):  # at least one changed row
+            deltaTable.alias("target").merge(
+                df_expire_source.alias("source"),
+                "target.player_id = source.player_id AND target.is_current = true",
+            ).whenMatchedUpdate(
+                set={
+                    "is_current": lit(False),
+                    "end_date": current_date(),
+                    "_silver_updated_at": current_timestamp(),
+                }
+            ).execute()
+            print("Step 1 complete: expired old current rows for changed players")
+
+        # ---- Step 2: Insert new current rows for changed + new records ----
+        df_to_insert = (
+            df_changed
+            .withColumn("effective_date", current_date())
+            .withColumn("end_date", lit(None).cast(DateType()))
+            .withColumn("is_current", lit(True))
+            .withColumn(
+                "version",
+                when(col("_change_type") == "new", lit(1))
+                .otherwise(coalesce(col("existing_version"), lit(0)) + 1),
+            )
+            .withColumn("_silver_timestamp", current_timestamp())
+            .withColumn("_silver_updated_at", current_timestamp())
+            .withColumn("_batch_id", lit(batch_id))
+            .drop("_change_type", "existing_version")
+        )
+
+        df_to_insert.write.format("delta").mode("append").saveAsTable(TARGET_TABLE)
+        print(f"Step 2 complete: inserted {changed_count:,} new version rows")
     else:
-        print("Target table does not exist - performing initial load")
-    
-        # Initial load
-        df_new.write \
-            .format("delta") \
-            .mode("overwrite") \
-            .saveAsTable(target_table)
-    
-        print(f"Initial load: {df_new.count():,} records")
-except Exception as e:
-    print(f"ERROR in lh_silver.silver_player_master (batch_id={batch_id}): {e}")
-    raise
+        print("No changes detected - nothing to merge")
+
+    # Release cached DataFrame
+    df_changed.unpersist()
 
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## Validation
+# MAGIC ## Post-Write Validation
 
 # COMMAND ----------
 
 # Total records
-total_records = spark.sql(f"SELECT COUNT(*) as total FROM {target_table}").first()["total"]
+total_records = spark.sql(
+    f"SELECT COUNT(*) as total FROM {TARGET_TABLE}"
+).first()["total"]
 print(f"Total records in Silver: {total_records:,}")
 
 # Current records
-current_records = spark.sql(f"SELECT COUNT(*) as current FROM {target_table} WHERE is_current = True").first()["current"]
+current_records = spark.sql(
+    f"SELECT COUNT(*) as current FROM {TARGET_TABLE} WHERE is_current = True"
+).first()["current"]
 print(f"Current records: {current_records:,}")
 
 # Historical records
@@ -231,7 +288,7 @@ spark.sql(f"""
         COUNT(*) as versions,
         MIN(effective_date) as first_record,
         MAX(effective_date) as last_record
-    FROM {target_table}
+    FROM {TARGET_TABLE}
     GROUP BY player_id
     HAVING COUNT(*) > 1
     ORDER BY versions DESC
@@ -249,10 +306,10 @@ spark.sql(f"""
         end_date,
         is_current,
         version
-    FROM {target_table}
+    FROM {TARGET_TABLE}
     WHERE player_id IN (
         SELECT player_id
-        FROM {target_table}
+        FROM {TARGET_TABLE}
         GROUP BY player_id
         HAVING COUNT(*) > 1
         LIMIT 1
@@ -268,17 +325,30 @@ spark.sql(f"""
 # COMMAND ----------
 
 # Quality metrics on current records
-spark.sql(f"""
+df_dq = spark.sql(f"""
     SELECT
-        COUNT(*) as total_current,
-        COUNT(email) as has_email,
-        COUNT(phone) as has_phone,
-        COUNT(address) as has_address,
-        COUNT(loyalty_tier) as has_tier,
-        COUNT(DISTINCT loyalty_tier) as unique_tiers
-    FROM {target_table}
+        COUNT(*)                       as total_current,
+        COUNT(email)                   as has_email,
+        COUNT(phone)                   as has_phone,
+        COUNT(address)                 as has_address,
+        COUNT(loyalty_tier)            as has_tier,
+        COUNT(DISTINCT loyalty_tier)   as unique_tiers,
+        ROUND(COUNT(email)   * 100.0 / COUNT(*), 1) as email_pct,
+        ROUND(COUNT(phone)   * 100.0 / COUNT(*), 1) as phone_pct,
+        ROUND(COUNT(address) * 100.0 / COUNT(*), 1) as address_pct
+    FROM {TARGET_TABLE}
     WHERE is_current = True
-""").show()
+""")
+df_dq.show(truncate=False)
+
+# Compute a simple DQ score (% of key fields populated)
+dq_row = df_dq.first()
+dq_score = round(
+    (dq_row["email_pct"] + dq_row["phone_pct"] + dq_row["address_pct"]) / 3, 1
+)
+print(f"Data Quality Score (avg field completeness): {dq_score}%")
+
+# COMMAND ----------
 
 # Tier distribution
 spark.sql(f"""
@@ -286,7 +356,7 @@ spark.sql(f"""
         loyalty_tier,
         COUNT(*) as players,
         ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 2) as pct
-    FROM {target_table}
+    FROM {TARGET_TABLE}
     WHERE is_current = True
     GROUP BY loyalty_tier
     ORDER BY players DESC

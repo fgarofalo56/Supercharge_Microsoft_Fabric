@@ -22,6 +22,9 @@ param tags object = {}
 @description('Enable private endpoints - restricts public network access when true')
 param enablePrivateEndpoints bool = false
 
+@description('Subnet ID for private endpoint')
+param privateEndpointSubnetId string = ''
+
 // =============================================================================
 // Managed Identity
 // =============================================================================
@@ -99,6 +102,27 @@ resource keyVaultDiagnostics 'Microsoft.Insights/diagnosticSettings@2021-05-01-p
         category: 'AllMetrics'
         enabled: true
       }
+    ]
+  }
+}
+
+// =============================================================================
+// Private Endpoint (Optional)
+// =============================================================================
+
+module keyVaultPrivateEndpoint '../networking/private-endpoint.bicep' = if (enablePrivateEndpoints) {
+  name: 'pe-${keyVaultName}'
+  params: {
+    name: 'pe-${keyVaultName}'
+    location: location
+    tags: tags
+    subnetId: privateEndpointSubnetId
+    privateLinkServiceId: keyVault.id
+    groupIds: [
+      'vault'
+    ]
+    dnsZoneNames: [
+      'privatelink.vaultcore.azure.net'
     ]
   }
 }

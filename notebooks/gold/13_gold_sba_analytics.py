@@ -47,6 +47,7 @@ from pyspark.sql.functions import (
     year,
 )
 from pyspark.sql.window import Window
+from delta.tables import DeltaTable
 from datetime import datetime
 
 # Parameters
@@ -226,16 +227,24 @@ df_portfolio_flagged = df_portfolio \
 # COMMAND ----------
 
 try:
-    df_portfolio_flagged.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .partitionBy("approval_year") \
-        .option("overwriteSchema", "true") \
-        .saveAsTable(TARGET_LOAN_PORTFOLIO)
-    
-    print(f"Written {df_portfolio_flagged.count():,} records to {TARGET_LOAN_PORTFOLIO}")
+    if spark.catalog.tableExists(TARGET_LOAN_PORTFOLIO):
+        deltaTable = DeltaTable.forName(spark, TARGET_LOAN_PORTFOLIO)
+        deltaTable.alias("target").merge(
+            df_portfolio_flagged.alias("source"),
+            "target.state = source.state AND target.naics_sector = source.naics_sector AND target.approval_year = source.approval_year AND target.program_type = source.program_type"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_portfolio_flagged.write.format("delta") \
+            .mode("overwrite") \
+            .partitionBy("approval_year") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_LOAN_PORTFOLIO)
+
+    print(f"Merged {df_portfolio_flagged.count():,} records into {TARGET_LOAN_PORTFOLIO}")
 except Exception as e:
-    print(f"ERROR in unknown (batch_id={batch_id}): {e}")
+    print(f"ERROR writing loan portfolio (batch_id={batch_id}): {e}")
     raise
 
 # COMMAND ----------
@@ -342,14 +351,26 @@ df_economic_final = df_economic_impact \
 
 # COMMAND ----------
 
-df_economic_final.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("approval_year") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_ECONOMIC_IMPACT)
+try:
+    if spark.catalog.tableExists(TARGET_ECONOMIC_IMPACT):
+        deltaTable = DeltaTable.forName(spark, TARGET_ECONOMIC_IMPACT)
+        deltaTable.alias("target").merge(
+            df_economic_final.alias("source"),
+            "target.state = source.state AND target.approval_year = source.approval_year"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_economic_final.write.format("delta") \
+            .mode("overwrite") \
+            .partitionBy("approval_year") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_ECONOMIC_IMPACT)
 
-print(f"Written {df_economic_final.count():,} records to {TARGET_ECONOMIC_IMPACT}")
+    print(f"Merged {df_economic_final.count():,} records into {TARGET_ECONOMIC_IMPACT}")
+except Exception as e:
+    print(f"ERROR writing economic impact (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 
@@ -464,13 +485,25 @@ df_lender_final = df_lender_scorecard \
 
 # COMMAND ----------
 
-df_lender_final.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_LENDER_SCORECARD)
+try:
+    if spark.catalog.tableExists(TARGET_LENDER_SCORECARD):
+        deltaTable = DeltaTable.forName(spark, TARGET_LENDER_SCORECARD)
+        deltaTable.alias("target").merge(
+            df_lender_final.alias("source"),
+            "target.lender_id = source.lender_id"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_lender_final.write.format("delta") \
+            .mode("overwrite") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_LENDER_SCORECARD)
 
-print(f"Written {df_lender_final.count():,} records to {TARGET_LENDER_SCORECARD}")
+    print(f"Merged {df_lender_final.count():,} records into {TARGET_LENDER_SCORECARD}")
+except Exception as e:
+    print(f"ERROR writing lender scorecard (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

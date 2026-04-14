@@ -389,9 +389,11 @@ module workspaceIdentity 'modules/security/workspace-identity.bicep' = if (enabl
 }
 
 // =============================================================================
-// Fabric Warehouse Module (Phase 10 - Optional)
+// Fabric Warehouse Module (Phase 10 - Optional, METADATA-ONLY)
 // =============================================================================
-// Deploys configuration metadata for Fabric Warehouse (Synapse Data Warehouse).
+// This is a metadata-only module — it does NOT deploy real Azure resources.
+// It documents the Warehouse configuration as Bicep outputs for CI/CD.
+// Actual Fabric Warehouse items are deployed via fabric-cicd library.
 // Enable by setting enableWarehouse = true in your parameter file.
 // =============================================================================
 
@@ -411,9 +413,11 @@ module warehouse 'modules/fabric/fabric-warehouse.bicep' = if (enableWarehouse) 
 }
 
 // =============================================================================
-// Fabric SQL Database Module (Phase 10 - Optional)
+// Fabric SQL Database Module (Phase 10 - Optional, METADATA-ONLY)
 // =============================================================================
-// Deploys configuration metadata for Fabric SQL Database (OLTP + OneLake).
+// This is a metadata-only module — it does NOT deploy real Azure resources.
+// It documents the SQL Database configuration as Bicep outputs for CI/CD.
+// Actual Fabric SQL Database items are deployed via fabric-cicd library.
 // Enable by setting enableSqlDatabase = true in your parameter file.
 // =============================================================================
 
@@ -436,9 +440,11 @@ module sqlDatabase 'modules/fabric/fabric-sql-database.bicep' = if (enableSqlDat
 }
 
 // =============================================================================
-// Fabric Data Factory Pipeline Module (Phase 10 - Optional)
+// Fabric Data Factory Pipeline Module (Phase 10 - Optional, METADATA-ONLY)
 // =============================================================================
-// Deploys configuration metadata for Fabric Data Factory pipelines.
+// This is a metadata-only module — it does NOT deploy real Azure resources.
+// It documents the Pipeline configuration as Bicep outputs for CI/CD.
+// Actual Fabric Pipeline items are deployed via fabric-cicd library.
 // Enable by setting enablePipeline = true in your parameter file.
 // =============================================================================
 
@@ -566,5 +572,5 @@ output monitoringBudgetId string = enableMonitoringAlerts ? monitoringAlerts.out
 // For detailed cost estimates and optimization strategies, see:
 // - docs/COST_ESTIMATION.md - Comprehensive cost guide
 // - docs/diagrams/cost-breakdown.md - Visual cost breakdowns
-// - infra/cost-tags.bicep - Reusable cost allocation tags module
+// - Cost allocation tags are defined inline via the tags parameter
 // =============================================================================

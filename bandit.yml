@@ -9,7 +9,6 @@ skips:
 
 exclude_dirs:
   - validation/unit_tests
-  - notebooks
   - temp
   - .venv
   - __pycache__

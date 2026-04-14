@@ -1510,7 +1510,7 @@ def rotate_service_principal_secret(
     new_secret = generate_secure_secret()
     expiry_date = datetime.utcnow() + timedelta(days=90)
 
-    # Update in Azure AD
+    # Update in Microsoft Entra ID
     graph_client = GraphRbacManagementClient(credential, tenant_id)
 
     password_cred = PasswordCredential(

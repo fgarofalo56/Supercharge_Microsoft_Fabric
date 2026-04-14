@@ -219,7 +219,7 @@ GO
 |---------|-------------------|-------------------------|
 | **Server** | `your-server.database.windows.net` | `your-server.domain.com` |
 | **Database** | `CasinoOperational` | `CasinoOperational` |
-| **Authentication** | Azure AD or SQL Auth | SQL Auth |
+| **Authentication** | Microsoft Entra ID or SQL Auth | SQL Auth |
 | **Gateway** | Not required | On-Premises Data Gateway |
 
 1. Enter connection details

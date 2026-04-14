@@ -41,6 +41,7 @@ from pyspark.sql.types import (
     StructType,
     TimestampType,
 )
+from delta.tables import DeltaTable
 from datetime import datetime
 
 # Parameters
@@ -209,13 +210,25 @@ else:
 # COMMAND ----------
 
 try:
-    df_gold.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .option("overwriteSchema", "true") \
-        .saveAsTable(target_table)
-    
-    print(f"Written {df_gold.count():,} records to {target_table}")
+    # Write to Gold — incremental MERGE on aggregation natural key
+    if spark.catalog.tableExists(target_table):
+        deltaTable = DeltaTable.forName(spark, target_table)
+        deltaTable.alias("target").merge(
+            df_gold.alias("source"),
+            "target.event_date = source.event_date "
+            "AND target.game_type = source.game_type "
+            "AND target.game_category = source.game_category"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_gold.write.format("delta") \
+            .mode("overwrite") \
+            .partitionBy("event_date") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(target_table)
+
+    print(f"Merged {df_gold.count():,} records into {target_table}")
 except Exception as e:
     print(f"ERROR in lh_gold.gold_table_analytics (batch_id={batch_id}): {e}")
     raise

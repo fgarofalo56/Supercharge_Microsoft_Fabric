@@ -42,6 +42,7 @@ from pyspark.sql.functions import (
     when,
 )
 from pyspark.sql.types import FloatType, IntegerType
+from delta.tables import DeltaTable
 from datetime import datetime
 
 # Parameters (set by pipeline or manual)
@@ -352,16 +353,26 @@ try:
     
     df_final = df_silver.select([col(c) for c in final_columns if c in df_silver.columns])
     
-    # Write to Silver layer
-    df_final.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .option("overwriteSchema", "true") \
-        .partitionBy("event_date") \
-        .saveAsTable(target_table)
-    
-    silver_count = df_final.count()
-    print(f"Written {silver_count:,} records to {target_table}")
+    # Write to Silver layer using Delta MERGE (incremental upsert)
+    if spark.catalog.tableExists(target_table):
+        deltaTable = DeltaTable.forName(spark, target_table)
+        deltaTable.alias("target").merge(
+            df_final.alias("source"),
+            "target.event_id = source.event_id"
+        ).whenMatchedUpdateAll(
+            condition="target._silver_timestamp < source._silver_timestamp"
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_final.write \
+            .format("delta") \
+            .mode("overwrite") \
+            .option("overwriteSchema", "true") \
+            .partitionBy("event_date") \
+            .saveAsTable(target_table)
+
+    silver_count = spark.table(target_table).count()
+    print(f"Written/merged records to {target_table} (total: {silver_count:,})")
 except Exception as e:
     print(f"ERROR in lh_silver.silver_people_movement (batch_id={batch_id}): {e}")
     raise

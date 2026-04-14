@@ -285,7 +285,7 @@ CREATE OR REPLACE EXTERNAL VOLUME onelake_volume
   );
 
 -- Grant Snowflake's service principal access to OneLake
--- (Requires Azure AD app registration and RBAC assignment)
+-- (Requires Microsoft Entra ID app registration and RBAC assignment)
 ```
 
 **Step 2: Create an Iceberg Table in Snowflake**
@@ -363,7 +363,7 @@ Workspace → + New → Snowflake (Preview)
 
 | Auth Method | Direction | Setup |
 |------------|-----------|-------|
-| **OAuth (Entra ID)** | Both | Register app in Azure AD, configure Snowflake security integration |
+| **OAuth (Entra ID)** | Both | Register app in Microsoft Entra ID, configure Snowflake security integration |
 | **Service Principal** | Snowflake → OneLake | Create SPN with Storage Blob Data Contributor on OneLake |
 | **Key Pair** | Fabric → Snowflake | Generate RSA key pair, assign public key to Snowflake user |
 | **Managed Identity** | Fabric → OneLake | Automatic for Fabric workloads (no configuration needed) |

@@ -512,7 +512,7 @@ graph TD
 | Rule | Requirement | Implementation |
 |------|-------------|----------------|
 | **Privacy Rule** | Minimum necessary standard for PHI access | Role-based access control (RBAC) on all Lakehouse tables; row-level security in Power BI |
-| **Security Rule** | Administrative, physical, and technical safeguards | Azure AD authentication, conditional access policies, Fabric workspace isolation |
+| **Security Rule** | Administrative, physical, and technical safeguards | Microsoft Entra ID authentication, conditional access policies, Fabric workspace isolation |
 | **Breach Notification** | 60-day notification for breaches affecting 500+ individuals | Automated alerting via Microsoft Sentinel integration |
 | **Transaction Standards** | Standard code sets (ICD-10, CPT, NDC) | All encounter records use validated ICD-10, CPT, and NDC codes |
 | **Retention** | 6-year minimum retention for HIPAA records | Delta Lake time travel with 7-year retention policy |

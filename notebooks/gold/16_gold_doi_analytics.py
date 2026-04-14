@@ -48,6 +48,7 @@ from pyspark.sql.functions import (
     year,
 )
 from pyspark.sql.window import Window
+from delta.tables import DeltaTable
 from datetime import datetime
 
 # Parameters
@@ -220,16 +221,24 @@ df_seismic_final = df_seismic_risk \
 # COMMAND ----------
 
 try:
-    df_seismic_final.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .partitionBy("event_year") \
-        .option("overwriteSchema", "true") \
-        .saveAsTable(TARGET_SEISMIC_RISK)
-    
-    print(f"Written {df_seismic_final.count():,} records to {TARGET_SEISMIC_RISK}")
+    if spark.catalog.tableExists(TARGET_SEISMIC_RISK):
+        deltaTable = DeltaTable.forName(spark, TARGET_SEISMIC_RISK)
+        deltaTable.alias("target").merge(
+            df_seismic_final.alias("source"),
+            "target.region = source.region AND target.event_year = source.event_year"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_seismic_final.write.format("delta") \
+            .mode("overwrite") \
+            .partitionBy("event_year") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_SEISMIC_RISK)
+
+    print(f"Merged {df_seismic_final.count():,} records into {TARGET_SEISMIC_RISK}")
 except Exception as e:
-    print(f"ERROR in unknown (batch_id={batch_id}): {e}")
+    print(f"ERROR writing seismic risk (batch_id={batch_id}): {e}")
     raise
 
 # COMMAND ----------
@@ -338,14 +347,26 @@ df_water_resources = df_water_agg \
 
 # COMMAND ----------
 
-df_water_resources.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("measurement_year") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_WATER_RESOURCES)
+try:
+    if spark.catalog.tableExists(TARGET_WATER_RESOURCES):
+        deltaTable = DeltaTable.forName(spark, TARGET_WATER_RESOURCES)
+        deltaTable.alias("target").merge(
+            df_water_resources.alias("source"),
+            "target.site_state = source.site_state AND target.measurement_year = source.measurement_year"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_water_resources.write.format("delta") \
+            .mode("overwrite") \
+            .partitionBy("measurement_year") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_WATER_RESOURCES)
 
-print(f"Written {df_water_resources.count():,} records to {TARGET_WATER_RESOURCES}")
+    print(f"Merged {df_water_resources.count():,} records into {TARGET_WATER_RESOURCES}")
+except Exception as e:
+    print(f"ERROR writing water resources (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 
@@ -500,14 +521,26 @@ df_park_final = df_park_yoy \
 
 # COMMAND ----------
 
-df_park_final.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("visit_year") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_PARK_PERFORMANCE)
+try:
+    if spark.catalog.tableExists(TARGET_PARK_PERFORMANCE):
+        deltaTable = DeltaTable.forName(spark, TARGET_PARK_PERFORMANCE)
+        deltaTable.alias("target").merge(
+            df_park_final.alias("source"),
+            "target.park_code = source.park_code AND target.visit_year = source.visit_year"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_park_final.write.format("delta") \
+            .mode("overwrite") \
+            .partitionBy("visit_year") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_PARK_PERFORMANCE)
 
-print(f"Written {df_park_final.count():,} records to {TARGET_PARK_PERFORMANCE}")
+    print(f"Merged {df_park_final.count():,} records into {TARGET_PARK_PERFORMANCE}")
+except Exception as e:
+    print(f"ERROR writing park performance (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 
@@ -653,13 +686,25 @@ df_dashboard_scored = df_dashboard \
 
 # COMMAND ----------
 
-df_dashboard_scored.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_NR_DASHBOARD)
+try:
+    if spark.catalog.tableExists(TARGET_NR_DASHBOARD):
+        deltaTable = DeltaTable.forName(spark, TARGET_NR_DASHBOARD)
+        deltaTable.alias("target").merge(
+            df_dashboard_scored.alias("source"),
+            "target.report_year = source.report_year"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_dashboard_scored.write.format("delta") \
+            .mode("overwrite") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_NR_DASHBOARD)
 
-print(f"Written {df_dashboard_scored.count():,} records to {TARGET_NR_DASHBOARD}")
+    print(f"Merged {df_dashboard_scored.count():,} records into {TARGET_NR_DASHBOARD}")
+except Exception as e:
+    print(f"ERROR writing NR dashboard (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

@@ -254,7 +254,7 @@ This diagram illustrates the security and governance framework.
 ```mermaid
 flowchart TB
     subgraph Access["🔑 Access Control"]
-        AAD["Azure AD"]
+        AAD["Entra ID"]
         RBAC["Role-Based Access"]
         RLS["Row-Level Security"]
     end
@@ -287,7 +287,7 @@ flowchart TB
 
 | Layer | Controls | Tools |
 |-------|----------|-------|
-| 🔑 Identity | SSO, MFA, Conditional Access | Azure AD |
+| 🔑 Identity | SSO, MFA, Conditional Access | Microsoft Entra ID |
 | 🔒 Data | Encryption, Masking, Tokenization | Key Vault, Purview |
 | 📝 Audit | Activity logs, Access logs | Log Analytics |
 | 📋 Compliance | Policy enforcement, Reporting | Purview, Custom |

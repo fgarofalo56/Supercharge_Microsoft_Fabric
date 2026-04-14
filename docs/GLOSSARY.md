@@ -168,13 +168,13 @@
 | **Azure AD** | Azure Active Directory (now Microsoft Entra ID) - cloud identity and access management service. | Identity | Entra ID, IAM, SSO |
 | **Bicep** | Domain-specific language for deploying Azure resources declaratively, transpiles to ARM templates. | IaC | ARM, Template, Infrastructure |
 | **Capacity Unit (CU)** | Unit of compute and storage capacity in Microsoft Fabric, determines performance and concurrency. | Measurement | CU, Capacity, SKU |
-| **Conditional Access** | Azure AD feature controlling access based on conditions (location, device, risk level). | Security | MFA, Policy, Zero Trust |
+| **Conditional Access** | Microsoft Entra ID feature controlling access based on conditions (location, device, risk level). | Security | MFA, Policy, Zero Trust |
 | **Defender for Cloud** | Azure security posture management and threat protection service. | Security | Security Center, CSPM, CWPP |
 | **Key Vault** | Azure service for securely storing and managing secrets, certificates, and encryption keys. | Security | Secrets, Keys, Certificates |
-| **Managed Identity** | Azure AD identity for Azure resources, eliminating need for credentials in code. | Identity | Service Principal, MSI, Authentication |
-| **MFA** | Multi-Factor Authentication - requiring multiple verification methods to authenticate users. | Security | 2FA, Authentication, Azure AD |
+| **Managed Identity** | Microsoft Entra ID identity for Azure resources, eliminating need for credentials in code. | Identity | Service Principal, MSI, Authentication |
+| **MFA** | Multi-Factor Authentication - requiring multiple verification methods to authenticate users. | Security | 2FA, Authentication, Microsoft Entra ID |
 | **NSG** | Network Security Group - firewall rules controlling inbound/outbound traffic to Azure resources. | Networking | Firewall, Rules, Security |
-| **PIM** | Privileged Identity Management - Azure AD feature providing just-in-time admin access. | Security | JIT, Admin, Elevation |
+| **PIM** | Privileged Identity Management - Microsoft Entra ID feature providing just-in-time admin access. | Security | JIT, Admin, Elevation |
 | **Private Endpoint** | Network interface connecting privately to Azure services over private IP address. | Networking | Private Link, VNet, Connectivity |
 | **RBAC** | Role-Based Access Control - authorization system assigning permissions based on roles. | Security | Permissions, IAM, Authorization |
 | **Region** | Azure geographic area containing one or more datacenters (e.g., East US, West Europe). | Geography | Location, Datacenter, Availability |
@@ -182,7 +182,7 @@
 | **Sentinel** | Azure-native SIEM (Security Information and Event Management) and SOAR solution. | Security | SIEM, SOAR, Security Analytics |
 | **SKU** | Stock Keeping Unit - tier or size variant of Azure service (Basic, Standard, Premium, F64, etc.). | Pricing | Tier, Size, Capacity |
 | **Subscription** | Azure billing and management boundary containing resource groups and resources. | Management | Billing, Tenant, Account |
-| **Tenant** | Dedicated Azure AD instance representing an organization. | Identity | Directory, Organization, Azure AD |
+| **Tenant** | Dedicated Microsoft Entra ID instance representing an organization. | Identity | Directory, Organization, Microsoft Entra ID |
 | **VNet** | Virtual Network - isolated network environment in Azure for deploying resources. | Networking | Network, Subnet, Virtual Network |
 
 ---
@@ -191,7 +191,7 @@
 
 | Term | Definition | Category | Related Terms |
 |------|------------|----------|---------------|
-| **Authentication** | Process of verifying identity (who you are) using credentials, tokens, or biometrics. | Concept | Login, Identity, Azure AD |
+| **Authentication** | Process of verifying identity (who you are) using credentials, tokens, or biometrics. | Concept | Login, Identity, Microsoft Entra ID |
 | **Authorization** | Process of determining permissions (what you can do) after authentication. | Concept | RBAC, Permissions, Access Control |
 | **Classification** | Tagging data by sensitivity level (Public, Internal, Confidential, Restricted) for governance. | Governance | Labeling, Sensitivity, Purview |
 | **Data Masking** | Technique hiding sensitive data by replacing characters (e.g., SSN: ***-**-1234). | Protection | Obfuscation, Redaction, Privacy |
@@ -205,7 +205,7 @@
 | **Row-Level Security (RLS)** | Filtering data rows based on user identity, common in Power BI semantic models. | Access Control | Data Filtering, Security, Power BI |
 | **Security Principal** | Identity that can be authenticated and authorized (user, group, service principal, managed identity). | Identity | User, Group, Service Account |
 | **Service Principal** | Identity used by applications and services to access Azure resources programmatically. | Identity | App Identity, Service Account, Auth |
-| **SSO** | Single Sign-On - authentication allowing one set of credentials to access multiple systems. | Authentication | Azure AD, Federation, Login |
+| **SSO** | Single Sign-On - authentication allowing one set of credentials to access multiple systems. | Authentication | Microsoft Entra ID, Federation, Login |
 | **TLS** | Transport Layer Security - cryptographic protocol for secure network communication. | Protocol | SSL, HTTPS, Encryption |
 | **Zero Trust** | Security model assuming breach and verifying every access request regardless of location. | Strategy | Never Trust, Always Verify, Modern Security |
 

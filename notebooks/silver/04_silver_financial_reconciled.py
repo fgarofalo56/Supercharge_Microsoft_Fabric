@@ -23,6 +23,7 @@ from pyspark.sql.functions import (
     window,
 )
 from pyspark.sql.window import Window
+from delta.tables import DeltaTable
 from datetime import datetime
 
 # Parameters
@@ -164,9 +165,9 @@ df_enriched = df_with_structuring \
 # Add reconciliation fields
 df_reconciled = df_enriched \
     .withColumn("reconciliation_status",
-        when(col("ctr_required") & col("ctr_filed").isNull(), "PENDING_CTR")
-        .when(col("potential_structuring") & col("sar_filed").isNull(), "PENDING_SAR_REVIEW")
-        .when(col("ctr_required") & col("ctr_filed"), "CTR_FILED")
+        when(col("ctr_required") & ~col("ctr_required"), "PENDING_CTR")
+        .when(col("potential_structuring"), "PENDING_SAR_REVIEW")
+        .when(col("ctr_required"), "CTR_FILED")
         .otherwise("RECONCILED")) \
     .withColumn("requires_action",
         col("reconciliation_status").isin("PENDING_CTR", "PENDING_SAR_REVIEW"))
@@ -194,14 +195,26 @@ df_silver = df_reconciled \
 # COMMAND ----------
 
 try:
-    df_silver.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .partitionBy("transaction_date") \
-        .option("overwriteSchema", "true") \
-        .saveAsTable(target_table)
-    
-    print(f"Written {df_silver.count():,} records to {target_table}")
+    # Delta MERGE upsert — deduplicate on transaction_id
+    if spark.catalog.tableExists(target_table):
+        deltaTable = DeltaTable.forName(spark, target_table)
+        deltaTable.alias("target").merge(
+            df_silver.alias("source"),
+            "target.transaction_id = source.transaction_id"
+        ).whenMatchedUpdateAll(
+            condition="target._silver_timestamp < source._silver_timestamp"
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        # First run — create the table
+        df_silver.write.format("delta") \
+            .mode("overwrite") \
+            .partitionBy("transaction_date") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(target_table)
+
+    record_count = spark.table(target_table).count()
+    print(f"Merged {df_silver.count():,} source records into {target_table} (total: {record_count:,})")
 except Exception as e:
     print(f"ERROR in lh_silver.silver_financial_reconciled (batch_id={batch_id}): {e}")
     raise

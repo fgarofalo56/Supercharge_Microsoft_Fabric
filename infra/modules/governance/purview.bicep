@@ -86,24 +86,19 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 // Private Endpoint (Optional)
 // =============================================================================
 
-resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-05-01' = if (enablePrivateEndpoint) {
+module purviewPrivateEndpoint '../networking/private-endpoint.bicep' = if (enablePrivateEndpoint) {
   name: 'pe-${purviewAccountName}'
-  location: location
-  tags: tags
-  properties: {
-    subnet: {
-      id: privateEndpointSubnetId
-    }
-    privateLinkServiceConnections: [
-      {
-        name: 'purview-connection'
-        properties: {
-          privateLinkServiceId: purviewAccount.id
-          groupIds: [
-            'account'
-          ]
-        }
-      }
+  params: {
+    name: 'pe-${purviewAccountName}'
+    location: location
+    tags: tags
+    subnetId: privateEndpointSubnetId
+    privateLinkServiceId: purviewAccount.id
+    groupIds: [
+      'account'
+    ]
+    dnsZoneNames: [
+      'privatelink.purview.azure.com'
     ]
   }
 }

@@ -14,8 +14,8 @@ param fabricCapacitySku = 'F64'
 // Admin email for Fabric capacity alerts and notifications
 param fabricAdminEmail = 'frgarofa@microsoft.com'
 
-// Staging can test private endpoints
-param enablePrivateEndpoints = false
+// Staging must test private endpoint code path like production
+param enablePrivateEndpoints = true
 
 // Medium retention for staging
 param logRetentionDays = 60

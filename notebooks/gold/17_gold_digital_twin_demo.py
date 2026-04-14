@@ -41,6 +41,7 @@ from pyspark.sql.types import (
     StructField,
     StructType,
 )
+from delta.tables import DeltaTable
 from datetime import datetime
 
 # Parameters
@@ -164,7 +165,7 @@ df_latest_telemetry = df_slot_telemetry \
         max("event_timestamp").alias("last_event_time"),
         sum("coin_in").alias("coins_in_last_hour"),
         sum("coin_out").alias("coins_out_last_hour"),
-        avg("credits").alias("current_credits"),
+        avg("coin_in").alias("current_credits"),
         count("*").alias("event_count"),
     )
 
@@ -383,24 +384,40 @@ df_all_relationships = df_machine_zone_rels \
     .withColumn("_gold_timestamp", current_timestamp()) \
     .withColumn("_batch_id", lit(batch_id))
 
-# Write entities
+# Write entities (Delta MERGE - incremental)
 try:
-    df_all_entities.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .option("overwriteSchema", "true") \
-        .saveAsTable(TARGET_ENTITIES)
+    if spark.catalog.tableExists(TARGET_ENTITIES):
+        deltaTable = DeltaTable.forName(spark, TARGET_ENTITIES)
+        deltaTable.alias("target").merge(
+            df_all_entities.alias("source"),
+            "target.entity_id = source.entity_id"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_all_entities.write.format("delta") \
+            .mode("overwrite") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_ENTITIES)
 
-    df_all_relationships.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .option("overwriteSchema", "true") \
-        .saveAsTable(TARGET_RELATIONSHIPS)
+    if spark.catalog.tableExists(TARGET_RELATIONSHIPS):
+        deltaTableRel = DeltaTable.forName(spark, TARGET_RELATIONSHIPS)
+        deltaTableRel.alias("target").merge(
+            df_all_relationships.alias("source"),
+            "target.relationship_id = source.relationship_id"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_all_relationships.write.format("delta") \
+            .mode("overwrite") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_RELATIONSHIPS)
 
     entity_count = df_all_entities.count()
     rel_count = df_all_relationships.count()
-    print(f"Written {entity_count:,} entities to {TARGET_ENTITIES}")
-    print(f"Written {rel_count:,} relationships to {TARGET_RELATIONSHIPS}")
+    print(f"Merged {entity_count:,} entities into {TARGET_ENTITIES}")
+    print(f"Merged {rel_count:,} relationships into {TARGET_RELATIONSHIPS}")
 except Exception as e:
     print(f"ERROR in digital twin export (batch_id={batch_id}): {e}")
     raise
@@ -469,13 +486,21 @@ df_federal_template = spark.createDataFrame(
     .withColumn("_batch_id", lit(batch_id))
 
 try:
-    df_federal_template.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .option("overwriteSchema", "true") \
-        .saveAsTable(TARGET_FEDERAL_TEMPLATE)
+    if spark.catalog.tableExists(TARGET_FEDERAL_TEMPLATE):
+        deltaTable = DeltaTable.forName(spark, TARGET_FEDERAL_TEMPLATE)
+        deltaTable.alias("target").merge(
+            df_federal_template.alias("source"),
+            "target.entity_id = source.entity_id"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_federal_template.write.format("delta") \
+            .mode("overwrite") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_FEDERAL_TEMPLATE)
 
-    print(f"Written {df_federal_template.count():,} federal template entities to {TARGET_FEDERAL_TEMPLATE}")
+    print(f"Merged {df_federal_template.count():,} federal template entities into {TARGET_FEDERAL_TEMPLATE}")
 except Exception as e:
     print(f"ERROR in federal template (batch_id={batch_id}): {e}")
     raise

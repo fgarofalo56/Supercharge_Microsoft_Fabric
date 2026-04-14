@@ -179,7 +179,7 @@ See [Prerequisites - Dev Container Setup](PREREQUISITES.md#dev-container-setup-a
 <summary>🔑 Click to see steps</summary>
 
 **Requirements:**
-- Azure AD Global Administrator OR Fabric Administrator role
+- Microsoft Entra ID Global Administrator OR Fabric Administrator role
 
 **Steps:**
 1. Navigate to [Microsoft Fabric Admin Portal](https://app.fabric.microsoft.com/admin-portal)
@@ -195,7 +195,7 @@ See [Prerequisites - Dev Container Setup](PREREQUISITES.md#dev-container-setup-a
 2. You should see the Fabric home page
 3. Click **+ New** - you should see Lakehouse, Warehouse, etc.
 
-**Troubleshooting:** If Fabric options don't appear, contact your Azure AD admin to verify tenant settings.
+**Troubleshooting:** If Fabric options don't appear, contact your Microsoft Entra ID admin to verify tenant settings.
 
 </details>
 
@@ -608,7 +608,7 @@ See [Tutorials README](tutorials/README.md) for complete learning path.
 
 **Cause:** Fabric not enabled in tenant
 
-**Fix:** Ask Azure AD admin to enable Fabric tenant settings.
+**Fix:** Ask Microsoft Entra ID admin to enable Fabric tenant settings.
 
 ---
 

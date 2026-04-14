@@ -41,6 +41,7 @@ from pyspark.sql.functions import (
     window,
 )
 from pyspark.sql.window import Window
+from delta.tables import DeltaTable
 from datetime import datetime
 
 # Parameters
@@ -177,19 +178,27 @@ print(f"Geofence summary records: {df_geofence_summary.count():,}")
 # COMMAND ----------
 
 try:
-    df_geofence_summary.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .option("overwriteSchema", "true") \
-        .partitionBy("event_date") \
-        .saveAsTable(geofence_summary_table)
-    
-    print(f"Written {df_geofence_summary.count():,} records to {geofence_summary_table}")
-    
+    if spark.catalog.tableExists(geofence_summary_table):
+        deltaTable = DeltaTable.forName(spark, geofence_summary_table)
+        deltaTable.alias("target").merge(
+            df_geofence_summary.alias("source"),
+            "target.geofence_id = source.geofence_id AND target.geofence_name = source.geofence_name AND target.event_date = source.event_date"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_geofence_summary.write.format("delta") \
+            .mode("overwrite") \
+            .option("overwriteSchema", "true") \
+            .partitionBy("event_date") \
+            .saveAsTable(geofence_summary_table)
+
+    print(f"Merged {df_geofence_summary.count():,} records into {geofence_summary_table}")
+
     spark.sql(f"OPTIMIZE {geofence_summary_table} ZORDER BY (geofence_id, geofence_name)")
     print("Geofence summary table optimized")
 except Exception as e:
-    print(f"ERROR in unknown (batch_id={batch_id}): {e}")
+    print(f"ERROR writing geofence summary (batch_id={batch_id}): {e}")
     raise
 
 # COMMAND ----------
@@ -335,17 +344,29 @@ print(f"Device tracking records: {df_device_tracking.count():,}")
 
 # COMMAND ----------
 
-df_device_tracking.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .partitionBy("event_date") \
-    .saveAsTable(device_tracking_table)
+try:
+    if spark.catalog.tableExists(device_tracking_table):
+        deltaTable = DeltaTable.forName(spark, device_tracking_table)
+        deltaTable.alias("target").merge(
+            df_device_tracking.alias("source"),
+            "target.device_id = source.device_id AND target.device_type_clean = source.device_type_clean AND target.mobility_class = source.mobility_class AND target.event_date = source.event_date"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_device_tracking.write.format("delta") \
+            .mode("overwrite") \
+            .option("overwriteSchema", "true") \
+            .partitionBy("event_date") \
+            .saveAsTable(device_tracking_table)
 
-print(f"Written {df_device_tracking.count():,} records to {device_tracking_table}")
+    print(f"Merged {df_device_tracking.count():,} records into {device_tracking_table}")
 
-spark.sql(f"OPTIMIZE {device_tracking_table} ZORDER BY (device_id, device_type_clean)")
-print("Device tracking table optimized")
+    spark.sql(f"OPTIMIZE {device_tracking_table} ZORDER BY (device_id, device_type_clean)")
+    print("Device tracking table optimized")
+except Exception as e:
+    print(f"ERROR writing device tracking (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 
@@ -448,17 +469,29 @@ print(f"H3 density records: {df_h3_density.count():,}")
 
 # COMMAND ----------
 
-df_h3_density.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .partitionBy("event_date") \
-    .saveAsTable(h3_density_table)
+try:
+    if spark.catalog.tableExists(h3_density_table):
+        deltaTable = DeltaTable.forName(spark, h3_density_table)
+        deltaTable.alias("target").merge(
+            df_h3_density.alias("source"),
+            "target.h3_index = source.h3_index AND target.event_date = source.event_date AND target.event_hour = source.event_hour"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_h3_density.write.format("delta") \
+            .mode("overwrite") \
+            .option("overwriteSchema", "true") \
+            .partitionBy("event_date") \
+            .saveAsTable(h3_density_table)
 
-print(f"Written {df_h3_density.count():,} records to {h3_density_table}")
+    print(f"Merged {df_h3_density.count():,} records into {h3_density_table}")
 
-spark.sql(f"OPTIMIZE {h3_density_table} ZORDER BY (h3_index, event_hour)")
-print("H3 density table optimized")
+    spark.sql(f"OPTIMIZE {h3_density_table} ZORDER BY (h3_index, event_hour)")
+    print("H3 density table optimized")
+except Exception as e:
+    print(f"ERROR writing H3 density (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

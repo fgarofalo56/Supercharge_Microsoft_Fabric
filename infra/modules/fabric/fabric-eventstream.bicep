@@ -110,7 +110,7 @@ resource eventHubNamespace 'Microsoft.EventHub/namespaces@2024-01-01' = {
     publicNetworkAccess: enablePrivateEndpoint ? 'Disabled' : 'Enabled'
     minimumTlsVersion: '1.2'
     zoneRedundant: true
-    disableLocalAuth: false
+    disableLocalAuth: true
   }
 }
 
@@ -155,7 +155,6 @@ resource sendListenRule 'Microsoft.EventHub/namespaces/authorizationRules@2024-0
     rights: [
       'Send'
       'Listen'
-      'Manage'
     ]
   }
 }
@@ -198,24 +197,19 @@ resource eventHubDiagnostics 'Microsoft.Insights/diagnosticSettings@2021-05-01-p
 // Private Endpoint (Optional)
 // =============================================================================
 
-resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-05-01' = if (enablePrivateEndpoint) {
+module eventstreamPrivateEndpoint '../networking/private-endpoint.bicep' = if (enablePrivateEndpoint) {
   name: 'pe-${eventStreamName}'
-  location: location
-  tags: tags
-  properties: {
-    subnet: {
-      id: privateEndpointSubnetId
-    }
-    privateLinkServiceConnections: [
-      {
-        name: 'eventstream-connection'
-        properties: {
-          privateLinkServiceId: eventHubNamespace.id
-          groupIds: [
-            'namespace'
-          ]
-        }
-      }
+  params: {
+    name: 'pe-${eventStreamName}'
+    location: location
+    tags: tags
+    subnetId: privateEndpointSubnetId
+    privateLinkServiceId: eventHubNamespace.id
+    groupIds: [
+      'namespace'
+    ]
+    dnsZoneNames: [
+      'privatelink.servicebus.windows.net'
     ]
   }
 }

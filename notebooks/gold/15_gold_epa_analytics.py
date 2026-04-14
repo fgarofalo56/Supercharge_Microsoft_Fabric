@@ -50,6 +50,7 @@ from pyspark.sql.functions import (
     year,
 )
 from pyspark.sql.window import Window
+from delta.tables import DeltaTable
 from datetime import datetime
 
 # Parameters
@@ -196,16 +197,24 @@ df_aqi_final = df_aqi_with_rolling \
 # COMMAND ----------
 
 try:
-    df_aqi_final.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .partitionBy("state") \
-        .option("overwriteSchema", "true") \
-        .saveAsTable(TARGET_AIR_QUALITY)
-    
-    print(f"Written {df_aqi_final.count():,} records to {TARGET_AIR_QUALITY}")
+    if spark.catalog.tableExists(TARGET_AIR_QUALITY):
+        deltaTable = DeltaTable.forName(spark, TARGET_AIR_QUALITY)
+        deltaTable.alias("target").merge(
+            df_aqi_final.alias("source"),
+            "target.state = source.state AND target.county_fips = source.county_fips AND target.date = source.date"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_aqi_final.write.format("delta") \
+            .mode("overwrite") \
+            .partitionBy("state") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_AIR_QUALITY)
+
+    print(f"Merged {df_aqi_final.count():,} records into {TARGET_AIR_QUALITY}")
 except Exception as e:
-    print(f"ERROR in unknown (batch_id={batch_id}): {e}")
+    print(f"ERROR writing air quality (batch_id={batch_id}): {e}")
     raise
 
 # COMMAND ----------
@@ -353,14 +362,26 @@ df_facility_final = df_facility_with_trend \
 
 # COMMAND ----------
 
-df_facility_final.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("state") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_FACILITY_RISK)
+try:
+    if spark.catalog.tableExists(TARGET_FACILITY_RISK):
+        deltaTable = DeltaTable.forName(spark, TARGET_FACILITY_RISK)
+        deltaTable.alias("target").merge(
+            df_facility_final.alias("source"),
+            "target.facility_id = source.facility_id"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_facility_final.write.format("delta") \
+            .mode("overwrite") \
+            .partitionBy("state") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_FACILITY_RISK)
 
-print(f"Written {df_facility_final.count():,} records to {TARGET_FACILITY_RISK}")
+    print(f"Merged {df_facility_final.count():,} records into {TARGET_FACILITY_RISK}")
+except Exception as e:
+    print(f"ERROR writing facility risk (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 
@@ -515,14 +536,26 @@ df_water_final = df_water_scored \
 
 # COMMAND ----------
 
-df_water_final.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("state") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_WATER_COMPLIANCE)
+try:
+    if spark.catalog.tableExists(TARGET_WATER_COMPLIANCE):
+        deltaTable = DeltaTable.forName(spark, TARGET_WATER_COMPLIANCE)
+        deltaTable.alias("target").merge(
+            df_water_final.alias("source"),
+            "target.pwsid = source.pwsid"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_water_final.write.format("delta") \
+            .mode("overwrite") \
+            .partitionBy("state") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_WATER_COMPLIANCE)
 
-print(f"Written {df_water_final.count():,} records to {TARGET_WATER_COMPLIANCE}")
+    print(f"Merged {df_water_final.count():,} records into {TARGET_WATER_COMPLIANCE}")
+except Exception as e:
+    print(f"ERROR writing water compliance (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 
@@ -698,14 +731,26 @@ df_scorecard_final = df_env_scorecard \
 
 # COMMAND ----------
 
-df_scorecard_final.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .partitionBy("report_year") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable(TARGET_ENV_SCORECARD)
+try:
+    if spark.catalog.tableExists(TARGET_ENV_SCORECARD):
+        deltaTable = DeltaTable.forName(spark, TARGET_ENV_SCORECARD)
+        deltaTable.alias("target").merge(
+            df_scorecard_final.alias("source"),
+            "target.state = source.state AND target.report_year = source.report_year"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_scorecard_final.write.format("delta") \
+            .mode("overwrite") \
+            .partitionBy("report_year") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(TARGET_ENV_SCORECARD)
 
-print(f"Written {df_scorecard_final.count():,} records to {TARGET_ENV_SCORECARD}")
+    print(f"Merged {df_scorecard_final.count():,} records into {TARGET_ENV_SCORECARD}")
+except Exception as e:
+    print(f"ERROR writing environmental scorecard (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

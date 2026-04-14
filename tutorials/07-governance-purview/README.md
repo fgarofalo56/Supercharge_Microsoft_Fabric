@@ -140,7 +140,7 @@ Microsoft Purview provides unified data governance:
 - [ ] Microsoft Purview account deployed in your Azure subscription
 - [ ] Purview Data Curator role or higher
 - [ ] Fabric workspace admin access
-- [ ] Azure AD permissions for service principal (optional)
+- [ ] Microsoft Entra ID permissions for service principal (optional)
 
 > **Note:** Purview is included with Microsoft 365 E5 or can be provisioned separately in Azure.
 
@@ -158,7 +158,7 @@ Microsoft Purview provides unified data governance:
 | Setting | Value |
 |---------|-------|
 | **Name** | `Fabric-Casino-POC` |
-| **Tenant** | Select your Azure AD tenant |
+| **Tenant** | Select your Microsoft Entra ID tenant |
 | **Workspace** | `casino-fabric-poc` |
 | **Collection** | Root or create `Casino Data Estate` |
 

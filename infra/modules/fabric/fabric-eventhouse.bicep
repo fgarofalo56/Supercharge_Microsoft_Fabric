@@ -272,24 +272,19 @@ resource adxDiagnostics 'Microsoft.Insights/diagnosticSettings@2021-05-01-previe
 // Private Endpoint (Optional)
 // =============================================================================
 
-resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-05-01' = if (enablePrivateEndpoint) {
+module eventhousePrivateEndpoint '../networking/private-endpoint.bicep' = if (enablePrivateEndpoint) {
   name: 'pe-${eventHouseName}'
-  location: location
-  tags: tags
-  properties: {
-    subnet: {
-      id: privateEndpointSubnetId
-    }
-    privateLinkServiceConnections: [
-      {
-        name: 'eventhouse-connection'
-        properties: {
-          privateLinkServiceId: adxCluster.id
-          groupIds: [
-            'cluster'
-          ]
-        }
-      }
+  params: {
+    name: 'pe-${eventHouseName}'
+    location: location
+    tags: tags
+    subnetId: privateEndpointSubnetId
+    privateLinkServiceId: adxCluster.id
+    groupIds: [
+      'cluster'
+    ]
+    dnsZoneNames: [
+      'privatelink.kusto.windows.net'
     ]
   }
 }

@@ -41,6 +41,7 @@ from pyspark.sql.functions import (
     window,
 )
 from pyspark.sql.window import Window
+from delta.tables import DeltaTable
 from datetime import datetime
 
 # Parameters
@@ -156,15 +157,23 @@ print(f"Alert summary records: {df_alert_summary.count():,}")
 # COMMAND ----------
 
 try:
-    df_alert_summary.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .option("overwriteSchema", "true") \
-        .partitionBy("event_date") \
-        .saveAsTable(alert_summary_table)
-    
-    print(f"Written {df_alert_summary.count():,} records to {alert_summary_table}")
-    
+    if spark.catalog.tableExists(alert_summary_table):
+        deltaTable = DeltaTable.forName(spark, alert_summary_table)
+        deltaTable.alias("target").merge(
+            df_alert_summary.alias("source"),
+            "target.camera_id = source.camera_id AND target.camera_location_clean = source.camera_location_clean AND target.event_type_clean = source.event_type_clean AND target.alert_level_clean = source.alert_level_clean AND target.event_date = source.event_date"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_alert_summary.write.format("delta") \
+            .mode("overwrite") \
+            .option("overwriteSchema", "true") \
+            .partitionBy("event_date") \
+            .saveAsTable(alert_summary_table)
+
+    print(f"Merged {df_alert_summary.count():,} records into {alert_summary_table}")
+
     spark.sql(f"OPTIMIZE {alert_summary_table} ZORDER BY (camera_id, event_type_clean)")
     print("Alert summary table optimized")
 except Exception as e:
@@ -264,17 +273,29 @@ print(f"Camera utilization records: {df_camera_util.count():,}")
 
 # COMMAND ----------
 
-df_camera_util.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .partitionBy("event_date") \
-    .saveAsTable(camera_util_table)
+try:
+    if spark.catalog.tableExists(camera_util_table):
+        deltaTable = DeltaTable.forName(spark, camera_util_table)
+        deltaTable.alias("target").merge(
+            df_camera_util.alias("source"),
+            "target.camera_id = source.camera_id AND target.camera_location_clean = source.camera_location_clean AND target.event_date = source.event_date"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_camera_util.write.format("delta") \
+            .mode("overwrite") \
+            .option("overwriteSchema", "true") \
+            .partitionBy("event_date") \
+            .saveAsTable(camera_util_table)
 
-print(f"Written {df_camera_util.count():,} records to {camera_util_table}")
+    print(f"Merged {df_camera_util.count():,} records into {camera_util_table}")
 
-spark.sql(f"OPTIMIZE {camera_util_table} ZORDER BY (camera_id, camera_location_clean)")
-print("Camera utilization table optimized")
+    spark.sql(f"OPTIMIZE {camera_util_table} ZORDER BY (camera_id, camera_location_clean)")
+    print("Camera utilization table optimized")
+except Exception as e:
+    print(f"ERROR writing camera utilization (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 
@@ -362,17 +383,29 @@ print(f"Incident trend records: {df_incident_trends.count():,}")
 
 # COMMAND ----------
 
-df_incident_trends.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .partitionBy("event_date") \
-    .saveAsTable(incident_trends_table)
+try:
+    if spark.catalog.tableExists(incident_trends_table):
+        deltaTable = DeltaTable.forName(spark, incident_trends_table)
+        deltaTable.alias("target").merge(
+            df_incident_trends.alias("source"),
+            "target.camera_location_clean = source.camera_location_clean AND target.event_date = source.event_date AND target.event_hour = source.event_hour AND target.day_of_week = source.day_of_week AND target.is_weekend = source.is_weekend"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_incident_trends.write.format("delta") \
+            .mode("overwrite") \
+            .option("overwriteSchema", "true") \
+            .partitionBy("event_date") \
+            .saveAsTable(incident_trends_table)
 
-print(f"Written {df_incident_trends.count():,} records to {incident_trends_table}")
+    print(f"Merged {df_incident_trends.count():,} records into {incident_trends_table}")
 
-spark.sql(f"OPTIMIZE {incident_trends_table} ZORDER BY (camera_location_clean, event_hour)")
-print("Incident trends table optimized")
+    spark.sql(f"OPTIMIZE {incident_trends_table} ZORDER BY (camera_location_clean, event_hour)")
+    print("Incident trends table optimized")
+except Exception as e:
+    print(f"ERROR writing incident trends (batch_id={batch_id}): {e}")
+    raise
 
 # COMMAND ----------
 

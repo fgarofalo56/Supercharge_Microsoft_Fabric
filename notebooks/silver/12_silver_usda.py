@@ -48,6 +48,7 @@ from pyspark.sql.functions import (
     year,
 )
 from pyspark.sql.types import DecimalType, IntegerType
+from delta.tables import DeltaTable
 from datetime import datetime
 
 # Parameters (set by pipeline or manual)
@@ -400,15 +401,26 @@ try:
         [col(c) for c in crop_columns if c in df_crop_silver.columns]
     )
     
-    df_crop_out.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .option("overwriteSchema", "true") \
-        .partitionBy("year") \
-        .saveAsTable(TARGET_CROP)
-    
-    crop_silver_count = df_crop_out.count()
-    print(f"Written {crop_silver_count:,} records to {TARGET_CROP}")
+    # Write to Silver layer using Delta MERGE (incremental upsert)
+    if spark.catalog.tableExists(TARGET_CROP):
+        deltaTable = DeltaTable.forName(spark, TARGET_CROP)
+        deltaTable.alias("target").merge(
+            df_crop_out.alias("source"),
+            "target.record_id = source.record_id"
+        ).whenMatchedUpdateAll(
+            condition="target._silver_timestamp < source._silver_timestamp"
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_crop_out.write \
+            .format("delta") \
+            .mode("overwrite") \
+            .option("overwriteSchema", "true") \
+            .partitionBy("year") \
+            .saveAsTable(TARGET_CROP)
+
+    crop_silver_count = spark.table(TARGET_CROP).count()
+    print(f"Written/merged records to {TARGET_CROP} (total: {crop_silver_count:,})")
 except Exception as e:
     print(f"ERROR in unknown (batch_id={batch_id}): {e}")
     raise
@@ -622,15 +634,26 @@ df_food_out = df_food_silver.select(
     [col(c) for c in food_columns if c in df_food_silver.columns]
 )
 
-df_food_out.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .partitionBy("recall_year") \
-    .saveAsTable(TARGET_FOOD_SAFETY)
+# Write to Silver layer using Delta MERGE (incremental upsert)
+if spark.catalog.tableExists(TARGET_FOOD_SAFETY):
+    deltaTable = DeltaTable.forName(spark, TARGET_FOOD_SAFETY)
+    deltaTable.alias("target").merge(
+        df_food_out.alias("source"),
+        "target.recall_id = source.recall_id"
+    ).whenMatchedUpdateAll(
+        condition="target._silver_timestamp < source._silver_timestamp"
+    ).whenNotMatchedInsertAll(
+    ).execute()
+else:
+    df_food_out.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .option("overwriteSchema", "true") \
+        .partitionBy("recall_year") \
+        .saveAsTable(TARGET_FOOD_SAFETY)
 
-food_silver_count = df_food_out.count()
-print(f"Written {food_silver_count:,} records to {TARGET_FOOD_SAFETY}")
+food_silver_count = spark.table(TARGET_FOOD_SAFETY).count()
+print(f"Written/merged records to {TARGET_FOOD_SAFETY} (total: {food_silver_count:,})")
 
 # COMMAND ----------
 

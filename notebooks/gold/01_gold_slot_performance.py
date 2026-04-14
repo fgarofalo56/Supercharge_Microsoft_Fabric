@@ -33,6 +33,7 @@ from pyspark.sql.functions import (
     unix_timestamp,
     when,
 )
+from delta.tables import DeltaTable
 from datetime import datetime
 
 # Parameters
@@ -243,16 +244,29 @@ try:
     ]
     
     df_final = df_gold.select([col(c) for c in final_columns if c in df_gold.columns])
-    
-    # Write to Gold
-    df_final.write \
-        .format("delta") \
-        .mode("overwrite") \
-        .partitionBy("business_date") \
-        .option("overwriteSchema", "true") \
-        .saveAsTable(target_table)
-    
-    print(f"Written {df_final.count():,} records to {target_table}")
+
+    # Write to Gold — incremental MERGE on aggregation natural key
+    if spark.catalog.tableExists(target_table):
+        deltaTable = DeltaTable.forName(spark, target_table)
+        deltaTable.alias("target").merge(
+            df_final.alias("source"),
+            "target.machine_id = source.machine_id "
+            "AND target.zone = source.zone "
+            "AND target.denomination = source.denomination "
+            "AND target.manufacturer = source.manufacturer "
+            "AND target.machine_type = source.machine_type "
+            "AND target.business_date = source.business_date"
+        ).whenMatchedUpdateAll(
+        ).whenNotMatchedInsertAll(
+        ).execute()
+    else:
+        df_final.write.format("delta") \
+            .mode("overwrite") \
+            .partitionBy("business_date") \
+            .option("overwriteSchema", "true") \
+            .saveAsTable(target_table)
+
+    print(f"Merged {df_final.count():,} records into {target_table}")
 except Exception as e:
     print(f"ERROR in lh_gold.gold_slot_performance (batch_id={batch_id}): {e}")
     raise
@@ -372,12 +386,18 @@ spark.sql(f"""
 # Create schema (idempotent):
 # spark.sql("CREATE SCHEMA IF NOT EXISTS casino")
 #
-# Write to schema-qualified table:
-# df_kpis.write \
-#     .format("delta") \
-#     .mode("overwrite") \
-#     .option("overwriteSchema", "true") \
-#     .saveAsTable("casino.gold_slot_performance")
+# Write to schema-qualified table (uses same MERGE pattern):
+# if spark.catalog.tableExists("casino.gold_slot_performance"):
+#     deltaTable = DeltaTable.forName(spark, "casino.gold_slot_performance")
+#     deltaTable.alias("target").merge(
+#         df_kpis.alias("source"),
+#         "target.machine_id = source.machine_id AND target.business_date = source.business_date"
+#     ).whenMatchedUpdateAll().whenNotMatchedInsertAll().execute()
+# else:
+#     df_kpis.write.format("delta") \
+#         .mode("overwrite") \
+#         .option("overwriteSchema", "true") \
+#         .saveAsTable("casino.gold_slot_performance")
 #
 # For federal agency isolation:
 # spark.sql("CREATE SCHEMA IF NOT EXISTS usda")

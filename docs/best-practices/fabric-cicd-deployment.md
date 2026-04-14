@@ -69,7 +69,7 @@ flowchart LR
 |---|---|
 | **Python** | 3.9 or later |
 | **Packages** | `fabric-cicd`, `azure-identity` |
-| **Azure AD App** | App Registration with Fabric API permissions |
+| **Microsoft Entra ID App** | App Registration with Fabric API permissions |
 | **OIDC** | Federated identity for GitHub Actions (recommended) |
 | **Workspace** | One Fabric workspace per environment (dev, staging, prod) |
 | **Permissions** | Contributor or Admin on target workspaces |
@@ -230,7 +230,7 @@ Validate --> Deploy Dev --> Deploy Staging --> Deploy Production
 | Secret | Description |
 |---|---|
 | `AZURE_CLIENT_ID` | App Registration client ID |
-| `AZURE_TENANT_ID` | Azure AD tenant ID |
+| `AZURE_TENANT_ID` | Microsoft Entra ID tenant ID |
 | `AZURE_SUBSCRIPTION_ID` | Azure subscription ID |
 | `FABRIC_DEV_WORKSPACE_ID` | Dev workspace GUID |
 | `FABRIC_STAGING_WORKSPACE_ID` | Staging workspace GUID |

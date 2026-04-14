@@ -365,7 +365,7 @@ Upon completion, the team will have:
 
 | 🔑 Account | ✅ Status |
 |:----------|:--------:|
-| Azure AD accounts for all participants | ⬜ |
+| Microsoft Entra ID accounts for all participants | ⬜ |
 | Fabric workspace access | ⬜ |
 | Purview access (Day 3) | ⬜ |
 
