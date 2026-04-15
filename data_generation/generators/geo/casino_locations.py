@@ -599,58 +599,58 @@ def generate_us_casino_locations(count: int = 100) -> list[dict[str, Any]]:
     casinos = []
 
     for i in range(count):
-        market = random.choice(US_GAMING_MARKETS)
+        market = random.choice(US_GAMING_MARKETS)  # nosec B311 - synthetic data only
 
         # Add randomness to coordinates (within ~5 miles)
-        lat_offset = random.uniform(-0.05, 0.05)
-        lon_offset = random.uniform(-0.05, 0.05)
+        lat_offset = random.uniform(-0.05, 0.05)  # nosec B311 - synthetic data only
+        lon_offset = random.uniform(-0.05, 0.05)  # nosec B311 - synthetic data only
         latitude = round(market["lat"] + lat_offset, 6)
         longitude = round(market["lon"] + lon_offset, 6)
 
-        property_type = random.choice(PROPERTY_TYPES)
+        property_type = random.choice(PROPERTY_TYPES)  # nosec B311 - synthetic data only
 
         # Scale properties based on property type
         if property_type == "Resort":
-            gaming_sqft = random.randint(80000, 200000)
-            hotel_rooms = random.randint(1000, 5000)
-            slot_machines = random.randint(1500, 4000)
-            table_games = random.randint(100, 300)
-            poker_tables = random.randint(20, 60)
-            revenue_tier = random.choice(REVENUE_TIERS[:2])
-            employees = random.randint(3000, 10000)
+            gaming_sqft = random.randint(80000, 200000)  # nosec B311 - synthetic data only
+            hotel_rooms = random.randint(1000, 5000)  # nosec B311 - synthetic data only
+            slot_machines = random.randint(1500, 4000)  # nosec B311 - synthetic data only
+            table_games = random.randint(100, 300)  # nosec B311 - synthetic data only
+            poker_tables = random.randint(20, 60)  # nosec B311 - synthetic data only
+            revenue_tier = random.choice(REVENUE_TIERS[:2])  # nosec B311 - synthetic data only
+            employees = random.randint(3000, 10000)  # nosec B311 - synthetic data only
         elif property_type == "Tribal":
-            gaming_sqft = random.randint(40000, 150000)
-            hotel_rooms = random.randint(200, 1500)
-            slot_machines = random.randint(1000, 3000)
-            table_games = random.randint(30, 150)
-            poker_tables = random.randint(5, 30)
-            revenue_tier = random.choice(REVENUE_TIERS[1:3])
-            employees = random.randint(1000, 5000)
+            gaming_sqft = random.randint(40000, 150000)  # nosec B311 - synthetic data only
+            hotel_rooms = random.randint(200, 1500)  # nosec B311 - synthetic data only
+            slot_machines = random.randint(1000, 3000)  # nosec B311 - synthetic data only
+            table_games = random.randint(30, 150)  # nosec B311 - synthetic data only
+            poker_tables = random.randint(5, 30)  # nosec B311 - synthetic data only
+            revenue_tier = random.choice(REVENUE_TIERS[1:3])  # nosec B311 - synthetic data only
+            employees = random.randint(1000, 5000)  # nosec B311 - synthetic data only
         elif property_type == "Racino":
-            gaming_sqft = random.randint(30000, 80000)
-            hotel_rooms = random.randint(0, 300)
-            slot_machines = random.randint(1500, 3500)
-            table_games = random.randint(0, 50)
-            poker_tables = random.randint(0, 15)
-            revenue_tier = random.choice(REVENUE_TIERS[2:])
-            employees = random.randint(800, 2500)
+            gaming_sqft = random.randint(30000, 80000)  # nosec B311 - synthetic data only
+            hotel_rooms = random.randint(0, 300)  # nosec B311 - synthetic data only
+            slot_machines = random.randint(1500, 3500)  # nosec B311 - synthetic data only
+            table_games = random.randint(0, 50)  # nosec B311 - synthetic data only
+            poker_tables = random.randint(0, 15)  # nosec B311 - synthetic data only
+            revenue_tier = random.choice(REVENUE_TIERS[2:])  # nosec B311 - synthetic data only
+            employees = random.randint(800, 2500)  # nosec B311 - synthetic data only
         else:  # Local or Riverboat
-            gaming_sqft = random.randint(20000, 80000)
-            hotel_rooms = random.randint(0, 500)
-            slot_machines = random.randint(500, 2000)
-            table_games = random.randint(20, 80)
-            poker_tables = random.randint(0, 20)
-            revenue_tier = random.choice(REVENUE_TIERS[2:])
-            employees = random.randint(500, 2500)
+            gaming_sqft = random.randint(20000, 80000)  # nosec B311 - synthetic data only
+            hotel_rooms = random.randint(0, 500)  # nosec B311 - synthetic data only
+            slot_machines = random.randint(500, 2000)  # nosec B311 - synthetic data only
+            table_games = random.randint(20, 80)  # nosec B311 - synthetic data only
+            poker_tables = random.randint(0, 20)  # nosec B311 - synthetic data only
+            revenue_tier = random.choice(REVENUE_TIERS[2:])  # nosec B311 - synthetic data only
+            employees = random.randint(500, 2500)  # nosec B311 - synthetic data only
 
-        brand = random.choice(CASINO_BRANDS)
+        brand = random.choice(CASINO_BRANDS)  # nosec B311 - synthetic data only
         name = f"{brand} {market['city']}"
-        if random.random() > 0.7:
+        if random.random() > 0.7:  # nosec B311 - synthetic data only
             name += (
-                f" {random.choice(['Resort', 'Casino', 'Hotel & Casino', 'Gaming'])}"
+                f" {random.choice(['Resort', 'Casino', 'Hotel & Casino', 'Gaming'])}"  # nosec B311 - synthetic data only
             )
 
-        opened_year = random.randint(1990, 2020)
+        opened_year = random.randint(1990, 2020)  # nosec B311 - synthetic data only
         regulatory_body = GAMING_REGULATIONS.get(
             market["state"], "State Gaming Commission"
         )
@@ -661,10 +661,10 @@ def generate_us_casino_locations(count: int = 100) -> list[dict[str, Any]]:
             brand=brand,
             latitude=latitude,
             longitude=longitude,
-            address=f"{random.randint(100, 9999)} Gaming Blvd",
+            address=f"{random.randint(100, 9999)} Gaming Blvd",  # nosec B311 - synthetic data only
             city=market["city"],
             state=market["state"],
-            zip_code=f"{market['zip_prefix']}{random.randint(10, 99)}",
+            zip_code=f"{market['zip_prefix']}{random.randint(10, 99)}",  # nosec B311 - synthetic data only
             country="USA",
             region=market["region"],
             property_type=property_type,
@@ -673,17 +673,17 @@ def generate_us_casino_locations(count: int = 100) -> list[dict[str, Any]]:
             slot_machines=slot_machines,
             table_games=table_games,
             poker_tables=poker_tables,
-            sports_book=random.random() > 0.3,
-            opened_date=f"{opened_year}-{random.randint(1,12):02d}-{random.randint(1,28):02d}",
+            sports_book=random.random() > 0.3,  # nosec B311 - synthetic data only
+            opened_date=f"{opened_year}-{random.randint(1,12):02d}-{random.randint(1,28):02d}",  # nosec B311 - synthetic data only
             last_renovation=(
-                f"{random.randint(opened_year+1, 2024)}-{random.randint(1,12):02d}-01"
-                if random.random() > 0.3
+                f"{random.randint(opened_year+1, 2024)}-{random.randint(1,12):02d}-01"  # nosec B311 - synthetic data only
+                if random.random() > 0.3  # nosec B311 - synthetic data only
                 else None
             ),
             annual_revenue_tier=revenue_tier,
             employee_count=employees,
             regulatory_body=regulatory_body,
-            license_number=f"GL-{market['state']}-{random.randint(10000, 99999)}",
+            license_number=f"GL-{market['state']}-{random.randint(10000, 99999)}",  # nosec B311 - synthetic data only
             latitude_dms=decimal_to_dms(latitude, True),
             longitude_dms=decimal_to_dms(longitude, False),
             geo_point_wkt=f"POINT({longitude} {latitude})",
@@ -699,24 +699,24 @@ def generate_global_casino_locations(count: int = 50) -> list[dict[str, Any]]:
     casinos = []
 
     for i in range(count):
-        market = random.choice(GLOBAL_GAMING_MARKETS)
+        market = random.choice(GLOBAL_GAMING_MARKETS)  # nosec B311 - synthetic data only
 
-        lat_offset = random.uniform(-0.02, 0.02)
-        lon_offset = random.uniform(-0.02, 0.02)
+        lat_offset = random.uniform(-0.02, 0.02)  # nosec B311 - synthetic data only
+        lon_offset = random.uniform(-0.02, 0.02)  # nosec B311 - synthetic data only
         latitude = round(market["lat"] + lat_offset, 6)
         longitude = round(market["lon"] + lon_offset, 6)
 
         # International casinos tend to be larger resorts
-        gaming_sqft = random.randint(50000, 300000)
-        hotel_rooms = random.randint(500, 6000)
-        slot_machines = random.randint(800, 5000)
-        table_games = random.randint(50, 500)
-        poker_tables = random.randint(10, 100)
+        gaming_sqft = random.randint(50000, 300000)  # nosec B311 - synthetic data only
+        hotel_rooms = random.randint(500, 6000)  # nosec B311 - synthetic data only
+        slot_machines = random.randint(800, 5000)  # nosec B311 - synthetic data only
+        table_games = random.randint(50, 500)  # nosec B311 - synthetic data only
+        poker_tables = random.randint(10, 100)  # nosec B311 - synthetic data only
 
-        brand = random.choice(CASINO_BRANDS)
+        brand = random.choice(CASINO_BRANDS)  # nosec B311 - synthetic data only
         name = f"Grand {brand} {market['city']}"
 
-        opened_year = random.randint(1980, 2022)
+        opened_year = random.randint(1980, 2022)  # nosec B311 - synthetic data only
 
         casino = {
             "casino_id": f"INT{i:05d}",
@@ -724,7 +724,7 @@ def generate_global_casino_locations(count: int = 50) -> list[dict[str, Any]]:
             "brand": brand,
             "latitude": latitude,
             "longitude": longitude,
-            "address": f"{random.randint(1, 999)} Casino Avenue",
+            "address": f"{random.randint(1, 999)} Casino Avenue",  # nosec B311 - synthetic data only
             "city": market["city"],
             "state": None,
             "zip_code": None,
@@ -736,17 +736,17 @@ def generate_global_casino_locations(count: int = 50) -> list[dict[str, Any]]:
             "slot_machines": slot_machines,
             "table_games": table_games,
             "poker_tables": poker_tables,
-            "sports_book": random.random() > 0.4,
-            "opened_date": f"{opened_year}-{random.randint(1,12):02d}-{random.randint(1,28):02d}",
+            "sports_book": random.random() > 0.4,  # nosec B311 - synthetic data only
+            "opened_date": f"{opened_year}-{random.randint(1,12):02d}-{random.randint(1,28):02d}",  # nosec B311 - synthetic data only
             "last_renovation": (
-                f"{random.randint(opened_year+1, 2024)}-{random.randint(1,12):02d}-01"
-                if random.random() > 0.4
+                f"{random.randint(opened_year+1, 2024)}-{random.randint(1,12):02d}-01"  # nosec B311 - synthetic data only
+                if random.random() > 0.4  # nosec B311 - synthetic data only
                 else None
             ),
-            "annual_revenue_tier": random.choice(REVENUE_TIERS[:3]),
-            "employee_count": random.randint(2000, 15000),
+            "annual_revenue_tier": random.choice(REVENUE_TIERS[:3]),  # nosec B311 - synthetic data only
+            "employee_count": random.randint(2000, 15000),  # nosec B311 - synthetic data only
             "regulatory_body": f"{market['country']} Gaming Authority",
-            "license_number": f"INTL-{market['country'][:3].upper()}-{random.randint(10000, 99999)}",
+            "license_number": f"INTL-{market['country'][:3].upper()}-{random.randint(10000, 99999)}",  # nosec B311 - synthetic data only
             "currency": market.get("currency", "USD"),
             "timezone": None,  # Would be populated based on coordinates
             "latitude_dms": decimal_to_dms(latitude, True),

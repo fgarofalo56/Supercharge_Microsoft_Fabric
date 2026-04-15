@@ -24,10 +24,19 @@
 
 # COMMAND ----------
 
+from datetime import datetime
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import (
-    current_timestamp, lit, input_file_name,
-    col, to_timestamp, when, trim, upper, coalesce
+    coalesce,
+    col,
+    current_timestamp,
+    input_file_name,
+    lit,
+    to_timestamp,
+    trim,
+    upper,
+    when,
 )
 from pyspark.sql.types import (
     BooleanType,
@@ -39,7 +48,6 @@ from pyspark.sql.types import (
     StructType,
     TimestampType,
 )
-from datetime import datetime
 
 # Configuration
 LANDING_BASE_PATH = "Files/landing/dot_faa"
@@ -197,12 +205,12 @@ def ingest_domain(domain_name, source_path, schema, target_table):
             .partitionBy("_load_date") \
             .saveAsTable(target_table)
 
-        final_count = df_bronze.count()
+        final_count = spark.table(target_table).count()
         print(f"  Written: {final_count:,} records to {target_table}")
         return final_count
 
     except Exception as e:
-        print(f"  ERROR ingesting {domain_name}: {str(e)}")
+        print(f"  ERROR ingesting {domain_name}: {e!s}")
         return -1
 
 # COMMAND ----------

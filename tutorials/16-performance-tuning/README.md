@@ -8,7 +8,7 @@
 
 </div>
 
-> **[Home](../../index.md)** > **[Tutorials](../index.md)** > **Performance Tuning**
+> **[Home](../../README.md)** > **[Tutorials](../README.md)** > **Performance Tuning**
 
 ---
 
@@ -1658,7 +1658,7 @@ Continue to **[Tutorial 17: Monitoring & Alerting](../17-monitoring-alerting/REA
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [⬅️ 15-Cost Optimization](../15-cost-optimization/README.md) | [📖 Tutorials Index](../index.md) | [17-Monitoring & Alerting](../17-monitoring-alerting/README.md) ➡️ |
+| [⬅️ 15-Cost Optimization](../15-cost-optimization/README.md) | [📖 Tutorials Index](../README.md) | [17-Monitoring & Alerting](../17-monitoring-alerting/README.md) ➡️ |
 
 ---
 

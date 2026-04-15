@@ -35,12 +35,16 @@ ignore = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"validation/unit_tests/**" = ["N802", "N803"]      # allow non-PEP8 names in tests
-"notebooks/**" = ["E402", "F401"]                  # allow late imports in notebooks
-"**/__init__.py" = ["F401"]                        # re-exports in __init__ files
-"validation/integration_tests/**" = ["F401", "UP035", "N806", "E402", "E741", "SIM102"]
+"validation/unit_tests/**" = ["N802", "N803", "E712", "F841"]
+# Notebook .py source files use Databricks/Fabric magic markers (# COMMAND, # MAGIC)
+# and depend on runtime-injected globals (spark, dbutils -> mssparkutils), so
+# disable several rules that don't apply to notebook semantics.
+"notebooks/**" = ["E402", "F401", "F811", "F821", "F541", "E712", "N806", "N816", "RUF005", "B007"]
+"**/__init__.py" = ["F401"]
+"validation/integration_tests/**" = ["F401", "UP035", "N806", "E402", "E741", "SIM102", "E712", "F841"]
 "validation/deployment_tests/**" = ["F401", "UP035"]
 "validation/great_expectations/**" = ["F401"]
+"scripts/**" = ["E402", "F401"]
 
 [tool.ruff.lint.isort]
 known-first-party = ["generators", "validation"]
@@ -65,7 +69,12 @@ module = "validation.unit_tests.*"
 disallow_untyped_defs = false
 
 [tool.pytest.ini_options]
-testpaths = ["validation/unit_tests"]
+testpaths = [
+    "validation/unit_tests",
+    "validation/integration_tests",
+    "validation/deployment_tests",
+]
+pythonpath = ["data_generation"]
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
@@ -73,11 +82,18 @@ markers = [
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",
     "integration: marks tests as integration tests",
     "compliance: marks tests related to compliance logic",
+    "azure_required: requires az CLI authenticated session",
 ]
-addopts = "-v --tb=short"
+addopts = "-v --tb=short --strict-markers"
 
 [tool.coverage.run]
-source = ["data_generation/generators"]
+source = [
+    "data_generation/generators",
+    "data_generation/generators/federal",
+    "data_generation/generators/analytics",
+    "data_generation/generators/streaming",
+    "data_generation/generators/geo",
+]
 omit = ["*/tests/*", "*/unit_tests/*", "*/__pycache__/*"]
 
 [tool.coverage.report]

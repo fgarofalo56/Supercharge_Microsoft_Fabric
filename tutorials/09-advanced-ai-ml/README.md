@@ -1,6 +1,6 @@
 # 🤖 Tutorial 09: Advanced AI/ML
 
-> **🏠 [Home](../../index.md)** > **📖 [Tutorials](../index.md)** > **🤖 Advanced AI/ML**
+> **🏠 [Home](../../README.md)** > **📖 [Tutorials](../README.md)** > **🤖 Advanced AI/ML**
 
 ---
 
@@ -1318,7 +1318,7 @@ Or review the **[POC Agenda](../poc-agenda/)** for workshop preparation, present
 
 | ⬅️ Previous | ⬆️ Up | ➡️ Next |
 |------------|------|--------|
-| [08-Database Mirroring](../08-database-mirroring/README.md) | [Tutorials Index](../index.md) | [10-Teradata Migration](../10-teradata-migration/README.md) |
+| [08-Database Mirroring](../08-database-mirroring/README.md) | [Tutorials Index](../README.md) | [10-Teradata Migration](../10-teradata-migration/README.md) |
 
 ---
 

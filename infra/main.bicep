@@ -1,17 +1,13 @@
 // =============================================================================
-// Microsoft Fabric Casino/Gaming POC - Main Orchestration
+// Microsoft Fabric POC - Main Orchestration
 // =============================================================================
-// This template deploys all infrastructure required for the Fabric POC:
-// - Fabric Capacity (F64)
-// - Microsoft Purview Account
-// - Azure Data Lake Storage Gen2
-// - Azure Key Vault
-// - Log Analytics Workspace
-// - Virtual Network (optional, for private endpoints)
-// - Managed Identity
-// - Eventstream / Event Hubs (optional, for real-time ingestion)
-// - Eventhouse / Azure Data Explorer (optional, for KQL analytics)
-// - Power BI Workspace / Embedded Capacity (optional, for BI)
+// Deploys: Fabric Capacity, Purview, ADLS Gen2, Key Vault, Log Analytics,
+// Managed Identity, (optional) VNet + private endpoints, Eventstream,
+// Eventhouse, Power BI capacity, Workspace Identity, and Monitoring alerts.
+//
+// Compliance frameworks selected via `complianceFramework` actively
+// tighten controls (retention, private endpoints, FIPS Key Vault,
+// CMK enablement) -- the parameter is NOT just a tag.
 // =============================================================================
 
 targetScope = 'subscription'
@@ -36,15 +32,15 @@ param projectPrefix string = 'fabricpoc'
 @allowed(['F2', 'F4', 'F8', 'F16', 'F32', 'F64', 'F128', 'F256', 'F512', 'F1024', 'F2048'])
 param fabricCapacitySku string = 'F64'
 
-@description('Admin email for Fabric capacity')
+@description('Admin email for Fabric capacity. Must NOT be a placeholder in prod.')
 param fabricAdminEmail string
 
-@description('Enable private endpoints for enhanced security')
+@description('Enable private endpoints for enhanced security. Forced true for FedRAMP/HIPAA.')
 param enablePrivateEndpoints bool = false
 
-@description('Log retention in days')
+@description('Log retention in days. Floor lifted by compliance framework (HIPAA>=2190, NIGC-MICS>=1825, FedRAMP>=1095, PCI-DSS>=365).')
 @minValue(30)
-@maxValue(730)
+@maxValue(4383)
 param logRetentionDays int = 90
 
 @description('Tags to apply to all resources')
@@ -55,9 +51,6 @@ param costCenter string = ''
 
 @description('Owner email or team name')
 param owner string = ''
-
-@description('Deployment timestamp (auto-generated)')
-param deployedAt string = utcNow()
 
 // --- Real-Time Intelligence (RTI) Parameters ---
 
@@ -83,7 +76,7 @@ param eventhouseRetentionDays int = 365
 @maxValue(365)
 param eventhouseHotCacheDays int = 31
 
-// --- Phase 9: Workspace Identity & Governance Parameters ---
+// --- Workspace Identity & Governance Parameters ---
 
 @description('Enable Fabric Workspace Identity (GA 2026) for credential-free authentication')
 param enableWorkspaceIdentity bool = false
@@ -95,48 +88,14 @@ param fabricDomain string = ''
 @allowed(['Public', 'Internal', 'Confidential', 'HighlyConfidential', ''])
 param dataClassification string = ''
 
-@description('Compliance framework applicable to this deployment')
-@allowed(['NIGC-MICS', 'HIPAA', 'FedRAMP', 'FISMA', '42CFR-Part2', 'CIPSEA', 'None', ''])
+@description('Compliance framework. Selecting a framework tightens controls; it is NOT merely a tag.')
+@allowed(['NIGC-MICS', 'HIPAA', 'FedRAMP', 'FISMA', '42CFR-Part2', 'PCI-DSS', 'CIPSEA', 'None', ''])
 param complianceFramework string = ''
 
 @description('Federal agency code for workspace tag governance (e.g., USDA, SBA, NOAA, EPA, DOI)')
 param agencyCode string = ''
 
-// --- Phase 10: Warehouse, SQL Database, Pipeline & Monitoring Parameters ---
-
-@description('Enable Fabric Warehouse configuration deployment')
-param enableWarehouse bool = false
-
-@description('Warehouse display name')
-param warehouseName string = 'fabric-warehouse'
-
-@description('Enable Fabric SQL Database configuration deployment')
-param enableSqlDatabase bool = false
-
-@description('SQL Database display name')
-param sqlDatabaseName string = 'fabric-sqldb'
-
-@description('Enable Dynamic Data Masking for SQL Database')
-param enableDDM bool = true
-
-@description('Enable Customer-Managed Keys for SQL Database')
-param enableSqlDbCMK bool = false
-
-@description('Key Vault key URI for SQL Database CMK')
-param sqlDbKeyVaultKeyUri string = ''
-
-@description('Enable Fabric Data Factory Pipeline configuration deployment')
-param enablePipeline bool = false
-
-@description('Pipeline display name')
-param pipelineName string = 'fabric-pipeline'
-
-@description('Enable schedule trigger for pipeline')
-param enablePipelineSchedule bool = false
-
-@description('Pipeline schedule frequency')
-@allowed(['Minute', 'Hour', 'Day', 'Week', 'Month'])
-param pipelineScheduleFrequency string = 'Day'
+// --- Monitoring Parameters ---
 
 @description('Enable monitoring alerts and budget tracking')
 param enableMonitoringAlerts bool = false
@@ -155,6 +114,43 @@ param capacityAlertThreshold int = 80
 param alertEmailRecipients array = []
 
 // =============================================================================
+// Compliance-Driven Control Resolution
+// =============================================================================
+// Selecting a compliance framework raises floors on retention, forces private
+// endpoints for networking-sensitive frameworks, and enables FIPS mode on
+// Key Vault. Individual parameters act as lower bounds; they can be exceeded
+// but not reduced below the framework floor.
+
+var complianceRetentionFloor = complianceFramework == 'HIPAA' ? 2190
+  : complianceFramework == 'NIGC-MICS' ? 1825
+  : complianceFramework == 'FedRAMP' ? 1095
+  : complianceFramework == 'FISMA' ? 1095
+  : complianceFramework == '42CFR-Part2' ? 2190
+  : complianceFramework == 'PCI-DSS' ? 365
+  : 30
+
+var complianceForcesPrivateEndpoints = contains(
+  ['HIPAA', 'FedRAMP', 'FISMA', '42CFR-Part2', 'PCI-DSS'],
+  complianceFramework
+)
+
+var complianceRequiresFipsKeyVault = contains(
+  ['FedRAMP', 'FISMA', 'PCI-DSS'],
+  complianceFramework
+)
+
+var complianceRequiresCmk = contains(
+  ['HIPAA', 'FedRAMP', 'FISMA', '42CFR-Part2', 'PCI-DSS'],
+  complianceFramework
+)
+
+// Resolved effective controls (parameter max'd with compliance floor).
+var effectiveRetentionDays = max(logRetentionDays, complianceRetentionFloor)
+var effectivePrivateEndpoints = enablePrivateEndpoints || complianceForcesPrivateEndpoints
+var effectiveKeyVaultSku = complianceRequiresFipsKeyVault ? 'premium' : 'standard'
+var effectiveEnableCmk = complianceRequiresCmk
+
+// =============================================================================
 // Variables
 // =============================================================================
 
@@ -170,13 +166,13 @@ var eventStreamName = 'evtns-${projectPrefix}-${environment}'
 var eventHouseName = 'adx${projectPrefix}${environment}'
 var powerBICapacityName = 'pbi${projectPrefix}${environment}'
 
-// Cost allocation tags (using cost-tags module pattern)
+// Cost allocation tags
 var costAllocationTags = union(
   !empty(costCenter) ? { CostCenter: costCenter } : {},
   !empty(owner) ? { Owner: owner } : {}
 )
 
-// Phase 9: Workspace governance tags (GA 2026)
+// Workspace governance tags (GA 2026)
 var workspaceGovernanceTags = union(
   !empty(fabricDomain) ? { FabricDomain: fabricDomain } : {},
   !empty(dataClassification) ? { DataClassification: dataClassification } : {},
@@ -184,12 +180,13 @@ var workspaceGovernanceTags = union(
   !empty(agencyCode) ? { AgencyCode: agencyCode } : {}
 )
 
+// DeployedAt intentionally omitted from resource tags so that every deployment
+// doesn't produce a diff in what-if. Use the deployment name for traceability.
 var defaultTags = union(tags, costAllocationTags, workspaceGovernanceTags, {
   Environment: environment
   Project: 'Microsoft Fabric POC'
   Application: 'fabric-casino-poc'
   ManagedBy: 'Bicep'
-  DeployedAt: deployedAt
 })
 
 // =============================================================================
@@ -212,7 +209,8 @@ module monitoring 'modules/monitoring/log-analytics.bicep' = {
   params: {
     name: logAnalyticsName
     location: location
-    retentionInDays: logRetentionDays
+    retentionInDays: effectiveRetentionDays
+    enablePrivateEndpoints: effectivePrivateEndpoints
     tags: defaultTags
   }
 }
@@ -229,16 +227,18 @@ module security 'modules/security/security.bicep' = {
     managedIdentityName: managedIdentityName
     location: location
     logAnalyticsWorkspaceId: monitoring.outputs.workspaceId
-    enablePrivateEndpoints: enablePrivateEndpoints
+    enablePrivateEndpoints: effectivePrivateEndpoints
+    keyVaultSku: effectiveKeyVaultSku
+    provisionStorageCmkKey: effectiveEnableCmk
     tags: defaultTags
   }
 }
 
 // =============================================================================
-// Networking Module (Optional)
+// Networking Module (deployed when any control requires private networking)
 // =============================================================================
 
-module networking 'modules/networking/vnet.bicep' = if (enablePrivateEndpoints) {
+module networking 'modules/networking/vnet.bicep' = if (effectivePrivateEndpoints) {
   name: 'networking-deployment'
   scope: resourceGroup
   params: {
@@ -260,8 +260,10 @@ module storage 'modules/storage/storage-account.bicep' = {
     location: location
     logAnalyticsWorkspaceId: monitoring.outputs.workspaceId
     managedIdentityPrincipalId: security.outputs.managedIdentityPrincipalId
-    enablePrivateEndpoint: enablePrivateEndpoints
-    privateEndpointSubnetId: enablePrivateEndpoints ? networking.outputs.privateEndpointSubnetId : ''
+    enablePrivateEndpoint: effectivePrivateEndpoints
+    privateEndpointSubnetId: effectivePrivateEndpoints ? networking.outputs.privateEndpointSubnetId : ''
+    enableCmk: effectiveEnableCmk
+    keyVaultKeyUri: effectiveEnableCmk ? security.outputs.storageCmkKeyUri : ''
     tags: defaultTags
   }
 }
@@ -294,17 +296,14 @@ module governance 'modules/governance/purview.bicep' = {
     location: location
     managedIdentityPrincipalId: security.outputs.managedIdentityPrincipalId
     logAnalyticsWorkspaceId: monitoring.outputs.workspaceId
-    enablePrivateEndpoint: enablePrivateEndpoints
-    privateEndpointSubnetId: enablePrivateEndpoints ? networking.outputs.privateEndpointSubnetId : ''
+    enablePrivateEndpoint: effectivePrivateEndpoints
+    privateEndpointSubnetId: effectivePrivateEndpoints ? networking.outputs.privateEndpointSubnetId : ''
     tags: defaultTags
   }
 }
 
 // =============================================================================
 // Eventstream Module (Real-Time Ingestion - Optional)
-// =============================================================================
-// Deploys Event Hubs namespace as the backing resource for Fabric Eventstream.
-// Enable by setting enableEventstream = true in your parameter file.
 // =============================================================================
 
 module eventstream 'modules/fabric/fabric-eventstream.bicep' = if (enableEventstream) {
@@ -315,18 +314,14 @@ module eventstream 'modules/fabric/fabric-eventstream.bicep' = if (enableEventst
     fabricCapacityId: fabric.outputs.capacityId
     location: location
     logAnalyticsWorkspaceId: monitoring.outputs.workspaceId
-    enablePrivateEndpoint: enablePrivateEndpoints
-    privateEndpointSubnetId: enablePrivateEndpoints ? networking.outputs.privateEndpointSubnetId : ''
+    enablePrivateEndpoint: effectivePrivateEndpoints
+    privateEndpointSubnetId: effectivePrivateEndpoints ? networking.outputs.privateEndpointSubnetId : ''
     tags: defaultTags
   }
 }
 
 // =============================================================================
 // Eventhouse Module (KQL Real-Time Analytics - Optional)
-// =============================================================================
-// Deploys Azure Data Explorer cluster as the backing resource for Fabric
-// Eventhouse with KQL databases, ingestion mappings, and retention policies.
-// Enable by setting enableEventhouse = true in your parameter file.
 // =============================================================================
 
 module eventhouse 'modules/fabric/fabric-eventhouse.bicep' = if (enableEventhouse) {
@@ -340,17 +335,15 @@ module eventhouse 'modules/fabric/fabric-eventhouse.bicep' = if (enableEventhous
     hotCacheDays: eventhouseHotCacheDays
     logAnalyticsWorkspaceId: monitoring.outputs.workspaceId
     managedIdentityPrincipalId: security.outputs.managedIdentityPrincipalId
-    enablePrivateEndpoint: enablePrivateEndpoints
-    privateEndpointSubnetId: enablePrivateEndpoints ? networking.outputs.privateEndpointSubnetId : ''
+    enablePrivateEndpoint: effectivePrivateEndpoints
+    privateEndpointSubnetId: effectivePrivateEndpoints ? networking.outputs.privateEndpointSubnetId : ''
+    enableDoubleEncryption: complianceRequiresFipsKeyVault
     tags: defaultTags
   }
 }
 
 // =============================================================================
 // Power BI Workspace Module (BI & Direct Lake - Optional)
-// =============================================================================
-// Deploys Power BI Embedded capacity for Fabric workspace analytics.
-// Enable by setting enablePowerBIWorkspace = true in your parameter file.
 // =============================================================================
 
 module powerBIWorkspace 'modules/analytics/powerbi-workspace.bicep' = if (enablePowerBIWorkspace) {
@@ -367,7 +360,7 @@ module powerBIWorkspace 'modules/analytics/powerbi-workspace.bicep' = if (enable
 }
 
 // =============================================================================
-// Workspace Identity (Phase 9 - GA 2026: Credential-free authentication)
+// Workspace Identity (GA 2026: credential-free authentication)
 // =============================================================================
 
 module workspaceIdentity 'modules/security/workspace-identity.bicep' = if (enableWorkspaceIdentity) {
@@ -389,86 +382,7 @@ module workspaceIdentity 'modules/security/workspace-identity.bicep' = if (enabl
 }
 
 // =============================================================================
-// Fabric Warehouse Module (Phase 10 - Optional, METADATA-ONLY)
-// =============================================================================
-// This is a metadata-only module — it does NOT deploy real Azure resources.
-// It documents the Warehouse configuration as Bicep outputs for CI/CD.
-// Actual Fabric Warehouse items are deployed via fabric-cicd library.
-// Enable by setting enableWarehouse = true in your parameter file.
-// =============================================================================
-
-module warehouse 'modules/fabric/fabric-warehouse.bicep' = if (enableWarehouse) {
-  name: 'warehouse-deployment'
-  scope: resourceGroup
-  params: {
-    location: location
-    projectPrefix: projectPrefix
-    environment: environment
-    warehouseName: warehouseName
-    capacityId: fabric.outputs.capacityId
-    logAnalyticsWorkspaceId: monitoring.outputs.workspaceId
-    managedIdentityPrincipalId: security.outputs.managedIdentityPrincipalId
-    tags: defaultTags
-  }
-}
-
-// =============================================================================
-// Fabric SQL Database Module (Phase 10 - Optional, METADATA-ONLY)
-// =============================================================================
-// This is a metadata-only module — it does NOT deploy real Azure resources.
-// It documents the SQL Database configuration as Bicep outputs for CI/CD.
-// Actual Fabric SQL Database items are deployed via fabric-cicd library.
-// Enable by setting enableSqlDatabase = true in your parameter file.
-// =============================================================================
-
-module sqlDatabase 'modules/fabric/fabric-sql-database.bicep' = if (enableSqlDatabase) {
-  name: 'sql-database-deployment'
-  scope: resourceGroup
-  params: {
-    location: location
-    projectPrefix: projectPrefix
-    environment: environment
-    databaseName: sqlDatabaseName
-    capacityId: fabric.outputs.capacityId
-    enableDDM: enableDDM
-    enableCMK: enableSqlDbCMK
-    keyVaultKeyUri: sqlDbKeyVaultKeyUri
-    logAnalyticsWorkspaceId: monitoring.outputs.workspaceId
-    managedIdentityPrincipalId: security.outputs.managedIdentityPrincipalId
-    tags: defaultTags
-  }
-}
-
-// =============================================================================
-// Fabric Data Factory Pipeline Module (Phase 10 - Optional, METADATA-ONLY)
-// =============================================================================
-// This is a metadata-only module — it does NOT deploy real Azure resources.
-// It documents the Pipeline configuration as Bicep outputs for CI/CD.
-// Actual Fabric Pipeline items are deployed via fabric-cicd library.
-// Enable by setting enablePipeline = true in your parameter file.
-// =============================================================================
-
-module pipeline 'modules/fabric/fabric-pipeline.bicep' = if (enablePipeline) {
-  name: 'pipeline-deployment'
-  scope: resourceGroup
-  params: {
-    location: location
-    projectPrefix: projectPrefix
-    environment: environment
-    pipelineName: pipelineName
-    capacityId: fabric.outputs.capacityId
-    enableScheduleTrigger: enablePipelineSchedule
-    scheduleFrequency: pipelineScheduleFrequency
-    logAnalyticsWorkspaceId: monitoring.outputs.workspaceId
-    tags: defaultTags
-  }
-}
-
-// =============================================================================
-// Monitoring Alerts & Budgets Module (Phase 10 - Optional)
-// =============================================================================
-// Deploys capacity utilization alerts and budget tracking.
-// Enable by setting enableMonitoringAlerts = true in your parameter file.
+// Monitoring Alerts & Budgets Module (Optional)
 // =============================================================================
 
 module monitoringAlerts 'modules/monitoring/alerts-and-budgets.bicep' = if (enableMonitoringAlerts) {
@@ -488,7 +402,7 @@ module monitoringAlerts 'modules/monitoring/alerts-and-budgets.bicep' = if (enab
 }
 
 // =============================================================================
-// Resource Locks (Prevent accidental deletion of critical resources)
+// Resource Locks (prevent accidental deletion of critical resources)
 // =============================================================================
 
 module resourceLocks 'modules/security/resource-locks.bicep' = {
@@ -531,8 +445,7 @@ output managedIdentityId string = security.outputs.managedIdentityId
 output managedIdentityPrincipalId string = security.outputs.managedIdentityPrincipalId
 output managedIdentityClientId string = security.outputs.managedIdentityClientId
 
-// --- Real-Time Intelligence Outputs (conditional) ---
-
+// Real-Time Intelligence outputs (conditional)
 output eventStreamId string = enableEventstream ? eventstream.outputs.eventStreamId : ''
 output eventStreamEndpoint string = enableEventstream ? eventstream.outputs.eventStreamEndpoint : ''
 
@@ -540,37 +453,21 @@ output eventHouseId string = enableEventhouse ? eventhouse.outputs.eventHouseId 
 output kqlEndpoint string = enableEventhouse ? eventhouse.outputs.kqlEndpoint : ''
 output eventHouseDatabaseIds array = enableEventhouse ? eventhouse.outputs.databaseIds : []
 
-output powerBIWorkspaceId string = enablePowerBIWorkspace ? powerBIWorkspace.outputs.workspaceId : ''
-output powerBIWorkspaceUrl string = enablePowerBIWorkspace ? powerBIWorkspace.outputs.workspaceUrl : ''
+output powerBICapacityId string = enablePowerBIWorkspace ? powerBIWorkspace.outputs.workspaceId : ''
+output powerBIPortalUrl string = enablePowerBIWorkspace ? powerBIWorkspace.outputs.powerBiPortalUrl : ''
 
-// --- Phase 9: Workspace Identity Outputs (conditional) ---
-
+// Workspace Identity outputs (conditional)
 output workspaceIdentityId string = enableWorkspaceIdentity ? workspaceIdentity.outputs.identityId : ''
 output workspaceIdentityPrincipalId string = enableWorkspaceIdentity ? workspaceIdentity.outputs.principalId : ''
 output workspaceIdentityClientId string = enableWorkspaceIdentity ? workspaceIdentity.outputs.clientId : ''
 
-// Cost tracking reference
+// Resolved compliance controls (for assertion / traceability)
 output appliedTags object = defaultTags
+output effectiveRetentionDays int = effectiveRetentionDays
+output effectivePrivateEndpoints bool = effectivePrivateEndpoints
+output effectiveKeyVaultSku string = effectiveKeyVaultSku
+output effectiveEnableCmk bool = effectiveEnableCmk
 
-// --- Phase 10: Warehouse, SQL Database, Pipeline & Monitoring Outputs ---
-
-output warehouseName string = enableWarehouse ? warehouse.outputs.warehouseName : ''
-output warehouseSqlEndpoint string = enableWarehouse ? warehouse.outputs.sqlEndpoint : ''
-
-output sqlDatabaseEndpoint string = enableSqlDatabase ? sqlDatabase.outputs.tdsEndpoint : ''
-output sqlDatabaseOneLakeEnabled bool = enableSqlDatabase ? sqlDatabase.outputs.oneLakeReplicationEnabled : false
-
-output fabricPipelineName string = enablePipeline ? pipeline.outputs.pipelineName : ''
-output fabricPipelineTriggerStatus string = enablePipeline ? pipeline.outputs.triggerStatus : ''
-
+// Monitoring alert outputs (conditional)
 output monitoringActionGroupId string = enableMonitoringAlerts ? monitoringAlerts.outputs.actionGroupId : ''
 output monitoringBudgetId string = enableMonitoringAlerts ? monitoringAlerts.outputs.budgetId : ''
-
-// =============================================================================
-// Cost Documentation Reference
-// =============================================================================
-// For detailed cost estimates and optimization strategies, see:
-// - docs/COST_ESTIMATION.md - Comprehensive cost guide
-// - docs/diagrams/cost-breakdown.md - Visual cost breakdowns
-// - Cost allocation tags are defined inline via the tags parameter
-// =============================================================================

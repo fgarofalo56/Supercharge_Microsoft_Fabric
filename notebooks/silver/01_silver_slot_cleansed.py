@@ -13,11 +13,45 @@
 
 # COMMAND ----------
 
+# ---------------------------------------------------------------------------
+# Fabric/local compatibility shim
+# ---------------------------------------------------------------------------
+import os
+
+try:
+    import notebookutils  # Fabric runtime
+    def _get_arg(name, default=None):
+        try:
+            return notebookutils.notebook.getArgument(name, default)
+        except Exception:
+            return os.environ.get(name.upper(), default)
+    def _notebook_exit(status: str) -> None:
+        notebookutils.notebook.exit(status)
+except ImportError:
+    try:
+        import mssparkutils  # legacy Synapse/Fabric runtime
+        def _get_arg(name, default=None):
+            try:
+                return mssparkutils.notebook.getArgument(name, default)
+            except Exception:
+                return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            mssparkutils.notebook.exit(status)
+    except ImportError:
+        def _get_arg(name, default=None):
+            return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            raise SystemExit(status)
+
+
 # MAGIC %md
 # MAGIC ## Configuration
 
 # COMMAND ----------
 
+from datetime import datetime
+
+from delta.tables import DeltaTable
 from pyspark.sql.functions import (
     array,
     array_compact,
@@ -43,11 +77,9 @@ from pyspark.sql.types import (
     StructType,
     TimestampType,
 )
-from delta.tables import DeltaTable
-from datetime import datetime
 
 # Parameters (set by pipeline or manual)
-batch_id = dbutils.widgets.get("batch_id") if "batch_id" in [w.name for w in dbutils.widgets.getAll()] else datetime.now().strftime("%Y%m%d_%H%M%S")
+batch_id = _get_arg("batch_id", datetime.now().strftime("%Y%m%d_%H%M%S"))
 
 # Source and target
 source_table = "lh_bronze.bronze_slot_telemetry"
@@ -262,7 +294,7 @@ try:
             .saveAsTable(target_table)
 
     record_count = spark.table(target_table).count()
-    print(f"Merged {df_final.count():,} source records into {target_table} (total: {record_count:,})")
+    print(f"Merged {spark.table(target_table).count():,} source records into {target_table} (total: {record_count:,})")
 except Exception as e:
     print(f"ERROR in lh_silver.silver_slot_cleansed (batch_id={batch_id}): {e}")
     raise

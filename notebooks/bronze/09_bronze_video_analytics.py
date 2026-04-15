@@ -24,10 +24,18 @@
 
 # COMMAND ----------
 
+import uuid
+from datetime import datetime
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import (
-    current_timestamp, lit, input_file_name,
-    col, to_timestamp, when, count
+    col,
+    count,
+    current_timestamp,
+    input_file_name,
+    lit,
+    to_timestamp,
+    when,
 )
 from pyspark.sql.types import (
     FloatType,
@@ -38,8 +46,6 @@ from pyspark.sql.types import (
     StructType,
     TimestampType,
 )
-from datetime import datetime
-import uuid
 
 # Configuration
 SOURCE_PATH = "Files/landing/video_analytics/"
@@ -223,7 +229,7 @@ df_bronze.write \
     .partitionBy("_load_date") \
     .saveAsTable(TARGET_TABLE)
 
-final_count = df_bronze.count()
+final_count = spark.table(TARGET_TABLE).count()
 print(f"Successfully wrote {final_count:,} records to {TARGET_TABLE}")
 
 # COMMAND ----------

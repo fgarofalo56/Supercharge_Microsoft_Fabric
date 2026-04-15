@@ -39,6 +39,7 @@ Library::
 from __future__ import annotations
 
 import argparse
+import contextlib
 import logging
 import time
 from pathlib import Path
@@ -394,10 +395,8 @@ def download_tri_data(
 
                 frames.append(df_year)
 
-                try:
+                with contextlib.suppress(OSError):
                     tmp_path.unlink()
-                except OSError:
-                    pass
 
                 downloaded = True
                 break

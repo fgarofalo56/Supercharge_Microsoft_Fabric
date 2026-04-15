@@ -125,7 +125,7 @@ class TestUSDACropSchemaAlignment:
 
     def test_usda_crop_schema_alignment(self):
         """Mapped NASS response has all columns required by CROP_PRODUCTION_SCHEMA."""
-        from open_data.usda_download import _map_nass_to_schema, _add_metadata_columns
+        from open_data.usda_download import _add_metadata_columns, _map_nass_to_schema
 
         raw = self._mock_nass_response()
         mapped = _map_nass_to_schema(raw)
@@ -147,7 +147,7 @@ class TestUSDACropSchemaAlignment:
 
     def test_usda_crop_column_order(self):
         """Aligned DataFrame columns follow schema order exactly."""
-        from open_data.usda_download import _map_nass_to_schema, _add_metadata_columns
+        from open_data.usda_download import _add_metadata_columns, _map_nass_to_schema
 
         raw = self._mock_nass_response()
         mapped = _map_nass_to_schema(raw)
@@ -230,7 +230,7 @@ class TestUSDAFoodSafetySchemaAlignment:
 
     def test_usda_food_safety_schema_alignment(self):
         """Mapped FSIS response has all columns required by FOOD_SAFETY_SCHEMA."""
-        from open_data.usda_download import _map_fsis_to_schema, _add_metadata_columns
+        from open_data.usda_download import _add_metadata_columns, _map_fsis_to_schema
 
         raw = self._mock_fsis_csv()
         # Normalise column names to match what download code does

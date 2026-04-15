@@ -180,9 +180,9 @@ class TestPurviewPrivateEndpoint:
 
         content = purview_path.read_text(encoding="utf-8")
 
-        # Should have conditional deployment
+        # Should have conditional deployment via module or resource declaration
         pe_pattern = (
-            r"resource\s+privateEndpoint[^=]*=\s*if\s*\(enablePrivateEndpoint\)"
+            r"(?:resource|module)\s+\w*[Pp]rivate[Ee]ndpoint[^=]*=\s*if\s*\(enablePrivateEndpoint\)"
         )
         assert re.search(
             pe_pattern, content

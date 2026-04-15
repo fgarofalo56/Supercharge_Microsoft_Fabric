@@ -147,14 +147,15 @@ resource capacityAlert 'Microsoft.Insights/scheduledQueryRules@2023-03-15-previe
       allOf: [
         {
           query: '''
-            // Fabric Capacity Utilization Query
-            // Monitors CU (Capacity Unit) consumption from workspace monitoring tables
-            // Adjust table name based on your workspace monitoring configuration
-            let threshold = ${capacityThresholdPercent};
-            FabricCapacityMetrics_CL
+            // Fabric Capacity Utilization via AzureMetrics
+            // Workspace Monitoring must be enabled on the Fabric capacity and
+            // routed to this Log Analytics workspace (diagnostic setting).
+            AzureMetrics
+            | where ResourceProvider == "MICROSOFT.FABRIC"
+            | where MetricName in ("CUPercentage", "CapacityUtilization")
             | where TimeGenerated > ago(15m)
-            | summarize AvgUtilization = avg(CapacityUtilizationPercent_d) by bin(TimeGenerated, 5m)
-            | where AvgUtilization > threshold
+            | summarize AvgUtilization = avg(Average) by bin(TimeGenerated, 5m)
+            | where AvgUtilization > ${capacityThresholdPercent}
           '''
           timeAggregation: 'Count'
           operator: 'GreaterThan'
@@ -196,12 +197,14 @@ resource throttlingAlert 'Microsoft.Insights/scheduledQueryRules@2023-03-15-prev
       allOf: [
         {
           query: '''
-            // Fabric Capacity Throttling Detection
-            FabricCapacityMetrics_CL
+            // Fabric Capacity Throttling Detection via AzureMetrics
+            AzureMetrics
+            | where ResourceProvider == "MICROSOFT.FABRIC"
+            | where MetricName in ("ThrottlingPercentage", "CUPercentage")
             | where TimeGenerated > ago(5m)
-            | where ThrottlingState_s == "Active" or CapacityUtilizationPercent_d >= 100
-            | summarize ThrottleEvents = count() by bin(TimeGenerated, 1m)
-            | where ThrottleEvents > 0
+            | summarize MaxValue = max(Average) by bin(TimeGenerated, 1m), MetricName
+            | where (MetricName == "ThrottlingPercentage" and MaxValue > 0)
+               or  (MetricName == "CUPercentage" and MaxValue >= 100)
           '''
           timeAggregation: 'Count'
           operator: 'GreaterThan'
@@ -289,12 +292,17 @@ resource longRunningJobAlert 'Microsoft.Insights/scheduledQueryRules@2023-03-15-
       allOf: [
         {
           query: '''
-            // Long-running Fabric job detection
-            FabricJobMetrics_CL
+            // Long-running Fabric job detection via Workspace Monitoring
+            // Requires Fabric Workspace Monitoring enabled and diagnostic
+            // settings routed to this workspace (categories: SparkJob, SQLJob).
+            AzureDiagnostics
+            | where ResourceProvider == "MICROSOFT.FABRIC"
+            | where Category in ("SparkJob", "SQLExecution", "DataFactoryPipelineRuns")
             | where TimeGenerated > ago(30m)
-            | where Status_s == "Running"
-            | where DurationMinutes_d > 120
-            | project JobName_s, ItemType_s, DurationMinutes_d, WorkspaceName_s
+            | where status_s == "Running" or Status_s == "Running"
+            | extend DurationMinutes = datetime_diff('minute', now(), startTime_t)
+            | where DurationMinutes > 120
+            | project JobId_s, ItemType_s, DurationMinutes, workspaceName_s
           '''
           timeAggregation: 'Count'
           operator: 'GreaterThan'

@@ -23,13 +23,24 @@
 
 # COMMAND ----------
 
+from datetime import datetime
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import (
-    current_timestamp, lit, input_file_name,
-    col, to_timestamp, when
+    col,
+    current_timestamp,
+    input_file_name,
+    lit,
+    to_timestamp,
+    when,
 )
-from pyspark.sql.types import DoubleType, IntegerType, StringType, StructField, StructType
-from datetime import datetime
+from pyspark.sql.types import (
+    DoubleType,
+    IntegerType,
+    StringType,
+    StructField,
+    StructType,
+)
 
 # Source paths - data generator parquet output (primary)
 SOURCE_PATHS = {
@@ -277,7 +288,7 @@ df_crop_bronze.write \
     .partitionBy("_bronze_load_date") \
     .saveAsTable(TARGET_TABLES["crop_production"])
 
-crop_final_count = df_crop_bronze.count()
+crop_final_count = spark.table(TARGET_TABLES["crop_production"]).count()
 print(f"Successfully wrote {crop_final_count:,} records to {TARGET_TABLES['crop_production']}")
 
 # COMMAND ----------

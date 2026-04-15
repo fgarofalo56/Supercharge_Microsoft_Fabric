@@ -1,6 +1,6 @@
 # Tutorial 19: Copilot & AI-Assisted Development for Microsoft Fabric
 
-> **[Home](../../index.md)** > **[Tutorials](../index.md)** > **Copilot & AI-Assisted Development**
+> **[Home](../../README.md)** > **[Tutorials](../README.md)** > **Copilot & AI-Assisted Development**
 
 ---
 
@@ -44,7 +44,6 @@
 +---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+
                                                                                               ^
                                                                                          YOU ARE HERE
-                                                                                        FINAL TUTORIAL
 ```
 
 </div>
@@ -52,7 +51,7 @@
 | Navigation | |
 |---|---|
 | **Previous** | [18-Data Sharing](../18-data-sharing/README.md) |
-| **Next** | [Tutorials Home](../index.md) - Series Complete! |
+| **Next** | [20-Workspace Best Practices](../20-workspace-best-practices/README.md) |
 
 ---
 
@@ -62,7 +61,7 @@
 
 *Source: [What is Copilot in Fabric?](https://learn.microsoft.com/en-us/fabric/fundamentals/copilot-fabric-overview)*
 
-Welcome to the **final tutorial** in the Microsoft Fabric learning series! This tutorial introduces you to **Copilot for Microsoft Fabric**, the AI-powered assistant that accelerates development across the entire Fabric platform. You will learn how to leverage natural language prompts to create pipelines, generate code, build reports, and optimize queries - dramatically reducing development time while maintaining quality.
+This tutorial introduces you to **Copilot for Microsoft Fabric**, the AI-powered assistant that accelerates development across the entire Fabric platform. You will learn how to leverage natural language prompts to create pipelines, generate code, build reports, and optimize queries - dramatically reducing development time while maintaining quality.
 
 Copilot integrates seamlessly across Fabric workloads, enabling both beginners and experts to work more efficiently. By the end of this tutorial, you will understand how to effectively use AI assistance in your daily data engineering and analytics workflows.
 
@@ -1217,7 +1216,7 @@ You are now ready to implement Microsoft Fabric in production!
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [⬅️ 18-Data Sharing](../18-data-sharing/README.md) | [📖 Tutorials Index](../index.md) | [20-Workspace Best Practices](../20-workspace-best-practices/README.md) ➡️ |
+| [⬅️ 18-Data Sharing](../18-data-sharing/README.md) | [📖 Tutorials Index](../README.md) | [20-Workspace Best Practices](../20-workspace-best-practices/README.md) ➡️ |
 
 ---
 

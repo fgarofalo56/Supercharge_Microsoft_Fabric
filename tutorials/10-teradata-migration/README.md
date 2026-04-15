@@ -8,7 +8,7 @@
 
 </div>
 
-> 🏠 **[Home](../../index.md)** > 📖 **[Tutorials](../index.md)** > 🔄 **Teradata Migration**
+> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > 🔄 **Teradata Migration**
 
 ---
 
@@ -2076,7 +2076,7 @@ This tutorial includes the following supplementary files:
 
 | ⬅️ Previous | ⬆️ Up | ➡️ Next |
 |------------|------|--------|
-| [09-Advanced AI/ML](../09-advanced-ai-ml/README.md) | [Tutorials Index](../index.md) | [11-SAS Connectivity](../11-sas-connectivity/README.md) |
+| [09-Advanced AI/ML](../09-advanced-ai-ml/README.md) | [Tutorials Index](../README.md) | [11-SAS Connectivity](../11-sas-connectivity/README.md) |
 
 ---
 

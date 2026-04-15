@@ -19,11 +19,45 @@
 
 # COMMAND ----------
 
+# ---------------------------------------------------------------------------
+# Fabric/local compatibility shim
+# ---------------------------------------------------------------------------
+import os
+
+try:
+    import notebookutils  # Fabric runtime
+    def _get_arg(name, default=None):
+        try:
+            return notebookutils.notebook.getArgument(name, default)
+        except Exception:
+            return os.environ.get(name.upper(), default)
+    def _notebook_exit(status: str) -> None:
+        notebookutils.notebook.exit(status)
+except ImportError:
+    try:
+        import mssparkutils  # legacy Synapse/Fabric runtime
+        def _get_arg(name, default=None):
+            try:
+                return mssparkutils.notebook.getArgument(name, default)
+            except Exception:
+                return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            mssparkutils.notebook.exit(status)
+    except ImportError:
+        def _get_arg(name, default=None):
+            return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            raise SystemExit(status)
+
+
 # MAGIC %md
 # MAGIC ## Configuration
 
 # COMMAND ----------
 
+from datetime import datetime
+
+from delta.tables import DeltaTable
 from pyspark.sql.functions import (
     avg,
     col,
@@ -41,11 +75,9 @@ from pyspark.sql.functions import (
     window,
 )
 from pyspark.sql.window import Window
-from delta.tables import DeltaTable
-from datetime import datetime
 
 # Parameters
-batch_id = dbutils.widgets.get("batch_id") if "batch_id" in [w.name for w in dbutils.widgets.getAll()] else datetime.now().strftime("%Y%m%d_%H%M%S")
+batch_id = _get_arg("batch_id", datetime.now().strftime("%Y%m%d_%H%M%S"))
 
 # Source table
 source_table = "lh_silver.silver_geolocation"
@@ -193,7 +225,7 @@ try:
             .partitionBy("event_date") \
             .saveAsTable(geofence_summary_table)
 
-    print(f"Merged {df_geofence_summary.count():,} records into {geofence_summary_table}")
+    print(f"Merged {spark.table(geofence_summary_table).count():,} records into {geofence_summary_table}")
 
     spark.sql(f"OPTIMIZE {geofence_summary_table} ZORDER BY (geofence_id, geofence_name)")
     print("Geofence summary table optimized")

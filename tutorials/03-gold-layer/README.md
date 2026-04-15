@@ -1,6 +1,6 @@
 # 🥇 Tutorial 03: Gold Layer
 
-> **[🏠 Home](../../index.md)** > **[📖 Tutorials](../index.md)** > **🥇 Gold Layer**
+> **[🏠 Home](../../README.md)** > **[📖 Tutorials](../README.md)** > **🥇 Gold Layer**
 
 ---
 
@@ -1567,7 +1567,7 @@ Continue to **[Tutorial 04: Real-Time Analytics](../04-real-time-analytics/READM
 
 | ⬅️ Previous | ⬆️ Up | ➡️ Next |
 |-------------|-------|---------|
-| [02-Silver Layer](../02-silver-layer/README.md) | [Tutorials Index](../index.md) | [04-Real-Time Analytics](../04-real-time-analytics/README.md) |
+| [02-Silver Layer](../02-silver-layer/README.md) | [Tutorials Index](../README.md) | [04-Real-Time Analytics](../04-real-time-analytics/README.md) |
 
 ---
 

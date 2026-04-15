@@ -23,29 +23,77 @@
 
 # COMMAND ----------
 
+# ---------------------------------------------------------------------------
+# Fabric/local compatibility shim
+# ---------------------------------------------------------------------------
+import os
+
+try:
+    import notebookutils  # Fabric runtime
+    def _get_arg(name, default=None):
+        try:
+            return notebookutils.notebook.getArgument(name, default)
+        except Exception:
+            return os.environ.get(name.upper(), default)
+    def _notebook_exit(status: str) -> None:
+        notebookutils.notebook.exit(status)
+except ImportError:
+    try:
+        import mssparkutils  # legacy Synapse/Fabric runtime
+        def _get_arg(name, default=None):
+            try:
+                return mssparkutils.notebook.getArgument(name, default)
+            except Exception:
+                return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            mssparkutils.notebook.exit(status)
+    except ImportError:
+        def _get_arg(name, default=None):
+            return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            raise SystemExit(status)
+
+
 # MAGIC %md
 # MAGIC ## Configuration
 
 # COMMAND ----------
 
-from pyspark.sql import SparkSession
-from pyspark.sql.functions import (
-    current_timestamp, lit, input_file_name,
-    col, to_date, to_timestamp, when, coalesce, sum as _sum, count as _count
-)
-from pyspark.sql.types import BooleanType, DoubleType, StringType, StructField, StructType, TimestampType
 from datetime import datetime
+
+from pyspark.sql import SparkSession
+from pyspark.sql import functions as F
+from pyspark.sql.functions import (
+    coalesce,
+    col,
+    current_timestamp,
+    input_file_name,
+    lit,
+    to_date,
+    to_timestamp,
+    when,
+)
+from pyspark.sql.functions import count as _count
+from pyspark.sql.functions import sum as _sum
+from pyspark.sql.types import (
+    BooleanType,
+    DoubleType,
+    StringType,
+    StructField,
+    StructType,
+    TimestampType,
+)
 
 # Configuration
 SOURCE_PATH = "Files/output/bronze_financial_txn.parquet"
-TARGET_TABLE = "bronze_financial_txn"
+TARGET_TABLE = "lh_bronze.bronze_financial_txn"
 SCHEMA_VERSION = "1.0"
 BATCH_ID = datetime.now().strftime("%Y%m%d_%H%M%S")
 
 # Compliance thresholds
 CTR_THRESHOLD = 10000       # Currency Transaction Report threshold
 NEAR_CTR_LOW = 8000         # Lower bound for near-CTR detection (structuring)
-SAR_THRESHOLD = 5000        # Suspicious Activity Report consideration threshold
+SAR_THRESHOLD = 8000        # Suspicious Activity Report consideration threshold
 
 # Valid enum values from schema
 VALID_TRANSACTION_TYPES = [
@@ -119,9 +167,9 @@ try:
 
 except Exception as e:
     print(f"ERROR: Failed to read source data from {SOURCE_PATH}")
-    print(f"  Exception: {str(e)}")
+    print(f"  Exception: {e!s}")
     print(f"  Verify the source file exists and is accessible.")
-    dbutils.notebook.exit(f"FAILED: Source read error - {str(e)}")
+    _notebook_exit(f"FAILED: Source read error - {e!s}")
 
 # COMMAND ----------
 
@@ -208,14 +256,22 @@ if "payment_method" in df_enforced.columns:
 # Check amount range validation (must be >= 0)
 print("\n4. Amount Range Validation:")
 if "amount" in df_enforced.columns:
-    negative_amounts = df_enforced.filter(col("amount") < 0).count()
-    zero_amounts = df_enforced.filter(col("amount") == 0).count()
-    max_amount = df_enforced.agg({"amount": "max"}).collect()[0][0]
-    avg_amount = df_enforced.agg({"amount": "avg"}).collect()[0][0]
+    # Single aggregation action: combines negative/zero/max/avg into one Spark job
+    # rather than four separate scans across the full dataset.
+    _amount_stats = df_enforced.agg(
+        F.sum((col("amount") < 0).cast("int")).alias("negative"),
+        F.sum((col("amount") == 0).cast("int")).alias("zero"),
+        F.max("amount").alias("max_amount"),
+        F.avg("amount").alias("avg_amount"),
+    ).collect()[0]
+    negative_amounts = int(_amount_stats["negative"] or 0)
+    zero_amounts = int(_amount_stats["zero"] or 0)
+    max_amount = _amount_stats["max_amount"]
+    avg_amount = _amount_stats["avg_amount"]
     print(f"  Negative amounts: {negative_amounts}")
     print(f"  Zero amounts: {zero_amounts}")
-    print(f"  Max amount: ${max_amount:,.2f}" if max_amount else "  Max amount: N/A")
-    print(f"  Avg amount: ${avg_amount:,.2f}" if avg_amount else "  Avg amount: N/A")
+    print(f"  Max amount: ${max_amount:,.2f}" if max_amount is not None else "  Max amount: N/A")
+    print(f"  Avg amount: ${avg_amount:,.2f}" if avg_amount is not None else "  Avg amount: N/A")
     if negative_amounts > 0:
         quality_issues += 1
         print("  WARN: Negative amounts detected - review source data")
@@ -291,7 +347,7 @@ df_bronze.write \
     .partitionBy("transaction_date") \
     .saveAsTable(TARGET_TABLE)
 
-print(f"Successfully wrote {df_bronze.count():,} records to {TARGET_TABLE}")
+print(f"Successfully wrote {spark.table(TARGET_TABLE).count():,} records to {TARGET_TABLE}")
 
 # COMMAND ----------
 

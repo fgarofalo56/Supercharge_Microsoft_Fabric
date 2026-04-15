@@ -12,6 +12,40 @@
 
 # COMMAND ----------
 
+# ---------------------------------------------------------------------------
+# Fabric/local compatibility shim
+# ---------------------------------------------------------------------------
+import os
+
+try:
+    import notebookutils  # Fabric runtime
+    def _get_arg(name, default=None):
+        try:
+            return notebookutils.notebook.getArgument(name, default)
+        except Exception:
+            return os.environ.get(name.upper(), default)
+    def _notebook_exit(status: str) -> None:
+        notebookutils.notebook.exit(status)
+except ImportError:
+    try:
+        import mssparkutils  # legacy Synapse/Fabric runtime
+        def _get_arg(name, default=None):
+            try:
+                return mssparkutils.notebook.getArgument(name, default)
+            except Exception:
+                return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            mssparkutils.notebook.exit(status)
+    except ImportError:
+        def _get_arg(name, default=None):
+            return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            raise SystemExit(status)
+
+
+from datetime import datetime
+
+from delta.tables import DeltaTable
 from pyspark.sql.functions import (
     abs,
     array,
@@ -31,11 +65,9 @@ from pyspark.sql.functions import (
     window,
 )
 from pyspark.sql.window import Window
-from delta.tables import DeltaTable
-from datetime import datetime
 
 # Parameters
-batch_id = dbutils.widgets.get("batch_id") if "batch_id" in [w.name for w in dbutils.widgets.getAll()] else datetime.now().strftime("%Y%m%d_%H%M%S")
+batch_id = _get_arg("batch_id", datetime.now().strftime("%Y%m%d_%H%M%S"))
 source_table = "lh_bronze.bronze_table_games"
 target_table = "lh_silver.silver_table_enriched"
 
@@ -188,7 +220,7 @@ try:
             .saveAsTable(target_table)
 
     record_count = spark.table(target_table).count()
-    print(f"Merged {df_silver.count():,} source records into {target_table} (total: {record_count:,})")
+    print(f"Merged {spark.table(target_table).count():,} source records into {target_table} (total: {record_count:,})")
 except Exception as e:
     print(f"ERROR in lh_silver.silver_table_enriched (batch_id={batch_id}): {e}")
     raise

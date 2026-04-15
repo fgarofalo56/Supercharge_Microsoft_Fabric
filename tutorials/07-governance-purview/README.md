@@ -1,6 +1,6 @@
 # 🛡️ Tutorial 07: Governance & Purview
 
-> **🏠 [Home](../../index.md)** > **📖 [Tutorials](../index.md)** > **🛡️ Governance & Purview**
+> **🏠 [Home](../../README.md)** > **📖 [Tutorials](../README.md)** > **🛡️ Governance & Purview**
 
 ---
 
@@ -895,7 +895,7 @@ Continue to **[Tutorial 08: Database Mirroring](../08-database-mirroring/README.
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [⬅️ 06-Data Pipelines](../06-data-pipelines/README.md) | [📖 Tutorials Index](../index.md) | [08-Database Mirroring](../08-database-mirroring/README.md) ➡️ |
+| [⬅️ 06-Data Pipelines](../06-data-pipelines/README.md) | [📖 Tutorials Index](../README.md) | [08-Database Mirroring](../08-database-mirroring/README.md) ➡️ |
 
 ---
 

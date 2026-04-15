@@ -743,7 +743,7 @@ az keyvault set-policy --name "kv-fabric-gateway" `
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [⬅️ 22-Networking & Connectivity](../22-networking-connectivity/README.md) | [📖 Tutorials Index](../index.md) | [24-Snowflake to Fabric](../24-snowflake-to-fabric/README.md) ➡️ |
+| [⬅️ 22-Networking & Connectivity](../22-networking-connectivity/README.md) | [📖 Tutorials Index](../README.md) | [24-Snowflake to Fabric](../24-snowflake-to-fabric/README.md) ➡️ |
 
 ---
 

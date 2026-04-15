@@ -10,10 +10,17 @@ param name string
 @description('Azure region for deployment')
 param location string
 
-@description('Retention period in days')
+@description('Retention period in days. HIPAA/NIGC MICS workloads should configure >= 2190 days (6 yrs).')
 @minValue(30)
-@maxValue(730)
+@maxValue(4383)
 param retentionInDays int = 90
+
+@description('When true, disables public network access (for FedRAMP, HIPAA, private-network deployments).')
+param enablePrivateEndpoints bool = false
+
+@description('Daily ingestion cap in GB. Set 0 for unlimited.')
+@minValue(0)
+param dailyQuotaGb int = 10
 
 @description('Tags to apply to resources')
 param tags object = {}
@@ -22,7 +29,7 @@ param tags object = {}
 // Log Analytics Workspace
 // =============================================================================
 
-resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
+resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2023-09-01' = {
   name: name
   location: location
   tags: tags
@@ -34,11 +41,11 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
     features: {
       enableLogAccessUsingOnlyResourcePermissions: true
     }
-    workspaceCapping: {
-      dailyQuotaGb: 10
-    }
-    publicNetworkAccessForIngestion: 'Enabled'
-    publicNetworkAccessForQuery: 'Enabled'
+    workspaceCapping: dailyQuotaGb > 0 ? {
+      dailyQuotaGb: dailyQuotaGb
+    } : null
+    publicNetworkAccessForIngestion: enablePrivateEndpoints ? 'Disabled' : 'Enabled'
+    publicNetworkAccessForQuery: enablePrivateEndpoints ? 'Disabled' : 'Enabled'
   }
 }
 
@@ -61,6 +68,12 @@ resource performanceSolution 'Microsoft.OperationsManagement/solutions@2015-11-0
     workspaceResourceId: logAnalytics.id
   }
 }
+
+// =============================================================================
+// Outputs (additional)
+// =============================================================================
+@description('Effective retention in days (echoed for reporting/assertions).')
+output retentionInDays int = retentionInDays
 
 // =============================================================================
 // Saved Queries for Fabric Monitoring

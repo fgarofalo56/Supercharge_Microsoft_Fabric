@@ -214,8 +214,8 @@ flowchart TB
 
 1. **Clone repository**
    ```bash
-   git clone https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric.git
-   cd Supercharge_Microsoft_Fabric
+   git clone https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric.git
+   cd Suppercharge_Microsoft_Fabric
    ```
 
 2. **Configure environment**
@@ -319,8 +319,8 @@ Generate sample data in under 5 minutes without installing any dependencies.
 
 ```bash
 # Clone the repository
-git clone https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric.git
-cd Supercharge_Microsoft_Fabric
+git clone https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric.git
+cd Suppercharge_Microsoft_Fabric
 
 # Generate demo dataset (7 days, smaller volumes)
 docker-compose run --rm demo-generator

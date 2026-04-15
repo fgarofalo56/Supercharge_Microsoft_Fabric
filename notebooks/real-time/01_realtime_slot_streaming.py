@@ -1,3 +1,6 @@
+import os
+from datetime import datetime
+
 # Databricks notebook source
 # MAGIC %md
 # MAGIC # Real-Time Slot Machine Streaming
@@ -10,14 +13,10 @@
 # MAGIC - Jackpot alerts
 # MAGIC - Machine health monitoring
 # MAGIC - Live player engagement tracking
-
 # COMMAND ----------
-
 # MAGIC %md
 # MAGIC ## Configuration
-
 # COMMAND ----------
-
 from pyspark.sql.functions import (
     col,
     concat,
@@ -35,11 +34,17 @@ from pyspark.sql.functions import (
     when,
     window,
 )
-from pyspark.sql.types import DecimalType, IntegerType, StringType, StructField, StructType, TimestampType
-from datetime import datetime
+from pyspark.sql.types import (
+    DecimalType,
+    IntegerType,
+    StringType,
+    StructField,
+    StructType,
+    TimestampType,
+)
 
 # Streaming parameters
-checkpoint_location = "/tmp/checkpoints/slot_streaming"
+checkpoint_location = os.environ.get('CHECKPOINT_PATH_BASE', 'abfss://Files/checkpoints') + '/slot_streaming'
 trigger_interval = "10 seconds"
 
 # Schema for incoming events
@@ -70,6 +75,7 @@ event_schema = StructType([
 
 import json
 import random
+
 
 # Generate sample event for simulation
 def generate_sample_event():
@@ -120,7 +126,8 @@ print(json.dumps(generate_sample_event(), indent=2, default=str))
 # COMMAND ----------
 
 # # Event Hub configuration (uncomment for production)
-# eh_connection = dbutils.secrets.get(scope="casino", key="eventhub-connection")
+# import notebookutils
+# eh_connection = notebookutils.credentials.getSecret("https://<vault>.vault.azure.net/", "eventhub-connection")
 #
 # df_stream = spark.readStream \
 #     .format("eventhubs") \

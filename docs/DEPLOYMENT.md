@@ -239,8 +239,8 @@ Follow these steps for a rapid deployment to the development environment.
 
 ```bash
 # Clone repository
-git clone https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric.git
-cd Supercharge_Microsoft_Fabric
+git clone https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric.git
+cd Suppercharge_Microsoft_Fabric
 
 # Copy environment template
 cp .env.sample .env
@@ -614,7 +614,7 @@ az ad app federated-credential create \
   --parameters '{
     "name": "github-main",
     "issuer": "https://token.actions.githubusercontent.com",
-    "subject": "repo:<your-org>/Supercharge_Microsoft_Fabric:ref:refs/heads/main",
+    "subject": "repo:<your-org>/Suppercharge_Microsoft_Fabric:ref:refs/heads/main",
     "audiences": ["api://AzureADTokenExchange"]
   }'
 
@@ -624,7 +624,7 @@ az ad app federated-credential create \
   --parameters '{
     "name": "github-pr",
     "issuer": "https://token.actions.githubusercontent.com",
-    "subject": "repo:<your-org>/Supercharge_Microsoft_Fabric:pull_request",
+    "subject": "repo:<your-org>/Suppercharge_Microsoft_Fabric:pull_request",
     "audiences": ["api://AzureADTokenExchange"]
   }'
 ```
@@ -910,4 +910,4 @@ After successful deployment, proceed with these guides:
 ---
 
 > 📖 **Documentation maintained by:** Microsoft Fabric POC Team
-> 🔗 **Repository:** [Supercharge_Microsoft_Fabric](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric)
+> 🔗 **Repository:** [Suppercharge_Microsoft_Fabric](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric)

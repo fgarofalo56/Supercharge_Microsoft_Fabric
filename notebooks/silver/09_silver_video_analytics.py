@@ -16,11 +16,45 @@
 
 # COMMAND ----------
 
+# ---------------------------------------------------------------------------
+# Fabric/local compatibility shim
+# ---------------------------------------------------------------------------
+import os
+
+try:
+    import notebookutils  # Fabric runtime
+    def _get_arg(name, default=None):
+        try:
+            return notebookutils.notebook.getArgument(name, default)
+        except Exception:
+            return os.environ.get(name.upper(), default)
+    def _notebook_exit(status: str) -> None:
+        notebookutils.notebook.exit(status)
+except ImportError:
+    try:
+        import mssparkutils  # legacy Synapse/Fabric runtime
+        def _get_arg(name, default=None):
+            try:
+                return mssparkutils.notebook.getArgument(name, default)
+            except Exception:
+                return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            mssparkutils.notebook.exit(status)
+    except ImportError:
+        def _get_arg(name, default=None):
+            return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            raise SystemExit(status)
+
+
 # MAGIC %md
 # MAGIC ## Configuration
 
 # COMMAND ----------
 
+from datetime import datetime
+
+from delta.tables import DeltaTable
 from pyspark.sql.functions import (
     array,
     array_compact,
@@ -43,11 +77,9 @@ from pyspark.sql.functions import (
     when,
 )
 from pyspark.sql.types import FloatType
-from delta.tables import DeltaTable
-from datetime import datetime
 
 # Parameters (set by pipeline or manual)
-batch_id = dbutils.widgets.get("batch_id") if "batch_id" in [w.name for w in dbutils.widgets.getAll()] else datetime.now().strftime("%Y%m%d_%H%M%S")
+batch_id = _get_arg("batch_id", datetime.now().strftime("%Y%m%d_%H%M%S"))
 
 # Source and target
 source_table = "lh_bronze.bronze_video_analytics"
@@ -297,37 +329,37 @@ try:
         "event_id", "camera_id", "camera_location_clean", "event_type_clean",
         "timestamp", "event_date", "event_hour", "event_minute",
         "day_of_week", "is_weekend",
-    
+
         # Detection fields
         "confidence_score", "object_class_clean", "object_count",
         "bounding_box", "track_id",
-    
+
         # Zone crossing
         "zone_from", "zone_to",
-    
+
         # Temporal
         "dwell_time_seconds",
-    
+
         # Anomaly
         "anomaly_type_clean",
-    
+
         # Alert and severity
         "alert_level_clean", "alert_severity_score",
         "is_security_event", "is_critical",
-    
+
         # Video metadata
         "frame_number", "video_resolution", "fps",
         "model_name", "model_version",
-    
+
         # Data quality
         "_dq_score", "_dq_flags",
-    
+
         # Metadata
         "_silver_timestamp", "_batch_id"
     ]
-    
+
     df_final = df_silver.select([col(c) for c in final_columns if c in df_silver.columns])
-    
+
     # Write to Silver layer using Delta MERGE (incremental upsert)
     if spark.catalog.tableExists(target_table):
         deltaTable = DeltaTable.forName(spark, target_table)

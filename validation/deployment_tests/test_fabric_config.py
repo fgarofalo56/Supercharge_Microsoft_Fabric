@@ -342,9 +342,11 @@ class TestFabricModuleStructure:
         param_pattern = r"param\s+(\w+)\s+"
         params = re.findall(param_pattern, content)
 
+        # Allow any number of additional decorators (e.g., @allowed, @minValue)
+        # between @description and the param keyword.
         missing_desc = []
         for param in params:
-            desc_pattern = rf"@description\s*\([^\)]+\)\s*param\s+{param}\s+"
+            desc_pattern = rf"@description\s*\([^\)]+\)\s*(?:@\w+\s*\([^\)]*\)\s*)*param\s+{param}\s+"
             if not re.search(desc_pattern, content):
                 missing_desc.append(param)
 

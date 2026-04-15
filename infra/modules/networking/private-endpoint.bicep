@@ -84,7 +84,7 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-05-01' = {
 // Private DNS Zones (one per dnsZoneName)
 // =============================================================================
 
-resource privateDnsZones 'Microsoft.Network/privateDnsZones@2020-06-01' = [
+resource privateDnsZones 'Microsoft.Network/privateDnsZones@2024-06-01' = [
   for zoneName in dnsZoneNames: {
     name: zoneName
     location: 'global'

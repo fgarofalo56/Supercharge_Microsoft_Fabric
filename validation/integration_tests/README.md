@@ -67,7 +67,7 @@ Tests for notebook dependencies:
 
 ### Run All Integration Tests
 ```bash
-cd E:\Repos\GitHub\MyDemoRepos\Supercharge_Microsoft_Fabric
+cd E:\Repos\GitHub\MyDemoRepos\Suppercharge_Microsoft_Fabric
 pytest validation/integration_tests/ -v
 ```
 
@@ -238,7 +238,7 @@ Optional:
 ### Import Errors
 Ensure the data_generation directory is in PYTHONPATH:
 ```bash
-set PYTHONPATH=%PYTHONPATH%;E:\Repos\GitHub\MyDemoRepos\Supercharge_Microsoft_Fabric\data_generation
+set PYTHONPATH=%PYTHONPATH%;E:\Repos\GitHub\MyDemoRepos\Suppercharge_Microsoft_Fabric\data_generation
 ```
 
 ### Fixture Not Found

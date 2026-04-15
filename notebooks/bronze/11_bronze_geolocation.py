@@ -24,10 +24,18 @@
 
 # COMMAND ----------
 
+import uuid
+from datetime import datetime
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import (
-    current_timestamp, lit, input_file_name,
-    col, to_timestamp, when, count
+    col,
+    count,
+    current_timestamp,
+    input_file_name,
+    lit,
+    to_timestamp,
+    when,
 )
 from pyspark.sql.types import (
     DoubleType,
@@ -39,8 +47,6 @@ from pyspark.sql.types import (
     StructType,
     TimestampType,
 )
-from datetime import datetime
-import uuid
 
 # Configuration
 SOURCE_PATH = "Files/landing/geolocation/"
@@ -178,7 +184,7 @@ print(f"  Latitude range: {lat_stats['min_lat']:.6f} to {lat_stats['max_lat']:.6
 print(f"  Longitude range: {lat_stats['min_lon']:.6f} to {lat_stats['max_lon']:.6f}")
 
 # Flag records with out-of-range coordinates
-from pyspark.sql.functions import min, max, avg
+from pyspark.sql.functions import avg, max, min
 
 out_of_range = df_valid.filter(
     (col("latitude") < 35.0) | (col("latitude") > 37.0) |
@@ -274,7 +280,7 @@ df_bronze.write \
     .partitionBy("_load_date") \
     .saveAsTable(TARGET_TABLE)
 
-final_count = df_bronze.count()
+final_count = spark.table(TARGET_TABLE).count()
 print(f"Successfully wrote {final_count:,} records to {TARGET_TABLE}")
 
 # COMMAND ----------

@@ -17,11 +17,45 @@
 
 # COMMAND ----------
 
+# ---------------------------------------------------------------------------
+# Fabric/local compatibility shim
+# ---------------------------------------------------------------------------
+import os
+
+try:
+    import notebookutils  # Fabric runtime
+    def _get_arg(name, default=None):
+        try:
+            return notebookutils.notebook.getArgument(name, default)
+        except Exception:
+            return os.environ.get(name.upper(), default)
+    def _notebook_exit(status: str) -> None:
+        notebookutils.notebook.exit(status)
+except ImportError:
+    try:
+        import mssparkutils  # legacy Synapse/Fabric runtime
+        def _get_arg(name, default=None):
+            try:
+                return mssparkutils.notebook.getArgument(name, default)
+            except Exception:
+                return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            mssparkutils.notebook.exit(status)
+    except ImportError:
+        def _get_arg(name, default=None):
+            return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            raise SystemExit(status)
+
+
 # MAGIC %md
 # MAGIC ## Configuration
 
 # COMMAND ----------
 
+from datetime import datetime
+
+from delta.tables import DeltaTable
 from pyspark.sql.functions import (
     array,
     array_compact,
@@ -42,11 +76,9 @@ from pyspark.sql.functions import (
     when,
 )
 from pyspark.sql.types import DoubleType, FloatType, IntegerType
-from delta.tables import DeltaTable
-from datetime import datetime
 
 # Parameters (set by pipeline or manual)
-batch_id = dbutils.widgets.get("batch_id") if "batch_id" in [w.name for w in dbutils.widgets.getAll()] else datetime.now().strftime("%Y%m%d_%H%M%S")
+batch_id = _get_arg("batch_id", datetime.now().strftime("%Y%m%d_%H%M%S"))
 
 # Source and target
 source_table = "lh_bronze.bronze_geolocation"
@@ -365,41 +397,41 @@ try:
         # Core event fields
         "event_id", "device_id", "device_type_clean",
         "timestamp", "event_date", "event_hour", "day_of_week", "is_weekend",
-    
+
         # Location
         "latitude", "longitude", "altitude_meters",
         "accuracy_meters", "accuracy_tier",
         "h3_index", "has_h3_index",
-    
+
         # Movement
         "speed_mps", "speed_kmh", "heading_degrees",
         "mobility_class", "is_stationary", "is_walking", "is_vehicle_speed",
-    
+
         # Geofence
         "geofence_id", "geofence_name", "geofence_event_clean",
         "geofence_dwell_seconds", "geofence_dwell_minutes",
-    
+
         # Points of interest
         "poi_name", "poi_distance_meters",
-    
+
         # Indoor positioning
         "floor_level", "indoor_zone_clean", "location_type",
-    
+
         # Triggers
         "proximity_trigger",
-    
+
         # Source and device metadata
         "source_system_clean", "battery_level",
-    
+
         # Data quality
         "_dq_score", "_dq_flags",
-    
+
         # Metadata
         "_silver_timestamp", "_batch_id"
     ]
-    
+
     df_final = df_silver.select([col(c) for c in final_columns if c in df_silver.columns])
-    
+
     # Write to Silver layer using Delta MERGE (incremental upsert)
     if spark.catalog.tableExists(target_table):
         deltaTable = DeltaTable.forName(spark, target_table)

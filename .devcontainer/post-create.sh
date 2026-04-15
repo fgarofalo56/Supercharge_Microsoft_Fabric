@@ -233,3 +233,9 @@ echo "  - Check README.md for detailed documentation"
 echo ""
 echo -e "${GREEN}Happy coding!${NC}"
 echo ""
+
+# ==============================================================================
+# 11. Install pre-commit hooks (idempotent; errors are non-fatal)
+# ==============================================================================
+git config --local core.hooksPath .githooks 2>/dev/null || true
+pre-commit install --install-hooks 2>/dev/null || true

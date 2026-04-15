@@ -29,7 +29,7 @@ param tags object = {}
 // Purview Account
 // =============================================================================
 
-resource purviewAccount 'Microsoft.Purview/accounts@2021-12-01' = {
+resource purviewAccount 'Microsoft.Purview/accounts@2023-05-01-preview' = {
   name: purviewAccountName
   location: location
   tags: tags

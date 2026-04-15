@@ -8,7 +8,7 @@
 
 </div>
 
-> :house: **[Home](../../index.md)** > :book: **[Tutorials](../index.md)** > :airplane: **Federal DOT/FAA Aviation Analytics**
+> :house: **[Home](../../README.md)** > :book: **[Tutorials](../README.md)** > :airplane: **Federal DOT/FAA Aviation Analytics**
 
 ---
 
@@ -959,7 +959,7 @@ Congratulations! You have built a complete DOT/FAA aviation analytics pipeline o
 
 | Previous | Up | Next |
 |:---------|:--:|-----:|
-| [:arrow_left: 30-Tribal Healthcare Analytics](../30-tribal-healthcare/README.md) | [:book: Tutorials Index](../index.md) | Phase Complete :tada: |
+| [:arrow_left: 30-Tribal Healthcare Analytics](../30-tribal-healthcare/README.md) | [:book: Tutorials Index](../README.md) | Phase Complete :tada: |
 
 ---
 

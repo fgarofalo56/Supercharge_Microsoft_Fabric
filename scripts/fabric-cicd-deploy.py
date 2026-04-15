@@ -24,8 +24,8 @@ import sys
 from pathlib import Path
 
 try:
-    from fabric_cicd import FabricWorkspace, publish_all_items
     from azure.identity import DefaultAzureCredential
+    from fabric_cicd import FabricWorkspace, publish_all_items
 except ImportError:
     print("ERROR: Required packages not installed.")
     print("Run: pip install fabric-cicd azure-identity")
@@ -90,7 +90,7 @@ def deploy(
 ) -> None:
     """Deploy Fabric items to the target workspace."""
     print(f"\n{'=' * 60}")
-    print(f"Fabric CI/CD Deployment")
+    print("Fabric CI/CD Deployment")
     print(f"{'=' * 60}")
     print(f"  Workspace ID:  {workspace_id}")
     print(f"  Environment:   {environment}")
@@ -107,7 +107,7 @@ def deploy(
     print(f"  Connected to workspace: {workspace_id}")
 
     # Get environment-specific parameters
-    env_params = ENVIRONMENT_PARAMS.get(environment, {})
+    ENVIRONMENT_PARAMS.get(environment, {})
     print(f"  Environment config: {environment}")
 
     if dry_run:

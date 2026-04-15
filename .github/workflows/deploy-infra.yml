@@ -28,6 +28,11 @@ on:
 permissions:
   id-token: write
   contents: read
+  issues: write
+
+concurrency:
+  group: deploy-infra-${{ github.ref }}-${{ inputs.environment || 'dev' }}
+  cancel-in-progress: false
 
 env:
   AZURE_LOCATION: ${{ inputs.location || 'eastus2' }}
@@ -39,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -67,7 +72,7 @@ jobs:
       changes: ${{ steps.whatif.outputs.changes }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -79,18 +84,26 @@ jobs:
       - name: Run What-If
         id: whatif
         run: |
-          RESULT=$(az deployment sub what-if \
+          set -o pipefail
+          RESULT_FILE=$(mktemp)
+          if ! az deployment sub what-if \
             --location ${{ env.AZURE_LOCATION }} \
             --template-file infra/main.bicep \
             --parameters infra/environments/${{ env.ENVIRONMENT }}/${{ env.ENVIRONMENT }}.bicepparam \
-            --no-prompt 2>&1) || true
+            --no-prompt > "$RESULT_FILE" 2>&1; then
+            echo "::error::what-if failed" >&2
+            cat "$RESULT_FILE"
+            exit 1
+          fi
 
-          echo "### What-If Results" >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
-          echo "$RESULT" >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
+          {
+            echo "### What-If Results"
+            echo '```'
+            cat "$RESULT_FILE"
+            echo '```'
+          } >> $GITHUB_STEP_SUMMARY
 
-          if echo "$RESULT" | grep -q "Resource changes"; then
+          if grep -q "Resource changes" "$RESULT_FILE"; then
             echo "changes=true" >> $GITHUB_OUTPUT
           else
             echo "changes=false" >> $GITHUB_OUTPUT
@@ -106,7 +119,7 @@ jobs:
       url: https://portal.azure.com
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -137,13 +150,13 @@ jobs:
             --query "properties.outputs" \
             -o json >> $GITHUB_STEP_SUMMARY
 
-  post-deploy:
-    name: Post-Deployment Configuration
+  smoke-test:
+    name: Post-Deployment Smoke Test
     runs-on: ubuntu-latest
     needs: deploy
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -152,23 +165,30 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Configure Diagnostics
+      - name: Verify resource group exists
         run: |
-          echo "Configuring diagnostic settings..."
-          # Add post-deployment configuration scripts here
+          RG="rg-fabric-poc-${{ env.ENVIRONMENT }}"
+          az group show --name "$RG" --query "provisioningState" -o tsv | grep -q Succeeded
 
-      - name: Run Smoke Tests
+      - name: Verify Fabric capacity exists and is active
         run: |
-          echo "Running deployment smoke tests..."
-          # Verify resources are accessible
-          # Check connectivity
-          # Validate configurations
-          echo "✅ Smoke tests passed"
+          RG="rg-fabric-poc-${{ env.ENVIRONMENT }}"
+          STATE=$(az fabric capacity list --resource-group "$RG" --query "[0].properties.state" -o tsv)
+          if [ "$STATE" != "Active" ]; then
+            echo "::error::Fabric capacity not Active (state=$STATE)"
+            exit 1
+          fi
+
+      - name: Verify Key Vault reachable
+        run: |
+          RG="rg-fabric-poc-${{ env.ENVIRONMENT }}"
+          KV=$(az keyvault list --resource-group "$RG" --query "[0].name" -o tsv)
+          az keyvault show --name "$KV" --query "properties.provisioningState" -o tsv | grep -q Succeeded
 
   notify:
     name: Notify on Failure
     runs-on: ubuntu-latest
-    needs: [validate, what-if, deploy, post-deploy]
+    needs: [validate, what-if, deploy, smoke-test]
     if: failure()
     steps:
       - name: Create Issue on Failure

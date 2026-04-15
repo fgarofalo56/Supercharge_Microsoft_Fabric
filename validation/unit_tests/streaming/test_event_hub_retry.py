@@ -19,13 +19,26 @@ import pytest
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT / "data_generation"))
 
+from generators.streaming import event_hub_producer as _eh_mod
 from generators.streaming.event_hub_producer import (
-    DEFAULT_BACKOFF_FACTOR,
     DEFAULT_BASE_DELAY,
     DEFAULT_MAX_DELAY,
     DEFAULT_MAX_RETRIES,
     EventHubProducer,
 )
+
+# Autouse fixture: the module-level EVENTHUB_AVAILABLE flag gates _send_to_eventhub
+# from running when azure-eventhub isn't installed. The retry tests exercise the
+# retry path through a mock producer, so force the flag on and stub EventData.
+
+
+@pytest.fixture(autouse=True)
+def _force_eventhub_available(monkeypatch):
+    monkeypatch.setattr(_eh_mod, "EVENTHUB_AVAILABLE", True)
+    monkeypatch.setattr(
+        _eh_mod, "EventData", lambda body=None: MagicMock(name="EventData"), raising=False
+    )
+    yield
 
 
 class TestEventHubProducerDefaults:

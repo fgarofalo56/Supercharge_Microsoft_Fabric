@@ -21,17 +21,29 @@
 
 # COMMAND ----------
 
+from datetime import datetime
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import (
-    current_timestamp, lit, input_file_name,
-    col, to_timestamp, when
+    col,
+    current_timestamp,
+    input_file_name,
+    lit,
+    to_timestamp,
+    when,
 )
-from pyspark.sql.types import DoubleType, IntegerType, StringType, StructField, StructType, TimestampType
-from datetime import datetime
+from pyspark.sql.types import (
+    DoubleType,
+    IntegerType,
+    StringType,
+    StructField,
+    StructType,
+    TimestampType,
+)
 
 # Configuration
 SOURCE_PATH = "Files/output/bronze_slot_telemetry.parquet"
-TARGET_TABLE = "bronze_slot_telemetry"
+TARGET_TABLE = "lh_bronze.bronze_slot_telemetry"
 BATCH_ID = datetime.now().strftime("%Y%m%d_%H%M%S")
 
 print(f"Source: {SOURCE_PATH}")
@@ -150,7 +162,7 @@ df_bronze.write \
     .partitionBy("_bronze_load_date") \
     .saveAsTable(TARGET_TABLE)
 
-print(f"Successfully wrote {df_bronze.count():,} records to {TARGET_TABLE}")
+print(f"Successfully wrote {spark.table(TARGET_TABLE).count():,} records to {TARGET_TABLE}")
 
 # COMMAND ----------
 

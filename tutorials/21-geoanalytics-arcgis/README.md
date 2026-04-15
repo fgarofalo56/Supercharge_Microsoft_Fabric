@@ -834,7 +834,7 @@ def generate_global_casinos(count: int = 50) -> List[dict]:
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [⬅️ 20-Workspace Best Practices](../20-workspace-best-practices/README.md) | [📖 Tutorials Index](../index.md) | [22-Networking & Connectivity](../22-networking-connectivity/README.md) ➡️ |
+| [⬅️ 20-Workspace Best Practices](../20-workspace-best-practices/README.md) | [📖 Tutorials Index](../README.md) | [22-Networking & Connectivity](../22-networking-connectivity/README.md) ➡️ |
 
 ---
 

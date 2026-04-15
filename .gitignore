@@ -1,5 +1,5 @@
-# Claude Code local settings
-.claude/settings.local.json
+# Claude Code local settings and harness state
+.claude/
 .mcp.json
 
 # Bicep build artifacts (generated from .bicep source)
@@ -111,6 +111,8 @@ coverage.xml
 
 # Great Expectations
 great_expectations/uncommitted/
+validation/great_expectations/uncommitted/
+**/.ge_store_backend_id
 
 # Generated data (large files)
 data_generation/output/
@@ -238,6 +240,8 @@ site/
 
 # Playwright test results
 test-results/
+tests/e2e/node_modules/
+tests/e2e/test-results/
 
 # Windows null device artifacts
 nul

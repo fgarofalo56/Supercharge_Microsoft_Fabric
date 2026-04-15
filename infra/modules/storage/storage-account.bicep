@@ -28,7 +28,7 @@ param tags object = {}
 @description('Enable Customer-Managed Keys for storage encryption')
 param enableCmk bool = false
 
-@description('Key Vault key URI for CMK encryption (required when enableCmk is true)')
+@description('Key Vault key URI for CMK encryption (required when enableCmk is true). Format: https://<vault>.vault.azure.net/keys/<keyname>[/<version>]')
 param keyVaultKeyUri string = ''
 
 @description('User-assigned managed identity resource ID for Key Vault access (required when enableCmk is true)')
@@ -38,7 +38,17 @@ param keyVaultIdentityId string = ''
 // Storage Account
 // =============================================================================
 
-resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
+// Parse the Key Vault key URI. Expected formats:
+//   https://<vault>.vault.azure.net/keys/<keyname>
+//   https://<vault>.vault.azure.net/keys/<keyname>/<version>
+// Use the system assigned identity when a dedicated identity ID isn't supplied
+// so that the storage account has an identity to use for CMK wrap/unwrap.
+var cmkSegments = split(keyVaultKeyUri, '/')
+var cmkVaultUri = enableCmk ? '${cmkSegments[0]}//${cmkSegments[2]}/' : ''
+var cmkKeyName = enableCmk ? cmkSegments[4] : ''
+var cmkKeyVersion = enableCmk && length(cmkSegments) >= 6 ? cmkSegments[5] : ''
+
+resource storageAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {
   name: storageAccountName
   location: location
   tags: tags
@@ -46,12 +56,12 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   sku: {
     name: 'Standard_ZRS'
   }
-  identity: enableCmk ? {
+  identity: enableCmk && !empty(keyVaultIdentityId) ? {
     type: 'UserAssigned'
     userAssignedIdentities: {
       '${keyVaultIdentityId}': {}
     }
-  } : { type: 'None' }
+  } : enableCmk ? { type: 'SystemAssigned' } : { type: 'None' }
   properties: {
     accessTier: 'Hot'
     isHnsEnabled: true // Enable hierarchical namespace (ADLS Gen2)
@@ -59,6 +69,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
     supportsHttpsTrafficOnly: true
     allowBlobPublicAccess: false
     allowSharedKeyAccess: false // Use Azure AD/Entra ID auth via managed identity RBAC
+    publicNetworkAccess: enablePrivateEndpoint ? 'Disabled' : 'Enabled'
     networkAcls: {
       defaultAction: enablePrivateEndpoint ? 'Deny' : 'Allow'
       bypass: 'AzureServices'
@@ -66,8 +77,9 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
     encryption: {
       keySource: enableCmk ? 'Microsoft.Keyvault' : 'Microsoft.Storage'
       keyvaultproperties: enableCmk ? {
-        keyname: last(split(keyVaultKeyUri, '/'))
-        keyvaulturi: substring(keyVaultKeyUri, 0, lastIndexOf(keyVaultKeyUri, '/keys/'))
+        keyname: cmkKeyName
+        keyvaulturi: cmkVaultUri
+        keyversion: cmkKeyVersion
       } : null
       services: {
         blob: { enabled: true, keyType: 'Account' }
@@ -288,13 +300,13 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-05-01' = if (e
 // in a hub VNet and linked to spoke VNets. This POC deploys them inline for simplicity.
 // See: https://learn.microsoft.com/azure/private-link/private-endpoint-dns
 
-resource privateDnsZoneDfs 'Microsoft.Network/privateDnsZones@2020-06-01' = if (enablePrivateEndpoint) {
+resource privateDnsZoneDfs 'Microsoft.Network/privateDnsZones@2024-06-01' = if (enablePrivateEndpoint) {
   name: 'privatelink.dfs.${environment().suffixes.storage}'
   location: 'global'
   tags: tags
 }
 
-resource privateDnsZoneBlob 'Microsoft.Network/privateDnsZones@2020-06-01' = if (enablePrivateEndpoint) {
+resource privateDnsZoneBlob 'Microsoft.Network/privateDnsZones@2024-06-01' = if (enablePrivateEndpoint) {
   name: 'privatelink.blob.${environment().suffixes.storage}'
   location: 'global'
   tags: tags

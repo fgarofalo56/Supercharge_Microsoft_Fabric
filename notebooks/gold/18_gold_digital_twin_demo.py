@@ -14,11 +14,45 @@
 
 # COMMAND ----------
 
+# ---------------------------------------------------------------------------
+# Fabric/local compatibility shim
+# ---------------------------------------------------------------------------
+import os
+
+try:
+    import notebookutils  # Fabric runtime
+    def _get_arg(name, default=None):
+        try:
+            return notebookutils.notebook.getArgument(name, default)
+        except Exception:
+            return os.environ.get(name.upper(), default)
+    def _notebook_exit(status: str) -> None:
+        notebookutils.notebook.exit(status)
+except ImportError:
+    try:
+        import mssparkutils  # legacy Synapse/Fabric runtime
+        def _get_arg(name, default=None):
+            try:
+                return mssparkutils.notebook.getArgument(name, default)
+            except Exception:
+                return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            mssparkutils.notebook.exit(status)
+    except ImportError:
+        def _get_arg(name, default=None):
+            return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            raise SystemExit(status)
+
+
 # MAGIC %md
 # MAGIC ## Configuration
 
 # COMMAND ----------
 
+from datetime import datetime
+
+from delta.tables import DeltaTable
 from pyspark.sql.functions import (
     avg,
     coalesce,
@@ -41,14 +75,10 @@ from pyspark.sql.types import (
     StructField,
     StructType,
 )
-from delta.tables import DeltaTable
-from datetime import datetime
 
 # Parameters
 batch_id = (
-    dbutils.widgets.get("batch_id")
-    if "batch_id" in [w.name for w in dbutils.widgets.getAll()]
-    else datetime.now().strftime("%Y%m%d_%H%M%S")
+    _get_arg("batch_id", datetime.now().strftime("%Y%m%d_%H%M%S"))
 )
 
 # Source tables
@@ -414,7 +444,7 @@ try:
             .option("overwriteSchema", "true") \
             .saveAsTable(TARGET_RELATIONSHIPS)
 
-    entity_count = df_all_entities.count()
+    entity_count = spark.table(TARGET_RELATIONSHIPS).count()
     rel_count = df_all_relationships.count()
     print(f"Merged {entity_count:,} entities into {TARGET_ENTITIES}")
     print(f"Merged {rel_count:,} relationships into {TARGET_RELATIONSHIPS}")

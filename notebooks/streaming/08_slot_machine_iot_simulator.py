@@ -35,15 +35,15 @@
 
 # COMMAND ----------
 
-import os
-import time
 import json
+import os
 import random
-import uuid
 import threading
+import time
+import uuid
+from dataclasses import asdict, dataclass, field
 from datetime import datetime, timedelta
-from dataclasses import dataclass, field, asdict
-from typing import List, Dict, Optional
+from typing import Dict, List, Optional
 
 # Event Hub / IoT Hub target — credentials from Key Vault / env vars
 EVENTHUB_CONN_STRING = os.getenv("EVENTHUB_CONN_STRING")   # Key Vault secret
@@ -127,7 +127,7 @@ class SlotMachineState:
     is_door_open:        bool = False
     is_powered:          bool = True
 
-def init_machines(n: int) -> List[SlotMachineState]:
+def init_machines(n: int) -> list[SlotMachineState]:
     machines = []
     for i in range(1, n + 1):
         denom = random.choice(DENOMINATIONS)
@@ -283,8 +283,9 @@ def next_event(machine: SlotMachineState) -> dict:
 #   %pip install azure-eventhub
 # Or add to the environment via Workspace Settings → Libraries.
 
-from azure.eventhub import EventHubProducerClient, EventData
+from azure.eventhub import EventData, EventHubProducerClient
 from azure.eventhub.exceptions import EventHubError
+
 
 def create_producer() -> EventHubProducerClient:
     return EventHubProducerClient.from_connection_string(
@@ -293,7 +294,7 @@ def create_producer() -> EventHubProducerClient:
     )
 
 def send_batch(producer: EventHubProducerClient,
-               events: List[dict]) -> int:
+               events: list[dict]) -> int:
     """Pack events into an EventDataBatch (respects 1 MB limit) and send."""
     event_data_batch = producer.create_batch()
     overflow = []

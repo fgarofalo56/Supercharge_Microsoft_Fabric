@@ -12,11 +12,45 @@
 
 # COMMAND ----------
 
+# ---------------------------------------------------------------------------
+# Fabric/local compatibility shim
+# ---------------------------------------------------------------------------
+import os
+
+try:
+    import notebookutils  # Fabric runtime
+    def _get_arg(name, default=None):
+        try:
+            return notebookutils.notebook.getArgument(name, default)
+        except Exception:
+            return os.environ.get(name.upper(), default)
+    def _notebook_exit(status: str) -> None:
+        notebookutils.notebook.exit(status)
+except ImportError:
+    try:
+        import mssparkutils  # legacy Synapse/Fabric runtime
+        def _get_arg(name, default=None):
+            try:
+                return mssparkutils.notebook.getArgument(name, default)
+            except Exception:
+                return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            mssparkutils.notebook.exit(status)
+    except ImportError:
+        def _get_arg(name, default=None):
+            return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            raise SystemExit(status)
+
+
 # MAGIC %md
 # MAGIC ## Configuration
 
 # COMMAND ----------
 
+from datetime import datetime
+
+from delta.tables import DeltaTable
 from pyspark.sql.functions import (
     array,
     array_compact,
@@ -33,11 +67,9 @@ from pyspark.sql.functions import (
     unix_timestamp,
     when,
 )
-from delta.tables import DeltaTable
-from datetime import datetime
 
 # Parameters
-batch_id = dbutils.widgets.get("batch_id") if "batch_id" in [w.name for w in dbutils.widgets.getAll()] else datetime.now().strftime("%Y%m%d_%H%M%S")
+batch_id = _get_arg("batch_id", datetime.now().strftime("%Y%m%d_%H%M%S"))
 
 # Source and target
 source_table = "lh_silver.silver_slot_cleansed"
@@ -220,29 +252,29 @@ try:
     final_columns = [
         # Dimensions
         "machine_id", "zone", "denomination", "manufacturer", "machine_type", "business_date",
-    
+
         # Volume metrics
         "total_coin_in", "total_coin_out", "total_games", "total_events",
-    
+
         # Financial KPIs
         "net_win", "actual_hold_pct", "theoretical_win", "hold_variance", "hold_variance_pct",
-    
+
         # Jackpot metrics
         "jackpot_payouts", "jackpot_count",
-    
+
         # Player metrics
         "unique_players", "unique_sessions", "games_per_player",
-    
+
         # Operational metrics
         "avg_bet", "win_per_unit", "operating_hours",
-    
+
         # Quality & Status
         "avg_data_quality", "performance_status", "alert_flags",
-    
+
         # Metadata
         "_gold_timestamp", "_batch_id", "_theoretical_hold_used"
     ]
-    
+
     df_final = df_gold.select([col(c) for c in final_columns if c in df_gold.columns])
 
     # Write to Gold — incremental MERGE on aggregation natural key
@@ -266,7 +298,7 @@ try:
             .option("overwriteSchema", "true") \
             .saveAsTable(target_table)
 
-    print(f"Merged {df_final.count():,} records into {target_table}")
+    print(f"Merged {spark.table(target_table).count():,} records into {target_table}")
 except Exception as e:
     print(f"ERROR in lh_gold.gold_slot_performance (batch_id={batch_id}): {e}")
     raise

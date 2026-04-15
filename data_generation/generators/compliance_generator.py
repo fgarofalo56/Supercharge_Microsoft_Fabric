@@ -12,7 +12,6 @@ Thresholds are loaded from config/compliance_thresholds.yaml for easy
 customization across jurisdictions.
 """
 
-import os
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
@@ -199,9 +198,14 @@ class ComplianceGenerator(BaseGenerator):
         return self.add_metadata_columns(record)
 
     def _add_player_info(self, record: dict[str, Any]) -> dict[str, Any]:
-        """Add hashed/masked player information."""
+        """Add hashed/masked player information.
+
+        All PII hashing here routes through ``hash_value`` which requires a
+        salt (raises ValueError if FABRIC_POC_HASH_SALT is not set), so
+        unsalted-SHA256 rainbow-table attacks are prevented structurally.
+        """
         name = f"{self.faker.first_name()} {self.faker.last_name()}"
-        ssn = self.faker.ssn()
+        ssn = self.synthetic_ssn()  # 900-series synthetic, never a real SSN
         address = self.faker.address().replace("\n", ", ")
 
         record["player_name_hash"] = self.hash_value(name)

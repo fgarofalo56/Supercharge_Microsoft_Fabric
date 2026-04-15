@@ -23,18 +23,31 @@
 # COMMAND ----------
 
 import os
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import (
-    col, current_timestamp, lit, from_json, regexp_replace,
-    when, to_timestamp, expr, udf
+    col,
+    current_timestamp,
+    expr,
+    from_json,
+    lit,
+    regexp_replace,
+    to_timestamp,
+    udf,
+    when,
 )
 from pyspark.sql.types import (
-    StructType, StructField, StringType, LongType,
-    DecimalType, TimestampType, BooleanType
+    BooleanType,
+    DecimalType,
+    LongType,
+    StringType,
+    StructField,
+    StructType,
+    TimestampType,
 )
 
 # Oracle JDBC connection parameters — credentials from environment / Key Vault
-ORACLE_HOST     = os.getenv("ORACLE_HOST", "oracle-db.casino.internal")
+ORACLE_HOST     = os.getenv("ORACLE_HOST", "<oracle-host>")
 ORACLE_PORT     = os.getenv("ORACLE_PORT", "1521")
 ORACLE_SERVICE  = os.getenv("ORACLE_SERVICE", "CASINOPRD")
 ORACLE_USER     = os.getenv("ORACLE_USER", "cdc_reader")

@@ -1,18 +1,17 @@
 # =============================================================================
 # Microsoft Fabric Item Deployment using fabric-cicd (GA, Feb 2026)
 # =============================================================================
-# This workflow deploys Fabric items (notebooks, lakehouses, warehouses,
-# semantic models) across Dev → Staging → Production environments using
-# the officially supported fabric-cicd Python library.
+# Deploy Fabric items (notebooks, lakehouses, semantic models) across
+# Dev -> Staging -> Production using the fabric-cicd Python library.
 #
-# Prerequisites:
-#   - Azure AD App Registration with Fabric API permissions
-#   - Fabric workspace IDs for each environment
-#   - OIDC federated identity configured
+# Gate model:
+#   - push to main              -> dev (dry-run by default, live if dry_run=false)
+#   - workflow_dispatch env=dev -> dev
+#   - workflow_dispatch env=stg -> staging  (requires environment approval)
+#   - workflow_dispatch env=prd -> production (requires environment approval)
 #
-# References:
-#   - https://learn.microsoft.com/fabric/cicd/manage-deployment
-#   - https://pypi.org/project/fabric-cicd/
+# Dev/Staging/Production are GitHub Environments. Protection rules
+# (required reviewers, wait timers, secrets) MUST be configured there.
 # =============================================================================
 
 name: Deploy Fabric Items
@@ -22,12 +21,12 @@ on:
     branches: [main]
     paths:
       - 'notebooks/**'
-      - 'semantic-models/**'
-      - 'pipelines/**'
+      - 'reports/semantic-model/**'
+      - 'reports/report-definitions/**'
   workflow_dispatch:
     inputs:
       target_environment:
-        description: 'Target environment for deployment'
+        description: 'Target environment (dev/staging/prod). Required.'
         required: true
         type: choice
         options:
@@ -44,14 +43,18 @@ permissions:
   id-token: write
   contents: read
 
+concurrency:
+  group: deploy-fabric-${{ github.ref }}
+  cancel-in-progress: false
+
 env:
   PYTHON_VERSION: '3.11'
-  FABRIC_CICD_VERSION: '>=1.0.0'
+  FABRIC_CICD_VERSION: '==1.0.0'
 
 jobs:
-  # ===========================================================================
-  # Stage 1: Install and Validate
-  # ===========================================================================
+  # ---------------------------------------------------------------------------
+  # Stage 1: Validate
+  # ---------------------------------------------------------------------------
   validate:
     name: Validate Fabric Items
     runs-on: ubuntu-latest
@@ -72,38 +75,23 @@ jobs:
 
       - name: Validate item definitions
         run: |
-          python -c "
-          from fabric_cicd import FabricWorkspace
-          print('fabric-cicd installed successfully')
-          print(f'Version: {FabricWorkspace.__module__}')
-          "
+          python -c "from fabric_cicd import FabricWorkspace; print('fabric-cicd import OK')"
 
-      - name: Lint notebook files
+      - name: Lint notebook metadata
         run: |
-          echo '📝 Validating notebook format...'
-          errors=0
-          for f in notebooks/**/*.py; do
-            if [ -f "$f" ]; then
-              first_line=$(head -1 "$f")
-              if [ "$first_line" != "# Databricks notebook source" ]; then
-                echo "❌ Invalid notebook format: $f"
-                errors=$((errors + 1))
-              fi
-            fi
-          done
-          if [ $errors -gt 0 ]; then
-            echo "❌ $errors notebook(s) have invalid format"
-            exit 1
-          fi
-          echo '✅ All notebooks valid'
+          python scripts/validate_notebook_metadata.py
 
-  # ===========================================================================
+  # ---------------------------------------------------------------------------
   # Stage 2: Deploy to Dev
-  # ===========================================================================
+  #   - On push to main: always runs, dry-run defaults to true
+  #   - On workflow_dispatch with env=dev: runs with user-specified dry-run
+  # ---------------------------------------------------------------------------
   deploy-dev:
     name: Deploy to Dev
     needs: validate
-    if: github.event.inputs.target_environment == 'dev' || github.event.inputs.target_environment == ''
+    if: |
+      (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.target_environment == 'dev')
     runs-on: ubuntu-latest
     environment: dev
     steps:
@@ -139,13 +127,13 @@ jobs:
             --item-type-in-scope Notebook Lakehouse SemanticModel \
             $( [ "$DRY_RUN" = "true" ] && echo "--dry-run" )
 
-  # ===========================================================================
-  # Stage 3: Deploy to Staging
-  # ===========================================================================
+  # ---------------------------------------------------------------------------
+  # Stage 3: Deploy to Staging (manual only)
+  # ---------------------------------------------------------------------------
   deploy-staging:
     name: Deploy to Staging
-    needs: deploy-dev
-    if: github.event.inputs.target_environment == 'staging' || (github.ref == 'refs/heads/main' && github.event_name == 'push')
+    needs: validate
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_environment == 'staging'
     runs-on: ubuntu-latest
     environment: staging
     steps:
@@ -173,19 +161,21 @@ jobs:
       - name: Deploy to Staging workspace
         env:
           FABRIC_WORKSPACE_ID: ${{ secrets.FABRIC_STAGING_WORKSPACE_ID }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
         run: |
           python scripts/fabric-cicd-deploy.py \
             --workspace-id "$FABRIC_WORKSPACE_ID" \
             --environment staging \
-            --item-type-in-scope Notebook Lakehouse SemanticModel
+            --item-type-in-scope Notebook Lakehouse SemanticModel \
+            $( [ "$DRY_RUN" = "true" ] && echo "--dry-run" )
 
-  # ===========================================================================
-  # Stage 4: Deploy to Production (requires approval)
-  # ===========================================================================
+  # ---------------------------------------------------------------------------
+  # Stage 4: Deploy to Production (manual only, requires approval)
+  # ---------------------------------------------------------------------------
   deploy-prod:
     name: Deploy to Production
-    needs: deploy-staging
-    if: github.event.inputs.target_environment == 'prod'
+    needs: validate
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_environment == 'prod'
     runs-on: ubuntu-latest
     environment: production
     steps:
@@ -213,14 +203,15 @@ jobs:
       - name: Deploy to Production workspace
         env:
           FABRIC_WORKSPACE_ID: ${{ secrets.FABRIC_PROD_WORKSPACE_ID }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
         run: |
           python scripts/fabric-cicd-deploy.py \
             --workspace-id "$FABRIC_WORKSPACE_ID" \
             --environment prod \
-            --item-type-in-scope Notebook Lakehouse SemanticModel
+            --item-type-in-scope Notebook Lakehouse SemanticModel \
+            $( [ "$DRY_RUN" = "true" ] && echo "--dry-run" )
 
-      - name: Post-deployment verification
+      - name: Post-deployment smoke test
         run: |
-          echo '🎯 Production deployment complete'
-          echo '📝 Verify items in Fabric workspace portal'
-          echo '📊 Run smoke tests against production semantic models'
+          python scripts/fabric_smoke_test.py \
+            --workspace-id "${{ secrets.FABRIC_PROD_WORKSPACE_ID }}"

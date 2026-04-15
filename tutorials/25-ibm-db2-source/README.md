@@ -8,7 +8,7 @@
 
 </div>
 
-> :house: **[Home](../../index.md)** > :book: **[Tutorials](../index.md)** > :office: **IBM DB2 Source**
+> :house: **[Home](../../README.md)** > :book: **[Tutorials](../README.md)** > :office: **IBM DB2 Source**
 
 ---
 
@@ -960,7 +960,7 @@ Continue to **[Tutorial 26: Multi-Source Real-Time Intelligence](../26-multi-sou
 
 | :arrow_left: Previous | :arrow_up: Up | :arrow_right: Next |
 |------------|------|--------|
-| [24-Snowflake to Fabric](../24-snowflake-to-fabric/README.md) | [Tutorials Index](../index.md) | [26-Multi-Source Streaming](../26-multi-source-streaming/README.md) |
+| [24-Snowflake to Fabric](../24-snowflake-to-fabric/README.md) | [Tutorials Index](../README.md) | [26-Multi-Source Streaming](../26-multi-source-streaming/README.md) |
 
 ---
 

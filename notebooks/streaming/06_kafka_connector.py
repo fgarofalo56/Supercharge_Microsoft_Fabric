@@ -25,14 +25,30 @@
 # COMMAND ----------
 
 import os
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import (
-    col, current_timestamp, lit, from_json, from_avro,
-    window, count, sum as _sum, avg, expr, schema_of_json
+    avg,
+    col,
+    count,
+    current_timestamp,
+    expr,
+    from_avro,
+    from_json,
+    lit,
+    schema_of_json,
+    window,
 )
+from pyspark.sql.functions import sum as _sum
 from pyspark.sql.types import (
-    StructType, StructField, StringType, LongType,
-    DoubleType, TimestampType, BooleanType, IntegerType
+    BooleanType,
+    DoubleType,
+    IntegerType,
+    LongType,
+    StringType,
+    StructField,
+    StructType,
+    TimestampType,
 )
 
 # Kafka / Eventstreams broker config — credentials from Key Vault / env vars
@@ -41,7 +57,7 @@ KAFKA_BROKERS       = os.getenv("KAFKA_BROKERS",
 KAFKA_USERNAME      = os.getenv("KAFKA_USERNAME", "$ConnectionString")
 KAFKA_PASSWORD      = os.getenv("KAFKA_PASSWORD")          # Key Vault secret
 SCHEMA_REGISTRY_URL = os.getenv("SCHEMA_REGISTRY_URL",
-                        "https://schema-registry.casino.internal")
+                        "https://<schema-registry-host>")
 
 # Topics
 TOPIC_SLOT_EVENTS     = "casino.slot-events"
@@ -170,7 +186,8 @@ player_stream = (raw_stream
 # Fetch Avro schema from registry (cached after first call)
 def get_avro_schema(subject: str, registry_url: str) -> str:
     """Fetch latest Avro schema JSON string from Confluent Schema Registry."""
-    import urllib.request, json
+    import json
+    import urllib.request
     url = f"{registry_url}/subjects/{subject}/versions/latest"
     with urllib.request.urlopen(url) as resp:
         return json.loads(resp.read())["schema"]

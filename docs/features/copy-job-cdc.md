@@ -184,7 +184,7 @@ Workspace → + New → Copy Job (Preview)
 ```
 Copy Job → Source → + Add Connection
   Connection Type: Oracle
-  Server: oracle-gaming.casino.internal:1521
+  Server: <oracle-host>:1521
   Database: GAMING_OPS
   Authentication: Service Principal (recommended)
   
@@ -533,7 +533,7 @@ The primary casino ingestion scenario: slot machine transaction logs are loaded 
     "copy_job_name": "cj-casino-slot-logs",
     "source": {
         "type": "Oracle",
-        "connection": "oracle-gaming.casino.internal:1521/GAMING_OPS",
+        "connection": "<oracle-host>:1521/GAMING_OPS",
         "authentication": "service_principal"
     },
     "tables": [

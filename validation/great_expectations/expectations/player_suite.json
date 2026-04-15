@@ -176,11 +176,11 @@
       "expectation_type": "expect_column_values_to_match_regex",
       "kwargs": {
         "column": "phone",
-        "regex": "^[0-9\\-\\+\\(\\)\\s]{10,20}$",
+        "regex": "^[0-9\\*\\-\\+\\(\\)\\s]{10,20}$",
         "mostly": 0.90
       },
       "meta": {
-        "notes": "Phone number basic format validation"
+        "notes": "Phone format — digits or * (masked per PII policy when include_pii=False)"
       }
     },
     {

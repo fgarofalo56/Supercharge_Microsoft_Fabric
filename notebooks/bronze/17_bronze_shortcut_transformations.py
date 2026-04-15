@@ -19,11 +19,17 @@
 
 # COMMAND ----------
 
-from pyspark.sql.functions import current_timestamp, lit, input_file_name, col
-from pyspark.sql.types import (
-    DoubleType, IntegerType, LongType, StringType, StructField, StructType
-)
 from datetime import datetime
+
+from pyspark.sql.functions import col, current_timestamp, input_file_name, lit
+from pyspark.sql.types import (
+    DoubleType,
+    IntegerType,
+    LongType,
+    StringType,
+    StructField,
+    StructType,
+)
 
 TRADITIONAL_SOURCE = "Files/landing/adls_exports/player_activity.csv"
 TRADITIONAL_TABLE = "bronze_player_activity_pipeline"
@@ -73,7 +79,7 @@ try:
     df_trad.write.format("delta").mode("append") \
         .option("mergeSchema", "true").partitionBy("_bronze_load_date") \
         .saveAsTable(TRADITIONAL_TABLE)
-    trad_count = df_trad.count()
+    trad_count = spark.table(TRADITIONAL_TABLE).count()
     print(f"Traditional Pipeline: {trad_count:,} records -> {TRADITIONAL_TABLE}")
 except Exception as e:
     print(f"Traditional ingestion skipped (source not present): {e}")

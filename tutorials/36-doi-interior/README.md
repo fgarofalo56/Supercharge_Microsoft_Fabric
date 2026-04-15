@@ -8,7 +8,7 @@
 
 </div>
 
-> 🏠 **[Home](../../index.md)** > 📖 **[Tutorials](../index.md)** > 🏔️ **DOI Natural Resources Analytics**
+> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > 🏔️ **DOI Natural Resources Analytics**
 
 ---
 
@@ -52,7 +52,7 @@
 | Navigation | |
 |---|---|
 | ⬅️ **Previous** | [35-EPA Environmental Analytics](../35-epa-environment/README.md) |
-| ➡️ **Next** | [37-Error Handling Best Practices](../37-error-handling/README.md) |
+| ➡️ **Next** | [Tutorials Index](../README.md) |
 
 ---
 
@@ -1204,7 +1204,7 @@ Congratulations! You have built a comprehensive DOI natural resources analytics 
 
 Continue your learning journey:
 
-**Next Tutorial:** [Tutorial 37: Error Handling Best Practices](../37-error-handling/README.md) -- Learn patterns for robust error handling, retry logic, dead-letter queues, and pipeline resilience across all tutorial scenarios.
+**Tutorial series complete.** Return to the [Tutorials Index](../README.md) to review or revisit any tutorial.
 
 **Related Tutorials:**
 - [Tutorial 34: NOAA Weather & Climate Analytics](../34-noaa-weather-climate/README.md) -- Combine NOAA weather data with USGS earthquake data for multi-hazard analysis
@@ -1234,7 +1234,7 @@ Continue your learning journey:
 
 | Previous | Up | Next |
 |:---------|:--:|-----:|
-| [⬅️ 35-EPA Environmental Analytics](../35-epa-environment/README.md) | [📖 Tutorials Index](../index.md) | [37-Error Handling Best Practices ➡️](../37-error-handling/README.md) |
+| [⬅️ 35-EPA Environmental Analytics](../35-epa-environment/README.md) | [📖 Tutorials Index](../README.md) | — |
 
 ---
 

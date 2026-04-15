@@ -13,6 +13,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.1.0] - 2026-04-15
+
+### Added
+- `bronze_utils.py` shared helper for common notebook patterns
+- `FABRIC_POC_HASH_SALT` env var documented in `.env.sample` (required for PII generation)
+- `CHECKPOINT_PATH_BASE` env var documented in `.env.sample` (OneLake checkpoint path)
+
+### Changed
+- CLAUDE.md: Phase Status updated to Phase 11 Complete (Audit Remediation, 2026-04-15)
+- 65 notebooks: `dbutils` replaced with `mssparkutils`; `/tmp` paths replaced with OneLake checkpoint paths; `lh_bronze.*` namespace applied consistently
+- Compliance framework parameter wired to enforce real controls (CMK, private endpoints, retention)
+- SSN generation: replaced Faker SSN with deterministic 900-series synthetic; salt now requires `FABRIC_POC_HASH_SALT` env var
+- Tutorial 15 progress tracker: corrected links for tutorials 17–19 to actual dir names
+- Tutorial 19: removed false "FINAL TUTORIAL" / "Series Complete!" markers; now links to Tutorial 20
+- Tutorial 36: removed dead Tutorial 37 links; series terminus now points back to Tutorials Index
+
+### Fixed
+- All 74 `../index.md` broken links in `tutorials/**/README.md` replaced with `../README.md`
+- 39 occurrences of `Supercharge_Microsoft_Fabric` (single 'p') corrected to `Suppercharge_Microsoft_Fabric`
+- CI workflow: fixed GitHub Actions action versions and deploy-fabric conditional logic
+- README.md and other docs: removed all `future-expansions/` links (directory deleted)
+- README.md: removed "Production-Ready" self-certification language and empty Acknowledgments section
+
+### Removed
+- `future-expansions/` directory and all references to it
+- Dead-weight metadata-only Bicep stub modules
+
+---
+
 ## [2.0.0] - 2026-04-13
 
 ### Added — Phase 9: New Fabric Experience Modernization

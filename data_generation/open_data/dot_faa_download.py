@@ -581,7 +581,7 @@ def download_faa_safety_reports(
             params.setdefault("$where", "")
             params["$where"] += f"incident_date>='{start_date}'"
         if end_date:
-            if "$where" in params and params["$where"]:
+            if params.get("$where"):
                 params["$where"] += f" AND incident_date<='{end_date}'"
             else:
                 params["$where"] = f"incident_date<='{end_date}'"

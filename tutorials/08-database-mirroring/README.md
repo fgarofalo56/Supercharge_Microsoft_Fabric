@@ -1,6 +1,6 @@
 # 🔄 Tutorial 08: Database Mirroring
 
-> **🏠 [Home](../../index.md)** > **📖 [Tutorials](../index.md)** > **🔄 Database Mirroring**
+> **🏠 [Home](../../README.md)** > **📖 [Tutorials](../README.md)** > **🔄 Database Mirroring**
 
 ---
 
@@ -790,7 +790,7 @@ Continue to **[Tutorial 09: Advanced AI/ML](../09-advanced-ai-ml/README.md)** to
 
 | ⬅️ Previous | ⬆️ Up | ➡️ Next |
 |------------|------|--------|
-| [07-Governance & Purview](../07-governance-purview/README.md) | [Tutorials Index](../index.md) | [09-Advanced AI/ML](../09-advanced-ai-ml/README.md) |
+| [07-Governance & Purview](../07-governance-purview/README.md) | [Tutorials Index](../README.md) | [09-Advanced AI/ML](../09-advanced-ai-ml/README.md) |
 
 ---
 

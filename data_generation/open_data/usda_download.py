@@ -979,7 +979,7 @@ def validate_download(file_path: str | Path) -> dict[str, Any]:
         result["errors"].append(f"File not found: {path}")
         return result
 
-    if not path.suffix == ".parquet":
+    if path.suffix != ".parquet":
         result["errors"].append(f"Expected .parquet extension, got: {path.suffix}")
         return result
 

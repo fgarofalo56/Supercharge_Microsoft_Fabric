@@ -8,7 +8,7 @@
 
 </div>
 
-> 🏠 **[Home](../../index.md)** > 📖 **[Tutorials](../index.md)** > 🚶 **People Movement Analytics**
+> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > 🚶 **People Movement Analytics**
 
 ---
 
@@ -1142,7 +1142,7 @@ The people movement analytics pipeline gives casino operations a spatial awarene
 
 | ⬅️ Previous | ⬆️ Up | ➡️ Next |
 |------------|------|--------|
-| [27-Video Security Analytics](../27-video-security-analytics/README.md) | [Tutorials Index](../index.md) | [29-Geolocation Analytics](../29-geolocation-analytics/README.md) |
+| [27-Video Security Analytics](../27-video-security-analytics/README.md) | [Tutorials Index](../README.md) | [29-Geolocation Analytics](../29-geolocation-analytics/README.md) |
 
 ---
 

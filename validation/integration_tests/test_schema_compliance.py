@@ -278,12 +278,18 @@ class TestSchemaFieldTypes:
             or (isinstance(props.get("type"), list) and "string" in props.get("type"))
         ]
 
+        # Schema "string" includes datetime / date logical types serialized as
+        # ISO strings. Pandas may upgrade those to Timestamp/date when read
+        # from parquet. Treat both as conforming.
+        import datetime as _dt
+
+        import pandas as _pd
         for field in string_fields:
             if field in sample_slot_data.columns:
                 non_null = sample_slot_data[field].dropna()
                 for val in non_null.head(50):
                     assert isinstance(
-                        val, str
+                        val, (str, _pd.Timestamp, _dt.date)
                     ), f"{field} contains non-string: {type(val)}"
 
     def test_number_fields_are_numeric(self, sample_slot_data, slot_telemetry_schema):

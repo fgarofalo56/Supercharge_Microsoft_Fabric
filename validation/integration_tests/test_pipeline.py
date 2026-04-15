@@ -119,9 +119,9 @@ class TestComplianceLogic:
         # Should have some SAR records
         assert len(sar_records) > 0
 
-        # SAR records should have suspicion details
+        # SAR records should have suspicion details (sar_category encodes the type)
         for record in sar_records:
-            assert record.get("suspicious_activity_type") is not None
+            assert record.get("sar_category") is not None
 
     @pytest.mark.compliance
     def test_w2g_generation(self):

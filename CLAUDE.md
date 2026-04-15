@@ -6,7 +6,7 @@
 **Type:** Infrastructure + Documentation + Data Engineering
 **Primary Stack:** Bicep, Python, PySpark, KQL, DAX
 **Target Platform:** Microsoft Fabric (F64 SKU)
-**Phase Status:** Phase 10 Complete (Full Fabric Landscape Coverage)
+**Phase Status:** Phase 11 Complete (Audit Remediation, 2026-04-15)
 
 ## Key Technologies
 
@@ -34,8 +34,7 @@ notebooks/          - 55+ Fabric-importable notebooks (medallion + streaming + f
   silver/           - 16 Silver transformation notebooks
   gold/             - 18 Gold KPI/analytics notebooks (+ digital twin, AI functions)
 scripts/            - Deployment scripts (fabric-cicd)
-validation/         - 134+ unit tests + 9 Great Expectations suites
-future-expansions/  - Federal agency & industry expansion documentation
+validation/         - 612 unit tests + 9 Great Expectations suites
 ```
 
 ## Coding Conventions
@@ -218,8 +217,25 @@ Phase 10 achieves full Fabric landscape coverage — every major feature and ent
 - Phase 8 adds full medallion notebooks, tutorials, open data scripts, and GE suites for all federal agencies
 - Phase 9 adds new Fabric experience features: Digital Twin Builder, Data Agents, OneLake Security, Workspace Identity, Lakehouse Schemas, Shortcut Transformations, Iceberg Interop, fabric-cicd CI/CD, CMK, OAP, SQL Audit Logs, Workspace Tags, dbt Integration, AI Functions, Materialized Views, Vector DB, Spark Runtime 2.0
 - Phase 10 adds full landscape coverage: Mirroring, Direct Lake, SQL Database, GraphQL, Semantic Link, OneLake Catalog, AutoML, Translytical, MCP, Workspace Monitoring, Copy Job CDC + 11 enterprise best practices + 4 Bicep modules
+- Phase 11 is audit remediation only — no new features; see Phase 11 section below
 - All federal datasets use real, publicly available APIs documented in `data_generation/config/federal_datasets.yaml`
 - Each agency supports BOTH synthetic data generation AND real open data downloads
+
+## Phase 11 Completion (2026-04-15)
+
+Phase 11 is a pure audit remediation — no new features, only correctness fixes:
+
+| Area | Change |
+|------|--------|
+| Dead directories | Removed `future-expansions/` references throughout docs |
+| CI workflow | Fixed GitHub Actions action versions; fixed deploy-fabric conditional logic |
+| Compliance framework | Wired compliance parameter to enforce real controls (CMK, private endpoints, retention) |
+| PII generation | Fixed SSN salt to require env var (`FABRIC_POC_HASH_SALT`); replaced Faker SSN with 900-series synthetic |
+| Bicep modules | Deleted metadata-only stub modules |
+| Notebooks (65) | Bulk-fixed for Fabric compatibility: `dbutils` → `mssparkutils`, `/tmp` → OneLake checkpoints, `lh_bronze.*` namespace |
+| Utilities | Added `bronze_utils.py` shared helper |
+| Test suite | Restored full suite to 612 passing tests |
+| Documentation | Fixed broken tutorial nav links, Tutorial 19/36 false terminals, Tutorial 15 progress tracker, clone URL typos |
 
 ## Archon Project ID
 

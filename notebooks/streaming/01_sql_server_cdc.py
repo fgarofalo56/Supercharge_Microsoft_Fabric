@@ -22,11 +22,19 @@
 # COMMAND ----------
 
 import os
+
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 from pyspark.sql.types import (
-    StructType, StructField, StringType, LongType,
-    TimestampType, IntegerType, DecimalType, BooleanType, MapType
+    BooleanType,
+    DecimalType,
+    IntegerType,
+    LongType,
+    MapType,
+    StringType,
+    StructField,
+    StructType,
+    TimestampType,
 )
 
 spark = SparkSession.builder.getOrCreate()
@@ -37,7 +45,7 @@ spark = SparkSession.builder.getOrCreate()
 #       Azure Key Vault via mssparkutils.credentials.getSecret()
 # ---------------------------------------------------------------------------
 try:
-    from notebookutils import mssparkutils  # noqa: F401 — Fabric runtime
+    from notebookutils import mssparkutils
     EVENTSTREAM_CONN_STR = mssparkutils.credentials.getSecret(
         "kv-casino-poc", "eventstream-cdc-connection-string"
     )
@@ -47,7 +55,7 @@ try:
 except ImportError:
     # Local / unit-test fallback — never use real credentials here
     EVENTSTREAM_CONN_STR = os.getenv("EVENTSTREAM_CONN_STR", "")
-    CHECKPOINT_STORAGE = os.getenv("CHECKPOINT_PATH", "/tmp/checkpoints")
+    CHECKPOINT_STORAGE = os.getenv("CHECKPOINT_PATH", os.environ.get('CHECKPOINT_PATH_BASE', 'abfss://Files/checkpoints') + '')
 
 # Eventstream / Kafka endpoint exposed by Fabric Eventstreams
 KAFKA_BOOTSTRAP_SERVERS = os.getenv(
@@ -280,7 +288,7 @@ def write_cdc_stream(df, epoch_id):
         .partitionBy("source_table", F.to_date(F.col("event_timestamp")).cast("string") if False else "ingested_at")
         .saveAsTable(BRONZE_TABLE)
     )
-    print(f"[Epoch {epoch_id}] Wrote {df.count()} CDC records to {BRONZE_TABLE}")
+    print(f"[Epoch {epoch_id}] Wrote {spark.table(BRONZE_TABLE).count()} CDC records to {BRONZE_TABLE}")
 
 
 # Append-mode streaming query with 2-second micro-batches

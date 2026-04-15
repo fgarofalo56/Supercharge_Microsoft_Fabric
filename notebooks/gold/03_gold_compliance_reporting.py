@@ -12,6 +12,40 @@
 
 # COMMAND ----------
 
+# ---------------------------------------------------------------------------
+# Fabric/local compatibility shim
+# ---------------------------------------------------------------------------
+import os
+
+try:
+    import notebookutils  # Fabric runtime
+    def _get_arg(name, default=None):
+        try:
+            return notebookutils.notebook.getArgument(name, default)
+        except Exception:
+            return os.environ.get(name.upper(), default)
+    def _notebook_exit(status: str) -> None:
+        notebookutils.notebook.exit(status)
+except ImportError:
+    try:
+        import mssparkutils  # legacy Synapse/Fabric runtime
+        def _get_arg(name, default=None):
+            try:
+                return mssparkutils.notebook.getArgument(name, default)
+            except Exception:
+                return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            mssparkutils.notebook.exit(status)
+    except ImportError:
+        def _get_arg(name, default=None):
+            return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            raise SystemExit(status)
+
+
+from datetime import datetime
+
+from delta.tables import DeltaTable
 from pyspark.sql.functions import (
     array,
     array_compact,
@@ -27,11 +61,9 @@ from pyspark.sql.functions import (
     when,
 )
 from pyspark.sql.types import DateType, DecimalType, LongType, StructField, StructType
-from delta.tables import DeltaTable
-from datetime import datetime
 
 # Parameters
-batch_id = dbutils.widgets.get("batch_id") if "batch_id" in [w.name for w in dbutils.widgets.getAll()] else datetime.now().strftime("%Y%m%d_%H%M%S")
+batch_id = _get_arg("batch_id", datetime.now().strftime("%Y%m%d_%H%M%S"))
 
 # Sources
 compliance_table = "lh_silver.silver_compliance_validated"
@@ -208,7 +240,7 @@ try:
             .option("overwriteSchema", "true") \
             .saveAsTable(target_table)
 
-    print(f"Merged {df_gold.count():,} records into {target_table}")
+    print(f"Merged {spark.table(target_table).count():,} records into {target_table}")
 except Exception as e:
     print(f"ERROR in lh_gold.gold_compliance_reporting (batch_id={batch_id}): {e}")
     raise

@@ -53,6 +53,7 @@ Library::
 from __future__ import annotations
 
 import argparse
+import contextlib
 import logging
 import os
 import time
@@ -428,7 +429,7 @@ def download_hrsa_health_centers(
 
     pbar = tqdm(desc="HRSA health centers (pages)", unit="page")
 
-    for page_num in range(max_pages):
+    for _page_num in range(max_pages):
         params: dict[str, Any] = {
             "$limit": page_size,
             "$offset": offset,
@@ -479,10 +480,8 @@ def download_hrsa_health_centers(
                 except Exception:
                     logger.warning("Failed to parse HRSA response as CSV")
                 finally:
-                    try:
+                    with contextlib.suppress(OSError):
                         os.remove(tmp_path)
-                    except OSError:
-                        pass
                 break
 
         except Exception as exc:
@@ -520,10 +519,8 @@ def download_hrsa_health_centers(
                 frames.append(chunk_df)
                 logger.info("Downloaded HRSA %s: %d rows", Path(url).stem, len(chunk_df))
 
-                try:
+                with contextlib.suppress(OSError):
                     os.remove(tmp_path)
-                except OSError:
-                    pass
 
                 time.sleep(RATE_LIMIT_SLEEP)
 
@@ -691,10 +688,8 @@ def download_ihs_statistics(
                 except Exception:
                     logger.warning("Could not parse IHS CSV from %s", url)
                 finally:
-                    try:
+                    with contextlib.suppress(OSError):
                         os.remove(tmp_path)
-                    except OSError:
-                        pass
 
             time.sleep(RATE_LIMIT_SLEEP)
 

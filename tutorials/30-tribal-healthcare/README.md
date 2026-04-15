@@ -8,7 +8,7 @@
 
 </div>
 
-> 🏠 **[Home](../../index.md)** > 📖 **[Tutorials](../index.md)** > 🏥 **Tribal Healthcare Analytics**
+> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > 🏥 **Tribal Healthcare Analytics**
 
 ---
 
@@ -1432,7 +1432,7 @@ Continue your learning journey:
 
 | Previous | Up | Next |
 |:---------|:--:|-----:|
-| [⬅️ 29-Geolocation Analytics](../29-geolocation-analytics/README.md) | [📖 Tutorials Index](../index.md) | [31-Federal DOT/FAA Analytics ➡️](../31-federal-dot-faa/README.md) |
+| [⬅️ 29-Geolocation Analytics](../29-geolocation-analytics/README.md) | [📖 Tutorials Index](../README.md) | [31-Federal DOT/FAA Analytics ➡️](../31-federal-dot-faa/README.md) |
 
 ---
 

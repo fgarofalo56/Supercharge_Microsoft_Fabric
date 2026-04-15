@@ -96,8 +96,8 @@ This project follows the [Microsoft Open Source Code of Conduct](https://opensou
 
 ```bash
 # Clone your fork
-git clone https://github.com/YOUR_USERNAME/Supercharge_Microsoft_Fabric.git
-cd Supercharge_Microsoft_Fabric
+git clone https://github.com/YOUR_USERNAME/Suppercharge_Microsoft_Fabric.git
+cd Suppercharge_Microsoft_Fabric
 
 # Create virtual environment
 python -m venv .venv
@@ -251,7 +251,7 @@ time estimates based on POC feedback."
 ## Project Structure
 
 ```
-Supercharge_Microsoft_Fabric/
+Suppercharge_Microsoft_Fabric/
 |-- infra/                     # Infrastructure as Code (Bicep)
 |   |-- main.bicep             # Root orchestration
 |   |-- modules/               # Reusable modules

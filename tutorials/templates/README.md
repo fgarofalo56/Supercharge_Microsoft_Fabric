@@ -55,5 +55,5 @@ This folder contains templates and reference materials for creating consistent t
 
 ---
 
-[← Back to Tutorials](../index.md)
+[← Back to Tutorials](../README.md)
 

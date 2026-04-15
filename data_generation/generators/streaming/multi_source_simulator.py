@@ -336,10 +336,10 @@ class MultiSourceSimulator(BaseGenerator):
             "source_type": cfg["source_type_enum"],
             "operation": operation,
             "timestamp": event_ts.isoformat(),
-            "server_name": random.choice(cfg["server_names"]),
-            "database_name": random.choice(cfg["database_names"]),
+            "server_name": random.choice(cfg["server_names"]),  # nosec B311 - synthetic data only
+            "database_name": random.choice(cfg["database_names"]),  # nosec B311 - synthetic data only
             "schema_name": cfg["schema_name"],
-            "table_name": random.choice(cfg["table_names"]),
+            "table_name": random.choice(cfg["table_names"]),  # nosec B311 - synthetic data only
             "primary_key": primary_key,
             "before_image": before_image,
             "after_image": after_image,
@@ -348,7 +348,7 @@ class MultiSourceSimulator(BaseGenerator):
             "scn": scn,
             "partition_key": partition_key,
             "sequence_number": self._sequence_counter,
-            "connector_name": random.choice(cfg["connectors"]),
+            "connector_name": random.choice(cfg["connectors"]),  # nosec B311 - synthetic data only
             "latency_ms": latency_ms,
             "schema_version": "1.0.0",
             "load_time": datetime.now(UTC).isoformat(),
@@ -387,7 +387,7 @@ class MultiSourceSimulator(BaseGenerator):
         """
         source_types = list(SOURCE_CONFIG.keys())
         return [
-            self.generate_record(source_type=random.choice(source_types))
+            self.generate_record(source_type=random.choice(source_types))  # nosec B311 - synthetic data only
             for _ in range(count)
         ]
 
@@ -428,23 +428,23 @@ class MultiSourceSimulator(BaseGenerator):
         pool: dict[str, Any] = {
             "player_id": "P" + str(self.rng.integers(100_000, 999_999)),
             "amount": round(float(self.rng.uniform(1.0, 50_000.0)), 2),
-            "status": random.choice(_AMOUNT_STATUSES),
-            "game_status": random.choice(_GAME_STATUSES),
-            "player_tier": random.choice(_PLAYER_TIERS),
-            "transaction_type": random.choice(_TRANSACTION_TYPES),
-            "payment_method": random.choice(_PAYMENT_METHODS),
+            "status": random.choice(_AMOUNT_STATUSES),  # nosec B311 - synthetic data only
+            "game_status": random.choice(_GAME_STATUSES),  # nosec B311 - synthetic data only
+            "player_tier": random.choice(_PLAYER_TIERS),  # nosec B311 - synthetic data only
+            "transaction_type": random.choice(_TRANSACTION_TYPES),  # nosec B311 - synthetic data only
+            "payment_method": random.choice(_PAYMENT_METHODS),  # nosec B311 - synthetic data only
             "machine_id": "M" + str(self.rng.integers(1_000, 9_999)),
             "cage_id": "CAGE-" + str(self.rng.integers(1, 20)),
-            "shift": random.choice(["DAY", "SWING", "GRAVE"]),
-            "denomination": random.choice([0.01, 0.05, 0.25, 1.00, 5.00, 25.00]),
+            "shift": random.choice(["DAY", "SWING", "GRAVE"]),  # nosec B311 - synthetic data only
+            "denomination": random.choice([0.01, 0.05, 0.25, 1.00, 5.00, 25.00]),  # nosec B311 - synthetic data only
             "win_amount": round(float(self.rng.uniform(0.0, 100_000.0)), 2),
             "session_id": "SES-" + uuid.uuid4().hex[:8].upper(),
-            "modified_by": random.choice(["system", "cashier", "pit_boss", "audit"]),
+            "modified_by": random.choice(["system", "cashier", "pit_boss", "audit"]),  # nosec B311 - synthetic data only
         }
 
         # Pick 3 to 5 fields
         num_fields = self.rng.integers(3, 6)
-        selected_keys = random.sample(list(pool.keys()), k=int(num_fields))
+        selected_keys = random.sample(list(pool.keys()), k=int(num_fields))  # nosec B311 - synthetic data only
         return {k: pool[k] for k in selected_keys}
 
     def _generate_lsn(self) -> str:
@@ -464,6 +464,6 @@ class MultiSourceSimulator(BaseGenerator):
 
     def _generate_partition_key(self, cfg: dict[str, Any]) -> str:
         """Generate a Cosmos DB-style partition key path with a realistic value."""
-        template: str = random.choice(cfg["partition_key_templates"])
+        template: str = random.choice(cfg["partition_key_templates"])  # nosec B311 - synthetic data only
         numeric_id = str(self.rng.integers(10_000, 999_999))
         return template.format(id=numeric_id)

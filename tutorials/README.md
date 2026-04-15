@@ -1,6 +1,6 @@
 # 📖 Tutorials
 
-> 🏠 [Home](../index.md) > 📖 Tutorials
+> 🏠 [Home](../README.md) > 📖 Tutorials
 
 **Last Updated:** `2026-03-11` | **Version:** 2.0.0
 
@@ -268,9 +268,9 @@ Before starting the tutorials, ensure you have:
 
 ---
 
-[⬆️ Back to top](#-tutorials) | [🏠 Home](../index.md)
+[⬆️ Back to top](#-tutorials) | [🏠 Home](../README.md)
 
 ---
 
 > 📖 **Documentation maintained by:** Microsoft Fabric POC Team
-> 🔗 **Repository:** [Supercharge_Microsoft_Fabric](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric)
+> 🔗 **Repository:** [Suppercharge_Microsoft_Fabric](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric)

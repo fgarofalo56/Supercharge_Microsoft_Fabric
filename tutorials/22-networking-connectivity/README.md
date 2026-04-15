@@ -788,7 +788,7 @@ az network express-route show \
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [⬅️ 21-GeoAnalytics & ArcGIS](../21-geoanalytics-arcgis/README.md) | [📖 Tutorials Index](../index.md) | [23-SHIR & Data Gateways](../23-shir-data-gateways/README.md) ➡️ |
+| [⬅️ 21-GeoAnalytics & ArcGIS](../21-geoanalytics-arcgis/README.md) | [📖 Tutorials Index](../README.md) | [23-SHIR & Data Gateways](../23-shir-data-gateways/README.md) ➡️ |
 
 ---
 

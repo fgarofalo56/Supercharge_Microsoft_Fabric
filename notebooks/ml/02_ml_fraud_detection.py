@@ -18,21 +18,36 @@
 
 # COMMAND ----------
 
-import pandas as pd
-import numpy as np
 from datetime import datetime, timedelta
 
-from pyspark.sql.functions import col, when, rand, coalesce, lit, count, countDistinct, sum, avg, max, min, stddev, to_date, hour, current_timestamp
+# MLflow
+import mlflow
+import mlflow.sklearn
+import numpy as np
+import pandas as pd
+from pyspark.sql.functions import (
+    avg,
+    coalesce,
+    col,
+    count,
+    countDistinct,
+    current_timestamp,
+    hour,
+    lit,
+    max,
+    min,
+    rand,
+    stddev,
+    sum,
+    to_date,
+    when,
+)
 from pyspark.sql.types import DoubleType, IntegerType, Row
 from pyspark.sql.window import Window
 
 # For sklearn-based anomaly detection
 from sklearn.ensemble import IsolationForest
 from sklearn.preprocessing import StandardScaler
-
-# MLflow
-import mlflow
-import mlflow.sklearn
 
 # Source table
 financial_table = "lh_silver.silver_financial_reconciled"
@@ -50,8 +65,9 @@ print(f"Analyzing financial transactions for fraud patterns")
 if not spark.catalog.tableExists(financial_table):
     print(f"Table {financial_table} does not exist. Creating sample data...")
     # Create sample financial data for demo
-    from pyspark.sql import Row
     import random
+
+    from pyspark.sql import Row
 
     sample_data = []
     for i in range(10000):
@@ -415,7 +431,8 @@ df_results.write \
     .option("overwriteSchema", "true") \
     .saveAsTable("lh_gold.ml_fraud_detection_scores")
 
-print(f"Saved {df_results.count():,} records to Gold layer")
+_fraud_count = spark.table("lh_gold.ml_fraud_detection_scores").count()
+print(f"Saved {_fraud_count:,} records to Gold layer")
 
 # COMMAND ----------
 

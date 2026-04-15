@@ -29,11 +29,45 @@
 
 # COMMAND ----------
 
+# ---------------------------------------------------------------------------
+# Fabric/local compatibility shim
+# ---------------------------------------------------------------------------
+import os
+
+try:
+    import notebookutils  # Fabric runtime
+    def _get_arg(name, default=None):
+        try:
+            return notebookutils.notebook.getArgument(name, default)
+        except Exception:
+            return os.environ.get(name.upper(), default)
+    def _notebook_exit(status: str) -> None:
+        notebookutils.notebook.exit(status)
+except ImportError:
+    try:
+        import mssparkutils  # legacy Synapse/Fabric runtime
+        def _get_arg(name, default=None):
+            try:
+                return mssparkutils.notebook.getArgument(name, default)
+            except Exception:
+                return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            mssparkutils.notebook.exit(status)
+    except ImportError:
+        def _get_arg(name, default=None):
+            return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            raise SystemExit(status)
+
+
 # MAGIC %md
 # MAGIC ## Configuration
 
 # COMMAND ----------
 
+from datetime import datetime
+
+from delta.tables import DeltaTable
 from pyspark.sql.functions import (
     col,
     count,
@@ -43,23 +77,17 @@ from pyspark.sql.functions import (
     sum,
     when,
 )
-from delta.tables import DeltaTable
-from datetime import datetime
 
 # Parameters
 batch_id = (
-    dbutils.widgets.get("batch_id")
-    if "batch_id" in [w.name for w in dbutils.widgets.getAll()]
-    else datetime.now().strftime("%Y%m%d_%H%M%S")
+    _get_arg("batch_id", datetime.now().strftime("%Y%m%d_%H%M%S"))
 )
 
 # Warehouse SQL endpoint connection
 # AI functions require execution through the Warehouse SQL analytics endpoint.
 # The JDBC URL is configured at the workspace level; retrieve via Fabric APIs or widget.
 WAREHOUSE_JDBC_URL = (
-    dbutils.widgets.get("warehouse_jdbc_url")
-    if "warehouse_jdbc_url" in [w.name for w in dbutils.widgets.getAll()]
-    else "jdbc:sqlserver://<your-warehouse>.datawarehouse.fabric.microsoft.com:1433"
+    _get_arg("warehouse_jdbc_url", "jdbc:sqlserver://<your-warehouse>.datawarehouse.fabric.microsoft.com:1433")
 )
 
 # Source tables (Silver)
@@ -398,7 +426,7 @@ try:
             .option("overwriteSchema", "true") \
             .saveAsTable(TARGET_AI_ANALYSIS)
 
-    written_count = df_risk_scored.count()
+    written_count = spark.table(TARGET_AI_ANALYSIS).count()
     print(f"Merged {written_count:,} records into {TARGET_AI_ANALYSIS}")
 except Exception as e:
     print(f"ERROR writing AI analysis (batch_id={batch_id}): {e}")

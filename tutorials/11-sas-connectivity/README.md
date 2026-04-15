@@ -8,7 +8,7 @@
 
 </div>
 
-> 🏠 **[Home](../../index.md)** > 📖 **[Tutorials](../index.md)** > 🔌 **SAS Connectivity**
+> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > 🔌 **SAS Connectivity**
 
 ---
 
@@ -1080,7 +1080,7 @@ Continue your learning journey with the next tutorials:
 
 Or explore:
 
-- **Review** [Tutorial Index](../index.md) for any missed content
+- **Review** [Tutorial Index](../README.md) for any missed content
 - **Implement** the patterns in your own environment
 - **Explore** advanced SAS/Fabric integration patterns
 - **Share** feedback via GitHub issues
@@ -1115,7 +1115,7 @@ This tutorial includes the following supplementary files:
 
 | ⬅️ Previous | ⬆️ Up | ➡️ Next |
 |------------|------|--------|
-| [10-Teradata Migration](../10-teradata-migration/README.md) | [Tutorials Index](../index.md) | [12-CI/CD DevOps](../12-cicd-devops/README.md) |
+| [10-Teradata Migration](../10-teradata-migration/README.md) | [Tutorials Index](../README.md) | [12-CI/CD DevOps](../12-cicd-devops/README.md) |
 
 ---
 

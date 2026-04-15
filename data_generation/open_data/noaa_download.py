@@ -36,6 +36,7 @@ Library::
 from __future__ import annotations
 
 import argparse
+import contextlib
 import logging
 import time
 from pathlib import Path
@@ -367,10 +368,8 @@ def download_storm_events(
             df_year.rename(columns=STORM_COLUMN_MAP, inplace=True)
             frames.append(df_year)
 
-            try:
+            with contextlib.suppress(OSError):
                 tmp_path.unlink()
-            except OSError:
-                pass
 
         except Exception:
             logger.exception("Failed to download storm events for %d", year)

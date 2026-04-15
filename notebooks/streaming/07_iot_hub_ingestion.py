@@ -26,14 +26,29 @@
 # COMMAND ----------
 
 import os
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import (
-    col, current_timestamp, lit, from_json, when,
-    get_json_object, to_timestamp, expr, broadcast
+    broadcast,
+    col,
+    current_timestamp,
+    expr,
+    from_json,
+    get_json_object,
+    lit,
+    to_timestamp,
+    when,
 )
 from pyspark.sql.types import (
-    StructType, StructField, StringType, DoubleType,
-    LongType, TimestampType, BooleanType, IntegerType, MapType
+    BooleanType,
+    DoubleType,
+    IntegerType,
+    LongType,
+    MapType,
+    StringType,
+    StructField,
+    StructType,
+    TimestampType,
 )
 
 # IoT Hub / Event Hub-compatible endpoint — credentials from Key Vault

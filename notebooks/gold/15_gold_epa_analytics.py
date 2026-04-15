@@ -19,11 +19,45 @@
 
 # COMMAND ----------
 
+# ---------------------------------------------------------------------------
+# Fabric/local compatibility shim
+# ---------------------------------------------------------------------------
+import os
+
+try:
+    import notebookutils  # Fabric runtime
+    def _get_arg(name, default=None):
+        try:
+            return notebookutils.notebook.getArgument(name, default)
+        except Exception:
+            return os.environ.get(name.upper(), default)
+    def _notebook_exit(status: str) -> None:
+        notebookutils.notebook.exit(status)
+except ImportError:
+    try:
+        import mssparkutils  # legacy Synapse/Fabric runtime
+        def _get_arg(name, default=None):
+            try:
+                return mssparkutils.notebook.getArgument(name, default)
+            except Exception:
+                return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            mssparkutils.notebook.exit(status)
+    except ImportError:
+        def _get_arg(name, default=None):
+            return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            raise SystemExit(status)
+
+
 # MAGIC %md
 # MAGIC ## Configuration
 
 # COMMAND ----------
 
+from datetime import datetime
+
+from delta.tables import DeltaTable
 from pyspark.sql.functions import (
     asc,
     avg,
@@ -50,11 +84,9 @@ from pyspark.sql.functions import (
     year,
 )
 from pyspark.sql.window import Window
-from delta.tables import DeltaTable
-from datetime import datetime
 
 # Parameters
-batch_id = dbutils.widgets.get("batch_id") if "batch_id" in [w.name for w in dbutils.widgets.getAll()] else datetime.now().strftime("%Y%m%d_%H%M%S")
+batch_id = _get_arg("batch_id", datetime.now().strftime("%Y%m%d_%H%M%S"))
 
 # Source tables (Silver)
 SOURCE_AQI_DATA = "lh_silver.silver_epa_air_quality"
@@ -212,7 +244,7 @@ try:
             .option("overwriteSchema", "true") \
             .saveAsTable(TARGET_AIR_QUALITY)
 
-    print(f"Merged {df_aqi_final.count():,} records into {TARGET_AIR_QUALITY}")
+    print(f"Merged {spark.table(TARGET_AIR_QUALITY).count():,} records into {TARGET_AIR_QUALITY}")
 except Exception as e:
     print(f"ERROR writing air quality (batch_id={batch_id}): {e}")
     raise

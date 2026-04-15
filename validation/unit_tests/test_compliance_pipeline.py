@@ -16,7 +16,6 @@ Tests:
 """
 
 import sys
-from datetime import datetime
 from pathlib import Path
 
 import pytest
@@ -30,7 +29,6 @@ sys.path.insert(0, str(PROJECT_ROOT / "data_generation"))
 
 from generators.compliance_generator import ComplianceGenerator, get_threshold
 from generators.financial_generator import FinancialGenerator
-
 
 SEED = 42
 SAMPLE_SIZE = 100

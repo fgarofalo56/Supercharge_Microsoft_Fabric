@@ -8,7 +8,7 @@
 
 </div>
 
-> **[Home](../../index.md)** > **[Tutorials](../index.md)** > **Security & Network Configuration**
+> **[Home](../../README.md)** > **[Tutorials](../README.md)** > **Security & Network Configuration**
 
 ---
 
@@ -2318,7 +2318,7 @@ Continue to **[Tutorial 15: Cost Management](../15-cost-management/README.md)** 
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [⬅️ 13-Migration Planning](../13-migration-planning/README.md) | [📖 Tutorials Index](../index.md) | [15-Cost Optimization](../15-cost-optimization/README.md) ➡️ |
+| [⬅️ 13-Migration Planning](../13-migration-planning/README.md) | [📖 Tutorials Index](../README.md) | [15-Cost Optimization](../15-cost-optimization/README.md) ➡️ |
 
 ---
 

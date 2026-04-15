@@ -598,7 +598,7 @@ tags = {
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [⬅️ 19-Copilot & AI](../19-copilot-ai/README.md) | [📖 Tutorials Index](../index.md) | [21-GeoAnalytics & ArcGIS](../21-geoanalytics-arcgis/README.md) ➡️ |
+| [⬅️ 19-Copilot & AI](../19-copilot-ai/README.md) | [📖 Tutorials Index](../README.md) | [21-GeoAnalytics & ArcGIS](../21-geoanalytics-arcgis/README.md) ➡️ |
 
 ---
 

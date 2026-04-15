@@ -8,7 +8,7 @@
 
 </div>
 
-> 🏠 **[Home](../../index.md)** > 📖 **[Tutorials](../index.md)** > 🌊 **Multi-Source RTI**
+> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > 🌊 **Multi-Source RTI**
 
 ---
 
@@ -259,14 +259,14 @@ In the Fabric portal:
 | Setting | Value |
 |---------|-------|
 | **Connection name** | `conn_casino_sqlserver` |
-| **Server** | `sqlserver.casino.internal` |
+| **Server** | `<sqlserver-host>` |
 | **Database** | `CasinoDB` |
 | **Tables** | `dbo.SlotTransactions, dbo.PlayerSessions` |
 | **Integration Runtime** | Select your SHIR |
 
 5. Add a **Destination** > **Eventhouse** and map to `kql_casino_rti` database, table `SlotCDC`
 
-> **Note:** The SHIR must be online and able to reach both the SQL Server port (1433) and the Fabric service endpoints. Verify network path with `Test-NetConnection sqlserver.casino.internal -Port 1433` from the SHIR host.
+> **Note:** The SHIR must be online and able to reach both the SQL Server port (1433) and the Fabric service endpoints. Verify network path with `Test-NetConnection <sqlserver-host> -Port 1433` from the SHIR host.
 
 ---
 
@@ -534,7 +534,7 @@ CREATE TABLE DB2ADMIN.IBMSNAP_REGISTER (
 # Fabric Notebook: Read DB2 via JDBC (with gateway-resolved connection)
 df_db2 = spark.read \
     .format("jdbc") \
-    .option("url", "jdbc:db2://db2host.casino.internal:50000/CASINODB") \
+    .option("url", "jdbc:db2://<db2-host>:50000/CASINODB") \
     .option("dbtable", "(SELECT * FROM CASINO.LEGACY_TRANSACTIONS WHERE UPDATED_AT > '2024-01-01') AS legacy") \
     .option("driver", "com.ibm.db2.jcc.DB2Driver") \
     .option("user", mssparkutils.credentials.getSecret("casino-kv", "db2-user")) \
@@ -599,7 +599,7 @@ debezium_config = {
     "name": "oracle-cdc-casino",
     "config": {
         "connector.class": "io.debezium.connector.oracle.OracleConnector",
-        "database.hostname": "oracle.casino.internal",
+        "database.hostname": "<oracle-host>",
         "database.port": "1521",
         "database.user": "fabric_cdc",
         "database.password": "SecureP@ss123",
@@ -1218,7 +1218,7 @@ The unified view from all eight sources gives casino operations unprecedented si
 
 | ⬅️ Previous | ⬆️ Up | ➡️ Next |
 |------------|------|--------|
-| [25-IBM DB2 Source](../25-ibm-db2-source/README.md) | [Tutorials Index](../index.md) | [27-Video Security Analytics](../27-video-security-analytics/README.md) |
+| [25-IBM DB2 Source](../25-ibm-db2-source/README.md) | [Tutorials Index](../README.md) | [27-Video Security Analytics](../27-video-security-analytics/README.md) |
 
 ---
 

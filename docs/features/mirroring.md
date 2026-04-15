@@ -276,7 +276,7 @@ Workspace → + New → Mirrored Database
 
 ```
 Connection Settings:
-  Server: oracle-gaming.casino.internal
+  Server: <oracle-host>
   Port: 1521
   Service Name: GAMINGDB
   Authentication: Basic (username/password)
@@ -308,7 +308,7 @@ Estimated Initial Snapshot: ~45 minutes
 
 ```
 Review Configuration:
-  Source: Oracle 19c — oracle-gaming.casino.internal:1521/GAMINGDB
+  Source: Oracle 19c — <oracle-host>:1521/GAMINGDB
   Tables: 5 selected
   Target: mir-oracle-gaming (Mirrored Database)
   Replication Mode: Continuous (initial snapshot + incremental)

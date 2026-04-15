@@ -155,8 +155,8 @@ The fastest way to generate sample data and explore the POC.
 
 ```bash
 # Clone the repository
-git clone https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric.git
-cd Supercharge_Microsoft_Fabric
+git clone https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric.git
+cd Suppercharge_Microsoft_Fabric
 
 # Generate demo data (1000 events, 7 days)
 docker-compose run --rm demo-generator
@@ -222,8 +222,8 @@ See [Dev Container](#-dev-container) for configuration details.
 **Clone the Repository**
 
 ```bash
-git clone https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric.git
-cd Supercharge_Microsoft_Fabric
+git clone https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric.git
+cd Suppercharge_Microsoft_Fabric
 ```
 
 </td>
@@ -477,8 +477,6 @@ flowchart TD
 | **Wave 4** | Tribal Healthcare + DOT/FAA | 15 | — | `🟢 Complete` |
 | **Wave 5** | Final Regression | 1 | 197 | `🟢 Complete` |
 | **Total** | | **71** | **197** | **All Complete** |
-
-> 👉 See [Future Expansions](future-expansions/README.md) for detailed documentation on each expansion.
 
 ---
 
@@ -793,7 +791,7 @@ For generating larger custom datasets, see [data_generation/README.md](data_gene
 ## 📂 Repository Structure
 
 ```
-Supercharge_Microsoft_Fabric/
+Suppercharge_Microsoft_Fabric/
 │
 ├── 📁 .devcontainer/                  # 💻 Dev Container configuration
 │   ├── devcontainer.json              # VS Code/Codespaces config
@@ -858,15 +856,6 @@ Supercharge_Microsoft_Fabric/
 │   └── semantic-model/                # Direct Lake model definitions
 │       ├── tables/                    # Table definitions
 │       └── measures/                  # DAX measures
-│
-├── 📁 future-expansions/              # 🏛️ Federal & industry expansions
-│   ├── federal-usda/                  # USDA agriculture
-│   ├── federal-sba/                   # SBA small business
-│   ├── federal-noaa/                  # NOAA weather
-│   ├── federal-epa/                   # EPA environment
-│   ├── federal-doi/                   # DOI interior
-│   ├── tribal-healthcare/             # IHS healthcare (HIPAA)
-│   └── federal-dot-faa/               # DOT/FAA aviation (FedRAMP)
 │
 ├── 📁 poc-agenda/                     # 📅 3-Day workshop materials
 ├── 📁 data_generation/                # 🎲 Synthetic data generators
@@ -1150,20 +1139,18 @@ This POC addresses regulatory requirements across gaming jurisdictions:
 
 Phase 7 delivered industry expansions beyond the core Casino/Gaming POC:
 
-| Expansion | Compliance | Key Capabilities | Documentation |
-|:----------|:-----------|:-----------------|:--------------|
-| 🌾 **USDA** | NASS, FSIS | Crop production, food safety recalls | [README](future-expansions/federal-usda/README.md) |
-| 💼 **SBA** | PPP, 7(a) | Loan analytics, 20 NAICS codes | [README](future-expansions/federal-sba/README.md) |
-| 🌊 **NOAA** | CDO API | Weather observations, storm events | [README](future-expansions/federal-noaa/README.md) |
-| 🏭 **EPA** | AirNow, TRI | Air quality (AQI), water quality (MCL) | [README](future-expansions/federal-epa/README.md) |
-| 🏔️ **DOI** | USGS, BLM | Earthquakes, land use management | [README](future-expansions/federal-doi/README.md) |
-| 🏥 **Tribal Healthcare** | HIPAA, 42 CFR | IHS encounters, PHI masking, FHIR | [README](future-expansions/tribal-healthcare/README.md) |
-| ✈️ **DOT/FAA** | FedRAMP, FISMA | Flight ops, safety, carrier analytics | [README](future-expansions/federal-dot-faa/README.md) |
+| Expansion | Compliance | Key Capabilities | Tutorial |
+|:----------|:-----------|:-----------------|:---------|
+| 🌾 **USDA** | NASS, FSIS | Crop production, food safety recalls | [Tutorial 32](tutorials/32-usda-agriculture/README.md) |
+| 💼 **SBA** | PPP, 7(a) | Loan analytics, 20 NAICS codes | [Tutorial 33](tutorials/33-sba-small-business/README.md) |
+| 🌊 **NOAA** | CDO API | Weather observations, storm events | [Tutorial 34](tutorials/34-noaa-weather-climate/README.md) |
+| 🏭 **EPA** | AirNow, TRI | Air quality (AQI), water quality (MCL) | [Tutorial 35](tutorials/35-epa-environment/README.md) |
+| 🏔️ **DOI** | USGS, BLM | Earthquakes, land use management | [Tutorial 36](tutorials/36-doi-interior/README.md) |
+| 🏥 **Tribal Healthcare** | HIPAA, 42 CFR | IHS encounters, PHI masking, FHIR | [Tutorial 30](tutorials/30-tribal-healthcare/README.md) |
+| ✈️ **DOT/FAA** | FedRAMP, FISMA | Flight ops, safety, carrier analytics | [Tutorial 31](tutorials/31-federal-dot-faa/README.md) |
 | 📹 **Video Analytics** | — | YOLO/DeepSORT, 50 cameras, 8 event types | [Tutorial 27](tutorials/27-video-security-analytics/README.md) |
 | 🚶 **People Movement** | — | 30 zones, queue detection, heat maps | [Tutorial 28](tutorials/28-people-movement-analytics/README.md) |
 | 📍 **Geolocation** | — | H3 indexing, geofencing, proximity triggers | [Tutorial 29](tutorials/29-geolocation-analytics/README.md) |
-
-> 👉 See [Future Expansions](future-expansions/README.md) for the complete overview.
 
 ---
 
@@ -1202,40 +1189,9 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ---
 
-## 🙏 Acknowledgments
-
-<table>
-<tr>
-<td align="center">
-<h3>🪟</h3>
-<sub><b>Microsoft Fabric Team</b></sub>
-</td>
-<td align="center">
-<h3>☁️</h3>
-<sub><b>Azure Architecture Center</b></sub>
-</td>
-<td align="center">
-<h3>🎰</h3>
-<sub><b>Gaming Industry Experts</b></sub>
-</td>
-<td align="center">
-<h3>📜</h3>
-<sub><b>Compliance Specialists</b></sub>
-</td>
-</tr>
-</table>
-
----
-
 <div align="center">
 
-### 🎰 Built for Microsoft Fabric | Casino/Gaming Industry | Production-Ready POC 🎲
-
 **[⬆ Back to Top](#-supercharge-microsoft-fabric-)**
-
----
-
-<sub>Made with ❤️ for the gaming industry</sub>
 
 [![GitHub stars](https://img.shields.io/github/stars/fgarofalo56/Suppercharge_Microsoft_Fabric?style=social)](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric)
 [![GitHub forks](https://img.shields.io/github/forks/fgarofalo56/Suppercharge_Microsoft_Fabric?style=social)](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/fork)

@@ -101,7 +101,7 @@
       "expectation_type": "expect_column_values_to_match_regex",
       "kwargs": {
         "column": "transaction_id",
-        "regex": "^TXN-[A-Z0-9]{8,16}$|^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
+        "regex": "^TXN-[A-Za-z0-9]{8,16}$|^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
         "mostly": 0.95
       },
       "meta": {

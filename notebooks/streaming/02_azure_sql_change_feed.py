@@ -24,13 +24,20 @@
 # COMMAND ----------
 
 import os
+
+from delta.tables import DeltaTable
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 from pyspark.sql.types import (
-    StructType, StructField, StringType, LongType,
-    TimestampType, IntegerType, DecimalType, BooleanType
+    BooleanType,
+    DecimalType,
+    IntegerType,
+    LongType,
+    StringType,
+    StructField,
+    StructType,
+    TimestampType,
 )
-from delta.tables import DeltaTable
 
 spark = SparkSession.builder.getOrCreate()
 
@@ -57,7 +64,7 @@ except ImportError:
     AZURE_SQL_JDBC_URL = os.getenv("AZURE_SQL_JDBC_URL", "")
     AZURE_SQL_USER     = os.getenv("AZURE_SQL_USER", "")
     AZURE_SQL_PASSWORD = os.getenv("AZURE_SQL_PASSWORD", "")
-    CHECKPOINT_STORAGE = os.getenv("CHECKPOINT_PATH", "/tmp/checkpoints")
+    CHECKPOINT_STORAGE = os.getenv("CHECKPOINT_PATH", os.environ.get('CHECKPOINT_PATH_BASE', 'abfss://Files/checkpoints') + '')
 
 # JDBC properties dict (used for batch reads during CT polling)
 jdbc_properties = {

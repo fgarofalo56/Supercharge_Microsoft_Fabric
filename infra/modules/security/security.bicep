@@ -25,6 +25,16 @@ param enablePrivateEndpoints bool = false
 @description('Subnet ID for private endpoint')
 param privateEndpointSubnetId string = ''
 
+@description('Key Vault SKU. `premium` is required for HSM-backed keys (FedRAMP, PCI-DSS).')
+@allowed([
+  'standard'
+  'premium'
+])
+param keyVaultSku string = 'standard'
+
+@description('When true, provisions a CMK key inside this Key Vault for storage encryption and outputs its key URI.')
+param provisionStorageCmkKey bool = false
+
 // =============================================================================
 // Managed Identity
 // =============================================================================
@@ -46,7 +56,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
   properties: {
     sku: {
       family: 'A'
-      name: 'standard'
+      name: keyVaultSku
     }
     tenantId: subscription().tenantId
     enableRbacAuthorization: true
@@ -58,6 +68,50 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
     networkAcls: {
       defaultAction: enablePrivateEndpoints ? 'Deny' : 'Allow'
       bypass: 'AzureServices'
+    }
+  }
+}
+
+// =============================================================================
+// CMK key for storage encryption (provisioned when compliance requires CMK)
+// =============================================================================
+
+resource storageCmkKey 'Microsoft.KeyVault/vaults/keys@2023-07-01' = if (provisionStorageCmkKey) {
+  parent: keyVault
+  name: 'cmk-storage-${uniqueString(resourceGroup().id)}'
+  properties: {
+    kty: keyVaultSku == 'premium' ? 'RSA-HSM' : 'RSA'
+    keySize: 2048
+    keyOps: [
+      'wrapKey'
+      'unwrapKey'
+    ]
+    attributes: {
+      enabled: true
+      exportable: false
+    }
+    rotationPolicy: {
+      attributes: {
+        expiryTime: 'P2Y'
+      }
+      lifetimeActions: [
+        {
+          trigger: {
+            timeBeforeExpiry: 'P60D'
+          }
+          action: {
+            type: 'Rotate'
+          }
+        }
+        {
+          trigger: {
+            timeBeforeExpiry: 'P30D'
+          }
+          action: {
+            type: 'Notify'
+          }
+        }
+      ]
     }
   }
 }
@@ -148,3 +202,6 @@ output managedIdentityPrincipalId string = managedIdentity.properties.principalI
 
 @description('The client ID of the Managed Identity')
 output managedIdentityClientId string = managedIdentity.properties.clientId
+
+@description('Unversioned key URI for the storage CMK key (empty when not provisioned).')
+output storageCmkKeyUri string = provisionStorageCmkKey ? storageCmkKey.properties.keyUriWithVersion : ''

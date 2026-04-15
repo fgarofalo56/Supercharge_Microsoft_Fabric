@@ -8,7 +8,7 @@
 
 </div>
 
-> 🏠 **[Home](../../index.md)** > 📖 **[Tutorials](../index.md)** > 🌦️ **NOAA Weather & Climate Analytics**
+> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > 🌦️ **NOAA Weather & Climate Analytics**
 
 ---
 
@@ -1165,7 +1165,7 @@ Continue your learning journey:
 
 | Previous | Up | Next |
 |:---------|:--:|-----:|
-| [⬅️ 33-SBA Small Business Analytics](../33-sba-small-business/README.md) | [📖 Tutorials Index](../index.md) | [35-EPA Environmental Analytics ➡️](../35-epa-environment/README.md) |
+| [⬅️ 33-SBA Small Business Analytics](../33-sba-small-business/README.md) | [📖 Tutorials Index](../README.md) | [35-EPA Environmental Analytics ➡️](../35-epa-environment/README.md) |
 
 ---
 

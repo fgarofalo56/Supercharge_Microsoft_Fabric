@@ -412,17 +412,21 @@ class TestNotebookStructure:
             assert has_doc, f"{notebook.name} lacks documentation"
 
     def test_notebooks_follow_naming_convention(self, notebooks_dir):
-        """Verify notebooks follow naming convention."""
+        """Verify notebooks follow naming convention.
+
+        Layer notebooks use ``XX_layer_description.py``. Files under
+        ``notebooks/utils/`` are shared helper modules and are exempt.
+        """
         import re
 
-        # Expected pattern: XX_layer_description.py
         pattern = re.compile(r"^\d{2}_[a-z]+_[\w]+\.py$")
 
         for notebook in notebooks_dir.rglob("*.py"):
-            # Skip __init__.py and similar
             if notebook.name.startswith("_"):
                 continue
-
+            # Shared utility modules under notebooks/utils/ are exempt.
+            if "utils" in notebook.parts:
+                continue
             assert pattern.match(
                 notebook.name
             ), f"{notebook.name} doesn't follow naming convention"

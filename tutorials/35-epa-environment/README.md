@@ -8,7 +8,7 @@
 
 </div>
 
-> 🏠 **[Home](../../index.md)** > 📖 **[Tutorials](../index.md)** > 🌿 **EPA Environmental Analytics**
+> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > 🌿 **EPA Environmental Analytics**
 
 ---
 
@@ -1194,7 +1194,7 @@ Continue your learning journey:
 
 | Previous | Up | Next |
 |:---------|:--:|-----:|
-| [⬅️ 34-NOAA Weather & Climate Analytics](../34-noaa-weather-climate/README.md) | [📖 Tutorials Index](../index.md) | [36-DOI Natural Resources Analytics ➡️](../36-doi-interior/README.md) |
+| [⬅️ 34-NOAA Weather & Climate Analytics](../34-noaa-weather-climate/README.md) | [📖 Tutorials Index](../README.md) | [36-DOI Natural Resources Analytics ➡️](../36-doi-interior/README.md) |
 
 ---
 

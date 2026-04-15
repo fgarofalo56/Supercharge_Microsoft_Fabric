@@ -8,7 +8,7 @@
 
 </div>
 
-> 🏠 **[Home](../../index.md)** > 📖 **[Tutorials](../index.md)** > 📹 **Video Security Analytics**
+> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > 📹 **Video Security Analytics**
 
 ---
 
@@ -1431,7 +1431,7 @@ Continue your learning journey:
 
 | ⬅️ Previous | ⬆️ Up | ➡️ Next |
 |------------|------|--------|
-| [26-Multi-Source Streaming](../26-multi-source-streaming/README.md) | [Tutorials Index](../index.md) | [28-People Movement Analytics](../28-people-movement-analytics/README.md) |
+| [26-Multi-Source Streaming](../26-multi-source-streaming/README.md) | [Tutorials Index](../README.md) | [28-People Movement Analytics](../28-people-movement-analytics/README.md) |
 
 ---
 

@@ -70,6 +70,21 @@ param enablePrivateEndpoint bool = false
 @description('Subnet ID for private endpoint')
 param privateEndpointSubnetId string = ''
 
+@description('Enable the destructive Purge operation. Disabled by default; enable only for environments where hard-delete is explicitly required for DSAR or retention enforcement.')
+param enablePurge bool = false
+
+@description('When true, turns on double encryption (FIPS 140-2 Level 2 equivalent) for the ADX cluster.')
+param enableDoubleEncryption bool = false
+
+@description('Principal type for the managed identity. "ServicePrincipal" is correct for both user-assigned and system-assigned MIs.')
+@allowed([
+  'App'
+  'Group'
+  'User'
+  'ServicePrincipal'
+])
+param managedIdentityPrincipalType string = 'ServicePrincipal'
+
 @description('Tags to apply to resources')
 param tags object = {}
 
@@ -103,10 +118,10 @@ resource adxCluster 'Microsoft.Kusto/clusters@2024-04-13' = {
   }
   properties: {
     enableStreamingIngest: enableStreamingIngestion
-    enablePurge: true
+    enablePurge: enablePurge
     enableAutoStop: true
     enableDiskEncryption: true
-    enableDoubleEncryption: false
+    enableDoubleEncryption: enableDoubleEncryption
     publicNetworkAccess: enablePrivateEndpoint ? 'Disabled' : 'Enabled'
     publicIPType: 'IPv4'
     trustedExternalTenants: []
@@ -231,6 +246,8 @@ resource complianceAlertTable 'Microsoft.Kusto/clusters/databases/scripts@2024-0
 // RBAC - Managed Identity Database Admin
 // =============================================================================
 
+// Kusto principalAssignments.role values: "Admin" | "Ingestor" | "User" | "UnrestrictedViewer" | "Viewer" | "Monitor"
+// (these are Kusto-specific role names, not ARM role definition GUIDs).
 resource databasePrincipal 'Microsoft.Kusto/clusters/databases/principalAssignments@2024-04-13' = [
   for (dbName, i) in databaseNames: if (!empty(managedIdentityPrincipalId)) {
     parent: databases[i]
@@ -239,7 +256,7 @@ resource databasePrincipal 'Microsoft.Kusto/clusters/databases/principalAssignme
       principalId: managedIdentityPrincipalId
       role: kustoDatabaseAdminRoleId
       tenantId: subscription().tenantId
-      principalType: 'App'
+      principalType: managedIdentityPrincipalType
     }
   }
 ]

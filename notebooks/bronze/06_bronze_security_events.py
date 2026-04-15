@@ -24,23 +24,69 @@
 
 # COMMAND ----------
 
+# ---------------------------------------------------------------------------
+# Fabric/local compatibility shim
+# ---------------------------------------------------------------------------
+import os
+
+try:
+    import notebookutils  # Fabric runtime
+    def _get_arg(name, default=None):
+        try:
+            return notebookutils.notebook.getArgument(name, default)
+        except Exception:
+            return os.environ.get(name.upper(), default)
+    def _notebook_exit(status: str) -> None:
+        notebookutils.notebook.exit(status)
+except ImportError:
+    try:
+        import mssparkutils  # legacy Synapse/Fabric runtime
+        def _get_arg(name, default=None):
+            try:
+                return mssparkutils.notebook.getArgument(name, default)
+            except Exception:
+                return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            mssparkutils.notebook.exit(status)
+    except ImportError:
+        def _get_arg(name, default=None):
+            return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            raise SystemExit(status)
+
+
 # MAGIC %md
 # MAGIC ## Configuration
 
 # COMMAND ----------
 
+from datetime import datetime
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import (
-    current_timestamp, lit, input_file_name,
-    col, to_date, hour, when, coalesce,
-    sum as _sum, count as _count
+    coalesce,
+    col,
+    current_timestamp,
+    hour,
+    input_file_name,
+    lit,
+    to_date,
+    when,
 )
-from pyspark.sql.types import BooleanType, DoubleType, StringType, StructField, StructType, TimestampType
-from datetime import datetime
+from pyspark.sql.functions import count as _count
+from pyspark.sql.functions import sum as _sum
+from pyspark.sql.types import (
+    BooleanType,
+    DoubleType,
+    StringType,
+    StructField,
+    StructType,
+    TimestampType,
+)
 
 # Configuration
 SOURCE_PATH = "Files/output/bronze_security_events.parquet"
-TARGET_TABLE = "bronze_security_events"
+TARGET_TABLE = "lh_bronze.bronze_security_events"
 SCHEMA_VERSION = "1.0"
 BATCH_ID = datetime.now().strftime("%Y%m%d_%H%M%S")
 
@@ -135,9 +181,9 @@ try:
 
 except Exception as e:
     print(f"ERROR: Failed to read source data from {SOURCE_PATH}")
-    print(f"  Exception: {str(e)}")
+    print(f"  Exception: {e!s}")
     print(f"  Verify the source file exists and is accessible.")
-    dbutils.notebook.exit(f"FAILED: Source read error - {str(e)}")
+    _notebook_exit(f"FAILED: Source read error - {e!s}")
 
 # COMMAND ----------
 
@@ -359,7 +405,7 @@ df_bronze.write \
     .partitionBy("event_date", "severity_level") \
     .saveAsTable(TARGET_TABLE)
 
-print(f"Successfully wrote {df_bronze.count():,} records to {TARGET_TABLE}")
+print(f"Successfully wrote {spark.table(TARGET_TABLE).count():,} records to {TARGET_TABLE}")
 
 # COMMAND ----------
 

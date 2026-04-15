@@ -1,6 +1,6 @@
 # 🥈 Tutorial 02: Silver Layer
 
-> **[🏠 Home](../../index.md)** > **[📖 Tutorials](../index.md)** > **🥈 Silver Layer**
+> **[🏠 Home](../../README.md)** > **[📖 Tutorials](../README.md)** > **🥈 Silver Layer**
 
 ---
 
@@ -1264,7 +1264,7 @@ Continue to **[Tutorial 03: Gold Layer](../03-gold-layer/README.md)** to learn:
 
 | ⬅️ Previous | ⬆️ Up | ➡️ Next |
 |-------------|-------|---------|
-| [01-Bronze Layer](../01-bronze-layer/README.md) | [Tutorials Index](../index.md) | [03-Gold Layer](../03-gold-layer/README.md) |
+| [01-Bronze Layer](../01-bronze-layer/README.md) | [Tutorials Index](../README.md) | [03-Gold Layer](../03-gold-layer/README.md) |
 
 ---
 

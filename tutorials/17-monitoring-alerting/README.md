@@ -8,7 +8,7 @@
 
 </div>
 
-> **[Home](../../index.md)** > **[Tutorials](../index.md)** > **Monitoring & Observability**
+> **[Home](../../README.md)** > **[Tutorials](../README.md)** > **Monitoring & Observability**
 
 ---
 
@@ -1682,7 +1682,7 @@ Continue to **[Tutorial 18: Data Sharing and Collaboration](../18-data-sharing/R
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [⬅️ 16-Performance Tuning](../16-performance-tuning/README.md) | [📖 Tutorials Index](../index.md) | [18-Data Sharing](../18-data-sharing/README.md) ➡️ |
+| [⬅️ 16-Performance Tuning](../16-performance-tuning/README.md) | [📖 Tutorials Index](../README.md) | [18-Data Sharing](../18-data-sharing/README.md) ➡️ |
 
 ---
 

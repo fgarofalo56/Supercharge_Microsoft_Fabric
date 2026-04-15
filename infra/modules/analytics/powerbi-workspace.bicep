@@ -115,11 +115,10 @@ output provisioningState string = pbiCapacity.properties.provisioningState
 @description('The workspace admin members configured')
 output adminMembersConfigured array = adminMembers
 
-// NOTE: The actual workspace URL is generated when the workspace is created
-// via the Power BI REST API. Use the Fabric capacity ID to assign a workspace
-// to this capacity:
-//   POST https://api.powerbi.com/v1.0/myorg/groups
-//   POST https://api.powerbi.com/v1.0/myorg/groups/{groupId}/AssignToCapacity
-//   Body: { "capacityId": "<output.workspaceId>" }
-@description('The workspace URL placeholder - actual URL is generated via Power BI REST API after workspace creation')
-output workspaceUrl string = 'https://app.powerbi.com/groups/${pbiCapacity.name}'
+// The actual workspace URL requires a workspace GUID obtained from the Power BI
+// REST API after workspace creation (POST /v1.0/myorg/groups then
+// POST /v1.0/myorg/groups/{groupId}/AssignToCapacity with this capacity id).
+// We intentionally do NOT synthesize a URL from the capacity name because it
+// would be structurally wrong and misleading to downstream consumers.
+@description('Power BI portal entry point. Navigate here to assign a workspace to this capacity.')
+output powerBiPortalUrl string = 'https://app.powerbi.com/admin-portal/capacities'

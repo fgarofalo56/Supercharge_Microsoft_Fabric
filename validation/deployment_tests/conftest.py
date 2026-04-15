@@ -100,12 +100,47 @@ def all_bicep_files() -> list[Path]:
 
 @pytest.fixture(scope="session")
 def module_bicep_files() -> dict[str, Path]:
-    """Get Bicep files organized by module name."""
-    modules = {}
+    """Get Bicep files organized by module name.
+
+    Each module directory may contain several .bicep files (e.g. security/
+    contains security.bicep, workspace-identity.bicep, resource-locks.bicep).
+    The "primary" file for a module is the one whose stem matches the parent
+    directory name (security/security.bicep), or the only file if there is one.
+    """
+    # For modules where the directory holds multiple files, the "primary" is
+    # the file whose stem matches the directory name (e.g. security/security.bicep).
+    # Fall back to a curated map for legacy directories where no file matches.
+    PRIMARY_OVERRIDES = {
+        "fabric": "fabric-capacity.bicep",
+        "networking": "vnet.bicep",
+        "monitoring": "log-analytics.bicep",
+        "storage": "storage-account.bicep",
+        "governance": "purview.bicep",
+        "analytics": "powerbi-workspace.bicep",
+    }
+    modules: dict[str, Path] = {}
+    by_dir: dict[str, list[Path]] = {}
     for bicep_file in MODULES_ROOT.rglob("*.bicep"):
-        module_name = bicep_file.parent.name
-        modules[module_name] = bicep_file
+        by_dir.setdefault(bicep_file.parent.name, []).append(bicep_file)
+    for dir_name, files in by_dir.items():
+        override = PRIMARY_OVERRIDES.get(dir_name)
+        if override:
+            picked = next((f for f in files if f.name == override), None)
+            if picked:
+                modules[dir_name] = picked
+                continue
+        primary = next((f for f in files if f.stem == dir_name), files[0])
+        modules[dir_name] = primary
     return modules
+
+
+@pytest.fixture(scope="session")
+def all_module_bicep_files() -> dict[str, list[Path]]:
+    """Every .bicep file in modules/, grouped by module directory."""
+    by_dir: dict[str, list[Path]] = {}
+    for bicep_file in MODULES_ROOT.rglob("*.bicep"):
+        by_dir.setdefault(bicep_file.parent.name, []).append(bicep_file)
+    return by_dir
 
 
 @pytest.fixture(scope="session")
@@ -361,7 +396,13 @@ def azure_subscription_id(azure_logged_in: bool) -> str | None:
 
 @pytest.fixture(scope="session")
 def bicep_cli_available() -> bool:
-    """Check if Bicep CLI is available."""
+    """Check if Bicep CLI is available *and* can read these source paths.
+
+    A `WSL` host running a Windows-installed `az` cannot resolve the Linux
+    paths under /mnt/...; in that case `az bicep build` fails with
+    "An error occurred reading file". Probe a real build of main.bicep so
+    we skip cleanly in unsupported environments rather than failing.
+    """
     try:
         result = subprocess.run(
             ["az", "bicep", "version"],
@@ -369,7 +410,18 @@ def bicep_cli_available() -> bool:
             text=True,
             timeout=30,
         )
-        return result.returncode == 0
+        if result.returncode != 0:
+            return False
+        # Probe build with the actual file we care about. If the host az can't
+        # read the path, downstream tests would fail with a path-translation
+        # error rather than a real Bicep error -- skip them instead.
+        probe = subprocess.run(
+            ["az", "bicep", "build", "--file", str(INFRA_ROOT / "main.bicep"), "--stdout"],
+            capture_output=True,
+            text=True,
+            timeout=120,
+        )
+        return not (probe.returncode != 0 and "Could not find a part of the path" in probe.stderr)
     except (subprocess.SubprocessError, FileNotFoundError):
         return False
 

@@ -25,12 +25,20 @@
 # COMMAND ----------
 
 import os
+
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 from pyspark.sql.types import (
-    StructType, StructField, StringType, LongType,
-    TimestampType, DoubleType, IntegerType, BooleanType,
-    ArrayType, MapType
+    ArrayType,
+    BooleanType,
+    DoubleType,
+    IntegerType,
+    LongType,
+    MapType,
+    StringType,
+    StructField,
+    StructType,
+    TimestampType,
 )
 
 spark = SparkSession.builder.getOrCreate()
@@ -55,7 +63,7 @@ except ImportError:
     # Local / unit-test fallback
     COSMOS_ENDPOINT = os.getenv("COSMOS_ENDPOINT", "https://<account>.documents.azure.com:443/")
     COSMOS_KEY      = os.getenv("COSMOS_KEY", "")
-    CHECKPOINT_STORAGE = os.getenv("CHECKPOINT_PATH", "/tmp/checkpoints")
+    CHECKPOINT_STORAGE = os.getenv("CHECKPOINT_PATH", os.environ.get('CHECKPOINT_PATH_BASE', 'abfss://Files/checkpoints') + '')
 
 COSMOS_DATABASE = "CasinoDB"
 

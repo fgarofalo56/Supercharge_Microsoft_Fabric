@@ -8,7 +8,7 @@
 
 </div>
 
-> 🏠 **[Home](../../index.md)** > 📖 **[Tutorials](../index.md)** > ❄️ **Snowflake Migration**
+> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > ❄️ **Snowflake Migration**
 
 ---
 
@@ -1704,7 +1704,7 @@ This tutorial includes the following supplementary files:
 
 | ⬅️ Previous | ⬆️ Up | ➡️ Next |
 |------------|------|--------|
-| [23-SHIR & Data Gateways](../23-shir-data-gateways/README.md) | [Tutorials Index](../index.md) | [25-IBM DB2 Source](../25-ibm-db2-source/README.md) |
+| [23-SHIR & Data Gateways](../23-shir-data-gateways/README.md) | [Tutorials Index](../README.md) | [25-IBM DB2 Source](../25-ibm-db2-source/README.md) |
 
 ---
 

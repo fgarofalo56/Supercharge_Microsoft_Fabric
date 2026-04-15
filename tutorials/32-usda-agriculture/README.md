@@ -8,7 +8,7 @@
 
 </div>
 
-> 🏠 **[Home](../../index.md)** > 📖 **[Tutorials](../index.md)** > 🌾 **USDA Agriculture Analytics**
+> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > 🌾 **USDA Agriculture Analytics**
 
 ---
 
@@ -1259,7 +1259,7 @@ Continue your learning journey:
 
 | Previous | Up | Next |
 |:---------|:--:|-----:|
-| [⬅️ 31-Federal DOT/FAA Analytics](../31-federal-dot-faa/README.md) | [📖 Tutorials Index](../index.md) | [33-SBA Small Business Analytics ➡️](../33-sba-small-business/README.md) |
+| [⬅️ 31-Federal DOT/FAA Analytics](../31-federal-dot-faa/README.md) | [📖 Tutorials Index](../README.md) | [33-SBA Small Business Analytics ➡️](../33-sba-small-business/README.md) |
 
 ---
 

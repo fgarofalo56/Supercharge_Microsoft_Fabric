@@ -8,7 +8,7 @@
 
 </div>
 
-> [Home](../../index.md) > [Tutorials](../index.md) > **Data Sharing & OneLake Shortcuts**
+> [Home](../../README.md) > [Tutorials](../README.md) > **Data Sharing & OneLake Shortcuts**
 
 ---
 
@@ -1598,7 +1598,7 @@ Continue to **[Tutorial 19: Fabric Copilot & AI Features](../19-copilot-ai/READM
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [⬅️ 17-Monitoring & Alerting](../17-monitoring-alerting/README.md) | [📖 Tutorials Index](../index.md) | [19-Copilot & AI](../19-copilot-ai/README.md) ➡️ |
+| [⬅️ 17-Monitoring & Alerting](../17-monitoring-alerting/README.md) | [📖 Tutorials Index](../README.md) | [19-Copilot & AI](../19-copilot-ai/README.md) ➡️ |
 
 ---
 

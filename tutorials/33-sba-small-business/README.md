@@ -8,7 +8,7 @@
 
 </div>
 
-> 🏠 **[Home](../../index.md)** > 📖 **[Tutorials](../index.md)** > 🏦 **SBA Small Business Analytics**
+> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > 🏦 **SBA Small Business Analytics**
 
 ---
 
@@ -1219,7 +1219,7 @@ Continue your learning journey:
 
 | Previous | Up | Next |
 |:---------|:--:|-----:|
-| [⬅️ 32-USDA Agriculture Analytics](../32-usda-agriculture/README.md) | [📖 Tutorials Index](../index.md) | [34-NOAA Weather & Climate Analytics ➡️](../34-noaa-weather-climate/README.md) |
+| [⬅️ 32-USDA Agriculture Analytics](../32-usda-agriculture/README.md) | [📖 Tutorials Index](../README.md) | [34-NOAA Weather & Climate Analytics ➡️](../34-noaa-weather-climate/README.md) |
 
 ---
 

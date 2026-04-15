@@ -8,7 +8,7 @@
 
 </div>
 
-> 🏠 **[Home](../../index.md)** > 📖 **[Tutorials](../index.md)** > 📍 **Geolocation Analytics**
+> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > 📍 **Geolocation Analytics**
 
 ---
 
@@ -1570,7 +1570,7 @@ Continue your learning journey:
 
 | Previous | Up | Next |
 |:---------|:--:|-----:|
-| [⬅️ 28-People Movement Analytics](../28-people-movement-analytics/README.md) | [📖 Tutorials Index](../index.md) | [30-Tribal Healthcare Analytics ➡️](../30-tribal-healthcare/README.md) |
+| [⬅️ 28-People Movement Analytics](../28-people-movement-analytics/README.md) | [📖 Tutorials Index](../README.md) | [30-Tribal Healthcare Analytics ➡️](../30-tribal-healthcare/README.md) |
 
 ---
 

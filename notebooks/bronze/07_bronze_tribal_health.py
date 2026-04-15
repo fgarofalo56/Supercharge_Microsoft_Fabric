@@ -27,10 +27,20 @@
 
 # COMMAND ----------
 
+import uuid
+from datetime import datetime
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import (
-    current_timestamp, lit, input_file_name,
-    col, to_timestamp, when, sha2, concat_ws, count
+    col,
+    concat_ws,
+    count,
+    current_timestamp,
+    input_file_name,
+    lit,
+    sha2,
+    to_timestamp,
+    when,
 )
 from pyspark.sql.types import (
     BooleanType,
@@ -41,8 +51,6 @@ from pyspark.sql.types import (
     StructField,
     StructType,
 )
-from datetime import datetime
-import uuid
 
 # Configuration
 SOURCE_PATH = "Files/landing/tribal_health/"
@@ -250,7 +258,7 @@ df_bronze.write \
     .partitionBy("_load_date") \
     .saveAsTable(TARGET_TABLE)
 
-final_count = df_bronze.count()
+final_count = spark.table(TARGET_TABLE).count()
 print(f"Successfully wrote {final_count:,} records to {TARGET_TABLE}")
 
 # COMMAND ----------

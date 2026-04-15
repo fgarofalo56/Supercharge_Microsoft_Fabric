@@ -25,12 +25,19 @@
 # COMMAND ----------
 
 import os
+
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 from pyspark.sql.types import (
-    StructType, StructField, StringType, LongType,
-    TimestampType, IntegerType, DecimalType, BooleanType,
-    DateType
+    BooleanType,
+    DateType,
+    DecimalType,
+    IntegerType,
+    LongType,
+    StringType,
+    StructField,
+    StructType,
+    TimestampType,
 )
 
 spark = SparkSession.builder.getOrCreate()
@@ -56,7 +63,7 @@ except ImportError:
     DB2_DATABASE = os.getenv("DB2_DATABASE", "CASINODB")
     DB2_USER     = os.getenv("DB2_USER", "")
     DB2_PASSWORD = os.getenv("DB2_PASSWORD", "")
-    CHECKPOINT_STORAGE = os.getenv("CHECKPOINT_PATH", "/tmp/checkpoints")
+    CHECKPOINT_STORAGE = os.getenv("CHECKPOINT_PATH", os.environ.get('CHECKPOINT_PATH_BASE', 'abfss://Files/checkpoints') + '')
 
 # DB2 LUW JDBC URL (standard TCP/IP port 50000)
 DB2_LUW_JDBC_URL = f"jdbc:db2://{DB2_HOST}:{DB2_PORT}/{DB2_DATABASE}"
@@ -275,9 +282,10 @@ def read_db2_incremental(
 
 # COMMAND ----------
 
+import codecs
+
 from pyspark.sql.functions import udf
 from pyspark.sql.types import StringType as ST
-import codecs
 
 
 def decode_ebcdic_blob(blob_bytes: bytes, ccsid: str = "cp037") -> str:
@@ -292,7 +300,7 @@ def decode_ebcdic_blob(blob_bytes: bytes, ccsid: str = "cp037") -> str:
         if isinstance(blob_bytes, (bytes, bytearray)):
             return blob_bytes.decode(ccsid).strip()
         return str(blob_bytes).strip()
-    except (UnicodeDecodeError, LookupError) as e:
+    except (UnicodeDecodeError, LookupError):
         # Fall back to UTF-8 if EBCDIC decode fails (LUW data received in error)
         return blob_bytes.decode("utf-8", errors="replace").strip()
 

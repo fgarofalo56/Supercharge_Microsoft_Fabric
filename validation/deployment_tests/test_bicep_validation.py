@@ -176,7 +176,11 @@ class TestParameterValidation:
         assert max_len <= 20, "projectPrefix maxLength should be reasonable (<=20)"
 
     def test_log_retention_has_value_constraints(self, parsed_main_bicep):
-        """Test that logRetentionDays has min/max value constraints."""
+        """Test that logRetentionDays has min/max value constraints.
+
+        Max ceiling is 4383 days (12 years) to support HIPAA / 42 CFR Part 2
+        retention requirements (HIPAA: 6 yrs / NIGC MICS: 5 yrs).
+        """
         retention_param = parsed_main_bicep.parameters.get("logRetentionDays")
         assert retention_param is not None, "logRetentionDays parameter not found"
 
@@ -186,21 +190,31 @@ class TestParameterValidation:
         assert min_val is not None, "logRetentionDays should have minValue constraint"
         assert max_val is not None, "logRetentionDays should have maxValue constraint"
         assert min_val >= 30, "Log retention should be at least 30 days"
-        assert max_val <= 730, "Log retention should not exceed 730 days"
+        assert max_val <= 4383, "Log retention should not exceed 4383 days (12 yrs ceiling)"
 
     def test_parameters_have_descriptions(self, main_bicep_path: Path):
-        """Test that all parameters have @description decorators."""
+        """Test that all parameters have @description decorators.
+
+        The regex tolerates additional decorators (@allowed, @minValue, etc.)
+        between @description and `param`, and quoted strings containing
+        balanced parentheses inside the description text.
+        """
         content = main_bicep_path.read_text(encoding="utf-8")
 
         # Find all param declarations
         param_pattern = r"param\s+(\w+)\s+"
         params = re.findall(param_pattern, content)
 
-        # For each param, check if preceded by @description
         missing_descriptions = []
         for param in params:
-            # Look for @description before the param declaration
-            desc_pattern = rf"@description\s*\([^\)]+\)\s*(?:@\w+\s*\([^\)]*\)\s*)*param\s+{param}\s+"
+            # @description('...') optionally followed by other decorators, then `param NAME `.
+            # Use [\s\S]*? for the description body so it can include literal `)`s
+            # within balanced quoted strings.
+            desc_pattern = (
+                r"@description\s*\(\s*'(?:[^'\\]|\\.)*'\s*\)\s*"
+                r"(?:@\w+\s*\([\s\S]*?\)\s*)*"
+                rf"param\s+{re.escape(param)}\b"
+            )
             if not re.search(desc_pattern, content):
                 missing_descriptions.append(param)
 
@@ -357,38 +371,53 @@ class TestBicepBestPractices:
                     )
 
     def test_modules_use_latest_api_versions(self, module_bicep_files: dict[str, Path]):
-        """Test that modules use reasonably recent API versions."""
-        # Minimum API version year to check
+        """Test that modules use reasonably recent API versions.
+
+        Some Microsoft RPs publish APIs only on older year stamps (e.g., the
+        Power BI Dedicated RP's stable API is still 2021-01-01 and there is no
+        newer GA). Allow per-RP overrides for those legitimate cases.
+        """
         min_year = 2022
+        ALLOWED_OLDER = {
+            # RP : minimum_year_allowed_for_this_RP
+            "Microsoft.PowerBIDedicated": 2021,
+            "Microsoft.PowerBIDedicated/capacities": 2021,
+            "Microsoft.OperationsManagement": 2015,
+            "Microsoft.OperationsManagement/solutions": 2015,
+            "Microsoft.Insights/diagnosticSettings": 2021,
+        }
 
         for module_name, bicep_path in module_bicep_files.items():
             content = bicep_path.read_text(encoding="utf-8")
-
-            # Find API versions like '2023-01-01' or '2022-10-01'
-            api_pattern = r"@(\d{4})-\d{2}-\d{2}"
-            versions = re.findall(api_pattern, content)
-
-            for year_str in versions:
+            # Find lines like  Microsoft.X/y@2023-01-01
+            api_pattern = r"(Microsoft\.[A-Za-z]+(?:/[A-Za-z]+)?)@(\d{4})-\d{2}-\d{2}"
+            for rp, year_str in re.findall(api_pattern, content):
                 year = int(year_str)
-                if year < min_year:
+                allowed_floor = ALLOWED_OLDER.get(rp, min_year)
+                if year < allowed_floor:
                     pytest.fail(
-                        f"Module {module_name} uses outdated API version from {year}. "
-                        f"Consider updating to {min_year} or later."
+                        f"Module {module_name} uses outdated API version from {year} "
+                        f"on {rp}. Consider updating to {allowed_floor} or later."
                     )
 
     def test_outputs_have_descriptions(self, module_bicep_files: dict[str, Path]):
-        """Test that module outputs have @description decorators."""
+        """Test that module outputs have @description decorators.
+
+        Tolerates description bodies that contain literal `)` characters by
+        consuming the description string explicitly with a balanced quoted body.
+        """
         for module_name, bicep_path in module_bicep_files.items():
             content = bicep_path.read_text(encoding="utf-8")
 
-            # Find all output declarations
             output_pattern = r"output\s+(\w+)\s+"
             outputs = re.findall(output_pattern, content)
 
             missing = []
             for output in outputs:
-                # Check for @description before output
-                desc_pattern = rf"@description\s*\([^\)]+\)\s*output\s+{output}\s+"
+                desc_pattern = (
+                    r"@description\s*\(\s*'(?:[^'\\]|\\.)*'\s*\)\s*"
+                    rf"output\s+{re.escape(output)}\b"
+                )
                 if not re.search(desc_pattern, content):
                     missing.append(output)
 

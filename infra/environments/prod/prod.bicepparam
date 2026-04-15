@@ -11,19 +11,23 @@ param projectPrefix = 'fabricpoc'
 // Full capacity for production
 param fabricCapacitySku = 'F64'
 
-// Admin email for critical Fabric capacity alerts and notifications
-param fabricAdminEmail = 'frgarofa@microsoft.com'
+// Admin email MUST be overridden at deploy time (CI secret or CLI --parameters).
+// The placeholder will fail casino-floor compliance checks at deploy.
+param fabricAdminEmail = readEnvironmentVariable('FABRIC_ADMIN_EMAIL', 'fabric-admin@example.com')
 
-// Production should use private endpoints
+// Production uses private endpoints
 param enablePrivateEndpoints = true
 
-// Full retention for production
-param logRetentionDays = 90
+// Production log retention. Compliance floor takes over when complianceFramework
+// is set (NIGC-MICS=1825d, HIPAA=2190d, FedRAMP=1095d).
+param logRetentionDays = 730
+
+// Activate compliance controls. Set to your applicable framework.
+param complianceFramework = 'NIGC-MICS'
 
 param tags = {
   Environment: 'Production'
   CostCenter: 'Casino-Analytics'
-  Owner: 'DataPlatformTeam'
+  Owner: readEnvironmentVariable('OWNER_TEAM', 'DataPlatformTeam')
   Project: 'Fabric Casino POC'
-  Compliance: 'NIGC-MICS'
 }

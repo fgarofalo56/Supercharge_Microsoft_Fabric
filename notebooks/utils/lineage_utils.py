@@ -45,6 +45,37 @@
 
 # COMMAND ----------
 
+# ---------------------------------------------------------------------------
+# Fabric/local compatibility shim
+# ---------------------------------------------------------------------------
+import os
+
+try:
+    import notebookutils  # Fabric runtime
+    def _get_arg(name, default=None):
+        try:
+            return notebookutils.notebook.getArgument(name, default)
+        except Exception:
+            return os.environ.get(name.upper(), default)
+    def _notebook_exit(status: str) -> None:
+        notebookutils.notebook.exit(status)
+except ImportError:
+    try:
+        import mssparkutils  # legacy Synapse/Fabric runtime
+        def _get_arg(name, default=None):
+            try:
+                return mssparkutils.notebook.getArgument(name, default)
+            except Exception:
+                return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            mssparkutils.notebook.exit(status)
+    except ImportError:
+        def _get_arg(name, default=None):
+            return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            raise SystemExit(status)
+
+
 import time
 import uuid
 from datetime import datetime
@@ -57,8 +88,10 @@ from pyspark.sql.functions import (
     current_timestamp,
     lit,
     regexp_extract,
-    sum as spark_sum,
     when,
+)
+from pyspark.sql.functions import (
+    sum as spark_sum,
 )
 from pyspark.sql.types import (
     DoubleType,
@@ -228,13 +261,19 @@ def get_batch_id(dbutils=None) -> str:
     """
     if dbutils is not None:
         try:
+            # Best-effort compatibility: mssparkutils / notebookutils expose
+            # getArgument; Databricks dbutils exposes widgets.getAll. Try the
+            # arg fetch first (works in Fabric), fall back to widget list.
+            value = _get_arg("batch_id")
+            if value and str(value).strip():
+                return str(value).strip()
             widget_names = [w.name for w in dbutils.widgets.getAll()]
             if "batch_id" in widget_names:
-                value = dbutils.widgets.get("batch_id")
+                value = _get_arg("batch_id")
                 if value and value.strip():
                     return value.strip()
         except Exception:
-            # Widget API not available — fall through to default
+            # Widget API not available - fall through to default
             pass
 
     return datetime.now().strftime("%Y%m%d_%H%M%S")

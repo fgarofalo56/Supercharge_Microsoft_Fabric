@@ -253,4 +253,4 @@ For questions about diagram implementation:
 
 **Quick Reference Created:** 2025-01-21  
 **Related Document:** [MERMAID_DIAGRAM_OPPORTUNITIES.md](./MERMAID_DIAGRAM_OPPORTUNITIES.md)  
-**Repository:** [Supercharge_Microsoft_Fabric](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric)
+**Repository:** [Suppercharge_Microsoft_Fabric](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric)

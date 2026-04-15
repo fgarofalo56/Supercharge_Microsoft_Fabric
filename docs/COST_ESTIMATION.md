@@ -540,4 +540,4 @@ tags: {
 ---
 
 > **Documentation maintained by:** Microsoft Fabric POC Team
-> **Repository:** [Supercharge_Microsoft_Fabric](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric)
+> **Repository:** [Suppercharge_Microsoft_Fabric](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric)

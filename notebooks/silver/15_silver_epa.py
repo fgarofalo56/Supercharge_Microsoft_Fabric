@@ -16,11 +16,45 @@
 
 # COMMAND ----------
 
+# ---------------------------------------------------------------------------
+# Fabric/local compatibility shim
+# ---------------------------------------------------------------------------
+import os
+
+try:
+    import notebookutils  # Fabric runtime
+    def _get_arg(name, default=None):
+        try:
+            return notebookutils.notebook.getArgument(name, default)
+        except Exception:
+            return os.environ.get(name.upper(), default)
+    def _notebook_exit(status: str) -> None:
+        notebookutils.notebook.exit(status)
+except ImportError:
+    try:
+        import mssparkutils  # legacy Synapse/Fabric runtime
+        def _get_arg(name, default=None):
+            try:
+                return mssparkutils.notebook.getArgument(name, default)
+            except Exception:
+                return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            mssparkutils.notebook.exit(status)
+    except ImportError:
+        def _get_arg(name, default=None):
+            return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            raise SystemExit(status)
+
+
 # MAGIC %md
 # MAGIC ## Configuration
 
 # COMMAND ----------
 
+from datetime import datetime
+
+from delta.tables import DeltaTable
 from pyspark.sql.functions import (
     abs,
     array,
@@ -45,11 +79,9 @@ from pyspark.sql.functions import (
     year,
 )
 from pyspark.sql.types import DoubleType, IntegerType
-from delta.tables import DeltaTable
-from datetime import datetime
 
 # Parameters (set by pipeline or manual)
-batch_id = dbutils.widgets.get("batch_id") if "batch_id" in [w.name for w in dbutils.widgets.getAll()] else datetime.now().strftime("%Y%m%d_%H%M%S")
+batch_id = _get_arg("batch_id", datetime.now().strftime("%Y%m%d_%H%M%S"))
 
 # Source tables (Bronze)
 SOURCE_AIR = "lh_bronze.bronze_epa_air_quality"
@@ -304,7 +336,7 @@ try:
     df_air_silver = df_air_dq \
         .withColumn("_silver_timestamp", current_timestamp()) \
         .withColumn("_batch_id", lit(batch_id))
-    
+
     air_columns = [
         # Identifiers
         "station_id", "station_name", "site_number",
@@ -319,11 +351,11 @@ try:
         # Quality & metadata
         "_dq_score", "_dq_flags", "_silver_timestamp", "_batch_id",
     ]
-    
+
     df_air_out = df_air_silver.select(
         [col(c) for c in air_columns if c in df_air_silver.columns]
     )
-    
+
     # Write to Silver layer using Delta MERGE (incremental upsert)
     if spark.catalog.tableExists(TARGET_AIR):
         deltaTable = DeltaTable.forName(spark, TARGET_AIR)

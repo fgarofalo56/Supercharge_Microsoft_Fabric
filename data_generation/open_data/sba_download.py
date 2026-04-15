@@ -36,6 +36,7 @@ Library::
 from __future__ import annotations
 
 import argparse
+import contextlib
 import logging
 import os
 import time
@@ -305,10 +306,8 @@ def download_ppp_loans(
             frames.append(chunk_df)
 
             # Clean up temp file
-            try:
+            with contextlib.suppress(OSError):
                 os.remove(tmp_path)
-            except OSError:
-                pass
 
             time.sleep(RATE_LIMIT_SLEEP)
 
@@ -373,10 +372,8 @@ def download_7a_504_loans(
         df.rename(columns=LOAN_7A_504_COLUMN_MAP, inplace=True)
 
         # Clean up temp file
-        try:
+        with contextlib.suppress(OSError):
             os.remove(tmp_path)
-        except OSError:
-            pass
 
     except Exception:
         logger.exception("Failed to download 7(a)/504 data")

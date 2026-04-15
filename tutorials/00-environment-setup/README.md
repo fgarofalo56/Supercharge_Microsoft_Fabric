@@ -1,6 +1,6 @@
 # Tutorial 00: Environment Setup
 
-> **[Home](../../index.md)** > **[Tutorials](../README.md)** > **Environment Setup**
+> **[Home](../../README.md)** > **[Tutorials](../README.md)** > **Environment Setup**
 
 ---
 
@@ -202,7 +202,7 @@ For local data generation and development, set up Python:
 
 ### Python environment setup
 
-Run these commands in a terminal from the **repo root** (`Supercharge_Microsoft_Fabric/`):
+Run these commands in a terminal from the **repo root** (`Suppercharge_Microsoft_Fabric/`):
 
 ```bash
 # Create virtual environment

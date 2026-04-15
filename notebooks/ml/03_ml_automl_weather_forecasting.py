@@ -18,31 +18,72 @@
 
 # COMMAND ----------
 
+# ---------------------------------------------------------------------------
+# Fabric/local compatibility shim
+# ---------------------------------------------------------------------------
+import os
+
+try:
+    import notebookutils  # Fabric runtime
+    def _get_arg(name, default=None):
+        try:
+            return notebookutils.notebook.getArgument(name, default)
+        except Exception:
+            return os.environ.get(name.upper(), default)
+    def _notebook_exit(status: str) -> None:
+        notebookutils.notebook.exit(status)
+except ImportError:
+    try:
+        import mssparkutils  # legacy Synapse/Fabric runtime
+        def _get_arg(name, default=None):
+            try:
+                return mssparkutils.notebook.getArgument(name, default)
+            except Exception:
+                return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            mssparkutils.notebook.exit(status)
+    except ImportError:
+        def _get_arg(name, default=None):
+            return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            raise SystemExit(status)
+
+
 # MAGIC %md
 # MAGIC ## Configuration
 
 # COMMAND ----------
 
-import numpy as np
-import pandas as pd
 from datetime import datetime, timedelta
 
+import mlflow
+import mlflow.sklearn
+import numpy as np
+import pandas as pd
+from flaml import AutoML
 from pyspark.sql.functions import (
-    avg, col, count, current_timestamp, dayofmonth, dayofweek,
-    lag, lit, max, min, month, round, sum, when,
+    avg,
+    col,
+    count,
+    current_timestamp,
+    dayofmonth,
+    dayofweek,
+    lag,
+    lit,
+    max,
+    min,
+    month,
+    round,
+    sum,
+    when,
 )
 from pyspark.sql.types import DoubleType
 from pyspark.sql.window import Window
-from flaml import AutoML
-import mlflow
-import mlflow.sklearn
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 
 # Parameters
 batch_id = (
-    dbutils.widgets.get("batch_id")
-    if "batch_id" in [w.name for w in dbutils.widgets.getAll()]
-    else datetime.now().strftime("%Y%m%d_%H%M%S")
+    _get_arg("batch_id", datetime.now().strftime("%Y%m%d_%H%M%S"))
 )
 
 EXPERIMENT_NAME = "/Shared/automl_weather_demand_forecast"
@@ -73,6 +114,7 @@ print(f"Batch: {batch_id} | Horizon: {FORECAST_HORIZON}d | Experiment: {EXPERIME
 if not spark.catalog.tableExists(SOURCE_NOAA_WEATHER):
     print(f"{SOURCE_NOAA_WEATHER} not found — generating 2-year synthetic weather dataset")
     import random
+
     from pyspark.sql import Row
     random.seed(42)
     base = datetime(2024, 1, 1)
@@ -130,6 +172,7 @@ df_weather.select(
 if not spark.catalog.tableExists(SOURCE_SLOT_PERFORMANCE):
     print(f"{SOURCE_SLOT_PERFORMANCE} not found — generating synthetic demand data")
     import random
+
     from pyspark.sql import Row
     random.seed(99)
     base = datetime(2024, 1, 1)

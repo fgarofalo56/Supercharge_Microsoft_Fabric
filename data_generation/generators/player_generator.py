@@ -53,7 +53,16 @@ class PlayerGenerator(BaseGenerator):
         """
         super().__init__(seed=seed, start_date=start_date, end_date=end_date)
         self.include_pii = include_pii
-        self._salt = os.environ.get("FABRIC_POC_HASH_SALT", "fabric-poc-2024")  # Salt for hashing - use env var in production
+        # Salt MUST come from the environment. No default -- a committed default
+        # defeats the purpose of salting (see HIPAA Safe Harbor, FERPA, PCI-DSS
+        # re: irreversible de-identification).
+        self._salt = os.environ.get("FABRIC_POC_HASH_SALT")
+        if not self._salt:
+            raise RuntimeError(
+                "PlayerGenerator requires the FABRIC_POC_HASH_SALT environment "
+                "variable. Set it to a high-entropy secret (minimum 32 random "
+                "bytes, base64-encoded) retrieved from Key Vault in production."
+            )
 
         self._schema = {
             "player_id": "string",
@@ -99,8 +108,9 @@ class PlayerGenerator(BaseGenerator):
         first_name = self.faker.first_name()
         last_name = self.faker.last_name()
 
-        # Generate SSN (will be hashed/masked)
-        ssn = self.faker.ssn()
+        # Generate SSN using the 900-series synthetic format so output is
+        # unambiguously non-real (real SSNs never start with 900-999).
+        ssn = self.synthetic_ssn()
 
         # Determine loyalty tier
         tier = self.weighted_choice(self.LOYALTY_TIERS, self.TIER_WEIGHTS)

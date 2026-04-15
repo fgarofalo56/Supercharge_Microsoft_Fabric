@@ -225,14 +225,6 @@ data_docs_sites:
 plugins_directory: plugins/
 
 # =============================================================================
-# Anonymous Usage Statistics
-# =============================================================================
-
-anonymous_usage_statistics:
-  enabled: false
-  data_context_id: casino-fabric-poc
-
-# =============================================================================
 # Fluent API Configuration (GX 0.18+)
 # =============================================================================
 # Additional configuration for the fluent API

@@ -224,15 +224,14 @@ Notebooks expect the following:
 
 ### Parameterization
 
-Use widgets for configurable values:
+Use Fabric `notebookutils.notebook.getArgument` for configurable values (use
+the shim helper `_get_arg` provided at the top of every notebook so code runs
+both in Fabric and in local pytest):
 
 ```python
 # Configuration cell
-dbutils.widgets.text("source_path", "Files/data/")
-dbutils.widgets.text("batch_date", "2024-01-01")
-
-source_path = dbutils.widgets.get("source_path")
-batch_date = dbutils.widgets.get("batch_date")
+source_path = _get_arg("source_path", "Files/data/")
+batch_date  = _get_arg("batch_date", "2024-01-01")
 ```
 
 ### Error Handling

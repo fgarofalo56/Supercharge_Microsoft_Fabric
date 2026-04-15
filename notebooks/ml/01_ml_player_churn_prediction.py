@@ -18,9 +18,21 @@
 
 # COMMAND ----------
 
-import pandas as pd
-import numpy as np
 from datetime import datetime
+
+# MLflow
+import mlflow
+import mlflow.spark
+import numpy as np
+import pandas as pd
+from pyspark.ml import Pipeline
+from pyspark.ml.classification import GBTClassifier, RandomForestClassifier
+from pyspark.ml.evaluation import (
+    BinaryClassificationEvaluator,
+    MulticlassClassificationEvaluator,
+)
+from pyspark.ml.feature import StandardScaler, StringIndexer, VectorAssembler
+from pyspark.ml.tuning import CrossValidator, ParamGridBuilder
 
 # PySpark ML
 from pyspark.sql.functions import (
@@ -35,15 +47,6 @@ from pyspark.sql.functions import (
     transform,
     when,
 )
-from pyspark.ml.feature import VectorAssembler, StandardScaler, StringIndexer
-from pyspark.ml.classification import GBTClassifier, RandomForestClassifier
-from pyspark.ml.evaluation import BinaryClassificationEvaluator, MulticlassClassificationEvaluator
-from pyspark.ml import Pipeline
-from pyspark.ml.tuning import CrossValidator, ParamGridBuilder
-
-# MLflow
-import mlflow
-import mlflow.spark
 
 # Source table
 source_table = "lh_gold.gold_player_360"
@@ -418,7 +421,8 @@ scored_players.write \
     .mode("overwrite") \
     .saveAsTable("lh_gold.ml_player_churn_scores")
 
-print(f"Scored {scored_players.count():,} players")
+_scored_count = spark.table("lh_gold.ml_player_churn_scores").count()
+print(f"Scored {_scored_count:,} players")
 
 # COMMAND ----------
 

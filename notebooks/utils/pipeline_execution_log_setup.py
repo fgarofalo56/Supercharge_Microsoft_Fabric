@@ -211,14 +211,19 @@ print(f"  - {CATALOG}.v_pipeline_freshness    (view)")
 # COMMAND ----------
 
 import uuid
-from datetime import datetime, timezone
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
 from typing import Optional
 
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, current_timestamp, lit
 from pyspark.sql.types import (
-    DoubleType, LongType, StringType, StructField, StructType, TimestampType,
+    DoubleType,
+    LongType,
+    StringType,
+    StructField,
+    StructType,
+    TimestampType,
 )
 
 
@@ -276,7 +281,7 @@ def start_execution_log(
     source_table: str,
     target_table: str,
     batch_id: str = "",
-    pipeline_run_id: Optional[str] = None,
+    pipeline_run_id: str | None = None,
     environment: str = "dev",
 ) -> ExecutionContext:
     """Record the start of a notebook execution.
@@ -333,14 +338,14 @@ def start_execution_log(
 def complete_execution_log(
     ctx: ExecutionContext,
     status: str = "SUCCESS",
-    rows_read: Optional[int] = None,
-    rows_written: Optional[int] = None,
-    rows_rejected: Optional[int] = None,
-    dq_score_avg: Optional[float] = None,
-    dq_score_min: Optional[float] = None,
-    dq_pass_rate: Optional[float] = None,
-    error_message: Optional[str] = None,
-    error_type: Optional[str] = None,
+    rows_read: int | None = None,
+    rows_written: int | None = None,
+    rows_rejected: int | None = None,
+    dq_score_avg: float | None = None,
+    dq_score_min: float | None = None,
+    dq_pass_rate: float | None = None,
+    error_message: str | None = None,
+    error_type: str | None = None,
 ) -> None:
     """Record the completion (success or failure) of a notebook execution.
 

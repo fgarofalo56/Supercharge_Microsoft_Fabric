@@ -4,11 +4,13 @@
 skips:
   # B101: assert used (acceptable in generators for internal validation)
   - B101
-  # B311: random used for non-security purposes (data generation)
-  - B311
+  # B311 is NOT skipped globally; individual uses of random for synthetic data
+  # are annotated inline with # nosec B311 - synthetic data only
 
 exclude_dirs:
   - validation/unit_tests
+  - validation/integration_tests
+  - validation/deployment_tests
   - temp
   - .venv
   - __pycache__

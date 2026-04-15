@@ -1,6 +1,6 @@
 # Tutorial 01: Bronze Layer
 
-> **🏠 [Home](../../index.md)** > **📖 [Tutorials](../index.md)** > **🥉 Bronze Layer**
+> **🏠 [Home](../../README.md)** > **📖 [Tutorials](../README.md)** > **🥉 Bronze Layer**
 
 ---
 
@@ -922,7 +922,7 @@ Continue to **[Tutorial 02: Silver Layer](../02-silver-layer/README.md)** to lea
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [⬅️ 00-Environment Setup](../00-environment-setup/README.md) | [📖 Tutorials Index](../index.md) | [02-Silver Layer](../02-silver-layer/README.md) ➡️ |
+| [⬅️ 00-Environment Setup](../00-environment-setup/README.md) | [📖 Tutorials Index](../README.md) | [02-Silver Layer](../02-silver-layer/README.md) ➡️ |
 
 ---
 

@@ -515,7 +515,7 @@ def haversine_distance(lat1: float, lon1: float, lat2: float, lon2: float) -> fl
 def get_income_bracket(median_income: int, variation: float = 0.5) -> str:
     """Assign income bracket based on location's median income with variation."""
     # Add random variation
-    income = median_income * random.uniform(1 - variation, 1 + variation)
+    income = median_income * random.uniform(1 - variation, 1 + variation)  # nosec B311 - synthetic data only
 
     if income < 30000:
         return "Under $30K"
@@ -573,7 +573,7 @@ def calculate_ltv(
         freq_multiplier
         * income_multiplier
         * gaming_multiplier
-        * random.uniform(0.5, 2.0)
+        * random.uniform(0.5, 2.0)  # nosec B311 - synthetic data only
     )
     ltv = annual_value * years_active
 
@@ -619,11 +619,11 @@ def assign_player_segment(
     elif preferred_gaming == "Sports Betting":
         return "Sports Bettor"
     elif visit_frequency in ["Annually", "Occasional"]:
-        return random.choice(
+        return random.choice(  # nosec B311 - synthetic data only
             ["Special Occasion", "Entertainment Seeker", "Comp Chaser"]
         )
 
-    return random.choice(PLAYER_SEGMENTS)
+    return random.choice(PLAYER_SEGMENTS)  # nosec B311 - synthetic data only
 
 
 def generate_player_demographics(
@@ -651,11 +651,11 @@ def generate_player_demographics(
 
     for i in range(count):
         # Select home location
-        home_center = random.choice(weighted_centers)
+        home_center = random.choice(weighted_centers)  # nosec B311 - synthetic data only
 
         # Add randomness to home coordinates (within ~20 miles)
-        lat_offset = random.uniform(-0.3, 0.3)
-        lon_offset = random.uniform(-0.3, 0.3)
+        lat_offset = random.uniform(-0.3, 0.3)  # nosec B311 - synthetic data only
+        lon_offset = random.uniform(-0.3, 0.3)  # nosec B311 - synthetic data only
         home_lat = round(home_center["lat"] + lat_offset, 6)
         home_lon = round(home_center["lon"] + lon_offset, 6)
 
@@ -681,22 +681,22 @@ def generate_player_demographics(
         else:
             visit_weights = [0.01, 0.02, 0.07, 0.20, 0.35, 0.35]
 
-        visit_frequency = random.choices(VISIT_FREQUENCIES, weights=visit_weights)[0]
+        visit_frequency = random.choices(VISIT_FREQUENCIES, weights=visit_weights)[0]  # nosec B311 - synthetic data only
 
         # Demographics
-        age_group = random.choices(AGE_GROUPS, weights=AGE_WEIGHTS)[0]
-        gender = random.choices(GENDERS, weights=GENDER_WEIGHTS)[0]
+        age_group = random.choices(AGE_GROUPS, weights=AGE_WEIGHTS)[0]  # nosec B311 - synthetic data only
+        gender = random.choices(GENDERS, weights=GENDER_WEIGHTS)[0]  # nosec B311 - synthetic data only
         income_bracket = get_income_bracket(home_center["median_income"])
-        preferred_gaming = random.choice(PREFERRED_GAMING)
+        preferred_gaming = random.choice(PREFERRED_GAMING)  # nosec B311 - synthetic data only
 
         # Calculate years active (influenced by age)
         age_idx = AGE_GROUPS.index(age_group)
         min_years = max(1, age_idx)
         max_years = min(20, age_idx * 5 + 5)
-        years_active = random.randint(min_years, max_years)
+        years_active = random.randint(min_years, max_years)  # nosec B311 - synthetic data only
 
         active_since = datetime.now() - timedelta(
-            days=years_active * 365 + random.randint(0, 364)
+            days=years_active * 365 + random.randint(0, 364)  # nosec B311 - synthetic data only
         )
 
         # Calculate LTV and assign tier
@@ -726,7 +726,7 @@ def generate_player_demographics(
             "home_longitude": home_lon,
             "home_city": home_center["city"],
             "home_state": home_center["state"],
-            "home_zip": f"{home_center['zip_prefix']}{random.randint(10, 99)}",
+            "home_zip": f"{home_center['zip_prefix']}{random.randint(10, 99)}",  # nosec B311 - synthetic data only
             "distance_to_casino_miles": distance,
             "market_type": market_type,
             "age_group": age_group,
@@ -740,7 +740,7 @@ def generate_player_demographics(
             "years_active": years_active,
             "active_since": active_since.strftime("%Y-%m-%d"),
             "last_visit": (
-                datetime.now() - timedelta(days=random.randint(1, 365))
+                datetime.now() - timedelta(days=random.randint(1, 365))  # nosec B311 - synthetic data only
             ).strftime("%Y-%m-%d"),
             "total_visits_ytd": int(
                 {
@@ -751,7 +751,7 @@ def generate_player_demographics(
                     "Annually": 1,
                     "Occasional": 0,
                 }.get(visit_frequency, 1)
-                * random.uniform(0.5, 1.2)
+                * random.uniform(0.5, 1.2)  # nosec B311 - synthetic data only
             ),
             "avg_trip_worth": round(
                 ltv
@@ -771,12 +771,12 @@ def generate_player_demographics(
                 ),
                 2,
             ),
-            "has_hotel_booking": random.random() > (0.9 if distance < 50 else 0.3),
-            "has_show_tickets": random.random() > 0.7,
-            "has_dining_reservations": random.random() > 0.5,
-            "email_opt_in": random.random() > 0.3,
-            "sms_opt_in": random.random() > 0.5,
-            "direct_mail_opt_in": random.random() > 0.4,
+            "has_hotel_booking": random.random() > (0.9 if distance < 50 else 0.3),  # nosec B311 - synthetic data only
+            "has_show_tickets": random.random() > 0.7,  # nosec B311 - synthetic data only
+            "has_dining_reservations": random.random() > 0.5,  # nosec B311 - synthetic data only
+            "email_opt_in": random.random() > 0.3,  # nosec B311 - synthetic data only
+            "sms_opt_in": random.random() > 0.5,  # nosec B311 - synthetic data only
+            "direct_mail_opt_in": random.random() > 0.4,  # nosec B311 - synthetic data only
             "geo_point_wkt": f"POINT({home_lon} {home_lat})",
         }
 

@@ -556,9 +556,7 @@ def download_species_data(
     logger.info("Downloading FWS ECOS species data (status=%s)", status_filter)
 
     # ECOS species report in CSV format
-    url = f"{FWS_ECOS_BASE}/species-listings-by-current-listing-status"
 
-    all_records: list[dict[str, Any]] = []
 
     # ECOS provides a downloadable report; try multiple access patterns
     report_urls = [

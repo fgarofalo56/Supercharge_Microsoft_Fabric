@@ -24,8 +24,8 @@
 ## Step 1: Clone and Configure
 
 ```bash
-git clone https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric.git
-cd Supercharge_Microsoft_Fabric
+git clone https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric.git
+cd Suppercharge_Microsoft_Fabric
 ```
 
 Copy the environment template and fill in your values:
@@ -44,7 +44,7 @@ FABRIC_CAPACITY_SKU=F64
 PROJECT_PREFIX=casinopoc
 ```
 
-**Checkpoint:** You should be in the `Supercharge_Microsoft_Fabric/` directory with a populated `.env` file.
+**Checkpoint:** You should be in the `Suppercharge_Microsoft_Fabric/` directory with a populated `.env` file.
 
 ---
 
@@ -100,7 +100,7 @@ Choose **one** of the three paths below.
 ### Option A: Local Python
 
 ```bash
-# From the repo root (Supercharge_Microsoft_Fabric/)
+# From the repo root (Suppercharge_Microsoft_Fabric/)
 python -m venv .venv
 
 # Windows

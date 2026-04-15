@@ -14,11 +14,45 @@
 
 # COMMAND ----------
 
+# ---------------------------------------------------------------------------
+# Fabric/local compatibility shim
+# ---------------------------------------------------------------------------
+import os
+
+try:
+    import notebookutils  # Fabric runtime
+    def _get_arg(name, default=None):
+        try:
+            return notebookutils.notebook.getArgument(name, default)
+        except Exception:
+            return os.environ.get(name.upper(), default)
+    def _notebook_exit(status: str) -> None:
+        notebookutils.notebook.exit(status)
+except ImportError:
+    try:
+        import mssparkutils  # legacy Synapse/Fabric runtime
+        def _get_arg(name, default=None):
+            try:
+                return mssparkutils.notebook.getArgument(name, default)
+            except Exception:
+                return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            mssparkutils.notebook.exit(status)
+    except ImportError:
+        def _get_arg(name, default=None):
+            return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            raise SystemExit(status)
+
+
 # MAGIC %md
 # MAGIC ## Configuration
 
 # COMMAND ----------
 
+from datetime import datetime
+
+from delta.tables import DeltaTable
 from pyspark.sql.functions import (
     avg,
     coalesce,
@@ -47,11 +81,9 @@ from pyspark.sql.types import (
     StructType,
     TimestampType,
 )
-from delta.tables import DeltaTable
-from datetime import datetime
 
 # Parameters
-batch_id = dbutils.widgets.get("batch_id") if "batch_id" in [w.name for w in dbutils.widgets.getAll()] else datetime.now().strftime("%Y%m%d_%H%M%S")
+batch_id = _get_arg("batch_id", datetime.now().strftime("%Y%m%d_%H%M%S"))
 
 # Source tables
 player_table = "lh_silver.silver_player_master"
@@ -373,33 +405,33 @@ try:
         "player_id", "first_name", "last_name", "date_of_birth", "gender",
         "email", "phone", "city", "state",
         "loyalty_tier", "enrollment_date", "marketing_opt_in",
-    
+
         # Slot activity
         "slot_coin_in", "slot_coin_out", "slot_games_played",
         "slot_machines_played", "slot_visit_days", "slot_theo_win",
         "first_slot_play", "last_slot_play",
-    
+
         # Table activity
         "table_buy_in", "table_cash_out", "table_hours_played",
         "tables_played", "table_visit_days", "table_theo_win",
         "first_table_play", "last_table_play",
-    
+
         # Financial
         "total_transactions", "total_cash_in", "total_cash_out",
         "total_markers", "total_marker_payments", "ctr_transaction_count",
-    
+
         # Calculated metrics
         "total_gaming_activity", "total_theo_win", "total_visits",
         "first_visit", "last_visit", "days_since_visit", "account_age_days",
-    
+
         # Scoring
         "player_value_score", "churn_risk", "churn_risk_score",
         "player_segment", "vip_flag", "preferred_game_type",
-    
+
         # Metadata
         "_gold_timestamp", "_batch_id"
     ]
-    
+
     df_final = df_gold.select([col(c) for c in final_columns if c in df_gold.columns])
 
     # Write to Gold — incremental MERGE on player natural key
@@ -417,7 +449,7 @@ try:
             .option("overwriteSchema", "true") \
             .saveAsTable(target_table)
 
-    print(f"Merged {df_final.count():,} records into {target_table}")
+    print(f"Merged {spark.table(target_table).count():,} records into {target_table}")
 except Exception as e:
     print(f"ERROR in lh_gold.gold_player_360 (batch_id={batch_id}): {e}")
     raise

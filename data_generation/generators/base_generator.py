@@ -48,7 +48,7 @@ class BaseGenerator(ABC):
         if seed is not None and seed < 0:
             raise ValueError(f"seed must be non-negative, got {seed}")
 
-        self.seed = seed or 42
+        self.seed = 42 if seed is None else seed
         self.locale = locale
         self.start_date = start_date or datetime.now() - timedelta(days=30)
         self.end_date = end_date or datetime.now()
@@ -110,6 +110,15 @@ class BaseGenerator(ABC):
             records.append(self.generate_record())
 
         return pd.DataFrame(records)
+
+    def generate_batch(self, num_records: int) -> list[dict[str, Any]]:
+        """Generate ``num_records`` and return them as a list of dicts.
+
+        Kept for backward compatibility with integration tests that iterate
+        records as Python mappings rather than as a DataFrame. For DataFrame
+        output use ``generate(num_records)``.
+        """
+        return [self.generate_record() for _ in range(num_records)]
 
     def generate_batches(
         self,
@@ -237,12 +246,33 @@ class BaseGenerator(ABC):
         return start + timedelta(seconds=random_seconds)
 
     def generate_uuid(self) -> str:
-        """Generate a UUID."""
-        return str(uuid.uuid4())
+        """Generate a UUID seeded by ``self.rng`` so output is reproducible."""
+        return str(uuid.UUID(bytes=bytes(self.rng.integers(0, 256, size=16, dtype="uint8")), version=4))
 
-    def hash_value(self, value: str, salt: str = "") -> str:
-        """Generate SHA-256 hash of a value."""
-        return hashlib.sha256(f"{salt}{value}".encode()).hexdigest()
+    def hash_value(self, value: str, salt: str | None = None) -> str:
+        """HMAC-SHA-256 hash of a value using a required salt.
+
+        The ``salt`` argument is mandatory when hashing PII (SSN, name, etc.).
+        If omitted, the salt is read from the ``FABRIC_POC_HASH_SALT``
+        environment variable. Calling this helper without any salt source
+        raises ``ValueError`` -- hashing PII with an empty salt produces a
+        reversible rainbow-table-vulnerable hash.
+        """
+        import hmac
+        import os
+
+        effective_salt = salt if salt is not None else os.environ.get("FABRIC_POC_HASH_SALT")
+        if not effective_salt:
+            raise ValueError(
+                "hash_value requires a non-empty salt. Either pass salt=... or "
+                "set the FABRIC_POC_HASH_SALT environment variable. This check "
+                "exists to prevent rainbow-table-vulnerable PII hashing."
+            )
+        return hmac.new(
+            effective_salt.encode("utf-8"),
+            value.encode("utf-8"),
+            hashlib.sha256,
+        ).hexdigest()
 
     def mask_ssn(self, ssn: str | None) -> str:
         """Mask SSN showing only last 4 digits.
@@ -286,3 +316,25 @@ class BaseGenerator(ABC):
         record["_source"] = self.__class__.__name__
         record["_batch_id"] = self.generate_uuid()[:8]
         return record
+
+    # ==========================================================================
+    # Synthetic-PII helpers
+    # ==========================================================================
+
+    def synthetic_ssn(self) -> str:
+        """Generate a 900-series synthetic SSN.
+
+        Real SSNs never start with the 900 series (the SSA reserves 900-999 for
+        Individual Taxpayer Identification Numbers / test values). Generators
+        that previously used ``self.faker.ssn()`` produced realistic formats
+        indistinguishable from real SSNs; this helper guarantees the output is
+        obviously synthetic.
+        """
+        area = int(self.rng.integers(900, 1000))
+        group = int(self.rng.integers(70, 100))
+        serial = int(self.rng.integers(0, 10000))
+        return f"{area:03d}-{group:02d}-{serial:04d}"
+
+    def synthetic_card_number(self) -> str:
+        """Return a PCI-DSS safe test card number (Visa test PAN range)."""
+        return f"4111-1111-1111-{int(self.rng.integers(0, 10000)):04d}"

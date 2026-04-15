@@ -25,13 +25,25 @@
 
 # COMMAND ----------
 
+from datetime import datetime
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import (
-    current_timestamp, lit, input_file_name,
-    col, to_timestamp, when
+    col,
+    current_timestamp,
+    input_file_name,
+    lit,
+    to_timestamp,
+    when,
 )
-from pyspark.sql.types import DoubleType, IntegerType, LongType, StringType, StructField, StructType
-from datetime import datetime
+from pyspark.sql.types import (
+    DoubleType,
+    IntegerType,
+    LongType,
+    StringType,
+    StructField,
+    StructType,
+)
 
 # Source paths - data generator parquet output (primary)
 SOURCE_PATHS = {
@@ -400,7 +412,7 @@ df_quake_bronze.write \
     .partitionBy("_bronze_load_date") \
     .saveAsTable(TARGET_TABLES["earthquakes"])
 
-quake_final_count = df_quake_bronze.count()
+quake_final_count = spark.table(TARGET_TABLES["earthquakes"]).count()
 print(f"Successfully wrote {quake_final_count:,} records to {TARGET_TABLES['earthquakes']}")
 
 # COMMAND ----------
@@ -594,7 +606,10 @@ display(
 
 # COMMAND ----------
 
-from pyspark.sql.functions import min as spark_min, max as spark_max, avg as spark_avg, count as spark_count
+from pyspark.sql.functions import avg as spark_avg
+from pyspark.sql.functions import count as spark_count
+from pyspark.sql.functions import max as spark_max
+from pyspark.sql.functions import min as spark_min
 
 # Geospatial coverage statistics for earthquakes
 quake_geo_stats = df_quake_verify.select(

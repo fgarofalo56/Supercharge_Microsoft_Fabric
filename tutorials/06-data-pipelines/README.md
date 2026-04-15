@@ -1,6 +1,6 @@
 # 🔧 Tutorial 06: Data Pipelines
 
-> **🏠 [Home](../../index.md)** > **📖 [Tutorials](../index.md)** > **🔧 Data Pipelines**
+> **🏠 [Home](../../README.md)** > **📖 [Tutorials](../README.md)** > **🔧 Data Pipelines**
 
 ---
 
@@ -930,7 +930,7 @@ Continue to **[Tutorial 07: Governance & Purview](../07-governance-purview/READM
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [⬅️ 05-Direct Lake & Power BI](../05-direct-lake-powerbi/README.md) | [📖 Tutorials Index](../index.md) | [07-Governance & Purview](../07-governance-purview/README.md) ➡️ |
+| [⬅️ 05-Direct Lake & Power BI](../05-direct-lake-powerbi/README.md) | [📖 Tutorials Index](../README.md) | [07-Governance & Purview](../07-governance-purview/README.md) ➡️ |
 
 ---
 

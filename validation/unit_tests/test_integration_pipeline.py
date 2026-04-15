@@ -34,14 +34,14 @@ import pytest
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT / "data_generation"))
 
-from generators.slot_machine_generator import SlotMachineGenerator
-from generators.federal.usda_generator import USDAGenerator
-from generators.federal.sba_generator import SBAGenerator
-from generators.federal.noaa_generator import NOAAGenerator
-from generators.federal.epa_generator import EPAGenerator
 from generators.federal.doi_generator import DOIGenerator
-from generators.federal.tribal_healthcare_generator import TribalHealthcareGenerator
 from generators.federal.dot_faa_generator import DOTFAAGenerator
+from generators.federal.epa_generator import EPAGenerator
+from generators.federal.noaa_generator import NOAAGenerator
+from generators.federal.sba_generator import SBAGenerator
+from generators.federal.tribal_healthcare_generator import TribalHealthcareGenerator
+from generators.federal.usda_generator import USDAGenerator
+from generators.slot_machine_generator import SlotMachineGenerator
 
 # ---------------------------------------------------------------------------
 # Shared constants
@@ -164,9 +164,12 @@ class TestCasinoIntegrationPipeline:
             null_count = df[col].isnull().sum()
             assert null_count == 0, f"Bronze column '{col}' has {null_count} nulls"
 
-        # Validate data types
+        # Validate data types (pandas 2.x may return StringDtype for inferred
+        # string columns; accept either object or any string-like dtype).
+        import pandas as _pd
         assert df["denomination"].dtype in (np.float64, float, object)
-        assert df["event_id"].dtype == object  # string
+        event_id_dtype = df["event_id"].dtype
+        assert event_id_dtype == object or _pd.api.types.is_string_dtype(event_id_dtype)
         assert len(df) == SAMPLE_SIZE
 
         # Validate event_type is from allowed set
@@ -199,7 +202,7 @@ class TestCasinoIntegrationPipeline:
         assert silver["_dq_score"].min() > 0.0, "Every Silver record has at least some fields"
 
         # Validate denomination > 0
-        denom_valid, denom_invalid = _silver_validate_range(silver, "denomination", 0.001, 1000.0)
+        denom_valid, _denom_invalid = _silver_validate_range(silver, "denomination", 0.001, 1000.0)
         assert len(denom_valid) == len(silver), "All denominations should be positive"
 
     def test_silver_to_gold_aggregations(self):
@@ -296,7 +299,7 @@ class TestUSDAIntegrationPipeline:
         assert len(silver) + len(dupes) == len(bronze)
 
         # Validate value > 0 (crop stats should be positive)
-        value_valid, value_invalid = _silver_validate_range(silver, "value", 0.0, float("inf"))
+        value_valid, _value_invalid = _silver_validate_range(silver, "value", 0.0, float("inf"))
         assert len(value_valid) == len(silver), "All crop production values should be >= 0"
 
         # Compute DQ score
@@ -394,7 +397,7 @@ class TestSBAIntegrationPipeline:
         assert len(silver) + len(dupes) == len(bronze)
 
         # Validate loan_amount range ($20K minimum for PPP)
-        valid, invalid = _silver_validate_range(silver, "loan_amount", 0.01, 10_000_001.0)
+        valid, _invalid = _silver_validate_range(silver, "loan_amount", 0.01, 10_000_001.0)
         assert len(valid) == len(silver), "All loan amounts should be within range"
 
         # Validate term_months is reasonable
@@ -612,7 +615,7 @@ class TestEPAIntegrationPipeline:
         assert len(silver) + len(dupes) == len(bronze)
 
         # Validate concentration >= 0
-        conc_valid, conc_invalid = _silver_validate_range(silver, "concentration", 0.0, float("inf"))
+        conc_valid, _conc_invalid = _silver_validate_range(silver, "concentration", 0.0, float("inf"))
         assert len(conc_valid) == len(silver), "All concentrations should be non-negative"
 
         # Validate AQI category matches AQI value
@@ -731,11 +734,11 @@ class TestDOIIntegrationPipeline:
         assert len(silver) + len(dupes) == len(bronze)
 
         # Validate magnitude range
-        mag_valid, mag_invalid = _silver_validate_range(silver, "magnitude", 0.0, 10.0)
+        mag_valid, _mag_invalid = _silver_validate_range(silver, "magnitude", 0.0, 10.0)
         assert len(mag_valid) == len(silver), "All magnitudes should be 0-10"
 
         # Validate depth range
-        depth_valid, depth_invalid = _silver_validate_range(silver, "depth_km", 0.0, 800.0)
+        depth_valid, _depth_invalid = _silver_validate_range(silver, "depth_km", 0.0, 800.0)
         assert len(depth_valid) == len(silver), "All depths should be 0-800 km"
 
         # Validate significance is within 0-1000
@@ -823,8 +826,8 @@ class TestTribalHealthIntegrationPipeline:
         assert len(df) == SAMPLE_SIZE
 
         # Validate HIPAA compliance flags
-        assert (df["hipaa_consent"] == True).all(), "All records must have HIPAA consent"  # noqa: E712
-        assert (df["phi_masked"] == True).all(), "All records must have PHI masked"  # noqa: E712
+        assert (df["hipaa_consent"] == True).all(), "All records must have HIPAA consent"
+        assert (df["phi_masked"] == True).all(), "All records must have PHI masked"
 
         # Validate encounter_type from known set
         valid_encounter_types = {
@@ -986,7 +989,7 @@ class TestDotFaaIntegrationPipeline:
         assert len(silver) + len(dupes) == len(bronze)
 
         # Validate delay_minutes: non-negative for non-cancelled flights
-        non_cancelled = silver[silver["cancelled"] == False]  # noqa: E712
+        non_cancelled = silver[silver["cancelled"] == False]
         if len(non_cancelled) > 0:
             delays = pd.to_numeric(non_cancelled["delay_minutes"], errors="coerce")
             valid_delays = delays.dropna()
@@ -1026,7 +1029,7 @@ class TestDotFaaIntegrationPipeline:
 
         # Gold KPI: average delay per carrier
         # Filter to non-cancelled with valid delay
-        non_cancelled = silver[silver["cancelled"] == False].copy()  # noqa: E712
+        non_cancelled = silver[silver["cancelled"] == False].copy()
         non_cancelled["delay_minutes"] = pd.to_numeric(
             non_cancelled["delay_minutes"], errors="coerce"
         )

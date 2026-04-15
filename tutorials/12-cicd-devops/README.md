@@ -8,7 +8,7 @@
 
 </div>
 
-> 🏠 **[Home](../../index.md)** > 📖 **[Tutorials](../index.md)** > 🔄 **CI/CD & DevOps**
+> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > 🔄 **CI/CD & DevOps**
 
 ---
 
@@ -1459,4 +1459,4 @@ This tutorial includes the following deployment scripts:
 
 | ⬅️ Previous | ⬆️ Up | ➡️ Next |
 |------------|------|--------|
-| [11-SAS Connectivity](../11-sas-connectivity/README.md) | [Tutorials Index](../index.md) | [13-Migration Planning](../13-migration-planning/README.md) |
+| [11-SAS Connectivity](../11-sas-connectivity/README.md) | [Tutorials Index](../README.md) | [13-Migration Planning](../13-migration-planning/README.md) |

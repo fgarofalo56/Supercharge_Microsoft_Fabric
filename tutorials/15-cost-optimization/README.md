@@ -8,7 +8,7 @@
 
 </div>
 
-> **[Home](../../index.md)** > **[Tutorials](../index.md)** > **Cost Management & Capacity Optimization**
+> **[Home](../../README.md)** > **[Tutorials](../README.md)** > **Cost Management & Capacity Optimization**
 
 ---
 
@@ -162,21 +162,21 @@
 </tr>
 <tr>
 <td align="center">17</td>
-<td><a href="../17-disaster-recovery/README.md">Disaster Recovery</a></td>
+<td><a href="../17-monitoring-alerting/README.md">Monitoring & Alerting</a></td>
 <td align="center"><img src="https://img.shields.io/badge/-TODO-lightgrey?style=flat-square" alt="Todo"></td>
 <td align="center">60-90 min</td>
 <td align="center">Advanced</td>
 </tr>
 <tr>
 <td align="center">18</td>
-<td><a href="../18-monitoring/README.md">Monitoring & Alerting</a></td>
+<td><a href="../18-data-sharing/README.md">Data Sharing</a></td>
 <td align="center"><img src="https://img.shields.io/badge/-TODO-lightgrey?style=flat-square" alt="Todo"></td>
 <td align="center">60-90 min</td>
 <td align="center">Intermediate</td>
 </tr>
 <tr>
 <td align="center">19</td>
-<td><a href="../19-advanced-scenarios/README.md">Advanced Scenarios</a></td>
+<td><a href="../19-copilot-ai/README.md">Copilot & AI</a></td>
 <td align="center"><img src="https://img.shields.io/badge/-TODO-lightgrey?style=flat-square" alt="Todo"></td>
 <td align="center">120-180 min</td>
 <td align="center">Advanced</td>
@@ -1563,7 +1563,7 @@ Continue to **[Tutorial 16: Performance Tuning](../16-performance-tuning/README.
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [⬅️ 14-Security & Networking](../14-security-networking/README.md) | [📖 Tutorials Index](../index.md) | [16-Performance Tuning](../16-performance-tuning/README.md) ➡️ |
+| [⬅️ 14-Security & Networking](../14-security-networking/README.md) | [📖 Tutorials Index](../README.md) | [16-Performance Tuning](../16-performance-tuning/README.md) ➡️ |
 
 ---
 

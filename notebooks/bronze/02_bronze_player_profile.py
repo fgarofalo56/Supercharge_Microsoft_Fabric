@@ -23,22 +23,62 @@
 
 # COMMAND ----------
 
+# ---------------------------------------------------------------------------
+# Fabric/local compatibility shim
+# ---------------------------------------------------------------------------
+import os
+
+try:
+    import notebookutils  # Fabric runtime
+    def _get_arg(name, default=None):
+        try:
+            return notebookutils.notebook.getArgument(name, default)
+        except Exception:
+            return os.environ.get(name.upper(), default)
+    def _notebook_exit(status: str) -> None:
+        notebookutils.notebook.exit(status)
+except ImportError:
+    try:
+        import mssparkutils  # legacy Synapse/Fabric runtime
+        def _get_arg(name, default=None):
+            try:
+                return mssparkutils.notebook.getArgument(name, default)
+            except Exception:
+                return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            mssparkutils.notebook.exit(status)
+    except ImportError:
+        def _get_arg(name, default=None):
+            return os.environ.get(name.upper(), default)
+        def _notebook_exit(status: str) -> None:
+            raise SystemExit(status)
+
+
 # MAGIC %md
 # MAGIC ## Configuration
 
 # COMMAND ----------
 
+from datetime import datetime
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import (
-    current_timestamp, lit, input_file_name,
-    col, to_date, when, sha2, coalesce, length, regexp_extract
+    coalesce,
+    col,
+    current_timestamp,
+    input_file_name,
+    length,
+    lit,
+    regexp_extract,
+    sha2,
+    to_date,
+    when,
 )
 from pyspark.sql.types import BooleanType, StringType, StructField, StructType
-from datetime import datetime
 
 # Configuration
 SOURCE_PATH = "Files/output/bronze_player_profile.parquet"
-TARGET_TABLE = "bronze_player_profile"
+TARGET_TABLE = "lh_bronze.bronze_player_profile"
 SCHEMA_VERSION = "1.0"
 BATCH_ID = datetime.now().strftime("%Y%m%d_%H%M%S")
 
@@ -109,9 +149,9 @@ try:
 
 except Exception as e:
     print(f"ERROR: Failed to read source data from {SOURCE_PATH}")
-    print(f"  Exception: {str(e)}")
+    print(f"  Exception: {e!s}")
     print(f"  Verify the source file exists and is accessible.")
-    dbutils.notebook.exit(f"FAILED: Source read error - {str(e)}")
+    _notebook_exit(f"FAILED: Source read error - {e!s}")
 
 # COMMAND ----------
 
@@ -281,7 +321,7 @@ df_bronze.write \
     .option("overwriteSchema", "true") \
     .saveAsTable(TARGET_TABLE)
 
-print(f"Successfully wrote {df_bronze.count():,} records to {TARGET_TABLE}")
+print(f"Successfully wrote {spark.table(TARGET_TABLE).count():,} records to {TARGET_TABLE}")
 
 # COMMAND ----------
 
