@@ -254,7 +254,7 @@ if (-not (Test-Path $mainBicep)) {
 }
 
 # Resource group name
-$resourceGroupName = "$($envVars['PROJECT_PREFIX'])-$Environment-rg"
+$resourceGroupName = "rg-$($envVars['PROJECT_PREFIX'])-$Environment"
 Write-Info "Resource Group: $resourceGroupName"
 
 # =============================================================================
@@ -315,7 +315,7 @@ Write-Host ""
 # Build deployment command
 $deployArgs = @(
     "deployment", "sub", "create",
-    "--resource-group", $resourceGroupName,
+    "--location", $Location,
     "--template-file", $mainBicep,
     "--parameters", $bicepParams,
     "--parameters", "environment=$Environment",

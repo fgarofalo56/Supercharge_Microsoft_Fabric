@@ -105,3 +105,7 @@ exclude_lines = [
     "if TYPE_CHECKING:",
     "pass",
 ]
+
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"

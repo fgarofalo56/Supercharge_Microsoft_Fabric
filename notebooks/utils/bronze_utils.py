@@ -18,6 +18,7 @@
 
 from __future__ import annotations
 
+import re
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -59,18 +60,26 @@ def write_bronze_append(
 # COMMAND ----------
 
 
+def _validate_identifier(name: str) -> str:
+    """Validate a SQL identifier to prevent injection."""
+    if not re.match(r'^[a-zA-Z_][a-zA-Z0-9_.]*$', name):
+        raise ValueError(f"Invalid SQL identifier: {name}")
+    return name
+
+
 def optimize_bronze(
     spark: SparkSession,
     table_name: str,
     zorder_cols: list[str] | None = None,
     vacuum_retention_hours: int = 168,
 ) -> None:
+    safe_table = _validate_identifier(table_name)
     if zorder_cols:
-        cols = ", ".join(zorder_cols)
-        spark.sql(f"OPTIMIZE {table_name} ZORDER BY ({cols})")
+        safe_cols = ", ".join(_validate_identifier(c) for c in zorder_cols)
+        spark.sql(f"OPTIMIZE {safe_table} ZORDER BY ({safe_cols})")
     else:
-        spark.sql(f"OPTIMIZE {table_name}")
-    spark.sql(f"VACUUM {table_name} RETAIN {vacuum_retention_hours} HOURS")
+        spark.sql(f"OPTIMIZE {safe_table}")
+    spark.sql(f"VACUUM {safe_table} RETAIN {vacuum_retention_hours} HOURS")
 
 
 # COMMAND ----------

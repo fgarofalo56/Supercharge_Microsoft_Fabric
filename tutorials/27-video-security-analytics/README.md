@@ -1412,7 +1412,6 @@ Continue your learning journey:
 | [`data_generation/schemas/analytics/video_event_schema.json`](../../data_generation/schemas/analytics/video_event_schema.json) | Video event JSON schema definition |
 | [`data_generation/generators/analytics/video_analytics_generator.py`](../../data_generation/generators/analytics/video_analytics_generator.py) | Synthetic video event generator |
 | [`validation/unit_tests/analytics/test_video_analytics_generator.py`](../../validation/unit_tests/analytics/test_video_analytics_generator.py) | Unit tests for video generator |
-| [`future-expansions/video-security-geospatial-iot-research.md`](../../future-expansions/video-security-geospatial-iot-research.md) | Research notes and dataset references |
 
 **External Documentation:**
 

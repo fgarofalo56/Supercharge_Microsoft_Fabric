@@ -123,13 +123,13 @@
         },
 
         // Black formatter
-        "black-formatter.args": ["--line-length", "100"],
+        "black-formatter.args": ["--line-length", "88"],
 
         // isort
-        "isort.args": ["--profile", "black", "--line-length", "100"],
+        "isort.args": ["--profile", "black", "--line-length", "88"],
 
         // Ruff linter
-        "ruff.lint.args": ["--line-length=100"],
+        "ruff.lint.args": ["--line-length=88"],
 
         // Testing
         "python.testing.pytestEnabled": true,
@@ -149,7 +149,7 @@
         },
 
         // Editor settings
-        "editor.rulers": [100],
+        "editor.rulers": [88],
         "editor.tabSize": 4,
         "editor.insertSpaces": true,
         "editor.trimAutoWhitespace": true,

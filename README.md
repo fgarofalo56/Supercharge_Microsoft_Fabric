@@ -12,8 +12,8 @@
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Dev Container](https://img.shields.io/badge/Dev%20Container-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)
 ![Tutorials](https://img.shields.io/badge/Tutorials-37-blue?style=for-the-badge)
-![Tests](https://img.shields.io/badge/Tests-616_Passing-brightgreen?style=for-the-badge)
-![Phase](https://img.shields.io/badge/Phase_10-Complete-brightgreen?style=for-the-badge)
+![Tests](https://img.shields.io/badge/Tests-612_Passing-brightgreen?style=for-the-badge)
+![Phase](https://img.shields.io/badge/Phase_11-Complete-brightgreen?style=for-the-badge)
 
 **Transform your casino operations with enterprise-grade analytics powered by Microsoft Fabric**
 

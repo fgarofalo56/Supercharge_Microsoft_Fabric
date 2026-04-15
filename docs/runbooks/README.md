@@ -204,7 +204,7 @@ This directory contains operational runbooks for the Casino Analytics platform. 
 
    for date in affected_dates:
        # Re-run Silver transformation
-       dbutils.notebook.run("01_silver_slot_cleansing",
+       mssparkutils.notebook.run("01_silver_slot_cleansing",
                            timeout_seconds=3600,
                            arguments={"process_date": date})
    ```

@@ -56,8 +56,8 @@ CSV_FALLBACK_PATHS = {
 
 # Target Delta tables
 TARGET_TABLES = {
-    "crop_production": "bronze_usda_crop_production",
-    "food_safety": "bronze_usda_food_safety",
+    "crop_production": "lh_bronze.bronze_usda_crop_production",
+    "food_safety": "lh_bronze.bronze_usda_food_safety",
 }
 
 BATCH_ID = datetime.now().strftime("%Y%m%d_%H%M%S")

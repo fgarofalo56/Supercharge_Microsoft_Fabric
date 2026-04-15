@@ -75,6 +75,9 @@ param keyVaultId string = ''
 @description('Tags to apply to resources')
 param tags object = {}
 
+@description('Disable local (key-based) authentication, enforcing AAD-only. Default: true for security.')
+param disableLocalAuth bool = true
+
 // =============================================================================
 // Variables
 // =============================================================================
@@ -110,7 +113,7 @@ resource eventHubNamespace 'Microsoft.EventHub/namespaces@2024-01-01' = {
     publicNetworkAccess: enablePrivateEndpoint ? 'Disabled' : 'Enabled'
     minimumTlsVersion: '1.2'
     zoneRedundant: true
-    disableLocalAuth: true
+    disableLocalAuth: disableLocalAuth
   }
 }
 

@@ -120,7 +120,7 @@ pip install -r requirements-dev.txt
 pytest validation/unit_tests/ -v
 
 # Check code formatting
-black --check .
+ruff format --check .
 
 # Run linter
 ruff check .
@@ -271,7 +271,6 @@ Suppercharge_Microsoft_Fabric/
 |-- data_generation/           # Sample data generators
 |-- notebooks/                 # Fabric-importable notebooks
 |-- validation/                # Tests & data quality
-+-- future-expansions/         # Industry expansion plans
 ```
 
 ---

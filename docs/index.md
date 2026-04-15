@@ -107,7 +107,7 @@ az deployment sub create \
 |:--------|:------------|
 | [📖 Getting Started](PREREQUISITES.md) | Prerequisites, setup, and configuration |
 | [🏗️ Architecture](ARCHITECTURE.md) | System design and component overview |
-| [📚 Tutorials](tutorials/README.md) | 24 hands-on learning modules |
+| [📚 Tutorials](tutorials/README.md) | 37 hands-on learning modules |
 | [📅 POC Agenda](poc-agenda/README.md) | 3-day workshop materials |
 | [📊 Reference](GLOSSARY.md) | FAQ, glossary, and standards |
 | [🛠️ Infrastructure](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/infra) | Bicep IaC modules |
@@ -155,8 +155,6 @@ az deployment sub create \
 |:---------|:------------|
 | [📓 Notebooks](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/notebooks) | Ready-to-import Fabric notebooks (Bronze, Silver, Gold, ML) |
 | [📊 Power BI Assets](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/powerbi) | DAX measures and TMDL semantic models |
-| [🔌 SDK Examples](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/sdk-examples) | Fabric REST API and Semantic Link code samples |
-| [⚡ Benchmarks](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/benchmarks) | Performance baselines and load testing scripts |
 
 ---
 
@@ -211,7 +209,7 @@ This POC addresses key gaming industry regulations:
 
 | Framework | Coverage |
 |:----------|:---------|
-| **NIGC MICS** | Minimal Internal Control Standards |
+| **NIGC MICS** | Minimum Internal Control Standards |
 | **Title 31/BSA** | Anti-money laundering, CTR/SAR |
 | **IRS Gaming** | W-2G, 1042-S reporting |
 | **State Gaming Commissions** | Jurisdiction-specific requirements |
@@ -255,10 +253,13 @@ This POC addresses key gaming industry regulations:
 
 | Component | Monthly Cost (F64) |
 |:----------|-------------------:|
-| Fabric Capacity (F64) | ~$5,700 |
-| Azure Storage | ~$200 |
-| Purview | ~$500 |
-| **Total Estimate** | **~$6,400/month** |
+| Fabric Capacity (F64) | ~$8,500 |
+| ADLS Gen2 Storage | ~$500 |
+| Microsoft Purview | ~$800 |
+| Log Analytics | ~$300 |
+| Key Vault | ~$10 |
+| Networking | ~$200 |
+| **Total Estimate** | **~$10,310/month** |
 
 [💰 Detailed Cost Analysis](COST_ESTIMATION.md){ .md-button }
 

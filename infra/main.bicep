@@ -130,17 +130,17 @@ var complianceRetentionFloor = complianceFramework == 'HIPAA' ? 2190
   : 30
 
 var complianceForcesPrivateEndpoints = contains(
-  ['HIPAA', 'FedRAMP', 'FISMA', '42CFR-Part2', 'PCI-DSS'],
+  ['HIPAA', 'FedRAMP', 'FISMA', '42CFR-Part2', 'PCI-DSS', 'NIGC-MICS', 'CIPSEA'],
   complianceFramework
 )
 
 var complianceRequiresFipsKeyVault = contains(
-  ['FedRAMP', 'FISMA', 'PCI-DSS'],
+  ['FedRAMP', 'FISMA', 'PCI-DSS', 'NIGC-MICS', 'CIPSEA'],
   complianceFramework
 )
 
 var complianceRequiresCmk = contains(
-  ['HIPAA', 'FedRAMP', 'FISMA', '42CFR-Part2', 'PCI-DSS'],
+  ['HIPAA', 'FedRAMP', 'FISMA', '42CFR-Part2', 'PCI-DSS', 'NIGC-MICS', 'CIPSEA'],
   complianceFramework
 )
 

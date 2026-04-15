@@ -167,12 +167,12 @@ jobs:
 
       - name: Verify resource group exists
         run: |
-          RG="rg-fabric-poc-${{ env.ENVIRONMENT }}"
+          RG="rg-fabricpoc-${{ env.ENVIRONMENT }}"
           az group show --name "$RG" --query "provisioningState" -o tsv | grep -q Succeeded
 
       - name: Verify Fabric capacity exists and is active
         run: |
-          RG="rg-fabric-poc-${{ env.ENVIRONMENT }}"
+          RG="rg-fabricpoc-${{ env.ENVIRONMENT }}"
           STATE=$(az fabric capacity list --resource-group "$RG" --query "[0].properties.state" -o tsv)
           if [ "$STATE" != "Active" ]; then
             echo "::error::Fabric capacity not Active (state=$STATE)"
@@ -181,7 +181,7 @@ jobs:
 
       - name: Verify Key Vault reachable
         run: |
-          RG="rg-fabric-poc-${{ env.ENVIRONMENT }}"
+          RG="rg-fabricpoc-${{ env.ENVIRONMENT }}"
           KV=$(az keyvault list --resource-group "$RG" --query "[0].name" -o tsv)
           az keyvault show --name "$KV" --query "properties.provisioningState" -o tsv | grep -q Succeeded
 

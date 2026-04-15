@@ -65,7 +65,7 @@ ENVIRONMENT_PARAMS = {
 # Deployment Functions
 # =============================================================================
 
-def create_workspace_client(workspace_id: str) -> FabricWorkspace:
+def create_workspace_client(workspace_id: str, item_types: list[str]) -> FabricWorkspace:
     """Create an authenticated FabricWorkspace client using DefaultAzureCredential."""
     credential = DefaultAzureCredential()
 
@@ -75,7 +75,7 @@ def create_workspace_client(workspace_id: str) -> FabricWorkspace:
     workspace = FabricWorkspace(
         workspace_id=workspace_id,
         repository_directory=str(repo_root),
-        item_type_in_scope=["Notebook", "Lakehouse", "SemanticModel", "Pipeline"],
+        item_type_in_scope=item_types,
         credential=credential,
     )
 
@@ -103,11 +103,11 @@ def deploy(
 
     # Create authenticated workspace client
     print("Authenticating with Azure...")
-    workspace = create_workspace_client(workspace_id)
+    workspace = create_workspace_client(workspace_id, item_types)
     print(f"  Connected to workspace: {workspace_id}")
 
     # Get environment-specific parameters
-    ENVIRONMENT_PARAMS.get(environment, {})
+    env_config = ENVIRONMENT_PARAMS.get(environment, {})
     print(f"  Environment config: {environment}")
 
     if dry_run:

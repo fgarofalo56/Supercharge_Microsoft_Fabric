@@ -98,7 +98,7 @@ See the [3-Day POC Agenda](poc-agenda/README.md) for detailed schedules.
 | 🛒 Retail/E-commerce | Customer 360, supply chain optimization |
 | 🏦 Financial Services | Transaction monitoring, fraud detection |
 
-See [Future Expansions](../future-expansions/) for vertical-specific examples.
+See the tutorial modules (14–37) for vertical-specific examples.
 
 ---
 

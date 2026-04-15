@@ -133,6 +133,22 @@ resource keyVaultRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04
 }
 
 // =============================================================================
+// Key Vault Crypto User Role for Managed Identity (CMK wrap/unwrap)
+// =============================================================================
+
+var keyVaultCryptoUserRoleId = '12338af0-0e69-4776-bea7-57586841c05f'
+
+resource keyVaultCryptoRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(keyVault.id, managedIdentity.id, keyVaultCryptoUserRoleId)
+  scope: keyVault
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', keyVaultCryptoUserRoleId)
+    principalId: managedIdentity.properties.principalId
+    principalType: 'ServicePrincipal'
+  }
+}
+
+// =============================================================================
 // Diagnostic Settings
 // =============================================================================
 
@@ -204,4 +220,4 @@ output managedIdentityPrincipalId string = managedIdentity.properties.principalI
 output managedIdentityClientId string = managedIdentity.properties.clientId
 
 @description('Unversioned key URI for the storage CMK key (empty when not provisioned).')
-output storageCmkKeyUri string = provisionStorageCmkKey ? storageCmkKey.properties.keyUriWithVersion : ''
+output storageCmkKeyUri string = provisionStorageCmkKey ? storageCmkKey.properties.keyUri : ''

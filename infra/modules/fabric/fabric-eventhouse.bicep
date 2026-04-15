@@ -88,6 +88,9 @@ param managedIdentityPrincipalType string = 'ServicePrincipal'
 @description('Tags to apply to resources')
 param tags object = {}
 
+@description('Enable automatic cluster stop after inactivity. Disable for production workloads.')
+param enableAutoStop bool = false
+
 // =============================================================================
 // Variables
 // =============================================================================
@@ -119,7 +122,7 @@ resource adxCluster 'Microsoft.Kusto/clusters@2024-04-13' = {
   properties: {
     enableStreamingIngest: enableStreamingIngestion
     enablePurge: enablePurge
-    enableAutoStop: true
+    enableAutoStop: enableAutoStop
     enableDiskEncryption: true
     enableDoubleEncryption: enableDoubleEncryption
     publicNetworkAccess: enablePrivateEndpoint ? 'Disabled' : 'Enabled'

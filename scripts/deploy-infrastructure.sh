@@ -287,7 +287,7 @@ if [ ! -f "$MAIN_BICEP" ]; then
 fi
 
 # Resource group name
-RESOURCE_GROUP="${PROJECT_PREFIX}-${ENVIRONMENT}-rg"
+RESOURCE_GROUP="rg-${PROJECT_PREFIX}-${ENVIRONMENT}"
 write_info "Resource Group: $RESOURCE_GROUP"
 
 # =============================================================================
@@ -346,7 +346,7 @@ echo ""
 # Build deployment command
 DEPLOY_CMD=(
     az deployment sub create
-    --resource-group "$RESOURCE_GROUP"
+    --location "$LOCATION"
     --template-file "$MAIN_BICEP"
     --parameters "$BICEP_PARAMS"
     --parameters "environment=$ENVIRONMENT"

@@ -197,9 +197,8 @@ df_enriched = df_with_structuring \
 # Add reconciliation fields
 df_reconciled = df_enriched \
     .withColumn("reconciliation_status",
-        when(col("ctr_required") & ~col("ctr_required"), "PENDING_CTR")
-        .when(col("potential_structuring"), "PENDING_SAR_REVIEW")
-        .when(col("ctr_required"), "CTR_FILED")
+        when(col("potential_structuring"), "PENDING_SAR_REVIEW")
+        .when(col("ctr_required"), "PENDING_CTR")
         .otherwise("RECONCILED")) \
     .withColumn("requires_action",
         col("reconciliation_status").isin("PENDING_CTR", "PENDING_SAR_REVIEW"))
