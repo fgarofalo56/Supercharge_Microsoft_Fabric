@@ -1,5 +1,8 @@
 # 🔄 Tutorial 12: CI/CD and DevOps for Microsoft Fabric
 
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
 <div align="center">
 
 ![Difficulty](https://img.shields.io/badge/⭐_Difficulty-Advanced-red?style=for-the-badge)
@@ -1460,3 +1463,7 @@ This tutorial includes the following deployment scripts:
 | ⬅️ Previous | ⬆️ Up | ➡️ Next |
 |------------|------|--------|
 | [11-SAS Connectivity](../11-sas-connectivity/README.md) | [Tutorials Index](../README.md) | [13-Migration Planning](../13-migration-planning/README.md) |
+
+---
+
+[⬆️ Back to Top](#-tutorial-12-cicd-and-devops-for-microsoft-fabric) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)

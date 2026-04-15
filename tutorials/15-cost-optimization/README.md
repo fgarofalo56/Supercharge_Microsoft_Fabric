@@ -1,18 +1,42 @@
-# Tutorial 15: Cost Management & Capacity Optimization
+[Home](../../docs/index.md) > [Tutorials](../) > Tutorial 15: Cost Management & Capacity Optimization
+
+# 💰 Tutorial 15: Cost Management & Capacity Optimization
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
 
 <div align="center">
 
 ![Difficulty](https://img.shields.io/badge/Difficulty-Intermediate-yellow?style=for-the-badge)
+![Category](https://img.shields.io/badge/Category-Cost_Optimization-green?style=for-the-badge)
 ![Duration](https://img.shields.io/badge/Duration-2_hours-blue?style=for-the-badge)
 ![Prerequisites](https://img.shields.io/badge/Prerequisites-Tutorial_00--03-orange?style=for-the-badge)
 
 </div>
 
-> **[Home](../../README.md)** > **[Tutorials](../README.md)** > **Cost Management & Capacity Optimization**
-
 ---
 
-## Tutorial 15: Cost Management & Capacity Optimization
+## 📑 Table of Contents
+
+- [📋 Overview](#-overview)
+- [🎯 Learning Objectives](#-learning-objectives)
+- [🏗️ Capacity Architecture](#️-capacity-architecture)
+- [✅ Prerequisites](#-prerequisites)
+- [📊 Step 1: Understand Fabric Capacity SKUs and Pricing](#-step-1-understand-fabric-capacity-skus-and-pricing)
+- [📈 Step 2: Configure Capacity Metrics App](#-step-2-configure-capacity-metrics-app)
+- [⏸️ Step 3: Implement Capacity Pause/Resume Automation](#️-step-3-implement-capacity-pauseresume-automation)
+- [🔔 Step 4: Set Up Cost Monitoring and Budget Alerts](#-step-4-set-up-cost-monitoring-and-budget-alerts)
+- [💳 Step 5: Implement Chargeback and Cost Allocation](#-step-5-implement-chargeback-and-cost-allocation)
+- [⚡ Step 6: Optimization Strategies](#-step-6-optimization-strategies)
+- [🔄 Step 7: Burst Capacity and Smoothing](#-step-7-burst-capacity-and-smoothing)
+- [💵 Step 8: Reserved Capacity vs Pay-As-You-Go](#-step-8-reserved-capacity-vs-pay-as-you-go)
+- [🏢 Step 9: Multi-Workspace Capacity Sharing](#-step-9-multi-workspace-capacity-sharing)
+- [✅ Validation Checklist](#-validation-checklist)
+- [🔧 Troubleshooting](#-troubleshooting)
+- [📌 Best Practices](#-best-practices)
+- [📝 Summary](#-summary)
+
+---
 
 ![Microsoft Fabric Capacity SKUs](https://learn.microsoft.com/en-us/fabric/enterprise/media/licenses/fabric-capacities.png)
 
@@ -197,7 +221,7 @@
 
 ---
 
-## Overview
+## 📋 Overview
 
 This tutorial provides comprehensive guidance on managing costs and optimizing capacity utilization in Microsoft Fabric. You will learn how to right-size your Fabric capacity, implement automation for cost savings, set up monitoring dashboards, and establish chargeback models for your organization.
 
@@ -231,7 +255,7 @@ flowchart TB
 
 ---
 
-## Learning Objectives
+## 🎯 Learning Objectives
 
 By the end of this tutorial, you will be able to:
 
@@ -247,7 +271,7 @@ By the end of this tutorial, you will be able to:
 
 ---
 
-## Capacity Architecture
+## 🏗️ Capacity Architecture
 
 Understanding how Fabric capacity works is fundamental to cost optimization.
 
@@ -299,7 +323,7 @@ Capacity Units (CUs) are the fundamental compute resource in Microsoft Fabric. A
 
 ---
 
-## Prerequisites
+## ✅ Prerequisites
 
 Before starting this tutorial, ensure you have:
 
@@ -314,7 +338,7 @@ Before starting this tutorial, ensure you have:
 
 ---
 
-## Step 1: Understand Fabric Capacity SKUs and Pricing
+## 📊 Step 1: Understand Fabric Capacity SKUs and Pricing
 
 ### 1.1 Fabric Capacity SKU Reference
 
@@ -388,7 +412,7 @@ pie showData
 
 ---
 
-## Step 2: Configure Capacity Metrics App
+## 📈 Step 2: Configure Capacity Metrics App
 
 The Microsoft Fabric Capacity Metrics app provides detailed insights into capacity utilization.
 
@@ -476,7 +500,7 @@ df_hourly.show(10)
 
 ---
 
-## Step 3: Implement Capacity Pause/Resume Automation
+## ⏸️ Step 3: Implement Capacity Pause/Resume Automation
 
 One of the most effective cost-saving strategies is automatically pausing capacity during non-business hours.
 
@@ -801,7 +825,7 @@ flowchart LR
 
 ---
 
-## Step 4: Set Up Cost Monitoring and Budget Alerts
+## 🔔 Step 4: Set Up Cost Monitoring and Budget Alerts
 
 ### 4.1 Azure Cost Management Integration
 
@@ -927,7 +951,7 @@ CostManagementData
 
 ---
 
-## Step 5: Implement Chargeback and Cost Allocation
+## 💳 Step 5: Implement Chargeback and Cost Allocation
 
 ### 5.1 Chargeback Model Design
 
@@ -1053,7 +1077,7 @@ df_chargeback.toPandas().to_csv(
 
 ---
 
-## Step 6: Optimization Strategies
+## ⚡ Step 6: Optimization Strategies
 
 ### 6.1 Compute Optimization
 
@@ -1221,7 +1245,7 @@ pipeline_config = {
 
 ---
 
-## Step 7: Burst Capacity and Smoothing
+## 🔄 Step 7: Burst Capacity and Smoothing
 
 ### 7.1 Understanding Burst Behavior
 
@@ -1275,7 +1299,7 @@ CapacityMetrics
 
 ---
 
-## Step 8: Reserved Capacity vs Pay-As-You-Go
+## 💵 Step 8: Reserved Capacity vs Pay-As-You-Go
 
 ### 8.1 Cost Comparison
 
@@ -1318,7 +1342,7 @@ flowchart TB
 
 ---
 
-## Step 9: Multi-Workspace Capacity Sharing
+## 🏢 Step 9: Multi-Workspace Capacity Sharing
 
 ### 9.1 Capacity Sharing Architecture
 
@@ -1379,7 +1403,7 @@ Invoke-PowerBIRestMethod `
 
 ---
 
-## Validation Checklist
+## ✅ Validation Checklist
 
 Before considering cost optimization complete, verify:
 
@@ -1433,7 +1457,7 @@ display(df_queries)
 
 ---
 
-## Troubleshooting
+## 🔧 Troubleshooting
 
 ### Common Issues
 
@@ -1495,7 +1519,7 @@ spark.sql("""
 
 ---
 
-## Best Practices
+## 📌 Best Practices
 
 ### Cost Governance
 
@@ -1526,7 +1550,7 @@ spark.sql("""
 
 ---
 
-## Summary
+## 📝 Summary
 
 Congratulations! You have completed the Cost Management & Capacity Optimization tutorial. You have learned to:
 
@@ -1541,13 +1565,13 @@ Congratulations! You have completed the Cost Management & Capacity Optimization 
 
 ---
 
-## Next Steps
+## 🚀 Next Steps
 
 Continue to **[Tutorial 16: Performance Tuning](../16-performance-tuning/README.md)** to learn advanced techniques for optimizing query performance, Spark job efficiency, and real-time analytics throughput.
 
 ---
 
-## Additional Resources
+## 📚 Additional Resources
 
 - [Microsoft Fabric Pricing](https://azure.microsoft.com/pricing/details/microsoft-fabric/)
 - [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
@@ -1567,4 +1591,4 @@ Continue to **[Tutorial 16: Performance Tuning](../16-performance-tuning/README.
 
 ---
 
-> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
+[⬆️ Back to Top](#-tutorial-15-cost-management--capacity-optimization) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)

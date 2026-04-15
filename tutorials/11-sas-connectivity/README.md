@@ -1,5 +1,8 @@
 # 🔌 Tutorial 11: SAS Connectivity to Microsoft Fabric
 
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
 <div align="center">
 
 ![Difficulty](https://img.shields.io/badge/⭐_Difficulty-Intermediate-yellow?style=for-the-badge)
@@ -1120,3 +1123,7 @@ This tutorial includes the following supplementary files:
 ---
 
 > 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
+
+---
+
+[⬆️ Back to Top](#-tutorial-11-sas-connectivity-to-microsoft-fabric) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)

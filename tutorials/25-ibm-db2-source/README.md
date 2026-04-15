@@ -1,22 +1,26 @@
+[Home](../../docs/index.md) > [Tutorials](../) > IBM DB2 Source
+
 # 🏢 Tutorial 25: IBM DB2 as a Source for Microsoft Fabric
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
 
 <div align="center">
 
-![Difficulty](https://img.shields.io/badge/⭐_Difficulty-Advanced-red?style=for-the-badge)
-![Duration](https://img.shields.io/badge/⏱️_Duration-150--210_mins-blue?style=for-the-badge)
-![Prerequisites](https://img.shields.io/badge/📋_Prerequisites-Tutorial_00--03,_23-orange?style=for-the-badge)
+![Difficulty](https://img.shields.io/badge/Difficulty-Advanced-red?style=for-the-badge)
+![Category](https://img.shields.io/badge/Category-Migration-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
 
 </div>
 
-> :house: **[Home](../../README.md)** > :book: **[Tutorials](../README.md)** > :office: **IBM DB2 Source**
-
 ---
 
-## :office: Tutorial 25: IBM DB2 as a Source for Microsoft Fabric
+## 🏢 Tutorial 25: IBM DB2 as a Source for Microsoft Fabric
 
 | | |
 |---|---|
-| **Difficulty** | :star::star::star: Advanced |
+| **Difficulty** | ⭐⭐⭐ Advanced |
 | **Time** | :clock1: 150-210 minutes |
 | **Focus** | Mainframe & Legacy Data Migration |
 
@@ -45,11 +49,11 @@
 | Navigation | |
 |---|---|
 | :arrow_left: **Previous** | [24-Snowflake to Fabric](../24-snowflake-to-fabric/README.md) |
-| :arrow_right: **Next** | [26-Multi-Source Streaming](../26-multi-source-streaming/README.md) |
+| ➡️ **Next** | [26-Multi-Source Streaming](../26-multi-source-streaming/README.md) |
 
 ---
 
-## :book: Overview
+## 📖 Overview
 
 This tutorial provides a comprehensive guide for connecting **IBM DB2** as a data source for **Microsoft Fabric**. Many casino and gaming organizations run core systems --- cage transaction processing, player tracking, regulatory reporting --- on DB2 mainframes that have been in production for decades.
 
@@ -65,7 +69,7 @@ Microsoft Fabric provides a unified analytics platform that can ingest from all 
 
 ---
 
-## :dart: Learning Objectives
+## 🎯 Learning Objectives
 
 By the end of this tutorial, you will be able to:
 
@@ -80,7 +84,7 @@ By the end of this tutorial, you will be able to:
 
 ---
 
-## :building_construction: Migration Architecture Overview
+## 🏗️ Migration Architecture Overview
 
 ```mermaid
 flowchart TB
@@ -139,7 +143,7 @@ flowchart TB
 
 ---
 
-## :clipboard: Prerequisites
+## 📋 Prerequisites
 
 - [ ] Completed [Tutorial 00: Environment Setup](../00-environment-setup/README.md)
 - [ ] Completed [Tutorials 01-03: Medallion Architecture](../01-bronze-layer/README.md)
@@ -151,11 +155,11 @@ flowchart TB
 - [ ] [IBM Data Server Driver for JDBC](https://www.ibm.com/support/pages/db2-jdbc-driver-versions-and-downloads) (`db2jcc4.jar`)
 - [ ] On-premises Data Gateway or Self-Hosted Integration Runtime installed
 
-> :bulb: **Tip:** For testing without a live DB2 instance, use the sample DDL scripts and synthetic data to practice SQL translation patterns.
+> 💡 **Tip:** For testing without a live DB2 instance, use the sample DDL scripts and synthetic data to practice SQL translation patterns.
 
 ---
 
-## :hammer_and_wrench: Step 1: Assess Your DB2 Environment
+## 🛠️ Step 1: Assess Your DB2 Environment
 
 ### 1.1 z/OS System Catalog Queries
 
@@ -237,7 +241,7 @@ quadrantChart
 
 ---
 
-## :hammer_and_wrench: Step 2: Configure DB2 Connectivity
+## 🛠️ Step 2: Configure DB2 Connectivity
 
 ### 2.1 On-Premises Data Gateway
 
@@ -278,7 +282,7 @@ Install SHIR, register with the authentication key, then place `db2jcc4.jar` in 
 | **z/OS + iSeries License** | `db2jcc_license_cisuz.jar` | **Required** for z/OS and iSeries |
 | **LUW License** | `db2jcc_license_cu.jar` | Required for LUW |
 
-> :warning: **Important:** Without `db2jcc_license_cisuz.jar`, z/OS and iSeries connections fail with `SQL1598N` licensing errors.
+> ⚠️ **Important:** Without `db2jcc_license_cisuz.jar`, z/OS and iSeries connections fail with `SQL1598N` licensing errors.
 
 ### 2.4 Connection String Formats
 
@@ -331,7 +335,7 @@ print(f"Connection successful! DB2 time: {df_test.collect()[0]['TEST_TS']}")
 
 ---
 
-## :hammer_and_wrench: Step 3: Data Type Mapping
+## 🛠️ Step 3: Data Type Mapping
 
 ### 3.1 DB2 to Fabric Type Reference
 
@@ -416,7 +420,7 @@ df = df_raw.withColumn(
 
 ---
 
-## :hammer_and_wrench: Step 4: SQL Translation Patterns
+## 🛠️ Step 4: SQL Translation Patterns
 
 ### 4.1 FETCH FIRST N ROWS
 
@@ -455,7 +459,7 @@ WHERE shift_date = DATEADD(DAY, -1, CAST(GETDATE() AS DATE))
 GROUP BY cage_id;
 ```
 
-> :bulb: **Note:** In Spark/Delta Lake, MVCC handles concurrency automatically --- no isolation hint needed.
+> 💡 **Note:** In Spark/Delta Lake, MVCC handles concurrency automatically --- no isolation hint needed.
 
 ### 4.3 Date/Time Functions
 
@@ -520,7 +524,7 @@ df_daily.filter(col("ctr_required") == "Y") \
 
 ---
 
-## :hammer_and_wrench: Step 5: Batch Data Migration
+## 🛠️ Step 5: Batch Data Migration
 
 ### 5.1 Data Factory Pipeline Architecture
 
@@ -623,7 +627,7 @@ for data_col, null_col in null_indicators.items():
 
 ---
 
-## :hammer_and_wrench: Step 6: CDC Patterns for DB2
+## 🛠️ Step 6: CDC Patterns for DB2
 
 ### 6.1 InfoSphere CDC (ASN Capture)
 
@@ -717,11 +721,11 @@ flowchart LR
 }
 ```
 
-> :bulb: **Note:** Debezium for DB2 polls ASN change data capture tables --- it requires the ASN capture agent to be configured on the DB2 LUW instance.
+> 💡 **Note:** Debezium for DB2 polls ASN change data capture tables --- it requires the ASN capture agent to be configured on the DB2 LUW instance.
 
 ---
 
-## :hammer_and_wrench: Step 7: z/OS Specific Patterns
+## 🛠️ Step 7: z/OS Specific Patterns
 
 ### 7.1 DRDA Protocol and Subsystem Access
 
@@ -780,7 +784,7 @@ df_processed.write.mode("overwrite").saveAsTable("silver.cage_transactions_zos")
 
 ---
 
-## :hammer_and_wrench: Step 8: Ongoing Synchronization
+## 🛠️ Step 8: Ongoing Synchronization
 
 ### 8.1 Strategy by Table Type
 
@@ -820,7 +824,7 @@ flowchart TB
 
 ---
 
-## :hammer_and_wrench: Step 9: Validate Migrated Data
+## 🛠️ Step 9: Validate Migrated Data
 
 ### 9.1 Row Count Comparison
 
@@ -877,7 +881,7 @@ print(f"Status: {'PASS' if bad == 0 else 'REVIEW'}")
 
 ---
 
-## :wrench: Troubleshooting
+## 🔧 Troubleshooting
 
 | Issue | Cause | Resolution |
 |---|---|---|
@@ -896,7 +900,7 @@ print(f"Status: {'PASS' if bad == 0 else 'REVIEW'}")
 
 ---
 
-## :books: Best Practices
+## 📚 Best Practices
 
 1. **Assess all three DB2 variants independently** --- z/OS, LUW, and iSeries have different catalogs, protocols, and encoding challenges.
 2. **Install the correct JDBC license JARs** --- `db2jcc_license_cisuz.jar` is mandatory for z/OS and iSeries; missing it causes cryptic errors.
@@ -911,28 +915,28 @@ print(f"Status: {'PASS' if bad == 0 else 'REVIEW'}")
 
 ---
 
-## :tada: Summary
+## 🎉 Summary
 
 Congratulations! You have completed the IBM DB2 as a Source for Microsoft Fabric tutorial. You have learned to:
 
-- :white_check_mark: Assess DB2 environments across z/OS, LUW, and iSeries using system catalog queries
-- :white_check_mark: Configure DB2 connectivity through Data Gateway and Self-Hosted Integration Runtime
-- :white_check_mark: Map DB2 data types to Fabric, including GRAPHIC, DECFLOAT, and ROWID
-- :white_check_mark: Translate DB2 SQL patterns (FETCH FIRST, WITH UR, || concatenation) to Fabric equivalents
-- :white_check_mark: Build Data Factory pipelines and PySpark notebooks for batch migration
-- :white_check_mark: Implement CDC using InfoSphere CDC, Q Replication, and Debezium
-- :white_check_mark: Handle z/OS-specific challenges: EBCDIC encoding, packed decimal, DRDA protocol
-- :white_check_mark: Validate migrated data for row counts, checksums, and character encoding integrity
+- ✅ Assess DB2 environments across z/OS, LUW, and iSeries using system catalog queries
+- ✅ Configure DB2 connectivity through Data Gateway and Self-Hosted Integration Runtime
+- ✅ Map DB2 data types to Fabric, including GRAPHIC, DECFLOAT, and ROWID
+- ✅ Translate DB2 SQL patterns (FETCH FIRST, WITH UR, || concatenation) to Fabric equivalents
+- ✅ Build Data Factory pipelines and PySpark notebooks for batch migration
+- ✅ Implement CDC using InfoSphere CDC, Q Replication, and Debezium
+- ✅ Handle z/OS-specific challenges: EBCDIC encoding, packed decimal, DRDA protocol
+- ✅ Validate migrated data for row counts, checksums, and character encoding integrity
 
 ---
 
-## :arrow_right: Next Steps
+## ➡️ Next Steps
 
 Continue to **[Tutorial 26: Multi-Source Real-Time Intelligence](../26-multi-source-streaming/README.md)** to learn how to combine multiple data sources --- including DB2 CDC streams --- into a unified real-time analytics pipeline in Microsoft Fabric.
 
 ---
 
-## :file_folder: Included Resources
+## 📁 Included Resources
 
 | Resource | Description |
 |---|---|
@@ -944,7 +948,7 @@ Continue to **[Tutorial 26: Multi-Source Real-Time Intelligence](../26-multi-sou
 
 ---
 
-## :books: Additional Resources
+## 📚 Additional Resources
 
 - [IBM DB2 Connector - Fabric Data Factory](https://learn.microsoft.com/en-us/fabric/data-factory/connector-ibm-db2-database)
 - [On-premises Data Gateway](https://learn.microsoft.com/en-us/data-integration/gateway/service-gateway-onprem)
@@ -956,12 +960,16 @@ Continue to **[Tutorial 26: Multi-Source Real-Time Intelligence](../26-multi-sou
 
 ---
 
-## :compass: Navigation
+## 🧭 Navigation
 
-| :arrow_left: Previous | :arrow_up: Up | :arrow_right: Next |
+| :arrow_left: Previous | :arrow_up: Up | ➡️ Next |
 |------------|------|--------|
 | [24-Snowflake to Fabric](../24-snowflake-to-fabric/README.md) | [Tutorials Index](../README.md) | [26-Multi-Source Streaming](../26-multi-source-streaming/README.md) |
 
 ---
 
 > :speech_balloon: **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
+
+---
+
+[⬆️ Back to Top](#-tutorial-25-ibm-db2-as-a-source-for-microsoft-fabric) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)

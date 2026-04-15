@@ -1,10 +1,35 @@
-# Pipelines & Data Movement
+[Home](../index.md) > [Best Practices](./) > Pipelines & Data Movement
 
-> **Best Practices > Pipelines & Data Movement**
+# 🔄 Pipelines & Data Movement
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Pipeline-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
+
+</div>
+
+## 📑 Table of Contents
+
+- [Overview](#-overview)
+- [ETL vs ELT Decision Framework](#-etl-vs-elt-decision-framework)
+- [Copy Activity Optimization](#-copy-activity-optimization)
+- [Load Patterns](#-load-patterns)
+- [Pipeline Performance Optimization](#-pipeline-performance-optimization)
+- [Pipeline Patterns for Large Tables](#-pipeline-patterns-for-large-tables)
+- [Sink Optimization](#-sink-optimization)
+- [Error Handling and Retry](#-error-handling-and-retry)
+- [Performance Benchmarks](#-performance-benchmarks)
+- [Best Practices Checklist](#-best-practices-checklist)
+- [Related Documents](#-related-documents)
 
 ---
 
-## Overview
+## 📋 Overview
 
 This guide covers best practices for data movement in Microsoft Fabric, including ETL vs ELT patterns, copy activity optimization, and different load strategies (full, incremental, CDC).
 
@@ -14,7 +39,7 @@ This guide covers best practices for data movement in Microsoft Fabric, includin
 
 ---
 
-## ETL vs ELT Decision Framework
+## ⚖️ ETL vs ELT Decision Framework
 
 ### Comparison
 
@@ -69,7 +94,7 @@ flowchart TD
 
 ---
 
-## Copy Activity Optimization
+## 📋 Copy Activity Optimization
 
 ### Parallel Copy Configuration
 
@@ -130,7 +155,7 @@ flowchart TD
 
 ---
 
-## Load Patterns
+## 📦 Load Patterns
 
 ![Configure Source Connection in Pipeline](https://learn.microsoft.com/en-us/fabric/data-factory/media/copy-data-activity/configure-source-connection-in-pipeline-new.png)
 
@@ -308,7 +333,7 @@ delta_table.alias("target").merge(
 
 ---
 
-## Pipeline Performance Optimization
+## ⚡ Pipeline Performance Optimization
 
 ### ForEach Parallel Execution
 
@@ -378,7 +403,7 @@ Pipeline Structure:
 
 ---
 
-## Pipeline Patterns for Large Tables
+## 🏗️ Pipeline Patterns for Large Tables
 
 ### Pattern 1: Chunked Full Load
 
@@ -411,7 +436,7 @@ flowchart LR
 
 ---
 
-## Sink Optimization
+## 🎯 Sink Optimization
 
 ### Lakehouse Table Sink
 
@@ -457,7 +482,7 @@ flowchart LR
 
 ---
 
-## Error Handling and Retry
+## 🛡️ Error Handling and Retry
 
 ### Retry Configuration
 
@@ -514,7 +539,7 @@ flowchart LR
 
 ---
 
-## Performance Benchmarks
+## 📊 Performance Benchmarks
 
 ### Copy Activity Performance Reference
 
@@ -532,7 +557,7 @@ flowchart LR
 
 ---
 
-## Best Practices Checklist
+## ✅ Best Practices Checklist
 
 ### Copy Activity
 - [ ] Use parallel copy with partitioning for large tables
@@ -555,4 +580,17 @@ flowchart LR
 
 ---
 
-[Back to Best Practices Index](./README.md)
+## 🔗 Related Documents
+
+| Document | Description |
+|----------|-------------|
+| [Metadata-Driven Pipelines](./04_METADATA_DRIVEN_PIPELINES.md) | Dynamic, configuration-based pipeline patterns |
+| [Data Gateway Optimization](./02_DATA_GATEWAY.md) | Gateway configuration for on-premises sources |
+| [Source-Specific Patterns](./09_SOURCE_SPECIFIC_PATTERNS.md) | Oracle and SQL Server extraction patterns |
+| [Decision Guide](./10_DECISION_GUIDE.md) | Choosing the right data movement tool |
+| [Incremental Refresh & CDC](./incremental-refresh-cdc.md) | Advanced incremental and CDC patterns |
+| [Copy Job CDC](../features/copy-job-cdc.md) | Copy Job CDC feature documentation |
+
+---
+
+[⬆️ Back to Top](#-pipelines--data-movement) | [📚 Best Practices](./) | [🏠 Home](../index.md)

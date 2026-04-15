@@ -1,10 +1,40 @@
-# Spark & Notebooks Best Practices
+[Home](../index.md) > [Best Practices](./) > Spark & Notebooks
 
-> **Best Practices > Spark & Notebooks**
+# ⚡ Spark & Notebooks Best Practices
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Spark-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
+
+</div>
+
+## 📑 Table of Contents
+
+- [Overview](#-overview)
+- [Spark Capacity and Cluster Planning](#-spark-capacity-and-cluster-planning)
+- [Native Execution Engine (NEE)](#-native-execution-engine-nee)
+- [Session Configuration](#-session-configuration)
+- [Read Optimization](#-read-optimization)
+- [Write Optimization](#-write-optimization)
+- [Shuffle Optimization](#-shuffle-optimization)
+- [High Concurrency Mode](#-high-concurrency-mode)
+- [Parallel Notebook Execution](#-parallel-notebook-execution)
+- [Library Management](#-library-management)
+- [Resource Profiles](#-resource-profiles)
+- [Monitoring and Profiling](#-monitoring-and-profiling)
+- [Delta Lake Best Practices](#-delta-lake-best-practices)
+- [Notebook Organization](#-notebook-organization)
+- [Performance Checklist](#-performance-checklist)
+- [Related Documents](#-related-documents)
 
 ---
 
-## Overview
+## 📋 Overview
 
 Apache Spark in Microsoft Fabric provides powerful distributed computing for data engineering and data science workloads. This guide covers Spark optimization, notebook best practices, library management, and performance tuning.
 
@@ -14,7 +44,7 @@ Apache Spark in Microsoft Fabric provides powerful distributed computing for dat
 
 ---
 
-## Spark Capacity and Cluster Planning
+## 🖥️ Spark Capacity and Cluster Planning
 
 ### Starter Pool vs Custom Pool
 
@@ -39,7 +69,7 @@ Apache Spark in Microsoft Fabric provides powerful distributed computing for dat
 
 ---
 
-## Native Execution Engine (NEE)
+## 🚀 Native Execution Engine (NEE)
 
 ### Enabling NEE
 
@@ -68,7 +98,7 @@ SET spark.native.enabled = True
 
 ---
 
-## Session Configuration
+## ⚙️ Session Configuration
 
 ### %%configure Magic Command
 
@@ -111,7 +141,7 @@ Configure Spark sessions at the beginning of notebooks:
 
 ---
 
-## Read Optimization
+## 📖 Read Optimization
 
 ### Partition Tuning
 
@@ -148,7 +178,7 @@ df = spark.read.format("delta").load("/path")
 
 ---
 
-## Write Optimization
+## ✍️ Write Optimization
 
 ### Auto Compaction
 
@@ -186,7 +216,7 @@ df.write.format("delta") \
 
 ---
 
-## Shuffle Optimization
+## 🔀 Shuffle Optimization
 
 ### Tuning Shuffle Partitions
 
@@ -214,7 +244,7 @@ spark.conf.set("spark.sql.adaptive.skewJoin.enabled", "true")
 
 ---
 
-## High Concurrency Mode
+## 🔗 High Concurrency Mode
 
 ### Benefits
 - Share Spark sessions across multiple notebooks
@@ -237,7 +267,7 @@ Workspace Settings > Spark Settings > High Concurrency Mode: Enabled
 
 ---
 
-## Parallel Notebook Execution
+## 📓 Parallel Notebook Execution
 
 ### Using runMultiple()
 
@@ -272,7 +302,7 @@ mssparkutils.notebook.runMultiple(dag)
 
 ---
 
-## Library Management
+## 📦 Library Management
 
 ### Best Practices by Scenario
 
@@ -308,7 +338,7 @@ mssparkutils.notebook.runMultiple(dag)
 
 ---
 
-## Resource Profiles
+## 📊 Resource Profiles
 
 ### Pre-defined Profiles
 
@@ -326,7 +356,7 @@ spark.conf.set("spark.fabric.profile", "HighConcurrency")
 
 ---
 
-## Monitoring and Profiling
+## 🔍 Monitoring and Profiling
 
 ### Spark History Server
 
@@ -356,7 +386,7 @@ Monitor:
 
 ---
 
-## Delta Lake Best Practices
+## 🏗️ Delta Lake Best Practices
 
 ### Table Configuration
 
@@ -403,7 +433,7 @@ OPTIMIZE my_table ZORDER BY (customer_id, event_date);
 
 ---
 
-## Notebook Organization
+## 📂 Notebook Organization
 
 ### Recommended Structure
 
@@ -437,7 +467,7 @@ Examples:
 
 ---
 
-## Performance Checklist
+## ✅ Performance Checklist
 
 ### Before Production
 
@@ -460,4 +490,16 @@ Examples:
 
 ---
 
-[Back to Best Practices Index](./README.md)
+## 🔗 Related Documents
+
+| Document | Description |
+|----------|-------------|
+| [Lakehouse Setup & Organization](./07_LAKEHOUSE_SETUP.md) | Delta Lake configuration and table maintenance |
+| [Pipelines & Data Movement](./03_PIPELINES_DATA_MOVEMENT.md) | Pipeline optimization for data movement |
+| [Decision Guide](./10_DECISION_GUIDE.md) | When to use Spark vs other tools |
+| [Testing Strategies](./testing-strategies.md) | Unit and integration testing patterns |
+| [Monitoring & Observability](./monitoring-observability.md) | Spark monitoring and performance tracking |
+
+---
+
+[⬆️ Back to Top](#-spark--notebooks-best-practices) | [📚 Best Practices](./) | [🏠 Home](../index.md)

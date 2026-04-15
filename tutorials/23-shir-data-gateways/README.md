@@ -1,10 +1,22 @@
-# Tutorial 23: Self-Hosted Integration Runtime & Data Gateways
+[Home](../../docs/index.md) > [Tutorials](../) > SHIR & Data Gateways
 
-> **Home > Tutorials > SHIR & Data Gateways**
+# 🔌 Tutorial 23: Self-Hosted Integration Runtime & Data Gateways
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Difficulty](https://img.shields.io/badge/Difficulty-Advanced-red?style=for-the-badge)
+![Category](https://img.shields.io/badge/Category-Data_Gateway-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
+
+</div>
 
 ---
 
-## Overview
+## 🎯 Overview
 
 This tutorial provides comprehensive guidance on implementing Self-Hosted Integration Runtime (SHIR) and On-Premises Data Gateways for Microsoft Fabric. Essential for connecting to on-premises data sources, private networks, and legacy systems.
 
@@ -22,7 +34,7 @@ This tutorial provides comprehensive guidance on implementing Self-Hosted Integr
 
 ---
 
-## Learning Objectives
+## 📚 Learning Objectives
 
 By the end of this tutorial, you will be able to:
 
@@ -35,7 +47,7 @@ By the end of this tutorial, you will be able to:
 
 ---
 
-## Part 1: Self-Hosted Integration Runtime (SHIR)
+## 🛠️ Part 1: Self-Hosted Integration Runtime (SHIR)
 
 ### Understanding SHIR vs Data Gateway
 
@@ -159,7 +171,7 @@ $registrationKey = "YOUR_REGISTRATION_KEY_HERE"
 
 ---
 
-## Part 2: On-Premises Data Gateway
+## 🔌 Part 2: On-Premises Data Gateway
 
 ### Step 2.1: Download and Install Gateway
 
@@ -264,7 +276,7 @@ $gatewayCmd = "C:\Program Files\On-premises data gateway\enterprisegatewayconfig
 
 ---
 
-## Part 3: Connecting On-Premises Data Sources
+## 🗄️ Part 3: Connecting On-Premises Data Sources
 
 ### Step 3.1: SQL Server Connection
 
@@ -383,7 +395,7 @@ linked_service = {
 
 ---
 
-## Part 4: Data Pipeline Examples
+## 🚀 Part 4: Data Pipeline Examples
 
 ### Step 4.1: Copy On-Premises SQL to Fabric Lakehouse
 
@@ -512,7 +524,7 @@ print(f"Incrementally loaded {df_incremental.count()} new records")
 
 ---
 
-## Part 5: Monitoring and Troubleshooting
+## 📊 Part 5: Monitoring and Troubleshooting
 
 ### Step 5.1: Gateway Diagnostics
 
@@ -616,7 +628,7 @@ $request.GetResponse()
 
 ---
 
-## Part 6: Security Best Practices
+## 🔒 Part 6: Security Best Practices
 
 ### Step 6.1: Service Account Configuration
 
@@ -702,7 +714,7 @@ az keyvault set-policy --name "kv-fabric-gateway" `
 
 ---
 
-## Summary Checklist
+## ✅ Summary Checklist
 
 ### SHIR Setup
 - [ ] Downloaded and installed SHIR
@@ -731,7 +743,7 @@ az keyvault set-policy --name "kv-fabric-gateway" `
 
 ---
 
-## Additional Resources
+## 📖 Additional Resources
 
 - [Networking Documentation](../NETWORKING.md)
 - [Self-Hosted IR Documentation](https://learn.microsoft.com/en-us/azure/data-factory/create-self-hosted-integration-runtime)
@@ -748,3 +760,7 @@ az keyvault set-policy --name "kv-fabric-gateway" `
 ---
 
 > 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
+
+---
+
+[⬆️ Back to Top](#-tutorial-23-self-hosted-integration-runtime--data-gateways) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)

@@ -1,4 +1,17 @@
+[Home](../docs/index.md) > [POC Agenda](./) > Diagram Guide
+
 # 📊 Mermaid Diagram Guide for POC Agenda
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Reference-purple?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
+
+</div>
 
 This document provides an overview of the Mermaid diagrams added to the POC agenda files.
 
@@ -355,10 +368,21 @@ For questions about the diagrams:
 
 ---
 
+## 📖 Related Documents
+
+| Document | Description |
+|:---------|:-----------|
+| [POC Agenda](./README.md) | 3-day workshop overview |
+| [Day 1: Medallion Foundation](./day1-medallion-foundation.md) | Day 1 with journey diagram |
+| [Day 2: Transformations](./day2-transformations-realtime.md) | Day 2 with flowchart |
+| [Day 3: BI & Governance](./day3-bi-governance-mirroring.md) | Day 3 with timeline |
+
+---
+
 <div align="center">
 
 **Happy Visualizing! 📊**
 
-[← Back to POC Agenda](./README.md)
+[⬆️ Back to Top](#-mermaid-diagram-guide-for-poc-agenda) | [📚 POC Agenda](./) | [🏠 Home](../docs/index.md)
 
 </div>

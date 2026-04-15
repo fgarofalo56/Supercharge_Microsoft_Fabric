@@ -1,4 +1,7 @@
-# Tutorial 01: Bronze Layer
+# 🥉 Tutorial 01: Bronze Layer
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
 
 > **🏠 [Home](../../README.md)** > **📖 [Tutorials](../README.md)** > **🥉 Bronze Layer**
 
@@ -927,3 +930,7 @@ Continue to **[Tutorial 02: Silver Layer](../02-silver-layer/README.md)** to lea
 ---
 
 > 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
+
+---
+
+[⬆️ Back to Top](#-tutorial-01-bronze-layer) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)

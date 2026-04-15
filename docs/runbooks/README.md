@@ -1,16 +1,27 @@
-# Operational Runbooks
+[Home](../index.md) > [Docs](..) > Runbooks
 
-> **Home > Documentation > Runbooks**
+# 📋 Operational Runbooks
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Operations-orange)
+![Status](https://img.shields.io/badge/Status-Final-green)
+![Platform](https://img.shields.io/badge/Platform-Microsoft%20Fabric-purple)
+
+</div>
 
 ---
 
-## Overview
+## 📖 Overview
 
 This directory contains operational runbooks for the Casino Analytics platform. Each runbook provides step-by-step instructions for common operational tasks and incident response.
 
 ---
 
-## Runbook Index
+## 📑 Runbook Index
 
 | Category | Runbook | Description |
 |----------|---------|-------------|
@@ -25,7 +36,7 @@ This directory contains operational runbooks for the Casino Analytics platform. 
 
 ---
 
-## Incident Runbooks
+## 🚨 Incident Runbooks
 
 ### Data Pipeline Failure
 
@@ -280,7 +291,7 @@ This directory contains operational runbooks for the Casino Analytics platform. 
 
 ---
 
-## Maintenance Runbooks
+## 🔧 Maintenance Runbooks
 
 ### Capacity Pause/Resume
 
@@ -411,7 +422,7 @@ for table in tables_to_optimize:
 
 ---
 
-## Escalation Matrix
+## 📞 Escalation Matrix
 
 | Severity | Response Time | Escalation After | Contact |
 |----------|---------------|------------------|---------|
@@ -422,7 +433,7 @@ for table in tables_to_optimize:
 
 ---
 
-## Quick Reference
+## ⚡ Quick Reference
 
 ### Useful Commands
 
@@ -448,4 +459,18 @@ az rest --method get --url "https://api.fabric.microsoft.com/v1/workspaces/{id}/
 
 ---
 
-[Back to Documentation](../index.md)
+---
+
+## 🔗 Related Documents
+
+| Document | Description |
+|----------|-------------|
+| [Error Handling & Monitoring](../best-practices/error-handling-monitoring.md) | Pipeline error architecture and handling |
+| [Alerting & Data Activator](../best-practices/alerting-data-activator.md) | Alert patterns and notification setup |
+| [Monitoring & Observability](../best-practices/monitoring-observability.md) | Custom dashboards and monitoring |
+| [Architecture Overview](../diagrams/architecture-overview.md) | System architecture diagrams |
+| [Deployment Guide](../DEPLOYMENT.md) | Infrastructure deployment instructions |
+
+---
+
+[⬆️ Back to Top](#-operational-runbooks) | [📚 Parent](./) | [🏠 Home](../index.md)

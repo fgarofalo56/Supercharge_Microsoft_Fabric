@@ -1,16 +1,27 @@
-# Data Dictionary
+[Home](../index.md) > [Docs](..) > Data Dictionary
 
-> **Home > Documentation > Data Dictionary**
+# 📖 Data Dictionary
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Reference-purple)
+![Status](https://img.shields.io/badge/Status-Final-green)
+![Tables](https://img.shields.io/badge/Tables-Bronze%20%7C%20Silver%20%7C%20Gold-blue)
+
+</div>
 
 ---
 
-## Overview
+## 📖 Overview
 
 This data dictionary provides comprehensive documentation for all tables in the Casino Analytics data platform. Each layer (Bronze, Silver, Gold) maintains specific schemas optimized for their purpose.
 
 ---
 
-## Table of Contents
+## 📑 Table of Contents
 
 - [Bronze Layer Tables](#bronze-layer-tables)
 - [Silver Layer Tables](#silver-layer-tables)
@@ -20,7 +31,7 @@ This data dictionary provides comprehensive documentation for all tables in the 
 
 ---
 
-## Bronze Layer Tables
+## 🥉 Bronze Layer Tables
 
 ### bronze_slot_telemetry
 
@@ -132,7 +143,7 @@ This data dictionary provides comprehensive documentation for all tables in the 
 
 ---
 
-## Silver Layer Tables
+## 🥈 Silver Layer Tables
 
 ### silver_slot_telemetry
 
@@ -197,7 +208,7 @@ This data dictionary provides comprehensive documentation for all tables in the 
 
 ---
 
-## Gold Layer Tables
+## 🥇 Gold Layer Tables
 
 ### fact_daily_slot_performance
 
@@ -284,7 +295,7 @@ This data dictionary provides comprehensive documentation for all tables in the 
 
 ---
 
-## Real-Time Tables
+## ⚡ Real-Time Tables
 
 ### SlotTelemetry (Eventhouse)
 
@@ -307,7 +318,7 @@ This data dictionary provides comprehensive documentation for all tables in the 
 
 ---
 
-## Reference Data
+## 📚 Reference Data
 
 ### ref_loyalty_tiers
 
@@ -337,7 +348,7 @@ This data dictionary provides comprehensive documentation for all tables in the 
 
 ---
 
-## Glossary
+## 📝 Glossary
 
 | Term | Definition |
 |------|------------|
@@ -354,4 +365,17 @@ This data dictionary provides comprehensive documentation for all tables in the 
 
 ---
 
-[Back to Documentation](../index.md)
+---
+
+## 🔗 Related Documents
+
+| Document | Description |
+|----------|-------------|
+| [Architecture Overview](../diagrams/architecture-overview.md) | System architecture and data flow diagrams |
+| [Compliance Templates](../compliance-templates/README.md) | Regulatory compliance report templates |
+| [Medallion Architecture](../best-practices/medallion-architecture-deep-dive.md) | Bronze/Silver/Gold patterns deep dive |
+| [Best Practices](../best-practices/README.md) | Data engineering best practices |
+
+---
+
+[⬆️ Back to Top](#-data-dictionary) | [📚 Parent](./) | [🏠 Home](../index.md)

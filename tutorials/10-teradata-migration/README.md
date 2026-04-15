@@ -1,5 +1,8 @@
 # 🔄 Tutorial 10: Teradata to Microsoft Fabric Migration
 
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
 <div align="center">
 
 ![Difficulty](https://img.shields.io/badge/⭐_Difficulty-Advanced-red?style=for-the-badge)
@@ -2081,3 +2084,7 @@ This tutorial includes the following supplementary files:
 ---
 
 > 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
+
+---
+
+[⬆️ Back to Top](#-tutorial-10-teradata-to-microsoft-fabric-migration) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)

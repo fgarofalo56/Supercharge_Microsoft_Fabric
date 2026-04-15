@@ -1,5 +1,8 @@
 # ⚡ Tutorial 04: Real-Time Analytics
 
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
 > **🏠 [Home](../../README.md)** > **📖 [Tutorials](../README.md)** > **⚡ Real-Time Analytics**
 
 ---
@@ -1276,3 +1279,7 @@ Continue your learning journey:
 *Tutorial 04 of 10 in the Microsoft Fabric Casino POC Series*
 
 </div>
+
+---
+
+[⬆️ Back to Top](#-tutorial-04-real-time-analytics) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)

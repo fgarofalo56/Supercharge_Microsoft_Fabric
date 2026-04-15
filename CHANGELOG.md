@@ -1,11 +1,35 @@
-# Changelog
+# 📋 Changelog
+
+> **Last Updated:** 2026-04-15 | **Version:** 2.1.0 | **Status:** Active
+
+<div align="center">
+
+![Changelog](https://img.shields.io/badge/📋_Changelog-Keep_a_Changelog-blue?style=for-the-badge)
+![SemVer](https://img.shields.io/badge/🔢_Versioning-SemVer_2.0-green?style=for-the-badge)
+![Phase](https://img.shields.io/badge/🎯_Phase-11_Complete-purple?style=for-the-badge)
+
+</div>
+
+---
+
+## 📑 Table of Contents
+
+- [🔮 Unreleased](#-unreleased)
+- [🏷️ 2.1.0 — Phase 11: Audit Remediation](#️-210---2026-04-15)
+- [🏷️ 2.0.0 — Phases 9 & 10: Fabric Modernization](#️-200---2026-04-13)
+- [🏷️ 1.2.0 — Tutorials & Docs Site](#️-120---2025-01-28)
+- [🏷️ 1.1.0 — Docker & Power BI](#️-110---2025-01-21)
+- [🏷️ 1.0.0 — Initial Release](#️-100---2025-01-21)
+- [📊 Version History Summary](#-version-history-summary)
+
+---
 
 All notable changes to the Microsoft Fabric Casino/Gaming POC will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## 🔮 [Unreleased]
 
 ### Planned
 - Additional Power BI report templates
@@ -13,7 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [2.1.0] - 2026-04-15
+## 🏷️ [2.1.0] - 2026-04-15
 
 ### Added
 - `bronze_utils.py` shared helper for common notebook patterns
@@ -42,7 +66,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [2.0.0] - 2026-04-13
+## 🏷️ [2.0.0] - 2026-04-13
 
 ### Added — Phase 9: New Fabric Experience Modernization
 
@@ -129,7 +153,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [1.2.0] - 2025-01-28
+## 🏷️ [1.2.0] - 2025-01-28
 
 ### Added
 
@@ -169,7 +193,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [1.1.0] - 2025-01-21
+## 🏷️ [1.1.0] - 2025-01-21
 
 ### Added
 
@@ -263,7 +287,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [1.0.0] - 2025-01-21
+## 🏷️ [1.0.0] - 2025-01-21
 
 ### Added
 
@@ -346,7 +370,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## Version History Summary
+## 📊 Version History Summary
 
 | Version | Date | Highlights |
 |---------|------|------------|
@@ -355,10 +379,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## Contributing
+## 🤝 Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute to this project.
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License - see [LICENSE](LICENSE) for details.
+
+---
+
+<div align="center">
+
+[⬆️ Back to Top](#-changelog) | [📚 Docs](docs/index.md) | [🏠 Main README](README.md)
+
+</div>

@@ -1,28 +1,32 @@
-# :airplane: Tutorial 31: Federal DOT/FAA Aviation Analytics
+[Home](../../docs/index.md) > [Tutorials](../) > Federal DOT/FAA
+
+# ✈️ Tutorial 31: Federal DOT/FAA
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
 
 <div align="center">
 
-![Difficulty](https://img.shields.io/badge/⭐_Difficulty-Advanced-red?style=for-the-badge)
-![Duration](https://img.shields.io/badge/⏱️_Duration-120--150_mins-blue?style=for-the-badge)
-![Prerequisites](https://img.shields.io/badge/📋_Prerequisites-Tutorial_00--03-orange?style=for-the-badge)
+![Difficulty](https://img.shields.io/badge/Difficulty-Advanced-orange?style=for-the-badge)
+![Category](https://img.shields.io/badge/Category-Federal-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
 
 </div>
 
-> :house: **[Home](../../README.md)** > :book: **[Tutorials](../README.md)** > :airplane: **Federal DOT/FAA Aviation Analytics**
-
 ---
 
-## :airplane: Tutorial 31: Federal DOT/FAA Aviation Analytics
+## ✈️ Tutorial 31: Federal DOT/FAA Aviation Analytics
 
 | | |
 |---|---|
-| **Difficulty** | :star::star::star: Advanced |
-| **Time** | :clock1: 120-150 minutes |
+| **Difficulty** | ⭐⭐⭐ Advanced |
+| **Time** | ⏱️ 120-150 minutes |
 | **Focus** | Federal Aviation Data, BTS/FAA Public Datasets, Medallion Architecture & FedRAMP Considerations |
 
 ---
 
-### :bar_chart: Progress Tracker
+### 📊 Progress Tracker
 
 ```
 ┌──────┬──────┬──────┬──────┬──────┬──────┬──────┬──────┬──────┬──────┬──────┬──────┬──────┬──────┐
@@ -44,18 +48,18 @@
 
 | Navigation | |
 |---|---|
-| :arrow_left: **Previous** | [30-Tribal Healthcare Analytics](../30-tribal-healthcare/README.md) |
-| :arrow_right: **Next** | Phase Complete -- Congratulations! |
+| ⬅️ **Previous** | [30-Tribal Healthcare Analytics](../30-tribal-healthcare/README.md) |
+| ➡️ **Next** | Phase Complete -- Congratulations! |
 
 ---
 
-## :book: Overview
+## 📖 Overview
 
 The U.S. Department of Transportation (DOT) and the Federal Aviation Administration (FAA) publish some of the richest public datasets in the federal government. Every domestic flight's on-time performance, every wildlife strike at every airport, and every safety report flows through systems that are freely accessible to analysts, researchers, and government agencies. This tutorial teaches you to build a complete aviation analytics pipeline on Microsoft Fabric, ingesting data from BTS (Bureau of Transportation Statistics) and FAA public APIs, processing it through the medallion architecture, and surfacing carrier performance, safety trends, and airport utilization through Power BI dashboards.
 
 Federal agencies deploying Fabric must also navigate FedRAMP authorization, GCC/GCC-High environments, and data classification requirements. This tutorial addresses those considerations alongside the technical implementation, providing a blueprint that any DOT, FAA, or interagency analytics team can adapt.
 
-> **:bulb: Why DOT/FAA Aviation Analytics on Fabric?**
+> **💡 Why DOT/FAA Aviation Analytics on Fabric?**
 >
 > - **On-time accountability**: Rank carriers by delay frequency and root cause, giving Congress and the public transparent performance data
 > - **Safety pattern detection**: Correlate wildlife strike clusters with seasonal migration patterns and airport geography
@@ -68,7 +72,7 @@ Federal agencies deploying Fabric must also navigate FedRAMP authorization, GCC/
 
 ---
 
-## :dart: Learning Objectives
+## 🎯 Learning Objectives
 
 By the end of this tutorial, you will be able to:
 
@@ -85,7 +89,7 @@ By the end of this tutorial, you will be able to:
 
 ---
 
-## :building_construction: Architecture Diagram
+## 🏗️ Architecture Diagram
 
 ```mermaid
 %%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#2196F3','primaryTextColor':'#fff','primaryBorderColor':'#1565C0','lineColor':'#1976D2','secondaryColor':'#E3F2FD','tertiaryColor':'#fff'}}}%%
@@ -159,7 +163,7 @@ flowchart TB
 
 ---
 
-## :wrench: Step 1: Public Dataset Access
+## 🛠️ Step 1: Public Dataset Access
 
 Federal aviation data is openly published through several portals. Understanding the structure, update cadence, and access patterns for each source is essential before building ingestion pipelines.
 
@@ -220,7 +224,7 @@ Create a Data Factory pipeline `pl_ingest_dot_faa` with three Copy Activities:
 
 **Trigger:** Schedule monthly on the 15th to capture prior month BTS release (~45-day lag).
 
-> **:warning: Data Landing Zone Structure**
+> **⚠️ Data Landing Zone Structure**
 >
 > ```
 > Files/
@@ -235,7 +239,7 @@ Create a Data Factory pipeline `pl_ingest_dot_faa` with three Copy Activities:
 
 ---
 
-## :wrench: Step 2: FedRAMP Deployment Considerations
+## 🛠️ Step 2: FedRAMP Deployment Considerations
 
 Federal agencies must operate within authorized cloud environments. Microsoft Fabric is available in Government Community Cloud (GCC) and GCC-High configurations with FedRAMP authorization.
 
@@ -270,7 +274,7 @@ Understanding data sensitivity determines which environment to deploy in and wha
 | **SSI** | Sensitive Security Information | Vulnerability assessments, security plans | GCC-High |
 | **PII** | Personally Identifiable Information | Pilot records, passenger manifests | GCC with encryption |
 
-> **:bulb: For This Tutorial**
+> **💡 For This Tutorial**
 >
 > All datasets used in this tutorial are **publicly available** through BTS and FAA portals. A commercial Fabric instance is sufficient for the POC. When agencies move to production with internal data, GCC or GCC-High deployment is required based on data classification.
 
@@ -285,7 +289,7 @@ Understanding data sensitivity determines which environment to deploy in and wha
 
 ---
 
-## :wrench: Step 3: Bronze Layer -- Multi-Domain Ingestion
+## 🛠️ Step 3: Bronze Layer -- Multi-Domain Ingestion
 
 The Bronze layer captures raw DOT/FAA data across four domains: flight operations, safety incidents, traffic statistics, and airport infrastructure. This step references `notebooks/bronze/08_bronze_dot_faa.py`.
 
@@ -380,7 +384,7 @@ print(f"Batch: {BATCH_ID}")
 
 The same pattern applies for safety data. Define an explicit schema for incident fields (`incident_id`, `incident_date`, `incident_type`, `severity`, `airport_code`, `species`, `damage_level`, `cost_repairs`, etc.), read from `Files/landing/dot_faa/safety_incidents/`, add ingestion metadata (`_ingested_at`, `_source`, `_batch_id`), and append to `bronze_dot_safety`. See `notebooks/bronze/08_bronze_dot_faa.py` for the full implementation.
 
-> **:bulb: Verification**
+> **💡 Verification**
 >
 > ```python
 > # Verify Bronze tables
@@ -391,7 +395,7 @@ The same pattern applies for safety data. Define an explicit schema for incident
 
 ---
 
-## :wrench: Step 4: Silver Layer -- Validation & Enrichment
+## 🛠️ Step 4: Silver Layer -- Validation & Enrichment
 
 The Silver layer cleanses, validates, and enriches Bronze data. This step references `notebooks/silver/08_silver_dot_faa.py`. Key transformations include IATA code validation, delay categorization, carrier name standardization, and cross-source correlation.
 
@@ -540,7 +544,7 @@ Each record receives a `data_quality_score` (0-100) based on four 25-point check
 
 ---
 
-## :wrench: Step 5: Gold Layer -- Aviation Analytics
+## 🛠️ Step 5: Gold Layer -- Aviation Analytics
 
 The Gold layer produces business-ready analytics tables optimized for Power BI Direct Lake consumption. This step references `notebooks/gold/08_gold_dot_faa_analytics.py`.
 
@@ -746,7 +750,7 @@ DIVIDE(
 
 ---
 
-## :wrench: Step 6: Power BI Dashboard
+## 📊 Step 6: Power BI Dashboard
 
 ### 6.1 Flight Performance Scorecard
 
@@ -822,7 +826,7 @@ Build a `gold_dot_route_performance` table by grouping Silver flights on `origin
 
 ---
 
-## :wrench: Step 7: Agency Reporting
+## 📋 Step 7: Agency Reporting
 
 Federal aviation analytics must feed into several reporting channels: NTSB safety databases, Congressional oversight reports, and public data portals.
 
@@ -840,7 +844,7 @@ Aggregate Gold carrier performance into annual summaries grouped by `carrier_nam
 
 Prepare aggregated, anonymized datasets for data.gov by selecting non-PII columns from `gold_dot_carrier_performance` and adding metadata fields (`dataset_name`, `publisher`, `license: Public Domain (US Government Work)`, `published_date`). Export in both Parquet (for analysts) and CSV (for broad accessibility) to `Files/exports/public_portal/`.
 
-> **:bulb: Open Data Best Practices**
+> **💡 Open Data Best Practices**
 >
 > - Never include PII or SSI in public datasets
 > - Version datasets with `report_year` and `report_month` for reproducibility
@@ -848,7 +852,7 @@ Prepare aggregated, anonymized datasets for data.gov by selecting non-PII column
 
 ---
 
-## :wrench: Troubleshooting
+## 🔧 Troubleshooting
 
 | Symptom | Likely Cause | Solution |
 |---------|-------------|----------|
@@ -865,7 +869,7 @@ Prepare aggregated, anonymized datasets for data.gov by selecting non-PII column
 
 ---
 
-## :clipboard: Best Practices
+## 📐 Best Practices
 
 1. **Use explicit schemas at ingestion**: BTS file formats evolve across years. Defining `StructType` schemas in Bronze prevents silent column drift and ensures ingestion fails fast when formats change rather than producing corrupt downstream tables.
 
@@ -889,22 +893,22 @@ Prepare aggregated, anonymized datasets for data.gov by selecting non-PII column
 
 ---
 
-## :white_check_mark: Summary
+## ✅ Summary
 
 Congratulations! You have built a complete DOT/FAA aviation analytics pipeline on Microsoft Fabric, from public federal data sources through the medallion architecture to agency-ready dashboards and reports.
 
 ### What You Accomplished
 
-- :white_check_mark: Connected to BTS On-Time Performance, FAA Wildlife Strike, ASIAS, and T-100 datasets
-- :white_check_mark: Configured Data Factory pipelines for scheduled federal data ingestion
-- :white_check_mark: Understood FedRAMP Moderate/High requirements for GCC and GCC-High deployments
-- :white_check_mark: Classified DOT/FAA data domains and applied appropriate handling controls
-- :white_check_mark: Ingested multi-domain aviation data into Bronze Delta tables with full lineage
-- :white_check_mark: Validated IATA codes, categorized delays, standardized carriers, and correlated safety data in Silver
-- :white_check_mark: Built Gold layer analytics with carrier rankings, safety trends, and airport utilization
-- :white_check_mark: Created DAX measures for on-time performance, delay cost estimation, and safety scoring
-- :white_check_mark: Designed Power BI dashboards with performance scorecards, safety maps, and delay analysis
-- :white_check_mark: Generated NTSB, Congressional, and public data portal exports
+- ✅ Connected to BTS On-Time Performance, FAA Wildlife Strike, ASIAS, and T-100 datasets
+- ✅ Configured Data Factory pipelines for scheduled federal data ingestion
+- ✅ Understood FedRAMP Moderate/High requirements for GCC and GCC-High deployments
+- ✅ Classified DOT/FAA data domains and applied appropriate handling controls
+- ✅ Ingested multi-domain aviation data into Bronze Delta tables with full lineage
+- ✅ Validated IATA codes, categorized delays, standardized carriers, and correlated safety data in Silver
+- ✅ Built Gold layer analytics with carrier rankings, safety trends, and airport utilization
+- ✅ Created DAX measures for on-time performance, delay cost estimation, and safety scoring
+- ✅ Designed Power BI dashboards with performance scorecards, safety maps, and delay analysis
+- ✅ Generated NTSB, Congressional, and public data portal exports
 
 ### Key Takeaways
 
@@ -919,7 +923,7 @@ Congratulations! You have built a complete DOT/FAA aviation analytics pipeline o
 
 ---
 
-## :rocket: Next Steps
+## 🚀 Next Steps
 
 **Phase Complete!** You have reached the final tutorial in the Microsoft Fabric Casino & Federal Analytics POC series.
 
@@ -935,7 +939,7 @@ Congratulations! You have built a complete DOT/FAA aviation analytics pipeline o
 
 ---
 
-## :books: Resources
+## 📚 Resources
 
 | Resource | Link |
 |----------|------|
@@ -955,11 +959,11 @@ Congratulations! You have built a complete DOT/FAA aviation analytics pipeline o
 
 ---
 
-## :compass: Navigation
+## 🧭 Navigation
 
 | Previous | Up | Next |
 |:---------|:--:|-----:|
-| [:arrow_left: 30-Tribal Healthcare Analytics](../30-tribal-healthcare/README.md) | [:book: Tutorials Index](../README.md) | Phase Complete :tada: |
+| [⬅️ 30-Tribal Healthcare Analytics](../30-tribal-healthcare/README.md) | [📖 Tutorials Index](../README.md) | Phase Complete 🎉 |
 
 ---
 
@@ -970,3 +974,7 @@ Congratulations! You have built a complete DOT/FAA aviation analytics pipeline o
 *Tutorial 31 of 31 in the Microsoft Fabric Casino & Federal Analytics POC Series*
 
 </div>
+
+---
+
+[⬆️ Back to Top](#-tutorial-31-federal-dotfaa) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)

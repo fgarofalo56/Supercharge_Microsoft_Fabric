@@ -1,10 +1,22 @@
-# Tutorial 22: Networking and Connectivity
+[Home](../../docs/index.md) > [Tutorials](../) > Networking & Connectivity
 
-> **Home > Tutorials > Networking & Connectivity**
+# 🌐 Tutorial 22: Networking and Connectivity
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Difficulty](https://img.shields.io/badge/Difficulty-Advanced-red?style=for-the-badge)
+![Category](https://img.shields.io/badge/Category-Networking-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
+
+</div>
 
 ---
 
-## Overview
+## 🎯 Overview
 
 This hands-on tutorial walks you through implementing enterprise networking for Microsoft Fabric, including Private Endpoints, ExpressRoute, VPN configurations, and multi-cloud connectivity. Essential for organizations with hybrid infrastructure or strict compliance requirements.
 
@@ -22,7 +34,7 @@ This hands-on tutorial walks you through implementing enterprise networking for 
 
 ---
 
-## Learning Objectives
+## 📚 Learning Objectives
 
 By the end of this tutorial, you will be able to:
 
@@ -35,7 +47,7 @@ By the end of this tutorial, you will be able to:
 
 ---
 
-## Part 1: Private Endpoints
+## 🔒 Part 1: Private Endpoints
 
 ### Step 1.1: Architecture Overview
 
@@ -204,7 +216,7 @@ nslookup onelake.dfs.fabric.microsoft.com
 
 ---
 
-## Part 2: ExpressRoute Configuration
+## 🔌 Part 2: ExpressRoute Configuration
 
 ### Step 2.1: ExpressRoute Architecture
 
@@ -295,7 +307,7 @@ az network express-route peering create \
 
 ---
 
-## Part 3: VPN Gateway Configuration
+## 🛡️ Part 3: VPN Gateway Configuration
 
 ### Step 3.1: Site-to-Site VPN Architecture
 
@@ -419,7 +431,7 @@ route azure-tunnel 10.100.0.0 255.255.0.0 169.254.1.2
 
 ---
 
-## Part 4: Network Security Groups
+## 🔐 Part 4: Network Security Groups
 
 ### Step 4.1: Create NSG for Fabric Access
 
@@ -478,7 +490,7 @@ az network vnet subnet update \
 
 ---
 
-## Part 5: Multi-Cloud Connectivity
+## ☁️ Part 5: Multi-Cloud Connectivity
 
 ### Step 5.1: AWS S3 Shortcut Configuration
 
@@ -564,7 +576,7 @@ shortcut_config = {
 
 ---
 
-## Part 6: Compliance Network Configuration
+## 🏛️ Part 6: Compliance Network Configuration
 
 ### Step 6.1: PCI-DSS Network Requirements
 
@@ -697,7 +709,7 @@ audit_requirements:
 
 ---
 
-## Part 7: Monitoring and Troubleshooting
+## 📊 Part 7: Monitoring and Troubleshooting
 
 ### Step 7.1: Network Watcher Setup
 
@@ -743,7 +755,7 @@ az network express-route show \
 
 ---
 
-## Summary Checklist
+## ✅ Summary Checklist
 
 ### Private Endpoints
 - [ ] Created VNet and subnets
@@ -776,7 +788,7 @@ az network express-route show \
 
 ---
 
-## Additional Resources
+## 📖 Additional Resources
 
 - [Networking Documentation](../NETWORKING.md)
 - [Private Endpoints for Fabric](https://learn.microsoft.com/en-us/fabric/security/security-private-links-overview)
@@ -793,3 +805,7 @@ az network express-route show \
 ---
 
 > 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
+
+---
+
+[⬆️ Back to Top](#-tutorial-22-networking-and-connectivity) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)

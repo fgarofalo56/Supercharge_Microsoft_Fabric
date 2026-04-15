@@ -1,16 +1,41 @@
-# Workspaces & Naming Conventions
+[Home](../index.md) > [Best Practices](./) > Workspaces & Naming Conventions
 
-> **Best Practices > Workspaces & Naming Conventions**
+# ⚙️ Workspaces & Naming Conventions
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Configuration-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
+
+</div>
+
+## 📑 Table of Contents
+
+- [Overview](#-overview)
+- [Workspace Organization Patterns](#-workspace-organization-patterns)
+- [Workspace Configuration Checklist](#-workspace-configuration-checklist)
+- [Domain Organization](#-domain-organization)
+- [Naming Conventions](#-naming-conventions)
+- [Workspace Roles and Permissions](#-workspace-roles-and-permissions)
+- [Git Integration Best Practices](#-git-integration-best-practices)
+- [Anti-Patterns to Avoid](#-anti-patterns-to-avoid)
+- [Implementation Checklist](#-implementation-checklist)
+- [Sample Workspace Setup Script](#-sample-workspace-setup-script)
+- [Related Documents](#-related-documents)
 
 ---
 
-## Overview
+## 📋 Overview
 
 Proper workspace organization and consistent naming conventions are foundational to a successful Microsoft Fabric implementation. This guide covers workspace design patterns, domain organization, and naming standards.
 
 ---
 
-## Workspace Organization Patterns
+## 🏗️ Workspace Organization Patterns
 
 ### Pattern 1: Environment-Based Separation
 
@@ -64,7 +89,7 @@ domain-marketing/
 
 ---
 
-## Workspace Configuration Checklist
+## ✅ Workspace Configuration Checklist
 
 Access workspace settings by clicking the settings cog in the workspace:
 
@@ -97,7 +122,7 @@ Manage your Fabric capacities from the admin portal:
 
 ---
 
-## Domain Organization
+## 🌐 Domain Organization
 
 ### Planning Domains
 
@@ -147,7 +172,7 @@ flowchart TD
 
 ---
 
-## Naming Conventions
+## 🏷️ Naming Conventions
 
 ### General Principles
 
@@ -290,7 +315,7 @@ Examples:
 
 ---
 
-## Workspace Roles and Permissions
+## 🔐 Workspace Roles and Permissions
 
 ### Role Matrix
 
@@ -312,7 +337,7 @@ Examples:
 
 ---
 
-## Git Integration Best Practices
+## 🔀 Git Integration Best Practices
 
 ### Repository Structure
 
@@ -345,7 +370,7 @@ release/*     -> Test/UAT workspace
 
 ---
 
-## Anti-Patterns to Avoid
+## 🚫 Anti-Patterns to Avoid
 
 | Anti-Pattern | Problem | Better Approach |
 |--------------|---------|-----------------|
@@ -357,7 +382,7 @@ release/*     -> Test/UAT workspace
 
 ---
 
-## Implementation Checklist
+## 📝 Implementation Checklist
 
 ### Initial Setup
 - [ ] Define workspace naming convention
@@ -377,7 +402,7 @@ release/*     -> Test/UAT workspace
 
 ---
 
-## Sample Workspace Setup Script
+## 💻 Sample Workspace Setup Script
 
 ```powershell
 # Using Fabric REST API via PowerShell
@@ -418,4 +443,16 @@ Write-Host "Created workspace: $($workspace.id)"
 
 ---
 
-[Back to Best Practices Index](./README.md)
+## 🔗 Related Documents
+
+| Document | Description |
+|----------|-------------|
+| [Data Gateway Optimization](./02_DATA_GATEWAY.md) | Gateway configuration and performance tuning |
+| [Lakehouse Setup & Organization](./07_LAKEHOUSE_SETUP.md) | Lakehouse architecture and Delta Lake configuration |
+| [Warehouse Setup & Configuration](./08_WAREHOUSE_SETUP.md) | Warehouse schema design and optimization |
+| [Decision Guide](./10_DECISION_GUIDE.md) | Choosing the right tool for your scenario |
+| [Identity & RBAC Patterns](./identity-rbac-patterns.md) | Advanced role-based access control |
+
+---
+
+[⬆️ Back to Top](#-workspaces--naming-conventions) | [📚 Best Practices](./) | [🏠 Home](../index.md)

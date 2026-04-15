@@ -1,16 +1,40 @@
-# Oracle & SQL Server Source Patterns
+[Home](../index.md) > [Best Practices](./) > Source-Specific Patterns
 
-> **Best Practices > Source-Specific Patterns**
+# 🔌 Oracle & SQL Server Source Patterns
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Data_Sources-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
+
+</div>
+
+## 📑 Table of Contents
+
+- [Overview](#-overview)
+- [Oracle Extraction Patterns](#-oracle-extraction-patterns)
+- [SQL Server Extraction Patterns](#-sql-server-extraction-patterns)
+- [Logical Partitioning Patterns](#-logical-partitioning-patterns)
+- [Performance Benchmarks](#-performance-benchmarks)
+- [Gateway Optimization for Large Extractions](#-gateway-optimization-for-large-extractions)
+- [Incremental Load Patterns](#-incremental-load-patterns)
+- [Full Load vs Incremental Decision](#-full-load-vs-incremental-decision)
+- [Checklist](#-checklist)
+- [Related Documents](#-related-documents)
 
 ---
 
-## Overview
+## 📋 Overview
 
 Migrating data from Oracle and SQL Server to Microsoft Fabric requires specific patterns for optimal performance. This guide covers large table extraction, parallel loading, incremental patterns, and gateway optimization.
 
 ---
 
-## Oracle Extraction Patterns
+## 🟠 Oracle Extraction Patterns
 
 ### Connection Requirements
 
@@ -96,7 +120,7 @@ SELECT * FROM (
 
 ---
 
-## SQL Server Extraction Patterns
+## 🔵 SQL Server Extraction Patterns
 
 ### Connection Options
 
@@ -202,7 +226,7 @@ Copy Job Configuration:
 
 ---
 
-## Logical Partitioning Patterns
+## 🧩 Logical Partitioning Patterns
 
 ### Date-Based Chunking (Very Large Tables)
 
@@ -274,7 +298,7 @@ chunks = generate_id_chunks(1, 50000000, 1000000)  # 50M records, 1M per chunk
 
 ---
 
-## Performance Benchmarks
+## 📊 Performance Benchmarks
 
 ### Oracle to Lakehouse
 
@@ -299,7 +323,7 @@ chunks = generate_id_chunks(1, 50000000, 1000000)  # 50M records, 1M per chunk
 
 ---
 
-## Gateway Optimization for Large Extractions
+## 🌐 Gateway Optimization for Large Extractions
 
 ### Gateway Sizing for Oracle/SQL Server
 
@@ -336,7 +360,7 @@ chunks = generate_id_chunks(1, 50000000, 1000000)  # 50M records, 1M per chunk
 
 ---
 
-## Incremental Load Patterns
+## 🔄 Incremental Load Patterns
 
 ### Watermark-Based (Oracle)
 
@@ -409,7 +433,7 @@ chunks = generate_id_chunks(1, 50000000, 1000000)  # 50M records, 1M per chunk
 
 ---
 
-## Full Load vs Incremental Decision
+## 🧭 Full Load vs Incremental Decision
 
 ```mermaid
 flowchart TD
@@ -437,7 +461,7 @@ flowchart TD
 
 ---
 
-## Checklist
+## ✅ Checklist
 
 ### Pre-Migration
 
@@ -470,4 +494,17 @@ flowchart TD
 
 ---
 
-[Back to Best Practices Index](./README.md)
+## 🔗 Related Documents
+
+| Document | Description |
+|----------|-------------|
+| [Data Gateway Optimization](./02_DATA_GATEWAY.md) | Gateway configuration and sizing |
+| [Pipelines & Data Movement](./03_PIPELINES_DATA_MOVEMENT.md) | Pipeline optimization patterns |
+| [Oracle Gateway Troubleshooting](./11_ORACLE_GATEWAY_TROUBLESHOOTING.md) | Oracle-specific gateway troubleshooting |
+| [Metadata-Driven Pipelines](./04_METADATA_DRIVEN_PIPELINES.md) | Dynamic pipeline configuration |
+| [Migration Patterns](./migration-patterns.md) | Enterprise migration strategies |
+| [Mirroring](../features/mirroring.md) | Database mirroring feature |
+
+---
+
+[⬆️ Back to Top](#-oracle--sql-server-source-patterns) | [📚 Best Practices](./) | [🏠 Home](../index.md)

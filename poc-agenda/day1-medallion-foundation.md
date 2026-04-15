@@ -1,4 +1,19 @@
+[Home](../docs/index.md) > [POC Agenda](./) > Day 1: Medallion Foundation
+
 # 📅 Day 1: Medallion Foundation
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Workshop_Day_1-purple?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
+
+</div>
+
+---
 
 > 🏠 Home > 📆 POC Agenda > 🏗️ Day 1
 
@@ -641,6 +656,19 @@ ORDER BY avg_quality DESC;
 
 ---
 
+---
+
+## 📖 Related Documents
+
+| Document | Description |
+|:---------|:-----------|
+| [POC Overview](./README.md) | 3-day workshop overview |
+| [Day 2: Transformations & Real-Time](./day2-transformations-realtime.md) | Next day's session guide |
+| [Instructor Guide](./instructor-guide/README.md) | Facilitator notes for Day 1 |
+| [Demo Runbook](./DEMO_RUNBOOK.md) | Live demo presenter guide |
+
+---
+
 <div align="center">
 
 **Day 1 Complete!**
@@ -652,6 +680,6 @@ Overall POC: ███░░░░░░░ 33% Complete
 
 ---
 
-[⬅️ POC Overview](./README.md) | [Day 2: Transformations ➡️](./day2-transformations-realtime.md)
+[⬆️ Back to Top](#-day-1-medallion-foundation) | [📚 POC Agenda](./) | [🏠 Home](../docs/index.md)
 
 </div>

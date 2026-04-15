@@ -1,4 +1,19 @@
-# 📘 Instructor Guide - Casino Fabric POC
+[Home](../../docs/index.md) > [POC Agenda](../) > Instructor Guide
+
+# 👩‍🏫 Instructor Guide - Casino Fabric POC
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Instructor_Guide-purple?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
+
+</div>
+
+---
 
 > 🏠 Home > 📆 POC Agenda > 📘 Instructor Guide
 
@@ -725,6 +740,21 @@ Collect the following:
 
 ---
 
+---
+
+## 📖 Related Documents
+
+| Document | Description |
+|:---------|:-----------|
+| [POC Overview](../README.md) | 3-day workshop overview |
+| [Day 1 Guide](../day1-medallion-foundation.md) | Day 1 detailed session guide |
+| [Day 2 Guide](../day2-transformations-realtime.md) | Day 2 detailed session guide |
+| [Day 3 Guide](../day3-bi-governance-mirroring.md) | Day 3 detailed session guide |
+| [Demo Runbook](../DEMO_RUNBOOK.md) | Live demo presenter guide |
+| [Diagram Guide](../DIAGRAM_GUIDE.md) | Mermaid diagram reference |
+
+---
+
 <div align="center">
 
 **Instructor Guide Quick Reference**
@@ -737,6 +767,6 @@ Collect the following:
 
 ---
 
-[⬅️ POC Overview](../README.md) | [Day 1 Guide ➡️](../day1-medallion-foundation.md)
+[⬆️ Back to Top](#-instructor-guide---casino-fabric-poc) | [📚 POC Agenda](../) | [🏠 Home](../../docs/index.md)
 
 </div>

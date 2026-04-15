@@ -1,5 +1,8 @@
 # 📋 Tutorial 13: Enterprise Migration Planning & Delivery
 
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
 <div align="center">
 
 ![Difficulty](https://img.shields.io/badge/⭐_Difficulty-Expert-purple?style=for-the-badge)
@@ -1187,3 +1190,7 @@ This comprehensive migration guide provides:
 | ⬅️ Previous | ⬆️ Up | ➡️ Next |
 |------------|------|--------|
 | [12-CI/CD DevOps](../12-cicd-devops/README.md) | [Tutorials Index](../README.md) | [Tutorials Home](../README.md) |
+
+---
+
+[⬆️ Back to Top](#-tutorial-13-enterprise-migration-planning--delivery) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)

@@ -1,16 +1,41 @@
-# Disaster Recovery & Business Continuity
+[Home](index.md) > [Docs](./) > Disaster Recovery
 
-> **Home > Documentation > Disaster Recovery**
+# 🔄 Disaster Recovery & Business Continuity
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Business_Continuity-critical?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
+
+</div>
 
 ---
 
-## Overview
+## 📑 Table of Contents
+
+- [🎯 Overview](#-overview)
+- [⏱️ Recovery Objectives](#️-recovery-objectives)
+- [🏗️ Architecture: Multi-Region Deployment](#️-architecture-multi-region-deployment)
+- [💾 Backup Strategy](#-backup-strategy)
+- [🔀 Failover Procedures](#-failover-procedures)
+- [📡 Monitoring & Alerting](#-monitoring--alerting)
+- [🧪 Testing Schedule](#-testing-schedule)
+- [📞 Contact Information](#-contact-information)
+- [📋 Regulatory Compliance](#-regulatory-compliance)
+
+---
+
+## 🎯 Overview
 
 This document outlines the disaster recovery (DR) and business continuity (BC) strategy for the Microsoft Fabric Casino Analytics platform. Gaming operations require high availability and rapid recovery to meet regulatory requirements and minimize business impact.
 
 ---
 
-## Recovery Objectives
+## ⏱️ Recovery Objectives
 
 ### Recovery Time Objective (RTO)
 
@@ -34,7 +59,7 @@ This document outlines the disaster recovery (DR) and business continuity (BC) s
 
 ---
 
-## Architecture: Multi-Region Deployment
+## 🏗️ Architecture: Multi-Region Deployment
 
 ```
                     Primary Region (East US 2)              DR Region (West US 2)
@@ -60,7 +85,7 @@ This document outlines the disaster recovery (DR) and business continuity (BC) s
 
 ---
 
-## Backup Strategy
+## 💾 Backup Strategy
 
 ### OneLake Data Protection
 
@@ -137,7 +162,7 @@ foreach ($report in $reports) {
 
 ---
 
-## Failover Procedures
+## 🔀 Failover Procedures
 
 ### Scenario 1: Primary Region Failure
 
@@ -279,7 +304,7 @@ sequenceDiagram
 
 ---
 
-## Monitoring & Alerting
+## 📡 Monitoring & Alerting
 
 ### Health Check Queries
 
@@ -320,7 +345,7 @@ SlotTelemetry
 
 ---
 
-## Testing Schedule
+## 🧪 Testing Schedule
 
 | Test Type | Frequency | Duration | Participants |
 |-----------|-----------|----------|--------------|
@@ -360,7 +385,7 @@ SlotTelemetry
 
 ---
 
-## Contact Information
+## 📞 Contact Information
 
 ### Escalation Path
 
@@ -393,7 +418,7 @@ FOLLOW-UP: [Actions]
 
 ---
 
-## Regulatory Compliance
+## 📋 Regulatory Compliance
 
 ### Gaming Commission Requirements
 
@@ -412,4 +437,19 @@ FOLLOW-UP: [Actions]
 
 ---
 
-[Back to Documentation](./README.md)
+## 📚 Related Documentation
+
+| Document | Description |
+|----------|-------------|
+| [🏗️ Architecture](ARCHITECTURE.md) | System architecture and design |
+| [🔐 Security Guide](SECURITY.md) | Security controls and compliance |
+| [🚀 Deployment Guide](DEPLOYMENT.md) | Infrastructure deployment |
+
+---
+
+[⬆️ Back to Top](#-disaster-recovery--business-continuity) | [📚 Docs](./) | [🏠 Home](index.md)
+
+---
+
+> 📖 **Documentation maintained by:** Microsoft Fabric POC Team
+> 🔗 **Repository:** [Suppercharge_Microsoft_Fabric](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric)

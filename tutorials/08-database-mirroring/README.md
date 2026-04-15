@@ -1,5 +1,8 @@
 # 🔄 Tutorial 08: Database Mirroring
 
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
 > **🏠 [Home](../../README.md)** > **📖 [Tutorials](../README.md)** > **🔄 Database Mirroring**
 
 ---
@@ -795,3 +798,7 @@ Continue to **[Tutorial 09: Advanced AI/ML](../09-advanced-ai-ml/README.md)** to
 ---
 
 > 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
+
+---
+
+[⬆️ Back to Top](#-tutorial-08-database-mirroring) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)

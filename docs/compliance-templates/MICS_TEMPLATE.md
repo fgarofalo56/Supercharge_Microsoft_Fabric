@@ -1,16 +1,27 @@
-# NIGC MICS Compliance Template
+[Home](../index.md) > [Docs](..) > [Compliance Templates](./) > MICS Template
 
-> **Home > Documentation > Compliance Templates > MICS**
+# 🏛️ MICS Compliance Template
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Compliance-red)
+![Status](https://img.shields.io/badge/Status-Final-green)
+![Authority](https://img.shields.io/badge/Authority-NIGC-blue)
+
+</div>
 
 ---
 
-## Overview
+## 📖 Overview
 
 This template provides guidance for implementing and reporting on National Indian Gaming Commission (NIGC) Minimum Internal Control Standards (MICS) requirements using the Casino Analytics platform.
 
 ---
 
-## Regulatory Framework
+## 📜 Regulatory Framework
 
 | Requirement | Details |
 |-------------|---------|
@@ -21,7 +32,7 @@ This template provides guidance for implementing and reporting on National India
 
 ---
 
-## MICS Categories
+## 📑 MICS Categories
 
 ### Part 542 - Minimum Internal Control Standards
 
@@ -38,7 +49,7 @@ This template provides guidance for implementing and reporting on National India
 
 ---
 
-## Gaming Machine Controls (542.19)
+## 🎰 Gaming Machine Controls (542.19)
 
 ### Required Data Points
 
@@ -167,7 +178,7 @@ ORDER BY ABS(variance) DESC;
 
 ---
 
-## Drop and Count Procedures (542.21)
+## 📦 Drop and Count Procedures (542.21)
 
 ### Drop Schedule Tracking
 
@@ -218,7 +229,7 @@ def verify_drop_compliance(report_date: str):
 
 ---
 
-## Surveillance Requirements (542.31)
+## 📹 Surveillance Requirements (542.31)
 
 ### Camera Coverage Verification
 
@@ -250,7 +261,7 @@ HAVING SUM(CASE WHEN status = 'OFFLINE' THEN 1 ELSE 0 END) > 0
 
 ---
 
-## Audit Reports
+## 📊 Audit Reports
 
 ### Monthly MICS Compliance Summary
 
@@ -323,7 +334,7 @@ def generate_mics_compliance_report(report_month: str):
 
 ---
 
-## Variance Thresholds
+## ⚠️ Variance Thresholds
 
 | Category | Warning | Alert | Investigation |
 |----------|---------|-------|---------------|
@@ -334,7 +345,7 @@ def generate_mics_compliance_report(report_month: str):
 
 ---
 
-## Documentation Requirements
+## 📂 Documentation Requirements
 
 ### Required Records
 
@@ -348,7 +359,7 @@ def generate_mics_compliance_report(report_month: str):
 
 ---
 
-## Audit Preparation Checklist
+## ✅ Audit Preparation Checklist
 
 - [ ] All meter readings documented and reconciled
 - [ ] Drop schedules complete with dual signatures
@@ -362,7 +373,7 @@ def generate_mics_compliance_report(report_month: str):
 
 ---
 
-## Contact
+## 📞 Contact
 
 **Gaming Commission Liaison:** gaming-compliance@casino.com
 **Internal Audit:** internal-audit@casino.com
@@ -370,4 +381,18 @@ def generate_mics_compliance_report(report_month: str):
 
 ---
 
-[Back to Compliance Templates](./README.md)
+---
+
+## 🔗 Related Documents
+
+| Document | Description |
+|----------|-------------|
+| [Compliance Templates Overview](./README.md) | Index of all compliance templates |
+| [CTR Template](./CTR_TEMPLATE.md) | Currency Transaction Report template |
+| [SAR Template](./SAR_TEMPLATE.md) | Suspicious Activity Report template |
+| [W-2G Template](./W2G_TEMPLATE.md) | Gambling winnings tax reporting |
+| [Data Dictionary](../data-dictionary/README.md) | Table schemas and field definitions |
+
+---
+
+[⬆️ Back to Top](#-mics-compliance-template) | [📚 Parent](./) | [🏠 Home](../index.md)

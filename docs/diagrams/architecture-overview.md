@@ -1,8 +1,17 @@
-# 📊 Architecture Diagrams
+[Home](../index.md) > [Docs](..) > [Diagrams](./) > Architecture Overview
 
-> 🏠 [Home](../../index.md) > 📚 [Docs](../) > 📊 Architecture Diagrams
+# 🏗️ Architecture Overview Diagram
 
-**Last Updated:** `2025-01-21` | **Version:** 1.0.0
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Architecture-blue)
+![Status](https://img.shields.io/badge/Status-Final-green)
+![Platform](https://img.shields.io/badge/Platform-Microsoft%20Fabric-purple)
+
+</div>
 
 ---
 
@@ -421,19 +430,16 @@ Reference these diagrams for lineage documentation in Microsoft Purview data cat
 
 ---
 
-## 📚 Related Documentation
+## 🔗 Related Documents
 
 | Document | Description |
 |----------|-------------|
-| [🏗️ Architecture](../ARCHITECTURE.md) | Full architecture documentation |
-| [🚀 Deployment Guide](../DEPLOYMENT.md) | Infrastructure deployment |
-| [🔐 Security Guide](../SECURITY.md) | Security controls |
+| [Architecture](../ARCHITECTURE.md) | Full architecture documentation |
+| [Deployment Guide](../DEPLOYMENT.md) | Infrastructure deployment |
+| [Security Guide](../SECURITY.md) | Security controls |
+| [Cost Breakdown](./cost-breakdown.md) | Cost analysis diagrams |
+| [Data Dictionary](../data-dictionary/README.md) | Table schemas and field definitions |
 
 ---
 
-[⬆️ Back to top](#-architecture-diagrams)
-
----
-
-> 📖 **Documentation maintained by:** Microsoft Fabric POC Team
-> 🔗 **Repository:** [Suppercharge_Microsoft_Fabric](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric)
+[⬆️ Back to Top](#-architecture-overview-diagram) | [📚 Parent](./) | [🏠 Home](../index.md)

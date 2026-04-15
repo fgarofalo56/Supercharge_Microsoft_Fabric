@@ -1,16 +1,27 @@
-# Compliance Report Templates
+[Home](../index.md) > [Docs](..) > [Compliance Templates](./) > Overview
 
-> **Home > Documentation > Compliance Templates**
+# 📋 Compliance Templates
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Compliance-red)
+![Status](https://img.shields.io/badge/Status-Final-green)
+![Regulation](https://img.shields.io/badge/Regulation-BSA%20%7C%20FinCEN%20%7C%20IRS-blue)
+
+</div>
 
 ---
 
-## Overview
+## 📖 Overview
 
 This directory contains templates and data extraction scripts for gaming regulatory compliance reports. These templates are designed to meet the requirements of various gaming commissions and federal regulations.
 
 ---
 
-## Template Index
+## 📑 Template Index
 
 | Template | Regulation | Authority | Filing Deadline |
 |----------|------------|-----------|-----------------|
@@ -21,7 +32,7 @@ This directory contains templates and data extraction scripts for gaming regulat
 
 ---
 
-## Regulatory Framework
+## 🏛️ Regulatory Framework
 
 ### Federal Requirements
 
@@ -44,7 +55,7 @@ Gaming regulations vary by jurisdiction. Common requirements include:
 
 ---
 
-## Data Sources
+## 🗄️ Data Sources
 
 All compliance reports draw from these platform tables:
 
@@ -58,7 +69,7 @@ All compliance reports draw from these platform tables:
 
 ---
 
-## Automation
+## ⚙️ Automation
 
 ### Daily Compliance Checks
 
@@ -95,7 +106,7 @@ flowchart LR
 
 ---
 
-## Best Practices
+## ✅ Best Practices
 
 1. **Automate Threshold Monitoring** - Use real-time queries to flag reportable events
 2. **Maintain Audit Trail** - Log all compliance decisions and filings
@@ -105,11 +116,23 @@ flowchart LR
 
 ---
 
-## Contact
+## 📞 Contact
 
 **Compliance Questions:** compliance@casino.com
 **Technical Support:** data-engineering@casino.com
 
 ---
 
-[Back to Documentation](../index.md)
+## 🔗 Related Documents
+
+| Document | Description |
+|----------|-------------|
+| [CTR Template](./CTR_TEMPLATE.md) | Currency Transaction Report data extraction template |
+| [SAR Template](./SAR_TEMPLATE.md) | Suspicious Activity Report detection and filing |
+| [W-2G Template](./W2G_TEMPLATE.md) | Gambling winnings tax reporting template |
+| [MICS Template](./MICS_TEMPLATE.md) | NIGC Minimum Internal Control Standards |
+| [Data Governance](../best-practices/data-governance-deep-dive.md) | Governance and compliance frameworks |
+
+---
+
+[⬆️ Back to Top](#-compliance-templates) | [📚 Parent](./) | [🏠 Home](../index.md)

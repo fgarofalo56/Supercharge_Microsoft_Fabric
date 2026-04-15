@@ -1,16 +1,44 @@
-# Oracle to Fabric: Gateway & Pipeline Troubleshooting
+[Home](../index.md) > [Best Practices](./) > Oracle Gateway Troubleshooting
 
-> **Best Practices > Oracle Gateway Troubleshooting**
+# 🔧 Oracle to Fabric: Gateway & Pipeline Troubleshooting
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Troubleshooting-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
+
+</div>
+
+## 📑 Table of Contents
+
+- [Overview](#-overview)
+- [Step-by-Step Configuration Guide](#-step-by-step-configuration-guide)
+- [Common Issues Checklist](#-common-issues-checklist)
+- [Gateway Configuration](#-gateway-configuration)
+- [ForEach Parallelism Issues](#-foreach-parallelism-issues)
+- [Enable Oracle Parallel Copy](#-enable-oracle-parallel-copy)
+- [Oracle Connection Limits](#-oracle-connection-limits)
+- [Complete Optimized Pipeline Example](#-complete-optimized-pipeline-example)
+- [Monitoring and Diagnostics](#-monitoring-and-diagnostics)
+- [Troubleshooting Decision Tree](#-troubleshooting-decision-tree)
+- [Quick Fix Summary](#-quick-fix-summary)
+- [Anti-Virus Exclusions](#-anti-virus-exclusions)
+- [Gateway Cluster for High Availability](#-gateway-cluster-for-high-availability)
+- [Related Documents](#-related-documents)
 
 ---
 
-## Overview
+## 📋 Overview
 
 This guide addresses common issues when moving data from on-premises Oracle to Microsoft Fabric, including slow gateway performance, ForEach loops not running in parallel, and maximizing concurrent connections.
 
 ---
 
-## Step-by-Step Configuration Guide
+## 📝 Step-by-Step Configuration Guide
 
 Follow these steps in order to configure optimal Oracle-to-Fabric data movement.
 
@@ -258,19 +286,19 @@ Gateway Containers ≥ ForEach batchCount × 2
 
 ---
 
-## Common Issues Checklist
+## ⚠️ Common Issues Checklist
 
 | Symptom | Likely Cause | Solution Section |
 |---------|--------------|------------------|
-| ForEach not running in parallel | Gateway bottleneck or Sequential=true | [ForEach Parallelism](#foreach-parallelism-issues) |
-| Slow copy despite high batchCount | Gateway container limits | [Gateway Configuration](#gateway-configuration) |
-| Throttling errors (429) | Too many concurrent requests | [Concurrency Limits](#oracle-connection-limits) |
-| Gateway memory errors | Insufficient container memory | [Container Settings](#mashup-container-configuration) |
-| Single-threaded copy | No partitioning enabled | [Parallel Copy](#enable-oracle-parallel-copy) |
+| ForEach not running in parallel | Gateway bottleneck or Sequential=true | [ForEach Parallelism](#-foreach-parallelism-issues) |
+| Slow copy despite high batchCount | Gateway container limits | [Gateway Configuration](#-gateway-configuration) |
+| Throttling errors (429) | Too many concurrent requests | [Oracle Connection Limits](#-oracle-connection-limits) |
+| Gateway memory errors | Insufficient container memory | [Gateway Configuration](#-gateway-configuration) |
+| Single-threaded copy | No partitioning enabled | [Enable Oracle Parallel Copy](#-enable-oracle-parallel-copy) |
 
 ---
 
-## Gateway Configuration
+## 🌐 Gateway Configuration
 
 ### Step 1: Verify Gateway Version
 
@@ -346,7 +374,7 @@ Recommended RAM = Containers × 512 MB + 4 GB base
 
 ---
 
-## ForEach Parallelism Issues
+## 🔄 ForEach Parallelism Issues
 
 ### Why ForEach Might Not Run in Parallel
 
@@ -417,7 +445,7 @@ Oracle may limit concurrent connections.
 
 **Diagnosis:** Check Oracle alert log for connection errors.
 
-**Fix:** See [Oracle Connection Limits](#oracle-connection-limits) section.
+**Fix:** See [Oracle Connection Limits](#-oracle-connection-limits) section.
 
 ### ForEach Behavior Deep Dive
 
@@ -442,7 +470,7 @@ Queue 3: [Item3] → [Item6] → [Item9] (sequential)
 
 ---
 
-## Enable Oracle Parallel Copy
+## ⚡ Enable Oracle Parallel Copy
 
 ### The Most Important Setting for Oracle Performance
 
@@ -521,7 +549,7 @@ Effective Parallelism = min(
 
 ---
 
-## Oracle Connection Limits
+## 🔐 Oracle Connection Limits
 
 ### Oracle-Side Configuration
 
@@ -566,7 +594,7 @@ ALTER SYSTEM SET sessions = 572 SCOPE=SPFILE;
 
 ---
 
-## Complete Optimized Pipeline Example
+## 🏗️ Complete Optimized Pipeline Example
 
 ### Pipeline: Parallel Oracle to Lakehouse
 
@@ -651,7 +679,7 @@ ALTER SYSTEM SET sessions = 572 SCOPE=SPFILE;
 
 ---
 
-## Monitoring and Diagnostics
+## 📊 Monitoring and Diagnostics
 
 ### Enable Gateway Logging
 
@@ -699,7 +727,7 @@ If start times are staggered, parallelism is limited.
 
 ---
 
-## Troubleshooting Decision Tree
+## 🔍 Troubleshooting Decision Tree
 
 ```mermaid
 flowchart TD
@@ -731,7 +759,7 @@ flowchart TD
 
 ---
 
-## Quick Fix Summary
+## 🚀 Quick Fix Summary
 
 ### Immediate Actions
 
@@ -777,7 +805,7 @@ Restart-Service PBIEgwService
 
 ---
 
-## Anti-Virus Exclusions
+## 🛡️ Anti-Virus Exclusions
 
 Add these folders to anti-virus exclusions for better performance:
 
@@ -789,7 +817,7 @@ C:\Program Files\On-premises data gateway
 
 ---
 
-## Gateway Cluster for High Availability
+## 🔗 Gateway Cluster for High Availability
 
 For maximum throughput, deploy a gateway cluster:
 
@@ -819,4 +847,16 @@ Example: 3 nodes × 32 = 96 concurrent operations
 
 ---
 
-[Back to Best Practices Index](./README.md)
+## 🔗 Related Documents
+
+| Document | Description |
+|----------|-------------|
+| [Data Gateway Optimization](./02_DATA_GATEWAY.md) | General gateway configuration and sizing |
+| [Source-Specific Patterns](./09_SOURCE_SPECIFIC_PATTERNS.md) | Oracle and SQL Server extraction patterns |
+| [Pipelines & Data Movement](./03_PIPELINES_DATA_MOVEMENT.md) | Pipeline optimization patterns |
+| [Metadata-Driven Pipelines](./04_METADATA_DRIVEN_PIPELINES.md) | Dynamic pipeline configuration |
+| [Network Security](./network-security.md) | Network security and firewall rules |
+
+---
+
+[⬆️ Back to Top](#-oracle-to-fabric-gateway--pipeline-troubleshooting) | [📚 Best Practices](./) | [🏠 Home](../index.md)

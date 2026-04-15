@@ -1,10 +1,12 @@
-# :handshake: Contributing Guide
+# 🤝 Contributing Guide
 
-> **[Home](README.md)** | **[Tutorials](tutorials/)** | **[Data Generation](data_generation/)** | **[Validation](validation/)**
-
----
+> **Last Updated:** 2026-04-15 | **Version:** 2.1.0 | **Status:** Active
 
 <div align="center">
+
+![Contributions](https://img.shields.io/badge/🤝_Contributions-Welcome-brightgreen?style=for-the-badge)
+![License](https://img.shields.io/badge/📄_License-MIT-blue?style=for-the-badge)
+![PRs](https://img.shields.io/badge/🔀_PRs-Open-orange?style=for-the-badge)
 
 **Thank you for your interest in contributing to the Microsoft Fabric Casino/Gaming POC!**
 
@@ -14,7 +16,24 @@ We welcome contributions from data engineers, architects, and industry experts.
 
 ---
 
-## Code of Conduct
+## 📑 Table of Contents
+
+- [📜 Code of Conduct](#-code-of-conduct)
+- [🚀 How to Contribute](#-how-to-contribute)
+- [🛠️ Development Setup](#️-development-setup)
+- [🧪 Running Tests](#-running-tests)
+- [🎨 Code Style](#-code-style)
+- [📝 Commit Messages](#-commit-messages)
+- [📁 Project Structure](#-project-structure)
+- [🔀 Pull Request Process](#-pull-request-process)
+- [👀 Review Process](#-review-process)
+- [❓ Getting Help](#-getting-help)
+- [🏆 Recognition](#-recognition)
+- [📄 License](#-license)
+
+---
+
+## 📜 Code of Conduct
 
 This project follows the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). By participating, you agree to abide by its terms.
 
@@ -27,7 +46,7 @@ This project follows the [Microsoft Open Source Code of Conduct](https://opensou
 
 ---
 
-## How to Contribute
+## 🚀 How to Contribute
 
 ### Reporting Issues
 
@@ -81,7 +100,7 @@ This project follows the [Microsoft Open Source Code of Conduct](https://opensou
 
 ---
 
-## Development Setup
+## 🛠️ Development Setup
 
 ### Prerequisites
 
@@ -128,7 +147,7 @@ ruff check .
 
 ---
 
-## Running Tests
+## 🧪 Running Tests
 
 ### Unit Tests
 
@@ -162,7 +181,7 @@ great_expectations checkpoint run all_checkpoints
 
 ---
 
-## Code Style
+## 🎨 Code Style
 
 We maintain consistent code quality using these tools:
 
@@ -200,7 +219,7 @@ mypy data_generation/
 
 ---
 
-## Commit Messages
+## 📝 Commit Messages
 
 Follow [Conventional Commits](https://www.conventionalcommits.org/) specification:
 
@@ -248,7 +267,7 @@ time estimates based on POC feedback."
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 Suppercharge_Microsoft_Fabric/
@@ -275,7 +294,7 @@ Suppercharge_Microsoft_Fabric/
 
 ---
 
-## Pull Request Process
+## 🔀 Pull Request Process
 
 ### Before Submitting
 
@@ -330,7 +349,7 @@ Suppercharge_Microsoft_Fabric/
 
 ---
 
-## Review Process
+## 👀 Review Process
 
 ```
 +------------------+     +------------------+     +------------------+
@@ -360,7 +379,7 @@ Suppercharge_Microsoft_Fabric/
 
 ---
 
-## Getting Help
+## ❓ Getting Help
 
 | Channel | Purpose |
 |---------|---------|
@@ -372,7 +391,7 @@ Suppercharge_Microsoft_Fabric/
 
 ---
 
-## Recognition
+## 🏆 Recognition
 
 Contributors are recognized in:
 
@@ -384,7 +403,7 @@ Contributors are recognized in:
 
 ---
 
-## License
+## 📄 License
 
 By contributing, you agree that your contributions will be licensed under the MIT License.
 
@@ -396,6 +415,6 @@ By contributing, you agree that your contributions will be licensed under the MI
 
 Your contributions help make this project better for everyone.
 
-**[Back to Top](#handshake-contributing-guide)** | **[Main README](README.md)**
+[⬆️ Back to Top](#-contributing-guide) | [📚 Docs](docs/index.md) | [🏠 Main README](README.md)
 
 </div>

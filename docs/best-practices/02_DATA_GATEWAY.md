@@ -1,10 +1,36 @@
-# Data Gateway Optimization
+[Home](../index.md) > [Best Practices](./) > Data Gateway Optimization
 
-> **Best Practices > Data Gateway Optimization**
+# 🌐 Data Gateway Optimization
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Data_Gateway-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
+
+</div>
+
+## 📑 Table of Contents
+
+- [Overview](#-overview)
+- [Gateway Types](#-gateway-types)
+- [Gateway Sizing Guidelines](#-gateway-sizing-guidelines)
+- [Parallel and Concurrent Connections](#-parallel-and-concurrent-connections)
+- [Performance Optimization](#-performance-optimization)
+- [High Availability Clustering](#-high-availability-clustering)
+- [Gateway for Fabric Pipelines](#-gateway-for-fabric-pipelines)
+- [Monitoring and Troubleshooting](#-monitoring-and-troubleshooting)
+- [Gateway Configuration Script](#-gateway-configuration-script)
+- [Best Practices Summary](#-best-practices-summary)
+- [Capacity Planning Calculator](#-capacity-planning-calculator)
+- [Related Documents](#-related-documents)
 
 ---
 
-## Overview
+## 📋 Overview
 
 The on-premises data gateway is critical for connecting Fabric to on-premises data sources like Oracle, SQL Server, and file systems. Proper configuration dramatically impacts data movement performance.
 
@@ -14,7 +40,7 @@ The on-premises data gateway is critical for connecting Fabric to on-premises da
 
 ---
 
-## Gateway Types
+## 🔌 Gateway Types
 
 | Gateway Type | Use Case | Management | Best For |
 |--------------|----------|------------|----------|
@@ -26,7 +52,7 @@ The on-premises data gateway is critical for connecting Fabric to on-premises da
 
 ---
 
-## Gateway Sizing Guidelines
+## 📐 Gateway Sizing Guidelines
 
 ### Hardware Requirements
 
@@ -45,7 +71,7 @@ Estimated RAM = (Concurrent Operations × 512 MB) + 4 GB base
 
 ---
 
-## Parallel and Concurrent Connections
+## 🔄 Parallel and Concurrent Connections
 
 ### Mashup Container Configuration
 
@@ -88,7 +114,7 @@ The gateway uses "mashup containers" to execute queries. Key settings in `Micros
 
 ---
 
-## Performance Optimization
+## ⚡ Performance Optimization
 
 ### Network Optimization
 
@@ -128,7 +154,7 @@ Default: C:\Users\PBIEgwService\AppData\Local\Microsoft\On-premises data gateway
 
 ---
 
-## High Availability Clustering
+## 🔗 High Availability Clustering
 
 ### Cluster Configuration
 
@@ -168,7 +194,7 @@ flowchart LR
 
 ---
 
-## Gateway for Fabric Pipelines
+## 🔧 Gateway for Fabric Pipelines
 
 ### Required Firewall Rules
 
@@ -192,7 +218,7 @@ Pipeline Copy Activity Settings:
 
 ---
 
-## Monitoring and Troubleshooting
+## 📊 Monitoring and Troubleshooting
 
 ### Enable Additional Logging
 
@@ -224,7 +250,7 @@ Monitor these Windows performance counters:
 
 ---
 
-## Gateway Configuration Script
+## 💻 Gateway Configuration Script
 
 ```powershell
 # Gateway Configuration Helper Script
@@ -268,7 +294,7 @@ $config | Format-Table -AutoSize
 
 ---
 
-## Best Practices Summary
+## ✅ Best Practices Summary
 
 ### Do's
 - Use Standard Mode gateway for production
@@ -287,7 +313,7 @@ $config | Format-Table -AutoSize
 
 ---
 
-## Capacity Planning Calculator
+## 🧮 Capacity Planning Calculator
 
 ```python
 # Gateway Sizing Calculator
@@ -343,4 +369,16 @@ for key, value in sizing.items():
 
 ---
 
-[Back to Best Practices Index](./README.md)
+## 🔗 Related Documents
+
+| Document | Description |
+|----------|-------------|
+| [Workspaces & Naming Conventions](./01_WORKSPACES_NAMING.md) | Workspace organization and naming standards |
+| [Pipelines & Data Movement](./03_PIPELINES_DATA_MOVEMENT.md) | Pipeline optimization and load patterns |
+| [Source-Specific Patterns](./09_SOURCE_SPECIFIC_PATTERNS.md) | Oracle and SQL Server extraction patterns |
+| [Oracle Gateway Troubleshooting](./11_ORACLE_GATEWAY_TROUBLESHOOTING.md) | Gateway troubleshooting for Oracle workloads |
+| [Network Security](./network-security.md) | Network security and firewall configuration |
+
+---
+
+[⬆️ Back to Top](#-data-gateway-optimization) | [📚 Best Practices](./) | [🏠 Home](../index.md)

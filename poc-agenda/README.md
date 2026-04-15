@@ -1,10 +1,21 @@
+[Home](../docs/index.md) > POC Agenda
+
 # 🎰 3-Day POC Agenda
 
-> 🏠 Home > 📆 POC Agenda
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Workshop-purple?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
+
+</div>
 
 ---
 
-## Casino/Gaming Microsoft Fabric POC Workshop
+## 🎲 Casino/Gaming Microsoft Fabric POC Workshop
 
 ![Microsoft Fabric Overview](https://learn.microsoft.com/en-us/fabric/get-started/media/microsoft-fabric-overview/fabric-architecture.png)
 
@@ -408,6 +419,20 @@ Upon completion, the team will have:
 
 ---
 
+## 📖 Related Documents
+
+| Document | Description |
+|:---------|:-----------|
+| [Day 1: Medallion Foundation](./day1-medallion-foundation.md) | Detailed Day 1 session guide |
+| [Day 2: Transformations & Real-Time](./day2-transformations-realtime.md) | Detailed Day 2 session guide |
+| [Day 3: BI & Governance](./day3-bi-governance-mirroring.md) | Detailed Day 3 session guide |
+| [Federal Agency Tracks](./federal-agency-tracks.md) | Supplemental federal workshop tracks |
+| [Demo Runbook](./DEMO_RUNBOOK.md) | Live demo presenter guide |
+| [Diagram Guide](./DIAGRAM_GUIDE.md) | Mermaid diagram reference |
+| [Instructor Guide](./instructor-guide/README.md) | Facilitator preparation guide |
+
+---
+
 <div align="center">
 
 **Session Type Legend**
@@ -420,6 +445,6 @@ Upon completion, the team will have:
 
 ---
 
-[⬅️ Back to Main](../README.md) | [Day 1 ➡️](./day1-medallion-foundation.md)
+[⬆️ Back to Top](#-3-day-poc-agenda) | [📚 POC Agenda](./) | [🏠 Home](../docs/index.md)
 
 </div>

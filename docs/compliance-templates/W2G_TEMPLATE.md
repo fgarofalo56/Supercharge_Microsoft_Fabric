@@ -1,16 +1,27 @@
-# W-2G Gaming Winnings Report Template
+[Home](../index.md) > [Docs](..) > [Compliance Templates](./) > W-2G Template
 
-> **Compliance > W-2G Template**
+# 🎰 W-2G Gambling Winnings Template
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Compliance-red)
+![Status](https://img.shields.io/badge/Status-Final-green)
+![Authority](https://img.shields.io/badge/Authority-IRS-blue)
+
+</div>
 
 ---
 
-## Overview
+## 📖 Overview
 
 IRS Form W-2G reports certain gambling winnings to the IRS. Casinos must file W-2G forms for slot machine winnings of $1,200 or more, and withhold taxes when required.
 
 ---
 
-## Reporting Thresholds
+## 📊 Reporting Thresholds
 
 | Game Type | W-2G Threshold | Withholding Threshold |
 |-----------|----------------|----------------------|
@@ -22,7 +33,7 @@ IRS Form W-2G reports certain gambling winnings to the IRS. Casinos must file W-
 
 ---
 
-## Data Fields Required
+## 📝 Data Fields Required
 
 ### Winner Information (Boxes 1-14)
 
@@ -42,7 +53,7 @@ IRS Form W-2G reports certain gambling winnings to the IRS. Casinos must file W-
 
 ---
 
-## SQL Query for W-2G Data
+## 🔍 SQL Query for W-2G Data
 
 ```sql
 -- W-2G Data Extraction
@@ -88,7 +99,7 @@ ORDER BY s.win_amount DESC;
 
 ---
 
-## PySpark Implementation
+## ⚙️ PySpark Implementation
 
 ```python
 from pyspark.sql.functions import *
@@ -159,7 +170,7 @@ print(f"W-2G records extracted: {w2g_data.count()}")
 
 ---
 
-## Handpay Process
+## 🤝 Handpay Process
 
 When a jackpot >= $1,200 is hit:
 
@@ -182,7 +193,7 @@ sequenceDiagram
 
 ---
 
-## Filing Requirements
+## 📅 Filing Requirements
 
 1. **To IRS:** File Copy A by February 28 (paper) or March 31 (electronic)
 2. **To Winner:** Provide Copy B and C by January 31
@@ -190,7 +201,7 @@ sequenceDiagram
 
 ---
 
-## W-2G Form Fields Mapping
+## 📄 W-2G Form Fields Mapping
 
 ```json
 {
@@ -224,4 +235,18 @@ sequenceDiagram
 
 ---
 
-[Back to Compliance Templates](./README.md)
+---
+
+## 🔗 Related Documents
+
+| Document | Description |
+|----------|-------------|
+| [Compliance Templates Overview](./README.md) | Index of all compliance templates |
+| [CTR Template](./CTR_TEMPLATE.md) | Currency Transaction Report template |
+| [SAR Template](./SAR_TEMPLATE.md) | Suspicious Activity Report template |
+| [MICS Template](./MICS_TEMPLATE.md) | NIGC compliance template |
+| [Data Dictionary](../data-dictionary/README.md) | Table schemas and field definitions |
+
+---
+
+[⬆️ Back to Top](#-w-2g-gambling-winnings-template) | [📚 Parent](./) | [🏠 Home](../index.md)

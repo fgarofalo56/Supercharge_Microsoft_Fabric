@@ -1,14 +1,18 @@
+[Home](../../docs/index.md) > [Tutorials](../) > Snowflake to Fabric Migration
+
 # ❄️ Tutorial 24: Snowflake to Microsoft Fabric Migration
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
 
 <div align="center">
 
-![Difficulty](https://img.shields.io/badge/⭐_Difficulty-Advanced-red?style=for-the-badge)
-![Duration](https://img.shields.io/badge/⏱️_Duration-150--210_mins-blue?style=for-the-badge)
-![Prerequisites](https://img.shields.io/badge/📋_Prerequisites-Tutorial_00--03,_23-orange?style=for-the-badge)
+![Difficulty](https://img.shields.io/badge/Difficulty-Advanced-red?style=for-the-badge)
+![Category](https://img.shields.io/badge/Category-Migration-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
 
 </div>
-
-> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > ❄️ **Snowflake Migration**
 
 ---
 
@@ -1709,3 +1713,7 @@ This tutorial includes the following supplementary files:
 ---
 
 > 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
+
+---
+
+[⬆️ Back to Top](#-tutorial-24-snowflake-to-microsoft-fabric-migration) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)

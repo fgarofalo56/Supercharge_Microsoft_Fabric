@@ -1,14 +1,18 @@
-# 📹 Tutorial 27: Video Security Analytics Pipeline
+[Home](../../docs/index.md) > [Tutorials](../) > Video Security Analytics
+
+# 📹 Tutorial 27: Video Security Analytics
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
 
 <div align="center">
 
-![Difficulty](https://img.shields.io/badge/⭐_Difficulty-Advanced-red?style=for-the-badge)
-![Duration](https://img.shields.io/badge/⏱️_Duration-120--150_mins-blue?style=for-the-badge)
-![Prerequisites](https://img.shields.io/badge/📋_Prerequisites-Tutorial_00--04-orange?style=for-the-badge)
+![Difficulty](https://img.shields.io/badge/Difficulty-Advanced-orange?style=for-the-badge)
+![Category](https://img.shields.io/badge/Category-Security_Analytics-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
 
 </div>
-
-> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > 📹 **Video Security Analytics**
 
 ---
 
@@ -1435,3 +1439,7 @@ Continue your learning journey:
 ---
 
 > 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
+
+---
+
+[⬆️ Back to Top](#-tutorial-27-video-security-analytics) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)

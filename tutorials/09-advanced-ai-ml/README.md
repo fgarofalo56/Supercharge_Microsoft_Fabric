@@ -1,5 +1,8 @@
 # 🤖 Tutorial 09: Advanced AI/ML
 
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
 > **🏠 [Home](../../README.md)** > **📖 [Tutorials](../README.md)** > **🤖 Advanced AI/ML**
 
 ---
@@ -1331,3 +1334,7 @@ Or review the **[POC Agenda](../poc-agenda/)** for workshop preparation, present
 Thank you for completing this comprehensive Microsoft Fabric learning journey. We hope these tutorials have equipped you with the skills and confidence to build world-class casino analytics solutions.
 
 **Happy analyzing!** 🎰
+
+---
+
+[⬆️ Back to Top](#-tutorial-09-advanced-aiml) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)

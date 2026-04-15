@@ -1,16 +1,44 @@
-# Decision Guide: Choosing the Right Tool
+[Home](../index.md) > [Best Practices](./) > Decision Guide
 
-> **Best Practices > Decision Guide**
+# 🧭 Decision Guide: Choosing the Right Tool
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Decision_Guide-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
+
+</div>
+
+## 📑 Table of Contents
+
+- [Overview](#-overview)
+- [Quick Decision Matrix](#-quick-decision-matrix)
+- [Tool Comparison](#-tool-comparison)
+- [Decision Tree: Data Movement](#-decision-tree-data-movement)
+- [Decision Tree: Storage Destination](#-decision-tree-storage-destination)
+- [Scenario-Based Recommendations](#-scenario-based-recommendations)
+- [Tool Selection by Persona](#-tool-selection-by-persona)
+- [Performance Considerations](#-performance-considerations)
+- [Cost Considerations](#-cost-considerations)
+- [Hybrid Patterns](#-hybrid-patterns)
+- [Anti-Patterns to Avoid](#-anti-patterns-to-avoid)
+- [Quick Reference Card](#-quick-reference-card)
+- [Decision Checklist](#-decision-checklist)
+- [Related Documents](#-related-documents)
 
 ---
 
-## Overview
+## 📋 Overview
 
 Microsoft Fabric offers multiple tools for data movement and transformation. This guide helps you choose the right tool based on your specific requirements, data volumes, and team capabilities.
 
 ---
 
-## Quick Decision Matrix
+## ⚡ Quick Decision Matrix
 
 | Scenario | Recommended Tool |
 |----------|------------------|
@@ -24,7 +52,7 @@ Microsoft Fabric offers multiple tools for data movement and transformation. Thi
 
 ---
 
-## Tool Comparison
+## 🔍 Tool Comparison
 
 ### Data Movement Tools
 
@@ -49,7 +77,7 @@ Microsoft Fabric offers multiple tools for data movement and transformation. Thi
 
 ---
 
-## Decision Tree: Data Movement
+## 🔀 Decision Tree: Data Movement
 
 ```mermaid
 flowchart TD
@@ -83,7 +111,7 @@ flowchart TD
 
 ---
 
-## Decision Tree: Storage Destination
+## 🗄️ Decision Tree: Storage Destination
 
 ```mermaid
 flowchart TD
@@ -109,7 +137,7 @@ flowchart TD
 
 ---
 
-## Scenario-Based Recommendations
+## 💡 Scenario-Based Recommendations
 
 ### Scenario 1: Enterprise Data Warehouse Migration
 
@@ -193,7 +221,7 @@ Multiple Sources → Lakehouse (Bronze) → Spark (Feature Engineering) → Lake
 
 ---
 
-## Tool Selection by Persona
+## 👥 Tool Selection by Persona
 
 | Persona | Primary Tools | Secondary Tools |
 |---------|--------------|-----------------|
@@ -205,7 +233,7 @@ Multiple Sources → Lakehouse (Bronze) → Spark (Feature Engineering) → Lake
 
 ---
 
-## Performance Considerations
+## 📈 Performance Considerations
 
 ### By Data Volume
 
@@ -228,7 +256,7 @@ Multiple Sources → Lakehouse (Bronze) → Spark (Feature Engineering) → Lake
 
 ---
 
-## Cost Considerations
+## 💰 Cost Considerations
 
 ### Compute Cost Ranking (Lower = Less Expensive)
 
@@ -247,7 +275,7 @@ All Fabric storage uses OneLake with the same pricing:
 
 ---
 
-## Hybrid Patterns
+## 🔗 Hybrid Patterns
 
 ### Pipeline + Dataflow
 
@@ -275,7 +303,7 @@ Real-time Events → Eventstream → Eventhouse (hot) → Lakehouse (cold)
 
 ---
 
-## Anti-Patterns to Avoid
+## 🚫 Anti-Patterns to Avoid
 
 | Anti-Pattern | Problem | Better Approach |
 |--------------|---------|-----------------|
@@ -287,7 +315,7 @@ Real-time Events → Eventstream → Eventhouse (hot) → Lakehouse (cold)
 
 ---
 
-## Quick Reference Card
+## 📇 Quick Reference Card
 
 ### When to Use Each Tool
 
@@ -328,7 +356,7 @@ Real-time Events → Eventstream → Eventhouse (hot) → Lakehouse (cold)
 
 ---
 
-## Decision Checklist
+## ✅ Decision Checklist
 
 Before choosing a tool, answer these questions:
 
@@ -343,4 +371,17 @@ Before choosing a tool, answer these questions:
 
 ---
 
-[Back to Best Practices Index](./README.md)
+## 🔗 Related Documents
+
+| Document | Description |
+|----------|-------------|
+| [Pipelines & Data Movement](./03_PIPELINES_DATA_MOVEMENT.md) | Pipeline optimization patterns |
+| [Dataflows Gen2](./06_DATAFLOWS.md) | Dataflow performance optimization |
+| [Spark & Notebooks](./05_SPARK_NOTEBOOKS.md) | Spark best practices |
+| [Lakehouse Setup](./07_LAKEHOUSE_SETUP.md) | Lakehouse architecture and configuration |
+| [Warehouse Setup](./08_WAREHOUSE_SETUP.md) | Warehouse schema design and optimization |
+| [Real-Time Intelligence](../features/real-time-intelligence.md) | Eventstream and Eventhouse features |
+
+---
+
+[⬆️ Back to Top](#-decision-guide-choosing-the-right-tool) | [📚 Best Practices](./) | [🏠 Home](../index.md)

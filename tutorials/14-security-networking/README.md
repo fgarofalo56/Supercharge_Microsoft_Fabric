@@ -1,18 +1,21 @@
-# Tutorial 14: Security & Network Configuration
+# 🔐 Tutorial 14: Security & Network Configuration
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
 
 <div align="center">
 
-![Difficulty](https://img.shields.io/badge/Difficulty-Advanced-red?style=for-the-badge)
-![Duration](https://img.shields.io/badge/Duration-2--3_hours-blue?style=for-the-badge)
-![Prerequisites](https://img.shields.io/badge/Prerequisites-Tutorial_07-orange?style=for-the-badge)
+![Difficulty](https://img.shields.io/badge/⭐_Difficulty-Advanced-red?style=for-the-badge)
+![Duration](https://img.shields.io/badge/⏱️_Duration-2--3_hours-blue?style=for-the-badge)
+![Prerequisites](https://img.shields.io/badge/📋_Prerequisites-Tutorial_07-orange?style=for-the-badge)
 
 </div>
 
-> **[Home](../../README.md)** > **[Tutorials](../README.md)** > **Security & Network Configuration**
+> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > 🔐 **Security & Network Configuration**
 
 ---
 
-## Tutorial 14: Security & Network Configuration
+## 🔐 Tutorial 14: Security & Network Configuration
 
 ![Microsoft Fabric Security Layers](https://learn.microsoft.com/en-us/fabric/security/media/security-overview/fabric-security-layers.svg)
 
@@ -26,7 +29,7 @@
 
 ---
 
-### Progress Tracker
+### 📊 Progress Tracker
 
 <div align="center">
 
@@ -193,7 +196,7 @@
 
 ---
 
-## Overview
+## 📖 Overview
 
 This tutorial provides comprehensive guidance on implementing enterprise-grade security and network configuration for Microsoft Fabric in a casino/gaming environment. You will learn how to protect sensitive player data, implement row-level and object-level security, configure private connectivity, and ensure compliance with gaming industry regulations including PCI-DSS and NIGC MICS.
 
@@ -251,7 +254,7 @@ flowchart TB
 
 ---
 
-## Learning Objectives
+## 🎯 Learning Objectives
 
 By the end of this tutorial, you will be able to:
 
@@ -270,7 +273,7 @@ By the end of this tutorial, you will be able to:
 
 ---
 
-## Casino/Gaming Compliance Context
+## 🎰 Casino/Gaming Compliance Context
 
 Casino and gaming operations handle highly regulated data requiring strict security controls:
 
@@ -287,7 +290,7 @@ Casino and gaming operations handle highly regulated data requiring strict secur
 
 ---
 
-## Security Architecture Overview
+## 🏗️ Security Architecture Overview
 
 ```mermaid
 flowchart TB
@@ -372,7 +375,7 @@ flowchart TB
 
 ---
 
-## Prerequisites
+## 📋 Prerequisites
 
 Before starting, ensure you have:
 
@@ -386,7 +389,7 @@ Before starting, ensure you have:
 
 ---
 
-## Step 1: Row-Level Security (RLS) Implementation
+## 🛠️ Step 1: Row-Level Security (RLS) Implementation
 
 Row-Level Security restricts data access at the row level based on user identity. This is critical for casino operations where different regions, properties, or player segments require access isolation.
 
@@ -589,7 +592,7 @@ SUMMARIZE(
 
 ---
 
-## Step 2: Object-Level Security (OLS)
+## 🛠️ Step 2: Object-Level Security (OLS)
 
 Object-Level Security hides sensitive columns from unauthorized users, even if they can see the row. Critical for protecting PII like SSN, payment card numbers, and addresses.
 
@@ -750,7 +753,7 @@ flowchart LR
 
 ---
 
-## Step 3: Dynamic Data Masking
+## 🛠️ Step 3: Dynamic Data Masking
 
 Dynamic Data Masking provides real-time obfuscation of sensitive data without modifying the underlying storage.
 
@@ -941,7 +944,7 @@ print("Created masked player table for standard access")
 
 ---
 
-## Step 4: Sensitivity Labels & Purview Integration
+## 🛠️ Step 4: Sensitivity Labels & Purview Integration
 
 ### 4.1 Sensitivity Label Framework
 
@@ -1110,7 +1113,7 @@ apply_sensitivity_label(workspace_id, lakehouse_id, confidential_label_id, acces
 
 ---
 
-## Step 5: Private Endpoints & Private Link
+## 🛠️ Step 5: Private Endpoints & Private Link
 
 ### 5.1 Private Network Architecture
 
@@ -1280,7 +1283,7 @@ az network private-endpoint dns-zone-group create \
 
 ---
 
-## Step 6: Firewall Rules & IP Restrictions
+## 🛠️ Step 6: Firewall Rules & IP Restrictions
 
 ### 6.1 IP Restriction Architecture
 
@@ -1394,7 +1397,7 @@ configure_workspace_access(workspace_id, security_settings, token)
 
 ---
 
-## Step 7: Service Principal Security
+## 🛠️ Step 7: Service Principal Security
 
 ### 7.1 Service Principal Architecture
 
@@ -1534,7 +1537,7 @@ def rotate_service_principal_secret(
 
 ---
 
-## Step 8: Conditional Access Policies
+## 🛠️ Step 8: Conditional Access Policies
 
 ### 8.1 Conditional Access Architecture
 
@@ -1744,7 +1747,7 @@ foreach ($prop in $properties) {
 
 ---
 
-## Step 9: Encryption Configuration
+## 🛠️ Step 9: Encryption Configuration
 
 ### 9.1 Encryption Architecture
 
@@ -1897,7 +1900,7 @@ for endpoint in endpoints:
 
 ---
 
-## Step 10: Audit Logging & Compliance
+## 🛠️ Step 10: Audit Logging & Compliance
 
 ### 10.1 Audit Architecture
 
@@ -2114,7 +2117,7 @@ print(f"  Export Events: {summary['export_events']}")
 
 ---
 
-## Step 11: Gaming Industry Compliance Mapping
+## 🛠️ Step 11: Gaming Industry Compliance Mapping
 
 ### 11.1 PCI-DSS Compliance Controls
 
@@ -2178,7 +2181,7 @@ flowchart TB
 
 ---
 
-## Validation Checklist
+## ✅ Validation Checklist
 
 Before moving to the next tutorial, verify:
 
@@ -2233,7 +2236,7 @@ FabricAudit
 
 ---
 
-## Troubleshooting
+## 🔧 Troubleshooting
 
 | Issue | Symptoms | Solution |
 |-------|----------|----------|
@@ -2247,7 +2250,7 @@ FabricAudit
 
 ---
 
-## Best Practices
+## 💡 Best Practices
 
 ### Security Implementation
 
@@ -2273,7 +2276,7 @@ FabricAudit
 
 ---
 
-## Summary
+## 🎉 Summary
 
 Congratulations! You have successfully implemented enterprise-grade security for Microsoft Fabric in a casino/gaming environment:
 
@@ -2293,13 +2296,13 @@ Your Fabric environment now meets enterprise security standards for the regulate
 
 ---
 
-## Next Steps
+## ➡️ Next Steps
 
 Continue to **[Tutorial 15: Cost Management](../15-cost-management/README.md)** to learn how to monitor, optimize, and control Microsoft Fabric costs.
 
 ---
 
-## Additional Resources
+## 📚 Additional Resources
 
 | Resource | Link |
 |----------|------|
@@ -2323,3 +2326,7 @@ Continue to **[Tutorial 15: Cost Management](../15-cost-management/README.md)** 
 ---
 
 > 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
+
+---
+
+[⬆️ Back to Top](#-tutorial-14-security--network-configuration) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)

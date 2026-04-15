@@ -1,14 +1,18 @@
-# 🏥 Tutorial 30: Tribal Healthcare Analytics
+[Home](../../docs/index.md) > [Tutorials](../) > Tribal Healthcare
+
+# 🏥 Tutorial 30: Tribal Healthcare
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
 
 <div align="center">
 
-![Difficulty](https://img.shields.io/badge/⭐_Difficulty-Expert-purple?style=for-the-badge)
-![Duration](https://img.shields.io/badge/⏱️_Duration-150--180_mins-blue?style=for-the-badge)
-![Prerequisites](https://img.shields.io/badge/📋_Prerequisites-Tutorial_00--07-orange?style=for-the-badge)
+![Difficulty](https://img.shields.io/badge/Difficulty-Advanced-orange?style=for-the-badge)
+![Category](https://img.shields.io/badge/Category-Healthcare-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
 
 </div>
-
-> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > 🏥 **Tribal Healthcare Analytics**
 
 ---
 
@@ -1443,3 +1447,7 @@ Continue your learning journey:
 *Tutorial 30 of 31 in the Microsoft Fabric Casino POC Series*
 
 </div>
+
+---
+
+[⬆️ Back to Top](#-tutorial-30-tribal-healthcare) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)

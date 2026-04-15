@@ -1,16 +1,27 @@
-# Currency Transaction Report (CTR) Template
+[Home](../index.md) > [Docs](..) > [Compliance Templates](./) > CTR Template
 
-> **Compliance > CTR Template**
+# 💰 Currency Transaction Report Template
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Compliance-red)
+![Status](https://img.shields.io/badge/Status-Final-green)
+![Threshold](https://img.shields.io/badge/Threshold-%2410%2C000-orange)
+
+</div>
 
 ---
 
-## Overview
+## 📖 Overview
 
 This template documents the data requirements and format for Currency Transaction Reports (CTR) as required by the Bank Secrecy Act (BSA) and FinCEN regulations. CTRs must be filed for cash transactions exceeding $10,000.
 
 ---
 
-## Regulatory Requirements
+## 📜 Regulatory Requirements
 
 - **Threshold:** $10,000 in cash (single transaction or aggregated daily)
 - **Filing Deadline:** 15 days from transaction date
@@ -19,7 +30,7 @@ This template documents the data requirements and format for Currency Transactio
 
 ---
 
-## Data Fields Required
+## 📝 Data Fields Required
 
 ### Part I - Person Involved in Transaction
 
@@ -57,7 +68,7 @@ This template documents the data requirements and format for Currency Transactio
 
 ---
 
-## SQL Query for CTR Data Extraction
+## 🔍 SQL Query for CTR Data Extraction
 
 ```sql
 -- CTR Data Extraction Query
@@ -118,7 +129,7 @@ ORDER BY transaction_date, total_cash DESC;
 
 ---
 
-## PySpark Implementation
+## ⚙️ PySpark Implementation
 
 ```python
 from pyspark.sql.functions import *
@@ -181,7 +192,7 @@ print(f"CTR candidates extracted: {ctr_data.count()}")
 
 ---
 
-## FinCEN Filing Format
+## 📄 FinCEN Filing Format
 
 ```json
 {
@@ -224,7 +235,7 @@ print(f"CTR candidates extracted: {ctr_data.count()}")
 
 ---
 
-## Filing Workflow
+## 🔄 Filing Workflow
 
 ```mermaid
 flowchart TD
@@ -243,7 +254,7 @@ flowchart TD
 
 ---
 
-## Compliance Checklist
+## ✅ Compliance Checklist
 
 - [ ] Daily CTR threshold monitoring automated
 - [ ] Player identification data complete
@@ -254,4 +265,18 @@ flowchart TD
 
 ---
 
-[Back to Compliance Templates](./README.md)
+---
+
+## 🔗 Related Documents
+
+| Document | Description |
+|----------|-------------|
+| [Compliance Templates Overview](./README.md) | Index of all compliance templates |
+| [SAR Template](./SAR_TEMPLATE.md) | Suspicious Activity Report template |
+| [W-2G Template](./W2G_TEMPLATE.md) | Gambling winnings tax reporting |
+| [MICS Template](./MICS_TEMPLATE.md) | NIGC compliance template |
+| [Data Governance](../best-practices/data-governance-deep-dive.md) | Governance and compliance frameworks |
+
+---
+
+[⬆️ Back to Top](#-currency-transaction-report-template) | [📚 Parent](./) | [🏠 Home](../index.md)

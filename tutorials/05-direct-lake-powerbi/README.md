@@ -1,5 +1,8 @@
 # 📊 Tutorial 05: Direct Lake & Power BI
 
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
 > **🏠 [Home](../../README.md)** > **📖 [Tutorials](../README.md)** > **📊 Direct Lake & Power BI**
 
 ---
@@ -1161,3 +1164,7 @@ Continue your learning journey:
 *Tutorial 05 of 10 in the Microsoft Fabric Casino POC Series*
 
 </div>
+
+---
+
+[⬆️ Back to Top](#-tutorial-05-direct-lake--power-bi) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)

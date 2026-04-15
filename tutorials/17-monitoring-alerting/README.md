@@ -1,18 +1,22 @@
-# Tutorial 17: Monitoring and Observability for Microsoft Fabric
+[Home](../../docs/index.md) > [Tutorials](../) > Tutorial 17: Monitoring and Observability
+
+# 📡 Tutorial 17: Monitoring and Observability for Microsoft Fabric
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
 
 <div align="center">
 
 ![Difficulty](https://img.shields.io/badge/Difficulty-Intermediate-yellow?style=for-the-badge)
+![Category](https://img.shields.io/badge/Category-Monitoring-green?style=for-the-badge)
 ![Duration](https://img.shields.io/badge/Duration-120_mins-blue?style=for-the-badge)
 ![Prerequisites](https://img.shields.io/badge/Prerequisites-Tutorial_00--06-orange?style=for-the-badge)
 
 </div>
 
-> **[Home](../../README.md)** > **[Tutorials](../README.md)** > **Monitoring & Observability**
-
 ---
 
-## Tutorial 17: Monitoring and Observability
+## 📡 Tutorial 17: Monitoring and Observability
 
 | | |
 |---|---|
@@ -49,7 +53,7 @@
 
 ---
 
-## Overview
+## 📋 Overview
 
 This tutorial provides comprehensive guidance on implementing **monitoring and observability** for Microsoft Fabric environments. You will learn how to monitor capacity utilization, track pipeline and notebook performance, configure alerts, analyze logs, and build custom monitoring dashboards for your casino analytics platform.
 
@@ -62,7 +66,7 @@ Effective monitoring ensures:
 
 ---
 
-## Learning Objectives
+## 🎯 Learning Objectives
 
 By the end of this tutorial, you will be able to:
 

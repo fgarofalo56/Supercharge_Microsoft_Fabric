@@ -1,28 +1,40 @@
-# Performance & Parallelism Best Practices
+[Home](../index.md) > [Best Practices](./) > Performance & Parallelism
 
-> **Best Practices > Performance & Parallelism**
+# 🚀 Performance & Parallelism Best Practices
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category: Best Practices](https://img.shields.io/badge/Category-Best_Practices-blue?style=flat-square)
+![Platform: Microsoft Fabric](https://img.shields.io/badge/Platform-Microsoft_Fabric-742774?style=flat-square)
+![Focus: Performance](https://img.shields.io/badge/Focus-Performance_Optimization-brightgreen?style=flat-square)
+![Scope: Copy | Spark | KQL | Direct Lake](https://img.shields.io/badge/Scope-Copy_|_Spark_|_KQL_|_Direct_Lake-orange?style=flat-square)
+
+</div>
 
 ---
 
-## Overview
+## 📖 Overview
 
 Performance optimization in Microsoft Fabric spans multiple workloads: Copy Activities, Spark notebooks, pipeline orchestration, Direct Lake semantic models, and KQL queries. This guide provides concrete configuration recommendations, benchmark guidelines, and cost-performance trade-off analysis for the casino gaming, federal agency, and healthcare workloads in this project.
 
 ---
 
-## Table of Contents
+## 🧭 Table of Contents
 
-- [Copy Activity Optimization](#copy-activity-optimization)
-- [Spark Notebook Performance](#spark-notebook-performance)
-- [Pipeline Parallelism](#pipeline-parallelism)
-- [Direct Lake Performance](#direct-lake-performance)
-- [KQL Query Performance](#kql-query-performance)
-- [Benchmark Guidelines by Data Volume](#benchmark-guidelines-by-data-volume)
-- [Cost vs Performance Trade-Offs](#cost-vs-performance-trade-offs)
+- [📦 Copy Activity Optimization](#-copy-activity-optimization)
+- [✨ Spark Notebook Performance](#-spark-notebook-performance)
+- [🔄 Pipeline Parallelism](#-pipeline-parallelism)
+- [⚡ Direct Lake Performance](#-direct-lake-performance)
+- [🔍 KQL Query Performance](#-kql-query-performance)
+- [📈 Benchmark Guidelines by Data Volume](#-benchmark-guidelines-by-data-volume)
+- [💰 Cost vs Performance Trade-Offs](#-cost-vs-performance-trade-offs)
 
 ---
 
-## Copy Activity Optimization
+## 📦 Copy Activity Optimization
 
 ### Data Integration Units (DIU)
 
@@ -188,7 +200,7 @@ For large cross-network transfers, enable staging through an intermediate blob s
 
 ---
 
-## Spark Notebook Performance
+## ✨ Spark Notebook Performance
 
 ### Partition Strategy
 
@@ -419,7 +431,7 @@ spark.conf.set("spark.sql.adaptive.localShuffleReader.enabled", "true")
 
 ---
 
-## Pipeline Parallelism
+## 🔄 Pipeline Parallelism
 
 ### ForEach Activity with Batch Count
 
@@ -530,7 +542,7 @@ Be aware of Fabric pipeline limits when designing parallel flows:
 
 ---
 
-## Direct Lake Performance
+## ⚡ Direct Lake Performance
 
 ### Framing Optimization
 
@@ -667,7 +679,7 @@ flowchart LR
 
 ---
 
-## KQL Query Performance
+## 🔍 KQL Query Performance
 
 ### Materialized Views
 
@@ -798,7 +810,7 @@ SlotTelemetryHourly  // Pre-computed materialized view
 
 ---
 
-## Benchmark Guidelines by Data Volume
+## 📈 Benchmark Guidelines by Data Volume
 
 ### Small (< 1 GB daily ingestion)
 
@@ -850,7 +862,7 @@ Typical for: Multi-property casino telemetry, real-time streaming at scale, full
 
 ---
 
-## Cost vs Performance Trade-Offs
+## 💰 Cost vs Performance Trade-Offs
 
 ### CU Consumption by Activity Type
 
@@ -924,7 +936,7 @@ For this project's F64 SKU:
 
 ---
 
-## Summary
+## ⭐ Summary
 
 Performance optimization in Microsoft Fabric follows a layered approach:
 
@@ -938,14 +950,16 @@ Performance optimization in Microsoft Fabric follows a layered approach:
 
 ---
 
-## Related Documents
+## 📚 Related Documents
 
-- [Pipelines & Data Movement](./03_PIPELINES_DATA_MOVEMENT.md) -- Pipeline configuration details
-- [Spark & Notebooks](./05_SPARK_NOTEBOOKS.md) -- Spark configuration and NEE
-- [Lakehouse Setup](./07_LAKEHOUSE_SETUP.md) -- Delta Lake table management
-- [Warehouse Configuration](./08_WAREHOUSE_SETUP.md) -- SQL optimization
-- [Error Handling & Monitoring](./error-handling-monitoring.md) -- Performance-related error handling
+| Document | Description |
+|----------|-------------|
+| [Pipelines & Data Movement](./03_PIPELINES_DATA_MOVEMENT.md) | Pipeline configuration details |
+| [Spark & Notebooks](./05_SPARK_NOTEBOOKS.md) | Spark configuration and NEE |
+| [Lakehouse Setup](./07_LAKEHOUSE_SETUP.md) | Delta Lake table management |
+| [Warehouse Configuration](./08_WAREHOUSE_SETUP.md) | SQL optimization |
+| [Error Handling & Monitoring](./error-handling-monitoring.md) | Performance-related error handling |
 
 ---
 
-[Back to Best Practices Index](./README.md) | [Back to Documentation](../index.md)
+[Back to Top](#-performance--parallelism-best-practices) | [Best Practices](./) | [Home](../index.md)

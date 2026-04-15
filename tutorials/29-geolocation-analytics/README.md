@@ -1,14 +1,18 @@
-# 📍 Tutorial 29: Geolocation Analytics in Microsoft Fabric
+[Home](../../docs/index.md) > [Tutorials](../) > Geolocation Analytics
+
+# 📍 Tutorial 29: Geolocation Analytics
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
 
 <div align="center">
 
-![Difficulty](https://img.shields.io/badge/⭐_Difficulty-Advanced-red?style=for-the-badge)
-![Duration](https://img.shields.io/badge/⏱️_Duration-120--150_mins-blue?style=for-the-badge)
-![Prerequisites](https://img.shields.io/badge/📋_Prerequisites-Tutorial_00--04_+_21-orange?style=for-the-badge)
+![Difficulty](https://img.shields.io/badge/Difficulty-Advanced-orange?style=for-the-badge)
+![Category](https://img.shields.io/badge/Category-Location_Analytics-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
 
 </div>
-
-> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > 📍 **Geolocation Analytics**
 
 ---
 
@@ -1581,3 +1585,7 @@ Continue your learning journey:
 *Tutorial 29 of 31 in the Microsoft Fabric Casino POC Series*
 
 </div>
+
+---
+
+[⬆️ Back to Top](#-tutorial-29-geolocation-analytics) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)

@@ -1,14 +1,17 @@
-# Tutorial 00: Environment Setup
+# ⚙️ Tutorial 00: Environment Setup
 
-> **[Home](../../README.md)** > **[Tutorials](../README.md)** > **Environment Setup**
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > ⚙️ **Environment Setup**
 
 ---
 
 <div align="center">
 
-![Difficulty](https://img.shields.io/badge/Difficulty-Beginner-brightgreen?style=for-the-badge)
-![Duration](https://img.shields.io/badge/Duration-45--60_mins-blue?style=for-the-badge)
-![Prerequisites](https://img.shields.io/badge/Prerequisites-Azure_Subscription-orange?style=for-the-badge)
+![Difficulty](https://img.shields.io/badge/⭐_Difficulty-Beginner-brightgreen?style=for-the-badge)
+![Duration](https://img.shields.io/badge/⏱️_Duration-45--60_mins-blue?style=for-the-badge)
+![Prerequisites](https://img.shields.io/badge/📋_Prerequisites-Azure_Subscription-orange?style=for-the-badge)
 
 </div>
 
@@ -349,3 +352,7 @@ Your environment is ready for data ingestion.
 | Previous | Up | Next |
 |----------|-----|------|
 | N/A — this is the first tutorial | [Tutorials Index](../README.md) | [Tutorial 01: Bronze Layer](../01-bronze-layer/README.md) |
+
+---
+
+[⬆️ Back to Top](#-tutorial-00-environment-setup) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)

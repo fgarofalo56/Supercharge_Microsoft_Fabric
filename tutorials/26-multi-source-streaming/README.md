@@ -1,18 +1,22 @@
-# 🌊 Tutorial 26: Multi-Source Real-Time Intelligence in Microsoft Fabric
+[Home](../../docs/index.md) > [Tutorials](../) > Multi-Source Streaming
+
+# 📡 Tutorial 26: Multi-Source Streaming
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
 
 <div align="center">
 
-![Difficulty](https://img.shields.io/badge/⭐_Difficulty-Advanced-red?style=for-the-badge)
-![Duration](https://img.shields.io/badge/⏱️_Duration-180_mins-blue?style=for-the-badge)
-![Prerequisites](https://img.shields.io/badge/📋_Prerequisites-Tutorial_00--04-orange?style=for-the-badge)
+![Difficulty](https://img.shields.io/badge/Difficulty-Advanced-orange?style=for-the-badge)
+![Category](https://img.shields.io/badge/Category-Streaming-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
 
 </div>
 
-> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > 🌊 **Multi-Source RTI**
-
 ---
 
-## 🌊 Tutorial 26: Multi-Source Real-Time Intelligence
+## 📡 Tutorial 26: Multi-Source Real-Time Intelligence
 
 | | |
 |---|---|
@@ -1223,3 +1227,7 @@ The unified view from all eight sources gives casino operations unprecedented si
 ---
 
 > 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
+
+---
+
+[⬆️ Back to Top](#-tutorial-26-multi-source-streaming) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)

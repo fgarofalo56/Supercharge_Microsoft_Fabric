@@ -1,12 +1,25 @@
-# Casino/Gaming Microsoft Fabric POC - Demo Runbook
+[Home](../docs/index.md) > [POC Agenda](./) > Demo Runbook
+
+# 🎰 Casino/Gaming Microsoft Fabric POC - Demo Runbook
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Demo_Guide-purple?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
+
+</div>
 
 > **Presenter Guide for Live Demonstrations**
 >
-> **Version:** 1.0.0 | **Last Updated:** 2025-01-21 | **Duration:** 90 minutes
+> **Duration:** 90 minutes
 
 ---
 
-## Table of Contents
+## 📋 Table of Contents
 
 - [1. Pre-Demo Checklist](#1-pre-demo-checklist)
 - [2. Demo Flow Overview (90-minute version)](#2-demo-flow-overview-90-minute-version)
@@ -23,7 +36,7 @@
 
 ---
 
-## 1. Pre-Demo Checklist
+## ✅ 1. Pre-Demo Checklist
 
 ### 1.1 Environment Verification (30 minutes before demo)
 
@@ -92,7 +105,7 @@ Open these tabs in order (left to right):
 
 ---
 
-## 2. Demo Flow Overview (90-minute version)
+## 🎬 2. Demo Flow Overview (90-minute version)
 
 ```
 +-----+------------------+------------------+---------------------+------------------+-----------+-----+
@@ -120,7 +133,7 @@ Open these tabs in order (left to right):
 
 ---
 
-## 3. Demo Sections
+## 🎯 3. Demo Sections
 
 ---
 
@@ -1097,7 +1110,7 @@ SlotEvents
 
 ---
 
-## 4. Troubleshooting Quick Reference
+## 🔧 4. Troubleshooting Quick Reference
 
 | Symptom | Cause | Fix |
 |---------|-------|-----|
@@ -1114,7 +1127,7 @@ SlotEvents
 
 ---
 
-## 5. Backup Demo Paths
+## 🔀 5. Backup Demo Paths
 
 ### 5.1 If Bronze Lakehouse Not Available
 
@@ -1211,7 +1224,7 @@ If time is cut, prioritize:
 
 ---
 
-## 6. Appendix
+## 📎 6. Appendix
 
 ### 6.1 Key URLs
 
@@ -1305,11 +1318,22 @@ After the demo, share this link for feedback:
 
 ---
 
-## Version History
+## 📜 Version History
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
 | 1.0.0 | 2025-01-21 | POC Team | Initial release |
+
+---
+
+## 📖 Related Documents
+
+| Document | Description |
+|:---------|:-----------|
+| [POC Agenda](./README.md) | 3-day workshop overview |
+| [Instructor Guide](./instructor-guide/README.md) | Full facilitator preparation guide |
+| [Diagram Guide](./DIAGRAM_GUIDE.md) | Mermaid diagram reference |
+| [Day 1: Medallion Foundation](./day1-medallion-foundation.md) | Day 1 detailed guide |
 
 ---
 
@@ -1321,6 +1345,6 @@ Remember: The best demos tell a story. Guide the audience through the data journ
 
 ---
 
-[Back to POC Agenda](./README.md) | [Instructor Guide](./instructor-guide/README.md)
+[⬆️ Back to Top](#-casinogaming-microsoft-fabric-poc---demo-runbook) | [📚 POC Agenda](./) | [🏠 Home](../docs/index.md)
 
 </div>

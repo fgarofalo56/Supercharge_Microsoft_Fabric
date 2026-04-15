@@ -1,10 +1,37 @@
-# Warehouse Setup & Configuration
+[Home](../index.md) > [Best Practices](./) > Warehouse Setup & Configuration
 
-> **Best Practices > Warehouse Setup**
+# 🏢 Warehouse Setup & Configuration
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Warehouse-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
+
+</div>
+
+## 📑 Table of Contents
+
+- [Overview](#-overview)
+- [Warehouse vs Lakehouse SQL Endpoint](#-warehouse-vs-lakehouse-sql-endpoint)
+- [Schema Design](#-schema-design)
+- [Data Type Optimization](#-data-type-optimization)
+- [Statistics Management](#-statistics-management)
+- [Query Optimization](#-query-optimization)
+- [Ingestion Best Practices](#-ingestion-best-practices)
+- [V-Order in Warehouse](#-v-order-in-warehouse)
+- [Performance Monitoring](#-performance-monitoring)
+- [Concurrency and Locking](#-concurrency-and-locking)
+- [Warehouse Design Patterns](#-warehouse-design-patterns)
+- [Checklist](#-checklist)
+- [Related Documents](#-related-documents)
 
 ---
 
-## Overview
+## 📋 Overview
 
 The Fabric Data Warehouse provides a full T-SQL experience with ACID transactions, ideal for traditional SQL workloads and enterprise analytics. This guide covers schema design, statistics management, query optimization, and best practices.
 
@@ -23,7 +50,7 @@ To create a new warehouse in Microsoft Fabric:
 
 ---
 
-## Warehouse vs Lakehouse SQL Endpoint
+## ⚖️ Warehouse vs Lakehouse SQL Endpoint
 
 | Capability | Warehouse | Lakehouse SQL Endpoint |
 |------------|-----------|------------------------|
@@ -38,7 +65,7 @@ To create a new warehouse in Microsoft Fabric:
 
 ---
 
-## Schema Design
+## 🏗️ Schema Design
 
 ### Star Schema Pattern
 
@@ -90,7 +117,7 @@ erDiagram
 
 ---
 
-## Data Type Optimization
+## 🔢 Data Type Optimization
 
 ### Best Practices
 
@@ -130,7 +157,7 @@ CREATE TABLE players_good (
 
 ---
 
-## Statistics Management
+## 📊 Statistics Management
 
 ### Types of Statistics
 
@@ -195,7 +222,7 @@ DBCC SHOW_STATISTICS ('fact_daily_slot_performance', '_WA_Sys_00000001');
 
 ---
 
-## Query Optimization
+## 🔍 Query Optimization
 
 ### Filter Early
 
@@ -239,7 +266,7 @@ JOIN dim_machine m ON f.machine_id = m.machine_id  -- Both INT
 
 ---
 
-## Ingestion Best Practices
+## 📥 Ingestion Best Practices
 
 ### Loading Data
 
@@ -276,7 +303,7 @@ UPDATE STATISTICS fact_daily_slot_performance WITH FULLSCAN;
 
 ---
 
-## V-Order in Warehouse
+## 🚀 V-Order in Warehouse
 
 ### Automatic V-Order
 
@@ -298,7 +325,7 @@ All data ingested into Warehouse is automatically V-Order optimized.
 
 ---
 
-## Performance Monitoring
+## 📈 Performance Monitoring
 
 ### Query Monitoring Views
 
@@ -341,7 +368,7 @@ WHERE resource_database_id = DB_ID();
 
 ---
 
-## Concurrency and Locking
+## 🔒 Concurrency and Locking
 
 ### Best Practices
 
@@ -364,7 +391,7 @@ def execute_query(connection, query):
 
 ---
 
-## Warehouse Design Patterns
+## 🧩 Warehouse Design Patterns
 
 ### Slowly Changing Dimensions (SCD)
 
@@ -411,7 +438,7 @@ WHEN NOT MATCHED THEN
 
 ---
 
-## Checklist
+## ✅ Checklist
 
 ### Warehouse UI Reference
 
@@ -447,4 +474,16 @@ Use the Fabric workspace to manage your warehouse. Access settings via the works
 
 ---
 
-[Back to Best Practices Index](./README.md)
+## 🔗 Related Documents
+
+| Document | Description |
+|----------|-------------|
+| [Lakehouse Setup & Organization](./07_LAKEHOUSE_SETUP.md) | Lakehouse architecture and comparison |
+| [Spark & Notebooks](./05_SPARK_NOTEBOOKS.md) | Spark-based data processing |
+| [Decision Guide](./10_DECISION_GUIDE.md) | Warehouse vs Lakehouse decision criteria |
+| [Fabric SQL Database](../features/fabric-sql-database.md) | Fabric SQL Database feature documentation |
+| [Direct Lake](../features/direct-lake.md) | Direct Lake connectivity for Power BI |
+
+---
+
+[⬆️ Back to Top](#-warehouse-setup--configuration) | [📚 Best Practices](./) | [🏠 Home](../index.md)

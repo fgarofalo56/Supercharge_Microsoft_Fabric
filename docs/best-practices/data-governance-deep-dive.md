@@ -1,31 +1,43 @@
-# Data Governance Deep Dive
+[Home](../index.md) > [Best Practices](./) > Data Governance Deep Dive
 
-> **Best Practices > Data Governance Deep Dive**
+# 🛡️ Data Governance Deep Dive
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category: Best Practices](https://img.shields.io/badge/Category-Best_Practices-blue?style=flat-square)
+![Platform: Microsoft Fabric](https://img.shields.io/badge/Platform-Microsoft_Fabric-742774?style=flat-square)
+![Focus: Governance](https://img.shields.io/badge/Focus-Data_Governance-purple?style=flat-square)
+![Compliance: FISMA | HIPAA | NIGC | FedRAMP](https://img.shields.io/badge/Compliance-FISMA_|_HIPAA_|_NIGC_|_FedRAMP-red?style=flat-square)
+
+</div>
 
 ---
 
-## Overview
+## 📖 Overview
 
 Data governance in Microsoft Fabric spans classification, protection, access control, quality assurance, and compliance enforcement. This guide provides a comprehensive governance framework for the casino gaming, federal agency, and tribal healthcare domains in this project, covering Microsoft Purview integration, sensitivity labels, row-level and column-level security, data quality governance, compliance frameworks, data sharing, audit logging, and retention lifecycle management.
 
 ---
 
-## Table of Contents
+## 🧭 Table of Contents
 
-- [Microsoft Purview in Fabric](#microsoft-purview-in-fabric)
-- [Classification Taxonomy](#classification-taxonomy)
-- [Row-Level Security](#row-level-security)
-- [Column-Level Security](#column-level-security)
-- [Data Quality Governance](#data-quality-governance)
-- [Compliance Frameworks](#compliance-frameworks)
-- [Data Sharing and External Access](#data-sharing-and-external-access)
-- [Audit and Monitoring](#audit-and-monitoring)
-- [Default Domain Sensitivity Labels (GA 2026)](#default-domain-sensitivity-labels-ga-2026)
-- [Data Retention and Lifecycle Management](#data-retention-and-lifecycle-management)
+- [🟣 Microsoft Purview in Fabric](#-microsoft-purview-in-fabric)
+- [🏷️ Classification Taxonomy](#-classification-taxonomy)
+- [🔐 Row-Level Security](#-row-level-security)
+- [👁️ Column-Level Security](#-column-level-security)
+- [✅ Data Quality Governance](#-data-quality-governance)
+- [⚖️ Compliance Frameworks](#-compliance-frameworks)
+- [:handshake: Data Sharing and External Access](#-data-sharing-and-external-access)
+- [🔎 Audit and Monitoring](#-audit-and-monitoring)
+- [:new: Default Domain Sensitivity Labels (GA 2026)](#-default-domain-sensitivity-labels-ga-2026)
+- [:recycle: Data Retention and Lifecycle Management](#-data-retention-and-lifecycle-management)
 
 ---
 
-## Microsoft Purview in Fabric
+## 🟣 Microsoft Purview in Fabric
 
 ### Workspace-Level Governance
 
@@ -187,7 +199,7 @@ flowchart LR
 
 ---
 
-## Classification Taxonomy
+## 🏷️ Classification Taxonomy
 
 ### Unified Classification Framework
 
@@ -279,7 +291,7 @@ Rule: Detect 42 CFR Part 2
 
 ---
 
-## Row-Level Security
+## 🔐 Row-Level Security
 
 ### Implementation Patterns for Multi-Agency Data
 
@@ -452,7 +464,7 @@ CALCULATETABLE(
 
 ---
 
-## Column-Level Security
+## 👁️ Column-Level Security
 
 ### Masking Patterns for Sensitive Fields
 
@@ -601,7 +613,7 @@ Model Configuration:
 
 ---
 
-## Data Quality Governance
+## ✅ Data Quality Governance
 
 ### DQ Score Thresholds and Enforcement
 

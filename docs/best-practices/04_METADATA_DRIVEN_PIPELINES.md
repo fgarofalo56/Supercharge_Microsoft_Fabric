@@ -1,16 +1,42 @@
-# Metadata-Driven Pipelines
+[Home](../index.md) > [Best Practices](./) > Metadata-Driven Pipelines
 
-> **Best Practices > Metadata-Driven Pipelines**
+# 🧩 Metadata-Driven Pipelines
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Pipeline-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
+
+</div>
+
+## 📑 Table of Contents
+
+- [Overview](#-overview)
+- [Key Concepts](#-key-concepts)
+- [Expressions and Functions](#-expressions-and-functions)
+- [Metadata Configuration Table](#-metadata-configuration-table)
+- [Pipeline Architecture](#-pipeline-architecture)
+- [Dynamic Copy Activity](#-dynamic-copy-activity)
+- [Parameterizing Connections](#-parameterizing-connections)
+- [Advanced Patterns](#-advanced-patterns)
+- [Error Handling and Logging](#-error-handling-and-logging)
+- [Best Practices Checklist](#-best-practices-checklist)
+- [Common Expression Functions](#-common-expression-functions)
+- [Related Documents](#-related-documents)
 
 ---
 
-## Overview
+## 📋 Overview
 
 Metadata-driven pipelines enable dynamic, configuration-based data movement without hardcoding source and destination details. This approach significantly reduces maintenance, improves reusability, and accelerates onboarding of new data sources.
 
 ---
 
-## Key Concepts
+## 💡 Key Concepts
 
 ### What is Metadata-Driven Design?
 
@@ -32,7 +58,7 @@ Metadata-Driven Pipeline:
 
 ---
 
-## Expressions and Functions
+## 🔧 Expressions and Functions
 
 ### Pipeline Scope Variables
 
@@ -93,7 +119,7 @@ Metadata-Driven Pipeline:
 
 ---
 
-## Metadata Configuration Table
+## 🗄️ Metadata Configuration Table
 
 ### Schema Design
 
@@ -129,7 +155,7 @@ INSERT INTO config.pipeline_metadata VALUES
 
 ---
 
-## Pipeline Architecture
+## 🏗️ Pipeline Architecture
 
 ### Master Orchestration Pattern
 
@@ -207,7 +233,7 @@ flowchart TD
 
 ---
 
-## Dynamic Copy Activity
+## 🔀 Dynamic Copy Activity
 
 ### Parameterized Source Query
 
@@ -266,7 +292,7 @@ flowchart TD
 
 ---
 
-## Parameterizing Connections
+## 🔌 Parameterizing Connections
 
 ### Getting Connection GUID
 
@@ -294,7 +320,7 @@ flowchart TD
 
 ---
 
-## Advanced Patterns
+## 🧪 Advanced Patterns
 
 ### Schema Drift Handling
 
@@ -352,7 +378,7 @@ flowchart TD
 
 ---
 
-## Error Handling and Logging
+## 🛡️ Error Handling and Logging
 
 ### Audit Log Pattern
 
@@ -408,7 +434,7 @@ flowchart TD
 
 ---
 
-## Best Practices Checklist
+## ✅ Best Practices Checklist
 
 ### Design
 - [ ] Create centralized metadata configuration table
@@ -430,7 +456,7 @@ flowchart TD
 
 ---
 
-## Common Expression Functions
+## 📚 Common Expression Functions
 
 | Function | Description | Example |
 |----------|-------------|---------|
@@ -447,4 +473,16 @@ flowchart TD
 
 ---
 
-[Back to Best Practices Index](./README.md)
+## 🔗 Related Documents
+
+| Document | Description |
+|----------|-------------|
+| [Pipelines & Data Movement](./03_PIPELINES_DATA_MOVEMENT.md) | Copy activity optimization and load patterns |
+| [Source-Specific Patterns](./09_SOURCE_SPECIFIC_PATTERNS.md) | Oracle and SQL Server extraction patterns |
+| [Error Handling & Alerting](./error-handling-alerting.md) | Comprehensive error handling patterns |
+| [Monitoring & Observability](./monitoring-observability.md) | Pipeline monitoring and alerting |
+| [Decision Guide](./10_DECISION_GUIDE.md) | Choosing the right data movement tool |
+
+---
+
+[⬆️ Back to Top](#-metadata-driven-pipelines) | [📚 Best Practices](./) | [🏠 Home](../index.md)

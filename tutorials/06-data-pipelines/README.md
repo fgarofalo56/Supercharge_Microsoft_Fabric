@@ -1,5 +1,8 @@
 # 🔧 Tutorial 06: Data Pipelines
 
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
 > **🏠 [Home](../../README.md)** > **📖 [Tutorials](../README.md)** > **🔧 Data Pipelines**
 
 ---
@@ -24,7 +27,7 @@
 
 ---
 
-### Progress Tracker
+### 📊 Progress Tracker
 
 ```
 +--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+
@@ -43,7 +46,7 @@
 
 ---
 
-## Overview
+## 📖 Overview
 
 This tutorial covers creating orchestrated data pipelines in Microsoft Fabric. You will build end-to-end pipelines that automate the Bronze-Silver-Gold data flow with error handling, monitoring, and alerting.
 
@@ -80,7 +83,7 @@ flowchart LR
 
 ---
 
-## Learning Objectives
+## 🎯 Learning Objectives
 
 By the end of this tutorial, you will be able to:
 
@@ -93,7 +96,7 @@ By the end of this tutorial, you will be able to:
 
 ---
 
-## Prerequisites
+## 📋 Prerequisites
 
 - [ ] Completed Tutorials 01-05 (Bronze, Silver, Gold, Real-Time, Power BI)
 - [ ] Notebooks created for each medallion layer
@@ -104,7 +107,7 @@ By the end of this tutorial, you will be able to:
 
 ---
 
-## Data Factory Pipeline Concepts
+## 📊 Data Factory Pipeline Concepts
 
 Before building pipelines, understand these key concepts:
 
@@ -119,7 +122,7 @@ Before building pipelines, understand these key concepts:
 
 ---
 
-## Step 1: Create Master Pipeline
+## 🛠️ Step 1: Create Master Pipeline
 
 ### 1.1 In Fabric Portal
 
@@ -154,7 +157,7 @@ flowchart TB
 
 ---
 
-## Step 2: Create Bronze Pipeline
+## 🛠️ Step 2: Create Bronze Pipeline
 
 ### 2.1 Create Pipeline
 
@@ -247,7 +250,7 @@ flowchart TB
 
 ---
 
-## Step 3: Create Silver Pipeline
+## 🛠️ Step 3: Create Silver Pipeline
 
 ### 3.1 Create Pipeline
 
@@ -346,7 +349,7 @@ flowchart TB
 
 ---
 
-## Step 4: Create Gold Pipeline
+## 🛠️ Step 4: Create Gold Pipeline
 
 ### 4.1 Create Pipeline
 
@@ -413,7 +416,7 @@ VACUUM gold_compliance_reporting RETAIN 168 HOURS;
 
 ---
 
-## Step 5: Error Handling
+## 🛠️ Step 5: Error Handling
 
 ### 5.1 Retry Configuration
 
@@ -488,7 +491,7 @@ For critical failures, add an error handler:
 
 ---
 
-## Step 6: Master Orchestration Pipeline
+## 🛠️ Step 6: Master Orchestration Pipeline
 
 ### 6.1 Create Master Pipeline
 
@@ -527,7 +530,7 @@ Connect activities with appropriate conditions:
 
 ---
 
-## Step 7: Schedule Pipeline
+## 🛠️ Step 7: Schedule Pipeline
 
 ### 7.1 Create Scheduled Trigger
 
@@ -565,7 +568,7 @@ Connect activities with appropriate conditions:
 
 ---
 
-## Pipeline Parameters
+## ⚙️ Pipeline Parameters
 
 ### 8.1 Define Pipeline Parameters
 
@@ -841,7 +844,7 @@ If you configured email/Teams alerts:
 
 ---
 
-## Best Practices
+## 💡 Best Practices
 
 ### Pipeline Design
 
@@ -873,7 +876,7 @@ If you configured email/Teams alerts:
 
 ---
 
-## Troubleshooting
+## 🔧 Troubleshooting
 
 ### Common Issues
 
@@ -895,7 +898,7 @@ If you configured email/Teams alerts:
 
 ---
 
-## Summary
+## 🎉 Summary
 
 Congratulations! You have successfully:
 
@@ -909,13 +912,13 @@ Your data pipelines now automate the entire Bronze-Silver-Gold flow with product
 
 ---
 
-## Next Steps
+## ➡️ Next Steps
 
 Continue to **[Tutorial 07: Governance & Purview](../07-governance-purview/README.md)** to implement data cataloging, lineage tracking, and compliance controls.
 
 ---
 
-## Resources
+## 📚 Resources
 
 | Resource | Link |
 |----------|------|
@@ -935,3 +938,7 @@ Continue to **[Tutorial 07: Governance & Purview](../07-governance-purview/READM
 ---
 
 > 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
+
+---
+
+[⬆️ Back to Top](#-tutorial-06-data-pipelines) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)

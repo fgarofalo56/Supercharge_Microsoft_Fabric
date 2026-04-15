@@ -1,4 +1,19 @@
+[Home](../docs/index.md) > [POC Agenda](./) > Day 2: Transformations & Real-Time
+
 # 📅 Day 2: Transformations & Real-Time Analytics
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Workshop_Day_2-purple?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
+
+</div>
+
+---
 
 > 🏠 Home > 📆 POC Agenda > ⚡ Day 2
 
@@ -843,6 +858,19 @@ while True:
 
 ---
 
+---
+
+## 📖 Related Documents
+
+| Document | Description |
+|:---------|:-----------|
+| [Day 1: Foundation](./day1-medallion-foundation.md) | Previous day's session guide |
+| [Day 3: BI & Governance](./day3-bi-governance-mirroring.md) | Next day's session guide |
+| [POC Overview](./README.md) | 3-day workshop overview |
+| [Instructor Guide](./instructor-guide/README.md) | Facilitator notes for Day 2 |
+
+---
+
 <div align="center">
 
 **Day 2 Complete!**
@@ -854,6 +882,6 @@ Overall POC: ██████░░░░ 66% Complete
 
 ---
 
-[⬅️ Day 1: Foundation](./day1-medallion-foundation.md) | [Day 3: BI & Governance ➡️](./day3-bi-governance-mirroring.md)
+[⬆️ Back to Top](#-day-2-transformations--real-time-analytics) | [📚 POC Agenda](./) | [🏠 Home](../docs/index.md)
 
 </div>

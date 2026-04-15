@@ -1,31 +1,43 @@
-# Alerting & Data Activator Best Practices
+[Home](../index.md) > [Best Practices](./) > Alerting & Data Activator
 
-> **Best Practices > Alerting & Data Activator**
+# 🔔 Alerting & Data Activator Best Practices
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category: Best Practices](https://img.shields.io/badge/Category-Best_Practices-blue?style=flat-square)
+![Platform: Microsoft Fabric](https://img.shields.io/badge/Platform-Microsoft_Fabric-742774?style=flat-square)
+![Component: Data Activator](https://img.shields.io/badge/Component-Data_Activator-orange?style=flat-square)
+![Domains: Casino | Federal | Healthcare](https://img.shields.io/badge/Domains-Casino_|_Federal_|_Healthcare-green?style=flat-square)
+
+</div>
 
 ---
 
-## Overview
+## 📖 Overview
 
 Data Activator is Microsoft Fabric's no-code experience for automatically monitoring data and triggering actions when conditions are met. This guide covers Reflex item configuration, alert patterns for casino gaming compliance, federal agency data pipelines, and healthcare workloads, along with integration patterns for Teams, Email, Power Automate, and Azure Logic Apps. It also addresses alert fatigue prevention and operational runbooks.
 
 ---
 
-## Table of Contents
+## 🧭 Table of Contents
 
-- [Data Activator Fundamentals](#data-activator-fundamentals)
-- [Reflex Item Configuration](#reflex-item-configuration)
-- [Alert Patterns](#alert-patterns)
-- [Integration Patterns](#integration-patterns)
-- [Domain-Specific Alert Configurations](#domain-specific-alert-configurations)
-- [Alert Fatigue Prevention](#alert-fatigue-prevention)
-- [Monitoring Dashboards](#monitoring-dashboards)
-- [On-Call Rotation Patterns](#on-call-rotation-patterns)
-- [Runbook Templates](#runbook-templates)
-- [Testing and Validation](#testing-and-validation)
+- [⚙️ Data Activator Fundamentals](#-data-activator-fundamentals)
+- [🔧 Reflex Item Configuration](#-reflex-item-configuration)
+- [🚨 Alert Patterns](#-alert-patterns)
+- [🔗 Integration Patterns](#-integration-patterns)
+- [🏢 Domain-Specific Alert Configurations](#-domain-specific-alert-configurations)
+- [🔇 Alert Fatigue Prevention](#-alert-fatigue-prevention)
+- [📊 Monitoring Dashboards](#-monitoring-dashboards)
+- [📞 On-Call Rotation Patterns](#-on-call-rotation-patterns)
+- [📓 Runbook Templates](#-runbook-templates)
+- [✅ Testing and Validation](#-testing-and-validation)
 
 ---
 
-## Data Activator Fundamentals
+## ⚙️ Data Activator Fundamentals
 
 ### What is Data Activator?
 
@@ -97,7 +109,7 @@ Objects represent the entities you want to monitor. Each object has properties t
 
 ---
 
-## Reflex Item Configuration
+## 🔧 Reflex Item Configuration
 
 ### Naming Convention
 
@@ -156,7 +168,7 @@ Action: Trigger Power Automate flow
 
 ---
 
-## Alert Patterns
+## 🚨 Alert Patterns
 
 ### Pattern 1: Data Quality Threshold Alerts
 
@@ -297,7 +309,7 @@ Domain-specific compliance monitoring with zero tolerance for missed deadlines.
 
 ---
 
-## Integration Patterns
+## 🔗 Integration Patterns
 
 ### Microsoft Teams Integration
 
@@ -465,7 +477,7 @@ flowchart LR
 
 ---
 
-## Domain-Specific Alert Configurations
+## 🏢 Domain-Specific Alert Configurations
 
 ### Casino Gaming Compliance
 
@@ -636,7 +648,7 @@ Triggers:
 
 ---
 
-## Alert Fatigue Prevention
+## 🔇 Alert Fatigue Prevention
 
 Alert fatigue occurs when too many notifications desensitize the team, causing critical alerts to be missed. Follow these strategies to maintain alert effectiveness.
 
@@ -720,7 +732,7 @@ Schedule a weekly review to calibrate alert effectiveness:
 
 ---
 
-## Monitoring Dashboards
+## 📊 Monitoring Dashboards
 
 ### Power BI Alert Operations Dashboard
 
@@ -789,7 +801,7 @@ ingestion_metadata
 
 ---
 
-## On-Call Rotation Patterns
+## 📞 On-Call Rotation Patterns
 
 ### Rotation Structure
 
@@ -834,7 +846,7 @@ Rotation: Weekly, handoff on Monday 09:00 UTC
 
 ---
 
-## Runbook Templates
+## 📓 Runbook Templates
 
 ### Template: Pipeline Failure Runbook
 
@@ -960,7 +972,7 @@ Rotation: Weekly, handoff on Monday 09:00 UTC
 
 ---
 
-## Testing and Validation
+## ✅ Testing and Validation
 
 ### Alert Testing Checklist
 
@@ -989,7 +1001,7 @@ Deploy new alerts in shadow mode first:
 
 ---
 
-## Summary
+## ⭐ Summary
 
 Effective alerting in Microsoft Fabric requires:
 
@@ -1003,13 +1015,15 @@ Effective alerting in Microsoft Fabric requires:
 
 ---
 
-## Related Documents
+## 📚 Related Documents
 
-- [Error Handling & Monitoring](./error-handling-monitoring.md) -- Error architecture and classification
-- [Performance & Parallelism](./performance-parallelism.md) -- Performance monitoring baselines
-- [Disaster Recovery](../DISASTER_RECOVERY.md) -- Recovery procedures
-- [Security Guide](../SECURITY.md) -- Compliance and access controls
+| Document | Description |
+|----------|-------------|
+| [Error Handling & Monitoring](./error-handling-monitoring.md) | Error architecture and classification |
+| [Performance & Parallelism](./performance-parallelism.md) | Performance monitoring baselines |
+| [Disaster Recovery](../DISASTER_RECOVERY.md) | Recovery procedures |
+| [Security Guide](../SECURITY.md) | Compliance and access controls |
 
 ---
 
-[Back to Best Practices Index](./README.md) | [Back to Documentation](../index.md)
+[Back to Top](#-alerting--data-activator-best-practices) | [Best Practices](./) | [Home](../index.md)

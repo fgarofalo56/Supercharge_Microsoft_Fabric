@@ -1,16 +1,27 @@
-# Microsoft Fabric Best Practices Guide
+[Home](../index.md) > [Docs](..) > Best Practices
 
-> **Home > Documentation > Best Practices**
+# 💡 Best Practices Guide
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Best_Practices-yellow)
+![Status](https://img.shields.io/badge/Status-Final-green)
+![Platform](https://img.shields.io/badge/Platform-Microsoft%20Fabric-purple)
+
+</div>
 
 ---
 
-## Overview
+## 📖 Overview
 
 This comprehensive guide provides best practices for all aspects of Microsoft Fabric implementation. Whether you're setting up workspaces, designing data pipelines, optimizing Spark jobs, or migrating from Oracle/SQL Server, this guide covers proven patterns and recommendations based on Microsoft's official guidance.
 
 ---
 
-## Guide Index
+## 📑 Guide Index
 
 | Document | Description |
 |----------|-------------|
@@ -30,7 +41,7 @@ This comprehensive guide provides best practices for all aspects of Microsoft Fa
 | [Performance & Parallelism](./performance-parallelism.md) | Copy Activity DIUs, Spark tuning, pipeline parallelism, Direct Lake, KQL |
 | [Data Governance Deep Dive](./data-governance-deep-dive.md) | Purview, classification, RLS/CLS, compliance frameworks, retention |
 
-### Phase 9: New Fabric Experience Best Practices
+### 🆕 Phase 9: New Fabric Experience Best Practices
 
 | Document | Description |
 |----------|-------------|
@@ -40,7 +51,7 @@ This comprehensive guide provides best practices for all aspects of Microsoft Fa
 | [Customer-Managed Keys](./customer-managed-keys.md) | BYOK encryption key management for Fabric |
 | [Spark Runtime Migration](./spark-runtime-migration.md) | Runtime 2.0 migration guide, breaking changes, compatibility |
 
-### Phase 10: Enterprise Readiness Best Practices
+### 🏢 Phase 10: Enterprise Readiness Best Practices
 
 | Document | Description |
 |----------|-------------|
@@ -58,7 +69,7 @@ This comprehensive guide provides best practices for all aspects of Microsoft Fa
 
 ---
 
-## Quick Reference: Key Principles
+## ⚡ Quick Reference: Key Principles
 
 ### 1. Workspace Organization
 - Separate workspaces by environment (Dev/Test/Prod)
@@ -85,7 +96,7 @@ Bronze (Raw) -> Silver (Cleansed) -> Gold (Curated)
 
 ---
 
-## Architecture Decision Tree
+## 🌳 Architecture Decision Tree
 
 ```mermaid
 flowchart TD
@@ -116,7 +127,7 @@ flowchart TD
 
 ---
 
-## Capacity Planning Quick Reference
+## 📐 Capacity Planning Quick Reference
 
 | Workload Profile | Recommended SKU | Use Case |
 |------------------|-----------------|----------|
@@ -127,7 +138,7 @@ flowchart TD
 
 ---
 
-## Performance Targets
+## 🎯 Performance Targets
 
 | Metric | Target | Optimization Strategy |
 |--------|--------|----------------------|
@@ -138,7 +149,7 @@ flowchart TD
 
 ---
 
-## Document Conventions
+## 📝 Document Conventions
 
 Throughout this guide:
 - **Recommended** - Best practice, use by default
@@ -148,7 +159,7 @@ Throughout this guide:
 
 ---
 
-## Related Resources
+## 🌐 Related Resources
 
 - [Microsoft Fabric Documentation](https://learn.microsoft.com/en-us/fabric/)
 - [Fabric Capacity Calculator](https://www.microsoft.com/microsoft-fabric/capacity-estimator)
@@ -156,4 +167,18 @@ Throughout this guide:
 
 ---
 
-[Back to Documentation](../index.md)
+---
+
+## 🔗 Related Documents
+
+| Document | Description |
+|----------|-------------|
+| [Architecture Overview](../diagrams/architecture-overview.md) | System architecture and data flow diagrams |
+| [Cost Breakdown](../diagrams/cost-breakdown.md) | Cost analysis and optimization diagrams |
+| [Data Dictionary](../data-dictionary/README.md) | Table schemas and field definitions |
+| [Operational Runbooks](../runbooks/README.md) | Incident response and maintenance procedures |
+| [Compliance Templates](../compliance-templates/README.md) | Regulatory compliance report templates |
+
+---
+
+[⬆️ Back to Top](#-best-practices-guide) | [📚 Parent](./) | [🏠 Home](../index.md)

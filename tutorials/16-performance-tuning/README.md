@@ -1,18 +1,22 @@
-# Tutorial 16: Performance Tuning & Optimization
+[Home](../../docs/index.md) > [Tutorials](../) > Tutorial 16: Performance Tuning & Optimization
+
+# ⚡ Tutorial 16: Performance Tuning & Optimization
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
 
 <div align="center">
 
 ![Difficulty](https://img.shields.io/badge/Difficulty-Advanced-red?style=for-the-badge)
+![Category](https://img.shields.io/badge/Category-Performance-green?style=for-the-badge)
 ![Duration](https://img.shields.io/badge/Duration-2.5_hours-blue?style=for-the-badge)
 ![Prerequisites](https://img.shields.io/badge/Prerequisites-Tutorial_00--03-orange?style=for-the-badge)
 
 </div>
 
-> **[Home](../../README.md)** > **[Tutorials](../README.md)** > **Performance Tuning**
-
 ---
 
-## Tutorial 16: Performance Tuning & Optimization
+## ⚡ Tutorial 16: Performance Tuning & Optimization
 
 | | |
 |---|---|
@@ -49,7 +53,7 @@
 
 ---
 
-## Overview
+## 📋 Overview
 
 This tutorial provides comprehensive guidance on **optimizing performance** across all Microsoft Fabric workloads. You will learn techniques for tuning Delta Lake tables, optimizing Spark configurations, improving query performance, and establishing performance baselines for your casino analytics platform.
 
@@ -62,7 +66,7 @@ Performance optimization in Microsoft Fabric spans multiple layers:
 
 ---
 
-## Learning Objectives
+## 🎯 Learning Objectives
 
 By the end of this tutorial, you will be able to:
 
@@ -79,7 +83,7 @@ By the end of this tutorial, you will be able to:
 
 ---
 
-## Performance Optimization Architecture
+## 🏗️ Performance Optimization Architecture
 
 ```mermaid
 flowchart TB
@@ -130,7 +134,7 @@ flowchart TB
 
 ---
 
-## Prerequisites
+## ✅ Prerequisites
 
 Before starting this tutorial, ensure you have:
 
@@ -144,7 +148,7 @@ Before starting this tutorial, ensure you have:
 
 ---
 
-## Step 1: V-Order Optimization for Delta Lake
+## 📦 Step 1: V-Order Optimization for Delta Lake
 
 ### 1.1 Understanding V-Order
 
@@ -278,7 +282,7 @@ print(f"\nPerformance Improvement: {improvement:.1f}%")
 
 ---
 
-## Step 2: Partitioning Strategies
+## 🗂️ Step 2: Partitioning Strategies
 
 ### 2.1 Partitioning Decision Matrix
 
@@ -395,7 +399,7 @@ spark.sql("""
 
 ---
 
-## Step 3: File Compaction and OPTIMIZE
+## 🔧 Step 3: File Compaction and OPTIMIZE
 
 ### 3.1 Understanding Small File Problem
 
@@ -557,7 +561,7 @@ for table_name, zorder_cols in tables_to_optimize:
 
 ---
 
-## Step 4: Query Optimization Patterns
+## 🔍 Step 4: Query Optimization Patterns
 
 ### 4.1 Predicate Pushdown
 
@@ -727,7 +731,7 @@ print("Hourly summary table created for faster aggregations")
 
 ---
 
-## Step 5: Lakehouse vs Warehouse Decision Matrix
+## 🏛️ Step 5: Lakehouse vs Warehouse Decision Matrix
 
 ![OneLake Architecture](https://learn.microsoft.com/en-us/fabric/onelake/media/onelake-overview/onelake-foundation.png)
 
@@ -849,7 +853,7 @@ flowchart LR
 
 ---
 
-## Step 6: Direct Lake Performance Tuning
+## 🚀 Step 6: Direct Lake Performance Tuning
 
 ### 6.1 Direct Lake Architecture
 
@@ -964,7 +968,7 @@ SUMMARIZE(
 
 ---
 
-## Step 7: Spark Configuration Tuning
+## ⚙️ Step 7: Spark Configuration Tuning
 
 ![Spark Compute Configuration](https://learn.microsoft.com/en-us/fabric/data-engineering/media/spark-compute/spark-compute-configuration.png)
 
@@ -1061,7 +1065,7 @@ configure_for_workload("aggregation")
 
 ---
 
-## Step 8: Caching Strategies
+## 💾 Step 8: Caching Strategies
 
 ### 8.1 Caching Options in Fabric
 
@@ -1169,7 +1173,7 @@ print("\nDelta cache warmed for critical tables")
 
 ---
 
-## Step 9: Real-Time Query Optimization (KQL)
+## 📡 Step 9: Real-Time Query Optimization (KQL)
 
 ### 9.1 KQL Query Best Practices
 
@@ -1273,7 +1277,7 @@ SlotHourlyStats
 
 ---
 
-## Step 10: Benchmarking and Baseline Establishment
+## 📊 Step 10: Benchmarking and Baseline Establishment
 
 ### 10.1 Benchmark Framework
 
@@ -1513,7 +1517,7 @@ compare_performance()
 
 ---
 
-## Performance Optimization Summary Table
+## 📋 Performance Optimization Summary Table
 
 | Technique | Target | Improvement | When to Apply |
 |-----------|--------|-------------|---------------|
@@ -1530,7 +1534,7 @@ compare_performance()
 
 ---
 
-## Validation Checklist
+## ✅ Validation Checklist
 
 Before moving to the next tutorial, verify:
 
@@ -1585,7 +1589,7 @@ spark.sql(query).explain(True)
 
 ---
 
-## Troubleshooting
+## 🔧 Troubleshooting
 
 | Issue | Symptom | Solution |
 |-------|---------|----------|
@@ -1598,7 +1602,7 @@ spark.sql(query).explain(True)
 
 ---
 
-## Best Practices
+## 📌 Best Practices
 
 1. **Measure First** - Establish baselines before optimizing
 2. **Optimize Incrementally** - One change at a time, measure impact
@@ -1613,7 +1617,7 @@ spark.sql(query).explain(True)
 
 ---
 
-## Summary
+## 📝 Summary
 
 You have successfully learned to optimize performance across Microsoft Fabric:
 
@@ -1628,13 +1632,13 @@ You have successfully learned to optimize performance across Microsoft Fabric:
 
 ---
 
-## Next Steps
+## 🚀 Next Steps
 
 Continue to **[Tutorial 17: Monitoring & Alerting](../17-monitoring-alerting/README.md)** to learn how to monitor your optimized Fabric environment and set up proactive alerting.
 
 ---
 
-## Additional Resources
+## 📚 Additional Resources
 
 ### Microsoft Documentation
 - [Delta Lake Optimization](https://learn.microsoft.com/fabric/data-engineering/delta-optimization)
@@ -1662,4 +1666,4 @@ Continue to **[Tutorial 17: Monitoring & Alerting](../17-monitoring-alerting/REA
 
 ---
 
-> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
+[⬆️ Back to Top](#-tutorial-16-performance-tuning--optimization) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)

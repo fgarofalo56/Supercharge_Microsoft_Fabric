@@ -1,16 +1,44 @@
-# Dataflows Gen2 Best Practices
+[Home](../index.md) > [Best Practices](./) > Dataflows Gen2
 
-> **Best Practices > Dataflows Gen2**
+# 🔀 Dataflows Gen2 Best Practices
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Dataflow-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
+
+</div>
+
+## 📑 Table of Contents
+
+- [Overview](#-overview)
+- [Key Performance Areas](#-key-performance-areas)
+- [Query Folding](#-query-folding)
+- [Fast Copy](#-fast-copy)
+- [Staging for Complex Transformations](#-staging-for-complex-transformations)
+- [Modern Evaluator](#-modern-evaluator)
+- [Partitioned Compute (Preview)](#-partitioned-compute-preview)
+- [Data Destinations](#-data-destinations)
+- [Performance Patterns](#-performance-patterns)
+- [Optimization Checklist](#-optimization-checklist)
+- [Common Issues and Solutions](#-common-issues-and-solutions)
+- [Dataflow vs Pipeline Decision](#-dataflow-vs-pipeline-decision)
+- [Best Practices Summary](#-best-practices-summary)
+- [Related Documents](#-related-documents)
 
 ---
 
-## Overview
+## 📋 Overview
 
 Dataflows Gen2 provides a low-code/no-code experience for data transformation using Power Query. This guide covers query folding, staging, fast copy, and performance optimization techniques.
 
 ---
 
-## Key Performance Areas
+## 🎯 Key Performance Areas
 
 ```mermaid
 flowchart LR
@@ -30,7 +58,7 @@ flowchart LR
 
 ---
 
-## Query Folding
+## 📊 Query Folding
 
 ### What is Query Folding?
 
@@ -66,7 +94,7 @@ Query folding pushes transformation logic to the data source, reducing data tran
 
 ---
 
-## Fast Copy
+## 🚀 Fast Copy
 
 ### What is Fast Copy?
 
@@ -116,7 +144,7 @@ For critical performance queries:
 
 ---
 
-## Staging for Complex Transformations
+## 🏗️ Staging for Complex Transformations
 
 ### When to Use Staging
 
@@ -162,7 +190,7 @@ Split Queries:
 
 ---
 
-## Modern Evaluator
+## 🔧 Modern Evaluator
 
 ### What is Modern Evaluator?
 
@@ -188,7 +216,7 @@ Modern Evaluator improves transformation performance for connectors that don't s
 
 ---
 
-## Partitioned Compute (Preview)
+## 🧪 Partitioned Compute (Preview)
 
 ### What is Partitioned Compute?
 
@@ -208,7 +236,7 @@ Process multi-file sources in parallel partitions for improved performance.
 
 ---
 
-## Data Destinations
+## 🎯 Data Destinations
 
 ### Destination Options
 
@@ -239,7 +267,7 @@ Destination Settings:
 
 ---
 
-## Performance Patterns
+## 📈 Performance Patterns
 
 ### Pattern 1: Simple EL (Extract-Load)
 
@@ -284,7 +312,7 @@ flowchart LR
 
 ---
 
-## Optimization Checklist
+## ✅ Optimization Checklist
 
 ### Before Publishing
 
@@ -311,7 +339,7 @@ flowchart LR
 
 ---
 
-## Common Issues and Solutions
+## ⚠️ Common Issues and Solutions
 
 | Issue | Cause | Solution |
 |-------|-------|----------|
@@ -322,7 +350,7 @@ flowchart LR
 
 ---
 
-## Dataflow vs Pipeline Decision
+## ⚖️ Dataflow vs Pipeline Decision
 
 | Criterion | Use Dataflow Gen2 | Use Pipeline Copy |
 |-----------|-------------------|-------------------|
@@ -335,7 +363,7 @@ flowchart LR
 
 ---
 
-## Best Practices Summary
+## 💡 Best Practices Summary
 
 ### Do's
 
@@ -355,4 +383,16 @@ flowchart LR
 
 ---
 
-[Back to Best Practices Index](./README.md)
+## 🔗 Related Documents
+
+| Document | Description |
+|----------|-------------|
+| [Pipelines & Data Movement](./03_PIPELINES_DATA_MOVEMENT.md) | Pipeline-based data movement patterns |
+| [Decision Guide](./10_DECISION_GUIDE.md) | When to use Dataflow vs Pipeline |
+| [Lakehouse Setup & Organization](./07_LAKEHOUSE_SETUP.md) | Lakehouse destination configuration |
+| [Warehouse Setup & Configuration](./08_WAREHOUSE_SETUP.md) | Warehouse destination requirements |
+| [Data Gateway Optimization](./02_DATA_GATEWAY.md) | Gateway configuration for on-premises sources |
+
+---
+
+[⬆️ Back to Top](#-dataflows-gen2-best-practices) | [📚 Best Practices](./) | [🏠 Home](../index.md)

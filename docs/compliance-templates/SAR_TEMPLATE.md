@@ -1,16 +1,27 @@
-# Suspicious Activity Report (SAR) Template
+[Home](../index.md) > [Docs](..) > [Compliance Templates](./) > SAR Template
 
-> **Home > Documentation > Compliance Templates > SAR**
+# 🔍 Suspicious Activity Report Template
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Compliance-red)
+![Status](https://img.shields.io/badge/Status-Final-green)
+![Authority](https://img.shields.io/badge/Authority-FinCEN%20%7C%20BSA-blue)
+
+</div>
 
 ---
 
-## Overview
+## 📖 Overview
 
 This template provides guidance for identifying, documenting, and filing Suspicious Activity Reports (SARs) as required by the Bank Secrecy Act (BSA) and FinCEN regulations.
 
 ---
 
-## Regulatory Requirements
+## 📜 Regulatory Requirements
 
 | Requirement | Details |
 |-------------|---------|
@@ -22,7 +33,7 @@ This template provides guidance for identifying, documenting, and filing Suspici
 
 ---
 
-## Suspicious Activity Indicators
+## 🚨 Suspicious Activity Indicators
 
 ### Structuring Patterns
 
@@ -44,7 +55,7 @@ This template provides guidance for identifying, documenting, and filing Suspici
 
 ---
 
-## Data Extraction Query
+## 🔍 Data Extraction Query
 
 ### PySpark - Identify SAR Candidates
 
@@ -206,7 +217,7 @@ ORDER BY f.daily_total DESC;
 
 ---
 
-## SAR Filing Data Elements
+## 📝 SAR Filing Data Elements
 
 ### Part I - Subject Information
 
@@ -245,7 +256,7 @@ The narrative should include:
 
 ---
 
-## Investigation Workflow
+## 🔄 Investigation Workflow
 
 ```mermaid
 flowchart TD
@@ -267,7 +278,7 @@ flowchart TD
 
 ---
 
-## Automated Alerts Configuration
+## 🔔 Automated Alerts Configuration
 
 ### Real-Time KQL Alert
 
@@ -298,7 +309,7 @@ FinancialTransactions
 
 ---
 
-## Record Retention
+## 🗃️ Record Retention
 
 | Record Type | Retention Period |
 |-------------|------------------|
@@ -310,7 +321,7 @@ FinancialTransactions
 
 ---
 
-## Quality Checklist
+## ✅ Quality Checklist
 
 - [ ] All subject identification verified
 - [ ] Transaction records attached
@@ -322,7 +333,7 @@ FinancialTransactions
 
 ---
 
-## Contact
+## 📞 Contact
 
 **BSA Officer:** bsa-officer@casino.com
 **Compliance Hotline:** compliance@casino.com
@@ -330,4 +341,18 @@ FinancialTransactions
 
 ---
 
-[Back to Compliance Templates](./README.md)
+---
+
+## 🔗 Related Documents
+
+| Document | Description |
+|----------|-------------|
+| [Compliance Templates Overview](./README.md) | Index of all compliance templates |
+| [CTR Template](./CTR_TEMPLATE.md) | Currency Transaction Report template |
+| [W-2G Template](./W2G_TEMPLATE.md) | Gambling winnings tax reporting |
+| [MICS Template](./MICS_TEMPLATE.md) | NIGC compliance template |
+| [Alerting & Data Activator](../best-practices/alerting-data-activator.md) | Alert patterns and integration |
+
+---
+
+[⬆️ Back to Top](#-suspicious-activity-report-template) | [📚 Parent](./) | [🏠 Home](../index.md)

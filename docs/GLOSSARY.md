@@ -2,7 +2,16 @@
 
 > 🏠 [Home](index.md) > 📚 [Docs](./) > 📖 Glossary
 
-**Last Updated:** `2026-03-11` | **Version:** 2.0.0
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Reference-purple?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
+
+</div>
 
 ---
 

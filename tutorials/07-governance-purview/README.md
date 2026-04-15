@@ -1,5 +1,8 @@
 # 🛡️ Tutorial 07: Governance & Purview
 
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
 > **🏠 [Home](../../README.md)** > **📖 [Tutorials](../README.md)** > **🛡️ Governance & Purview**
 
 ---
@@ -24,7 +27,7 @@
 
 ---
 
-### Progress Tracker
+### 📊 Progress Tracker
 
 ```
 +--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+
@@ -43,7 +46,7 @@
 
 ---
 
-## Overview
+## 📖 Overview
 
 This tutorial covers implementing data governance using Microsoft Purview integration with Fabric. You will catalog data assets, apply classifications, track data lineage, and establish compliance controls for the regulated casino/gaming environment.
 
@@ -83,7 +86,7 @@ flowchart TB
 
 ---
 
-## Learning Objectives
+## 🎯 Learning Objectives
 
 By the end of this tutorial, you will be able to:
 
@@ -97,7 +100,7 @@ By the end of this tutorial, you will be able to:
 
 ---
 
-## Why Governance Matters for Casino Data
+## ⚠️ Why Governance Matters for Casino Data
 
 Casino and gaming operations handle highly regulated data:
 
@@ -114,7 +117,7 @@ Casino and gaming operations handle highly regulated data:
 
 ---
 
-## Microsoft Purview Capabilities
+## 📊 Microsoft Purview Capabilities
 
 Microsoft Purview provides unified data governance:
 
@@ -134,7 +137,7 @@ Microsoft Purview provides unified data governance:
 
 ---
 
-## Prerequisites
+## 📋 Prerequisites
 
 - [ ] Completed Tutorials 01-06 (Medallion architecture + Pipelines)
 - [ ] Microsoft Purview account deployed in your Azure subscription
@@ -146,7 +149,7 @@ Microsoft Purview provides unified data governance:
 
 ---
 
-## Step 1: Connect Purview to Fabric
+## 🛠️ Step 1: Connect Purview to Fabric
 
 ### 1.1 Register Fabric as a Data Source
 
@@ -226,7 +229,7 @@ sequenceDiagram
 
 ---
 
-## Step 2: Review Scanned Assets
+## 🛠️ Step 2: Review Scanned Assets
 
 ### 2.1 View Data Catalog
 
@@ -245,7 +248,7 @@ You should see:
 
 Click on a table (e.g., `gold_slot_performance`):
 
-#### Overview Tab
+#### 📖 Overview Tab
 - Asset description
 - Owner and steward
 - Classifications applied
@@ -284,7 +287,7 @@ Fabric-Casino-POC (Source)
 
 ---
 
-## Step 3: Apply Classifications
+## 🛠️ Step 3: Apply Classifications
 
 ### 3.1 Built-in Classifications
 
@@ -366,7 +369,7 @@ For compliance tables:
 
 ---
 
-## Step 4: Create Business Glossary
+## 🛠️ Step 4: Create Business Glossary
 
 ### 4.1 Navigate to Glossary
 
@@ -536,7 +539,7 @@ Monitoring: |
 
 ---
 
-## Step 5: View Data Lineage
+## 🛠️ Step 5: View Data Lineage
 
 ### 5.1 Navigate to Lineage
 
@@ -637,7 +640,7 @@ If `silver_slot_cleansed` schema changes:
 
 ---
 
-## Step 6: Sensitivity Labels and Data Policies
+## 🛠️ Step 6: Sensitivity Labels and Data Policies
 
 ### 6.1 Apply Sensitivity Labels
 
@@ -703,7 +706,7 @@ def mask_pii(df):
 
 ---
 
-## Step 7: Monitoring and Compliance Reporting
+## 🛠️ Step 7: Monitoring and Compliance Reporting
 
 ### 7.1 Data Estate Insights
 
@@ -733,7 +736,7 @@ For regulatory audits:
 
 ```markdown
 # Casino Data Governance Compliance Report
-## Period: Q4 2024
+## 📅 Period: Q4 2024
 
 ### 1. Data Inventory
 - Total cataloged assets: 45
@@ -812,7 +815,7 @@ Before moving to the next tutorial, verify:
 <details>
 <parameter name="summary">🔍 How to verify each item
 
-## Best Practices
+## 💡 Best Practices
 
 ### Governance Framework
 
@@ -836,7 +839,7 @@ Before moving to the next tutorial, verify:
 
 ---
 
-## Troubleshooting
+## 🔧 Troubleshooting
 
 ### Common Issues
 
@@ -858,7 +861,7 @@ Before moving to the next tutorial, verify:
 
 ---
 
-## Summary
+## 🎉 Summary
 
 Congratulations! You have successfully:
 
@@ -873,13 +876,13 @@ Your data estate is now governed with enterprise-grade controls suitable for the
 
 ---
 
-## Next Steps
+## ➡️ Next Steps
 
 Continue to **[Tutorial 08: Database Mirroring](../08-database-mirroring/README.md)** to learn how to replicate operational databases into Fabric for near-real-time analytics.
 
 ---
 
-## Resources
+## 📚 Resources
 
 | Resource | Link |
 |----------|------|
@@ -900,3 +903,7 @@ Continue to **[Tutorial 08: Database Mirroring](../08-database-mirroring/README.
 ---
 
 > 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
+
+---
+
+[⬆️ Back to Top](#-tutorial-07-governance--purview) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)

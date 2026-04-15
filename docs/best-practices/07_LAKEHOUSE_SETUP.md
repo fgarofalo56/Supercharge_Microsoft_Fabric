@@ -1,10 +1,38 @@
-# Lakehouse Setup & Organization
+[Home](../index.md) > [Best Practices](./) > Lakehouse Setup & Organization
 
-> **Best Practices > Lakehouse Setup**
+# 🏠 Lakehouse Setup & Organization
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Lakehouse-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
+
+</div>
+
+## 📑 Table of Contents
+
+- [Overview](#-overview)
+- [Lakehouse Architecture](#-lakehouse-architecture)
+- [Medallion Architecture](#-medallion-architecture)
+- [Delta Lake Configuration](#-delta-lake-configuration)
+- [V-Order Optimization](#-v-order-optimization)
+- [Partitioning Strategy](#-partitioning-strategy)
+- [Z-ORDER Clustering](#-z-order-clustering)
+- [Table Maintenance](#-table-maintenance)
+- [Lakehouse UI Maintenance](#-lakehouse-ui-maintenance)
+- [Shortcuts](#-shortcuts)
+- [File Organization](#-file-organization)
+- [Best Practices Checklist](#-best-practices-checklist)
+- [Common Issues and Solutions](#-common-issues-and-solutions)
+- [Related Documents](#-related-documents)
 
 ---
 
-## Overview
+## 📋 Overview
 
 The Lakehouse is central to Microsoft Fabric's data architecture, combining data lake flexibility with data warehouse capabilities. This guide covers Delta Lake configuration, medallion architecture implementation, and table maintenance best practices.
 
@@ -14,7 +42,7 @@ The Lakehouse is central to Microsoft Fabric's data architecture, combining data
 
 ---
 
-## Lakehouse Architecture
+## 🏗️ Lakehouse Architecture
 
 ### Components
 
@@ -42,7 +70,7 @@ Lakehouse
 
 ---
 
-## Medallion Architecture
+## 🥇 Medallion Architecture
 
 ### Layer Definitions
 
@@ -79,7 +107,7 @@ flowchart LR
 
 ---
 
-## Delta Lake Configuration
+## ⚙️ Delta Lake Configuration
 
 ### Table Creation with Best Practices
 
@@ -120,7 +148,7 @@ spark.sql("""
 
 ---
 
-## V-Order Optimization
+## 🚀 V-Order Optimization
 
 ### What is V-Order?
 
@@ -150,7 +178,7 @@ VORDER;
 
 ---
 
-## Partitioning Strategy
+## 📐 Partitioning Strategy
 
 ### When to Partition
 
@@ -189,7 +217,7 @@ df.write.format("delta") \
 
 ---
 
-## Z-ORDER Clustering
+## 🔍 Z-ORDER Clustering
 
 ### What is Z-ORDER?
 
@@ -212,7 +240,7 @@ ZORDER BY (player_id, event_date);
 
 ---
 
-## Table Maintenance
+## 🔧 Table Maintenance
 
 ### Three Core Operations
 
@@ -278,7 +306,7 @@ delta_table.vacuum(168)  # 168 hours = 7 days
 
 ---
 
-## Lakehouse UI Maintenance
+## 🖥️ Lakehouse UI Maintenance
 
 ### Using Portal UI
 
@@ -326,7 +354,7 @@ response = requests.post(
 
 ---
 
-## Shortcuts
+## 🔗 Shortcuts
 
 ### When to Use Shortcuts
 
@@ -361,7 +389,7 @@ Lakehouse > Files > New shortcut > Select source
 
 ---
 
-## File Organization
+## 📂 File Organization
 
 ### Recommended Structure
 
@@ -388,7 +416,7 @@ Tables/
 
 ---
 
-## Best Practices Checklist
+## ✅ Best Practices Checklist
 
 ### Initial Setup
 
@@ -416,7 +444,7 @@ Tables/
 
 ---
 
-## Common Issues and Solutions
+## ⚠️ Common Issues and Solutions
 
 | Issue | Cause | Solution |
 |-------|-------|----------|
@@ -428,4 +456,16 @@ Tables/
 
 ---
 
-[Back to Best Practices Index](./README.md)
+## 🔗 Related Documents
+
+| Document | Description |
+|----------|-------------|
+| [Spark & Notebooks](./05_SPARK_NOTEBOOKS.md) | Spark optimization and notebook patterns |
+| [Warehouse Setup & Configuration](./08_WAREHOUSE_SETUP.md) | Warehouse schema design and comparison |
+| [Medallion Architecture Deep Dive](./medallion-architecture-deep-dive.md) | Advanced medallion architecture patterns |
+| [Decision Guide](./10_DECISION_GUIDE.md) | Lakehouse vs Warehouse decision criteria |
+| [Direct Lake](../features/direct-lake.md) | Direct Lake connectivity for Power BI |
+
+---
+
+[⬆️ Back to Top](#-lakehouse-setup--organization) | [📚 Best Practices](./) | [🏠 Home](../index.md)

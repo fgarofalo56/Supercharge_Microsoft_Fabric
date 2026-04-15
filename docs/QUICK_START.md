@@ -1,6 +1,17 @@
-# Quick Start Guide
+[Home](index.md) > [Docs](./) > Quick Start
 
-> [Home](index.md) > [Docs](./) > Quick Start
+# 🚀 Quick Start Guide
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category](https://img.shields.io/badge/Category-Getting_Started-brightgreen?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
+
+</div>
 
 **Get your Microsoft Fabric Casino Analytics POC running in under 15 minutes.**
 
@@ -8,7 +19,20 @@
 
 ---
 
-## Prerequisites
+## 📑 Table of Contents
+
+- [📋 Prerequisites](#-prerequisites)
+- [🔧 Step 1: Clone and Configure](#-step-1-clone-and-configure)
+- [☁️ Step 2: Deploy Infrastructure](#️-step-2-deploy-infrastructure)
+- [🏗️ Step 3: Create Workspace and Lakehouses](#️-step-3-create-workspace-and-lakehouses)
+- [🎲 Step 4: Generate Sample Data](#-step-4-generate-sample-data)
+- [📓 Step 5: Run Your First Notebook](#-step-5-run-your-first-notebook)
+- [🗺️ Where to Go Next](#️-where-to-go-next)
+- [🔧 Troubleshooting](#-troubleshooting)
+
+---
+
+## 📋 Prerequisites
 
 | Requirement | Details |
 |-------------|---------|
@@ -21,7 +45,7 @@
 
 ---
 
-## Step 1: Clone and Configure
+## 🔧 Step 1: Clone and Configure
 
 ```bash
 git clone https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric.git
@@ -48,7 +72,7 @@ PROJECT_PREFIX=casinopoc
 
 ---
 
-## Step 2: Deploy Infrastructure
+## ☁️ Step 2: Deploy Infrastructure
 
 ```bash
 az login
@@ -74,7 +98,7 @@ az deployment sub create \
 
 ---
 
-## Step 3: Create Workspace and Lakehouses
+## 🏗️ Step 3: Create Workspace and Lakehouses
 
 This step is done in the **Fabric portal** — Bicep deploys the capacity, but you create the workspace manually.
 
@@ -93,7 +117,7 @@ This step is done in the **Fabric portal** — Bicep deploys the capacity, but y
 
 ---
 
-## Step 4: Generate Sample Data
+## 🎲 Step 4: Generate Sample Data
 
 Choose **one** of the three paths below.
 
@@ -129,7 +153,7 @@ The Bronze notebooks can generate synthetic data inline. Skip this step and proc
 
 ---
 
-## Step 5: Run Your First Notebook
+## 📓 Step 5: Run Your First Notebook
 
 Fabric notebooks are **not imported as files**. You create a new notebook and paste the code.
 
@@ -158,7 +182,7 @@ You should see rows with columns like `machine_id`, `casino_id`, `event_type`, `
 
 ---
 
-## Where to Go Next
+## 🗺️ Where to Go Next
 
 | Task | Tutorial |
 |------|----------|
@@ -170,7 +194,7 @@ You should see rows with columns like `machine_id`, `casino_id`, `event_type`, `
 
 ---
 
-## Troubleshooting
+## 🔧 Troubleshooting
 
 | Error / Symptom | Cause | Fix |
 |-----------------|-------|-----|
@@ -183,6 +207,21 @@ You should see rows with columns like `machine_id`, `casino_id`, `event_type`, `
 
 ---
 
-> **Full Documentation:** [Prerequisites](PREREQUISITES.md) | [Architecture](ARCHITECTURE.md) | [Deployment](DEPLOYMENT.md)
+## 📚 Related Documentation
+
+| Document | Description |
+|----------|-------------|
+| [📋 Prerequisites](PREREQUISITES.md) | Full prerequisites guide |
+| [🏗️ Architecture](ARCHITECTURE.md) | System architecture |
+| [🚀 Deployment](DEPLOYMENT.md) | Detailed deployment guide |
+
+---
+
+[⬆️ Back to Top](#-quick-start-guide) | [📚 Docs](./) | [🏠 Home](index.md)
+
+---
+
+> 📖 **Documentation maintained by:** Microsoft Fabric POC Team
+> 🔗 **Repository:** [Suppercharge_Microsoft_Fabric](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric)
 
 **Total Time:** ~15 minutes (mostly waiting for Bicep deployment and Spark cold start).

@@ -1,32 +1,44 @@
-# Error Handling & Monitoring Best Practices
+[Home](../index.md) > [Best Practices](./) > Error Handling & Monitoring
 
-> **Best Practices > Error Handling & Monitoring**
+# ⚠️ Error Handling & Monitoring Best Practices
+
+> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Status**: ✅ Final | **Maintainer**: Documentation Team
+
+<div align="center">
+
+![Category: Best Practices](https://img.shields.io/badge/Category-Best_Practices-blue?style=flat-square)
+![Platform: Microsoft Fabric](https://img.shields.io/badge/Platform-Microsoft_Fabric-742774?style=flat-square)
+![Component: Error Handling](https://img.shields.io/badge/Component-Error_Handling-red?style=flat-square)
+![Scope: Pipelines | Spark | KQL](https://img.shields.io/badge/Scope-Pipelines_|_Spark_|_KQL-green?style=flat-square)
+
+</div>
 
 ---
 
-## Overview
+## 📖 Overview
 
 Robust error handling and monitoring are essential for production-grade Microsoft Fabric deployments. This guide covers pipeline error architecture, structured error logging, classification taxonomy, monitoring with Data Activator, PySpark error handling patterns, and KQL-based error analysis. It draws on patterns proven across casino gaming compliance, federal agency data pipelines, and real-time streaming workloads.
 
 ---
 
-## Table of Contents
+## 🧭 Table of Contents
 
-- [Pipeline Error Architecture](#pipeline-error-architecture)
-- [Production Error Table Design](#production-error-table-design)
-- [Stored Procedures](#stored-procedures)
-- [Error Classification Taxonomy](#error-classification-taxonomy)
-- [Pipeline Error Patterns](#pipeline-error-patterns)
-- [PySpark Error Handling](#pyspark-error-handling)
-- [Monitoring with Data Activator](#monitoring-with-data-activator)
-- [Alert Escalation Matrix](#alert-escalation-matrix)
-- [KQL Queries for Error Analysis](#kql-queries-for-error-analysis)
-- [Operational Dashboards](#operational-dashboards)
-- [Runbook Integration](#runbook-integration)
+- [🏗️ Pipeline Error Architecture](#-pipeline-error-architecture)
+- [💾 Production Error Table Design](#-production-error-table-design)
+- [🔧 Stored Procedures](#-stored-procedures)
+- [🏷️ Error Classification Taxonomy](#-error-classification-taxonomy)
+- [🔁 Pipeline Error Patterns](#-pipeline-error-patterns)
+- [🐍 PySpark Error Handling](#-pyspark-error-handling)
+- [🔔 Monitoring with Data Activator](#-monitoring-with-data-activator)
+- [📢 Alert Escalation Matrix](#-alert-escalation-matrix)
+- [🔍 KQL Queries for Error Analysis](#-kql-queries-for-error-analysis)
+- [📊 Operational Dashboards](#-operational-dashboards)
+- [📓 Runbook Integration](#-runbook-integration)
 
 ---
 
-## Pipeline Error Architecture
+## 🏗️ Pipeline Error Architecture
 
 ### Design Principles
 
@@ -125,7 +137,7 @@ Configure retry policies on activities that interact with external systems (Copy
 
 ---
 
-## Production Error Table Design
+## 💾 Production Error Table Design
 
 ### Error Table DDL
 
@@ -209,7 +221,7 @@ GROUP BY
 
 ---
 
-## Stored Procedures
+## 🔧 Stored Procedures
 
 ### usp_log_pipeline_error
 
@@ -483,7 +495,7 @@ END;
 
 ---
 
-## Error Classification Taxonomy
+## 🏷️ Error Classification Taxonomy
 
 ### Classification Definitions
 
@@ -555,7 +567,7 @@ flowchart TD
 
 ---
 
-## Pipeline Error Patterns
+## 🔁 Pipeline Error Patterns
 
 ### Pattern 1: Simple Pipeline with Error Logging
 
@@ -658,7 +670,7 @@ flowchart LR
 
 ---
 
-## PySpark Error Handling
+## 🐍 PySpark Error Handling
 
 ### Structured Error Handling in Notebooks
 
@@ -963,7 +975,7 @@ class DataQualityCollector:
 
 ---
 
-## Monitoring with Data Activator
+## 🔔 Monitoring with Data Activator
 
 ### Setting Up Monitoring Reflexes
 
@@ -1016,7 +1028,7 @@ flowchart LR
 
 ---
 
-## Alert Escalation Matrix
+## 📢 Alert Escalation Matrix
 
 ### Escalation Tiers
 
@@ -1053,7 +1065,7 @@ Rotation rules:
 
 ---
 
-## KQL Queries for Error Analysis
+## 🔍 KQL Queries for Error Analysis
 
 ### Error Trend Analysis (Eventhouse)
 
@@ -1162,7 +1174,7 @@ pipeline_errors
 
 ---
 
-## Operational Dashboards
+## 📊 Operational Dashboards
 
 ### Power BI Error Dashboard Design
 
@@ -1217,7 +1229,7 @@ DIVIDE(
 
 ---
 
-## Runbook Integration
+## 📓 Runbook Integration
 
 ### Runbook Template
 
@@ -1269,7 +1281,7 @@ For each common error scenario, maintain a runbook entry:
 
 ---
 
-## Summary
+## ⭐ Summary
 
 Effective error handling in Microsoft Fabric requires:
 
@@ -1283,13 +1295,15 @@ Effective error handling in Microsoft Fabric requires:
 
 ---
 
-## Related Documents
+## 📚 Related Documents
 
-- [Pipelines & Data Movement](./03_PIPELINES_DATA_MOVEMENT.md) -- Pipeline configuration patterns
-- [Alerting & Data Activator](./alerting-data-activator.md) -- Detailed alerting setup
-- [Disaster Recovery](../DISASTER_RECOVERY.md) -- Recovery procedures
-- [Security Guide](../SECURITY.md) -- Compliance and access controls
+| Document | Description |
+|----------|-------------|
+| [Pipelines & Data Movement](./03_PIPELINES_DATA_MOVEMENT.md) | Pipeline configuration patterns |
+| [Alerting & Data Activator](./alerting-data-activator.md) | Detailed alerting setup |
+| [Disaster Recovery](../DISASTER_RECOVERY.md) | Recovery procedures |
+| [Security Guide](../SECURITY.md) | Compliance and access controls |
 
 ---
 
-[Back to Best Practices Index](./README.md) | [Back to Documentation](../index.md)
+[Back to Top](#-error-handling--monitoring-best-practices) | [Best Practices](./) | [Home](../index.md)
