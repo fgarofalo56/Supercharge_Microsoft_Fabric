@@ -124,7 +124,7 @@ jobs:
             --junitxml=test-results.xml
 
       - name: Upload Coverage
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v6
         with:
           files: coverage.xml
           fail_ci_if_error: false
