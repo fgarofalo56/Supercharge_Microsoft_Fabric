@@ -104,22 +104,20 @@ resource purviewRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-
 }
 
 // ---- Existing Resource References ----
-// Extract subscription and resource group from the full resource ID so that
-// cross-RG / cross-subscription IDs resolve correctly rather than silently
-// binding to the wrong scope.
+// These resources are assumed to be in the same resource group as this module.
+// Cross-RG deployments are not supported; pass resource IDs only for resources
+// co-located in the same resource group.
+// Role assignments (above) are scoped to these existing resources.
 
 resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' existing = if (enableKeyVaultAccess && !empty(keyVaultId)) {
-  scope: resourceGroup(split(keyVaultId, '/')[2], split(keyVaultId, '/')[4])
   name: last(split(keyVaultId, '/'))
 }
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-05-01' existing = if (enableStorageAccess && !empty(storageAccountId)) {
-  scope: resourceGroup(split(storageAccountId, '/')[2], split(storageAccountId, '/')[4])
   name: last(split(storageAccountId, '/'))
 }
 
 resource purviewAccount 'Microsoft.Purview/accounts@2023-05-01-preview' existing = if (enablePurviewAccess && !empty(purviewAccountId)) {
-  scope: resourceGroup(split(purviewAccountId, '/')[2], split(purviewAccountId, '/')[4])
   name: last(split(purviewAccountId, '/'))
 }
 
