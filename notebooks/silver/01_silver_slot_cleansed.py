@@ -82,8 +82,8 @@ from pyspark.sql.types import (
 batch_id = _get_arg("batch_id", datetime.now().strftime("%Y%m%d_%H%M%S"))
 
 # Source and target
-source_table = "lh_bronze.bronze_slot_telemetry"
-target_table = "lh_silver.silver_slot_cleansed"
+source_table = "lh_bronze.dbo.bronze_slot_telemetry"
+target_table = "lh_silver.dbo.silver_slot_cleansed"
 
 print(f"Processing batch: {batch_id}")
 print(f"Source: {source_table}")

@@ -77,8 +77,8 @@ batch_id = (
 )
 
 # Source and target
-SOURCE_TABLE = "lh_bronze.bronze_player_profile"
-TARGET_TABLE = "lh_silver.silver_player_master"
+SOURCE_TABLE = "lh_bronze.dbo.bronze_player_profile"
+TARGET_TABLE = "lh_silver.dbo.silver_player_master"
 KEY_COLUMN = "player_id"
 
 # Attributes that trigger a new version when changed
