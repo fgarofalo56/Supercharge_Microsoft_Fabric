@@ -89,7 +89,6 @@ var alertTags = union(tags, {
 
 var hasActionGroup = !empty(alertActionGroupId)
 var hasEmailRecipients = !empty(alertEmailRecipients)
-var hasCapacityResource = !empty(fabricCapacityResourceId)
 
 // Calculate budget start date
 var resolvedBudgetStartDate = !empty(budgetStartDate) ? budgetStartDate : '${substring(deployedAt, 0, 7)}-01'
@@ -125,6 +124,45 @@ resource actionGroup 'Microsoft.Insights/actionGroups@2023-01-01' = if (!hasActi
 // Resolve which action group to use
 var resolvedActionGroupId = hasActionGroup ? alertActionGroupId : (hasEmailRecipients ? actionGroup.id : '')
 
+// When a specific capacity resource ID is supplied, alerts filter by _ResourceId
+// so they only fire for this capacity (not any Fabric capacity in the workspace).
+// Bicep multi-line strings ('''...''') are verbatim and do NOT interpolate, so we
+// build final queries via replace() on placeholder tokens.
+var capacityResourceFilter = !empty(fabricCapacityResourceId) ? '| where _ResourceId =~ "${fabricCapacityResourceId}"' : ''
+
+var capacityUtilQueryTemplate = '''
+            // Fabric Capacity Utilization via AzureMetrics
+            // Workspace Monitoring must be enabled on the Fabric capacity and
+            // routed to this Log Analytics workspace (diagnostic setting).
+            AzureMetrics
+            | where ResourceProvider == "MICROSOFT.FABRIC"
+            __RESOURCE_FILTER__
+            | where MetricName in ("CUPercentage", "CapacityUtilization")
+            | where TimeGenerated > ago(15m)
+            | summarize AvgUtilization = avg(Average) by bin(TimeGenerated, 5m)
+            | where AvgUtilization > __THRESHOLD__
+          '''
+
+var capacityUtilQuery = replace(
+  replace(capacityUtilQueryTemplate, '__RESOURCE_FILTER__', capacityResourceFilter),
+  '__THRESHOLD__',
+  string(capacityThresholdPercent)
+)
+
+var throttlingQueryTemplate = '''
+            // Fabric Capacity Throttling Detection via AzureMetrics
+            AzureMetrics
+            | where ResourceProvider == "MICROSOFT.FABRIC"
+            __RESOURCE_FILTER__
+            | where MetricName in ("ThrottlingPercentage", "CUPercentage")
+            | where TimeGenerated > ago(5m)
+            | summarize MaxValue = max(Average) by bin(TimeGenerated, 1m), MetricName
+            | where (MetricName == "ThrottlingPercentage" and MaxValue > 0)
+               or  (MetricName == "CUPercentage" and MaxValue >= 100)
+          '''
+
+var throttlingQuery = replace(throttlingQueryTemplate, '__RESOURCE_FILTER__', capacityResourceFilter)
+
 // =============================================================================
 // Capacity Utilization Alert (Scheduled Query Rule)
 // =============================================================================
@@ -146,17 +184,7 @@ resource capacityAlert 'Microsoft.Insights/scheduledQueryRules@2023-03-15-previe
     criteria: {
       allOf: [
         {
-          query: '''
-            // Fabric Capacity Utilization via AzureMetrics
-            // Workspace Monitoring must be enabled on the Fabric capacity and
-            // routed to this Log Analytics workspace (diagnostic setting).
-            AzureMetrics
-            | where ResourceProvider == "MICROSOFT.FABRIC"
-            | where MetricName in ("CUPercentage", "CapacityUtilization")
-            | where TimeGenerated > ago(15m)
-            | summarize AvgUtilization = avg(Average) by bin(TimeGenerated, 5m)
-            | where AvgUtilization > ${capacityThresholdPercent}
-          '''
+          query: capacityUtilQuery
           timeAggregation: 'Count'
           operator: 'GreaterThan'
           threshold: 0
@@ -196,16 +224,7 @@ resource throttlingAlert 'Microsoft.Insights/scheduledQueryRules@2023-03-15-prev
     criteria: {
       allOf: [
         {
-          query: '''
-            // Fabric Capacity Throttling Detection via AzureMetrics
-            AzureMetrics
-            | where ResourceProvider == "MICROSOFT.FABRIC"
-            | where MetricName in ("ThrottlingPercentage", "CUPercentage")
-            | where TimeGenerated > ago(5m)
-            | summarize MaxValue = max(Average) by bin(TimeGenerated, 1m), MetricName
-            | where (MetricName == "ThrottlingPercentage" and MaxValue > 0)
-               or  (MetricName == "CUPercentage" and MaxValue >= 100)
-          '''
+          query: throttlingQuery
           timeAggregation: 'Count'
           operator: 'GreaterThan'
           threshold: 0
