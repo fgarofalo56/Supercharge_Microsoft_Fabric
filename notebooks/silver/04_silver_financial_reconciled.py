@@ -53,6 +53,7 @@ from pyspark.sql.functions import (
     filter,
     lit,
     sum,
+    unix_timestamp,
     when,
     window,
 )
@@ -143,7 +144,7 @@ df_compliance = df_quality \
 # Window for structuring detection (24-hour rolling)
 structuring_window = Window \
     .partitionBy("player_id") \
-    .orderBy(col("transaction_timestamp").cast("long")) \
+    .orderBy(unix_timestamp(col("transaction_timestamp"))) \
     .rangeBetween(-STRUCTURING_WINDOW_HOURS * 3600, 0)
 
 # Detect potential structuring

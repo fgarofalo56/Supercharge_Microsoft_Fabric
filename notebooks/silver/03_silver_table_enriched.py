@@ -249,12 +249,14 @@ spark.sql(f"""
 
 # COMMAND ----------
 
-# Pattern flag summary
+# Pattern flag summary — LATERAL VIEW lets us GROUP BY the exploded column
+# (can't alias EXPLODE() in SELECT and GROUP BY that alias in the same query)
 spark.sql(f"""
     SELECT
-        EXPLODE(pattern_flags) as flag,
+        flag,
         COUNT(*) as occurrences
     FROM {target_table}
+    LATERAL VIEW EXPLODE(pattern_flags) t AS flag
     WHERE SIZE(pattern_flags) > 0
     GROUP BY flag
     ORDER BY occurrences DESC

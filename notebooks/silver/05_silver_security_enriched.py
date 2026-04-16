@@ -56,6 +56,7 @@ from pyspark.sql.functions import (
     least,
     lit,
     sum,
+    unix_timestamp,
     when,
     window,
 )
@@ -146,13 +147,13 @@ df_threat_scored = df_quality \
 # Window for location-based correlation (5-minute window)
 location_window = Window \
     .partitionBy("location_id") \
-    .orderBy(col("event_timestamp").cast("long")) \
+    .orderBy(unix_timestamp(col("event_timestamp"))) \
     .rangeBetween(-300, 0)
 
 # Window for person-based correlation (if person_id exists)
 person_window = Window \
     .partitionBy("person_id") \
-    .orderBy(col("event_timestamp").cast("long")) \
+    .orderBy(unix_timestamp(col("event_timestamp"))) \
     .rangeBetween(-3600, 0)  # 1 hour
 
 # Add correlation metrics
