@@ -261,7 +261,7 @@ module storage 'modules/storage/storage-account.bicep' = {
     logAnalyticsWorkspaceId: monitoring.outputs.workspaceId
     managedIdentityPrincipalId: security.outputs.managedIdentityPrincipalId
     enablePrivateEndpoint: effectivePrivateEndpoints
-    privateEndpointSubnetId: effectivePrivateEndpoints ? networking.outputs.privateEndpointSubnetId : ''
+    privateEndpointSubnetId: effectivePrivateEndpoints ? networking!.outputs.privateEndpointSubnetId : ''
     enableCmk: effectiveEnableCmk
     keyVaultKeyUri: effectiveEnableCmk ? security.outputs.storageCmkKeyUri : ''
     tags: defaultTags
@@ -297,7 +297,7 @@ module governance 'modules/governance/purview.bicep' = {
     managedIdentityPrincipalId: security.outputs.managedIdentityPrincipalId
     logAnalyticsWorkspaceId: monitoring.outputs.workspaceId
     enablePrivateEndpoint: effectivePrivateEndpoints
-    privateEndpointSubnetId: effectivePrivateEndpoints ? networking.outputs.privateEndpointSubnetId : ''
+    privateEndpointSubnetId: effectivePrivateEndpoints ? networking!.outputs.privateEndpointSubnetId : ''
     tags: defaultTags
   }
 }
@@ -315,7 +315,7 @@ module eventstream 'modules/fabric/fabric-eventstream.bicep' = if (enableEventst
     location: location
     logAnalyticsWorkspaceId: monitoring.outputs.workspaceId
     enablePrivateEndpoint: effectivePrivateEndpoints
-    privateEndpointSubnetId: effectivePrivateEndpoints ? networking.outputs.privateEndpointSubnetId : ''
+    privateEndpointSubnetId: effectivePrivateEndpoints ? networking!.outputs.privateEndpointSubnetId : ''
     tags: defaultTags
   }
 }
@@ -336,7 +336,7 @@ module eventhouse 'modules/fabric/fabric-eventhouse.bicep' = if (enableEventhous
     logAnalyticsWorkspaceId: monitoring.outputs.workspaceId
     managedIdentityPrincipalId: security.outputs.managedIdentityPrincipalId
     enablePrivateEndpoint: effectivePrivateEndpoints
-    privateEndpointSubnetId: effectivePrivateEndpoints ? networking.outputs.privateEndpointSubnetId : ''
+    privateEndpointSubnetId: effectivePrivateEndpoints ? networking!.outputs.privateEndpointSubnetId : ''
     enableDoubleEncryption: complianceRequiresFipsKeyVault
     tags: defaultTags
   }
@@ -366,7 +366,6 @@ module powerBIWorkspace 'modules/analytics/powerbi-workspace.bicep' = if (enable
 module workspaceIdentity 'modules/security/workspace-identity.bicep' = if (enableWorkspaceIdentity) {
   name: 'workspace-identity-deployment'
   scope: resourceGroup
-  dependsOn: [security, storage, governance]
   params: {
     location: location
     projectPrefix: projectPrefix
@@ -446,20 +445,20 @@ output managedIdentityPrincipalId string = security.outputs.managedIdentityPrinc
 output managedIdentityClientId string = security.outputs.managedIdentityClientId
 
 // Real-Time Intelligence outputs (conditional)
-output eventStreamId string = enableEventstream ? eventstream.outputs.eventStreamId : ''
-output eventStreamEndpoint string = enableEventstream ? eventstream.outputs.eventStreamEndpoint : ''
+output eventStreamId string = enableEventstream ? eventstream!.outputs.eventStreamId : ''
+output eventStreamEndpoint string = enableEventstream ? eventstream!.outputs.eventStreamEndpoint : ''
 
-output eventHouseId string = enableEventhouse ? eventhouse.outputs.eventHouseId : ''
-output kqlEndpoint string = enableEventhouse ? eventhouse.outputs.kqlEndpoint : ''
-output eventHouseDatabaseIds array = enableEventhouse ? eventhouse.outputs.databaseIds : []
+output eventHouseId string = enableEventhouse ? eventhouse!.outputs.eventHouseId : ''
+output kqlEndpoint string = enableEventhouse ? eventhouse!.outputs.kqlEndpoint : ''
+output eventHouseDatabaseIds array = enableEventhouse ? eventhouse!.outputs.databaseIds : []
 
-output powerBICapacityId string = enablePowerBIWorkspace ? powerBIWorkspace.outputs.workspaceId : ''
-output powerBIPortalUrl string = enablePowerBIWorkspace ? powerBIWorkspace.outputs.powerBiPortalUrl : ''
+output powerBICapacityId string = enablePowerBIWorkspace ? powerBIWorkspace!.outputs.workspaceId : ''
+output powerBIPortalUrl string = enablePowerBIWorkspace ? powerBIWorkspace!.outputs.powerBiPortalUrl : ''
 
 // Workspace Identity outputs (conditional)
-output workspaceIdentityId string = enableWorkspaceIdentity ? workspaceIdentity.outputs.identityId : ''
-output workspaceIdentityPrincipalId string = enableWorkspaceIdentity ? workspaceIdentity.outputs.principalId : ''
-output workspaceIdentityClientId string = enableWorkspaceIdentity ? workspaceIdentity.outputs.clientId : ''
+output workspaceIdentityId string = enableWorkspaceIdentity ? workspaceIdentity!.outputs.identityId : ''
+output workspaceIdentityPrincipalId string = enableWorkspaceIdentity ? workspaceIdentity!.outputs.principalId : ''
+output workspaceIdentityClientId string = enableWorkspaceIdentity ? workspaceIdentity!.outputs.clientId : ''
 
 // Resolved compliance controls (for assertion / traceability)
 output appliedTags object = defaultTags
@@ -469,5 +468,5 @@ output effectiveKeyVaultSku string = effectiveKeyVaultSku
 output effectiveEnableCmk bool = effectiveEnableCmk
 
 // Monitoring alert outputs (conditional)
-output monitoringActionGroupId string = enableMonitoringAlerts ? monitoringAlerts.outputs.actionGroupId : ''
-output monitoringBudgetId string = enableMonitoringAlerts ? monitoringAlerts.outputs.budgetId : ''
+output monitoringActionGroupId string = enableMonitoringAlerts ? monitoringAlerts!.outputs.actionGroupId : ''
+output monitoringBudgetId string = enableMonitoringAlerts ? monitoringAlerts!.outputs.budgetId : ''

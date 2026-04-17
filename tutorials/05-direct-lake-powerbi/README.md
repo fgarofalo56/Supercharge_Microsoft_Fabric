@@ -130,13 +130,14 @@ Before starting this tutorial, ensure you have:
 
 - [ ] ✅ Completed [Tutorial 03: Gold Layer](../03-gold-layer/README.md)
 - [ ] ✅ Gold tables populated in `lh_gold` Lakehouse:
-  - `gold_slot_performance`
-  - `gold_player_360`
-  - `gold_compliance_reporting`
-  - `dim_date` (dimension table)
-  - `dim_machine` (dimension table)
+  - `gold_slot_performance`, `gold_player_360`, `gold_compliance_reporting`, `gold_table_analytics`, `gold_financial_summary`, `gold_security_dashboard` (fact tables from Tutorial 03)
+  - `dim_date`, `dim_machine` (dimensions — created by [notebooks/gold/00_gold_dim_tables.py](../../notebooks/gold/00_gold_dim_tables.py))
+  - `gold_player_slot_daily` (player-grain fact — created by [notebooks/gold/07_gold_player_slot_daily.py](../../notebooks/gold/07_gold_player_slot_daily.py))
+  - `gold_player_table_daily` (player-grain fact — created by [notebooks/gold/08_gold_player_table_daily.py](../../notebooks/gold/08_gold_player_table_daily.py))
 - [ ] ✅ Power BI license (Pro or Premium Per User)
 - [ ] ✅ Fabric workspace with semantic model creation permissions
+
+> **⚠️ Run the three prerequisite notebooks first.** Tutorial 03 does not create `dim_date`, `dim_machine`, `gold_player_slot_daily`, or `gold_player_table_daily`. Run [notebooks/gold/00_gold_dim_tables.py](../../notebooks/gold/00_gold_dim_tables.py), [notebooks/gold/07_gold_player_slot_daily.py](../../notebooks/gold/07_gold_player_slot_daily.py), and [notebooks/gold/08_gold_player_table_daily.py](../../notebooks/gold/08_gold_player_table_daily.py) against your Silver/Gold lakehouses before proceeding. Each takes under a minute.
 
 > **⚠️ License Note**
 >
@@ -151,24 +152,37 @@ Before starting this tutorial, ensure you have:
 1. Navigate to your workspace (`casino-fabric-poc`)
 2. Open the `lh_gold` Lakehouse
 3. Click **New semantic model** in the toolbar
-4. Select tables to include:
+4. Select **all 10 tables** to include:
 
 | Table | Type | Purpose |
-|-------|------|---------|
-| ✅ `gold_slot_performance` | Fact | Daily slot machine performance metrics |
-| ✅ `gold_player_360` | Fact/Dim | Player profiles and value scores |
-| ✅ `gold_compliance_reporting` | Fact | Regulatory filing summaries |
-| ✅ `dim_date` | Dimension | Date hierarchy for time intelligence |
-| ✅ `dim_machine` | Dimension | Machine master data |
+| ----- | ---- | ------- |
+| ✅ `gold_slot_performance` | Fact | Daily slot machine performance (machine-day grain) |
+| ✅ `gold_player_360` | Dimension | Player profiles and value scores (player grain) |
+| ✅ `gold_compliance_reporting` | Fact | Regulatory filing summaries (CTR/SAR/W-2G) |
+| ✅ `gold_table_analytics` | Fact | Table games KPIs at game-day grain |
+| ✅ `gold_financial_summary` | Fact | Daily P&L and cash flow |
+| ✅ `gold_security_dashboard` | Fact | Security events and incident tracking |
+| ✅ `gold_player_slot_daily` | Fact | Slot activity at **player-day** grain (joins player_360 to slots) |
+| ✅ `gold_player_table_daily` | Fact | Table games at **player-day** grain (joins player_360 to tables) |
+| ✅ `dim_date` | Dimension | Date hierarchy for time intelligence (2020–2030) |
+| ✅ `dim_machine` | Dimension | Slot machine master data |
+
+> **Missing tables from the picker?**
+>
+> - `dim_date` / `dim_machine` → run [notebooks/gold/00_gold_dim_tables.py](../../notebooks/gold/00_gold_dim_tables.py)
+> - `gold_player_slot_daily` → run [notebooks/gold/07_gold_player_slot_daily.py](../../notebooks/gold/07_gold_player_slot_daily.py)
+> - `gold_player_table_daily` → run [notebooks/gold/08_gold_player_table_daily.py](../../notebooks/gold/08_gold_player_table_daily.py)
 
 5. Configure semantic model:
 
 | Setting | Value |
 |---------|-------|
-| **Name** | `Casino Analytics Model` |
+| **Name** | `sm_casino_gold` |
 | **Workspace** | `casino-fabric-poc` |
 
 6. Click **Create**
+
+> **Already created the model with fewer tables?** Open `sm_casino_gold` → top ribbon → **Home** → **Get data** → **OneLake** → pick `lh_gold` → check any missing tables from the list above → **Load**. They'll join the existing tables without re-creating the model.
 
 ![Direct Lake Overview](https://learn.microsoft.com/en-us/fabric/fundamentals/media/direct-lake-overview/direct-lake-overview.svg)
 
@@ -206,35 +220,34 @@ A well-designed star schema is critical for optimal query performance and intuit
 
 ```mermaid
 erDiagram
-    dim_date ||--o{ gold_slot_performance : "date_key"
+    dim_date ||--o{ gold_slot_performance : "business_date"
     dim_date ||--o{ gold_compliance_reporting : "report_date"
+    dim_date ||--o{ gold_table_analytics : "event_date"
+    dim_date ||--o{ gold_financial_summary : "report_date"
+    dim_date ||--o{ gold_security_dashboard : "event_date"
+    dim_date ||--o{ gold_player_slot_daily : "business_date"
+    dim_date ||--o{ gold_player_table_daily : "event_date"
     dim_machine ||--o{ gold_slot_performance : "machine_id"
-    gold_player_360 ||--o{ gold_slot_performance : "player_id"
+    gold_player_360 ||--o{ gold_player_slot_daily : "player_id"
+    gold_player_360 ||--o{ gold_player_table_daily : "player_id"
 
     dim_date {
         date date_key PK
         int year
+        int quarter
         int month
         int day
         string month_name
-        string day_of_week
+        string day_name
+        boolean is_weekend
     }
 
     dim_machine {
         string machine_id PK
         string manufacturer
-        string game_type
+        string machine_type
         decimal denomination
         string zone
-    }
-
-    gold_slot_performance {
-        date business_date FK
-        string machine_id FK
-        string zone
-        decimal total_coin_in
-        decimal total_coin_out
-        int total_games
     }
 
     gold_player_360 {
@@ -245,36 +258,101 @@ erDiagram
         decimal player_value_score
     }
 
+    gold_slot_performance {
+        date business_date FK
+        string machine_id FK
+        int unique_players
+        decimal total_coin_in
+        decimal total_coin_out
+        decimal hold_percentage
+    }
+
+    gold_table_analytics {
+        date event_date FK
+        string game_type
+        int unique_players
+        decimal total_drop
+        decimal table_win
+    }
+
+    gold_player_slot_daily {
+        string player_id FK
+        date business_date FK
+        decimal total_coin_in
+        decimal net_win
+        int total_games_played
+        int jackpot_count
+    }
+
+    gold_player_table_daily {
+        string player_id FK
+        date event_date FK
+        decimal total_drop
+        decimal player_net_win
+        int total_hands_played
+        decimal total_hours_played
+    }
+
     gold_compliance_reporting {
         date report_date FK
         int ctr_count
         int sar_count
         int w2g_count
-        decimal ctr_total_amount
+    }
+
+    gold_financial_summary {
+        date report_date FK
+        decimal gross_revenue
+        decimal total_drop
+    }
+
+    gold_security_dashboard {
+        date event_date FK
+        string zone
+        int incident_count
     }
 ```
 
 ### 2.3 Configure Each Relationship
 
-Create the following relationships by dragging columns between tables:
+Create the **10 relationships** below by dragging columns between tables (or via **Manage relationships → New**). The Many side is always the Fact; the One side is always the Dimension.
 
-| From Table | From Column | To Table | To Column | Cardinality | Cross-filter |
-|------------|-------------|----------|-----------|-------------|--------------|
+#### Dimension → Fact relationships (dim_date as universal date dimension)
+
+| From (One / Dimension) | From Column | To (Many / Fact) | To Column | Cardinality | Cross-filter |
+| ---------------------- | ----------- | ---------------- | --------- | ----------- | ------------ |
 | `dim_date` | `date_key` | `gold_slot_performance` | `business_date` | One-to-Many | Single |
-| `dim_machine` | `machine_id` | `gold_slot_performance` | `machine_id` | One-to-Many | Single |
 | `dim_date` | `date_key` | `gold_compliance_reporting` | `report_date` | One-to-Many | Single |
+| `dim_date` | `date_key` | `gold_table_analytics` | `event_date` | One-to-Many | Single |
+| `dim_date` | `date_key` | `gold_financial_summary` | `report_date` | One-to-Many | Single |
+| `dim_date` | `date_key` | `gold_security_dashboard` | `event_date` | One-to-Many | Single |
+| `dim_date` | `date_key` | `gold_player_slot_daily` | `business_date` | One-to-Many | Single |
+| `dim_date` | `date_key` | `gold_player_table_daily` | `event_date` | One-to-Many | Single |
 
-**For each relationship, configure:**
+#### Machine dimension → Slot fact
+
+| From (One / Dimension) | From Column | To (Many / Fact) | To Column | Cardinality | Cross-filter |
+| ---------------------- | ----------- | ---------------- | --------- | ----------- | ------------ |
+| `dim_machine` | `machine_id` | `gold_slot_performance` | `machine_id` | One-to-Many | Single |
+
+#### Player dimension → Player-grain facts
+
+`gold_player_360` now joins the model through the two player-grain fact tables (`gold_player_slot_daily`, `gold_player_table_daily`). This enables cross-filtering VIP/loyalty/churn slicers against slot and table activity.
+
+| From (One / Dimension) | From Column | To (Many / Fact) | To Column | Cardinality | Cross-filter |
+| ---------------------- | ----------- | ---------------- | --------- | ----------- | ------------ |
+| `gold_player_360` | `player_id` | `gold_player_slot_daily` | `player_id` | One-to-Many | Single |
+| `gold_player_360` | `player_id` | `gold_player_table_daily` | `player_id` | One-to-Many | Single |
+
+#### Configuration for every relationship
+
 - **Cardinality:** Many-to-One (from fact to dimension)
 - **Cross-filter direction:** Single
 - **Make this relationship active:** Yes
 
-> **⚠️ Relationship Best Practices**
->
-> - Always use **single cross-filter direction** for better performance
-> - Avoid bidirectional filters unless absolutely necessary
-> - Use **integer keys** when possible for faster joins
-> - Validate relationships with sample queries
+> **Ambiguity note.** Because `dim_date` filters five facts and several of those facts share natural-key columns (e.g., `report_date` appears on both `gold_compliance_reporting` and `gold_financial_summary`), Power BI may warn about "ambiguous paths." This is expected and safe — each relationship is between distinct tables. If you see a warning about an inactive relationship, that's fine; for a Direct Lake star schema, one active date relationship per fact is what you want.
+
+> **⚠️ Relationship Best Practices.** Always use **single cross-filter direction** for better performance. Avoid bidirectional filters unless absolutely necessary. Use **integer keys** when possible for faster joins. Validate relationships with sample queries.
 
 ---
 

@@ -100,7 +100,7 @@ resource storageCmkKey 'Microsoft.KeyVault/vaults/keys@2023-07-01' = if (provisi
             timeBeforeExpiry: 'P60D'
           }
           action: {
-            type: 'Rotate'
+            type: 'rotate'
           }
         }
         {
@@ -108,7 +108,7 @@ resource storageCmkKey 'Microsoft.KeyVault/vaults/keys@2023-07-01' = if (provisi
             timeBeforeExpiry: 'P30D'
           }
           action: {
-            type: 'Notify'
+            type: 'notify'
           }
         }
       ]
@@ -220,4 +220,4 @@ output managedIdentityPrincipalId string = managedIdentity.properties.principalI
 output managedIdentityClientId string = managedIdentity.properties.clientId
 
 @description('Unversioned key URI for the storage CMK key (empty when not provisioned).')
-output storageCmkKeyUri string = provisionStorageCmkKey ? storageCmkKey.properties.keyUri : ''
+output storageCmkKeyUri string = provisionStorageCmkKey ? storageCmkKey!.properties.keyUri : ''

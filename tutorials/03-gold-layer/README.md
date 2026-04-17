@@ -1150,6 +1150,8 @@ erDiagram
 
 ### Date Dimension
 
+> **📦 Shortcut — use the packaged notebook.** Both `dim_date` and `dim_machine` are packaged in [notebooks/gold/00_gold_dim_tables.py](../../notebooks/gold/00_gold_dim_tables.py). Import that single notebook into your Fabric workspace and run it once; it creates both dimensions in `lh_gold.dbo.dim_date` and `lh_gold.dbo.dim_machine`. The code blocks below explain what the notebook does — you do not need to copy-paste them if you imported the notebook.
+
 ```python
 # Create Date Dimension
 from pyspark.sql.functions import *

@@ -12,37 +12,15 @@
 
 # COMMAND ----------
 
-# ---------------------------------------------------------------------------
-# Fabric/local compatibility shim
-# ---------------------------------------------------------------------------
+# MAGIC %md
+# MAGIC ## Configuration
+
+# COMMAND ----------
+
+# Imports, Fabric parameter shim, and configuration — all in one cell so the
+# shim is guaranteed to be defined before it's called (avoids NameError when
+# cells are run out of order after import).
 import os
-
-try:
-    import notebookutils  # Fabric runtime
-    def _get_arg(name, default=None):
-        try:
-            return notebookutils.notebook.getArgument(name, default)
-        except Exception:
-            return os.environ.get(name.upper(), default)
-    def _notebook_exit(status: str) -> None:
-        notebookutils.notebook.exit(status)
-except ImportError:
-    try:
-        import mssparkutils  # legacy Synapse/Fabric runtime
-        def _get_arg(name, default=None):
-            try:
-                return mssparkutils.notebook.getArgument(name, default)
-            except Exception:
-                return os.environ.get(name.upper(), default)
-        def _notebook_exit(status: str) -> None:
-            mssparkutils.notebook.exit(status)
-    except ImportError:
-        def _get_arg(name, default=None):
-            return os.environ.get(name.upper(), default)
-        def _notebook_exit(status: str) -> None:
-            raise SystemExit(status)
-
-
 from datetime import datetime
 
 from delta.tables import DeltaTable
@@ -62,15 +40,42 @@ from pyspark.sql.functions import (
 )
 from pyspark.sql.types import DateType, DecimalType, LongType, StructField, StructType
 
+
+def _get_arg(name: str, default=None):
+    """Read a notebook parameter from Fabric/Synapse runtime, env var, or default."""
+    try:
+        import notebookutils  # Fabric runtime
+        return notebookutils.notebook.getArgument(name, default)
+    except Exception:
+        try:
+            import mssparkutils  # legacy Synapse/Fabric runtime
+            return mssparkutils.notebook.getArgument(name, default)
+        except Exception:
+            return os.environ.get(name.upper(), default)
+
+
+def _notebook_exit(status: str) -> None:
+    """Exit the notebook with a status message (Fabric/Synapse pipelines consume this)."""
+    try:
+        import notebookutils
+        notebookutils.notebook.exit(status)
+    except Exception:
+        try:
+            import mssparkutils
+            mssparkutils.notebook.exit(status)
+        except Exception:
+            raise SystemExit(status)
+
+
 # Parameters
 batch_id = _get_arg("batch_id", datetime.now().strftime("%Y%m%d_%H%M%S"))
 
-# Sources
-compliance_table = "lh_silver.silver_compliance_validated"
-financial_table = "lh_silver.silver_financial_reconciled"
+# Sources (three-part names for schema-enabled Lakehouses)
+compliance_table = "lh_silver.dbo.silver_compliance_validated"
+financial_table = "lh_silver.dbo.silver_financial_reconciled"
 
 # Target
-target_table = "lh_gold.gold_compliance_reporting"
+target_table = "lh_gold.dbo.gold_compliance_reporting"
 
 print(f"Processing batch: {batch_id}")
 
@@ -111,8 +116,8 @@ if compliance_exists:
             sum(when(col("filing_type") == "W2G", col("amount"))).alias("w2g_total_amount"),
 
             # Status breakdown
-            sum(when(col("filing_status") == "PENDING", 1).otherwise(0)).alias("pending_filings"),
-            sum(when(col("filing_status") == "SUBMITTED", 1).otherwise(0)).alias("submitted_filings"),
+            sum(when(col("status") == "PENDING", 1).otherwise(0)).alias("pending_filings"),
+            sum(when(col("status") == "SUBMITTED", 1).otherwise(0)).alias("submitted_filings"),
 
             # Totals
             count("*").alias("total_filings")
@@ -252,8 +257,11 @@ except Exception as e:
 
 # COMMAND ----------
 
-spark.sql(f"OPTIMIZE {target_table} ZORDER BY (report_date)")
-print("Table optimized with Z-Order on report_date")
+# Table is partitioned by report_date and aggregates to one row per date, so ZORDER
+# on report_date is both illegal (partition column) and pointless (no intra-partition
+# clustering to gain). Plain OPTIMIZE still compacts parquet files for Direct Lake.
+spark.sql(f"OPTIMIZE {target_table}")
+print("Table optimized (file compaction only — ZORDER not applicable on daily-aggregated table)")
 
 # COMMAND ----------
 

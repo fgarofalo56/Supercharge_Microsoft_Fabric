@@ -69,9 +69,6 @@ param enablePrivateEndpoint bool = false
 @description('Subnet ID for private endpoint')
 param privateEndpointSubnetId string = ''
 
-@description('Key Vault resource ID for storing connection strings securely (optional)')
-param keyVaultId string = ''
-
 @description('Tags to apply to resources')
 param tags object = {}
 
