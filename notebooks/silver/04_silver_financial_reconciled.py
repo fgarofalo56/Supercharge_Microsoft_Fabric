@@ -53,6 +53,7 @@ from pyspark.sql.functions import (
     filter,
     lit,
     sum,
+    unix_timestamp,
     when,
     window,
 )
@@ -60,8 +61,8 @@ from pyspark.sql.window import Window
 
 # Parameters
 batch_id = _get_arg("batch_id", datetime.now().strftime("%Y%m%d_%H%M%S"))
-source_table = "lh_bronze.bronze_financial_txn"
-target_table = "lh_silver.silver_financial_reconciled"
+source_table = "lh_bronze.dbo.bronze_financial_txn"
+target_table = "lh_silver.dbo.silver_financial_reconciled"
 
 # Compliance thresholds
 CTR_THRESHOLD = 10000
@@ -143,7 +144,7 @@ df_compliance = df_quality \
 # Window for structuring detection (24-hour rolling)
 structuring_window = Window \
     .partitionBy("player_id") \
-    .orderBy(col("transaction_timestamp").cast("long")) \
+    .orderBy(unix_timestamp(col("transaction_timestamp"))) \
     .rangeBetween(-STRUCTURING_WINDOW_HOURS * 3600, 0)
 
 # Detect potential structuring

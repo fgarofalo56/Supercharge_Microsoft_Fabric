@@ -56,6 +56,7 @@ from pyspark.sql.functions import (
     least,
     lit,
     sum,
+    unix_timestamp,
     when,
     window,
 )
@@ -63,8 +64,8 @@ from pyspark.sql.window import Window
 
 # Parameters
 batch_id = _get_arg("batch_id", datetime.now().strftime("%Y%m%d_%H%M%S"))
-source_table = "lh_bronze.bronze_security_events"
-target_table = "lh_silver.silver_security_enriched"
+source_table = "lh_bronze.dbo.bronze_security_events"
+target_table = "lh_silver.dbo.silver_security_enriched"
 
 print(f"Processing batch: {batch_id}")
 
@@ -146,13 +147,13 @@ df_threat_scored = df_quality \
 # Window for location-based correlation (5-minute window)
 location_window = Window \
     .partitionBy("location_id") \
-    .orderBy(col("event_timestamp").cast("long")) \
+    .orderBy(unix_timestamp(col("event_timestamp"))) \
     .rangeBetween(-300, 0)
 
 # Window for person-based correlation (if person_id exists)
 person_window = Window \
     .partitionBy("person_id") \
-    .orderBy(col("event_timestamp").cast("long")) \
+    .orderBy(unix_timestamp(col("event_timestamp"))) \
     .rangeBetween(-3600, 0)  # 1 hour
 
 # Add correlation metrics

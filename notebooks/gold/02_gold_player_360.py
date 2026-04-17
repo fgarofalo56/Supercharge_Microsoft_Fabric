@@ -14,42 +14,15 @@
 
 # COMMAND ----------
 
-# ---------------------------------------------------------------------------
-# Fabric/local compatibility shim
-# ---------------------------------------------------------------------------
-import os
-
-try:
-    import notebookutils  # Fabric runtime
-    def _get_arg(name, default=None):
-        try:
-            return notebookutils.notebook.getArgument(name, default)
-        except Exception:
-            return os.environ.get(name.upper(), default)
-    def _notebook_exit(status: str) -> None:
-        notebookutils.notebook.exit(status)
-except ImportError:
-    try:
-        import mssparkutils  # legacy Synapse/Fabric runtime
-        def _get_arg(name, default=None):
-            try:
-                return mssparkutils.notebook.getArgument(name, default)
-            except Exception:
-                return os.environ.get(name.upper(), default)
-        def _notebook_exit(status: str) -> None:
-            mssparkutils.notebook.exit(status)
-    except ImportError:
-        def _get_arg(name, default=None):
-            return os.environ.get(name.upper(), default)
-        def _notebook_exit(status: str) -> None:
-            raise SystemExit(status)
-
-
 # MAGIC %md
 # MAGIC ## Configuration
 
 # COMMAND ----------
 
+# Imports, Fabric parameter shim, and configuration — all in one cell so the
+# shim is guaranteed to be defined before it's called (avoids NameError when
+# cells are run out of order after import).
+import os
 from datetime import datetime
 
 from delta.tables import DeltaTable
@@ -70,6 +43,7 @@ from pyspark.sql.functions import (
     max,
     min,
     sum,
+    to_date,
     when,
 )
 from pyspark.sql.types import (
@@ -82,16 +56,43 @@ from pyspark.sql.types import (
     TimestampType,
 )
 
+
+def _get_arg(name: str, default=None):
+    """Read a notebook parameter from Fabric/Synapse runtime, env var, or default."""
+    try:
+        import notebookutils  # Fabric runtime
+        return notebookutils.notebook.getArgument(name, default)
+    except Exception:
+        try:
+            import mssparkutils  # legacy Synapse/Fabric runtime
+            return mssparkutils.notebook.getArgument(name, default)
+        except Exception:
+            return os.environ.get(name.upper(), default)
+
+
+def _notebook_exit(status: str) -> None:
+    """Exit the notebook with a status message (Fabric/Synapse pipelines consume this)."""
+    try:
+        import notebookutils
+        notebookutils.notebook.exit(status)
+    except Exception:
+        try:
+            import mssparkutils
+            mssparkutils.notebook.exit(status)
+        except Exception:
+            raise SystemExit(status)
+
+
 # Parameters
 batch_id = _get_arg("batch_id", datetime.now().strftime("%Y%m%d_%H%M%S"))
 
-# Source tables
-player_table = "lh_silver.silver_player_master"
-slot_table = "lh_silver.silver_slot_cleansed"
-financial_table = "lh_silver.silver_financial_reconciled"
+# Source tables (three-part names for schema-enabled Lakehouses)
+player_table = "lh_silver.dbo.silver_player_master"
+slot_table = "lh_silver.dbo.silver_slot_cleansed"
+financial_table = "lh_silver.dbo.silver_financial_reconciled"
 
 # Target
-target_table = "lh_gold.gold_player_360"
+target_table = "lh_gold.dbo.gold_player_360"
 
 # Business parameters
 THEO_SLOT_PCT = 0.08  # 8% slot theoretical
@@ -155,17 +156,21 @@ print(f"Players with slot activity: {df_slot_activity.count():,}")
 # COMMAND ----------
 
 # Check if table games Silver exists
-if spark.catalog.tableExists("lh_silver.silver_table_enriched"):
-    df_table_activity = spark.table("lh_silver.silver_table_enriched") \
+if spark.catalog.tableExists("lh_silver.dbo.silver_table_enriched"):
+    # Column mapping: silver_table_enriched has drop_amount (= buy-in) and
+    # actual_win_loss (= house win). Cash out is derived from these. Session
+    # windows derive from event_timestamp since no explicit session columns exist.
+    df_table_activity = spark.table("lh_silver.dbo.silver_table_enriched") \
+        .filter(col("player_id").isNotNull()) \
         .groupBy("player_id") \
         .agg(
-            sum("buy_in").alias("table_buy_in"),
-            sum("cash_out").alias("table_cash_out"),
+            sum("drop_amount").alias("table_buy_in"),
+            sum(col("drop_amount") - col("actual_win_loss")).alias("table_cash_out"),
             sum("hours_played").alias("table_hours_played"),
             countDistinct("table_id").alias("tables_played"),
-            countDistinct("session_date").alias("table_visit_days"),
-            min("session_start").alias("first_table_play"),
-            max("session_end").alias("last_table_play")
+            countDistinct(to_date("event_timestamp")).alias("table_visit_days"),
+            min("event_timestamp").alias("first_table_play"),
+            max("event_timestamp").alias("last_table_play")
         )
     print(f"Players with table activity: {df_table_activity.count():,}")
 else:
