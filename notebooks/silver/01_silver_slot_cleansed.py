@@ -13,42 +13,15 @@
 
 # COMMAND ----------
 
-# ---------------------------------------------------------------------------
-# Fabric/local compatibility shim
-# ---------------------------------------------------------------------------
-import os
-
-try:
-    import notebookutils  # Fabric runtime
-    def _get_arg(name, default=None):
-        try:
-            return notebookutils.notebook.getArgument(name, default)
-        except Exception:
-            return os.environ.get(name.upper(), default)
-    def _notebook_exit(status: str) -> None:
-        notebookutils.notebook.exit(status)
-except ImportError:
-    try:
-        import mssparkutils  # legacy Synapse/Fabric runtime
-        def _get_arg(name, default=None):
-            try:
-                return mssparkutils.notebook.getArgument(name, default)
-            except Exception:
-                return os.environ.get(name.upper(), default)
-        def _notebook_exit(status: str) -> None:
-            mssparkutils.notebook.exit(status)
-    except ImportError:
-        def _get_arg(name, default=None):
-            return os.environ.get(name.upper(), default)
-        def _notebook_exit(status: str) -> None:
-            raise SystemExit(status)
-
-
 # MAGIC %md
 # MAGIC ## Configuration
 
 # COMMAND ----------
 
+# Imports, Fabric parameter shim, and configuration — all in one cell so the
+# shim is guaranteed to be defined before it's called (avoids NameError when
+# cells are run out of order after import).
+import os
 from datetime import datetime
 
 from delta.tables import DeltaTable
@@ -78,12 +51,39 @@ from pyspark.sql.types import (
     TimestampType,
 )
 
+
+def _get_arg(name: str, default=None):
+    """Read a notebook parameter from Fabric/Synapse runtime, env var, or default."""
+    try:
+        import notebookutils  # Fabric runtime
+        return notebookutils.notebook.getArgument(name, default)
+    except Exception:
+        try:
+            import mssparkutils  # legacy Synapse/Fabric runtime
+            return mssparkutils.notebook.getArgument(name, default)
+        except Exception:
+            return os.environ.get(name.upper(), default)
+
+
+def _notebook_exit(status: str) -> None:
+    """Exit the notebook with a status message (Fabric/Synapse pipelines consume this)."""
+    try:
+        import notebookutils
+        notebookutils.notebook.exit(status)
+    except Exception:
+        try:
+            import mssparkutils
+            mssparkutils.notebook.exit(status)
+        except Exception:
+            raise SystemExit(status)
+
+
 # Parameters (set by pipeline or manual)
 batch_id = _get_arg("batch_id", datetime.now().strftime("%Y%m%d_%H%M%S"))
 
 # Source and target
-source_table = "lh_bronze.bronze_slot_telemetry"
-target_table = "lh_silver.silver_slot_cleansed"
+source_table = "lh_bronze.dbo.bronze_slot_telemetry"
+target_table = "lh_silver.dbo.silver_slot_cleansed"
 
 print(f"Processing batch: {batch_id}")
 print(f"Source: {source_table}")

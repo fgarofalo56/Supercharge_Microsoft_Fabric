@@ -323,27 +323,57 @@ Before starting this tutorial, ensure you have:
 This notebook demonstrates comprehensive data cleansing for slot machine telemetry.
 
 ```python
-# Cell 1: Configuration
-from pyspark.sql import SparkSession
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
-from delta.tables import DeltaTable
+# Cell 1: Configuration (imports + parameter shim + source/target paths)
+#
+# The parameter shim (`_get_arg`) is defined in the SAME cell as its caller to
+# avoid NameError when cells are run out of order after importing the notebook
+# from the repo. Keep imports, the shim, and the batch_id assignment together.
+import os
 from datetime import datetime
 
-# Configuration
-BRONZE_TABLE = "lh_bronze.bronze_slot_telemetry"
-SILVER_TABLE = "silver_slot_cleansed"
+from delta.tables import DeltaTable
+from pyspark.sql.functions import (
+    array, array_compact, col, count, current_timestamp, filter,
+    hour, initcap, lit, to_date, to_timestamp, trim, upper, when,
+)
+from pyspark.sql.types import (
+    DateType, DecimalType, IntegerType, StringType,
+    StructField, StructType, TimestampType,
+)
 
-print("=" * 60)
-print("🥈 SILVER LAYER - Slot Machine Data Cleansing")
-print("=" * 60)
-print(f"Source: {BRONZE_TABLE}")
-print(f"Target: {SILVER_TABLE}")
+
+def _get_arg(name: str, default=None):
+    """Read a parameter from Fabric/Synapse runtime, env var, or default."""
+    try:
+        import notebookutils  # Fabric runtime
+        return notebookutils.notebook.getArgument(name, default)
+    except Exception:
+        try:
+            import mssparkutils  # legacy Synapse/Fabric runtime
+            return mssparkutils.notebook.getArgument(name, default)
+        except Exception:
+            return os.environ.get(name.upper(), default)
+
+
+# Parameters (set by pipeline or manual)
+batch_id = _get_arg("batch_id", datetime.now().strftime("%Y%m%d_%H%M%S"))
+
+# Source and target — three-part names require schema-enabled Lakehouses
+source_table = "lh_bronze.dbo.bronze_slot_telemetry"
+target_table = "lh_silver.dbo.silver_slot_cleansed"
+
+print(f"Processing batch: {batch_id}")
+print(f"Source: {source_table}")
+print(f"Target: {target_table}")
 ```
+
+> **Why one cell?** Earlier versions split the parameter shim and the config across two cells. When Fabric imports a notebook from a `.py` file, cells can be run out of order, which produces `NameError: name '_get_arg' is not defined`. Keeping imports, shim, and parameters together guarantees the shim is bound before it's called.
+>
+> **Why three-part names (`lh_<layer>.dbo.<table>`)?** Required for Fabric Lakehouses that were created with the **Schemas** preview enabled. `dbo` is the default schema. If your Lakehouses are flat (no schemas), drop the `.dbo` middle segment and use bare table names instead (e.g., `source_table = "bronze_slot_telemetry"`).
 
 ```python
 # Cell 2: Read Bronze Data
-df_bronze = spark.table(BRONZE_TABLE)
+df_bronze = spark.table(source_table)
 
 print(f"\n📊 Bronze Layer Statistics:")
 print(f"  Records: {df_bronze.count():,}")

@@ -165,6 +165,7 @@ resource slotTelemetryTable 'Microsoft.Kusto/clusters/databases/scripts@2024-04-
   parent: databases[0]
   name: 'createSlotTelemetryTable'
   properties: {
+    #disable-next-line use-secure-value-for-secure-inputs
     scriptContent: '''
       .create-merge table SlotTelemetry (
         Timestamp: datetime,
@@ -209,6 +210,7 @@ resource complianceAlertTable 'Microsoft.Kusto/clusters/databases/scripts@2024-0
   parent: databases[0]
   name: 'createComplianceAlertTable'
   properties: {
+    #disable-next-line use-secure-value-for-secure-inputs
     scriptContent: '''
       .create-merge table ComplianceAlerts (
         Timestamp: datetime,

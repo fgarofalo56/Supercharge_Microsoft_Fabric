@@ -104,10 +104,11 @@ resource purviewRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-
 }
 
 // ---- Existing Resource References ----
-// These resources are assumed to be in the same resource group as this module.
+// All target resources are expected to live in the same resource group as the
+// workspace identity (enforced by main.bicep orchestration). Role assignments
+// must target the same scope as this module, so we reference by name only.
 // Cross-RG deployments are not supported; pass resource IDs only for resources
 // co-located in the same resource group.
-// Role assignments (above) are scoped to these existing resources.
 
 resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' existing = if (enableKeyVaultAccess && !empty(keyVaultId)) {
   name: last(split(keyVaultId, '/'))

@@ -65,8 +65,8 @@ from pyspark.sql.functions import (
 
 # Parameters
 batch_id = _get_arg("batch_id", datetime.now().strftime("%Y%m%d_%H%M%S"))
-source_table = "lh_bronze.bronze_compliance_filings"
-target_table = "lh_silver.silver_compliance_validated"
+source_table = "lh_bronze.dbo.bronze_compliance"
+target_table = "lh_silver.dbo.silver_compliance_validated"
 
 # Regulatory thresholds
 CTR_THRESHOLD = 10000
@@ -108,7 +108,9 @@ df_validated = df_bronze \
     .withColumn("has_player_info",
         col("player_id").isNotNull() | col("ssn_hash").isNotNull()) \
     .withColumn("has_transaction_ref",
-        col("transaction_id").isNotNull())
+        col("transaction_date").isNotNull() |
+        col("transaction_amount").isNotNull() |
+        col("machine_id").isNotNull())
 
 # Calculate DQ score
 df_with_dq = df_validated \
@@ -157,11 +159,9 @@ df_threshold_validated = df_quality \
 # COMMAND ----------
 
 # Calculate filing deadlines and compliance
+# (transaction_date, filing_date, and status already exist in bronze_compliance —
+#  don't recreate them, just compute derived deadline/status fields)
 df_deadline_validated = df_threshold_validated \
-    .withColumn("transaction_date",
-        coalesce(col("transaction_timestamp"), col("filing_timestamp")).cast("date")) \
-    .withColumn("filing_date",
-        col("filing_timestamp").cast("date")) \
     .withColumn("filing_deadline",
         when(col("filing_type") == "CTR",
             date_add(col("transaction_date"), CTR_FILING_DAYS))
@@ -173,7 +173,7 @@ df_deadline_validated = df_threshold_validated \
     .withColumn("days_since_transaction",
         datediff(col("filing_date"), col("transaction_date"))) \
     .withColumn("filing_deadline_status",
-        when(col("filing_status") == "SUBMITTED", "FILED")
+        when(col("status") == "SUBMITTED", "FILED")
         .when(col("days_to_deadline") < 0, "OVERDUE")
         .when(col("days_to_deadline") <= 3, "DUE_SOON")
         .otherwise("ON_TRACK"))
@@ -343,12 +343,14 @@ spark.sql(f"""
 
 # COMMAND ----------
 
-# Validation issues breakdown
+# Validation issues breakdown — LATERAL VIEW lets us GROUP BY the exploded column
+# (can't alias EXPLODE() in SELECT and GROUP BY that alias in the same query)
 spark.sql(f"""
     SELECT
-        EXPLODE(validation_issues) as issue,
+        issue,
         COUNT(*) as occurrences
     FROM {target_table}
+    LATERAL VIEW EXPLODE(validation_issues) t AS issue
     WHERE validation_issue_count > 0
     GROUP BY issue
     ORDER BY occurrences DESC
