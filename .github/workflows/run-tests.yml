@@ -83,7 +83,7 @@ jobs:
         run: python -m pip_audit --strict --desc
 
       - name: Upload security reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: security-reports
@@ -130,7 +130,7 @@ jobs:
           fail_ci_if_error: false
 
       - name: Upload Test Results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: test-results-${{ matrix.python-version }}
@@ -386,7 +386,7 @@ jobs:
             --junitxml=integration-test-results.xml
 
       - name: Upload Integration Test Results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: integration-test-results
