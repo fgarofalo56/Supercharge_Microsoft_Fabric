@@ -2,7 +2,7 @@
 
 # 🔧 dbt Integration with Microsoft Fabric
 
-<div align="center">
+<div align="center" markdown>
 
 **Transform Data with dbt Natively in Fabric Data Factory**
 

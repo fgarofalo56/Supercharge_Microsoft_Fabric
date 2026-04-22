@@ -2,7 +2,7 @@
 
 # 📊 Power BI Best Practices for Microsoft Fabric
 
-<div align="center">
+<div align="center" markdown>
 
 **Optimize Semantic Models, DAX Performance, and Report Design for Fabric Workloads**
 

@@ -2,7 +2,7 @@
 
 # 📊 Monitoring & Observability for Microsoft Fabric
 
-<div align="center">
+<div align="center" markdown>
 
 **Unified Telemetry, Dashboards, Alerting & Runbooks for Fabric Workloads**
 

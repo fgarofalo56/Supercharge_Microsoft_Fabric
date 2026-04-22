@@ -2,7 +2,7 @@
 
 > 🏠 [Home](index.md) > 📚 [Docs](./) > 💰 Cost Estimation
 
-<div align="center">
+<div align="center" markdown>
 
 # 💰 Cost Estimation
 

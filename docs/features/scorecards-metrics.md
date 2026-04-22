@@ -2,7 +2,7 @@
 
 # 🎯 Scorecards & Metrics - KPI Goal Tracking
 
-<div align="center">
+<div align="center" markdown>
 
 **Track Organizational Goals with Automated Status, Check-Ins, and Hierarchical Scorecards**
 

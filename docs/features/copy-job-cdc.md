@@ -2,7 +2,7 @@
 
 # 📋 Copy Job - Continuous Ingestion with Change Data Capture
 
-<div align="center">
+<div align="center" markdown>
 
 **Low-Code Incremental Data Ingestion for Microsoft Fabric**
 

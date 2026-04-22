@@ -2,7 +2,7 @@
 
 > 🏠 [Home](index.md) > 📚 [Docs](./) > 🚀 Deployment
 
-<div align="center">
+<div align="center" markdown>
 
 # 🚀 Deployment Guide
 

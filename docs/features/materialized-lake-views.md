@@ -2,7 +2,7 @@
 
 # 🏔️ Materialized Lake Views - Pre-Computed Analytics Acceleration
 
-<div align="center">
+<div align="center" markdown>
 
 **Accelerate Analytics with Pre-Computed Delta Lake Views**
 

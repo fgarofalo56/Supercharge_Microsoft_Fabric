@@ -2,7 +2,7 @@
 
 # 🤖 AI Copilot Configuration & Setup
 
-<div align="center">
+<div align="center" markdown>
 
 **Enterprise-Grade AI Assistance Across Microsoft Fabric Workloads**
 

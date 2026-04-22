@@ -5,6 +5,10 @@
  * backend powered by Azure OpenAI. Supports streaming responses, markdown
  * rendering, dark/light mode, and a dedicated full-page chat experience.
  *
+ * NEW: Client-side documentation search via MkDocs search index. When the
+ * backend is unreachable, the widget falls back to local search and shows
+ * clickable links to docs pages and GitHub source files.
+ *
  * Configuration:
  *   Set window.COPILOT_CONFIG.apiEndpoint before this script loads, or it
  *   defaults to "/api/chat" (works when the Azure Function is proxied).
@@ -13,48 +17,46 @@
   "use strict";
 
   /* ── Configuration ─────────────────────────────────────────────── */
-  const CONFIG = Object.assign(
+  var CONFIG = Object.assign(
     {
-      apiEndpoint: "https://fabric-copilot-docs.azurewebsites.net/api/chat",          // Azure Function URL
-      maxHistory: 20,                     // conversation turns to keep
-      rateLimitMs: 1500,                  // min ms between sends
+      apiEndpoint: "https://fabric-copilot-docs.azurewebsites.net/api/chat",
+      maxHistory: 20,
+      rateLimitMs: 1500,
+      siteUrl: "https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/",
+      repoUrl: "https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric",
+      repoBranch: "master",
+      docsDir: "docs",
       welcomeMessage:
-        "Hi! I'm the **Supercharge Fabric Copilot**. Ask me anything about the codebase, tutorials, architecture, compliance rules, or troubleshooting. I have full context of this repository.",
+        "Hi! I'm the **Supercharge Fabric Copilot**. Ask me anything about the codebase, tutorials, architecture, compliance rules, or troubleshooting.\n\nI can **search the documentation** and provide direct links to relevant pages. Try asking about *\"Data Flow\"*, *\"medallion architecture\"*, or *\"compliance thresholds\"*.",
     },
     window.COPILOT_CONFIG || {}
   );
 
   /* ── State ─────────────────────────────────────────────────────── */
-  let chatHistory = [];
-  let isOpen = false;
-  let isStreaming = false;
-  let lastSendTime = 0;
+  var chatHistory = [];
+  var isOpen = false;
+  var isStreaming = false;
+  var lastSendTime = 0;
+  var searchIndex = null;
+  var searchIndexLoading = false;
 
   /* ── Detect full-page mode ─────────────────────────────────────── */
-  const isFullPage = !!document.getElementById("copilot-fullpage");
+  var isFullPage = !!document.getElementById("copilot-fullpage");
 
   /* ── Utility: simple markdown → HTML ───────────────────────────── */
   function md(text) {
     if (!text) return "";
-    let html = text
-      // code blocks (```lang ... ```)
+    var html = text
       .replace(/```(\w*)\n([\s\S]*?)```/g, function (_, lang, code) {
         return '<pre><code class="language-' + (lang || "text") + '">' +
           escapeHtml(code.trim()) + "</code></pre>";
       })
-      // inline code
       .replace(/`([^`]+)`/g, "<code>$1</code>")
-      // bold
       .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-      // italic
       .replace(/\*(.+?)\*/g, "<em>$1</em>")
-      // links
       .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
-      // unordered lists
       .replace(/^- (.+)$/gm, "<li>$1</li>")
-      // wrap consecutive <li> in <ul>
       .replace(/((?:<li>.*<\/li>\n?)+)/g, "<ul>$1</ul>")
-      // line breaks → paragraphs
       .replace(/\n{2,}/g, "</p><p>")
       .replace(/\n/g, "<br>");
     return "<p>" + html + "</p>";
@@ -64,62 +66,202 @@
     return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
-  /* ── Detect dark mode ──────────────────────────────────────────── */
-  function isDark() {
-    return document.body.getAttribute("data-md-color-scheme") === "slate";
+  /* ── Search Index ─────────────────────────────────────────────── */
+
+  function getBaseUrl() {
+    var base = document.querySelector('meta[name="base_url"]');
+    if (base) return base.getAttribute("content");
+    var link = document.querySelector('link[rel="canonical"]');
+    if (link) {
+      var url = new URL(link.getAttribute("href"));
+      return url.pathname.replace(/[^/]*$/, "");
+    }
+    return "/Suppercharge_Microsoft_Fabric/";
+  }
+
+  function loadSearchIndex(callback) {
+    if (searchIndex) { callback(searchIndex); return; }
+    if (searchIndexLoading) {
+      // Retry after a moment
+      setTimeout(function () { loadSearchIndex(callback); }, 200);
+      return;
+    }
+    searchIndexLoading = true;
+    var base = getBaseUrl();
+    fetch(base + "search/search_index.json")
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        searchIndex = data;
+        searchIndexLoading = false;
+        callback(data);
+      })
+      .catch(function () {
+        searchIndexLoading = false;
+        callback(null);
+      });
+  }
+
+  /**
+   * Search the MkDocs index for matching documents.
+   * Returns top results with title, snippet, docs URL, and GitHub URL.
+   */
+  function searchDocs(query, maxResults) {
+    maxResults = maxResults || 8;
+    if (!searchIndex || !searchIndex.docs) return [];
+
+    var terms = query.toLowerCase().split(/\s+/).filter(function (t) { return t.length > 1; });
+    if (terms.length === 0) return [];
+
+    var scored = [];
+    searchIndex.docs.forEach(function (doc) {
+      var title = (doc.title || "").toLowerCase();
+      var text = (doc.text || "").toLowerCase();
+      var location = doc.location || "";
+      var score = 0;
+
+      terms.forEach(function (term) {
+        // Title matches score higher
+        if (title.indexOf(term) !== -1) score += 10;
+        // Exact word boundary match in title
+        if (new RegExp("\\b" + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + "\\b").test(title)) score += 5;
+        // Text body matches
+        var bodyMatches = (text.match(new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), "gi")) || []).length;
+        score += Math.min(bodyMatches, 5);
+      });
+
+      // Skip very low scores and anchor-only entries (sections within a page)
+      if (score > 0 && location) {
+        // Extract a snippet around the first match
+        var snippet = "";
+        for (var i = 0; i < terms.length; i++) {
+          var idx = text.indexOf(terms[i]);
+          if (idx !== -1) {
+            var start = Math.max(0, idx - 60);
+            var end = Math.min(text.length, idx + 120);
+            snippet = (start > 0 ? "..." : "") + doc.text.substring(start, end).trim() + (end < text.length ? "..." : "");
+            break;
+          }
+        }
+        if (!snippet && doc.text) {
+          snippet = doc.text.substring(0, 150).trim() + (doc.text.length > 150 ? "..." : "");
+        }
+
+        scored.push({
+          title: doc.title || "Untitled",
+          location: location,
+          snippet: snippet,
+          score: score,
+        });
+      }
+    });
+
+    // Sort by score descending
+    scored.sort(function (a, b) { return b.score - a.score; });
+
+    // Deduplicate by base page (remove anchor fragments, keep highest score)
+    var seen = {};
+    var deduped = [];
+    scored.forEach(function (item) {
+      var basePage = item.location.split("#")[0];
+      if (!seen[basePage]) {
+        seen[basePage] = true;
+        deduped.push(item);
+      }
+    });
+
+    return deduped.slice(0, maxResults);
+  }
+
+  /**
+   * Build docs URL from a search index location.
+   */
+  function buildDocsUrl(location) {
+    return CONFIG.siteUrl + location;
+  }
+
+  /**
+   * Build GitHub source URL from a search index location.
+   */
+  function buildGitHubUrl(location) {
+    // location is like "PREREQUISITES/" or "features/fabric-iq/"
+    // Map to docs source path
+    var path = location.replace(/\/$/, "");
+    if (!path) path = "index";
+    // Most MkDocs pages map to docs/PAGE.md or docs/PAGE/index.md
+    // We'll link to the folder; GitHub shows the README/index
+    return CONFIG.repoUrl + "/blob/" + CONFIG.repoBranch + "/" + CONFIG.docsDir + "/" + path + ".md";
+  }
+
+  /**
+   * Format search results as a chat-friendly HTML string.
+   */
+  function formatSearchResults(results, query) {
+    if (results.length === 0) {
+      return "I couldn't find any documentation pages matching **\"" + escapeHtml(query) + "\"**. Try different keywords or browse the [documentation home](" + CONFIG.siteUrl + ").";
+    }
+
+    var msg = 'I found **' + results.length + ' page' + (results.length > 1 ? 's' : '') + '** matching **"' + escapeHtml(query) + '"**:\n\n';
+
+    results.forEach(function (r, i) {
+      var docsUrl = buildDocsUrl(r.location);
+      var ghUrl = buildGitHubUrl(r.location);
+      msg += '**' + (i + 1) + '. ' + escapeHtml(r.title) + '**\n';
+      if (r.snippet) {
+        // Truncate snippet for chat
+        var snip = r.snippet.length > 120 ? r.snippet.substring(0, 120) + "..." : r.snippet;
+        msg += escapeHtml(snip) + '\n';
+      }
+      msg += '[📄 View in Docs](' + docsUrl + ') · [💻 View on GitHub](' + ghUrl + ')\n\n';
+    });
+
+    msg += "---\n*Click any link above to jump directly to that page.*";
+    return msg;
   }
 
   /* ── Build DOM ─────────────────────────────────────────────────── */
   function buildWidget() {
-    // Container
-    const container = document.createElement("div");
+    var container = document.createElement("div");
     container.id = "copilot-container";
-    container.innerHTML = `
-      <!-- Floating button -->
-      <button id="copilot-btn" aria-label="Open AI Copilot Chat" title="Ask the Fabric Copilot">
-        <svg id="copilot-icon-chat" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-        </svg>
-        <svg id="copilot-icon-close" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
-          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-        </svg>
-      </button>
-
-      <!-- Chat panel -->
-      <div id="copilot-panel" class="copilot-hidden">
-        <div id="copilot-header">
-          <div id="copilot-header-left">
-            <span id="copilot-logo">🤖</span>
-            <span id="copilot-title">Fabric Copilot</span>
-          </div>
-          <div id="copilot-header-right">
-            <button id="copilot-clear" title="Clear conversation" aria-label="Clear conversation">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-            </button>
-            <button id="copilot-fullscreen" title="Open full-page chat" aria-label="Open full-page chat">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
-            </button>
-          </div>
-        </div>
-        <div id="copilot-messages"></div>
-        <form id="copilot-form">
-          <div id="copilot-input-wrap">
-            <textarea id="copilot-input" placeholder="Ask about Fabric, tutorials, code..." rows="1"></textarea>
-            <button type="submit" id="copilot-send" aria-label="Send message">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            </button>
-          </div>
-          <div id="copilot-footer">Powered by Azure OpenAI &middot; Context: this repository</div>
-        </form>
-      </div>
-    `;
+    container.innerHTML =
+      '<button id="copilot-btn" aria-label="Open AI Copilot Chat" title="Ask the Fabric Copilot">' +
+        '<svg id="copilot-icon-chat" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+          '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>' +
+        '</svg>' +
+        '<svg id="copilot-icon-close" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">' +
+          '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>' +
+        '</svg>' +
+      '</button>' +
+      '<div id="copilot-panel" class="copilot-hidden">' +
+        '<div id="copilot-header">' +
+          '<div id="copilot-header-left">' +
+            '<span id="copilot-logo">🤖</span>' +
+            '<span id="copilot-title">Fabric Copilot</span>' +
+          '</div>' +
+          '<div id="copilot-header-right">' +
+            '<button id="copilot-clear" title="Clear conversation" aria-label="Clear conversation">' +
+              '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>' +
+            '</button>' +
+            '<button id="copilot-fullscreen" title="Open full-page chat" aria-label="Open full-page chat">' +
+              '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>' +
+            '</button>' +
+          '</div>' +
+        '</div>' +
+        '<div id="copilot-messages"></div>' +
+        '<form id="copilot-form">' +
+          '<div id="copilot-input-wrap">' +
+            '<textarea id="copilot-input" placeholder="Ask about Fabric, tutorials, code..." rows="1"></textarea>' +
+            '<button type="submit" id="copilot-send" aria-label="Send message">' +
+              '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>' +
+            '</button>' +
+          '</div>' +
+          '<div id="copilot-footer">Powered by Azure OpenAI · <a href="' + CONFIG.siteUrl + '" target="_blank" style="color:inherit;text-decoration:underline;">Documentation</a></div>' +
+        '</form>' +
+      '</div>';
 
     if (isFullPage) {
-      // In full-page mode, embed inside the target div
-      const target = document.getElementById("copilot-fullpage");
+      var target = document.getElementById("copilot-fullpage");
       target.appendChild(container);
       container.classList.add("copilot-fullpage-mode");
-      // Auto-open immediately (no delay)
       togglePanel(true);
     } else {
       document.body.appendChild(container);
@@ -148,19 +290,9 @@
 
     // Show welcome message
     addMessage("assistant", CONFIG.welcomeMessage);
-  }
 
-  /* ── Get base URL for MkDocs ───────────────────────────────────── */
-  function getBaseUrl() {
-    var base = document.querySelector('meta[name="base_url"]');
-    if (base) return base.getAttribute("content");
-    // fallback: look at canonical or just use /
-    var link = document.querySelector('link[rel="canonical"]');
-    if (link) {
-      var url = new URL(link.getAttribute("href"));
-      return url.pathname.replace(/[^/]*$/, "");
-    }
-    return "/";
+    // Preload search index in background
+    loadSearchIndex(function () {});
   }
 
   /* ── Toggle panel ──────────────────────────────────────────────── */
@@ -173,19 +305,19 @@
     if (isOpen) {
       panel.classList.remove("copilot-hidden");
       panel.classList.add("copilot-visible");
-      iconChat.style.display = "none";
-      iconClose.style.display = "block";
+      if (iconChat) iconChat.style.display = "none";
+      if (iconClose) iconClose.style.display = "block";
       document.getElementById("copilot-input").focus();
     } else {
       panel.classList.remove("copilot-visible");
       panel.classList.add("copilot-hidden");
-      iconChat.style.display = "block";
-      iconClose.style.display = "none";
+      if (iconChat) iconChat.style.display = "block";
+      if (iconClose) iconClose.style.display = "none";
     }
   }
 
   /* ── Add message to chat ───────────────────────────────────────── */
-  function addMessage(role, content, isStreaming) {
+  function addMessage(role, content, streaming) {
     var messages = document.getElementById("copilot-messages");
     var div = document.createElement("div");
     div.className = "copilot-msg copilot-msg-" + role;
@@ -203,7 +335,7 @@
     messages.appendChild(div);
     messages.scrollTop = messages.scrollHeight;
 
-    if (isStreaming) {
+    if (streaming) {
       div.id = "copilot-streaming";
     }
 
@@ -246,55 +378,52 @@
     var message = input.value.trim();
     if (!message || isStreaming) return;
 
-    // Rate limit
     var now = Date.now();
     if (now - lastSendTime < CONFIG.rateLimitMs) return;
     lastSendTime = now;
 
-    // Add user message
     addMessage("user", message);
     chatHistory.push({ role: "user", content: message });
 
-    // Trim history
     if (chatHistory.length > CONFIG.maxHistory * 2) {
       chatHistory = chatHistory.slice(-CONFIG.maxHistory * 2);
     }
 
-    // Clear input
     input.value = "";
     input.style.height = "auto";
 
-    // Show typing indicator
     isStreaming = true;
     document.getElementById("copilot-send").disabled = true;
     input.disabled = true;
-    addMessage("assistant", "Thinking...", true);
+    addMessage("assistant", "Searching documentation...", true);
 
-    // Send to backend
     sendToBackend(message);
   }
 
-  /* ── Send message to Azure Function ────────────────────────────── */
+  /* ── Send message to Azure Function (with search fallback) ─────── */
   function sendToBackend(message) {
     var payload = {
       message: message,
-      history: chatHistory.slice(0, -1), // exclude the message we just added
+      history: chatHistory.slice(0, -1),
       pageContext: getPageContext(),
     };
+
+    // Set a short timeout for the backend check
+    var controller = new AbortController();
+    var timeoutId = setTimeout(function () { controller.abort(); }, 5000);
 
     fetch(CONFIG.apiEndpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
+      signal: controller.signal,
     })
       .then(function (response) {
-        if (!response.ok) {
-          throw new Error("HTTP " + response.status);
-        }
+        clearTimeout(timeoutId);
+        if (!response.ok) throw new Error("HTTP " + response.status);
 
         var contentType = response.headers.get("content-type") || "";
 
-        // Streaming response (SSE-style via ndjson)
         if (contentType.includes("text/event-stream") || contentType.includes("application/x-ndjson")) {
           var reader = response.body.getReader();
           var decoder = new TextDecoder();
@@ -308,10 +437,9 @@
                 return;
               }
               var chunk = decoder.decode(result.value, { stream: true });
-              // Each line is a JSON object with a "content" field
               chunk.split("\n").forEach(function (line) {
                 line = line.trim();
-                if (!line || line.startsWith(":")) return; // SSE comment/keepalive
+                if (!line || line.startsWith(":")) return;
                 if (line.startsWith("data: ")) line = line.substring(6);
                 if (line === "[DONE]") return;
                 try {
@@ -324,16 +452,13 @@
                     accumulated = "**Error:** " + data.error;
                     updateStreamingMessage(accumulated);
                   }
-                } catch (_) {
-                  // non-JSON line, skip
-                }
+                } catch (_) {}
               });
               readChunk();
             });
           }
           readChunk();
         } else {
-          // Non-streaming JSON response
           response.json().then(function (data) {
             var reply = data.reply || data.content || data.message || "Sorry, I couldn't generate a response.";
             updateStreamingMessage(reply);
@@ -342,16 +467,32 @@
           });
         }
       })
-      .catch(function (err) {
-        console.error("Copilot chat error:", err);
-        updateStreamingMessage(
-          "**Connection Error**\n\nCould not reach the Copilot backend. This typically means:\n\n" +
-          "- The Azure Function isn't deployed yet\n" +
-          "- The API endpoint URL needs to be configured\n\n" +
-          "See `azure-functions/copilot-chat/` in the repo for setup instructions."
-        );
-        finalizeStreaming();
+      .catch(function () {
+        clearTimeout(timeoutId);
+        // Backend unreachable — fall back to local documentation search
+        fallbackToLocalSearch(message);
       });
+  }
+
+  /* ── Local search fallback ────────────────────────────────────── */
+  function fallbackToLocalSearch(query) {
+    loadSearchIndex(function (index) {
+      if (!index) {
+        updateStreamingMessage(
+          "**Offline Mode**\n\nThe AI backend isn't available and I couldn't load the search index. " +
+          "You can browse the [documentation](" + CONFIG.siteUrl + ") directly or use the search bar above."
+        );
+        chatHistory.push({ role: "assistant", content: "Offline — search index unavailable." });
+        finalizeStreaming();
+        return;
+      }
+
+      var results = searchDocs(query);
+      var reply = formatSearchResults(results, query);
+      updateStreamingMessage(reply);
+      chatHistory.push({ role: "assistant", content: reply });
+      finalizeStreaming();
+    });
   }
 
   /* ── Clear chat ────────────────────────────────────────────────── */
@@ -364,7 +505,6 @@
 
   /* ── Initialize ────────────────────────────────────────────────── */
   function init() {
-    // Wait for DOM
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", buildWidget);
     } else {

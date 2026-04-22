@@ -2,7 +2,7 @@
 
 # 🔀 Git Integration for Fabric
 
-<div align="center">
+<div align="center" markdown>
 
 **Source Control and Multi-Developer Collaboration**
 

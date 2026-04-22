@@ -2,7 +2,7 @@
 
 # 🗄️ Fabric SQL Database - Operational OLTP in Microsoft Fabric
 
-<div align="center">
+<div align="center" markdown>
 
 **Fabric-Native Transactional Database with Automatic OneLake Replication**
 

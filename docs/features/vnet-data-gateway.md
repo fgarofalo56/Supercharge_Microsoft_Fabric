@@ -2,7 +2,7 @@
 
 # 🔒 VNet Data Gateway - Secure Connectivity from Your Virtual Network
 
-<div align="center">
+<div align="center" markdown>
 
 **Access On-Premises and Private Data Sources Securely Through Your Azure VNet**
 

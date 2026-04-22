@@ -2,7 +2,7 @@
 
 # 🛡️ Outbound Access Protection (OAP)
 
-<div align="center">
+<div align="center" markdown>
 
 **Prevent Data Exfiltration with Fabric-Native Network Controls**
 

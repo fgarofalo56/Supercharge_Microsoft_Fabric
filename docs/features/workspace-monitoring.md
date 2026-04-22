@@ -2,7 +2,7 @@
 
 # 📊 Workspace Monitoring - Observability for Fabric Workloads
 
-<div align="center">
+<div align="center" markdown>
 
 **Queryable System Tables for Spark, SQL, Pipeline, and Dataflow Activity**
 

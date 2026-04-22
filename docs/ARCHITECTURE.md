@@ -2,7 +2,7 @@
 
 > 🏠 [Home](index.md) > 📚 [Docs](./) > 🏗️ Architecture
 
-<div align="center">
+<div align="center" markdown>
 
 # 🏗️ Architecture
 

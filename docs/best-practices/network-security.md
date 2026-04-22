@@ -2,7 +2,7 @@
 
 # 🔒 Network Security for Microsoft Fabric
 
-<div align="center">
+<div align="center" markdown>
 
 **Defense-in-Depth Network Architecture for Enterprise Analytics**
 

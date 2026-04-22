@@ -2,7 +2,7 @@
 
 # 🔑 Identity & RBAC Patterns for Microsoft Fabric
 
-<div align="center">
+<div align="center" markdown>
 
 **Least-Privilege Access Control from Entra ID to Row-Level Data**
 

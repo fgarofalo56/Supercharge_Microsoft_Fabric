@@ -2,7 +2,7 @@
 
 # 🤖 Fabric MCP Server - AI Agent Data Access
 
-<div align="center">
+<div align="center" markdown>
 
 **Connect AI Agents to Microsoft Fabric via the Model Context Protocol**
 

@@ -2,7 +2,7 @@
 
 # 🤖 AutoML & ML Model Endpoints - Automated Training and Real-Time Serving
 
-<div align="center">
+<div align="center" markdown>
 
 **Automated Machine Learning and RESTful Model Serving in Microsoft Fabric**
 

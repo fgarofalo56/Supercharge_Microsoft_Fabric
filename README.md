@@ -19,6 +19,7 @@
 
 *Real-time insights • Medallion Architecture • Regulatory Compliance • Direct Lake BI*
 
+[📚 Documentation](https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/) •
 [🚀 Quick Start](#-quick-start) •
 [🐳 Docker](#-docker-support) •
 [📖 Tutorials](#-tutorials) •

@@ -5,7 +5,7 @@
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
-<div align="center">
+<div align="center" markdown>
 
 ![Category: Best Practices](https://img.shields.io/badge/Category-Best_Practices-blue?style=flat-square)
 ![Platform: Microsoft Fabric](https://img.shields.io/badge/Platform-Microsoft_Fabric-742774?style=flat-square)

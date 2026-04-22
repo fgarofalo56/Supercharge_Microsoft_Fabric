@@ -2,7 +2,7 @@
 
 # 🤖 Fabric Data Agents - Conversational AI for Enterprise Data
 
-<div align="center">
+<div align="center" markdown>
 
 **Build Customizable Q&A Systems Over Your Fabric Data**
 

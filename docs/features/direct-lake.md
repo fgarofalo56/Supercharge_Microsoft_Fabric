@@ -2,7 +2,7 @@
 
 # ⚡ Direct Lake - Zero-Copy Power BI over OneLake
 
-<div align="center">
+<div align="center" markdown>
 
 **Sub-Second Analytics Directly from Delta Lake — No Import, No DirectQuery**
 

@@ -2,7 +2,7 @@
 
 # 📡 Real-Time Hub — Event Discovery and Sharing
 
-<div align="center">
+<div align="center" markdown>
 
 **Centralized Event Catalog for Microsoft Fabric**
 

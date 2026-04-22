@@ -2,7 +2,7 @@
 
 > 🏠 [Home](index.md) > 📚 [Docs](./) > 🔐 Security
 
-<div align="center">
+<div align="center" markdown>
 
 # 🔐 Security
 

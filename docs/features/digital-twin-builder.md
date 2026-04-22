@@ -2,7 +2,7 @@
 
 # 🏗️ Digital Twin Builder - Real-Time Entity Modeling
 
-<div align="center">
+<div align="center" markdown>
 
 **Data-Driven Representations of Physical Assets in Microsoft Fabric**
 

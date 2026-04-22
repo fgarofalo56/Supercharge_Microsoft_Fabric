@@ -2,7 +2,7 @@
 
 > 🏠 [Home](index.md) > 📚 [Docs](./) > 📋 Prerequisites
 
-<div align="center">
+<div align="center" markdown>
 
 # 📋 Prerequisites
 

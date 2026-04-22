@@ -2,7 +2,7 @@
 
 # 🏢 Multi-Tenant Workspace Architecture for Microsoft Fabric
 
-<div align="center">
+<div align="center" markdown>
 
 **Design Patterns for Isolating Workloads Across Tenants, Properties, and Agencies**
 

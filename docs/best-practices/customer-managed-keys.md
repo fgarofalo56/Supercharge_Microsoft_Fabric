@@ -2,7 +2,7 @@
 
 # 🔐 Customer-Managed Keys (CMK) for Microsoft Fabric
 
-<div align="center">
+<div align="center" markdown>
 
 **Bring Your Own Encryption Keys for Full Data Sovereignty**
 

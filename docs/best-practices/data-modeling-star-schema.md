@@ -2,7 +2,7 @@
 
 # ⭐ Data Modeling & Star Schema Best Practices for Microsoft Fabric
 
-<div align="center">
+<div align="center" markdown>
 
 **Design Performant Dimensional Models Optimized for Direct Lake and Power BI**
 

@@ -2,7 +2,7 @@
 
 # 🔗 Semantic Link - Bridge Spark Notebooks and Power BI
 
-<div align="center">
+<div align="center" markdown>
 
 **Unlock Power BI Semantic Models from PySpark Notebooks with SemPy**
 

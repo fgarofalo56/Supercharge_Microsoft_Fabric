@@ -2,7 +2,7 @@
 
 # 🏗️ Lakehouse vs Warehouse vs SQL Database — Decision Guide
 
-<div align="center">
+<div align="center" markdown>
 
 **Choose the Right Fabric Analytics Store for Every Workload**
 

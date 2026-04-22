@@ -2,7 +2,7 @@
 
 # 🔗 API for GraphQL - Unified Data Access Layer
 
-<div align="center">
+<div align="center" markdown>
 
 **Fabric-Native GraphQL API Item for Schema-Driven Data Access**
 

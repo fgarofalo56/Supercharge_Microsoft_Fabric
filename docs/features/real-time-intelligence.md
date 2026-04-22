@@ -2,7 +2,7 @@
 
 # ⚡ Real-Time Intelligence (RTI) Comprehensive Guide
 
-<div align="center">
+<div align="center" markdown>
 
 **Streaming Analytics at Scale with Microsoft Fabric**
 

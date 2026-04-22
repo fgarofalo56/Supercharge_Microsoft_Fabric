@@ -2,7 +2,7 @@
 
 # 🔄 Translytical Task Flows - Visual Orchestration and Write-Back from Power BI
 
-<div align="center">
+<div align="center" markdown>
 
 **Bridge the Gap Between Analytics and Action with Task Flows**
 

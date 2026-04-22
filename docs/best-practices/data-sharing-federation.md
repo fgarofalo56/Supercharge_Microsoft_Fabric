@@ -2,7 +2,7 @@
 
 # 🔗 Data Sharing & Federation for Microsoft Fabric
 
-<div align="center">
+<div align="center" markdown>
 
 **Cross-Workspace, Cross-Organization, and Cross-Cloud Data Access Patterns**
 

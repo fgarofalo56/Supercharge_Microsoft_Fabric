@@ -2,7 +2,7 @@
 
 # 🔗 Cross-Database Queries in Microsoft Fabric
 
-<div align="center">
+<div align="center" markdown>
 
 **Query Across Lakehouse, Warehouse, and SQL Database Using Three-Part Naming**
 

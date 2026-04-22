@@ -2,7 +2,7 @@
 
 # Spark Runtime 2.0 Migration Guide
 
-<div align="center">
+<div align="center" markdown>
 
 ![Category](https://img.shields.io/badge/Category-Data_Engineering-green?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)

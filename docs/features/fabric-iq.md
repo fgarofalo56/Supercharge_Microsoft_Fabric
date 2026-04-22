@@ -2,7 +2,7 @@
 
 # 🧠 Fabric IQ - Natural Language Analytics
 
-<div align="center">
+<div align="center" markdown>
 
 **Unlock Data Insights with Natural Language**
 

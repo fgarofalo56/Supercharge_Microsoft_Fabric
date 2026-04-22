@@ -2,7 +2,7 @@
 
 # 🔀 Composite Models - Mixed Storage Mode Semantic Models
 
-<div align="center">
+<div align="center" markdown>
 
 **Combine Import, DirectQuery, and Direct Lake in a Single Semantic Model for Maximum Flexibility**
 
