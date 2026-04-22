@@ -2,7 +2,7 @@
 
 # 🔒 SQL Audit Logs & Compliance
 
-<div align="center">
+<div align="center" markdown>
 
 **Immutable Audit Trails for Regulated Workloads**
 

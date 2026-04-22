@@ -2,7 +2,7 @@
 
 # 🏗️ Medallion Architecture Deep Dive
 
-<div align="center">
+<div align="center" markdown>
 
 **Bronze → Silver → Gold Patterns for Casino Gaming & Federal Data Workloads**
 

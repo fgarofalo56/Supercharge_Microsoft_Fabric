@@ -2,7 +2,7 @@
 
 # 🧪 Testing Strategies for Microsoft Fabric
 
-<div align="center">
+<div align="center" markdown>
 
 **Comprehensive Quality Assurance Across the Analytics Lifecycle**
 

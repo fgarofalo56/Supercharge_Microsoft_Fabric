@@ -5,7 +5,7 @@
 > **Last Updated**: 2026-04-21 | **Version**: 2.1
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
-<div align="center">
+<div align="center" markdown>
 
 ![Category](https://img.shields.io/badge/Category-Best_Practices-yellow)
 ![Status](https://img.shields.io/badge/Status-Final-green)

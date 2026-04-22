@@ -2,7 +2,7 @@
 
 # 🚀 Deployment Pipelines — Stage-Based Promotion in Fabric
 
-<div align="center">
+<div align="center" markdown>
 
 **Built-In Dev/Test/Prod Lifecycle Management for Microsoft Fabric**
 

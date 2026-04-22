@@ -2,7 +2,7 @@
 
 # 🔄 Mirroring - Near-Real-Time Database Replication
 
-<div align="center">
+<div align="center" markdown>
 
 **Replicate External Databases into OneLake Delta Tables — No ETL Pipelines Required**
 

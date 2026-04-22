@@ -2,7 +2,7 @@
 
 # 🧬 Eventhouse as a Vector Database - AI-Powered Semantic Search
 
-<div align="center">
+<div align="center" markdown>
 
 **Unlock AI/ML Scenarios with Vector Search in Real-Time Intelligence**
 

@@ -2,7 +2,7 @@
 
 # ⚙️ Spark Environments & Job Definitions
 
-<div align="center">
+<div align="center" markdown>
 
 **Production-Grade Library Management and Batch Job Execution**
 

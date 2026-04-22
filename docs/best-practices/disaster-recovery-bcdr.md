@@ -2,7 +2,7 @@
 
 # 🛡️ Disaster Recovery & Business Continuity for Microsoft Fabric
 
-<div align="center">
+<div align="center" markdown>
 
 **Protect Your Analytics Platform with Resilient Architecture and Tested Failover Procedures**
 

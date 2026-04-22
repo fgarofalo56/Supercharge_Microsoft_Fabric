@@ -2,7 +2,7 @@
 
 # 🧊 OneLake Iceberg Interoperability
 
-<div align="center">
+<div align="center" markdown>
 
 **Seamless Multi-Engine Data Access with Delta-Iceberg Virtualization**
 

@@ -2,7 +2,7 @@
 
 # 🛡️ Workspace IP Firewall & Surge Protection
 
-<div align="center">
+<div align="center" markdown>
 
 **IP-Based Access Control and Throttling Protection for Fabric Workspaces**
 

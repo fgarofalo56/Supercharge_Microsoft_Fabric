@@ -2,7 +2,7 @@
 
 # 💸 FinOps & Cost Governance for Microsoft Fabric
 
-<div align="center">
+<div align="center" markdown>
 
 **Implement FinOps Disciplines to Maximize Fabric ROI and Enforce Cost Accountability**
 

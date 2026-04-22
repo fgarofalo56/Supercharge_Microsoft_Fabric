@@ -2,7 +2,7 @@
 
 # 🔄 Dataflow Gen2 — Low-Code ETL with Power Query
 
-<div align="center">
+<div align="center" markdown>
 
 **Visual Data Transformation for Microsoft Fabric**
 

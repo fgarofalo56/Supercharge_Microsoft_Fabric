@@ -2,7 +2,7 @@
 
 # 🔐 OneLake Security - Unified Data Protection
 
-<div align="center">
+<div align="center" markdown>
 
 **Define Once, Enforce Everywhere — Security That Lives with the Data**
 

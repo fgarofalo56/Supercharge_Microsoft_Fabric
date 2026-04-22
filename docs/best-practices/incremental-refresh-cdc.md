@@ -2,7 +2,7 @@
 
 # 🔄 Incremental Refresh & CDC Patterns for Microsoft Fabric
 
-<div align="center">
+<div align="center" markdown>
 
 **Delta MERGE, Change Data Capture, and Semantic Model Incremental Refresh**
 

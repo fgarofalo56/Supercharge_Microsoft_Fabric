@@ -2,7 +2,7 @@
 
 # 🔔 Data Activator — Real-Time Alerting and Actions
 
-<div align="center">
+<div align="center" markdown>
 
 **Rule-Based Triggers for Microsoft Fabric Data**
 

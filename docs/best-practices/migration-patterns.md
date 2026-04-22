@@ -2,7 +2,7 @@
 
 # 🔄 Migration Patterns for Microsoft Fabric
 
-<div align="center">
+<div align="center" markdown>
 
 **Structured Migration Playbook from Legacy Analytics to Microsoft Fabric**
 

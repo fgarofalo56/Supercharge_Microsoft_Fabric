@@ -253,13 +253,13 @@
 
 /* ── Full-page mode ──────────────────────────────────────────── */
 #copilot-fullpage {
-  min-height: 500px;
+  min-height: 420px;
 }
 .copilot-fullpage-mode {
   display: flex;
   flex-direction: column;
-  min-height: 500px;
-  height: calc(100vh - 240px);
+  min-height: 420px;
+  height: calc(100vh - 200px);
 }
 .copilot-fullpage-mode #copilot-btn {
   display: none !important;
@@ -329,4 +329,59 @@
 @keyframes copilot-blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
+}
+
+/* ── Search result links in chat ─────────────────────────────── */
+.copilot-bubble a[href*="github.io"],
+.copilot-bubble a[href*="github.com"] {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.82em;
+  font-weight: 500;
+  text-decoration: none !important;
+  margin-right: 4px;
+  transition: background 0.15s;
+}
+.copilot-bubble a[href*="github.io"] {
+  background: rgba(0, 120, 212, 0.12);
+  color: #0078d4;
+}
+.copilot-bubble a[href*="github.io"]:hover {
+  background: rgba(0, 120, 212, 0.25);
+}
+.copilot-bubble a[href*="github.com"] {
+  background: rgba(36, 41, 47, 0.08);
+  color: #24292f;
+}
+.copilot-bubble a[href*="github.com"]:hover {
+  background: rgba(36, 41, 47, 0.18);
+}
+
+/* Dark mode search result links */
+[data-md-color-scheme="slate"] .copilot-bubble a[href*="github.io"] {
+  background: rgba(59, 130, 246, 0.2);
+  color: #93bbfc;
+}
+[data-md-color-scheme="slate"] .copilot-bubble a[href*="github.io"]:hover {
+  background: rgba(59, 130, 246, 0.35);
+}
+[data-md-color-scheme="slate"] .copilot-bubble a[href*="github.com"] {
+  background: rgba(255, 255, 255, 0.1);
+  color: #c9d1d9;
+}
+[data-md-color-scheme="slate"] .copilot-bubble a[href*="github.com"]:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* Strong titles in search results */
+.copilot-bubble strong {
+  color: inherit;
+}
+
+/* Horizontal rule in chat */
+.copilot-bubble hr {
+  border: none;
+  border-top: 1px solid var(--md-default-fg-color--lightest, #e0e0e0);
+  margin: 0.5em 0;
 }

@@ -2,7 +2,7 @@
 
 # 🖨️ Paginated Reports - Pixel-Perfect Enterprise Reporting
 
-<div align="center">
+<div align="center" markdown>
 
 **Pixel-Perfect, Print-Ready Reports for Compliance Filings, Regulatory Submissions, and Operational Exports**
 

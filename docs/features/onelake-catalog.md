@@ -2,7 +2,7 @@
 
 # 📚 OneLake Catalog - Unified Data Discovery & Governance Hub
 
-<div align="center">
+<div align="center" markdown>
 
 **Discover, Endorse, and Govern All Fabric Items from a Single Pane**
 

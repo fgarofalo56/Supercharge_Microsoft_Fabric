@@ -2,7 +2,7 @@
 
 # 🔌 Fabric REST APIs - Programmatic Platform Management
 
-<div align="center">
+<div align="center" markdown>
 
 **Automate Workspace Provisioning, Item Deployment, and Capacity Management via REST**
 

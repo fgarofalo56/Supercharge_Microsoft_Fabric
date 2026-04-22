@@ -2,7 +2,7 @@
 
 # 💰 Capacity Planning & Cost Optimization for Microsoft Fabric
 
-<div align="center">
+<div align="center" markdown>
 
 **Right-Size Your Fabric Capacity and Minimize Total Cost of Ownership**
 

@@ -2,7 +2,7 @@
 
 # 🏛️ Data Mesh & Enterprise Architecture Patterns
 
-<div align="center">
+<div align="center" markdown>
 
 **Scaling Microsoft Fabric Across Domains with Data Mesh Principles**
 

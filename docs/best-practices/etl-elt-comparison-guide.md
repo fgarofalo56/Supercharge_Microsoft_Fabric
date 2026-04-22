@@ -2,7 +2,7 @@
 
 # 🔄 ETL/ELT Comparison Guide — Choosing the Right Data Movement Method
 
-<div align="center">
+<div align="center" markdown>
 
 **Side-by-Side Comparison of All 5 Fabric Data Ingestion Methods**
 
