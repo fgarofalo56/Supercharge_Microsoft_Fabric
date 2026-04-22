@@ -6,7 +6,7 @@
 
 ![Changelog](https://img.shields.io/badge/📋_Changelog-Keep_a_Changelog-blue?style=for-the-badge)
 ![SemVer](https://img.shields.io/badge/🔢_Versioning-SemVer_2.0-green?style=for-the-badge)
-![Phase](https://img.shields.io/badge/🎯_Phase-11_Complete-purple?style=for-the-badge)
+![Phase](https://img.shields.io/badge/🎯_Phase-12_Complete-purple?style=for-the-badge)
 
 </div>
 
@@ -15,6 +15,7 @@
 ## 📑 Table of Contents
 
 - [🔮 Unreleased](#-unreleased)
+- [🏷️ 2.2.0 — Phase 12: Documentation Gap Remediation](#️-220---2026-04-21)
 - [🏷️ 2.1.0 — Phase 11: Audit Remediation](#️-210---2026-04-15)
 - [🏷️ 2.0.0 — Phases 9 & 10: Fabric Modernization](#️-200---2026-04-13)
 - [🏷️ 1.2.0 — Tutorials & Docs Site](#️-120---2025-01-28)
@@ -34,6 +35,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Planned
 - Additional Power BI report templates
 - Enhanced compliance reporting
+
+---
+
+## 🏷️ [2.2.0] - 2026-04-21
+
+### Added — Phase 12: Documentation Gap Remediation
+
+#### Feature Documentation (13 new docs)
+- **docs/features/dataflow-gen2.md** — Power Query M transformations, query folding, staging, scheduling
+- **docs/features/data-activator.md** — Rule-based alerting, objects, properties, triggers
+- **docs/features/deployment-pipelines.md** — Native ALM, stage promotion, deployment rules
+- **docs/features/spark-environments-job-definitions.md** — Library management, Spark Job Definitions
+- **docs/features/git-integration.md** — Azure DevOps/GitHub sync, branch-per-workspace
+- **docs/features/real-time-hub.md** — Event catalog, data streams, derived streams
+- **docs/features/paginated-reports.md** — RDL authoring, pixel-perfect reports, subscriptions
+- **docs/features/scorecards-metrics.md** — KPI tracking, status rules, automated check-ins
+- **docs/features/composite-models.md** — Mixed Import + DirectQuery + Direct Lake
+- **docs/features/cross-database-queries.md** — Three-part naming across Lakehouse/Warehouse/SQL DB
+- **docs/features/fabric-rest-apis.md** — Core/Admin/Item APIs, authentication, LRO polling
+- **docs/features/vnet-data-gateway.md** — Managed gateway in customer VNet, Bicep setup
+- **docs/features/workspace-ip-firewall.md** — IP rules, trusted service bypass, surge protection
+
+#### Best Practices (5 new guides)
+- **docs/best-practices/etl-elt-comparison-guide.md** — Side-by-side comparison of all 5 ETL methods with code
+- **docs/best-practices/power-bi-best-practices.md** — DAX optimization, semantic model design, Direct Lake tuning
+- **docs/best-practices/lakehouse-warehouse-sqldb-decision-guide.md** — Feature comparison matrix, hybrid patterns
+- **docs/best-practices/finops-cost-governance.md** — FinOps framework, chargeback, pause/resume automation
+- **docs/best-practices/data-modeling-star-schema.md** — Dimensional modeling, SCD Type 1/2/3, Direct Lake
+
+### Changed — Phase 12
+- **mkdocs.yml** — Added Features nav section (35 docs), expanded Best Practices (37 docs), added tutorials 24-36
+- **docs/best-practices/README.md** — Added Phase 12 documentation gap remediation section
+- **CHANGELOG.md** — Added [2.2.0] section
 
 ---
 

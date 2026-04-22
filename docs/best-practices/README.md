@@ -2,7 +2,7 @@
 
 # 💡 Best Practices Guide
 
-> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Last Updated**: 2026-04-21 | **Version**: 2.1
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
 <div align="center">
@@ -50,6 +50,16 @@ This comprehensive guide provides best practices for all aspects of Microsoft Fa
 | [Outbound Access Protection](./outbound-access-protection.md) | Data exfiltration prevention, managed private endpoints |
 | [Customer-Managed Keys](./customer-managed-keys.md) | BYOK encryption key management for Fabric |
 | [Spark Runtime Migration](./spark-runtime-migration.md) | Runtime 2.0 migration guide, breaking changes, compatibility |
+
+### 📊 Phase 12: Documentation Gap Remediation
+
+| Document | Description |
+|----------|-------------|
+| [ETL/ELT Comparison Guide](./etl-elt-comparison-guide.md) | Side-by-side comparison of all 5 ETL methods with code examples and CU benchmarks |
+| [FinOps & Cost Governance](./finops-cost-governance.md) | FinOps framework, chargeback models, pause/resume automation, budget alerts |
+| [Data Modeling & Star Schema](./data-modeling-star-schema.md) | Dimensional modeling, SCD Type 1/2/3 with PySpark, Direct Lake optimization |
+| [Power BI Best Practices](./power-bi-best-practices.md) | DAX optimization, semantic model design, Direct Lake tuning |
+| [Lakehouse vs Warehouse vs SQL DB Decision Guide](./lakehouse-warehouse-sqldb-decision-guide.md) | Feature comparison matrix, hybrid patterns, workload routing |
 
 ### 🏢 Phase 10: Enterprise Readiness Best Practices
 

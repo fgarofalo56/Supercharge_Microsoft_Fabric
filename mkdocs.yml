@@ -118,9 +118,11 @@ markdown_extensions:
 # Extra CSS/JS
 extra_css:
   - stylesheets/extra.css
+  - stylesheets/copilot-chat.css
 
 extra_javascript:
   - https://unpkg.com/mermaid@10/dist/mermaid.min.js
+  - javascripts/copilot-chat.js
 
 # Extra configuration
 extra:
@@ -139,6 +141,7 @@ nav:
     - Overview: index.md
     - Quick Start: QUICK_START.md
     - Changelog: CHANGELOG.md
+    - AI Copilot Chat: chat.md
   
   - Getting Started:
     - Prerequisites: PREREQUISITES.md
@@ -176,6 +179,19 @@ nav:
     - 21 - GeoAnalytics & ArcGIS: tutorials/21-geoanalytics-arcgis/README.md
     - 22 - Networking & Connectivity: tutorials/22-networking-connectivity/README.md
     - 23 - SHIR & Data Gateways: tutorials/23-shir-data-gateways/README.md
+    - 24 - Snowflake to Fabric: tutorials/24-snowflake-to-fabric/README.md
+    - 25 - IBM DB2 Source: tutorials/25-ibm-db2-source/README.md
+    - 26 - Multi-Source Streaming: tutorials/26-multi-source-streaming/README.md
+    - 27 - Video Security Analytics: tutorials/27-video-security-analytics/README.md
+    - 28 - People Movement Analytics: tutorials/28-people-movement-analytics/README.md
+    - 29 - Geolocation Analytics: tutorials/29-geolocation-analytics/README.md
+    - 30 - Tribal Healthcare: tutorials/30-tribal-healthcare/README.md
+    - 31 - Federal DOT/FAA: tutorials/31-federal-dot-faa/README.md
+    - 32 - USDA Agriculture: tutorials/32-usda-agriculture/README.md
+    - 33 - SBA Small Business: tutorials/33-sba-small-business/README.md
+    - 34 - NOAA Weather & Climate: tutorials/34-noaa-weather-climate/README.md
+    - 35 - EPA Environment: tutorials/35-epa-environment/README.md
+    - 36 - DOI Interior: tutorials/36-doi-interior/README.md
     - Cheat Sheet: tutorials/CHEAT_SHEET.md
   
   - POC Agenda:
@@ -186,6 +202,43 @@ nav:
     - Demo Runbook: poc-agenda/DEMO_RUNBOOK.md
     - Diagram Guide: poc-agenda/DIAGRAM_GUIDE.md
   
+  - Features:
+    - Fabric IQ: features/fabric-iq.md
+    - Real-Time Intelligence: features/real-time-intelligence.md
+    - AI Copilot: features/ai-copilot-configuration.md
+    - Data Mesh: features/data-mesh-enterprise-patterns.md
+    - Digital Twin Builder: features/digital-twin-builder.md
+    - Data Agents: features/data-agents.md
+    - OneLake Security: features/onelake-security.md
+    - Iceberg Interop: features/onelake-iceberg-interop.md
+    - dbt Integration: features/dbt-fabric-integration.md
+    - Materialized Lake Views: features/materialized-lake-views.md
+    - Vector Database: features/eventhouse-vector-database.md
+    - Mirroring: features/mirroring.md
+    - Direct Lake: features/direct-lake.md
+    - SQL Database: features/fabric-sql-database.md
+    - GraphQL API: features/api-for-graphql.md
+    - Semantic Link: features/semantic-link.md
+    - OneLake Catalog: features/onelake-catalog.md
+    - AutoML & Model Endpoints: features/automl-model-endpoints.md
+    - Translytical Task Flows: features/translytical-task-flows.md
+    - Fabric MCP: features/fabric-mcp.md
+    - Workspace Monitoring: features/workspace-monitoring.md
+    - Copy Job CDC: features/copy-job-cdc.md
+    - Dataflow Gen2: features/dataflow-gen2.md
+    - Data Activator: features/data-activator.md
+    - Deployment Pipelines: features/deployment-pipelines.md
+    - Spark Environments & Jobs: features/spark-environments-job-definitions.md
+    - Git Integration: features/git-integration.md
+    - Real-Time Hub: features/real-time-hub.md
+    - Paginated Reports: features/paginated-reports.md
+    - Scorecards & Metrics: features/scorecards-metrics.md
+    - Composite Models: features/composite-models.md
+    - Cross-Database Queries: features/cross-database-queries.md
+    - REST APIs: features/fabric-rest-apis.md
+    - VNet Data Gateway: features/vnet-data-gateway.md
+    - Workspace IP Firewall: features/workspace-ip-firewall.md
+
   - Best Practices:
     - Overview: best-practices/README.md
     - Workspaces & Naming: best-practices/01_WORKSPACES_NAMING.md
@@ -199,6 +252,31 @@ nav:
     - Oracle & SQL Server Patterns: best-practices/09_SOURCE_SPECIFIC_PATTERNS.md
     - Decision Guide: best-practices/10_DECISION_GUIDE.md
     - Oracle Gateway Troubleshooting: best-practices/11_ORACLE_GATEWAY_TROUBLESHOOTING.md
+    - Error Handling & Monitoring: best-practices/error-handling-monitoring.md
+    - Alerting & Data Activator: best-practices/alerting-data-activator.md
+    - Performance & Parallelism: best-practices/performance-parallelism.md
+    - Data Governance Deep Dive: best-practices/data-governance-deep-dive.md
+    - CI/CD with fabric-cicd: best-practices/fabric-cicd-deployment.md
+    - SQL Audit Logs Compliance: best-practices/sql-audit-logs-compliance.md
+    - Outbound Access Protection: best-practices/outbound-access-protection.md
+    - Customer-Managed Keys: best-practices/customer-managed-keys.md
+    - Spark Runtime Migration: best-practices/spark-runtime-migration.md
+    - Capacity Planning & Cost: best-practices/capacity-planning-cost-optimization.md
+    - Disaster Recovery & BCDR: best-practices/disaster-recovery-bcdr.md
+    - Testing Strategies: best-practices/testing-strategies.md
+    - Network Security: best-practices/network-security.md
+    - Identity & RBAC Patterns: best-practices/identity-rbac-patterns.md
+    - Medallion Architecture Deep Dive: best-practices/medallion-architecture-deep-dive.md
+    - Monitoring & Observability: best-practices/monitoring-observability.md
+    - Migration Patterns: best-practices/migration-patterns.md
+    - Multi-Tenant Architecture: best-practices/multi-tenant-workspace-architecture.md
+    - Data Sharing & Federation: best-practices/data-sharing-federation.md
+    - Incremental Refresh & CDC: best-practices/incremental-refresh-cdc.md
+    - ETL/ELT Comparison Guide: best-practices/etl-elt-comparison-guide.md
+    - Power BI Best Practices: best-practices/power-bi-best-practices.md
+    - Lakehouse vs Warehouse vs SQL DB: best-practices/lakehouse-warehouse-sqldb-decision-guide.md
+    - FinOps & Cost Governance: best-practices/finops-cost-governance.md
+    - Data Modeling & Star Schema: best-practices/data-modeling-star-schema.md
 
   - Reference:
     - FAQ: FAQ.md
