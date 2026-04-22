@@ -128,6 +128,11 @@
     return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
+  /** Strip HTML tags and collapse whitespace for clean text snippets */
+  function stripHtml(str) {
+    return str.replace(/<[^>]*>/g, " ").replace(/\s{2,}/g, " ").trim();
+  }
+
   /* ── Search Index ─────────────────────────────────────────────── */
 
   function getBaseUrl() {
@@ -200,12 +205,12 @@
           if (idx !== -1) {
             var start = Math.max(0, idx - 60);
             var end = Math.min(text.length, idx + 120);
-            snippet = (start > 0 ? "..." : "") + doc.text.substring(start, end).trim() + (end < text.length ? "..." : "");
+            snippet = (start > 0 ? "..." : "") + stripHtml(doc.text.substring(start, end)) + (end < text.length ? "..." : "");
             break;
           }
         }
         if (!snippet && doc.text) {
-          snippet = doc.text.substring(0, 150).trim() + (doc.text.length > 150 ? "..." : "");
+          snippet = stripHtml(doc.text.substring(0, 150)) + (doc.text.length > 150 ? "..." : "");
         }
 
         scored.push({
