@@ -40,6 +40,8 @@
   box-shadow: 0 12px 48px rgba(0, 0, 0, 0.18);
   overflow: hidden;
   transition: opacity 0.25s, transform 0.25s;
+  min-width: 320px;
+  min-height: 300px;
 }
 #copilot-panel.copilot-hidden {
   opacity: 0;
@@ -49,6 +51,31 @@
 #copilot-panel.copilot-visible {
   opacity: 1;
   transform: translateY(0) scale(1);
+}
+
+/* ── Resize Handle ──────────────────────────────────────────── */
+#copilot-resize-handle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  cursor: nw-resize;
+  z-index: 10;
+}
+#copilot-resize-handle::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid rgba(0, 0, 0, 0.25);
+  border-left: 2px solid rgba(0, 0, 0, 0.25);
+  border-radius: 2px 0 0 0;
+}
+.copilot-fullpage-mode #copilot-resize-handle {
+  display: none;
 }
 
 /* ── Header ──────────────────────────────────────────────────── */
@@ -97,8 +124,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  min-height: 200px;
-  max-height: 400px;
+  min-height: 0;
 }
 
 /* Message row */
@@ -171,6 +197,23 @@
 .copilot-bubble ul {
   margin: 0.3em 0;
   padding-left: 1.3em;
+}
+.copilot-bubble ol {
+  margin: 0.3em 0;
+  padding-left: 1.5em;
+}
+.copilot-bubble li {
+  margin-bottom: 0.2em;
+}
+.copilot-bubble h2, .copilot-bubble h3, .copilot-bubble h4 {
+  margin: 0.6em 0 0.3em;
+  font-size: 0.95em;
+  font-weight: 600;
+}
+.copilot-bubble hr {
+  border: none;
+  border-top: 1px solid var(--md-default-fg-color--lightest, #e0e0e0);
+  margin: 0.5em 0;
 }
 .copilot-bubble a {
   color: #0078d4;

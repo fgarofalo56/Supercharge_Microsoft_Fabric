@@ -46,20 +46,82 @@
   /* ── Utility: simple markdown → HTML ───────────────────────────── */
   function md(text) {
     if (!text) return "";
-    var html = text
-      .replace(/```(\w*)\n([\s\S]*?)```/g, function (_, lang, code) {
-        return '<pre><code class="language-' + (lang || "text") + '">' +
-          escapeHtml(code.trim()) + "</code></pre>";
-      })
+
+    // Split out fenced code blocks first to protect them
+    var codeBlocks = [];
+    var html = text.replace(/```(\w*)\n([\s\S]*?)```/g, function (_, lang, code) {
+      var placeholder = "\x00CODE" + codeBlocks.length + "\x00";
+      codeBlocks.push(
+        '<pre><code class="language-' + (lang || "text") + '">' +
+        escapeHtml(code.trim()) + "</code></pre>"
+      );
+      return placeholder;
+    });
+
+    // Inline formatting
+    html = html
       .replace(/`([^`]+)`/g, "<code>$1</code>")
       .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
       .replace(/\*(.+?)\*/g, "<em>$1</em>")
-      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
-      .replace(/^- (.+)$/gm, "<li>$1</li>")
-      .replace(/((?:<li>.*<\/li>\n?)+)/g, "<ul>$1</ul>")
-      .replace(/\n{2,}/g, "</p><p>")
-      .replace(/\n/g, "<br>");
-    return "<p>" + html + "</p>";
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+
+    // Horizontal rules
+    html = html.replace(/^---+$/gm, "<hr>");
+
+    // Headers (h3, h2, h1)
+    html = html.replace(/^### (.+)$/gm, "<h4>$1</h4>");
+    html = html.replace(/^## (.+)$/gm, "<h3>$1</h3>");
+    html = html.replace(/^# (.+)$/gm, "<h2>$1</h2>");
+
+    // Process block-level lists by splitting into lines
+    var lines = html.split("\n");
+    var out = [];
+    var inUl = false;
+    var inOl = false;
+
+    for (var i = 0; i < lines.length; i++) {
+      var line = lines[i];
+      var ulMatch = line.match(/^[-*] (.+)$/);
+      var olMatch = line.match(/^\d+\.\s+(.+)$/);
+
+      if (ulMatch) {
+        if (!inUl) { if (inOl) { out.push("</ol>"); inOl = false; } out.push("<ul>"); inUl = true; }
+        out.push("<li>" + ulMatch[1] + "</li>");
+      } else if (olMatch) {
+        if (!inOl) { if (inUl) { out.push("</ul>"); inUl = false; } out.push("<ol>"); inOl = true; }
+        out.push("<li>" + olMatch[1] + "</li>");
+      } else {
+        if (inUl) { out.push("</ul>"); inUl = false; }
+        if (inOl) { out.push("</ol>"); inOl = false; }
+        out.push(line);
+      }
+    }
+    if (inUl) out.push("</ul>");
+    if (inOl) out.push("</ol>");
+
+    html = out.join("\n");
+
+    // Paragraphs — double newline = paragraph break, single = <br>
+    // But skip <br> right after block elements
+    html = html.replace(/\n{2,}/g, "</p><p>");
+    html = html.replace(/\n/g, "<br>");
+    // Clean up <br> adjacent to block elements
+    html = html.replace(/<br>(<\/?(?:ul|ol|li|h[1-6]|hr|pre|blockquote)[\s>])/gi, "$1");
+    html = html.replace(/(<\/(?:ul|ol|li|h[1-6]|hr|pre|blockquote)>)<br>/gi, "$1");
+
+    html = "<p>" + html + "</p>";
+
+    // Clean empty paragraphs and paragraphs wrapping block elements
+    html = html.replace(/<p>\s*<\/p>/g, "");
+    html = html.replace(/<p>(<(?:ul|ol|h[1-6]|hr|pre)[\s>])/gi, "$1");
+    html = html.replace(/(<\/(?:ul|ol|h[1-6]|hr|pre)>)<\/p>/gi, "$1");
+
+    // Restore code blocks
+    for (var j = 0; j < codeBlocks.length; j++) {
+      html = html.replace("\x00CODE" + j + "\x00", codeBlocks[j]);
+    }
+
+    return html;
   }
 
   function escapeHtml(str) {
@@ -232,6 +294,7 @@
         '</svg>' +
       '</button>' +
       '<div id="copilot-panel" class="copilot-hidden">' +
+        '<div id="copilot-resize-handle" title="Drag to resize"></div>' +
         '<div id="copilot-header">' +
           '<div id="copilot-header-left">' +
             '<span id="copilot-logo">🤖</span>' +
@@ -293,6 +356,37 @@
 
     // Preload search index in background
     loadSearchIndex(function () {});
+
+    // ── Resize logic ──────────────────────────────────────────────
+    if (!isFullPage) {
+      var resizeHandle = document.getElementById("copilot-resize-handle");
+      var panel = document.getElementById("copilot-panel");
+      var startX, startY, startW, startH;
+
+      resizeHandle.addEventListener("mousedown", function (e) {
+        e.preventDefault();
+        startX = e.clientX;
+        startY = e.clientY;
+        startW = panel.offsetWidth;
+        startH = panel.offsetHeight;
+        document.addEventListener("mousemove", onResizeMove);
+        document.addEventListener("mouseup", onResizeUp);
+        panel.style.transition = "none";
+      });
+
+      function onResizeMove(e) {
+        var newW = Math.max(320, startW - (e.clientX - startX));
+        var newH = Math.max(300, startH - (e.clientY - startY));
+        panel.style.width = newW + "px";
+        panel.style.maxHeight = newH + "px";
+      }
+
+      function onResizeUp() {
+        document.removeEventListener("mousemove", onResizeMove);
+        document.removeEventListener("mouseup", onResizeUp);
+        panel.style.transition = "";
+      }
+    }
   }
 
   /* ── Toggle panel ──────────────────────────────────────────────── */
