@@ -252,6 +252,15 @@
 }
 
 /* ── Full-page mode ──────────────────────────────────────────── */
+#copilot-fullpage {
+  min-height: 500px;
+}
+.copilot-fullpage-mode {
+  display: flex;
+  flex-direction: column;
+  min-height: 500px;
+  height: calc(100vh - 240px);
+}
 .copilot-fullpage-mode #copilot-btn {
   display: none !important;
 }
@@ -261,7 +270,9 @@
   right: auto;
   width: 100%;
   max-height: none;
-  height: calc(100vh - 200px);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   border-radius: 12px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
 }
@@ -274,6 +285,7 @@
 .copilot-fullpage-mode #copilot-messages {
   max-height: none;
   flex: 1;
+  min-height: 300px;
 }
 .copilot-fullpage-mode #copilot-fullscreen {
   display: none;

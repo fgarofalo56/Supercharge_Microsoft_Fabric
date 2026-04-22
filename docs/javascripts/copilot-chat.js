@@ -119,8 +119,8 @@
       const target = document.getElementById("copilot-fullpage");
       target.appendChild(container);
       container.classList.add("copilot-fullpage-mode");
-      // Auto-open
-      setTimeout(function () { togglePanel(true); }, 100);
+      // Auto-open immediately (no delay)
+      togglePanel(true);
     } else {
       document.body.appendChild(container);
     }
