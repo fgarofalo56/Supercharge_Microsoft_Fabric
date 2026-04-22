@@ -411,7 +411,7 @@ from pyspark.sql import SparkSession
 jdbc_url = "jdbc:sqlserver://sql-casino.contoso.local:1433;databaseName=CasinoOps"
 jdbc_properties = {
     "user": "fabric_reader",
-    "password": dbutils.secrets.get("keyvault", "sql-password"),
+    "password": mssparkutils.credentials.getSecret("keyvault", "sql-password"),
     "driver": "com.microsoft.sqlserver.jdbc.SQLServerDriver"
 }
 

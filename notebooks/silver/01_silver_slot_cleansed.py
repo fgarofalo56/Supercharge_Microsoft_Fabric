@@ -8,8 +8,11 @@
 # MAGIC - Schema enforcement and type casting
 # MAGIC - Null handling and default values
 # MAGIC - Data quality validation and scoring
-# MAGIC - Deduplication
+# MAGIC - Derived KPIs: net_win, hold_percentage, is_jackpot, is_game_play, event_day_of_week
+# MAGIC - Deduplication (deterministic, latest record wins)
 # MAGIC - Standardization of codes and formats
+# MAGIC - Future-dated event rejection
+# MAGIC - Invalid denomination default-replace (0.01)
 
 # COMMAND ----------
 
@@ -31,16 +34,19 @@ from pyspark.sql.functions import (
     col,
     count,
     current_timestamp,
+    dayofweek,
     filter,
     hour,
     initcap,
     lit,
+    row_number,
     to_date,
     to_timestamp,
     trim,
     upper,
     when,
 )
+from pyspark.sql.window import Window
 from pyspark.sql.types import (
     DateType,
     DecimalType,
@@ -148,11 +154,12 @@ VALID_DENOMINATIONS = [0.01, 0.05, 0.25, 0.50, 1.00, 2.00, 5.00, 10.00, 25.00, 1
 
 # COMMAND ----------
 
-# Step 1: Filter out records with null required fields
+# Step 1: Filter out records with null required fields and future-dated events
 df_filtered = df_bronze \
     .filter(col("machine_id").isNotNull()) \
     .filter(col("event_timestamp").isNotNull()) \
-    .filter(col("event_type").isNotNull())
+    .filter(col("event_type").isNotNull()) \
+    .filter(col("event_timestamp") <= current_timestamp())
 
 print(f"After null filter: {df_filtered.count():,}")
 
@@ -186,7 +193,12 @@ df_cleaned = df_typed \
 df_standardized = df_cleaned \
     .withColumn("event_type", upper(trim(col("event_type")))) \
     .withColumn("zone", initcap(trim(col("zone")))) \
-    .withColumn("machine_id", upper(trim(col("machine_id"))))
+    .withColumn("machine_id", upper(trim(col("machine_id")))) \
+    .withColumn("denomination",
+        when(~col("denomination").isin(VALID_DENOMINATIONS) | col("denomination").isNull(),
+             lit(0.01).cast(DecimalType(5, 2)))
+        .otherwise(col("denomination"))
+    )
 
 # COMMAND ----------
 
@@ -234,12 +246,38 @@ df_with_dq = df_with_dq.drop("is_valid_event_type", "is_valid_zone", "is_valid_d
 # COMMAND ----------
 
 # MAGIC %md
+# MAGIC ## Derived KPI Columns
+
+# COMMAND ----------
+
+# Add derived KPIs for downstream Gold consumption
+df_with_kpis = df_with_dq \
+    .withColumn("net_win",
+        col("coin_in") - col("coin_out")) \
+    .withColumn("hold_percentage",
+        when(col("coin_in") > 0,
+             (col("coin_in") - col("coin_out")) / col("coin_in") * 100)
+        .otherwise(lit(0.0)).cast(DecimalType(8, 4))) \
+    .withColumn("is_jackpot",
+        col("event_type") == lit("JACKPOT")) \
+    .withColumn("is_game_play",
+        col("event_type") == lit("GAME_PLAY")) \
+    .withColumn("event_day_of_week",
+        dayofweek(col("event_timestamp")))
+
+# COMMAND ----------
+
+# MAGIC %md
 # MAGIC ## Deduplication
 
 # COMMAND ----------
 
-# Deduplicate on natural key
-df_deduped = df_with_dq.dropDuplicates(["machine_id", "event_timestamp", "event_type"])
+# Deduplicate on natural key — deterministic: keep latest Bronze ingestion
+dedup_window = Window.partitionBy("machine_id", "event_timestamp", "event_type") \
+    .orderBy(col("_silver_timestamp").desc())  # latest wins
+df_deduped = df_with_kpis.withColumn("_rn", row_number().over(dedup_window)) \
+    .filter(col("_rn") == 1) \
+    .drop("_rn")
 
 print(f"After deduplication: {df_deduped.count():,}")
 
@@ -265,7 +303,9 @@ df_silver = df_deduped \
 try:
     final_columns = [
         "machine_id", "event_type", "event_timestamp", "event_date", "event_hour",
-        "coin_in", "coin_out", "games_played", "jackpot_amount",
+        "event_day_of_week",
+        "coin_in", "coin_out", "net_win", "hold_percentage", "games_played",
+        "jackpot_amount", "is_jackpot", "is_game_play",
         "zone", "denomination", "manufacturer", "machine_type",
         "player_id", "session_id",
         "_dq_score", "_dq_flags", "_silver_timestamp", "_batch_id"

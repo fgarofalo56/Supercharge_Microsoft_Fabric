@@ -158,7 +158,7 @@ Before starting this tutorial, ensure you have:
 %pip install shap xgboost imbalanced-learn
 
 # Restart kernel after installation
-# dbutils.library.restartPython()
+# mssparkutils.session.restartPython()
 ```
 
 ### 1.3 Import Libraries

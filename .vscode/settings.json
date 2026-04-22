@@ -191,5 +191,14 @@
     "**/venv/**": true,
     "**/__pycache__/**": true
   },
-  "snyk.advanced.autoSelectOrganization": true
+  "snyk.advanced.autoSelectOrganization": true,
+  "chat.agentSkillsLocations": {
+    ".github/skills": true,
+    ".agents/skills": true,
+    ".claude/skills": true,
+    "~/.copilot/skills": true,
+    "~/.agents/skills": true,
+    "~/.claude/skills": true,
+    "~/.vscode-insiders/extensions/synapsevscode.synapse-1.22.0/copilot/skills": true
+  }
 }

@@ -375,6 +375,8 @@ from pyspark.sql.types import *
 from datetime import datetime
 
 # Configuration
+# Path B (Quickstart): Files/raw/slot_telemetry/bronze_slot_telemetry.parquet
+# Path A (Production): Files/landing_zone/slot_telemetry/bronze_slot_telemetry.parquet
 SOURCE_PATH = "Files/output/bronze_slot_telemetry.parquet"
 TARGET_TABLE = "bronze_slot_telemetry"
 BATCH_ID = datetime.now().strftime("%Y%m%d_%H%M%S")

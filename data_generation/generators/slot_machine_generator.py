@@ -150,7 +150,7 @@ class SlotMachineGenerator(BaseGenerator):
         record.setdefault("coin_in", None)
         record.setdefault("coin_out", None)
         record.setdefault("jackpot_amount", None)
-        record.setdefault("games_played", None)
+        record.setdefault("games_played", 0)
         record.setdefault("actual_hold", None)
         record.setdefault("player_id", None)
         record.setdefault("session_id", None)

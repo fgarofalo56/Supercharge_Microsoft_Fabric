@@ -581,7 +581,7 @@ casino_geojson = create_geojson_features(casinos, "latitude", "longitude", casin
 # Save to Files
 import json
 geojson_path = "/lakehouse/default/Files/geo/casino_locations.geojson"
-dbutils.fs.mkdirs("/lakehouse/default/Files/geo")
+mssparkutils.fs.mkdirs("/lakehouse/default/Files/geo")
 
 with open("/lakehouse/default/Files/geo/casino_locations.geojson", "w") as f:
     json.dump(casino_geojson, f)

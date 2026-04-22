@@ -419,7 +419,7 @@ source_path = "/lakehouse/default/Files/raw/sba/"
 df_parquet = spark.read \
     .schema(sba_loan_schema) \
     .parquet(f"{source_path}*.parquet") \
-    if len(dbutils.fs.ls(f"{source_path}*.parquet")) > 0 else None
+    if len(mssparkutils.fs.ls(f"{source_path}*.parquet")) > 0 else None
 
 # Read CSV (from open data download)
 df_csv = spark.read \

@@ -657,8 +657,8 @@ df = spark.read \
     .format("jdbc") \
     .option("url", "jdbc:teradata://teradata.casino.com/CASINO_DW") \
     .option("dbtable", teradata_table) \
-    .option("user", dbutils.secrets.get("keyvault", "teradata-user")) \
-    .option("password", dbutils.secrets.get("keyvault", "teradata-password")) \
+    .option("user", mssparkutils.credentials.getSecret("keyvault", "teradata-user")) \
+    .option("password", mssparkutils.credentials.getSecret("keyvault", "teradata-password")) \
     .option("partitionColumn", partition_column) \
     .option("lowerBound", "2020-01-01") \
     .option("upperBound", "2024-12-31") \
@@ -1318,7 +1318,7 @@ try:
     if staging_count == 0:
         print(f"WARNING: No data found for {report_date}")
         exit_code = 4  # Mirrors .QUIT 4 (NO_DATA_EXIT)
-        dbutils.notebook.exit(f"NO_DATA|exit_code={exit_code}")
+        mssparkutils.notebook.exit(f"NO_DATA|exit_code={exit_code}")
 
     df_raw.write.mode("overwrite").saveAsTable(staging_table)
     print(f"Step 1 PASS: {staging_count:,} rows loaded to staging")
@@ -1704,7 +1704,7 @@ CALL CASINO_DW.sp_daily_slot_hold(DATE '2024-01-15', ?, ?);
 # ==========================================================
 # These are notebook parameters - configurable via pipeline or API
 p_report_date = "2024-01-15"   # IN parameter
-# OUT values returned via dbutils.notebook.exit()
+# OUT values returned via mssparkutils.notebook.exit()
 
 # Cell 2: Imports and Setup
 # =========================
@@ -1816,7 +1816,7 @@ result = json.dumps({
     "report_date": p_report_date
 })
 print(f"Procedure complete: {result}")
-dbutils.notebook.exit(result)
+mssparkutils.notebook.exit(result)
 ```
 
 ### 12.3 CALL Statement → Notebook Scheduling
@@ -1872,9 +1872,9 @@ print(f"Status: {result['status']}")
 | `ACTIVITY_COUNT` | `df.count()` after write | Explicit count call required |
 | `EXECUTE IMMEDIATE` | `spark.sql(f"...")` | F-strings replace string concatenation |
 | `SET variable = expr` | Python assignment | `variable = expr` |
-| Procedure OUT params | `dbutils.notebook.exit(json)` | Return JSON for structured results |
+| Procedure OUT params | `mssparkutils.notebook.exit(json)` | Return JSON for structured results |
 
-> 💡 **Tip:** When migrating complex stored procedures with multiple OUT parameters, use `dbutils.notebook.exit()` with a JSON payload. The calling pipeline or notebook can parse the JSON to make branching decisions, replicating the control flow that BTEQ scripts achieved with `.IF` and return codes.
+> 💡 **Tip:** When migrating complex stored procedures with multiple OUT parameters, use `mssparkutils.notebook.exit()` with a JSON payload. The calling pipeline or notebook can parse the JSON to make branching decisions, replicating the control flow that BTEQ scripts achieved with `.IF` and return codes.
 
 ---
 

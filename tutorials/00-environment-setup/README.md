@@ -166,9 +166,23 @@ Each Lakehouse will have empty **Tables** and **Files** folders — that's expec
 
 ---
 
-## 🛠️ Step 4: Connect External Storage (Optional)
+## 🛠️ Step 4: Connect External Storage (Path A Only)
 
-If you deployed the ADLS Gen2 storage account via Bicep, you can connect it as a shortcut to avoid copying data.
+> **🔀 Which path are you on?**
+>
+> | | **Path A — Production-Aligned** | **Path B — Quickstart** |
+> |---|---|---|
+> | **Prereq** | Deploy `infra/main.bicep` first | Fabric capacity + workspace only |
+> | **Data location** | ADLS Gen2 → OneLake shortcut | Upload directly to OneLake |
+> | **Source path in notebooks** | `Files/landing_zone/...` | `Files/raw/...` |
+> | **Cost** | ~$1-3/day (Purview + Storage + KV + LAW) | Fabric capacity only |
+> | **Best for** | Production patterns, governance, security tutorials | Learning medallion flow fast |
+>
+> **Path B users:** Skip this step entirely — proceed to [Step 5](#-step-5-configure-workspace-access). Upload your generated data directly to `lh_bronze/Files/raw/<source>/` via the Fabric UI.
+>
+> **Path A users:** Complete this step to connect your Bicep-provisioned ADLS storage.
+
+If you deployed the ADLS Gen2 storage account via Bicep, connect it as a shortcut to avoid copying data.
 
 1. Open `lh_bronze` in the workspace
 2. In the **Explorer** pane, right-click on **Files**

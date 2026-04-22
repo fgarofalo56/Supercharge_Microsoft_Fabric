@@ -360,11 +360,11 @@ batch_id = _get_arg("batch_id", datetime.now().strftime("%Y%m%d_%H%M%S"))
 
 # Source and target — three-part names require schema-enabled Lakehouses
 source_table = "lh_bronze.dbo.bronze_slot_telemetry"
-target_table = "lh_silver.dbo.silver_slot_cleansed"
+SILVER_TABLE = "lh_silver.dbo.silver_slot_cleansed"
 
 print(f"Processing batch: {batch_id}")
 print(f"Source: {source_table}")
-print(f"Target: {target_table}")
+print(f"Target: {SILVER_TABLE}")
 ```
 
 > **Why one cell?** Earlier versions split the parameter shim and the config across two cells. When Fabric imports a notebook from a `.py` file, cells can be run out of order, which produces `NameError: name '_get_arg' is not defined`. Keeping imports, shim, and parameters together guarantees the shim is bound before it's called.

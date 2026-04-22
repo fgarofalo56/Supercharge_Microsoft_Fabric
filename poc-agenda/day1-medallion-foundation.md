@@ -420,7 +420,7 @@ df_bronze = df_compliance \
 df_bronze.write \
     .format("delta") \
     .mode("append") \
-    .saveAsTable("bronze_compliance_filings")
+    .saveAsTable("bronze_compliance")
 ```
 
 ---
@@ -553,7 +553,7 @@ ORDER BY avg_quality DESC;
 | `bronze_table_games` | Populated | ⬜ |
 | `bronze_player_profile` | 10K records | ⬜ |
 | `bronze_financial_txn` | Populated | ⬜ |
-| `bronze_compliance_filings` | Populated | ⬜ |
+| `bronze_compliance` | Populated | ⬜ |
 
 ### Silver Layer (Started)
 

@@ -77,7 +77,7 @@ TABLE_PREFIX_TARGETS = {
     "bronze_slot_telemetry",
     "bronze_player_profile",
     "bronze_financial_txn",
-    "bronze_compliance_filings",
+    "bronze_compliance",
     "bronze_table_games",
     "bronze_security_events",
 }

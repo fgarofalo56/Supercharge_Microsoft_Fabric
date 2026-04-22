@@ -252,7 +252,17 @@ Before starting the tutorials, ensure you have:
 - [ ] Completed the [Prerequisites Guide](../PREREQUISITES.md)
 - [ ] Generated sample data (optional but recommended)
 
-> 💡 **Tip:** Start with [Tutorial 00](./00-environment-setup/README.md) to set up your environment before proceeding.
+### 🔀 Choose Your Path
+
+| | **Path A — Production-Aligned** | **Path B — Quickstart** |
+|---|---|---|
+| **Setup** | Deploy `infra/main.bicep` → ADLS shortcut | Fabric capacity + workspace only |
+| **Data source** | `Files/landing_zone/...` (ADLS shortcut) | `Files/raw/...` (direct upload) |
+| **Unlocks** | Tutorials 06, 07, 14, 17, 22 (governance, security, monitoring, networking) | Tutorials 01-05 (core medallion flow) |
+| **Cost** | ~$1-3/day idle (Purview + Storage + KV + LAW) | Fabric capacity only |
+| **Best for** | Production readiness, enterprise patterns | Learning, demos, rapid prototyping |
+
+> **Most users should start with Path B** and upgrade to Path A when ready for governance and security tutorials. See [Tutorial 00 Step 4](./00-environment-setup/README.md#-step-4-connect-external-storage-path-a-only) for details.
 
 ---
 

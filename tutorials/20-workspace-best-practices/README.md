@@ -129,7 +129,7 @@ folders = [
 ]
 
 for folder in folders:
-    dbutils.fs.mkdirs(f"abfss://{lakehouse_name}@onelake.dfs.fabric.microsoft.com/{folder}")
+    mssparkutils.fs.mkdirs(f"abfss://{lakehouse_name}@onelake.dfs.fabric.microsoft.com/{folder}")
     print(f"Created: {folder}")
 ```
 
@@ -187,7 +187,7 @@ def verify_structure(lakehouse_name: str, expected_folders: list) -> dict:
     for folder in expected_folders:
         path = f"abfss://{lakehouse_name}@onelake.dfs.fabric.microsoft.com/{folder}"
         try:
-            dbutils.fs.ls(path)
+            mssparkutils.fs.ls(path)
             results["success"].append(folder)
         except:
             results["missing"].append(folder)

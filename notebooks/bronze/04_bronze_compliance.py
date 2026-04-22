@@ -11,7 +11,7 @@
 # MAGIC - **Update Frequency:** Daily batch
 # MAGIC
 # MAGIC ## Target
-# MAGIC - **Table:** bronze_compliance_filings
+# MAGIC - **Table:** bronze_compliance
 # MAGIC - **Format:** Delta Lake
 # MAGIC - **Mode:** Append
 # MAGIC
@@ -84,7 +84,7 @@ from pyspark.sql.types import (
 
 # Configuration
 SOURCE_PATH = "Files/output/bronze_compliance_filings.parquet"
-TARGET_TABLE = "lh_bronze.bronze_compliance_filings"
+TARGET_TABLE = "lh_bronze.bronze_compliance"
 SCHEMA_VERSION = "1.0"
 BATCH_ID = datetime.now().strftime("%Y%m%d_%H%M%S")
 
@@ -458,7 +458,7 @@ display(
 # MAGIC | Metric | Value |
 # MAGIC |--------|-------|
 # MAGIC | Source | Parquet files |
-# MAGIC | Target | bronze_compliance_filings |
+# MAGIC | Target | bronze_compliance |
 # MAGIC | Load Pattern | Append |
 # MAGIC | Format | Delta Lake |
 # MAGIC | Partitioned By | filing_date |

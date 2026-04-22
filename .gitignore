@@ -245,3 +245,4 @@ tests/e2e/test-results/
 
 # Windows null device artifacts
 nul
+.playwright-mcp/

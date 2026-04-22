@@ -34,6 +34,22 @@
 
 ---
 
+## 🔀 Deployment Path Selection
+
+Before starting, decide which deployment path suits your needs:
+
+| | **Path B — Quickstart** | **Path A — Production-Aligned** |
+|---|---|---|
+| **You need** | Fabric capacity + workspace | Azure subscription + Fabric capacity |
+| **Deploy Bicep?** | No | Yes (`infra/main.bicep`) |
+| **Data flow** | Upload → OneLake directly | Upload → ADLS → OneLake shortcut |
+| **Tutorials unlocked** | 00-05 (core medallion) | All tutorials including 06, 07, 14, 17, 22 |
+| **Azure cost** | Fabric capacity only | +$1-3/day (Purview, Storage, KV, LAW) |
+
+> **Recommendation:** Start with **Path B** to learn the medallion architecture quickly. Upgrade to **Path A** when you're ready for governance, security, and monitoring tutorials. The upgrade is non-destructive — deploy Bicep, move data, swap notebook source paths.
+
+---
+
 ## ☁️ Azure Requirements
 
 ### Subscription Access

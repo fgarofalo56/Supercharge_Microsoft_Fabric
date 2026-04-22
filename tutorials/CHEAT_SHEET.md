@@ -352,7 +352,7 @@ spark.catalog.listTables("bronze")
 spark.read.format("delta").load("Tables/bronze_slot_telemetry").printSchema()
 
 # Check file counts
-dbutils.fs.ls("Tables/bronze_slot_telemetry")
+mssparkutils.fs.ls("Tables/bronze_slot_telemetry")
 
 # Clear cache
 spark.catalog.clearCache()

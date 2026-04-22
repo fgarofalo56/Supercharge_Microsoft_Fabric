@@ -147,6 +147,14 @@ Choose your preferred deployment method:
 | [💻 Dev Container](#dev-container-quick-start) | Full development environment | ~10 minutes |
 | [☁️ Azure Deployment](#azure-deployment) | Production-like POC environment | ~30 minutes |
 
+> **🔀 Two Ways to Run This POC**
+>
+> **Path A (Production-Aligned):** Deploy Azure infrastructure via Bicep (`infra/main.bicep`), upload data to ADLS Gen2, and connect it to Fabric via OneLake shortcuts. This unlocks governance (Purview), security (Private Endpoints), and monitoring tutorials. Cost: ~$1-3/day idle.
+>
+> **Path B (Quickstart):** Skip Bicep entirely — upload generated data straight into your Fabric Lakehouse via the UI and start running notebooks immediately. Fastest path to learning the medallion architecture. Upgrade to Path A anytime.
+>
+> See [Tutorial 00 — Step 4](tutorials/00-environment-setup/README.md#-step-4-connect-external-storage-path-a-only) for details.
+
 ---
 
 ### Docker Quick Start
