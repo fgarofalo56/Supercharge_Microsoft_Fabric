@@ -135,6 +135,9 @@ az deployment sub create \
 | [dbt Integration](features/dbt-fabric-integration.md) | dbt Core/Cloud with Fabric SQL & Spark | GA |
 | [Materialized Lake Views](features/materialized-lake-views.md) | Pre-computed views for Direct Lake performance | Preview |
 | [Eventhouse Vector Database](features/eventhouse-vector-database.md) | Vector search in KQL for AI/RAG workloads | GA |
+| [Graph in Fabric](features/graph-in-fabric.md) | Entity relationship modeling and graph analytics | GA |
+| [Maps in Fabric](features/maps-in-fabric.md) | Native geospatial visualization in RTI dashboards | GA |
+| [Database Hub](features/database-hub.md) | Unified database management across edge/cloud/Fabric | Early Access |
 | [Mirroring](features/mirroring.md) | Near-real-time DB replication (Oracle, SAP, BigQuery, MySQL) | GA |
 | [Direct Lake](features/direct-lake.md) | Power BI reads Delta directly from OneLake | GA |
 | [Fabric SQL Database](features/fabric-sql-database.md) | OLTP workload with auto-replication to OneLake | GA |

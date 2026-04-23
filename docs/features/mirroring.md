@@ -192,6 +192,8 @@ sequenceDiagram
 | **Google BigQuery** | ![Preview](https://img.shields.io/badge/Preview-blue) | CDC Stream | ✅ Full | ✅ Minutes | ✅ Auto | 500 |
 | **MySQL** | ![Preview](https://img.shields.io/badge/Preview-blue) | Binlog | ✅ Parallel | ✅ Minutes | ⚠️ Limited | 500 |
 | **PostgreSQL** | ![Preview](https://img.shields.io/badge/Preview-blue) | WAL | ✅ Parallel | ✅ Minutes | ⚠️ Limited | 500 |
+| **SharePoint Lists** | ![Preview](https://img.shields.io/badge/Preview-blue) | Change Notifications | ✅ Full | ✅ Minutes | ⚠️ Limited | 100 |
+| **Azure MySQL** | ![Preview](https://img.shields.io/badge/Preview-blue) | Binlog | ✅ Parallel | ✅ Minutes | ⚠️ Limited | 500 |
 | **Open Mirroring SDK** | ![GA](https://img.shields.io/badge/GA-green) | Custom | Depends on implementation | Depends on implementation | Custom | Unlimited |
 
 ### Open Mirroring
@@ -827,6 +829,32 @@ The DOT/FAA mirrors its operational databases to provide near-real-time flight d
 | Mirroring Security | https://learn.microsoft.com/fabric/database/mirrored-database/security |
 | On-Premises Data Gateway | https://learn.microsoft.com/data-integration/gateway/service-gateway-onprem |
 | Delta Lake MERGE | https://docs.delta.io/latest/delta-update.html#upsert-into-a-table-using-merge |
+
+---
+
+### SharePoint Lists Mirroring (Preview)
+
+Announced at FabCon Atlanta March 2026, **SharePoint Lists Mirroring** brings operational list data into OneLake for analytics — bridging the gap between collaborative list management and enterprise analytics.
+
+SharePoint Lists are widely used for lightweight data tracking across organizations. Mirroring enables continuous replication of list data into Delta tables in OneLake, making it queryable via SQL, PySpark, and Power BI without impacting SharePoint performance.
+
+**How It Works:**
+- Uses Microsoft Graph **Change Notifications** to detect list item changes in near real-time
+- Mirrors list columns as Delta table columns with automatic type mapping
+- Supports lists with up to **100 columns** and millions of rows
+- Handles list item creation, updates, and soft deletes
+- Metadata columns (Created By, Modified, Version) are preserved for auditing
+
+**Configuration:**
+1. Create a new Mirrored Database item in a Fabric workspace
+2. Select **SharePoint Lists** as the source
+3. Authenticate via organizational account or service principal
+4. Select one or more lists from the target SharePoint site
+5. Configure sync frequency (minimum: 5 minutes)
+
+**Casino Use Case:** Casino operations teams frequently manage shift schedules, equipment maintenance logs, and vendor contact lists in SharePoint. Mirroring these lists into OneLake enables cross-referencing maintenance schedules with slot machine downtime telemetry, identifying patterns between equipment servicing and revenue impact — all without requiring operations staff to change their familiar SharePoint workflows.
+
+**Federal Use Case:** Federal agencies commonly track project milestones, procurement status, and inter-agency coordination tasks in SharePoint Lists. Mirroring enables program managers to build Power BI dashboards that combine project tracking data with budget actuals from financial systems, providing a unified view of program health without duplicating data entry across systems.
 
 ---
 

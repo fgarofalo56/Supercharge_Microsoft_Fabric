@@ -915,6 +915,48 @@ union backup_freshness, keyvault_health
 
 ---
 
+## 🆕 FabCon 2026: Fabric Data Warehouse Recovery (Preview)
+
+Announced at FabCon Atlanta March 2026, **Fabric Data Warehouse Recovery** introduces point-in-time restore capabilities for Fabric Data Warehouses:
+
+### Key Capabilities
+
+| Feature | Description |
+|---------|-------------|
+| **Point-in-Time Restore** | Restore a warehouse to any point within the retention window |
+| **Retention Window** | Configurable retention period (default 7 days, up to 30 days) |
+| **Granularity** | Restore to the nearest minute |
+| **Scope** | Full warehouse or individual schemas |
+| **Target** | Restore to same or different workspace |
+
+### Recovery Procedure
+
+1. Navigate to **Warehouse Settings** → **Recovery**
+2. Select the restore point (timestamp or named checkpoint)
+3. Choose target workspace and warehouse name
+4. Initiate recovery — progress visible in Monitoring Hub
+5. Validate recovered data against source checksums
+
+### Casino Application
+
+Gaming compliance audits may require reconstructing warehouse state as of a specific date. Point-in-time restore enables:
+
+- Reproduce regulatory reports exactly as they were generated
+- Recover from accidental data deletion (e.g., erroneous TRUNCATE on a compliance table)
+- Support NIGC audit investigations with historical data snapshots
+- Meet MICS requirements for data retention and recoverability
+
+### Federal Application
+
+FedRAMP continuous monitoring requires the ability to demonstrate data recovery capabilities. Warehouse Recovery provides:
+
+- Documented RTO/RPO for warehouse-tier data (RPO ≤ 1 minute, RTO dependent on warehouse size)
+- Automated recovery testing via REST API for quarterly DR drills
+- Compliance evidence for NIST SP 800-53 CP-10 (System Recovery and Reconstitution)
+- Cross-workspace restore enables isolated recovery validation without impacting production
+
+---
+
 ## Related Documents
 
 - [Capacity Planning & Cost Optimization](./capacity-planning-cost-optimization.md) -- DR capacity cost management

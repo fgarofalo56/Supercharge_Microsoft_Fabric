@@ -798,6 +798,55 @@ With staging enabled, Dataflow Gen2 first loads data into a temporary Lakehouse 
 
 ---
 
+## 🆕 FabCon 2026 Announcements
+
+The following enhancements were announced at **FabCon Atlanta, March 2026**, expanding Dataflow Gen2 capabilities for multi-platform strategies and production reliability.
+
+### New Destinations (Preview)
+
+Dataflow Gen2 now supports additional output destinations, enabling broader data distribution patterns:
+
+| Destination | Status | Description |
+|-------------|--------|-------------|
+| **Snowflake** | ![Preview](https://img.shields.io/badge/Preview-blue) | Write Dataflow Gen2 outputs directly to Snowflake tables for multi-platform analytics strategies |
+| **Excel** | ![Preview](https://img.shields.io/badge/Preview-blue) | Write to Excel files (.xlsx) in OneLake or SharePoint for business user consumption |
+| **ADLS Gen2** | ![GA](https://img.shields.io/badge/GA-green) | Write directly to Azure Data Lake Storage Gen2 containers (Parquet, CSV, or Delta) |
+| **Lakehouse Files** | ![GA](https://img.shields.io/badge/GA-green) | Write to the Lakehouse **Files** area (not just managed Tables), enabling unstructured/semi-structured output |
+
+**Casino Use Case:** Export daily compliance summaries to Excel for regulatory officers who prefer spreadsheet-based review, while simultaneously writing the same data to Snowflake for cross-platform analytics teams.
+
+**Federal Use Case:** Write USDA crop production reports to ADLS Gen2 for inter-agency sharing with partners who haven't adopted Fabric, while maintaining the gold-layer Delta tables in Lakehouse for internal dashboards.
+
+### Failure Notifications (Preview)
+
+Dataflow Gen2 now supports **email notifications on refresh failure**, ensuring data pipeline issues are surfaced immediately:
+
+- **Automatic alerts**: Configure email recipients who are notified when a dataflow refresh fails
+- **Failure details**: Notification includes error message, failure timestamp, and affected dataflow name
+- **Configuration path**: Dataflow Settings → Notifications → Enable "Send email on failure"
+- **Multiple recipients**: Add team distribution lists or individual stakeholders
+- **Integration**: Works alongside Data Activator for advanced alerting scenarios (e.g., Slack, Teams)
+
+To configure:
+1. Open the Dataflow Gen2 item in your workspace
+2. Navigate to **Settings** → **Notifications**
+3. Toggle **"Email on refresh failure"** to On
+4. Add recipient email addresses
+5. Optionally configure retry behavior before notification triggers
+
+### Preview-Only Steps Now GA
+
+Several transformation steps that were previously available only in Preview are now **Generally Available** for production use:
+
+- **Fuzzy Merge**: Join tables using approximate matching (configurable similarity threshold)
+- **AI Insights**: Sentiment analysis, key phrase extraction, and language detection via built-in AI models
+- **Dataverse connector enhancements**: Improved performance and pagination for large Dataverse tables
+- **Native query folding indicators**: Visual indicators showing which transformation steps fold to the source query engine
+
+These steps are now fully supported under Microsoft SLAs and recommended for production dataflows.
+
+---
+
 ## 🔗 Related Documents
 
 - [Copy Job CDC](copy-job-cdc.md) — Managed incremental ingestion with watermark-based CDC

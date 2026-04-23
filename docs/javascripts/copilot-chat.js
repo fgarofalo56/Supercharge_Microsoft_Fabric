@@ -39,6 +39,36 @@
   var lastSendTime = 0;
   var searchIndex = null;
   var searchIndexLoading = false;
+  var sendCount = 0;
+  var sessionStart = Date.now();
+
+  /* ── Client-side security ─────────────────────────────────────── */
+  var MAX_MESSAGE_LENGTH = 2000;
+  var MAX_SESSION_REQUESTS = 100;  // per browser session
+  var INJECTION_PATTERNS = [
+    /ignore\s+(all\s+)?(previous|prior|system)\s+(instructions?|prompts?|rules?)/i,
+    /disregard\s+(all\s+)?(previous|system)\s+(instructions?|prompts?)/i,
+    /forget\s+(all\s+)?(previous|your)\s+(instructions?|prompts?)/i,
+    /override\s+(system|your)\s+(prompt|instructions?)/i,
+    /you\s+are\s+now\s+(a|an|no\s+longer)/i,
+    /pretend\s+(you\s+are|to\s+be)/i,
+    /from\s+now\s+on\s+(you|ignore|disregard)/i,
+    /\[system\]/i,
+    /\[INST\]/i,
+    /<\|im_start\|>/i,
+    /(repeat|reveal|show|print)\s+(your|the)\s+(system\s+)?(prompt|instructions?)/i,
+    /\bDAN\b/,
+    /jailbreak/i,
+    /developer\s+mode/i,
+    /sudo\s+mode/i,
+  ];
+
+  function isInjectionAttempt(text) {
+    for (var i = 0; i < INJECTION_PATTERNS.length; i++) {
+      if (INJECTION_PATTERNS[i].test(text)) return true;
+    }
+    return false;
+  }
 
   /* ── Detect full-page mode ─────────────────────────────────────── */
   var isFullPage = !!document.getElementById("copilot-fullpage");
@@ -480,6 +510,28 @@
     var now = Date.now();
     if (now - lastSendTime < CONFIG.rateLimitMs) return;
     lastSendTime = now;
+
+    // ── Client-side security checks ──────────────────────────────
+    // Enforce max message length
+    if (message.length > MAX_MESSAGE_LENGTH) {
+      message = message.substring(0, MAX_MESSAGE_LENGTH);
+    }
+
+    // Session request cap (prevents runaway usage from a single tab)
+    sendCount++;
+    if (sendCount > MAX_SESSION_REQUESTS) {
+      addMessage("assistant", "You've reached the session limit. Please refresh the page to continue.");
+      return;
+    }
+
+    // Client-side injection detection (defense in depth — server also checks)
+    if (isInjectionAttempt(message)) {
+      addMessage("user", message);
+      addMessage("assistant", "I can only help with Microsoft Fabric topics from this repository. Try asking about tutorials, architecture, compliance rules, or troubleshooting.");
+      input.value = "";
+      input.style.height = "auto";
+      return;
+    }
 
     addMessage("user", message);
     chatHistory.push({ role: "user", content: message });

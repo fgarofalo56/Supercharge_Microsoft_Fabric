@@ -1083,6 +1083,56 @@ usda_sas_migration = {
 
 ---
 
+## 🆕 FabCon 2026: Migration Tooling Enhancements
+
+### ADF & Synapse Pipelines Migration Assistant (Preview)
+
+A new **"Migrate to Fabric"** button in Azure Data Factory and Azure Synapse Analytics workspaces automates pipeline migration:
+
+1. **Assessment**: Scans existing ADF/Synapse pipelines for Fabric compatibility
+2. **Conversion**: Automatically translates pipeline definitions to Fabric Data Factory format
+3. **Validation**: Runs compatibility checks for connectors, linked services, and activities
+4. **Deployment**: Creates equivalent Fabric pipelines in the target workspace
+
+**Supported Conversions:**
+
+| Source Component | Fabric Equivalent |
+|-----------------|-------------------|
+| Copy Activities | Fabric Copy Activity |
+| Data Flows | Dataflow Gen2 |
+| Linked Services | Fabric Connections |
+| Triggers | Fabric Schedules |
+| Parameters | Fabric Pipeline Parameters |
+| Self-hosted IR | On-premises Data Gateway |
+
+**Casino Migration**: Migrate existing ADF pipelines that ingest from on-prem gaming systems (Oracle, SQL Server) to Fabric without manual recreation. The assistant maps Oracle linked services to Fabric's Oracle connector and preserves parameterized table name patterns.
+
+### Live Connectivity in Migration Assistant (Preview)
+
+For **Fabric Data Warehouse** migrations, the Migration Assistant now supports **live connectivity** to source systems — no DACPAC file upload required:
+
+- Connect directly to source SQL Server, Azure SQL, or Synapse Dedicated Pool
+- Auto-discover schemas, tables, views, and stored procedures
+- Generate DDL scripts optimized for Fabric Warehouse (T-SQL subset)
+- Migrate data in parallel with configurable batch sizes
+- Progress tracking and error reporting in the Monitoring Hub
+
+This eliminates the previous two-step process (export DACPAC → import to Fabric) and reduces migration time by 60-80% for large schemas.
+
+### SSIS Package Activity in Fabric Data Factory (Preview)
+
+Run existing **SQL Server Integration Services (SSIS)** packages directly within Fabric Data Factory pipelines:
+
+- Execute `.dtsx` packages stored in Azure Files or SSISDB
+- Leverage existing SSIS investments during phased migration to Fabric
+- Configure via the **SSIS Package Activity** in the pipeline designer
+- Supports both Azure-SSIS Integration Runtime and Fabric-hosted execution
+- Pass pipeline parameters into SSIS package variables
+
+**Federal Use Case**: Many federal agencies have decades of SSIS-based ETL managing critical data flows (e.g., USDA crop reporting, SBA loan processing). This activity enables a gradual transition to Fabric without rewriting legacy packages, allowing agencies to modernize at their own pace while maintaining existing compliance certifications.
+
+---
+
 ## Related Documents
 
 - [Performance & Parallelism](./performance-parallelism.md) — Copy Activity and Spark optimization
