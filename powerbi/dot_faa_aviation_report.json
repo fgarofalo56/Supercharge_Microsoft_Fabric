@@ -1,0 +1,158 @@
+{
+  "report_name": "DOT/FAA Aviation Analytics",
+  "description": "Department of Transportation / Federal Aviation Administration analytics covering carrier performance, route analytics, safety incidents, and airport infrastructure.",
+  "version": "1.0.0",
+  "dataset": {
+    "tables": [
+      {
+        "name": "gold_dot_faa_carrier_performance",
+        "source": "lh_gold.gold_dot_faa_carrier_performance",
+        "columns": ["carrier_code", "carrier_name", "year", "month", "total_flights", "on_time_flights", "delayed_flights", "cancelled_flights", "diverted_flights", "avg_departure_delay", "avg_arrival_delay", "on_time_percentage"]
+      },
+      {
+        "name": "gold_dot_faa_route_analytics",
+        "source": "lh_gold.gold_dot_faa_route_analytics",
+        "columns": ["origin_airport", "destination_airport", "origin_city", "destination_city", "carrier_code", "total_flights", "avg_delay_minutes", "cancellation_rate", "distance", "avg_flight_time"]
+      },
+      {
+        "name": "gold_dot_faa_safety",
+        "source": "lh_gold.gold_dot_faa_safety",
+        "columns": ["incident_id", "incident_date", "incident_type", "severity", "airport_code", "carrier_code", "phase_of_flight", "contributing_factors", "injuries", "fatalities", "aircraft_damage"]
+      },
+      {
+        "name": "gold_dot_faa_airports",
+        "source": "lh_gold.gold_dot_faa_airports",
+        "columns": ["airport_code", "airport_name", "city", "state", "airport_type", "ownership", "total_operations", "total_enplanements", "num_runways", "longest_runway_ft", "elevation_ft", "latitude", "longitude"]
+      }
+    ],
+    "measures": [
+      {
+        "name": "Total Flights",
+        "expression": "SUM(gold_dot_faa_carrier_performance[total_flights])",
+        "format": "#,##0",
+        "description": "Total number of flights"
+      },
+      {
+        "name": "On-Time Rate",
+        "expression": "DIVIDE(SUM(gold_dot_faa_carrier_performance[on_time_flights]), SUM(gold_dot_faa_carrier_performance[total_flights]))",
+        "format": "0.0%",
+        "description": "Overall on-time performance percentage"
+      },
+      {
+        "name": "Avg Departure Delay",
+        "expression": "AVERAGE(gold_dot_faa_carrier_performance[avg_departure_delay])",
+        "format": "#,##0.0",
+        "description": "Average departure delay in minutes"
+      },
+      {
+        "name": "Cancellation Rate",
+        "expression": "DIVIDE(SUM(gold_dot_faa_carrier_performance[cancelled_flights]), SUM(gold_dot_faa_carrier_performance[total_flights]))",
+        "format": "0.00%",
+        "description": "Flight cancellation rate"
+      },
+      {
+        "name": "Total Safety Incidents",
+        "expression": "COUNTROWS(gold_dot_faa_safety)",
+        "format": "#,##0",
+        "description": "Total reported safety incidents"
+      },
+      {
+        "name": "Total Airports",
+        "expression": "COUNTROWS(gold_dot_faa_airports)",
+        "format": "#,##0",
+        "description": "Total airports in the system"
+      },
+      {
+        "name": "Total Enplanements",
+        "expression": "SUM(gold_dot_faa_airports[total_enplanements])",
+        "format": "#,##0",
+        "description": "Total passenger enplanements"
+      },
+      {
+        "name": "Avg Route Delay",
+        "expression": "AVERAGE(gold_dot_faa_route_analytics[avg_delay_minutes])",
+        "format": "#,##0.0",
+        "description": "Average delay across all routes"
+      }
+    ],
+    "relationships": [
+      {
+        "from_table": "gold_dot_faa_carrier_performance",
+        "from_column": "carrier_code",
+        "to_table": "gold_dot_faa_route_analytics",
+        "to_column": "carrier_code",
+        "cardinality": "one-to-many",
+        "cross_filter": "single"
+      },
+      {
+        "from_table": "gold_dot_faa_airports",
+        "from_column": "airport_code",
+        "to_table": "gold_dot_faa_route_analytics",
+        "to_column": "origin_airport",
+        "cardinality": "one-to-many",
+        "cross_filter": "single"
+      },
+      {
+        "from_table": "gold_dot_faa_airports",
+        "from_column": "airport_code",
+        "to_table": "gold_dot_faa_safety",
+        "to_column": "airport_code",
+        "cardinality": "one-to-many",
+        "cross_filter": "single"
+      }
+    ]
+  },
+  "pages": [
+    {
+      "name": "Carrier Performance",
+      "visuals": [
+        {"type": "card", "measure": "Total Flights", "title": "Total Flights"},
+        {"type": "card", "measure": "On-Time Rate", "title": "On-Time Rate"},
+        {"type": "card", "measure": "Avg Departure Delay", "title": "Avg Departure Delay (min)"},
+        {"type": "card", "measure": "Cancellation Rate", "title": "Cancellation Rate"},
+        {"type": "bar_chart", "axis": "carrier_name", "values": ["On-Time Rate"], "title": "On-Time Performance by Carrier"},
+        {"type": "line_chart", "axis": "month", "values": ["On-Time Rate"], "legend": "carrier_name", "title": "Monthly On-Time Trends"},
+        {"type": "bar_chart", "axis": "carrier_name", "values": ["Avg Departure Delay"], "title": "Average Delay by Carrier"}
+      ]
+    },
+    {
+      "name": "Route Analytics",
+      "visuals": [
+        {"type": "card", "measure": "Avg Route Delay", "title": "Avg Route Delay"},
+        {"type": "table", "columns": ["origin_airport", "destination_airport", "total_flights", "avg_delay_minutes", "cancellation_rate"], "title": "Route Performance"},
+        {"type": "bar_chart", "axis": "origin_airport", "values": ["total_flights"], "title": "Busiest Origin Airports", "top_n": 20},
+        {"type": "bar_chart", "axis": "destination_airport", "values": ["avg_delay_minutes"], "title": "Most Delayed Destinations", "top_n": 15}
+      ]
+    },
+    {
+      "name": "Safety Incidents",
+      "visuals": [
+        {"type": "card", "measure": "Total Safety Incidents", "title": "Total Incidents"},
+        {"type": "bar_chart", "axis": "incident_type", "values": ["Total Safety Incidents"], "title": "Incidents by Type"},
+        {"type": "bar_chart", "axis": "severity", "values": ["Total Safety Incidents"], "title": "Incidents by Severity"},
+        {"type": "bar_chart", "axis": "phase_of_flight", "values": ["Total Safety Incidents"], "title": "Incidents by Flight Phase"},
+        {"type": "line_chart", "axis": "incident_date", "values": ["Total Safety Incidents"], "title": "Incident Trends Over Time"},
+        {"type": "table", "columns": ["incident_date", "incident_type", "severity", "airport_code", "carrier_code", "injuries", "aircraft_damage"], "title": "Incident Detail"}
+      ]
+    },
+    {
+      "name": "Airport Infrastructure",
+      "visuals": [
+        {"type": "card", "measure": "Total Airports", "title": "Total Airports"},
+        {"type": "card", "measure": "Total Enplanements", "title": "Total Enplanements"},
+        {"type": "map", "latitude": "latitude", "longitude": "longitude", "size": "total_enplanements", "title": "Airport Locations"},
+        {"type": "bar_chart", "axis": "airport_name", "values": ["total_enplanements"], "title": "Busiest Airports", "top_n": 25},
+        {"type": "bar_chart", "axis": "airport_type", "values": ["Total Airports"], "title": "Airports by Type"},
+        {"type": "bar_chart", "axis": "state", "values": ["Total Airports"], "title": "Airports by State", "top_n": 20}
+      ]
+    }
+  ],
+  "direct_lake_config": {
+    "workspace": "ws_supercharge_fabric",
+    "lakehouse": "lh_gold",
+    "semantic_model": "sm_dot_faa_aviation",
+    "refresh_policy": "on_demand",
+    "default_mode": "DirectLake",
+    "compliance": ["FedRAMP", "FAA Order 1600.2"]
+  }
+}

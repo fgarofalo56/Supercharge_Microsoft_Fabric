@@ -2,190 +2,430 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/ARCHITECTURE/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/BEST_PRACTICES/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/COST_ESTIMATION/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/DEPLOYMENT/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/DISASTER_RECOVERY/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/FAQ/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/GENERATOR_API_REFERENCE/</loc>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/GLOSSARY/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/MIGRATION_AND_RTI_RESEARCH/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/MY_RESOURCES/</loc>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/NETWORKING/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/PREREQUISITES/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/QUICK_START/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/SECURITY/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/STYLE_GUIDE/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/VISUAL_STANDARDS/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
-         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/archive/review-2025-01/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/chat/</loc>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
-         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/archive/review-2025-01/CALLOUT_EXAMPLES/</loc>
-         <lastmod>2026-01-29</lastmod>
-    </url>
-    <url>
-         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/archive/review-2025-01/DIAGRAM_QUICK_REFERENCE/</loc>
-         <lastmod>2026-01-29</lastmod>
-    </url>
-    <url>
-         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/archive/review-2025-01/DIAGRAM_VISUAL_SUMMARY/</loc>
-         <lastmod>2026-01-29</lastmod>
-    </url>
-    <url>
-         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/archive/review-2025-01/DOCUMENTATION_ENHANCEMENTS/</loc>
-         <lastmod>2026-01-29</lastmod>
-    </url>
-    <url>
-         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/archive/review-2025-01/DOCUMENTATION_REVIEW/</loc>
-         <lastmod>2026-01-29</lastmod>
-    </url>
-    <url>
-         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/archive/review-2025-01/EXAMPLES_BEFORE_AFTER/</loc>
-         <lastmod>2026-01-29</lastmod>
-    </url>
-    <url>
-         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/archive/review-2025-01/MERMAID_DIAGRAMS_SUMMARY/</loc>
-         <lastmod>2026-01-29</lastmod>
-    </url>
-    <url>
-         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/archive/review-2025-01/MERMAID_DIAGRAM_OPPORTUNITIES/</loc>
-         <lastmod>2026-01-29</lastmod>
-    </url>
-    <url>
-         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/archive/review-2025-01/MERMAID_TEST/</loc>
-         <lastmod>2026-01-29</lastmod>
-    </url>
-    <url>
-         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/archive/review-2025-01/QUICK_FIXES/</loc>
-         <lastmod>2026-01-29</lastmod>
-    </url>
-    <url>
-         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/archive/review-2025-01/SECURITY_DIAGRAMS_SUMMARY/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/microsoft-fabric-features-april-2026/</loc>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/01_WORKSPACES_NAMING/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/02_DATA_GATEWAY/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/03_PIPELINES_DATA_MOVEMENT/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/04_METADATA_DRIVEN_PIPELINES/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/05_SPARK_NOTEBOOKS/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/06_DATAFLOWS/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/07_LAKEHOUSE_SETUP/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/08_WAREHOUSE_SETUP/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/09_SOURCE_SPECIFIC_PATTERNS/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/10_DECISION_GUIDE/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/11_ORACLE_GATEWAY_TROUBLESHOOTING/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/alerting-data-activator/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/capacity-planning-cost-optimization/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/customer-managed-keys/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/data-governance-deep-dive/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/data-modeling-star-schema/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/data-sharing-federation/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/disaster-recovery-bcdr/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/error-handling-monitoring/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/etl-elt-comparison-guide/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/fabric-cicd-deployment/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/finops-cost-governance/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/identity-rbac-patterns/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/incremental-refresh-cdc/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/lakehouse-warehouse-sqldb-decision-guide/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/medallion-architecture-deep-dive/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/migration-patterns/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/monitoring-observability/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/multi-tenant-workspace-architecture/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/network-security/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/outbound-access-protection/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/performance-parallelism/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/power-bi-best-practices/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/spark-runtime-migration/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/sql-audit-logs-compliance/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/best-practices/testing-strategies/</loc>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/compliance-templates/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/compliance-templates/CTR_TEMPLATE/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/compliance-templates/MICS_TEMPLATE/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/compliance-templates/SAR_TEMPLATE/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/compliance-templates/W2G_TEMPLATE/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/data-dictionary/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/diagrams/architecture-overview/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/diagrams/cost-breakdown/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/ai-copilot-configuration/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/api-for-graphql/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/automl-model-endpoints/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/composite-models/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/copy-job-cdc/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/cross-database-queries/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/data-activator/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/data-agents/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/data-mesh-enterprise-patterns/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/database-hub/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/dataflow-gen2/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/dbt-fabric-integration/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/deployment-pipelines/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/digital-twin-builder/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/direct-lake/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/eventhouse-vector-database/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/fabric-iq/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/fabric-mcp/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/fabric-rest-apis/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/fabric-sql-database/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/git-integration/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/graph-in-fabric/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/maps-in-fabric/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/materialized-lake-views/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/mirroring/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/onelake-catalog/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/onelake-iceberg-interop/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/onelake-security/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/paginated-reports/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/real-time-hub/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/real-time-intelligence/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/scorecards-metrics/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/semantic-link/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/spark-environments-job-definitions/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/translytical-task-flows/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/vnet-data-gateway/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/workspace-ip-firewall/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/features/workspace-monitoring/</loc>
+         <lastmod>2026-04-23</lastmod>
     </url>
     <url>
          <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/runbooks/</loc>
-         <lastmod>2026-01-29</lastmod>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/use-cases/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/use-cases/antitrust-analytics/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/use-cases/federal-justice-analytics/</loc>
+         <lastmod>2026-04-23</lastmod>
+    </url>
+    <url>
+         <loc>https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/use-cases/references/</loc>
+         <lastmod>2026-04-23</lastmod>
     </url>
 </urlset>

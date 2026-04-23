@@ -1,0 +1,126 @@
+{
+  "report_name": "EPA Environmental Analytics",
+  "description": "Environmental Protection Agency data analytics covering air quality, water quality, toxic releases, and enforcement compliance.",
+  "version": "1.0.0",
+  "dataset": {
+    "tables": [
+      {
+        "name": "gold_epa_air_quality",
+        "source": "lh_gold.gold_epa_air_quality",
+        "columns": ["state_code", "county_code", "site_number", "parameter_name", "date_local", "aqi", "arithmetic_mean", "first_max_value", "units_of_measure", "sample_duration", "latitude", "longitude"]
+      },
+      {
+        "name": "gold_epa_toxic_releases",
+        "source": "lh_gold.gold_epa_toxic_releases",
+        "columns": ["facility_name", "facility_state", "chemical_name", "total_releases", "on_site_release_total", "off_site_release_total", "reporting_year", "industry_sector", "latitude", "longitude"]
+      },
+      {
+        "name": "gold_epa_water_quality",
+        "source": "lh_gold.gold_epa_water_quality",
+        "columns": ["monitoring_location_id", "activity_start_date", "characteristic_name", "result_value", "result_unit", "state_code", "huc_code"]
+      },
+      {
+        "name": "gold_epa_echo_compliance",
+        "source": "lh_gold.gold_epa_echo_compliance",
+        "columns": ["registry_id", "facility_name", "facility_state", "permit_type", "compliance_status", "last_inspection_date", "violation_count", "penalty_amount", "latitude", "longitude"]
+      }
+    ],
+    "measures": [
+      {
+        "name": "Avg AQI",
+        "expression": "AVERAGE(gold_epa_air_quality[aqi])",
+        "format": "#,##0.0",
+        "description": "Average Air Quality Index"
+      },
+      {
+        "name": "Unhealthy Air Days",
+        "expression": "CALCULATE(COUNTROWS(gold_epa_air_quality), gold_epa_air_quality[aqi] > 100)",
+        "format": "#,##0",
+        "description": "Days with AQI above 100 (Unhealthy for Sensitive Groups)"
+      },
+      {
+        "name": "Total Toxic Releases (lbs)",
+        "expression": "SUM(gold_epa_toxic_releases[total_releases])",
+        "format": "#,##0",
+        "description": "Total pounds of toxic chemicals released"
+      },
+      {
+        "name": "Facilities in Violation",
+        "expression": "CALCULATE(COUNTROWS(gold_epa_echo_compliance), gold_epa_echo_compliance[compliance_status] = \"Violation\")",
+        "format": "#,##0",
+        "description": "Number of facilities currently in violation"
+      },
+      {
+        "name": "Total Penalties",
+        "expression": "SUM(gold_epa_echo_compliance[penalty_amount])",
+        "format": "$#,##0",
+        "description": "Total penalty dollars assessed"
+      },
+      {
+        "name": "Compliance Rate",
+        "expression": "DIVIDE(CALCULATE(COUNTROWS(gold_epa_echo_compliance), gold_epa_echo_compliance[compliance_status] = \"No Violation\"), COUNTROWS(gold_epa_echo_compliance))",
+        "format": "0.0%",
+        "description": "Percentage of facilities in compliance"
+      }
+    ],
+    "relationships": [
+      {
+        "from_table": "gold_epa_air_quality",
+        "from_column": "state_code",
+        "to_table": "gold_epa_echo_compliance",
+        "to_column": "facility_state",
+        "cardinality": "many-to-many",
+        "cross_filter": "single"
+      }
+    ]
+  },
+  "pages": [
+    {
+      "name": "Air Quality Index",
+      "visuals": [
+        {"type": "card", "measure": "Avg AQI", "title": "Average AQI"},
+        {"type": "card", "measure": "Unhealthy Air Days", "title": "Unhealthy Air Days"},
+        {"type": "gauge", "measure": "Avg AQI", "min": 0, "max": 500, "target": 50, "title": "Current AQI Gauge"},
+        {"type": "line_chart", "axis": "date_local", "values": ["Avg AQI"], "title": "AQI Trend Over Time"},
+        {"type": "filled_map", "location": "state_code", "color_saturation": "Avg AQI", "title": "AQI by State"},
+        {"type": "bar_chart", "axis": "parameter_name", "values": ["arithmetic_mean"], "title": "Pollutant Concentrations"}
+      ]
+    },
+    {
+      "name": "Toxic Releases (TRI)",
+      "visuals": [
+        {"type": "card", "measure": "Total Toxic Releases (lbs)", "title": "Total Toxic Releases"},
+        {"type": "bar_chart", "axis": "chemical_name", "values": ["Total Toxic Releases (lbs)"], "title": "Top Chemicals Released", "top_n": 15},
+        {"type": "bar_chart", "axis": "industry_sector", "values": ["Total Toxic Releases (lbs)"], "title": "Releases by Industry"},
+        {"type": "map", "latitude": "latitude", "longitude": "longitude", "size": "total_releases", "title": "TRI Facility Locations"},
+        {"type": "line_chart", "axis": "reporting_year", "values": ["Total Toxic Releases (lbs)"], "title": "Release Trends"}
+      ]
+    },
+    {
+      "name": "Water Quality",
+      "visuals": [
+        {"type": "bar_chart", "axis": "characteristic_name", "values": ["avg_result_value"], "title": "Average by Characteristic"},
+        {"type": "line_chart", "axis": "activity_start_date", "values": ["result_value"], "legend": "characteristic_name", "title": "Water Quality Trends"},
+        {"type": "table", "columns": ["monitoring_location_id", "activity_start_date", "characteristic_name", "result_value", "result_unit"], "title": "Water Quality Measurements"}
+      ]
+    },
+    {
+      "name": "Enforcement & Compliance",
+      "visuals": [
+        {"type": "card", "measure": "Facilities in Violation", "title": "Facilities in Violation"},
+        {"type": "card", "measure": "Total Penalties", "title": "Total Penalties"},
+        {"type": "card", "measure": "Compliance Rate", "title": "Compliance Rate"},
+        {"type": "bar_chart", "axis": "facility_state", "values": ["Facilities in Violation"], "title": "Violations by State", "top_n": 20},
+        {"type": "bar_chart", "axis": "permit_type", "values": ["violation_count"], "title": "Violations by Permit Type"},
+        {"type": "map", "latitude": "latitude", "longitude": "longitude", "color": "compliance_status", "title": "Facility Compliance Map"}
+      ]
+    }
+  ],
+  "direct_lake_config": {
+    "workspace": "ws_supercharge_fabric",
+    "lakehouse": "lh_gold",
+    "semantic_model": "sm_epa_environmental",
+    "refresh_policy": "on_demand",
+    "default_mode": "DirectLake"
+  }
+}

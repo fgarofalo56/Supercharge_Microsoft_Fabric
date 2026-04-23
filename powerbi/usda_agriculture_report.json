@@ -1,0 +1,124 @@
+{
+  "report_name": "USDA Agriculture Analytics",
+  "description": "Comprehensive USDA data analytics covering crop production, food safety, SNAP retailer distribution, and Census of Agriculture metrics.",
+  "version": "1.0.0",
+  "dataset": {
+    "tables": [
+      {
+        "name": "gold_usda_crop_production",
+        "source": "lh_gold.gold_usda_crop_production",
+        "columns": ["commodity", "state_name", "state_fips", "year", "value", "unit_desc", "planted_acres", "harvested_acres", "yield_per_acre", "production_value"]
+      },
+      {
+        "name": "gold_usda_food_safety",
+        "source": "lh_gold.gold_usda_food_safety",
+        "columns": ["recall_id", "product_name", "reason", "classification", "recall_date", "company_name", "state", "quantity", "status"]
+      },
+      {
+        "name": "gold_usda_snap_retailers",
+        "source": "lh_gold.gold_usda_snap_retailers",
+        "columns": ["store_name", "store_type", "state", "city", "zip_code", "latitude", "longitude", "authorization_date"]
+      },
+      {
+        "name": "gold_usda_census_agriculture",
+        "source": "lh_gold.gold_usda_census_agriculture",
+        "columns": ["commodity", "year", "state_fips", "value", "source_desc", "agg_level_desc"]
+      }
+    ],
+    "measures": [
+      {
+        "name": "Total Production Value",
+        "expression": "SUM(gold_usda_crop_production[production_value])",
+        "format": "$#,##0",
+        "description": "Total dollar value of crop production"
+      },
+      {
+        "name": "Avg Yield Per Acre",
+        "expression": "AVERAGE(gold_usda_crop_production[yield_per_acre])",
+        "format": "#,##0.0",
+        "description": "Average yield per acre across all commodities"
+      },
+      {
+        "name": "Total Planted Acres",
+        "expression": "SUM(gold_usda_crop_production[planted_acres])",
+        "format": "#,##0",
+        "description": "Total planted acreage"
+      },
+      {
+        "name": "Active Recalls",
+        "expression": "CALCULATE(COUNTROWS(gold_usda_food_safety), gold_usda_food_safety[status] = \"Active\")",
+        "format": "#,##0",
+        "description": "Count of currently active food safety recalls"
+      },
+      {
+        "name": "SNAP Retailer Count",
+        "expression": "COUNTROWS(gold_usda_snap_retailers)",
+        "format": "#,##0",
+        "description": "Total number of authorized SNAP retailers"
+      },
+      {
+        "name": "Census Farm Count",
+        "expression": "SUM(gold_usda_census_agriculture[value])",
+        "format": "#,##0",
+        "description": "Aggregate census value for selected commodities"
+      }
+    ],
+    "relationships": [
+      {
+        "from_table": "gold_usda_crop_production",
+        "from_column": "state_fips",
+        "to_table": "gold_usda_census_agriculture",
+        "to_column": "state_fips",
+        "cardinality": "many-to-many",
+        "cross_filter": "both"
+      }
+    ]
+  },
+  "pages": [
+    {
+      "name": "Crop Production Overview",
+      "visuals": [
+        {"type": "card", "measure": "Total Production Value", "title": "Total Production Value"},
+        {"type": "card", "measure": "Avg Yield Per Acre", "title": "Average Yield/Acre"},
+        {"type": "card", "measure": "Total Planted Acres", "title": "Total Planted Acres"},
+        {"type": "bar_chart", "axis": "commodity", "values": ["Total Production Value"], "title": "Production by Commodity"},
+        {"type": "line_chart", "axis": "year", "values": ["Avg Yield Per Acre"], "legend": "commodity", "title": "Yield Trends Over Time"},
+        {"type": "filled_map", "location": "state_name", "color_saturation": "Total Production Value", "title": "Production by State"}
+      ]
+    },
+    {
+      "name": "Food Safety Recalls",
+      "visuals": [
+        {"type": "card", "measure": "Active Recalls", "title": "Active Recalls"},
+        {"type": "bar_chart", "axis": "classification", "values": ["recall_count"], "title": "Recalls by Classification"},
+        {"type": "table", "columns": ["recall_date", "product_name", "company_name", "reason", "classification", "status"], "title": "Recent Recalls"},
+        {"type": "line_chart", "axis": "recall_date", "values": ["recall_count"], "title": "Recall Trends"}
+      ]
+    },
+    {
+      "name": "SNAP Retailer Distribution",
+      "visuals": [
+        {"type": "card", "measure": "SNAP Retailer Count", "title": "Total SNAP Retailers"},
+        {"type": "map", "latitude": "latitude", "longitude": "longitude", "size": "store_count", "title": "SNAP Retailer Locations"},
+        {"type": "bar_chart", "axis": "store_type", "values": ["retailer_count"], "title": "Retailers by Store Type"},
+        {"type": "bar_chart", "axis": "state", "values": ["retailer_count"], "title": "Retailers by State"}
+      ]
+    },
+    {
+      "name": "Census of Agriculture",
+      "visuals": [
+        {"type": "card", "measure": "Census Farm Count", "title": "Census Aggregate Value"},
+        {"type": "bar_chart", "axis": "year", "values": ["Census Farm Count"], "title": "Census Values by Year"},
+        {"type": "bar_chart", "axis": "commodity", "values": ["Census Farm Count"], "title": "Values by Commodity"},
+        {"type": "table", "columns": ["year", "commodity", "state_fips", "value", "agg_level_desc"], "title": "Census Data Detail"}
+      ]
+    }
+  ],
+  "direct_lake_config": {
+    "workspace": "ws_supercharge_fabric",
+    "lakehouse": "lh_gold",
+    "semantic_model": "sm_usda_agriculture",
+    "refresh_policy": "on_demand",
+    "default_mode": "DirectLake"
+  }
+}

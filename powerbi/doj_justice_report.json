@@ -1,0 +1,201 @@
+{
+  "report_name": "DOJ Justice Analytics",
+  "description": "Department of Justice analytics covering crime trends, federal sentencing, antitrust enforcement, and drug seizure operations.",
+  "version": "1.0.0",
+  "dataset": {
+    "tables": [
+      {
+        "name": "gold_doj_crime_trends",
+        "source": "lh_gold.gold_doj_crime_trends",
+        "columns": ["state_code", "offense_category", "reporting_year", "incident_count", "victim_count", "clearance_rate", "arrest_rate", "firearm_rate", "yoy_change"]
+      },
+      {
+        "name": "gold_doj_sentencing_analytics",
+        "source": "lh_gold.gold_doj_sentencing_analytics",
+        "columns": ["district_court", "offense_category", "fiscal_year", "case_count", "avg_sentence_months", "median_sentence_months", "departure_rate", "plea_rate", "avg_fine"]
+      },
+      {
+        "name": "gold_doj_antitrust_metrics",
+        "source": "lh_gold.gold_doj_antitrust_metrics",
+        "columns": ["industry_sector", "industry_name", "fiscal_year", "merger_count", "challenge_rate", "avg_hhi_delta", "total_penalties", "cartel_count"]
+      },
+      {
+        "name": "gold_doj_drug_enforcement",
+        "source": "lh_gold.gold_doj_drug_enforcement",
+        "columns": ["dea_region", "drug_type", "fiscal_year", "seizure_count", "total_quantity_kg", "total_street_value", "avg_arrests"]
+      }
+    ],
+    "measures": [
+      {
+        "name": "Total Incidents",
+        "expression": "SUM(gold_doj_crime_trends[incident_count])",
+        "format": "#,##0",
+        "description": "Total reported crime incidents"
+      },
+      {
+        "name": "Total Victims",
+        "expression": "SUM(gold_doj_crime_trends[victim_count])",
+        "format": "#,##0",
+        "description": "Total reported crime victims"
+      },
+      {
+        "name": "Clearance Rate",
+        "expression": "AVERAGE(gold_doj_crime_trends[clearance_rate])",
+        "format": "0.0%",
+        "description": "Average crime clearance rate"
+      },
+      {
+        "name": "Arrest Rate",
+        "expression": "AVERAGE(gold_doj_crime_trends[arrest_rate])",
+        "format": "0.0%",
+        "description": "Average arrest rate across offenses"
+      },
+      {
+        "name": "Firearm Involvement Rate",
+        "expression": "AVERAGE(gold_doj_crime_trends[firearm_rate])",
+        "format": "0.0%",
+        "description": "Average rate of firearm involvement in crimes"
+      },
+      {
+        "name": "Avg Sentence Months",
+        "expression": "AVERAGE(gold_doj_sentencing_analytics[avg_sentence_months])",
+        "format": "#,##0.0",
+        "description": "Average federal sentence length in months"
+      },
+      {
+        "name": "Total Cases",
+        "expression": "SUM(gold_doj_sentencing_analytics[case_count])",
+        "format": "#,##0",
+        "description": "Total federal sentencing cases"
+      },
+      {
+        "name": "Plea Rate",
+        "expression": "AVERAGE(gold_doj_sentencing_analytics[plea_rate])",
+        "format": "0.0%",
+        "description": "Average plea bargain rate"
+      },
+      {
+        "name": "Total Fines",
+        "expression": "SUM(gold_doj_sentencing_analytics[avg_fine]) * SUM(gold_doj_sentencing_analytics[case_count])",
+        "format": "$#,##0",
+        "description": "Estimated total fines assessed"
+      },
+      {
+        "name": "Challenge Rate",
+        "expression": "AVERAGE(gold_doj_antitrust_metrics[challenge_rate])",
+        "format": "0.0%",
+        "description": "Average merger challenge rate"
+      },
+      {
+        "name": "Total Penalties",
+        "expression": "SUM(gold_doj_antitrust_metrics[total_penalties])",
+        "format": "$#,##0",
+        "description": "Total antitrust penalties assessed"
+      },
+      {
+        "name": "Total Mergers Reviewed",
+        "expression": "SUM(gold_doj_antitrust_metrics[merger_count])",
+        "format": "#,##0",
+        "description": "Total mergers reviewed by DOJ Antitrust Division"
+      },
+      {
+        "name": "HHI Delta Average",
+        "expression": "AVERAGE(gold_doj_antitrust_metrics[avg_hhi_delta])",
+        "format": "#,##0",
+        "description": "Average Herfindahl-Hirschman Index delta for reviewed mergers"
+      },
+      {
+        "name": "Total Cartel Cases",
+        "expression": "SUM(gold_doj_antitrust_metrics[cartel_count])",
+        "format": "#,##0",
+        "description": "Total cartel enforcement actions"
+      },
+      {
+        "name": "Total Seizures (kg)",
+        "expression": "SUM(gold_doj_drug_enforcement[total_quantity_kg])",
+        "format": "#,##0.0",
+        "description": "Total drug seizures in kilograms"
+      },
+      {
+        "name": "Total Seizure Value",
+        "expression": "SUM(gold_doj_drug_enforcement[total_street_value])",
+        "format": "$#,##0",
+        "description": "Total estimated street value of drug seizures"
+      },
+      {
+        "name": "Total Seizure Count",
+        "expression": "SUM(gold_doj_drug_enforcement[seizure_count])",
+        "format": "#,##0",
+        "description": "Total number of drug seizure operations"
+      },
+      {
+        "name": "Avg Arrests per Seizure",
+        "expression": "AVERAGE(gold_doj_drug_enforcement[avg_arrests])",
+        "format": "#,##0.0",
+        "description": "Average arrests per seizure operation"
+      }
+    ],
+    "relationships": []
+  },
+  "pages": [
+    {
+      "name": "Crime Overview",
+      "visuals": [
+        {"type": "card", "measure": "Total Incidents", "title": "Total Incidents"},
+        {"type": "card", "measure": "Total Victims", "title": "Total Victims"},
+        {"type": "card", "measure": "Clearance Rate", "title": "Clearance Rate"},
+        {"type": "card", "measure": "Firearm Involvement Rate", "title": "Firearm Rate"},
+        {"type": "filled_map", "location": "state_code", "color_saturation": "Total Incidents", "title": "Crime Incidents by State"},
+        {"type": "bar_chart", "axis": "offense_category", "values": ["Total Incidents"], "title": "Incidents by Offense Category"},
+        {"type": "bar_chart", "axis": "reporting_year", "values": ["Total Incidents", "Total Victims"], "title": "Crime Trends Over Time"},
+        {"type": "bar_chart", "axis": "state_code", "values": ["Clearance Rate"], "title": "Clearance Rate by State", "top_n": 20}
+      ]
+    },
+    {
+      "name": "Sentencing Dashboard",
+      "visuals": [
+        {"type": "card", "measure": "Total Cases", "title": "Total Cases"},
+        {"type": "card", "measure": "Avg Sentence Months", "title": "Avg Sentence (Months)"},
+        {"type": "card", "measure": "Plea Rate", "title": "Plea Rate"},
+        {"type": "card", "measure": "Total Fines", "title": "Total Fines"},
+        {"type": "bar_chart", "axis": "district_court", "values": ["Total Cases"], "title": "Cases by District Court", "top_n": 20},
+        {"type": "bar_chart", "axis": "offense_category", "values": ["Avg Sentence Months"], "title": "Avg Sentence by Offense Category"},
+        {"type": "bar_chart", "axis": "fiscal_year", "values": ["Total Cases"], "title": "Caseload Trends Over Time"},
+        {"type": "bar_chart", "axis": "offense_category", "values": ["Plea Rate"], "title": "Plea Rate by Offense"}
+      ]
+    },
+    {
+      "name": "Antitrust Analysis",
+      "visuals": [
+        {"type": "card", "measure": "Total Mergers Reviewed", "title": "Mergers Reviewed"},
+        {"type": "card", "measure": "Challenge Rate", "title": "Challenge Rate"},
+        {"type": "card", "measure": "Total Penalties", "title": "Total Penalties"},
+        {"type": "card", "measure": "Total Cartel Cases", "title": "Cartel Cases"},
+        {"type": "scatter_chart", "x_axis": "avg_hhi_delta", "y_axis": "challenge_rate", "legend": "industry_sector", "title": "HHI Delta vs Challenge Rate by Industry"},
+        {"type": "bar_chart", "axis": "industry_name", "values": ["Challenge Rate"], "title": "Challenge Rate by Industry", "top_n": 15},
+        {"type": "waterfall_chart", "axis": "industry_sector", "values": ["Total Penalties"], "title": "Penalty Distribution by Sector"},
+        {"type": "bar_chart", "axis": "fiscal_year", "values": ["Total Mergers Reviewed", "Total Cartel Cases"], "title": "Enforcement Trends Over Time"}
+      ]
+    },
+    {
+      "name": "Drug Enforcement",
+      "visuals": [
+        {"type": "card", "measure": "Total Seizures (kg)", "title": "Total Seizures (kg)"},
+        {"type": "card", "measure": "Total Seizure Value", "title": "Total Street Value"},
+        {"type": "card", "measure": "Total Seizure Count", "title": "Seizure Operations"},
+        {"type": "card", "measure": "Avg Arrests per Seizure", "title": "Avg Arrests per Seizure"},
+        {"type": "bar_chart", "axis": "drug_type", "values": ["Total Seizures (kg)"], "title": "Seizure Volume by Drug Type"},
+        {"type": "bar_chart", "axis": "dea_region", "values": ["Total Seizure Value"], "title": "Street Value by DEA Region"},
+        {"type": "line_chart", "axis": "fiscal_year", "values": ["Total Seizures (kg)", "Total Seizure Value"], "title": "Seizure Trends Over Time"},
+        {"type": "bar_chart", "axis": "drug_type", "values": ["Avg Arrests per Seizure"], "title": "Arrests per Seizure by Drug Type"}
+      ]
+    }
+  ],
+  "direct_lake_config": {
+    "workspace": "ws_supercharge_fabric",
+    "lakehouse": "lh_gold",
+    "semantic_model": "sm_doj_justice",
+    "refresh_policy": "on_demand",
+    "default_mode": "DirectLake"
+  }
+}

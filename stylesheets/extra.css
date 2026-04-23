@@ -149,6 +149,58 @@
   font-weight: 500;
 }
 
+/* ── Auto dark mode for browser/OS preference ──────────────── */
+/* When a user's browser requests dark mode and no manual toggle
+   has been clicked, apply the slate scheme automatically.       */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-md-color-switching]) body:not([data-md-color-scheme="default"]) {
+    /* Fallback dark vars for elements rendered before JS runs */
+    --md-default-bg-color: #1e1e1e;
+    --md-default-fg-color: #e0e0e0;
+    --md-code-bg-color: #2d2d2d;
+  }
+}
+
+/* Ensure tables remain readable in dark mode */
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) td,
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) th {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) tr:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+/* Dark mode badge visibility */
+[data-md-color-scheme="slate"] .md-typeset img[src*="shields.io"] {
+  filter: brightness(1.1);
+}
+
+/* Dark mode card styling */
+[data-md-color-scheme="slate"] .md-typeset .card {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+}
+[data-md-color-scheme="slate"] .md-typeset .card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Dark mode admonition tweaks */
+[data-md-color-scheme="slate"] .md-typeset .admonition,
+[data-md-color-scheme="slate"] .md-typeset details {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* Dark mode code in tables */
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) code {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Dark mode duration badge */
+[data-md-color-scheme="slate"] .md-typeset .duration {
+  background-color: #b8860b;
+  color: #fff;
+}
+
 /* Responsive adjustments */
 @media screen and (max-width: 76.1875em) {
   .md-typeset .hero h1 {
