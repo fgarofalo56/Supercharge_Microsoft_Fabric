@@ -209,6 +209,13 @@ nav:
     - Overview: use-cases/README.md
     - Antitrust Analytics: use-cases/antitrust-analytics.md
     - Federal Justice Analytics: use-cases/federal-justice-analytics.md
+    - Transportation Safety: use-cases/transportation-safety-analytics.md
+    - Agricultural Analytics: use-cases/agricultural-analytics.md
+    - Small Business Lending: use-cases/small-business-lending-analytics.md
+    - Weather & Climate: use-cases/weather-climate-analytics.md
+    - Environmental Compliance: use-cases/environmental-compliance-analytics.md
+    - Natural Resources: use-cases/natural-resources-analytics.md
+    - Tribal Health: use-cases/tribal-health-analytics.md
     - Published References: use-cases/references/README.md
 
   - Features:

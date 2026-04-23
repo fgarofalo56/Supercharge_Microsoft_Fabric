@@ -24,6 +24,13 @@ Each use case includes:
 |----------|--------|---------------|--------|
 | [Antitrust Analytics](antitrust-analytics.md) | DOJ/FTC Competition | HHI concentration, merger review, cartel detection | Available |
 | [Federal Justice Analytics](federal-justice-analytics.md) | DOJ/FBI/BOP | Crime trends, prosecution pipeline, sentencing disparity | Available |
+| [Transportation Safety Analytics](transportation-safety-analytics.md) | DOT/FAA | Aviation safety (ASRS), on-time performance, NHTSA crash data | Available |
+| [Agricultural Analytics](agricultural-analytics.md) | USDA | Crop production, food safety recalls, SNAP benefits | Available |
+| [Small Business Lending Analytics](small-business-lending-analytics.md) | SBA | PPP loan analysis, 7(a)/504 lending, SBIR/STTR grants | Available |
+| [Weather & Climate Analytics](weather-climate-analytics.md) | NOAA | Storm events, severe weather, climate trends, coastal monitoring | Available |
+| [Environmental Compliance Analytics](environmental-compliance-analytics.md) | EPA | Air quality, toxic releases, enforcement, water safety | Available |
+| [Natural Resources Analytics](natural-resources-analytics.md) | DOI | USGS earthquakes, water resources, endangered species, public lands | Available |
+| [Tribal Health Analytics](tribal-health-analytics.md) | IHS/Tribal | Health disparities, chronic disease, data sovereignty | Available |
 
 ---
 
