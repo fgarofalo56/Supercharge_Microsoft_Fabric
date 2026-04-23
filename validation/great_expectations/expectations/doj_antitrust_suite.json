@@ -1,0 +1,97 @@
+{
+  "expectation_suite_name": "doj_antitrust_suite",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "case_id" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "case_type" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "doj_action" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "industry_sector" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "transaction_value_usd" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "hhi_pre_merger" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "hhi_post_merger" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "hhi_delta" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": { "column": "case_id" },
+      "meta": { "notes": "Case ID is the primary identifier" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": { "column": "case_id" },
+      "meta": { "notes": "Case ID must be unique" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "case_type",
+        "value_set": ["Criminal", "Civil", "Merger Review"]
+      },
+      "meta": { "notes": "DOJ Antitrust Division case types" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "doj_action",
+        "value_set": ["Approved", "Challenged", "Consent Decree", "Blocked", "Abandoned"]
+      },
+      "meta": { "notes": "DOJ enforcement action outcomes" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": { "column": "industry_sector", "regex": "^\\d{2}$" },
+      "meta": { "notes": "NAICS 2-digit industry sector code" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": { "column": "transaction_value_usd", "min_value": 0, "max_value": null, "strictly": true },
+      "meta": { "notes": "Transaction value must be strictly positive" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": { "column": "hhi_pre_merger", "min_value": 0, "max_value": 10000, "mostly": 0.95 },
+      "meta": { "notes": "HHI ranges 0-10000; null for non-merger cases" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": { "column": "hhi_post_merger", "min_value": 0, "max_value": 10000, "mostly": 0.95 },
+      "meta": { "notes": "HHI post-merger ranges 0-10000; null for non-merger cases" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "cartel_type",
+        "value_set": ["Price-fixing", "Bid-rigging", "Market allocation", "None"]
+      },
+      "meta": { "notes": "Cartel activity classification" }
+    }
+  ],
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "notes": "Data quality expectations for DOJ Antitrust Division case and merger data",
+    "domain": "Department of Justice - Antitrust",
+    "data_source": "DOJ Antitrust Case Filings (catalog.data.gov), HSR Filing Data"
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "expectation_suite_name": "doj_federal_cases_suite",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "case_id" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "district_court" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "circuit" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "sentence_months" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "guideline_range_min_months" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "guideline_range_max_months" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "departure_type" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "defendant_age" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "plea_type" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": { "column": "case_id" },
+      "meta": { "notes": "Case ID is the primary identifier" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": { "column": "case_id" },
+      "meta": { "notes": "Case ID must be unique" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": { "column": "sentence_months", "min_value": 0, "max_value": null },
+      "meta": { "notes": "Sentence months must be non-negative" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": { "column": "defendant_age", "min_value": 18, "max_value": 75 },
+      "meta": { "notes": "Defendant age within realistic federal defendant range" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "departure_type",
+        "value_set": ["None", "Above", "Below", "Substantial Assistance"]
+      },
+      "meta": { "notes": "USSC departure type categories" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "plea_type",
+        "value_set": ["Guilty Plea", "Not Guilty", "Nolo Contendere"]
+      },
+      "meta": { "notes": "Federal court plea types" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "defendant_gender",
+        "value_set": ["M", "F"]
+      },
+      "meta": { "notes": "Gender classification per USSC data" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "criminal_history_category",
+        "value_set": ["I", "II", "III", "IV", "V", "VI"]
+      },
+      "meta": { "notes": "USSC criminal history categories" }
+    }
+  ],
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "notes": "Data quality expectations for USSC federal sentencing case data",
+    "domain": "Department of Justice - Federal Cases",
+    "data_source": "US Sentencing Commission (ussc.gov/research)"
+  }
+}

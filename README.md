@@ -11,7 +11,7 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Dev Container](https://img.shields.io/badge/Dev%20Container-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)
-![Tutorials](https://img.shields.io/badge/Tutorials-37-blue?style=for-the-badge)
+![Tutorials](https://img.shields.io/badge/Tutorials-38-blue?style=for-the-badge)
 ![Tests](https://img.shields.io/badge/Tests-612_Passing-brightgreen?style=for-the-badge)
 ![Phase](https://img.shields.io/badge/Phase_11-Complete-brightgreen?style=for-the-badge)
 
@@ -446,6 +446,7 @@ flowchart TD
         NOAA[NOAA<br/>Weather & Storms]
         EPA[EPA<br/>Air & Water Quality]
         DOI[DOI<br/>Earthquakes & Land]
+        DOJ[DOJ<br/>Crime & Antitrust]
     end
 
     subgraph W2["🔄 Wave 2: Migration & Streaming"]
@@ -1157,6 +1158,7 @@ Phase 7 delivered industry expansions beyond the core Casino/Gaming POC:
 | 🏔️ **DOI** | USGS, BLM | Earthquakes, land use management | [Tutorial 36](tutorials/36-doi-interior/README.md) |
 | 🏥 **Tribal Healthcare** | HIPAA, 42 CFR | IHS encounters, PHI masking, FHIR | [Tutorial 30](tutorials/30-tribal-healthcare/README.md) |
 | ✈️ **DOT/FAA** | FedRAMP, FISMA | Flight ops, safety, carrier analytics | [Tutorial 31](tutorials/31-federal-dot-faa/README.md) |
+| ⚖️ **DOJ** | FBI NIBRS, USSC | Crime stats, sentencing, antitrust, DEA | [Tutorial 38](tutorials/38-doj-justice/README.md) |
 | 📹 **Video Analytics** | — | YOLO/DeepSORT, 50 cameras, 8 event types | [Tutorial 27](tutorials/27-video-security-analytics/README.md) |
 | 🚶 **People Movement** | — | 30 zones, queue detection, heat maps | [Tutorial 28](tutorials/28-people-movement-analytics/README.md) |
 | 📍 **Geolocation** | — | H3 indexing, geofencing, proximity triggers | [Tutorial 29](tutorials/29-geolocation-analytics/README.md) |

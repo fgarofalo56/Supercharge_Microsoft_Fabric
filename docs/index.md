@@ -23,7 +23,7 @@ hide:
 
 ## 🎯 Overview
 
-This repository provides a **complete, production-ready proof-of-concept** environment for Microsoft Fabric, covering the casino/gaming industry and **7 federal agency domains** (USDA, SBA, NOAA, EPA, DOI, DOT/FAA, Tribal Healthcare).
+This repository provides a **complete, production-ready proof-of-concept** environment for Microsoft Fabric, covering the casino/gaming industry and **8 federal agency domains** (USDA, SBA, NOAA, EPA, DOI, DOT/FAA, Tribal Healthcare, DOJ).
 
 <div class="grid" markdown>
 

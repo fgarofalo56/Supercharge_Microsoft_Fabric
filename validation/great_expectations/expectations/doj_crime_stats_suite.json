@@ -1,0 +1,93 @@
+{
+  "expectation_suite_name": "doj_crime_stats_suite",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "incident_id" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "ori_code" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "offense_code" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "state_code" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "offense_category" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "clearance_status" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "victim_count" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": { "column": "incident_id" },
+      "meta": { "notes": "Incident ID is the primary identifier" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": { "column": "incident_id" },
+      "meta": { "notes": "Incident ID must be unique across all records" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": { "column": "ori_code" },
+      "meta": { "notes": "ORI code identifies the reporting agency" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": { "column": "state_code", "regex": "^[A-Z]{2}$" },
+      "meta": { "notes": "State code must be a 2-character uppercase abbreviation" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "offense_category",
+        "value_set": ["Persons", "Property", "Society"]
+      },
+      "meta": { "notes": "NIBRS offense categories" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "clearance_status",
+        "value_set": ["Cleared by Arrest", "Not Cleared", "Exceptionally Cleared"]
+      },
+      "meta": { "notes": "FBI UCR clearance status categories" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": { "column": "victim_count", "min_value": 0, "max_value": null },
+      "meta": { "notes": "Victim count must be non-negative" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "weapon_involved",
+        "value_set": ["None", "Firearm", "Knife", "Other"]
+      },
+      "meta": { "notes": "Weapon involvement classification" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": { "column": "reporting_year", "min_value": 2000, "max_value": 2030 },
+      "meta": { "notes": "Reporting year within reasonable range" }
+    }
+  ],
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "notes": "Data quality expectations for FBI UCR/NIBRS crime statistics",
+    "domain": "Department of Justice - Crime Statistics",
+    "data_source": "FBI Crime Data Explorer (cde.ucr.cjis.gov)"
+  }
+}

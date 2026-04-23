@@ -10,9 +10,11 @@ Provides synthetic data generators for federal government agency scenarios:
 - DOIGenerator: DOI earthquake events, land use permits
 - TribalHealthcareGenerator: IHS health records (HIPAA-compliant synthetic)
 - DOTFAAGenerator: DOT/FAA flight operations, safety incidents
+- DOJGenerator: DOJ crime statistics, federal cases, antitrust, drug enforcement
 """
 
 from .doi_generator import DOIGenerator
+from .doj_generator import DOJGenerator
 from .dot_faa_generator import DOTFAAGenerator
 from .epa_generator import EPAGenerator
 from .noaa_generator import NOAAGenerator
@@ -22,6 +24,7 @@ from .usda_generator import USDAGenerator
 
 __all__ = [
     "DOIGenerator",
+    "DOJGenerator",
     "DOTFAAGenerator",
     "EPAGenerator",
     "NOAAGenerator",

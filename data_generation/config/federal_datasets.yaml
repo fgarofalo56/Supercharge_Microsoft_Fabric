@@ -347,6 +347,105 @@ agencies:
         update_frequency: "56-day AIRAC cycle"
         notable: "19,000+ airports including elevation, runway length, operations count"
 
+  doj:
+    name: "Department of Justice"
+    acronym: "DOJ"
+    portal: "https://www.justice.gov/open/open-data"
+    data_gov: "https://catalog.data.gov/organization/doj-gov"
+    sub_agencies: ["FBI", "DEA", "BOP", "USAO", "ATF"]
+    datasets:
+      - name: "FBI Crime Data Explorer"
+        description: "National Incident-Based Reporting System (NIBRS) crime data"
+        url: "https://cde.ucr.cjis.gov"
+        api_docs: "https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/docApi"
+        format: "JSON, CSV"
+        api_key_required: true
+        api_key_signup: "https://api.usa.gov/signup/"
+        domains: ["crime_stats", "incidents", "offenses", "agencies", "arrests"]
+        size_estimate: "~20GB total, queries return subsets"
+        real_time: false
+        update_frequency: "annual (full year), quarterly (preliminary)"
+        sample_query: "https://api.usa.gov/crime/fbi/cde/estimate/national?API_KEY=YOUR_KEY"
+        notable: "Free API key via api.usa.gov, covers 18,000+ agencies, 30+ NIBRS offenses"
+
+      - name: "USSC Federal Sentencing Data"
+        description: "US Sentencing Commission individual offender sentencing data"
+        url: "https://www.ussc.gov/research/datafiles/commission-datafiles"
+        format: "CSV, SAS, SPSS"
+        api_key_required: false
+        domains: ["federal_cases", "sentencing", "guidelines", "demographics"]
+        size_estimate: "~2GB per fiscal year"
+        real_time: false
+        update_frequency: "annual"
+        notable: "Individual-level data for 70,000+ cases/year, 94 districts, 13 circuits"
+
+      - name: "DOJ Antitrust Case Filings"
+        description: "Antitrust Division case filings, merger reviews, consent decrees"
+        url: "https://www.justice.gov/atr/antitrust-case-filings"
+        api_docs: "https://catalog.data.gov/dataset?q=antitrust&organization=doj-gov"
+        format: "CSV, JSON"
+        api_key_required: false
+        domains: ["antitrust", "mergers", "cartels", "consent_decrees"]
+        size_estimate: "~500MB"
+        real_time: false
+        update_frequency: "as filed"
+        notable: "Includes HSR filings, merger challenges, cartel prosecutions, penalty data"
+
+      - name: "HSR Merger Filing Data"
+        description: "Hart-Scott-Rodino premerger notification filings"
+        url: "https://www.ftc.gov/policy/reports/policy-reports/annual-competition-reports"
+        format: "CSV, PDF"
+        api_key_required: false
+        domains: ["mergers", "hsr_filings", "market_concentration"]
+        size_estimate: "~100MB"
+        real_time: false
+        update_frequency: "annual"
+        notable: "Joint DOJ/FTC data, includes filing counts, second requests, enforcement actions"
+
+      - name: "DEA Drug Seizure Statistics"
+        description: "Drug Enforcement Administration seizure and enforcement data"
+        url: "https://www.dea.gov/data-and-statistics"
+        format: "CSV, PDF"
+        api_key_required: false
+        domains: ["drug_enforcement", "seizures", "scheduling", "lab_data"]
+        size_estimate: "~200MB"
+        real_time: false
+        update_frequency: "annual"
+        notable: "23 DEA field divisions, 7 major drug categories, CSA schedules"
+
+      - name: "BOP Federal Prison Statistics"
+        description: "Bureau of Prisons inmate demographics and facility data"
+        url: "https://www.bop.gov/about/statistics/"
+        format: "CSV, HTML"
+        api_key_required: false
+        domains: ["incarceration", "demographics", "facilities"]
+        size_estimate: "~50MB"
+        real_time: false
+        update_frequency: "weekly (population), annual (detailed)"
+        notable: "155,000+ federal inmates, 122 facilities, demographics by offense type"
+
+      - name: "BJS National Crime Victimization Survey"
+        description: "Bureau of Justice Statistics crime victimization data"
+        url: "https://bjs.ojp.gov/data-collection/ncvs"
+        format: "CSV, SAS"
+        api_key_required: false
+        domains: ["victimization", "crime_rates", "demographics"]
+        size_estimate: "~1GB"
+        real_time: false
+        update_frequency: "annual"
+        notable: "240,000 interviews/year, unreported crime estimates"
+
+      - name: "Vera Institute Incarceration Trends"
+        description: "County-level incarceration and jail data (1970-present)"
+        url: "https://github.com/vera-institute/incarceration-trends"
+        format: "CSV"
+        api_key_required: false
+        domains: ["incarceration", "jail_population", "county_level"]
+        size_estimate: "~100MB"
+        real_time: false
+        update_frequency: "annual"
+        notable: "Open-source, county-level, includes pretrial and sentenced populations"
+
 # Geospatial Reference Datasets (used across agencies)
 geospatial_reference:
   - name: "US Census TIGER/Line Shapefiles"

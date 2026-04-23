@@ -66,6 +66,14 @@ def dot_faa_generator():
 
 
 @pytest.fixture
+def doj_generator():
+    """Fixture for DOJ data generator."""
+    from generators.federal.doj_generator import DOJGenerator
+
+    return DOJGenerator(seed=42)
+
+
+@pytest.fixture
 def sample_size():
     """Default sample size for batch tests."""
     return 100

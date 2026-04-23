@@ -193,6 +193,8 @@ nav:
     - 34 - NOAA Weather & Climate: tutorials/34-noaa-weather-climate/README.md
     - 35 - EPA Environment: tutorials/35-epa-environment/README.md
     - 36 - DOI Interior: tutorials/36-doi-interior/README.md
+    - 37 - Graph Analytics: tutorials/37-graph-analytics/README.md
+    - 38 - DOJ Justice: tutorials/38-doj-justice/README.md
     - Cheat Sheet: tutorials/CHEAT_SHEET.md
   
   - POC Agenda:
@@ -203,6 +205,12 @@ nav:
     - Demo Runbook: poc-agenda/DEMO_RUNBOOK.md
     - Diagram Guide: poc-agenda/DIAGRAM_GUIDE.md
   
+  - Use Cases:
+    - Overview: use-cases/README.md
+    - Antitrust Analytics: use-cases/antitrust-analytics.md
+    - Federal Justice Analytics: use-cases/federal-justice-analytics.md
+    - Published References: use-cases/references/README.md
+
   - Features:
     - Fabric IQ: features/fabric-iq.md
     - Real-Time Intelligence: features/real-time-intelligence.md

@@ -32,6 +32,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 🔮 [Unreleased]
 
+### Added — Phase 13: DOJ Federal Domain + Use Cases
+
+#### DOJ Department of Justice (8th Federal Domain)
+- **doj_generator.py** — DOJGenerator with 4 domains: crime_stats (FBI NIBRS), federal_cases (USSC), antitrust (mergers/cartels), drug_enforcement (DEA)
+- **test_doj_generator.py** — 29 unit tests covering all 4 domains, HHI logic, sentencing ranges
+- **doj_download.py** — Open data download module for FBI CDE API, USSC, antitrust filings, HSR, DEA
+- **18_bronze_doj.py** — Bronze ingestion for 4 DOJ tables with schema enforcement
+- **18_silver_doj.py** — Silver transformations with NIBRS validation, HHI classification, DQ scoring
+- **19_gold_doj_analytics.py** — Gold analytics: crime trends, sentencing analytics, antitrust metrics, drug enforcement
+- **4 GE suites** — Great Expectations for crime_stats, federal_cases, antitrust, drug_enforcement
+- **Tutorial 38** — DOJ Justice Analytics step-by-step guide
+- **doj_justice_report.json** — Power BI report template (4 pages: Crime, Sentencing, Antitrust, DEA)
+- **federal_datasets.yaml** — Added DOJ agency block with 8 public datasets (FBI CDE, USSC, Antitrust, HSR, DEA, BOP, BJS, Vera)
+
+#### Use Cases Section
+- **docs/use-cases/README.md** — Use cases index page
+- **docs/use-cases/antitrust-analytics.md** — HHI concentration analysis, 2023 Merger Guidelines, cartel detection, cross-domain analysis
+- **docs/use-cases/federal-justice-analytics.md** — Crime analytics, sentencing disparity, prosecution pipeline, drug enforcement
+- **docs/use-cases/references/README.md** — Curated published DOJ/FBI/USSC/DEA resources with URLs
+
+### Changed
+- **README.md** — Added DOJ to federal domain listing, bumped tutorial count to 38
+- **CLAUDE.md** — Updated domain listing with DOJ
+- **__init__.py** — Added DOJGenerator export
+- **conftest.py** — Added doj_generator fixture
+
 ### Planned
 - Additional Power BI report templates
 - Enhanced compliance reporting

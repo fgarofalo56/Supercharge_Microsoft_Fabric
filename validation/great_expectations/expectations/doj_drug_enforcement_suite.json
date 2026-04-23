@@ -1,0 +1,96 @@
+{
+  "expectation_suite_name": "doj_drug_enforcement_suite",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "seizure_id" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "drug_type" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "drug_schedule" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "quantity_kg" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "estimated_street_value_usd" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "region" }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": { "column": "quarter" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": { "column": "seizure_id" },
+      "meta": { "notes": "Seizure ID is the primary identifier" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": { "column": "seizure_id" },
+      "meta": { "notes": "Seizure ID must be unique" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "drug_type",
+        "value_set": ["Cocaine", "Heroin", "Fentanyl", "Methamphetamine", "Cannabis", "MDMA", "Other"]
+      },
+      "meta": { "notes": "DEA drug classification types" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "drug_schedule",
+        "value_set": ["I", "II"]
+      },
+      "meta": { "notes": "Controlled Substances Act schedule classification" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": { "column": "quantity_kg", "min_value": 0, "max_value": null, "strictly": true },
+      "meta": { "notes": "Seizure quantity must be strictly positive" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": { "column": "estimated_street_value_usd", "min_value": 0, "max_value": null, "strictly": true },
+      "meta": { "notes": "Estimated street value must be strictly positive" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "quarter",
+        "value_set": [1, 2, 3, 4]
+      },
+      "meta": { "notes": "Fiscal quarter must be 1-4" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "seizure_type",
+        "value_set": ["Land", "Maritime", "Air", "Mail"]
+      },
+      "meta": { "notes": "DEA seizure method classification" }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": { "column": "arrests_count", "min_value": 0, "max_value": null },
+      "meta": { "notes": "Arrests count must be non-negative" }
+    }
+  ],
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "notes": "Data quality expectations for DEA drug seizure and enforcement data",
+    "domain": "Department of Justice - Drug Enforcement",
+    "data_source": "DEA Data & Statistics (dea.gov/data-and-statistics)"
+  }
+}

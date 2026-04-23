@@ -6,7 +6,7 @@
 **Type:** Infrastructure + Documentation + Data Engineering
 **Primary Stack:** Bicep, Python, PySpark, KQL, DAX
 **Target Platform:** Microsoft Fabric (F64 SKU)
-**Phase Status:** Phase 11 Complete (Audit Remediation, 2026-04-15)
+**Phase Status:** Phase 13 In Progress (DOJ Domain + Use Cases, 2026-04-23)
 
 ## Key Technologies
 
@@ -25,14 +25,15 @@ infra/              - Bicep IaC modules and deployments
 docs/               - Architecture, deployment, best practices, feature docs
   best-practices/   - Error handling, alerting, performance, governance, CI/CD, CMK, OAP, capacity, BCDR, testing, RBAC, network, medallion, migration, observability, multi-tenant, sharing, CDC
   features/         - 22 feature docs: Fabric IQ, RTI, Copilot, Data Mesh, DTB, Data Agents, OneLake Security, Mirroring, Direct Lake, SQL DB, GraphQL, Semantic Link, Catalog, AutoML, Translytical, MCP, Monitoring, Copy Job, Iceberg, dbt, MLV, Vector DB
-tutorials/          - 37 step-by-step tutorials (00-36)
+tutorials/          - 38 step-by-step tutorials (00-38)
 poc-agenda/         - 3-day workshop materials
-data_generation/    - 16 Python data generators (casino, federal, streaming, analytics)
-  open_data/        - Real federal dataset download scripts (USDA, SBA, NOAA, EPA, DOI)
-notebooks/          - 55+ Fabric-importable notebooks (medallion + streaming + federal + AI)
-  bronze/           - 17 Bronze ingestion notebooks (casino + 5 federal agencies + shortcuts)
-  silver/           - 16 Silver transformation notebooks
-  gold/             - 18 Gold KPI/analytics notebooks (+ digital twin, AI functions)
+data_generation/    - 17 Python data generators (casino, federal, streaming, analytics)
+  open_data/        - Real federal dataset download scripts (USDA, SBA, NOAA, EPA, DOI, DOJ)
+notebooks/          - 58+ Fabric-importable notebooks (medallion + streaming + federal + AI)
+  bronze/           - 18 Bronze ingestion notebooks (casino + 6 federal agencies + shortcuts)
+  silver/           - 17 Silver transformation notebooks
+  gold/             - 19 Gold KPI/analytics notebooks (+ digital twin, AI functions)
+  docs/use-cases/   - Applied analytics use cases with published references
 scripts/            - Deployment scripts (fabric-cicd)
 validation/         - 612 unit tests + 9 Great Expectations suites
 ```
