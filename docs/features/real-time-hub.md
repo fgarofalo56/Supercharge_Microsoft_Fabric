@@ -319,6 +319,40 @@ NOAA severe-weather-alerts → shared with:
 
 ---
 
+## 📊 Capacity Events in Real-Time Hub (Preview)
+
+Announced at FabCon Atlanta March 2026, **Capacity Events** bring real-time visibility into Fabric capacity usage directly into the Real-Time Hub. This enables proactive workload management by surfacing:
+
+- **Throttling Events**: Alerts when capacity throttling begins or ends
+- **Usage Spikes**: Real-time CU consumption exceeding configurable thresholds
+- **Performance Degradation**: Latency increases across workloads detected automatically
+- **Capacity Utilization**: Continuous percentage utilization stream updated every 30 seconds
+
+### How It Works
+
+Capacity events appear as a new **system event source** in the Real-Time Hub. Once enabled:
+
+1. Navigate to **Real-Time Hub** → **System Events** → **Capacity Events**
+2. Select the target Fabric capacity
+3. Configure event filters (throttling, utilization thresholds, latency)
+4. Route events to an Eventstream, KQL Database, or Data Activator reflex
+5. Build dashboards or automated responses on the event stream
+
+### Casino Use Case
+
+Casino gaming floors generate unpredictable compute spikes during peak hours (Friday/Saturday nights, major sporting events). Capacity events enable:
+
+- Real-time alerts when slot telemetry ingestion causes throttling
+- Automated scaling triggers via Data Activator (e.g., pause low-priority refreshes)
+- Historical analysis of capacity patterns for F64 right-sizing decisions
+- Correlation of CU spikes with specific workloads (e.g., CTR batch processing)
+
+### Federal Use Case
+
+Federal agencies with shared Fabric tenants (e.g., USDA + NOAA sharing capacity) can monitor per-agency consumption and prevent one agency's batch jobs from throttling another's real-time dashboards. Capacity events provide the telemetry foundation for chargeback models and fair-use enforcement across organizational boundaries.
+
+---
+
 ## 🔗 Related Documents
 
 - [Real-Time Intelligence](real-time-intelligence.md) — Eventstreams and Eventhouse for analytics

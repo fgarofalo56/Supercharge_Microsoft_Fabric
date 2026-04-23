@@ -950,6 +950,36 @@ flowchart TD
 
 ---
 
+## 🆕 FabCon 2026: Capacity Billing Enhancements
+
+### Capacity Overage Billing (Preview)
+
+Previously, when a Fabric capacity hit its CU limit, workloads were **throttled** — queries slowed, refreshes delayed, and notebooks queued. Starting with the FabCon 2026 announcement, **Capacity Overage Billing** introduces a pay-as-you-go overflow model:
+
+- Workloads **continue running** when capacity limits are exceeded
+- Overage consumption is billed at **on-demand rates** (typically 1.5-2x reserved pricing)
+- Admins set **overage caps** to prevent runaway costs (e.g., "allow up to 20% overage")
+- Billing reports break down reserved vs. overage consumption with hourly granularity
+- Overage events are surfaced in the **Capacity Metrics app** and via Real-Time Hub capacity events
+
+**Casino Impact**: During peak gaming hours, slot telemetry ingestion and real-time dashboards no longer risk throttling. Overage billing absorbs the spike, ensuring compliance reporting (CTR, SAR) is never delayed. Post-event analysis shows exact overage cost vs. the business impact of delayed reporting.
+
+**Federal Impact**: End-of-fiscal-year reporting surges no longer require pre-provisioned capacity headroom. Agencies pay only for actual overage, aligning cloud costs with the government's consumption-based budgeting model.
+
+### Workspace-Level Surge Protection (Preview)
+
+Complementing overage billing, **Workspace-Level Surge Protection** gives admins fine-grained controls to prevent individual workspaces from monopolizing shared capacity:
+
+- Set **per-workspace CU ceilings** (e.g., "Dev workspace max 20% of capacity")
+- Configure **priority tiers** for workspaces (Production > Staging > Dev)
+- Enable **automatic throttling** at workspace level without affecting other workspaces
+- View per-workspace consumption in the Capacity Metrics app with drill-down by item type
+- Define **burst windows** allowing temporary ceiling overrides during scheduled operations
+
+This is critical for multi-tenant deployments where casino gaming workloads, hotel analytics, and restaurant reporting share a single F64 capacity. Surge protection ensures a runaway development notebook never impacts production compliance dashboards.
+
+---
+
 ## Related Documents
 
 - [Performance & Parallelism](./performance-parallelism.md) -- Spark and pipeline performance tuning

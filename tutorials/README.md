@@ -18,7 +18,7 @@
 
 ## 🎯 Overview
 
-This tutorial series of 37 tutorials guides you through implementing a complete Microsoft Fabric data platform for casino/gaming and federal agency analytics. Starting from environment setup through advanced AI/ML, migration, streaming, federal agency POCs, and enterprise best practices, you'll learn industry best practices for medallion architecture, real-time analytics, and data governance.
+This tutorial series of 38 tutorials guides you through implementing a complete Microsoft Fabric data platform for casino/gaming and federal agency analytics. Starting from environment setup through advanced AI/ML, migration, streaming, federal agency POCs, and enterprise best practices, you'll learn industry best practices for medallion architecture, real-time analytics, and data governance.
 
 ### What You'll Build
 
@@ -97,6 +97,10 @@ flowchart LR
         T36[36-DOI]
     end
 
+    subgraph L13["🔗 Graph Analytics"]
+        T37[37-Graph]
+    end
+
     T00 --> T01 --> T02 --> T03 --> T04 --> T05
     T05 --> T06 --> T07 --> T08 --> T09
     T09 --> T10 --> T11
@@ -107,6 +111,7 @@ flowchart LR
     T23 --> T24 --> T25 --> T26
     T26 --> T27 --> T28 --> T29 --> T30 --> T31
     T31 --> T32 --> T33 --> T34 --> T35 --> T36
+    T36 --> T37
 ```
 
 ---
@@ -146,12 +151,12 @@ Complete tutorials in sequence for the best learning experience:
 ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║
 ╚════════╩════════╩════════╩════════╩════════╩════════╩════════╩════════╝
 
-╔════════╦════════╦════════╦════════╦════════╗
-║   32   ║   33   ║   34   ║   35   ║   36   ║
-║  USDA  ║  SBA   ║  NOAA  ║  EPA   ║  DOI   ║
-╠════════╬════════╬════════╬════════╬════════╣
-║  ⭐⭐  ║  ⭐⭐  ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║
-╚════════╩════════╩════════╩════════╩════════╝
+╔════════╦════════╦════════╦════════╦════════╦════════╗
+║   32   ║   33   ║   34   ║   35   ║   36   ║   37   ║
+║  USDA  ║  SBA   ║  NOAA  ║  EPA   ║  DOI   ║ GRAPH  ║
+╠════════╬════════╬════════╬════════╬════════╬════════╣
+║  ⭐⭐  ║  ⭐⭐  ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║ ⭐⭐⭐ ║
+╚════════╩════════╩════════╩════════╩════════╩════════╝
  Beginner ──────────────────────────────────────────────────────────────────────► Advanced
 ```
 
@@ -210,6 +215,8 @@ Complete tutorials in sequence for the best learning experience:
 | | [34 - NOAA Weather & Climate](./34-noaa-weather-climate/README.md) | Weather, storms, climate trends & real-time | ~2.5 hours |
 | | [35 - EPA Environment](./35-epa-environment/README.md) | Air quality, toxic releases, water compliance | ~2.5 hours |
 | | [36 - DOI Natural Resources](./36-doi-interior/README.md) | Earthquakes, water, parks, species analytics | ~2.5 hours |
+| **🔗 Graph Analytics** | | | |
+| | [37 - Graph Analytics for Fraud Detection](./37-graph-analytics/README.md) | Graph modeling, fraud pattern detection, network visualization | ~1.5 hours |
 
 ---
 
