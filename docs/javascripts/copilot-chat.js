@@ -19,7 +19,7 @@
   /* ── Configuration ─────────────────────────────────────────────── */
   var CONFIG = Object.assign(
     {
-      apiEndpoint: "https://fabric-copilot-docs-fg.azurewebsites.net/api/chat",
+      apiEndpoint: "https://fabric-copilot-docs-ldai.azurewebsites.net/api/chat",
       maxHistory: 20,
       rateLimitMs: 1500,
       siteUrl: "https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/",
