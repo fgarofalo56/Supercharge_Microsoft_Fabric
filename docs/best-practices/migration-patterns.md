@@ -14,7 +14,21 @@
 
 ---
 
-**Last Updated:** `2026-04-13` | **Version:** 1.0.0
+**Last Updated:** `2026-04-27` | **Version:** 1.1.0
+
+---
+
+> 🆕 **Phase 14 Wave 4 — Migration Source Expansion (2026-04-27)**
+>
+> Five new end-to-end tutorials add detailed playbooks for the most-asked enterprise migration sources. Each ships with assessment scripts, schema/SQL converters, validation suites, and capacity-sizing references. Use this best-practices doc for cross-source patterns; deep-dive into the dedicated tutorials when executing a specific source migration.
+>
+> | Source | Tutorial | Focus |
+> |--------|----------|-------|
+> | Azure Synapse Analytics | [Tutorial 41](../../tutorials/41-synapse-to-fabric/README.md) | Dedicated SQL pool, Spark pool, ADLS Gen2, Synapse Pipelines |
+> | Databricks | [Tutorial 42](../../tutorials/42-databricks-to-fabric/README.md) | Workspace, Unity Catalog, Delta, Workflows, MLflow, DBSQL |
+> | Amazon Redshift | [Tutorial 43](../../tutorials/43-redshift-to-fabric/README.md) | RA3/DC2 cluster, Spectrum, Glue Catalog, WLM, multi-cloud egress |
+> | Google BigQuery | [Tutorial 44](../../tutorials/44-bigquery-to-fabric/README.md) | Slots, partitioning/clustering, Dataflow, BQML, Looker, GCP egress |
+> | On-Prem SSAS/SSIS/SSRS | [Tutorial 45](../../tutorials/45-onprem-ssas-ssis-ssrs/README.md) | MSBI stack — Tabular & Multidim cubes, packages, RDL reports |
 
 ---
 
@@ -534,6 +548,258 @@ For cross-cloud or cross-organization sharing, use the Delta Sharing protocol.
 # In Databricks: publish tables to a share
 # In Fabric: consume via shortcut with Delta Sharing profile
 ```
+
+---
+
+### 🔷 Azure Synapse Analytics Migration Pattern
+
+Azure Synapse → Fabric is the **most-asked enterprise migration** because Synapse and Fabric share Microsoft DNA, but the architectural shift from DWUs to CUs and from Spark/SQL silos to a unified capacity is real. The migration pivots on three big wins: Dedicated SQL pool DDL converts cleanly to Fabric Warehouse (drop the `DISTRIBUTION` and `CLUSTERED COLUMNSTORE` clauses; Fabric handles those automatically via V-Order), ADLS Gen2 storage moves to OneLake via shortcut (no data copy), and Synapse Spark notebooks port with mostly mechanical `mssparkutils` adjustments.
+
+**Detailed playbook:** [Tutorial 41 — Synapse → Fabric](../../tutorials/41-synapse-to-fabric/README.md)
+
+#### Component Mapping (Synapse → Fabric)
+
+| Synapse Component | Fabric Equivalent | Migration Approach |
+|-------------------|-------------------|--------------------|
+| Dedicated SQL pool (DWUs) | Fabric Warehouse (CUs) | DDL conversion + CTAS bulk load |
+| Serverless SQL pool | Fabric SQL endpoint over Lakehouse | Often direct (T-SQL → Lakehouse SQL) |
+| Spark pool | Fabric Spark + notebooks | Notebook code mostly portable |
+| Synapse Pipelines | Fabric Data Pipelines | Activities mostly compatible |
+| Mapping Data Flows | Dataflow Gen2 | **Manual recreation** in Power Query |
+| ADLS Gen2 (linked) | OneLake shortcut | **No data movement needed** |
+| Synapse Studio notebooks | Fabric notebooks | Minor API tweaks (`mssparkutils` shim) |
+| Stream Analytics | Eventstream + Eventhouse | Re-author logic |
+| Linked services | Connections | Recreate; secrets to Key Vault |
+
+#### Type Conversion Highlights
+
+| Synapse Type | Fabric Warehouse Type | Notes |
+|--------------|----------------------|-------|
+| `nvarchar(n)` | `varchar(n)` | UTF-8 default in Fabric |
+| `datetime` | `datetime2(6)` | Recommended upgrade |
+| `xml` | `varchar(max)` + JSON | Not supported — convert |
+| `geography`, `geometry` | Use Lakehouse + `sedona` | Not in Warehouse |
+| `hierarchyid` | Materialized path string | Not supported |
+
+#### DWU → F-SKU Sizing (Starting Point)
+
+| Synapse DWU | Approximate Fabric F-SKU |
+|-------------|--------------------------|
+| DW100c | F8 |
+| DW1000c | F64 |
+| DW3000c | F128 |
+| DW6000c | F256 |
+| DW15000c | F1024 |
+
+> 💡 **When to use this approach:** Existing Azure Synapse Analytics estate (Dedicated SQL pool, Spark pool, or both). Goal is unified capacity model, Direct Lake BI, and elimination of Spark/SQL billing silos. Synapse SQL pools are entering sustaining mode — Fabric is where new investment lands. Validate F-SKU sizing empirically during coexistence; CU pool also serves Power BI and RTI.
+
+---
+
+### 🧱 Databricks Migration Pattern (Detailed)
+
+Databricks → Fabric is the **smoothest cloud-to-cloud migration** because both platforms speak Delta Lake natively. The technical lift is small; the strategic question is bigger — moving onto a Microsoft platform that bundles BI, real-time, governance, and ML alongside Spark, with a single capacity-based commercial model. The migration pivots on Delta-table movement (shortcut-in-place or rewrite for V-Order), Unity Catalog → OneLake Catalog governance translation, `dbutils` → `mssparkutils` shim, Workflows → Fabric Pipelines, and MLflow registry export-import.
+
+**Detailed playbook:** [Tutorial 42 — Databricks → Fabric](../../tutorials/42-databricks-to-fabric/README.md)
+
+#### Workflow / Activity Mapping (Databricks → Fabric)
+
+| Databricks Component | Fabric Equivalent | Migration Approach |
+|----------------------|-------------------|--------------------|
+| Databricks Workspace | Fabric Workspace | New workspace per source workspace |
+| Unity Catalog | OneLake Catalog + Lakehouse schemas | Three-part name preserved |
+| Delta tables on ADLS/S3 | Delta in OneLake | **Shortcut (zero-copy)** OR rewrite for V-Order |
+| Iceberg / UniForm tables | OneLake Iceberg shortcut | Direct |
+| Notebooks (`dbutils`) | Fabric Notebooks (`mssparkutils`) | Port code with shim |
+| Workflows / Jobs | Fabric Data Pipelines | Activity translation |
+| Delta Live Tables (DLT) | Materialized Lake Views | SQL DLT direct; Python DLT rewrite |
+| MLflow Registry | Fabric Model Registry | `mlflow-export-import` tool |
+| Model Serving | Fabric Real-Time Endpoints | Re-deploy registered model |
+| DBSQL Warehouses | Fabric Warehouse + SQL endpoint | DDL conversion + V-Order |
+| Cluster pools (DBU) | Fabric Spark capacity (CU) | Auto-scales within F-SKU |
+| Photon engine | V-Order + Native Execution Engine | Different code path, similar perf |
+
+#### V-Order Benefits (vs. Photon-only Optimization)
+
+| Benefit | Databricks | Fabric |
+|---------|-----------|--------|
+| BI hot-path latency | Photon cluster + cached | Direct Lake (no copy, no refresh) |
+| File compaction | `OPTIMIZE` (compaction only) | `OPTIMIZE table VORDER` (V-Order + compaction) |
+| BI cache | Separate per cluster | Shared via OneLake + capacity cache |
+| Billing | Photon DBU surcharge | Included in F-SKU |
+| Liquid clustering | Supported | Supported (Runtime 1.3+) |
+
+#### DBU → F-SKU Sizing (Starting Point)
+
+| Databricks Avg Active DBU/hr | Approximate Fabric F-SKU |
+|------------------------------|--------------------------|
+| ~1 DBU/hr (small dev) | F8 |
+| ~10 DBU/hr | F32 |
+| ~25 DBU/hr | F64 (POC/production baseline) |
+| ~100 DBU/hr | F256 |
+| ~400 DBU/hr | F1024 |
+
+> 💡 **When to use this approach:** Databricks-on-Azure or Databricks-on-AWS workloads where governance, BI consolidation, and predictable monthly billing are the strategic drivers. Best results when source uses ADLS Gen2 (zero-copy via shortcut). Photon-heavy SQL workloads need a perf-tuning pass post-migration since some Photon-only functions fall back to JVM Spark on Fabric. Always re-bench DBU → CU empirically — Photon-DBU and serverless-SQL-DBU consume at different ratios.
+
+---
+
+### 🟧 Amazon Redshift Migration Pattern
+
+Amazon Redshift → Fabric is a **multi-cloud migration** — increasingly common as enterprises consolidate analytics estates onto Microsoft Fabric while keeping operational workloads in AWS. The migration pivots on `UNLOAD` to S3 (Parquet/Snappy), OneLake shortcuts to S3 (zero-copy, zero AWS egress on shortcuts), Redshift PostgreSQL DDL → Fabric T-SQL, and **stripping** Redshift-specific physical tuning clauses (`DISTKEY`, `SORTKEY`, `ENCODE`) which V-Order replaces automatically. Spectrum external tables are the cheapest part of the migration — same S3 prefix becomes a OneLake shortcut with no data movement.
+
+**Detailed playbook:** [Tutorial 43 — Redshift → Fabric](../../tutorials/43-redshift-to-fabric/README.md)
+
+#### Component Mapping (Redshift → Fabric)
+
+| Redshift Component | Fabric Equivalent | Migration Approach |
+|--------------------|-------------------|--------------------|
+| Redshift cluster | Fabric Warehouse | DDL conversion + UNLOAD/COPY load |
+| RA3 / DC2 nodes | Fabric Capacity (CU model) | Heuristic node → CU sizing table |
+| `DISTKEY` / `DISTSTYLE` | V-Order automatic | **Remove** — Fabric optimizes automatically |
+| `SORTKEY` (compound / interleaved) | V-Order automatic | **Remove** — Fabric maintains physical order |
+| `ENCODE` (LZO, ZSTD, AZ64) | Delta + Parquet compression | **Remove** — handled automatically |
+| WLM (Workload Management) queues | Workspace + capacity assignment | Map queues to workspaces |
+| Concurrency Scaling | Capacity bursting + smoothing | Replace WLM auto-scale |
+| Python UDFs (plpythonu) | Fabric notebook function (PySpark) | Manual port |
+| SQL UDFs | T-SQL inline / scalar function | Mostly direct |
+| Stored procedures (plpgsql) | T-SQL stored procedures | Syntax tweaks |
+| **Redshift Spectrum** (S3 externals) | **OneLake shortcut to S3** | **No copy** — same S3 prefix |
+| AWS Glue Data Catalog | OneLake Catalog | Metadata sync; rebuild lineage in Purview |
+
+#### Spectrum → OneLake Shortcut (Zero Egress)
+
+Spectrum tables already live as files on S3. The fastest possible migration: create a OneLake shortcut to the same S3 prefix. **No data movement, no AWS egress.** Both Redshift Spectrum and Fabric read the same prefix during coexistence.
+
+#### RA3 → F-SKU Sizing (Starting Point)
+
+| Redshift Cluster | Approximate Fabric F-SKU |
+|------------------|--------------------------|
+| 2× `dc2.large` | F8 |
+| 4× `ra3.xlplus` | F32 |
+| 4× `ra3.4xlarge` | F64 |
+| 8× `ra3.4xlarge` | F128 |
+| 8× `ra3.16xlarge` | F512 |
+| 32× `ra3.16xlarge` | F2048 |
+
+> 💡 **When to use this approach:** AWS Redshift estate where Microsoft 365 / Power BI / Purview integration justifies the multi-cloud migration. **Critical: read the AWS egress mitigation section in Tutorial 43 first** — naïve full-table copies can spike GCP/AWS bills by tens of thousands of dollars. Default to S3 shortcuts during coexistence and only materialize hot BI tables into managed OneLake Delta. Co-locate Azure region with AWS region (e.g., `us-east-1` ↔ `eastus2`) for egress tier savings.
+
+---
+
+### 🔵 Google BigQuery Migration Pattern
+
+Google BigQuery → Fabric is a **multi-cloud migration** where dialect translation and cross-cloud egress are the two dominant cost drivers. The migration pivots on BigQuery `EXPORT DATA OPTIONS(format='PARQUET')` to GCS, OneLake shortcuts to GCS during coexistence (zero copy), Standard SQL → T-SQL dialect translation (the translator handles ~80% mechanically), partitioning + clustering → Delta partitioning + Z-Order, and JS UDFs → PySpark notebook UDFs. STRUCT and ARRAY columns are the hardest type-mapping problem — T-SQL has no native equivalents, so they land as JSON `varchar(max)` or move to Lakehouse for native Spark complex-type handling.
+
+**Detailed playbook:** [Tutorial 44 — BigQuery → Fabric](../../tutorials/44-bigquery-to-fabric/README.md)
+
+#### Component Mapping (BigQuery → Fabric)
+
+| BigQuery Component | Fabric Equivalent | Migration Approach |
+|--------------------|-------------------|--------------------|
+| BigQuery dataset | Fabric Warehouse / Lakehouse | DDL conversion + EXPORT/COPY |
+| Slot model (on-demand or reserved) | CU model (F-SKU) | Empirical sizing from query history |
+| Date / integer / ingestion-time partitioning | Delta partitioning | Convert to `PARTITIONED BY (col)` |
+| Clustering keys | Delta Z-Order / V-Order | Z-Order on Lakehouse; V-Order auto in Warehouse |
+| Authorized views | Row-level security | T-SQL `CREATE SECURITY POLICY` |
+| Standard SQL UDF | T-SQL UDF | Direct port for most |
+| JavaScript UDF | Notebook Python UDF | Re-author logic in PySpark |
+| Materialized views | Materialized Lake Views | Recreate in Lakehouse |
+| Google Cloud Storage (GCS) | OneLake shortcut to GCS | **No data movement during coexistence** |
+| BigQuery ML | Fabric AutoML / notebooks | Re-train; export coefficients where needed |
+| Dataflow (Apache Beam) | Fabric Pipelines + Notebooks | Pattern-by-pattern |
+| Cloud Composer (Airflow) | Fabric Pipelines OR Apache Airflow Job (preview) | Pipelines for most |
+| Looker | Power BI semantic models | LookML → Tabular model |
+
+#### Dialect Translation Highlights (Standard SQL → T-SQL)
+
+| BigQuery | T-SQL | Notes |
+|----------|-------|-------|
+| `SAFE_CAST(x AS INT64)` | `TRY_CAST(x AS BIGINT)` | INT64 = BIGINT |
+| `DATE_DIFF(d1, d2, DAY)` | `DATEDIFF(DAY, d2, d1)` | Argument order flipped |
+| `IFNULL(x, y)` | `ISNULL(x, y)` or `COALESCE` | |
+| `STRUCT(a, b, c)` | Flatten OR JSON `varchar(max)` | T-SQL has no native STRUCT |
+| `ARRAY<INT64>` + `UNNEST(arr)` | JSON + `CROSS APPLY OPENJSON` | T-SQL has no native array |
+| `QUALIFY ROW_NUMBER()...` | CTE + `WHERE rn = 1` | T-SQL has no QUALIFY |
+| `APPROX_COUNT_DISTINCT(x)` | `APPROX_COUNT_DISTINCT(x)` | T-SQL has it (HLL) |
+
+#### Slot → F-SKU Sizing (Starting Point)
+
+| BigQuery Slot Reservation | Approximate Fabric F-SKU |
+|---------------------------|--------------------------|
+| 100 slots | F8 |
+| 500 slots | F16-F32 |
+| 1,000 slots | F32-F64 |
+| 2,000 slots | F64 (default starting point) |
+| 5,000 slots | F128 |
+| 10,000 slots | F256 |
+| 20,000 slots | F512 |
+
+#### Partitioning + Clustering → Delta + Z-Order
+
+| BigQuery Feature | Fabric Equivalent |
+|------------------|-------------------|
+| Date partitioning | Delta `PARTITIONED BY (dt DATE)` |
+| Integer-range partitioning | Delta `PARTITIONED BY (bucket INT)` |
+| Ingestion-time partitioning | Delta `PARTITIONED BY (ingestion_date)` |
+| Clustering keys (1-4 cols) | Z-Order on Lakehouse / V-Order on Warehouse |
+
+> 💡 **When to use this approach:** GCP BigQuery estate where multi-cloud sprawl reduction and unified Microsoft 365 / Power BI / Purview governance justify cross-cloud migration. **Critical: budget GCP egress before the first byte moves** — first 1 TB/month is ~$120/TB. Default to GCS shortcuts during coexistence; only materialize hot BI tables to managed OneLake Delta. Co-locate Azure region with GCP region for egress tier savings. STRUCT/ARRAY-heavy datasets land in Lakehouse, not Warehouse.
+
+---
+
+### 📊 On-Prem MSBI Stack (SSAS / SSIS / SSRS) Migration Pattern
+
+The legacy Microsoft BI stack — SSAS (Tabular and Multidimensional), SSIS, and SSRS — is a **multi-product migration** that touches every layer of the analytics estate. The canonical wave order is **non-negotiable**: source data first (Mirroring or Copy Job CDC), then ETL (SSIS → Fabric Pipelines or Azure-SSIS bridge), then semantic (SSAS → Power BI semantic models via TMDL), then reports (SSRS → Paginated Reports). The hardest single task is Multidimensional cube migration, which requires a two-hop conversion (Multidim → Tabular → Power BI) plus manual MDX → DAX translation for every calculated member, named set, and scope assignment.
+
+**Detailed playbook:** [Tutorial 45 — On-Prem SSAS/SSIS/SSRS → Fabric](../../tutorials/45-onprem-ssas-ssis-ssrs/README.md)
+
+#### Component Mapping (MSBI → Fabric)
+
+| MSBI Component | Fabric Equivalent | Migration Approach |
+|----------------|-------------------|--------------------|
+| SQL Server source DB (OLTP) | Fabric Warehouse via **Mirroring** | Near-real-time, no ETL |
+| SQL Server source DB (batch) | Fabric Warehouse via **Copy Job CDC** | Hourly/daily incremental |
+| **SSAS Tabular** model | **Power BI semantic model** (Direct Lake or Import) | Direct via **TMDL** export/import |
+| **SSAS Multidimensional** cube | **Power BI semantic model** | **Two-step**: Multidim → Tabular (SSDT) → Power BI |
+| DAX measure (Tabular) | DAX measure (Power BI) | **Direct** — copy over |
+| **MDX measure** (Multidim) | DAX measure | **Manual translation** — the hardest part |
+| MDX named set / scope assignment | DAX table / `CALCULATE` filter | Manual rewrite — re-think the calc |
+| **SSIS package** (control flow) | **Fabric Pipeline** | Activity-by-activity mapping |
+| SSIS package (high-complexity) | Azure-SSIS IR (interim bridge) | Lift-and-shift, plan rewrite later |
+| SSIS Data Flow | Dataflow Gen2 OR Notebook | Power Query for simple; PySpark for complex |
+| SSIS Custom Component (C#) | Notebook rewrite OR Azure-SSIS | High-effort — see Tutorial 45 decision tree |
+| **SSRS report (RDL)** | **Fabric Paginated Report** | Re-target data source in Report Builder |
+| SSRS subscription (email) | Power BI subscription | Direct |
+| SSRS data-driven subscription | Power Automate flow OR PBI bursting | Re-author |
+| AD group → SSAS role | Entra group → Power BI role | Direct |
+| Multidim Cell Security | Power BI OLS + RLS combination | **Re-design** (no direct equivalent) |
+| Column-level encryption | OneLake Security + sensitivity labels + OLS | Re-design layered protection |
+
+#### MDX → DAX Translation Hardness
+
+| MDX Pattern | Hardness | Approach |
+|-------------|----------|----------|
+| `[Measures].[Sales]` | 🟢 Easy | Auto-translate to `[Sales]` |
+| `PARALLELPERIOD`, `LASTPERIODS` | 🟢 Easy | Direct DAX time-intelligence equivalent |
+| `IIF`, `EXISTS`, `MEMBERS` | 🟢 Easy | Pattern-similar to DAX |
+| Named sets | 🟡 Medium | DAX table variable or calc table |
+| Hierarchy navigation (`.Parent`) | 🟡 Medium | `PATH()` + `PATHITEM()` |
+| `SCOPE` assignments | 🔴 Hard | No equivalent — re-think as `CALCULATE` with filter override |
+| Cell calculations | 🔴 Hard | No equivalent — re-design |
+| Custom rollup operators | 🔴 Hard | No equivalent — `CALCULATE` + `AVERAGEX` |
+| Multidim Cell Security | 🔴 Hard | Re-design as RLS + OLS combination |
+
+> ⚠️ **MDX → DAX Translation Effort:** Auto-translation handles ~60% of patterns; the remaining 40% needs manual rewrite. Budget **2-3 person-days per "hard" cube**. The inventory script captures the cube's query log — calculations with **zero queries in 90 days** are decommissioning candidates, eliminating 30-50% of calc migration work.
+
+#### Hybrid Pattern (Keep On-Prem SQL Server, Move BI to Fabric)
+
+A common pattern delivers **80% of the modernization benefit with 20% of the source-system risk**:
+
+- **Source SQL Server stays on-prem** (the OLTP app isn't ready to move)
+- **Mirroring** replicates to Fabric continuously
+- **Direct Lake** semantic model in Fabric reads from the mirrored copy
+- **Power BI Service** delivers reports
+- **SSAS, SSIS, SSRS retire** even though the source DB does not
+
+> 💡 **When to use this approach:** Legacy SQL Server BI estate (typically SQL Server 2014/2016/2019 with cubes refreshed nightly and RDL reports distributed via email subscription). Best fit when (1) AD already syncs to Entra ID, (2) Tabular models dominate (Multidim is the long pole), (3) custom SSIS components are limited or already documented. Plan **4-8 week coexistence** with both stacks running in parallel — this is expensive but lets users validate report parity before flipping subscriptions. Use Azure-SSIS as an interim bridge for high-complexity packages, but treat it as a 12-18 month bridge, not a destination.
 
 ---
 
@@ -1080,6 +1346,23 @@ usda_sas_migration = {
 - [NIGC MICS Standards](https://www.nigc.gov/compliance/minimum-internal-control-standards) — Casino compliance requirements
 - [FedRAMP Authorization](https://www.fedramp.gov/) — Federal security controls
 - [USDA NASS QuickStats](https://quickstats.nass.usda.gov/) — Agricultural data source
+
+### Phase 14 Wave 4 — Source-Specific Migration Tutorials
+
+Detailed end-to-end playbooks for each supported source (assessment scripts, schema/SQL converters, validation suites, capacity sizing):
+
+- [Tutorial 41 — Azure Synapse Analytics → Fabric](../../tutorials/41-synapse-to-fabric/README.md) — Dedicated SQL pool, Spark pool, ADLS Gen2, Synapse Pipelines
+- [Tutorial 42 — Databricks → Fabric](../../tutorials/42-databricks-to-fabric/README.md) — Workspace, Unity Catalog, Delta, Workflows, MLflow, DBSQL
+- [Tutorial 43 — Amazon Redshift → Fabric](../../tutorials/43-redshift-to-fabric/README.md) — RA3/DC2 cluster, Spectrum, Glue Catalog, WLM, AWS egress mitigation
+- [Tutorial 44 — Google BigQuery → Fabric](../../tutorials/44-bigquery-to-fabric/README.md) — Slots, partitioning/clustering, Dataflow, BQML, Looker, GCP egress mitigation
+- [Tutorial 45 — On-Prem SSAS/SSIS/SSRS → Fabric](../../tutorials/45-onprem-ssas-ssis-ssrs/README.md) — MSBI stack: Tabular & Multidim cubes, packages, RDL reports
+
+### Synthetic Test Data Generators
+
+For development and testing of migration tooling without access to real source systems:
+
+- `data_generation/generators/migration/synapse_workload_inventory.py` — Synthetic Synapse workspace inventory (tables, pipelines, notebooks, DWU consumption)
+- `data_generation/generators/migration/databricks_workload_inventory.py` — Synthetic Databricks workspace inventory (notebooks, jobs, Unity Catalog tables, MLflow models, DBU consumption)
 
 ---
 
