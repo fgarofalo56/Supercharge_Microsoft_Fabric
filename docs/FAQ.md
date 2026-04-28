@@ -2,7 +2,7 @@
 
 > 🏠 [Home](index.md) > 📚 [Docs](./) > 💬 FAQ
 
-> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Last Updated**: 2026-04-27 | **Version**: 3.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
 <div align="center" markdown>
@@ -27,6 +27,12 @@
 - [🔧 Troubleshooting](#-troubleshooting)
 - [💰 Cost & Licensing](#-cost--licensing)
 - [🐳 Docker & Dev Containers](#-docker--dev-containers)
+- [🏗️ Architecture Deep Dive](#-architecture-deep-dive)
+- [⚡ Performance Tuning](#-performance-tuning)
+- [🤖 MLOps & AI](#-mlops--ai)
+- [🔄 Migrations](#-migrations)
+- [🛠️ Dev Experience](#-dev-experience)
+- [📜 Compliance Frameworks](#-compliance-frameworks)
 
 ---
 
@@ -1402,6 +1408,334 @@ docker-compose pull
 ```
 
 </details>
+
+---
+
+## 🏗️ Architecture Deep Dive
+
+### Why Lakehouse instead of Warehouse for this POC?
+
+The POC chose Lakehouse as the primary store for three reasons: (1) the diverse data formats across 9 industry verticals (Parquet, CSV, JSON) favor schema-on-read flexibility; (2) the PySpark-first notebook workflow aligns naturally with Lakehouse's Spark engine; and (3) Direct Lake mode provides zero-copy Power BI connectivity without Import refresh schedules. Warehouse is the better choice for T-SQL-heavy teams or migrations from Synapse Dedicated SQL Pool.
+
+See: [DECISION_TREES.md](DECISION_TREES.md#1-lakehouse-vs-warehouse-vs-sql-database) | [Lakehouse/Warehouse/SQL DB Decision Guide](best-practices/lakehouse-warehouse-sqldb-decision-guide.md)
+
+---
+
+### What goes in each medallion layer?
+
+| Layer | Content | Schema | Retention |
+|-------|---------|--------|-----------|
+| **Bronze** | Raw ingested data, append-only, minimal transformation | Schema-on-read, source schema preserved | Full history |
+| **Silver** | Cleansed, deduplicated, validated, enriched data | Schema-on-write, enforced constraints | Full history |
+| **Gold** | Business aggregations, KPIs, star schema fact/dim tables | Star schema, V-Order optimized for Direct Lake | Rolling window or full |
+
+The key principle: Bronze is append-only (never modify source records), Silver deduplicates and validates (MERGE upserts), Gold aggregates for consumption (overwrite on refresh).
+
+See: [Medallion Architecture Deep Dive](best-practices/medallion-architecture-deep-dive.md)
+
+---
+
+### How should I design workspaces?
+
+The recommended pattern for this POC is a **per-environment** workspace layout:
+
+| Workspace | Purpose | Capacity |
+|-----------|---------|----------|
+| `ws-fabric-poc-dev` | Development, notebook authoring | F4 (dev) |
+| `ws-fabric-poc-staging` | Integration testing, UAT | F16 (staging) |
+| `ws-fabric-poc-prod` | Production workloads | F64 (prod) |
+
+Each workspace contains three Lakehouses (`lh_bronze`, `lh_silver`, `lh_gold`), one Warehouse (for T-SQL consumers), and one Eventhouse (for real-time). For multi-tenant scenarios, see [Multi-Tenant Workspace Architecture](best-practices/multi-tenant-workspace-architecture.md).
+
+See: [Workspace Naming](best-practices/01_WORKSPACES_NAMING.md)
+
+---
+
+### When should I use shortcuts vs. copying data?
+
+Use **shortcuts** when you want to query data in-place without storage duplication (e.g., referencing ADLS Gen2 landing zones or cross-workspace tables). Use **copy** (pipeline Copy Activity) when you need to transform data during ingestion, the source requires a data gateway, or you want full control over the data lifecycle in OneLake. Shortcuts are free (no storage cost); copies consume storage.
+
+See: [DECISION_TREES.md](DECISION_TREES.md#5-mirroring-vs-shortcuts-vs-pipeline-copy) | [Shortcut Transformations Notebook](../notebooks/bronze/17_bronze_shortcut_transformations.py)
+
+---
+
+### What is Workspace Identity and when do I need it?
+
+Workspace Identity is a managed identity scoped to a Fabric workspace. It enables credential-free authentication to Azure resources (Storage, Key Vault, Purview) from notebooks and pipelines -- no service principal secrets to rotate. Use it whenever your notebooks access Azure resources. The POC deploys it via `infra/modules/security/workspace-identity.bicep`.
+
+See: [OneLake Security](features/onelake-security.md) | [Workspace Identity Module](../infra/modules/security/workspace-identity.bicep)
+
+---
+
+## ⚡ Performance Tuning
+
+### What is V-Order and do I need it?
+
+V-Order is a write-time optimization for Parquet files that dramatically improves Direct Lake query performance. It reorders data within row groups for optimal column compression and scan efficiency. You need it on every Gold table that feeds a Power BI semantic model via Direct Lake. Enable it with:
+
+```python
+spark.conf.set("spark.sql.parquet.vorder.enabled", "true")
+```
+
+Or apply retroactively: `OPTIMIZE gold_table_name USING VORDER`.
+
+See: [Direct Lake](features/direct-lake.md) | [Performance & Parallelism](best-practices/performance-parallelism.md)
+
+---
+
+### How should I partition large tables?
+
+Partition by the most common filter column (typically a date column). For this POC, Bronze and Silver tables partition by `event_date` for efficient time-range queries. Rules of thumb:
+
+- **Partition size target:** 256 MB - 1 GB per partition
+- **Do not over-partition:** Avoid partitioning by high-cardinality columns (player_id) -- too many small files
+- **Combine with Z-Order:** `OPTIMIZE table ZORDER BY (property_id)` within each partition for multi-column filtering
+
+See: [Performance & Parallelism](best-practices/performance-parallelism.md) | [Medallion Deep Dive](best-practices/medallion-architecture-deep-dive.md)
+
+---
+
+### What Spark settings should I tune first?
+
+For POC-scale data (~700K-1M records per table), the most impactful settings are:
+
+| Setting | POC Value | Default | Why |
+|---------|-----------|---------|-----|
+| `spark.sql.shuffle.partitions` | 8 | 200 | POC data is small; 200 partitions creates too many tiny files |
+| `spark.sql.parquet.vorder.enabled` | true | false | Required for Direct Lake performance |
+| `spark.sql.autoBroadcastJoinThreshold` | 10485760 | 10485760 | 10 MB is fine for POC dimension tables |
+| `spark.sql.adaptive.enabled` | true | true | AQE auto-tunes at runtime |
+
+See: [CHEAT_SHEETS.md](CHEAT_SHEETS.md#spark-configuration-for-fabric) | [Spark Notebooks Best Practices](best-practices/05_SPARK_NOTEBOOKS.md)
+
+---
+
+### How do I prevent Direct Lake fallback to DirectQuery?
+
+Direct Lake falls back to DirectQuery when: (1) the model contains calculated tables; (2) column cardinality exceeds guardrails; (3) the query uses unsupported DAX patterns. To prevent fallback:
+
+1. Move all calculated tables into Gold notebooks (materialize as Delta tables)
+2. Pre-aggregate high-cardinality columns in Gold layer
+3. Monitor fallback using Power BI Performance Analyzer
+4. Keep Gold tables V-Order optimized
+
+See: [Direct Lake](features/direct-lake.md) | [CHEAT_SHEETS.md](CHEAT_SHEETS.md#direct-lake-specific)
+
+---
+
+## 🤖 MLOps & AI
+
+### What ML models does this POC include?
+
+The POC includes three ML notebooks:
+
+| Notebook | Model | Purpose | Algorithm |
+|----------|-------|---------|-----------|
+| `01_ml_player_churn_prediction.py` | Player Churn | Predict player attrition risk | Gradient Boosted Trees |
+| `02_ml_fraud_detection.py` | Fraud Detection | Identify anomalous transactions | Isolation Forest |
+| `03_ml_automl_weather_forecasting.py` | Weather Forecast | Predict weather patterns (NOAA data) | AutoML |
+
+All models use MLflow for experiment tracking and model registry.
+
+See: [ML Notebooks](../notebooks/ml/) | [AutoML Model Endpoints](features/automl-model-endpoints.md)
+
+---
+
+### How does model versioning work in Fabric?
+
+Fabric uses MLflow's model registry natively. Models are logged during training with `mlflow.log_model()`, registered in the workspace model registry, and versioned automatically. Fabric's ML model item provides a UI for version comparison, stage transitions (Staging/Production), and deployment to endpoints.
+
+See: [AutoML Model Endpoints](features/automl-model-endpoints.md)
+
+---
+
+### Can I use AI Functions in notebooks?
+
+Yes. Fabric AI Functions (`ai_summarize`, `ai_classify`, `ai_translate`, etc.) are available in Spark SQL for inline LLM-powered transformations. The POC demonstrates compliance-aware usage in `17_gold_ai_functions_compliance.py`, including token cost estimation and PII guardrails.
+
+See: [AI Copilot Configuration](features/ai-copilot-configuration.md) | [AI Functions Notebook](../notebooks/gold/17_gold_ai_functions_compliance.py)
+
+---
+
+### What about Data Agents?
+
+Data Agents are autonomous AI-powered analytics assistants that can answer natural language questions about your data. They run inside Fabric workspaces with governed access to Lakehouses and Warehouses. The POC documents configuration patterns but does not deploy a live agent (requires tenant admin enablement).
+
+See: [Data Agents](features/data-agents.md) | [Fabric IQ](features/fabric-iq.md)
+
+---
+
+## 🔄 Migrations
+
+### How do I migrate from Synapse Analytics?
+
+The migration path depends on your current Synapse component:
+
+| Synapse Component | Fabric Equivalent | Migration Approach |
+|---|---|---|
+| Dedicated SQL Pool | Warehouse | T-SQL compatible; CTAS scripts transfer directly |
+| Serverless SQL Pool | Lakehouse SQL endpoint | Repoint external tables to OneLake |
+| Spark Pool | Fabric Spark | Notebooks largely compatible; update `dbutils` to `mssparkutils` |
+| Pipelines | Fabric Pipelines | JSON-compatible with minor activity type changes |
+| Data Explorer | Eventhouse | KQL fully compatible; export/import databases |
+
+See: [Migration Patterns](best-practices/migration-patterns.md) | [Tutorial 13: Migration Planning](../tutorials/13-migration-planning/)
+
+---
+
+### How do I migrate from Databricks?
+
+Key differences to address:
+
+1. **Runtime:** Replace `dbutils` with `mssparkutils` (file system, credentials, notebook orchestration)
+2. **Unity Catalog:** Map to Fabric OneLake + Purview for governance
+3. **Delta Lake:** Fully compatible -- Delta tables work as-is in OneLake
+4. **MLflow:** Supported natively in Fabric
+5. **Notebook format:** Databricks notebook source format imports directly
+
+The POC notebooks already use the Databricks notebook format with `# COMMAND ----------` separators. Phase 11 remediation ensured all `dbutils` references were replaced with `mssparkutils`.
+
+See: [Migration Patterns](best-practices/migration-patterns.md)
+
+---
+
+### How do I migrate from Snowflake?
+
+Use Fabric Mirroring for continuous replication from Snowflake into OneLake (Delta format). This provides near-real-time sync without building custom ETL. Alternatively, use Snowflake's `COPY INTO` to export to ADLS Gen2, then create Lakehouse shortcuts to the exported data.
+
+See: [Mirroring](features/mirroring.md) | [Tutorial 24: Snowflake to Fabric](../tutorials/24-snowflake-to-fabric/)
+
+---
+
+### What about Teradata and IBM DB2?
+
+Both are covered in the POC:
+
+- **Teradata:** Tutorial 10 covers TPT export patterns and migration planning
+- **IBM DB2:** Streaming notebook `04_ibm_db2_cdc.py` demonstrates CDC from DB2 z/OS and LUW with EBCDIC handling
+
+For both, the typical pattern is: set up an on-premises Data Gateway, configure a pipeline Copy Activity, and land data in the Bronze Lakehouse.
+
+See: [Tutorial 10: Teradata Migration](../tutorials/10-teradata-migration/) | [IBM DB2 CDC Notebook](../notebooks/streaming/04_ibm_db2_cdc.py)
+
+---
+
+## 🛠️ Dev Experience
+
+### Can I develop notebooks locally?
+
+Yes, but with caveats. Notebooks use the Databricks notebook format (`.py` files with `# COMMAND ----------` separators) and can be edited in any IDE. However, `mssparkutils` and `spark` are only available inside Fabric. The POC includes a `_get_arg` shim at the top of every notebook so code can run in both Fabric and local pytest:
+
+```python
+try:
+    from notebookutils import mssparkutils
+except ImportError:
+    mssparkutils = None
+```
+
+The 612 unit tests in `validation/unit_tests/` validate notebook logic locally without a Fabric session.
+
+See: [Testing Strategies](best-practices/testing-strategies.md)
+
+---
+
+### How does Git integration work with Fabric?
+
+Fabric workspaces can connect to Azure DevOps or GitHub repos. Each Fabric item (notebook, pipeline, semantic model) is serialized as a JSON/YAML/Python file and synced bi-directionally. Best practice: establish a one-way flow (edit in IDE, push to Git, sync to Fabric) to avoid merge conflicts.
+
+See: [Git Integration](features/git-integration.md) | [fabric-cicd Deployment](best-practices/fabric-cicd-deployment.md)
+
+---
+
+### What CI/CD tool should I use?
+
+The POC uses two complementary approaches:
+
+| Tool | Purpose | Configuration |
+|------|---------|---------------|
+| **GitHub Actions** | Bicep IaC deployment, testing | `.github/workflows/deploy-fabric.yml` |
+| **fabric-cicd** (Python) | Fabric item deployment (notebooks, pipelines) | `scripts/fabric-cicd-deploy.py` |
+
+`fabric-cicd` is the Microsoft-recommended tool for deploying Fabric workspace items. It handles notebook uploads, pipeline definitions, and semantic model refreshes.
+
+See: [fabric-cicd Deployment](best-practices/fabric-cicd-deployment.md) | [Tutorial 12: CI/CD DevOps](../tutorials/12-cicd-devops/)
+
+---
+
+### How do I run tests?
+
+```bash
+# All 612 unit tests
+pytest validation/unit_tests/ -v
+
+# By category
+pytest validation/unit_tests/test_generators.py -v      # Casino (30 tests)
+pytest validation/unit_tests/federal/ -v                 # Federal (54 tests)
+pytest validation/unit_tests/streaming/ -v               # Streaming (20 tests)
+pytest validation/unit_tests/analytics/ -v               # Analytics (30 tests)
+
+# Data quality (Great Expectations)
+great_expectations checkpoint run bronze_checkpoint
+```
+
+See: [Testing Strategies](best-practices/testing-strategies.md)
+
+---
+
+## 📜 Compliance Frameworks
+
+### What compliance frameworks does this POC address?
+
+| Framework | Domain | POC Implementation |
+|-----------|--------|-------------------|
+| **NIGC MICS** | Casino/Gaming | Meter accuracy validation, drop count verification, audit trails |
+| **FinCEN BSA** | Casino/Financial | CTR (>$10K), SAR (structuring detection), W-2G auto-generation |
+| **HIPAA** | Tribal Healthcare | PHI masking, audit logging, 42 CFR Part 2 substance abuse protections |
+| **FedRAMP** | Federal (DOT/FAA) | Encryption at rest (CMK), private endpoints, audit logging |
+| **SOX** | Financial | Immutable audit trails, access controls, data retention |
+| **GDPR** | General | Data subject access rights, right to erasure (Delta DELETE) |
+| **CCPA** | California | Consumer data inventory, opt-out mechanisms |
+| **PCI-DSS** | Payment | Card number masking, Key Vault (HSM-backed) for card data |
+
+See: [Security](SECURITY.md) | [SQL Audit Logs](best-practices/sql-audit-logs-compliance.md) | [CMK](best-practices/customer-managed-keys.md)
+
+---
+
+### How are CTR and SAR reports generated?
+
+**Currency Transaction Reports (CTR):** Any cash transaction >= $10,000 triggers automatic CTR flagging in the Bronze compliance notebook (`04_bronze_compliance.py`). The Silver layer validates amounts and deadlines. The Gold layer (`03_gold_compliance_reporting.py`) produces FinCEN-ready reports.
+
+**Suspicious Activity Reports (SAR):** The Silver layer detects structuring patterns -- multiple transactions between $8,000-$9,999 by the same individual within 24 hours. The fraud detection ML model (`02_ml_fraud_detection.py`) provides additional anomaly scoring.
+
+See: [Compliance Reporting Notebook](../notebooks/gold/03_gold_compliance_reporting.py)
+
+---
+
+### How is HIPAA compliance handled?
+
+Tribal Healthcare notebooks implement HIPAA safeguards:
+
+1. **PHI Masking:** Silver layer (`07_silver_tribal_health.py`) masks protected health information
+2. **Audit Logging:** Every data access is logged with user ID, timestamp, and data accessed
+3. **FHIR R4 Mapping:** Data mapped to standardized FHIR R4 format for interoperability
+4. **42 CFR Part 2:** Substance abuse treatment records have additional access restrictions
+5. **Retention:** Log Analytics configured for >= 6 years (HIPAA requirement) via `log-analytics.bicep`
+
+See: [Tribal Health Analytics](use-cases/tribal-health-analytics.md) | [Tutorial 30: Tribal Healthcare](../tutorials/30-tribal-healthcare/)
+
+---
+
+### What encryption options are available?
+
+| Layer | Mechanism | Configuration |
+|-------|-----------|---------------|
+| **At Rest (default)** | Microsoft-managed keys (MMK) | Automatic, no config needed |
+| **At Rest (enhanced)** | Customer-managed keys (CMK) | `infra/modules/storage/storage-account.bicep` with `enableCmk=true` |
+| **In Transit** | TLS 1.2+ | Automatic for all Fabric endpoints |
+| **Key Storage** | Azure Key Vault (HSM-backed for PCI-DSS) | `infra/modules/security/security.bicep` with `skuName='premium'` |
+| **PII Fields** | Application-level hashing (SHA-256) | Implemented in Bronze notebooks (SSN, card numbers) |
+
+See: [Customer-Managed Keys](best-practices/customer-managed-keys.md) | [Network Security](best-practices/network-security.md)
 
 ---
 
