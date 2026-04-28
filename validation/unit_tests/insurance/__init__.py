@@ -1,0 +1,1 @@
+"""Insurance domain unit tests."""
