@@ -1,12 +1,12 @@
 # 📋 Changelog
 
-> **Last Updated:** 2026-04-15 | **Version:** 2.1.0 | **Status:** Active
+> **Last Updated:** 2026-04-27 | **Version:** 3.0.0 | **Status:** Active
 
 <div align="center">
 
 ![Changelog](https://img.shields.io/badge/📋_Changelog-Keep_a_Changelog-blue?style=for-the-badge)
 ![SemVer](https://img.shields.io/badge/🔢_Versioning-SemVer_2.0-green?style=for-the-badge)
-![Phase](https://img.shields.io/badge/🎯_Phase-12_Complete-purple?style=for-the-badge)
+![Phase](https://img.shields.io/badge/🎯_Phase-14_Complete-purple?style=for-the-badge)
 
 </div>
 
@@ -15,6 +15,7 @@
 ## 📑 Table of Contents
 
 - [🔮 Unreleased](#-unreleased)
+- [🏷️ 3.0.0 — Phase 14: One-Stop Shop Completion](#️-300---2026-04-27)
 - [🏷️ 2.2.0 — Phase 12: Documentation Gap Remediation](#️-220---2026-04-21)
 - [🏷️ 2.1.0 — Phase 11: Audit Remediation](#️-210---2026-04-15)
 - [🏷️ 2.0.0 — Phases 9 & 10: Fabric Modernization](#️-200---2026-04-13)
@@ -32,7 +33,96 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 🔮 [Unreleased]
 
-### Added — Phase 13: DOJ Federal Domain + Use Cases
+Nothing currently unreleased.
+
+---
+
+## 🏷️ [3.0.0] — 2026-04-27
+
+### Phase 14: One-Stop Shop Completion — 119 Features, 9 Waves
+
+Major release transforming the POC into a comprehensive Microsoft Fabric enterprise reference.
+
+#### Wave 1 — Operations & SRE (PR #53)
+
+**Added:**
+- 7 operational runbooks: incident response, capacity throttling, pipeline failure triage, auth failure playbook, multi-region failover, tenant migration, data quality incident
+- 4 operations best-practice docs: SLO/SLI definitions, on-call rotation handbook, change management (RFC/CAB), observability stack
+- 2 Bicep modules: Action Groups (7 receiver types), Log Analytics Workspace (table-level retention, CMK, archive)
+
+#### Wave 2 — MLOps & AI Lifecycle (PR #54)
+
+**Added:**
+- 8 MLOps/AI docs: MLOps production guide, drift detection (PSI/KS/Wasserstein), feature store, responsible AI framework, LLM cost tracking, RAG patterns, prompt engineering, eval harness
+- 5 ML notebooks: model registry (MLflow champion/challenger), drift detection, feature store demo, RAG with Eventhouse vectors, responsible AI audit
+- 2 tutorials: end-to-end MLOps (Tutorial 39), production RAG (Tutorial 40)
+
+#### Wave 3 — Data Management (PR #55)
+
+**Added:**
+- 7 data management docs: MDM (4 topologies), data contracts (YAML + GE), data product framework, reference data versioning, late-arriving data, SCD patterns (all 6 types), business glossary automation
+- 4 notebooks: MDM golden customer, SCD Type 2 dimension, reference data versioned, late-arriving backfill
+- 1 Great Expectations suite: data contract enforcement
+
+#### Wave 4 — Migration (PR #56)
+
+**Added:**
+- 5 migration tutorials: Synapse → Fabric, Databricks → Fabric, Redshift → Fabric, BigQuery → Fabric, on-prem SSAS/SSIS/SSRS
+- 2 assessment/conversion notebooks: Synapse workload assessment (3-mode CLI), schema conversion (28 type mappings)
+- 2 migration data generators: Synapse workload inventory, Databricks workload inventory
+- Updated `migration-patterns.md` with 5 new source sub-sections
+
+#### Wave 5 — Security & Compliance (PR #57)
+
+**Added:**
+- 9 security docs: SOC 2 Type II readiness, ISO 27001 Annex A mapping, GDPR right-to-deletion, CCPA privacy rights, STRIDE threat model, zero-trust blueprint, data exfiltration prevention, supply chain security, audit trail immutability
+- 2 compliance templates: SOC 2 control matrix (47 criteria), DSAR runbook (7-phase lifecycle)
+- 1 notebook: GDPR cascading delete (4 modes, hash-chain audit)
+- 1 Bicep module: private endpoint with DNS + lock
+
+#### Wave 6 — Commercial Industry Verticals (PR #58)
+
+**Added:**
+- 9 industry verticals, each with use-case doc + data generator + bronze/silver/gold notebooks + tutorial + unit tests:
+  - Healthcare (HIPAA/HITRUST) — readmission risk, claims denial analytics
+  - Financial Services (SOX/PCI-DSS/Basel III) — real-time fraud detection, AML
+  - Insurance (NAIC) — loss triangles, fraud ring detection
+  - Retail/CPG (PCI-DSS) — demand forecasting, Customer 360
+  - Manufacturing/IoT (IEC 62443) — predictive maintenance, OEE
+  - Energy/Utilities (NERC CIP) — smart meter analytics, grid reliability
+  - Telecom (CPNI/GDPR) — churn prediction, network quality
+  - Pharma/Life Sciences (21 CFR Part 11/GxP) — clinical trials, safety signals
+  - Media/Entertainment (COPPA/GDPR) — audience analytics, recommendations
+- 133 new unit tests (431 total), 0 regressions
+
+#### Wave 7 — Feature Coverage Completion (PR #64)
+
+**Added:**
+- 8 feature docs: Variable Libraries, FUAM, User Data Functions, Apache Airflow Job, Spark Job Definitions, Notebook Resources & Environments, TMDL/Developer Mode, OneLake Shortcuts (S3/GCS/Dataverse)
+- 6 best-practice docs: OneLake Files vs Tables, Lakehouse Schema Versioning, Spark Runtime Breaking Changes Matrix, V-Order Tuning, Partition Strategy Decision Tree, Query Optimization Deep Dive
+- 1 notebook: Variable Library parameterized pipeline demo
+
+#### Wave 8 — Developer Experience (PR #65)
+
+**Added:**
+- 4 sample applications: Streamlit dashboard (SQL endpoint), React+GraphQL (Apollo/MSAL), Power Apps canvas consumer, Logic App orchestrator
+- 5 developer docs: VS Code workflow, notebook unit testing, local Spark debugging, Git workflow for Fabric, devcontainer setup
+- Bronze pattern unit test (PySpark)
+- Updated `.devcontainer/devcontainer.json`
+
+#### Wave 9 — Structural Refactor
+
+**Added:**
+- Decision Trees guide (Mermaid flowcharts for 7 key decisions)
+- Troubleshooting Matrix (symptom-indexed, 10+ categories)
+- Cheat Sheets (PySpark, KQL, T-SQL, DAX quick reference)
+- FAQ expansion (25+ entries, 8 categories)
+- Notebooks cross-reference README
+- Bicep modules README
+- Phase 14 regression report (119 features, 431 tests, 0 regressions)
+- CHANGELOG update (this entry)
+
+---
 
 #### DOJ Department of Justice (8th Federal Domain)
 - **doj_generator.py** — DOJGenerator with 4 domains: crime_stats (FBI NIBRS), federal_cases (USSC), antitrust (mergers/cartels), drug_enforcement (DEA)
