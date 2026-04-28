@@ -1,0 +1,12 @@
+# Streamlit Fabric Consumer - Dependencies
+# Requires: ODBC Driver 18 for SQL Server
+#   Windows: https://learn.microsoft.com/sql/connect/odbc/download-odbc-driver-for-sql-server
+#   Linux:   curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+#            apt-get install -y msodbcsql18
+
+streamlit==1.41.1
+pyodbc==5.2.0
+sqlalchemy==2.0.36
+plotly==5.24.1
+pandas==2.2.3
+python-dotenv==1.0.1

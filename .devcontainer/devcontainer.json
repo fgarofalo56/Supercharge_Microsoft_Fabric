@@ -1,34 +1,19 @@
-// Dev Container configuration for Microsoft Fabric Casino/Gaming POC
+// Dev Container for Supercharge Microsoft Fabric POC
 // https://aka.ms/devcontainer.json
 {
-  "name": "Fabric Casino POC",
-  "build": {
-    "dockerfile": "Dockerfile",
-    "context": "..",
-    "args": {
-      "PYTHON_VERSION": "3.11"
-    }
-  },
+  "name": "Supercharge Microsoft Fabric Dev",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
 
   // Dev Container Features
-  // https://containers.dev/features
   "features": {
-    // Azure CLI with Bicep support
     "ghcr.io/devcontainers/features/azure-cli:1": {
       "installBicep": true,
       "version": "latest"
     },
-    // Git configuration
-    "ghcr.io/devcontainers/features/git:1": {
-      "ppa": true,
-      "version": "latest"
-    },
-    // PowerShell for cross-platform scripting
-    "ghcr.io/devcontainers/features/powershell:1": {
-      "version": "latest"
-    },
-    // GitHub CLI for repo management
     "ghcr.io/devcontainers/features/github-cli:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
       "version": "latest"
     }
   },
@@ -36,102 +21,17 @@
   // VS Code customizations
   "customizations": {
     "vscode": {
-      // Extensions to install in the container
       "extensions": [
-        // Python Development
         "ms-python.python",
         "ms-python.vscode-pylance",
-        "ms-python.black-formatter",
-        "ms-python.isort",
-        "charliermarsh.ruff",
-        "ms-python.mypy-type-checker",
-
-        // Jupyter Notebooks
-        "ms-toolsai.jupyter",
-        "ms-toolsai.jupyter-keymap",
-        "ms-toolsai.jupyter-renderers",
-        "ms-toolsai.vscode-jupyter-cell-tags",
-
-        // Azure Tools
-        "ms-vscode.vscode-node-azure-pack",
+        "ms-vscode.azurecli",
         "ms-azuretools.vscode-bicep",
-        "ms-azuretools.vscode-azurefunctions",
-        "ms-azure-devops.azure-pipelines",
-
-        // Git & Version Control
-        "eamodio.gitlens",
-        "mhutchie.git-graph",
-        "github.vscode-pull-request-github",
-
-        // Documentation & Markdown
-        "yzhang.markdown-all-in-one",
-        "bierner.markdown-mermaid",
-        "davidanson.vscode-markdownlint",
-
-        // Code Quality & Formatting
-        "esbenp.prettier-vscode",
-        "EditorConfig.EditorConfig",
-
-        // Data & Config Files
-        "redhat.vscode-yaml",
-        "ms-vscode.vscode-json5",
-        "tamasfe.even-better-toml",
-        "mechatroner.rainbow-csv",
-
-        // Utilities
-        "streetsidesoftware.code-spell-checker",
-        "wayou.vscode-todo-highlight",
-        "gruntfuggly.todo-tree",
-        "ms-vscode.live-server"
+        "ms-toolsai.jupyter",
+        "esbenp.prettier-vscode"
       ],
-
-      // VS Code settings for the container
       "settings": {
-        // Python settings
         "python.defaultInterpreterPath": "/usr/local/bin/python",
-        "python.analysis.typeCheckingMode": "basic",
-        "python.analysis.autoImportCompletions": true,
-        "python.analysis.inlayHints.functionReturnTypes": true,
-        "python.analysis.inlayHints.variableTypes": true,
-
-        // Formatting
         "editor.formatOnSave": true,
-        "editor.formatOnPaste": false,
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "[python]": {
-          "editor.defaultFormatter": "ms-python.black-formatter",
-          "editor.formatOnSave": true,
-          "editor.codeActionsOnSave": {
-            "source.organizeImports": "explicit"
-          }
-        },
-        "[json]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-        },
-        "[jsonc]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-        },
-        "[yaml]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-        },
-        "[markdown]": {
-          "editor.defaultFormatter": "yzhang.markdown-all-in-one",
-          "editor.wordWrap": "on"
-        },
-        "[bicep]": {
-          "editor.defaultFormatter": "ms-azuretools.vscode-bicep"
-        },
-
-        // Black formatter
-        "black-formatter.args": ["--line-length", "88"],
-
-        // isort
-        "isort.args": ["--profile", "black", "--line-length", "88"],
-
-        // Ruff linter
-        "ruff.lint.args": ["--line-length=88"],
-
-        // Testing
         "python.testing.pytestEnabled": true,
         "python.testing.pytestArgs": [
           "validation",
@@ -139,133 +39,32 @@
           "--tb=short"
         ],
         "python.testing.unittestEnabled": false,
-
-        // Jupyter
-        "jupyter.askForKernelRestart": false,
-        "jupyter.interactiveWindow.textEditor.executeSelection": true,
-        "notebook.cellToolbarLocation": {
-          "default": "right",
-          "jupyter-notebook": "left"
-        },
-
-        // Editor settings
-        "editor.rulers": [88],
         "editor.tabSize": 4,
         "editor.insertSpaces": true,
-        "editor.trimAutoWhitespace": true,
         "files.trimTrailingWhitespace": true,
-        "files.insertFinalNewline": true,
-        "files.trimFinalNewlines": true,
-
-        // File associations
-        "files.associations": {
-          "*.bicep": "bicep",
-          "*.ipynb": "jupyter-notebook",
-          "Dockerfile*": "dockerfile"
-        },
-
-        // Exclude patterns
-        "files.exclude": {
-          "**/__pycache__": true,
-          "**/.pytest_cache": true,
-          "**/*.pyc": true,
-          "**/.mypy_cache": true,
-          "**/.ruff_cache": true,
-          "**/temp": false
-        },
-
-        // Terminal settings
-        "terminal.integrated.defaultProfile.linux": "bash",
-        "terminal.integrated.scrollback": 10000,
-
-        // Git settings
-        "git.autofetch": true,
-        "git.confirmSync": false,
-        "gitlens.codeLens.enabled": true,
-
-        // Spell checker
-        "cSpell.words": [
-          "bicep",
-          "eventhub",
-          "parquet",
-          "lakehouse",
-          "deltalake",
-          "pydantic",
-          "pytest",
-          "pyarrow",
-          "numpy",
-          "pandas",
-          "sklearn",
-          "mlflow",
-          "xgboost",
-          "fabricdemo",
-          "onelake",
-          "msft",
-          "vnet",
-          "keyvault"
-        ]
+        "files.insertFinalNewline": true
       }
     }
   },
 
-  // Post-create command to set up the environment
-  "postCreateCommand": "bash .devcontainer/post-create.sh",
+  // Install dependencies after container creation
+  "postCreateCommand": "pip install --upgrade pip && pip install pyspark pytest great-expectations faker numpy pandas delta-spark",
 
-  // Forward ports for local development
-  "forwardPorts": [
-    8888,  // Jupyter Notebook
-    8000,  // FastAPI / Local web server
-    5000   // Flask / Debug server
-  ],
-
-  // Port attributes
+  // Port forwarding
+  "forwardPorts": [8501],
   "portsAttributes": {
-    "8888": {
-      "label": "Jupyter Notebook",
+    "8501": {
+      "label": "Streamlit",
       "onAutoForward": "notify"
-    },
-    "8000": {
-      "label": "Local Web Server",
-      "onAutoForward": "silent"
-    },
-    "5000": {
-      "label": "Debug Server",
-      "onAutoForward": "silent"
     }
   },
 
-  // Mount volumes
-  "mounts": [
-    // Persist Azure CLI configuration
-    "source=fabric-casino-poc-azure,target=/home/vscode/.azure,type=volume",
-    // Persist VS Code extensions cache
-    "source=fabric-casino-poc-vscode-extensions,target=/home/vscode/.vscode-server/extensions,type=volume"
-  ],
-
-  // Container environment variables
-  "containerEnv": {
+  // Environment variables
+  "remoteEnv": {
+    "FABRIC_POC_HASH_SALT": "${localEnv:FABRIC_POC_HASH_SALT:CHANGE_ME_BEFORE_USE}",
     "PYTHONDONTWRITEBYTECODE": "1",
-    "PYTHONUNBUFFERED": "1",
-    "PIP_NO_CACHE_DIR": "1",
-    "PROJECT_ROOT": "/workspaces/Supercharge_Microsoft_Fabric"
+    "PYTHONUNBUFFERED": "1"
   },
 
-  // Run as non-root user
-  "remoteUser": "vscode",
-
-  // Update remote user UID/GID to match local user (helps with file permissions)
-  "updateRemoteUserUID": true,
-
-  // Lifecycle scripts
-  "initializeCommand": "echo 'Initializing Fabric Casino POC Dev Container...'",
-  "onCreateCommand": "echo 'Container created successfully'",
-  "updateContentCommand": "pip install --upgrade pip",
-  "postStartCommand": "echo 'Dev Container is ready! Run: python data_generation/generate.py --help'",
-
-  // Host requirements (optional)
-  "hostRequirements": {
-    "cpus": 2,
-    "memory": "4gb",
-    "storage": "16gb"
-  }
+  "remoteUser": "vscode"
 }
