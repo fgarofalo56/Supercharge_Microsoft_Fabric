@@ -149,6 +149,7 @@ az deployment sub create \
 | [Fabric MCP](features/fabric-mcp.md) | Model Context Protocol for AI agent interaction | Preview |
 | [Workspace Monitoring](features/workspace-monitoring.md) | Queryable system tables for activity tracking | GA |
 | [Copy Job CDC](features/copy-job-cdc.md) | Low-code continuous ingestion with change data capture | GA |
+| [Federated Fabric for GCC](features/federated-fabric-gcc.md) | Cross-cloud architecture for GCC customers to use Fabric in Commercial | Guide |
 
 ---
 
