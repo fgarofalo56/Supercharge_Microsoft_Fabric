@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400" role="img" aria-label="Microsoft Fabric architecture diagram showing OneLake, Medallion flow, Real-Time Intelligence, Direct Lake to Power BI, and Purview governance">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f0f6ff"/>
+      <stop offset="100%" stop-color="#e8f4f8"/>
+    </linearGradient>
+    <linearGradient id="bgGradDark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#16213e"/>
+    </linearGradient>
+    <linearGradient id="onelakeGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0078D4"/>
+      <stop offset="100%" stop-color="#005a9e"/>
+    </linearGradient>
+    <linearGradient id="bronzeGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#CD7F32"/>
+      <stop offset="100%" stop-color="#a0622d"/>
+    </linearGradient>
+    <linearGradient id="silverGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#C0C0C0"/>
+      <stop offset="100%" stop-color="#909090"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFB900"/>
+      <stop offset="100%" stop-color="#d49b00"/>
+    </linearGradient>
+    <linearGradient id="rtiGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#50E6FF"/>
+      <stop offset="100%" stop-color="#30b8d6"/>
+    </linearGradient>
+    <linearGradient id="pbiGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F2C811"/>
+      <stop offset="100%" stop-color="#d4ad0e"/>
+    </linearGradient>
+    <filter id="dropShadow" x="-4%" y="-4%" width="108%" height="116%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#00000020"/>
+    </filter>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#0078D4"/>
+    </marker>
+    <marker id="arrowCyan" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#50E6FF"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" rx="12" fill="url(#bgGrad)"/>
+
+  <!-- Purview governance overlay band -->
+  <rect x="20" y="360" width="760" height="30" rx="6" fill="#7B2D8E" opacity="0.12"/>
+  <text x="400" y="380" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="11" fill="#7B2D8E" font-weight="600">Microsoft Purview Governance &amp; Compliance</text>
+
+  <!-- Title -->
+  <text x="400" y="32" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="16" font-weight="700" fill="#1a1a2e">Microsoft Fabric Architecture</text>
+
+  <!-- OneLake center -->
+  <rect x="310" y="130" width="180" height="110" rx="16" fill="url(#onelakeGrad)" filter="url(#dropShadow)"/>
+  <text x="400" y="175" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="15" font-weight="700" fill="#ffffff">OneLake</text>
+  <text x="400" y="196" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="10" fill="#d0e8ff">Unified Data Lake</text>
+  <text x="400" y="212" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="10" fill="#d0e8ff">Delta &amp; Iceberg</text>
+  <!-- OneLake icon (lake waves) -->
+  <path d="M370,155 Q385,148 400,155 Q415,162 430,155" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.5"/>
+  <path d="M375,150 Q390,143 405,150 Q420,157 435,150" stroke="#ffffff" stroke-width="1" fill="none" opacity="0.3"/>
+
+  <!-- ─── Medallion flow (left side) ─── -->
+  <!-- Bronze -->
+  <rect x="40" y="60" width="120" height="70" rx="10" fill="url(#bronzeGrad)" filter="url(#dropShadow)"/>
+  <text x="100" y="92" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="13" font-weight="700" fill="#ffffff">Bronze</text>
+  <text x="100" y="110" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="9" fill="#ffeedd">Raw Ingestion</text>
+
+  <!-- Silver -->
+  <rect x="40" y="165" width="120" height="70" rx="10" fill="url(#silverGrad)" filter="url(#dropShadow)"/>
+  <text x="100" y="197" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="13" font-weight="700" fill="#ffffff">Silver</text>
+  <text x="100" y="215" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="9" fill="#f5f5f5">Cleansed &amp; Validated</text>
+
+  <!-- Gold -->
+  <rect x="40" y="270" width="120" height="70" rx="10" fill="url(#goldGrad)" filter="url(#dropShadow)"/>
+  <text x="100" y="302" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="13" font-weight="700" fill="#ffffff">Gold</text>
+  <text x="100" y="320" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="9" fill="#fff8e0">Business KPIs</text>
+
+  <!-- Medallion flow arrows -->
+  <line x1="100" y1="130" x2="100" y2="162" stroke="#0078D4" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <line x1="100" y1="235" x2="100" y2="267" stroke="#0078D4" stroke-width="2" marker-end="url(#arrowBlue)"/>
+
+  <!-- Bronze -> OneLake -->
+  <line x1="160" y1="95" x2="307" y2="165" stroke="#0078D4" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowBlue)"/>
+  <!-- Silver -> OneLake -->
+  <line x1="160" y1="200" x2="307" y2="190" stroke="#0078D4" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowBlue)"/>
+  <!-- Gold -> OneLake -->
+  <line x1="160" y1="300" x2="307" y2="220" stroke="#0078D4" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowBlue)"/>
+
+  <!-- ─── Real-Time Intelligence (top right) ─── -->
+  <rect x="560" y="50" width="200" height="90" rx="10" fill="url(#rtiGrad)" filter="url(#dropShadow)"/>
+  <text x="660" y="80" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="13" font-weight="700" fill="#0a3d5c">Real-Time Intelligence</text>
+  <text x="660" y="98" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="9" fill="#0a3d5c">Eventstreams</text>
+  <text x="660" y="112" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="9" fill="#0a3d5c">Eventhouse &amp; KQL</text>
+  <!-- Lightning bolt icon -->
+  <path d="M564,65 L574,65 L570,78 L578,78 L566,95 L569,82 L563,82 Z" fill="#0a3d5c" opacity="0.3"/>
+
+  <!-- RTI -> OneLake -->
+  <line x1="560" y1="110" x2="493" y2="158" stroke="#50E6FF" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrowCyan)"/>
+
+  <!-- ─── Direct Lake / Power BI (bottom right) ─── -->
+  <rect x="560" y="190" width="200" height="90" rx="10" fill="url(#pbiGrad)" filter="url(#dropShadow)"/>
+  <text x="660" y="222" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="13" font-weight="700" fill="#5b4a00">Direct Lake</text>
+  <text x="660" y="240" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="9" fill="#5b4a00">Power BI Analytics</text>
+  <text x="660" y="254" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="9" fill="#5b4a00">Sub-second Queries</text>
+  <!-- Chart icon -->
+  <rect x="570" y="210" width="4" height="18" rx="1" fill="#5b4a00" opacity="0.3"/>
+  <rect x="578" y="216" width="4" height="12" rx="1" fill="#5b4a00" opacity="0.3"/>
+  <rect x="586" y="204" width="4" height="24" rx="1" fill="#5b4a00" opacity="0.3"/>
+
+  <!-- OneLake -> Direct Lake -->
+  <line x1="493" y1="210" x2="557" y2="225" stroke="#0078D4" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <text x="524" y="208" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="8" fill="#0078D4" font-weight="600">Direct Lake</text>
+
+  <!-- ─── Data sources (far left) ─── -->
+  <rect x="40" y="5" width="120" height="30" rx="6" fill="#0078D4" opacity="0.15"/>
+  <text x="100" y="25" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="9" fill="#0078D4" font-weight="600">Data Sources</text>
+  <!-- Arrow from sources to Bronze -->
+  <line x1="100" y1="35" x2="100" y2="57" stroke="#0078D4" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+
+  <!-- ─── Labels ─── -->
+  <!-- Medallion label -->
+  <text x="100" y="355" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="10" fill="#666" font-weight="600">Medallion Architecture</text>
+
+  <!-- RTI label -->
+  <text x="660" y="155" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="9" fill="#30b8d6" font-style="italic">Streaming Ingestion</text>
+
+  <!-- BI consumers (far right) -->
+  <rect x="660" y="300" width="100" height="40" rx="8" fill="#0078D4" opacity="0.12"/>
+  <text x="710" y="318" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="9" fill="#0078D4" font-weight="600">BI Consumers</text>
+  <text x="710" y="332" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="8" fill="#0078D4">Reports &amp; Dashboards</text>
+  <line x1="660" y1="280" x2="700" y2="298" stroke="#0078D4" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowBlue)"/>
+
+  <!-- Fabric IQ / Copilot badge -->
+  <rect x="320" y="260" width="160" height="32" rx="8" fill="#0078D4" opacity="0.1"/>
+  <text x="400" y="280" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="9" fill="#0078D4" font-weight="600">Fabric IQ &amp; AI Copilot</text>
+
+  <!-- Data Agents label -->
+  <rect x="320" y="300" width="160" height="28" rx="8" fill="#50E6FF" opacity="0.12"/>
+  <text x="400" y="318" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="9" fill="#2c9db8" font-weight="600">Data Agents &amp; MCP</text>
+
+  <!-- Purview shield icon -->
+  <path d="M395,367 L400,363 L405,367 L405,375 Q400,379 395,375 Z" fill="#7B2D8E" opacity="0.4"/>
+</svg>

@@ -1,215 +1,169 @@
 ---
 title: Home
-description: Supercharge Microsoft Fabric - Casino & Gaming Industry POC
+description: Supercharge Microsoft Fabric — Casino & Gaming Industry POC with Federal Agency Domains
 hide:
   - navigation
   - toc
 ---
 
-# 🎰 Supercharge Microsoft Fabric
+# Supercharge Microsoft Fabric
 
-<div class="hero" markdown>
+**Transform your operations with enterprise-grade analytics powered by Microsoft Fabric**
 
-**Transform your casino operations with enterprise-grade analytics powered by Microsoft Fabric**
+*Real-time insights · Medallion Architecture · Regulatory Compliance · Direct Lake BI*
 
-*Real-time insights • Medallion Architecture • Regulatory Compliance • Direct Lake BI*
+[Quick Start](PREREQUISITES.md){ .md-button .md-button--primary }
+[Tutorials](tutorials/README.md){ .md-button }
 
-[🚀 Quick Start](PREREQUISITES.md){ .md-button .md-button--primary }
-[📖 Tutorials](tutorials/README.md){ .md-button }
+---
+
+## Architecture at a Glance
+
+<a href="ARCHITECTURE.md" class="architecture-hero">
+  <img src="assets/images/architecture-hero.svg" alt="Microsoft Fabric architecture — OneLake, Medallion flow, Real-Time Intelligence, Direct Lake to Power BI, Purview governance">
+</a>
+
+---
+
+## Three Core Paradigms
+
+This POC is built on three paradigms that define how data flows from source to insight inside Microsoft Fabric.
+
+**OneLake** is the unified storage layer. Every workspace writes Delta and Iceberg tables to a single lake — no data movement, no copy sprawl.
+
+**Medallion Architecture** (Bronze → Silver → Gold) organizes that data by quality tier. Bronze captures raw ingestion, Silver cleanses and validates, Gold produces business-ready KPIs and star schemas.
+
+**Direct Lake** connects Power BI semantic models straight to Gold-layer Delta tables in OneLake — sub-second queries without import or DirectQuery overhead.
+
+Together they give you a single pipeline from raw events to executive dashboards, with governance enforced by Microsoft Purview at every layer.
+
+---
+
+## Start Here
+
+<div class="grid cards" markdown>
+
+-   :material-rocket-launch:{ .lg .middle } __Quick Start__
+
+    ---
+
+    Prerequisites, Azure setup, one-click Bicep deployment
+
+    [:octicons-arrow-right-24: Get started](PREREQUISITES.md)
+
+-   :material-school:{ .lg .middle } __Tutorials__
+
+    ---
+
+    37+ hands-on modules from Bronze ingestion to AI/ML
+
+    [:octicons-arrow-right-24: Browse tutorials](tutorials/README.md)
+
+-   :material-domain:{ .lg .middle } __Architecture__
+
+    ---
+
+    System design, component overview, data flow diagrams
+
+    [:octicons-arrow-right-24: View architecture](ARCHITECTURE.md)
+
+-   :material-calendar-check:{ .lg .middle } __3-Day POC Agenda__
+
+    ---
+
+    Workshop materials: Foundation → Transformation → BI & Governance
+
+    [:octicons-arrow-right-24: View agenda](poc-agenda/README.md)
 
 </div>
 
 ---
 
-## 🎯 Overview
+## Choose Your Path
 
-This repository provides a **complete, production-ready proof-of-concept** environment for Microsoft Fabric, covering the casino/gaming industry and **8 federal agency domains** (USDA, SBA, NOAA, EPA, DOI, DOT/FAA, Tribal Healthcare, DOJ).
+<div class="grid cards" markdown>
 
-<div class="grid" markdown>
+-   :material-database-cog:{ .lg .middle } __Data Engineers__
 
-<div class="card" markdown>
+    ---
 
-### 🏛️ Medallion Architecture
+    PySpark notebooks, pipelines, ETL, medallion implementation
 
-Bronze/Silver/Gold Lakehouse pattern with Delta Lake tables
+    [:octicons-arrow-right-24: Bronze layer tutorial](tutorials/01-bronze-layer/README.md)
 
-</div>
+-   :material-chart-areaspline:{ .lg .middle } __BI Developers__
 
-<div class="card" markdown>
+    ---
 
-### ⚡ Real-Time Intelligence
+    Direct Lake, Power BI semantic models, DAX measures
 
-Casino floor monitoring with Eventstreams and Eventhouse
+    [:octicons-arrow-right-24: Direct Lake tutorial](tutorials/05-direct-lake-powerbi/README.md)
 
-</div>
+-   :material-shield-lock:{ .lg .middle } __Security & Compliance__
 
-<div class="card" markdown>
+    ---
 
-### 📊 Direct Lake
+    Purview governance, MICS, CTR/SAR, regulatory reporting
 
-Sub-second Power BI analytics with semantic models
+    [:octicons-arrow-right-24: Governance tutorial](tutorials/07-governance-purview/README.md)
 
-</div>
+-   :material-lightning-bolt:{ .lg .middle } __Real-Time Analytics__
 
-<div class="card" markdown>
+    ---
 
-### 🔐 Data Governance
+    Eventstreams, Eventhouse, KQL for streaming workloads
 
-Microsoft Purview integration for compliance
-
-</div>
+    [:octicons-arrow-right-24: Real-time tutorial](tutorials/04-real-time-analytics/README.md)
 
 </div>
 
 ---
 
-## 👥 Target Audience
+## Feature Documentation
 
-| Role | Focus Areas |
-|:-----|:------------|
-| 🏗️ **Data Architects** | System design, medallion pattern, scalability |
-| 💻 **Data Engineers** | PySpark notebooks, pipelines, ETL |
-| 📊 **BI Developers** | Direct Lake, Power BI, DAX |
-| 🔐 **Security/Compliance** | Purview, MICS, regulatory reporting |
-| 💼 **Solution Architects** | End-to-end integration, infrastructure |
+<div class="grid cards" markdown>
 
----
+-   :material-brain:{ .lg .middle } __Fabric IQ__
 
-## 🚀 Quick Start
+    ---
 
-### Prerequisites
+    Natural language data exploration with Ontology & Plan layers
 
-- Azure subscription with Fabric capacity (F64 or trial)
-- Azure CLI and Bicep tools
-- Power BI Desktop
+    [:octicons-arrow-right-24: Fabric IQ](features/fabric-iq.md)
 
-### One-Click Deployment
+-   :material-lightning-bolt:{ .lg .middle } __Real-Time Intelligence__
 
-```bash
-# Clone the repository
-git clone https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric.git
-cd Suppercharge_Microsoft_Fabric
+    ---
 
-# Deploy infrastructure
-az deployment sub create \
-  --location eastus2 \
-  --template-file infra/main.bicep \
-  --parameters infra/environments/dev/dev.bicepparam
-```
+    Eventstreams, Eventhouse, KQL, Business Events, Maps
 
-[➡️ Full Deployment Guide](DEPLOYMENT.md){ .md-button }
+    [:octicons-arrow-right-24: RTI](features/real-time-intelligence.md)
 
----
+-   :material-robot:{ .lg .middle } __AI Copilot__
 
-## 📂 Documentation Structure
+    ---
 
-| Section | Description |
-|:--------|:------------|
-| [📖 Getting Started](PREREQUISITES.md) | Prerequisites, setup, and configuration |
-| [🏗️ Architecture](ARCHITECTURE.md) | System design and component overview |
-| [📚 Tutorials](tutorials/README.md) | 37 hands-on learning modules |
-| [📅 POC Agenda](poc-agenda/README.md) | 3-day workshop materials |
-| [📊 Reference](GLOSSARY.md) | FAQ, glossary, and standards |
-| [🛠️ Infrastructure](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/infra) | Bicep IaC modules |
-| [🏢 Best Practices](BEST_PRACTICES.md) | Workspace organization, folder structures, environments |
-| [🌐 Networking](NETWORKING.md) | Private endpoints, ExpressRoute, VPN, gateways |
-| [🔄 Disaster Recovery](DISASTER_RECOVERY.md) | Multi-region architecture, RTO/RPO, failover procedures |
-| [📋 Data Dictionary](data-dictionary/README.md) | Complete schema documentation for all layers |
-| [📕 Runbooks](runbooks/README.md) | Operational procedures and incident response |
-| [📜 Compliance Templates](compliance-templates/README.md) | CTR, SAR, W-2G, MICS reporting templates |
+    Copilot Studio integration and governance configuration
+
+    [:octicons-arrow-right-24: Copilot](features/ai-copilot-configuration.md)
+
+-   :material-lan:{ .lg .middle } __Data Mesh__
+
+    ---
+
+    Enterprise data mesh patterns with Fabric domains
+
+    [:octicons-arrow-right-24: Data Mesh](features/data-mesh-enterprise-patterns.md)
+
+</div>
+
+[:octicons-arrow-right-24: View all features](features/fabric-iq.md){ .md-button }
 
 ---
 
-## 🔧 Feature Documentation (New Fabric Experience)
+## Compliance & Governance
 
-| Feature | Description | Status |
-|:--------|:------------|:-------|
-| [Fabric IQ](features/fabric-iq.md) | Natural language data exploration with Ontology & Plan layers | GA |
-| [Real-Time Intelligence](features/real-time-intelligence.md) | Eventstreams, Eventhouse, KQL, Business Events, Maps | GA |
-| [AI Copilot](features/ai-copilot-configuration.md) | Copilot Studio integration and governance | GA |
-| [Data Mesh](features/data-mesh-enterprise-patterns.md) | Enterprise data mesh patterns with Fabric domains | GA |
-| [Digital Twin Builder](features/digital-twin-builder.md) | IoT digital twin modeling and simulation | Preview |
-| [Data Agents](features/data-agents.md) | Autonomous AI agents for data workflows | Preview |
-| [OneLake Security](features/onelake-security.md) | Workspace identity, managed VNet, trusted access | GA |
-| [OneLake Iceberg Interop](features/onelake-iceberg-interop.md) | Apache Iceberg read/write for cross-platform analytics | GA |
-| [dbt Integration](features/dbt-fabric-integration.md) | dbt Core/Cloud with Fabric SQL & Spark | GA |
-| [Materialized Lake Views](features/materialized-lake-views.md) | Pre-computed views for Direct Lake performance | Preview |
-| [Eventhouse Vector Database](features/eventhouse-vector-database.md) | Vector search in KQL for AI/RAG workloads | GA |
-| [Graph in Fabric](features/graph-in-fabric.md) | Entity relationship modeling and graph analytics | GA |
-| [Maps in Fabric](features/maps-in-fabric.md) | Native geospatial visualization in RTI dashboards | GA |
-| [Database Hub](features/database-hub.md) | Unified database management across edge/cloud/Fabric | Early Access |
-| [Mirroring](features/mirroring.md) | Near-real-time DB replication (Oracle, SAP, BigQuery, MySQL) | GA |
-| [Direct Lake](features/direct-lake.md) | Power BI reads Delta directly from OneLake | GA |
-| [Fabric SQL Database](features/fabric-sql-database.md) | OLTP workload with auto-replication to OneLake | GA |
-| [API for GraphQL](features/api-for-graphql.md) | GraphQL API layer over Fabric data items | GA |
-| [Semantic Link](features/semantic-link.md) | SemPy library bridging notebooks and semantic models | GA |
-| [OneLake Catalog](features/onelake-catalog.md) | Unified data discovery and governance hub | GA |
-| [AutoML & Model Endpoints](features/automl-model-endpoints.md) | Automated ML training and REST model deployment | GA/Preview |
-| [Translytical Task Flows](features/translytical-task-flows.md) | Write-back from Power BI reports to Lakehouse | GA |
-| [Fabric MCP](features/fabric-mcp.md) | Model Context Protocol for AI agent interaction | Preview |
-| [Workspace Monitoring](features/workspace-monitoring.md) | Queryable system tables for activity tracking | GA |
-| [Copy Job CDC](features/copy-job-cdc.md) | Low-code continuous ingestion with change data capture | GA |
-| [Federated Fabric for GCC](features/federated-fabric-gcc.md) | Cross-cloud architecture for GCC customers to use Fabric in Commercial | Guide |
-
----
-
-## 🛠️ Developer Resources
-
-| Resource | Description |
-|:---------|:------------|
-| [📓 Notebooks](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/notebooks) | Ready-to-import Fabric notebooks (Bronze, Silver, Gold, ML) |
-| [📊 Power BI Assets](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/powerbi) | DAX measures and TMDL semantic models |
-
----
-
-## 📊 3-Day POC Agenda
-
-| Day | Focus | Topics |
-|:---:|:------|:-------|
-| 1️⃣ | **Foundation** | Medallion architecture, Bronze layer, ingestion patterns |
-| 2️⃣ | **Transformation** | Silver/Gold layers, real-time analytics, Eventstreams |
-| 3️⃣ | **BI & Governance** | Direct Lake, Power BI, Purview, database mirroring |
-
-[📅 View Full Agenda](poc-agenda/README.md){ .md-button }
-
----
-
-## 🎰 Casino/Gaming Data Domains
-
-```mermaid
-flowchart LR
-    subgraph Bronze["🥉 Bronze Layer"]
-        A[Slot Telemetry]
-        B[Table Games]
-        C[Player Activity]
-        D[Compliance Events]
-    end
-    
-    subgraph Silver["🥈 Silver Layer"]
-        E[Cleansed Slots]
-        F[Validated Tables]
-        G[Player Profiles]
-        H[Compliance Records]
-    end
-    
-    subgraph Gold["🥇 Gold Layer"]
-        I[Machine KPIs]
-        J[Game Analytics]
-        K[Player 360]
-        L[Regulatory Reports]
-    end
-    
-    A --> E --> I
-    B --> F --> J
-    C --> G --> K
-    D --> H --> L
-```
-
----
-
-## 📜 Compliance Frameworks
-
-This POC addresses key gaming industry regulations:
+This POC addresses casino/gaming regulations (NIGC MICS, Title 31/BSA, IRS Gaming) and supports **8 federal agency domains** — USDA, SBA, NOAA, EPA, DOI, DOT/FAA, Tribal Healthcare, and DOJ.
 
 | Framework | Coverage |
 |:----------|:---------|
@@ -218,92 +172,45 @@ This POC addresses key gaming industry regulations:
 | **IRS Gaming** | W-2G, 1042-S reporting |
 | **State Gaming Commissions** | Jurisdiction-specific requirements |
 
-[🛡️ Security Documentation](SECURITY.md){ .md-button }
+[:octicons-arrow-right-24: Security documentation](SECURITY.md){ .md-button }
 
 ---
 
-## 📚 Tutorials
+## Quick Links
 
-| # | Tutorial | Duration |
-|:-:|:---------|:--------:|
-| 00 | [Environment Setup](tutorials/00-environment-setup/README.md) | ~1 hour |
-| 01 | [Bronze Layer](tutorials/01-bronze-layer/README.md) | ~2 hours |
-| 02 | [Silver Layer](tutorials/02-silver-layer/README.md) | ~2 hours |
-| 03 | [Gold Layer](tutorials/03-gold-layer/README.md) | ~2 hours |
-| 04 | [Real-Time Analytics](tutorials/04-real-time-analytics/README.md) | ~2 hours |
-| 05 | [Direct Lake & Power BI](tutorials/05-direct-lake-powerbi/README.md) | ~2 hours |
-| 06 | [Data Pipelines](tutorials/06-data-pipelines/README.md) | ~2 hours |
-| 07 | [Governance & Purview](tutorials/07-governance-purview/README.md) | ~2 hours |
-| 08 | [Database Mirroring](tutorials/08-database-mirroring/README.md) | ~2 hours |
-| 09 | [Advanced AI/ML](tutorials/09-advanced-ai-ml/README.md) | ~3 hours |
-| 10 | [Teradata Migration](tutorials/10-teradata-migration/README.md) | ~2 hours |
-| 11 | [SAS Connectivity](tutorials/11-sas-connectivity/README.md) | ~2 hours |
-| 12 | [CI/CD & DevOps](tutorials/12-cicd-devops/README.md) | ~2 hours |
-| 13 | [Migration Planning](tutorials/13-migration-planning/README.md) | ~2 hours |
-| 14 | [Security & Networking](tutorials/14-security-networking/README.md) | ~2.5 hours |
-| 15 | [Cost Optimization](tutorials/15-cost-optimization/README.md) | ~2 hours |
-| 16 | [Performance Tuning](tutorials/16-performance-tuning/README.md) | ~2.5 hours |
-| 17 | [Monitoring & Alerting](tutorials/17-monitoring-alerting/README.md) | ~2 hours |
-| 18 | [Data Sharing](tutorials/18-data-sharing/README.md) | ~1.5 hours |
-| 19 | [Copilot & AI](tutorials/19-copilot-ai/README.md) | ~1.5 hours |
-| 20 | [Workspace Best Practices](tutorials/20-workspace-best-practices/README.md) | ~2.5 hours |
-| 21 | [GeoAnalytics & ArcGIS](tutorials/21-geoanalytics-arcgis/README.md) | ~3.5 hours |
-| 22 | [Networking Connectivity](tutorials/22-networking-connectivity/README.md) | ~3.5 hours |
-| 23 | [SHIR & Data Gateways](tutorials/23-shir-data-gateways/README.md) | ~2.5 hours |
+<div class="grid cards" markdown>
 
----
+-   :fontawesome-brands-github:{ .lg .middle } __GitHub Repository__
 
-## 💰 Cost Estimation
+    ---
 
-| Component | Monthly Cost (F64) |
-|:----------|-------------------:|
-| Fabric Capacity (F64) | ~$8,500 |
-| ADLS Gen2 Storage | ~$500 |
-| Microsoft Purview | ~$800 |
-| Log Analytics | ~$300 |
-| Key Vault | ~$10 |
-| Networking | ~$200 |
-| **Total Estimate** | **~$10,310/month** |
+    Source code, issues, and releases
 
-[💰 Detailed Cost Analysis](COST_ESTIMATION.md){ .md-button }
+    [:octicons-arrow-right-24: Open on GitHub](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric)
 
----
+-   :material-file-document-multiple:{ .lg .middle } __Documentation__
 
-## 🔗 Quick Links
+    ---
 
-<div class="grid" markdown>
+    Full documentation index and guides
 
-<div class="card" markdown>
+    [:octicons-arrow-right-24: Browse docs](index.md)
 
-### [:fontawesome-brands-github: GitHub Repository](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric)
+-   :material-cog:{ .lg .middle } __Infrastructure__
 
-Source code and issues
+    ---
 
-</div>
+    Bicep IaC modules for Azure deployment
 
-<div class="card" markdown>
+    [:octicons-arrow-right-24: View infra](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/infra)
 
-### [:material-file-document: Documentation](index.md)
+-   :material-currency-usd:{ .lg .middle } __Cost Estimation__
 
-Complete documentation index
+    ---
 
-</div>
+    F64 capacity breakdown — ~$10,310/month
 
-<div class="card" markdown>
-
-### [:material-school: Tutorials](tutorials/README.md)
-
-Hands-on learning path
-
-</div>
-
-<div class="card" markdown>
-
-### [:material-cog: Infrastructure](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/infra)
-
-Bicep IaC modules
-
-</div>
+    [:octicons-arrow-right-24: Cost details](COST_ESTIMATION.md)
 
 </div>
 

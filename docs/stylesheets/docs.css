@@ -1,0 +1,71 @@
+/* docs.css — Visual foundation styles for Supercharge Microsoft Fabric */
+
+/* ── Architecture Hero ──────────────────────────────────────────── */
+.architecture-hero {
+  display: block;
+  width: 100%;
+  max-width: 1100px;
+  margin: 1.5rem auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.architecture-hero img,
+.architecture-hero svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+a.architecture-hero {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a.architecture-hero:hover,
+a.architecture-hero:focus-visible {
+  box-shadow: 0 8px 32px rgba(0, 120, 212, 0.18);
+  transform: translateY(-2px);
+}
+
+a.architecture-hero:focus-visible {
+  outline: 3px solid var(--md-accent-fg-color);
+  outline-offset: 2px;
+}
+
+[data-md-color-scheme="slate"] .architecture-hero {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+[data-md-color-scheme="slate"] a.architecture-hero:hover {
+  box-shadow: 0 8px 32px rgba(80, 230, 255, 0.15);
+}
+
+/* ── Card grid gap tightening ───────────────────────────────────── */
+.md-typeset .grid.cards {
+  gap: 0.75rem;
+}
+
+/* ── Diagram container ──────────────────────────────────────────── */
+.diagram-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 1rem auto;
+  text-align: center;
+  overflow-x: auto;
+}
+
+.diagram-container .mermaid {
+  margin: 0 auto;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────── */
+@media screen and (max-width: 76.1875em) {
+  .architecture-hero {
+    border-radius: 8px;
+    margin: 1rem auto;
+  }
+}
