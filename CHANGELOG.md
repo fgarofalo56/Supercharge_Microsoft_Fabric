@@ -1,12 +1,12 @@
 # 📋 Changelog
 
-> **Last Updated:** 2026-04-27 | **Version:** 3.0.0 | **Status:** Active
+> **Last Updated:** 2026-05-05 | **Version:** 3.1.0 | **Status:** Active
 
 <div align="center">
 
 ![Changelog](https://img.shields.io/badge/📋_Changelog-Keep_a_Changelog-blue?style=for-the-badge)
 ![SemVer](https://img.shields.io/badge/🔢_Versioning-SemVer_2.0-green?style=for-the-badge)
-![Phase](https://img.shields.io/badge/🎯_Phase-14_Complete-purple?style=for-the-badge)
+![Phase](https://img.shields.io/badge/🎯_Phase-15_Complete-purple?style=for-the-badge)
 
 </div>
 
@@ -15,6 +15,7 @@
 ## 📑 Table of Contents
 
 - [🔮 Unreleased](#-unreleased)
+- [🏷️ 3.1.0 — Phase 15: Layout, Visual Impact & CSA-in-a-Box Content](#️-310---2026-05-05)
 - [🏷️ 3.0.0 — Phase 14: One-Stop Shop Completion](#️-300---2026-04-27)
 - [🏷️ 2.2.0 — Phase 12: Documentation Gap Remediation](#️-220---2026-04-21)
 - [🏷️ 2.1.0 — Phase 11: Audit Remediation](#️-210---2026-04-15)
@@ -34,6 +35,84 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 🔮 [Unreleased]
 
 Nothing currently unreleased.
+
+---
+
+## 🏷️ [3.1.0] — 2026-05-05
+
+### Phase 15: Layout, Visual Impact & CSA-in-a-Box Content Reframing — 55 Files, 10 PRs
+
+Transforms the site from a flat documentation listing into a visually polished, navigable, enterprise-grade knowledge hub with collapsible navigation, hero graphics, decision trees, industry guidance, compliance mappings, research papers, operational runbooks, and reference architectures.
+
+#### Navigation Restructure (PR #81)
+
+**Changed:**
+- Removed `navigation.expand` and `navigation.sections` from mkdocs.yml — sidebar is now collapsible
+- Added `navigation.indexes` for section landing pages
+- Reorganized nav tree with new Guides tab grouping all new sections
+
+**Added:**
+- Section index pages with Material grid cards: features/, best-practices/, use-cases/, tutorials/, getting-started/
+
+#### Visual Foundation (PR #77)
+
+**Added:**
+- `docs/assets/images/architecture-hero.svg` — Fabric architecture hero diagram with brand colors
+- `docs/stylesheets/docs.css` — `.architecture-hero` class, diagram containers, card grid styling
+
+**Changed:**
+- `docs/index.md` — Redesigned homepage with Material grid cards and clickable hero SVG (removed custom .hero/.grid/.card divs)
+- `docs/stylesheets/extra.css` — Removed replaced .grid/.card CSS, kept branding
+
+#### Copilot Chat Enhancements (PR #79)
+
+**Changed:**
+- `docs/javascripts/copilot-chat.js` — XSS-hardened markdown renderer, highlight.js lazy loading, copy buttons on code blocks, citation footer cards, panel resize drag handle, full-page mode toggle
+- `docs/stylesheets/copilot-chat.css` — FAB button, resizable panel, message bubbles, table/citation/task-list styling, dark mode, responsive breakpoints
+- `docs/chat.md` — Mermaid architecture diagram added
+
+#### Role-Based Quickstarts (PR #78)
+
+**Added:**
+- 5 role-based quickstart pages: Data Engineer, BI Developer, Data Scientist, Platform Admin, Security Admin
+- Section index with Material grid cards
+
+#### Interactive Decision Trees (PR #80)
+
+**Added:**
+- 5 Mermaid decision trees: Lakehouse vs Warehouse vs SQL DB, ETL vs ELT vs Streaming, Direct Lake vs Import vs DirectQuery, Fabric vs Databricks vs Synapse, Workspace Topology
+- Each with TL;DR, per-recommendation tradeoffs, and anti-patterns
+
+#### Industry Verticals (PR #82)
+
+**Added:**
+- 6 industry pages: Healthcare, Financial Services, Retail/CPG, Manufacturing, Energy/Utilities, Telecommunications
+- Each with scenario tables, regulatory landscape, Mermaid data flow diagrams
+
+#### Compliance Framework Mappings (PR #83)
+
+**Added:**
+- 6 compliance frameworks: NIST 800-53, FedRAMP, HIPAA, SOC 2, PCI-DSS, GDPR
+- Each with control mapping tables (10+ controls), shared responsibility model, gap analysis
+
+#### Research & White Papers (PR #86)
+
+**Added:**
+- Enterprise Data Platform Comparison 2026 (3,262 words) — Fabric vs Databricks vs Snowflake vs Synapse
+- AI Readiness Assessment (3,060 words) — maturity model with assessment questionnaire
+- Data Mesh Maturity Model (3,548 words) — migration path from centralized to mesh on Fabric
+
+#### Operational Runbooks (PR #84)
+
+**Added:**
+- 6 runbooks: Capacity Throttling, Failed Refresh Triage, Data Quality Incident, Security Incident Response, Disaster Recovery Execution, Cost Spike Investigation
+- Each with Mermaid flowcharts, numbered procedures, escalation paths
+
+#### Reference Architectures (PR #85)
+
+**Added:**
+- 4 reference architectures: Small/Medium Enterprise, Large Enterprise Multi-Domain, Hybrid Cloud, Real-Time Analytics
+- Each with Mermaid diagrams, component tables, capacity sizing guidance
 
 ---
 
