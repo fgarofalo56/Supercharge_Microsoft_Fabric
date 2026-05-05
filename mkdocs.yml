@@ -43,8 +43,7 @@ theme:
     - navigation.tracking
     - navigation.tabs
     - navigation.tabs.sticky
-    - navigation.sections
-    - navigation.expand
+    - navigation.indexes
     - navigation.top
     - navigation.footer
     - search.suggest
@@ -145,6 +144,7 @@ nav:
     - AI Copilot Chat: chat.md
   
   - Getting Started:
+    - getting-started/index.md
     - Prerequisites: PREREQUISITES.md
     - Deployment: DEPLOYMENT.md
     - Cost Estimation: COST_ESTIMATION.md
@@ -155,6 +155,7 @@ nav:
     - Diagrams: diagrams/architecture-overview.md
   
   - Tutorials:
+    - tutorials/index.md
     - Overview: tutorials/README.md
     - 00 - Environment Setup: tutorials/00-environment-setup/README.md
     - 01 - Bronze Layer: tutorials/01-bronze-layer/README.md
@@ -206,6 +207,7 @@ nav:
     - Diagram Guide: poc-agenda/DIAGRAM_GUIDE.md
   
   - Use Cases:
+    - use-cases/index.md
     - Overview: use-cases/README.md
     - Antitrust Analytics: use-cases/antitrust-analytics.md
     - Federal Justice Analytics: use-cases/federal-justice-analytics.md
@@ -219,6 +221,7 @@ nav:
     - Published References: use-cases/references/README.md
 
   - Features:
+    - features/index.md
     - Fabric IQ: features/fabric-iq.md
     - Real-Time Intelligence: features/real-time-intelligence.md
     - AI Copilot: features/ai-copilot-configuration.md
@@ -256,6 +259,7 @@ nav:
     - Workspace IP Firewall: features/workspace-ip-firewall.md
 
   - Best Practices:
+    - best-practices/index.md
     - Overview: best-practices/README.md
     - Workspaces & Naming: best-practices/01_WORKSPACES_NAMING.md
     - Data Gateway: best-practices/02_DATA_GATEWAY.md
@@ -303,3 +307,19 @@ nav:
   - Infrastructure:
     - Overview: infra/README.md
     - Contributing: CONTRIBUTING.md
+
+  - Guides:
+    - Industries:
+      - Overview: guides/industries/index.md
+    - Decision Guides:
+      - Overview: guides/decisions/index.md
+    - Compliance:
+      - Overview: guides/compliance/index.md
+    - Quickstarts:
+      - Overview: guides/quickstarts/index.md
+    - Research:
+      - Overview: guides/research/index.md
+    - Runbooks:
+      - Overview: guides/runbooks/index.md
+    - Reference Architecture:
+      - Overview: guides/reference-architecture/index.md
