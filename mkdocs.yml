@@ -118,6 +118,7 @@ markdown_extensions:
 extra_css:
   - stylesheets/extra.css
   - stylesheets/copilot-chat.css
+  - stylesheets/docs.css
 
 extra_javascript:
   - https://unpkg.com/mermaid@10/dist/mermaid.min.js
@@ -310,16 +311,57 @@ nav:
 
   - Guides:
     - Industries:
-      - Overview: guides/industries/index.md
+      - industries/index.md
+      - Healthcare: industries/healthcare.md
+      - Financial Services: industries/financial-services.md
+      - Manufacturing: industries/manufacturing.md
+      - Retail & CPG: industries/retail-cpg.md
+      - Energy & Utilities: industries/energy-utilities.md
+      - Telecommunications: industries/telecommunications.md
     - Decision Guides:
-      - Overview: guides/decisions/index.md
+      - decisions/index.md
+      - Fabric vs Databricks vs Synapse: decisions/fabric-databricks-synapse.md
+      - Lakehouse vs Warehouse vs SQL DB: decisions/lakehouse-warehouse-sqldb.md
+      - Direct Lake vs Import vs DirectQuery: decisions/direct-lake-import-directquery.md
+      - ETL vs ELT vs Streaming: decisions/etl-elt-streaming.md
+      - Workspace Topology: decisions/workspace-topology.md
     - Compliance:
-      - Overview: guides/compliance/index.md
+      - compliance/index.md
+      - FedRAMP: compliance/fedramp.md
+      - HIPAA: compliance/hipaa.md
+      - SOC 2: compliance/soc2.md
+      - PCI DSS: compliance/pci-dss.md
+      - GDPR: compliance/gdpr.md
+      - NIST 800-53: compliance/nist-800-53.md
     - Quickstarts:
-      - Overview: guides/quickstarts/index.md
+      - quickstarts/index.md
+      - Data Engineer: quickstarts/data-engineer.md
+      - Data Scientist: quickstarts/data-scientist.md
+      - BI Developer: quickstarts/bi-developer.md
+      - Platform Admin: quickstarts/platform-admin.md
+      - Security Admin: quickstarts/security-admin.md
     - Research:
-      - Overview: guides/research/index.md
+      - research/index.md
+      - Enterprise Platform Comparison: research/enterprise-data-platform-comparison.md
+      - AI Readiness Assessment: research/ai-readiness-assessment.md
+      - Data Mesh Maturity Model: research/data-mesh-maturity-model.md
     - Runbooks:
-      - Overview: guides/runbooks/index.md
+      - runbooks/index.md
+      - Pipeline Failure Triage: runbooks/pipeline-failure-triage.md
+      - Capacity Throttling Response: runbooks/capacity-throttling-response.md
+      - Data Quality Incident: runbooks/data-quality-incident.md
+      - Security Incident Response: runbooks/security-incident-response.md
+      - Disaster Recovery Execution: runbooks/disaster-recovery-execution.md
+      - Cost Spike Investigation: runbooks/cost-spike-investigation.md
+      - Failed Refresh Triage: runbooks/failed-refresh-triage.md
+      - Auth Failure Playbook: runbooks/auth-failure-playbook.md
+      - Capacity Throttling: runbooks/capacity-throttling.md
+      - Incident Response Template: runbooks/incident-response-template.md
+      - Multi-Region Failover: runbooks/multi-region-failover.md
+      - Tenant Migration: runbooks/tenant-migration-dev-staging-prod.md
     - Reference Architecture:
-      - Overview: guides/reference-architecture/index.md
+      - reference-architecture/index.md
+      - Small-Medium Enterprise: reference-architecture/small-medium-enterprise.md
+      - Large Enterprise Multi-Domain: reference-architecture/large-enterprise-multi-domain.md
+      - Hybrid Cloud: reference-architecture/hybrid-cloud.md
+      - Real-Time Analytics: reference-architecture/real-time-analytics.md
