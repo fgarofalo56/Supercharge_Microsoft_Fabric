@@ -46,6 +46,9 @@ theme:
     - navigation.indexes
     - navigation.top
     - navigation.footer
+    - navigation.path
+    - navigation.prune
+    - toc.integrate
     - search.suggest
     - search.highlight
     - search.share
@@ -138,230 +141,356 @@ extra:
 # Files are served from docs/ directory. The GitHub Action copies external
 # folders (tutorials/, poc-agenda/, infra/) into docs/ before building.
 nav:
-  - Home:
-    - Overview: index.md
+  # ============================================================
+  # 1. HOME
+  # ============================================================
+  - Home: index.md
+
+  # ============================================================
+  # 2. GET STARTED — first 30 minutes for any new visitor
+  # ============================================================
+  - Get Started:
+    - Welcome: getting-started/index.md
     - Quick Start: QUICK_START.md
-    - Changelog: CHANGELOG.md
-    - AI Copilot Chat: chat.md
-  
-  - Getting Started:
-    - getting-started/index.md
     - Prerequisites: PREREQUISITES.md
     - Deployment: DEPLOYMENT.md
     - Cost Estimation: COST_ESTIMATION.md
-  
+    - AI Copilot Chat: chat.md
+    - Role-Based Quickstarts:
+      - Overview: quickstarts/index.md
+      - Data Engineer: quickstarts/data-engineer.md
+      - Data Scientist: quickstarts/data-scientist.md
+      - BI Developer: quickstarts/bi-developer.md
+      - Platform Admin: quickstarts/platform-admin.md
+      - Security Admin: quickstarts/security-admin.md
+
+  # ============================================================
+  # 3. ARCHITECTURE — how the platform is designed and why
+  # ============================================================
   - Architecture:
     - Overview: ARCHITECTURE.md
     - Security: SECURITY.md
-    - Diagrams: diagrams/architecture-overview.md
-  
-  - Tutorials:
-    - tutorials/index.md
-    - Overview: tutorials/README.md
-    - 00 - Environment Setup: tutorials/00-environment-setup/README.md
-    - 01 - Bronze Layer: tutorials/01-bronze-layer/README.md
-    - 02 - Silver Layer: tutorials/02-silver-layer/README.md
-    - 03 - Gold Layer: tutorials/03-gold-layer/README.md
-    - 04 - Real-Time Analytics: tutorials/04-real-time-analytics/README.md
-    - 05 - Direct Lake & Power BI: tutorials/05-direct-lake-powerbi/README.md
-    - 06 - Data Pipelines: tutorials/06-data-pipelines/README.md
-    - 07 - Governance & Purview: tutorials/07-governance-purview/README.md
-    - 08 - Database Mirroring: tutorials/08-database-mirroring/README.md
-    - 09 - Advanced AI/ML: tutorials/09-advanced-ai-ml/README.md
-    - 10 - Teradata Migration: tutorials/10-teradata-migration/README.md
-    - 11 - SAS Connectivity: tutorials/11-sas-connectivity/README.md
-    - 12 - CI/CD & DevOps: tutorials/12-cicd-devops/README.md
-    - 13 - Migration Planning: tutorials/13-migration-planning/README.md
-    - 14 - Security & Networking: tutorials/14-security-networking/README.md
-    - 15 - Cost Optimization: tutorials/15-cost-optimization/README.md
-    - 16 - Performance Tuning: tutorials/16-performance-tuning/README.md
-    - 17 - Monitoring & Alerting: tutorials/17-monitoring-alerting/README.md
-    - 18 - Data Sharing: tutorials/18-data-sharing/README.md
-    - 19 - Copilot & AI Features: tutorials/19-copilot-ai/README.md
-    - 20 - Workspace Best Practices: tutorials/20-workspace-best-practices/README.md
-    - 21 - GeoAnalytics & ArcGIS: tutorials/21-geoanalytics-arcgis/README.md
-    - 22 - Networking & Connectivity: tutorials/22-networking-connectivity/README.md
-    - 23 - SHIR & Data Gateways: tutorials/23-shir-data-gateways/README.md
-    - 24 - Snowflake to Fabric: tutorials/24-snowflake-to-fabric/README.md
-    - 25 - IBM DB2 Source: tutorials/25-ibm-db2-source/README.md
-    - 26 - Multi-Source Streaming: tutorials/26-multi-source-streaming/README.md
-    - 27 - Video Security Analytics: tutorials/27-video-security-analytics/README.md
-    - 28 - People Movement Analytics: tutorials/28-people-movement-analytics/README.md
-    - 29 - Geolocation Analytics: tutorials/29-geolocation-analytics/README.md
-    - 30 - Tribal Healthcare: tutorials/30-tribal-healthcare/README.md
-    - 31 - Federal DOT/FAA: tutorials/31-federal-dot-faa/README.md
-    - 32 - USDA Agriculture: tutorials/32-usda-agriculture/README.md
-    - 33 - SBA Small Business: tutorials/33-sba-small-business/README.md
-    - 34 - NOAA Weather & Climate: tutorials/34-noaa-weather-climate/README.md
-    - 35 - EPA Environment: tutorials/35-epa-environment/README.md
-    - 36 - DOI Interior: tutorials/36-doi-interior/README.md
-    - 37 - Graph Analytics: tutorials/37-graph-analytics/README.md
-    - 38 - DOJ Justice: tutorials/38-doj-justice/README.md
-    - Cheat Sheet: tutorials/CHEAT_SHEET.md
-  
-  - POC Agenda:
-    - Overview: poc-agenda/README.md
-    - Day 1 - Medallion Foundation: poc-agenda/day1-medallion-foundation.md
-    - Day 2 - Transformations & Real-Time: poc-agenda/day2-transformations-realtime.md
-    - Day 3 - BI, Governance & Mirroring: poc-agenda/day3-bi-governance-mirroring.md
-    - Demo Runbook: poc-agenda/DEMO_RUNBOOK.md
-    - Diagram Guide: poc-agenda/DIAGRAM_GUIDE.md
-  
+    - Networking: NETWORKING.md
+    - Disaster Recovery: DISASTER_RECOVERY.md
+    - Reference Architectures:
+      - Overview: reference-architecture/index.md
+      - Small-Medium Enterprise: reference-architecture/small-medium-enterprise.md
+      - Large Enterprise Multi-Domain: reference-architecture/large-enterprise-multi-domain.md
+      - Hybrid Cloud: reference-architecture/hybrid-cloud.md
+      - Real-Time Analytics: reference-architecture/real-time-analytics.md
+    - Architecture Diagrams:
+      - Overview: diagrams/architecture-overview.md
+      - Cost Breakdown: diagrams/cost-breakdown.md
+    - Decision Trees:
+      - Overview: decisions/index.md
+      - Fabric vs Databricks vs Synapse: decisions/fabric-databricks-synapse.md
+      - Lakehouse vs Warehouse vs SQL DB: decisions/lakehouse-warehouse-sqldb.md
+      - Direct Lake vs Import vs DirectQuery: decisions/direct-lake-import-directquery.md
+      - ETL vs ELT vs Streaming: decisions/etl-elt-streaming.md
+      - Workspace Topology: decisions/workspace-topology.md
+      - Decision Trees Index: DECISION_TREES.md
+      - Partition Strategy: best-practices/partition-strategy-decision-tree.md
+    - Best Practices:
+      - Overview: best-practices/index.md
+      - Best Practices Index: BEST_PRACTICES.md
+      - Foundations:
+        - Workspaces & Naming: best-practices/01_WORKSPACES_NAMING.md
+        - Data Gateway: best-practices/02_DATA_GATEWAY.md
+        - Pipelines & Data Movement: best-practices/03_PIPELINES_DATA_MOVEMENT.md
+        - Metadata-Driven Pipelines: best-practices/04_METADATA_DRIVEN_PIPELINES.md
+        - Spark & Notebooks: best-practices/05_SPARK_NOTEBOOKS.md
+        - Dataflows Gen2: best-practices/06_DATAFLOWS.md
+        - Lakehouse Setup: best-practices/07_LAKEHOUSE_SETUP.md
+        - Warehouse Setup: best-practices/08_WAREHOUSE_SETUP.md
+        - Source-Specific Patterns: best-practices/09_SOURCE_SPECIFIC_PATTERNS.md
+        - Decision Guide: best-practices/10_DECISION_GUIDE.md
+        - Oracle Gateway Troubleshooting: best-practices/11_ORACLE_GATEWAY_TROUBLESHOOTING.md
+      - Architecture & Design:
+        - Medallion Architecture Deep Dive: best-practices/medallion-architecture-deep-dive.md
+        - Multi-Tenant Workspace Architecture: best-practices/multi-tenant-workspace-architecture.md
+        - ETL/ELT Comparison Guide: best-practices/etl-elt-comparison-guide.md
+        - Data Modeling & Star Schema: best-practices/data-modeling-star-schema.md
+        - Lakehouse vs Warehouse vs SQL DB: best-practices/lakehouse-warehouse-sqldb-decision-guide.md
+        - Lakehouse Schema Versioning: best-practices/lakehouse-schema-versioning.md
+        - OneLake Files vs Tables: best-practices/onelake-files-vs-tables.md
+        - V-Order Tuning Deep Dive: best-practices/v-order-tuning-deep-dive.md
+        - Power BI Best Practices: best-practices/power-bi-best-practices.md
+      - Performance & Reliability:
+        - Performance & Parallelism: best-practices/performance-parallelism.md
+        - Query Optimization Deep Dive: best-practices/query-optimization-deep-dive.md
+        - Spark Runtime Migration: best-practices/spark-runtime-migration.md
+        - Spark Runtime Breaking Changes: best-practices/spark-runtime-breaking-changes-matrix.md
+        - Disaster Recovery & BCDR: best-practices/disaster-recovery-bcdr.md
+        - Capacity Planning & Cost: best-practices/capacity-planning-cost-optimization.md
+        - Monitoring & Observability: best-practices/monitoring-observability.md
+        - Error Handling & Monitoring: best-practices/error-handling-monitoring.md
+        - Alerting & Data Activator: best-practices/alerting-data-activator.md
+        - Incremental Refresh & CDC: best-practices/incremental-refresh-cdc.md
+        - Data Sharing & Federation: best-practices/data-sharing-federation.md
+        - Migration Patterns: best-practices/migration-patterns.md
+        - Testing Strategies: best-practices/testing-strategies.md
+      - Data Management:
+        - Master Data Management: best-practices/data-management/master-data-management.md
+        - Data Contracts: best-practices/data-management/data-contracts.md
+        - Data Product Framework: best-practices/data-management/data-product-framework.md
+        - SCD Patterns: best-practices/data-management/scd-patterns.md
+        - Late-Arriving Data: best-practices/data-management/late-arriving-data.md
+        - Reference Data Versioning: best-practices/data-management/reference-data-versioning.md
+        - Business Glossary Automation: best-practices/data-management/business-glossary-automation.md
+      - AI/ML on Fabric:
+        - MLOps in Fabric Production: best-practices/mlops-fabric-production.md
+        - Model Monitoring & Drift Detection: best-practices/model-monitoring-drift-detection.md
+        - Feature Store on OneLake: best-practices/feature-store-onelake.md
+        - Responsible AI Framework: best-practices/responsible-ai-framework.md
+        - LLM Cost Tracking: best-practices/llm-cost-tracking.md
+      - Security:
+        - Network Security: best-practices/network-security.md
+        - Identity & RBAC Patterns: best-practices/identity-rbac-patterns.md
+        - Customer-Managed Keys: best-practices/customer-managed-keys.md
+        - Outbound Access Protection: best-practices/outbound-access-protection.md
+        - Zero Trust Blueprint: best-practices/security/zero-trust-blueprint.md
+        - Threat Model (STRIDE): best-practices/security/threat-model-stride.md
+        - Data Exfiltration Prevention: best-practices/security/data-exfiltration-prevention.md
+        - Audit Trail Immutability: best-practices/security/audit-trail-immutability.md
+        - Supply Chain Security: best-practices/security/supply-chain-security.md
+        - GDPR Right to Deletion: best-practices/security/gdpr-right-to-deletion.md
+        - CCPA Privacy Rights: best-practices/security/ccpa-privacy-rights.md
+        - SOC 2 Type II Readiness: best-practices/security/soc2-type2-readiness.md
+        - ISO 27001 Mapping: best-practices/security/iso27001-mapping.md
+      - Operations:
+        - Change Management: best-practices/operations/change-management.md
+        - Observability Stack: best-practices/operations/observability-stack.md
+        - On-Call Rotation Handbook: best-practices/operations/oncall-rotation-handbook.md
+        - SLO/SLI on Fabric: best-practices/operations/slo-sli-fabric.md
+        - SQL Audit Logs Compliance: best-practices/sql-audit-logs-compliance.md
+        - FinOps & Cost Governance: best-practices/finops-cost-governance.md
+        - Data Governance Deep Dive: best-practices/data-governance-deep-dive.md
+      - Dev Experience:
+        - VS Code Fabric Workflow: best-practices/dev-experience/vscode-fabric-workflow.md
+        - DevContainer Setup: best-practices/dev-experience/devcontainer-setup.md
+        - Git Workflow for Fabric: best-practices/dev-experience/git-workflow-fabric.md
+        - Local Spark Debugging: best-practices/dev-experience/local-spark-debugging.md
+        - Notebook Unit Testing: best-practices/dev-experience/notebook-unit-testing.md
+        - CI/CD with fabric-cicd: best-practices/fabric-cicd-deployment.md
+
+  # ============================================================
+  # 4. BUILD — features, tutorials, hands-on workshops
+  # ============================================================
+  - Build:
+    - Features:
+      - Overview: features/index.md
+      - April 2026 Features Snapshot: microsoft-fabric-features-april-2026.md
+      - Foundation:
+        - Mirroring: features/mirroring.md
+        - Direct Lake: features/direct-lake.md
+        - Fabric SQL Database: features/fabric-sql-database.md
+        - Database Hub: features/database-hub.md
+        - GraphQL API: features/api-for-graphql.md
+        - Real-Time Hub: features/real-time-hub.md
+        - Real-Time Intelligence: features/real-time-intelligence.md
+      - Data Engineering:
+        - Copy Job CDC: features/copy-job-cdc.md
+        - Dataflow Gen2: features/dataflow-gen2.md
+        - dbt Integration: features/dbt-fabric-integration.md
+        - Materialized Lake Views: features/materialized-lake-views.md
+        - Apache Airflow Job: features/apache-airflow-job.md
+        - Spark Environments & Job Definitions: features/spark-environments-job-definitions.md
+        - Spark Job Definitions Deep Dive: features/spark-job-definitions-deep-dive.md
+        - Notebook Resources & Environments: features/notebook-resources-environments.md
+        - Variable Libraries: features/variable-libraries.md
+        - User Data Functions: features/user-data-functions.md
+      - Data Mesh & OneLake:
+        - Data Mesh Enterprise Patterns: features/data-mesh-enterprise-patterns.md
+        - OneLake Catalog: features/onelake-catalog.md
+        - OneLake Security: features/onelake-security.md
+        - OneLake Iceberg Interop: features/onelake-iceberg-interop.md
+        - OneLake Shortcuts (S3/GCS/Dataverse): features/onelake-shortcuts-s3-gcs-dataverse.md
+      - AI & ML:
+        - AI Copilot Configuration: features/ai-copilot-configuration.md
+        - Data Agents: features/data-agents.md
+        - AutoML & Model Endpoints: features/automl-model-endpoints.md
+        - Translytical Task Flows: features/translytical-task-flows.md
+        - Eventhouse Vector Database: features/eventhouse-vector-database.md
+        - Semantic Link: features/semantic-link.md
+        - Fabric IQ: features/fabric-iq.md
+        - Fabric MCP: features/fabric-mcp.md
+        - Digital Twin Builder: features/digital-twin-builder.md
+        - Prompt Engineering for Fabric: features/prompt-engineering-fabric.md
+        - RAG Patterns Deep Dive: features/rag-patterns-deep-dive.md
+        - Eval Harness for LLM: features/eval-harness-llm.md
+      - Power BI & Analytics:
+        - Composite Models: features/composite-models.md
+        - Cross-Database Queries: features/cross-database-queries.md
+        - Paginated Reports: features/paginated-reports.md
+        - Scorecards & Metrics: features/scorecards-metrics.md
+        - TMDL Power BI Developer Mode: features/tmdl-power-bi-developer-mode.md
+      - Spatial & Graph:
+        - Graph in Fabric: features/graph-in-fabric.md
+        - Maps in Fabric: features/maps-in-fabric.md
+      - Operations & DevOps:
+        - Workspace Monitoring: features/workspace-monitoring.md
+        - Fabric Unified Admin Monitoring: features/fabric-unified-admin-monitoring.md
+        - Data Activator: features/data-activator.md
+        - Deployment Pipelines: features/deployment-pipelines.md
+        - Git Integration: features/git-integration.md
+        - Fabric REST APIs: features/fabric-rest-apis.md
+      - Security & Networking:
+        - VNet Data Gateway: features/vnet-data-gateway.md
+        - Workspace IP Firewall: features/workspace-ip-firewall.md
+        - Federated Fabric for GCC: features/federated-fabric-gcc.md
+    - Tutorials:
+      - Overview: tutorials/index.md
+      - Cheat Sheet: tutorials/CHEAT_SHEET.md
+      - Foundation:
+        - "00 — Environment Setup": tutorials/00-environment-setup/README.md
+        - "01 — Bronze Layer": tutorials/01-bronze-layer/README.md
+        - "02 — Silver Layer": tutorials/02-silver-layer/README.md
+        - "03 — Gold Layer": tutorials/03-gold-layer/README.md
+      - Real-Time & Analytics:
+        - "04 — Real-Time Analytics": tutorials/04-real-time-analytics/README.md
+        - "05 — Direct Lake & Power BI": tutorials/05-direct-lake-powerbi/README.md
+        - "06 — Data Pipelines": tutorials/06-data-pipelines/README.md
+        - "07 — Governance & Purview": tutorials/07-governance-purview/README.md
+        - "08 — Database Mirroring": tutorials/08-database-mirroring/README.md
+        - "09 — Advanced AI/ML": tutorials/09-advanced-ai-ml/README.md
+      - Migration & Connectivity:
+        - "10 — Teradata Migration": tutorials/10-teradata-migration/README.md
+        - "11 — SAS Connectivity": tutorials/11-sas-connectivity/README.md
+        - "12 — CI/CD & DevOps": tutorials/12-cicd-devops/README.md
+        - "13 — Migration Planning": tutorials/13-migration-planning/README.md
+        - "14 — Security & Networking": tutorials/14-security-networking/README.md
+        - "15 — Cost Optimization": tutorials/15-cost-optimization/README.md
+        - "16 — Performance Tuning": tutorials/16-performance-tuning/README.md
+        - "17 — Monitoring & Alerting": tutorials/17-monitoring-alerting/README.md
+        - "18 — Data Sharing": tutorials/18-data-sharing/README.md
+        - "19 — Copilot & AI Features": tutorials/19-copilot-ai/README.md
+        - "20 — Workspace Best Practices": tutorials/20-workspace-best-practices/README.md
+      - Specialty Connectors:
+        - "21 — GeoAnalytics & ArcGIS": tutorials/21-geoanalytics-arcgis/README.md
+        - "22 — Networking & Connectivity": tutorials/22-networking-connectivity/README.md
+        - "23 — SHIR & Data Gateways": tutorials/23-shir-data-gateways/README.md
+        - "24 — Snowflake to Fabric": tutorials/24-snowflake-to-fabric/README.md
+        - "25 — IBM DB2 Source": tutorials/25-ibm-db2-source/README.md
+        - "26 — Multi-Source Streaming": tutorials/26-multi-source-streaming/README.md
+      - Industry & Domain:
+        - "27 — Video Security Analytics": tutorials/27-video-security-analytics/README.md
+        - "28 — People Movement Analytics": tutorials/28-people-movement-analytics/README.md
+        - "29 — Geolocation Analytics": tutorials/29-geolocation-analytics/README.md
+        - "30 — Tribal Healthcare": tutorials/30-tribal-healthcare/README.md
+        - "31 — Federal DOT/FAA": tutorials/31-federal-dot-faa/README.md
+        - "32 — USDA Agriculture": tutorials/32-usda-agriculture/README.md
+        - "33 — SBA Small Business": tutorials/33-sba-small-business/README.md
+        - "34 — NOAA Weather & Climate": tutorials/34-noaa-weather-climate/README.md
+        - "35 — EPA Environment": tutorials/35-epa-environment/README.md
+        - "36 — DOI Interior": tutorials/36-doi-interior/README.md
+        - "37 — Graph Analytics": tutorials/37-graph-analytics/README.md
+        - "38 — DOJ Justice": tutorials/38-doj-justice/README.md
+    - POC Workshop (3-Day Agenda):
+      - Overview: poc-agenda/README.md
+      - Day 1 — Medallion Foundation: poc-agenda/day1-medallion-foundation.md
+      - Day 2 — Transformations & Real-Time: poc-agenda/day2-transformations-realtime.md
+      - Day 3 — BI, Governance & Mirroring: poc-agenda/day3-bi-governance-mirroring.md
+      - Federal Agency Tracks: poc-agenda/federal-agency-tracks.md
+      - Demo Runbook: poc-agenda/DEMO_RUNBOOK.md
+      - Diagram Guide: poc-agenda/DIAGRAM_GUIDE.md
+
+  # ============================================================
+  # 5. USE CASES — applied analytics by domain & industry
+  # ============================================================
   - Use Cases:
-    - use-cases/index.md
-    - Overview: use-cases/README.md
-    - Antitrust Analytics: use-cases/antitrust-analytics.md
-    - Federal Justice Analytics: use-cases/federal-justice-analytics.md
-    - Transportation Safety: use-cases/transportation-safety-analytics.md
-    - Agricultural Analytics: use-cases/agricultural-analytics.md
-    - Small Business Lending: use-cases/small-business-lending-analytics.md
-    - Weather & Climate: use-cases/weather-climate-analytics.md
-    - Environmental Compliance: use-cases/environmental-compliance-analytics.md
-    - Natural Resources: use-cases/natural-resources-analytics.md
-    - Tribal Health: use-cases/tribal-health-analytics.md
-    - Published References: use-cases/references/README.md
-
-  - Features:
-    - features/index.md
-    - Fabric IQ: features/fabric-iq.md
-    - Real-Time Intelligence: features/real-time-intelligence.md
-    - AI Copilot: features/ai-copilot-configuration.md
-    - Data Mesh: features/data-mesh-enterprise-patterns.md
-    - Digital Twin Builder: features/digital-twin-builder.md
-    - Data Agents: features/data-agents.md
-    - OneLake Security: features/onelake-security.md
-    - Iceberg Interop: features/onelake-iceberg-interop.md
-    - dbt Integration: features/dbt-fabric-integration.md
-    - Materialized Lake Views: features/materialized-lake-views.md
-    - Vector Database: features/eventhouse-vector-database.md
-    - Mirroring: features/mirroring.md
-    - Direct Lake: features/direct-lake.md
-    - SQL Database: features/fabric-sql-database.md
-    - GraphQL API: features/api-for-graphql.md
-    - Semantic Link: features/semantic-link.md
-    - OneLake Catalog: features/onelake-catalog.md
-    - AutoML & Model Endpoints: features/automl-model-endpoints.md
-    - Translytical Task Flows: features/translytical-task-flows.md
-    - Fabric MCP: features/fabric-mcp.md
-    - Workspace Monitoring: features/workspace-monitoring.md
-    - Copy Job CDC: features/copy-job-cdc.md
-    - Dataflow Gen2: features/dataflow-gen2.md
-    - Data Activator: features/data-activator.md
-    - Deployment Pipelines: features/deployment-pipelines.md
-    - Spark Environments & Jobs: features/spark-environments-job-definitions.md
-    - Git Integration: features/git-integration.md
-    - Real-Time Hub: features/real-time-hub.md
-    - Paginated Reports: features/paginated-reports.md
-    - Scorecards & Metrics: features/scorecards-metrics.md
-    - Composite Models: features/composite-models.md
-    - Cross-Database Queries: features/cross-database-queries.md
-    - REST APIs: features/fabric-rest-apis.md
-    - VNet Data Gateway: features/vnet-data-gateway.md
-    - Workspace IP Firewall: features/workspace-ip-firewall.md
-
-  - Best Practices:
-    - best-practices/index.md
-    - Overview: best-practices/README.md
-    - Workspaces & Naming: best-practices/01_WORKSPACES_NAMING.md
-    - Data Gateway: best-practices/02_DATA_GATEWAY.md
-    - Pipelines & Data Movement: best-practices/03_PIPELINES_DATA_MOVEMENT.md
-    - Metadata-Driven Pipelines: best-practices/04_METADATA_DRIVEN_PIPELINES.md
-    - Spark & Notebooks: best-practices/05_SPARK_NOTEBOOKS.md
-    - Dataflows Gen2: best-practices/06_DATAFLOWS.md
-    - Lakehouse Setup: best-practices/07_LAKEHOUSE_SETUP.md
-    - Warehouse Setup: best-practices/08_WAREHOUSE_SETUP.md
-    - Oracle & SQL Server Patterns: best-practices/09_SOURCE_SPECIFIC_PATTERNS.md
-    - Decision Guide: best-practices/10_DECISION_GUIDE.md
-    - Oracle Gateway Troubleshooting: best-practices/11_ORACLE_GATEWAY_TROUBLESHOOTING.md
-    - Error Handling & Monitoring: best-practices/error-handling-monitoring.md
-    - Alerting & Data Activator: best-practices/alerting-data-activator.md
-    - Performance & Parallelism: best-practices/performance-parallelism.md
-    - Data Governance Deep Dive: best-practices/data-governance-deep-dive.md
-    - CI/CD with fabric-cicd: best-practices/fabric-cicd-deployment.md
-    - SQL Audit Logs Compliance: best-practices/sql-audit-logs-compliance.md
-    - Outbound Access Protection: best-practices/outbound-access-protection.md
-    - Customer-Managed Keys: best-practices/customer-managed-keys.md
-    - Spark Runtime Migration: best-practices/spark-runtime-migration.md
-    - Capacity Planning & Cost: best-practices/capacity-planning-cost-optimization.md
-    - Disaster Recovery & BCDR: best-practices/disaster-recovery-bcdr.md
-    - Testing Strategies: best-practices/testing-strategies.md
-    - Network Security: best-practices/network-security.md
-    - Identity & RBAC Patterns: best-practices/identity-rbac-patterns.md
-    - Medallion Architecture Deep Dive: best-practices/medallion-architecture-deep-dive.md
-    - Monitoring & Observability: best-practices/monitoring-observability.md
-    - Migration Patterns: best-practices/migration-patterns.md
-    - Multi-Tenant Architecture: best-practices/multi-tenant-workspace-architecture.md
-    - Data Sharing & Federation: best-practices/data-sharing-federation.md
-    - Incremental Refresh & CDC: best-practices/incremental-refresh-cdc.md
-    - ETL/ELT Comparison Guide: best-practices/etl-elt-comparison-guide.md
-    - Power BI Best Practices: best-practices/power-bi-best-practices.md
-    - Lakehouse vs Warehouse vs SQL DB: best-practices/lakehouse-warehouse-sqldb-decision-guide.md
-    - FinOps & Cost Governance: best-practices/finops-cost-governance.md
-    - Data Modeling & Star Schema: best-practices/data-modeling-star-schema.md
-
-  - Reference:
-    - FAQ: FAQ.md
-    - Glossary: GLOSSARY.md
-    - Style Guide: STYLE_GUIDE.md
-    - Visual Standards: VISUAL_STANDARDS.md
-
-  - Infrastructure:
-    - Overview: infra/README.md
-    - Contributing: CONTRIBUTING.md
-
-  - Guides:
+    - Overview: use-cases/index.md
     - Industries:
-      - industries/index.md
+      - Overview: industries/index.md
       - Healthcare: industries/healthcare.md
       - Financial Services: industries/financial-services.md
       - Manufacturing: industries/manufacturing.md
       - Retail & CPG: industries/retail-cpg.md
       - Energy & Utilities: industries/energy-utilities.md
       - Telecommunications: industries/telecommunications.md
-    - Decision Guides:
-      - decisions/index.md
-      - Fabric vs Databricks vs Synapse: decisions/fabric-databricks-synapse.md
-      - Lakehouse vs Warehouse vs SQL DB: decisions/lakehouse-warehouse-sqldb.md
-      - Direct Lake vs Import vs DirectQuery: decisions/direct-lake-import-directquery.md
-      - ETL vs ELT vs Streaming: decisions/etl-elt-streaming.md
-      - Workspace Topology: decisions/workspace-topology.md
-    - Compliance:
-      - compliance/index.md
-      - FedRAMP: compliance/fedramp.md
-      - HIPAA: compliance/hipaa.md
-      - SOC 2: compliance/soc2.md
-      - PCI DSS: compliance/pci-dss.md
-      - GDPR: compliance/gdpr.md
-      - NIST 800-53: compliance/nist-800-53.md
-    - Quickstarts:
-      - quickstarts/index.md
-      - Data Engineer: quickstarts/data-engineer.md
-      - Data Scientist: quickstarts/data-scientist.md
-      - BI Developer: quickstarts/bi-developer.md
-      - Platform Admin: quickstarts/platform-admin.md
-      - Security Admin: quickstarts/security-admin.md
-    - Research:
-      - research/index.md
-      - Enterprise Platform Comparison: research/enterprise-data-platform-comparison.md
-      - AI Readiness Assessment: research/ai-readiness-assessment.md
-      - Data Mesh Maturity Model: research/data-mesh-maturity-model.md
+    - Federal & Public Sector:
+      - Federal Justice Analytics: use-cases/federal-justice-analytics.md
+      - Antitrust Analytics: use-cases/antitrust-analytics.md
+      - Transportation Safety: use-cases/transportation-safety-analytics.md
+      - Agricultural Analytics: use-cases/agricultural-analytics.md
+      - Small Business Lending: use-cases/small-business-lending-analytics.md
+      - Weather & Climate: use-cases/weather-climate-analytics.md
+      - Environmental Compliance: use-cases/environmental-compliance-analytics.md
+      - Natural Resources: use-cases/natural-resources-analytics.md
+      - Tribal Health: use-cases/tribal-health-analytics.md
+    - Healthcare & Life Sciences:
+      - Commercial Healthcare Operations: use-cases/commercial-healthcare-operations.md
+      - Pharma Clinical Trials: use-cases/pharma-clinical-trials.md
+    - Financial Services:
+      - Financial Fraud Detection: use-cases/financial-fraud-detection.md
+      - Insurance Claims Analytics: use-cases/insurance-claims-analytics.md
+    - Manufacturing & Industrial:
+      - Manufacturing Predictive Maintenance: use-cases/manufacturing-predictive-maintenance.md
+      - Energy Grid Analytics: use-cases/energy-grid-analytics.md
+    - Retail, Telco & Media:
+      - Retail Demand Forecasting: use-cases/retail-demand-forecasting.md
+      - Telecom Churn & Network: use-cases/telecom-churn-network.md
+      - Media Audience Analytics: use-cases/media-audience-analytics.md
+    - Published References: use-cases/references/README.md
+
+  # ============================================================
+  # 6. WHITE PAPERS — research, maturity models, frameworks
+  # ============================================================
+  - White Papers:
+    - Overview: research/index.md
+    - Enterprise Data Platform Comparison: research/enterprise-data-platform-comparison.md
+    - AI Readiness Assessment: research/ai-readiness-assessment.md
+    - Data Mesh Maturity Model: research/data-mesh-maturity-model.md
+    - Migration & RTI Research: MIGRATION_AND_RTI_RESEARCH.md
+
+  # ============================================================
+  # 7. OPERATE — Day-2 ops, runbooks, compliance, infrastructure
+  # ============================================================
+  - Operate:
     - Runbooks:
-      - runbooks/index.md
+      - Overview: runbooks/index.md
       - Pipeline Failure Triage: runbooks/pipeline-failure-triage.md
       - Capacity Throttling Response: runbooks/capacity-throttling-response.md
+      - Capacity Throttling: runbooks/capacity-throttling.md
       - Data Quality Incident: runbooks/data-quality-incident.md
       - Security Incident Response: runbooks/security-incident-response.md
       - Disaster Recovery Execution: runbooks/disaster-recovery-execution.md
       - Cost Spike Investigation: runbooks/cost-spike-investigation.md
       - Failed Refresh Triage: runbooks/failed-refresh-triage.md
       - Auth Failure Playbook: runbooks/auth-failure-playbook.md
-      - Capacity Throttling: runbooks/capacity-throttling.md
-      - Incident Response Template: runbooks/incident-response-template.md
       - Multi-Region Failover: runbooks/multi-region-failover.md
-      - Tenant Migration: runbooks/tenant-migration-dev-staging-prod.md
-    - Reference Architecture:
-      - reference-architecture/index.md
-      - Small-Medium Enterprise: reference-architecture/small-medium-enterprise.md
-      - Large Enterprise Multi-Domain: reference-architecture/large-enterprise-multi-domain.md
-      - Hybrid Cloud: reference-architecture/hybrid-cloud.md
-      - Real-Time Analytics: reference-architecture/real-time-analytics.md
+      - Tenant Migration (Dev/Staging/Prod): runbooks/tenant-migration-dev-staging-prod.md
+      - Incident Response Template: runbooks/incident-response-template.md
+    - Compliance Frameworks:
+      - Overview: compliance/index.md
+      - FedRAMP: compliance/fedramp.md
+      - HIPAA: compliance/hipaa.md
+      - SOC 2: compliance/soc2.md
+      - PCI DSS: compliance/pci-dss.md
+      - GDPR: compliance/gdpr.md
+      - NIST 800-53: compliance/nist-800-53.md
+    - Compliance Templates:
+      - Overview: compliance-templates/README.md
+      - CTR Template: compliance-templates/CTR_TEMPLATE.md
+      - MICS Template: compliance-templates/MICS_TEMPLATE.md
+      - SAR Template: compliance-templates/SAR_TEMPLATE.md
+      - W-2G Template: compliance-templates/W2G_TEMPLATE.md
+      - DSAR Runbook: compliance-templates/dsar-runbook.md
+      - SOC 2 Control Matrix: compliance-templates/soc2-control-matrix.md
+    - Infrastructure:
+      - Overview: infra/README.md
+      - Contributing: CONTRIBUTING.md
+    - Troubleshooting Matrix: TROUBLESHOOTING_MATRIX.md
+
+  # ============================================================
+  # 8. REFERENCE — lookup material, glossaries, schemas
+  # ============================================================
+  - Reference:
+    - FAQ: FAQ.md
+    - Glossary: GLOSSARY.md
+    - Style Guide: STYLE_GUIDE.md
+    - Visual Standards: VISUAL_STANDARDS.md
+    - Cheat Sheets: CHEAT_SHEETS.md
+    - Generator API Reference: GENERATOR_API_REFERENCE.md
+    - Data Dictionary: data-dictionary/README.md
+    - My Resources: MY_RESOURCES.md
+    - Changelog: CHANGELOG.md
