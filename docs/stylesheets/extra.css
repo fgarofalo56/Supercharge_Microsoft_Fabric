@@ -81,36 +81,7 @@
   background-color: var(--md-primary-fg-color--dark);
 }
 
-/* Hero section styling (for home page) */
-.md-typeset .hero {
-  text-align: center;
-  padding: 2rem;
-  margin-bottom: 2rem;
-}
-
-.md-typeset .hero h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-/* Card grid for features */
-.md-typeset .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  margin: 1rem 0;
-}
-
-.md-typeset .card {
-  padding: 1.5rem;
-  border: 1px solid var(--md-default-fg-color--lightest);
-  border-radius: 8px;
-  transition: box-shadow 0.2s;
-}
-
-.md-typeset .card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
+/* Custom .hero/.grid/.card replaced by Material built-in grid cards + docs.css */
 
 /* Badge styling */
 .md-typeset .badge {
@@ -175,14 +146,7 @@
   filter: brightness(1.1);
 }
 
-/* Dark mode card styling */
-[data-md-color-scheme="slate"] .md-typeset .card {
-  border-color: rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.04);
-}
-[data-md-color-scheme="slate"] .md-typeset .card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-}
+/* Dark mode card styling now handled by Material built-in grid cards + docs.css */
 
 /* Dark mode admonition tweaks */
 [data-md-color-scheme="slate"] .md-typeset .admonition,
@@ -201,9 +165,4 @@
   color: #fff;
 }
 
-/* Responsive adjustments */
-@media screen and (max-width: 76.1875em) {
-  .md-typeset .hero h1 {
-    font-size: 1.75rem;
-  }
-}
+/* Responsive adjustments for custom components handled in docs.css */
