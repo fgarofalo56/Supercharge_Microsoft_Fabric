@@ -48,15 +48,14 @@ theme:
     - navigation.footer
     - navigation.path
     - navigation.prune
-    - toc.integrate
+    - toc.follow
     - search.suggest
     - search.highlight
     - search.share
     - content.code.copy
     - content.code.annotate
     - content.tabs.link
-    - toc.follow
-  
+
   # Icons
   icon:
     repo: fontawesome/brands/github
