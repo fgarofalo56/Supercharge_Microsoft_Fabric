@@ -597,7 +597,7 @@ ORDER BY t.sea_level_trend_mm_yr DESC
 - [Best Practices: Real-Time Intelligence](../features/real-time-intelligence.md) - Streaming architecture for weather observation ingestion
 - [Best Practices: Medallion Architecture](../best-practices/medallion-architecture-deep-dive.md) - Bronze/Silver/Gold patterns for time-series weather data
 - [Best Practices: Monitoring & Observability](../best-practices/monitoring-observability.md) - Alerting on climate anomaly thresholds
-- [Tutorial 27: NOAA Bronze Ingestion](../../tutorials/27-noaa-bronze-ingestion.md) - Step-by-step NOAA data loading
+- [Tutorial 27: NOAA Bronze Ingestion](../tutorials/34-noaa-weather-climate/README.md) - Step-by-step NOAA data loading
 
 ---
 

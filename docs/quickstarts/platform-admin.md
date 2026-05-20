@@ -18,7 +18,7 @@ You care about uptime, cost efficiency, access governance, performance consisten
 Follow these steps to establish baseline platform operations:
 
 1. **Provision your environment** - Deploy Fabric capacity with Bicep, create workspaces, and configure initial access policies.
-   [:octicons-arrow-right-24: Tutorial 00: Environment Setup](../../tutorials/00-environment-setup/README.md)
+   [:octicons-arrow-right-24: Tutorial 00: Environment Setup](../tutorials/00-environment-setup/README.md)
 
 2. **Configure workspace structure and naming** - Set up a workspace hierarchy that scales with your organization's teams and environments.
    [:octicons-arrow-right-24: Workspaces & Naming Best Practices](../best-practices/01_WORKSPACES_NAMING.md)

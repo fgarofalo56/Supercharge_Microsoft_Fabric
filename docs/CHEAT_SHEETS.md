@@ -582,9 +582,9 @@ SWITCH(
 
 ## See Also
 
-- [Tutorials Cheat Sheet](../tutorials/CHEAT_SHEET.md) -- POC-specific command reference
+- [Tutorials Cheat Sheet](tutorials/CHEAT_SHEET.md) -- POC-specific command reference
 - [PySpark Notebooks](../notebooks/) -- Working code examples
-- [KQL Queries](../notebooks/real-time/02_kql_casino_floor.kql) -- Casino floor KQL
+- [KQL Queries](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/real-time/02_kql_casino_floor.kql) -- Casino floor KQL
 - [Power BI Best Practices](best-practices/power-bi-best-practices.md) -- DAX guidance
 - [Direct Lake](features/direct-lake.md) -- Direct Lake guardrails and optimization
 

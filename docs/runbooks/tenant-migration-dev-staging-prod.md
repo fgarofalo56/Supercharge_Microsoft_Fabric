@@ -1,4 +1,4 @@
-[Home](../index.md) > [Docs](..) > [Runbooks](README.md) > Tenant Migration: Dev → Staging → Prod
+[Home](../index.md) > [Docs](..) > [Runbooks](index.md) > Tenant Migration: Dev → Staging → Prod
 
 # 🚀 Tenant Migration: Dev → Staging → Prod Promotion
 
@@ -731,4 +731,4 @@ flowchart LR
 
 ---
 
-[⬆️ Back to Top](#-tenant-migration-dev--staging--prod-promotion) | [📚 Runbooks Index](README.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#-tenant-migration-dev--staging--prod-promotion) | [📚 Runbooks Index](index.md) | [🏠 Home](../index.md)

@@ -891,7 +891,7 @@ After successful deployment, proceed with these guides:
 |------|-------|-------------|
 | 1 | [Tutorial 00: Environment Setup](tutorials/00-environment-setup/README.md) | Configure your workspace |
 | 2 | [Tutorial 01: Bronze Layer](tutorials/01-bronze-layer/README.md) | Build ingestion pipelines |
-| 3 | [Generate Sample Data](../data_generation/README.md) | Create test datasets |
+| 3 | [Generate Sample Data](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/README.md) | Create test datasets |
 
 ---
 

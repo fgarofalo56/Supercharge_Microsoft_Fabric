@@ -3,7 +3,7 @@
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
-> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > 📋 **Templates**
+> 🏠 **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > 📖 **[Tutorials](../index.md)** > 📋 **Templates**
 
 ---
 
@@ -62,9 +62,9 @@ This folder contains templates and reference materials for creating consistent t
 
 ---
 
-[← Back to Tutorials](../README.md)
+[← Back to Tutorials](../index.md)
 
 ---
 
-[⬆️ Back to Top](#-tutorial-templates) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-templates) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
 

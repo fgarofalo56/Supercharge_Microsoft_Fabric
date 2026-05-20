@@ -13,7 +13,7 @@ hide:
 *Real-time insights · Medallion Architecture · Regulatory Compliance · Direct Lake BI*
 
 [Quick Start](PREREQUISITES.md){ .md-button .md-button--primary }
-[Tutorials](tutorials/README.md){ .md-button }
+[Tutorials](tutorials/index.md){ .md-button }
 
 ---
 
@@ -57,7 +57,7 @@ Together they give you a single pipeline from raw events to executive dashboards
 
     37+ hands-on modules from Bronze ingestion to AI/ML
 
-    [:octicons-arrow-right-24: Browse tutorials](tutorials/README.md)
+    [:octicons-arrow-right-24: Browse tutorials](tutorials/index.md)
 
 -   :material-domain:{ .lg .middle } __Architecture__
 

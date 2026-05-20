@@ -539,7 +539,7 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 - [NumPy 2.0 Migration Guide](https://numpy.org/doc/stable/numpy_2_0_migration_guide.html)
 - [Pandas 2.0 What's New](https://pandas.pydata.org/docs/whatsnew/v2.0.0.html)
 - [Python 3.12 What's New](https://docs.python.org/3/whatsnew/3.12.html)
-- [Spark Runtime Migration Guide](../features/spark-runtime-migration.md)
+- [Spark Runtime Migration Guide](../best-practices/spark-runtime-migration.md)
 
 ---
 

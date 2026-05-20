@@ -8,7 +8,7 @@
 
 </div>
 
-> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > 🌾 **USDA Agriculture Analytics**
+> 🏠 **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > 📖 **[Tutorials](../index.md)** > 🌾 **USDA Agriculture Analytics**
 
 ---
 
@@ -288,7 +288,7 @@ Parquet files written to data_generation/output/
 > - `crop_production` -- NASS QuickStats-style records with commodity, year, state FIPS, county FIPS (for county-level aggregation), statistic category (AREA PLANTED, AREA HARVESTED, YIELD, PRODUCTION, PRICE RECEIVED), value, unit, source (SURVEY/CENSUS), and aggregation level (NATIONAL/STATE/COUNTY)
 > - `food_safety` -- FSIS recall-style records with recall number (FSIS-YYYY-NNN format), recall date, product type, recall class (I/II/III), reason (15 possible reasons including pathogen contamination and undeclared allergens), risk level, company, establishment number, pounds recalled, and distribution scope
 >
-> See [`data_generation/generators/federal/usda_generator.py`](../../data_generation/generators/federal/usda_generator.py) for the full implementation.
+> See [`data_generation/generators/federal/usda_generator.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/generators/federal/usda_generator.py) for the full implementation.
 
 ### Option B: Real Open Data Download
 
@@ -342,7 +342,7 @@ print(f"Food safety: {len(food_df):,} records, {food_df['recall_class'].nunique(
 
 > **💡 Data Source Configuration**
 >
-> Full details on available USDA datasets, API endpoints, and download options are documented in [`data_generation/config/federal_datasets.yaml`](../../data_generation/config/federal_datasets.yaml) under the `usda` agency section.
+> Full details on available USDA datasets, API endpoints, and download options are documented in [`data_generation/config/federal_datasets.yaml`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/config/federal_datasets.yaml) under the `usda` agency section.
 
 ### Verification Checkpoint
 
@@ -375,7 +375,7 @@ Upload the Parquet files from Step 1 to your Fabric lakehouse:
 
 ### 2.2 Run the Bronze Ingestion Notebook
 
-Open and run the Bronze ingestion notebook: [`notebooks/bronze/12_bronze_usda.py`](../../notebooks/bronze/12_bronze_usda.py)
+Open and run the Bronze ingestion notebook: [`notebooks/bronze/12_bronze_usda.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/bronze/12_bronze_usda.py)
 
 The notebook performs the following operations:
 
@@ -446,7 +446,7 @@ The Silver layer applies domain-specific validation, standardization, deduplicat
 
 ### 3.1 Run the Silver Transformation Notebook
 
-Open and run: [`notebooks/silver/12_silver_usda.py`](../../notebooks/silver/12_silver_usda.py)
+Open and run: [`notebooks/silver/12_silver_usda.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/silver/12_silver_usda.py)
 
 The notebook reads from Bronze tables and writes to Silver tables:
 
@@ -558,7 +558,7 @@ The Gold layer produces four aggregated tables optimized for Power BI Direct Lak
 
 ### 4.1 Run the Gold Analytics Notebook
 
-Open and run: [`notebooks/gold/12_gold_usda_analytics.py`](../../notebooks/gold/12_gold_usda_analytics.py)
+Open and run: [`notebooks/gold/12_gold_usda_analytics.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/12_gold_usda_analytics.py)
 
 The notebook reads from Silver tables and writes four Gold tables:
 
@@ -1245,13 +1245,13 @@ Continue your learning journey:
 | CIPSEA (Public Law 107-347) | [bjs.gov/cipsea](https://bjs.ojp.gov/cipsea) |
 | FSMA Overview | [fda.gov/fsma](https://www.fda.gov/food/food-safety-modernization-act-fsma) |
 | Fabric Direct Lake | [Microsoft Learn](https://learn.microsoft.com/en-us/fabric/get-started/direct-lake-overview) |
-| Bronze Notebook | [`notebooks/bronze/12_bronze_usda.py`](../../notebooks/bronze/12_bronze_usda.py) |
-| Silver Notebook | [`notebooks/silver/12_silver_usda.py`](../../notebooks/silver/12_silver_usda.py) |
-| Gold Notebook | [`notebooks/gold/12_gold_usda_analytics.py`](../../notebooks/gold/12_gold_usda_analytics.py) |
-| Data Generator | [`data_generation/generators/federal/usda_generator.py`](../../data_generation/generators/federal/usda_generator.py) |
-| Open Data Download | [`data_generation/open_data/usda_download.py`](../../data_generation/open_data/usda_download.py) |
-| Dataset Config | [`data_generation/config/federal_datasets.yaml`](../../data_generation/config/federal_datasets.yaml) |
-| Unit Tests | [`validation/unit_tests/federal/test_usda_generator.py`](../../validation/unit_tests/federal/test_usda_generator.py) |
+| Bronze Notebook | [`notebooks/bronze/12_bronze_usda.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/bronze/12_bronze_usda.py) |
+| Silver Notebook | [`notebooks/silver/12_silver_usda.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/silver/12_silver_usda.py) |
+| Gold Notebook | [`notebooks/gold/12_gold_usda_analytics.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/12_gold_usda_analytics.py) |
+| Data Generator | [`data_generation/generators/federal/usda_generator.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/generators/federal/usda_generator.py) |
+| Open Data Download | [`data_generation/open_data/usda_download.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/open_data/usda_download.py) |
+| Dataset Config | [`data_generation/config/federal_datasets.yaml`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/config/federal_datasets.yaml) |
+| Unit Tests | [`validation/unit_tests/federal/test_usda_generator.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/validation/unit_tests/federal/test_usda_generator.py) |
 
 ---
 
@@ -1259,7 +1259,7 @@ Continue your learning journey:
 
 | Previous | Up | Next |
 |:---------|:--:|-----:|
-| [⬅️ 31-Federal DOT/FAA Analytics](../31-federal-dot-faa/README.md) | [📖 Tutorials Index](../README.md) | [33-SBA Small Business Analytics ➡️](../33-sba-small-business/README.md) |
+| [⬅️ 31-Federal DOT/FAA Analytics](../31-federal-dot-faa/README.md) | [📖 Tutorials Index](../index.md) | [33-SBA Small Business Analytics ➡️](../33-sba-small-business/README.md) |
 
 ---
 

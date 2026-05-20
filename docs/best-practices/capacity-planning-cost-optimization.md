@@ -990,4 +990,4 @@ This is critical for multi-tenant deployments where casino gaming workloads, hot
 
 ---
 
-[Back to Best Practices Index](./README.md) | [Back to Documentation](../index.md)
+[Back to Best Practices Index](./index.md) | [Back to Documentation](../index.md)

@@ -795,7 +795,7 @@ Before declaring the glossary "production":
 
 ### Related Wave 1 + Wave 2 Docs
 - [Responsible AI Framework](../responsible-ai-framework.md)
-- [Retrieval-Augmented Generation Patterns](../retrieval-augmented-generation.md)
+- [Retrieval-Augmented Generation Patterns](../../features/rag-patterns-deep-dive.md)
 - [Data Quality Incident Runbook](../../runbooks/data-quality-incident.md)
 
 ### Industry Standards

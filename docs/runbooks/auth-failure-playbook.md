@@ -1,4 +1,4 @@
-[Home](../index.md) > [Docs](..) > [Runbooks](README.md) > Authentication Failure Playbook
+[Home](../index.md) > [Docs](..) > [Runbooks](index.md) > Authentication Failure Playbook
 
 # 🔑 Authentication Failure Playbook
 
@@ -544,4 +544,4 @@ curl -s -H "Authorization: Bearer $TOKEN" \
 
 ---
 
-[⬆️ Back to Top](#-authentication-failure-playbook) | [📚 Runbooks Index](README.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#-authentication-failure-playbook) | [📚 Runbooks Index](index.md) | [🏠 Home](../index.md)

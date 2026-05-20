@@ -119,7 +119,7 @@ This is the **canonical mapping** auditors will ask for. Every Common Criterion 
 | CC6.2 | Authentication | MFA, conditional access | Entra ID Conditional Access |
 | CC6.3 | Authorization | Least privilege, role-based | Fabric workspace roles + OneLake security |
 | CC6.4 | Data classification | PII, sensitivity labels | Microsoft Purview sensitivity labels |
-| CC6.5 | Encryption — at rest | Customer-managed keys | [CMK Bicep module](../../../infra/modules/security/) |
+| CC6.5 | Encryption — at rest | Customer-managed keys | [CMK Bicep module](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/security/) |
 | CC6.6 | Encryption — in transit | TLS 1.2+ everywhere | Native to Fabric; verify Network Security |
 | CC6.7 | Logging & monitoring | Audit logs retained | Log Analytics + Workspace Monitoring |
 | CC6.8 | Vulnerability management | Patching, CVE response | Microsoft-managed (Fabric runtime) |

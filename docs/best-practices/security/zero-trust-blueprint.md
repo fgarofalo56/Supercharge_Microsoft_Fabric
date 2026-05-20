@@ -264,7 +264,7 @@ Standing admin rights are zero-trust kryptonite. Enforce JIT for every Fabric-re
 | Long-lived API keys for ADLS shortcuts | Workspace Identity + RBAC on the storage account |
 | Per-user PAT for fabric-cicd | Workload Identity Federation from GitHub Actions |
 
-The [`infra/modules/security/workspace-identity.bicep`](../../../infra/modules/security/workspace-identity.bicep) module deploys a user-assigned managed identity wired with Key Vault Secrets User, Storage Blob Data Contributor, and (optionally) Purview Data Curator role assignments — exactly the JIT-scoped service identity the zero-trust model wants.
+The [`infra/modules/security/workspace-identity.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/security/workspace-identity.bicep) module deploys a user-assigned managed identity wired with Key Vault Secrets User, Storage Blob Data Contributor, and (optionally) Purview Data Curator role assignments — exactly the JIT-scoped service identity the zero-trust model wants.
 
 ### 1.6 Identity Governance
 
@@ -1169,8 +1169,8 @@ Before declaring "zero-trust ready":
 - [SQL Audit Logs Compliance](../sql-audit-logs-compliance.md)
 
 ### Bicep Modules
-- [Workspace Identity Module](../../../infra/modules/security/workspace-identity.bicep)
-- [Storage Account](../../../infra/modules/storage/storage-account.bicep)
+- [Workspace Identity Module](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/security/workspace-identity.bicep)
+- [Storage Account](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/storage/storage-account.bicep)
 
 ---
 

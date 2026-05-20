@@ -1,4 +1,4 @@
-[Home](../../docs/index.md) > [Tutorials](../) > Copilot & AI-Assisted Development
+[Home](../../index.md) > [Tutorials](../) > Copilot & AI-Assisted Development
 
 # 🤖 Tutorial 19: Copilot & AI-Assisted Development
 
@@ -1218,7 +1218,7 @@ You are now ready to implement Microsoft Fabric in production!
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [⬅️ 18-Data Sharing](../18-data-sharing/README.md) | [📖 Tutorials Index](../README.md) | [20-Workspace Best Practices](../20-workspace-best-practices/README.md) ➡️ |
+| [⬅️ 18-Data Sharing](../18-data-sharing/README.md) | [📖 Tutorials Index](../index.md) | [20-Workspace Best Practices](../20-workspace-best-practices/README.md) ➡️ |
 
 ---
 
@@ -1226,4 +1226,4 @@ You are now ready to implement Microsoft Fabric in production!
 
 ---
 
-[⬆️ Back to Top](#-tutorial-19-copilot--ai-assisted-development) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-19-copilot--ai-assisted-development) | [📚 Tutorials](../) | [🏠 Home](../../index.md)

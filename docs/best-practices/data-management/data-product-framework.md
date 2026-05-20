@@ -218,7 +218,7 @@ this is the answer.
 | Schema stability | Breaking changes require 30-day notice | Enforced via contract CI |
 | Accuracy | Reconciles to MDM hub ± 0 records | Daily checksum job |
 
-**SLA wired to:** [SLO/SLI doc](../../slo-sli-instrumentation.md) (Wave 1)
+**SLA wired to:** [SLO/SLI doc](../../operations/slo-sli-fabric.md) (Wave 1)
 
 ## Cost
 
@@ -470,7 +470,7 @@ The SLA is a **published commitment** — not an aspiration. Each clause is meas
 
 ### Wiring to SLO/SLI Infra
 
-The SLA clauses become **SLIs** (Service Level Indicators) in the Wave 1 SLO/SLI doc. Every product registers its SLIs into the central SLO dashboard so cross-domain leadership can see *all* product health on one page. See [slo-sli-instrumentation.md](../slo-sli-instrumentation.md) (Wave 1).
+The SLA clauses become **SLIs** (Service Level Indicators) in the Wave 1 SLO/SLI doc. Every product registers its SLIs into the central SLO dashboard so cross-domain leadership can see *all* product health on one page. See [slo-sli-instrumentation.md](../operations/slo-sli-fabric.md) (Wave 1).
 
 ```mermaid
 flowchart LR

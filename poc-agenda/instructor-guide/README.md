@@ -1,4 +1,4 @@
-[Home](../../docs/index.md) > [POC Agenda](../) > Instructor Guide
+[Home](../../index.md) > [POC Agenda](../) > Instructor Guide
 
 # 👩‍🏫 Instructor Guide - Casino Fabric POC
 
@@ -767,6 +767,6 @@ Collect the following:
 
 ---
 
-[⬆️ Back to Top](#-instructor-guide---casino-fabric-poc) | [📚 POC Agenda](../) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-instructor-guide---casino-fabric-poc) | [📚 POC Agenda](../) | [🏠 Home](../../index.md)
 
 </div>

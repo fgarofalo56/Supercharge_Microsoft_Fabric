@@ -1,4 +1,4 @@
-[Home](../../docs/index.md) > [Tutorials](../) > Amazon Redshift to Fabric Migration
+[Home](../../index.md) > [Tutorials](../) > Amazon Redshift to Fabric Migration
 
 # 🟧 Tutorial 43: Amazon Redshift → Microsoft Fabric Migration
 
@@ -557,7 +557,7 @@ Output: a recommended workspace + capacity assignment plan, e.g.:
 | `bi_queue` | Power BI / QuickSight | `ws-fabric-bi` | Shared F64 |
 | `adhoc_queue` | Analyst ad-hoc | `ws-fabric-analyst` | Shared F64 with throttle |
 
-> 💡 **Tip**: Use [Action Groups + budget alerts](../../infra/modules/monitoring/alerts-and-budgets.bicep) (Wave 1 Bicep module) to alert on CU saturation, the equivalent of Redshift WLM queue queueing time.
+> 💡 **Tip**: Use [Action Groups + budget alerts](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/monitoring/alerts-and-budgets.bicep) (Wave 1 Bicep module) to alert on CU saturation, the equivalent of Redshift WLM queue queueing time.
 
 ### Step 10 — Size Fabric Capacity from Redshift Node-Hours
 
@@ -735,7 +735,7 @@ Redshift speaks a PostgreSQL-flavored dialect. Fabric speaks T-SQL. Most product
 - [ ] WLM queues mapped to Fabric workspaces + capacity governance
 - [ ] Power BI semantic models repointed to Fabric (Direct Lake)
 - [ ] Apps, APIs, integrations cut over from Redshift JDBC/ODBC to Fabric SQL endpoint
-- [ ] F-SKU sized correctly (CU usage in steady-state band, see [SLO/SLI doc](../../docs/best-practices/operations/slo-sli-fabric.md))
+- [ ] F-SKU sized correctly (CU usage in steady-state band, see [SLO/SLI doc](../../best-practices/operations/slo-sli-fabric.md))
 - [ ] AWS egress costs monitored and within budget
 - [ ] OneLake Catalog reflects migrated assets; Glue Catalog references retired or read-only
 - [ ] Redshift cluster paused (or deleted post-grace-period)
@@ -763,10 +763,10 @@ aws s3 rm s3://your-fabric-staging-bucket/redshift-export/ --recursive
 - **[Tutorial 44 — BigQuery → Fabric](../44-bigquery-to-fabric/README.md)** — for shops with GCP analytics alongside AWS
 - **[Tutorial 41 — Synapse → Fabric](../41-synapse-to-fabric/README.md)** — anchor pattern for Azure-native migrations
 - **[Tutorial 42 — Databricks → Fabric](../42-databricks-to-fabric/README.md)** — for Databricks-on-AWS shops
-- **[Migration Patterns Best Practices](../../docs/best-practices/migration-patterns.md)** — cross-source patterns
-- **[fabric-cicd Deployment](../../docs/best-practices/fabric-cicd-deployment.md)** — automate the deployment of migrated artifacts
-- **[Capacity Planning](../../docs/best-practices/capacity-planning-cost-optimization.md)** — F-SKU sizing deep dive
-- **[Network Security](../../docs/best-practices/network-security.md)** — S3 PrivateLink + ExpressRoute interconnect
+- **[Migration Patterns Best Practices](../../best-practices/migration-patterns.md)** — cross-source patterns
+- **[fabric-cicd Deployment](../../best-practices/fabric-cicd-deployment.md)** — automate the deployment of migrated artifacts
+- **[Capacity Planning](../../best-practices/capacity-planning-cost-optimization.md)** — F-SKU sizing deep dive
+- **[Network Security](../../best-practices/network-security.md)** — S3 PrivateLink + ExpressRoute interconnect
 
 ---
 
@@ -784,7 +784,7 @@ aws s3 rm s3://your-fabric-staging-bucket/redshift-export/ --recursive
 | `VARCHAR` truncation after migration | Redshift bytes vs T-SQL chars | Increase target `varchar(n)` size; re-run validation hashes |
 | Stored procedure compile error: `RAISE NOTICE` | plpgsql vs T-SQL | Replace with `PRINT` or `RAISERROR` |
 | Python UDF returns NULL in Fabric | Inline plpythonu has no T-SQL equivalent | Refactor calling SQL to call a notebook PySpark function |
-| F-SKU throttles after migration | Workload concurrency higher than Redshift WLM allowed | Scale F-SKU; use [capacity-throttling runbook](../../docs/runbooks/capacity-throttling-response.md) |
+| F-SKU throttles after migration | Workload concurrency higher than Redshift WLM allowed | Scale F-SKU; use [capacity-throttling runbook](../../runbooks/capacity-throttling-response.md) |
 | Power BI Direct Lake fails to refresh | Schema drift in Warehouse | Refresh metadata; see workspace monitoring |
 | Encoding mismatch warnings during validation | Redshift `ENCODE ZSTD` source vs Parquet target | Expected — encoding is removed; data parity is preserved |
 | Large `VARBYTE` / LOB columns slow | Cross-cloud shortcut latency on big BLOBs | Copy to OneLake (Path B) for tables with > 64 KB avg row size |
@@ -827,11 +827,11 @@ aws s3 rm s3://your-fabric-staging-bucket/redshift-export/ --recursive
 - [Tutorial 41 — Synapse → Fabric](../41-synapse-to-fabric/README.md) — anchor pattern
 - [Tutorial 42 — Databricks → Fabric](../42-databricks-to-fabric/README.md)
 - [Tutorial 44 — BigQuery → Fabric](../44-bigquery-to-fabric/README.md)
-- [Migration Patterns](../../docs/best-practices/migration-patterns.md)
-- [fabric-cicd Deployment](../../docs/best-practices/fabric-cicd-deployment.md)
-- [Capacity Planning & Cost Optimization](../../docs/best-practices/capacity-planning-cost-optimization.md)
-- [Network Security](../../docs/best-practices/network-security.md)
+- [Migration Patterns](../../best-practices/migration-patterns.md)
+- [fabric-cicd Deployment](../../best-practices/fabric-cicd-deployment.md)
+- [Capacity Planning & Cost Optimization](../../best-practices/capacity-planning-cost-optimization.md)
+- [Network Security](../../best-practices/network-security.md)
 
 ---
 
-[⬆️ Back to Top](#-tutorial-43-amazon-redshift--microsoft-fabric-migration) | [📚 Tutorial Index](../README.md) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-43-amazon-redshift--microsoft-fabric-migration) | [📚 Tutorial Index](../index.md) | [🏠 Home](../../index.md)

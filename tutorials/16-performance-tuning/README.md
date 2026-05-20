@@ -1,4 +1,4 @@
-[Home](../../docs/index.md) > [Tutorials](../) > Tutorial 16: Performance Tuning & Optimization
+[Home](../../index.md) > [Tutorials](../) > Tutorial 16: Performance Tuning & Optimization
 
 # ⚡ Tutorial 16: Performance Tuning & Optimization
 
@@ -1662,8 +1662,8 @@ Continue to **[Tutorial 17: Monitoring & Alerting](../17-monitoring-alerting/REA
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [⬅️ 15-Cost Optimization](../15-cost-optimization/README.md) | [📖 Tutorials Index](../README.md) | [17-Monitoring & Alerting](../17-monitoring-alerting/README.md) ➡️ |
+| [⬅️ 15-Cost Optimization](../15-cost-optimization/README.md) | [📖 Tutorials Index](../index.md) | [17-Monitoring & Alerting](../17-monitoring-alerting/README.md) ➡️ |
 
 ---
 
-[⬆️ Back to Top](#-tutorial-16-performance-tuning--optimization) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-16-performance-tuning--optimization) | [📚 Tutorials](../) | [🏠 Home](../../index.md)

@@ -841,4 +841,4 @@ Before declaring a model "monitored":
 
 ---
 
-[⬆️ Back to Top](#-model-monitoring--drift-detection) | [📚 Best Practices Index](README.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#-model-monitoring--drift-detection) | [📚 Best Practices Index](index.md) | [🏠 Home](../index.md)

@@ -855,7 +855,7 @@ Before declaring CCPA/CPRA-ready:
 ### Compliance Templates
 
 - [DSAR Runbook Template](../../compliance-templates/dsar-runbook.md) (Wave 5 batch 5b)
-- [CCPA Categories Disclosure Template](../../compliance-templates/ccpa-categories-disclosure.md) (Wave 5 batch 5b)
+- [CCPA Categories Disclosure Template](../../compliance/gdpr.md) (Wave 5 batch 5b)
 
 ---
 

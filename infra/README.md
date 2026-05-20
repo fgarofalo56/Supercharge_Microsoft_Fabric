@@ -1,6 +1,6 @@
 # 🏗️ Infrastructure as Code
 
-> 🏠 [Home](../README.md) > 📚 [Docs](../docs/index.md) > 🏗️ Infrastructure
+> 🏠 [Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md) > 📚 [Docs](../index.md) > 🏗️ Infrastructure
 
 **Last Updated:** 2025-01-28 | **Version:** 1.0.0
 
@@ -407,12 +407,12 @@ az bicep build --file infra/main.bicep
 
 | Document | Description |
 |----------|-------------|
-| [📋 Prerequisites](../docs/PREREQUISITES.md) | Full prerequisites guide |
-| [🚀 Deployment Guide](../docs/DEPLOYMENT.md) | Complete deployment walkthrough |
-| [💰 Cost Estimation](../docs/COST_ESTIMATION.md) | Detailed cost analysis |
-| [🔐 Security Guide](../docs/SECURITY.md) | Security best practices |
+| [📋 Prerequisites](../PREREQUISITES.md) | Full prerequisites guide |
+| [🚀 Deployment Guide](../DEPLOYMENT.md) | Complete deployment walkthrough |
+| [💰 Cost Estimation](../COST_ESTIMATION.md) | Detailed cost analysis |
+| [🔐 Security Guide](../SECURITY.md) | Security best practices |
 
 ---
 
-[⬆️ Back to top](#️-infrastructure-as-code) | [🏠 Home](../README.md)
+[⬆️ Back to top](#️-infrastructure-as-code) | [🏠 Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)
 

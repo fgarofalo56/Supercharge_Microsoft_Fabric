@@ -24,11 +24,11 @@
 >
 > | Source | Tutorial | Focus |
 > |--------|----------|-------|
-> | Azure Synapse Analytics | [Tutorial 41](../../tutorials/41-synapse-to-fabric/README.md) | Dedicated SQL pool, Spark pool, ADLS Gen2, Synapse Pipelines |
-> | Databricks | [Tutorial 42](../../tutorials/42-databricks-to-fabric/README.md) | Workspace, Unity Catalog, Delta, Workflows, MLflow, DBSQL |
-> | Amazon Redshift | [Tutorial 43](../../tutorials/43-redshift-to-fabric/README.md) | RA3/DC2 cluster, Spectrum, Glue Catalog, WLM, multi-cloud egress |
-> | Google BigQuery | [Tutorial 44](../../tutorials/44-bigquery-to-fabric/README.md) | Slots, partitioning/clustering, Dataflow, BQML, Looker, GCP egress |
-> | On-Prem SSAS/SSIS/SSRS | [Tutorial 45](../../tutorials/45-onprem-ssas-ssis-ssrs/README.md) | MSBI stack — Tabular & Multidim cubes, packages, RDL reports |
+> | Azure Synapse Analytics | [Tutorial 41](../tutorials/41-synapse-to-fabric/README.md) | Dedicated SQL pool, Spark pool, ADLS Gen2, Synapse Pipelines |
+> | Databricks | [Tutorial 42](../tutorials/42-databricks-to-fabric/README.md) | Workspace, Unity Catalog, Delta, Workflows, MLflow, DBSQL |
+> | Amazon Redshift | [Tutorial 43](../tutorials/43-redshift-to-fabric/README.md) | RA3/DC2 cluster, Spectrum, Glue Catalog, WLM, multi-cloud egress |
+> | Google BigQuery | [Tutorial 44](../tutorials/44-bigquery-to-fabric/README.md) | Slots, partitioning/clustering, Dataflow, BQML, Looker, GCP egress |
+> | On-Prem SSAS/SSIS/SSRS | [Tutorial 45](../tutorials/45-onprem-ssas-ssis-ssrs/README.md) | MSBI stack — Tabular & Multidim cubes, packages, RDL reports |
 
 ---
 
@@ -555,7 +555,7 @@ For cross-cloud or cross-organization sharing, use the Delta Sharing protocol.
 
 Azure Synapse → Fabric is the **most-asked enterprise migration** because Synapse and Fabric share Microsoft DNA, but the architectural shift from DWUs to CUs and from Spark/SQL silos to a unified capacity is real. The migration pivots on three big wins: Dedicated SQL pool DDL converts cleanly to Fabric Warehouse (drop the `DISTRIBUTION` and `CLUSTERED COLUMNSTORE` clauses; Fabric handles those automatically via V-Order), ADLS Gen2 storage moves to OneLake via shortcut (no data copy), and Synapse Spark notebooks port with mostly mechanical `mssparkutils` adjustments.
 
-**Detailed playbook:** [Tutorial 41 — Synapse → Fabric](../../tutorials/41-synapse-to-fabric/README.md)
+**Detailed playbook:** [Tutorial 41 — Synapse → Fabric](../tutorials/41-synapse-to-fabric/README.md)
 
 #### Component Mapping (Synapse → Fabric)
 
@@ -599,7 +599,7 @@ Azure Synapse → Fabric is the **most-asked enterprise migration** because Syna
 
 Databricks → Fabric is the **smoothest cloud-to-cloud migration** because both platforms speak Delta Lake natively. The technical lift is small; the strategic question is bigger — moving onto a Microsoft platform that bundles BI, real-time, governance, and ML alongside Spark, with a single capacity-based commercial model. The migration pivots on Delta-table movement (shortcut-in-place or rewrite for V-Order), Unity Catalog → OneLake Catalog governance translation, `dbutils` → `mssparkutils` shim, Workflows → Fabric Pipelines, and MLflow registry export-import.
 
-**Detailed playbook:** [Tutorial 42 — Databricks → Fabric](../../tutorials/42-databricks-to-fabric/README.md)
+**Detailed playbook:** [Tutorial 42 — Databricks → Fabric](../tutorials/42-databricks-to-fabric/README.md)
 
 #### Workflow / Activity Mapping (Databricks → Fabric)
 
@@ -646,7 +646,7 @@ Databricks → Fabric is the **smoothest cloud-to-cloud migration** because both
 
 Amazon Redshift → Fabric is a **multi-cloud migration** — increasingly common as enterprises consolidate analytics estates onto Microsoft Fabric while keeping operational workloads in AWS. The migration pivots on `UNLOAD` to S3 (Parquet/Snappy), OneLake shortcuts to S3 (zero-copy, zero AWS egress on shortcuts), Redshift PostgreSQL DDL → Fabric T-SQL, and **stripping** Redshift-specific physical tuning clauses (`DISTKEY`, `SORTKEY`, `ENCODE`) which V-Order replaces automatically. Spectrum external tables are the cheapest part of the migration — same S3 prefix becomes a OneLake shortcut with no data movement.
 
-**Detailed playbook:** [Tutorial 43 — Redshift → Fabric](../../tutorials/43-redshift-to-fabric/README.md)
+**Detailed playbook:** [Tutorial 43 — Redshift → Fabric](../tutorials/43-redshift-to-fabric/README.md)
 
 #### Component Mapping (Redshift → Fabric)
 
@@ -688,7 +688,7 @@ Spectrum tables already live as files on S3. The fastest possible migration: cre
 
 Google BigQuery → Fabric is a **multi-cloud migration** where dialect translation and cross-cloud egress are the two dominant cost drivers. The migration pivots on BigQuery `EXPORT DATA OPTIONS(format='PARQUET')` to GCS, OneLake shortcuts to GCS during coexistence (zero copy), Standard SQL → T-SQL dialect translation (the translator handles ~80% mechanically), partitioning + clustering → Delta partitioning + Z-Order, and JS UDFs → PySpark notebook UDFs. STRUCT and ARRAY columns are the hardest type-mapping problem — T-SQL has no native equivalents, so they land as JSON `varchar(max)` or move to Lakehouse for native Spark complex-type handling.
 
-**Detailed playbook:** [Tutorial 44 — BigQuery → Fabric](../../tutorials/44-bigquery-to-fabric/README.md)
+**Detailed playbook:** [Tutorial 44 — BigQuery → Fabric](../tutorials/44-bigquery-to-fabric/README.md)
 
 #### Component Mapping (BigQuery → Fabric)
 
@@ -749,7 +749,7 @@ Google BigQuery → Fabric is a **multi-cloud migration** where dialect translat
 
 The legacy Microsoft BI stack — SSAS (Tabular and Multidimensional), SSIS, and SSRS — is a **multi-product migration** that touches every layer of the analytics estate. The canonical wave order is **non-negotiable**: source data first (Mirroring or Copy Job CDC), then ETL (SSIS → Fabric Pipelines or Azure-SSIS bridge), then semantic (SSAS → Power BI semantic models via TMDL), then reports (SSRS → Paginated Reports). The hardest single task is Multidimensional cube migration, which requires a two-hop conversion (Multidim → Tabular → Power BI) plus manual MDX → DAX translation for every calculated member, named set, and scope assignment.
 
-**Detailed playbook:** [Tutorial 45 — On-Prem SSAS/SSIS/SSRS → Fabric](../../tutorials/45-onprem-ssas-ssis-ssrs/README.md)
+**Detailed playbook:** [Tutorial 45 — On-Prem SSAS/SSIS/SSRS → Fabric](../tutorials/45-onprem-ssas-ssis-ssrs/README.md)
 
 #### Component Mapping (MSBI → Fabric)
 
@@ -1351,11 +1351,11 @@ usda_sas_migration = {
 
 Detailed end-to-end playbooks for each supported source (assessment scripts, schema/SQL converters, validation suites, capacity sizing):
 
-- [Tutorial 41 — Azure Synapse Analytics → Fabric](../../tutorials/41-synapse-to-fabric/README.md) — Dedicated SQL pool, Spark pool, ADLS Gen2, Synapse Pipelines
-- [Tutorial 42 — Databricks → Fabric](../../tutorials/42-databricks-to-fabric/README.md) — Workspace, Unity Catalog, Delta, Workflows, MLflow, DBSQL
-- [Tutorial 43 — Amazon Redshift → Fabric](../../tutorials/43-redshift-to-fabric/README.md) — RA3/DC2 cluster, Spectrum, Glue Catalog, WLM, AWS egress mitigation
-- [Tutorial 44 — Google BigQuery → Fabric](../../tutorials/44-bigquery-to-fabric/README.md) — Slots, partitioning/clustering, Dataflow, BQML, Looker, GCP egress mitigation
-- [Tutorial 45 — On-Prem SSAS/SSIS/SSRS → Fabric](../../tutorials/45-onprem-ssas-ssis-ssrs/README.md) — MSBI stack: Tabular & Multidim cubes, packages, RDL reports
+- [Tutorial 41 — Azure Synapse Analytics → Fabric](../tutorials/41-synapse-to-fabric/README.md) — Dedicated SQL pool, Spark pool, ADLS Gen2, Synapse Pipelines
+- [Tutorial 42 — Databricks → Fabric](../tutorials/42-databricks-to-fabric/README.md) — Workspace, Unity Catalog, Delta, Workflows, MLflow, DBSQL
+- [Tutorial 43 — Amazon Redshift → Fabric](../tutorials/43-redshift-to-fabric/README.md) — RA3/DC2 cluster, Spectrum, Glue Catalog, WLM, AWS egress mitigation
+- [Tutorial 44 — Google BigQuery → Fabric](../tutorials/44-bigquery-to-fabric/README.md) — Slots, partitioning/clustering, Dataflow, BQML, Looker, GCP egress mitigation
+- [Tutorial 45 — On-Prem SSAS/SSIS/SSRS → Fabric](../tutorials/45-onprem-ssas-ssis-ssrs/README.md) — MSBI stack: Tabular & Multidim cubes, packages, RDL reports
 
 ### Synthetic Test Data Generators
 
@@ -1427,4 +1427,4 @@ Run existing **SQL Server Integration Services (SSIS)** packages directly within
 
 ---
 
-[Back to Best Practices Index](./README.md) | [Back to Documentation](../index.md)
+[Back to Best Practices Index](./index.md) | [Back to Documentation](../index.md)

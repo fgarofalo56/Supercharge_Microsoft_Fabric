@@ -374,7 +374,7 @@ This data dictionary provides comprehensive documentation for all tables in the 
 | [Architecture Overview](../diagrams/architecture-overview.md) | System architecture and data flow diagrams |
 | [Compliance Templates](../compliance-templates/README.md) | Regulatory compliance report templates |
 | [Medallion Architecture](../best-practices/medallion-architecture-deep-dive.md) | Bronze/Silver/Gold patterns deep dive |
-| [Best Practices](../best-practices/README.md) | Data engineering best practices |
+| [Best Practices](../best-practices/index.md) | Data engineering best practices |
 
 ---
 

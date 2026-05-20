@@ -1,4 +1,4 @@
-[Home](../../docs/index.md) > [Tutorials](../) > [42 — Databricks → Fabric](./README.md) > Workflow Migration Reference
+[Home](../../index.md) > [Tutorials](../) > [42 — Databricks → Fabric](./README.md) > Workflow Migration Reference
 
 # 🔁 Tutorial 42 — Reference: Databricks Workflows → Fabric Pipelines + Spark Job Definitions
 
@@ -45,7 +45,7 @@ The first decision is *which* Fabric construct each Databricks workflow becomes.
 | **Continuous (always-on) job** | **Fabric streaming notebook** + **Eventstream** trigger | Not a Pipeline — re-author against Eventstream/Eventhouse |
 | **Webhook-triggered job** | **Pipeline** invoked via REST API + Logic App / Power Automate | Storage event triggers also possible |
 
-> ⚠️ **Gotcha**: Don't reflexively put every Databricks job inside a Pipeline. A heavy production Spark batch (gigabytes of input, a single executable script) is usually a better fit as a **Spark Job Definition**. Pipelines are for **orchestration** of activities; SJDs are for **execution** of code. See [Spark Job Definitions](../../docs/features/spark-environments-job-definitions.md).
+> ⚠️ **Gotcha**: Don't reflexively put every Databricks job inside a Pipeline. A heavy production Spark batch (gigabytes of input, a single executable script) is usually a better fit as a **Spark Job Definition**. Pipelines are for **orchestration** of activities; SJDs are for **execution** of code. See [Spark Job Definitions](../../features/spark-environments-job-definitions.md).
 
 ---
 
@@ -64,7 +64,7 @@ Every Databricks task type, with the recommended Fabric construct.
 | `sql_task` (DBSQL query) | **Script** (T-SQL) **OR** **Lookup** **OR** **Stored procedure** activity | Lookup if you need return values; Script for fire-and-forget DDL/DML |
 | `sql_task` (DBSQL alert) | **Pipeline** + **Web** activity (to alerting system) **OR** **Activator** | Alert logic re-authored as expression on Lookup output |
 | `sql_task` (DBSQL dashboard refresh) | Power BI semantic model refresh activity | Dashboards re-authored as Power BI reports |
-| `dbt_task` | **Notebook** with `dbt-fabric` adapter **OR** external dbt runner via Web activity | See [dbt Fabric Integration](../../docs/features/dbt-fabric-integration.md) |
+| `dbt_task` | **Notebook** with `dbt-fabric` adapter **OR** external dbt runner via Web activity | See [dbt Fabric Integration](../../features/dbt-fabric-integration.md) |
 | `pipeline_task` (DLT) | **Materialized Lake View** (SQL DLT) **OR** scheduled Notebook chain (Python DLT) | See [DLT-Specific Migration](#-dlt-specific-migration) |
 | `for_each_task` | **ForEach** activity | Direct map; iteration over array parameter |
 | `condition_task` (If/Else, run-if) | **If Condition**, **Switch**, or **Until** activity | If/Else → If Condition; multi-branch → Switch; loop-with-exit → Until |
@@ -84,7 +84,7 @@ Databricks job-cluster definitions live inside the Job JSON (under `new_cluster`
 
 | Databricks Cluster Field | Fabric Equivalent | Notes |
 |--------------------------|-------------------|-------|
-| `spark_version` (e.g., `14.3.x-scala2.12`) | Fabric Spark Runtime (1.3 / 2.0) | Pick the runtime closest to DBR major; see [Spark Runtime Migration](../../docs/best-practices/spark-runtime-migration.md) |
+| `spark_version` (e.g., `14.3.x-scala2.12`) | Fabric Spark Runtime (1.3 / 2.0) | Pick the runtime closest to DBR major; see [Spark Runtime Migration](../../best-practices/spark-runtime-migration.md) |
 | `node_type_id` (e.g., `Standard_E8s_v3`) | No equivalent — sized by CU | Fabric chooses node sizing from F-SKU; tune via `spark.executor.memory` if needed |
 | `driver_node_type_id` | No equivalent | Driver memory tuned via `spark.driver.memory` Spark property |
 | `num_workers` (fixed) | No equivalent | Fabric autoscales; control with `spark.dynamicAllocation.maxExecutors` |
@@ -92,7 +92,7 @@ Databricks job-cluster definitions live inside the Job JSON (under `new_cluster`
 | `spark_conf` (dict) | Environment **Spark properties** | Direct copy with key remapping (`spark.databricks.*` → `spark.microsoft.*` where applicable) |
 | `spark_env_vars` | Environment YAML `env:` section | Set via Environment, not per-session |
 | `init_scripts` | Environment **Resources** + custom library | Repackage init logic as a `.whl` or `.tar.gz` and upload to Environment |
-| `cluster_log_conf` (DBFS log path) | Workspace Monitoring | Logs go to workspace monitoring eventhouse — see [Workspace Monitoring](../../docs/features/workspace-monitoring.md) |
+| `cluster_log_conf` (DBFS log path) | Workspace Monitoring | Logs go to workspace monitoring eventhouse — see [Workspace Monitoring](../../features/workspace-monitoring.md) |
 | `aws_attributes` / `azure_attributes` | F-SKU region + Workspace Identity | Identity grants replace IAM role passthrough |
 | `instance_pool_id` | No equivalent — F-SKU CU pool | Warm-pool semantics built into capacity |
 | `enable_elastic_disk` | Always-on in Fabric | No setting required |
@@ -102,7 +102,7 @@ Databricks job-cluster definitions live inside the Job JSON (under `new_cluster`
 | Library install (CRAN) | Environment R libraries | R support varies by Fabric Spark runtime — check coverage |
 | Cluster policies | Fabric capacity governance + Environment governance | Use workspace roles + Environment publish gates |
 
-For full Environment authoring detail (YAML, library priority, conflict resolution), see [Spark Environments & Job Definitions](../../docs/features/spark-environments-job-definitions.md).
+For full Environment authoring detail (YAML, library priority, conflict resolution), see [Spark Environments & Job Definitions](../../features/spark-environments-job-definitions.md).
 
 ### Example — Cluster Spec → Environment YAML
 
@@ -147,7 +147,7 @@ env:
 | Databricks Trigger | Fabric Equivalent | Notes |
 |--------------------|-------------------|-------|
 | `schedule` (cron) | **Pipeline schedule trigger** | Same cron syntax; check timezone (`timezone_id`) |
-| `continuous` (always-on streaming) | **Eventstream trigger** **OR** scheduled Notebook with `availableNow=True` at high frequency | Re-author against Eventstream — see [Real-Time Intelligence](../../docs/features/real-time-intelligence.md) |
+| `continuous` (always-on streaming) | **Eventstream trigger** **OR** scheduled Notebook with `availableNow=True` at high frequency | Re-author against Eventstream — see [Real-Time Intelligence](../../features/real-time-intelligence.md) |
 | `file_arrival` trigger | **Storage event trigger** on Pipeline via Logic App + REST API call | Native triggers landing late 2026; Logic App bridge today |
 | `job_completion` trigger | **Invoke Pipeline** activity in a parent pipeline | Chain pipelines explicitly instead of relying on event chaining |
 | `pause_status: PAUSED` | Disable schedule on Pipeline | Direct toggle in Pipeline portal or REST |
@@ -195,7 +195,7 @@ env:
 
 ### Variable Library Binding
 
-Promote anything used by ≥ 3 jobs to a Fabric **Variable Library**, with per-stage values (Dev / Test / Prod). See [Wave 7 — Variable Library Setup](../../docs/features/deployment-pipelines.md) for the full pattern.
+Promote anything used by ≥ 3 jobs to a Fabric **Variable Library**, with per-stage values (Dev / Test / Prod). See [Wave 7 — Variable Library Setup](../../features/deployment-pipelines.md) for the full pattern.
 
 ```json
 // Pipeline parameter bound to Variable Library:
@@ -454,7 +454,7 @@ WHERE event_time IS NOT NULL
   AND coin_in >= 0;        -- DLT EXPECT enforced as filter (drop semantics)
 ```
 
-For the **expect** rule (`ON VIOLATION DROP ROW`), the conversion above embeds the predicate directly. For richer rules use a **Great Expectations checkpoint** in the upstream notebook — see [Wave 3 Data Contract Suite](../../docs/best-practices/testing-strategies.md#data-contract-suites).
+For the **expect** rule (`ON VIOLATION DROP ROW`), the conversion above embeds the predicate directly. For richer rules use a **Great Expectations checkpoint** in the upstream notebook — see [Wave 3 Data Contract Suite](../../best-practices/testing-strategies.md#data-contract-suites).
 
 > ⚠️ **Gotcha**: DLT `ON VIOLATION FAIL` (block-on-bad-data) has no MLV equivalent. Author it as a **GE checkpoint** on the Bronze table that fails the upstream pipeline run. Don't try to encode it as a `CHECK` constraint — Delta `CHECK` aborts the *write*, not the read.
 
@@ -477,7 +477,7 @@ Because DLT is the most opinionated thing in Databricks Workflows, it's worth it
 | `@dlt.expect_or_drop` | Filter in MLV WHERE clause | Direct |
 | `@dlt.expect_or_fail` | **GE checkpoint** on upstream table that fails the pipeline | No MLV equivalent for fail-on-violation |
 | `@dlt.expect_all_or_drop({...})` | Multiple AND-ed filter predicates in MLV WHERE | Concatenate predicates |
-| Apply CHANGES INTO (CDC merge) | **Copy Job CDC** activity **OR** Notebook with `MERGE INTO` | Copy Job is the no-code path; see [Copy Job CDC](../../docs/features/copy-job-cdc.md) |
+| Apply CHANGES INTO (CDC merge) | **Copy Job CDC** activity **OR** Notebook with `MERGE INTO` | Copy Job is the no-code path; see [Copy Job CDC](../../features/copy-job-cdc.md) |
 | DLT pipeline mode = `triggered` | Pipeline schedule | Direct |
 | DLT pipeline mode = `continuous` | Eventstream + streaming Notebook (`availableNow=False`) | Re-author |
 | DLT `target` (catalog destination) | Lakehouse + schema (`lh_silver.<schema>.<table>`) | Direct |
@@ -679,18 +679,18 @@ Use this as the workflow-migration sub-checklist for Step 5 of [Tutorial 42](./R
 ### Wave 4 Cross-References
 - **[Tutorial 42 — Databricks → Fabric](./README.md)** (parent tutorial — Step 5 anchors here)
 - **[Tutorial 41 — Synapse → Fabric](../41-synapse-to-fabric/README.md)** (style anchor; overlapping Pipeline patterns)
-- **[Spark Environments & Job Definitions](../../docs/features/spark-environments-job-definitions.md)** (Environment YAML, SJD authoring)
-- **[Deployment Pipelines](../../docs/features/deployment-pipelines.md)** (stage promotion + Variable Library)
-- **[Pipelines & Data Movement Best Practices](../../docs/best-practices/03_PIPELINES_DATA_MOVEMENT.md)** (ETL/ELT, copy activity tuning)
-- **[Materialized Lake Views](../../docs/features/materialized-lake-views.md)** (DLT replacement)
-- **[Copy Job CDC](../../docs/features/copy-job-cdc.md)** (autoLoader replacement)
-- **[Real-Time Intelligence](../../docs/features/real-time-intelligence.md)** (continuous-trigger replacement)
-- **[dbt Fabric Integration](../../docs/features/dbt-fabric-integration.md)** (`dbt_task` migration)
-- **[Spark Runtime Migration](../../docs/best-practices/spark-runtime-migration.md)** (DBR → Fabric Spark runtime)
-- **[Testing Strategies — Data Contract Suites](../../docs/best-practices/testing-strategies.md)** (GE checkpoints replacing DLT expects)
-- **[fabric-cicd Deployment](../../docs/best-practices/fabric-cicd-deployment.md)** (deploying converted Pipelines)
-- **[Workspace Monitoring](../../docs/features/workspace-monitoring.md)** (replacement for `cluster_log_conf`)
+- **[Spark Environments & Job Definitions](../../features/spark-environments-job-definitions.md)** (Environment YAML, SJD authoring)
+- **[Deployment Pipelines](../../features/deployment-pipelines.md)** (stage promotion + Variable Library)
+- **[Pipelines & Data Movement Best Practices](../../best-practices/03_PIPELINES_DATA_MOVEMENT.md)** (ETL/ELT, copy activity tuning)
+- **[Materialized Lake Views](../../features/materialized-lake-views.md)** (DLT replacement)
+- **[Copy Job CDC](../../features/copy-job-cdc.md)** (autoLoader replacement)
+- **[Real-Time Intelligence](../../features/real-time-intelligence.md)** (continuous-trigger replacement)
+- **[dbt Fabric Integration](../../features/dbt-fabric-integration.md)** (`dbt_task` migration)
+- **[Spark Runtime Migration](../../best-practices/spark-runtime-migration.md)** (DBR → Fabric Spark runtime)
+- **[Testing Strategies — Data Contract Suites](../../best-practices/testing-strategies.md)** (GE checkpoints replacing DLT expects)
+- **[fabric-cicd Deployment](../../best-practices/fabric-cicd-deployment.md)** (deploying converted Pipelines)
+- **[Workspace Monitoring](../../features/workspace-monitoring.md)** (replacement for `cluster_log_conf`)
 
 ---
 
-[⬆️ Back to Top](#-tutorial-42--reference-databricks-workflows--fabric-pipelines--spark-job-definitions) | [⬅️ Back to Tutorial 42](./README.md) | [📚 Tutorial Index](../README.md) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-42--reference-databricks-workflows--fabric-pipelines--spark-job-definitions) | [⬅️ Back to Tutorial 42](./README.md) | [📚 Tutorial Index](../index.md) | [🏠 Home](../../index.md)

@@ -1,4 +1,4 @@
-[Home](../index.md) > [Docs](..) > [Runbooks](README.md) > Capacity Throttling Response
+[Home](../index.md) > [Docs](..) > [Runbooks](index.md) > Capacity Throttling Response
 
 # 🚨 Capacity Throttling Response
 
@@ -593,9 +593,9 @@ requests.delete(
 | [Monitoring & Observability](../best-practices/monitoring-observability.md) | Custom dashboards, alert wiring |
 | [Alerting & Data Activator](../best-practices/alerting-data-activator.md) | Throttle alert rules, Action Group fan-out |
 | [Error Handling & Monitoring](../best-practices/error-handling-monitoring.md) | Pipeline error architecture |
-| [Performance Optimization](../best-practices/performance-optimization.md) | Spark tuning, V-Order, Z-Order |
+| [Performance Optimization](../best-practices/performance-parallelism.md) | Spark tuning, V-Order, Z-Order |
 | [Disaster Recovery & BCDR](../best-practices/disaster-recovery-bcdr.md) | Capacity failover patterns |
 
 ---
 
-[⬆️ Back to Top](#-capacity-throttling-response) | [📚 Runbooks Index](README.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#-capacity-throttling-response) | [📚 Runbooks Index](index.md) | [🏠 Home](../index.md)

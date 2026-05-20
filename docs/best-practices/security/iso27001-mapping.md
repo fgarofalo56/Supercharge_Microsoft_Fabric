@@ -842,7 +842,7 @@ Before declaring "ISO 27001 ready":
 
 ### Compliance Templates
 - [SOC 2 Control Matrix Template](../../compliance-templates/soc2-control-matrix.md) (Wave 5 batch 5b)
-- [ISO 27001 SoA Template](../../compliance-templates/iso27001-soa.md) (Wave 5 batch 5b)
+- [ISO 27001 SoA Template](../../compliance/nist-800-53.md) (Wave 5 batch 5b)
 - [DSAR Runbook Template](../../compliance-templates/dsar-runbook.md) (Wave 5 batch 5b)
 
 ---

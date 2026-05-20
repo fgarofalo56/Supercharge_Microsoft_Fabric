@@ -479,7 +479,7 @@ The following Microsoft-published white papers and reference architectures suppo
 ## Related Documentation
 
 - [Antitrust Analytics](antitrust-analytics.md)
-- [Use Cases Index](README.md)
+- [Use Cases Index](index.md)
 - [Published References Catalog](references/README.md)
 - [Medallion Architecture Deep Dive](../best-practices/medallion-architecture-deep-dive.md)
 

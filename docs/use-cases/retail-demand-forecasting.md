@@ -423,7 +423,7 @@ FabricAuditLogs
 
 ## 12. Related Resources
 
-- [Tutorial 49: Retail/CPG End-to-End](../../tutorials/49-retail-cpg/README.md)
+- [Tutorial 49: Retail/CPG End-to-End](../tutorials/49-retail-cpg/README.md)
 - [Direct Lake Best Practices](../features/direct-lake.md)
 - [Medallion Architecture Deep Dive](../best-practices/medallion-architecture-deep-dive.md)
 - [PCI-DSS Tokenization Patterns](../best-practices/network-security.md)

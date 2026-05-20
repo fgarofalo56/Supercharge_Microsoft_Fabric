@@ -365,8 +365,8 @@ Expected: **6 tests passed**.
 - [CPNI Rules (47 CFR 64)](https://www.ecfr.gov/current/title-47/chapter-I/subchapter-B/part-64/subpart-U)
 - [Microsoft Fabric Real-Time Intelligence](https://learn.microsoft.com/fabric/real-time-intelligence/)
 - [Spark ML GBTClassifier](https://spark.apache.org/docs/latest/ml-classification-regression.html#gradient-boosted-tree-classifier)
-- [Tutorial 01: Casino Slot Telemetry](../01-slot-telemetry/README.md) (similar medallion pattern)
+- [Tutorial 01: Casino Slot Telemetry](../01-bronze-layer/README.md) (similar medallion pattern)
 
 ---
 
-**Next:** [Tutorial 53 >>](../53-energy/README.md)
+**Next:** [Tutorial 53 >>](../53-pharma/README.md)

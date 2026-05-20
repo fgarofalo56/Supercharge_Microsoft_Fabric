@@ -186,7 +186,7 @@ Throughout this guide:
 | [Architecture Overview](../diagrams/architecture-overview.md) | System architecture and data flow diagrams |
 | [Cost Breakdown](../diagrams/cost-breakdown.md) | Cost analysis and optimization diagrams |
 | [Data Dictionary](../data-dictionary/README.md) | Table schemas and field definitions |
-| [Operational Runbooks](../runbooks/README.md) | Incident response and maintenance procedures |
+| [Operational Runbooks](../runbooks/index.md) | Incident response and maintenance procedures |
 | [Compliance Templates](../compliance-templates/README.md) | Regulatory compliance report templates |
 
 ---

@@ -568,7 +568,7 @@ Right tool when you need **one pane of glass across Workspace Monitoring + Log A
 
 ### FUAM (Fabric Unified Admin Monitoring)
 
-FUAM is Microsoft's open-source admin monitoring solution: ingests tenant audit logs, capacity metrics, workspace inventory, and refresh history into a Lakehouse + Power BI report. See the [FUAM feature doc](../../features/fuam-fabric-unified-admin-monitoring.md). Use FUAM for tenant-wide admin reporting, chargeback, and 90+ day audit trends — **not** for real-time ops (use RTI), per-query troubleshooting (use Workspace Monitoring), or sub-minute alerts (use Data Activator).
+FUAM is Microsoft's open-source admin monitoring solution: ingests tenant audit logs, capacity metrics, workspace inventory, and refresh history into a Lakehouse + Power BI report. See the [FUAM feature doc](../../features/fabric-unified-admin-monitoring.md). Use FUAM for tenant-wide admin reporting, chargeback, and 90+ day audit trends — **not** for real-time ops (use RTI), per-query troubleshooting (use Workspace Monitoring), or sub-minute alerts (use Data Activator).
 
 ---
 
@@ -778,7 +778,7 @@ For every new Fabric platform — apply this checklist at provisioning time. Tre
 - [Workspace Monitoring](../../features/workspace-monitoring.md) — system tables reference
 - [Data Activator](../../features/data-activator.md) — Reflex configuration
 - [Real-Time Intelligence](../../features/real-time-intelligence.md) — RTI dashboards
-- [FUAM (Fabric Unified Admin Monitoring)](../../features/fuam-fabric-unified-admin-monitoring.md) — tenant admin reporting
+- [FUAM (Fabric Unified Admin Monitoring)](../../features/fabric-unified-admin-monitoring.md) — tenant admin reporting
 
 ---
 
@@ -802,4 +802,4 @@ For every new Fabric platform — apply this checklist at provisioning time. Tre
 
 ---
 
-[Back to Operations](./README.md) | [Back to Best Practices](../README.md) | [Back to Documentation](../../index.md)
+[Back to Operations](../index.md) | [Back to Best Practices](../index.md) | [Back to Documentation](../../index.md)

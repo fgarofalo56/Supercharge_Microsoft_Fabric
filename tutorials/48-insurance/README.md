@@ -345,12 +345,12 @@ GROUP BY line_of_business
 
 ## :link: Related Resources
 
-- [Use Case: Insurance Claims Analytics](../../docs/use-cases/insurance-claims-analytics.md)
+- [Use Case: Insurance Claims Analytics](../../use-cases/insurance-claims-analytics.md)
 - [NAIC Model Audit Rule](https://content.naic.org/cipr-topics/model-audit-rule)
 - [NAIC Risk-Based Capital](https://content.naic.org/cipr-topics/risk-based-capital)
 - [Microsoft Fabric Lakehouse](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-overview)
 - [Delta Lake Documentation](https://docs.delta.io/latest/)
-- [Tutorial 01: Casino Slot Telemetry (Bronze pattern)](../01-bronze-ingestion/README.md)
+- [Tutorial 01: Casino Slot Telemetry (Bronze pattern)](../01-bronze-layer/README.md)
 
 ---
 
@@ -376,4 +376,4 @@ In this tutorial you built an end-to-end insurance claims analytics pipeline:
 
 ---
 
-*Next: [Tutorial 49](../49-next-tutorial/README.md) | [Back to Tutorials](../README.md)*
+*Next: [Tutorial 49](../49-retail-cpg/README.md) | [Back to Tutorials](../index.md)*

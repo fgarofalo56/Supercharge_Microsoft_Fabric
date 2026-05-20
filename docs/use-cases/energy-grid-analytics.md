@@ -510,5 +510,5 @@ gantt
 
 ---
 
-> **Next**: [Tutorial 51 - Energy & Utilities](../../tutorials/51-energy-utilities/README.md) |
+> **Next**: [Tutorial 51 - Energy & Utilities](../tutorials/51-energy-utilities/README.md) |
 > **Related**: [Real-Time Intelligence](../features/real-time-intelligence.md) | [Medallion Architecture](../best-practices/medallion-architecture-deep-dive.md)

@@ -8,7 +8,7 @@
 
 </div>
 
-> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > ⚖️ **DOJ Justice Analytics**
+> 🏠 **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > 📖 **[Tutorials](../index.md)** > ⚖️ **DOJ Justice Analytics**
 
 ---
 
@@ -676,9 +676,9 @@ env_crime = crime.filter(F.col("offense_category") == "Society") \
 
 ### Related Use Cases
 
-- [Antitrust Analytics](../../docs/use-cases/antitrust-analytics.md) — Deep dive into HHI concentration analysis and merger review
-- [Federal Justice Analytics](../../docs/use-cases/federal-justice-analytics.md) — Crime, sentencing, and prosecution pipeline
-- [References](../../docs/use-cases/references/README.md) — Complete curated resource catalog
+- [Antitrust Analytics](../../use-cases/antitrust-analytics.md) — Deep dive into HHI concentration analysis and merger review
+- [Federal Justice Analytics](../../use-cases/federal-justice-analytics.md) — Crime, sentencing, and prosecution pipeline
+- [References](../../use-cases/references/README.md) — Complete curated resource catalog
 
 ---
 
@@ -724,5 +724,5 @@ In this tutorial you built a complete DOJ Justice Analytics pipeline:
 | Navigation | |
 |---|---|
 | ⬅️ **Previous** | [37-Graph Analytics](../37-graph-analytics/README.md) |
-| 🏠 **Home** | [README](../../README.md) |
-| 📖 **All Tutorials** | [Tutorial Index](../README.md) |
+| 🏠 **Home** | [README](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md) |
+| 📖 **All Tutorials** | [Tutorial Index](../index.md) |

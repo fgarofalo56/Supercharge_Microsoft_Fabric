@@ -518,7 +518,7 @@ tags: {
 | [Architecture Guide](ARCHITECTURE.md) | System architecture and components |
 | [Deployment Guide](DEPLOYMENT.md) | Infrastructure deployment instructions |
 | [Prerequisites](PREREQUISITES.md) | Setup requirements |
-| [Cost Tags Module](../infra/cost-tags.bicep) | Bicep module for cost allocation |
+| [Cost Tags Module](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/cost-tags.bicep) | Bicep module for cost allocation |
 
 ---
 

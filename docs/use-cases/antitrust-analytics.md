@@ -685,7 +685,7 @@ The following Microsoft-published white papers and reference architectures provi
 ## Related Documentation
 
 - [Federal Justice Analytics](federal-justice-analytics.md)
-- [Use Cases Index](README.md)
+- [Use Cases Index](index.md)
 - [Published References Catalog](references/README.md)
 - [Medallion Architecture Deep Dive](../best-practices/medallion-architecture-deep-dive.md)
 - [Data Governance](../best-practices/data-governance-deep-dive.md)

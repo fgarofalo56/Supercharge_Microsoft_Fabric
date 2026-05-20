@@ -1181,7 +1181,7 @@ See the [CI Integration](#-ci-integration) section above for the canonical `llm-
 
 ---
 
-[⬆️ Back to Top](#-llm-evaluation-harness-on-fabric) | [📚 Features Index](README.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#-llm-evaluation-harness-on-fabric) | [📚 Features Index](index.md) | [🏠 Home](../index.md)
 
 > 📝 **Document Metadata**
 > - **Author**: Documentation Team

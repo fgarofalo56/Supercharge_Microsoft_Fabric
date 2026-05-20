@@ -61,12 +61,18 @@ jobs:
         run: |
           echo "📁 Preparing documentation structure..."
 
-          # Copy external folders into docs/ for MkDocs to find them
+          # Copy external folders into docs/ for MkDocs to find them.
+          # NOTE: docs/tutorials/ already exists (it ships an index.md grid page),
+          # so we must copy the *contents* of tutorials/ into it, not the
+          # directory itself — otherwise files would land at docs/tutorials/tutorials/
+          # and every tutorial link would 404.
           echo "Copying tutorials..."
-          cp -r tutorials docs/tutorials
+          mkdir -p docs/tutorials
+          cp -r tutorials/. docs/tutorials/
 
           echo "Copying poc-agenda..."
-          cp -r poc-agenda docs/poc-agenda
+          mkdir -p docs/poc-agenda
+          cp -r poc-agenda/. docs/poc-agenda/
 
           echo "Copying infra README..."
           mkdir -p docs/infra

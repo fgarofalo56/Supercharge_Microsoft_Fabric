@@ -860,7 +860,7 @@ Copy Job → Monitor → Watermark State
 - [Real-Time Intelligence](real-time-intelligence.md) -- For sub-second latency, use Eventstreams instead of Copy Job
 - [Fabric IQ](fabric-iq.md) -- Query Copy Job-loaded Bronze tables with natural language
 - [Data Governance Deep Dive](../best-practices/data-governance-deep-dive.md) -- Governance for incremental ingestion
-- [Performance Best Practices](../best-practices/performance-best-practices.md) -- Delta table optimization post-ingestion
+- [Performance Best Practices](../best-practices/performance-parallelism.md) -- Delta table optimization post-ingestion
 - [Fabric CI/CD Deployment](../best-practices/fabric-cicd-deployment.md) -- Deploy Copy Job configurations via CI/CD
 - [Architecture](../ARCHITECTURE.md) -- System architecture overview
 

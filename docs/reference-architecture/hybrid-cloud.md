@@ -221,28 +221,28 @@ Hybrid deployments require unified networking across Azure services and Fabric:
 
 | Resource | Bicep Module | Description |
 |:---------|:-------------|:------------|
-| Fabric Capacity | [`infra/modules/fabric/fabric-capacity.bicep`](../../infra/modules/fabric/fabric-capacity.bicep) | Analytics capacity |
-| Eventhouse | [`infra/modules/fabric/fabric-eventhouse.bicep`](../../infra/modules/fabric/fabric-eventhouse.bicep) | Real-time analytics engine |
-| Eventstream | [`infra/modules/fabric/fabric-eventstream.bicep`](../../infra/modules/fabric/fabric-eventstream.bicep) | Event routing |
-| Storage Account | [`infra/modules/storage/storage-account.bicep`](../../infra/modules/storage/storage-account.bicep) | ADLS Gen2 landing zone |
-| VNet | [`infra/modules/networking/vnet.bicep`](../../infra/modules/networking/vnet.bicep) | Hub-spoke network |
-| Private Endpoints | [`infra/modules/networking/private-endpoint.bicep`](../../infra/modules/networking/private-endpoint.bicep) | Private Link for all services |
-| Security / Workspace Identity | [`infra/modules/security/workspace-identity.bicep`](../../infra/modules/security/workspace-identity.bicep) | Managed identity for cross-service auth |
-| Alerts & Budgets | [`infra/modules/monitoring/alerts-and-budgets.bicep`](../../infra/modules/monitoring/alerts-and-budgets.bicep) | Cost and performance alerts |
+| Fabric Capacity | [`infra/modules/fabric/fabric-capacity.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/fabric/fabric-capacity.bicep) | Analytics capacity |
+| Eventhouse | [`infra/modules/fabric/fabric-eventhouse.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/fabric/fabric-eventhouse.bicep) | Real-time analytics engine |
+| Eventstream | [`infra/modules/fabric/fabric-eventstream.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/fabric/fabric-eventstream.bicep) | Event routing |
+| Storage Account | [`infra/modules/storage/storage-account.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/storage/storage-account.bicep) | ADLS Gen2 landing zone |
+| VNet | [`infra/modules/networking/vnet.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/networking/vnet.bicep) | Hub-spoke network |
+| Private Endpoints | [`infra/modules/networking/private-endpoint.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/networking/private-endpoint.bicep) | Private Link for all services |
+| Security / Workspace Identity | [`infra/modules/security/workspace-identity.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/security/workspace-identity.bicep) | Managed identity for cross-service auth |
+| Alerts & Budgets | [`infra/modules/monitoring/alerts-and-budgets.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/monitoring/alerts-and-budgets.bicep) | Cost and performance alerts |
 
 ### Step-by-Step Tutorials
 
 | Step | Tutorial | What You'll Build |
 |:-----|:---------|:-----------------|
-| 1 | [Environment Setup](../../tutorials/00-environment-setup/README.md) | Provision Fabric + Azure services |
-| 2 | [Bronze Layer](../../tutorials/01-bronze-layer/README.md) | Ingest via Mirroring + Shortcuts + Dataflow |
-| 3 | [Database Mirroring](../../tutorials/08-database-mirroring/README.md) | Set up Azure SQL → OneLake mirroring |
-| 4 | [Real-Time Analytics](../../tutorials/04-real-time-analytics/README.md) | Event Hubs → Eventstream → Eventhouse |
-| 5 | [Multi-Source Streaming](../../tutorials/26-multi-source-streaming/README.md) | Multiple streaming sources into Fabric |
-| 6 | [Direct Lake Power BI](../../tutorials/05-direct-lake-powerbi/README.md) | Unified BI over hybrid data |
-| 7 | [Security & Networking](../../tutorials/14-security-networking/README.md) | Private endpoints and VNet setup |
-| 8 | [SHIR & Data Gateways](../../tutorials/23-shir-data-gateways/README.md) | On-premises connectivity |
-| 9 | [Networking Connectivity](../../tutorials/22-networking-connectivity/README.md) | Hub-spoke network architecture |
+| 1 | [Environment Setup](../tutorials/00-environment-setup/README.md) | Provision Fabric + Azure services |
+| 2 | [Bronze Layer](../tutorials/01-bronze-layer/README.md) | Ingest via Mirroring + Shortcuts + Dataflow |
+| 3 | [Database Mirroring](../tutorials/08-database-mirroring/README.md) | Set up Azure SQL → OneLake mirroring |
+| 4 | [Real-Time Analytics](../tutorials/04-real-time-analytics/README.md) | Event Hubs → Eventstream → Eventhouse |
+| 5 | [Multi-Source Streaming](../tutorials/26-multi-source-streaming/README.md) | Multiple streaming sources into Fabric |
+| 6 | [Direct Lake Power BI](../tutorials/05-direct-lake-powerbi/README.md) | Unified BI over hybrid data |
+| 7 | [Security & Networking](../tutorials/14-security-networking/README.md) | Private endpoints and VNet setup |
+| 8 | [SHIR & Data Gateways](../tutorials/23-shir-data-gateways/README.md) | On-premises connectivity |
+| 9 | [Networking Connectivity](../tutorials/22-networking-connectivity/README.md) | Hub-spoke network architecture |
 
 ### Key Feature Documentation
 

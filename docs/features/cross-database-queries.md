@@ -561,7 +561,7 @@ ORDER BY TABLE_CATALOG, TABLE_SCHEMA, TABLE_NAME;
 
 ---
 
-[Back to Features Index](./README.md) | [Back to Documentation](../index.md)
+[Back to Features Index](../index.md) | [Back to Documentation](../index.md)
 
 ---
 

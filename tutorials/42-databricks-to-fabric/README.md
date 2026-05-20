@@ -1,4 +1,4 @@
-[Home](../../docs/index.md) > [Tutorials](../) > Databricks to Fabric Migration
+[Home](../../index.md) > [Tutorials](../) > Databricks to Fabric Migration
 
 # 🧱 Tutorial 42: Databricks → Microsoft Fabric Migration
 
@@ -168,11 +168,11 @@ flowchart LR
 | Hive Metastore (legacy) | Lakehouse default schema | Bulk register tables to Lakehouse |
 | Delta tables on ADLS Gen2 | Delta in OneLake | **Shortcut (zero-copy)** OR rewrite for V-Order |
 | Delta tables on S3 / GCS | Delta in OneLake | OneLake S3/GCS shortcut OR copy |
-| Iceberg tables (UniForm) | OneLake Iceberg shortcut | Direct — see [Iceberg Interop](../../docs/features/onelake-iceberg-interop.md) |
+| Iceberg tables (UniForm) | OneLake Iceberg shortcut | Direct — see [Iceberg Interop](../../features/onelake-iceberg-interop.md) |
 | Databricks Notebooks | Fabric Notebooks | Port code; `dbutils` → `mssparkutils` shim |
 | Databricks Workflows / Jobs | Fabric Data Pipelines | Activity translation (see Step 5) |
 | Delta Live Tables (DLT) | Materialized Lake Views | Declarative SQL maps directly; Python DLT rewrites |
-| DBR Runtime (e.g., 14.3 LTS) | Fabric Spark Runtime 1.3 / 2.0 | Most code portable; see [runtime migration](../../docs/best-practices/spark-runtime-migration.md) |
+| DBR Runtime (e.g., 14.3 LTS) | Fabric Spark Runtime 1.3 / 2.0 | Most code portable; see [runtime migration](../../best-practices/spark-runtime-migration.md) |
 | Cluster pools | Fabric Spark capacity (CUs) | No 1:1 — Fabric autoscales within F-SKU |
 | Photon engine | Fabric V-Order + Native Execution Engine | Different code path, similar perf for BI workloads |
 | MLflow Tracking Server | Fabric MLflow (built-in) | Re-point experiments; export-import models |
@@ -180,7 +180,7 @@ flowchart LR
 | Model Serving | Fabric Real-Time Endpoints | Re-deploy registered model |
 | DBSQL Warehouses | Fabric Warehouse + SQL endpoint | DDL conversion + V-Order; Power BI repoints |
 | Unity Catalog Volumes | Lakehouse Files section | Copy non-tabular files |
-| Secret Scopes | Azure Key Vault + Workspace Identity | Recreate; reference via [OAP](../../docs/best-practices/outbound-access-protection.md) |
+| Secret Scopes | Azure Key Vault + Workspace Identity | Recreate; reference via [OAP](../../best-practices/outbound-access-protection.md) |
 | Cluster init scripts | Fabric Environment files | Repackage as conda/pip env |
 | Repos (Git folders) | Fabric Git Integration | Connect workspace to same repo |
 
@@ -419,7 +419,7 @@ python 03_workflow_migration.py \
 | `spark_submit_task` | Spark Job Definition | Translate args |
 | `sql_task` (DBSQL query) | Script (T-SQL) or Lookup | Re-point to Fabric Warehouse / SQL endpoint |
 | `pipeline_task` (DLT) | Materialized Lake Views or chained notebooks | Manual rewrite (Step 6) |
-| `dbt_task` | Notebook with `dbt-fabric` | See [dbt integration](../../docs/features/dbt-fabric-integration.md) |
+| `dbt_task` | Notebook with `dbt-fabric` | See [dbt integration](../../features/dbt-fabric-integration.md) |
 | `run_job_task` | Invoke Pipeline | Direct map |
 | `condition_task` (If/Else) | If Condition | Direct map |
 | `for_each_task` | ForEach | Direct map |
@@ -588,7 +588,7 @@ python 04_dbsql_ddl_conversion.py \
 
 ### Step 9 — Iceberg Interoperability (UniForm Tables)
 
-If your Databricks tables use **Delta UniForm** (write Delta, expose as Iceberg), Fabric reads them directly via [OneLake Iceberg shortcuts](../../docs/features/onelake-iceberg-interop.md). No conversion required.
+If your Databricks tables use **Delta UniForm** (write Delta, expose as Iceberg), Fabric reads them directly via [OneLake Iceberg shortcuts](../../features/onelake-iceberg-interop.md). No conversion required.
 
 ```bash
 # Create an Iceberg shortcut
@@ -680,7 +680,7 @@ Output: F-SKU recommendation with rationale.
 
 > ⚠️ **Gotcha**: This table is a **starting point only**. Photon-DBU and serverless-SQL-DBU consume different ratios in Databricks; in Fabric all draw from the same CU pool plus Power BI users. **Always measure during coexistence and adjust before cutover.**
 
-> 💡 **Tip**: Use [capacity planning best practices](../../docs/best-practices/capacity-planning-cost-optimization.md) for the full sizing methodology and CU smoothing patterns.
+> 💡 **Tip**: Use [capacity planning best practices](../../best-practices/capacity-planning-cost-optimization.md) for the full sizing methodology and CU smoothing patterns.
 
 ### Step 13 — Validate Migration
 
@@ -778,7 +778,7 @@ python 07_backup_databricks_metadata.py \
 - [ ] DBSQL workloads on Fabric Warehouse / SQL endpoint with Power BI repointed
 - [ ] Unity Catalog grants re-authored as OneLake Security policies
 - [ ] Microsoft Purview connected; lineage captured
-- [ ] F-SKU sized correctly (CU usage in steady-state band — see [SLO/SLI doc](../../docs/best-practices/operations/slo-sli-fabric.md))
+- [ ] F-SKU sized correctly (CU usage in steady-state band — see [SLO/SLI doc](../../best-practices/operations/slo-sli-fabric.md))
 - [ ] Databricks Workflows disabled, DBSQL warehouses stopped
 - [ ] Cutover postmortem published
 - [ ] DBU spend → CU spend cost reduction realized
@@ -797,11 +797,11 @@ If your assessment ran against a real Databricks workspace, the read-only API ca
 
 - **[Tutorial 43 — Redshift → Fabric](../43-redshift-to-fabric/README.md)** — for shops also retiring AWS Redshift
 - **[Tutorial 44 — BigQuery → Fabric](../44-bigquery-to-fabric/README.md)** — for GCP exits
-- **[Migration Patterns Best Practices](../../docs/best-practices/migration-patterns.md)** — cross-source patterns
-- **[Spark Runtime Migration](../../docs/best-practices/spark-runtime-migration.md)** — DBR → Fabric Spark Runtime details
-- **[OneLake Iceberg Interop](../../docs/features/onelake-iceberg-interop.md)** — UniForm and cross-engine reads
-- **[dbt Fabric Integration](../../docs/features/dbt-fabric-integration.md)** — for shops migrating dbt projects
-- **[fabric-cicd Deployment](../../docs/best-practices/fabric-cicd-deployment.md)** — automate the deployment of migrated artifacts
+- **[Migration Patterns Best Practices](../../best-practices/migration-patterns.md)** — cross-source patterns
+- **[Spark Runtime Migration](../../best-practices/spark-runtime-migration.md)** — DBR → Fabric Spark Runtime details
+- **[OneLake Iceberg Interop](../../features/onelake-iceberg-interop.md)** — UniForm and cross-engine reads
+- **[dbt Fabric Integration](../../features/dbt-fabric-integration.md)** — for shops migrating dbt projects
+- **[fabric-cicd Deployment](../../best-practices/fabric-cicd-deployment.md)** — automate the deployment of migrated artifacts
 
 ---
 
@@ -818,7 +818,7 @@ If your assessment ran against a real Databricks workspace, the read-only API ca
 | Row counts off by ~1% post-migration | Time-zone drift on partitioned timestamps | Cast partition columns to `TIMESTAMP_NTZ` explicitly |
 | Direct Lake fallback to DirectQuery | Schema not V-Ordered or unsupported types | Run `OPTIMIZE table VORDER`; check VARCHAR(MAX) usage |
 | Cluster init script broke on migration | Init scripts not portable | Repackage as Fabric Environment custom library |
-| F-SKU throttles after cutover | Concurrent BI users + Spark + ML draw same CU pool | Scale F-SKU; review [throttling runbook](../../docs/runbooks/capacity-throttling-response.md) |
+| F-SKU throttles after cutover | Concurrent BI users + Spark + ML draw same CU pool | Scale F-SKU; review [throttling runbook](../../runbooks/capacity-throttling-response.md) |
 
 ---
 
@@ -858,13 +858,13 @@ If your assessment ran against a real Databricks workspace, the read-only API ca
 - [Tutorial 41 — Synapse → Fabric](../41-synapse-to-fabric/README.md) (Wave 4 anchor)
 - [Tutorial 24 — Snowflake → Fabric](../24-snowflake-to-fabric/README.md)
 - [Tutorial 10 — Teradata → Fabric](../10-teradata-migration/README.md)
-- [Migration Patterns](../../docs/best-practices/migration-patterns.md)
-- [Spark Runtime Migration](../../docs/best-practices/spark-runtime-migration.md)
-- [OneLake Iceberg Interop](../../docs/features/onelake-iceberg-interop.md)
-- [dbt Fabric Integration](../../docs/features/dbt-fabric-integration.md)
-- [Capacity Planning](../../docs/best-practices/capacity-planning-cost-optimization.md)
-- [fabric-cicd Deployment](../../docs/best-practices/fabric-cicd-deployment.md)
+- [Migration Patterns](../../best-practices/migration-patterns.md)
+- [Spark Runtime Migration](../../best-practices/spark-runtime-migration.md)
+- [OneLake Iceberg Interop](../../features/onelake-iceberg-interop.md)
+- [dbt Fabric Integration](../../features/dbt-fabric-integration.md)
+- [Capacity Planning](../../best-practices/capacity-planning-cost-optimization.md)
+- [fabric-cicd Deployment](../../best-practices/fabric-cicd-deployment.md)
 
 ---
 
-[⬆️ Back to Top](#-tutorial-42-databricks--microsoft-fabric-migration) | [📚 Tutorial Index](../README.md) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-42-databricks--microsoft-fabric-migration) | [📚 Tutorial Index](../index.md) | [🏠 Home](../../index.md)

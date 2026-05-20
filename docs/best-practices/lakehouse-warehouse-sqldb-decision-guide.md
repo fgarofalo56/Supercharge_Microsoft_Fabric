@@ -603,7 +603,7 @@ flowchart TB
 
 ---
 
-[Back to Best Practices Index](./README.md) | [Back to Documentation](../index.md)
+[Back to Best Practices Index](./index.md) | [Back to Documentation](../index.md)
 
 ---
 

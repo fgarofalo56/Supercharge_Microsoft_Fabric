@@ -1,4 +1,4 @@
-[Home](../../docs/index.md) > [Tutorials](../) > Production RAG
+[Home](../../index.md) > [Tutorials](../) > Production RAG
 
 # 🔎 Tutorial 40: Production RAG with Eventhouse Vector + Data Agents + Eval Harness
 
@@ -63,8 +63,8 @@
 
 | Navigation | |
 |---|---|
-| ⬅️ **Previous** | [39-Copilot Studio Agents](../39-copilot-studio-agents/README.md) |
-| ➡️ **Next** | [Tutorials Index](../README.md) |
+| ⬅️ **Previous** | [39-Copilot Studio Agents](../39-mlops-end-to-end/README.md) |
+| ➡️ **Next** | [Tutorials Index](../index.md) |
 
 ---
 
@@ -74,7 +74,7 @@ Most RAG tutorials stop at "embed your PDFs, run cosine similarity, stuff the to
 
 This tutorial teaches you to build a **production-grade RAG system** for casino BSA/AML/MICS compliance Q&A on Microsoft Fabric. You will ingest a regulatory corpus, chunk it intelligently, embed it, store the vectors in Eventhouse with Vector16 encoding, retrieve passages with **hybrid vector + BM25 search fused via Reciprocal Rank Fusion**, rerank the top-N with a cross-encoder, generate cited answers via Azure OpenAI or AI Functions, expose the system through a Fabric Data Agent, and continuously evaluate quality with a golden test set, an LLM-as-judge harness, a CI quality gate, and a Real-Time Dashboard for retrieval analytics.
 
-The tutorial mirrors the patterns documented in [`docs/features/rag-patterns-deep-dive.md`](../../docs/features/rag-patterns-deep-dive.md), [`docs/features/eventhouse-vector-database.md`](../../docs/features/eventhouse-vector-database.md), [`docs/features/eval-harness-llm.md`](../../docs/features/eval-harness-llm.md), and the runnable reference notebook [`notebooks/ml/07_rag_eventhouse_vector.py`](../../notebooks/ml/07_rag_eventhouse_vector.py). Use it as the reference implementation when shipping any RAG workload on Fabric — casino, federal, healthcare, or otherwise.
+The tutorial mirrors the patterns documented in [`docs/features/rag-patterns-deep-dive.md`](../../features/rag-patterns-deep-dive.md), [`docs/features/eventhouse-vector-database.md`](../../features/eventhouse-vector-database.md), [`docs/features/eval-harness-llm.md`](../../features/eval-harness-llm.md), and the runnable reference notebook [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py). Use it as the reference implementation when shipping any RAG workload on Fabric — casino, federal, healthcare, or otherwise.
 
 > **💡 Why production RAG is different**
 >
@@ -375,7 +375,7 @@ spark.createDataFrame([], eval_schema).write \
 
 For this tutorial we use 18 synthetic compliance documents bundled with the reference notebook. In production you would parse PDFs, DOCX, HTML, or Confluence exports.
 
-> **📓 Notebook Reference**: [`notebooks/ml/07_rag_eventhouse_vector.py`](../../notebooks/ml/07_rag_eventhouse_vector.py) — section *1. Synthetic Compliance Corpus*
+> **📓 Notebook Reference**: [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py) — section *1. Synthetic Compliance Corpus*
 
 ### 3.1 Corpus Structure
 
@@ -801,7 +801,7 @@ def rerank(query: str, candidates: list[dict], top_k: int = 5) -> list[dict]:
     return candidates[:top_k]
 ```
 
-If `sentence-transformers` is not installed, the reference notebook falls back to an LLM-as-judge stub (slower, more expensive, but works without GPUs). See [`docs/features/rag-patterns-deep-dive.md#-reranking`](../../docs/features/rag-patterns-deep-dive.md#-reranking) for the comparison matrix.
+If `sentence-transformers` is not installed, the reference notebook falls back to an LLM-as-judge stub (slower, more expensive, but works without GPUs). See [`docs/features/rag-patterns-deep-dive.md#-reranking`](../../features/rag-patterns-deep-dive.md#-reranking) for the comparison matrix.
 
 > **💡 Tip — rerank only the top-N, not the whole corpus**
 >
@@ -938,7 +938,7 @@ In the KQL Queryset, click **Pin to dashboard → New Real-Time Dashboard → `d
 
 The eval harness is what distinguishes a *real* RAG system from a demo. Build the golden set with **five complementary sources** so no single failure mode dominates: hand-curated, synthetic, production-sampled, adversarial, regression-from-bugs.
 
-> **📓 Doc Reference**: [`docs/features/eval-harness-llm.md`](../../docs/features/eval-harness-llm.md) — section *Eval Test Set Construction*
+> **📓 Doc Reference**: [`docs/features/eval-harness-llm.md`](../../features/eval-harness-llm.md) — section *Eval Test Set Construction*
 
 ### 13.1 Hand-Curated Golden Set
 
@@ -1128,7 +1128,7 @@ spark.createDataFrame([metrics_row]).write \
 
 The eval harness must run on every PR that touches the prompt, retriever, embedding model, or chunker. A regression on the golden set blocks the merge.
 
-> **📓 Doc Reference**: [`docs/features/eval-harness-llm.md`](../../docs/features/eval-harness-llm.md) — section *CI Integration*
+> **📓 Doc Reference**: [`docs/features/eval-harness-llm.md`](../../features/eval-harness-llm.md) — section *CI Integration*
 
 `.github/workflows/rag-eval.yml`:
 
@@ -1185,7 +1185,7 @@ The `run_rag_eval.py` script invokes the Fabric notebook via the [Fabric REST AP
 
 Now expose the production RAG pipeline as a natural-language interface for compliance officers via Microsoft Teams / M365 Copilot.
 
-> **📓 Doc Reference**: [`docs/features/data-agents.md`](../../docs/features/data-agents.md)
+> **📓 Doc Reference**: [`docs/features/data-agents.md`](../../features/data-agents.md)
 
 ### 16.1 Create the Data Agent
 
@@ -1267,7 +1267,7 @@ def log_query(run_id: str, user_upn: str, query: str, retrieved_ids: list[str],
 
 LLM costs follow Pareto — 5% of queries drive 80% of spend. Track per-query unit economics and alert on outliers.
 
-> **📓 Doc Reference**: [`docs/features/llm-cost-tracking.md`](../../docs/features/llm-cost-tracking.md)
+> **📓 Doc Reference**: [`docs/features/llm-cost-tracking.md`](../../best-practices/llm-cost-tracking.md)
 
 ```python
 PRICING = {
@@ -1412,7 +1412,7 @@ Continue your learning journey:
 
 - [Tutorial 04: Real-Time Analytics](../04-real-time-analytics/README.md) — Eventhouse fundamentals, KQL essentials
 - [Tutorial 19: Copilot & AI](../19-copilot-ai/README.md) — AI Functions, Copilot patterns
-- [Tutorial 39: Copilot Studio Agents](../39-copilot-studio-agents/README.md) — Multi-agent orchestration
+- [Tutorial 39: Copilot Studio Agents](../39-mlops-end-to-end/README.md) — Multi-agent orchestration
 - [Tutorial 09: Advanced AI/ML](../09-advanced-ai-ml/README.md) — Model lifecycle, MLflow, registry
 
 **Extension Ideas:**
@@ -1445,18 +1445,18 @@ Continue your learning journey:
 | Step | Source File | Purpose |
 |------|-------------|---------|
 | 1 | KQL Queryset on `kqldb_rag` | Eventhouse provisioning |
-| 2-3 | [`notebooks/ml/07_rag_eventhouse_vector.py`](../../notebooks/ml/07_rag_eventhouse_vector.py) §1 | Synthetic corpus |
-| 4 | [`notebooks/ml/07_rag_eventhouse_vector.py`](../../notebooks/ml/07_rag_eventhouse_vector.py) §2 | Recursive chunker |
-| 5 | [`notebooks/ml/07_rag_eventhouse_vector.py`](../../notebooks/ml/07_rag_eventhouse_vector.py) §3 | Embedding (3 strategies) |
-| 6 | [`notebooks/ml/07_rag_eventhouse_vector.py`](../../notebooks/ml/07_rag_eventhouse_vector.py) §4 | Eventhouse persistence |
-| 7-9 | [`docs/features/rag-patterns-deep-dive.md`](../../docs/features/rag-patterns-deep-dive.md) | Hybrid retrieval patterns |
-| 10 | [`docs/features/rag-patterns-deep-dive.md`](../../docs/features/rag-patterns-deep-dive.md#-reranking) | Reranker comparison |
-| 11 | [`notebooks/ml/07_rag_eventhouse_vector.py`](../../notebooks/ml/07_rag_eventhouse_vector.py) §9-10 | Generation + citations |
-| 12 | [`docs/features/eventhouse-vector-database.md`](../../docs/features/eventhouse-vector-database.md) | Real-Time Dashboard |
-| 13-14 | [`docs/features/eval-harness-llm.md`](../../docs/features/eval-harness-llm.md) | Eval harness reference |
+| 2-3 | [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py) §1 | Synthetic corpus |
+| 4 | [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py) §2 | Recursive chunker |
+| 5 | [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py) §3 | Embedding (3 strategies) |
+| 6 | [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py) §4 | Eventhouse persistence |
+| 7-9 | [`docs/features/rag-patterns-deep-dive.md`](../../features/rag-patterns-deep-dive.md) | Hybrid retrieval patterns |
+| 10 | [`docs/features/rag-patterns-deep-dive.md`](../../features/rag-patterns-deep-dive.md#-reranking) | Reranker comparison |
+| 11 | [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py) §9-10 | Generation + citations |
+| 12 | [`docs/features/eventhouse-vector-database.md`](../../features/eventhouse-vector-database.md) | Real-Time Dashboard |
+| 13-14 | [`docs/features/eval-harness-llm.md`](../../features/eval-harness-llm.md) | Eval harness reference |
 | 15 | `.github/workflows/rag-eval.yml` (to create) | CI quality gate |
-| 16 | [`docs/features/data-agents.md`](../../docs/features/data-agents.md) | Data Agent setup |
-| 17-20 | [`notebooks/ml/07_rag_eventhouse_vector.py`](../../notebooks/ml/07_rag_eventhouse_vector.py) §11-13 | Production logging, cost, drift, feedback |
+| 16 | [`docs/features/data-agents.md`](../../features/data-agents.md) | Data Agent setup |
+| 17-20 | [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py) §11-13 | Production logging, cost, drift, feedback |
 
 ---
 
@@ -1466,14 +1466,14 @@ Continue your learning journey:
 
 | Doc | Purpose |
 |-----|---------|
-| [RAG Patterns Deep Dive](../../docs/features/rag-patterns-deep-dive.md) | Chunking, embedding, retrieval, reranking patterns |
-| [Eventhouse Vector Database](../../docs/features/eventhouse-vector-database.md) | KQL vector primitives, Vector16 encoding |
-| [LLM Eval Harness](../../docs/features/eval-harness-llm.md) | Test sets, judge models, CI integration |
-| [Data Agents](../../docs/features/data-agents.md) | Conversational AI surface |
-| [LLM Cost Tracking](../../docs/features/llm-cost-tracking.md) | Per-query cost attribution |
-| [Prompt Engineering for Fabric](../../docs/features/prompt-engineering-fabric.md) | System prompt design |
-| [Responsible AI Framework](../../docs/best-practices/responsible-ai-framework.md) | Refusal patterns, safety |
-| [MLOps for Fabric Production](../../docs/best-practices/mlops-fabric-production.md) | Validation gates, model registry |
+| [RAG Patterns Deep Dive](../../features/rag-patterns-deep-dive.md) | Chunking, embedding, retrieval, reranking patterns |
+| [Eventhouse Vector Database](../../features/eventhouse-vector-database.md) | KQL vector primitives, Vector16 encoding |
+| [LLM Eval Harness](../../features/eval-harness-llm.md) | Test sets, judge models, CI integration |
+| [Data Agents](../../features/data-agents.md) | Conversational AI surface |
+| [LLM Cost Tracking](../../best-practices/llm-cost-tracking.md) | Per-query cost attribution |
+| [Prompt Engineering for Fabric](../../features/prompt-engineering-fabric.md) | System prompt design |
+| [Responsible AI Framework](../../best-practices/responsible-ai-framework.md) | Refusal patterns, safety |
+| [MLOps for Fabric Production](../../best-practices/mlops-fabric-production.md) | Validation gates, model registry |
 
 ### Microsoft Learn
 
@@ -1502,7 +1502,7 @@ Continue your learning journey:
 
 | Previous | Up | Next |
 |:---------|:--:|-----:|
-| [⬅️ 39-Copilot Studio Agents](../39-copilot-studio-agents/README.md) | [📖 Tutorials Index](../README.md) | [Cheat Sheet ➡️](../CHEAT_SHEET.md) |
+| [⬅️ 39-Copilot Studio Agents](../39-mlops-end-to-end/README.md) | [📖 Tutorials Index](../index.md) | [Cheat Sheet ➡️](../CHEAT_SHEET.md) |
 
 ---
 
@@ -1516,4 +1516,4 @@ Continue your learning journey:
 
 ---
 
-[⬆️ Back to Top](#-tutorial-40-production-rag-with-eventhouse-vector--data-agents--eval-harness) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-40-production-rag-with-eventhouse-vector--data-agents--eval-harness) | [📚 Tutorials](../) | [🏠 Home](../../index.md)

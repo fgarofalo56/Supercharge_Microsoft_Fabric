@@ -3,7 +3,7 @@
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
-> **🏠 [Home](../../README.md)** > **📖 [Tutorials](../README.md)** > **⚡ Real-Time Analytics**
+> **🏠 [Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > **📖 [Tutorials](../index.md)** > **⚡ Real-Time Analytics**
 
 ---
 
@@ -1268,7 +1268,7 @@ Continue your learning journey:
 
 | Previous | Up | Next |
 |:---------|:--:|-----:|
-| [⬅️ 03-Gold Layer](../03-gold-layer/README.md) | [📖 Tutorials Index](../README.md) | [05-Direct Lake & Power BI ➡️](../05-direct-lake-powerbi/README.md) |
+| [⬅️ 03-Gold Layer](../03-gold-layer/README.md) | [📖 Tutorials Index](../index.md) | [05-Direct Lake & Power BI ➡️](../05-direct-lake-powerbi/README.md) |
 
 ---
 
@@ -1282,4 +1282,4 @@ Continue your learning journey:
 
 ---
 
-[⬆️ Back to Top](#-tutorial-04-real-time-analytics) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-04-real-time-analytics) | [📚 Tutorials](../) | [🏠 Home](../../index.md)

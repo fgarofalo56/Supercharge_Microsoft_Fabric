@@ -1,4 +1,4 @@
-[Home](../docs/index.md) > [POC Agenda](./) > Day 2: Transformations & Real-Time
+[Home](../index.md) > [POC Agenda](./) > Day 2: Transformations & Real-Time
 
 # 📅 Day 2: Transformations & Real-Time Analytics
 
@@ -882,6 +882,6 @@ Overall POC: ██████░░░░ 66% Complete
 
 ---
 
-[⬆️ Back to Top](#-day-2-transformations--real-time-analytics) | [📚 POC Agenda](./) | [🏠 Home](../docs/index.md)
+[⬆️ Back to Top](#-day-2-transformations--real-time-analytics) | [📚 POC Agenda](./) | [🏠 Home](../index.md)
 
 </div>

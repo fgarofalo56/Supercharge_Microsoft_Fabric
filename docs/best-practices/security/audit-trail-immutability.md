@@ -925,8 +925,8 @@ Before declaring "audit immutability ready":
 
 ### Infrastructure Modules
 
-- [`infra/modules/monitoring/log-analytics.bicep`](../../../infra/modules/monitoring/log-analytics.bicep)
-- [`infra/modules/monitoring/alerts-and-budgets.bicep`](../../../infra/modules/monitoring/alerts-and-budgets.bicep)
+- [`infra/modules/monitoring/log-analytics.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/monitoring/log-analytics.bicep)
+- [`infra/modules/monitoring/alerts-and-budgets.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/monitoring/alerts-and-budgets.bicep)
 
 ---
 

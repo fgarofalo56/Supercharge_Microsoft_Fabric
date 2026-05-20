@@ -217,7 +217,7 @@ Run this checklist on the **Friday before** your Monday shift starts. Catching a
 - [ ] Read most recent handoff doc from outgoing primary
 
 ### Runbook Bookmarks (browser folder "On-Call")
-- [ ] [Incident Response Template](../../runbooks/incident-response-template.md), [Runbooks Index](../../runbooks/README.md)
+- [ ] [Incident Response Template](../../runbooks/incident-response-template.md), [Runbooks Index](../../runbooks/index.md)
 - [ ] [Alerting & Data Activator](../alerting-data-activator.md), [Monitoring & Observability](../monitoring-observability.md)
 
 ### Logistics
@@ -385,7 +385,7 @@ flowchart LR
 
 ### Bicep snippet — Action Group with severity routing
 
-This pattern lives in the Wave 1 Bicep modules; full module: [`infra/modules/monitoring/action-group.bicep`](../../../infra/modules/monitoring/action-group.bicep) (when implemented).
+This pattern lives in the Wave 1 Bicep modules; full module: [`infra/modules/monitoring/action-group.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/monitoring/action-group.bicep) (when implemented).
 
 ```bicep
 @description('Action group for on-call paging — severity-routed')
@@ -660,7 +660,7 @@ gantt
 | Document | When to read |
 |----------|--------------|
 | [Incident Response Template](../../runbooks/incident-response-template.md) | Anchor — severity matrix, IC role, postmortem template |
-| [Runbooks Index](../../runbooks/README.md) | Catalog of failure-mode-specific runbooks |
+| [Runbooks Index](../../runbooks/index.md) | Catalog of failure-mode-specific runbooks |
 | [Capacity Throttling Response](../../runbooks/capacity-throttling-response.md) | Capacity SEV1/SEV2 |
 | [Pipeline Failure Triage](../../runbooks/pipeline-failure-triage.md) | Pipeline SEV2/SEV3 |
 | [Auth Failure Playbook](../../runbooks/auth-failure-playbook.md) | Workspace Identity / SP failures |
@@ -691,4 +691,4 @@ gantt
 
 ---
 
-[⬆️ Back to Top](#-on-call-rotation-handbook) | [📚 Best Practices Index](../README.md) | [🏠 Documentation Home](../../index.md)
+[⬆️ Back to Top](#-on-call-rotation-handbook) | [📚 Best Practices Index](../index.md) | [🏠 Documentation Home](../../index.md)

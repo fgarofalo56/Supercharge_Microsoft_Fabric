@@ -1,4 +1,4 @@
-[Home](../../docs/index.md) > [Tutorials](../) > SHIR & Data Gateways
+[Home](../../index.md) > [Tutorials](../) > SHIR & Data Gateways
 
 # 🔌 Tutorial 23: Self-Hosted Integration Runtime & Data Gateways
 
@@ -745,7 +745,7 @@ az keyvault set-policy --name "kv-fabric-gateway" `
 
 ## 📖 Additional Resources
 
-- [Networking Documentation](../NETWORKING.md)
+- [Networking Documentation](../../NETWORKING.md)
 - [Self-Hosted IR Documentation](https://learn.microsoft.com/en-us/azure/data-factory/create-self-hosted-integration-runtime)
 - [On-Premises Data Gateway](https://learn.microsoft.com/en-us/data-integration/gateway/service-gateway-onprem)
 
@@ -755,7 +755,7 @@ az keyvault set-policy --name "kv-fabric-gateway" `
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [⬅️ 22-Networking & Connectivity](../22-networking-connectivity/README.md) | [📖 Tutorials Index](../README.md) | [24-Snowflake to Fabric](../24-snowflake-to-fabric/README.md) ➡️ |
+| [⬅️ 22-Networking & Connectivity](../22-networking-connectivity/README.md) | [📖 Tutorials Index](../index.md) | [24-Snowflake to Fabric](../24-snowflake-to-fabric/README.md) ➡️ |
 
 ---
 
@@ -763,4 +763,4 @@ az keyvault set-policy --name "kv-fabric-gateway" `
 
 ---
 
-[⬆️ Back to Top](#-tutorial-23-self-hosted-integration-runtime--data-gateways) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-23-self-hosted-integration-runtime--data-gateways) | [📚 Tutorials](../) | [🏠 Home](../../index.md)

@@ -3,7 +3,7 @@
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
-> **🏠 [Home](../../README.md)** > **📖 [Tutorials](../README.md)** > **🔧 Data Pipelines**
+> **🏠 [Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > **📖 [Tutorials](../index.md)** > **🔧 Data Pipelines**
 
 ---
 
@@ -933,7 +933,7 @@ Continue to **[Tutorial 07: Governance & Purview](../07-governance-purview/READM
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [⬅️ 05-Direct Lake & Power BI](../05-direct-lake-powerbi/README.md) | [📖 Tutorials Index](../README.md) | [07-Governance & Purview](../07-governance-purview/README.md) ➡️ |
+| [⬅️ 05-Direct Lake & Power BI](../05-direct-lake-powerbi/README.md) | [📖 Tutorials Index](../index.md) | [07-Governance & Purview](../07-governance-purview/README.md) ➡️ |
 
 ---
 
@@ -941,4 +941,4 @@ Continue to **[Tutorial 07: Governance & Purview](../07-governance-purview/READM
 
 ---
 
-[⬆️ Back to Top](#-tutorial-06-data-pipelines) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-06-data-pipelines) | [📚 Tutorials](../) | [🏠 Home](../../index.md)

@@ -1,4 +1,4 @@
-[Home](../../docs/index.md) > [Tutorials](../) > Google BigQuery to Fabric Migration
+[Home](../../index.md) > [Tutorials](../) > Google BigQuery to Fabric Migration
 
 # 🔵 Tutorial 44: Google BigQuery → Microsoft Fabric Migration
 
@@ -169,7 +169,7 @@ flowchart LR
 | Scripts / procedures | T-SQL procedures | Dialect translation + `BEGIN/END` blocks |
 | Google Cloud Storage (GCS) | OneLake shortcut to GCS | **No data movement during coexistence** |
 | BigQuery ML | Fabric AutoML / notebooks | Re-train; export coefficients where needed |
-| Dataform | Fabric Notebooks + dbt | See [dbt feature doc](../../docs/features/dbt-fabric-integration.md) |
+| Dataform | Fabric Notebooks + dbt | See [dbt feature doc](../../features/dbt-fabric-integration.md) |
 | Cloud Composer (Airflow) | Fabric Pipelines OR Apache Airflow Job (preview) | Pipelines for most; Airflow Job to keep DAGs |
 | Looker | Power BI semantic models | LookML → Tabular model |
 | Looker Studio dashboards | Power BI reports | Manual recreation |
@@ -873,7 +873,7 @@ python 08_capacity_telemetry.py \
     --output ./capacity-telemetry.csv
 ```
 
-Read the [Capacity Planning best practices doc](../../docs/best-practices/capacity-planning-cost-optimization.md) for the full framework.
+Read the [Capacity Planning best practices doc](../../best-practices/capacity-planning-cost-optimization.md) for the full framework.
 
 > 💡 **Tip**: Fabric's capacity metrics app is free and shows hour-by-hour CU usage. After the first week, you'll know whether your initial F-SKU pick was right.
 
@@ -917,10 +917,10 @@ If `EXPORT DATA` was run and you want to abandon the migration, delete the GCS e
 - **[Tutorial 41 — Synapse → Fabric](../41-synapse-to-fabric/README.md)** — sister migration playbook (Microsoft-to-Microsoft)
 - **[Tutorial 42 — Databricks → Fabric](../42-databricks-to-fabric/README.md)** — for shops with Databricks alongside BigQuery
 - **[Tutorial 43 — Redshift → Fabric](../43-redshift-to-fabric/README.md)** — sister AWS-to-Azure playbook
-- **[Migration Patterns Best Practices](../../docs/best-practices/migration-patterns.md)** — cross-source patterns
-- **[fabric-cicd Deployment](../../docs/best-practices/fabric-cicd-deployment.md)** — automate the deployment of migrated artifacts
-- **[Capacity Planning](../../docs/best-practices/capacity-planning-cost-optimization.md)** — validate F-SKU choice with telemetry
-- **[dbt Fabric Integration](../../docs/features/dbt-fabric-integration.md)** — replacement for Dataform
+- **[Migration Patterns Best Practices](../../best-practices/migration-patterns.md)** — cross-source patterns
+- **[fabric-cicd Deployment](../../best-practices/fabric-cicd-deployment.md)** — automate the deployment of migrated artifacts
+- **[Capacity Planning](../../best-practices/capacity-planning-cost-optimization.md)** — validate F-SKU choice with telemetry
+- **[dbt Fabric Integration](../../features/dbt-fabric-integration.md)** — replacement for Dataform
 
 ---
 
@@ -938,7 +938,7 @@ If `EXPORT DATA` was run and you want to abandon the migration, delete the GCS e
 | `QUALIFY` translations missed | T-SQL has no QUALIFY clause | Wrap in CTE + `WHERE rn = 1` |
 | Shortcut returns 0 rows after working yesterday | GCS HMAC key rotated or expired | Refresh credentials; recreate connection |
 | BigQuery ML model metrics differ from Fabric AutoML | Different algorithms, different feature engineering defaults | Validate against business KPIs, not ML metrics |
-| F-SKU throttling after migration | Concurrent BI + Spark + Warehouse contention | Scale up; review [capacity throttling runbook](../../docs/runbooks/capacity-throttling-response.md) |
+| F-SKU throttling after migration | Concurrent BI + Spark + Warehouse contention | Scale up; review [capacity throttling runbook](../../runbooks/capacity-throttling-response.md) |
 | Looker dashboard expressions don't translate | LookML PDTs not in Fabric | Recreate PDT logic as Lakehouse table or DAX measure |
 | Cross-cloud query latency unacceptable | Shortcut reads pulling fresh from GCS each query | Materialize hot tables to managed Delta; rely on V-Order |
 | Time zone columns off by hours | BigQuery `TIMESTAMP` is always UTC; T-SQL `DATETIME2` is naive | Standardize on `DATETIMEOFFSET` or always-UTC convention |
@@ -975,19 +975,19 @@ If `EXPORT DATA` was run and you want to abandon the migration, delete the GCS e
 - [OneLake shortcuts (Google Cloud Storage)](https://learn.microsoft.com/fabric/onelake/onelake-shortcuts)
 - [Fabric Pipelines](https://learn.microsoft.com/fabric/data-factory/)
 - [Apache Airflow Job (preview)](https://learn.microsoft.com/fabric/data-factory/apache-airflow-jobs-concepts)
-- [Materialized Lake Views](../../docs/features/materialized-lake-views.md)
-- [Fabric AutoML](../../docs/features/automl-model-endpoints.md)
+- [Materialized Lake Views](../../features/materialized-lake-views.md)
+- [Fabric AutoML](../../features/automl-model-endpoints.md)
 
 ### Related Tutorials & Docs
 - [Tutorial 41 — Synapse → Fabric](../41-synapse-to-fabric/README.md) (Wave 4 anchor)
 - [Tutorial 42 — Databricks → Fabric](../42-databricks-to-fabric/README.md) (Wave 4)
 - [Tutorial 43 — Redshift → Fabric](../43-redshift-to-fabric/README.md) (Wave 4)
 - [Tutorial 24 — Snowflake → Fabric](../24-snowflake-to-fabric/README.md) (existing)
-- [Migration Patterns](../../docs/best-practices/migration-patterns.md)
-- [fabric-cicd Deployment](../../docs/best-practices/fabric-cicd-deployment.md)
-- [Capacity Planning](../../docs/best-practices/capacity-planning-cost-optimization.md)
-- [dbt Fabric Integration](../../docs/features/dbt-fabric-integration.md)
+- [Migration Patterns](../../best-practices/migration-patterns.md)
+- [fabric-cicd Deployment](../../best-practices/fabric-cicd-deployment.md)
+- [Capacity Planning](../../best-practices/capacity-planning-cost-optimization.md)
+- [dbt Fabric Integration](../../features/dbt-fabric-integration.md)
 
 ---
 
-[⬆️ Back to Top](#-tutorial-44-google-bigquery--microsoft-fabric-migration) | [📚 Tutorial Index](../README.md) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-44-google-bigquery--microsoft-fabric-migration) | [📚 Tutorial Index](../index.md) | [🏠 Home](../../index.md)

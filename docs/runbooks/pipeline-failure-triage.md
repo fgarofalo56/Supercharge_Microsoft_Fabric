@@ -1,4 +1,4 @@
-[Home](../index.md) > [Docs](..) > [Runbooks](README.md) > Pipeline Failure Triage
+[Home](../index.md) > [Docs](..) > [Runbooks](index.md) > Pipeline Failure Triage
 
 # 🛠️ Pipeline Failure Triage
 
@@ -548,4 +548,4 @@ flowchart TD
 
 ---
 
-[⬆️ Back to Top](#-pipeline-failure-triage) | [📚 Runbooks Index](README.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#-pipeline-failure-triage) | [📚 Runbooks Index](index.md) | [🏠 Home](../index.md)

@@ -1,4 +1,4 @@
-[Home](../docs/index.md) > POC Agenda
+[Home](../index.md) > POC Agenda
 
 # 🎰 3-Day POC Agenda
 
@@ -445,6 +445,6 @@ Upon completion, the team will have:
 
 ---
 
-[⬆️ Back to Top](#-3-day-poc-agenda) | [📚 POC Agenda](./) | [🏠 Home](../docs/index.md)
+[⬆️ Back to Top](#-3-day-poc-agenda) | [📚 POC Agenda](./) | [🏠 Home](../index.md)
 
 </div>

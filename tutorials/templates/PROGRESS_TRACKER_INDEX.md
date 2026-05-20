@@ -101,16 +101,16 @@ The following tutorial README files have been updated with the enhanced progress
 
 | Tutorial | Status | File |
 |----------|--------|------|
-| 00 - Environment Setup | ✅ Updated | [`00-environment-setup/README.md`](./00-environment-setup/README.md) |
-| 01 - Bronze Layer | ✅ Updated | [`01-bronze-layer/README.md`](./01-bronze-layer/README.md) |
-| 02 - Silver Layer | ✅ Updated | [`02-silver-layer/README.md`](./02-silver-layer/README.md) |
-| 03 - Gold Layer | ✅ Updated | [`03-gold-layer/README.md`](./03-gold-layer/README.md) |
-| 04 - Real-Time Analytics | ⏳ Template Available | [`04-real-time-analytics/README.md`](./04-real-time-analytics/README.md) |
-| 05 - Direct Lake & Power BI | ⏳ Template Available | [`05-direct-lake-powerbi/README.md`](./05-direct-lake-powerbi/README.md) |
-| 06 - Data Pipelines | ⏳ Template Available | [`06-data-pipelines/README.md`](./06-data-pipelines/README.md) |
-| 07 - Governance & Purview | ⏳ Template Available | [`07-governance-purview/README.md`](./07-governance-purview/README.md) |
-| 08 - Database Mirroring | ⏳ Template Available | [`08-database-mirroring/README.md`](./08-database-mirroring/README.md) |
-| 09 - Advanced AI/ML | ⏳ Template Available | [`09-advanced-ai-ml/README.md`](./09-advanced-ai-ml/README.md) |
+| 00 - Environment Setup | ✅ Updated | [`00-environment-setup/README.md`](../00-environment-setup/README.md) |
+| 01 - Bronze Layer | ✅ Updated | [`01-bronze-layer/README.md`](../01-bronze-layer/README.md) |
+| 02 - Silver Layer | ✅ Updated | [`02-silver-layer/README.md`](../02-silver-layer/README.md) |
+| 03 - Gold Layer | ✅ Updated | [`03-gold-layer/README.md`](../03-gold-layer/README.md) |
+| 04 - Real-Time Analytics | ⏳ Template Available | [`04-real-time-analytics/README.md`](../04-real-time-analytics/README.md) |
+| 05 - Direct Lake & Power BI | ⏳ Template Available | [`05-direct-lake-powerbi/README.md`](../05-direct-lake-powerbi/README.md) |
+| 06 - Data Pipelines | ⏳ Template Available | [`06-data-pipelines/README.md`](../06-data-pipelines/README.md) |
+| 07 - Governance & Purview | ⏳ Template Available | [`07-governance-purview/README.md`](../07-governance-purview/README.md) |
+| 08 - Database Mirroring | ⏳ Template Available | [`08-database-mirroring/README.md`](../08-database-mirroring/README.md) |
+| 09 - Advanced AI/ML | ⏳ Template Available | [`09-advanced-ai-ml/README.md`](../09-advanced-ai-ml/README.md) |
 
 ---
 

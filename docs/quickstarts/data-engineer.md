@@ -18,19 +18,19 @@ You care about data quality, pipeline reliability, idempotency, and keeping comp
 Follow these steps in order to get a working medallion pipeline running:
 
 1. **Set up your environment** - Create a workspace, provision Lakehouses for bronze/silver/gold, and configure access.
-   [:octicons-arrow-right-24: Tutorial 00: Environment Setup](../../tutorials/00-environment-setup/README.md)
+   [:octicons-arrow-right-24: Tutorial 00: Environment Setup](../tutorials/00-environment-setup/README.md)
 
 2. **Ingest your first Bronze table** - Run a PySpark notebook that lands raw data into the bronze Lakehouse with append-only semantics.
-   [:octicons-arrow-right-24: Tutorial 01: Bronze Layer](../../tutorials/01-bronze-layer/README.md)
+   [:octicons-arrow-right-24: Tutorial 01: Bronze Layer](../tutorials/01-bronze-layer/README.md)
 
 3. **Transform to Silver** - Cleanse, deduplicate, and enforce schemas to produce curated silver tables.
-   [:octicons-arrow-right-24: Tutorial 02: Silver Layer](../../tutorials/02-silver-layer/README.md)
+   [:octicons-arrow-right-24: Tutorial 02: Silver Layer](../tutorials/02-silver-layer/README.md)
 
 4. **Build Gold aggregations** - Create star-schema KPI tables that power Direct Lake reports.
-   [:octicons-arrow-right-24: Tutorial 03: Gold Layer](../../tutorials/03-gold-layer/README.md)
+   [:octicons-arrow-right-24: Tutorial 03: Gold Layer](../tutorials/03-gold-layer/README.md)
 
 5. **Create a Data Factory pipeline** - Orchestrate the bronze-to-gold flow with scheduling and error handling.
-   [:octicons-arrow-right-24: Tutorial 06: Data Pipelines](../../tutorials/06-data-pipelines/README.md)
+   [:octicons-arrow-right-24: Tutorial 06: Data Pipelines](../tutorials/06-data-pipelines/README.md)
 
 ---
 
@@ -39,7 +39,7 @@ Follow these steps in order to get a working medallion pipeline running:
 | Day | Focus | Resource |
 |-----|-------|----------|
 | 1 | Complete 30-minute path above | Tutorials 00-03, 06 |
-| 2 | Add real-time streaming ingestion | [Tutorial 04: Real-Time Analytics](../../tutorials/04-real-time-analytics/README.md) |
+| 2 | Add real-time streaming ingestion | [Tutorial 04: Real-Time Analytics](../tutorials/04-real-time-analytics/README.md) |
 | 3 | Set up Lakehouse schemas and shortcuts | [Lakehouse Setup Best Practices](../best-practices/07_LAKEHOUSE_SETUP.md) |
 | 4 | Implement data quality checks | [Testing Strategies](../best-practices/testing-strategies.md) |
 | 5 | Configure CI/CD for notebook deployment | [fabric-cicd Deployment](../best-practices/fabric-cicd-deployment.md) |

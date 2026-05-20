@@ -15,9 +15,9 @@
 
 **Get your Microsoft Fabric Casino Analytics POC running in under 15 minutes.**
 
-> **📌 This guide follows Path B (Quickstart)** — no Azure infrastructure deployment required. You only need a Fabric capacity and workspace. For the production-aligned Path A (Bicep + ADLS shortcuts), see [Tutorial 00 Step 4](../tutorials/00-environment-setup/README.md#-step-4-connect-external-storage-path-a-only).
+> **📌 This guide follows Path B (Quickstart)** — no Azure infrastructure deployment required. You only need a Fabric capacity and workspace. For the production-aligned Path A (Bicep + ADLS shortcuts), see [Tutorial 00 Step 4](tutorials/00-environment-setup/README.md#-step-4-connect-external-storage-path-a-only).
 
-> For the full walkthrough with screenshots and explanations, see [Tutorial 00: Environment Setup](../tutorials/00-environment-setup/README.md).
+> For the full walkthrough with screenshots and explanations, see [Tutorial 00: Environment Setup](tutorials/00-environment-setup/README.md).
 
 ---
 
@@ -188,11 +188,11 @@ You should see rows with columns like `machine_id`, `casino_id`, `event_type`, `
 
 | Task | Tutorial |
 |------|----------|
-| **Detailed environment setup** | [Tutorial 00: Environment Setup](../tutorials/00-environment-setup/README.md) |
-| **Build Silver Layer** | [Tutorial 02: Silver Layer](../tutorials/02-silver-layer/README.md) |
-| **Create Gold Aggregations** | [Tutorial 03: Gold Layer](../tutorials/03-gold-layer/README.md) |
-| **Set Up Real-Time Analytics** | [Tutorial 04: Real-Time Analytics](../tutorials/04-real-time-analytics/README.md) |
-| **Connect Power BI** | [Tutorial 05: Direct Lake & Power BI](../tutorials/05-direct-lake-powerbi/README.md) |
+| **Detailed environment setup** | [Tutorial 00: Environment Setup](tutorials/00-environment-setup/README.md) |
+| **Build Silver Layer** | [Tutorial 02: Silver Layer](tutorials/02-silver-layer/README.md) |
+| **Create Gold Aggregations** | [Tutorial 03: Gold Layer](tutorials/03-gold-layer/README.md) |
+| **Set Up Real-Time Analytics** | [Tutorial 04: Real-Time Analytics](tutorials/04-real-time-analytics/README.md) |
+| **Connect Power BI** | [Tutorial 05: Direct Lake & Power BI](tutorials/05-direct-lake-powerbi/README.md) |
 
 ---
 

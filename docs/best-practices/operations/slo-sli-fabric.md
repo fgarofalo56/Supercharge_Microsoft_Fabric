@@ -828,4 +828,4 @@ SLO consistently met (>99.9% of windows)?
 
 ---
 
-[⬆️ Back to Top](#-slosli-definitions-for-fabric-workspaces) | [📚 Best Practices Index](../README.md) | [📖 Runbooks Index](../../runbooks/README.md) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#-slosli-definitions-for-fabric-workspaces) | [📚 Best Practices Index](../index.md) | [📖 Runbooks Index](../../runbooks/index.md) | [🏠 Home](../../index.md)

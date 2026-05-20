@@ -520,9 +520,9 @@ Rural counties with higher SNAP participation rates may show lower SBA loan appr
 - [Federal Justice Analytics](federal-justice-analytics.md) — DOJ enforcement analytics patterns
 - [Antitrust Analytics](antitrust-analytics.md) — DOJ market concentration and enforcement analysis
 - [Transportation Safety Analytics](transportation-safety-analytics.md) — DOT/FAA safety analytics for cross-domain weather correlation
-- [NOAA Weather Notebooks](../../notebooks/bronze/12_bronze_noaa_storm_events.py) — Weather data for crop yield correlation
-- [EPA Air Quality Notebooks](../../notebooks/bronze/14_bronze_epa_air_quality.py) — Environmental data for runoff analysis
-- [SBA Lending Notebooks](../../notebooks/bronze/11_bronze_sba_loan_data.py) — Small business lending data for rural economy analysis
+- [NOAA Weather Notebooks](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/bronze/12_bronze_noaa_storm_events.py) — Weather data for crop yield correlation
+- [EPA Air Quality Notebooks](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/bronze/14_bronze_epa_air_quality.py) — Environmental data for runoff analysis
+- [SBA Lending Notebooks](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/bronze/11_bronze_sba_loan_data.py) — Small business lending data for rural economy analysis
 - [Medallion Architecture Deep Dive](../best-practices/medallion-architecture-deep-dive.md) — Bronze/Silver/Gold layering patterns
 - [Data Sharing and Federation](../best-practices/data-sharing-federation.md) — Cross-agency data sharing patterns
 

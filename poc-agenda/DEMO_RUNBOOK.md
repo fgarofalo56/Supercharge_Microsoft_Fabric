@@ -1,4 +1,4 @@
-[Home](../docs/index.md) > [POC Agenda](./) > Demo Runbook
+[Home](../index.md) > [POC Agenda](./) > Demo Runbook
 
 # 🎰 Casino/Gaming Microsoft Fabric POC - Demo Runbook
 
@@ -1345,6 +1345,6 @@ Remember: The best demos tell a story. Guide the audience through the data journ
 
 ---
 
-[⬆️ Back to Top](#-casinogaming-microsoft-fabric-poc---demo-runbook) | [📚 POC Agenda](./) | [🏠 Home](../docs/index.md)
+[⬆️ Back to Top](#-casinogaming-microsoft-fabric-poc---demo-runbook) | [📚 POC Agenda](./) | [🏠 Home](../index.md)
 
 </div>

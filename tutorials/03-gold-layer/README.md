@@ -3,7 +3,7 @@
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
-> **[🏠 Home](../../README.md)** > **[📖 Tutorials](../README.md)** > **🥇 Gold Layer**
+> **[🏠 Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > **[📖 Tutorials](../index.md)** > **🥇 Gold Layer**
 
 ---
 
@@ -1150,7 +1150,7 @@ erDiagram
 
 ### Date Dimension
 
-> **📦 Shortcut — use the packaged notebook.** Both `dim_date` and `dim_machine` are packaged in [notebooks/gold/00_gold_dim_tables.py](../../notebooks/gold/00_gold_dim_tables.py). Import that single notebook into your Fabric workspace and run it once; it creates both dimensions in `lh_gold.dbo.dim_date` and `lh_gold.dbo.dim_machine`. The code blocks below explain what the notebook does — you do not need to copy-paste them if you imported the notebook.
+> **📦 Shortcut — use the packaged notebook.** Both `dim_date` and `dim_machine` are packaged in [notebooks/gold/00_gold_dim_tables.py](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/00_gold_dim_tables.py). Import that single notebook into your Fabric workspace and run it once; it creates both dimensions in `lh_gold.dbo.dim_date` and `lh_gold.dbo.dim_machine`. The code blocks below explain what the notebook does — you do not need to copy-paste them if you imported the notebook.
 
 ```python
 # Create Date Dimension
@@ -1572,7 +1572,7 @@ Continue to **[Tutorial 04: Real-Time Analytics](../04-real-time-analytics/READM
 
 | ⬅️ Previous | ⬆️ Up | ➡️ Next |
 |-------------|-------|---------|
-| [02-Silver Layer](../02-silver-layer/README.md) | [Tutorials Index](../README.md) | [04-Real-Time Analytics](../04-real-time-analytics/README.md) |
+| [02-Silver Layer](../02-silver-layer/README.md) | [Tutorials Index](../index.md) | [04-Real-Time Analytics](../04-real-time-analytics/README.md) |
 
 ---
 
@@ -1588,4 +1588,4 @@ Continue to **[Tutorial 04: Real-Time Analytics](../04-real-time-analytics/READM
 
 ---
 
-[⬆️ Back to Top](#-tutorial-03-gold-layer) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-03-gold-layer) | [📚 Tutorials](../) | [🏠 Home](../../index.md)

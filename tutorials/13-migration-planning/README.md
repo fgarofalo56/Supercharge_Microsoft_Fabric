@@ -11,7 +11,7 @@
 
 </div>
 
-> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > 📋 **Migration Planning**
+> 🏠 **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > 📖 **[Tutorials](../index.md)** > 📋 **Migration Planning**
 
 ---
 
@@ -1189,8 +1189,8 @@ This comprehensive migration guide provides:
 
 | ⬅️ Previous | ⬆️ Up | ➡️ Next |
 |------------|------|--------|
-| [12-CI/CD DevOps](../12-cicd-devops/README.md) | [Tutorials Index](../README.md) | [Tutorials Home](../README.md) |
+| [12-CI/CD DevOps](../12-cicd-devops/README.md) | [Tutorials Index](../index.md) | [Tutorials Home](../index.md) |
 
 ---
 
-[⬆️ Back to Top](#-tutorial-13-enterprise-migration-planning--delivery) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-13-enterprise-migration-planning--delivery) | [📚 Tutorials](../) | [🏠 Home](../../index.md)

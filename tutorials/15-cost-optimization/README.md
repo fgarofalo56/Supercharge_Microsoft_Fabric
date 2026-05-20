@@ -1,4 +1,4 @@
-[Home](../../docs/index.md) > [Tutorials](../) > Tutorial 15: Cost Management & Capacity Optimization
+[Home](../../index.md) > [Tutorials](../) > Tutorial 15: Cost Management & Capacity Optimization
 
 # 💰 Tutorial 15: Cost Management & Capacity Optimization
 
@@ -1587,8 +1587,8 @@ Continue to **[Tutorial 16: Performance Tuning](../16-performance-tuning/README.
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [⬅️ 14-Security & Networking](../14-security-networking/README.md) | [📖 Tutorials Index](../README.md) | [16-Performance Tuning](../16-performance-tuning/README.md) ➡️ |
+| [⬅️ 14-Security & Networking](../14-security-networking/README.md) | [📖 Tutorials Index](../index.md) | [16-Performance Tuning](../16-performance-tuning/README.md) ➡️ |
 
 ---
 
-[⬆️ Back to Top](#-tutorial-15-cost-management--capacity-optimization) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-15-cost-management--capacity-optimization) | [📚 Tutorials](../) | [🏠 Home](../../index.md)

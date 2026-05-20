@@ -507,7 +507,7 @@ ORDER BY ppp.fraud_rate_pct DESC
 - [Best Practices: Medallion Architecture](../best-practices/medallion-architecture-deep-dive.md) - Bronze/Silver/Gold patterns used in lending pipelines
 - [Best Practices: Real-Time Intelligence](../features/real-time-intelligence.md) - Streaming fraud detection architecture
 - [Best Practices: Data Sharing & Federation](../best-practices/data-sharing-federation.md) - Cross-agency data federation patterns
-- [Tutorial 25: SBA Bronze Ingestion](../../tutorials/25-sba-bronze-ingestion.md) - Step-by-step SBA data loading
+- [Tutorial 25: SBA Bronze Ingestion](../tutorials/33-sba-small-business/README.md) - Step-by-step SBA data loading
 
 ---
 

@@ -695,7 +695,7 @@ Cohesive feature group describing player behavior. Consumed by churn, LTV, and m
 
 ### Notebook
 
-See [`notebooks/ml/feature_store/01_fs_player_engagement_compute.py`](../../notebooks/ml/feature_store/) (Phase 14 deliverable).
+See [`notebooks/ml/feature_store/01_fs_player_engagement_compute.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/feature_store/) (Phase 14 deliverable).
 
 ---
 
@@ -971,4 +971,4 @@ Before promoting any feature table to `lh_features` and tagging it `certified` i
 
 ---
 
-[⬆️ Back to Top](#-feature-store-on-onelake) | [📚 Best Practices Index](README.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#-feature-store-on-onelake) | [📚 Best Practices Index](index.md) | [🏠 Home](../index.md)

@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Docs](../..) > [Compliance Templates](.) > DSAR Runbook
+[Home](../index.md) > [Docs](../..) > [Compliance Templates](.) > DSAR Runbook
 
 # 📨 DSAR (Data Subject Access Request) Runbook
 
@@ -1784,4 +1784,4 @@ Findings feed into the next quarterly Privacy Office review and (where systemic)
 
 ---
 
-[⬆️ Back to Top](#-dsar-data-subject-access-request-runbook) | [📚 Compliance Templates](.) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#-dsar-data-subject-access-request-runbook) | [📚 Compliance Templates](.) | [🏠 Home](../index.md)

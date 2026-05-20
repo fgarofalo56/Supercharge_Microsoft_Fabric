@@ -1014,7 +1014,7 @@ gantt
 | Document                            | Description                               |
 | ----------------------------------- | ----------------------------------------- |
 | [Style Guide](./STYLE_GUIDE.md)     | Complete documentation style guide        |
-| [Contributing](../CONTRIBUTING.md)  | How to contribute to this project         |
+| [Contributing](CONTRIBUTING.md)  | How to contribute to this project         |
 | [README](index.md)              | Project overview and quick start          |
 
 ---

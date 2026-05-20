@@ -379,7 +379,7 @@ Use this checklist to assess your current maturity level and identify gaps.
 
 ## Related Documentation
 
-- [Data Mesh](../features/data-mesh.md) — Fabric's Data Mesh capabilities
+- [Data Mesh](../features/data-mesh-enterprise-patterns.md) — Fabric's Data Mesh capabilities
 - [OneLake Security](../features/onelake-security.md) — Table and column-level security
 - [OneLake Catalog](../features/onelake-catalog.md) — Data product discovery
 - [Multi-Tenant Workspace Architecture](../best-practices/multi-tenant-workspace-architecture.md) — Workspace topology patterns

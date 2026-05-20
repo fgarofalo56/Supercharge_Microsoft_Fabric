@@ -214,24 +214,24 @@ graph TB
 
 | Resource | Bicep Module | Description |
 |:---------|:-------------|:------------|
-| Fabric Capacity | [`infra/modules/fabric/fabric-capacity.bicep`](../../infra/modules/fabric/fabric-capacity.bicep) | Compute for RTI workloads |
-| Eventhouse | [`infra/modules/fabric/fabric-eventhouse.bicep`](../../infra/modules/fabric/fabric-eventhouse.bicep) | KQL analytics engine |
-| Eventstream | [`infra/modules/fabric/fabric-eventstream.bicep`](../../infra/modules/fabric/fabric-eventstream.bicep) | Event ingestion routing |
-| Alerts & Budgets | [`infra/modules/monitoring/alerts-and-budgets.bicep`](../../infra/modules/monitoring/alerts-and-budgets.bicep) | CU alerts and cost monitoring |
-| Action Groups | [`infra/modules/monitoring/action-groups.bicep`](../../infra/modules/monitoring/action-groups.bicep) | Alert notification routing |
+| Fabric Capacity | [`infra/modules/fabric/fabric-capacity.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/fabric/fabric-capacity.bicep) | Compute for RTI workloads |
+| Eventhouse | [`infra/modules/fabric/fabric-eventhouse.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/fabric/fabric-eventhouse.bicep) | KQL analytics engine |
+| Eventstream | [`infra/modules/fabric/fabric-eventstream.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/fabric/fabric-eventstream.bicep) | Event ingestion routing |
+| Alerts & Budgets | [`infra/modules/monitoring/alerts-and-budgets.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/monitoring/alerts-and-budgets.bicep) | CU alerts and cost monitoring |
+| Action Groups | [`infra/modules/monitoring/action-groups.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/monitoring/action-groups.bicep) | Alert notification routing |
 
 ### Step-by-Step Tutorials
 
 | Step | Tutorial | What You'll Build |
 |:-----|:---------|:-----------------|
-| 1 | [Environment Setup](../../tutorials/00-environment-setup/README.md) | Provision capacity and workspaces |
-| 2 | [Real-Time Analytics](../../tutorials/04-real-time-analytics/README.md) | Eventstream → Eventhouse → Dashboard |
-| 3 | [Multi-Source Streaming](../../tutorials/26-multi-source-streaming/README.md) | Ingest from multiple event sources |
-| 4 | [Bronze Layer](../../tutorials/01-bronze-layer/README.md) | Archive streaming data to lakehouse |
-| 5 | [Silver Layer](../../tutorials/02-silver-layer/README.md) | Enrich and deduplicate event data |
-| 6 | [Gold Layer](../../tutorials/03-gold-layer/README.md) | Build aggregated KPIs |
-| 7 | [Direct Lake Power BI](../../tutorials/05-direct-lake-powerbi/README.md) | Historical BI over archived events |
-| 8 | [Monitoring & Alerting](../../tutorials/17-monitoring-alerting/README.md) | Operational monitoring and alerts |
+| 1 | [Environment Setup](../tutorials/00-environment-setup/README.md) | Provision capacity and workspaces |
+| 2 | [Real-Time Analytics](../tutorials/04-real-time-analytics/README.md) | Eventstream → Eventhouse → Dashboard |
+| 3 | [Multi-Source Streaming](../tutorials/26-multi-source-streaming/README.md) | Ingest from multiple event sources |
+| 4 | [Bronze Layer](../tutorials/01-bronze-layer/README.md) | Archive streaming data to lakehouse |
+| 5 | [Silver Layer](../tutorials/02-silver-layer/README.md) | Enrich and deduplicate event data |
+| 6 | [Gold Layer](../tutorials/03-gold-layer/README.md) | Build aggregated KPIs |
+| 7 | [Direct Lake Power BI](../tutorials/05-direct-lake-powerbi/README.md) | Historical BI over archived events |
+| 8 | [Monitoring & Alerting](../tutorials/17-monitoring-alerting/README.md) | Operational monitoring and alerts |
 
 ### Key Feature Documentation
 
@@ -258,8 +258,8 @@ This reference architecture directly maps to the casino floor monitoring scenari
 | SAR pattern detection | KQL materialized view | Detect structuring patterns ($8K–$9.9K) |
 
 See notebooks:
-- [`notebooks/bronze/01_bronze_slot_telemetry.py`](../../notebooks/bronze/01_bronze_slot_telemetry.py) — Real-time slot ingestion
-- [`notebooks/gold/01_gold_slot_performance.py`](../../notebooks/gold/01_gold_slot_performance.py) — Slot KPI aggregations
+- [`notebooks/bronze/01_bronze_slot_telemetry.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/bronze/01_bronze_slot_telemetry.py) — Real-time slot ingestion
+- [`notebooks/gold/01_gold_slot_performance.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/01_gold_slot_performance.py) — Slot KPI aggregations
 
 ---
 

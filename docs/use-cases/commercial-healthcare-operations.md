@@ -539,4 +539,4 @@ ROI: ~36× the platform cost in year 1, before counting strategic benefits.
 
 ---
 
-[⬆️ Back to Top](#commercial-healthcare-operations-analytics) | [📚 Use Cases Index](README.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#commercial-healthcare-operations-analytics) | [📚 Use Cases Index](index.md) | [🏠 Home](../index.md)

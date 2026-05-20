@@ -3,7 +3,7 @@
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
-> **🏠 [Home](../../README.md)** > **📖 [Tutorials](../README.md)** > **🤖 Advanced AI/ML**
+> **🏠 [Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > **📖 [Tutorials](../index.md)** > **🤖 Advanced AI/ML**
 
 ---
 
@@ -1257,7 +1257,7 @@ You have now completed all **10 tutorials** in the Microsoft Fabric Casino/Gamin
 | 01 | [Bronze Layer](../01-bronze-layer/README.md) | Raw Data Ingestion | ✅ Complete |
 | 02 | [Silver Layer](../02-silver-layer/README.md) | Data Cleansing & Validation | ✅ Complete |
 | 03 | [Gold Layer](../03-gold-layer/README.md) | Business Aggregations | ✅ Complete |
-| 04 | [Real-Time Analytics](../04-real-time/README.md) | Streaming with Eventstream | ✅ Complete |
+| 04 | [Real-Time Analytics](../04-real-time-analytics/README.md) | Streaming with Eventstream | ✅ Complete |
 | 05 | [Direct Lake & Power BI](../05-direct-lake-powerbi/README.md) | Semantic Models & Reports | ✅ Complete |
 | 06 | [Data Pipelines](../06-data-pipelines/README.md) | Orchestration with Data Factory | ✅ Complete |
 | 07 | [Governance & Purview](../07-governance-purview/README.md) | Data Governance & Lineage | ✅ Complete |
@@ -1321,7 +1321,7 @@ Or review the **[POC Agenda](../poc-agenda/)** for workshop preparation, present
 
 | ⬅️ Previous | ⬆️ Up | ➡️ Next |
 |------------|------|--------|
-| [08-Database Mirroring](../08-database-mirroring/README.md) | [Tutorials Index](../README.md) | [10-Teradata Migration](../10-teradata-migration/README.md) |
+| [08-Database Mirroring](../08-database-mirroring/README.md) | [Tutorials Index](../index.md) | [10-Teradata Migration](../10-teradata-migration/README.md) |
 
 ---
 
@@ -1337,4 +1337,4 @@ Thank you for completing this comprehensive Microsoft Fabric learning journey. W
 
 ---
 
-[⬆️ Back to Top](#-tutorial-09-advanced-aiml) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-09-advanced-aiml) | [📚 Tutorials](../) | [🏠 Home](../../index.md)

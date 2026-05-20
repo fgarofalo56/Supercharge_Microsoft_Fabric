@@ -151,7 +151,7 @@ Organizations migrating to Fabric typically come from one of four starting point
 
 **From Snowflake:** Requires the most architectural change since Snowflake's proprietary storage format doesn't directly translate to Delta Parquet. Data must be exported and re-ingested. SQL stored procedures need rewriting from Snowflake's JavaScript UDFs to Fabric's T-SQL or Spark equivalents. Snowpipe integrations need replacement with Fabric Eventstreams or Pipelines.
 
-**From on-premises (SQL Server, Oracle, Teradata):** Fabric provides Mirroring for near-real-time replication from SQL Server and Azure SQL Database. For other sources, use Data Factory pipelines with on-premises data gateway. The [migration tutorial](../tutorials/10_migration_teradata_fabric.md) covers Teradata-specific patterns.
+**From on-premises (SQL Server, Oracle, Teradata):** Fabric provides Mirroring for near-real-time replication from SQL Server and Azure SQL Database. For other sources, use Data Factory pipelines with on-premises data gateway. The [migration tutorial](../tutorials/10-teradata-migration/README.md) covers Teradata-specific patterns.
 
 ### Migration Risk Assessment
 

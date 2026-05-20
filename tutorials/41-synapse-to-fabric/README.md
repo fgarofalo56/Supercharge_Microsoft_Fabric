@@ -1,4 +1,4 @@
-[Home](../../docs/index.md) > [Tutorials](../) > Synapse Analytics to Fabric Migration
+[Home](../../index.md) > [Tutorials](../) > Synapse Analytics to Fabric Migration
 
 # 🔷 Tutorial 41: Azure Synapse Analytics → Microsoft Fabric Migration
 
@@ -478,7 +478,7 @@ az synapse sql pool delete --workspace-name $SYN_WS --name $POOL --yes
 - [ ] All Synapse Pipelines converted; Mapping Data Flows recreated in Dataflow Gen2
 - [ ] Power BI semantic models repointed to Fabric (Direct Lake)
 - [ ] Apps, APIs, integrations cut over
-- [ ] F-SKU sized correctly (CU usage in steady-state band, see [SLO/SLI doc](../../docs/best-practices/operations/slo-sli-fabric.md))
+- [ ] F-SKU sized correctly (CU usage in steady-state band, see [SLO/SLI doc](../../best-practices/operations/slo-sli-fabric.md))
 - [ ] Synapse paused (or deleted post-grace-period)
 - [ ] Cutover postmortem published
 - [ ] Cost reduction realized vs prior Synapse + ADLS bill
@@ -497,9 +497,9 @@ If your assessment ran against a real Synapse workspace, the read-only queries l
 
 - **[Tutorial 42 — Databricks → Fabric](../42-databricks-to-fabric/README.md)** — for shops with Databricks alongside Synapse
 - **[Tutorial 45 — On-Prem SSAS/SSIS/SSRS → Fabric](../45-onprem-ssas-ssis-ssrs/README.md)** — for legacy SQL Server BI stacks
-- **[Migration Patterns Best Practices](../../docs/best-practices/migration-patterns.md)** — cross-source patterns
-- **[fabric-cicd Deployment](../../docs/best-practices/fabric-cicd-deployment.md)** — automate the deployment of migrated artifacts
-- **[SLO/SLI for Fabric](../../docs/best-practices/operations/slo-sli-fabric.md)** — set service objectives for the new workloads
+- **[Migration Patterns Best Practices](../../best-practices/migration-patterns.md)** — cross-source patterns
+- **[fabric-cicd Deployment](../../best-practices/fabric-cicd-deployment.md)** — automate the deployment of migrated artifacts
+- **[SLO/SLI for Fabric](../../best-practices/operations/slo-sli-fabric.md)** — set service objectives for the new workloads
 
 ---
 
@@ -513,7 +513,7 @@ If your assessment ran against a real Synapse workspace, the read-only queries l
 | OneLake shortcut shows 0 rows | Permissions on ADLS Gen2 | Grant Storage Blob Data Reader to Workspace Identity |
 | Pipeline activity "not supported" | Mapping Data Flow | Recreate as Dataflow Gen2 in Power Query |
 | Aggregation off by 0.01% | float vs decimal precision | Cast aggregation column to decimal explicitly |
-| F-SKU throttles after migration | Workload concurrency higher than Synapse | Scale F-SKU; use [capacity-throttling runbook](../../docs/runbooks/capacity-throttling-response.md) |
+| F-SKU throttles after migration | Workload concurrency higher than Synapse | Scale F-SKU; use [capacity-throttling runbook](../../runbooks/capacity-throttling-response.md) |
 | Power BI Direct Lake fails to refresh | Schema drift in Warehouse | Refresh metadata; see workspace monitoring |
 
 ---
@@ -543,10 +543,10 @@ If your assessment ran against a real Synapse workspace, the read-only queries l
 - [Tutorial 24 — Snowflake → Fabric](../24-snowflake-to-fabric/README.md) (existing)
 - [Tutorial 10 — Teradata → Fabric](../10-teradata-migration/README.md) (existing)
 - [Tutorial 42 — Databricks → Fabric](../42-databricks-to-fabric/README.md) (Wave 4)
-- [Migration Patterns](../../docs/best-practices/migration-patterns.md)
-- [fabric-cicd Deployment](../../docs/best-practices/fabric-cicd-deployment.md)
-- [Capacity Planning](../../docs/best-practices/capacity-planning-cost-optimization.md)
+- [Migration Patterns](../../best-practices/migration-patterns.md)
+- [fabric-cicd Deployment](../../best-practices/fabric-cicd-deployment.md)
+- [Capacity Planning](../../best-practices/capacity-planning-cost-optimization.md)
 
 ---
 
-[⬆️ Back to Top](#-tutorial-41-azure-synapse-analytics--microsoft-fabric-migration) | [📚 Tutorial Index](../README.md) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-41-azure-synapse-analytics--microsoft-fabric-migration) | [📚 Tutorial Index](../index.md) | [🏠 Home](../../index.md)

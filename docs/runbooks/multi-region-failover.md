@@ -1,4 +1,4 @@
-[Home](../index.md) > [Docs](..) > [Runbooks](README.md) > Multi-Region Failover
+[Home](../index.md) > [Docs](..) > [Runbooks](index.md) > Multi-Region Failover
 
 # 🌐 Multi-Region Failover Runbook
 
@@ -750,7 +750,7 @@ FabricDeploymentLogs
 
 ### Bicep Reference (DR Capacity)
 
-The DR capacity uses the same module as production — see [`infra/modules/fabric/fabric-capacity.bicep`](../../infra/modules/fabric/fabric-capacity.bicep). Set `skuName: 'F32'` and add `tags: { Environment: 'DR', AutoPause: 'true' }` to keep cost low until activation.
+The DR capacity uses the same module as production — see [`infra/modules/fabric/fabric-capacity.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/fabric/fabric-capacity.bicep). Set `skuName: 'F32'` and add `tags: { Environment: 'DR', AutoPause: 'true' }` to keep cost low until activation.
 
 ---
 
@@ -861,4 +861,4 @@ sequenceDiagram
 
 ---
 
-[⬆️ Back to Top](#-multi-region-failover-runbook) | [📚 Runbooks Index](README.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#-multi-region-failover-runbook) | [📚 Runbooks Index](index.md) | [🏠 Home](../index.md)

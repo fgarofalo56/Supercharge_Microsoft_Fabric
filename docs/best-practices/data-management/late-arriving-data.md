@@ -738,7 +738,7 @@ Bug-induced reprocessing differs from corrections: the *source data was correct 
 
 > **Why Bronze-as-source-of-truth matters:** Steps 4-6 are only safe because Bronze was never touched. If you'd been editing Bronze in place, the bug would have *also* corrupted your replay source, and recovery would require a backup restore.
 
-See the [data-quality-incident runbook](../../runbooks/README.md) for the incident-response wrapper around this procedure.
+See the [data-quality-incident runbook](../../runbooks/index.md) for the incident-response wrapper around this procedure.
 
 ---
 
@@ -956,7 +956,7 @@ Before declaring a pipeline "production" with respect to late-arrival handling:
 - [Outbound Access Protection](../outbound-access-protection.md)
 
 ### Related Wave 1 + Wave 2 Docs
-- [Operational Runbooks](../../runbooks/README.md) — incident-response wrapper for replay-after-bug
+- [Operational Runbooks](../../runbooks/index.md) — incident-response wrapper for replay-after-bug
 - [Feature Store on OneLake](../feature-store-onelake.md) — feature freshness & late-data handling for ML
 - [Responsible AI Framework](../responsible-ai-framework.md) — restatement effects on training data integrity
 

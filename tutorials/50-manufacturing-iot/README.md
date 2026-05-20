@@ -250,7 +250,7 @@ For sub-minute anomaly detection, configure Eventstream + Eventhouse:
 1. **Create Eventstream** connected to Azure IoT Hub
 2. **Route to Eventhouse** for KQL anomaly queries
 3. **Create KQL Queryset** with the vibration anomaly query from the
-   [use case doc](../../docs/use-cases/manufacturing-predictive-maintenance.md)
+   [use case doc](../../use-cases/manufacturing-predictive-maintenance.md)
 4. **Configure Data Activator** to alert when anomaly count > 5 in 10 minutes
 
 ---
@@ -308,10 +308,10 @@ Risk = (Vibration x 0.35) + (Temperature x 0.25)
 
 ## Related Resources
 
-- [Use Case: Manufacturing Predictive Maintenance](../../docs/use-cases/manufacturing-predictive-maintenance.md)
-- [Digital Twin Builder](../../docs/features/digital-twin-builder.md)
-- [Real-Time Intelligence](../../docs/features/real-time-intelligence.md)
-- [Network Security](../../docs/best-practices/network-security.md)
+- [Use Case: Manufacturing Predictive Maintenance](../../use-cases/manufacturing-predictive-maintenance.md)
+- [Digital Twin Builder](../../features/digital-twin-builder.md)
+- [Real-Time Intelligence](../../features/real-time-intelligence.md)
+- [Network Security](../../best-practices/network-security.md)
 - [Tutorial 04: Real-Time Analytics](../04-real-time-analytics/README.md)
 
 ---

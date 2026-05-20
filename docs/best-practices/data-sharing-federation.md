@@ -961,4 +961,4 @@ def check_shortcut_health(workspace_id: str, lakehouse_id: str, headers: dict) -
 
 ---
 
-[Back to Best Practices Index](./README.md) | [Back to Documentation](../index.md)
+[Back to Best Practices Index](./index.md) | [Back to Documentation](../index.md)

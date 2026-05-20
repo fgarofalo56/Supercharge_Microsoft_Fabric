@@ -3,7 +3,7 @@
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
-> **🏠 [Home](../../README.md)** > **📖 [Tutorials](../README.md)** > **🥉 Bronze Layer**
+> **🏠 [Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > **📖 [Tutorials](../index.md)** > **🥉 Bronze Layer**
 
 ---
 
@@ -927,7 +927,7 @@ Continue to **[Tutorial 02: Silver Layer](../02-silver-layer/README.md)** to lea
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [⬅️ 00-Environment Setup](../00-environment-setup/README.md) | [📖 Tutorials Index](../README.md) | [02-Silver Layer](../02-silver-layer/README.md) ➡️ |
+| [⬅️ 00-Environment Setup](../00-environment-setup/README.md) | [📖 Tutorials Index](../index.md) | [02-Silver Layer](../02-silver-layer/README.md) ➡️ |
 
 ---
 
@@ -935,4 +935,4 @@ Continue to **[Tutorial 02: Silver Layer](../02-silver-layer/README.md)** to lea
 
 ---
 
-[⬆️ Back to Top](#-tutorial-01-bronze-layer) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-01-bronze-layer) | [📚 Tutorials](../) | [🏠 Home](../../index.md)

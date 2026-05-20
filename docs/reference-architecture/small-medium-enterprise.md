@@ -178,23 +178,23 @@ For small-medium deployments, a simplified network posture balances security wit
 
 | Resource | Bicep Module | Description |
 |:---------|:-------------|:------------|
-| Fabric Capacity | [`infra/modules/fabric/fabric-capacity.bicep`](../../infra/modules/fabric/fabric-capacity.bicep) | Deploy F16–F128 capacity |
-| Storage Account | [`infra/modules/storage/storage-account.bicep`](../../infra/modules/storage/storage-account.bicep) | Landing zone for file ingestion |
-| Log Analytics | [`infra/modules/monitoring/log-analytics-workspace.bicep`](../../infra/modules/monitoring/log-analytics-workspace.bicep) | Monitoring and diagnostics |
-| Alerts & Budgets | [`infra/modules/monitoring/alerts-and-budgets.bicep`](../../infra/modules/monitoring/alerts-and-budgets.bicep) | Cost alerts and CU budget |
+| Fabric Capacity | [`infra/modules/fabric/fabric-capacity.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/fabric/fabric-capacity.bicep) | Deploy F16–F128 capacity |
+| Storage Account | [`infra/modules/storage/storage-account.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/storage/storage-account.bicep) | Landing zone for file ingestion |
+| Log Analytics | [`infra/modules/monitoring/log-analytics-workspace.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/monitoring/log-analytics-workspace.bicep) | Monitoring and diagnostics |
+| Alerts & Budgets | [`infra/modules/monitoring/alerts-and-budgets.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/monitoring/alerts-and-budgets.bicep) | Cost alerts and CU budget |
 
 ### Step-by-Step Tutorials
 
 | Step | Tutorial | What You'll Build |
 |:-----|:---------|:-----------------|
-| 1 | [Environment Setup](../../tutorials/00-environment-setup/README.md) | Provision capacity, create workspaces |
-| 2 | [Bronze Layer](../../tutorials/01-bronze-layer/README.md) | Ingest raw data into Bronze lakehouse |
-| 3 | [Silver Layer](../../tutorials/02-silver-layer/README.md) | Cleanse and validate data |
-| 4 | [Gold Layer](../../tutorials/03-gold-layer/README.md) | Build business KPIs and star schema |
-| 5 | [Direct Lake Power BI](../../tutorials/05-direct-lake-powerbi/README.md) | Connect Power BI via Direct Lake |
-| 6 | [Data Pipelines](../../tutorials/06-data-pipelines/README.md) | Orchestrate end-to-end data flow |
-| 7 | [Governance](../../tutorials/07-governance-purview/README.md) | Set up Purview and sensitivity labels |
-| 8 | [CI/CD](../../tutorials/12-cicd-devops/README.md) | Implement deployment pipelines |
+| 1 | [Environment Setup](../tutorials/00-environment-setup/README.md) | Provision capacity, create workspaces |
+| 2 | [Bronze Layer](../tutorials/01-bronze-layer/README.md) | Ingest raw data into Bronze lakehouse |
+| 3 | [Silver Layer](../tutorials/02-silver-layer/README.md) | Cleanse and validate data |
+| 4 | [Gold Layer](../tutorials/03-gold-layer/README.md) | Build business KPIs and star schema |
+| 5 | [Direct Lake Power BI](../tutorials/05-direct-lake-powerbi/README.md) | Connect Power BI via Direct Lake |
+| 6 | [Data Pipelines](../tutorials/06-data-pipelines/README.md) | Orchestrate end-to-end data flow |
+| 7 | [Governance](../tutorials/07-governance-purview/README.md) | Set up Purview and sensitivity labels |
+| 8 | [CI/CD](../tutorials/12-cicd-devops/README.md) | Implement deployment pipelines |
 
 ### Deployment Commands
 

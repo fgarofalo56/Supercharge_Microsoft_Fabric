@@ -21,7 +21,7 @@ Follow these steps to establish baseline security controls:
    [:octicons-arrow-right-24: OneLake Security](../features/onelake-security.md)
 
 2. **Configure data governance with Purview** - Set up data classification, sensitivity labels, and lineage tracking.
-   [:octicons-arrow-right-24: Tutorial 07: Governance & Purview](../../tutorials/07-governance-purview/README.md)
+   [:octicons-arrow-right-24: Tutorial 07: Governance & Purview](../tutorials/07-governance-purview/README.md)
 
 3. **Enable SQL audit logging** - Configure audit logs to capture all data access and administrative actions for compliance.
    [:octicons-arrow-right-24: SQL Audit Logs Compliance](../best-practices/sql-audit-logs-compliance.md)

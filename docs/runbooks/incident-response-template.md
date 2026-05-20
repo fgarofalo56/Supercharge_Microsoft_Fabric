@@ -1,4 +1,4 @@
-[Home](../index.md) > [Docs](..) > [Runbooks](README.md) > Incident Response Template
+[Home](../index.md) > [Docs](..) > [Runbooks](index.md) > Incident Response Template
 
 # 🚨 Incident Response Template
 
@@ -515,4 +515,4 @@ spark.sql("RESTORE TABLE gold.fact_daily_revenue TO TIMESTAMP AS OF '2026-04-27 
 
 ---
 
-[⬆️ Back to Top](#-incident-response-template) | [📚 Runbooks Index](README.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#-incident-response-template) | [📚 Runbooks Index](index.md) | [🏠 Home](../index.md)

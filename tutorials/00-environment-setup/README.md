@@ -3,7 +3,7 @@
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
-> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > ⚙️ **Environment Setup**
+> 🏠 **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > 📖 **[Tutorials](../index.md)** > ⚙️ **Environment Setup**
 
 ---
 
@@ -17,7 +17,7 @@
 
 ---
 
-> For the 5-minute version, see [docs/QUICK_START.md](../../docs/QUICK_START.md).
+> For the 5-minute version, see [docs/QUICK_START.md](../../QUICK_START.md).
 
 ## 📖 Overview
 
@@ -78,7 +78,7 @@ Your Fabric capacity must be **Running** before any notebooks or data processing
 | **Running** | Ready to use | Proceed to Step 2 |
 | **Paused** | Manually paused to save cost | Click **Resume** — takes 1-2 minutes |
 | **Deallocated** | Stopped by Azure | Click **Resume** — may take 2-3 minutes |
-| **Not found** | No capacity provisioned | Deploy via Bicep (see [QUICK_START.md](../../docs/QUICK_START.md) Step 2) or start a trial |
+| **Not found** | No capacity provisioned | Deploy via Bicep (see [QUICK_START.md](../../QUICK_START.md) Step 2) or start a trial |
 
 ### Verify from the Fabric portal
 
@@ -365,8 +365,8 @@ Your environment is ready for data ingestion.
 
 | Previous | Up | Next |
 |----------|-----|------|
-| N/A — this is the first tutorial | [Tutorials Index](../README.md) | [Tutorial 01: Bronze Layer](../01-bronze-layer/README.md) |
+| N/A — this is the first tutorial | [Tutorials Index](../index.md) | [Tutorial 01: Bronze Layer](../01-bronze-layer/README.md) |
 
 ---
 
-[⬆️ Back to Top](#-tutorial-00-environment-setup) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-00-environment-setup) | [📚 Tutorials](../) | [🏠 Home](../../index.md)

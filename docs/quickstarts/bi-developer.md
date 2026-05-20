@@ -18,10 +18,10 @@ You care about user experience, query performance, data freshness, and visual cl
 Follow these steps to get your first Direct Lake report running:
 
 1. **Verify your environment** - Make sure your workspace has a Fabric capacity and that gold-layer Lakehouse tables are available.
-   [:octicons-arrow-right-24: Tutorial 00: Environment Setup](../../tutorials/00-environment-setup/README.md)
+   [:octicons-arrow-right-24: Tutorial 00: Environment Setup](../tutorials/00-environment-setup/README.md)
 
 2. **Connect Direct Lake to gold tables** - Create a semantic model that reads directly from Delta tables without import or DirectQuery overhead.
-   [:octicons-arrow-right-24: Tutorial 05: Direct Lake & Power BI](../../tutorials/05-direct-lake-powerbi/README.md)
+   [:octicons-arrow-right-24: Tutorial 05: Direct Lake & Power BI](../tutorials/05-direct-lake-powerbi/README.md)
 
 3. **Explore the Power BI best practices guide** - Understand naming conventions, measure organization, and relationship modeling for Fabric.
    [:octicons-arrow-right-24: Power BI Best Practices](../best-practices/power-bi-best-practices.md)

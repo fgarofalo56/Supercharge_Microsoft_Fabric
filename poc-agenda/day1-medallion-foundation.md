@@ -1,4 +1,4 @@
-[Home](../docs/index.md) > [POC Agenda](./) > Day 1: Medallion Foundation
+[Home](../index.md) > [POC Agenda](./) > Day 1: Medallion Foundation
 
 # 📅 Day 1: Medallion Foundation
 
@@ -680,6 +680,6 @@ Overall POC: ███░░░░░░░ 33% Complete
 
 ---
 
-[⬆️ Back to Top](#-day-1-medallion-foundation) | [📚 POC Agenda](./) | [🏠 Home](../docs/index.md)
+[⬆️ Back to Top](#-day-1-medallion-foundation) | [📚 POC Agenda](./) | [🏠 Home](../index.md)
 
 </div>

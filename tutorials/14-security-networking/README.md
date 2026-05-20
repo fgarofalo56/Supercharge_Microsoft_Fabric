@@ -11,7 +11,7 @@
 
 </div>
 
-> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > 🔐 **Security & Network Configuration**
+> 🏠 **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > 📖 **[Tutorials](../index.md)** > 🔐 **Security & Network Configuration**
 
 ---
 
@@ -192,7 +192,7 @@
 | Navigation | |
 |---|---|
 | **Previous** | [13-Migration Planning](../13-migration-planning/README.md) |
-| **Next** | [15-Cost Management](../15-cost-management/README.md) |
+| **Next** | [15-Cost Management](../15-cost-optimization/README.md) |
 
 ---
 
@@ -2298,7 +2298,7 @@ Your Fabric environment now meets enterprise security standards for the regulate
 
 ## ➡️ Next Steps
 
-Continue to **[Tutorial 15: Cost Management](../15-cost-management/README.md)** to learn how to monitor, optimize, and control Microsoft Fabric costs.
+Continue to **[Tutorial 15: Cost Management](../15-cost-optimization/README.md)** to learn how to monitor, optimize, and control Microsoft Fabric costs.
 
 ---
 
@@ -2321,7 +2321,7 @@ Continue to **[Tutorial 15: Cost Management](../15-cost-management/README.md)** 
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [⬅️ 13-Migration Planning](../13-migration-planning/README.md) | [📖 Tutorials Index](../README.md) | [15-Cost Optimization](../15-cost-optimization/README.md) ➡️ |
+| [⬅️ 13-Migration Planning](../13-migration-planning/README.md) | [📖 Tutorials Index](../index.md) | [15-Cost Optimization](../15-cost-optimization/README.md) ➡️ |
 
 ---
 
@@ -2329,4 +2329,4 @@ Continue to **[Tutorial 15: Cost Management](../15-cost-management/README.md)** 
 
 ---
 
-[⬆️ Back to Top](#-tutorial-14-security--network-configuration) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-14-security--network-configuration) | [📚 Tutorials](../) | [🏠 Home](../../index.md)

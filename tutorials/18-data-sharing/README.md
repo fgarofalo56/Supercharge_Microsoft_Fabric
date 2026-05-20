@@ -1,4 +1,4 @@
-[Home](../../docs/index.md) > [Tutorials](../) > Data Sharing & OneLake Shortcuts
+[Home](../../index.md) > [Tutorials](../) > Data Sharing & OneLake Shortcuts
 
 # 🔗 Tutorial 18: Data Sharing & OneLake Shortcuts
 
@@ -1602,7 +1602,7 @@ Continue to **[Tutorial 19: Fabric Copilot & AI Features](../19-copilot-ai/READM
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [⬅️ 17-Monitoring & Alerting](../17-monitoring-alerting/README.md) | [📖 Tutorials Index](../README.md) | [19-Copilot & AI](../19-copilot-ai/README.md) ➡️ |
+| [⬅️ 17-Monitoring & Alerting](../17-monitoring-alerting/README.md) | [📖 Tutorials Index](../index.md) | [19-Copilot & AI](../19-copilot-ai/README.md) ➡️ |
 
 ---
 
@@ -1610,4 +1610,4 @@ Continue to **[Tutorial 19: Fabric Copilot & AI Features](../19-copilot-ai/READM
 
 ---
 
-[⬆️ Back to Top](#-tutorial-18-data-sharing--onelake-shortcuts) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-18-data-sharing--onelake-shortcuts) | [📚 Tutorials](../) | [🏠 Home](../../index.md)

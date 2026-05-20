@@ -100,4 +100,4 @@ Eventstream → Eventhouse (KQL) → Real-Time Dashboard + Data Activator alerts
 | [Disaster Recovery & BCDR](../best-practices/disaster-recovery-bcdr.md) | HA, geo-redundancy, RPO/RTO planning |
 | [Multi-Tenant Workspace Architecture](../best-practices/multi-tenant-workspace-architecture.md) | Isolation patterns for multi-tenant deployments |
 | [fabric-cicd Deployment](../best-practices/fabric-cicd-deployment.md) | CI/CD pipeline patterns for Fabric items |
-| [Infrastructure as Code](../../infra/main.bicep) | Bicep modules for automated deployment |
+| [Infrastructure as Code](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/main.bicep) | Bicep modules for automated deployment |

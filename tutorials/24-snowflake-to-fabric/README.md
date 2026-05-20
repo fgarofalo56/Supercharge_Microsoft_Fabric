@@ -1,4 +1,4 @@
-[Home](../../docs/index.md) > [Tutorials](../) > Snowflake to Fabric Migration
+[Home](../../index.md) > [Tutorials](../) > Snowflake to Fabric Migration
 
 # ❄️ Tutorial 24: Snowflake to Microsoft Fabric Migration
 
@@ -1681,12 +1681,12 @@ This tutorial includes the following supplementary files:
 
 | Resource | Description |
 |----------|-------------|
-| [`scripts/snowflake_assessment_queries.sql`](./scripts/snowflake_assessment_queries.sql) | Snowflake inventory and complexity assessment queries |
-| [`scripts/sql_translation_patterns.sql`](./scripts/sql_translation_patterns.sql) | Side-by-side SQL translation examples |
-| [`scripts/snowflake_migration_notebook.py`](./scripts/snowflake_migration_notebook.py) | PySpark notebook for full and incremental migration |
-| [`scripts/udf_migration_examples.py`](./scripts/udf_migration_examples.py) | JavaScript UDF to PySpark UDF conversion examples |
-| [`templates/snowflake_migration_assessment.md`](./templates/snowflake_migration_assessment.md) | Assessment template for your Snowflake environment |
-| [`templates/cost_comparison_calculator.md`](./templates/cost_comparison_calculator.md) | TCO comparison worksheet |
+| [`scripts/snowflake_assessment_queries.sql`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/tutorials/24-snowflake-to-fabric) | Snowflake inventory and complexity assessment queries |
+| [`scripts/sql_translation_patterns.sql`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/tutorials/24-snowflake-to-fabric) | Side-by-side SQL translation examples |
+| [`scripts/snowflake_migration_notebook.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/tutorials/24-snowflake-to-fabric) | PySpark notebook for full and incremental migration |
+| [`scripts/udf_migration_examples.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/tutorials/24-snowflake-to-fabric) | JavaScript UDF to PySpark UDF conversion examples |
+| [`templates/snowflake_migration_assessment.md`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/tutorials/24-snowflake-to-fabric) | Assessment template for your Snowflake environment |
+| [`templates/cost_comparison_calculator.md`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/tutorials/24-snowflake-to-fabric) | TCO comparison worksheet |
 
 ---
 
@@ -1708,7 +1708,7 @@ This tutorial includes the following supplementary files:
 
 | ⬅️ Previous | ⬆️ Up | ➡️ Next |
 |------------|------|--------|
-| [23-SHIR & Data Gateways](../23-shir-data-gateways/README.md) | [Tutorials Index](../README.md) | [25-IBM DB2 Source](../25-ibm-db2-source/README.md) |
+| [23-SHIR & Data Gateways](../23-shir-data-gateways/README.md) | [Tutorials Index](../index.md) | [25-IBM DB2 Source](../25-ibm-db2-source/README.md) |
 
 ---
 
@@ -1716,4 +1716,4 @@ This tutorial includes the following supplementary files:
 
 ---
 
-[⬆️ Back to Top](#-tutorial-24-snowflake-to-microsoft-fabric-migration) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-24-snowflake-to-microsoft-fabric-migration) | [📚 Tutorials](../) | [🏠 Home](../../index.md)

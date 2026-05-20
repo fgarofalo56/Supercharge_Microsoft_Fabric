@@ -1,4 +1,4 @@
-[Home](../docs/index.md) > [POC Agenda](./) > Day 3: BI, Governance & Mirroring
+[Home](../index.md) > [POC Agenda](./) > Day 3: BI, Governance & Mirroring
 
 # 📅 Day 3: BI, Governance & Database Mirroring
 
@@ -879,6 +879,6 @@ Overall POC: ██████████ 100% Complete
 
 ---
 
-[⬆️ Back to Top](#-day-3-bi-governance--database-mirroring) | [📚 POC Agenda](./) | [🏠 Home](../docs/index.md)
+[⬆️ Back to Top](#-day-3-bi-governance--database-mirroring) | [📚 POC Agenda](./) | [🏠 Home](../index.md)
 
 </div>

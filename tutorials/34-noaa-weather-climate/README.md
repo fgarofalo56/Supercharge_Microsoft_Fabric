@@ -8,7 +8,7 @@
 
 </div>
 
-> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > 🌦️ **NOAA Weather & Climate Analytics**
+> 🏠 **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > 📖 **[Tutorials](../index.md)** > 🌦️ **NOAA Weather & Climate Analytics**
 
 ---
 
@@ -221,7 +221,7 @@ Before starting this tutorial, ensure you have:
 > **📋 Data Source Options**
 >
 > This tutorial supports two data ingestion paths:
-> 1. **Synthetic Generator** (recommended for learning): Use [`noaa_generator.py`](../../data_generation/generators/federal/noaa_generator.py) to generate realistic NOAA weather data locally
+> 1. **Synthetic Generator** (recommended for learning): Use [`noaa_generator.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/generators/federal/noaa_generator.py) to generate realistic NOAA weather data locally
 > 2. **NOAA API + Bulk Downloads**: Connect to real NOAA data for production-grade analytics
 >
 > Both paths converge at the same Bronze schema. The real-time Eventstream component requires the NOAA Weather API token.
@@ -337,7 +337,7 @@ print(f"Wind Speed: {obs['properties']['windSpeed']['value']} km/h")
 
 The Bronze layer captures raw observations, storm events, and climate normals with full station metadata and NOAA quality control flags preserved.
 
-> **📓 Notebook Reference**: [`notebooks/bronze/14_bronze_noaa.py`](../../notebooks/bronze/14_bronze_noaa.py) *(coming soon)*
+> **📓 Notebook Reference**: [`notebooks/bronze/14_bronze_noaa.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/bronze/14_bronze_noaa.py) *(coming soon)*
 
 ### 2.1 Weather Observation Schema
 
@@ -478,7 +478,7 @@ print(f"Bronze storm events: {df_storm_bronze.count():,} records")
 
 The Silver layer standardizes all meteorological measurements to a consistent unit system, validates observation ranges against physical limits, and enriches storm events with derived severity classifications.
 
-> **📓 Notebook Reference**: [`notebooks/silver/14_silver_noaa.py`](../../notebooks/silver/14_silver_noaa.py) *(coming soon)*
+> **📓 Notebook Reference**: [`notebooks/silver/14_silver_noaa.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/silver/14_silver_noaa.py) *(coming soon)*
 
 ### 3.1 Unit Standardization
 
@@ -754,7 +754,7 @@ for alert_name, config in activator_rules.items():
 
 The Gold layer builds decision-ready aggregations: daily weather summaries, storm damage by geography, climate trend analysis, and severe weather risk indices.
 
-> **📓 Notebook Reference**: [`notebooks/gold/14_gold_noaa_analytics.py`](../../notebooks/gold/14_gold_noaa_analytics.py) *(coming soon)*
+> **📓 Notebook Reference**: [`notebooks/gold/14_gold_noaa_analytics.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/14_gold_noaa_analytics.py) *(coming soon)*
 
 ### 5.1 Weather Summary Aggregations
 
@@ -1155,9 +1155,9 @@ Continue your learning journey:
 | Climate Data Online | [NCEI CDO](https://www.ncdc.noaa.gov/cdo-web/) |
 | CO-OPS Tides & Currents | [tidesandcurrents.noaa.gov](https://tidesandcurrents.noaa.gov/) |
 | NDBC Buoy Data | [ndbc.noaa.gov](https://www.ndbc.noaa.gov/) |
-| Weather Schema | [`data_generation/schemas/federal/noaa_weather_schema.json`](../../data_generation/schemas/federal/noaa_weather_schema.json) |
-| Storm Schema | [`data_generation/schemas/federal/noaa_storm_schema.json`](../../data_generation/schemas/federal/noaa_storm_schema.json) |
-| Data Generator | [`data_generation/generators/federal/noaa_generator.py`](../../data_generation/generators/federal/noaa_generator.py) |
+| Weather Schema | [`data_generation/schemas/federal/noaa_weather_schema.json`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/schemas/federal/noaa_weather_schema.json) |
+| Storm Schema | [`data_generation/schemas/federal/noaa_storm_schema.json`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/schemas/federal/noaa_storm_schema.json) |
+| Data Generator | [`data_generation/generators/federal/noaa_generator.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/generators/federal/noaa_generator.py) |
 
 ---
 
@@ -1165,7 +1165,7 @@ Continue your learning journey:
 
 | Previous | Up | Next |
 |:---------|:--:|-----:|
-| [⬅️ 33-SBA Small Business Analytics](../33-sba-small-business/README.md) | [📖 Tutorials Index](../README.md) | [35-EPA Environmental Analytics ➡️](../35-epa-environment/README.md) |
+| [⬅️ 33-SBA Small Business Analytics](../33-sba-small-business/README.md) | [📖 Tutorials Index](../index.md) | [35-EPA Environmental Analytics ➡️](../35-epa-environment/README.md) |
 
 ---
 

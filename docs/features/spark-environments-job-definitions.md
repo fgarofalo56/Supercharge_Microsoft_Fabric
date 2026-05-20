@@ -334,7 +334,7 @@ Attached to:
 ## 🔗 Related Documents
 
 - [Spark Runtime Migration](../best-practices/spark-runtime-migration.md) — Migrating between Spark runtime versions
-- [Performance Best Practices](../best-practices/performance-best-practices.md) — Spark tuning
+- [Performance Best Practices](../best-practices/performance-parallelism.md) — Spark tuning
 - [Fabric CI/CD Deployment](../best-practices/fabric-cicd-deployment.md) — Deploy environments via CI/CD
 - [Architecture](../ARCHITECTURE.md) — System architecture overview
 

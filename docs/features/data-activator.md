@@ -580,7 +580,7 @@ Rule: HighVolumeAlert
 
 - [Real-Time Intelligence](real-time-intelligence.md) — Eventstreams and Eventhouse for streaming analytics
 - [Workspace Monitoring](workspace-monitoring.md) — Infrastructure monitoring for Fabric workspaces
-- [Alerting Best Practices](../best-practices/alerting-best-practices.md) — Alert rule design and fatigue prevention
+- [Alerting Best Practices](../best-practices/alerting-data-activator.md) — Alert rule design and fatigue prevention
 - [Copy Job CDC](copy-job-cdc.md) — Incremental ingestion that feeds Data Activator via Eventstream
 - [Architecture](../ARCHITECTURE.md) — System architecture overview
 

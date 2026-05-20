@@ -3,7 +3,7 @@
 > **Last Updated**: 2026-04-27 | **Version**: 1.0
 > **Status**: Phase 14 - Commercial Verticals | **Vertical**: Energy & Utilities
 
-> :house: **[Home](../../README.md)** > :book: **[Tutorials](../README.md)** > ⚡ **Energy & Utilities**
+> :house: **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > :book: **[Tutorials](../index.md)** > ⚡ **Energy & Utilities**
 
 ---
 
@@ -375,12 +375,12 @@ DROP TABLE IF EXISTS lh_gold.gold_revenue_protection;
 
 ## :books: Further Reading
 
-- [Use Case: Energy Grid Analytics](../../docs/use-cases/energy-grid-analytics.md) - Full architecture and ROI analysis
+- [Use Case: Energy Grid Analytics](../../use-cases/energy-grid-analytics.md) - Full architecture and ROI analysis
 - [NERC CIP Standards](https://www.nerc.com/pa/Stand/Pages/CIPStandards.aspx)
 - [IEEE 1366 Reliability Indices](https://standards.ieee.org/standard/1366-2012.html)
 - [ANSI C84.1 Voltage Standards](https://www.nema.org/standards/view/ansi-c84-1)
 - [Fabric Real-Time Intelligence](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/)
-- [Medallion Architecture Deep Dive](../../docs/best-practices/medallion-architecture-deep-dive.md)
+- [Medallion Architecture Deep Dive](../../best-practices/medallion-architecture-deep-dive.md)
 
 ---
 
@@ -388,9 +388,9 @@ DROP TABLE IF EXISTS lh_gold.gold_revenue_protection;
 
 | Tutorial | Topic |
 |----------|-------|
-| [Tutorial 52](../52-healthcare-clinical/README.md) | Healthcare & Clinical Analytics |
+| [Tutorial 52](../52-telecom/README.md) | Healthcare & Clinical Analytics |
 | [Tutorial 00](../00-environment-setup/README.md) | Environment Setup (if not done) |
 
 ---
 
-> :house: **[Home](../../README.md)** > :book: **[Tutorials](../README.md)** > ⚡ **Energy & Utilities**
+> :house: **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > :book: **[Tutorials](../index.md)** > ⚡ **Energy & Utilities**

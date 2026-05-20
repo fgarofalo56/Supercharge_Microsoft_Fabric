@@ -226,27 +226,27 @@ See [Network Security Best Practices](../best-practices/network-security.md) for
 
 | Resource | Bicep Module | Description |
 |:---------|:-------------|:------------|
-| Fabric Capacities | [`infra/modules/fabric/fabric-capacity.bicep`](../../infra/modules/fabric/fabric-capacity.bicep) | Deploy one capacity per domain |
-| Purview Account | [`infra/modules/governance/purview.bicep`](../../infra/modules/governance/purview.bicep) | Central governance hub |
-| VNet | [`infra/modules/networking/vnet.bicep`](../../infra/modules/networking/vnet.bicep) | Corporate network integration |
-| Private Endpoints | [`infra/modules/networking/private-endpoint.bicep`](../../infra/modules/networking/private-endpoint.bicep) | Private connectivity per capacity |
-| Alerts & Budgets | [`infra/modules/monitoring/alerts-and-budgets.bicep`](../../infra/modules/monitoring/alerts-and-budgets.bicep) | CU alerts, cost budgets |
-| Log Analytics | [`infra/modules/monitoring/log-analytics-workspace.bicep`](../../infra/modules/monitoring/log-analytics-workspace.bicep) | Centralized monitoring |
+| Fabric Capacities | [`infra/modules/fabric/fabric-capacity.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/fabric/fabric-capacity.bicep) | Deploy one capacity per domain |
+| Purview Account | [`infra/modules/governance/purview.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/governance/purview.bicep) | Central governance hub |
+| VNet | [`infra/modules/networking/vnet.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/networking/vnet.bicep) | Corporate network integration |
+| Private Endpoints | [`infra/modules/networking/private-endpoint.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/networking/private-endpoint.bicep) | Private connectivity per capacity |
+| Alerts & Budgets | [`infra/modules/monitoring/alerts-and-budgets.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/monitoring/alerts-and-budgets.bicep) | CU alerts, cost budgets |
+| Log Analytics | [`infra/modules/monitoring/log-analytics-workspace.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/monitoring/log-analytics-workspace.bicep) | Centralized monitoring |
 
 ### Step-by-Step Tutorials
 
 | Step | Tutorial | What You'll Build |
 |:-----|:---------|:-----------------|
-| 1 | [Environment Setup](../../tutorials/00-environment-setup/README.md) | Provision capacities and domain workspaces |
-| 2 | [Bronze Layer](../../tutorials/01-bronze-layer/README.md) | Domain-specific ingestion pipelines |
-| 3 | [Silver Layer](../../tutorials/02-silver-layer/README.md) | Cleansing and validation per domain |
-| 4 | [Gold Layer](../../tutorials/03-gold-layer/README.md) | Domain-specific KPIs and star schemas |
-| 5 | [Direct Lake Power BI](../../tutorials/05-direct-lake-powerbi/README.md) | Domain BI with Direct Lake |
-| 6 | [Governance & Purview](../../tutorials/07-governance-purview/README.md) | Central governance policies |
-| 7 | [CI/CD & DevOps](../../tutorials/12-cicd-devops/README.md) | fabric-cicd pipelines per domain |
-| 8 | [Security & Networking](../../tutorials/14-security-networking/README.md) | Private endpoints and VNet setup |
-| 9 | [Workspace Best Practices](../../tutorials/20-workspace-best-practices/README.md) | Multi-domain workspace design |
-| 10 | [Data Sharing](../../tutorials/18-data-sharing/README.md) | Cross-domain data products |
+| 1 | [Environment Setup](../tutorials/00-environment-setup/README.md) | Provision capacities and domain workspaces |
+| 2 | [Bronze Layer](../tutorials/01-bronze-layer/README.md) | Domain-specific ingestion pipelines |
+| 3 | [Silver Layer](../tutorials/02-silver-layer/README.md) | Cleansing and validation per domain |
+| 4 | [Gold Layer](../tutorials/03-gold-layer/README.md) | Domain-specific KPIs and star schemas |
+| 5 | [Direct Lake Power BI](../tutorials/05-direct-lake-powerbi/README.md) | Domain BI with Direct Lake |
+| 6 | [Governance & Purview](../tutorials/07-governance-purview/README.md) | Central governance policies |
+| 7 | [CI/CD & DevOps](../tutorials/12-cicd-devops/README.md) | fabric-cicd pipelines per domain |
+| 8 | [Security & Networking](../tutorials/14-security-networking/README.md) | Private endpoints and VNet setup |
+| 9 | [Workspace Best Practices](../tutorials/20-workspace-best-practices/README.md) | Multi-domain workspace design |
+| 10 | [Data Sharing](../tutorials/18-data-sharing/README.md) | Cross-domain data products |
 
 ### Key Feature Documentation
 

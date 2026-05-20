@@ -1,4 +1,4 @@
-[Home](../../docs/index.md) > [Tutorials](../) > On-Prem SSAS / SSIS / SSRS to Fabric Migration
+[Home](../../index.md) > [Tutorials](../) > On-Prem SSAS / SSIS / SSRS to Fabric Migration
 
 # 📚 Tutorial 45: On-Prem SSAS / SSIS / SSRS → Microsoft Fabric Migration
 
@@ -40,7 +40,7 @@
 | Navigation | |
 |---|---|
 | ⬅️ **Previous** | [44 — BigQuery → Fabric](../44-bigquery-to-fabric/README.md) |
-| ➡️ **Next** | [Tutorial Index](../README.md) |
+| ➡️ **Next** | [Tutorial Index](../index.md) |
 
 ---
 
@@ -185,7 +185,7 @@ This is the most important table in the tutorial. Every component on the left ma
 | KPIs | Power BI KPIs (in semantic model) | Direct |
 | Hierarchies | Hierarchies | Direct |
 | Partitions (Tabular) | Direct Lake partitions / Import partitions | Direct (but Direct Lake handles automatically) |
-| Composite models (DirectQuery + Import) | Composite models in Power BI | Direct — see [composite-models.md](../../docs/features/composite-models.md) |
+| Composite models (DirectQuery + Import) | Composite models in Power BI | Direct — see [composite-models.md](../../features/composite-models.md) |
 
 ### ETL Layer
 
@@ -233,7 +233,7 @@ This is the most important table in the tutorial. Every component on the left ma
 | SQL Auth | Entra ID + Service Principal | Migrate; deprecate SQL Auth |
 | AD group → SSAS role | Entra group → Power BI role | Direct |
 | SSAS row filter (DAX or MDX) | Power BI RLS filter (DAX) | Direct (Tabular) / Translate (Multidim) |
-| Column-level encryption (SQL Server Always Encrypted) | OneLake Security + sensitivity labels | Re-design — see [OneLake Security](../../docs/features/onelake-security.md) |
+| Column-level encryption (SQL Server Always Encrypted) | OneLake Security + sensitivity labels | Re-design — see [OneLake Security](../../features/onelake-security.md) |
 | Transparent Data Encryption (TDE) | OneLake encryption + CMK | Direct (different mechanism, same outcome) |
 | Reporting Services security model | Power BI workspace roles | Re-map |
 
@@ -371,7 +371,7 @@ curl -X POST \
 > -- Should match SELECT COUNT(*) FROM Sales.dbo.SalesOrderHeader on the source
 > ```
 
-> 💡 **Tip**: Mirroring is **free** under your F-SKU CU pool. It's almost always the right choice for SQL Server sources — see [Mirroring](../../docs/features/mirroring.md).
+> 💡 **Tip**: Mirroring is **free** under your F-SKU CU pool. It's almost always the right choice for SQL Server sources — see [Mirroring](../../features/mirroring.md).
 
 #### Option B — Copy Job CDC (batch incremental)
 
@@ -387,7 +387,7 @@ python 02_create_copy_job.py \
     --schedule "hourly"
 ```
 
-See [Copy Job CDC](../../docs/features/copy-job-cdc.md) for the full pattern.
+See [Copy Job CDC](../../features/copy-job-cdc.md) for the full pattern.
 
 #### Option C — SHIR + Pipeline (lift-and-shift the nightly batch)
 
@@ -613,7 +613,7 @@ Then deploy your existing SSIS packages **unchanged** to Azure-SSIS, and trigger
 
 ### Step 8 — Convert SSRS RDL → Fabric Paginated Reports
 
-[Paginated Reports](../../docs/features/paginated-reports.md) in Fabric use the **same RDL standard** as SSRS. Migration is mostly a re-target operation.
+[Paginated Reports](../../features/paginated-reports.md) in Fabric use the **same RDL standard** as SSRS. Migration is mostly a re-target operation.
 
 #### 8.1 Open RDL in Power BI Report Builder
 
@@ -695,7 +695,7 @@ Multidim cell security (which restricted specific cells of the cube based on dim
 
 SQL Server **Always Encrypted** (column-level encryption) doesn't directly translate to Fabric. Instead, layer protection:
 
-- **OneLake Security** restricts who can read the underlying data files — see [OneLake Security](../../docs/features/onelake-security.md)
+- **OneLake Security** restricts who can read the underlying data files — see [OneLake Security](../../features/onelake-security.md)
 - **Sensitivity labels** (Microsoft Information Protection / Purview) classify and audit access — see [Tutorial 07](../07-governance-purview/README.md)
 - **Power BI OLS** hides specific columns from users who shouldn't see them
 - **Dynamic data masking** (Fabric SQL Database) masks the value at query time for unauthorized users
@@ -720,7 +720,7 @@ Run SSRS, SSAS, and Fabric Power BI **side by side**:
 - Mirroring/Copy Job CDC replicates to Fabric continuously
 - Both stacks render the same reports for the same users
 - Daily diff report (counts, key aggregations) confirms parity
-- Action Group alerts on parity drift (see [alerts-and-budgets.bicep](../../infra/modules/alerts-and-budgets.bicep))
+- Action Group alerts on parity drift (see [alerts-and-budgets.bicep](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/alerts-and-budgets.bicep))
 
 > 💡 **Tip**: This period is **expensive** (running both stacks at the same time). Budget for it, but don't extend it past 8 weeks. If users haven't validated by week 6, escalate.
 
@@ -908,11 +908,11 @@ If your assessment ran against a real MSBI estate, the read-only queries leave n
 - **[Tutorial 41 — Synapse → Fabric](../41-synapse-to-fabric/README.md)** — for shops with both legacy MSBI **and** Synapse Analytics
 - **[Tutorial 08 — Database Mirroring](../08-database-mirroring/README.md)** — deep dive on the recommended source data pattern
 - **[Tutorial 23 — SHIR & Data Gateways](../23-shir-data-gateways/README.md)** — the hybrid bridge that powers Steps 3-4
-- **[Migration Patterns](../../docs/best-practices/migration-patterns.md)** — cross-source migration framework
-- **[Paginated Reports](../../docs/features/paginated-reports.md)** — feature deep-dive for the SSRS replacement
-- **[Composite Models](../../docs/features/composite-models.md)** — for hybrid Direct Lake + DirectQuery scenarios
-- **[Data Modeling Star Schema](../../docs/best-practices/data-modeling-star-schema.md)** — how to refactor cube schemas during migration
-- **[fabric-cicd Deployment](../../docs/best-practices/fabric-cicd-deployment.md)** — automate the deployment of migrated TMDL, Pipelines, and Paginated Reports
+- **[Migration Patterns](../../best-practices/migration-patterns.md)** — cross-source migration framework
+- **[Paginated Reports](../../features/paginated-reports.md)** — feature deep-dive for the SSRS replacement
+- **[Composite Models](../../features/composite-models.md)** — for hybrid Direct Lake + DirectQuery scenarios
+- **[Data Modeling Star Schema](../../best-practices/data-modeling-star-schema.md)** — how to refactor cube schemas during migration
+- **[fabric-cicd Deployment](../../best-practices/fabric-cicd-deployment.md)** — automate the deployment of migrated TMDL, Pipelines, and Paginated Reports
 
 ---
 
@@ -932,7 +932,7 @@ If your assessment ran against a real MSBI estate, the read-only queries leave n
 | Direct Lake refresh fails after migration | Calculated column not supported in Direct Lake | Convert to measure OR push to Warehouse view |
 | Fabric Pipeline "Lookup" returns 0 rows but SSIS Lookup worked | Case sensitivity or trailing whitespace difference in join keys | Add `TRIM()` and case normalization in the source query |
 | Power BI semantic model fails RLS test for nested groups | AD nested group not flattened in Entra | Enable group writeback or flatten manually in DAX role filter |
-| Capacity throttles after migration | F-SKU undersized for combined workload | Scale F-SKU; see [capacity-throttling runbook](../../docs/runbooks/capacity-throttling-response.md) |
+| Capacity throttles after migration | F-SKU undersized for combined workload | Scale F-SKU; see [capacity-throttling runbook](../../runbooks/capacity-throttling-response.md) |
 | MDX scope assignments missing | No DAX equivalent | Re-design as `CALCULATE` with filter override |
 
 ---
@@ -971,17 +971,17 @@ If your assessment ran against a real MSBI estate, the read-only queries leave n
 - [Tutorial 42 — Databricks → Fabric](../42-databricks-to-fabric/README.md)
 - [Tutorial 43 — Redshift → Fabric](../43-redshift-to-fabric/README.md)
 - [Tutorial 44 — BigQuery → Fabric](../44-bigquery-to-fabric/README.md)
-- [Migration Patterns](../../docs/best-practices/migration-patterns.md)
-- [Paginated Reports](../../docs/features/paginated-reports.md)
-- [Composite Models](../../docs/features/composite-models.md)
-- [Data Modeling Star Schema](../../docs/best-practices/data-modeling-star-schema.md)
-- [Mirroring](../../docs/features/mirroring.md)
-- [Copy Job CDC](../../docs/features/copy-job-cdc.md)
-- [OneLake Security](../../docs/features/onelake-security.md)
-- [Direct Lake](../../docs/features/direct-lake.md)
-- [fabric-cicd Deployment](../../docs/best-practices/fabric-cicd-deployment.md)
-- [Capacity Planning](../../docs/best-practices/capacity-planning-cost-optimization.md)
+- [Migration Patterns](../../best-practices/migration-patterns.md)
+- [Paginated Reports](../../features/paginated-reports.md)
+- [Composite Models](../../features/composite-models.md)
+- [Data Modeling Star Schema](../../best-practices/data-modeling-star-schema.md)
+- [Mirroring](../../features/mirroring.md)
+- [Copy Job CDC](../../features/copy-job-cdc.md)
+- [OneLake Security](../../features/onelake-security.md)
+- [Direct Lake](../../features/direct-lake.md)
+- [fabric-cicd Deployment](../../best-practices/fabric-cicd-deployment.md)
+- [Capacity Planning](../../best-practices/capacity-planning-cost-optimization.md)
 
 ---
 
-[⬆️ Back to Top](#-tutorial-45-on-prem-ssas--ssis--ssrs--microsoft-fabric-migration) | [📚 Tutorial Index](../README.md) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-45-on-prem-ssas--ssis--ssrs--microsoft-fabric-migration) | [📚 Tutorial Index](../index.md) | [🏠 Home](../../index.md)

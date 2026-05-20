@@ -89,7 +89,7 @@ Treat prompts the way you treat application code. The default mental model:
 2. **Versioned with semver.** A prompt template is an API. Bumping `system.j2` from `v1.2.3` to `v1.3.0` means new behavior; `v2.0.0` means breaking output schema. Tag the directory.
 3. **Reviewed in PRs.** Every prompt change requires a PR with a reviewer who can read and reason about prompts. Same as a code review.
 4. **Templated, not f-string'd.** Use Jinja2 with autoescaping or a structured templater. Never f-string user input into a system prompt.
-5. **Stored in `prompts/` or Variable Library.** Repo for source-of-truth; [Fabric Variable Library](../best-practices/fabric-variable-library.md) bindings for env-specific overrides (dev / staging / prod).
+5. **Stored in `prompts/` or Variable Library.** Repo for source-of-truth; [Fabric Variable Library](../best-practices/../features/variable-libraries.md) bindings for env-specific overrides (dev / staging / prod).
 
 ### Repository Layout
 
@@ -833,7 +833,7 @@ FROM lh_silver.silver_compliance_questions
 WHERE batch_id = @batch_id;
 ```
 
-See [`notebooks/gold/17_gold_ai_functions_compliance.py`](../../notebooks/gold/17_gold_ai_functions_compliance.py) for a working AI Functions notebook.
+See [`notebooks/gold/17_gold_ai_functions_compliance.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/17_gold_ai_functions_compliance.py) for a working AI Functions notebook.
 
 ### Pattern: Data Agent with Custom Prompt
 

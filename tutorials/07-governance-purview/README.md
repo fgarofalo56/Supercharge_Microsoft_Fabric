@@ -3,7 +3,7 @@
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
-> **🏠 [Home](../../README.md)** > **📖 [Tutorials](../README.md)** > **🛡️ Governance & Purview**
+> **🏠 [Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > **📖 [Tutorials](../index.md)** > **🛡️ Governance & Purview**
 
 ---
 
@@ -898,7 +898,7 @@ Continue to **[Tutorial 08: Database Mirroring](../08-database-mirroring/README.
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [⬅️ 06-Data Pipelines](../06-data-pipelines/README.md) | [📖 Tutorials Index](../README.md) | [08-Database Mirroring](../08-database-mirroring/README.md) ➡️ |
+| [⬅️ 06-Data Pipelines](../06-data-pipelines/README.md) | [📖 Tutorials Index](../index.md) | [08-Database Mirroring](../08-database-mirroring/README.md) ➡️ |
 
 ---
 
@@ -906,4 +906,4 @@ Continue to **[Tutorial 08: Database Mirroring](../08-database-mirroring/README.
 
 ---
 
-[⬆️ Back to Top](#-tutorial-07-governance--purview) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-07-governance--purview) | [📚 Tutorials](../) | [🏠 Home](../../index.md)

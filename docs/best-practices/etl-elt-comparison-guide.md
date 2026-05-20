@@ -424,7 +424,7 @@ flowchart LR
 - [Copy Job CDC](../features/copy-job-cdc.md) — Copy Job feature doc
 - [Mirroring](../features/mirroring.md) — Database Mirroring feature doc
 - [Medallion Architecture Deep Dive](medallion-architecture-deep-dive.md) — Medallion layer patterns
-- [Performance Best Practices](performance-best-practices.md) — Delta table optimization
+- [Performance Best Practices](performance-parallelism.md) — Delta table optimization
 - [Architecture](../ARCHITECTURE.md) — System architecture overview
 
 ---

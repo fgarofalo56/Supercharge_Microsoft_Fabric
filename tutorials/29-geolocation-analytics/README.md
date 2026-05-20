@@ -1,4 +1,4 @@
-[Home](../../docs/index.md) > [Tutorials](../) > Geolocation Analytics
+[Home](../../index.md) > [Tutorials](../) > Geolocation Analytics
 
 # 📍 Tutorial 29: Geolocation Analytics
 
@@ -1574,7 +1574,7 @@ Continue your learning journey:
 
 | Previous | Up | Next |
 |:---------|:--:|-----:|
-| [⬅️ 28-People Movement Analytics](../28-people-movement-analytics/README.md) | [📖 Tutorials Index](../README.md) | [30-Tribal Healthcare Analytics ➡️](../30-tribal-healthcare/README.md) |
+| [⬅️ 28-People Movement Analytics](../28-people-movement-analytics/README.md) | [📖 Tutorials Index](../index.md) | [30-Tribal Healthcare Analytics ➡️](../30-tribal-healthcare/README.md) |
 
 ---
 
@@ -1588,4 +1588,4 @@ Continue your learning journey:
 
 ---
 
-[⬆️ Back to Top](#-tutorial-29-geolocation-analytics) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-29-geolocation-analytics) | [📚 Tutorials](../) | [🏠 Home](../../index.md)

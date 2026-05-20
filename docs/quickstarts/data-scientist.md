@@ -18,10 +18,10 @@ You care about reproducibility, experiment tracking, model accuracy, feature qua
 Follow these steps to train and evaluate your first model in Fabric:
 
 1. **Set up your workspace and Lakehouses** - Ensure you have access to bronze/silver/gold tables that contain training data.
-   [:octicons-arrow-right-24: Tutorial 00: Environment Setup](../../tutorials/00-environment-setup/README.md)
+   [:octicons-arrow-right-24: Tutorial 00: Environment Setup](../tutorials/00-environment-setup/README.md)
 
 2. **Explore gold-layer features** - Review existing gold tables and understand the data available for modeling.
-   [:octicons-arrow-right-24: Tutorial 03: Gold Layer](../../tutorials/03-gold-layer/README.md)
+   [:octicons-arrow-right-24: Tutorial 03: Gold Layer](../tutorials/03-gold-layer/README.md)
 
 3. **Run an AutoML experiment** - Use Fabric's AutoML to automatically train and compare models on a forecasting or classification task.
    [:octicons-arrow-right-24: AutoML & Model Endpoints](../features/automl-model-endpoints.md)
@@ -30,7 +30,7 @@ Follow these steps to train and evaluate your first model in Fabric:
    [:octicons-arrow-right-24: Semantic Link](../features/semantic-link.md)
 
 5. **Try AI Functions for compliance scoring** - See how AI Functions can enrich data with LLM-powered transformations inline in Spark.
-   [:octicons-arrow-right-24: Tutorial 09: Advanced AI/ML](../../tutorials/09-advanced-ai-ml/README.md)
+   [:octicons-arrow-right-24: Tutorial 09: Advanced AI/ML](../tutorials/09-advanced-ai-ml/README.md)
 
 ---
 
@@ -39,7 +39,7 @@ Follow these steps to train and evaluate your first model in Fabric:
 | Day | Focus | Resource |
 |-----|-------|----------|
 | 1 | Complete 30-minute path above | Tutorials 00, 03, 09 + AutoML docs |
-| 2 | Build a churn prediction model with Spark ML | [ML Notebook: Player Churn](../../notebooks/ml/01_ml_player_churn_prediction.py) |
+| 2 | Build a churn prediction model with Spark ML | [ML Notebook: Player Churn](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/01_ml_player_churn_prediction.py) |
 | 3 | Set up the Feature Store for reusable features | [Feature Store Guide](../best-practices/feature-store-onelake.md) |
 | 4 | Implement vector search with Eventhouse | [Vector Database](../features/eventhouse-vector-database.md) |
 | 5 | Deploy a model and configure drift detection | [MLOps Production Guide](../best-practices/mlops-fabric-production.md) |

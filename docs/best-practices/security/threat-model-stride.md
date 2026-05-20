@@ -308,11 +308,11 @@ Boundary crossed: internal (within workspace), but with **external code executio
 
 | STRIDE | Threat | Mitigation | Reference |
 |:------:|--------|------------|-----------|
-| **S** | Pipeline run impersonates user via stored credentials | Workspace Identity replaces stored credentials; pipelines authenticate as the workspace identity | [Workspace Identity Bicep](../../../infra/modules/security/workspace-identity.bicep) |
+| **S** | Pipeline run impersonates user via stored credentials | Workspace Identity replaces stored credentials; pipelines authenticate as the workspace identity | [Workspace Identity Bicep](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/security/workspace-identity.bicep) |
 | **T** | Malicious dependency injects code at build/import time | Pinned dependency hashes; private feed (Artifact Registry) + signed artifacts | [Supply Chain Security](supply-chain-security.md) |
 | **R** | Pipeline run executed but no audit record | Pipeline run history retained; emitted to Workspace Monitoring | [Workspace Monitoring](../../features/workspace-monitoring.md) |
 | **I** | Exception stack traces leak data values into logs | Structured logging with PII redaction; log scrubbing rules | [Observability](../monitoring-observability.md) |
-| **D** | Misconfigured pipeline schedule storms the source system | Source-side rate limiting; pipeline concurrency caps | [Pipeline Bicep](../../../infra/modules/fabric/fabric-pipeline.bicep) |
+| **D** | Misconfigured pipeline schedule storms the source system | Source-side rate limiting; pipeline concurrency caps | [Pipeline Bicep](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/fabric/fabric-pipeline.bicep) |
 | **E** | Notebook calls `mssparkutils.credentials.getSecret()` for a secret it shouldn't access | Key Vault access policy scoped to Workspace Identity + secret-name pattern | [CMK](../customer-managed-keys.md) |
 
 ### Component 5 — External Data Ingestion (SHIR / Mirroring / Eventstream)
@@ -347,7 +347,7 @@ Boundary crossed: **Fabric Workspace ↔ Supporting Azure Services**.
 
 | STRIDE | Threat | Mitigation | Reference |
 |:------:|--------|------------|-----------|
-| **S** | Compromised workspace identity used from outside Fabric | Workspace Identity scoped to specific resource role assignments; conditional access not user-applicable but RBAC scope is tight | [Workspace Identity](../../../infra/modules/security/workspace-identity.bicep) |
+| **S** | Compromised workspace identity used from outside Fabric | Workspace Identity scoped to specific resource role assignments; conditional access not user-applicable but RBAC scope is tight | [Workspace Identity](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/security/workspace-identity.bicep) |
 | **T** | Key Vault access policy widened "temporarily" and never reverted | Bicep is source of truth; drift detection against deployed state | [Customer-Managed Keys](../customer-managed-keys.md) |
 | **R** | Service-to-service call denied on audit | Key Vault diagnostic logs to Log Analytics; immutable mirror | [SOC 2 CC6.7](soc2-type2-readiness.md) |
 | **I** | Storage Account public blob enumeration | Public blob access disabled at account level; OAP enforced | [OAP](../outbound-access-protection.md) |

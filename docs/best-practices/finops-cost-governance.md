@@ -690,4 +690,4 @@ def federal_cost_report(capacity_cost: float, ws_cu: dict) -> list[dict]:
 
 ---
 
-[Back to Best Practices Index](./README.md) | [Back to Documentation](../index.md)
+[Back to Best Practices Index](./index.md) | [Back to Documentation](../index.md)

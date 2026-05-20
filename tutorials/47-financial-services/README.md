@@ -364,6 +364,6 @@ graph TB
 
 ---
 
-[< Tutorial 46](../46-previous-tutorial/README.md) | [Tutorial 48 >](../48-next-tutorial/README.md)
+[< Tutorial 46](../46-commercial-healthcare/README.md) | [Tutorial 48 >](../48-insurance/README.md)
 
 *Last Updated: 2026-04-27 | Phase 14 - Wave 6 (Commercial Verticals)*

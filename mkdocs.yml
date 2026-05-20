@@ -384,6 +384,27 @@ nav:
         - "36 — DOI Interior": tutorials/36-doi-interior/README.md
         - "37 — Graph Analytics": tutorials/37-graph-analytics/README.md
         - "38 — DOJ Justice": tutorials/38-doj-justice/README.md
+      - Advanced AI/ML:
+        - "39 — End-to-End MLOps": tutorials/39-mlops-end-to-end/README.md
+        - "40 — Production RAG": tutorials/40-rag-production/README.md
+      - Cloud Migration:
+        - "41 — Synapse → Fabric": tutorials/41-synapse-to-fabric/README.md
+        - "42 — Databricks → Fabric":
+          - Overview: tutorials/42-databricks-to-fabric/README.md
+          - Workflow Migration: tutorials/42-databricks-to-fabric/02_workflow_migration.md
+        - "43 — Redshift → Fabric": tutorials/43-redshift-to-fabric/README.md
+        - "44 — BigQuery → Fabric": tutorials/44-bigquery-to-fabric/README.md
+        - "45 — On-Prem SSAS/SSIS/SSRS → Fabric": tutorials/45-onprem-ssas-ssis-ssrs/README.md
+      - Industry Deep Dives:
+        - "46 — Commercial Healthcare": tutorials/46-commercial-healthcare/README.md
+        - "47 — Financial Services": tutorials/47-financial-services/README.md
+        - "48 — Insurance Claims": tutorials/48-insurance/README.md
+        - "49 — Retail & CPG": tutorials/49-retail-cpg/README.md
+        - "50 — Manufacturing IoT": tutorials/50-manufacturing-iot/README.md
+        - "51 — Energy & Utilities": tutorials/51-energy-utilities/README.md
+        - "52 — Telecom Analytics": tutorials/52-telecom/README.md
+        - "53 — Pharma Clinical Trials": tutorials/53-pharma/README.md
+        - "54 — Media & Entertainment": tutorials/54-media/README.md
     - POC Workshop (3-Day Agenda):
       - Overview: poc-agenda/README.md
       - Day 1 — Medallion Foundation: poc-agenda/day1-medallion-foundation.md
@@ -392,6 +413,7 @@ nav:
       - Federal Agency Tracks: poc-agenda/federal-agency-tracks.md
       - Demo Runbook: poc-agenda/DEMO_RUNBOOK.md
       - Diagram Guide: poc-agenda/DIAGRAM_GUIDE.md
+      - Instructor Guide: poc-agenda/instructor-guide/README.md
 
   # ============================================================
   # 5. USE CASES — applied analytics by domain & industry

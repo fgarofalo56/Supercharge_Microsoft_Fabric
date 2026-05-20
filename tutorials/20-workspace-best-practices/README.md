@@ -1,4 +1,4 @@
-[Home](../../docs/index.md) > [Tutorials](../) > Workspace Organization Best Practices
+[Home](../../index.md) > [Tutorials](../) > Workspace Organization Best Practices
 
 # ⚙️ Tutorial 20: Workspace Organization Best Practices
 
@@ -600,7 +600,7 @@ tags = {
 
 ## 📖 Additional Resources
 
-- [Best Practices Documentation](../BEST_PRACTICES.md)
+- [Best Practices Documentation](../../BEST_PRACTICES.md)
 - [Microsoft Fabric Workspace Documentation](https://learn.microsoft.com/en-us/fabric/get-started/workspaces)
 - [Deployment Pipelines](https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/intro-to-deployment-pipelines)
 
@@ -610,7 +610,7 @@ tags = {
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [⬅️ 19-Copilot & AI](../19-copilot-ai/README.md) | [📖 Tutorials Index](../README.md) | [21-GeoAnalytics & ArcGIS](../21-geoanalytics-arcgis/README.md) ➡️ |
+| [⬅️ 19-Copilot & AI](../19-copilot-ai/README.md) | [📖 Tutorials Index](../index.md) | [21-GeoAnalytics & ArcGIS](../21-geoanalytics-arcgis/README.md) ➡️ |
 
 ---
 
@@ -618,4 +618,4 @@ tags = {
 
 ---
 
-[⬆️ Back to Top](#-tutorial-20-workspace-organization-best-practices) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-20-workspace-organization-best-practices) | [📚 Tutorials](../) | [🏠 Home](../../index.md)

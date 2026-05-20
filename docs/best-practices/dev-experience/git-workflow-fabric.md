@@ -784,5 +784,5 @@ Fix:    git rm --cached <file>
 - [Conventional Commits](https://www.conventionalcommits.org/)
 - [GitHub Branch Protection](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-a-branch-protection-rule/about-protected-branches)
 - [This POC: fabric-cicd Deployment Guide](../fabric-cicd-deployment.md)
-- [This POC: CI/CD Workflow](../../../.github/workflows/deploy-fabric.yml)
+- [This POC: CI/CD Workflow](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/.github/workflows/deploy-fabric.yml)
 - [This POC: VS Code Workflow](./vscode-fabric-workflow.md)

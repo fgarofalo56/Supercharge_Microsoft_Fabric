@@ -1242,4 +1242,4 @@ If 80% rule fails: document the legitimate business necessity for the predictive
 
 ---
 
-[⬆️ Back to Top](#-responsible-ai-framework-for-fabric) | [📚 Best Practices Index](README.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#-responsible-ai-framework-for-fabric) | [📚 Best Practices Index](index.md) | [🏠 Home](../index.md)

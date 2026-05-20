@@ -322,10 +322,10 @@ test_reproducibility ............. PASSED
 
 ## 🔗 Related Resources
 
-- [Retail Demand Forecasting Use Case](../../docs/use-cases/retail-demand-forecasting.md)
-- [Medallion Architecture Deep Dive](../../docs/best-practices/medallion-architecture-deep-dive.md)
-- [Direct Lake](../../docs/features/direct-lake.md)
-- [PCI-DSS & Network Security](../../docs/best-practices/network-security.md)
+- [Retail Demand Forecasting Use Case](../../use-cases/retail-demand-forecasting.md)
+- [Medallion Architecture Deep Dive](../../best-practices/medallion-architecture-deep-dive.md)
+- [Direct Lake](../../features/direct-lake.md)
+- [PCI-DSS & Network Security](../../best-practices/network-security.md)
 
 ## ⏭️ Next Steps
 

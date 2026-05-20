@@ -1,4 +1,4 @@
-[Home](../docs/index.md) > [POC Agenda](./) > Federal Agency Tracks
+[Home](../index.md) > [POC Agenda](./) > Federal Agency Tracks
 
 # 🏛️ Federal Agency POC Workshop Tracks
 
@@ -232,14 +232,14 @@ Both options produce parquet files with identical schemas, so all notebooks work
 | Document | Description |
 |:---------|:-----------|
 | [3-Day Base Agenda](./README.md) | Core Casino/Gaming workshop |
-| [Tutorials](../tutorials/README.md) | Step-by-step tutorial guides |
-| [Best Practices](../docs/best-practices/README.md) | Architecture and governance best practices |
+| [Tutorials](../tutorials/index.md) | Step-by-step tutorial guides |
+| [Best Practices](../best-practices/index.md) | Architecture and governance best practices |
 | [Demo Runbook](./DEMO_RUNBOOK.md) | Live demo presenter guide |
 
 ---
 
 <div align="center">
 
-[⬆️ Back to Top](#-federal-agency-poc-workshop-tracks) | [📚 POC Agenda](./) | [🏠 Home](../docs/index.md)
+[⬆️ Back to Top](#-federal-agency-poc-workshop-tracks) | [📚 POC Agenda](./) | [🏠 Home](../index.md)
 
 </div>

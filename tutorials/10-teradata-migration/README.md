@@ -11,7 +11,7 @@
 
 </div>
 
-> 🏠 **[Home](../../README.md)** > 📖 **[Tutorials](../README.md)** > 🔄 **Teradata Migration**
+> 🏠 **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > 📖 **[Tutorials](../index.md)** > 🔄 **Teradata Migration**
 
 ---
 
@@ -2079,7 +2079,7 @@ This tutorial includes the following supplementary files:
 
 | ⬅️ Previous | ⬆️ Up | ➡️ Next |
 |------------|------|--------|
-| [09-Advanced AI/ML](../09-advanced-ai-ml/README.md) | [Tutorials Index](../README.md) | [11-SAS Connectivity](../11-sas-connectivity/README.md) |
+| [09-Advanced AI/ML](../09-advanced-ai-ml/README.md) | [Tutorials Index](../index.md) | [11-SAS Connectivity](../11-sas-connectivity/README.md) |
 
 ---
 
@@ -2087,4 +2087,4 @@ This tutorial includes the following supplementary files:
 
 ---
 
-[⬆️ Back to Top](#-tutorial-10-teradata-to-microsoft-fabric-migration) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-10-teradata-to-microsoft-fabric-migration) | [📚 Tutorials](../) | [🏠 Home](../../index.md)

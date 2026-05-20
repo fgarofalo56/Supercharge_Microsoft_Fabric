@@ -977,7 +977,7 @@ Compliance team uses `ai.classify` to auto-tag SAR-suspicious narrative fields. 
 
 ### DOJ Data Agents
 
-The DOJ antitrust review agent (`da-doj-antitrust`) operates on case files and merger filings. High-stakes; quality matters more than cost — but rate-limit and audit are mandatory under [DOJ governance](../use-cases/doj/README.md).
+The DOJ antitrust review agent (`da-doj-antitrust`) operates on case files and merger filings. High-stakes; quality matters more than cost — but rate-limit and audit are mandatory under [DOJ governance](../use-cases/federal-justice-analytics.md).
 
 Controls:
 - **Tier 1 only** (Opus 4) — no automatic fallback; quality is non-negotiable
@@ -1110,4 +1110,4 @@ Use this before declaring an LLM workload "production-ready". Ties into the broa
 
 ---
 
-[⬆️ Back to Top](#-llm-cost-tracking--finops-for-ai-workloads) | [📚 Best Practices Index](README.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#-llm-cost-tracking--finops-for-ai-workloads) | [📚 Best Practices Index](index.md) | [🏠 Home](../index.md)

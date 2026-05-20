@@ -1,4 +1,4 @@
-[Home](../../docs/index.md) > [Tutorials](../) > Networking & Connectivity
+[Home](../../index.md) > [Tutorials](../) > Networking & Connectivity
 
 # 🌐 Tutorial 22: Networking and Connectivity
 
@@ -790,7 +790,7 @@ az network express-route show \
 
 ## 📖 Additional Resources
 
-- [Networking Documentation](../NETWORKING.md)
+- [Networking Documentation](../../NETWORKING.md)
 - [Private Endpoints for Fabric](https://learn.microsoft.com/en-us/fabric/security/security-private-links-overview)
 - [ExpressRoute Documentation](https://learn.microsoft.com/en-us/azure/expressroute/)
 
@@ -800,7 +800,7 @@ az network express-route show \
 
 | Previous | Up | Next |
 |----------|-----|------|
-| [⬅️ 21-GeoAnalytics & ArcGIS](../21-geoanalytics-arcgis/README.md) | [📖 Tutorials Index](../README.md) | [23-SHIR & Data Gateways](../23-shir-data-gateways/README.md) ➡️ |
+| [⬅️ 21-GeoAnalytics & ArcGIS](../21-geoanalytics-arcgis/README.md) | [📖 Tutorials Index](../index.md) | [23-SHIR & Data Gateways](../23-shir-data-gateways/README.md) ➡️ |
 
 ---
 
@@ -808,4 +808,4 @@ az network express-route show \
 
 ---
 
-[⬆️ Back to Top](#-tutorial-22-networking-and-connectivity) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-22-networking-and-connectivity) | [📚 Tutorials](../) | [🏠 Home](../../index.md)

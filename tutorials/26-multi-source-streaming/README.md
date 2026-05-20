@@ -1,4 +1,4 @@
-[Home](../../docs/index.md) > [Tutorials](../) > Multi-Source Streaming
+[Home](../../index.md) > [Tutorials](../) > Multi-Source Streaming
 
 # 📡 Tutorial 26: Multi-Source Streaming
 
@@ -1200,8 +1200,8 @@ The unified view from all eight sources gives casino operations unprecedented si
 
 | Resource | Description |
 |----------|-------------|
-| [`data_generation/config/streaming_sources.yaml`](../../data_generation/config/streaming_sources.yaml) | Full connector registry for all 8 sources |
-| [`data_generation/generators/streaming/`](../../data_generation/generators/streaming/) | Slot machine IoT simulator implementation |
+| [`data_generation/config/streaming_sources.yaml`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/config/streaming_sources.yaml) | Full connector registry for all 8 sources |
+| [`data_generation/generators/streaming/`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/generators/streaming/) | Slot machine IoT simulator implementation |
 | [`validation/unit_tests/streaming/`](../../validation/unit_tests/streaming/) | Unit tests for streaming generators |
 
 **External Documentation:**
@@ -1222,7 +1222,7 @@ The unified view from all eight sources gives casino operations unprecedented si
 
 | ⬅️ Previous | ⬆️ Up | ➡️ Next |
 |------------|------|--------|
-| [25-IBM DB2 Source](../25-ibm-db2-source/README.md) | [Tutorials Index](../README.md) | [27-Video Security Analytics](../27-video-security-analytics/README.md) |
+| [25-IBM DB2 Source](../25-ibm-db2-source/README.md) | [Tutorials Index](../index.md) | [27-Video Security Analytics](../27-video-security-analytics/README.md) |
 
 ---
 
@@ -1230,4 +1230,4 @@ The unified view from all eight sources gives casino operations unprecedented si
 
 ---
 
-[⬆️ Back to Top](#-tutorial-26-multi-source-streaming) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-26-multi-source-streaming) | [📚 Tutorials](../) | [🏠 Home](../../index.md)

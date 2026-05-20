@@ -1,4 +1,4 @@
-[Home](../../docs/index.md) > [Tutorials](../) > IBM DB2 Source
+[Home](../../index.md) > [Tutorials](../) > IBM DB2 Source
 
 # 🏢 Tutorial 25: IBM DB2 as a Source for Microsoft Fabric
 
@@ -940,11 +940,11 @@ Continue to **[Tutorial 26: Multi-Source Real-Time Intelligence](../26-multi-sou
 
 | Resource | Description |
 |---|---|
-| [`scripts/db2_migration_utils.py`](./scripts/db2_migration_utils.py) | Python utilities (EBCDIC, packed decimal converters) |
-| [`scripts/db2_type_mapping.sql`](./scripts/db2_type_mapping.sql) | Complete type mapping reference |
-| [`scripts/db2_sql_translation.sql`](./scripts/db2_sql_translation.sql) | SQL translation examples |
-| [`scripts/db2_catalog_queries.sql`](./scripts/db2_catalog_queries.sql) | System catalog queries for all variants |
-| [`templates/db2_migration_checklist.md`](./templates/db2_migration_checklist.md) | Migration checklist |
+| [`scripts/db2_migration_utils.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/tutorials/25-ibm-db2-source) | Python utilities (EBCDIC, packed decimal converters) |
+| [`scripts/db2_type_mapping.sql`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/tutorials/25-ibm-db2-source) | Complete type mapping reference |
+| [`scripts/db2_sql_translation.sql`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/tutorials/25-ibm-db2-source) | SQL translation examples |
+| [`scripts/db2_catalog_queries.sql`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/tutorials/25-ibm-db2-source) | System catalog queries for all variants |
+| [`templates/db2_migration_checklist.md`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/tutorials/25-ibm-db2-source) | Migration checklist |
 
 ---
 
@@ -964,7 +964,7 @@ Continue to **[Tutorial 26: Multi-Source Real-Time Intelligence](../26-multi-sou
 
 | :arrow_left: Previous | :arrow_up: Up | ➡️ Next |
 |------------|------|--------|
-| [24-Snowflake to Fabric](../24-snowflake-to-fabric/README.md) | [Tutorials Index](../README.md) | [26-Multi-Source Streaming](../26-multi-source-streaming/README.md) |
+| [24-Snowflake to Fabric](../24-snowflake-to-fabric/README.md) | [Tutorials Index](../index.md) | [26-Multi-Source Streaming](../26-multi-source-streaming/README.md) |
 
 ---
 
@@ -972,4 +972,4 @@ Continue to **[Tutorial 26: Multi-Source Real-Time Intelligence](../26-multi-sou
 
 ---
 
-[⬆️ Back to Top](#-tutorial-25-ibm-db2-as-a-source-for-microsoft-fabric) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-25-ibm-db2-as-a-source-for-microsoft-fabric) | [📚 Tutorials](../) | [🏠 Home](../../index.md)

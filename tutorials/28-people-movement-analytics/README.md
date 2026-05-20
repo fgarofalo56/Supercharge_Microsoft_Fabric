@@ -1,4 +1,4 @@
-[Home](../../docs/index.md) > [Tutorials](../) > People Movement Analytics
+[Home](../../index.md) > [Tutorials](../) > People Movement Analytics
 
 # 🚶 Tutorial 28: People Movement Analytics
 
@@ -364,7 +364,7 @@ Each sensor reading conforms to the `movement_event_schema.json` schema defined 
 | `calibration_date` | date/null | Last sensor calibration date |
 | `load_time` | datetime | Pipeline ingestion timestamp |
 
-> 📸 **Schema Reference:** The full JSON Schema is at [`data_generation/schemas/analytics/movement_event_schema.json`](../../data_generation/schemas/analytics/movement_event_schema.json).
+> 📸 **Schema Reference:** The full JSON Schema is at [`data_generation/schemas/analytics/movement_event_schema.json`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/schemas/analytics/movement_event_schema.json).
 
 ### 3.2 Eventstream Configuration
 
@@ -1126,9 +1126,9 @@ The people movement analytics pipeline gives casino operations a spatial awarene
 
 | Resource | Description |
 |----------|-------------|
-| [`data_generation/schemas/analytics/movement_event_schema.json`](../../data_generation/schemas/analytics/movement_event_schema.json) | JSON Schema for movement events |
-| [`data_generation/generators/analytics/people_movement_generator.py`](../../data_generation/generators/analytics/people_movement_generator.py) | Synthetic movement data generator |
-| [`data_generation/generators/analytics/zone_config.py`](../../data_generation/generators/analytics/zone_config.py) | Zone configuration model |
+| [`data_generation/schemas/analytics/movement_event_schema.json`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/schemas/analytics/movement_event_schema.json) | JSON Schema for movement events |
+| [`data_generation/generators/analytics/people_movement_generator.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/generators/analytics/people_movement_generator.py) | Synthetic movement data generator |
+| [`data_generation/generators/analytics/zone_config.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/generators/analytics/zone_config.py) | Zone configuration model |
 
 **External Documentation:**
 
@@ -1146,7 +1146,7 @@ The people movement analytics pipeline gives casino operations a spatial awarene
 
 | ⬅️ Previous | ⬆️ Up | ➡️ Next |
 |------------|------|--------|
-| [27-Video Security Analytics](../27-video-security-analytics/README.md) | [Tutorials Index](../README.md) | [29-Geolocation Analytics](../29-geolocation-analytics/README.md) |
+| [27-Video Security Analytics](../27-video-security-analytics/README.md) | [Tutorials Index](../index.md) | [29-Geolocation Analytics](../29-geolocation-analytics/README.md) |
 
 ---
 
@@ -1154,4 +1154,4 @@ The people movement analytics pipeline gives casino operations a spatial awarene
 
 ---
 
-[⬆️ Back to Top](#-tutorial-28-people-movement-analytics) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-28-people-movement-analytics) | [📚 Tutorials](../) | [🏠 Home](../../index.md)

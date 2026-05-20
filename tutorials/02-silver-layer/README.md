@@ -3,7 +3,7 @@
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
-> **[🏠 Home](../../README.md)** > **[📖 Tutorials](../README.md)** > **🥈 Silver Layer**
+> **[🏠 Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > **[📖 Tutorials](../index.md)** > **🥈 Silver Layer**
 
 ---
 
@@ -1297,7 +1297,7 @@ Continue to **[Tutorial 03: Gold Layer](../03-gold-layer/README.md)** to learn:
 
 | ⬅️ Previous | ⬆️ Up | ➡️ Next |
 |-------------|-------|---------|
-| [01-Bronze Layer](../01-bronze-layer/README.md) | [Tutorials Index](../README.md) | [03-Gold Layer](../03-gold-layer/README.md) |
+| [01-Bronze Layer](../01-bronze-layer/README.md) | [Tutorials Index](../index.md) | [03-Gold Layer](../03-gold-layer/README.md) |
 
 ---
 
@@ -1313,4 +1313,4 @@ Continue to **[Tutorial 03: Gold Layer](../03-gold-layer/README.md)** to learn:
 
 ---
 
-[⬆️ Back to Top](#-tutorial-02-silver-layer) | [📚 Tutorials](../) | [🏠 Home](../../docs/index.md)
+[⬆️ Back to Top](#-tutorial-02-silver-layer) | [📚 Tutorials](../) | [🏠 Home](../../index.md)

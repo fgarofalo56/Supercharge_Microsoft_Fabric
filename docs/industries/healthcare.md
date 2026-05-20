@@ -142,7 +142,7 @@ flowchart LR
 
 ## 🚀 Getting Started
 
-1. **Stand up the medallion architecture** — Follow [Tutorial 01: Bronze Ingestion](../../tutorials/) and [Medallion Deep Dive](../best-practices/medallion-architecture-deep-dive.md) to create `lh_bronze`, `lh_silver`, `lh_gold` Lakehouses.
+1. **Stand up the medallion architecture** — Follow [Tutorial 01: Bronze Ingestion](../tutorials/) and [Medallion Deep Dive](../best-practices/medallion-architecture-deep-dive.md) to create `lh_bronze`, `lh_silver`, `lh_gold` Lakehouses.
 2. **Map FHIR resources to Silver schemas** — Normalize FHIR R4 Bundles (Patient, Encounter, Observation, Condition) into Silver Delta tables with schema enforcement.
 3. **Apply security controls** — Configure [OneLake Security](../features/onelake-security.md) RLS/CLS, enable [Customer-Managed Keys](../best-practices/customer-managed-keys.md), and turn on [SQL Audit Logs](../best-practices/sql-audit-logs-compliance.md).
 4. **Stream device telemetry** — Set up [Eventstreams](../features/real-time-intelligence.md) from IoT Hub to Eventhouse for real-time vitals monitoring.

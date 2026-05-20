@@ -289,7 +289,7 @@
 Found a missing term or see an opportunity for improvement? Please:
 
 1. Open an issue with the term and suggested definition
-2. Submit a pull request following our [Contributing Guidelines](../CONTRIBUTING.md)
+2. Submit a pull request following our [Contributing Guidelines](CONTRIBUTING.md)
 3. Ensure new terms include: Definition, Category, and Related Terms
 
 ### Best Practices
@@ -347,6 +347,6 @@ Found a missing term or see an opportunity for improvement? Please:
 
 ---
 
-*Last Updated: 2025-01-21 | Questions? See [CONTRIBUTING.md](../CONTRIBUTING.md)*
+*Last Updated: 2025-01-21 | Questions? See [CONTRIBUTING.md](CONTRIBUTING.md)*
 
 </div>

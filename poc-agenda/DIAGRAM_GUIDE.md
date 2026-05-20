@@ -1,4 +1,4 @@
-[Home](../docs/index.md) > [POC Agenda](./) > Diagram Guide
+[Home](../index.md) > [POC Agenda](./) > Diagram Guide
 
 # 📊 Mermaid Diagram Guide for POC Agenda
 
@@ -383,6 +383,6 @@ For questions about the diagrams:
 
 **Happy Visualizing! 📊**
 
-[⬆️ Back to Top](#-mermaid-diagram-guide-for-poc-agenda) | [📚 POC Agenda](./) | [🏠 Home](../docs/index.md)
+[⬆️ Back to Top](#-mermaid-diagram-guide-for-poc-agenda) | [📚 POC Agenda](./) | [🏠 Home](../index.md)
 
 </div>

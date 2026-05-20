@@ -431,7 +431,7 @@ ls sample-data/bronze/
 
 Output location: `./output` directory
 
-See [Data Generation Guide](../data_generation/README.md) for complete documentation.
+See [Data Generation Guide](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/README.md) for complete documentation.
 
 </details>
 
@@ -476,7 +476,7 @@ docker-compose run --rm demo-generator  # 7 days, smaller volumes
 - Peak gaming hours: 7pm-2am (weekends higher)
 - CTR generation: ~0.5% of transactions
 
-See [Data Generation - Data Quality Features](../data_generation/README.md#data-quality-features).
+See [Data Generation - Data Quality Features](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/README.md#data-quality-features).
 
 ---
 
@@ -589,7 +589,7 @@ graph LR
 3. **🟠 Advanced** (04-05): Real-time analytics, Power BI
 4. **🔴 Enterprise** (06-09): Pipelines, governance, AI/ML
 
-See [Tutorials README](tutorials/README.md) for complete learning path.
+See [Tutorials README](tutorials/index.md) for complete learning path.
 
 ---
 
@@ -819,7 +819,7 @@ Users with free licenses can view reports published to Fabric capacity workspace
 
 **Location:** `reports/report-definitions/`
 
-See [Reports README](../reports/README.md) for import instructions.
+See [Reports README](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/reports/README.md) for import instructions.
 
 ---
 
@@ -1455,7 +1455,7 @@ See: [Workspace Naming](best-practices/01_WORKSPACES_NAMING.md)
 
 Use **shortcuts** when you want to query data in-place without storage duplication (e.g., referencing ADLS Gen2 landing zones or cross-workspace tables). Use **copy** (pipeline Copy Activity) when you need to transform data during ingestion, the source requires a data gateway, or you want full control over the data lifecycle in OneLake. Shortcuts are free (no storage cost); copies consume storage.
 
-See: [DECISION_TREES.md](DECISION_TREES.md#5-mirroring-vs-shortcuts-vs-pipeline-copy) | [Shortcut Transformations Notebook](../notebooks/bronze/17_bronze_shortcut_transformations.py)
+See: [DECISION_TREES.md](DECISION_TREES.md#5-mirroring-vs-shortcuts-vs-pipeline-copy) | [Shortcut Transformations Notebook](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/bronze/17_bronze_shortcut_transformations.py)
 
 ---
 
@@ -1463,7 +1463,7 @@ See: [DECISION_TREES.md](DECISION_TREES.md#5-mirroring-vs-shortcuts-vs-pipeline-
 
 Workspace Identity is a managed identity scoped to a Fabric workspace. It enables credential-free authentication to Azure resources (Storage, Key Vault, Purview) from notebooks and pipelines -- no service principal secrets to rotate. Use it whenever your notebooks access Azure resources. The POC deploys it via `infra/modules/security/workspace-identity.bicep`.
 
-See: [OneLake Security](features/onelake-security.md) | [Workspace Identity Module](../infra/modules/security/workspace-identity.bicep)
+See: [OneLake Security](features/onelake-security.md) | [Workspace Identity Module](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/security/workspace-identity.bicep)
 
 ---
 
@@ -1537,7 +1537,7 @@ The POC includes three ML notebooks:
 
 All models use MLflow for experiment tracking and model registry.
 
-See: [ML Notebooks](../notebooks/ml/) | [AutoML Model Endpoints](features/automl-model-endpoints.md)
+See: [ML Notebooks](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/) | [AutoML Model Endpoints](features/automl-model-endpoints.md)
 
 ---
 
@@ -1553,7 +1553,7 @@ See: [AutoML Model Endpoints](features/automl-model-endpoints.md)
 
 Yes. Fabric AI Functions (`ai_summarize`, `ai_classify`, `ai_translate`, etc.) are available in Spark SQL for inline LLM-powered transformations. The POC demonstrates compliance-aware usage in `17_gold_ai_functions_compliance.py`, including token cost estimation and PII guardrails.
 
-See: [AI Copilot Configuration](features/ai-copilot-configuration.md) | [AI Functions Notebook](../notebooks/gold/17_gold_ai_functions_compliance.py)
+See: [AI Copilot Configuration](features/ai-copilot-configuration.md) | [AI Functions Notebook](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/17_gold_ai_functions_compliance.py)
 
 ---
 
@@ -1579,7 +1579,7 @@ The migration path depends on your current Synapse component:
 | Pipelines | Fabric Pipelines | JSON-compatible with minor activity type changes |
 | Data Explorer | Eventhouse | KQL fully compatible; export/import databases |
 
-See: [Migration Patterns](best-practices/migration-patterns.md) | [Tutorial 13: Migration Planning](../tutorials/13-migration-planning/)
+See: [Migration Patterns](best-practices/migration-patterns.md) | [Tutorial 13: Migration Planning](tutorials/13-migration-planning/)
 
 ---
 
@@ -1603,7 +1603,7 @@ See: [Migration Patterns](best-practices/migration-patterns.md)
 
 Use Fabric Mirroring for continuous replication from Snowflake into OneLake (Delta format). This provides near-real-time sync without building custom ETL. Alternatively, use Snowflake's `COPY INTO` to export to ADLS Gen2, then create Lakehouse shortcuts to the exported data.
 
-See: [Mirroring](features/mirroring.md) | [Tutorial 24: Snowflake to Fabric](../tutorials/24-snowflake-to-fabric/)
+See: [Mirroring](features/mirroring.md) | [Tutorial 24: Snowflake to Fabric](tutorials/24-snowflake-to-fabric/)
 
 ---
 
@@ -1616,7 +1616,7 @@ Both are covered in the POC:
 
 For both, the typical pattern is: set up an on-premises Data Gateway, configure a pipeline Copy Activity, and land data in the Bronze Lakehouse.
 
-See: [Tutorial 10: Teradata Migration](../tutorials/10-teradata-migration/) | [IBM DB2 CDC Notebook](../notebooks/streaming/04_ibm_db2_cdc.py)
+See: [Tutorial 10: Teradata Migration](tutorials/10-teradata-migration/) | [IBM DB2 CDC Notebook](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/streaming/04_ibm_db2_cdc.py)
 
 ---
 
@@ -1658,7 +1658,7 @@ The POC uses two complementary approaches:
 
 `fabric-cicd` is the Microsoft-recommended tool for deploying Fabric workspace items. It handles notebook uploads, pipeline definitions, and semantic model refreshes.
 
-See: [fabric-cicd Deployment](best-practices/fabric-cicd-deployment.md) | [Tutorial 12: CI/CD DevOps](../tutorials/12-cicd-devops/)
+See: [fabric-cicd Deployment](best-practices/fabric-cicd-deployment.md) | [Tutorial 12: CI/CD DevOps](tutorials/12-cicd-devops/)
 
 ---
 
@@ -1707,7 +1707,7 @@ See: [Security](SECURITY.md) | [SQL Audit Logs](best-practices/sql-audit-logs-co
 
 **Suspicious Activity Reports (SAR):** The Silver layer detects structuring patterns -- multiple transactions between $8,000-$9,999 by the same individual within 24 hours. The fraud detection ML model (`02_ml_fraud_detection.py`) provides additional anomaly scoring.
 
-See: [Compliance Reporting Notebook](../notebooks/gold/03_gold_compliance_reporting.py)
+See: [Compliance Reporting Notebook](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/03_gold_compliance_reporting.py)
 
 ---
 
@@ -1721,7 +1721,7 @@ Tribal Healthcare notebooks implement HIPAA safeguards:
 4. **42 CFR Part 2:** Substance abuse treatment records have additional access restrictions
 5. **Retention:** Log Analytics configured for >= 6 years (HIPAA requirement) via `log-analytics.bicep`
 
-See: [Tribal Health Analytics](use-cases/tribal-health-analytics.md) | [Tutorial 30: Tribal Healthcare](../tutorials/30-tribal-healthcare/)
+See: [Tribal Health Analytics](use-cases/tribal-health-analytics.md) | [Tutorial 30: Tribal Healthcare](tutorials/30-tribal-healthcare/)
 
 ---
 
@@ -1764,7 +1764,7 @@ See: [Customer-Managed Keys](best-practices/customer-managed-keys.md) | [Network
 **GitHub Repository:**
 - 🐛 **Report bugs**: [Open an issue](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/issues)
 - 💡 **Feature requests**: [Start a discussion](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/discussions)
-- 🔧 **Pull requests**: See [Contributing Guide](../CONTRIBUTING.md)
+- 🔧 **Pull requests**: See [Contributing Guide](CONTRIBUTING.md)
 
 **Before Opening an Issue:**
 1. Check existing issues for duplicates
@@ -1781,7 +1781,7 @@ See: [Customer-Managed Keys](best-practices/customer-managed-keys.md) | [Network
 - Choose notification preferences
 
 **Release Notes:**
-- Check [CHANGELOG.md](../CHANGELOG.md) for version history
+- Check [CHANGELOG.md](CHANGELOG.md) for version history
 - Subscribe to releases on GitHub
 
 **Social Media:**

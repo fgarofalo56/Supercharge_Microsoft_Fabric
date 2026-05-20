@@ -1,4 +1,4 @@
-[Home](../../docs/index.md) > [Tutorials](../README.md) > Graph Analytics for Fraud Detection
+[Home](../../index.md) > [Tutorials](../index.md) > Graph Analytics for Fraud Detection
 
 # 🔗 Tutorial 37: Graph Analytics for Fraud Detection
 
@@ -21,7 +21,7 @@
 | **Fabric Capacity** | F64 or higher with Eventhouse enabled |
 | **Workspace** | Fabric workspace with Contributor+ access |
 | **Eventhouse** | At least one Eventhouse provisioned |
-| **Prior Tutorials** | [00 - Environment Setup](../00-environment-setup/README.md), [01 - Medallion Architecture](../01-medallion-architecture/README.md), [04 - Real-Time Intelligence](../04-real-time-intelligence/README.md) |
+| **Prior Tutorials** | [00 - Environment Setup](../00-environment-setup/README.md), [01 - Medallion Architecture](../01-bronze-layer/README.md), [04 - Real-Time Intelligence](../04-real-time-analytics/README.md) |
 | **Knowledge** | Basic KQL, familiarity with graph concepts (nodes/edges) |
 
 ---
@@ -613,10 +613,10 @@ Delete the `Fraud Network Monitor` dashboard from your workspace manually.
 
 | Tutorial | Relevance |
 |----------|-----------|
-| [04 - Real-Time Intelligence](../04-real-time-intelligence/README.md) | Eventhouse setup and KQL fundamentals |
-| [08 - Data Activator](../08-data-activator/README.md) | Reflex and alert configuration |
-| [14 - Compliance Reporting](../14-compliance-reporting/README.md) | CTR/SAR threshold logic and FinCEN reporting |
-| [29 - Federal Data Processing](../29-federal-data-processing/README.md) | Federal agency medallion pipelines |
+| [04 - Real-Time Intelligence](../04-real-time-analytics/README.md) | Eventhouse setup and KQL fundamentals |
+| [08 - Data Activator](../../features/data-activator.md) | Reflex and alert configuration |
+| [14 - Compliance Reporting](../14-security-networking/README.md) | CTR/SAR threshold logic and FinCEN reporting |
+| [29 - Federal Data Processing](../29-geolocation-analytics/README.md) | Federal agency medallion pipelines |
 
 ---
 
@@ -632,6 +632,6 @@ Delete the `Fraud Network Monitor` dashboard from your workspace manually.
 
 <div align="center">
 
-**[⬅️ Tutorial 36](../36-data-mesh-domains/README.md)** · **[🏠 All Tutorials](../README.md)**
+**[⬅️ Tutorial 36](../36-data-mesh-domains/README.md)** · **[🏠 All Tutorials](../index.md)**
 
 </div>

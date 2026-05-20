@@ -141,7 +141,7 @@ flowchart LR
 
 ## 🚀 Getting Started
 
-1. **Set up the medallion architecture** — Follow [Tutorial 01: Bronze Ingestion](../../tutorials/) and [Medallion Deep Dive](../best-practices/medallion-architecture-deep-dive.md) to establish Bronze/Silver/Gold layers.
+1. **Set up the medallion architecture** — Follow [Tutorial 01: Bronze Ingestion](../tutorials/) and [Medallion Deep Dive](../best-practices/medallion-architecture-deep-dive.md) to establish Bronze/Silver/Gold layers.
 2. **Stream transaction events** — Configure [Eventstreams](../features/real-time-intelligence.md) to ingest card authorization events from Event Hub into Eventhouse.
 3. **Apply PCI-DSS controls** — Enable [OneLake Security](../features/onelake-security.md) CLS for PAN masking, [CMK](../best-practices/customer-managed-keys.md), and [Network Security](../best-practices/network-security.md) private endpoints.
 4. **Build fraud detection** — Use Eventhouse KQL anomaly detection on the transaction stream and wire [Data Activator](../best-practices/alerting-data-activator.md) alerts.

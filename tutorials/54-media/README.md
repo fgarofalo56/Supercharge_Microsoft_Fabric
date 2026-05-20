@@ -272,7 +272,7 @@ DROP TABLE IF EXISTS lh_gold.gold_content_affinity;
 
 ## 📚 Related Resources
 
-- [Use Case: Media Audience Analytics](../../docs/use-cases/media-audience-analytics.md)
+- [Use Case: Media Audience Analytics](../../use-cases/media-audience-analytics.md)
 - [Tutorial 00: Environment Setup](../00-environment-setup/README.md)
 - [Tutorial 04: Real-Time Analytics](../04-real-time-analytics/README.md)
 - [Fabric Eventstream Docs](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/event-streams/overview)
@@ -295,4 +295,4 @@ DROP TABLE IF EXISTS lh_gold.gold_content_affinity;
 
 ---
 
-**Next Tutorial:** [Tutorial 55 →](../55-retail/README.md)
+**Next Tutorial:** [Tutorial 55 →](../index.md)

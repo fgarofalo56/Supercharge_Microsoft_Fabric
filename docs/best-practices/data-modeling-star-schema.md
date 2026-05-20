@@ -838,4 +838,4 @@ df_dim_agency.write.format("delta").mode("overwrite").saveAsTable("lh_gold.dim_a
 
 ---
 
-[Back to Best Practices Index](./README.md) | [Back to Documentation](../index.md)
+[Back to Best Practices Index](./index.md) | [Back to Documentation](../index.md)
