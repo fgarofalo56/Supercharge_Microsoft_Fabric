@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](../) > Operations > On-Call Rotation Handbook
+[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > Operations > On-Call Rotation Handbook
 
 # 📟 On-Call Rotation Handbook
 

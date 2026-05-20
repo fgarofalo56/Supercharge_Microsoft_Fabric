@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](..) > [Security](.) > GDPR Right to Deletion
+[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Security](../index.md) > GDPR Right to Deletion
 
 # 🗑️ GDPR Right to Deletion (Right to be Forgotten) on Microsoft Fabric
 

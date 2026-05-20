@@ -823,16 +823,16 @@ flowchart TB
 
 | Tutorial | Topic | Link |
 |----------|-------|------|
-| 00 | Environment Setup | [View](../tutorials/00-environment-setup/) |
-| 01 | Bronze Layer | [View](../tutorials/01-bronze-layer/) |
-| 02 | Silver Layer | [View](../tutorials/02-silver-layer/) |
-| 03 | Gold Layer | [View](../tutorials/03-gold-layer/) |
-| 04 | Real-Time Analytics | [View](../tutorials/04-real-time-analytics/) |
-| 05 | Direct Lake & Power BI | [View](../tutorials/05-direct-lake-powerbi/) |
-| 06 | Data Pipelines | [View](../tutorials/06-data-pipelines/) |
-| 07 | Governance & Purview | [View](../tutorials/07-governance-purview/) |
-| 08 | Database Mirroring | [View](../tutorials/08-database-mirroring/) |
-| 09 | Advanced AI/ML | [View](../tutorials/09-advanced-ai-ml/) |
+| 00 | Environment Setup | [View](../tutorials/00-environment-setup/README.md) |
+| 01 | Bronze Layer | [View](../tutorials/01-bronze-layer/README.md) |
+| 02 | Silver Layer | [View](../tutorials/02-silver-layer/README.md) |
+| 03 | Gold Layer | [View](../tutorials/03-gold-layer/README.md) |
+| 04 | Real-Time Analytics | [View](../tutorials/04-real-time-analytics/README.md) |
+| 05 | Direct Lake & Power BI | [View](../tutorials/05-direct-lake-powerbi/README.md) |
+| 06 | Data Pipelines | [View](../tutorials/06-data-pipelines/README.md) |
+| 07 | Governance & Purview | [View](../tutorials/07-governance-purview/README.md) |
+| 08 | Database Mirroring | [View](../tutorials/08-database-mirroring/README.md) |
+| 09 | Advanced AI/ML | [View](../tutorials/09-advanced-ai-ml/README.md) |
 
 ### Microsoft Documentation
 

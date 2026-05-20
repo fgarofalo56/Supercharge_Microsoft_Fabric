@@ -45,70 +45,70 @@
 <tbody>
 <tr>
 <td align="center">00</td>
-<td><a href="../00-environment-setup/README.md">⚙️ Environment Setup</a></td>
+<td><a href="../00-environment-setup/">⚙️ Environment Setup</a></td>
 <td align="center"><img src="https://img.shields.io/badge/✓-COMPLETE-success?style=flat-square" alt="Complete"></td>
 <td align="center">45-60 min</td>
 <td align="center">⭐ Beginner</td>
 </tr>
 <tr style="background-color: #e8f5e9;">
 <td align="center"><strong>01</strong></td>
-<td><strong>👉 <a href="../01-bronze-layer/README.md">🥉 Bronze Layer</a></strong></td>
+<td><strong>👉 <a href="../01-bronze-layer/">🥉 Bronze Layer</a></strong></td>
 <td align="center"><img src="https://img.shields.io/badge/●-CURRENT-blue?style=flat-square" alt="Current"></td>
 <td align="center">60-90 min</td>
 <td align="center">⭐ Beginner</td>
 </tr>
 <tr>
 <td align="center">02</td>
-<td><a href="../02-silver-layer/README.md">🥈 Silver Layer</a></td>
+<td><a href="../02-silver-layer/">🥈 Silver Layer</a></td>
 <td align="center"><img src="https://img.shields.io/badge/○-TODO-lightgrey?style=flat-square" alt="Todo"></td>
 <td align="center">60-90 min</td>
 <td align="center">⭐⭐ Intermediate</td>
 </tr>
 <tr>
 <td align="center">03</td>
-<td><a href="../03-gold-layer/README.md">🥇 Gold Layer</a></td>
+<td><a href="../03-gold-layer/">🥇 Gold Layer</a></td>
 <td align="center"><img src="https://img.shields.io/badge/○-TODO-lightgrey?style=flat-square" alt="Todo"></td>
 <td align="center">90-120 min</td>
 <td align="center">⭐⭐ Intermediate</td>
 </tr>
 <tr>
 <td align="center">04</td>
-<td><a href="../04-real-time-analytics/README.md">⚡ Real-Time Analytics</a></td>
+<td><a href="../04-real-time-analytics/">⚡ Real-Time Analytics</a></td>
 <td align="center"><img src="https://img.shields.io/badge/○-TODO-lightgrey?style=flat-square" alt="Todo"></td>
 <td align="center">90-120 min</td>
 <td align="center">⭐⭐⭐ Advanced</td>
 </tr>
 <tr>
 <td align="center">05</td>
-<td><a href="../05-direct-lake-powerbi/README.md">📊 Direct Lake & Power BI</a></td>
+<td><a href="../05-direct-lake-powerbi/">📊 Direct Lake & Power BI</a></td>
 <td align="center"><img src="https://img.shields.io/badge/○-TODO-lightgrey?style=flat-square" alt="Todo"></td>
 <td align="center">60-90 min</td>
 <td align="center">⭐⭐ Intermediate</td>
 </tr>
 <tr>
 <td align="center">06</td>
-<td><a href="../06-data-pipelines/README.md">🔄 Data Pipelines</a></td>
+<td><a href="../06-data-pipelines/">🔄 Data Pipelines</a></td>
 <td align="center"><img src="https://img.shields.io/badge/○-TODO-lightgrey?style=flat-square" alt="Todo"></td>
 <td align="center">60-90 min</td>
 <td align="center">⭐⭐ Intermediate</td>
 </tr>
 <tr>
 <td align="center">07</td>
-<td><a href="../07-governance-purview/README.md">🛡️ Governance & Purview</a></td>
+<td><a href="../07-governance-purview/">🛡️ Governance & Purview</a></td>
 <td align="center"><img src="https://img.shields.io/badge/○-TODO-lightgrey?style=flat-square" alt="Todo"></td>
 <td align="center">60-90 min</td>
 <td align="center">⭐⭐ Intermediate</td>
 </tr>
 <tr>
 <td align="center">08</td>
-<td><a href="../08-database-mirroring/README.md">🔄 Database Mirroring</a></td>
+<td><a href="../08-database-mirroring/">🔄 Database Mirroring</a></td>
 <td align="center"><img src="https://img.shields.io/badge/○-TODO-lightgrey?style=flat-square" alt="Todo"></td>
 <td align="center">60-90 min</td>
 <td align="center">⭐⭐ Intermediate</td>
 </tr>
 <tr>
 <td align="center">09</td>
-<td><a href="../09-advanced-ai-ml/README.md">🤖 Advanced AI/ML</a></td>
+<td><a href="../09-advanced-ai-ml/">🤖 Advanced AI/ML</a></td>
 <td align="center"><img src="https://img.shields.io/badge/○-TODO-lightgrey?style=flat-square" alt="Todo"></td>
 <td align="center">90-120 min</td>
 <td align="center">⭐⭐⭐ Advanced</td>

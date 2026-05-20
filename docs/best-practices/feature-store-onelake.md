@@ -110,7 +110,7 @@ A feature store earns its keep on three pillars. Drop any one and you've built a
 | **♻️ Reuse** | Features are stable contracts: same entity_id, same schema, same semver bump rules | Every project owns its own pipeline; cost and complexity compound |
 | **🎯 Correctness** | Point-in-time bitemporal joins prevent training-serving leakage | Models look great in dev, regress in prod, "the data was different" |
 
-**The three pillars must be enforced with conventions and tooling, not hope.** This document is the convention; the helper library lives in [`src/feature_store/`](../../src/feature_store/) (created in Phase 14).
+**The three pillars must be enforced with conventions and tooling, not hope.** This document is the convention; the helper library lives in [`src/feature_store/`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/notebooks/ml) (created in Phase 14).
 
 ---
 

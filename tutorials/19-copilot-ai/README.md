@@ -1154,7 +1154,7 @@ You are now ready to implement Microsoft Fabric in production!
 ### Immediate Actions
 
 1. **Start Your POC**
-   - Use the [3-Day Workshop Agenda](../poc-agenda/) to guide stakeholders
+   - Use the [3-Day Workshop Agenda](../../poc-agenda/README.md) to guide stakeholders
    - Focus on one high-value use case first
    - Demonstrate quick wins within the first week
 

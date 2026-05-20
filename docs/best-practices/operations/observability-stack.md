@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Docs](../../) > [Best Practices](../) > [Operations](./) > Observability Stack
+[Home](../../index.md) > [Docs](../../) > [Best Practices](../index.md) > [Operations](../index.md) > Observability Stack
 
 # 🔭 Observability Stack: Log Analytics + Workspace Monitoring + Action Groups + Grafana
 

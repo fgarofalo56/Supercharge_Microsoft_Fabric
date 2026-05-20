@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Docs](../../) > [Best Practices](../) > Git Workflow for Fabric
+[Home](../../index.md) > [Docs](../../) > [Best Practices](../index.md) > Git Workflow for Fabric
 
 # Git Workflow for Microsoft Fabric Development
 

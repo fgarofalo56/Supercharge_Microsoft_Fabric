@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](..) > [Data Management](.) > Master Data Management
+[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Data Management](../index.md) > Master Data Management
 
 # 🏛️ Master Data Management on Microsoft Fabric
 
@@ -553,7 +553,7 @@ For federal agencies (USDA, SBA, EPA, DOI, DOJ, NOAA, DOT/FAA, Tribal Health), t
 - Privacy Act 1974 — federal beneficiary records require System of Records Notice (SORN)
 - Cross-agency joins are **never automatic**; manual approval workflow required
 
-See [federal use cases](../../use-cases/) for agency-specific patterns.
+See [federal use cases](../../use-cases/index.md) for agency-specific patterns.
 
 ---
 

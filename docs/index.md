@@ -19,7 +19,7 @@ hide:
 
 ## Architecture at a Glance
 
-<a href="ARCHITECTURE.md" class="architecture-hero">
+<a href="ARCHITECTURE/" class="architecture-hero">
   <img src="assets/images/architecture-hero.svg" alt="Microsoft Fabric architecture — OneLake, Medallion flow, Real-Time Intelligence, Direct Lake to Power BI, Purview governance">
 </a>
 

@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](..) > [Security](.) > STRIDE Threat Model
+[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Security](../index.md) > STRIDE Threat Model
 
 # 🛡️ STRIDE Threat Modeling for Fabric Reference Architecture
 

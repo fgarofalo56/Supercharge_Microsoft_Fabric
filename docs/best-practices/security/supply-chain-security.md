@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](..) > [Security](.) > Supply Chain Security
+[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Security](../index.md) > Supply Chain Security
 
 # 🔗 Supply Chain Security: Notebook + Library + Connector Vetting
 

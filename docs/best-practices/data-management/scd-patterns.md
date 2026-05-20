@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](..) > [Data Management](.) > SCD Patterns
+[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Data Management](../index.md) > SCD Patterns
 
 # 🕰️ Slowly Changing Dimension (SCD) Patterns in Delta Lake
 

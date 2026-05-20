@@ -1202,7 +1202,7 @@ The unified view from all eight sources gives casino operations unprecedented si
 |----------|-------------|
 | [`data_generation/config/streaming_sources.yaml`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/config/streaming_sources.yaml) | Full connector registry for all 8 sources |
 | [`data_generation/generators/streaming/`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/generators/streaming/) | Slot machine IoT simulator implementation |
-| [`validation/unit_tests/streaming/`](../../validation/unit_tests/streaming/) | Unit tests for streaming generators |
+| [`validation/unit_tests/streaming/`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/validation/unit_tests/streaming) | Unit tests for streaming generators |
 
 **External Documentation:**
 

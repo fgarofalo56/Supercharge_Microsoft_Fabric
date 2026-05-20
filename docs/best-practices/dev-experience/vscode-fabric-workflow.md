@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Docs](../../) > [Best Practices](../) > VS Code Fabric Workflow
+[Home](../../index.md) > [Docs](../../) > [Best Practices](../index.md) > VS Code Fabric Workflow
 
 # VS Code Workflow for Microsoft Fabric Development
 

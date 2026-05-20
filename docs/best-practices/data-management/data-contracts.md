@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](..) > [Data Management](.) > Data Contracts
+[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Data Management](../index.md) > Data Contracts
 
 # 📜 Data Contracts on Microsoft Fabric
 

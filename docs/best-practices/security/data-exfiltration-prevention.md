@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](..) > [Security](.) > Data Exfiltration Prevention
+[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Security](../index.md) > Data Exfiltration Prevention
 
 # 🚪 Data Exfiltration Prevention on Microsoft Fabric
 

@@ -1,4 +1,4 @@
-[Home](../index.md) > [Docs](..) > [Diagrams](./) > Cost Breakdown
+[Home](../index.md) > [Docs](../index.md) > [Diagrams](../ARCHITECTURE.md) > Cost Breakdown
 
 # 💰 Cost Breakdown Diagram
 
@@ -312,4 +312,4 @@ flowchart TB
 
 ---
 
-[⬆️ Back to Top](#-cost-breakdown-diagram) | [📚 Parent](./) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#-cost-breakdown-diagram) | [📚 Parent](../ARCHITECTURE.md) | [🏠 Home](../index.md)

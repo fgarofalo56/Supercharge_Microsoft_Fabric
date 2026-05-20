@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](..) > [Security](.) > SOC 2 Type II Readiness
+[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Security](../index.md) > SOC 2 Type II Readiness
 
 # 🔐 SOC 2 Type II Readiness on Microsoft Fabric
 

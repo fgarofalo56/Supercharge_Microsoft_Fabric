@@ -1282,7 +1282,7 @@ You now have hands-on experience with:
 
 ### What's Next?
 
-1. **Review the [POC Agenda](../poc-agenda/)** for workshop preparation
+1. **Review the [POC Agenda](../../poc-agenda/README.md)** for workshop preparation
 2. **Customize** the solution for your specific casino requirements
 3. **Present** to stakeholders using the provided materials
 4. **Scale** to production with enterprise governance
@@ -1293,7 +1293,7 @@ You now have hands-on experience with:
 
 Continue to **[Tutorial 10: Teradata Migration](../10-teradata-migration/README.md)** to learn how to migrate from Teradata to Microsoft Fabric.
 
-Or review the **[POC Agenda](../poc-agenda/)** for workshop preparation, presentation materials, and stakeholder demonstrations.
+Or review the **[POC Agenda](../../poc-agenda/README.md)** for workshop preparation, presentation materials, and stakeholder demonstrations.
 
 ---
 

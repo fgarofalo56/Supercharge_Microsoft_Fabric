@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Docs](../../) > [Best Practices](../) > Local Spark Debugging
+[Home](../../index.md) > [Docs](../../) > [Best Practices](../index.md) > Local Spark Debugging
 
 # Local PySpark Debugging for Fabric Development
 

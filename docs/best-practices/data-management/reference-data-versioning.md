@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](..) > [Data Management](.) > Reference Data Versioning
+[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Data Management](../index.md) > Reference Data Versioning
 
 # 📚 Reference Data Versioning on Microsoft Fabric
 

@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Docs](../../) > [Best Practices](../) > [Operations](./) > SLO/SLI for Fabric
+[Home](../../index.md) > [Docs](../../) > [Best Practices](../index.md) > [Operations](../index.md) > SLO/SLI for Fabric
 
 # 🎯 SLO/SLI Definitions for Fabric Workspaces
 

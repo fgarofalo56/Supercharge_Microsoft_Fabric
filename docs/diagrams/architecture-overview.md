@@ -1,4 +1,4 @@
-[Home](../index.md) > [Docs](..) > [Diagrams](./) > Architecture Overview
+[Home](../index.md) > [Docs](../index.md) > [Diagrams](../ARCHITECTURE.md) > Architecture Overview
 
 # 🏗️ Architecture Overview Diagram
 
@@ -442,4 +442,4 @@ Reference these diagrams for lineage documentation in Microsoft Purview data cat
 
 ---
 
-[⬆️ Back to Top](#-architecture-overview-diagram) | [📚 Parent](./) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#-architecture-overview-diagram) | [📚 Parent](../ARCHITECTURE.md) | [🏠 Home](../index.md)

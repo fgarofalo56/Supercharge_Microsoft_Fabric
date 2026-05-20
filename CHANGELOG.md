@@ -614,7 +614,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute to th
 
 ## 📄 License
 
-This project is licensed under the MIT License - see [LICENSE](LICENSE) for details.
+This project is licensed under the MIT License - see [LICENSE](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/LICENSE) for details.
 
 ---
 

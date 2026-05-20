@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](..) > [Data Management](.) > Late-Arriving Data
+[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Data Management](../index.md) > Late-Arriving Data
 
 # ⏱️ Late-Arriving Data on Microsoft Fabric
 
@@ -851,7 +851,7 @@ Plug these queries into Data Activator. A spike in `late_ratio` is almost always
 
 - **Cause:** Compliance officer reviews a transaction, finds it was misclassified or under-reported (chip-color omission, structuring detection ex-post).
 - **Pattern:** Source pushes correction with `is_correction=true`. Silver MERGE updates in place. Audit row captures officer's name, reason, before/after.
-- **Cascading rule check:** A corrected amount that now crosses $10K (CTR) or matches structuring patterns ($8K-$9.9K series) **automatically** opens a compliance ticket — see [casino-floor-monitoring](../../use-cases/casino/) for the rule engine.
+- **Cascading rule check:** A corrected amount that now crosses $10K (CTR) or matches structuring patterns ($8K-$9.9K series) **automatically** opens a compliance ticket — see [casino-floor-monitoring](../../use-cases/index.md) for the rule engine.
 
 ### W-2G End-of-Year True-Ups
 

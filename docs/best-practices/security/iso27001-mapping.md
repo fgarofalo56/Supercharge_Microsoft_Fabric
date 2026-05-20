@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](..) > [Security](.) > ISO 27001:2022 Mapping
+[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Security](../index.md) > ISO 27001:2022 Mapping
 
 # 🌐 ISO 27001:2022 Annex A Controls → Fabric Implementation Mapping
 

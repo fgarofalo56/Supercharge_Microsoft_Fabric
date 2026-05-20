@@ -953,7 +953,7 @@ The casino floor analytics Data Agent answers natural-language questions about p
 
 ### DOJ Legal Research Eval
 
-Legal research generation must be conservative, well-cited, and free of hallucinated case law. See the DOJ feature in [Federal Use Cases](../use-cases/) for context.
+Legal research generation must be conservative, well-cited, and free of hallucinated case law. See the DOJ feature in [Federal Use Cases](../use-cases/index.md) for context.
 
 | Eval Dimension | Metric | Floor |
 |----------------|--------|-------|

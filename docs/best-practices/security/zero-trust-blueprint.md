@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](..) > [Security](.) > Zero-Trust Blueprint
+[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Security](../index.md) > Zero-Trust Blueprint
 
 # 🛡️ Zero-Trust Architecture Blueprint for Microsoft Fabric
 

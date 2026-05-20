@@ -49,7 +49,7 @@ The enhanced progress tracker provides:
 <!-- COMPLETED TUTORIALS -->
 <tr>
 <td align="center">00</td>
-<td><a href="../00-environment-setup/README.md">⚙️ Environment Setup</a></td>
+<td><a href="../../00-environment-setup/">⚙️ Environment Setup</a></td>
 <td align="center"><img src="https://img.shields.io/badge/✓-COMPLETE-success?style=flat-square" alt="Complete"></td>
 <td align="center">45-60 min</td>
 <td align="center">⭐ Beginner</td>
@@ -58,7 +58,7 @@ The enhanced progress tracker provides:
 <!-- CURRENT TUTORIAL (highlighted with background color and bold) -->
 <tr style="background-color: #e8f5e9;">
 <td align="center"><strong>01</strong></td>
-<td><strong>👉 <a href="../01-bronze-layer/README.md">🥉 Bronze Layer</a></strong></td>
+<td><strong>👉 <a href="../../01-bronze-layer/">🥉 Bronze Layer</a></strong></td>
 <td align="center"><img src="https://img.shields.io/badge/●-CURRENT-blue?style=flat-square" alt="Current"></td>
 <td align="center">60-90 min</td>
 <td align="center">⭐ Beginner</td>
@@ -67,7 +67,7 @@ The enhanced progress tracker provides:
 <!-- TODO TUTORIALS -->
 <tr>
 <td align="center">02</td>
-<td><a href="../02-silver-layer/README.md">🥈 Silver Layer</a></td>
+<td><a href="../../02-silver-layer/">🥈 Silver Layer</a></td>
 <td align="center"><img src="https://img.shields.io/badge/○-TODO-lightgrey?style=flat-square" alt="Todo"></td>
 <td align="center">60-90 min</td>
 <td align="center">⭐⭐ Intermediate</td>
@@ -174,14 +174,14 @@ When updating a tutorial's progress tracker:
    <!-- Remove style attribute and bold tags -->
    <tr>
      <td align="center">01</td>
-     <td><a href="../01-bronze-layer/README.md">🥉 Bronze Layer</a></td>
+     <td><a href="../../01-bronze-layer/">🥉 Bronze Layer</a></td>
    ```
 
 3. **Add highlighting to new current tutorial:**
    ```html
    <tr style="background-color: #e8f5e9;">
      <td align="center"><strong>02</strong></td>
-     <td><strong>👉 <a href="../02-silver-layer/README.md">🥈 Silver Layer</a></strong></td>
+     <td><strong>👉 <a href="../../02-silver-layer/">🥈 Silver Layer</a></strong></td>
      <td align="center"><img src="https://img.shields.io/badge/●-CURRENT-blue?style=flat-square" alt="Current"></td>
    ```
 
@@ -189,8 +189,8 @@ When updating a tutorial's progress tracker:
    ```markdown
    | Navigation | |
    |---|---|
-   | ⬅️ **Previous** | [01-Bronze Layer](../01-bronze-layer/README.md) |
-   | ➡️ **Next** | [03-Gold Layer](../03-gold-layer/README.md) |
+   | ⬅️ **Previous** | [01-Bronze Layer](../../01-bronze-layer/README.md) |
+   | ➡️ **Next** | [03-Gold Layer](../../03-gold-layer/README.md) |
    ```
 
 ## 📱 Responsive Behavior

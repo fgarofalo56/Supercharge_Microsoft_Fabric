@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](..) > [Security](.) > Audit Trail Immutability
+[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Security](../index.md) > Audit Trail Immutability
 
 # 📜 Audit Trail Immutability: Tamper-Evident Workflows for Compliance
 
@@ -797,14 +797,14 @@ State and tribal gaming commission examiners receive:
 - Reader group gated by DOJ background-check attestation
 - Retention extended to 10 years for case-related records
 - Replication to a Confidential Ledger instance in a **GovCloud** subscription
-- See [DOJ federal domain doc](../../federal-domains/doj/) for case-handling specifics
+- See [DOJ federal domain doc](../../use-cases/federal-justice-analytics.md) for case-handling specifics
 
 ### Tribal Health — HIPAA 6 Years
 
 - `retention_class=data-access` set to 2,190 days (6 yrs from creation/last-effective-date)
 - Audit captures every PHI access, including legitimate clinical access
 - Annual access-pattern review by Privacy Officer
-- See [HIPAA section in compliance docs](../../federal-domains/tribal-health/)
+- See [HIPAA section in compliance docs](../../use-cases/tribal-health-analytics.md)
 
 ### SBA — Privacy Act + Records Management
 

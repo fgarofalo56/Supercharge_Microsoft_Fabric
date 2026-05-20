@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Docs](../../) > [Best Practices](../) > Dev Container Setup
+[Home](../../index.md) > [Docs](../../) > [Best Practices](../index.md) > Dev Container Setup
 
 # Dev Container Setup for Fabric Development
 

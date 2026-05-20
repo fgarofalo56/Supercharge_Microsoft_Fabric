@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Docs](../../) > [Best Practices](../) > [Operations](./) > Change Management
+[Home](../../index.md) > [Docs](../../) > [Best Practices](../index.md) > [Operations](../index.md) > Change Management
 
 # 🛡️ Change Management for Fabric Platforms
 

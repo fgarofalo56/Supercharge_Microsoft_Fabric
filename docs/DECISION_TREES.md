@@ -260,7 +260,7 @@ flowchart TD
 
 The POC demonstrates all three patterns. **Shortcuts** are used in `17_bronze_shortcut_transformations.py` to reference external ADLS data without duplication. **Pipeline Copy** patterns are documented in streaming notebooks (`01_sql_server_cdc.py` through `05_oracle_cdc.py`) for on-premises source ingestion. **Mirroring** patterns are covered in Tutorial 08 (Database Mirroring).
 
-See: [Mirroring](features/mirroring.md) | [Shortcut Transformations Notebook](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/bronze/17_bronze_shortcut_transformations.py) | [Tutorial 08](tutorials/08-database-mirroring/)
+See: [Mirroring](features/mirroring.md) | [Shortcut Transformations Notebook](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/bronze/17_bronze_shortcut_transformations.py) | [Tutorial 08](tutorials/08-database-mirroring/README.md)
 
 ---
 
@@ -496,9 +496,9 @@ See: [Testing Strategies](best-practices/testing-strategies.md) | [Medallion Dee
 | Mirroring vs Shortcuts vs Copy | [Mirroring](features/mirroring.md) | [Shortcut Notebook](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/bronze/17_bronze_shortcut_transformations.py), [Source Patterns](best-practices/09_SOURCE_SPECIFIC_PATTERNS.md) |
 | Eventhouse vs Lakehouse | [RTI](features/real-time-intelligence.md) | [Vector DB](features/eventhouse-vector-database.md), [Lakehouse Setup](best-practices/07_LAKEHOUSE_SETUP.md) |
 | Config Management | [OneLake Security](features/onelake-security.md) | [Workspace Identity](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/security/workspace-identity.bicep), [CMK](best-practices/customer-managed-keys.md) |
-| Adding a New Vertical | [Notebook Index](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/README.md) | [USDA Tutorial](tutorials/32-usda-agriculture/), [DOJ Tutorial](tutorials/38-doj-justice/) |
+| Adding a New Vertical | [Notebook Index](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/README.md) | [USDA Tutorial](tutorials/32-usda-agriculture/README.md), [DOJ Tutorial](tutorials/38-doj-justice/README.md) |
 | Capacity Sizing | [Capacity Planning](best-practices/capacity-planning-cost-optimization.md) | [Cost Estimation](COST_ESTIMATION.md), [Alerts & Budgets](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/monitoring/alerts-and-budgets.bicep) |
-| Data Quality Strategy | [Testing Strategies](best-practices/testing-strategies.md) | [Medallion Deep Dive](best-practices/medallion-architecture-deep-dive.md), [Great Expectations](../validation/) |
+| Data Quality Strategy | [Testing Strategies](best-practices/testing-strategies.md) | [Medallion Deep Dive](best-practices/medallion-architecture-deep-dive.md), [Great Expectations](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/validation) |
 | General Decision Guide | [10_DECISION_GUIDE.md](best-practices/10_DECISION_GUIDE.md) | This document (detailed flowcharts) |
 
 ---
@@ -507,4 +507,4 @@ See: [Testing Strategies](best-practices/testing-strategies.md) | [Medallion Dee
 
 ---
 
-[Back to Docs](index.md) | [Architecture](ARCHITECTURE.md) | [Best Practices](best-practices/)
+[Back to Docs](index.md) | [Architecture](ARCHITECTURE.md) | [Best Practices](best-practices/index.md)

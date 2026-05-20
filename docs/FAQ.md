@@ -1579,7 +1579,7 @@ The migration path depends on your current Synapse component:
 | Pipelines | Fabric Pipelines | JSON-compatible with minor activity type changes |
 | Data Explorer | Eventhouse | KQL fully compatible; export/import databases |
 
-See: [Migration Patterns](best-practices/migration-patterns.md) | [Tutorial 13: Migration Planning](tutorials/13-migration-planning/)
+See: [Migration Patterns](best-practices/migration-patterns.md) | [Tutorial 13: Migration Planning](tutorials/13-migration-planning/README.md)
 
 ---
 
@@ -1603,7 +1603,7 @@ See: [Migration Patterns](best-practices/migration-patterns.md)
 
 Use Fabric Mirroring for continuous replication from Snowflake into OneLake (Delta format). This provides near-real-time sync without building custom ETL. Alternatively, use Snowflake's `COPY INTO` to export to ADLS Gen2, then create Lakehouse shortcuts to the exported data.
 
-See: [Mirroring](features/mirroring.md) | [Tutorial 24: Snowflake to Fabric](tutorials/24-snowflake-to-fabric/)
+See: [Mirroring](features/mirroring.md) | [Tutorial 24: Snowflake to Fabric](tutorials/24-snowflake-to-fabric/README.md)
 
 ---
 
@@ -1616,7 +1616,7 @@ Both are covered in the POC:
 
 For both, the typical pattern is: set up an on-premises Data Gateway, configure a pipeline Copy Activity, and land data in the Bronze Lakehouse.
 
-See: [Tutorial 10: Teradata Migration](tutorials/10-teradata-migration/) | [IBM DB2 CDC Notebook](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/streaming/04_ibm_db2_cdc.py)
+See: [Tutorial 10: Teradata Migration](tutorials/10-teradata-migration/README.md) | [IBM DB2 CDC Notebook](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/streaming/04_ibm_db2_cdc.py)
 
 ---
 
@@ -1658,7 +1658,7 @@ The POC uses two complementary approaches:
 
 `fabric-cicd` is the Microsoft-recommended tool for deploying Fabric workspace items. It handles notebook uploads, pipeline definitions, and semantic model refreshes.
 
-See: [fabric-cicd Deployment](best-practices/fabric-cicd-deployment.md) | [Tutorial 12: CI/CD DevOps](tutorials/12-cicd-devops/)
+See: [fabric-cicd Deployment](best-practices/fabric-cicd-deployment.md) | [Tutorial 12: CI/CD DevOps](tutorials/12-cicd-devops/README.md)
 
 ---
 
@@ -1721,7 +1721,7 @@ Tribal Healthcare notebooks implement HIPAA safeguards:
 4. **42 CFR Part 2:** Substance abuse treatment records have additional access restrictions
 5. **Retention:** Log Analytics configured for >= 6 years (HIPAA requirement) via `log-analytics.bicep`
 
-See: [Tribal Health Analytics](use-cases/tribal-health-analytics.md) | [Tutorial 30: Tribal Healthcare](tutorials/30-tribal-healthcare/)
+See: [Tribal Health Analytics](use-cases/tribal-health-analytics.md) | [Tutorial 30: Tribal Healthcare](tutorials/30-tribal-healthcare/README.md)
 
 ---
 
@@ -1802,10 +1802,10 @@ See: [Customer-Managed Keys](best-practices/customer-managed-keys.md) | [Network
 | 📋 **Prerequisites** | [PREREQUISITES.md](PREREQUISITES.md) |
 | 🔐 **Security** | [SECURITY.md](SECURITY.md) |
 | 💰 **Cost Estimation** | [COST_ESTIMATION.md](COST_ESTIMATION.md) |
-| 📖 **Tutorials** | [tutorials/](tutorials/) |
-| 🎲 **Data Generation** | [data_generation/](../data_generation/) |
-| 📊 **Reports** | [reports/](../reports/) |
-| 📅 **POC Agenda** | [poc-agenda/](poc-agenda/) |
+| 📖 **Tutorials** | [tutorials/](tutorials/index.md) |
+| 🎲 **Data Generation** | [data_generation/](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/data_generation) |
+| 📊 **Reports** | [reports/](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/reports) |
+| 📅 **POC Agenda** | [poc-agenda/](poc-agenda/README.md) |
 
 ---
 

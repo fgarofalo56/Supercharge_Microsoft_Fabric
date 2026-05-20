@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](..) > [Data Management](.) > Business Glossary Automation
+[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Data Management](../index.md) > Business Glossary Automation
 
 # 📖 Business Glossary Automation with Microsoft Purview
 

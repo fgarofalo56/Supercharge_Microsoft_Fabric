@@ -46,98 +46,98 @@
 <tbody>
 <tr>
 <td align="center">00</td>
-<td><a href="../00-environment-setup/README.md">Environment Setup</a></td>
+<td><a href="../00-environment-setup/">Environment Setup</a></td>
 <td align="center"><img src="https://img.shields.io/badge/DONE-brightgreen?style=flat-square" alt="Done"></td>
 <td align="center">45-60 min</td>
 <td align="center">Beginner</td>
 </tr>
 <tr>
 <td align="center">01</td>
-<td><a href="../01-bronze-layer/README.md">Bronze Layer</a></td>
+<td><a href="../01-bronze-layer/">Bronze Layer</a></td>
 <td align="center"><img src="https://img.shields.io/badge/DONE-brightgreen?style=flat-square" alt="Done"></td>
 <td align="center">60-90 min</td>
 <td align="center">Beginner</td>
 </tr>
 <tr>
 <td align="center">02</td>
-<td><a href="../02-silver-layer/README.md">Silver Layer</a></td>
+<td><a href="../02-silver-layer/">Silver Layer</a></td>
 <td align="center"><img src="https://img.shields.io/badge/DONE-brightgreen?style=flat-square" alt="Done"></td>
 <td align="center">60-90 min</td>
 <td align="center">Intermediate</td>
 </tr>
 <tr>
 <td align="center">03</td>
-<td><a href="../03-gold-layer/README.md">Gold Layer</a></td>
+<td><a href="../03-gold-layer/">Gold Layer</a></td>
 <td align="center"><img src="https://img.shields.io/badge/DONE-brightgreen?style=flat-square" alt="Done"></td>
 <td align="center">90-120 min</td>
 <td align="center">Intermediate</td>
 </tr>
 <tr>
 <td align="center">04</td>
-<td><a href="../04-real-time-analytics/README.md">Real-Time Analytics</a></td>
+<td><a href="../04-real-time-analytics/">Real-Time Analytics</a></td>
 <td align="center"><img src="https://img.shields.io/badge/DONE-brightgreen?style=flat-square" alt="Done"></td>
 <td align="center">90-120 min</td>
 <td align="center">Advanced</td>
 </tr>
 <tr>
 <td align="center">05</td>
-<td><a href="../05-direct-lake-powerbi/README.md">Direct Lake & Power BI</a></td>
+<td><a href="../05-direct-lake-powerbi/">Direct Lake & Power BI</a></td>
 <td align="center"><img src="https://img.shields.io/badge/DONE-brightgreen?style=flat-square" alt="Done"></td>
 <td align="center">60-90 min</td>
 <td align="center">Intermediate</td>
 </tr>
 <tr>
 <td align="center">06</td>
-<td><a href="../06-data-pipelines/README.md">Data Pipelines</a></td>
+<td><a href="../06-data-pipelines/">Data Pipelines</a></td>
 <td align="center"><img src="https://img.shields.io/badge/DONE-brightgreen?style=flat-square" alt="Done"></td>
 <td align="center">60-90 min</td>
 <td align="center">Intermediate</td>
 </tr>
 <tr>
 <td align="center">07</td>
-<td><a href="../07-governance-purview/README.md">Governance & Purview</a></td>
+<td><a href="../07-governance-purview/">Governance & Purview</a></td>
 <td align="center"><img src="https://img.shields.io/badge/DONE-brightgreen?style=flat-square" alt="Done"></td>
 <td align="center">60-90 min</td>
 <td align="center">Intermediate</td>
 </tr>
 <tr>
 <td align="center">08</td>
-<td><a href="../08-database-mirroring/README.md">Database Mirroring</a></td>
+<td><a href="../08-database-mirroring/">Database Mirroring</a></td>
 <td align="center"><img src="https://img.shields.io/badge/DONE-brightgreen?style=flat-square" alt="Done"></td>
 <td align="center">60-90 min</td>
 <td align="center">Intermediate</td>
 </tr>
 <tr>
 <td align="center">09</td>
-<td><a href="../09-advanced-ai-ml/README.md">Advanced AI/ML</a></td>
+<td><a href="../09-advanced-ai-ml/">Advanced AI/ML</a></td>
 <td align="center"><img src="https://img.shields.io/badge/DONE-brightgreen?style=flat-square" alt="Done"></td>
 <td align="center">90-120 min</td>
 <td align="center">Advanced</td>
 </tr>
 <tr>
 <td align="center">10</td>
-<td><a href="../10-teradata-migration/README.md">Teradata Migration</a></td>
+<td><a href="../10-teradata-migration/">Teradata Migration</a></td>
 <td align="center"><img src="https://img.shields.io/badge/DONE-brightgreen?style=flat-square" alt="Done"></td>
 <td align="center">2-3 hours</td>
 <td align="center">Advanced</td>
 </tr>
 <tr>
 <td align="center">11</td>
-<td><a href="../11-sas-connectivity/README.md">SAS Connectivity</a></td>
+<td><a href="../11-sas-connectivity/">SAS Connectivity</a></td>
 <td align="center"><img src="https://img.shields.io/badge/DONE-brightgreen?style=flat-square" alt="Done"></td>
 <td align="center">90 min</td>
 <td align="center">Intermediate</td>
 </tr>
 <tr>
 <td align="center">12</td>
-<td><a href="../12-cicd-devops/README.md">CI/CD DevOps</a></td>
+<td><a href="../12-cicd-devops/">CI/CD DevOps</a></td>
 <td align="center"><img src="https://img.shields.io/badge/DONE-brightgreen?style=flat-square" alt="Done"></td>
 <td align="center">2-3 hours</td>
 <td align="center">Advanced</td>
 </tr>
 <tr>
 <td align="center">13</td>
-<td><a href="../13-migration-planning/README.md">Migration Planning</a></td>
+<td><a href="../13-migration-planning/">Migration Planning</a></td>
 <td align="center"><img src="https://img.shields.io/badge/DONE-brightgreen?style=flat-square" alt="Done"></td>
 <td align="center">4 hours</td>
 <td align="center">Expert</td>
@@ -151,35 +151,35 @@
 </tr>
 <tr>
 <td align="center">15</td>
-<td><a href="../15-cost-management/README.md">Cost Management</a></td>
+<td><a href="../15-cost-optimization/">Cost Management</a></td>
 <td align="center"><img src="https://img.shields.io/badge/TODO-lightgrey?style=flat-square" alt="Todo"></td>
 <td align="center">1-2 hours</td>
 <td align="center">Intermediate</td>
 </tr>
 <tr>
 <td align="center">16</td>
-<td><a href="../16-monitoring-alerting/README.md">Monitoring & Alerting</a></td>
+<td><a href="../17-monitoring-alerting/">Monitoring & Alerting</a></td>
 <td align="center"><img src="https://img.shields.io/badge/TODO-lightgrey?style=flat-square" alt="Todo"></td>
 <td align="center">1-2 hours</td>
 <td align="center">Intermediate</td>
 </tr>
 <tr>
 <td align="center">17</td>
-<td><a href="../17-disaster-recovery/README.md">Disaster Recovery</a></td>
+<td><a href="../../runbooks/disaster-recovery-execution/">Disaster Recovery</a></td>
 <td align="center"><img src="https://img.shields.io/badge/TODO-lightgrey?style=flat-square" alt="Todo"></td>
 <td align="center">2 hours</td>
 <td align="center">Advanced</td>
 </tr>
 <tr>
 <td align="center">18</td>
-<td><a href="../18-performance-optimization/README.md">Performance Optimization</a></td>
+<td><a href="../16-performance-tuning/">Performance Optimization</a></td>
 <td align="center"><img src="https://img.shields.io/badge/TODO-lightgrey?style=flat-square" alt="Todo"></td>
 <td align="center">2-3 hours</td>
 <td align="center">Advanced</td>
 </tr>
 <tr>
 <td align="center">19</td>
-<td><a href="../19-capstone-project/README.md">Capstone Project</a></td>
+<td><a href="../">Capstone Project</a></td>
 <td align="center"><img src="https://img.shields.io/badge/TODO-lightgrey?style=flat-square" alt="Todo"></td>
 <td align="center">4-6 hours</td>
 <td align="center">Expert</td>

@@ -29,8 +29,8 @@ This document shows the visual and functional improvements made to the tutorial 
 
 | Navigation | |
 |---|---|
-| **Previous** | [00-Environment Setup](../00-environment-setup/README.md) |
-| **Next** | [02-Silver Layer](../02-silver-layer/README.md) |
+| **Previous** | [00-Environment Setup](../../00-environment-setup/README.md) |
+| **Next** | [02-Silver Layer](../../02-silver-layer/README.md) |
 ```
 
 **Limitations:**
@@ -64,21 +64,21 @@ This document shows the visual and functional improvements made to the tutorial 
 <tbody>
 <tr>
 <td align="center">00</td>
-<td><a href="../00-environment-setup/README.md">⚙️ Environment Setup</a></td>
+<td><a href="../../00-environment-setup/">⚙️ Environment Setup</a></td>
 <td align="center"><img src="https://img.shields.io/badge/✓-COMPLETE-success?style=flat-square" alt="Complete"></td>
 <td align="center">45-60 min</td>
 <td align="center">⭐ Beginner</td>
 </tr>
 <tr style="background-color: #e8f5e9;">
 <td align="center"><strong>01</strong></td>
-<td><strong>👉 <a href="../01-bronze-layer/README.md">🥉 Bronze Layer</a></strong></td>
+<td><strong>👉 <a href="../../01-bronze-layer/">🥉 Bronze Layer</a></strong></td>
 <td align="center"><img src="https://img.shields.io/badge/●-CURRENT-blue?style=flat-square" alt="Current"></td>
 <td align="center">60-90 min</td>
 <td align="center">⭐ Beginner</td>
 </tr>
 <tr>
 <td align="center">02</td>
-<td><a href="../02-silver-layer/README.md">🥈 Silver Layer</a></td>
+<td><a href="../../02-silver-layer/">🥈 Silver Layer</a></td>
 <td align="center"><img src="https://img.shields.io/badge/○-TODO-lightgrey?style=flat-square" alt="Todo"></td>
 <td align="center">60-90 min</td>
 <td align="center">⭐⭐ Intermediate</td>
@@ -95,8 +95,8 @@ This document shows the visual and functional improvements made to the tutorial 
 
 | Navigation | |
 |---|---|
-| **Previous** | [⬅️ 00-Environment Setup](../00-environment-setup/README.md) |
-| **Next** | [02-Silver Layer](../02-silver-layer/README.md) ➡️ |
+| **Previous** | [⬅️ 00-Environment Setup](../../00-environment-setup/README.md) |
+| **Next** | [02-Silver Layer](../../02-silver-layer/README.md) ➡️ |
 ```
 
 **Improvements:**

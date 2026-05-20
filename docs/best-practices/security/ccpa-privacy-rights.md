@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](..) > [Security](.) > CCPA / CPRA Privacy Rights
+[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Security](../index.md) > CCPA / CPRA Privacy Rights
 
 # 🛡️ CCPA / CPRA Privacy Rights Implementation on Microsoft Fabric
 
