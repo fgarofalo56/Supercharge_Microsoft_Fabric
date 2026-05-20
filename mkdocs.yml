@@ -414,6 +414,18 @@ nav:
       - Demo Runbook: poc-agenda/DEMO_RUNBOOK.md
       - Diagram Guide: poc-agenda/DIAGRAM_GUIDE.md
       - Instructor Guide: poc-agenda/instructor-guide/README.md
+    - Notebook Guides:
+      - Cross-Reference Index: notebooks/README.md
+      - Bronze Notebooks: notebooks/bronze/README.md
+      - Silver Notebooks: notebooks/silver/README.md
+      - Gold Notebooks: notebooks/gold/README.md
+      - ML Notebooks: notebooks/ml/README.md
+      - Real-Time Notebooks: notebooks/real-time/README.md
+    - Sample Apps:
+      - Logic App Orchestrator: sample-apps/logic-app-orchestrator/README.md
+      - Power Apps Canvas Consumer: sample-apps/power-apps-canvas-consumer/README.md
+      - React + GraphQL Consumer: sample-apps/react-graphql-consumer/README.md
+      - Streamlit Consumer: sample-apps/streamlit-fabric-consumer/README.md
 
   # ============================================================
   # 5. USE CASES — applied analytics by domain & industry
@@ -499,7 +511,26 @@ nav:
       - SOC 2 Control Matrix: compliance-templates/soc2-control-matrix.md
     - Infrastructure:
       - Overview: infra/README.md
+      - Bicep Module Index: infra/modules/README.md
       - Contributing: CONTRIBUTING.md
+    - Power BI Reports:
+      - Reports & Semantic Model: reports/README.md
+      - DAX Measures Reference: reports/dax-measures.md
+      - Semantic Model Setup: reports/setup-guide.md
+    - Validation & Testing:
+      - Framework Overview: validation/README.md
+      - Great Expectations DQ: validation/great_expectations/README.md
+      - Integration Tests: validation/integration_tests/README.md
+      - Deployment Tests: validation/deployment_tests/README.md
+      - Phase 14 Regression Report: validation/phase14_regression_report.md
+      - E2E Documentation Tests: tests/e2e/README.md
+    - Toolchain:
+      - Data Generation Framework: data_generation/README.md
+      - Scripts: scripts/README.md
+      - Docker Configuration: docker/README.md
+      - Sample Data: sample-data/README.md
+      - Dev Container: dev-container/README.md
+      - Git Hooks: git-hooks/README.md
     - Troubleshooting Matrix: TROUBLESHOOTING_MATRIX.md
 
   # ============================================================

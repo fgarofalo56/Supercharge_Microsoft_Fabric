@@ -1,6 +1,6 @@
 # Notebook Cross-Reference Index
 
-> **[Home](../README.md)** | **[Tutorials](../tutorials/)** | **[Feature Docs](../docs/features/)** | **[Validation](../validation/)**
+> **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** | **[Tutorials](../tutorials/)** | **[Feature Docs](../features/)** | **[Validation](../validation/)**
 
 Complete cross-reference mapping every notebook to its corresponding tutorial, feature doc, and use-case document. Use this index to navigate between implementation (notebooks), learning (tutorials), and reference (docs).
 
@@ -47,7 +47,7 @@ Core casino/gaming medallion pipeline -- the foundation of the POC.
 | 05 | `silver/05_silver_security_enriched.py` | Silver | [02-silver-layer](../tutorials/02-silver-layer/) | -- | Threat scoring, correlation |
 | 06 | `silver/06_silver_compliance_validated.py` | Silver | [02-silver-layer](../tutorials/02-silver-layer/) | -- | Threshold validation, deadlines |
 | 00 | `gold/00_gold_dim_tables.py` | Gold | [03-gold-layer](../tutorials/03-gold-layer/) | -- | Shared dimension tables |
-| 01 | `gold/01_gold_slot_performance.py` | Gold | [03-gold-layer](../tutorials/03-gold-layer/) | [Direct Lake](../docs/features/direct-lake.md) | Coin-in, Theo, Hold%, variance |
+| 01 | `gold/01_gold_slot_performance.py` | Gold | [03-gold-layer](../tutorials/03-gold-layer/) | [Direct Lake](../features/direct-lake.md) | Coin-in, Theo, Hold%, variance |
 | 02 | `gold/02_gold_player_360.py` | Gold | [03-gold-layer](../tutorials/03-gold-layer/) | -- | LTV, churn risk, tier analytics |
 | 03 | `gold/03_gold_compliance_reporting.py` | Gold | [03-gold-layer](../tutorials/03-gold-layer/) | -- | CTR/SAR/W-2G counts and reports |
 | 04 | `gold/04_gold_table_analytics.py` | Gold | [03-gold-layer](../tutorials/03-gold-layer/) | -- | Drop, Win, Hold% by table |
@@ -66,7 +66,7 @@ HIPAA-compliant health encounter processing with PHI masking and FHIR R4 mapping
 |---|----------|-------|----------|-------------|----------|
 | 07 | `bronze/07_bronze_tribal_health.py` | Bronze | [30-tribal-healthcare](../tutorials/30-tribal-healthcare/) | -- | IHS encounter ingestion, HIPAA audit |
 | 07 | `silver/07_silver_tribal_health.py` | Silver | [30-tribal-healthcare](../tutorials/30-tribal-healthcare/) | -- | PHI masking, FHIR R4, ICD-10 |
-| 07 | `gold/07_gold_tribal_health_360.py` | Gold | [30-tribal-healthcare](../tutorials/30-tribal-healthcare/) | -- | [Tribal Health Analytics](../docs/use-cases/tribal-health-analytics.md) |
+| 07 | `gold/07_gold_tribal_health_360.py` | Gold | [30-tribal-healthcare](../tutorials/30-tribal-healthcare/) | -- | [Tribal Health Analytics](../use-cases/tribal-health-analytics.md) |
 
 ---
 
@@ -78,7 +78,7 @@ Multi-domain transportation data: flights, safety incidents, traffic.
 |---|----------|-------|----------|-------------|----------|
 | 08 | `bronze/08_bronze_dot_faa.py` | Bronze | [31-federal-dot-faa](../tutorials/31-federal-dot-faa/) | -- | Multi-domain FAA ingestion |
 | 08 | `silver/08_silver_dot_faa.py` | Silver | [31-federal-dot-faa](../tutorials/31-federal-dot-faa/) | -- | IATA validation, delay categories |
-| 08 | `gold/08_gold_dot_faa_analytics.py` | Gold | [31-federal-dot-faa](../tutorials/31-federal-dot-faa/) | -- | [Transportation Safety](../docs/use-cases/transportation-safety-analytics.md) |
+| 08 | `gold/08_gold_dot_faa_analytics.py` | Gold | [31-federal-dot-faa](../tutorials/31-federal-dot-faa/) | -- | [Transportation Safety](../use-cases/transportation-safety-analytics.md) |
 
 ---
 
@@ -108,7 +108,7 @@ Crop production, food safety, and agricultural economics.
 |---|----------|-------|----------|-------------|----------|
 | 12 | `bronze/12_bronze_usda.py` | Bronze | [32-usda-agriculture](../tutorials/32-usda-agriculture/) | -- | USDA dataset ingestion |
 | 12 | `silver/12_silver_usda.py` | Silver | [32-usda-agriculture](../tutorials/32-usda-agriculture/) | -- | Crop data cleansing, validation |
-| 12 | `gold/12_gold_usda_analytics.py` | Gold | [32-usda-agriculture](../tutorials/32-usda-agriculture/) | -- | [Agricultural Analytics](../docs/use-cases/agricultural-analytics.md) |
+| 12 | `gold/12_gold_usda_analytics.py` | Gold | [32-usda-agriculture](../tutorials/32-usda-agriculture/) | -- | [Agricultural Analytics](../use-cases/agricultural-analytics.md) |
 
 ---
 
@@ -120,7 +120,7 @@ Loan programs, disaster lending, and small business analytics.
 |---|----------|-------|----------|-------------|----------|
 | 13 | `bronze/13_bronze_sba.py` | Bronze | [33-sba-small-business](../tutorials/33-sba-small-business/) | -- | SBA loan data ingestion |
 | 13 | `silver/13_silver_sba.py` | Silver | [33-sba-small-business](../tutorials/33-sba-small-business/) | -- | Loan validation, enrichment |
-| 13 | `gold/13_gold_sba_analytics.py` | Gold | [33-sba-small-business](../tutorials/33-sba-small-business/) | -- | [Small Business Lending](../docs/use-cases/small-business-lending-analytics.md) |
+| 13 | `gold/13_gold_sba_analytics.py` | Gold | [33-sba-small-business](../tutorials/33-sba-small-business/) | -- | [Small Business Lending](../use-cases/small-business-lending-analytics.md) |
 
 ---
 
@@ -132,7 +132,7 @@ Weather observations, climate data, and storm events.
 |---|----------|-------|----------|-------------|----------|
 | 14 | `bronze/14_bronze_noaa.py` | Bronze | [34-noaa-weather-climate](../tutorials/34-noaa-weather-climate/) | -- | NOAA weather data ingestion |
 | 14 | `silver/14_silver_noaa.py` | Silver | [34-noaa-weather-climate](../tutorials/34-noaa-weather-climate/) | -- | Station validation, unit conversion |
-| 14 | `gold/14_gold_noaa_analytics.py` | Gold | [34-noaa-weather-climate](../tutorials/34-noaa-weather-climate/) | -- | [Weather/Climate Analytics](../docs/use-cases/weather-climate-analytics.md) |
+| 14 | `gold/14_gold_noaa_analytics.py` | Gold | [34-noaa-weather-climate](../tutorials/34-noaa-weather-climate/) | -- | [Weather/Climate Analytics](../use-cases/weather-climate-analytics.md) |
 
 ---
 
@@ -144,7 +144,7 @@ Air quality monitoring, water quality, and emissions tracking.
 |---|----------|-------|----------|-------------|----------|
 | 15 | `bronze/15_bronze_epa.py` | Bronze | [35-epa-environment](../tutorials/35-epa-environment/) | -- | EPA environmental data ingestion |
 | 15 | `silver/15_silver_epa.py` | Silver | [35-epa-environment](../tutorials/35-epa-environment/) | -- | Compliance threshold checks |
-| 15 | `gold/15_gold_epa_analytics.py` | Gold | [35-epa-environment](../tutorials/35-epa-environment/) | -- | [Environmental Compliance](../docs/use-cases/environmental-compliance-analytics.md) |
+| 15 | `gold/15_gold_epa_analytics.py` | Gold | [35-epa-environment](../tutorials/35-epa-environment/) | -- | [Environmental Compliance](../use-cases/environmental-compliance-analytics.md) |
 
 ---
 
@@ -156,7 +156,7 @@ Land management, wildlife tracking, and natural resource analytics.
 |---|----------|-------|----------|-------------|----------|
 | 16 | `bronze/16_bronze_doi.py` | Bronze | [36-doi-interior](../tutorials/36-doi-interior/) | -- | DOI resource data ingestion |
 | 16 | `silver/16_silver_doi.py` | Silver | [36-doi-interior](../tutorials/36-doi-interior/) | -- | Geospatial validation, enrichment |
-| 16 | `gold/16_gold_doi_analytics.py` | Gold | [36-doi-interior](../tutorials/36-doi-interior/) | -- | [Natural Resources Analytics](../docs/use-cases/natural-resources-analytics.md) |
+| 16 | `gold/16_gold_doi_analytics.py` | Gold | [36-doi-interior](../tutorials/36-doi-interior/) | -- | [Natural Resources Analytics](../use-cases/natural-resources-analytics.md) |
 
 ---
 
@@ -168,7 +168,7 @@ Case management, antitrust enforcement, and federal justice analytics.
 |---|----------|-------|----------|-------------|----------|
 | 18 | `bronze/18_bronze_doj.py` | Bronze | [38-doj-justice](../tutorials/38-doj-justice/) | -- | DOJ case data ingestion |
 | 18 | `silver/18_silver_doj.py` | Silver | [38-doj-justice](../tutorials/38-doj-justice/) | -- | Case validation, jurisdiction |
-| 19 | `gold/19_gold_doj_analytics.py` | Gold | [38-doj-justice](../tutorials/38-doj-justice/) | -- | [Federal Justice Analytics](../docs/use-cases/federal-justice-analytics.md) |
+| 19 | `gold/19_gold_doj_analytics.py` | Gold | [38-doj-justice](../tutorials/38-doj-justice/) | -- | [Federal Justice Analytics](../use-cases/federal-justice-analytics.md) |
 
 ---
 
@@ -178,9 +178,9 @@ Notebooks that span domains or implement special features.
 
 | # | Notebook | Layer | Tutorial | Feature Doc |
 |---|----------|-------|----------|-------------|
-| 17 | `bronze/17_bronze_shortcut_transformations.py` | Bronze | [08-database-mirroring](../tutorials/08-database-mirroring/) | [Mirroring](../docs/features/mirroring.md) |
-| 17 | `gold/17_gold_ai_functions_compliance.py` | Gold | [19-copilot-ai](../tutorials/19-copilot-ai/) | [AI Copilot](../docs/features/ai-copilot-configuration.md) |
-| 18 | `gold/18_gold_digital_twin_demo.py` | Gold | -- | [Digital Twin Builder](../docs/features/digital-twin-builder.md) |
+| 17 | `bronze/17_bronze_shortcut_transformations.py` | Bronze | [08-database-mirroring](../tutorials/08-database-mirroring/) | [Mirroring](../features/mirroring.md) |
+| 17 | `gold/17_gold_ai_functions_compliance.py` | Gold | [19-copilot-ai](../tutorials/19-copilot-ai/) | [AI Copilot](../features/ai-copilot-configuration.md) |
+| 18 | `gold/18_gold_digital_twin_demo.py` | Gold | -- | [Digital Twin Builder](../features/digital-twin-builder.md) |
 
 ---
 
@@ -190,9 +190,9 @@ Predictive models and AI/ML pipelines using Fabric MLflow.
 
 | # | Notebook | Type | Tutorial | Feature Doc |
 |---|----------|------|----------|-------------|
-| 01 | `ml/01_ml_player_churn_prediction.py` | GBT Classifier | [09-advanced-ai-ml](../tutorials/09-advanced-ai-ml/) | [AutoML](../docs/features/automl-model-endpoints.md) |
-| 02 | `ml/02_ml_fraud_detection.py` | Isolation Forest | [09-advanced-ai-ml](../tutorials/09-advanced-ai-ml/) | [AutoML](../docs/features/automl-model-endpoints.md) |
-| 03 | `ml/03_ml_automl_weather_forecasting.py` | AutoML | [09-advanced-ai-ml](../tutorials/09-advanced-ai-ml/) | [AutoML](../docs/features/automl-model-endpoints.md) |
+| 01 | `ml/01_ml_player_churn_prediction.py` | GBT Classifier | [09-advanced-ai-ml](../tutorials/09-advanced-ai-ml/) | [AutoML](../features/automl-model-endpoints.md) |
+| 02 | `ml/02_ml_fraud_detection.py` | Isolation Forest | [09-advanced-ai-ml](../tutorials/09-advanced-ai-ml/) | [AutoML](../features/automl-model-endpoints.md) |
+| 03 | `ml/03_ml_automl_weather_forecasting.py` | AutoML | [09-advanced-ai-ml](../tutorials/09-advanced-ai-ml/) | [AutoML](../features/automl-model-endpoints.md) |
 
 ---
 
@@ -202,14 +202,14 @@ CDC and IoT streaming connectors for real-time data ingestion from diverse sourc
 
 | # | Notebook | Source | Tutorial | Feature Doc |
 |---|----------|--------|----------|-------------|
-| 01 | `streaming/01_sql_server_cdc.py` | SQL Server (Debezium) | [26-multi-source-streaming](../tutorials/26-multi-source-streaming/) | [Copy Job CDC](../docs/features/copy-job-cdc.md) |
-| 02 | `streaming/02_azure_sql_change_feed.py` | Azure SQL (Change Tracking) | [26-multi-source-streaming](../tutorials/26-multi-source-streaming/) | [Mirroring](../docs/features/mirroring.md) |
-| 03 | `streaming/03_cosmos_db_change_feed.py` | Cosmos DB (Change Feed) | [26-multi-source-streaming](../tutorials/26-multi-source-streaming/) | [Mirroring](../docs/features/mirroring.md) |
-| 04 | `streaming/04_ibm_db2_cdc.py` | IBM DB2 (ASN Capture) | [25-ibm-db2-source](../tutorials/25-ibm-db2-source/) | [Source Patterns](../docs/best-practices/09_SOURCE_SPECIFIC_PATTERNS.md) |
-| 05 | `streaming/05_oracle_cdc.py` | Oracle (LogMiner) | [26-multi-source-streaming](../tutorials/26-multi-source-streaming/) | [Source Patterns](../docs/best-practices/09_SOURCE_SPECIFIC_PATTERNS.md) |
-| 06 | `streaming/06_kafka_connector.py` | Apache Kafka (Avro/JSON) | [26-multi-source-streaming](../tutorials/26-multi-source-streaming/) | [RTI](../docs/features/real-time-intelligence.md) |
-| 07 | `streaming/07_iot_hub_ingestion.py` | Azure IoT Hub | [26-multi-source-streaming](../tutorials/26-multi-source-streaming/) | [RTI](../docs/features/real-time-intelligence.md) |
-| 08 | `streaming/08_slot_machine_iot_simulator.py` | Custom IoT (SAS) | [04-real-time-analytics](../tutorials/04-real-time-analytics/) | [RTI](../docs/features/real-time-intelligence.md) |
+| 01 | `streaming/01_sql_server_cdc.py` | SQL Server (Debezium) | [26-multi-source-streaming](../tutorials/26-multi-source-streaming/) | [Copy Job CDC](../features/copy-job-cdc.md) |
+| 02 | `streaming/02_azure_sql_change_feed.py` | Azure SQL (Change Tracking) | [26-multi-source-streaming](../tutorials/26-multi-source-streaming/) | [Mirroring](../features/mirroring.md) |
+| 03 | `streaming/03_cosmos_db_change_feed.py` | Cosmos DB (Change Feed) | [26-multi-source-streaming](../tutorials/26-multi-source-streaming/) | [Mirroring](../features/mirroring.md) |
+| 04 | `streaming/04_ibm_db2_cdc.py` | IBM DB2 (ASN Capture) | [25-ibm-db2-source](../tutorials/25-ibm-db2-source/) | [Source Patterns](../best-practices/09_SOURCE_SPECIFIC_PATTERNS.md) |
+| 05 | `streaming/05_oracle_cdc.py` | Oracle (LogMiner) | [26-multi-source-streaming](../tutorials/26-multi-source-streaming/) | [Source Patterns](../best-practices/09_SOURCE_SPECIFIC_PATTERNS.md) |
+| 06 | `streaming/06_kafka_connector.py` | Apache Kafka (Avro/JSON) | [26-multi-source-streaming](../tutorials/26-multi-source-streaming/) | [RTI](../features/real-time-intelligence.md) |
+| 07 | `streaming/07_iot_hub_ingestion.py` | Azure IoT Hub | [26-multi-source-streaming](../tutorials/26-multi-source-streaming/) | [RTI](../features/real-time-intelligence.md) |
+| 08 | `streaming/08_slot_machine_iot_simulator.py` | Custom IoT (SAS) | [04-real-time-analytics](../tutorials/04-real-time-analytics/) | [RTI](../features/real-time-intelligence.md) |
 
 ---
 
@@ -219,8 +219,8 @@ Live streaming and KQL query notebooks.
 
 | # | Notebook | Type | Tutorial | Feature Doc |
 |---|----------|------|----------|-------------|
-| 01 | `real-time/01_realtime_slot_streaming.py` | Spark Structured Streaming | [04-real-time-analytics](../tutorials/04-real-time-analytics/) | [RTI](../docs/features/real-time-intelligence.md) |
-| 02 | `real-time/02_kql_casino_floor.kql` | KQL Queries | [04-real-time-analytics](../tutorials/04-real-time-analytics/) | [Eventhouse](../docs/features/eventhouse-vector-database.md) |
+| 01 | `real-time/01_realtime_slot_streaming.py` | Spark Structured Streaming | [04-real-time-analytics](../tutorials/04-real-time-analytics/) | [RTI](../features/real-time-intelligence.md) |
+| 02 | `real-time/02_kql_casino_floor.kql` | KQL Queries | [04-real-time-analytics](../tutorials/04-real-time-analytics/) | [Eventhouse](../features/eventhouse-vector-database.md) |
 
 ---
 
@@ -261,13 +261,13 @@ Shared helper modules used across notebooks.
 
 | Resource | Description |
 |----------|-------------|
-| [Tutorials](../tutorials/README.md) | Step-by-step implementation guides |
-| [Feature Docs](../docs/features/) | Fabric feature reference documentation |
-| [Best Practices](../docs/best-practices/) | Architecture and engineering best practices |
-| [Use Cases](../docs/use-cases/) | Applied analytics use cases with references |
+| [Tutorials](../tutorials/index.md) | Step-by-step implementation guides |
+| [Feature Docs](../features/) | Fabric feature reference documentation |
+| [Best Practices](../best-practices/) | Architecture and engineering best practices |
+| [Use Cases](../use-cases/) | Applied analytics use cases with references |
 | [Data Generation](../data_generation/README.md) | Test data generation for notebooks |
 | [Validation](../validation/README.md) | Unit tests and data quality suites |
 
 ---
 
-[Back to Top](#notebook-cross-reference-index) | [Main README](../README.md)
+[Back to Top](#notebook-cross-reference-index) | [Main README](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)

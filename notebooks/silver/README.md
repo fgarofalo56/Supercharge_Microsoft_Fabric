@@ -1,4 +1,4 @@
-# [Home](../../README.md) > [Notebooks](../README.md) > Silver Layer
+# [Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md) > [Notebooks](../README.md) > Silver Layer
 
 ## 🥈 Silver Layer Notebooks
 
@@ -193,7 +193,7 @@ assert result.success, "Data quality checks failed!"
 
 ## 📖 Related Resources
 
-- **Tutorial**: [Day 2: Silver Transformation Tutorial](../../tutorials/day2-silver-transformation/README.md)
+- **Tutorial**: [Day 2: Silver Transformation Tutorial](../../tutorials/02-silver-layer/README.md)
 - **Previous Layer**: [Bronze Layer Notebooks](../bronze/README.md)
 - **Next Layer**: [Gold Layer Notebooks](../gold/README.md)
 - **Data Quality**: [Great Expectations Config](../../validation/great_expectations/)

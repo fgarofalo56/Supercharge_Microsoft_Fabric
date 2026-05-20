@@ -1,4 +1,4 @@
-# [Home](../../README.md) > [Notebooks](../README.md) > Bronze Layer
+# [Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md) > [Notebooks](../README.md) > Bronze Layer
 
 ## 🥉 Bronze Layer Notebooks
 
@@ -134,9 +134,9 @@ assert spark.sql("SELECT COUNT(*) FROM bronze.slot_telemetry WHERE machine_id IS
 
 ## 📖 Related Resources
 
-- **Tutorial**: [Day 1: Bronze Ingestion Tutorial](../../tutorials/day1-bronze-ingestion/README.md)
-- **Architecture**: [Medallion Architecture Overview](../../docs/architecture/medallion-architecture.md)
-- **Data Generation**: [Bronze Data Generators](../../data_generation/generators/)
+- **Tutorial**: [Day 1: Bronze Ingestion Tutorial](../../tutorials/01-bronze-layer/README.md)
+- **Architecture**: [Medallion Architecture Overview](../../best-practices/medallion-architecture-deep-dive.md)
+- **Data Generation**: [Bronze Data Generators](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/data_generation/generators)
 - **Next Layer**: [Silver Layer Notebooks](../silver/README.md)
 
 ---

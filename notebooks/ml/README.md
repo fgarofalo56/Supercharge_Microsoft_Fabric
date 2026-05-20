@@ -1,4 +1,4 @@
-# [Home](../../README.md) > [Notebooks](../README.md) > ML Layer
+# [Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md) > [Notebooks](../README.md) > ML Layer
 
 ## 🤖 Machine Learning Notebooks
 
@@ -331,10 +331,10 @@ report.save_html("drift_report.html")
 
 ## 📖 Related Resources
 
-- **Tutorial**: [Day 3: ML Integration Tutorial](../../tutorials/day3-ml/README.md)
-- **Feature Engineering**: [Feature Store Documentation](../../docs/ml/feature-store.md)
-- **MLflow Guide**: [MLflow on Fabric](../../docs/ml/mlflow-setup.md)
-- **Model Monitoring**: [Drift Detection Guide](../../docs/ml/model-monitoring.md)
+- **Tutorial**: [Day 3: ML Integration Tutorial](../../tutorials/09-advanced-ai-ml/README.md)
+- **Feature Engineering**: [Feature Store Documentation](../../best-practices/feature-store-onelake.md)
+- **MLflow Guide**: [MLflow on Fabric](../../best-practices/mlops-fabric-production.md)
+- **Model Monitoring**: [Drift Detection Guide](../../best-practices/model-monitoring-drift-detection.md)
 
 ---
 
@@ -431,4 +431,4 @@ for model in client.search_registered_models():
 
 ---
 
-> **Next Steps**: After models are trained and validated, configure [real-time scoring endpoints](../../docs/ml/real-time-scoring.md) and integrate with [marketing automation](../../docs/integrations/marketing-integration.md).
+> **Next Steps**: After models are trained and validated, configure [real-time scoring endpoints](../../features/automl-model-endpoints.md) and integrate with [marketing automation](../../use-cases/index.md).

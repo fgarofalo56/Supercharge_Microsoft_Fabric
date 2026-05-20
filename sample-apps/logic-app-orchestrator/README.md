@@ -529,4 +529,4 @@ LogicAppWorkflowRuntime
 - [Logic App Standard overview](https://learn.microsoft.com/azure/logic-apps/single-tenant-overview-compare)
 - [Managed identity for Logic Apps](https://learn.microsoft.com/azure/logic-apps/authenticate-with-managed-identity)
 - [Service Bus dead-letter queues](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-dead-letter-queues)
-- [Casino POC Pipelines](../../docs/features/translytical-task-flows.md)
+- [Casino POC Pipelines](../../features/translytical-task-flows.md)

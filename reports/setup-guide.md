@@ -1,6 +1,6 @@
 # Power BI Semantic Model Setup Guide
 
-> **[Home](../README.md)** > **[Reports](README.md)** > **Setup Guide**
+> **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > **[Reports](README.md)** > **Setup Guide**
 
 **Last Updated:** `2025-01-21` | **Version:** 1.0.0
 

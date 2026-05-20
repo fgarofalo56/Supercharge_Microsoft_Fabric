@@ -74,9 +74,66 @@ jobs:
           mkdir -p docs/poc-agenda
           cp -r poc-agenda/. docs/poc-agenda/
 
-          echo "Copying infra README..."
+          echo "Copying notebooks documentation (README files only)..."
+          mkdir -p docs/notebooks
+          # Use find so we only copy README.md files, not the .py notebooks themselves
+          find notebooks -name 'README.md' | while read -r f; do
+            dest="docs/${f}"
+            mkdir -p "$(dirname "$dest")"
+            cp "$f" "$dest"
+          done
+
+          echo "Copying sample-apps READMEs..."
+          mkdir -p docs/sample-apps
+          for app in sample-apps/*/; do
+            name=$(basename "$app")
+            mkdir -p "docs/sample-apps/$name"
+            if [ -f "$app/README.md" ]; then
+              cp "$app/README.md" "docs/sample-apps/$name/README.md"
+            fi
+          done
+
+          echo "Copying validation documentation..."
+          mkdir -p docs/validation
+          find validation -name '*.md' | while read -r f; do
+            dest="docs/${f}"
+            mkdir -p "$(dirname "$dest")"
+            cp "$f" "$dest"
+          done
+
+          echo "Copying reports documentation..."
+          mkdir -p docs/reports
+          if [ -d reports ]; then
+            cp reports/*.md docs/reports/ 2>/dev/null || true
+          fi
+
+          echo "Copying infra documentation..."
           mkdir -p docs/infra
           cp infra/README.md docs/infra/README.md
+          if [ -f infra/modules/README.md ]; then
+            mkdir -p docs/infra/modules
+            cp infra/modules/README.md docs/infra/modules/README.md
+          fi
+
+          echo "Copying toolchain READMEs..."
+          for src in data_generation docker scripts sample-data; do
+            if [ -f "$src/README.md" ]; then
+              mkdir -p "docs/$src"
+              cp "$src/README.md" "docs/$src/README.md"
+            fi
+          done
+          if [ -f tests/e2e/README.md ]; then
+            mkdir -p docs/tests/e2e
+            cp tests/e2e/README.md docs/tests/e2e/README.md
+          fi
+          if [ -f .devcontainer/README.md ]; then
+            mkdir -p docs/dev-container
+            cp .devcontainer/README.md docs/dev-container/README.md
+          fi
+          if [ -f .githooks/README.md ]; then
+            mkdir -p docs/git-hooks
+            cp .githooks/README.md docs/git-hooks/README.md
+          fi
 
           # Copy root-level files into docs/
           echo "Copying root-level files..."

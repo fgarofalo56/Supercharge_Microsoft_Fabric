@@ -365,7 +365,7 @@ great_expectations checkpoint run slot_machine_checkpoint --verbosity DEBUG
 - [Great Expectations Documentation](https://docs.greatexpectations.io/)
 - [Expectation Gallery](https://greatexpectations.io/expectations/)
 - [Microsoft Fabric Documentation](https://learn.microsoft.com/fabric/)
-- [Project Architecture](../../docs/ARCHITECTURE.md)
+- [Project Architecture](../../ARCHITECTURE.md)
 
 ## Version History
 

@@ -1,6 +1,6 @@
 # Bicep Module Index
 
-> **[Home](../../README.md)** | **[Main Bicep](../main.bicep)** | **[Environments](../environments/)** | **[Docs](../../docs/)**
+> **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** | **[Main Bicep](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/main.bicep)** | **[Environments](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/infra/environments)** | **[Docs](../../index.md)**
 
 Complete reference for all Bicep IaC modules in this POC. Each module is self-contained, parameterized, and designed for composition via `main.bicep`.
 
@@ -57,18 +57,18 @@ main.bicep (orchestrator)
 | Module | Category | Purpose | Key Parameters | Feature Doc |
 |---|---|---|---|---|
 | `fabric/fabric-capacity.bicep` | Fabric | Fabric capacity (F2-F2048) | `capacityName`, `skuName`, `adminEmail` | -- |
-| `fabric/fabric-eventhouse.bicep` | Fabric | ADX cluster backing Eventhouse | `eventHouseName`, `fabricCapacityId`, `databaseNames` | [Eventhouse Vector DB](../../docs/features/eventhouse-vector-database.md) |
-| `fabric/fabric-eventstream.bicep` | Fabric | Event Hubs namespace backing Eventstream | `eventStreamName`, `fabricCapacityId`, `consumerGroups` | [RTI](../../docs/features/real-time-intelligence.md) |
-| `security/security.bicep` | Security | Key Vault + User-Assigned Managed Identity | `keyVaultName`, `managedIdentityName`, `enablePrivateEndpoints`, `skuName` | [CMK](../../docs/best-practices/customer-managed-keys.md) |
-| `security/workspace-identity.bicep` | Security | Workspace-scoped managed identity | `projectPrefix`, `environment`, `enableKeyVaultAccess` | [OneLake Security](../../docs/features/onelake-security.md) |
+| `fabric/fabric-eventhouse.bicep` | Fabric | ADX cluster backing Eventhouse | `eventHouseName`, `fabricCapacityId`, `databaseNames` | [Eventhouse Vector DB](../../features/eventhouse-vector-database.md) |
+| `fabric/fabric-eventstream.bicep` | Fabric | Event Hubs namespace backing Eventstream | `eventStreamName`, `fabricCapacityId`, `consumerGroups` | [RTI](../../features/real-time-intelligence.md) |
+| `security/security.bicep` | Security | Key Vault + User-Assigned Managed Identity | `keyVaultName`, `managedIdentityName`, `enablePrivateEndpoints`, `skuName` | [CMK](../../best-practices/customer-managed-keys.md) |
+| `security/workspace-identity.bicep` | Security | Workspace-scoped managed identity | `projectPrefix`, `environment`, `enableKeyVaultAccess` | [OneLake Security](../../features/onelake-security.md) |
 | `security/resource-locks.bicep` | Security | CanNotDelete locks on critical resources | `keyVaultName`, `storageAccountName`, `fabricCapacityName`, `logAnalyticsName`, `purviewAccountName` | -- |
-| `storage/storage-account.bicep` | Storage | ADLS Gen2 for landing zone | `storageAccountName`, `enablePrivateEndpoint`, `enableCmk` | [Data Sharing](../../docs/best-practices/data-sharing-federation.md) |
-| `monitoring/log-analytics.bicep` | Monitoring | Centralized Log Analytics workspace | `name`, `retentionInDays`, `dailyQuotaGb`, `enablePrivateEndpoints` | [Observability](../../docs/best-practices/monitoring-observability.md) |
-| `monitoring/alerts-and-budgets.bicep` | Monitoring | CU utilization alerts + budget alerts | `logAnalyticsWorkspaceId`, `enableCapacityAlerts` | [Cost Optimization](../../docs/best-practices/capacity-planning-cost-optimization.md) |
-| `networking/vnet.bicep` | Networking | VNet with subnets for private endpoints | `vnetName`, `addressSpace` | [Network Security](../../docs/best-practices/network-security.md) |
-| `networking/private-endpoint.bicep` | Networking | Reusable PE with DNS zone + link | `name`, `subnetId`, `privateLinkServiceId`, `groupIds`, `dnsZoneNames` | [Network Security](../../docs/best-practices/network-security.md) |
-| `governance/purview.bicep` | Governance | Microsoft Purview account | `purviewAccountName`, `managedIdentityPrincipalId`, `enablePrivateEndpoint` | [Data Governance](../../docs/best-practices/data-governance-deep-dive.md) |
-| `analytics/powerbi-workspace.bicep` | Analytics | Power BI Embedded capacity | `workspaceName`, `fabricCapacityId`, `adminMembers` | [Direct Lake](../../docs/features/direct-lake.md) |
+| `storage/storage-account.bicep` | Storage | ADLS Gen2 for landing zone | `storageAccountName`, `enablePrivateEndpoint`, `enableCmk` | [Data Sharing](../../best-practices/data-sharing-federation.md) |
+| `monitoring/log-analytics.bicep` | Monitoring | Centralized Log Analytics workspace | `name`, `retentionInDays`, `dailyQuotaGb`, `enablePrivateEndpoints` | [Observability](../../best-practices/monitoring-observability.md) |
+| `monitoring/alerts-and-budgets.bicep` | Monitoring | CU utilization alerts + budget alerts | `logAnalyticsWorkspaceId`, `enableCapacityAlerts` | [Cost Optimization](../../best-practices/capacity-planning-cost-optimization.md) |
+| `networking/vnet.bicep` | Networking | VNet with subnets for private endpoints | `vnetName`, `addressSpace` | [Network Security](../../best-practices/network-security.md) |
+| `networking/private-endpoint.bicep` | Networking | Reusable PE with DNS zone + link | `name`, `subnetId`, `privateLinkServiceId`, `groupIds`, `dnsZoneNames` | [Network Security](../../best-practices/network-security.md) |
+| `governance/purview.bicep` | Governance | Microsoft Purview account | `purviewAccountName`, `managedIdentityPrincipalId`, `enablePrivateEndpoint` | [Data Governance](../../best-practices/data-governance-deep-dive.md) |
+| `analytics/powerbi-workspace.bicep` | Analytics | Power BI Embedded capacity | `workspaceName`, `fabricCapacityId`, `adminMembers` | [Direct Lake](../../features/direct-lake.md) |
 
 ---
 
@@ -395,14 +395,14 @@ flowchart TD
 
 | Resource | Description |
 |----------|-------------|
-| [main.bicep](../main.bicep) | Root orchestration template |
-| [Deployment Guide](../../docs/DEPLOYMENT.md) | Full deployment instructions |
-| [Architecture](../../docs/ARCHITECTURE.md) | System architecture overview |
-| [Cost Estimation](../../docs/COST_ESTIMATION.md) | SKU sizing and cost projections |
-| [Network Security](../../docs/best-practices/network-security.md) | Private endpoint patterns |
-| [CMK](../../docs/best-practices/customer-managed-keys.md) | Customer-managed key configuration |
-| [CI/CD](../../docs/best-practices/fabric-cicd-deployment.md) | Automated deployment patterns |
+| [main.bicep](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/main.bicep) | Root orchestration template |
+| [Deployment Guide](../../DEPLOYMENT.md) | Full deployment instructions |
+| [Architecture](../../ARCHITECTURE.md) | System architecture overview |
+| [Cost Estimation](../../COST_ESTIMATION.md) | SKU sizing and cost projections |
+| [Network Security](../../best-practices/network-security.md) | Private endpoint patterns |
+| [CMK](../../best-practices/customer-managed-keys.md) | Customer-managed key configuration |
+| [CI/CD](../../best-practices/fabric-cicd-deployment.md) | Automated deployment patterns |
 
 ---
 
-[Back to Top](#bicep-module-index) | [Main README](../../README.md)
+[Back to Top](#bicep-module-index) | [Main README](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)

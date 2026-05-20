@@ -1,4 +1,4 @@
-# [Home](../../README.md) > [Notebooks](../README.md) > Real-Time Layer
+# [Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md) > [Notebooks](../README.md) > Real-Time Layer
 
 ## ⚡ Real-Time Notebooks
 
@@ -245,10 +245,10 @@ for query in spark.streams.active:
 
 ## 📖 Related Resources
 
-- **Tutorial**: [Day 3: Real-Time Intelligence Tutorial](../../tutorials/day3-realtime/README.md)
-- **Eventstream Setup**: [Eventstream Configuration Guide](../../docs/real-time/eventstream-setup.md)
-- **KQL Reference**: [KQL Query Patterns](../../docs/real-time/kql-patterns.md)
-- **Activator Alerts**: [Alert Configuration Guide](../../docs/real-time/activator-setup.md)
+- **Tutorial**: [Day 3: Real-Time Intelligence Tutorial](../../tutorials/04-real-time-analytics/README.md)
+- **Eventstream Setup**: [Eventstream Configuration Guide](../../features/real-time-intelligence.md)
+- **KQL Reference**: [KQL Query Patterns](../../features/real-time-intelligence.md)
+- **Activator Alerts**: [Alert Configuration Guide](../../features/data-activator.md)
 
 ---
 
@@ -312,4 +312,4 @@ by floor_section, x_coord, y_coord
 
 ---
 
-> **Next Steps**: After real-time pipeline is operational, configure [Activator alerts](../../docs/real-time/activator-setup.md) and build [Real-Time Dashboards](../../reports/realtime/).
+> **Next Steps**: After real-time pipeline is operational, configure [Activator alerts](../../features/data-activator.md) and build [Real-Time Dashboards](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/reports).

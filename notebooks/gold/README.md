@@ -1,4 +1,4 @@
-# [Home](../../README.md) > [Notebooks](../README.md) > Gold Layer
+# [Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md) > [Notebooks](../README.md) > Gold Layer
 
 ## 🥇 Gold Layer Notebooks
 
@@ -217,9 +217,9 @@ print(f"Files: {history.operationMetrics.get('numFiles', 'N/A')}")
 
 ## 📖 Related Resources
 
-- **Tutorial**: [Day 2: Gold Aggregation Tutorial](../../tutorials/day2-gold-aggregation/README.md)
+- **Tutorial**: [Day 2: Gold Aggregation Tutorial](../../tutorials/03-gold-layer/README.md)
 - **Previous Layer**: [Silver Layer Notebooks](../silver/README.md)
-- **Power BI**: [Direct Lake Semantic Model Setup](../../docs/powerbi/direct-lake-setup.md)
+- **Power BI**: [Direct Lake Semantic Model Setup](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/powerbi/direct-lake-setup.md)
 - **Dashboards**: [Power BI Report Templates](../../reports/)
 
 ---
@@ -324,4 +324,4 @@ Gold tables are configured for automatic refresh to Direct Lake semantic model:
 
 ---
 
-> **Next Steps**: After Gold layer completes, configure [Direct Lake semantic model](../../docs/powerbi/direct-lake-setup.md) and build Power BI reports.
+> **Next Steps**: After Gold layer completes, configure [Direct Lake semantic model](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/powerbi/direct-lake-setup.md) and build Power BI reports.
