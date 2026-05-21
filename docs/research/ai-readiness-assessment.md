@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/white-papers.svg
+hero_alt: Research — AI Readiness Assessment for Microsoft Fabric
+---
+
 # AI Readiness Assessment for Microsoft Fabric
 
 > A structured framework for evaluating an organization's readiness to adopt Fabric AI capabilities — Copilot, AutoML, Semantic Link, Data Agents, and AI Functions — with a maturity model, assessment questionnaire, and implementation roadmap.

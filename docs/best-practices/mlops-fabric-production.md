@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/best-practices.svg
+hero_alt: Best practice — MLOps for Fabric Production
+---
+
 # 🚀 MLOps for Fabric Production
 
 <div align="center" markdown>

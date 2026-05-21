@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/best-practices.svg
+hero_alt: "Best practice — Incremental Refresh & CDC Patterns for Microsoft Fabric"
+---
+
 # 🔄 Incremental Refresh & CDC Patterns for Microsoft Fabric
 
 <div align="center" markdown>

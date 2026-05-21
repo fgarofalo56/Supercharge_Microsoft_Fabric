@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: "Fabric feature — OneLake Catalog - Unified Data Discovery & Governance Hub"
+---
+
 # 📚 OneLake Catalog - Unified Data Discovery & Governance Hub
 
 <div align="center" markdown>

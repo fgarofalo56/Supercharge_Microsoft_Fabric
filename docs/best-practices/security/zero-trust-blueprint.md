@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/compliance.svg
+hero_alt: Security best practice — Zero-Trust Architecture Blueprint for Microsoft Fabric
+---
+
 # 🛡️ Zero-Trust Architecture Blueprint for Microsoft Fabric
 
 <div align="center" markdown>

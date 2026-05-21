@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/best-practices.svg
+hero_alt: "Best practice — Performance & Parallelism Best Practices"
+---
+
 [Home](../index.md) > [Best Practices](./) > Performance & Parallelism
 
 # 🚀 Performance & Parallelism Best Practices

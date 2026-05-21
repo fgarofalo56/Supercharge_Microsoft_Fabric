@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/compliance-hipaa.svg
+hero_alt: "HIPAA — Healthcare privacy + security mapped to Fabric"
+---
+
 # 🏥 HIPAA Compliance Mapping for Microsoft Fabric
 
 <div align="center" markdown>

@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/best-practices.svg
+hero_alt: "Best practice — Spark & Notebooks Best Practices"
+---
+
 [Home](../index.md) > [Best Practices](./) > Spark & Notebooks
 
 # ⚡ Spark & Notebooks Best Practices

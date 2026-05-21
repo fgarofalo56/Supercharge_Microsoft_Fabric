@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/best-practices.svg
+hero_alt: Best practice — Multi-Tenant Workspace Architecture for Microsoft Fabric
+---
+
 # 🏢 Multi-Tenant Workspace Architecture for Microsoft Fabric
 
 <div align="center" markdown>

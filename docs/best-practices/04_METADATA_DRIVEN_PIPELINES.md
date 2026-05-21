@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/best-practices.svg
+hero_alt: Best practice — Metadata-Driven Pipelines
+---
+
 [Home](../index.md) > [Best Practices](./) > Metadata-Driven Pipelines
 
 # 🧩 Metadata-Driven Pipelines

@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/compliance.svg
+hero_alt: Compliance template — W-2G Gambling Winnings Template
+---
+
 # 🎰 W-2G Gambling Winnings Template
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0

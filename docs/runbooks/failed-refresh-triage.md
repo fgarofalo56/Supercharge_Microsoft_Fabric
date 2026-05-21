@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/runbooks.svg
+hero_alt: Runbook — Failed Refresh Triage Runbook
+---
+
 # ❌ Failed Refresh Triage Runbook
 
 > **Last Updated**: 2026-05-05 | **Version**: 1.0

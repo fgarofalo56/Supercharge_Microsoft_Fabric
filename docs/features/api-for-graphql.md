@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: Fabric feature — API for GraphQL - Unified Data Access Layer
+---
+
 # 🔗 API for GraphQL - Unified Data Access Layer
 
 <div align="center" markdown>

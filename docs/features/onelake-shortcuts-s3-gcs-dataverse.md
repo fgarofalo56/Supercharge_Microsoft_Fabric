@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: Fabric feature — OneLake Shortcuts - Multi-Cloud Data Federation
+---
+
 # 🔗 OneLake Shortcuts - Multi-Cloud Data Federation
 
 <div align="center" markdown>

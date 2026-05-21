@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/best-practices.svg
+hero_alt: "Best practice — Data Sharing & Federation for Microsoft Fabric"
+---
+
 # 🔗 Data Sharing & Federation for Microsoft Fabric
 
 <div align="center" markdown>

@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: "Fabric feature — Data Mesh & Enterprise Architecture Patterns"
+---
+
 # 🏛️ Data Mesh & Enterprise Architecture Patterns
 
 

@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/manufacturing.svg
+hero_alt: DOT/FAA transportation safety analytics
+---
+
 # Transportation Safety Analytics
 
 > Leveraging Microsoft Fabric to analyze aviation incident patterns, airline on-time performance, and surface transportation crash data using publicly available DOT, FAA, NTSB, and NHTSA datasets.

@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: Fabric feature — Eventhouse as a Vector Database - AI-Powered Semantic Search
+---
+
 # 🧬 Eventhouse as a Vector Database - AI-Powered Semantic Search
 
 <div align="center" markdown>

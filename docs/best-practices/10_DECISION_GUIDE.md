@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/best-practices.svg
+hero_alt: "Best practice — Decision Guide: Choosing the Right Tool"
+---
+
 [Home](../index.md) > [Best Practices](./) > Decision Guide
 
 # 🧭 Decision Guide: Choosing the Right Tool

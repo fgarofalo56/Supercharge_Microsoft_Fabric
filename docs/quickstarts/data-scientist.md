@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/getting-started.svg
+hero_alt: Quickstart — Data Scientist Quickstart
+---
+
 # Data Scientist Quickstart
 
 > **Last Updated**: 2026-05-05 | **Role**: Data Scientist

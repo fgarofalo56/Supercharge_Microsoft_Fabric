@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/runbooks.svg
+hero_alt: Runbook — Capacity Throttling Runbook
+---
+
 # 🔥 Capacity Throttling Runbook
 
 > **Last Updated**: 2026-05-05 | **Version**: 1.0

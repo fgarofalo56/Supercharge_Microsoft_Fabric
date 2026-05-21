@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/best-practices.svg
+hero_alt: "Best practice — CI/CD for Microsoft Fabric with `fabric-cicd`"
+---
+
 # CI/CD for Microsoft Fabric with `fabric-cicd`
 
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue)

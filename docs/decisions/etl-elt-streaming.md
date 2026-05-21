@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/decisions.svg
+hero_alt: Decision — ETL vs ELT vs Streaming
+---
+
 # ETL vs ELT vs Streaming
 
 <div align="center" markdown>

@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: "Fabric feature — AI Copilot Configuration & Setup"
+---
+
 # 🤖 AI Copilot Configuration & Setup
 
 <div align="center" markdown>

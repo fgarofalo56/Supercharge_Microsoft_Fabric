@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/compliance-fedramp.svg
+hero_alt: "FedRAMP — Moderate + High baselines on Azure Government"
+---
+
 # ☁️ FedRAMP Compliance Mapping for Microsoft Fabric
 
 <div align="center" markdown>

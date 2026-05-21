@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/compliance-soc2.svg
+hero_alt: "SOC 2 — Trust Services Criteria readiness"
+---
+
 # 🔒 SOC 2 Compliance Mapping for Microsoft Fabric
 
 <div align="center" markdown>

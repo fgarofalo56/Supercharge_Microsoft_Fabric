@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/reference-architecture.svg
+hero_alt: Reference architecture — Small-Medium Enterprise Reference Architecture
+---
+
 # 🏢 Small-Medium Enterprise Reference Architecture
 
 

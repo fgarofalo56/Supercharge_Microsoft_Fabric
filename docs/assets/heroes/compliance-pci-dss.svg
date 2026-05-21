@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 420" width="1600" height="420"
+     role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid slice">
+  <title id="title">PCI DSS on Microsoft Fabric</title>
+  <desc id="desc">Cardholder data environment, tokenization, and 12 PCI DSS 4.0 requirements</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="0.7">
+      <stop offset="0%"   stop-color="#082F49"/>
+      <stop offset="55%"  stop-color="#0078D4"/>
+      <stop offset="100%" stop-color="#082F49"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="78%" cy="50%" r="55%">
+      <stop offset="0%"   stop-color="#38BDF8" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .h-title { font-family:'IBM Plex Sans','Segoe UI','Helvetica Neue',sans-serif; font-weight:600; font-size:54px; fill:#FFFFFF; letter-spacing:-1.0px; }
+      .h-sub   { font-family:'IBM Plex Sans','Segoe UI','Helvetica Neue',sans-serif; font-weight:400; font-size:20px; fill:#FFFFFF; fill-opacity:0.84; letter-spacing:-0.2px; }
+      .h-chip  { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:700; font-size:13px; letter-spacing:2.5px; fill:#7DD3FC; }
+      .h-foot  { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:500; font-size:11px; letter-spacing:1.2px; fill:#FFFFFF; fill-opacity:0.45; }
+      .v-num   { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:700; font-size:15px; fill:#FFFFFF; letter-spacing:0.5px; }
+      .v-lbl   { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:600; font-size:13px; fill:#FFFFFF; fill-opacity:0.95; letter-spacing:0.8px; }
+      .v-cap   { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:500; font-size:11px; fill:#FFFFFF; fill-opacity:0.75; letter-spacing:1.0px; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1600" height="420" fill="url(#bg)"/>
+  <rect width="1600" height="420" fill="url(#glow)"/>
+
+  <!-- Left accent stripe -->
+  <rect x="0" y="0" width="6" height="420" fill="#7DD3FC" opacity="0.65"/>
+  <rect x="0" y="0" width="6" height="120" fill="#38BDF8"/>
+
+  <!-- Bottom scan line -->
+  <rect x="0" y="408" width="1600" height="2" fill="#7DD3FC" opacity="0.25"/>
+
+  <!-- Eyebrow chip -->
+  <g transform="translate(72, 60)">
+    <rect x="0" y="0" width="280" height="34" rx="0" fill="#38BDF8" fill-opacity="0.10" stroke="#38BDF8" stroke-opacity="0.55"/>
+    <rect x="0" y="0" width="6" height="34" fill="#38BDF8"/>
+    <text class="h-chip" x="140.0" y="22" text-anchor="middle">PCI DSS · PAYMENT CARD</text>
+  </g>
+
+  <!-- Title -->
+  <text class="h-title" x="72" y="208">PCI DSS on Microsoft Fabric</text>
+
+  <!-- Tagline -->
+  <text class="h-sub" x="72" y="252">Cardholder data environment, tokenization, and 12 PCI DSS 4.0 requirements</text>
+
+  <!-- Footer chip -->
+  <text class="h-foot" x="72" y="385">CDE · PAN MASKING · TOKENIZATION · KEY ROTATION · QSA ATTESTATION</text>
+
+<g transform="translate(900, 84)">
+
+    <g transform="translate(0,0)">
+      <rect x="0" y="0" width="640" height="50" rx="5" fill="#38BDF8" fill-opacity="0.28" stroke="#38BDF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="6" height="50" fill="#38BDF8"/>
+      <text class="v-num" x="20" y="22">01</text>
+      <text class="v-lbl" x="60" y="22" font-size="14">CARDHOLDER DATA ENVIRONMENT</text>
+      <text class="v-cap" x="60" y="38">Scope + segmentation in OneLake</text>
+    </g>
+
+    <g transform="translate(0,64)">
+      <rect x="0" y="0" width="640" height="50" rx="5" fill="#38BDF8" fill-opacity="0.28" stroke="#38BDF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="6" height="50" fill="#38BDF8"/>
+      <text class="v-num" x="20" y="22">02</text>
+      <text class="v-lbl" x="60" y="22" font-size="14">PAN TOKENIZATION + MASKING</text>
+      <text class="v-cap" x="60" y="38">Azure Key Vault HSM + Fabric RLS/CLS</text>
+    </g>
+
+    <g transform="translate(0,128)">
+      <rect x="0" y="0" width="640" height="50" rx="5" fill="#38BDF8" fill-opacity="0.28" stroke="#38BDF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="6" height="50" fill="#38BDF8"/>
+      <text class="v-num" x="20" y="22">03</text>
+      <text class="v-lbl" x="60" y="22" font-size="14">LOGGING + DAILY REVIEW</text>
+      <text class="v-cap" x="60" y="38">Defender for Cloud + Sentinel pipeline</text>
+    </g>
+
+    <g transform="translate(0,192)">
+      <rect x="0" y="0" width="640" height="50" rx="5" fill="#38BDF8" fill-opacity="0.28" stroke="#38BDF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="6" height="50" fill="#38BDF8"/>
+      <text class="v-num" x="20" y="22">04</text>
+      <text class="v-lbl" x="60" y="22" font-size="14">VULNERABILITY MANAGEMENT</text>
+      <text class="v-cap" x="60" y="38">Quarterly external scan + ASV attestation</text>
+    </g>
+</g>
+</svg>

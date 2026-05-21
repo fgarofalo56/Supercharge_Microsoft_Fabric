@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/financial-services.svg
+hero_alt: "Antitrust analytics — market concentration + M&A review"
+---
+
 # Antitrust Analytics
 
 > Leveraging Microsoft Fabric to analyze market concentration, merger activity, and cartel detection patterns using publicly available DOJ, FTC, and federal enforcement data.

@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: "Fabric feature — Workspace IP Firewall & Surge Protection"
+---
+
 # 🛡️ Workspace IP Firewall & Surge Protection
 
 <div align="center" markdown>

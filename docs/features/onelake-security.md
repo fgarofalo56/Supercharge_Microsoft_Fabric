@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: Fabric feature — OneLake Security - Unified Data Protection
+---
+
 # 🔐 OneLake Security - Unified Data Protection
 
 <div align="center" markdown>

@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/decisions.svg
+hero_alt: Decision — Workspace Topology
+---
+
 # Workspace Topology
 
 <div align="center" markdown>

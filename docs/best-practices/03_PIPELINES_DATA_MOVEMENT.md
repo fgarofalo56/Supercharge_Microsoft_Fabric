@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/best-practices.svg
+hero_alt: "Best practice — Pipelines & Data Movement"
+---
+
 [Home](../index.md) > [Best Practices](./) > Pipelines & Data Movement
 
 # 🔄 Pipelines & Data Movement

@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: Fabric feature — Materialized Lake Views - Pre-Computed Analytics Acceleration
+---
+
 # 🏔️ Materialized Lake Views - Pre-Computed Analytics Acceleration
 
 <div align="center" markdown>

@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/runbooks.svg
+hero_alt: Runbook — Pipeline Failure Triage
+---
+
 # 🛠️ Pipeline Failure Triage
 
 > **Last Updated**: 2026-04-27 | **Phase**: 14 (Wave 1) | **Feature**: 1.3

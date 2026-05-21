@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/energy-utilities.svg
+hero_alt: Natural resources — DOI lands + wildfires
+---
+
 # Natural Resources Analytics
 
 > Leveraging Microsoft Fabric to unify USGS earthquake monitoring, water resources data, endangered species tracking, and public lands management into a comprehensive natural resources intelligence platform.

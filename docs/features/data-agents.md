@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: Fabric feature — Fabric Data Agents - Conversational AI for Enterprise Data
+---
+
 # 🤖 Fabric Data Agents - Conversational AI for Enterprise Data
 
 <div align="center" markdown>

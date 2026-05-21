@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/best-practices.svg
+hero_alt: Data management best practice — Late-Arriving Data on Microsoft Fabric
+---
+
 # ⏱️ Late-Arriving Data on Microsoft Fabric
 
 <div align="center" markdown>

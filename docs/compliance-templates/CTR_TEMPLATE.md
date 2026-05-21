@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/compliance.svg
+hero_alt: Compliance template — Currency Transaction Report Template
+---
+
 # 💰 Currency Transaction Report Template
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0

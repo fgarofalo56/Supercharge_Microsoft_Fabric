@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: Fabric feature — Fabric MCP Server - AI Agent Data Access
+---
+
 # 🤖 Fabric MCP Server - AI Agent Data Access
 
 <div align="center" markdown>

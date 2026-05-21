@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/decisions.svg
+hero_alt: Decision — Direct Lake vs Import vs DirectQuery
+---
+
 # Direct Lake vs Import vs DirectQuery
 
 <div align="center" markdown>

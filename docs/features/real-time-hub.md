@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: Fabric feature — Real-Time Hub — Event Discovery and Sharing
+---
+
 # 📡 Real-Time Hub — Event Discovery and Sharing
 
 <div align="center" markdown>

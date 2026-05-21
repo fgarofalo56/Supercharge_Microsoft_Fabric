@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: Fabric feature — dbt Integration with Microsoft Fabric
+---
+
 # 🔧 dbt Integration with Microsoft Fabric
 
 <div align="center" markdown>

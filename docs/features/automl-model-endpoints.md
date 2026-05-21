@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: "Fabric feature — AutoML & ML Model Endpoints - Automated Training and Real-Time Serving"
+---
+
 # 🤖 AutoML & ML Model Endpoints - Automated Training and Real-Time Serving
 
 <div align="center" markdown>

@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/best-practices.svg
+hero_alt: "Best practice — Disaster Recovery & Business Continuity for Microsoft Fabric"
+---
+
 # 🛡️ Disaster Recovery & Business Continuity for Microsoft Fabric
 
 <div align="center" markdown>

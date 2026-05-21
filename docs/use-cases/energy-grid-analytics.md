@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/energy-utilities.svg
+hero_alt: Smart grid + load forecasting analytics
+---
+
 # Energy & Utilities: Smart Grid Analytics
 
 > **Last Updated**: 2026-04-27 | **Version**: 1.0

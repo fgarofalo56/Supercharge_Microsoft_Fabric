@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/white-papers.svg
+hero_alt: Research — Data Mesh Maturity Model on Microsoft Fabric
+---
+
 # Data Mesh Maturity Model on Microsoft Fabric
 
 > How to implement Data Mesh principles using Fabric constructs — workspaces as domains, OneLake as federated storage, Purview as the governance plane, and data products delivered via lakehouses and semantic models. Includes maturity levels, assessment criteria, and a migration path from centralized to mesh.

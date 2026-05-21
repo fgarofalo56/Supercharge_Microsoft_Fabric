@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/retail-cpg.svg
+hero_alt: Retail demand forecasting with AutoML
+---
+
 # 🛒 Retail & CPG: Demand Forecasting and Customer Analytics on Microsoft Fabric
 
 > **Industry:** Retail / Consumer Packaged Goods

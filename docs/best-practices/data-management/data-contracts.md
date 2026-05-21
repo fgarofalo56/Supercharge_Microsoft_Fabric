@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/best-practices.svg
+hero_alt: Data management best practice — Data Contracts on Microsoft Fabric
+---
+
 # 📜 Data Contracts on Microsoft Fabric
 
 <div align="center" markdown>

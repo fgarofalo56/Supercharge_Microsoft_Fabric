@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/best-practices.svg
+hero_alt: Best practice — Feature Store on OneLake
+---
+
 # 🏪 Feature Store on OneLake
 
 <div align="center" markdown>

@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/white-papers.svg
+hero_alt: Research — Enterprise Data Platform Comparison 2026
+---
+
 # Enterprise Data Platform Comparison 2026
 
 > Fabric vs Databricks vs Snowflake vs Synapse Analytics — a structured comparison to guide platform selection for enterprise analytics, data engineering, and AI workloads.

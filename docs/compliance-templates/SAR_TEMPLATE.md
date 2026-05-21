@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/compliance.svg
+hero_alt: Compliance template — Suspicious Activity Report Template
+---
+
 # 🔍 Suspicious Activity Report Template
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0

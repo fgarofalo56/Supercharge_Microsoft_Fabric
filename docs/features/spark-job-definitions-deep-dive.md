@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: Fabric feature — Spark Job Definitions - Production-Grade Spark in Fabric
+---
+
 # 🔥 Spark Job Definitions - Production-Grade Spark in Fabric
 
 <div align="center" markdown>

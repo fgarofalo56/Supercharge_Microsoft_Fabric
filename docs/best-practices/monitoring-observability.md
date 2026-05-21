@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/best-practices.svg
+hero_alt: "Best practice — Monitoring & Observability for Microsoft Fabric"
+---
+
 # 📊 Monitoring & Observability for Microsoft Fabric
 
 <div align="center" markdown>

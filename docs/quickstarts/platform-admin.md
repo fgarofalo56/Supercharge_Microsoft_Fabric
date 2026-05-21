@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/getting-started.svg
+hero_alt: Quickstart — Platform Admin Quickstart
+---
+
 # Platform Admin Quickstart
 
 > **Last Updated**: 2026-05-05 | **Role**: Platform Admin

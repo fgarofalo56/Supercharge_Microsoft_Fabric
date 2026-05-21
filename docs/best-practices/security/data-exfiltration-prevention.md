@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/compliance.svg
+hero_alt: Security best practice — Data Exfiltration Prevention on Microsoft Fabric
+---
+
 # 🚪 Data Exfiltration Prevention on Microsoft Fabric
 
 <div align="center" markdown>

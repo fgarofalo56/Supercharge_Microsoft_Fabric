@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: Fabric feature — Fabric Unified Admin Monitoring (FUAM) - Tenant-Wide Observability
+---
+
 # 📊 Fabric Unified Admin Monitoring (FUAM) - Tenant-Wide Observability
 
 <div align="center" markdown>

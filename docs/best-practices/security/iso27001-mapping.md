@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/compliance.svg
+hero_alt: "Security best practice — ISO 27001:2022 Annex A Controls → Fabric Implementation Mapping"
+---
+
 # 🌐 ISO 27001:2022 Annex A Controls → Fabric Implementation Mapping
 
 <div align="center" markdown>

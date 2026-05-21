@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: Fabric feature — Database Hub — Unified Database Management
+---
+
 # 🗄️ Database Hub — Unified Database Management
 
 <div align="center" markdown>

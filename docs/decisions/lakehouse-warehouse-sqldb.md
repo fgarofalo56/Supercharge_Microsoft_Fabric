@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/decisions.svg
+hero_alt: Decision — Lakehouse vs Warehouse vs SQL Database
+---
+
 # Lakehouse vs Warehouse vs SQL Database
 
 <div align="center" markdown>

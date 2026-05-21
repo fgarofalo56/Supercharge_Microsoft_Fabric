@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: "Fabric feature — Variable Libraries - Parameterized Pipelines & Environments"
+---
+
 # 🔧 Variable Libraries - Parameterized Pipelines & Environments
 
 <div align="center" markdown>

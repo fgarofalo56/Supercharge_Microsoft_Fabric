@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/energy-utilities.svg
+hero_alt: Agricultural analytics on Fabric
+---
+
 # Agricultural Analytics
 
 > Leveraging Microsoft Fabric to analyze crop production trends, food safety recall patterns, SNAP benefit distribution, and Census of Agriculture data using publicly available USDA datasets.

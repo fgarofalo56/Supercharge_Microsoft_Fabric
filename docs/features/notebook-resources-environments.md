@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: "Fabric feature — Notebook Resources & Environments - Dependency Management in Fabric"
+---
+
 # 📦 Notebook Resources & Environments - Dependency Management in Fabric
 
 <div align="center" markdown>

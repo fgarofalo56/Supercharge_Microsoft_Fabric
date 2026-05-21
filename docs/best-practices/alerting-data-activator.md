@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/best-practices.svg
+hero_alt: "Best practice — Alerting & Data Activator Best Practices"
+---
+
 [Home](../index.md) > [Best Practices](./) > Alerting & Data Activator
 
 # 🔔 Alerting & Data Activator Best Practices

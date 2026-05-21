@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/retail-cpg.svg
+hero_alt: Media audience analytics + content engagement
+---
+
 # Media & Entertainment: Audience Analytics on Microsoft Fabric
 
 ## Executive Summary

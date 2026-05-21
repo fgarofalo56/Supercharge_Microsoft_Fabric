@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/best-practices.svg
+hero_alt: Best practice — Medallion Architecture Deep Dive
+---
+
 # 🏗️ Medallion Architecture Deep Dive
 
 <div align="center" markdown>

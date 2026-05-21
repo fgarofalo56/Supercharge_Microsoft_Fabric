@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/architecture.svg
+hero_alt: Architecture diagram — Architecture Overview Diagram
+---
+
 # 🏗️ Architecture Overview Diagram
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0

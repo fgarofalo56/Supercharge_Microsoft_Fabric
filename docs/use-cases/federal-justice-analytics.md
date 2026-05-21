@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/compliance-fedramp.svg
+hero_alt: DOJ analytics + criminal-justice metrics
+---
+
 # Federal Justice Analytics
 
 > End-to-end analytics across the federal criminal justice system — from crime reporting through prosecution, sentencing, and incarceration — using publicly available FBI, DOJ, USSC, and BOP data on Microsoft Fabric.

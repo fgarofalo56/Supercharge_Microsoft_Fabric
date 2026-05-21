@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/financial-services.svg
+hero_alt: Real-time fraud detection + AML
+---
+
 # Financial Services: Real-Time Fraud Detection & Regulatory Compliance
 
 ## Executive Summary

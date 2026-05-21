@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: Fabric feature — Copy Job - Continuous Ingestion with Change Data Capture
+---
+
 # 📋 Copy Job - Continuous Ingestion with Change Data Capture
 
 <div align="center" markdown>

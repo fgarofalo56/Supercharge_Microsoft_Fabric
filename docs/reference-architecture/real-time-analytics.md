@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/reference-architecture.svg
+hero_alt: Reference architecture — Real-Time Analytics Reference Architecture
+---
+
 # ⚡ Real-Time Analytics Reference Architecture
 
 

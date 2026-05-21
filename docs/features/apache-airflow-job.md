@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: Fabric feature — Apache Airflow Job - Managed Orchestration in Fabric
+---
+
 # 🌬️ Apache Airflow Job - Managed Orchestration in Fabric
 
 <div align="center" markdown>

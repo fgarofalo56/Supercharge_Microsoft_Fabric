@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: Fabric feature — OneLake Iceberg Interoperability
+---
+
 # 🧊 OneLake Iceberg Interoperability
 
 <div align="center" markdown>

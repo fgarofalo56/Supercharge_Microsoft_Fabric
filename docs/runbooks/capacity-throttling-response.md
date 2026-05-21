@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/runbooks.svg
+hero_alt: Runbook — Capacity Throttling Response
+---
+
 # 🚨 Capacity Throttling Response
 
 > **Last Updated**: 2026-04-27 | **Phase**: 14 (Wave 1)

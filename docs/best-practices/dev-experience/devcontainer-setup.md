@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/best-practices.svg
+hero_alt: Dev experience best practice — Dev Container Setup for Fabric Development
+---
+
 # Dev Container Setup for Fabric Development
 
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue)

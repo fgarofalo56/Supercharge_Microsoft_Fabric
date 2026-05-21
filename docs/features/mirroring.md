@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: Fabric feature — Mirroring - Near-Real-Time Database Replication
+---
+
 # 🔄 Mirroring - Near-Real-Time Database Replication
 
 

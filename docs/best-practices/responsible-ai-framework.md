@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/best-practices.svg
+hero_alt: Best practice — Responsible AI Framework for Fabric
+---
+
 # 🧭 Responsible AI Framework for Fabric
 
 <div align="center" markdown>

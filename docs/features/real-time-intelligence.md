@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: Fabric feature — Real-Time Intelligence (RTI) Comprehensive Guide
+---
+
 # ⚡ Real-Time Intelligence (RTI) Comprehensive Guide
 
 

@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: Fabric feature — Digital Twin Builder - Real-Time Entity Modeling
+---
+
 # 🏗️ Digital Twin Builder - Real-Time Entity Modeling
 
 <div align="center" markdown>

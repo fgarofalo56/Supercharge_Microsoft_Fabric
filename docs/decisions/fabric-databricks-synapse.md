@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/decisions.svg
+hero_alt: Decision — Fabric vs Databricks vs Synapse
+---
+
 # Fabric vs Databricks vs Synapse
 
 <div align="center" markdown>

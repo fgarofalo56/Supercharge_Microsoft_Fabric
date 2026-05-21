@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: Fabric feature — LLM Evaluation Harness on Fabric
+---
+
 # 🧪 LLM Evaluation Harness on Fabric
 
 <div align="center" markdown>

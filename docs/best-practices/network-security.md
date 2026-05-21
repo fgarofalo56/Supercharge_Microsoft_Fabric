@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/best-practices.svg
+hero_alt: Best practice — Network Security for Microsoft Fabric
+---
+
 # 🔒 Network Security for Microsoft Fabric
 
 <div align="center" markdown>

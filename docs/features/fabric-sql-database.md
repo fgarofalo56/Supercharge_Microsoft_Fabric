@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: Fabric feature — Fabric SQL Database - Operational OLTP in Microsoft Fabric
+---
+
 # 🗄️ Fabric SQL Database - Operational OLTP in Microsoft Fabric
 
 <div align="center" markdown>

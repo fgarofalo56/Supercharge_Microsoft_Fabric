@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/compliance.svg
+hero_alt: Compliance template — DSAR (Data Subject Access Request) Runbook
+---
+
 # 📨 DSAR (Data Subject Access Request) Runbook
 
 <div align="center" markdown>

@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: Fabric feature — Semantic Link - Bridge Spark Notebooks and Power BI
+---
+
 # 🔗 Semantic Link - Bridge Spark Notebooks and Power BI
 
 <div align="center" markdown>

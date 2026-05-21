@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/best-practices.svg
+hero_alt: Data management best practice — Business Glossary Automation with Microsoft Purview
+---
+
 # 📖 Business Glossary Automation with Microsoft Purview
 
 <div align="center" markdown>

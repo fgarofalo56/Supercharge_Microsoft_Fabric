@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/reference-architecture.svg
+hero_alt: Reference architecture — Hybrid Cloud Reference Architecture
+---
+
 # ☁️ Hybrid Cloud Reference Architecture
 
 

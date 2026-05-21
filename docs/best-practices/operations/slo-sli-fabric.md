@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/runbooks.svg
+hero_alt: Operations best practice — SLO/SLI Definitions for Fabric Workspaces
+---
+
 # 🎯 SLO/SLI Definitions for Fabric Workspaces
 
 <div align="center" markdown>

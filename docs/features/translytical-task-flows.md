@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/features.svg
+hero_alt: Fabric feature — Translytical Task Flows - Visual Orchestration and Write-Back from Power BI
+---
+
 # 🔄 Translytical Task Flows - Visual Orchestration and Write-Back from Power BI
 
 <div align="center" markdown>

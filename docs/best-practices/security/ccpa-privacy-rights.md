@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/compliance.svg
+hero_alt: Security best practice — CCPA / CPRA Privacy Rights Implementation on Microsoft Fabric
+---
+
 # 🛡️ CCPA / CPRA Privacy Rights Implementation on Microsoft Fabric
 
 <div align="center" markdown>
