@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/features.svg
 hero_alt: "Fabric feature — TMDL & Power BI Developer Mode - Source-Controlled Semantic Models"
+type: feature
 ---
-
 # 🛠️ TMDL & Power BI Developer Mode - Source-Controlled Semantic Models
 
 <div align="center" markdown>

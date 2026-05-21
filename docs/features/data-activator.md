@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/features.svg
 hero_alt: Fabric feature — Data Activator — Real-Time Alerting and Actions
+type: feature
 ---
-
 # 🔔 Data Activator — Real-Time Alerting and Actions
 
 <div align="center" markdown>

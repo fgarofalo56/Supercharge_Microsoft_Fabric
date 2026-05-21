@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/deployment.svg
 hero_alt: "Deployment — CI/CD, Bicep IaC, fabric-cicd"
+type: runbook
 ---
-
 # 🚀 Deployment Guide
 
 <div align="center" markdown>

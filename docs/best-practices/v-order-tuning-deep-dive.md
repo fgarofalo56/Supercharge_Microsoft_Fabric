@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: Best practice — V-Order Tuning Deep Dive
+type: deep-dive
 ---
-
 # 🔀 V-Order Tuning Deep Dive
 
 <div align="center" markdown>

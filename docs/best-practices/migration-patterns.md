@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: Best practice — Migration Patterns for Microsoft Fabric
+type: deep-dive
 ---
-
 # 🔄 Migration Patterns for Microsoft Fabric
 
 <div align="center" markdown>

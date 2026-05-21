@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/financial-services.svg
 hero_alt: Insurance claims analytics + denial prediction
+type: feature
 ---
-
 # Insurance Claims Analytics - P&C Carrier Use Case
 
 ## Executive Summary

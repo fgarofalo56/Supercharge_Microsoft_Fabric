@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/white-papers.svg
 hero_alt: "Migration & RTI Research — Field findings"
+type: deep-dive
 ---
-
 # 🔄 Database Migration Paths & Advanced Real-Time Intelligence Research
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0

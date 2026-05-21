@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/compliance.svg
 hero_alt: "Security best practice — Supply Chain Security: Notebook + Library + Connector Vetting"
+type: compliance
 ---
-
 # 🔗 Supply Chain Security: Notebook + Library + Connector Vetting
 
 <div align="center" markdown>

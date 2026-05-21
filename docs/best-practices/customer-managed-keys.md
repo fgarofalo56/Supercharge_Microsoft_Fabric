@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: Best practice — Customer-Managed Keys (CMK) for Microsoft Fabric
+type: deep-dive
 ---
-
 # 🔐 Customer-Managed Keys (CMK) for Microsoft Fabric
 
 <div align="center" markdown>

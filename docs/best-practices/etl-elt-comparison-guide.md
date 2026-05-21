@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: Best practice — ETL/ELT Comparison Guide — Choosing the Right Data Movement Method
+type: deep-dive
 ---
-
 # 🔄 ETL/ELT Comparison Guide — Choosing the Right Data Movement Method
 
 <div align="center" markdown>

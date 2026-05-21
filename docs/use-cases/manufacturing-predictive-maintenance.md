@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/manufacturing.svg
 hero_alt: Predictive maintenance + OEE on factory telemetry
+type: feature
 ---
-
 # Manufacturing Predictive Maintenance & OEE Analytics
 
 ## Use Case Overview

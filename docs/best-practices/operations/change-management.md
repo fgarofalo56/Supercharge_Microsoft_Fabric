@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/runbooks.svg
 hero_alt: Operations best practice — Change Management for Fabric Platforms
+type: runbook
 ---
-
 # 🛡️ Change Management for Fabric Platforms
 
 <div align="center" markdown>

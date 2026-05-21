@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: "Best practice — Capacity Planning & Cost Optimization for Microsoft Fabric"
+type: deep-dive
 ---
-
 # 💰 Capacity Planning & Cost Optimization for Microsoft Fabric
 
 <div align="center" markdown>

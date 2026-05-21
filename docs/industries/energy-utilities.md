@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/energy-utilities.svg
 hero_alt: "Energy & Utilities — Smart grid, load forecasting on Fabric"
+type: feature
 ---
-
 # ⚡ Energy & Utilities — Smart Grid Analytics & Renewable Forecasting
 
 

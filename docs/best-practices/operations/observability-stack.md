@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/runbooks.svg
 hero_alt: "Operations best practice — Observability Stack: Log Analytics + Workspace Monitoring + Action Groups + Grafana"
+type: runbook
 ---
-
 # 🔭 Observability Stack: Log Analytics + Workspace Monitoring + Action Groups + Grafana
 
 <div align="center" markdown>

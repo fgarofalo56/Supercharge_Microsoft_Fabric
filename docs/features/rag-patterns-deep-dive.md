@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/features.svg
 hero_alt: Fabric feature — RAG Patterns Deep Dive — Production Retrieval-Augmented Generation on Fabric
+type: feature
 ---
-
 # 🔎 RAG Patterns Deep Dive — Production Retrieval-Augmented Generation on Fabric
 
 <div align="center" markdown>

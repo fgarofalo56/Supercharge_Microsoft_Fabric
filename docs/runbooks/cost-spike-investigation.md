@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/runbooks.svg
 hero_alt: Runbook — Cost Spike Investigation Runbook
+type: runbook
 ---
-
 # 📈 Cost Spike Investigation Runbook
 
 > **Last Updated**: 2026-05-05 | **Version**: 1.0

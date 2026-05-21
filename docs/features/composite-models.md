@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/features.svg
 hero_alt: Fabric feature — Composite Models - Mixed Storage Mode Semantic Models
+type: feature
 ---
-
 # 🔀 Composite Models - Mixed Storage Mode Semantic Models
 
 <div align="center" markdown>

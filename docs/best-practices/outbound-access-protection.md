@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: Best practice — Outbound Access Protection (OAP)
+type: deep-dive
 ---
-
 # 🛡️ Outbound Access Protection (OAP)
 
 <div align="center" markdown>

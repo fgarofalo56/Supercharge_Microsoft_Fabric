@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/retail-cpg.svg
 hero_alt: "Retail & CPG — Demand forecasting, customer segmentation on Fabric"
+type: feature
 ---
-
 # 🛒 Retail & CPG — Demand Forecasting & Customer 360
 
 

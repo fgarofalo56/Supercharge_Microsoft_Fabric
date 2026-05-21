@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/healthcare.svg
 hero_alt: Pharma clinical trials + adverse event detection
+type: feature
 ---
-
 # Pharma & Life Sciences: Clinical Trial Analytics on Microsoft Fabric
 
 <div align="center" markdown>

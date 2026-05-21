@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/architecture.svg
 hero_alt: "Architecture — Reference architectures, decisions, and best practices for Fabric"
+type: deep-dive
 ---
-
 # 🏗️ Architecture Documentation
 
 <div align="center" markdown>

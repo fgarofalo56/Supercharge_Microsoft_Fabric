@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: "Best practice — Lakehouse Setup & Organization"
+type: deep-dive
 ---
-
 [Home](../index.md) > [Best Practices](./) > Lakehouse Setup & Organization
 
 # 🏠 Lakehouse Setup & Organization

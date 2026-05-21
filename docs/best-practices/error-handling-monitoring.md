@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: "Best practice — Error Handling & Monitoring Best Practices"
+type: deep-dive
 ---
-
 [Home](../index.md) > [Best Practices](./) > Error Handling & Monitoring
 
 # ⚠️ Error Handling & Monitoring Best Practices

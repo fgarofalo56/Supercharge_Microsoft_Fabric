@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/healthcare.svg
 hero_alt: "Healthcare Analytics — EHR, claims, population health on Fabric"
+type: feature
 ---
-
 # 🏥 Healthcare — Patient Analytics & Clinical Intelligence
 
 

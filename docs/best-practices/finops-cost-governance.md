@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: "Best practice — FinOps & Cost Governance for Microsoft Fabric"
+type: deep-dive
 ---
-
 # 💸 FinOps & Cost Governance for Microsoft Fabric
 
 <div align="center" markdown>

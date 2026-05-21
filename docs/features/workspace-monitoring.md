@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/features.svg
 hero_alt: Fabric feature — Workspace Monitoring - Observability for Fabric Workloads
+type: feature
 ---
-
 # 📊 Workspace Monitoring - Observability for Fabric Workloads
 
 <div align="center" markdown>

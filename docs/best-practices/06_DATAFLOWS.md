@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: Best practice — Dataflows Gen2 Best Practices
+type: deep-dive
 ---
-
 [Home](../index.md) > [Best Practices](./) > Dataflows Gen2
 
 # 🔀 Dataflows Gen2 Best Practices

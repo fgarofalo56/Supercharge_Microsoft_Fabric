@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/features.svg
 hero_alt: Fabric feature — Maps in Fabric — Native Geospatial Visualization
+type: feature
 ---
-
 # 🗺️ Maps in Fabric — Native Geospatial Visualization
 
 <div align="center" markdown>

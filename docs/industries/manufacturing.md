@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/manufacturing.svg
 hero_alt: "Manufacturing & IoT — Factory telemetry, predictive maintenance on Fabric"
+type: feature
 ---
-
 # ⚙️ Manufacturing — IoT Telemetry & Predictive Maintenance
 
 

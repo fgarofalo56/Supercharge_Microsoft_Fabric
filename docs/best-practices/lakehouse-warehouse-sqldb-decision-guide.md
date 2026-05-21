@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: Best practice — Lakehouse vs Warehouse vs SQL Database — Decision Guide
+type: deep-dive
 ---
-
 # 🏗️ Lakehouse vs Warehouse vs SQL Database — Decision Guide
 
 <div align="center" markdown>

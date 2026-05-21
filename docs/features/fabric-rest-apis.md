@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/features.svg
 hero_alt: Fabric feature — Fabric REST APIs - Programmatic Platform Management
+type: feature
 ---
-
 # 🔌 Fabric REST APIs - Programmatic Platform Management
 
 <div align="center" markdown>

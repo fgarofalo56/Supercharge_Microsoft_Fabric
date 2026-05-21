@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: Best practice — Data Governance Deep Dive
+type: deep-dive
 ---
-
 [Home](../index.md) > [Best Practices](./) > Data Governance Deep Dive
 
 # 🛡️ Data Governance Deep Dive

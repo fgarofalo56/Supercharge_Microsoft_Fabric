@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/features.svg
 hero_alt: Fabric feature — Prompt Engineering for Fabric Workloads
+type: feature
 ---
-
 # 🎯 Prompt Engineering for Fabric Workloads
 
 <div align="center" markdown>

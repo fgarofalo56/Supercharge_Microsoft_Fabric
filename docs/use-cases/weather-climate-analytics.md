@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/energy-utilities.svg
 hero_alt: Weather + NOAA climate analytics
+type: feature
 ---
-
 # Weather and Climate Analytics
 
 > Leveraging Microsoft Fabric to analyze severe weather patterns, detect climate anomalies, and correlate meteorological events with cross-domain impacts using NOAA public observation and forecast data.

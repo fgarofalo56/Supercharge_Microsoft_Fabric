@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: "Best practice — Data Modeling & Star Schema Best Practices for Microsoft Fabric"
+type: deep-dive
 ---
-
 # ⭐ Data Modeling & Star Schema Best Practices for Microsoft Fabric
 
 <div align="center" markdown>

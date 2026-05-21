@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/features.svg
 hero_alt: Fabric feature — Dataflow Gen2 — Low-Code ETL with Power Query
+type: feature
 ---
-
 # 🔄 Dataflow Gen2 — Low-Code ETL with Power Query
 
 <div align="center" markdown>

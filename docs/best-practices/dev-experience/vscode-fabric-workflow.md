@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: Dev experience best practice — VS Code Workflow for Microsoft Fabric Development
+type: deep-dive
 ---
-
 # VS Code Workflow for Microsoft Fabric Development
 
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue)

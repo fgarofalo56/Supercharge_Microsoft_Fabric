@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: "Best practice — Workspaces & Naming Conventions"
+type: deep-dive
 ---
-
 [Home](../index.md) > [Best Practices](./) > Workspaces & Naming Conventions
 
 # ⚙️ Workspaces & Naming Conventions

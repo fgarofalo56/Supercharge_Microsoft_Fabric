@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: Best practice — Data Gateway Optimization
+type: deep-dive
 ---
-
 [Home](../index.md) > [Best Practices](./) > Data Gateway Optimization
 
 # 🌐 Data Gateway Optimization

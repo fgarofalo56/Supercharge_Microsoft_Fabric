@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/features.svg
 hero_alt: "Fabric feature — Spark Environments & Job Definitions"
+type: feature
 ---
-
 # ⚙️ Spark Environments & Job Definitions
 
 <div align="center" markdown>

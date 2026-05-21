@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: Best practice — OneLake Files vs Tables Decision Guide
+type: deep-dive
 ---
-
 # 📂 OneLake Files vs Tables Decision Guide
 
 <div align="center" markdown>

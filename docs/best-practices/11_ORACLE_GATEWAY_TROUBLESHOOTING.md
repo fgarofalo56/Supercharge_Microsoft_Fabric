@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: "Best practice — Oracle to Fabric: Gateway & Pipeline Troubleshooting"
+type: deep-dive
 ---
-
 [Home](../index.md) > [Best Practices](./) > Oracle Gateway Troubleshooting
 
 # 🔧 Oracle to Fabric: Gateway & Pipeline Troubleshooting

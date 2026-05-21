@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/reference.svg
 hero_alt: Reference — Style guide
+type: reference
 ---
-
 # 📝 Documentation Style Guide
 
 > **Last Updated**: 2025-01-22 | **Version**: 1.0  

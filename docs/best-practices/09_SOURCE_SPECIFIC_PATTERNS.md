@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: "Best practice — Oracle & SQL Server Source Patterns"
+type: deep-dive
 ---
-
 [Home](../index.md) > [Best Practices](./) > Source-Specific Patterns
 
 # 🔌 Oracle & SQL Server Source Patterns

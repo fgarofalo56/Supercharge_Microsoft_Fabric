@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/getting-started.svg
 hero_alt: Quickstart — Security Admin Quickstart
+type: quick-start
 ---
-
 # Security Admin Quickstart
 
 > **Last Updated**: 2026-05-05 | **Role**: Security Admin

@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/energy-utilities.svg
 hero_alt: Environmental compliance + EPA AQI
+type: feature
 ---
-
 # Environmental Compliance Analytics
 
 > Leveraging Microsoft Fabric to unify EPA air quality monitoring, toxic release tracking, enforcement compliance, and greenhouse gas reporting into a single analytical platform for environmental risk assessment and regulatory intelligence.

@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/reference-architecture.svg
 hero_alt: Reference architecture — Large Enterprise Multi-Domain Reference Architecture
+type: deep-dive
 ---
-
 # 🏛️ Large Enterprise Multi-Domain Reference Architecture
 
 

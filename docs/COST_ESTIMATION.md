@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/finops.svg
 hero_alt: Cost Estimation — Capacity sizing and FinOps
+type: reference
 ---
-
 # 💰 Azure Cost Estimation Guide
 
 <div align="center" markdown>

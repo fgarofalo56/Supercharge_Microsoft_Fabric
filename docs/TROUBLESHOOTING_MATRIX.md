@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/runbooks.svg
 hero_alt: Troubleshooting Matrix — Common issues + resolution paths
+type: runbook
 ---
-
 # Troubleshooting Matrix
 
 > **Last Updated**: 2026-04-27 | **Version**: 1.0

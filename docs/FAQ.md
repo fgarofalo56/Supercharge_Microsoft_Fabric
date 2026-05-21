@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/reference.svg
 hero_alt: "Reference — Glossary, FAQ, cheat sheets, style guide, and the data dictionary"
+type: reference
 ---
-
 # 💬 Frequently Asked Questions (FAQ)
 
 > **Last Updated**: 2026-04-27 | **Version**: 3.0

@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/runbooks.svg
 hero_alt: "Runbook — Tenant Migration: Dev → Staging → Prod Promotion"
+type: runbook
 ---
-
 # 🚀 Tenant Migration: Dev → Staging → Prod Promotion
 
 > **Last Updated**: 2026-04-27 | **Phase**: 14 (Wave 1) | **Feature 1.6**

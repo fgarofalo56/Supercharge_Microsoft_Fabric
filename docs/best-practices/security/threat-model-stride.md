@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/compliance.svg
 hero_alt: Security best practice — STRIDE Threat Modeling for Fabric Reference Architecture
+type: compliance
 ---
-
 # 🛡️ STRIDE Threat Modeling for Fabric Reference Architecture
 
 <div align="center" markdown>

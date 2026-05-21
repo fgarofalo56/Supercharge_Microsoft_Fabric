@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/compliance.svg
 hero_alt: Security best practice — GDPR Right to Deletion (Right to be Forgotten) on Microsoft Fabric
+type: compliance
 ---
-
 # 🗑️ GDPR Right to Deletion (Right to be Forgotten) on Microsoft Fabric
 
 <div align="center" markdown>

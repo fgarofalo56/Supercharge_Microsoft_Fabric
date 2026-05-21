@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: Best practice — Spark Runtime 2.0 Migration Guide
+type: deep-dive
 ---
-
 # Spark Runtime 2.0 Migration Guide
 
 <div align="center" markdown>

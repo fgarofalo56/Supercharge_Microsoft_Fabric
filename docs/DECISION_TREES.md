@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/decisions.svg
 hero_alt: Decision Trees — When to pick which Fabric component
+type: decision
 ---
-
 # Decision Trees: Choosing the Right Fabric Component
 
 > **Last Updated**: 2026-04-27 | **Version**: 1.0

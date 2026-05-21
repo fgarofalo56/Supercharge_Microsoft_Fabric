@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/features.svg
 hero_alt: Fabric feature — Deployment Pipelines — Stage-Based Promotion in Fabric
+type: feature
 ---
-
 # 🚀 Deployment Pipelines — Stage-Based Promotion in Fabric
 
 <div align="center" markdown>

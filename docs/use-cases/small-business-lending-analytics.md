@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/financial-services.svg
 hero_alt: SBA lending portfolio analytics
+type: feature
 ---
-
 # Small Business Lending Analytics
 
 > Leveraging Microsoft Fabric to analyze PPP loan distribution, detect lending fraud patterns, and monitor small business capital access using SBA, SAM.gov, and SBIR public data.

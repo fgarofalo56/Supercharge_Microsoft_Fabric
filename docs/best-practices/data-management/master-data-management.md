@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: Data management best practice — Master Data Management on Microsoft Fabric
+type: deep-dive
 ---
-
 # 🏛️ Master Data Management on Microsoft Fabric
 
 <div align="center" markdown>

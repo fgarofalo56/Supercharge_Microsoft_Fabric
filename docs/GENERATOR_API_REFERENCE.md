@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/reference.svg
 hero_alt: Reference — Generator API
+type: reference
 ---
-
 # 🔌 Generator API Reference
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0

@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: Best practice — Spark Runtime Breaking Changes Matrix
+type: deep-dive
 ---
-
 # ⚙️ Spark Runtime Breaking Changes Matrix
 
 <div align="center" markdown>

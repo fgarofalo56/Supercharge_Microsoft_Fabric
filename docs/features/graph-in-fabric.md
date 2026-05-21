@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/features.svg
 hero_alt: Fabric feature — Graph in Fabric — Relationship Modeling and Graph Analytics
+type: feature
 ---
-
 # 🔗 Graph in Fabric — Relationship Modeling and Graph Analytics
 
 <div align="center" markdown>

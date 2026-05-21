@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/reference-architecture.svg
 hero_alt: Reference architecture — Real-Time Analytics Reference Architecture
+type: deep-dive
 ---
-
 # ⚡ Real-Time Analytics Reference Architecture
 
 

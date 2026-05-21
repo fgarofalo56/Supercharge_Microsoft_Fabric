@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: Best practice — Lakehouse Schema Versioning
+type: deep-dive
 ---
-
 # 🔄 Lakehouse Schema Versioning
 
 <div align="center" markdown>

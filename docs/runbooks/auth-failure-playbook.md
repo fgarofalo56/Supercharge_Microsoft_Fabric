@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/runbooks.svg
 hero_alt: Runbook — Authentication Failure Playbook
+type: runbook
 ---
-
 # 🔑 Authentication Failure Playbook
 
 > **Last Updated**: 2026-04-27 | **Phase**: 14 (Wave 1) | **Anchor**: [incident-response-template.md](incident-response-template.md)

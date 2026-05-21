@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: Best practice — Partition Strategy Decision Tree
+type: deep-dive
 ---
-
 # 🌲 Partition Strategy Decision Tree
 
 <div align="center" markdown>

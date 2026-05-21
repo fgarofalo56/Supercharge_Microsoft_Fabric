@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/features.svg
 hero_alt: Fabric feature — Git Integration for Fabric
+type: feature
 ---
-
 # 🔀 Git Integration for Fabric
 
 <div align="center" markdown>

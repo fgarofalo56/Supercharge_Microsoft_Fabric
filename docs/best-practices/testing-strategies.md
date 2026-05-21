@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: Best practice — Testing Strategies for Microsoft Fabric
+type: deep-dive
 ---
-
 # 🧪 Testing Strategies for Microsoft Fabric
 
 <div align="center" markdown>

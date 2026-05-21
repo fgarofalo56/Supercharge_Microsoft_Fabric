@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/runbooks.svg
 hero_alt: Runbook — Incident Response Template
+type: runbook
 ---
-
 # 🚨 Incident Response Template
 
 > **Last Updated**: 2026-04-27 | **Phase**: 14 (Wave 1) | **Anchor Runbook**

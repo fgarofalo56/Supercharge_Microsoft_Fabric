@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/compliance-pci-dss.svg
 hero_alt: "PCI DSS — Cardholder data + 12 control requirements"
+type: compliance
 ---
-
 # 💳 PCI DSS Compliance Mapping for Microsoft Fabric
 
 <div align="center" markdown>

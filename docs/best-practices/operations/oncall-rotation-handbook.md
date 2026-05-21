@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/runbooks.svg
 hero_alt: Operations best practice — On-Call Rotation Handbook
+type: runbook
 ---
-
 # 📟 On-Call Rotation Handbook
 
 <div align="center" markdown>

@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: "Best practice — Identity & RBAC Patterns for Microsoft Fabric"
+type: deep-dive
 ---
-
 # 🔑 Identity & RBAC Patterns for Microsoft Fabric
 
 <div align="center" markdown>

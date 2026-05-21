@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/getting-started.svg
 hero_alt: Prerequisites — What you need before deploying
+type: quick-start
 ---
-
 # 📋 Prerequisites Guide
 
 <div align="center" markdown>

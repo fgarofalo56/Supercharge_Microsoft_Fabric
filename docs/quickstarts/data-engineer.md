@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/getting-started.svg
 hero_alt: Quickstart — Data Engineer Quickstart
+type: quick-start
 ---
-
 # Data Engineer Quickstart
 
 > **Last Updated**: 2026-05-05 | **Role**: Data Engineer

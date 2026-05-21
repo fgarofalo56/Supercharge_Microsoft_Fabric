@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/compliance.svg
 hero_alt: Compliance template — MICS Compliance Template
+type: compliance
 ---
-
 # 🏛️ MICS Compliance Template
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0

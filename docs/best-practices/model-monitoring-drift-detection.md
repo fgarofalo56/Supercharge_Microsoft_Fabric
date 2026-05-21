@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: "Best practice — Model Monitoring & Drift Detection"
+type: deep-dive
 ---
-
 # 📡 Model Monitoring & Drift Detection
 
 <div align="center" markdown>

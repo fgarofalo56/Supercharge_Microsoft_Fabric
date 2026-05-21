@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/healthcare.svg
 hero_alt: Commercial healthcare operations on Fabric
+type: feature
 ---
-
 # Commercial Healthcare Operations Analytics
 
 > **Anchor Use Case for Phase 14 Wave 6 — Commercial Industry Verticals**

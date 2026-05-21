@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/financial-services.svg
 hero_alt: "Financial Services Analytics — Fraud, AML, customer 360 on Fabric"
+type: feature
 ---
-
 # 🏦 Financial Services — Fraud Detection & Risk Analytics
 
 

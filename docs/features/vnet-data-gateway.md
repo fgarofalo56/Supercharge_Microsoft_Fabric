@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/features.svg
 hero_alt: Fabric feature — VNet Data Gateway - Secure Connectivity from Your Virtual Network
+type: feature
 ---
-
 # 🔒 VNet Data Gateway - Secure Connectivity from Your Virtual Network
 
 <div align="center" markdown>

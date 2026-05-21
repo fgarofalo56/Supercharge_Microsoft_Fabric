@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/runbooks.svg
 hero_alt: Runbook — Data Quality Incident Runbook
+type: runbook
 ---
-
 # 🧪 Data Quality Incident Runbook
 
 > **Last Updated**: 2026-05-05 | **Version**: 2.0

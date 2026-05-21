@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/compliance-gdpr.svg
 hero_alt: "GDPR — EU privacy + data subject rights"
+type: compliance
 ---
-
 # 🌍 GDPR Compliance Mapping for Microsoft Fabric
 
 <div align="center" markdown>

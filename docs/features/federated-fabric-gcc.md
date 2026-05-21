@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/features.svg
 hero_alt: Fabric feature — Federated Fabric for GCC — Using Microsoft Fabric in Commercial from Government Cloud
+type: feature
 ---
-
 # Federated Fabric for GCC — Using Microsoft Fabric in Commercial from Government Cloud
 
 <div align="center" markdown>

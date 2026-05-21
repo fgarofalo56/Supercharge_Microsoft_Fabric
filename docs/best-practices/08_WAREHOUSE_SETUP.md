@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: "Best practice — Warehouse Setup & Configuration"
+type: deep-dive
 ---
-
 [Home](../index.md) > [Best Practices](./) > Warehouse Setup & Configuration
 
 # 🏢 Warehouse Setup & Configuration

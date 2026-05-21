@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/compliance.svg
 hero_alt: Compliance template — SOC 2 Control Matrix Template — Microsoft Fabric Workloads
+type: compliance
 ---
-
 # SOC 2 Control Matrix Template — Microsoft Fabric Workloads
 
 <div align="center" markdown>

@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/compliance.svg
 hero_alt: Security best practice — SOC 2 Type II Readiness on Microsoft Fabric
+type: compliance
 ---
-
 # 🔐 SOC 2 Type II Readiness on Microsoft Fabric
 
 <div align="center" markdown>

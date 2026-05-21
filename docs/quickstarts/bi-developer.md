@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/getting-started.svg
 hero_alt: Quickstart — BI Developer Quickstart
+type: quick-start
 ---
-
 # BI Developer Quickstart
 
 > **Last Updated**: 2026-05-05 | **Role**: BI Developer

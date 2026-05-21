@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/features.svg
 hero_alt: Fabric feature — Fabric IQ - Natural Language Analytics
+type: feature
 ---
-
 # 🧠 Fabric IQ - Natural Language Analytics
 
 

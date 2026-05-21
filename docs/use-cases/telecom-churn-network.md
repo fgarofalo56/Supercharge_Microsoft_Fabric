@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/telecommunications.svg
 hero_alt: Telecom churn + network quality analytics
+type: feature
 ---
-
 # Telecom Churn Prediction & Network Quality Analytics
 
 ## Use Case Overview

@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/features.svg
 hero_alt: Fabric feature — User Data Functions - Serverless Compute in Fabric
+type: feature
 ---
-
 # ⚡ User Data Functions - Serverless Compute in Fabric
 
 <div align="center" markdown>

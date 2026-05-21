@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/runbooks.svg
 hero_alt: Runbook — Disaster Recovery Execution Runbook
+type: runbook
 ---
-
 # 🌐 Disaster Recovery Execution Runbook
 
 > **Last Updated**: 2026-05-05 | **Version**: 1.0

@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: Dev experience best practice — Unit Testing Microsoft Fabric Notebooks
+type: deep-dive
 ---
-
 # Unit Testing Microsoft Fabric Notebooks
 
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue)

@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/features.svg
 hero_alt: Fabric feature — Paginated Reports - Pixel-Perfect Enterprise Reporting
+type: feature
 ---
-
 # 🖨️ Paginated Reports - Pixel-Perfect Enterprise Reporting
 
 <div align="center" markdown>

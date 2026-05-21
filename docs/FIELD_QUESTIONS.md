@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/reference.svg
 hero_alt: "Reference — Field Questions: Real customer scenarios answered"
+type: reference
 ---
-
 # 🛠️ Field Questions — Real Customer Scenarios
 
 <div align="center" markdown>

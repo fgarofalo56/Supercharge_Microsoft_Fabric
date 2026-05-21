@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: "Best practice — SQL Audit Logs & Compliance"
+type: deep-dive
 ---
-
 # 🔒 SQL Audit Logs & Compliance
 
 <div align="center" markdown>

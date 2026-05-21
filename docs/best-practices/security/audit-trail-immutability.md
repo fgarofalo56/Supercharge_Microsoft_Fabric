@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/compliance.svg
 hero_alt: "Security best practice — Audit Trail Immutability: Tamper-Evident Workflows for Compliance"
+type: compliance
 ---
-
 # 📜 Audit Trail Immutability: Tamper-Evident Workflows for Compliance
 
 <div align="center" markdown>

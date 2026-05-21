@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: Best practice — Query Optimization Deep Dive
+type: deep-dive
 ---
-
 # 🚀 Query Optimization Deep Dive
 
 <div align="center" markdown>

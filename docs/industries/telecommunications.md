@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/telecommunications.svg
 hero_alt: "Telecom Analytics — Churn, network quality on Fabric"
+type: feature
 ---
-
 # 📡 Telecommunications — Network Performance & Churn Prediction
 
 <div align="center" markdown>

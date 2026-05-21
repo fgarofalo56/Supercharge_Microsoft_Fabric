@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/features.svg
 hero_alt: Fabric feature — Direct Lake - Zero-Copy Power BI over OneLake
+type: feature
 ---
-
 # ⚡ Direct Lake - Zero-Copy Power BI over OneLake
 
 

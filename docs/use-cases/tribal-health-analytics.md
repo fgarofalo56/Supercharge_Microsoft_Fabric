@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/healthcare.svg
 hero_alt: Tribal health analytics + IHS reporting
+type: feature
 ---
-
 # Tribal Health Analytics
 
 > Leveraging Microsoft Fabric to analyze health disparities, chronic disease burden, and facility utilization across Indian Health Service regions using publicly available federal health data while respecting tribal data sovereignty.

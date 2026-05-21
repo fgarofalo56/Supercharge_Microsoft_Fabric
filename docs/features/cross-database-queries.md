@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/features.svg
 hero_alt: Fabric feature — Cross-Database Queries in Microsoft Fabric
+type: feature
 ---
-
 # 🔗 Cross-Database Queries in Microsoft Fabric
 
 <div align="center" markdown>

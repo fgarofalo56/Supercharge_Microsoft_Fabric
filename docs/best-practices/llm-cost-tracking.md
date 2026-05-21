@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: "Best practice — LLM Cost Tracking & FinOps for AI Workloads"
+type: deep-dive
 ---
-
 # 💸 LLM Cost Tracking & FinOps for AI Workloads
 
 <div align="center" markdown>

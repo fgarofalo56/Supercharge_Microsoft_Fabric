@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: Data management best practice — Slowly Changing Dimension (SCD) Patterns in Delta Lake
+type: deep-dive
 ---
-
 # 🕰️ Slowly Changing Dimension (SCD) Patterns in Delta Lake
 
 <div align="center" markdown>

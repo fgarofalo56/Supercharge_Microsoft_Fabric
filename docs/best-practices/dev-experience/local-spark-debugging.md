@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/best-practices.svg
 hero_alt: Dev experience best practice — Local PySpark Debugging for Fabric Development
+type: deep-dive
 ---
-
 # Local PySpark Debugging for Fabric Development
 
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue)

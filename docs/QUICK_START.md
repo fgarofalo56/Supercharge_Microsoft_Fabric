@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/getting-started.svg
 hero_alt: Quick Start — Deploy the POC in under an hour
+type: quick-start
 ---
-
 # 🚀 Quick Start Guide
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0

@@ -1,8 +1,8 @@
 ---
 hero: assets/heroes/features.svg
 hero_alt: "Fabric feature — Scorecards & Metrics - KPI Goal Tracking"
+type: feature
 ---
-
 # 🎯 Scorecards & Metrics - KPI Goal Tracking
 
 <div align="center" markdown>

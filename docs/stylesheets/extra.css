@@ -571,3 +571,209 @@ img.service-icon {
 [data-md-color-scheme="slate"] .md-typeset hr {
   border-top-color: rgba(255, 255, 255, 0.08);
 }
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   VISUAL POLISH — site-wide visual upgrades (May 2026)
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Code-block language badges ────────────────────────────────────
+   pymdownx-superfences already adds a `.highlight` wrapper with the
+   language as a class. We extract it via a CSS attr() and render it
+   as a small monospace label in the top-right of every code block.
+   Pure CSS, no markdown changes, applies site-wide. */
+.md-typeset .highlight {
+  position: relative;
+}
+.md-typeset .highlight::before {
+  content: attr(data-lang);
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  font-family: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--md-default-fg-color--light);
+  background: var(--md-default-bg-color);
+  padding: 2px 8px;
+  border-radius: 4px;
+  opacity: 0.6;
+  pointer-events: none;
+  transition: opacity 0.15s;
+  z-index: 1;
+}
+.md-typeset .highlight:hover::before,
+.md-typeset .highlight:focus-within::before {
+  opacity: 1;
+}
+[data-md-color-scheme="slate"] .md-typeset .highlight::before {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+
+/* ── Section divider band for H2 headings on long pages ──────────
+   Adds a vertical gradient accent stripe on every H2 so headings
+   read as chapter breaks rather than just bolder text. */
+.md-typeset h2 {
+  position: relative;
+  padding-left: 0.8rem;
+  margin-top: 3rem;
+}
+.md-typeset h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.35em;
+  bottom: 0.35em;
+  width: 4px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--md-primary-fg-color) 0%, var(--md-accent-fg-color) 100%);
+}
+[data-md-color-scheme="slate"] .md-typeset h2::before {
+  background: linear-gradient(180deg, #818CF8 0%, #FFB300 100%);
+}
+
+
+/* ── Stat / KPI callout admonition ────────────────────────────────
+   Custom admonition type. Use as:
+     !!! stat "F64 Capacity"
+         8,480 USD / month — reserved
+   Renders the value as 2.4rem display text with the label above it. */
+.md-typeset .admonition.stat,
+.md-typeset details.stat {
+  border-left: 4px solid var(--md-accent-fg-color);
+  background: linear-gradient(135deg, rgba(63, 81, 181, 0.04) 0%, rgba(255, 179, 0, 0.06) 100%);
+  padding: 1.2rem 1.4rem;
+  border-radius: 8px;
+  margin: 1.6rem 0;
+}
+.md-typeset .admonition.stat > .admonition-title,
+.md-typeset details.stat > summary {
+  background: transparent;
+  padding: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--md-default-fg-color--light);
+  margin: 0 0 0.4rem 0;
+  font-family: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+}
+.md-typeset .admonition.stat > .admonition-title::before,
+.md-typeset details.stat > summary::before {
+  display: none;
+}
+.md-typeset .admonition.stat > p {
+  font-family: 'IBM Plex Sans', 'Segoe UI', sans-serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--md-primary-fg-color);
+  margin: 0;
+}
+[data-md-color-scheme="slate"] .md-typeset .admonition.stat > p {
+  color: #A5B4FC;
+}
+
+
+/* ── Page-type badge ──────────────────────────────────────────────
+   Frontmatter `type:` field renders as a colored chip after the H1.
+   Color is encoded via `data-page-type` attribute. */
+.md-typeset .md-page-type {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 0.32rem 0.7rem;
+  border-radius: 5px;
+  margin-left: 0.4rem;
+  vertical-align: 0.3em;
+  white-space: nowrap;
+}
+.md-typeset .md-page-type[data-page-type="deep-dive"]   { background: #E3F2FD; color: #1565C0; }
+.md-typeset .md-page-type[data-page-type="quick-start"] { background: #E8F5E9; color: #2E7D32; }
+.md-typeset .md-page-type[data-page-type="runbook"]     { background: #FFEBEE; color: #C62828; }
+.md-typeset .md-page-type[data-page-type="reference"]   { background: #F3E5F5; color: #6A1B9A; }
+.md-typeset .md-page-type[data-page-type="feature"]     { background: #FFF8E1; color: #F57F17; }
+.md-typeset .md-page-type[data-page-type="tutorial"]    { background: #FCE4EC; color: #AD1457; }
+.md-typeset .md-page-type[data-page-type="decision"]    { background: #E0F2F1; color: #00695C; }
+.md-typeset .md-page-type[data-page-type="compliance"]  { background: #E8EAF6; color: #283593; }
+[data-md-color-scheme="slate"] .md-typeset .md-page-type[data-page-type="deep-dive"]   { background: rgba(33,150,243,0.18); color: #90CAF9; }
+[data-md-color-scheme="slate"] .md-typeset .md-page-type[data-page-type="quick-start"] { background: rgba(76,175,80,0.18); color: #A5D6A7; }
+[data-md-color-scheme="slate"] .md-typeset .md-page-type[data-page-type="runbook"]     { background: rgba(244,67,54,0.18); color: #EF9A9A; }
+[data-md-color-scheme="slate"] .md-typeset .md-page-type[data-page-type="reference"]   { background: rgba(156,39,176,0.18); color: #CE93D8; }
+[data-md-color-scheme="slate"] .md-typeset .md-page-type[data-page-type="feature"]     { background: rgba(255,193,7,0.18); color: #FFD54F; }
+[data-md-color-scheme="slate"] .md-typeset .md-page-type[data-page-type="tutorial"]    { background: rgba(233,30,99,0.18); color: #F48FB1; }
+[data-md-color-scheme="slate"] .md-typeset .md-page-type[data-page-type="decision"]    { background: rgba(0,150,136,0.18); color: #80CBC4; }
+[data-md-color-scheme="slate"] .md-typeset .md-page-type[data-page-type="compliance"]  { background: rgba(63,81,181,0.22); color: #9FA8DA; }
+
+
+/* ── Next-step cards at bottom of every doc ───────────────────────
+   Rendered by the `hooks/next_steps_cards.py` post-page hook. */
+.md-typeset .next-steps {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+}
+.md-typeset .next-steps__heading {
+  font-family: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--md-default-fg-color--light);
+  margin: 0 0 1rem 0;
+}
+.md-typeset .next-steps__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+.md-typeset .next-step {
+  display: flex;
+  flex-direction: column;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 8px;
+  text-decoration: none;
+  background: var(--md-default-bg-color);
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.md-typeset .next-step:hover {
+  transform: translateY(-2px);
+  border-color: var(--md-accent-fg-color);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12);
+}
+[data-md-color-scheme="slate"] .md-typeset .next-step:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+.md-typeset .next-step__label {
+  font-family: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--md-default-fg-color--light);
+  margin-bottom: 0.4rem;
+}
+.md-typeset .next-step__title {
+  font-family: 'IBM Plex Sans', 'Segoe UI', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--md-default-fg-color);
+  line-height: 1.35;
+}
+.md-typeset .next-step__arrow {
+  margin-top: 0.6rem;
+  font-size: 0.75rem;
+  color: var(--md-accent-fg-color);
+  font-weight: 600;
+}
