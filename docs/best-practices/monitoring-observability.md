@@ -450,7 +450,7 @@ flowchart LR
     R2 -->|Failed| A1
     R2 -->|Failed 3x| A4
     R3 -->|OOM| A1
-    R4 -->|DQ < 70%| A1
+    R4 -->|"DQ < 70%"| A1
     R5 -->|Unauthorized| A4
 ```
 

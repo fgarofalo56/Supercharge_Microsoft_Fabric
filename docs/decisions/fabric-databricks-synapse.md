@@ -38,33 +38,33 @@ Choose **Fabric** when you want a unified SaaS analytics platform with integrate
 flowchart TD
     START([New analytics platform decision]) --> EXISTING{Existing platform<br/>investment?}
 
-    EXISTING -->|Greenfield - no<br/>existing platform| WORKLOAD
+    EXISTING -->|"Greenfield - no<br/>existing platform"| WORKLOAD
     EXISTING -->|Synapse Analytics| SYNAPSE_CHECK{Dedicated SQL pools<br/>or Serverless only?}
     EXISTING -->|Databricks| DB_CHECK{Multi-cloud<br/>requirement?}
     EXISTING -->|Other / on-prem| WORKLOAD
 
-    SYNAPSE_CHECK -->|Dedicated SQL pools<br/>active workloads| SYNAPSE_KEEP[Keep Synapse Dedicated<br/>+ evaluate Fabric migration]
+    SYNAPSE_CHECK -->|"Dedicated SQL pools<br/>active workloads"| SYNAPSE_KEEP[Keep Synapse Dedicated<br/>+ evaluate Fabric migration]
     SYNAPSE_CHECK -->|Serverless / Spark only| FABRIC_MIGRATE[Migrate to Fabric<br/>Lakehouse + Warehouse]
 
-    DB_CHECK -->|Yes - AWS, GCP,<br/>Azure all needed| DB_MULTI[Databricks<br/>multi-cloud Unity Catalog]
+    DB_CHECK -->|"Yes - AWS, GCP,<br/>Azure all needed"| DB_MULTI[Databricks<br/>multi-cloud Unity Catalog]
     DB_CHECK -->|No - Azure only| WORKLOAD
 
     WORKLOAD{Primary workload?} --> WL_ANALYTICS{Analytics + BI<br/>dominant?}
 
-    WL_ANALYTICS -->|Yes - dashboards,<br/>reports, KPIs| FABRIC[Fabric<br/>unified SaaS platform]
+    WL_ANALYTICS -->|"Yes - dashboards,<br/>reports, KPIs"| FABRIC[Fabric<br/>unified SaaS platform]
     WL_ANALYTICS -->|No| WL_ML{ML / AI<br/>dominant?}
 
-    WL_ML -->|Yes - training,<br/>MLOps, serving| ML_SCALE{Scale of ML<br/>operations?}
+    WL_ML -->|"Yes - training,<br/>MLOps, serving"| ML_SCALE{Scale of ML<br/>operations?}
     WL_ML -->|No| WL_STREAMING{Real-time<br/>streaming dominant?}
 
-    ML_SCALE -->|Enterprise MLOps,<br/>GPU clusters, LLM fine-tuning| DATABRICKS[Databricks<br/>ML-optimized platform]
-    ML_SCALE -->|Lightweight ML,<br/>AutoML, scoring| FABRIC
+    ML_SCALE -->|"Enterprise MLOps,<br/>GPU clusters, LLM fine-tuning"| DATABRICKS[Databricks<br/>ML-optimized platform]
+    ML_SCALE -->|"Lightweight ML,<br/>AutoML, scoring"| FABRIC
 
     WL_STREAMING -->|Yes| FABRIC
-    WL_STREAMING -->|No - general<br/>data engineering| TEAM{Team's primary<br/>ecosystem?}
+    WL_STREAMING -->|"No - general<br/>data engineering"| TEAM{Team's primary<br/>ecosystem?}
 
-    TEAM -->|Microsoft 365,<br/>Power Platform, Azure| FABRIC
-    TEAM -->|Open source,<br/>multi-cloud, Spark-heavy| DATABRICKS
+    TEAM -->|"Microsoft 365,<br/>Power Platform, Azure"| FABRIC
+    TEAM -->|"Open source,<br/>multi-cloud, Spark-heavy"| DATABRICKS
 
     FABRIC --> FABRIC_DONE[Fabric<br/>OneLake + Spark + Power BI<br/>+ Real-Time Intelligence]
     DATABRICKS --> DB_DONE[Databricks<br/>Unity Catalog + MLflow<br/>+ Delta Sharing]

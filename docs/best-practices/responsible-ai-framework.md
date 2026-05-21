@@ -132,9 +132,9 @@ flowchart TD
     Start -->|Yes| Q2{Does the decision<br/>materially affect their<br/>life/finances/liberty?}
     Q2 -->|No| Med[🟡 Medium Risk]
     Q2 -->|Yes| Q3{Domain?}
-    Q3 -->|Lending / Healthcare /<br/>Hiring / Criminal Justice /<br/>Insurance / Education| High[🔴 High Risk<br/>EU AI Act<br/>high-risk system]
+    Q3 -->|"Lending / Healthcare /<br/>Hiring / Criminal Justice /<br/>Insurance / Education"| High[🔴 High Risk<br/>EU AI Act<br/>high-risk system]
     Q3 -->|Other consequential| Med2[🟡 Medium-High Risk]
-    Q3 -->|Social scoring /<br/>predictive policing<br/>without controls /<br/>real-time biometric ID<br/>in public spaces| Banned[⛔ Unacceptable<br/>EU AI Act<br/>prohibited]
+    Q3 -->|"Social scoring /<br/>predictive policing<br/>without controls /<br/>real-time biometric ID<br/>in public spaces"| Banned[⛔ Unacceptable<br/>EU AI Act<br/>prohibited]
 ```
 
 ### Risk Tiers

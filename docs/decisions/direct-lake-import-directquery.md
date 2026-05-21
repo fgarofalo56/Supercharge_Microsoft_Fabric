@@ -39,25 +39,25 @@ flowchart TD
     START([New Power BI semantic model]) --> SOURCE{Data stored in<br/>OneLake Delta tables?}
 
     SOURCE -->|Yes| SIZE{Dataset fits within<br/>Direct Lake guardrails?<br/>rows, columns, tables}
-    SOURCE -->|No - external DB,<br/>API, non-Delta| EXTERNAL{Can data be<br/>mirrored/shortcutted<br/>to OneLake?}
+    SOURCE -->|"No - external DB,<br/>API, non-Delta"| EXTERNAL{Can data be<br/>mirrored/shortcutted<br/>to OneLake?}
 
-    EXTERNAL -->|Yes - set up<br/>mirroring or shortcut| SIZE
-    EXTERNAL -->|No - must query<br/>source directly| LIVE{Need live<br/>source data?}
+    EXTERNAL -->|"Yes - set up<br/>mirroring or shortcut"| SIZE
+    EXTERNAL -->|"No - must query<br/>source directly"| LIVE{Need live<br/>source data?}
 
-    LIVE -->|Yes - regulatory or<br/>real-time requirement| DQ[DirectQuery]
-    LIVE -->|No - periodic<br/>refresh is OK| IMPORT[Import Mode]
+    LIVE -->|"Yes - regulatory or<br/>real-time requirement"| DQ[DirectQuery]
+    LIVE -->|"No - periodic<br/>refresh is OK"| IMPORT[Import Mode]
 
     SIZE -->|Yes| DAX{Complex DAX?<br/>Calculated tables,<br/>many-to-many, composite}
-    SIZE -->|No - exceeds<br/>guardrails| PARTITION{Can partition<br/>to fit guardrails?}
+    SIZE -->|"No - exceeds<br/>guardrails"| PARTITION{Can partition<br/>to fit guardrails?}
 
     PARTITION -->|Yes| DL[Direct Lake<br/>with partitioning]
     PARTITION -->|No| FALLBACK{Acceptable to fall<br/>back to DirectQuery<br/>on guardrail breach?}
 
     FALLBACK -->|Yes - auto-fallback OK| DL
-    FALLBACK -->|No - need guaranteed<br/>Import performance| IMPORT
+    FALLBACK -->|"No - need guaranteed<br/>Import performance"| IMPORT
 
-    DAX -->|Simple measures,<br/>standard star schema| DL
-    DAX -->|Complex calculated tables,<br/>composite models| COMPOSITE{Need to combine<br/>Direct Lake + Import<br/>or DirectQuery?}
+    DAX -->|"Simple measures,<br/>standard star schema"| DL
+    DAX -->|"Complex calculated tables,<br/>composite models"| COMPOSITE{Need to combine<br/>Direct Lake + Import<br/>or DirectQuery?}
 
     COMPOSITE -->|Yes| COMPOSITE_MODEL[Composite Model<br/>Direct Lake + Import/DQ]
     COMPOSITE -->|No - Import covers it| IMPORT

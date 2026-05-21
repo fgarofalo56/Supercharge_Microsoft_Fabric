@@ -69,7 +69,7 @@ Use this matrix as your first move. The identity type drives every downstream st
 ```mermaid
 flowchart TD
     Start([Auth Failure Reported]) --> Q1{How many<br/>identities affected?}
-    Q1 -->|>10 UPNs in 5 min| SEV1[SEV1 — page on-call IC<br/>+ Identity team]
+    Q1 -->|">10 UPNs in 5 min"| SEV1[SEV1 — page on-call IC<br/>+ Identity team]
     Q1 -->|Single user/SP| Q2{Identity type?}
 
     Q2 -->|Workspace Identity| WI[Check role assignment<br/>+ workspace identity enabled]

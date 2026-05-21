@@ -94,9 +94,9 @@ flowchart TD
     Start([Regional Outage Suspected]) --> Q1{Azure Service Health<br/>confirms regional issue?}
     Q1 -->|No| Wait1[Wait + monitor — likely<br/>workspace/capacity issue]
     Q1 -->|Yes| Q2{Microsoft ETA<br/>to recover?}
-    Q2 -->|< 30 min| Wait2[Wait — recovery likely<br/>faster than failover]
+    Q2 -->|"< 30 min"| Wait2[Wait — recovery likely<br/>faster than failover]
     Q2 -->|30-60 min| Q3{Customer SLA<br/>at risk?}
-    Q2 -->|> 60 min OR unknown| Q4
+    Q2 -->|"> 60 min OR unknown"| Q4
     Q3 -->|No| Wait2
     Q3 -->|Yes| Q4{GRS replication<br/>lag within RPO<br/>< 15 min?}
     Q4 -->|No| Q5{Data residency<br/>allows secondary<br/>region?}

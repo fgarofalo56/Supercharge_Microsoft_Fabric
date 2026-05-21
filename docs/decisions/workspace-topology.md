@@ -38,23 +38,23 @@ Use a **single workspace** for small teams or POC projects where simplicity outw
 flowchart TD
     START([Designing workspace topology]) --> TEAM_SIZE{How many teams<br/>or domains?}
 
-    TEAM_SIZE -->|1 small team<br/>< 10 people| ENV{Need dev/test/prod<br/>separation?}
-    TEAM_SIZE -->|2-5 teams<br/>or domains| MULTI_WS{Need independent<br/>RBAC per team?}
-    TEAM_SIZE -->|6+ teams<br/>or enterprise| ENTERPRISE{Need compute<br/>isolation or chargeback?}
+    TEAM_SIZE -->|"1 small team<br/>< 10 people"| ENV{Need dev/test/prod<br/>separation?}
+    TEAM_SIZE -->|"2-5 teams<br/>or domains"| MULTI_WS{Need independent<br/>RBAC per team?}
+    TEAM_SIZE -->|"6+ teams<br/>or enterprise"| ENTERPRISE{Need compute<br/>isolation or chargeback?}
 
-    ENV -->|No - POC or<br/>exploration| SINGLE[Single Workspace]
-    ENV -->|Yes - CI/CD and<br/>promotion needed| ENV_WS[Multi-Workspace<br/>dev / test / prod]
+    ENV -->|"No - POC or<br/>exploration"| SINGLE[Single Workspace]
+    ENV -->|"Yes - CI/CD and<br/>promotion needed"| ENV_WS[Multi-Workspace<br/>dev / test / prod]
 
-    MULTI_WS -->|Yes - separate<br/>permissions per domain| DOMAIN_CHECK{Shared capacity<br/>sufficient?}
+    MULTI_WS -->|"Yes - separate<br/>permissions per domain"| DOMAIN_CHECK{Shared capacity<br/>sufficient?}
     MULTI_WS -->|No - shared RBAC OK| ENV
 
-    DOMAIN_CHECK -->|Yes - workloads<br/>don't compete| DOMAIN_WS[Multi-Workspace<br/>domain-based on<br/>shared capacity]
-    DOMAIN_CHECK -->|No - workloads<br/>interfere| MULTI_CAP
+    DOMAIN_CHECK -->|"Yes - workloads<br/>don't compete"| DOMAIN_WS[Multi-Workspace<br/>domain-based on<br/>shared capacity]
+    DOMAIN_CHECK -->|"No - workloads<br/>interfere"| MULTI_CAP
 
     ENTERPRISE --> COMPLIANCE{Regulatory boundary<br/>between business units?}
 
-    COMPLIANCE -->|Yes - strict isolation<br/>required| MULTI_CAP[Multi-Capacity<br/>dedicated compute<br/>per boundary]
-    COMPLIANCE -->|No - logical<br/>separation OK| CHARGEBACK{Need cost<br/>chargeback per team?}
+    COMPLIANCE -->|"Yes - strict isolation<br/>required"| MULTI_CAP[Multi-Capacity<br/>dedicated compute<br/>per boundary]
+    COMPLIANCE -->|"No - logical<br/>separation OK"| CHARGEBACK{Need cost<br/>chargeback per team?}
 
     CHARGEBACK -->|Yes| MULTI_CAP
     CHARGEBACK -->|No| DOMAIN_WS

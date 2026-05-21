@@ -503,8 +503,8 @@ flowchart TD
     A[FabricSQLAuditLogs] --> B[Scheduled KQL Query]
     B --> C{Condition Met?}
 
-    C -->|Failed Logins > 10| D[Reflex: Account Lockout Warning]
-    C -->|Bulk Export > 50K rows| E[Reflex: Data Exfiltration Alert]
+    C -->|"Failed Logins > 10"| D[Reflex: Account Lockout Warning]
+    C -->|"Bulk Export > 50K rows"| E[Reflex: Data Exfiltration Alert]
     C -->|Off-Hours PII Access| F[Reflex: Suspicious Access Alert]
     C -->|DDL on Compliance Tables| G[Reflex: Schema Change Alert]
     C -->|Permission Escalation| H[Reflex: Privilege Alert]

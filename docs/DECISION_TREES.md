@@ -14,15 +14,15 @@ This document provides structured decision flowcharts for the most common "which
 ```mermaid
 flowchart TD
     A[Need to store and query data?] --> B{Data format?}
-    B -->|Structured only<br/>relational schema| C{Need full T-SQL DML?<br/>INSERT/UPDATE/DELETE}
-    B -->|Semi-structured<br/>JSON, Parquet, CSV| D[Lakehouse]
-    B -->|Mixed structured<br/>+ unstructured| D
+    B -->|"Structured only<br/>relational schema"| C{Need full T-SQL DML?<br/>INSERT/UPDATE/DELETE}
+    B -->|"Semi-structured<br/>JSON, Parquet, CSV"| D[Lakehouse]
+    B -->|"Mixed structured<br/>+ unstructured"| D
     C -->|Yes, full CRUD| E{Operational or<br/>analytical workload?}
-    C -->|No, read-heavy<br/>analytics only| F{Team prefers<br/>T-SQL or PySpark?}
+    C -->|"No, read-heavy<br/>analytics only"| F{Team prefers<br/>T-SQL or PySpark?}
     E -->|Operational / OLTP| G[SQL Database]
     E -->|Analytical / OLAP| F
-    F -->|T-SQL, stored procs,<br/>CTAS patterns| H[Warehouse]
-    F -->|PySpark, Delta Lake,<br/>notebook-first| D
+    F -->|"T-SQL, stored procs,<br/>CTAS patterns"| H[Warehouse]
+    F -->|"PySpark, Delta Lake,<br/>notebook-first"| D
     D --> I{Need Direct Lake<br/>for Power BI?}
     I -->|Yes| J[Lakehouse<br/>with V-Order optimization]
     I -->|No| K[Lakehouse<br/>standard Delta tables]
@@ -64,17 +64,17 @@ See: [Lakehouse/Warehouse/SQL DB Decision Guide](best-practices/lakehouse-wareho
 ```mermaid
 flowchart TD
     A[Data arrives from source] --> B{Latency requirement?}
-    B -->|Sub-second to<br/>seconds| C[Real-Time Intelligence<br/>Eventstream + Eventhouse]
+    B -->|"Sub-second to<br/>seconds"| C[Real-Time Intelligence<br/>Eventstream + Eventhouse]
     B -->|Minutes to hours| D{Data volume<br/>per batch?}
     B -->|Daily or slower| E[Batch Pipeline<br/>Spark notebooks]
-    D -->|< 100 MB| F[Micro-batch<br/>Spark Structured Streaming]
+    D -->|"< 100 MB"| F[Micro-batch<br/>Spark Structured Streaming]
     D -->|100 MB - 10 GB| G{Transformation<br/>complexity?}
-    D -->|> 10 GB| E
+    D -->|"> 10 GB"| E
     G -->|Simple filter/project| F
-    G -->|Complex joins,<br/>aggregations, ML| E
+    G -->|"Complex joins,<br/>aggregations, ML"| E
     C --> H{Query pattern?}
-    H -->|Time-series, KQL,<br/>anomaly detection| I[Eventhouse<br/>KQL Database]
-    H -->|Joins with<br/>dimensional data| J[Eventhouse + Lakehouse<br/>shortcut federation]
+    H -->|"Time-series, KQL,<br/>anomaly detection"| I[Eventhouse<br/>KQL Database]
+    H -->|"Joins with<br/>dimensional data"| J[Eventhouse + Lakehouse<br/>shortcut federation]
 ```
 
 ### Comparison Table
@@ -113,15 +113,15 @@ flowchart TD
     A[Power BI semantic model<br/>needs data connection] --> B{Data in<br/>OneLake Delta tables?}
     B -->|No| C{Can you move<br/>data to OneLake?}
     B -->|Yes| D{Dataset size?}
-    C -->|Yes, via mirroring<br/>or shortcuts| B
-    C -->|No, external<br/>source only| E[DirectQuery]
-    D -->|< 10 GB<br/>simple schema| F{Refresh frequency<br/>acceptable?}
+    C -->|"Yes, via mirroring<br/>or shortcuts"| B
+    C -->|"No, external<br/>source only"| E[DirectQuery]
+    D -->|"< 10 GB<br/>simple schema"| F{Refresh frequency<br/>acceptable?}
     D -->|10 GB - 200 GB| G[Direct Lake]
-    D -->|> 200 GB| H{Complex DAX<br/>calculations?}
+    D -->|"> 200 GB"| H{Complex DAX<br/>calculations?}
     F -->|Hourly/daily OK| I[Import Mode]
     F -->|Need real-time| G
-    H -->|Yes, many<br/>calculated tables| I
-    H -->|No, standard<br/>measures| G
+    H -->|"Yes, many<br/>calculated tables"| I
+    H -->|"No, standard<br/>measures"| G
 ```
 
 ### Comparison Table
@@ -159,10 +159,10 @@ See: [Direct Lake](features/direct-lake.md) | [Power BI Best Practices](best-pra
 ```mermaid
 flowchart TD
     A[Need to run<br/>data processing] --> B{Interactive<br/>development needed?}
-    B -->|Yes, exploring data,<br/>building logic| C[Notebook]
-    B -->|No, production<br/>scheduled job| D{Single script or<br/>multi-step workflow?}
-    D -->|Single .py/.jar<br/>no UI needed| E[Spark Job Definition]
-    D -->|Multi-step with<br/>dependencies| F{Need conditional logic,<br/>loops, or retry?}
+    B -->|"Yes, exploring data,<br/>building logic"| C[Notebook]
+    B -->|"No, production<br/>scheduled job"| D{Single script or<br/>multi-step workflow?}
+    D -->|"Single .py/.jar<br/>no UI needed"| E[Spark Job Definition]
+    D -->|"Multi-step with<br/>dependencies"| F{Need conditional logic,<br/>loops, or retry?}
     F -->|Yes| G[Pipeline<br/>orchestrating notebooks]
     F -->|No, just sequential| H{Need parameterization<br/>across environments?}
     H -->|Yes, dev/staging/prod| G
@@ -206,17 +206,17 @@ See: [Spark Environments & Job Definitions](features/spark-environments-job-defi
 ```mermaid
 flowchart TD
     A[External data source<br/>needs to reach Fabric] --> B{Source type?}
-    B -->|Azure SQL, Cosmos DB,<br/>Snowflake, supported DB| C{Need continuous<br/>near-real-time sync?}
-    B -->|ADLS Gen2, S3,<br/>GCS, Dataverse| D{Need to copy<br/>or just reference?}
-    B -->|On-prem SQL Server,<br/>Oracle, DB2| E[Pipeline Copy Activity<br/>via Data Gateway]
+    B -->|"Azure SQL, Cosmos DB,<br/>Snowflake, supported DB"| C{Need continuous<br/>near-real-time sync?}
+    B -->|"ADLS Gen2, S3,<br/>GCS, Dataverse"| D{Need to copy<br/>or just reference?}
+    B -->|"On-prem SQL Server,<br/>Oracle, DB2"| E[Pipeline Copy Activity<br/>via Data Gateway]
     C -->|Yes, CDC/change feed| F[Mirroring]
     C -->|No, periodic sync OK| G{Acceptable latency?}
     G -->|Minutes| H[Pipeline Copy<br/>with incremental load]
     G -->|Hours/daily| H
-    D -->|Reference in-place,<br/>no data movement| I[Shortcut]
-    D -->|Need transformation<br/>before use| J{Transform at<br/>read or write time?}
-    J -->|Read time<br/>schema-on-read| I
-    J -->|Write time<br/>materialize Delta| H
+    D -->|"Reference in-place,<br/>no data movement"| I[Shortcut]
+    D -->|"Need transformation<br/>before use"| J{Transform at<br/>read or write time?}
+    J -->|"Read time<br/>schema-on-read"| I
+    J -->|"Write time<br/>materialize Delta"| H
     F --> K{Query via<br/>Lakehouse or Warehouse?}
     K -->|Lakehouse| L[Mirror to<br/>Lakehouse tables]
     K -->|Warehouse| M[Mirror to<br/>Warehouse tables]
@@ -256,15 +256,15 @@ See: [Mirroring](features/mirroring.md) | [Shortcut Transformations Notebook](ht
 ```mermaid
 flowchart TD
     A[Time-series data<br/>ingestion] --> B{Query pattern?}
-    B -->|Ad-hoc exploration,<br/>KQL, anomaly detection| C[Eventhouse]
-    B -->|Batch aggregation,<br/>joins with dims| D[Lakehouse]
-    B -->|Both real-time<br/>and historical| E[Both: Eventhouse<br/>hot + Lakehouse cold]
+    B -->|"Ad-hoc exploration,<br/>KQL, anomaly detection"| C[Eventhouse]
+    B -->|"Batch aggregation,<br/>joins with dims"| D[Lakehouse]
+    B -->|"Both real-time<br/>and historical"| E[Both: Eventhouse<br/>hot + Lakehouse cold]
     C --> F{Retention<br/>requirement?}
-    F -->|Hot: days/weeks<br/>Cold: months/years| G[Eventhouse with<br/>retention policy]
-    F -->|All data hot,<br/>sub-second queries| H[Eventhouse with<br/>large hot cache]
+    F -->|"Hot: days/weeks<br/>Cold: months/years"| G[Eventhouse with<br/>retention policy]
+    F -->|"All data hot,<br/>sub-second queries"| H[Eventhouse with<br/>large hot cache]
     D --> I{Ingestion rate?}
-    I -->|< 1,000 events/sec| J[Lakehouse Delta<br/>append + optimize]
-    I -->|> 1,000 events/sec| K[Eventhouse for ingest,<br/>shortcut to Lakehouse]
+    I -->|"< 1,000 events/sec"| J[Lakehouse Delta<br/>append + optimize]
+    I -->|"> 1,000 events/sec"| K[Eventhouse for ingest,<br/>shortcut to Lakehouse]
     E --> L[Eventstream splits<br/>to both destinations]
 ```
 
@@ -304,10 +304,10 @@ See: [Eventhouse Vector Database](features/eventhouse-vector-database.md) | [Rea
 ```mermaid
 flowchart TD
     A[Need to configure<br/>a value] --> B{Scope?}
-    B -->|Single notebook<br/>or job| C{Sensitive?}
-    B -->|Across pipeline<br/>activities| D[Pipeline Parameters<br/>+ Variables]
-    B -->|All notebooks<br/>in environment| E[Spark Environment<br/>Configuration]
-    C -->|Yes, secret<br/>or credential| F[Key Vault<br/>via mssparkutils.credentials]
+    B -->|"Single notebook<br/>or job"| C{Sensitive?}
+    B -->|"Across pipeline<br/>activities"| D[Pipeline Parameters<br/>+ Variables]
+    B -->|"All notebooks<br/>in environment"| E[Spark Environment<br/>Configuration]
+    C -->|"Yes, secret<br/>or credential"| F[Key Vault<br/>via mssparkutils.credentials]
     C -->|No, plain config| G{Changes per<br/>environment?}
     G -->|Yes, dev/staging/prod| H[Pipeline Parameters<br/>with env-specific defaults]
     G -->|No, global constant| I[Notebook constants<br/>or Environment config]
@@ -350,16 +350,16 @@ See: [Spark Environments & Job Definitions](features/spark-environments-job-defi
 ```mermaid
 flowchart TD
     A[New industry vertical<br/>or data domain] --> B{Source data<br/>available?}
-    B -->|Real open data<br/>API available| C[Add to<br/>federal_datasets.yaml]
-    B -->|Synthetic only<br/>no public API| D[Build data generator<br/>in data_generation/generators/]
-    B -->|Both real<br/>and synthetic| E[Build both paths]
+    B -->|"Real open data<br/>API available"| C[Add to<br/>federal_datasets.yaml]
+    B -->|"Synthetic only<br/>no public API"| D[Build data generator<br/>in data_generation/generators/]
+    B -->|"Both real<br/>and synthetic"| E[Build both paths]
     C --> F[Create Bronze<br/>notebook]
     D --> F
     E --> F
     F --> G[Create Silver<br/>notebook]
     G --> H[Create Gold<br/>notebook]
     H --> I{Compliance<br/>requirements?}
-    I -->|HIPAA, FedRAMP,<br/>PCI-DSS, etc.| J[Add compliance<br/>controls to Silver]
+    I -->|"HIPAA, FedRAMP,<br/>PCI-DSS, etc."| J[Add compliance<br/>controls to Silver]
     I -->|Standard| K[Standard DQ<br/>validation only]
     J --> L[Create Tutorial<br/>in tutorials/]
     K --> L
@@ -395,15 +395,15 @@ The DOJ vertical (Phase 13) followed this exact pattern: `18_bronze_doj.py` -> `
 ```mermaid
 flowchart TD
     A[Choose Fabric SKU] --> B{Workload type?}
-    B -->|Learning, tutorials,<br/>single developer| C[F2 or F4<br/>$265-530/mo 24/7]
-    B -->|POC demo,<br/>3-day workshop| D[F64<br/>$35-50 for 3 days]
-    B -->|Development team,<br/>concurrent users| E{How many<br/>concurrent users?}
+    B -->|"Learning, tutorials,<br/>single developer"| C[F2 or F4<br/>$265-530/mo 24/7]
+    B -->|"POC demo,<br/>3-day workshop"| D[F64<br/>$35-50 for 3 days]
+    B -->|"Development team,<br/>concurrent users"| E{How many<br/>concurrent users?}
     B -->|Production| F{Data volume<br/>and concurrency?}
     E -->|1-3 developers| G[F4 or F8<br/>pause off-hours]
     E -->|4-10 developers| H[F16 or F32<br/>pause off-hours]
-    F -->|< 100 GB, low concurrency| I[F32]
+    F -->|"< 100 GB, low concurrency"| I[F32]
     F -->|100 GB - 1 TB, medium| J[F64]
-    F -->|> 1 TB, high concurrency| K[F128+]
+    F -->|"> 1 TB, high concurrency"| K[F128+]
     C --> L{Cost optimization?}
     D --> L
     G --> L
@@ -443,15 +443,15 @@ See: [Capacity Planning](best-practices/capacity-planning-cost-optimization.md) 
 ```mermaid
 flowchart TD
     A[Data quality check<br/>needed] --> B{Check type?}
-    B -->|Schema validation<br/>column types, nulls| C{Which layer?}
-    B -->|Business rules<br/>thresholds, ranges| D[Silver layer<br/>Delta constraints + code]
-    B -->|Referential integrity<br/>FK relationships| E[Silver layer<br/>join validation]
-    B -->|Statistical profiling<br/>distributions, outliers| F[Gold layer<br/>or dedicated DQ notebook]
-    C -->|Ingest-time<br/>reject bad records| G[Bronze layer<br/>schema-on-read with fallback]
-    C -->|Post-ingest<br/>quarantine bad records| H[Silver layer<br/>DQ scoring + quarantine table]
+    B -->|"Schema validation<br/>column types, nulls"| C{Which layer?}
+    B -->|"Business rules<br/>thresholds, ranges"| D[Silver layer<br/>Delta constraints + code]
+    B -->|"Referential integrity<br/>FK relationships"| E[Silver layer<br/>join validation]
+    B -->|"Statistical profiling<br/>distributions, outliers"| F[Gold layer<br/>or dedicated DQ notebook]
+    C -->|"Ingest-time<br/>reject bad records"| G[Bronze layer<br/>schema-on-read with fallback]
+    C -->|"Post-ingest<br/>quarantine bad records"| H[Silver layer<br/>DQ scoring + quarantine table]
     D --> I{Enforcement level?}
-    I -->|Hard reject<br/>fail pipeline| J[Delta CHECK constraints<br/>+ try/except]
-    I -->|Soft flag<br/>continue with warning| K[DQ score column<br/>+ downstream filter]
+    I -->|"Hard reject<br/>fail pipeline"| J[Delta CHECK constraints<br/>+ try/except]
+    I -->|"Soft flag<br/>continue with warning"| K[DQ score column<br/>+ downstream filter]
     F --> L{Tool?}
     L -->|Automated suite| M[Great Expectations<br/>checkpoint]
     L -->|Ad-hoc profiling| N[Notebook with<br/>profiling functions]

@@ -48,18 +48,18 @@ Use this runbook when any of the following conditions are observed:
 ```mermaid
 flowchart TD
     A([Security Alert Received]) --> B{Alert source?}
-    B -->|Entra ID<br/>risky sign-in| C{Sign-in<br/>succeeded?}
+    B -->|"Entra ID<br/>risky sign-in"| C{Sign-in<br/>succeeded?}
     C -->|No| D[SEV4 — Log failed attempts,<br/>monitor for escalation]
     C -->|Yes| E{User account<br/>or service principal?}
     E -->|User| F[Revoke sessions<br/>→ Step 5]
     E -->|Service principal| G[Rotate secret<br/>→ Step 7]
 
-    B -->|Fabric audit log<br/>bulk export| H{Volume > baseline<br/>or unknown principal?}
+    B -->|"Fabric audit log<br/>bulk export"| H{Volume > baseline<br/>or unknown principal?}
     H -->|No| I[SEV3 — Review and close]
     H -->|Yes| J[SEV1 — Contain immediately<br/>→ Step 5]
 
     B -->|Purview DLP alert| K{Sensitivity level?}
-    K -->|Highly Confidential<br/>or PII/PHI| L[SEV1/SEV2 — Investigate<br/>→ Step 9]
+    K -->|"Highly Confidential<br/>or PII/PHI"| L[SEV1/SEV2 — Investigate<br/>→ Step 9]
     K -->|General or Internal| I
 
     B -->|RBAC change| M{Production<br/>workspace?}
@@ -245,11 +245,11 @@ flowchart TD
     PC -->|Highly Confidential / PII / PHI| PD[SEV1/SEV2 — Investigate access<br/>and revoke if unauthorized]
     PC -->|General / Internal| PE[SEV3 — Review, tune policy<br/>if false positive]
 
-    PB -->|Sensitivity label<br/>mismatch| PF{Production<br/>dataset?}
+    PB -->|"Sensitivity label<br/>mismatch"| PF{Production<br/>dataset?}
     PF -->|Yes| PG[Apply correct label,<br/>review who removed it]
     PF -->|No| PH[Apply correct label,<br/>log for awareness]
 
-    PB -->|Auto-labeling<br/>conflict| PI[Review conflicting rules,<br/>resolve priority]
+    PB -->|"Auto-labeling<br/>conflict"| PI[Review conflicting rules,<br/>resolve priority]
 ```
 
 ---

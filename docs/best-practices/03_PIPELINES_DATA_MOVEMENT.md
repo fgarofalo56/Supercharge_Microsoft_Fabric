@@ -41,9 +41,9 @@ This guide covers best practices for data movement in Microsoft Fabric, includin
 ```mermaid
 flowchart TD
     A[Data Movement Need] --> B{Data Volume}
-    B -->|< 1 GB| C{Complex Transform?}
+    B -->|"< 1 GB"| C{Complex Transform?}
     B -->|1-100 GB| D{Transform Complexity}
-    B -->|> 100 GB| E[ELT Pattern]
+    B -->|"> 100 GB"| E[ELT Pattern]
 
     C -->|Yes| F[ETL with Dataflow]
     C -->|No| G[Direct Copy]

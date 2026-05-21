@@ -66,7 +66,7 @@ Choosing between single and multiple workspaces depends on your organization's s
 ```mermaid
 flowchart TD
     A[Start: Workspace Design] --> B{Team Size?}
-    B -->|Small < 10| C{Security Isolation<br/>Required?}
+    B -->|"Small < 10"| C{Security Isolation<br/>Required?}
     B -->|Medium 10-50| D{Multiple Domains/<br/>Business Units?}
     B -->|Large 50+| E[Multiple Workspaces<br/>by Domain]
 

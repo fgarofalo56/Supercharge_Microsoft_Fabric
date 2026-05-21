@@ -486,8 +486,8 @@ flowchart TD
     Q4 -->|IdempotencyKeyConflict| R5[Apply MERGE idempotency pattern]
     Q5 -->|TRANSIENT deadlock| R1
     Q5 -->|PERMANENT| Perm[Fix code/config; PR review]
-    DQ -->|<5%| Quarantine[Quarantine bad rows, continue]
-    DQ -->|>=5%| Halt[Halt pipeline, escalate]
+    DQ -->|"<5%"| Quarantine[Quarantine bad rows, continue]
+    DQ -->|">=5%"| Halt[Halt pipeline, escalate]
     R1 --> V[Verification — V1/V2/V3]
     R2 --> V
     R5 --> V

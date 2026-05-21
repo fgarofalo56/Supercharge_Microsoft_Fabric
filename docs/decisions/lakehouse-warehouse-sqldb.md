@@ -38,14 +38,14 @@ Use **Lakehouse** when your team writes PySpark and needs schema-on-read flexibi
 flowchart TD
     START([What kind of data workload?]) --> FORMAT{Data format?}
 
-    FORMAT -->|Semi-structured<br/>JSON, Parquet, CSV, images| LH_DIRECT[Lakehouse]
+    FORMAT -->|"Semi-structured<br/>JSON, Parquet, CSV, images"| LH_DIRECT[Lakehouse]
     FORMAT -->|Structured relational| DML{Need full DML?<br/>INSERT, UPDATE, DELETE<br/>stored procs, triggers}
 
-    DML -->|No - read-heavy<br/>analytics| TEAM{Team's primary<br/>query language?}
+    DML -->|"No - read-heavy<br/>analytics"| TEAM{Team's primary<br/>query language?}
     DML -->|Yes - full CRUD| WORKLOAD{Workload type?}
 
-    WORKLOAD -->|OLTP / operational<br/>high concurrency| SQLDB[SQL Database]
-    WORKLOAD -->|OLAP / analytical<br/>batch transforms| WH_CHECK{Need T-SQL<br/>CTAS / MERGE?}
+    WORKLOAD -->|"OLTP / operational<br/>high concurrency"| SQLDB[SQL Database]
+    WORKLOAD -->|"OLAP / analytical<br/>batch transforms"| WH_CHECK{Need T-SQL<br/>CTAS / MERGE?}
 
     WH_CHECK -->|Yes| WH[Warehouse]
     WH_CHECK -->|No - Spark OK| LH_DIRECT
@@ -54,8 +54,8 @@ flowchart TD
     TEAM -->|PySpark, notebooks| LH_DIRECT
     TEAM -->|Both equally| VOLUME{Data volume?}
 
-    VOLUME -->|< 100 GB| WH
-    VOLUME -->|> 100 GB or<br/>unstructured mix| LH_DIRECT
+    VOLUME -->|"< 100 GB"| WH
+    VOLUME -->|"> 100 GB or<br/>unstructured mix"| LH_DIRECT
 
     LH_DIRECT --> DL_CHECK{Direct Lake<br/>for Power BI?}
     DL_CHECK -->|Yes| LH_VORDER[Lakehouse<br/>+ V-Order optimization]

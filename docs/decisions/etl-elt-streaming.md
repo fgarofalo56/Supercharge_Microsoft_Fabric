@@ -38,9 +38,9 @@ Use **ELT** as the default pattern in Fabric -- land raw data in OneLake first, 
 flowchart TD
     START([New data source to ingest]) --> LATENCY{Freshness requirement?}
 
-    LATENCY -->|Real-time<br/>< 1 minute| STREAM_CHECK{Event-driven source?<br/>Kafka, Event Hubs,<br/>IoT Hub, CDC stream}
-    LATENCY -->|Near-real-time<br/>1-15 minutes| MICRO{Can source emit<br/>micro-batches?}
-    LATENCY -->|Batch<br/>> 15 minutes| TRANSFORM_LOC{Where should<br/>transforms run?}
+    LATENCY -->|"Real-time<br/>< 1 minute"| STREAM_CHECK{Event-driven source?<br/>Kafka, Event Hubs,<br/>IoT Hub, CDC stream}
+    LATENCY -->|"Near-real-time<br/>1-15 minutes"| MICRO{Can source emit<br/>micro-batches?}
+    LATENCY -->|"Batch<br/>> 15 minutes"| TRANSFORM_LOC{Where should<br/>transforms run?}
 
     STREAM_CHECK -->|Yes| STREAMING[Streaming<br/>Eventstream + Eventhouse]
     STREAM_CHECK -->|No - must poll| MICRO
@@ -50,14 +50,14 @@ flowchart TD
 
     TRANSFORM_LOC --> PII{Must filter PII<br/>before landing?}
 
-    PII -->|Yes - compliance<br/>requires pre-filter| ETL[ETL<br/>Transform before load]
-    PII -->|No - land raw,<br/>transform in place| VOLUME{Data volume<br/>per load?}
+    PII -->|"Yes - compliance<br/>requires pre-filter"| ETL[ETL<br/>Transform before load]
+    PII -->|"No - land raw,<br/>transform in place"| VOLUME{Data volume<br/>per load?}
 
-    VOLUME -->|< 1 GB| DATAFLOW{Complex transforms<br/>or simple mapping?}
-    VOLUME -->|> 1 GB| ELT[ELT<br/>Land then transform<br/>with Spark / T-SQL]
+    VOLUME -->|"< 1 GB"| DATAFLOW{Complex transforms<br/>or simple mapping?}
+    VOLUME -->|"> 1 GB"| ELT[ELT<br/>Land then transform<br/>with Spark / T-SQL]
 
-    DATAFLOW -->|Simple mapping,<br/>low-code preferred| DATAFLOW_RESULT[ELT via<br/>Dataflow Gen2]
-    DATAFLOW -->|Complex joins,<br/>business logic| ELT
+    DATAFLOW -->|"Simple mapping,<br/>low-code preferred"| DATAFLOW_RESULT[ELT via<br/>Dataflow Gen2]
+    DATAFLOW -->|"Complex joins,<br/>business logic"| ELT
 
     ETL --> ETL_TOOL{Preferred tooling?}
     ETL_TOOL -->|Low-code| ETL_DF[ETL via<br/>Dataflow Gen2]

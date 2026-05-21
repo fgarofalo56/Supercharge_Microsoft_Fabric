@@ -606,13 +606,13 @@ Data quality is measured and enforced at each medallion layer transition.
 
 ```mermaid
 flowchart LR
-    A[Bronze] -->|DQ Score >= 50| B[Silver]
-    B -->|DQ Score >= 80| C[Gold]
-    C -->|DQ Score >= 95| D[Reports/BI]
+    A[Bronze] -->|"DQ Score >= 50"| B[Silver]
+    B -->|"DQ Score >= 80"| C[Gold]
+    C -->|"DQ Score >= 95"| D[Reports/BI]
 
-    A -->|DQ Score < 50| E[Quarantine]
-    B -->|DQ Score < 80| F[Review Queue]
-    C -->|DQ Score < 95| G[Manual Approval]
+    A -->|"DQ Score < 50"| E[Quarantine]
+    B -->|"DQ Score < 80"| F[Review Queue]
+    C -->|"DQ Score < 95"| G[Manual Approval]
 ```
 
 **DQ score components:**
@@ -639,7 +639,7 @@ flowchart LR
 ```mermaid
 flowchart TD
     A[DQ Check Fails] --> B{Severity?}
-    B -->|Critical: Score < 50| C[Auto-quarantine + Alert Steward]
+    B -->|"Critical: Score < 50"| C[Auto-quarantine + Alert Steward]
     B -->|High: Score 50-70| D[Flag for Review + Continue]
     B -->|Medium: Score 70-80| E[Log Issue + Continue]
 

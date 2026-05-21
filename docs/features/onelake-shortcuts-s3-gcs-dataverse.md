@@ -345,8 +345,8 @@ mssparkutils.lakehouse.refreshShortcut(
 flowchart TD
     A[External data in S3/GCS?] --> B{Read frequency?}
     B -->|Daily or less| C{Data size per read?}
-    C -->|< 10 GB| D[Use Shortcut ✓]
-    C -->|> 10 GB| E{Budget for egress?}
+    C -->|"< 10 GB"| D[Use Shortcut ✓]
+    C -->|"> 10 GB"| E{Budget for egress?}
     E -->|Yes| D
     E -->|No| F[Copy to OneLake ✓]
     B -->|Hourly+| G{Data changes frequently?}
@@ -504,10 +504,10 @@ flowchart TD
     B -->|You own it| C{In Azure same region?}
     C -->|Yes| D[Shortcut ✓ - Zero cost]
     C -->|No| E{Read frequency?}
-    E -->|< 1x/day| F[Shortcut ✓ - Low egress]
+    E -->|"< 1x/day"| F[Shortcut ✓ - Low egress]
     E -->|Multiple/day| G{Size per read?}
-    G -->|< 1 GB| F
-    G -->|> 1 GB| H[Copy ✓ - Amortize egress]
+    G -->|"< 1 GB"| F
+    G -->|"> 1 GB"| H[Copy ✓ - Amortize egress]
     B -->|Partner/vendor owns it| I{SLA for freshness?}
     I -->|Real-time| J[Shortcut ✓ - Always fresh]
     I -->|Daily OK| K{Egress budget?}

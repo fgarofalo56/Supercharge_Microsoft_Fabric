@@ -113,9 +113,9 @@ flowchart TD
     B -->|4-8 jobs| D{Performance<br/>Requirements}
     B -->|8+ jobs| E[F32 or higher]
 
-    C -->|< 10 GB/day| F[F2 - $265/mo]
+    C -->|"< 10 GB/day"| F[F2 - $265/mo]
     C -->|10-50 GB/day| G[F4 - $530/mo]
-    C -->|> 50 GB/day| H[F8 - $1,060/mo]
+    C -->|"> 50 GB/day"| H[F8 - $1,060/mo]
 
     D -->|Standard| I[F16 - $2,120/mo]
     D -->|High| J[F32 - $4,240/mo]

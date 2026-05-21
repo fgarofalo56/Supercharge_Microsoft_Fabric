@@ -67,9 +67,9 @@ flowchart TD
     B -->|Yes| C[Eventstream]
     B -->|No| D{Data Volume?}
 
-    D -->|Small < 1GB| E{Transform Complexity?}
+    D -->|"Small < 1GB"| E{Transform Complexity?}
     D -->|Medium 1-100GB| F{CDC Required?}
-    D -->|Large > 100GB| G[Pipeline Copy Activity]
+    D -->|"Large > 100GB"| G[Pipeline Copy Activity]
 
     E -->|Low| H[Dataflow Gen2]
     E -->|High| I{Code Preferred?}

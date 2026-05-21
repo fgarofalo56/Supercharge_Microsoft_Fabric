@@ -80,7 +80,7 @@ graph TB
     PBI --> U1
     PBI --> U2
     DASH --> U3
-    DEV_LH -.->|Deployment<br/>Pipeline| BRONZE
+    DEV_LH -.->|"Deployment<br/>Pipeline"| BRONZE
 ```
 
 ---

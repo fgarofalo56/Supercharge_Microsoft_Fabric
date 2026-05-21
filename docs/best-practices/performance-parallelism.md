@@ -224,9 +224,9 @@ df = df.repartition(128, "player_id")
 ```mermaid
 flowchart TD
     A[Read Data] --> B{Partition Count?}
-    B -->|< 2x cores| C[Repartition Up]
+    B -->|"< 2x cores"| C[Repartition Up]
     B -->|2x-4x cores| D[Good - No Change]
-    B -->|> 10x cores| E[Coalesce Down]
+    B -->|"> 10x cores"| E[Coalesce Down]
 
     C --> F{Need Key-Based Joins?}
     F -->|Yes| G["repartition(n, 'key_col')"]

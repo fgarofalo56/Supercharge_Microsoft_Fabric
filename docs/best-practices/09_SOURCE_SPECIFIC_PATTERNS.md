@@ -424,12 +424,12 @@ chunks = generate_id_chunks(1, 50000000, 1000000)  # 50M records, 1M per chunk
 ```mermaid
 flowchart TD
     A[Load Strategy Decision] --> B{Table Size}
-    B -->|< 1 GB| C[Full Load]
+    B -->|"< 1 GB"| C[Full Load]
     B -->|1-10 GB| D{Change Frequency}
-    B -->|> 10 GB| E{Has Watermark Column?}
+    B -->|"> 10 GB"| E{Has Watermark Column?}
 
-    D -->|Low < 10%/day| F[Full Load]
-    D -->|High > 10%/day| G[Incremental]
+    D -->|"Low < 10%/day"| F[Full Load]
+    D -->|"High > 10%/day"| G[Incremental]
 
     E -->|Yes| H[Incremental with Watermark]
     E -->|No| I{CDC Available?}

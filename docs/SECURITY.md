@@ -365,9 +365,9 @@ flowchart TD
     Q1 -->|Yes| Q2{Contains<br/>Regulated PII?}
     Q1 -->|No| Q3{Business<br/>Sensitive?}
     
-    Q2 -->|Yes<br/>SSN, Card Numbers,<br/>Bank Accounts| Restricted[🔴 RESTRICTED/PII<br/>════════════════<br/>✓ Customer-Managed Keys<br/>✓ Field-level encryption<br/>✓ Masking in all reports<br/>✓ No export allowed<br/>✓ Full audit logging<br/>✓ Data loss prevention<br/>════════════════<br/>Examples:<br/>• Social Security Numbers<br/>• Credit Card Numbers<br/>• Bank Account Numbers<br/>• Biometric Data]
+    Q2 -->|"Yes<br/>SSN, Card Numbers,<br/>Bank Accounts"| Restricted[🔴 RESTRICTED/PII<br/>════════════════<br/>✓ Customer-Managed Keys<br/>✓ Field-level encryption<br/>✓ Masking in all reports<br/>✓ No export allowed<br/>✓ Full audit logging<br/>✓ Data loss prevention<br/>════════════════<br/>Examples:<br/>• Social Security Numbers<br/>• Credit Card Numbers<br/>• Bank Account Numbers<br/>• Biometric Data]
     
-    Q2 -->|No<br/>Names, Emails,<br/>Player IDs| Q4{Required for<br/>Business Operations?}
+    Q2 -->|"No<br/>Names, Emails,<br/>Player IDs"| Q4{Required for<br/>Business Operations?}
     
     Q4 -->|Yes| Confidential[🟠 CONFIDENTIAL<br/>════════════════<br/>✓ RBAC enforcement<br/>✓ Row-level security<br/>✓ TLS encryption in transit<br/>✓ Export restrictions<br/>✓ Audit logging<br/>════════════════<br/>Examples:<br/>• Player Name + DOB<br/>• Win/Loss Records<br/>• Contact Information<br/>• Transaction History]
     

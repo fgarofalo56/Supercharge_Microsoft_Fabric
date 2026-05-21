@@ -796,10 +796,10 @@ print(calculate_agency_chargeback(monthly_cost, agency_usage))
 flowchart TD
     Start([Start]) --> Q1{How many<br/>concurrent Spark<br/>vCores needed?}
 
-    Q1 -->|< 32| Q2A{Real-time<br/>workloads?}
+    Q1 -->|"< 32"| Q2A{Real-time<br/>workloads?}
     Q1 -->|32-128| Q2B{Production or<br/>Dev/Test?}
     Q1 -->|129-512| Q2C{Multi-agency or<br/>enterprise?}
-    Q1 -->|> 512| F512+["F512 or higher"]
+    Q1 -->|"> 512"| F512+["F512 or higher"]
 
     Q2A -->|No| Q3A{Budget<br/>< $2K/mo?}
     Q2A -->|Yes| F32["F32<br/>$4,205/mo"]
@@ -829,9 +829,9 @@ flowchart TD
 flowchart TD
     Start([CU > 80%<br/>sustained]) --> Q1{Duration?}
 
-    Q1 -->|< 1 hour| Monitor["Monitor<br/>Burst is expected"]
+    Q1 -->|"< 1 hour"| Monitor["Monitor<br/>Burst is expected"]
     Q1 -->|1-4 hours| Q2{Recurring<br/>pattern?}
-    Q1 -->|> 4 hours| Q3{Optimization<br/>attempted?}
+    Q1 -->|"> 4 hours"| Q3{Optimization<br/>attempted?}
 
     Q2 -->|Yes, predictable| AutoScale["Auto-scale<br/>for peak window"]
     Q2 -->|No, sporadic| Investigate["Investigate<br/>runaway queries"]

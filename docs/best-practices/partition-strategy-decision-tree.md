@@ -105,22 +105,22 @@ df = spark.sql("""
 ```mermaid
 flowchart TD
     A[New Delta Table] --> B{Total table size?}
-    B -->|< 1 GB| C[No partitioning needed]
+    B -->|"< 1 GB"| C[No partitioning needed]
     B -->|1 GB - 1 TB| D{Primary query filter pattern?}
-    B -->|> 1 TB| E{Cardinality of filter column?}
+    B -->|"> 1 TB"| E{Cardinality of filter column?}
 
     D -->|Date-based filters| F{Daily data volume?}
     D -->|Category-based filters| G{Category cardinality?}
     D -->|Multiple filter patterns| H[Consider liquid clustering]
     D -->|No consistent pattern| I[ZORDER instead of partitioning]
 
-    F -->|< 128 MB/day| J[Partition by MONTH]
+    F -->|"< 128 MB/day"| J[Partition by MONTH]
     F -->|128 MB - 1 GB/day| K[Partition by DAY]
-    F -->|> 1 GB/day| L[Partition by DAY + ZORDER or liquid clustering]
+    F -->|"> 1 GB/day"| L[Partition by DAY + ZORDER or liquid clustering]
 
-    G -->|< 20 categories| M[Partition by category]
+    G -->|"< 20 categories"| M[Partition by category]
     G -->|20-1000 categories| N[ZORDER by category]
-    G -->|> 1000 categories| O[Liquid clustering on category]
+    G -->|"> 1000 categories"| O[Liquid clustering on category]
 
     E -->|Low cardinality date| P[Partition by DAY + secondary ZORDER]
     E -->|High cardinality| Q[Liquid clustering or ZORDER]

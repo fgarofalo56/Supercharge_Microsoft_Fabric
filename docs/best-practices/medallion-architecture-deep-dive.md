@@ -461,7 +461,7 @@ flowchart LR
     B --> V
     V -->|Pass| S
     V -->|Fail| Q
-    Q -->|Manual review<br/>+ reprocess| V
+    Q -->|"Manual review<br/>+ reprocess"| V
 ```
 
 ```python
