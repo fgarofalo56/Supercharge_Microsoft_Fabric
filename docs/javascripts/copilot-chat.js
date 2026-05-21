@@ -827,6 +827,14 @@
           } else {
             response.json().then(function (data) {
               var reply = data.reply || data.content || data.message || "Sorry, I couldn't generate a response.";
+              // If the answer was grounded from Microsoft Learn (i.e., the
+              // topic isn't covered in the repo yet), append a small note
+              // so the user knows where the citations came from.
+              if (data.groundedFromMsLearn) {
+                reply +=
+                  "\n\n*ⓘ Answer grounded from Microsoft Learn — this topic isn't in the repo yet. " +
+                  "A content-gap issue was filed automatically.*";
+              }
               updateStreamingMessage(reply);
               chatHistory.push({ role: "assistant", content: reply });
               finalizeStreaming();

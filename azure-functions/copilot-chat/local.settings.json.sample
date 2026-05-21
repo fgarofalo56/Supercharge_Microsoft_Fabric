@@ -6,7 +6,12 @@
     "AZURE_OPENAI_ENDPOINT": "https://YOUR-INSTANCE.openai.azure.com",
     "AZURE_OPENAI_KEY": "YOUR-API-KEY-HERE",
     "AZURE_OPENAI_DEPLOYMENT": "gpt-4o-mini",
-    "ALLOWED_ORIGINS": "https://fgarofalo56.github.io,http://localhost:8000"
+    "ALLOWED_ORIGINS": "https://fgarofalo56.github.io,http://localhost:8000",
+
+    "_comment_github": "Optional — when set, the Copilot files a 'content-gap' issue whenever it falls back to MS Learn. Leave empty in dev to disable.",
+    "GITHUB_TOKEN": "",
+    "GITHUB_REPO": "fgarofalo56/Suppercharge_Microsoft_Fabric",
+    "GITHUB_ISSUE_LABEL": "content-gap,copilot-suggested"
   },
   "Host": {
     "CORS": "https://fgarofalo56.github.io,http://localhost:8000",
