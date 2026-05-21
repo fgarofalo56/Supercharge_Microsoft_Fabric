@@ -369,6 +369,212 @@ Hands-on, step-by-step guides covering every aspect of the Microsoft Fabric POC 
 
 </div>
 
+## Advanced AI/ML
+
+<div class="grid cards" markdown>
+
+-   :material-rocket-launch:{ .lg .middle } __39 — End-to-End MLOps__
+
+    ---
+
+    Train, register, deploy, monitor, and retrain ML models on Fabric — full MLOps lifecycle with MLflow tracking and AutoML endpoints.
+
+    [:octicons-arrow-right-24: MLOps tutorial](39-mlops-end-to-end/README.md)
+
+-   :material-magnify-scan:{ .lg .middle } __40 — Production RAG__
+
+    ---
+
+    Retrieval-augmented generation in production with Eventhouse Vector, Data Agents, and an evaluation harness.
+
+    [:octicons-arrow-right-24: Production RAG](40-rag-production/README.md)
+
+</div>
+
+## Cloud Migration
+
+Step-by-step paths to migrate **off** another data platform **onto** Microsoft Fabric. Each tutorial covers assessment, schema/code translation, network egress costs, and validation.
+
+<div class="grid cards" markdown>
+
+-   :material-cube-outline:{ .lg .middle } __41 — Azure Synapse → Fabric__
+
+    ---
+
+    Lift Dedicated SQL Pools, Spark notebooks, and pipelines from Synapse Analytics into Fabric without rewriting business logic.
+
+    [:octicons-arrow-right-24: Synapse migration](41-synapse-to-fabric/README.md)
+
+-   :material-fire:{ .lg .middle } __42 — Databricks → Fabric__
+
+    ---
+
+    Migrate Databricks workspaces, Unity Catalog, Delta tables, and Jobs/Workflows to Fabric Data Engineering.
+
+    [:octicons-arrow-right-24: Databricks migration](42-databricks-to-fabric/README.md)
+
+-   :material-database-arrow-right:{ .lg .middle } __43 — Amazon Redshift → Fabric__
+
+    ---
+
+    Move Redshift schemas, queries, and data into Fabric Warehouse and OneLake. Includes AWS network egress mitigation.
+
+    [:octicons-arrow-right-24: Redshift migration](43-redshift-to-fabric/README.md)
+
+-   :material-google-circles-extended:{ .lg .middle } __44 — Google BigQuery → Fabric__
+
+    ---
+
+    Translate BigQuery Standard SQL → T-SQL, manage slot consumption, and handle GCP egress costs during migration.
+
+    [:octicons-arrow-right-24: BigQuery migration](44-bigquery-to-fabric/README.md)
+
+-   :material-server:{ .lg .middle } __45 — On-Prem SSAS / SSIS / SSRS → Fabric__
+
+    ---
+
+    Modernize on-prem Microsoft BI stack — SSAS cubes to Direct Lake, SSIS to Data Factory, SSRS to Paginated Reports.
+
+    [:octicons-arrow-right-24: On-Prem migration](45-onprem-ssas-ssis-ssrs/README.md)
+
+-   :material-shape-outline:{ .lg .middle } __55 — Palantir Foundry → Fabric__
+
+    ---
+
+    Rebuild Foundry ontology in Fabric IQ, port transforms to PySpark, replace Workshop/Forge apps with Power Apps + Translytical.
+
+    [:octicons-arrow-right-24: Palantir migration](55-palantir-to-fabric/README.md)
+
+-   :material-cog-transfer:{ .lg .middle } __56 — Informatica → Fabric__
+
+    ---
+
+    Translate PowerCenter mappings + IDMC to Fabric Data Factory + Dataflows + notebooks; PowerExchange CDC → Mirroring.
+
+    [:octicons-arrow-right-24: Informatica migration](56-informatica-to-fabric/README.md)
+
+-   :material-database-export:{ .lg .middle } __10 — Teradata → Fabric__
+
+    ---
+
+    Replace Teradata enterprise data warehouse with Fabric Warehouse — schema translation, BTEQ to T-SQL, capacity planning.
+
+    [:octicons-arrow-right-24: Teradata migration](10-teradata-migration/README.md)
+
+-   :material-snowflake:{ .lg .middle } __24 — Snowflake → Fabric__
+
+    ---
+
+    Move Snowflake virtual warehouses, schemas, and Snowpipe ingestion to Fabric SQL Warehouse and OneLake.
+
+    [:octicons-arrow-right-24: Snowflake migration](24-snowflake-to-fabric/README.md)
+
+-   :material-server-network:{ .lg .middle } __25 — IBM DB2 → Fabric__
+
+    ---
+
+    Connect or migrate IBM DB2 (LUW / z/OS) sources into Fabric via Self-Hosted IR, Mirroring, or full bulk migration.
+
+    [:octicons-arrow-right-24: IBM DB2](25-ibm-db2-source/README.md)
+
+-   :material-connection:{ .lg .middle } __11 — SAS → Fabric__
+
+    ---
+
+    Connect SAS workloads to Fabric — ODBC/JDBC connectivity, dataset extraction patterns, and SAS procedure replacement.
+
+    [:octicons-arrow-right-24: SAS connectivity](11-sas-connectivity/README.md)
+
+-   :material-map:{ .lg .middle } __13 — Migration Planning__
+
+    ---
+
+    Assessment-first methodology for any migration to Fabric. Inventory, sizing, dependency mapping, sequencing, and risk.
+
+    [:octicons-arrow-right-24: Migration planning](13-migration-planning/README.md)
+
+</div>
+
+## Industry Deep Dives
+
+End-to-end industry implementations on Fabric — from sources to gold-layer dashboards.
+
+<div class="grid cards" markdown>
+
+-   :material-hospital-building:{ .lg .middle } __46 — Commercial Healthcare__
+
+    ---
+
+    EHR (Epic FHIR), claims, lab results, and pharmacy data — clinical operations and population health on Fabric.
+
+    [:octicons-arrow-right-24: Healthcare ops](46-commercial-healthcare/README.md)
+
+-   :material-cash:{ .lg .middle } __47 — Financial Services__
+
+    ---
+
+    Real-time fraud detection, AML, regulatory reporting, and customer 360 on Fabric Real-Time Intelligence + Direct Lake.
+
+    [:octicons-arrow-right-24: Financial services](47-financial-services/README.md)
+
+-   :material-shield-account:{ .lg .middle } __48 — Insurance Claims__
+
+    ---
+
+    Claims processing, fraud scoring, and actuarial analytics — insurance pipelines on Fabric.
+
+    [:octicons-arrow-right-24: Insurance](48-insurance/README.md)
+
+-   :material-storefront:{ .lg .middle } __49 — Retail & CPG__
+
+    ---
+
+    Demand forecasting, customer segmentation, store-ops dashboards, and real-time clickstream on Fabric.
+
+    [:octicons-arrow-right-24: Retail / CPG](49-retail-cpg/README.md)
+
+-   :material-factory:{ .lg .middle } __50 — Manufacturing IoT__
+
+    ---
+
+    Factory IoT telemetry, predictive maintenance, OEE, and digital twin integration on Fabric.
+
+    [:octicons-arrow-right-24: Manufacturing](50-manufacturing-iot/README.md)
+
+-   :material-flash:{ .lg .middle } __51 — Energy & Utilities__
+
+    ---
+
+    Smart-grid analytics, load forecasting, outage prediction, and renewable generation on Fabric.
+
+    [:octicons-arrow-right-24: Energy / Utilities](51-energy-utilities/README.md)
+
+-   :material-satellite:{ .lg .middle } __52 — Telecom__
+
+    ---
+
+    Churn prediction, network-quality analytics, and customer-experience dashboards on Fabric.
+
+    [:octicons-arrow-right-24: Telecom](52-telecom/README.md)
+
+-   :material-pill:{ .lg .middle } __53 — Pharma Clinical Trials__
+
+    ---
+
+    Clinical-trial data ingestion, regulatory submission pipelines, and patient-cohort analytics on Fabric.
+
+    [:octicons-arrow-right-24: Pharma](53-pharma/README.md)
+
+-   :material-movie-open:{ .lg .middle } __54 — Media & Entertainment__
+
+    ---
+
+    Audience analytics, content performance, and ad-revenue dashboards on Fabric.
+
+    [:octicons-arrow-right-24: Media](54-media/README.md)
+
+</div>
+
 ## Quick Reference
 
 <div class="grid cards" markdown>

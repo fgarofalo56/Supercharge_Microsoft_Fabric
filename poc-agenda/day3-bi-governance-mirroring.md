@@ -83,7 +83,7 @@ Before starting, ensure the following are ready:
 timeline
     title Day 3: BI, Governance & Mirroring Journey
     
-    section Morning Session 1<br/>9:00-10:30<br/>👥 Data Architects + BI Devs (6)
+    section Morning Session 1 (09:00-10:30)
         Create Semantic Model : Direct Lake mode
                                : No refresh needed
         Define Relationships : Star schema
@@ -92,7 +92,7 @@ timeline
                       : Time intelligence
                       : 20+ measures
     
-    section Morning Session 2<br/>10:45-12:30<br/>👥 Data Architects + BI Devs (6)
+    section Morning Session 2 (10:45-12:30)
         Executive Dashboard : Net Win
                            : Hold %
                            : Zone Performance
@@ -103,7 +103,7 @@ timeline
                         : Churn risk
                         : Value scoring
     
-    section Afternoon Session 3<br/>13:30-15:00<br/>👥 All Participants (10+)
+    section Afternoon Session 3 (13:30-15:00)
         Connect Purview : Register Fabric source
                        : Configure scan
         Review Classifications : PII detection
@@ -116,7 +116,7 @@ timeline
                     : Impact analysis
                     : Transformation tracking
     
-    section Afternoon Session 4<br/>15:15-16:30<br/>👥 All Participants (10+)
+    section Afternoon Session 4 (15:15-16:30)
         Mirroring Concepts : Near real-time sync
                           : No ETL code
                           : Auto schema sync
@@ -127,7 +127,7 @@ timeline
                            : OneLake integration
                            : Production patterns
     
-    section Wrap-up<br/>16:30-17:00<br/>🎉 All Participants
+    section Wrap-up (16:30-17:00)
         POC Review : 3 days complete
                   : Medallion built
                   : Reports delivered

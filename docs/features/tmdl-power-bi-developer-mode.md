@@ -334,7 +334,7 @@ sequenceDiagram
 ### Git Workflow
 
 ```mermaid
-gitgraph
+gitGraph
     commit id: "Initial model export"
     branch feature/add-compliance-measures
     commit id: "Add CTR measure"

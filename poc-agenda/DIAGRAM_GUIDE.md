@@ -209,9 +209,12 @@ gantt
     title Your Title
     dateFormat HH:mm
     axisFormat %H:%M
-    
+
     section Day X
-    New Session   :tag, start, duration
+    Welcome           :done, w1, 09:00, 30m
+    Concepts          :active, c1, after w1, 1h
+    Hands-on Lab      :crit, lab1, after c1, 1h30m
+    Wrap-Up           :milestone, ms1, after lab1, 0m
 ```
 
 **Duration format:**

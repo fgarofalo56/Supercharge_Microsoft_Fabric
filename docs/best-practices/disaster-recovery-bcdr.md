@@ -81,11 +81,11 @@ flowchart TB
 
     subgraph SecondaryRegion["Secondary Region (West US 2)"]
         subgraph DRCapacity["F32 DR Capacity (Paused)"]
-            WS_DR[DR Workspace<br/>(Mirror)]
+            WS_DR["DR Workspace<br/>(Mirror)"]
         end
         OneLake_S[("OneLake<br/>(Read Replica)")]
-        KV_S[Azure Key Vault<br/>(Replicated)]
-        ADLS_S[ADLS Gen2<br/>(GRS Pair)]
+        KV_S["Azure Key Vault<br/>(Replicated)"]
+        ADLS_S["ADLS Gen2<br/>(GRS Pair)"]
     end
 
     subgraph Source["Data Sources"]

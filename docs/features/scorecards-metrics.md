@@ -219,9 +219,9 @@ quadrantChart
     x-axis Low Progress --> High Progress
     y-axis Plenty of Time --> Running Out of Time
     quadrant-1 On Track
-    quadrant-2 At Risk (time)
+    quadrant-2 Time Risk
     quadrant-3 Behind
-    quadrant-4 At Risk (progress)
+    quadrant-4 Progress Risk
     "Revenue Q2": [0.85, 0.5]
     "Hold %": [0.65, 0.4]
     "CTR Filings": [1.0, 0.5]

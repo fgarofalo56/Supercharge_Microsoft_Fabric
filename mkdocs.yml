@@ -395,6 +395,8 @@ nav:
         - "43 — Redshift → Fabric": tutorials/43-redshift-to-fabric/README.md
         - "44 — BigQuery → Fabric": tutorials/44-bigquery-to-fabric/README.md
         - "45 — On-Prem SSAS/SSIS/SSRS → Fabric": tutorials/45-onprem-ssas-ssis-ssrs/README.md
+        - "55 — Palantir Foundry → Fabric": tutorials/55-palantir-to-fabric/README.md
+        - "56 — Informatica → Fabric": tutorials/56-informatica-to-fabric/README.md
       - Industry Deep Dives:
         - "46 — Commercial Healthcare": tutorials/46-commercial-healthcare/README.md
         - "47 — Financial Services": tutorials/47-financial-services/README.md
