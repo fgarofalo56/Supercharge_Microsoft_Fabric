@@ -17,7 +17,9 @@ before/after images, and connector metadata drawn from the casino/gaming domain.
 
 import random
 import uuid
-from datetime import UTC, datetime
+from datetime import datetime, timezone
+
+UTC = timezone.utc  # `datetime.UTC` constant is Python 3.11+ only; alias for 3.10 compat
 from typing import Any
 
 import numpy as np
