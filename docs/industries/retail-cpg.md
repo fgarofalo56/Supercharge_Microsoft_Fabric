@@ -1,6 +1,10 @@
 [Home](../index.md) > [Docs](../) > [Industries](./) > Retail & CPG
 
+![Retail & CPG — Demand forecasting, customer segmentation on Fabric](../assets/heroes/retail-cpg.svg){ .hero-banner }
+
 # 🛒 Retail & CPG — Demand Forecasting & Customer 360
+
+![Retail Cpg reference architecture on Microsoft Fabric](../assets/diagrams/industry-retail.svg){ .architecture-diagram }
 
 <div align="center" markdown>
 

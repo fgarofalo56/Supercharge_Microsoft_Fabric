@@ -4,6 +4,8 @@
 
 > **Purpose**: Business-level aggregations, KPIs, star schema models, and analytics-ready datasets optimized for Direct Lake connectivity and Power BI consumption.
 
+![Gold layer star schema on Fabric](../../assets/diagrams/gold-layer-flow.svg){ .architecture-diagram }
+
 The Gold layer transforms cleansed Silver data into business intelligence assets. This layer creates dimensional models, calculates KPIs, builds aggregated views, and prepares compliance reports for regulatory submission.
 
 ---

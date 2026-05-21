@@ -3,6 +3,8 @@ title: Tutorials
 description: Step-by-step tutorials for Microsoft Fabric POC implementation
 ---
 
+![Step-by-step tutorials — 55 hands-on guides from bronze ingestion to MLOps](../assets/heroes/tutorials.svg){ .hero-banner }
+
 # Tutorials
 
 Hands-on, step-by-step guides covering every aspect of the Microsoft Fabric POC — from environment setup through advanced analytics and federal agency integrations.

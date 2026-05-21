@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  viewBox="0 -40 1654 1260" width="1654" height="1260">
+<defs>
+    
+      <marker id="arrow-475569" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+        <path d="M0,0 L10,5 L0,10 Z" fill="#475569" />
+      </marker>
+    
+      <marker id="arrow-0078D4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+        <path d="M0,0 L10,5 L0,10 Z" fill="#0078D4" />
+      </marker>
+    
+      <marker id="arrow-243A5E" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+        <path d="M0,0 L10,5 L0,10 Z" fill="#243A5E" />
+      </marker>
+    
+  </defs>
+<rect x="0" y="-40" width="1654" height="1260" fill="#FFFFFF" />
+<text x="827" y="-8" text-anchor="middle" font-size="26" font-weight="bold" fill="#0A2540">Microsoft Fabric Platform Overview</text>
+<rect x="60" y="110" width="1534" height="650" rx="12" ry="12" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1" opacity="1" /><text x="76" y="132" font-size="16" font-weight="bold" fill="#7F1D1D">Governance / Platform Envelope - Microsoft Purview</text>
+<rect x="60" y="790" width="1534" height="220" rx="12" ry="12" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1" opacity="1" /><text x="76" y="812" font-size="16" font-weight="bold" fill="#14532D">Fabric F64 Capacity - Integrated Workloads on OneLake</text>
+<rect x="60" y="1040" width="1534" height="120" rx="12" ry="12" fill="#FEFCE8" stroke="#FDE047" stroke-width="1" opacity="1" /><text x="76" y="1062" font-size="16" font-weight="bold" fill="#713F12">Data Foundation</text>
+<text x="60" y="46" font-size="26" fill="#243A5E" font-weight="bold">Microsoft Fabric Platform Overview</text>
+<text x="60" y="84" font-size="14" fill="#64748B" font-weight="normal">F64 capacity with OneLake foundation, six integrated workloads, Purview governance, and AI Copilot</text>
+<rect x="767" y="186" width="120" height="120" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><text x="827" y="298" text-anchor="middle" font-size="12" fill="#0F172A" font-weight="normal">Microsoft Purview</text>
+<rect x="767" y="416" width="120" height="120" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><image href="https://raw.githubusercontent.com/jgraph/drawio/dev/src/main/webapp/img/lib/azure2/ai_machine_learning/Azure_OpenAI.svg" x="787" y="424" width="80" height="80" preserveAspectRatio="xMidYMid meet" /><text x="827" y="528" text-anchor="middle" font-size="12" fill="#0F172A" font-weight="normal">AI Copilot</text>
+<rect x="80" y="866" width="120" height="120" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><image href="https://raw.githubusercontent.com/jgraph/drawio/dev/src/main/webapp/img/lib/azure2/databases/Data_Factory.svg" x="100" y="874" width="80" height="80" preserveAspectRatio="xMidYMid meet" /><text x="140" y="978" text-anchor="middle" font-size="12" fill="#0F172A" font-weight="normal">Data Factory</text>
+<rect x="320" y="866" width="120" height="120" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><text x="380" y="978" text-anchor="middle" font-size="12" fill="#0F172A" font-weight="normal">Data Engineering</text>
+<rect x="560" y="866" width="120" height="120" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><image href="https://raw.githubusercontent.com/jgraph/drawio/dev/src/main/webapp/img/lib/azure2/databases/SQL_Database.svg" x="580" y="874" width="80" height="80" preserveAspectRatio="xMidYMid meet" /><text x="620" y="978" text-anchor="middle" font-size="12" fill="#0F172A" font-weight="normal">Data Warehouse</text>
+<rect x="800" y="866" width="120" height="120" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><image href="https://raw.githubusercontent.com/jgraph/drawio/dev/src/main/webapp/img/lib/azure2/analytics/Event_Hubs.svg" x="820" y="874" width="80" height="80" preserveAspectRatio="xMidYMid meet" /><text x="860" y="978" text-anchor="middle" font-size="11" fill="#0F172A" font-weight="normal">Real-Time Intelligence</text>
+<rect x="1040" y="866" width="120" height="120" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><image href="https://raw.githubusercontent.com/jgraph/drawio/dev/src/main/webapp/img/lib/azure2/ai_machine_learning/Machine_Learning.svg" x="1060" y="874" width="80" height="80" preserveAspectRatio="xMidYMid meet" /><text x="1100" y="978" text-anchor="middle" font-size="12" fill="#0F172A" font-weight="normal">Data Science</text>
+<rect x="1280" y="866" width="120" height="120" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><text x="1340" y="978" text-anchor="middle" font-size="12" fill="#0F172A" font-weight="normal">Power BI</text>
+<rect x="707" y="1080" width="240" height="60" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><image href="https://raw.githubusercontent.com/jgraph/drawio/dev/src/main/webapp/img/lib/azure2/storage/Storage_Accounts.svg" x="817" y="1088" width="20" height="20" preserveAspectRatio="xMidYMid meet" /><text x="827" y="1132" text-anchor="middle" font-size="18" fill="#0F172A" font-weight="bold">OneLake</text>
+<path id="edge-e1" d="M827,1110 L483.5,1110 L483.5,926 L140,926" fill="none" stroke="#475569" stroke-width="2"  marker-end="url(#arrow-475569)" /><text x="483.5" y="1010" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">1. 1</text>
+<path id="edge-e2" d="M827,1110 L603.5,1110 L603.5,926 L380,926" fill="none" stroke="#475569" stroke-width="2"  marker-end="url(#arrow-475569)" /><text x="603.5" y="1010" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">2. 2</text>
+<path id="edge-e3" d="M827,1110 L723.5,1110 L723.5,926 L620,926" fill="none" stroke="#475569" stroke-width="2"  marker-end="url(#arrow-475569)" /><text x="723.5" y="1010" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">3. 3</text>
+<path id="edge-e4" d="M827,1110 L843.5,1110 L843.5,926 L860,926" fill="none" stroke="#475569" stroke-width="2"  marker-end="url(#arrow-475569)" /><text x="843.5" y="1010" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">4. 4</text>
+<path id="edge-e5" d="M827,1110 L963.5,1110 L963.5,926 L1100,926" fill="none" stroke="#475569" stroke-width="2"  marker-end="url(#arrow-475569)" /><text x="963.5" y="1010" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">5. 5</text>
+<path id="edge-e6" d="M827,1110 L1083.5,1110 L1083.5,926 L1340,926" fill="none" stroke="#475569" stroke-width="2"  marker-end="url(#arrow-475569)" /><text x="1083.5" y="1010" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">6. 6</text>
+<path id="edge-e7" d="M827,476 L483.5,476 L483.5,926 L140,926" fill="none" stroke="#0078D4" stroke-width="2"  marker-end="url(#arrow-0078D4)" /><text x="483.5" y="693" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">7. 7</text>
+<path id="edge-e8" d="M827,476 L843.5,476 L843.5,926 L860,926" fill="none" stroke="#0078D4" stroke-width="2"  marker-end="url(#arrow-0078D4)" /><text x="843.5" y="693" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">8. 8</text>
+<path id="edge-e9" d="M827,476 L1083.5,476 L1083.5,926 L1340,926" fill="none" stroke="#0078D4" stroke-width="2"  marker-end="url(#arrow-0078D4)" /><text x="1083.5" y="693" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">9. 9</text>
+<path id="edge-e10" d="M827,246 L827,246 L827,476 L827,476" fill="none" stroke="#243A5E" stroke-width="2"  marker-end="url(#arrow-243A5E)" /><text x="827" y="353" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">10. 10</text>
+</svg>

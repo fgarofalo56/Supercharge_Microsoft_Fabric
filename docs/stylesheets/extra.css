@@ -8,6 +8,32 @@
   --md-accent-fg-color: #ffb900;
 }
 
+/* Hero banner (top of section index pages) */
+.hero-banner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 0 1.5rem 0;
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(15, 23, 42, 0.12);
+  display: block;
+}
+
+/* Architecture diagrams (inline page content) */
+.architecture-diagram {
+  width: 100%;
+  max-width: 1100px;
+  margin: 1rem auto;
+  display: block;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 0.5rem;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+[data-md-color-scheme="slate"] .architecture-diagram {
+  background: #f8fafc;
+}
+
 /* Dark mode adjustments */
 [data-md-color-scheme="slate"] {
   --md-primary-fg-color: #3b82f6;

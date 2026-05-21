@@ -2,6 +2,8 @@
 
 # ⚡ Direct Lake - Zero-Copy Power BI over OneLake
 
+![Direct Lake connectivity architecture](../assets/diagrams/direct-lake-architecture.svg){ .architecture-diagram }
+
 <div align="center" markdown>
 
 **Sub-Second Analytics Directly from Delta Lake — No Import, No DirectQuery**

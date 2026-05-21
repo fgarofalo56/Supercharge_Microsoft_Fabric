@@ -2,6 +2,8 @@
 
 # 🧠 Fabric IQ - Natural Language Analytics
 
+![Fabric IQ ontology and knowledge graph](../assets/diagrams/fabric-iq-flow.svg){ .architecture-diagram }
+
 <div align="center" markdown>
 
 **Unlock Data Insights with Natural Language**

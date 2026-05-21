@@ -4,6 +4,8 @@
 
 > **Purpose**: Raw data ingestion from casino source systems with minimal transformation. Append-only landing zone preserving original data fidelity.
 
+![Bronze layer ingestion flow on Fabric](../../assets/diagrams/bronze-layer-flow.svg){ .architecture-diagram }
+
 The Bronze layer captures raw data from slot machines, player systems, financial transactions, table games, and security systems. Data arrives in its original format with only metadata enrichment (ingestion timestamp, source system, batch ID).
 
 ---

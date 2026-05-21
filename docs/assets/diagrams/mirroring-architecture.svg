@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  viewBox="0 -40 1654 1229" width="1654" height="1229">
+<defs>
+    
+      <marker id="arrow-475569" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+        <path d="M0,0 L10,5 L0,10 Z" fill="#475569" />
+      </marker>
+    
+      <marker id="arrow-0078D4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+        <path d="M0,0 L10,5 L0,10 Z" fill="#0078D4" />
+      </marker>
+    
+      <marker id="arrow-8B5CF6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+        <path d="M0,0 L10,5 L0,10 Z" fill="#8B5CF6" />
+      </marker>
+    
+  </defs>
+<rect x="0" y="-40" width="1654" height="1229" fill="#FFFFFF" />
+<text x="827" y="-8" text-anchor="middle" font-size="26" font-weight="bold" fill="#0A2540">Database Mirroring to Fabric</text>
+<rect x="60" y="120" width="1534" height="256" rx="12" ry="12" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1" opacity="1" /><text x="76" y="142" font-size="16" font-weight="bold" fill="#1E3A8A">Operational Data Sources</text>
+<rect x="60" y="406" width="1534" height="226" rx="12" ry="12" fill="#FEFCE8" stroke="#FDE047" stroke-width="1" opacity="1" /><text x="76" y="428" font-size="16" font-weight="bold" fill="#854D0E">Fabric Mirroring and OneLake</text>
+<rect x="60" y="662" width="1534" height="206" rx="12" ry="12" fill="#FAF5FF" stroke="#C4B5FD" stroke-width="1" opacity="1" /><text x="76" y="684" font-size="16" font-weight="bold" fill="#5B21B6">Analytics Consumption</text>
+<text x="60" y="46" font-size="26" fill="#243A5E" font-weight="bold">Database Mirroring to Fabric</text>
+<text x="60" y="84" font-size="14" fill="#64748B" font-weight="normal">CDC mirrors Azure SQL DB, Cosmos DB, Snowflake, and Databricks Unity Catalog into OneLake Delta tables for Direct Lake analytics with no pipeline or copy job.</text>
+<rect x="80" y="196" width="120" height="120" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><image href="https://raw.githubusercontent.com/jgraph/drawio/dev/src/main/webapp/img/lib/azure2/databases/SQL_Database.svg" x="100" y="204" width="80" height="80" preserveAspectRatio="xMidYMid meet" /><text x="140" y="308" text-anchor="middle" font-size="12" fill="#0F172A" font-weight="normal">Azure SQL DB</text>
+<rect x="240" y="196" width="120" height="120" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><image href="https://raw.githubusercontent.com/jgraph/drawio/dev/src/main/webapp/img/lib/azure2/databases/Azure_Cosmos_DB.svg" x="260" y="204" width="80" height="80" preserveAspectRatio="xMidYMid meet" /><text x="300" y="308" text-anchor="middle" font-size="12" fill="#0F172A" font-weight="normal">Cosmos DB</text>
+<g transform="translate(400,196)"><path d="M12,0 L108,0 Q120,0 120,12 L120,108 Q120,120 108,120 L12,120 Q0,120 0,108 L0,12 Q0,0 12,0 Z" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1"  /><text x="60" y="60" text-anchor="middle" dominant-baseline="middle" font-size="12" fill="#0F172A" font-weight="normal">Snowflake</text></g>
+<g transform="translate(560,196)"><path d="M12,0 L108,0 Q120,0 120,12 L120,108 Q120,120 108,120 L12,120 Q0,120 0,108 L0,12 Q0,0 12,0 Z" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1"  /><text x="60" y="60" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#0F172A" font-weight="normal">Databricks Unity Catalog</text></g>
+<g transform="translate(840,196)"><path d="M12,0 L188,0 Q200,0 200,12 L200,68 Q200,80 188,80 L12,80 Q0,80 0,68 L0,12 Q0,0 12,0 Z" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1" opacity="1"  /><text x="100" y="40" text-anchor="middle" dominant-baseline="middle" font-size="12" fill="#0F172A" font-weight="normal">CDC captures inserts, updates, and deletes</text></g>
+<g transform="translate(220,482)"><path d="M12,0 L188,0 Q200,0 200,12 L200,68 Q200,80 188,80 L12,80 Q0,80 0,68 L0,12 Q0,0 12,0 Z" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1"  /><text x="100" y="40" text-anchor="middle" dominant-baseline="middle" font-size="12" fill="#0F172A" font-weight="normal">Fabric Mirroring service</text></g>
+<g transform="translate(700,482)"><path d="M0,0 L200,0 L200,80 L0,80 Z" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1"  /><text x="100" y="40" text-anchor="middle" dominant-baseline="middle" font-size="12" fill="#0F172A" font-weight="normal">OneLake mirrored Delta tables</text></g>
+<g transform="translate(1180,482)"><path d="M12,0 L188,0 Q200,0 200,12 L200,68 Q200,80 188,80 L12,80 Q0,80 0,68 L0,12 Q0,0 12,0 Z" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1" opacity="1"  /><text x="100" y="40" text-anchor="middle" dominant-baseline="middle" font-size="12" fill="#0F172A" font-weight="normal">Near-real-time sync within seconds</text></g>
+<g transform="translate(380,738)"><path d="M12,0 L188,0 Q200,0 200,12 L200,68 Q200,80 188,80 L12,80 Q0,80 0,68 L0,12 Q0,0 12,0 Z" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1"  /><text x="100" y="40" text-anchor="middle" dominant-baseline="middle" font-size="12" fill="#0F172A" font-weight="normal">Power BI Direct Lake</text></g>
+<g transform="translate(900,738)"><path d="M12,0 L188,0 Q200,0 200,12 L200,68 Q200,80 188,80 L12,80 Q0,80 0,68 L0,12 Q0,0 12,0 Z" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1" opacity="1"  /><text x="100" y="40" text-anchor="middle" dominant-baseline="middle" font-size="12" fill="#0F172A" font-weight="normal">Queries mirrored tables directly</text></g>
+<g transform="translate(60,1039)"><path d="M12,0 L288,0 Q300,0 300,12 L300,78 Q300,90 288,90 L12,90 Q0,90 0,78 L0,12 Q0,0 12,0 Z" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2" opacity="1"  /><text x="150" y="45" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="#0F172A" font-weight="normal">Microsoft Azure native services and Fabric integration</text></g>
+<g transform="translate(440,1039)"><path d="M12,0 L288,0 Q300,0 300,12 L300,78 Q300,90 288,90 L12,90 Q0,90 0,78 L0,12 Q0,0 12,0 Z" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2" opacity="1"  /><text x="150" y="45" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="#0F172A" font-weight="normal">Near-real-time replicas stay synchronized within seconds</text></g>
+<g transform="translate(820,1039)"><path d="M12,0 L288,0 Q300,0 300,12 L300,78 Q300,90 288,90 L12,90 Q0,90 0,78 L0,12 Q0,0 12,0 Z" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2" opacity="1"  /><text x="150" y="45" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="#0F172A" font-weight="normal">No ETL pipeline or copy job required for analytics access</text></g>
+<g transform="translate(1200,1039)"><path d="M12,0 L288,0 Q300,0 300,12 L300,78 Q300,90 288,90 L12,90 Q0,90 0,78 L0,12 Q0,0 12,0 Z" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2" opacity="1"  /><text x="150" y="45" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="#0F172A" font-weight="normal">Direct Lake enables fast Power BI access to Delta tables</text></g>
+<path id="edge-e1" d="M140,256 L540,256 L540,236 L940,236" fill="none" stroke="#475569" stroke-width="2"  marker-end="url(#arrow-475569)" /><text x="540" y="238" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">1. 1</text>
+<path id="edge-e2" d="M300,256 L620,256 L620,236 L940,236" fill="none" stroke="#475569" stroke-width="2"  marker-end="url(#arrow-475569)" /><text x="620" y="238" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">2. 2</text>
+<path id="edge-e3" d="M460,256 L700,256 L700,236 L940,236" fill="none" stroke="#475569" stroke-width="2"  marker-end="url(#arrow-475569)" /><text x="700" y="238" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">3. 3</text>
+<path id="edge-e4" d="M620,256 L780,256 L780,236 L940,236" fill="none" stroke="#475569" stroke-width="2"  marker-end="url(#arrow-475569)" /><text x="780" y="238" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">4. 4</text>
+<path id="edge-e5" d="M940,236 L630,236 L630,522 L320,522" fill="none" stroke="#0078D4" stroke-width="2"  marker-end="url(#arrow-0078D4)" /><text x="630" y="371" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">5. 5</text>
+<path id="edge-e6" d="M320,522 L560,522 L560,522 L800,522" fill="none" stroke="#0078D4" stroke-width="2"  marker-end="url(#arrow-0078D4)" /><text x="560" y="514" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">6. 6</text>
+<path id="edge-e7" d="M800,522 L1040,522 L1040,522 L1280,522" fill="none" stroke="#475569" stroke-width="2"  marker-end="url(#arrow-475569)" /><text x="1040" y="514" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">7. 7</text>
+<path id="edge-e8" d="M800,522 L640,522 L640,778 L480,778" fill="none" stroke="#8B5CF6" stroke-width="2"  marker-end="url(#arrow-8B5CF6)" /><text x="640" y="642" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">8. 8</text>
+<path id="edge-e9" d="M480,778 L740,778 L740,778 L1000,778" fill="none" stroke="#475569" stroke-width="2"  marker-end="url(#arrow-475569)" /><text x="740" y="770" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">9. 9</text>
+</svg>

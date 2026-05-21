@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  viewBox="0 -40 1654 1229" width="1654" height="1229">
+<defs>
+    
+      <marker id="arrow-475569" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+        <path d="M0,0 L10,5 L0,10 Z" fill="#475569" />
+      </marker>
+    
+      <marker id="arrow-0078D4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+        <path d="M0,0 L10,5 L0,10 Z" fill="#0078D4" />
+      </marker>
+    
+      <marker id="arrow-50E6FF" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+        <path d="M0,0 L10,5 L0,10 Z" fill="#50E6FF" />
+      </marker>
+    
+      <marker id="arrow-8B5CF6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+        <path d="M0,0 L10,5 L0,10 Z" fill="#8B5CF6" />
+      </marker>
+    
+  </defs>
+<rect x="0" y="-40" width="1654" height="1229" fill="#FFFFFF" />
+<text x="827" y="-8" text-anchor="middle" font-size="26" font-weight="bold" fill="#0A2540">Data Mesh on Fabric</text>
+<rect x="60" y="110" width="1534" height="266" rx="12" ry="12" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1" opacity="1" /><text x="76" y="132" font-size="16" font-weight="bold" fill="#14532D">Domain Workspaces</text>
+<rect x="60" y="406" width="1534" height="226" rx="12" ry="12" fill="#FAF5FF" stroke="#C4B5FD" stroke-width="1" opacity="1" /><text x="76" y="428" font-size="16" font-weight="bold" fill="#5B21B6">Shared Catalog and Governance</text>
+<rect x="60" y="662" width="1534" height="226" rx="12" ry="12" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1" opacity="1" /><text x="76" y="684" font-size="16" font-weight="bold" fill="#1E3A8A">Central Platform Team</text>
+<text x="60" y="46" font-size="26" fill="#243A5E" font-weight="bold">Data Mesh on Fabric</text>
+<text x="60" y="84" font-size="14" fill="#64748B" font-weight="normal">Domain-owned Fabric workspaces publish governed data products to OneLake Catalog with zero-copy shortcuts and centralized capacity standards</text>
+<rect x="140" y="186" width="120" height="120" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><image href="https://raw.githubusercontent.com/jgraph/drawio/dev/src/main/webapp/img/lib/azure2/storage/Storage_Accounts.svg" x="160" y="194" width="80" height="80" preserveAspectRatio="xMidYMid meet" /><text x="200" y="298" text-anchor="middle" font-size="12" fill="#0F172A" font-weight="normal">Finance Workspace</text>
+<rect x="440" y="186" width="120" height="120" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><image href="https://raw.githubusercontent.com/jgraph/drawio/dev/src/main/webapp/img/lib/azure2/storage/Storage_Accounts.svg" x="460" y="194" width="80" height="80" preserveAspectRatio="xMidYMid meet" /><text x="500" y="298" text-anchor="middle" font-size="12" fill="#0F172A" font-weight="normal">Sales Workspace</text>
+<rect x="740" y="186" width="120" height="120" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><image href="https://raw.githubusercontent.com/jgraph/drawio/dev/src/main/webapp/img/lib/azure2/storage/Storage_Accounts.svg" x="760" y="194" width="80" height="80" preserveAspectRatio="xMidYMid meet" /><text x="800" y="298" text-anchor="middle" font-size="12" fill="#0F172A" font-weight="normal">Operations Workspace</text>
+<rect x="1040" y="186" width="120" height="120" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><image href="https://raw.githubusercontent.com/jgraph/drawio/dev/src/main/webapp/img/lib/azure2/storage/Storage_Accounts.svg" x="1060" y="194" width="80" height="80" preserveAspectRatio="xMidYMid meet" /><text x="1100" y="298" text-anchor="middle" font-size="12" fill="#0F172A" font-weight="normal">HR Workspace</text>
+<rect x="1340" y="186" width="120" height="120" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><text x="1400" y="298" text-anchor="middle" font-size="12" fill="#0F172A" font-weight="normal">OneLake Shortcuts</text>
+<rect x="527" y="482" width="120" height="120" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><text x="587" y="594" text-anchor="middle" font-size="12" fill="#0F172A" font-weight="normal">OneLake Catalog</text>
+<rect x="1007" y="482" width="120" height="120" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><text x="1067" y="594" text-anchor="middle" font-size="12" fill="#0F172A" font-weight="normal">Microsoft Purview</text>
+<rect x="527" y="738" width="120" height="120" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><image href="https://raw.githubusercontent.com/jgraph/drawio/dev/src/main/webapp/img/lib/azure2/compute/Kubernetes_Services.svg" x="547" y="746" width="80" height="80" preserveAspectRatio="xMidYMid meet" /><text x="587" y="850" text-anchor="middle" font-size="12" fill="#0F172A" font-weight="normal">F-SKU Capacity</text>
+<rect x="1007" y="738" width="120" height="120" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><image href="https://raw.githubusercontent.com/jgraph/drawio/dev/src/main/webapp/img/lib/azure2/management_governance/Monitor.svg" x="1027" y="746" width="80" height="80" preserveAspectRatio="xMidYMid meet" /><text x="1067" y="850" text-anchor="middle" font-size="12" fill="#0F172A" font-weight="normal">Standards and Guardrails</text>
+<g transform="translate(60,1039)"><path d="M12,0 L288,0 Q300,0 300,12 L300,78 Q300,90 288,90 L12,90 Q0,90 0,78 L0,12 Q0,0 12,0 Z" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2" opacity="1"  /><text x="150" y="45" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="#0F172A" font-weight="normal">Microsoft Azure native governance</text></g>
+<g transform="translate(440,1039)"><path d="M12,0 L288,0 Q300,0 300,12 L300,78 Q300,90 288,90 L12,90 Q0,90 0,78 L0,12 Q0,0 12,0 Z" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2" opacity="1"  /><text x="150" y="45" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="#0F172A" font-weight="normal">Domain ownership with shared discoverability</text></g>
+<g transform="translate(820,1039)"><path d="M12,0 L288,0 Q300,0 300,12 L300,78 Q300,90 288,90 L12,90 Q0,90 0,78 L0,12 Q0,0 12,0 Z" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2" opacity="1"  /><text x="150" y="45" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="#0F172A" font-weight="normal">Zero-copy sharing through OneLake shortcuts</text></g>
+<g transform="translate(1200,1039)"><path d="M12,0 L288,0 Q300,0 300,12 L300,78 Q300,90 288,90 L12,90 Q0,90 0,78 L0,12 Q0,0 12,0 Z" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2" opacity="1"  /><text x="150" y="45" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="#0F172A" font-weight="normal">Central capacity with federated policy control</text></g>
+<path id="edge-e1" d="M200,246 L393.5,246 L393.5,542 L587,542" fill="none" stroke="#475569" stroke-width="2"  marker-end="url(#arrow-475569)" /><text x="393.5" y="386" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">1. 1</text>
+<path id="edge-e2" d="M500,246 L543.5,246 L543.5,542 L587,542" fill="none" stroke="#475569" stroke-width="2"  marker-end="url(#arrow-475569)" /><text x="543.5" y="386" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">2. 2</text>
+<path id="edge-e3" d="M800,246 L693.5,246 L693.5,542 L587,542" fill="none" stroke="#475569" stroke-width="2"  marker-end="url(#arrow-475569)" /><text x="693.5" y="386" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">3. 3</text>
+<path id="edge-e4" d="M1100,246 L843.5,246 L843.5,542 L587,542" fill="none" stroke="#475569" stroke-width="2"  marker-end="url(#arrow-475569)" /><text x="843.5" y="386" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">4. 4</text>
+<path id="edge-e5" d="M200,246 L800,246 L800,246 L1400,246" fill="none" stroke="#0078D4" stroke-width="2"  marker-end="url(#arrow-0078D4)" /><text x="800" y="238" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">5. 5</text>
+<path id="edge-e6" d="M500,246 L950,246 L950,246 L1400,246" fill="none" stroke="#0078D4" stroke-width="2"  marker-end="url(#arrow-0078D4)" /><text x="950" y="238" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">6. 6</text>
+<path id="edge-e7" d="M800,246 L1100,246 L1100,246 L1400,246" fill="none" stroke="#0078D4" stroke-width="2"  marker-end="url(#arrow-0078D4)" /><text x="1100" y="238" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">7. 7</text>
+<path id="edge-e8" d="M1400,246 L993.5,246 L993.5,542 L587,542" fill="none" stroke="#50E6FF" stroke-width="2"  marker-end="url(#arrow-50E6FF)" /><text x="993.5" y="386" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">8. 8</text>
+<path id="edge-e9" d="M1067,542 L827,542 L827,542 L587,542" fill="none" stroke="#8B5CF6" stroke-width="2"  marker-end="url(#arrow-8B5CF6)" /><text x="827" y="534" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">9. 9</text>
+<path id="edge-e10" d="M587,798 L393.5,798 L393.5,246 L200,246" fill="none" stroke="#475569" stroke-width="2"  marker-end="url(#arrow-475569)" /><text x="393.5" y="514" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">10. 10</text>
+<path id="edge-e11" d="M587,798 L543.5,798 L543.5,246 L500,246" fill="none" stroke="#475569" stroke-width="2"  marker-end="url(#arrow-475569)" /><text x="543.5" y="514" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">11. 11</text>
+<path id="edge-e12" d="M1067,798 L1067,798 L1067,542 L1067,542" fill="none" stroke="#0078D4" stroke-width="2"  marker-end="url(#arrow-0078D4)" /><text x="1067" y="662" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">12. 12</text>
+</svg>

@@ -1,6 +1,10 @@
 [Home](../index.md) > [Docs](../) > [Industries](./) > Healthcare
 
+![Healthcare Analytics — EHR, claims, population health on Fabric](../assets/heroes/healthcare.svg){ .hero-banner }
+
 # 🏥 Healthcare — Patient Analytics & Clinical Intelligence
+
+![Healthcare reference architecture on Microsoft Fabric](../assets/diagrams/industry-healthcare.svg){ .architecture-diagram }
 
 <div align="center" markdown>
 

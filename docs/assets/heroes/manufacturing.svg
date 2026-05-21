@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" width="1200" height="320"
+     role="img" aria-label="Manufacturing & IoT">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1A237E"/>
+      <stop offset="55%" stop-color="#3F51B5"/>
+      <stop offset="100%" stop-color="#5C6BC0"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFC107" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#FFC107" stop-opacity="0.4"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+    </pattern>
+    <filter id="blur"><feGaussianBlur stdDeviation="40"/></filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="320" fill="url(#bg)"/>
+  <rect width="1200" height="320" fill="url(#grid)"/>
+
+  <!-- Decorative ambient blobs -->
+  <circle cx="180" cy="60"  r="120" fill="#FFC107" opacity="0.20" filter="url(#blur)"/>
+  <circle cx="960" cy="280" r="160" fill="#5C6BC0" opacity="0.30" filter="url(#blur)"/>
+
+  <!-- Accent bar on the left -->
+  <rect x="0" y="80" width="6" height="160" fill="url(#accent)" rx="3"/>
+
+  <!-- Title + tagline -->
+  <text x="56" y="148" font-family="Inter, system-ui, sans-serif" font-size="44" font-weight="700"
+        fill="#FFFFFF" letter-spacing="-0.5">Manufacturing &amp; IoT</text>
+  <text x="56" y="194" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="400"
+        fill="rgba(255,255,255,0.85)" letter-spacing="0.2">Factory telemetry, predictive maintenance, OEE, and digital twin on Fabric</text>
+
+  <!-- Subtle "Microsoft Fabric" eyebrow -->
+  <text x="56" y="100" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600"
+        fill="#FFC107" letter-spacing="2" text-transform="uppercase">MICROSOFT FABRIC POC</text>
+
+
+  <g transform="translate(1048,-8)">
+    <rect x="-12" y="-12" width="120" height="120" rx="16" ry="16"
+          fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
+    <svg x="0" y="0" width="96" height="96" viewBox="0 0 18 18"
+         preserveAspectRatio="xMidYMid meet">
+      <defs><linearGradient id="faaeb69b-3035-4577-9cb1-ddd3fba791e3" x1="9.13" y1="18.81" x2="8.85" y2="-8.1" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#198ab3" /><stop offset="0" stop-color="#198ab3" /><stop offset="0.09" stop-color="#22a5cb" /><stop offset="0.19" stop-color="#29bade" /><stop offset="0.29" stop-color="#2ec9eb" /><stop offset="0.42" stop-color="#31d1f3" /><stop offset="0.62" stop-color="#32d4f5" /></linearGradient></defs><circle id="fa3a22e9-e4e8-46a1-bc09-f9532747c739" cx="11.4" cy="8.44" r="1.97" fill="#fff" /><circle id="eb214416-6791-4934-ac0c-35afaa829f6e" cx="14.7" cy="14.3" r="1.55" fill="#fff" /><circle id="a4424413-b91f-48da-aedd-39e3a978b430" cx="8.57" cy="13.24" r="1.33" fill="#fff" /><circle id="f7ecfc1a-3268-471b-9464-57023bfc9cc4" cx="7.61" cy="3.11" r="1.65" fill="#fff" /><circle id="b4388938-ad80-41b4-b729-5c21e3eab320" cx="3.19" cy="9.19" r="1.33" fill="#fff" /><polygon points="15.06 13.99 11.73 8.16 11.4 8.35 11.67 8.15 7.9 2.79 7.21 3.29 10.55 8.04 3.15 8.65 3.22 9.51 10.55 8.9 8.12 12.94 8.85 13.38 11.35 9.22 14.32 14.41 15.06 13.99" fill="#949494" /><g><path d="M17.53,1.23h0A.73.73,0,0,0,16.8.5H13a.36.36,0,0,0-.36.36V2.27a.36.36,0,0,0,.36.36h2.35v2.3a.38.38,0,0,0,.37.37h1.4a.38.38,0,0,0,.37-.37V1.23Z" fill="#949494" /><path d="M5,15.37H2.61v-2.3a.38.38,0,0,0-.37-.37H.84a.38.38,0,0,0-.37.37v3.7h0a.73.73,0,0,0,.73.72H5a.36.36,0,0,0,.36-.36V15.73A.36.36,0,0,0,5,15.37Z" fill="#949494" /></g><path d="M11.4,6.49a2,2,0,1,1-2,1.95A2,2,0,0,1,11.4,6.49ZM6,3.11A1.66,1.66,0,1,0,7.62,1.46,1.65,1.65,0,0,0,6,3.11ZM1.86,9.18A1.33,1.33,0,1,0,3.19,7.85,1.33,1.33,0,0,0,1.86,9.18Zm5.38,4.05A1.34,1.34,0,1,0,8.58,11.9,1.33,1.33,0,0,0,7.24,13.23Zm5.92,1.07a1.55,1.55,0,1,0,1.55-1.54A1.53,1.53,0,0,0,13.16,14.3Z" fill="url(#faaeb69b-3035-4577-9cb1-ddd3fba791e3)" />
+    </svg>
+  </g>
+
+  <g transform="translate(1048,112)">
+    <rect x="-12" y="-12" width="120" height="120" rx="16" ry="16"
+          fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
+    <svg x="0" y="0" width="96" height="96" viewBox="0 0 18 18"
+         preserveAspectRatio="xMidYMid meet">
+      <title>Icon-analytics-144</title><g><g id="a53a4de8-371c-49da-a662-c4631299fc03"><path d="M10.83,8.42a.26.26,0,0,1-.24.27H8.5a.26.26,0,0,1-.27-.24V6.89a.26.26,0,0,1,.24-.27h2.09a.26.26,0,0,1,.27.24V8.42Z" fill="#76bc2d" /><path d="M14.54,10a.26.26,0,0,1-.24.27H12.21a.26.26,0,0,1-.27-.24V8.48a.26.26,0,0,1,.24-.27h2.09a.26.26,0,0,1,.27.24V10Z" fill="#76bc2d" /><path d="M10.83,11.6a.26.26,0,0,1-.24.27H8.5a.26.26,0,0,1-.27-.24V10.07a.26.26,0,0,1,.24-.27h2.09a.26.26,0,0,1,.27.24V11.6Z" fill="#76bc2d" /><path d="M7.12,6.84a.25.25,0,0,1-.23.26H4.74a.26.26,0,0,1-.27-.23V5.25A.26.26,0,0,1,4.71,5H6.8c.22,0,.32.11.32.27Z" fill="#86d633" /><path d="M7.12,10a.25.25,0,0,1-.23.27H4.74A.26.26,0,0,1,4.47,10V8.42a.26.26,0,0,1,.24-.26H6.8c.22,0,.32.11.32.26Z" fill="#76bc2d" /><path d="M7.12,13.19a.25.25,0,0,1-.23.27H4.74a.26.26,0,0,1-.27-.24V11.6a.25.25,0,0,1,.24-.26H6.8c.22,0,.32.1.32.26Z" fill="#76bc2d" /><g><path d="M1.07,1.51H2.36a0,0,0,0,1,0,0v3.6a.29.29,0,0,1-.29.29H.79A.29.29,0,0,1,.5,5.11v-3A.57.57,0,0,1,1.07,1.51Z" fill="#999" /><path d="M1.07,1.51H2.36a0,0,0,0,1,0,0v3.6a.29.29,0,0,1-.29.29H.79A.29.29,0,0,1,.5,5.11v-3A.57.57,0,0,1,1.07,1.51Z" fill="#999" opacity="0.5" /></g><g><path d="M15.64,1.51h1.29a.57.57,0,0,1,.57.57v3a.29.29,0,0,1-.29.29H15.92a.29.29,0,0,1-.29-.29V1.51A0,0,0,0,1,15.64,1.51Z" fill="#999" /><path d="M15.64,1.51h1.29a.57.57,0,0,1,.57.57v3a.29.29,0,0,1-.29.29H15.92a.29.29,0,0,1-.29-.29V1.51A0,0,0,0,1,15.64,1.51Z" fill="#999" opacity="0.5" /></g><path d="M8.66-6.08H9.91a0,0,0,0,1,0,0v17a0,0,0,0,1,0,0H8.66a.57.57,0,0,1-.57-.57V-5.52A.57.57,0,0,1,8.66-6.08Z" transform="translate(11.42 -6.58) rotate(90)" fill="#949494" /><g><path d="M.79,12.76H2.08a.29.29,0,0,1,.29.29v3.6a0,0,0,0,1,0,0H1.07a.57.57,0,0,1-.57-.57V13A.29.29,0,0,1,.79,12.76Z" fill="#999" /><path d="M.79,12.76H2.08a.29.29,0,0,1,.29.29v3.6a0,0,0,0,1,0,0H1.07a.57.57,0,0,1-.57-.57V13A.29.29,0,0,1,.79,12.76Z" fill="#999" opacity="0.5" /></g><g><path d="M15.92,12.76h1.29a.29.29,0,0,1,.29.29v3a.57.57,0,0,1-.57.57H15.64a0,0,0,0,1,0,0V13A.29.29,0,0,1,15.92,12.76Z" fill="#999" /><path d="M15.92,12.76h1.29a.29.29,0,0,1,.29.29v3a.57.57,0,0,1-.57.57H15.64a0,0,0,0,1,0,0V13A.29.29,0,0,1,15.92,12.76Z" fill="#999" opacity="0.5" /></g><path d="M8.66,7.24H9.91a0,0,0,0,1,0,0v17a0,0,0,0,1,0,0H8.66a.57.57,0,0,1-.57-.57V7.81A.57.57,0,0,1,8.66,7.24Z" transform="translate(-6.74 24.74) rotate(-90)" fill="#949494" /></g></g>
+    </svg>
+  </g>
+
+  <g transform="translate(1048,232)">
+    <rect x="-12" y="-12" width="120" height="120" rx="16" ry="16"
+          fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
+    <svg x="0" y="0" width="96" height="96" viewBox="0 0 18 18"
+         preserveAspectRatio="xMidYMid meet">
+      <defs><linearGradient id="a2543bcd-55aa-4840-a5ac-39d57afd4228" x1="9.261" y1="-0.364" x2="6.218" y2="20.052" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#32bedd" /><stop offset="1" stop-color="#198ab3" /></linearGradient><linearGradient id="a60145e1-6ccb-441f-b67d-d2694a998ff5" x1="10.798" y1="7.388" x2="14.441" y2="19.066" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#50e6ff" /><stop offset="0.997" stop-color="#32bedd" /></linearGradient><linearGradient id="b456a054-82ca-4a95-919b-f07fd04a13ed" x1="-0.168" y1="4.114" x2="12.572" y2="10.895" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff" /><stop offset="1" stop-color="#9cebff" /></linearGradient></defs><path d="M14.428,3.35l-5.195-3a2.624,2.624,0,0,0-2.622,0l-5.195,3A2.625,2.625,0,0,0,.105,5.621v6a2.625,2.625,0,0,0,1.311,2.272l5.2,3a2.624,2.624,0,0,0,2.622,0l5.2-3a2.625,2.625,0,0,0,1.311-2.272v-6A2.625,2.625,0,0,0,14.428,3.35Z" fill="url(#a2543bcd-55aa-4840-a5ac-39d57afd4228)" /><path d="M16.842,7.743,13.189,5.634a2.109,2.109,0,0,0-2.107,0L7.43,7.743A2.1,2.1,0,0,0,6.377,9.567v4.218A2.106,2.106,0,0,0,7.43,15.609l3.652,2.109a2.109,2.109,0,0,0,2.107,0l3.653-2.109A2.108,2.108,0,0,0,17.9,13.785V9.567A2.107,2.107,0,0,0,16.842,7.743Z" fill="url(#a60145e1-6ccb-441f-b67d-d2694a998ff5)" /><polygon points="7.578 2.963 8.63 2.381 13.14 11.728 12.774 12.128 2.835 12.128 2.947 10.931 11.328 10.931 7.578 2.963" fill="url(#b456a054-82ca-4a95-919b-f07fd04a13ed)" /><circle cx="2.732" cy="11.585" r="1.5" fill="#fff" /><circle cx="12.136" cy="11.676" r="2.344" fill="#fff" /><circle cx="8.041" cy="2.558" r="1.5" fill="#fff" />​
+
+    </svg>
+  </g>
+</svg>

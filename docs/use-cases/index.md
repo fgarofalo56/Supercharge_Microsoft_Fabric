@@ -3,6 +3,8 @@ title: Use Cases
 description: Industry-specific analytics use cases built on Microsoft Fabric
 ---
 
+![Industry Use Cases — Applied analytics for healthcare, finance, retail, manufacturing, and federal](../assets/heroes/use-cases.svg){ .hero-banner }
+
 # Use Cases
 
 Real-world analytics scenarios demonstrating Microsoft Fabric capabilities across federal agencies, regulated industries, and enterprise domains.

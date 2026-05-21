@@ -1,6 +1,10 @@
 [Home](../index.md) > [Docs](../) > [Industries](./) > Energy & Utilities
 
+![Energy & Utilities — Smart grid, load forecasting on Fabric](../assets/heroes/energy-utilities.svg){ .hero-banner }
+
 # ⚡ Energy & Utilities — Smart Grid Analytics & Renewable Forecasting
+
+![Energy Utilities reference architecture on Microsoft Fabric](../assets/diagrams/industry-energy-utilities.svg){ .architecture-diagram }
 
 <div align="center" markdown>
 

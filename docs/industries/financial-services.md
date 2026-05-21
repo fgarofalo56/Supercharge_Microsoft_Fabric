@@ -1,6 +1,10 @@
 [Home](../index.md) > [Docs](../) > [Industries](./) > Financial Services
 
+![Financial Services Analytics — Fraud, AML, customer 360 on Fabric](../assets/heroes/financial-services.svg){ .hero-banner }
+
 # 🏦 Financial Services — Fraud Detection & Risk Analytics
+
+![Financial Services reference architecture on Microsoft Fabric](../assets/diagrams/industry-financial-services.svg){ .architecture-diagram }
 
 <div align="center" markdown>
 

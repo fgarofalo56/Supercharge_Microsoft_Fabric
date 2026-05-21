@@ -3,6 +3,8 @@ title: Features
 description: Microsoft Fabric platform features and capabilities
 ---
 
+![Build on Fabric — 26 features across foundation, data engineering, AI, real-time, and ops](../assets/heroes/features.svg){ .hero-banner }
+
 # Features
 
 Explore the full spectrum of Microsoft Fabric capabilities — from real-time intelligence and AI-powered analytics to enterprise governance and connectivity.

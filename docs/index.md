@@ -6,6 +6,8 @@ hide:
   - toc
 ---
 
+![Supercharge Microsoft Fabric — Casino & gaming POC + federal expansions on F64 capacity](assets/heroes/home.svg){ .hero-banner }
+
 # Supercharge Microsoft Fabric
 
 **Transform your operations with enterprise-grade analytics powered by Microsoft Fabric**
@@ -19,9 +21,9 @@ hide:
 
 ## Architecture at a Glance
 
-<a href="ARCHITECTURE/" class="architecture-hero">
-  <img src="assets/images/architecture-hero.svg" alt="Microsoft Fabric architecture — OneLake, Medallion flow, Real-Time Intelligence, Direct Lake to Power BI, Purview governance">
-</a>
+![Microsoft Fabric medallion architecture — sources to Bronze to Silver to Gold to Power BI Direct Lake on F64 capacity with Purview](assets/diagrams/medallion-architecture.svg){ .architecture-diagram }
+
+[See the full architecture →](ARCHITECTURE.md){ .md-button }
 
 ---
 

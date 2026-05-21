@@ -2,6 +2,8 @@
 
 # 🔄 Mirroring - Near-Real-Time Database Replication
 
+![Database mirroring into Fabric](../assets/diagrams/mirroring-architecture.svg){ .architecture-diagram }
+
 <div align="center" markdown>
 
 **Replicate External Databases into OneLake Delta Tables — No ETL Pipelines Required**

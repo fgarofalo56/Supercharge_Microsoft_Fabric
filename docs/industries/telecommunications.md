@@ -1,5 +1,7 @@
 [Home](../index.md) > [Docs](../) > [Industries](./) > Telecommunications
 
+![Telecom Analytics — Churn, network quality on Fabric](../assets/heroes/telecommunications.svg){ .hero-banner }
+
 # 📡 Telecommunications — Network Performance & Churn Prediction
 
 <div align="center" markdown>

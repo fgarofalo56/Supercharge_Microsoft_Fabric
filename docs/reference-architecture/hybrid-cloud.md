@@ -2,6 +2,8 @@
 
 # ☁️ Hybrid Cloud Reference Architecture
 
+![Hybrid cloud reference](../assets/diagrams/reference-architecture-hybrid-cloud.svg){ .architecture-diagram }
+
 <div align="center" markdown>
 
 **Fabric for Analytics + Azure Services for OLTP, Custom Apps, and High-Volume Streaming**

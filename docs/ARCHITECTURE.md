@@ -1,6 +1,10 @@
+![Architecture — Reference architectures, decisions, and best practices for Fabric](assets/heroes/architecture.svg){ .hero-banner }
+
 # 🏗️ Architecture Documentation
 
 > 🏠 [Home](index.md) > 📚 [Docs](./) > 🏗️ Architecture
+
+![Microsoft Fabric platform overview — OneLake foundation with all workloads](assets/diagrams/fabric-platform-overview.svg){ .architecture-diagram }
 
 <div align="center" markdown>
 

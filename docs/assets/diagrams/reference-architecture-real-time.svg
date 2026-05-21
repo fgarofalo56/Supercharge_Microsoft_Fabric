@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  viewBox="0 -40 1654 1229" width="1654" height="1229">
+<defs>
+    
+      <marker id="arrow-475569" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+        <path d="M0,0 L10,5 L0,10 Z" fill="#475569" />
+      </marker>
+    
+      <marker id="arrow-0078D4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+        <path d="M0,0 L10,5 L0,10 Z" fill="#0078D4" />
+      </marker>
+    
+      <marker id="arrow-50E6FF" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+        <path d="M0,0 L10,5 L0,10 Z" fill="#50E6FF" />
+      </marker>
+    
+  </defs>
+<rect x="0" y="-40" width="1654" height="1229" fill="#FFFFFF" />
+<text x="827" y="-8" text-anchor="middle" font-size="26" font-weight="bold" fill="#0A2540">Real-Time Analytics Reference</text>
+<rect x="60" y="110" width="1534" height="226" rx="12" ry="12" fill="#EFF6FF" stroke="#93C5FD" stroke-width="1" opacity="1" /><text x="76" y="132" font-size="16" font-weight="bold" fill="#1E3A8A">Ingestion Tier</text>
+<rect x="60" y="366" width="1534" height="376" rx="12" ry="12" fill="#FAF5FF" stroke="#C4B5FD" stroke-width="1" opacity="1" /><text x="76" y="388" font-size="16" font-weight="bold" fill="#5B21B6">Analytics Tier</text>
+<rect x="60" y="772" width="1534" height="226" rx="12" ry="12" fill="#FEFCE8" stroke="#FDE047" stroke-width="1" opacity="1" /><text x="76" y="794" font-size="16" font-weight="bold" fill="#854D0E">Historical Tier</text>
+<text x="60" y="46" font-size="26" fill="#243A5E" font-weight="bold">Real-Time Analytics Reference</text>
+<text x="60" y="84" font-size="14" fill="#64748B" font-weight="normal">Event sources -&gt; Eventstreams -&gt; Eventhouse -&gt; dashboards, alerts, ML scoring, and OneLake gold history</text>
+<rect x="80" y="186" width="120" height="120" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><text x="140" y="298" text-anchor="middle" font-size="12" fill="#0F172A" font-weight="normal">Event Sources</text>
+<rect x="240" y="186" width="120" height="120" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><image href="https://raw.githubusercontent.com/jgraph/drawio/dev/src/main/webapp/img/lib/azure2/analytics/Event_Hubs.svg" x="260" y="194" width="80" height="80" preserveAspectRatio="xMidYMid meet" /><text x="300" y="298" text-anchor="middle" font-size="12" fill="#0F172A" font-weight="normal">Eventstreams</text>
+<rect x="80" y="442" width="120" height="120" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><text x="140" y="554" text-anchor="middle" font-size="12" fill="#0F172A" font-weight="normal">Eventhouse</text>
+<rect x="240" y="442" width="120" height="120" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><image href="https://raw.githubusercontent.com/jgraph/drawio/dev/src/main/webapp/img/lib/azure2/ai_machine_learning/Machine_Learning.svg" x="260" y="450" width="80" height="80" preserveAspectRatio="xMidYMid meet" /><text x="300" y="554" text-anchor="middle" font-size="12" fill="#0F172A" font-weight="normal">AutoML Scoring</text>
+<rect x="80" y="592" width="120" height="120" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><image href="https://raw.githubusercontent.com/jgraph/drawio/dev/src/main/webapp/img/lib/azure2/management_governance/Monitor.svg" x="100" y="600" width="80" height="80" preserveAspectRatio="xMidYMid meet" /><text x="140" y="704" text-anchor="middle" font-size="12" fill="#0F172A" font-weight="normal">Real-Time Dashboards</text>
+<rect x="240" y="592" width="120" height="120" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><text x="300" y="704" text-anchor="middle" font-size="12" fill="#0F172A" font-weight="normal">Data Activator</text>
+<rect x="80" y="848" width="120" height="120" rx="8" ry="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" opacity="1" /><image href="https://raw.githubusercontent.com/jgraph/drawio/dev/src/main/webapp/img/lib/azure2/storage/Storage_Accounts.svg" x="100" y="856" width="80" height="80" preserveAspectRatio="xMidYMid meet" /><text x="140" y="960" text-anchor="middle" font-size="12" fill="#0F172A" font-weight="normal">OneLake Gold</text>
+<g transform="translate(60,1039)"><path d="M12,0 L288,0 Q300,0 300,12 L300,78 Q300,90 288,90 L12,90 Q0,90 0,78 L0,12 Q0,0 12,0 Z" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2" opacity="1"  /><text x="150" y="45" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="#0F172A" font-weight="normal">Microsoft Azure native services</text></g>
+<g transform="translate(440,1039)"><path d="M12,0 L288,0 Q300,0 300,12 L300,78 Q300,90 288,90 L12,90 Q0,90 0,78 L0,12 Q0,0 12,0 Z" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2" opacity="1"  /><text x="150" y="45" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="#0F172A" font-weight="normal">Sub-second operational visibility</text></g>
+<g transform="translate(820,1039)"><path d="M12,0 L288,0 Q300,0 300,12 L300,78 Q300,90 288,90 L12,90 Q0,90 0,78 L0,12 Q0,0 12,0 Z" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2" opacity="1"  /><text x="150" y="45" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="#0F172A" font-weight="normal">Anomaly alerts and inline ML scoring</text></g>
+<g transform="translate(1200,1039)"><path d="M12,0 L288,0 Q300,0 300,12 L300,78 Q300,90 288,90 L12,90 Q0,90 0,78 L0,12 Q0,0 12,0 Z" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2" opacity="1"  /><text x="150" y="45" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="#0F172A" font-weight="normal">Unified hot and historical analytics</text></g>
+<path id="edge-e1" d="M140,246 L220,246 L220,246 L300,246" fill="none" stroke="#475569" stroke-width="2"  marker-end="url(#arrow-475569)" /><text x="220" y="238" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">1. 1</text>
+<path id="edge-e2" d="M300,246 L220,246 L220,502 L140,502" fill="none" stroke="#0078D4" stroke-width="2"  marker-end="url(#arrow-0078D4)" /><text x="220" y="366" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">2. 2</text>
+<path id="edge-e3" d="M140,502 L140,502 L140,652 L140,652" fill="none" stroke="#475569" stroke-width="2"  marker-end="url(#arrow-475569)" /><text x="140" y="569" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">3. 3</text>
+<path id="edge-e4" d="M140,502 L220,502 L220,652 L300,652" fill="none" stroke="#475569" stroke-width="2"  marker-end="url(#arrow-475569)" /><text x="220" y="569" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">4. 4</text>
+<path id="edge-e5" d="M300,246 L300,246 L300,502 L300,502" fill="none" stroke="#50E6FF" stroke-width="2"  marker-end="url(#arrow-50E6FF)" /><text x="300" y="366" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">5. 5</text>
+<path id="edge-e6" d="M300,502 L220,502 L220,502 L140,502" fill="none" stroke="#475569" stroke-width="2"  marker-end="url(#arrow-475569)" /><text x="220" y="494" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">6. 6</text>
+<path id="edge-e7" d="M140,502 L140,502 L140,908 L140,908" fill="none" stroke="#475569" stroke-width="2"  marker-end="url(#arrow-475569)" /><text x="140" y="697" text-anchor="middle" font-size="12" fill="#FFFFFF" font-weight="bold" style="paint-order:stroke;stroke:#FFFFFF;stroke-width:3px">7. 7</text>
+</svg>

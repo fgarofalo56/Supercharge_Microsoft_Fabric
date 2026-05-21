@@ -1,6 +1,10 @@
 [Home](../index.md) > [Docs](../) > [Industries](./) > Manufacturing
 
+![Manufacturing & IoT — Factory telemetry, predictive maintenance on Fabric](../assets/heroes/manufacturing.svg){ .hero-banner }
+
 # ⚙️ Manufacturing — IoT Telemetry & Predictive Maintenance
+
+![Manufacturing reference architecture on Microsoft Fabric](../assets/diagrams/industry-manufacturing.svg){ .architecture-diagram }
 
 <div align="center" markdown>
 
