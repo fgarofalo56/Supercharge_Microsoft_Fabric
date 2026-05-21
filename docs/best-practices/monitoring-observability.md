@@ -329,32 +329,29 @@ Real-Time Intelligence dashboards provide live operational views with auto-refre
 
 #### Operations Dashboard Layout
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                    FABRIC OPERATIONS CENTER              │
-│              Last Refresh: 2026-04-13 14:30:00 UTC       │
-├──────────────┬──────────────┬──────────────┬────────────┤
-│  CU Usage    │  Pipeline    │  Spark Jobs  │  Alerts    │
-│  ████░░ 68%  │  ✅ 142/150  │  ✅ 28/30    │  ⚠️ 2     │
-│  Warning: 70%│  ❌ 8 failed │  ❌ 2 OOM    │  🔴 0     │
-├──────────────┴──────────────┴──────────────┴────────────┤
-│                  CU Utilization (24h)                     │
-│  100%│                                                   │
-│   80%│          ▄▄▄▄                                     │
-│   60%│    ▄▄▄▄▄█████▄▄▄▄▄▄▄                             │
-│   40%│▄▄▄█████████████████████▄▄▄▄                       │
-│   20%│████████████████████████████████                    │
-│     0├────────────────────────────────                    │
-│      00:00  04:00  08:00  12:00  16:00  20:00            │
-├──────────────────────────────────────────────────────────┤
-│              Pipeline Status (Last 24h)                   │
-│  Pipeline Name          │ Status │ Duration │ Last Run   │
-│  pl_bronze_slot_ingest  │  ✅    │  4m 23s  │ 14:15 UTC  │
-│  pl_silver_slot_cleanse │  ✅    │  8m 12s  │ 14:20 UTC  │
-│  pl_gold_kpi_compute    │  ❌    │  --      │ 14:25 UTC  │
-│  pl_federal_usda_ingest │  ✅    │  3m 44s  │ 13:00 UTC  │
-└──────────────────────────────────────────────────────────┘
-```
+> **Dashboard:** Fabric Operations Center
+> **Last Refresh:** `2026-04-13 14:30:00 UTC`
+
+**Top-row KPI cards:**
+
+| CU Usage | Pipelines | Spark Jobs | Alerts |
+|---|---|---|---|
+| **68%** ████░░<br/>Warning at 70% | **✅ 142 / 150**<br/>❌ 8 failed | **✅ 28 / 30**<br/>❌ 2 OOM | ⚠️ 2 warnings<br/>🔴 0 critical |
+
+**CU Utilization (24h):**
+
+| Hour | 00 | 04 | 08 | 12 | 16 | 20 |
+|---|---|---|---|---|---|---|
+| % | 20 | 40 | 70 | 60 | 50 | 40 |
+
+**Pipeline Status (Last 24h):**
+
+| Pipeline Name | Status | Duration | Last Run |
+|---|:---:|---|---|
+| `pl_bronze_slot_ingest` | ✅ | 4m 23s | 14:15 UTC |
+| `pl_silver_slot_cleanse` | ✅ | 8m 12s | 14:20 UTC |
+| `pl_gold_kpi_compute` | ❌ | — | 14:25 UTC |
+| `pl_federal_usda_ingest` | ✅ | 3m 44s | 13:00 UTC |
 
 ### KQL for Dashboard Tiles
 

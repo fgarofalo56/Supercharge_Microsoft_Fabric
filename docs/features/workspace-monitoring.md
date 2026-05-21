@@ -807,46 +807,38 @@ ORDER BY total_cu DESC;
 
 ### Operations Dashboard Layout
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│  📊 Workspace Monitoring - Operations Dashboard              │
-│  Filters: [Time Range ▼] [Workload Type ▼] [Status ▼]       │
-├────────────────┬────────────────┬───────────────┬────────────┤
-│  Total Runs    │  Success Rate  │  Avg Duration │  CU Used   │
-│  1,247         │  96.3%         │  4.2 min      │  15,230 CU │
-│  ↑ 12% vs LW  │  ↓ 0.5%       │  ↓ 8%         │  ↑ 5%      │
-├────────────────┴────────────────┴───────────────┴────────────┤
-│  📈 CU Consumption by Workload Type (Stacked Area Chart)     │
-│  [Spark | SQL | Pipeline | Dataflow over last 7 days]        │
-├──────────────────────────────┬────────────────────────────────┤
-│  🔴 Recent Failures          │  🐢 Slowest Executions         │
-│  [Table: name, time, error]  │  [Table: name, duration, CU]   │
-│  [Sorted by most recent]     │  [Sorted by duration DESC]     │
-├──────────────────────────────┴────────────────────────────────┤
-│  📊 Daily Execution Volume (Bar Chart)                        │
-│  [Stacked: Succeeded | Failed | Cancelled over 30 days]      │
-└──────────────────────────────────────────────────────────────┘
-```
+> **Dashboard:** Workspace Monitoring — Operations
+> **Filters:** Time Range · Workload Type · Status
+
+**Top-row KPI cards:**
+
+| Total Runs | Success Rate | Avg Duration | CU Used |
+|---|---|---|---|
+| **1,247** ↑ 12% vs LW | **96.3%** ↓ 0.5% | **4.2 min** ↓ 8% | **15,230 CU** ↑ 5% |
+
+**Visualizations (in order, top to bottom):**
+
+1. 📈 **CU Consumption by Workload Type** — stacked area chart across Spark · SQL · Pipeline · Dataflow over last 7 days
+2. 🔴 **Recent Failures** *(left)* — table sorted by most recent, columns: name, time, error
+3. 🐢 **Slowest Executions** *(right)* — table sorted by duration DESC, columns: name, duration, CU
+4. 📊 **Daily Execution Volume** — stacked bar chart of Succeeded · Failed · Cancelled over 30 days
 
 ### Compliance Operations Dashboard (Casino)
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│  🎰 Compliance Pipeline Monitoring                            │
-│  Filters: [Date Range ▼] [Pipeline ▼]                        │
-├────────────────┬────────────────┬───────────────┬────────────┤
-│  CTR Pipeline  │  SAR Pipeline  │  W-2G Pipeline│  Audit     │
-│  ✅ Last: 2h   │  ✅ Last: 3h   │  ✅ Last: 1h  │  ✅ Last: 4h│
-│  Avg: 45 min   │  Avg: 1.2 hr   │  Avg: 20 min  │  Avg: 35 min│
-├────────────────┴────────────────┴───────────────┴────────────┤
-│  📈 Compliance Pipeline Duration Trend (7 days)               │
-│  [Line chart showing execution time per pipeline]             │
-├──────────────────────────────┬────────────────────────────────┤
-│  ⚠️ SLA Breaches (Last 30d)  │  🔴 Pipeline Failures          │
-│  [Table: pipeline, date,     │  [Table: pipeline, time,       │
-│   actual vs SLA]             │   error, impact]               │
-└──────────────────────────────┴────────────────────────────────┘
-```
+> **Dashboard:** 🎰 Compliance Pipeline Monitoring
+> **Filters:** Date Range · Pipeline
+
+**Top-row pipeline status cards:**
+
+| CTR Pipeline | SAR Pipeline | W-2G Pipeline | Audit |
+|---|---|---|---|
+| ✅ Last: 2 h<br/>Avg: 45 min | ✅ Last: 3 h<br/>Avg: 1.2 hr | ✅ Last: 1 h<br/>Avg: 20 min | ✅ Last: 4 h<br/>Avg: 35 min |
+
+**Visualizations (in order, top to bottom):**
+
+1. 📈 **Compliance Pipeline Duration Trend** — line chart of execution time per pipeline over 7 days
+2. ⚠️ **SLA Breaches (Last 30 days)** *(left)* — table columns: pipeline, date, actual vs SLA
+3. 🔴 **Pipeline Failures** *(right)* — table columns: pipeline, time, error, impact
 
 ---
 

@@ -164,22 +164,20 @@ Chunking determines what the retriever can find. Too large → diluted embedding
 
 ### Trade-Off Triangle
 
-```
-                     Context Preservation
-                              ▲
-                              │
-                              │
-                  ┌───────────┼───────────┐
-                  │ Late      │ Document- │
-                  │ Chunking  │ Structure │
-                  └───────────┼───────────┘
-                              │
-                  ┌───────────┼───────────┐
-                  │ Semantic  │ Recursive │
-                  └───────────┴───────────┘
-                              │
-            ◀─────────────────┼─────────────────▶
-   Retrieval Precision   Storage / Compute Cost
+```mermaid
+quadrantChart
+    title Chunking Strategy Trade-offs
+    x-axis "Lower retrieval precision" --> "Higher retrieval precision"
+    y-axis "Lower context preservation" --> "Higher context preservation"
+    quadrant-1 "High context + High precision (ideal)"
+    quadrant-2 "High context, lower precision"
+    quadrant-3 "Lower context + Lower precision (cheap)"
+    quadrant-4 "Lower context, higher precision"
+    "Late Chunking":         [0.45, 0.85]
+    "Document-Structure":    [0.70, 0.90]
+    "Semantic":              [0.65, 0.55]
+    "Recursive":             [0.55, 0.35]
+    "Fixed-size":            [0.30, 0.25]
 ```
 
 ### Recursive Splitting — Reference Implementation

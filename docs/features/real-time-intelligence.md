@@ -771,27 +771,21 @@ SlotPerformanceHourly
 
 ### Casino Floor Dashboard Layout
 
-```
-┌──────────────────────────────────────────────────────────┐
-│  🎰 Casino Floor Operations - Real-Time Dashboard        │
-│  Parameters: [Floor: All ▼] [Time: Last 4h ▼] [Denom ▼]│
-├──────────────┬──────────────┬──────────────┬─────────────┤
-│  Revenue     │  Machines    │  Active      │  Alerts     │
-│  $1.2M       │  1,247       │  Players     │  3 Active   │
-│  ↑ 4.2%      │  Online      │  892         │  ⚠ CTR: 1   │
-├──────────────┴──────────────┴──────────────┴─────────────┤
-│  📈 Hourly Revenue Trend (Time Chart)                    │
-│  ════════════════════════════════════════════════════     │
-│  [Line chart showing last 24h with anomaly markers]      │
-├──────────────────────────────┬────────────────────────────┤
-│  🗺️ Floor Heat Map           │  ⚠️ Active Compliance Alerts│
-│  [Color-coded by revenue]    │  [Table: CTR, SAR, W-2G]   │
-│  [Click machine for detail]  │  [Sorted by severity]      │
-├──────────────────────────────┴────────────────────────────┤
-│  🔄 Machine Error Rate (Anomaly Chart)                   │
-│  [Last 7 days with anomaly detection bands]              │
-└──────────────────────────────────────────────────────────┘
-```
+> **Dashboard:** 🎰 Casino Floor Operations — Real-Time
+> **Parameters:** Floor · Time window · Denomination
+
+**Top-row KPI cards:**
+
+| Revenue | Machines | Active Players | Alerts |
+|---|---|---|---|
+| **$1.2M** ↑ 4.2% | **1,247** Online | **892** | **3 Active** · ⚠ CTR: 1 |
+
+**Visualizations (in order, top to bottom):**
+
+1. 📈 **Hourly Revenue Trend** — time-series line chart of last 24h with anomaly markers
+2. 🗺️ **Floor Heat Map** *(left)* — color-coded by revenue; click a machine for detail
+3. ⚠️ **Active Compliance Alerts** *(right)* — CTR · SAR · W-2G table sorted by severity
+4. 🔄 **Machine Error Rate** — anomaly chart of last 7 days with detection bands
 
 ---
 

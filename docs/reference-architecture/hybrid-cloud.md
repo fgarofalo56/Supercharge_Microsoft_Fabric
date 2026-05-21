@@ -164,18 +164,33 @@ Hybrid deployments require unified networking across Azure services and Fabric:
 | **Managed VNet** | Enabled for Fabric Spark workloads | Outbound control via approved endpoints |
 | **DNS** | Azure Private DNS Zones | Centralized resolution for all private endpoints |
 
-```
-┌─────────────────────────────────────────────┐
-│                Hub VNet                      │
-│  ┌──────────┐  ┌──────────┐  ┌───────────┐ │
-│  │ Firewall │  │ DNS Zone │  │ VNet GW   │ │
-│  └──────────┘  └──────────┘  └───────────┘ │
-└────────┬──────────┬──────────────┬──────────┘
-         │          │              │
-   ┌─────┴───┐ ┌───┴────┐  ┌─────┴──────┐
-   │AKS Spoke│ │SQL Spoke│  │Fabric Spoke│
-   │  + EH   │ │  + KV   │  │   + ADLS   │
-   └─────────┘ └────────┘  └────────────┘
+```mermaid
+flowchart TB
+    subgraph Hub["🛡️ Hub VNet"]
+        direction LR
+        FW["Azure Firewall"]
+        DNS["Private DNS Zone"]
+        VGW["VNet Gateway"]
+    end
+
+    subgraph AKS["☸️ AKS Spoke"]
+        AKSE["AKS cluster + Event Hubs"]
+    end
+    subgraph SQL["🗄️ SQL Spoke"]
+        SQLE["Azure SQL + Key Vault"]
+    end
+    subgraph Fab["☁️ Fabric Spoke"]
+        FABE["Fabric workspace + ADLS Gen2"]
+    end
+
+    Hub --> AKS
+    Hub --> SQL
+    Hub --> Fab
+
+    style Hub fill:#1976D2,color:#fff
+    style AKS fill:#E3F2FD,color:#000
+    style SQL fill:#FFF9C4,color:#000
+    style Fab fill:#E8F5E9,color:#000
 ```
 
 ---

@@ -156,19 +156,12 @@ flowchart LR
 
 Eventhouse stores vectors alongside structured data in the same table, eliminating the need for cross-system joins:
 
-```
-KQL Table: compliance_document_vectors
-┌──────────────┬────────────────┬──────────┬──────────────────┬───────────────┐
-│ document_id  │ document_text  │ doc_type │ embedding        │ filing_date   │
-│ (string)     │ (string)       │ (string) │ (dynamic/vec16)  │ (datetime)    │
-├──────────────┼────────────────┼──────────┼──────────────────┼───────────────┤
-│ CTR-2026-001 │ "Transaction   │ CTR      │ [0.012, -0.034,  │ 2026-03-15    │
-│              │  of $15,000..."│          │  0.089, ...]     │               │
-├──────────────┼────────────────┼──────────┼──────────────────┼───────────────┤
-│ SAR-2026-042 │ "Multiple txns │ SAR      │ [-0.045, 0.023,  │ 2026-03-14    │
-│              │  $9,500 each.."│          │  0.067, ...]     │               │
-└──────────────┴────────────────┴──────────┴──────────────────┴───────────────┘
-```
+> **KQL Table:** `compliance_document_vectors`
+
+| document_id<br/>*(string)* | document_text<br/>*(string)* | doc_type<br/>*(string)* | embedding<br/>*(dynamic / vec16)* | filing_date<br/>*(datetime)* |
+|---|---|---|---|---|
+| `CTR-2026-001` | "Transaction of $15,000…" | `CTR` | `[0.012, -0.034, 0.089, …]` | 2026-03-15 |
+| `SAR-2026-042` | "Multiple txns $9,500 each…" | `SAR` | `[-0.045, 0.023, 0.067, …]` | 2026-03-14 |
 
 ### Vector16 Encoding
 

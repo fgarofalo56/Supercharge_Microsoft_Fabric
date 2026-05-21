@@ -331,14 +331,17 @@ ORDER BY changed_date;
 
 ### Step-by-Step Process
 
-```
-┌─────────────┐    ┌──────────────┐    ┌───────────────┐    ┌──────────────┐
-│ 1. Announce  │───▶│ 2. Dual-Write│───▶│ 3. Migrate    │───▶│ 4. Drop      │
-│  (Day 0)     │    │  (Day 1-30)  │    │  (Day 15-45)  │    │  (Day 60+)   │
-└─────────────┘    └──────────────┘    └───────────────┘    └──────────────┘
-  - Add COMMENT     - Both old & new    - Update queries    - Verify no usage
-  - Log to registry   columns written   - Update BI models  - Archive backup
-  - Notify team      - Backfill history  - Validate results  - Drop column
+```mermaid
+flowchart LR
+    A["📣 1. Announce<br/><b>Day 0</b>"] --> B["✍️ 2. Dual-Write<br/><b>Day 1–30</b>"] --> C["🔄 3. Migrate<br/><b>Day 15–45</b>"] --> D["🗑️ 4. Drop<br/><b>Day 60+</b>"]
+    A --- AA["• Add COMMENT<br/>• Log to registry<br/>• Notify team"]
+    B --- BB["• Both old + new columns<br/>• Backfill history"]
+    C --- CC["• Update queries<br/>• Update BI models<br/>• Validate results"]
+    D --- DD["• Verify no usage<br/>• Archive backup<br/>• Drop column"]
+    style A fill:#E3F2FD,color:#000
+    style B fill:#FFF9C4,color:#000
+    style C fill:#FFE0B2,color:#000
+    style D fill:#FFCDD2,color:#000
 ```
 
 ### Automated Deprecation Check

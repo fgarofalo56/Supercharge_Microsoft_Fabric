@@ -99,26 +99,13 @@ flowchart TB
 
 Navigate to the Fabric Admin Portal to configure tenant-wide Copilot settings:
 
-```
-Admin Portal → Tenant Settings → Copilot and Azure OpenAI Service
+> **Admin Portal → Tenant Settings → Copilot and Azure OpenAI Service**
 
-Settings to configure:
-┌────────────────────────────────────────────────────────────────────┐
-│ Users can use Copilot and other features powered by Azure OpenAI  │
-│ ├── Status: [Enabled / Disabled]                                  │
-│ ├── Apply to: [Entire organization / Specific security groups]    │
-│ └── Exclude: [Specific security groups to exclude]                │
-├────────────────────────────────────────────────────────────────────┤
-│ Data sent to Azure OpenAI can be processed outside your           │
-│ capacity's geographic region, US, and EU data boundary             │
-│ ├── Status: [Enabled / Disabled]                                  │
-│ └── NOTE: Disable for FedRAMP / FISMA workloads                   │
-├────────────────────────────────────────────────────────────────────┤
-│ Users can use Fabric IQ for natural language queries               │
-│ ├── Status: [Enabled / Disabled]                                  │
-│ └── Apply to: [Entire organization / Specific security groups]    │
-└────────────────────────────────────────────────────────────────────┘
-```
+| Setting | Status | Apply to | Notes |
+|---|---|---|---|
+| Users can use Copilot and other features powered by Azure OpenAI | Enabled / Disabled | Entire org / specific security groups | Exclude option available |
+| Data sent to Azure OpenAI can be processed outside your capacity's geographic region, US, and EU data boundary | Enabled / Disabled | — | ⚠️ **Disable for FedRAMP / FISMA workloads** |
+| Users can use Fabric IQ for natural language queries | Enabled / Disabled | Entire org / specific security groups | — |
 
 > ⚠️ **Warning**: For federal agency workloads (USDA, SBA, NOAA, EPA, DOI, DOT/FAA), ensure the data residency setting is configured to keep data within the US boundary. Cross-region processing may violate FedRAMP and FISMA requirements.
 

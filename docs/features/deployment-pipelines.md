@@ -80,18 +80,31 @@ flowchart LR
 
 Deployment Pipelines copy **item definitions** (metadata, configuration, queries, expressions) between workspaces. They do **not** copy data.
 
-```
-┌──────────────────────┐       ┌──────────────────────┐
-│   DEV Workspace      │       │   PROD Workspace     │
-│                      │  ──►  │                      │
-│ ✅ Notebook code     │       │ ✅ Notebook code     │
-│ ✅ Pipeline JSON     │       │ ✅ Pipeline JSON     │
-│ ✅ Semantic model    │       │ ✅ Semantic model    │
-│ ✅ Report layout     │       │ ✅ Report layout     │
-│ ✅ Lakehouse schema  │       │ ✅ Lakehouse schema  │
-│ ❌ Lakehouse DATA    │       │ ❌ (not copied)      │
-│ ❌ Warehouse DATA    │       │ ❌ (not copied)      │
-└──────────────────────┘       └──────────────────────┘
+```mermaid
+flowchart LR
+    subgraph Dev["🟢 DEV Workspace"]
+        direction TB
+        D1["✅ Notebook code"]
+        D2["✅ Pipeline JSON"]
+        D3["✅ Semantic model"]
+        D4["✅ Report layout"]
+        D5["✅ Lakehouse schema"]
+        D6["❌ Lakehouse DATA"]
+        D7["❌ Warehouse DATA"]
+    end
+    subgraph Prod["🔴 PROD Workspace"]
+        direction TB
+        P1["✅ Notebook code"]
+        P2["✅ Pipeline JSON"]
+        P3["✅ Semantic model"]
+        P4["✅ Report layout"]
+        P5["✅ Lakehouse schema"]
+        P6["❌ (not copied)"]
+        P7["❌ (not copied)"]
+    end
+    Dev -->|"Deployment Pipeline<br/>copies item definitions only"| Prod
+    style Dev fill:#E8F5E9,color:#000
+    style Prod fill:#FFEBEE,color:#000
 ```
 
 ---
@@ -153,22 +166,18 @@ sequenceDiagram
 
 Before deploying, the pipeline shows a comparison:
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│  Development → Test                                          │
-├──────────────────────────────────────────────────────────────┤
-│  Item                          │ Dev     │ Test    │ Status  │
-│  ─────────────────────────────────────────────────────────── │
-│  01_bronze_slot_telemetry      │ v3.2    │ v3.1    │ 🔄 Modified │
-│  01_silver_slot_cleansed       │ v2.5    │ v2.5    │ ✅ Same     │
-│  daily_revenue_report          │ v1.8    │ —       │ 🆕 New      │
-│  lh_bronze                     │ exists  │ exists  │ ✅ Same     │
-│  slot_analytics_model          │ v4.0    │ v3.9    │ 🔄 Modified │
-│  compliance_pipeline           │ v2.1    │ v2.1    │ ✅ Same     │
-├──────────────────────────────────────────────────────────────┤
-│  [Deploy selected]  [Deploy all]  [Cancel]                   │
-└──────────────────────────────────────────────────────────────┘
-```
+> **Comparison view:** Development → Test
+
+| Item | Dev | Test | Status |
+|---|---|---|---|
+| 01_bronze_slot_telemetry | v3.2 | v3.1 | 🔄 Modified |
+| 01_silver_slot_cleansed | v2.5 | v2.5 | ✅ Same |
+| daily_revenue_report | v1.8 | — | 🆕 New |
+| lh_bronze | exists | exists | ✅ Same |
+| slot_analytics_model | v4.0 | v3.9 | 🔄 Modified |
+| compliance_pipeline | v2.1 | v2.1 | ✅ Same |
+
+*Available actions:* **Deploy selected** · **Deploy all** · **Cancel**
 
 ### Selective Deployment
 

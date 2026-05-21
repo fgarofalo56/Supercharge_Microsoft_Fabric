@@ -51,56 +51,44 @@ reconciliation effort (~2,400 analyst-hours/year saved).
 
 ### System Landscape
 
-```
-                    ┌─────────────────────────────────────────────┐
-                    │           SOURCE SYSTEMS                     │
-                    │                                              │
-                    │  ┌────────┐ ┌────────┐ ┌────────┐          │
-                    │  │  EDC   │ │  CTMS  │ │  IRT   │          │
-                    │  │(Medidata│ │(Oracle │ │(IXRS)  │          │
-                    │  │ Rave)  │ │ Siebel)│ │        │          │
-                    │  └───┬────┘ └───┬────┘ └───┬────┘          │
-                    │      │          │          │                 │
-                    │  ┌───┴────┐ ┌───┴────┐ ┌───┴────┐          │
-                    │  │  ePRO  │ │  Lab   │ │ Safety │          │
-                    │  │(Signant│ │(Quest/ │ │(Argus  │          │
-                    │  │ Health)│ │ LabCorp│ │ Safety)│          │
-                    │  └───┬────┘ └───┬────┘ └───┬────┘          │
-                    └──────┼──────────┼──────────┼────────────────┘
-                           │          │          │
-                    ┌──────▼──────────▼──────────▼────────────────┐
-                    │         MICROSOFT FABRIC F64                 │
-                    │                                              │
-                    │  ┌──────────────────────────────────────┐   │
-                    │  │     BRONZE: bronze_pharma_trials      │   │
-                    │  │  Raw EDC, CTMS, IRT, ePRO, Lab, AE   │   │
-                    │  │  Append-only, audit-trail preserved   │   │
-                    │  └──────────────┬───────────────────────┘   │
-                    │                 │                             │
-                    │  ┌──────────────▼───────────────────────┐   │
-                    │  │     SILVER: silver_pharma_study       │   │
-                    │  │  SDTM-aligned domains (DM, AE, VS)   │   │
-                    │  │  MedDRA coded, visit-window checked   │   │
-                    │  │  Protocol deviations flagged          │   │
-                    │  └──────┬────────────────┬──────────────┘   │
-                    │         │                │                    │
-                    │  ┌──────▼──────┐  ┌──────▼──────────────┐   │
-                    │  │    GOLD:    │  │       GOLD:          │   │
-                    │  │gold_pharma_ │  │  gold_pharma_        │   │
-                    │  │enrollment   │  │  safety              │   │
-                    │  │             │  │                       │   │
-                    │  │• Enrollment │  │• Disproportionality  │   │
-                    │  │  curves     │  │  analysis (PRR/ROR)  │   │
-                    │  │• Site rank  │  │• SAE timeline KPIs   │   │
-                    │  │• Screen     │  │• CIOMS compliance    │   │
-                    │  │  failure %  │  │• MedDRA SOC treemap  │   │
-                    │  └─────────────┘  └──────────────────────┘   │
-                    │                                              │
-                    │  ┌──────────────────────────────────────┐   │
-                    │  │     POWER BI (Direct Lake)            │   │
-                    │  │  Trial Command Center Dashboard       │   │
-                    │  └──────────────────────────────────────┘   │
-                    └──────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+    subgraph Sources["📥 Source Systems"]
+        direction TB
+        EDC["EDC<br/>Medidata Rave"]
+        CTMS["CTMS<br/>Oracle Siebel"]
+        IRT["IRT / IXRS"]
+        ePRO["ePRO<br/>Signant Health"]
+        Lab["Central Lab<br/>Quest / LabCorp"]
+        Safety["Argus Safety<br/>AE / SAE / SUSAR"]
+    end
+
+    subgraph Fabric["☁️ Microsoft Fabric F64"]
+        direction TB
+        Bronze["🥉 BRONZE<br/>bronze_pharma_trials<br/><i>Raw EDC + CTMS + IRT + ePRO + Lab + AE</i><br/>Append-only · audit-trail preserved"]
+        Silver["🥈 SILVER<br/>silver_pharma_study<br/><i>SDTM-aligned domains (DM, AE, VS)</i><br/>MedDRA coded · visit-window checked"]
+        GoldEnr["🥇 GOLD<br/>gold_pharma_enrollment<br/>• Enrollment curves<br/>• Site rank<br/>• Screen-failure %"]
+        GoldSaf["🥇 GOLD<br/>gold_pharma_safety<br/>• Disproportionality (PRR / ROR)<br/>• SAE timeline KPIs<br/>• CIOMS compliance<br/>• MedDRA SOC treemap"]
+        PBI["📊 Power BI · Direct Lake<br/>Trial Command Center Dashboard"]
+    end
+
+    EDC --> Bronze
+    CTMS --> Bronze
+    IRT --> Bronze
+    ePRO --> Bronze
+    Lab --> Bronze
+    Safety --> Bronze
+    Bronze --> Silver
+    Silver --> GoldEnr
+    Silver --> GoldSaf
+    GoldEnr --> PBI
+    GoldSaf --> PBI
+
+    style Bronze fill:#CD7F32,color:#000
+    style Silver fill:#C0C0C0,color:#000
+    style GoldEnr fill:#FFD700,color:#000
+    style GoldSaf fill:#FFD700,color:#000
+    style PBI fill:#F2C811,color:#000
 ```
 
 ### Data Flow
@@ -370,26 +358,31 @@ All data modifications in Fabric are governed by Part 11 requirements:
 
 ### CSV (Computerized System Validation) Approach
 
-```
-┌─────────────────────────────────────────────┐
-│         GAMP 5 Category 5                   │
-│         (Custom Application)                │
-│                                             │
-│  ┌─────────┐  ┌─────────┐  ┌─────────┐    │
-│  │   URS   │  │   FS    │  │   DS    │    │
-│  │  User   │→ │Functional│→ │ Design  │    │
-│  │  Req    │  │  Spec   │  │  Spec   │    │
-│  └────┬────┘  └────┬────┘  └────┬────┘    │
-│       │            │            │           │
-│       ▼            ▼            ▼           │
-│  ┌─────────┐  ┌─────────┐  ┌─────────┐    │
-│  │   PQ    │  │   OQ    │  │   IQ    │    │
-│  │Performnc│← │Operatnl │← │Install  │    │
-│  │  Qual   │  │  Qual   │  │  Qual   │    │
-│  └─────────┘  └─────────┘  └─────────┘    │
-│                                             │
-│  Traceability Matrix links URS → Tests     │
-└─────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+    subgraph GAMP["GAMP 5 Category 5 — Custom Application"]
+        direction LR
+        subgraph Spec["📝 Specification Phase"]
+            direction LR
+            URS["URS<br/>User Requirements"] --> FS["FS<br/>Functional Spec"] --> DS["DS<br/>Design Spec"]
+        end
+        subgraph Qual["✅ Qualification Phase"]
+            direction LR
+            IQ["IQ<br/>Installation Qual"] --> OQ["OQ<br/>Operational Qual"] --> PQ["PQ<br/>Performance Qual"]
+        end
+        DS -. derives .-> IQ
+        Trace["🔗 Traceability Matrix<br/>links URS → all qualification tests"]
+        URS --- Trace
+        PQ --- Trace
+    end
+
+    style URS fill:#E1F5FE,color:#000
+    style FS fill:#E1F5FE,color:#000
+    style DS fill:#E1F5FE,color:#000
+    style IQ fill:#C8E6C9,color:#000
+    style OQ fill:#C8E6C9,color:#000
+    style PQ fill:#C8E6C9,color:#000
+    style Trace fill:#FFF9C4,color:#000
 ```
 
 ---

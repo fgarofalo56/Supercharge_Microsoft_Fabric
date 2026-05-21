@@ -45,30 +45,34 @@ V-Order is a Fabric-specific write-time optimization that applies a special colu
 
 V-Order reorders data within each Parquet row group to maximize compression efficiency and enable faster column scanning. It does **not** change the logical data or schema — it is a physical storage optimization.
 
-```
-Standard Parquet Write:
-┌──────────────────────────────────────────┐
-│ Row Group 1                              │
-│ ┌─────────┬─────────┬─────────┐         │
-│ │ Col A   │ Col B   │ Col C   │         │
-│ │ (mixed  │ (mixed  │ (mixed  │         │
-│ │  order) │  order) │  order) │         │
-│ └─────────┴─────────┴─────────┘         │
-└──────────────────────────────────────────┘
+```mermaid
+flowchart LR
+    subgraph Std["📦 Standard Parquet Write"]
+        direction TB
+        S1["Row Group 1"]
+        SA["Col A<br/>(mixed order)"]
+        SB["Col B<br/>(mixed order)"]
+        SC["Col C<br/>(mixed order)"]
+        S1 --- SA & SB & SC
+    end
+    subgraph Vor["⚡ V-Order Parquet Write"]
+        direction TB
+        V1["Row Group 1"]
+        VA["Col A<br/>sorted · RLE-encoded"]
+        VB["Col B<br/>sorted · RLE-encoded"]
+        VC["Col C<br/>sorted · RLE-encoded"]
+        V1 --- VA & VB & VC
+    end
+    Std -->|"sort + re-encode<br/>within row group"| Vor
+    Vor --> Result["✅ Better compression<br/>✅ Faster column scans<br/>✅ More effective predicate pushdown"]
 
-V-Order Parquet Write:
-┌──────────────────────────────────────────┐
-│ Row Group 1                              │
-│ ┌─────────┬─────────┬─────────┐         │
-│ │ Col A   │ Col B   │ Col C   │         │
-│ │ (sorted │ (sorted │ (sorted │         │
-│ │  & RLE  │  & RLE  │  & RLE  │         │
-│ │  encoded│  encoded│  encoded│         │
-│ └─────────┴─────────┴─────────┘         │
-└──────────────────────────────────────────┘
-
-Result: Better compression, faster column scans,
-        more effective predicate pushdown
+    style SA fill:#FFEBEE,color:#000
+    style SB fill:#FFEBEE,color:#000
+    style SC fill:#FFEBEE,color:#000
+    style VA fill:#E8F5E9,color:#000
+    style VB fill:#E8F5E9,color:#000
+    style VC fill:#E8F5E9,color:#000
+    style Result fill:#FFF9C4,color:#000
 ```
 
 ### How V-Order Improves Reads
@@ -300,31 +304,48 @@ for table, where_clause in tables_to_optimize:
 
 ### How They Work Together
 
-```
-Without either:
-┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐
-│F1   │ │F2   │ │F3   │ │F4   │   Files contain random mix
-│A,B,C│ │A,C,B│ │B,A,C│ │C,B,A│   of values for all columns
-└─────┘ └─────┘ └─────┘ └─────┘
+```mermaid
+flowchart TB
+    subgraph Neither["❌ Without either"]
+        direction LR
+        N1["F1<br/>A,B,C"]
+        N2["F2<br/>A,C,B"]
+        N3["F3<br/>B,A,C"]
+        N4["F4<br/>C,B,A"]
+        Nnote["Files contain a random mix<br/>of values for all columns →<br/>queries must scan every file"]
+    end
 
-With ZORDER BY (col_A):
-┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐
-│F1   │ │F2   │ │F3   │ │F4   │   Files sorted by col_A ranges
-│A=1-5│ │A=6-9│ │A=10 │ │A=15 │   Query on A=7 only reads F2
-└─────┘ └─────┘ └─────┘ └─────┘
+    subgraph Zorder["🎯 ZORDER BY (col_A)"]
+        direction LR
+        Z1["F1<br/>A = 1–5"]
+        Z2["F2<br/>A = 6–9"]
+        Z3["F3<br/>A = 10"]
+        Z4["F4<br/>A = 15"]
+        Znote["Files sorted by col_A ranges →<br/>query for A=7 reads only F2"]
+    end
 
-With V-Order (inside each file):
-┌─────────────────────────┐
-│ File (V-Ordered)        │   Within each file, columns are
-│ Col A: [1,1,2,3,5] RLE  │   sorted and RLE-encoded for
-│ Col B: [x,x,y,y,z] RLE  │   maximum compression and
-│ Col C: [10,20,30,40,50] │   scan performance
-└─────────────────────────┘
+    subgraph Vord["⚡ V-Order (inside each file)"]
+        direction TB
+        V1["📦 File (V-Ordered)"]
+        VA["Col A: [1,1,2,3,5] RLE"]
+        VB["Col B: [x,x,y,y,z] RLE"]
+        VC["Col C: [10,20,30,40,50] RLE"]
+        V1 --- VA & VB & VC
+        Vnote["Columns sorted + RLE-encoded<br/>within each file → max compression<br/>and column-scan speed"]
+    end
 
-With BOTH (optimal):
-Files are ZORDER-arranged for data skipping
-AND internally V-Order encoded for fast scans
-= Best of both worlds
+    subgraph Both["✅ BOTH (optimal)"]
+        Bnote["Files are ZORDER-arranged for data skipping<br/><b>AND</b> internally V-Order encoded for fast scans"]
+    end
+
+    Neither -->|add ZORDER| Zorder
+    Zorder -->|add V-Order| Both
+    Vord -.->|enables| Both
+
+    style Neither fill:#FFEBEE,color:#000
+    style Zorder fill:#FFF9C4,color:#000
+    style Vord fill:#E3F2FD,color:#000
+    style Both fill:#E8F5E9,color:#000
 ```
 
 ### When to Use Each

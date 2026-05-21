@@ -377,30 +377,39 @@ erDiagram
 
 #### Report Layout
 
-```
-┌──────────────────────────────────────────────────┐
-│ LOGO    CURRENCY TRANSACTION REPORT       Page 1 │
-│         FinCEN Form 103 - Casino                  │
-│         Filing Date: 2026-04-15                   │
-├──────────────────────────────────────────────────┤
-│ Part I — Person Involved in Transaction           │
-│ Name: [player_name]    DOB: [dob]                │
-│ SSN: [masked_ssn]      ID: [id_type] [id_number] │
-│ Address: [address]                                │
-├──────────────────────────────────────────────────┤
-│ Part II — Amount and Type of Transaction          │
-│ Cash In:  $12,500.00   Cash Out: $0.00           │
-│ Aggregate: $12,500.00                            │
-│ Transaction Type: [Slot Play / Table Game / Cage] │
-├──────────────────────────────────────────────────┤
-│ Part III — Casino Information                     │
-│ Property: [property_name]  EIN: [ein]            │
-│ Address: [property_address]                       │
-│ Filed By: [reviewer]  BSA ID: [bsa_id]           │
-├──────────────────────────────────────────────────┤
-│ Page 1 of 1  |  Generated: 2026-04-15 06:00 EST  │
-└──────────────────────────────────────────────────┘
-```
+> **Report:** Currency Transaction Report (CTR) — FinCEN Form 103 (Casino)
+> **Filing Date:** 2026-04-15 · **Page 1 of 1**
+
+**Part I — Person Involved in Transaction**
+
+| Field | Value |
+|---|---|
+| Name | `[player_name]` |
+| DOB | `[dob]` |
+| SSN | `[masked_ssn]` |
+| ID | `[id_type] [id_number]` |
+| Address | `[address]` |
+
+**Part II — Amount and Type of Transaction**
+
+| Field | Value |
+|---|---|
+| Cash In | $12,500.00 |
+| Cash Out | $0.00 |
+| **Aggregate** | **$12,500.00** |
+| Transaction Type | Slot Play / Table Game / Cage |
+
+**Part III — Casino Information**
+
+| Field | Value |
+|---|---|
+| Property | `[property_name]` |
+| EIN | `[ein]` |
+| Address | `[property_address]` |
+| Filed By | `[reviewer]` |
+| BSA ID | `[bsa_id]` |
+
+*Generated: 2026-04-15 06:00 EST*
 
 ### W-2G Withholding Report
 

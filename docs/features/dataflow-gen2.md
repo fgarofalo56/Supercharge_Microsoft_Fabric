@@ -119,17 +119,15 @@ Dataflow Gen2 executes in three phases:
 2. **Transform** — Apply Power Query M steps: filter rows, rename columns, change types, merge queries, pivot/unpivot, add computed columns, group/aggregate.
 3. **Load** — Write results to the configured data destination (Lakehouse Delta table, Warehouse table, or SQL Database table).
 
-```
-┌──────────────┐    ┌──────────────────┐    ┌──────────────────┐
-│   EXTRACT    │ →  │    TRANSFORM     │ →  │      LOAD        │
-│              │    │                  │    │                  │
-│ • Connect    │    │ • Filter rows    │    │ • Lakehouse      │
-│ • Query fold │    │ • Rename cols    │    │ • Warehouse      │
-│ • Read data  │    │ • Change types   │    │ • SQL Database   │
-│              │    │ • Add columns    │    │                  │
-│              │    │ • Merge / Join   │    │ • Append mode    │
-│              │    │ • Group / Agg    │    │ • Replace mode   │
-└──────────────┘    └──────────────────┘    └──────────────────┘
+```mermaid
+flowchart LR
+    E["📥 EXTRACT<br/>• Connect to source<br/>• Query folding<br/>• Read data"]
+    T["🔧 TRANSFORM<br/>• Filter rows<br/>• Rename columns<br/>• Change types<br/>• Add columns<br/>• Merge / Join<br/>• Group / Aggregate"]
+    L["📤 LOAD<br/>• Lakehouse<br/>• Warehouse<br/>• SQL Database<br/>• Append or Replace"]
+    E --> T --> L
+    style E fill:#E3F2FD,color:#000
+    style T fill:#FFF9C4,color:#000
+    style L fill:#E8F5E9,color:#000
 ```
 
 ---

@@ -561,20 +561,22 @@ Routes to: **[Incident Response Template](../../runbooks/incident-response-templ
 
 ### Slow Burn vs Fast Burn — Visual
 
-```
-                 ┌──────────────────────────────┐
-                 │  Error Budget = 100% (start) │
-                 └──────────────┬───────────────┘
-                                │
-        ┌───────────────────────┼───────────────────────┐
-        │                       │                       │
-  Fast burn (14.4×)      Sustained (6×)          Slow burn (1×)
-   1h window              6h window               24h window
-        │                       │                       │
-        ▼                       ▼                       ▼
-   PAGE NOW              PAGE TODAY              TICKET (review)
-   SEV1                  SEV2                    SEV3
-   "fire"                "smoke"                 "smell"
+```mermaid
+flowchart TD
+    Budget["📊 Error Budget = 100% (start)"]
+    Budget --> Fast["🔥 Fast burn — 14.4×<br/>1 h window"]
+    Budget --> Sust["💨 Sustained — 6×<br/>6 h window"]
+    Budget --> Slow["👃 Slow burn — 1×<br/>24 h window"]
+    Fast --> FastA["🚨 PAGE NOW<br/>SEV1 — <i>fire</i>"]
+    Sust --> SustA["📟 PAGE TODAY<br/>SEV2 — <i>smoke</i>"]
+    Slow --> SlowA["🎫 TICKET (review)<br/>SEV3 — <i>smell</i>"]
+    style Budget fill:#1976D2,color:#fff
+    style Fast fill:#FFCDD2,color:#000
+    style Sust fill:#FFE0B2,color:#000
+    style Slow fill:#FFF9C4,color:#000
+    style FastA fill:#D32F2F,color:#fff
+    style SustA fill:#F57C00,color:#fff
+    style SlowA fill:#FBC02D,color:#000
 ```
 
 ---

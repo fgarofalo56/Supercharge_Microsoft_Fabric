@@ -50,26 +50,41 @@ This document outlines the disaster recovery (DR) and business continuity (BC) s
 
 ## 🏗️ Architecture: Multi-Region Deployment
 
-```
-                    Primary Region (East US 2)              DR Region (West US 2)
-                    ┌────────────────────────────┐          ┌────────────────────────────┐
-                    │     Fabric Capacity        │          │     Fabric Capacity        │
-                    │         (F64)              │  Async   │         (F16)              │
-                    │                            │  Replic  │                            │
-                    │  ┌────────────────────┐   │ ──────► │  ┌────────────────────┐   │
-                    │  │    OneLake         │   │          │  │    OneLake         │   │
-                    │  │  ┌──────────────┐  │   │          │  │  ┌──────────────┐  │   │
-                    │  │  │   Bronze     │  │   │          │  │  │   Bronze     │  │   │
-                    │  │  │   Silver     │  │   │          │  │  │   Silver     │  │   │
-                    │  │  │    Gold      │  │   │          │  │  │    Gold      │  │   │
-                    │  │  └──────────────┘  │   │          │  │  └──────────────┘  │   │
-                    │  └────────────────────┘   │          │  └────────────────────┘   │
-                    │                            │          │                            │
-                    │  ┌────────────────────┐   │          │  ┌────────────────────┐   │
-                    │  │   Eventhouse       │   │ ──────► │  │   Eventhouse       │   │
-                    │  │   (Real-Time)      │   │          │  │   (Standby)        │   │
-                    │  └────────────────────┘   │          │  └────────────────────┘   │
-                    └────────────────────────────┘          └────────────────────────────┘
+```mermaid
+flowchart LR
+    subgraph Primary["🏢 Primary Region — East US 2"]
+        direction TB
+        PCap["Fabric Capacity<br/>F64"]
+        subgraph POL["📦 OneLake"]
+            PB["🥉 Bronze"]
+            PS["🥈 Silver"]
+            PG["🥇 Gold"]
+        end
+        PEH["⚡ Eventhouse<br/>Real-Time"]
+        PCap --- POL
+        PCap --- PEH
+    end
+
+    subgraph DR["🛡️ DR Region — West US 2"]
+        direction TB
+        DCap["Fabric Capacity<br/>F16 (standby)"]
+        subgraph DOL["📦 OneLake (replica)"]
+            DB["🥉 Bronze"]
+            DS["🥈 Silver"]
+            DG["🥇 Gold"]
+        end
+        DEH["⚡ Eventhouse<br/>Standby"]
+        DCap --- DOL
+        DCap --- DEH
+    end
+
+    POL -->|Async replication<br/>5-min RPO| DOL
+    PEH -->|Async replication| DEH
+
+    style Primary fill:#E3F2FD,color:#000
+    style DR fill:#FFF9C4,color:#000
+    style PCap fill:#1976D2,color:#fff
+    style DCap fill:#F9A825,color:#000
 ```
 
 ---

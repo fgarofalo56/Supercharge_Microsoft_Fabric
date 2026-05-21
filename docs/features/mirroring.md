@@ -469,19 +469,16 @@ Every mirrored table includes system columns for tracking replication state:
 
 Fabric provides a built-in monitoring dashboard for each mirrored database item:
 
-```
-Mirrored Database → Monitor Tab
+> **Mirrored Database → Monitor Tab**
 
-Status Overview:
-  ┌─────────────────────────────────────────────┐
-  │ Overall Status: ● Running                    │
-  │ Last Sync:      2026-04-13 14:30:22 UTC      │
-  │ Replication Lag: 12 seconds                   │
-  │ Tables:         5 / 5 syncing                 │
-  │ Rows Replicated: 63,125,000                   │
-  │ Data Size:       24.8 GB (Delta compressed)   │
-  └─────────────────────────────────────────────┘
-```
+| Metric | Value |
+|---|---|
+| **Overall Status** | 🟢 Running |
+| **Last Sync** | `2026-04-13 14:30:22 UTC` |
+| **Replication Lag** | 12 seconds |
+| **Tables** | 5 / 5 syncing |
+| **Rows Replicated** | 63,125,000 |
+| **Data Size** | 24.8 GB (Delta compressed) |
 
 ### Per-Table Metrics
 

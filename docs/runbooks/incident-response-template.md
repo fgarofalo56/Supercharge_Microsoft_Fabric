@@ -66,18 +66,19 @@ flowchart TD
 
 ## Incident Response Lifecycle
 
-```
-┌────────────┐   ┌────────────┐   ┌────────────┐   ┌────────────┐
-│  DETECT    │──▶│  MITIGATE  │──▶│  RESOLVE   │──▶│    PIR     │
-│  + TRIAGE  │   │            │   │            │   │            │
-│  0–15 min  │   │ 15–60 min  │   │  Variable  │   │ ≤48 hr post│
-└────────────┘   └────────────┘   └────────────┘   └────────────┘
-      │                │                │                │
-      ▼                ▼                ▼                ▼
-  Page on-call    Stop bleeding    Root cause        Postmortem
-  Classify SEV    Stabilize        Permanent fix     Action items
-  Open channel    Rollback if      Verify recovery   Process update
-                  needed
+```mermaid
+flowchart LR
+    D["🚨 DETECT + TRIAGE<br/><b>0–15 min</b>"] --> M["🔧 MITIGATE<br/><b>15–60 min</b>"] --> R["✅ RESOLVE<br/><b>Variable</b>"] --> P["📋 PIR<br/><b>≤ 48 hr post</b>"]
+
+    D --- DD["Page on-call<br/>Classify SEV<br/>Open channel"]
+    M --- MM["Stop bleeding<br/>Stabilize<br/>Rollback if needed"]
+    R --- RR["Root cause<br/>Permanent fix<br/>Verify recovery"]
+    P --- PP["Postmortem<br/>Action items<br/>Process update"]
+
+    style D fill:#FFCDD2,color:#000
+    style M fill:#FFE0B2,color:#000
+    style R fill:#C8E6C9,color:#000
+    style P fill:#BBDEFB,color:#000
 ```
 
 ---
@@ -140,17 +141,14 @@ Use the [Severity Matrix](#severity-matrix). Document classification in the chan
 
 ### 2.2 Mitigation Decision Framework
 
-```
-   Is service restored by mitigation?
-            │
-     ┌──────┴──────┐
-     │             │
-    YES           NO
-     │             │
-     ▼             ▼
-  Move to      Escalate one
-  Phase 3      severity level
-                + add resources
+```mermaid
+flowchart TD
+    Q{"Is service restored<br/>by mitigation?"}
+    Q -->|YES| MoveOn["✅ Move to Phase 3 — Resolve"]
+    Q -->|NO| Escalate["🚨 Escalate one severity level<br/>+ add resources"]
+    style Q fill:#FFF9C4,color:#000
+    style MoveOn fill:#C8E6C9,color:#000
+    style Escalate fill:#FFCDD2,color:#000
 ```
 
 ### 2.3 Communication During Mitigation

@@ -1106,30 +1106,32 @@ gaming_suite = {
 
 The ws-governance workspace contains a monitoring dashboard that tracks governance health across all domains:
 
-```
-┌──────────────────────────────────────────────────────────┐
-│  🛡️ Data Governance Health Dashboard                     │
-├──────────────┬──────────────┬──────────────┬─────────────┤
-│  Domains     │  Products    │  Certified   │  Quality    │
-│  10 Active   │  47 Total    │  38 (81%)    │  97.2% Avg  │
-├──────────────┴──────────────┴──────────────┴─────────────┤
-│  📊 Data Product Quality by Domain                       │
-│  ═══════════════════════════════════════════              │
-│  Gaming    ████████████████████░ 98.5%                    │
-│  USDA      ███████████████████░░ 96.8%                    │
-│  NOAA      ████████████████████░ 97.9%                    │
-│  EPA       █████████████████████ 99.1%                    │
-│  SBA       ████████████████░░░░░ 93.2%  ⚠️               │
-│  DOI       ███████████████████░░ 96.4%                    │
-│  DOT/FAA   ██████████████████░░░ 95.7%                    │
-│  Tribal HC ████████████████████░ 98.0%                    │
-├──────────────────────────────┬────────────────────────────┤
-│  ⏰ SLA Compliance           │  🔐 Security Posture       │
-│  On-Time: 94%                │  PII Classified: 100%      │
-│  Breached: 3 products        │  RLS Enforced: 100%        │
-│  At Risk: 5 products         │  Labels Applied: 97%       │
-└──────────────────────────────┴────────────────────────────┘
-```
+> **Dashboard:** 🛡️ Data Governance Health
+
+**Top-row KPI cards:**
+
+| Domains | Products | Certified | Quality |
+|---|---|---|---|
+| **10** Active | **47** Total | **38 (81%)** | **97.2%** Avg |
+
+**Data Product Quality by Domain:**
+
+| Domain | Quality | Bar |
+|---|---:|---|
+| EPA | **99.1%** | ████████████████████░ |
+| Gaming | **98.5%** | ████████████████████░ |
+| Tribal HC | **98.0%** | ████████████████████░ |
+| NOAA | **97.9%** | ████████████████████░ |
+| USDA | **96.8%** | ███████████████████░░ |
+| DOI | **96.4%** | ███████████████████░░ |
+| DOT/FAA | **95.7%** | ██████████████████░░░ |
+| SBA ⚠️ | **93.2%** | █████████████████░░░░ |
+
+**Bottom-row cards:**
+
+| ⏰ SLA Compliance | 🔐 Security Posture |
+|---|---|
+| On-Time: **94%**<br/>Breached: 3 products<br/>At Risk: 5 products | PII Classified: **100%**<br/>RLS Enforced: **100%**<br/>Labels Applied: **97%** |
 
 ---
 

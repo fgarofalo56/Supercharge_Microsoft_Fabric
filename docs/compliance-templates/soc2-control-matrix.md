@@ -110,26 +110,20 @@ The matrix is a living document. Update it:
 
 ## Cover Page
 
-```text
-┌──────────────────────────────────────────────────────────────────┐
-│                                                                  │
-│             SOC 2 TYPE II CONTROL MATRIX                         │
-│                                                                  │
-│  Company:                <COMPANY_NAME>                          │
-│  System / Service Name:  <SYSTEM_NAME>                           │
-│  Examination Period:     <START_DATE> to <END_DATE>              │
-│  In-Scope TSCs:          [ ] Security  [ ] Availability          │
-│                          [ ] Processing Integrity                │
-│                          [ ] Confidentiality   [ ] Privacy       │
-│  Auditor (CPA Firm):     <AUDITOR_FIRM_NAME>                     │
-│  Lead Engagement Partner:<AUDITOR_PARTNER_NAME>                  │
-│  Service Org Contact:    <PRIMARY_CONTACT_NAME>                  │
-│  Document Version:       <VERSION>                               │
-│  Last Updated:           <YYYY-MM-DD>                            │
-│  Classification:         CONFIDENTIAL — AUDITOR EYES ONLY        │
-│                                                                  │
-└──────────────────────────────────────────────────────────────────┘
-```
+> # SOC 2 Type II Control Matrix
+>
+> | Field | Value |
+> |---|---|
+> | **Company** | `<COMPANY_NAME>` |
+> | **System / Service Name** | `<SYSTEM_NAME>` |
+> | **Examination Period** | `<START_DATE>` to `<END_DATE>` |
+> | **In-Scope TSCs** | ☐ Security ☐ Availability ☐ Processing Integrity ☐ Confidentiality ☐ Privacy |
+> | **Auditor (CPA Firm)** | `<AUDITOR_FIRM_NAME>` |
+> | **Lead Engagement Partner** | `<AUDITOR_PARTNER_NAME>` |
+> | **Service Org Contact** | `<PRIMARY_CONTACT_NAME>` |
+> | **Document Version** | `<VERSION>` |
+> | **Last Updated** | `<YYYY-MM-DD>` |
+> | **Classification** | 🔒 CONFIDENTIAL — AUDITOR EYES ONLY |
 
 | Field | Value |
 |-------|-------|
