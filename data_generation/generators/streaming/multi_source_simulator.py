@@ -18,13 +18,15 @@ before/after images, and connector metadata drawn from the casino/gaming domain.
 import random
 import uuid
 from datetime import datetime, timezone
-
-UTC = timezone.utc  # `datetime.UTC` constant is Python 3.11+ only; alias for 3.10 compat
 from typing import Any
 
 import numpy as np
 
 from ..base_generator import BaseGenerator
+
+# `datetime.UTC` constant is Python 3.11+ only; alias `timezone.utc` so the
+# rest of the module can keep using the `UTC` name unchanged on 3.10.
+UTC = timezone.utc
 
 # ---------------------------------------------------------------------------
 # Source configuration registry
