@@ -1,0 +1,89 @@
+{% extends "main.html" %}
+
+{#- Override Material's default 404 page so GitHub Pages' /404.html
+    serves a branded "lost in the lakehouse" experience with the same
+    navbar + hero band as the rest of the site.
+
+    The hero is rendered manually here (instead of via page.meta.hero)
+    because the 404 isn't a markdown page — it's a Jinja template. -#}
+
+{% block content %}
+  <section class="md-hero-band" data-md-component="hero-band">
+    <div class="md-grid md-hero-band__grid">
+      <img
+        class="md-hero-band__image hero-banner"
+        src="{{ base_url }}/assets/heroes/404.svg"
+        alt="404 — Lost in the lakehouse?"
+        loading="eager"
+        decoding="async">
+    </div>
+  </section>
+
+  <article class="md-content__inner md-typeset">
+    <h1>Lost in the lakehouse?</h1>
+
+    <p>The page you're looking for doesn't exist — maybe it moved, maybe
+    it was renamed, or maybe a stray Bronze table swallowed it. Either
+    way, here's where you probably want to go next:</p>
+
+    <div class="grid cards">
+      <ul>
+        <li>
+          <p><strong>🏠 Home</strong></p>
+          <p>Start at the front door — what this POC is, who it's for,
+             and how to get oriented.</p>
+          <p><a href="{{ base_url }}/">→ Home</a></p>
+        </li>
+        <li>
+          <p><strong>🚀 Get Started</strong></p>
+          <p>Prerequisites, quick start, deployment, and the 3-day
+             workshop agenda.</p>
+          <p><a href="{{ base_url }}/getting-started/">→ Get Started</a></p>
+        </li>
+        <li>
+          <p><strong>🏛️ Architecture</strong></p>
+          <p>Medallion lakehouse, decision trees, reference architectures,
+             and diagrams.</p>
+          <p><a href="{{ base_url }}/ARCHITECTURE/">→ Architecture</a></p>
+        </li>
+        <li>
+          <p><strong>⚙️ Build</strong></p>
+          <p>38 Fabric features, 56 tutorials, sample apps, and notebook
+             guides.</p>
+          <p><a href="{{ base_url }}/features/">→ Features</a></p>
+        </li>
+        <li>
+          <p><strong>🎯 Use Cases</strong></p>
+          <p>Industry verticals — healthcare, finance, manufacturing,
+             retail, energy, telecom, plus federal agency analytics.</p>
+          <p><a href="{{ base_url }}/use-cases/">→ Use Cases</a></p>
+        </li>
+        <li>
+          <p><strong>📚 Reference</strong></p>
+          <p>FAQ, Field Questions, glossary, cheat sheets, style guide,
+             and visual standards.</p>
+          <p><a href="{{ base_url }}/FAQ/">→ Reference</a></p>
+        </li>
+      </ul>
+    </div>
+
+    <hr>
+
+    <h2>Still stuck?</h2>
+    <ul>
+      <li><strong>🔍 Use the search bar</strong> at the top of the page —
+          there's a full-text index of every doc on the site.</li>
+      <li><strong>💬 Ask Fabby</strong>, the AI Copilot — the chat bubble
+          in the lower-right knows the entire repo.</li>
+      <li><strong>🐙 File an issue</strong> at
+          <a href="https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/issues/new">github.com</a>
+          if you think this page should exist.</li>
+    </ul>
+
+    <blockquote>
+      <p><em>"You can't have a Direct Lake without OneLake.</em><br>
+         <em>And you can't have analytics without finding the page first."</em><br>
+         — every data engineer, probably</p>
+    </blockquote>
+  </article>
+{% endblock %}

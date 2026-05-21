@@ -7,10 +7,15 @@
 -#}
 {% block extrahead %}
   {{ super() }}
-  {%- set og_card = base_url ~ "/assets/images/og-card.png" -%}
+  {#- og:image MUST be an absolute URL — social platforms reject relative.
+      We pin the live GitHub Pages origin so previews work regardless of
+      whether the page was crawled from /Suppercharge_Microsoft_Fabric/
+      or any subpath. -#}
+  {%- set site_origin = "https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric" -%}
+  {%- set og_card = site_origin ~ "/assets/images/og-card.png" -%}
   {%- set page_title = page.title if page and page.title else config.site_name -%}
   {%- set page_desc = page.meta.description if page and page.meta and page.meta.description else config.site_description -%}
-  {%- set page_url = (page.canonical_url if page and page.canonical_url else config.site_url) | default(base_url) -%}
+  {%- set page_url = page.canonical_url if page and page.canonical_url else site_origin ~ "/" -%}
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="{{ config.site_name }}">
