@@ -1,6 +1,6 @@
 # Pharma & Life Sciences: Clinical Trial Analytics on Microsoft Fabric
 
-<div align="center">
+<div align="center" markdown>
 
 ![Industry](https://img.shields.io/badge/Industry-Pharma_%26_Life_Sciences-purple?style=for-the-badge)
 ![Compliance](https://img.shields.io/badge/Compliance-21_CFR_Part_11_%7C_GxP-red?style=for-the-badge)

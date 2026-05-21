@@ -2,7 +2,7 @@
 
 # 🔗 Tutorial 37: Graph Analytics for Fraud Detection
 
-<div align="center">
+<div align="center" markdown>
 
 **Detect Structuring, Money Laundering, and Procurement Fraud with Graph in Fabric**
 
@@ -630,7 +630,7 @@ Delete the `Fraud Network Monitor` dashboard from your workspace manually.
 
 ---
 
-<div align="center">
+<div align="center" markdown>
 
 **[⬅️ Tutorial 36](../36-data-mesh-domains/README.md)** · **[🏠 All Tutorials](../index.md)**
 

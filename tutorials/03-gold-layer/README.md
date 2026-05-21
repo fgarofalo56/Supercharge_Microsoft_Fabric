@@ -7,7 +7,7 @@
 
 ---
 
-<div align="center">
+<div align="center" markdown>
 
 ![Difficulty](https://img.shields.io/badge/⭐_Difficulty-Intermediate-yellow?style=for-the-badge)
 ![Duration](https://img.shields.io/badge/⏱️_Duration-90--120_mins-blue?style=for-the-badge)
@@ -17,7 +17,7 @@
 
 ---
 
-<div align="center">
+<div align="center" markdown>
 
 ## 🥇 Tutorial 03: Gold Layer - Business-Ready Aggregations
 
@@ -33,7 +33,7 @@
 
 ### 📍 Progress Tracker
 
-<div align="center">
+<div align="center" markdown>
 
 <table>
 <thead>
@@ -1576,7 +1576,7 @@ Continue to **[Tutorial 04: Real-Time Analytics](../04-real-time-analytics/READM
 
 ---
 
-<div align="center">
+<div align="center" markdown>
 
 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
 

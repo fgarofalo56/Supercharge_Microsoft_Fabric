@@ -5,7 +5,7 @@
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
-<div align="center">
+<div align="center" markdown>
 
 ![Category](https://img.shields.io/badge/Category-Workshop_Day_3-purple?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
@@ -83,7 +83,7 @@ Before starting, ensure the following are ready:
 timeline
     title Day 3: BI, Governance & Mirroring Journey
     
-    section Morning Session 1 (09:00-10:30)
+    section Morning Session 1 — 09:00-10:30
         Create Semantic Model : Direct Lake mode
                                : No refresh needed
         Define Relationships : Star schema
@@ -92,7 +92,7 @@ timeline
                       : Time intelligence
                       : 20+ measures
     
-    section Morning Session 2 (10:45-12:30)
+    section Morning Session 2 — 10:45-12:30
         Executive Dashboard : Net Win
                            : Hold %
                            : Zone Performance
@@ -103,7 +103,7 @@ timeline
                         : Churn risk
                         : Value scoring
     
-    section Afternoon Session 3 (13:30-15:00)
+    section Afternoon Session 3 — 13:30-15:00
         Connect Purview : Register Fabric source
                        : Configure scan
         Review Classifications : PII detection
@@ -116,7 +116,7 @@ timeline
                     : Impact analysis
                     : Transformation tracking
     
-    section Afternoon Session 4 (15:15-16:30)
+    section Afternoon Session 4 — 15:15-16:30
         Mirroring Concepts : Near real-time sync
                           : No ETL code
                           : Auto schema sync
@@ -127,7 +127,7 @@ timeline
                            : OneLake integration
                            : Production patterns
     
-    section Wrap-up (16:30-17:00)
+    section Wrap-up — 16:30-17:00
         POC Review : 3 days complete
                   : Medallion built
                   : Reports delivered
@@ -866,7 +866,7 @@ flowchart TB
 
 ---
 
-<div align="center">
+<div align="center" markdown>
 
 **POC Complete!**
 

@@ -546,7 +546,7 @@ The [Phase 7 Regression Report](phase7_regression_report.md) provides comprehens
 
 ---
 
-<div align="center">
+<div align="center" markdown>
 
 **[Back to Top](#white_check_mark-validation--testing-framework)** | **[Main README](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)**
 

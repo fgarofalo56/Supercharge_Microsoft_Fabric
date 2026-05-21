@@ -5,7 +5,7 @@
 > **Last Updated**: 2026-04-27 | **Phase**: 14 (Wave 4) | **Multi-Cloud Migration Track**
 > **Status**: ✅ Final | **Maintainer**: Platform Team
 
-<div align="center">
+<div align="center" markdown>
 
 ![Difficulty](https://img.shields.io/badge/Difficulty-Advanced-red?style=for-the-badge)
 ![Category](https://img.shields.io/badge/Category-Migration-blue?style=for-the-badge)

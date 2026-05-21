@@ -223,8 +223,8 @@ quadrantChart
     quadrant-3 Behind
     quadrant-4 Progress Risk
     "Revenue Q2": [0.85, 0.5]
-    "Hold %": [0.65, 0.4]
-    "CTR Filings": [1.0, 0.5]
+    "Hold Pct": [0.65, 0.4]
+    "CTR Filings": [0.95, 0.5]
     "Player Satisfaction": [0.7, 0.6]
 ```
 

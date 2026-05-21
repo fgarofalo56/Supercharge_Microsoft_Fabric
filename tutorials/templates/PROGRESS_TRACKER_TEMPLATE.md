@@ -33,7 +33,7 @@ The enhanced progress tracker provides:
 ```markdown
 ### 📍 Progress Tracker
 
-<div align="center">
+<div align="center" markdown>
 
 <table>
 <thead>

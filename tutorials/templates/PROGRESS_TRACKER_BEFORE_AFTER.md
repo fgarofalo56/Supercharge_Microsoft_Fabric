@@ -49,7 +49,7 @@ This document shows the visual and functional improvements made to the tutorial 
 ```markdown
 ### 📍 Progress Tracker
 
-<div align="center">
+<div align="center" markdown>
 
 <table>
 <thead>

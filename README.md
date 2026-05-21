@@ -1,4 +1,4 @@
-<div align="center">
+<div align="center" markdown>
 
 # 🎰 Supercharge Microsoft Fabric 🎲
 
@@ -1200,7 +1200,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ---
 
-<div align="center">
+<div align="center" markdown>
 
 **[⬆ Back to Top](#-supercharge-microsoft-fabric-)**
 

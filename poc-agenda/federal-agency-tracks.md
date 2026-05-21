@@ -5,7 +5,7 @@
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
-<div align="center">
+<div align="center" markdown>
 
 ![Category](https://img.shields.io/badge/Category-Workshop-purple?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
@@ -238,7 +238,7 @@ Both options produce parquet files with identical schemas, so all notebooks work
 
 ---
 
-<div align="center">
+<div align="center" markdown>
 
 [⬆️ Back to Top](#-federal-agency-poc-workshop-tracks) | [📚 POC Agenda](./) | [🏠 Home](../index.md)
 

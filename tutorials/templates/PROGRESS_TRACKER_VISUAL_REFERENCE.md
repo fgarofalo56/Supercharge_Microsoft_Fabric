@@ -12,7 +12,7 @@ This document shows exactly what the enhanced progress tracker looks like when r
 
 ### 📍 Progress Tracker
 
-<div align="center">
+<div align="center" markdown>
 
 <table>
 <thead>
@@ -110,7 +110,7 @@ This document shows exactly what the enhanced progress tracker looks like when r
 
 ### 📍 Progress Tracker
 
-<div align="center">
+<div align="center" markdown>
 
 <table>
 <thead>

@@ -1,6 +1,6 @@
 # 🏔️ Tutorial 36: DOI Natural Resources Analytics
 
-<div align="center">
+<div align="center" markdown>
 
 ![Difficulty](https://img.shields.io/badge/⭐_Difficulty-Advanced-red?style=for-the-badge)
 ![Duration](https://img.shields.io/badge/⏱️_Duration-120--150_mins-blue?style=for-the-badge)
@@ -1238,7 +1238,7 @@ Continue your learning journey:
 
 ---
 
-<div align="center">
+<div align="center" markdown>
 
 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues)
 

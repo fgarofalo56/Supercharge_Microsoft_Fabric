@@ -6,7 +6,7 @@
 
 ---
 
-<div align="center">
+<div align="center" markdown>
 
 ![Domain](https://img.shields.io/badge/Domain-Energy_%26_Utilities-yellow?style=for-the-badge)
 ![Scale](https://img.shields.io/badge/Scale-1.2M_Meters-blue?style=for-the-badge)

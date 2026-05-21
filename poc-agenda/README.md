@@ -5,7 +5,7 @@
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
-<div align="center">
+<div align="center" markdown>
 
 ![Category](https://img.shields.io/badge/Category-Workshop-purple?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
@@ -433,7 +433,7 @@ Upon completion, the team will have:
 
 ---
 
-<div align="center">
+<div align="center" markdown>
 
 **Session Type Legend**
 

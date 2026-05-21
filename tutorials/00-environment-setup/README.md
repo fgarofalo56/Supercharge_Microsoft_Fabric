@@ -7,7 +7,7 @@
 
 ---
 
-<div align="center">
+<div align="center" markdown>
 
 ![Difficulty](https://img.shields.io/badge/⭐_Difficulty-Beginner-brightgreen?style=for-the-badge)
 ![Duration](https://img.shields.io/badge/⏱️_Duration-45--60_mins-blue?style=for-the-badge)

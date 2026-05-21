@@ -2,7 +2,7 @@
 
 > **Last Updated:** 2026-04-15 | **Version:** 2.1.0 | **Status:** Active
 
-<div align="center">
+<div align="center" markdown>
 
 ![Contributions](https://img.shields.io/badge/🤝_Contributions-Welcome-brightgreen?style=for-the-badge)
 ![License](https://img.shields.io/badge/📄_License-MIT-blue?style=for-the-badge)
@@ -409,7 +409,7 @@ By contributing, you agree that your contributions will be licensed under the MI
 
 ---
 
-<div align="center">
+<div align="center" markdown>
 
 **Thank you for contributing!**
 

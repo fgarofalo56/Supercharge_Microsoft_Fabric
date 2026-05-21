@@ -1,6 +1,6 @@
 # ⚖️ Tutorial 38: DOJ Justice Analytics
 
-<div align="center">
+<div align="center" markdown>
 
 ![Difficulty](https://img.shields.io/badge/⭐_Difficulty-Intermediate-green?style=for-the-badge)
 ![Duration](https://img.shields.io/badge/⏱️_Duration-90--120_mins-blue?style=for-the-badge)

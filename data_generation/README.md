@@ -474,7 +474,7 @@ Schema files are in `schemas/` with subdirectories for each category.
 
 ---
 
-<div align="center">
+<div align="center" markdown>
 
 **[Back to Top](#slot_machine-data_generation)** | **[Main README](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)**
 

@@ -5,7 +5,7 @@
 > **Last Updated**: 2026-04-27 | **Version**: 1.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
-<div align="center">
+<div align="center" markdown>
 
 ![Difficulty](https://img.shields.io/badge/Difficulty-Advanced-red?style=for-the-badge)
 ![Category](https://img.shields.io/badge/Category-MLOps-purple?style=for-the-badge)
@@ -1020,7 +1020,7 @@ Congratulations — you have shipped a production-grade ML model on Microsoft Fa
 
 ---
 
-<div align="center">
+<div align="center" markdown>
 
 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/issues)
 

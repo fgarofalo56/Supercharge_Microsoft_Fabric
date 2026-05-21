@@ -4,7 +4,7 @@
 
 > **Last Updated**: 2026-05-21 | **Status**: ✅ Final | **Maintainer**: Platform Team
 
-<div align="center">
+<div align="center" markdown>
 
 ![Difficulty](https://img.shields.io/badge/Difficulty-Advanced-red?style=for-the-badge)
 ![Category](https://img.shields.io/badge/Category-Migration-blue?style=for-the-badge)

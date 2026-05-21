@@ -7,7 +7,7 @@
 
 ---
 
-<div align="center">
+<div align="center" markdown>
 
 ![Difficulty](https://img.shields.io/badge/⭐_Difficulty-Intermediate-yellow?style=for-the-badge)
 ![Duration](https://img.shields.io/badge/⏱️_Duration-60--90_mins-blue?style=for-the-badge)
@@ -17,7 +17,7 @@
 
 ---
 
-<div align="center">
+<div align="center" markdown>
 
 ## 🥈 Tutorial 02: Silver Layer - Data Cleansing & Transformation
 
@@ -33,7 +33,7 @@
 
 ### 📍 Progress Tracker
 
-<div align="center">
+<div align="center" markdown>
 
 <table>
 <thead>
@@ -1301,7 +1301,7 @@ Continue to **[Tutorial 03: Gold Layer](../03-gold-layer/README.md)** to learn:
 
 ---
 
-<div align="center">
+<div align="center" markdown>
 
 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
 

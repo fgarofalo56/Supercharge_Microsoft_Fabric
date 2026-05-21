@@ -2,7 +2,7 @@
 
 > **Last Updated:** 2026-05-05 | **Version:** 3.1.0 | **Status:** Active
 
-<div align="center">
+<div align="center" markdown>
 
 ![Changelog](https://img.shields.io/badge/📋_Changelog-Keep_a_Changelog-blue?style=for-the-badge)
 ![SemVer](https://img.shields.io/badge/🔢_Versioning-SemVer_2.0-green?style=for-the-badge)
@@ -618,7 +618,7 @@ This project is licensed under the MIT License - see [LICENSE](https://github.co
 
 ---
 
-<div align="center">
+<div align="center" markdown>
 
 [⬆️ Back to Top](#-changelog) | [📚 Docs](docs/index.md) | [🏠 Main README](README.md)
 

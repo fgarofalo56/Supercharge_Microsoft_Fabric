@@ -5,7 +5,7 @@
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
-<div align="center">
+<div align="center" markdown>
 
 ![Difficulty](https://img.shields.io/badge/Difficulty-Advanced-orange?style=for-the-badge)
 ![Category](https://img.shields.io/badge/Category-Federal-blue?style=for-the-badge)
@@ -967,7 +967,7 @@ Congratulations! You have built a complete DOT/FAA aviation analytics pipeline o
 
 ---
 
-<div align="center">
+<div align="center" markdown>
 
 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues)
 

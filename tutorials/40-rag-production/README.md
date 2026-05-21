@@ -5,7 +5,7 @@
 > **Last Updated**: 2026-04-27 | **Version**: 1.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
-<div align="center">
+<div align="center" markdown>
 
 ![Difficulty](https://img.shields.io/badge/Difficulty-Advanced-orange?style=for-the-badge)
 ![Category](https://img.shields.io/badge/Category-AI_RAG-purple?style=for-the-badge)
@@ -1506,7 +1506,7 @@ Continue your learning journey:
 
 ---
 
-<div align="center">
+<div align="center" markdown>
 
 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/issues)
 
