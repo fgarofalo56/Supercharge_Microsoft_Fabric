@@ -84,7 +84,7 @@ markdown_extensions:
   - tables
   - toc:
       permalink: true
-      toc_depth: 3
+      toc_depth: 2
   
   # PyMdown Extensions
   - pymdownx.arithmatex:
@@ -124,6 +124,7 @@ extra_css:
 
 extra_javascript:
   - https://unpkg.com/mermaid@10/dist/mermaid.min.js
+  - javascripts/mermaid-init.js
   - javascripts/dark-mode-auto.js
   - javascripts/copilot-chat.js
 

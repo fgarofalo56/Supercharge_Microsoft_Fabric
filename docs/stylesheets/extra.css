@@ -8,6 +8,59 @@
   --md-accent-fg-color: #ffb900;
 }
 
+/* ── Typography polish ─────────────────────────────────────────
+   Material's default H1 / H2 colors are washed out so headings
+   look like placeholder text. Bump weight + contrast so titles
+   read like titles in both schemes. */
+.md-typeset h1 {
+  color: var(--md-default-fg-color);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  margin-top: 0.5rem;
+}
+.md-typeset h2 {
+  color: var(--md-default-fg-color);
+  font-weight: 650;
+  letter-spacing: -0.005em;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+  padding-bottom: 0.4rem;
+  margin-top: 2.5rem;
+}
+.md-typeset h3 {
+  color: var(--md-default-fg-color);
+  font-weight: 600;
+  margin-top: 1.8rem;
+}
+[data-md-color-scheme="slate"] .md-typeset h1,
+[data-md-color-scheme="slate"] .md-typeset h2,
+[data-md-color-scheme="slate"] .md-typeset h3 {
+  color: #f4f6fb;
+}
+[data-md-color-scheme="slate"] .md-typeset h2 {
+  border-bottom-color: rgba(255, 255, 255, 0.10);
+}
+
+/* Body copy: cleaner reading line-length + line-height */
+.md-typeset {
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+.md-typeset p,
+.md-typeset li {
+  color: var(--md-default-fg-color);
+}
+[data-md-color-scheme="slate"] .md-typeset p,
+[data-md-color-scheme="slate"] .md-typeset li {
+  color: #d6dbe6;
+}
+
+/* "Last Updated | Version | Status" subhead line — keep readable in dark */
+[data-md-color-scheme="slate"] .md-typeset blockquote {
+  color: #c8cee0;
+  border-left-color: var(--md-accent-fg-color);
+}
+
 /* Hero banner (top of section index pages) */
 .hero-banner {
   width: 100%;
@@ -37,7 +90,9 @@
 }
 
 [data-md-color-scheme="slate"] .architecture-diagram {
-  background: #ffffff;
+  background: #1f2937;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 
 /* Open diagram in new tab when clicked */
@@ -111,11 +166,32 @@ img.service-icon {
   font-size: 0.8rem;
 }
 
-/* Mermaid diagram sizing */
+/* ── Mermaid diagrams ───────────────────────────────────────────
+   Default Material wraps Mermaid in a white container. In dark
+   mode that white card next to the dark page jars and the box
+   borders inside the diagram read as black-on-near-black. Give
+   the container a soft tint in dark + invert the SVG to flip
+   dark fills + light strokes. */
 .mermaid {
   text-align: center;
-  margin: 1rem 0;
+  margin: 1.5rem 0;
 }
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+[data-md-color-scheme="slate"] .mermaid {
+  background: #1f2937;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 0.75rem;
+}
+
+/* Mermaid theme switching is handled in javascripts/mermaid-init.js
+   which re-renders diagrams with theme: 'dark' when the user toggles
+   slate. No CSS filter is applied so brand colors stay true. */
 
 /* Navigation improvements */
 .md-nav__link {
@@ -212,3 +288,112 @@ img.service-icon {
 }
 
 /* Responsive adjustments for custom components handled in docs.css */
+
+
+/* ── Metadata strip polish ─────────────────────────────────────
+   The shields.io badge strip ("CATEGORY / STATUS / UPDATED /
+   PLATFORM") appears above almost every page. Tighten spacing
+   so the chips read as a calm metadata bar rather than a
+   multi-color collage. */
+.md-typeset div[align="center"] img[src*="shields.io"] {
+  margin: 0.15rem 0.2rem !important;
+  vertical-align: middle;
+  /* Soften the saturation slightly in dark mode so the reds /
+     oranges don't fluoresce against the dark page. */
+}
+[data-md-color-scheme="slate"] .md-typeset img[src*="shields.io"] {
+  filter: saturate(0.88) brightness(1.05);
+}
+
+/* The tutorial-page "Progress Tracker" code block (the ASCII art
+   one) reads as broken markdown in screenshots. Add a soft tint
+   + monospace styling so it clearly reads as a code panel rather
+   than a layout glitch. */
+.md-typeset h2 + pre,
+.md-typeset h3 + pre {
+  border-radius: 8px;
+}
+
+
+/* ── Right-side Table of Contents ──────────────────────────────
+   On long pages (FAQ, decisions, compliance, runbooks) the
+   secondary nav lists 20-30 deep entries with emoji prefixes.
+   Cap the visible depth to 2 levels and tighten spacing so it
+   reads as navigation, not a flat bulleted list. */
+.md-nav--secondary .md-nav__list .md-nav__list .md-nav__list {
+  display: none;
+}
+.md-nav--secondary .md-nav__link {
+  margin-top: 0.25em;
+  font-size: 0.7rem;
+  line-height: 1.35;
+}
+.md-nav--secondary .md-nav__list .md-nav__list .md-nav__link {
+  font-size: 0.66rem;
+  color: var(--md-default-fg-color--light);
+}
+
+
+/* ── Footer / Previous-Next nav ────────────────────────────────
+   In dark mode the prev/next bar blends into the page background.
+   Give it a subtle border so it reads as a contained component. */
+[data-md-color-scheme="slate"] .md-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+
+/* ── Tutorial / status pill badges ─────────────────────────────
+   The .duration pill on the validation page wraps "Passing" mid-
+   word inside the badge ("Passin\ng"). Stop the wrap. */
+.md-typeset .duration,
+.md-typeset .badge {
+  white-space: nowrap;
+}
+
+
+/* ── Code blocks ───────────────────────────────────────────────
+   Dark-mode inline code blends with the prose. Lift the contrast. */
+[data-md-color-scheme="slate"] .md-typeset code {
+  background-color: rgba(255, 255, 255, 0.10);
+  color: #f4f6fb;
+}
+[data-md-color-scheme="slate"] .md-typeset table code {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+
+/* ── Hero banner refinement ────────────────────────────────────
+   Slightly more breathing room on either side of the hero so it
+   doesn't run flush to content. Keep the rounded corners and the
+   shadow we already had. */
+.hero-banner {
+  margin-top: 0;
+  margin-bottom: 2.25rem;
+}
+[data-md-color-scheme="slate"] .hero-banner {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+
+/* ── Grid cards (Material) — make them feel modern ─────────────
+   Slight lift on hover so users can tell cards are tappable. */
+.md-typeset .grid.cards > * {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.md-typeset .grid.cards > *:hover {
+  transform: translateY(-2px);
+  border-color: var(--md-accent-fg-color);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12);
+}
+[data-md-color-scheme="slate"] .md-typeset .grid.cards > *:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+
+/* ── Page-meta line ("Last Updated: ... | Version: ... | Status: ...") ──
+   That subhead is wrapped in a blockquote on most tutorials and
+   reads small + gray. Give it a tiny lift so it scans as metadata. */
+.md-typeset blockquote:first-of-type {
+  font-size: 0.8rem;
+  border-left-width: 3px;
+}

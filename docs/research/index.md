@@ -1,3 +1,5 @@
+![White Papers — Research, maturity models, and platform comparisons for Fabric](../assets/heroes/white-papers.svg){ .hero-banner }
+
 # Research & White Papers
 
 Strategic analysis, maturity frameworks, and platform comparisons to guide enterprise Fabric adoption decisions.

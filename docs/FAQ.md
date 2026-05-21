@@ -1,3 +1,5 @@
+![Reference — Glossary, FAQ, cheat sheets, style guide, and the data dictionary](assets/heroes/reference.svg){ .hero-banner }
+
 # 💬 Frequently Asked Questions (FAQ)
 
 > 🏠 [Home](index.md) > 📚 [Docs](./) > 💬 FAQ

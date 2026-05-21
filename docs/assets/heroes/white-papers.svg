@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" width="1200" height="320"
+     role="img" aria-label="White Papers">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1A237E"/>
+      <stop offset="55%" stop-color="#3F51B5"/>
+      <stop offset="100%" stop-color="#5C6BC0"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFC107" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#FFC107" stop-opacity="0.4"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+    </pattern>
+    <filter id="blur"><feGaussianBlur stdDeviation="40"/></filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="320" fill="url(#bg)"/>
+  <rect width="1200" height="320" fill="url(#grid)"/>
+
+  <!-- Decorative ambient blobs -->
+  <circle cx="180" cy="60"  r="120" fill="#FFC107" opacity="0.20" filter="url(#blur)"/>
+  <circle cx="960" cy="280" r="160" fill="#5C6BC0" opacity="0.30" filter="url(#blur)"/>
+
+  <!-- Accent bar on the left -->
+  <rect x="0" y="80" width="6" height="160" fill="url(#accent)" rx="3"/>
+
+  <!-- Title + tagline -->
+  <text x="56" y="148" font-family="Inter, system-ui, sans-serif" font-size="44" font-weight="700"
+        fill="#FFFFFF" letter-spacing="-0.5">White Papers</text>
+  <text x="56" y="194" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="400"
+        fill="rgba(255,255,255,0.85)" letter-spacing="0.2">Research, maturity models, and platform comparisons for Microsoft Fabric</text>
+
+  <!-- Subtle "Microsoft Fabric" eyebrow -->
+  <text x="56" y="100" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600"
+        fill="#FFC107" letter-spacing="2" text-transform="uppercase">MICROSOFT FABRIC</text>
+
+
+  <g transform="translate(1048,-8)">
+    <rect x="-12" y="-12" width="120" height="120" rx="16" ry="16"
+          fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
+    <svg x="0" y="0" width="96" height="96" viewBox="0 0 18 18"
+         preserveAspectRatio="xMidYMid meet">
+      <defs><radialGradient id="uuid-2a7407aa-b787-48dd-a96a-0d81ab6e93bb" cx="-67.981" cy="793.199" r=".45" gradientTransform="translate(-17939.03 20368.029) rotate(45) scale(25.091 -34.149)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#83b9f9" /><stop offset="1" stop-color="#0078d4" /></radialGradient></defs><path d="m0,2.7v12.6c0,1.491,1.209,2.7,2.7,2.7h12.6c1.491,0,2.7-1.209,2.7-2.7V2.7c0-1.491-1.209-2.7-2.7-2.7H2.7C1.209,0,0,1.209,0,2.7ZM10.8,0v3.6c0,3.976,3.224,7.2,7.2,7.2h-3.6c-3.976,0-7.199,3.222-7.2,7.198v-3.598c0-3.976-3.224-7.2-7.2-7.2h3.6c3.976,0,7.2-3.224,7.2-7.2Z" fill="url(#uuid-2a7407aa-b787-48dd-a96a-0d81ab6e93bb)" stroke-width="0" />
+    </svg>
+  </g>
+
+  <g transform="translate(1048,112)">
+    <rect x="-12" y="-12" width="120" height="120" rx="16" ry="16"
+          fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
+    <svg x="0" y="0" width="96" height="96" viewBox="0 0 18 18"
+         preserveAspectRatio="xMidYMid meet">
+      <defs><linearGradient id="e1bcfd0f-68b5-4f66-9501-e6a7245a18e7" x1="1.1" y1="169" x2="11.12" y2="169" gradientTransform="translate(0 -160)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#50c7e8" /><stop offset="0.25" stop-color="#4cc3e4" /><stop offset="0.51" stop-color="#41b6da" /><stop offset="0.77" stop-color="#2fa2c8" /><stop offset="1" stop-color="#1989b2" /></linearGradient></defs><title>Icon-166Artboard 1</title><path id="bc892891-989d-4c43-80d3-d2b4546a974f" d="M15.8,17.5H2.2L1.1,13.4H16.9Z" fill="#198ab3" /><polygon points="6.9 0.5 6.9 6.9 1.1 13.4 2.2 17.5 11.1 6.9 11.1 0.5 6.9 0.5" fill="url(#e1bcfd0f-68b5-4f66-9501-e6a7245a18e7)" /><path id="e6be01d6-345d-4df4-bbdb-151aa8edaa1f" d="M15.8,17.5,9.6,11.1l2.6-3,4.7,5.3Z" fill="#32bedd" />
+    </svg>
+  </g>
+
+  <g transform="translate(1048,232)">
+    <rect x="-12" y="-12" width="120" height="120" rx="16" ry="16"
+          fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
+    <svg x="0" y="0" width="96" height="96" viewBox="0 0 18 18"
+         preserveAspectRatio="xMidYMid meet">
+      <path fill="url(#iffe440-a)" d="m15.157 11.038-4.3-7.45a8 8 0 0 1 .65 3.612l-.744-.055s.492.153.6.388c.34.72-.783 3.09-1.171 3.673-.63.944-1.848 2.16-2.167 2.16-.099 0-.141-.034-.141-.034-1.156.715-2.522 1.415-3.924 1.501h9.006c1.948 0 3.165-2.108 2.191-3.795"/><path fill="url(#iffe440-b)" fill-opacity=".5" d="m15.157 11.038-4.3-7.45a8 8 0 0 1 .65 3.612l-.744-.055s.492.153.6.388c.34.72-.783 3.09-1.171 3.673-.63.944-1.848 2.16-2.167 2.16-.099 0-.141-.034-.141-.034-1.156.715-2.522 1.415-3.924 1.501h9.006c1.948 0 3.165-2.108 2.191-3.795"/><path fill="url(#iffe440-c)" fill-opacity=".2" d="m15.157 11.038-4.3-7.45a8 8 0 0 1 .65 3.612l-.744-.055s.492.153.6.388c.34.72-.783 3.09-1.171 3.673-.63.944-1.848 2.16-2.167 2.16-.099 0-.141-.034-.141-.034-1.156.715-2.522 1.415-3.924 1.501h9.006c1.948 0 3.165-2.108 2.191-3.795"/><path fill="url(#iffe440-d)" d="M14.526 10.01q.133.183.253.37l-4.588-7.948C9.217.745 6.783.745 5.81 2.432L1.3 10.245c.692-1.033 2.209-1.81 3.307-2.352 0 0-.038-.23.052-.39.09-.158.213-.202.331-.25a8.06 8.06 0 0 1 9.537 2.757Z"/><path fill="url(#iffe440-e)" fill-opacity=".36" d="M14.526 10.01q.133.183.253.37l-4.588-7.948C9.217.745 6.783.745 5.81 2.432L1.3 10.245c.692-1.033 2.209-1.81 3.307-2.352 0 0-.038-.23.052-.39.09-.158.213-.202.331-.25a8.06 8.06 0 0 1 9.537 2.757Z"/><path fill="url(#iffe440-f)" d="M12.081 14.832H3.034c-1.948 0-3.165-2.109-2.191-3.796l4.584-7.942a8.063 8.063 0 0 0 6.654 11.738"/><path fill="url(#iffe440-g)" fill-opacity=".25" d="M12.081 14.832H3.034c-1.948 0-3.165-2.109-2.191-3.796l4.584-7.942a8.063 8.063 0 0 0 6.654 11.738"/><path fill="url(#iffe440-h)" d="M12.081 14.832H3.034c-1.948 0-3.165-2.109-2.191-3.796l4.584-7.942a8.063 8.063 0 0 0 6.654 11.738"/><defs><radialGradient id="iffe440-b" cx="0" cy="0" r="1" gradientTransform="matrix(.14216 3.1987 -2.95039 .13113 12.243 7.416)" gradientUnits="userSpaceOnUse"><stop stop-color="#041642"/><stop offset="1" stop-color="#041642" stop-opacity="0"/></radialGradient><radialGradient id="iffe440-c" cx="0" cy="0" r="1" gradientTransform="matrix(5.61361 -2.46018 2.79916 6.3871 8.443 14.14)" gradientUnits="userSpaceOnUse"><stop/><stop offset="1" stop-opacity="0"/></radialGradient><radialGradient id="iffe440-d" cx="0" cy="0" r="1" gradientTransform="matrix(-3.06704 5.34995 -8.79035 -5.03937 8.877 .902)" gradientUnits="userSpaceOnUse"><stop stop-color="#51DEFF"/><stop offset=".349" stop-color="#1ABAFD"/><stop offset="1" stop-color="#247FE0"/></radialGradient><radialGradient id="iffe440-e" cx="0" cy="0" r="1" gradientTransform="rotate(-39.249 15.386 7.104)scale(9.59415 6.27867)" gradientUnits="userSpaceOnUse"><stop offset=".475"/><stop offset="1" stop-opacity="0"/></radialGradient><radialGradient id="iffe440-g" cx="0" cy="0" r="1" gradientTransform="matrix(-.39897 2.5924 -3.80166 -.58508 4.571 6.97)" gradientUnits="userSpaceOnUse"><stop offset=".177" stop-color="#CCF9FF"/><stop offset="1" stop-color="#4FE3FF" stop-opacity=".12"/></radialGradient><linearGradient id="iffe440-a" x1="13.948" x2="14.231" y1="4.359" y2="12.801" gradientUnits="userSpaceOnUse"><stop stop-color="#033E9A"/><stop offset="1" stop-color="#0055C6"/></linearGradient><linearGradient id="iffe440-f" x1="3.897" x2="7.706" y1="5.277" y2="15.345" gradientUnits="userSpaceOnUse"><stop stop-color="#59E7FD"/><stop offset=".587" stop-color="#23D4F9"/><stop offset="1" stop-color="#32BBF2"/></linearGradient><linearGradient id="iffe440-h" x1="6.606" x2="4.909" y1="14.336" y2="10.303" gradientUnits="userSpaceOnUse"><stop stop-color="#08B0F8"/><stop offset="1" stop-color="#52E5FF" stop-opacity="0"/></linearGradient></defs>
+    </svg>
+  </g>
+</svg>
