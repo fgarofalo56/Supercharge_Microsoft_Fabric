@@ -11,27 +11,47 @@
 /* Hero banner (top of section index pages) */
 .hero-banner {
   width: 100%;
-  max-width: 1200px;
-  margin: 0 0 1.5rem 0;
-  border-radius: 12px;
-  box-shadow: 0 6px 24px rgba(15, 23, 42, 0.12);
+  max-width: 1280px;
+  margin: 0 0 2rem 0;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
   display: block;
+  aspect-ratio: 1200 / 320;
+  object-fit: cover;
 }
 
-/* Architecture diagrams (inline page content) */
+/* Architecture diagrams (inline page content) — cap visual height so the
+   diagram doesn't dominate the viewport on long pages */
 .architecture-diagram {
+  max-width: 100%;
   width: 100%;
-  max-width: 1100px;
-  margin: 1rem auto;
+  max-height: 560px;
+  margin: 1rem auto 1.5rem;
   display: block;
-  border-radius: 8px;
+  border-radius: 10px;
   background: #ffffff;
-  padding: 0.5rem;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+  padding: 1rem;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.08);
+  object-fit: contain;
+  cursor: zoom-in;
 }
 
 [data-md-color-scheme="slate"] .architecture-diagram {
-  background: #f8fafc;
+  background: #ffffff;
+}
+
+/* Open diagram in new tab when clicked */
+a:has(> img.architecture-diagram) {
+  display: block;
+  text-decoration: none;
+}
+
+/* Small inline service icons (used inline with text) */
+img.service-icon {
+  width: 1.1em;
+  height: 1.1em;
+  vertical-align: -0.2em;
+  margin-right: 0.25em;
 }
 
 /* Dark mode adjustments */

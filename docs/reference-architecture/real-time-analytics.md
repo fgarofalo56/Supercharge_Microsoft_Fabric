@@ -2,7 +2,6 @@
 
 # ⚡ Real-Time Analytics Reference Architecture
 
-![Real-time analytics reference](../assets/diagrams/reference-architecture-real-time.svg){ .architecture-diagram }
 
 <div align="center" markdown>
 

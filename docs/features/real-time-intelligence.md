@@ -2,7 +2,6 @@
 
 # ⚡ Real-Time Intelligence (RTI) Comprehensive Guide
 
-![Real-Time Intelligence architecture](../assets/diagrams/real-time-intelligence-flow.svg){ .architecture-diagram }
 
 <div align="center" markdown>
 

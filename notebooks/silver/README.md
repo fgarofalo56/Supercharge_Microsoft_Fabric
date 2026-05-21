@@ -4,7 +4,6 @@
 
 > **Purpose**: Data cleansing, validation, deduplication, and standardization. Enforces schema contracts and business rules while maintaining referential integrity.
 
-![Silver layer transformation flow on Fabric](../../assets/diagrams/silver-layer-flow.svg){ .architecture-diagram }
 
 The Silver layer transforms raw Bronze data into cleansed, validated datasets. This layer applies data quality rules, resolves duplicates, enriches with reference data, and enforces compliance constraints (PII masking, SSN hashing).
 

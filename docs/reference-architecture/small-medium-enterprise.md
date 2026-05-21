@@ -2,7 +2,6 @@
 
 # 🏢 Small-Medium Enterprise Reference Architecture
 
-![SME reference architecture](../assets/diagrams/reference-architecture-sme.svg){ .architecture-diagram }
 
 <div align="center" markdown>
 

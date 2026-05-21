@@ -4,7 +4,6 @@
 
 # ⚡ Energy & Utilities — Smart Grid Analytics & Renewable Forecasting
 
-![Energy Utilities reference architecture on Microsoft Fabric](../assets/diagrams/industry-energy-utilities.svg){ .architecture-diagram }
 
 <div align="center" markdown>
 

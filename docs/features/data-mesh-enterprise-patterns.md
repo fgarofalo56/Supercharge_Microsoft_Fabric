@@ -2,7 +2,6 @@
 
 # 🏛️ Data Mesh & Enterprise Architecture Patterns
 
-![Data Mesh enterprise pattern on Fabric](../assets/diagrams/data-mesh-pattern.svg){ .architecture-diagram }
 
 <div align="center" markdown>
 

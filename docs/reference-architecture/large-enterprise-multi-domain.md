@@ -2,7 +2,6 @@
 
 # 🏛️ Large Enterprise Multi-Domain Reference Architecture
 
-![Large enterprise multi-domain reference](../assets/diagrams/reference-architecture-large-enterprise.svg){ .architecture-diagram }
 
 <div align="center" markdown>
 

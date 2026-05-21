@@ -19,14 +19,6 @@ hide:
 
 ---
 
-## Architecture at a Glance
-
-![Microsoft Fabric medallion architecture — sources to Bronze to Silver to Gold to Power BI Direct Lake on F64 capacity with Purview](assets/diagrams/medallion-architecture.svg){ .architecture-diagram }
-
-[See the full architecture →](ARCHITECTURE.md){ .md-button }
-
----
-
 ## Three Core Paradigms
 
 This POC is built on three paradigms that define how data flows from source to insight inside Microsoft Fabric.

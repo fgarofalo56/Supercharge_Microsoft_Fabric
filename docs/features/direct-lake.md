@@ -2,7 +2,6 @@
 
 # ⚡ Direct Lake - Zero-Copy Power BI over OneLake
 
-![Direct Lake connectivity architecture](../assets/diagrams/direct-lake-architecture.svg){ .architecture-diagram }
 
 <div align="center" markdown>
 

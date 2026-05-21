@@ -4,7 +4,6 @@
 
 # 🏥 Healthcare — Patient Analytics & Clinical Intelligence
 
-![Healthcare reference architecture on Microsoft Fabric](../assets/diagrams/industry-healthcare.svg){ .architecture-diagram }
 
 <div align="center" markdown>
 

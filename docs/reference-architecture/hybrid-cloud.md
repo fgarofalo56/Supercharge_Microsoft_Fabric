@@ -2,7 +2,6 @@
 
 # ☁️ Hybrid Cloud Reference Architecture
 
-![Hybrid cloud reference](../assets/diagrams/reference-architecture-hybrid-cloud.svg){ .architecture-diagram }
 
 <div align="center" markdown>
 

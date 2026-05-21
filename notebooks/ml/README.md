@@ -4,7 +4,6 @@
 
 > **Purpose**: Predictive analytics, anomaly detection, and AI-powered insights for casino operations including player churn prediction and fraud detection.
 
-![ML pipeline on Fabric](../../assets/diagrams/ml-pipeline-flow.svg){ .architecture-diagram }
 
 The ML layer leverages Fabric's integrated data science capabilities to build, train, and deploy machine learning models. Models are trained on Gold layer data and predictions are written back for operational use.
 

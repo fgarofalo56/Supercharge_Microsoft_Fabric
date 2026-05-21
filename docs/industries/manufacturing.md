@@ -4,7 +4,6 @@
 
 # ⚙️ Manufacturing — IoT Telemetry & Predictive Maintenance
 
-![Manufacturing reference architecture on Microsoft Fabric](../assets/diagrams/industry-manufacturing.svg){ .architecture-diagram }
 
 <div align="center" markdown>
 

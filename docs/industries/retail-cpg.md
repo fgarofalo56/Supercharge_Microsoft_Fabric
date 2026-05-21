@@ -4,7 +4,6 @@
 
 # 🛒 Retail & CPG — Demand Forecasting & Customer 360
 
-![Retail Cpg reference architecture on Microsoft Fabric](../assets/diagrams/industry-retail.svg){ .architecture-diagram }
 
 <div align="center" markdown>
 

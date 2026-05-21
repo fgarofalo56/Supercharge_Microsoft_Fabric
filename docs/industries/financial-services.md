@@ -4,7 +4,6 @@
 
 # 🏦 Financial Services — Fraud Detection & Risk Analytics
 
-![Financial Services reference architecture on Microsoft Fabric](../assets/diagrams/industry-financial-services.svg){ .architecture-diagram }
 
 <div align="center" markdown>
 

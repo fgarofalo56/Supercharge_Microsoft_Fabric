@@ -4,7 +4,6 @@
 
 > **Purpose**: Stream processing for live casino floor monitoring, real-time alerts, and immediate operational insights using Fabric Eventstreams and Eventhouse (KQL).
 
-![Real-Time Intelligence architecture on Fabric](../../assets/diagrams/real-time-intelligence-flow.svg){ .architecture-diagram }
 
 The Real-Time layer processes streaming data from slot machines, table games, and security systems. Events flow through Eventstreams for transformation and land in Eventhouse for KQL-based analytics and alerting.
 
