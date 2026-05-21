@@ -61,10 +61,49 @@
   border-left-color: var(--md-accent-fg-color);
 }
 
-/* Hero banner (top of section index pages) ─────────────────────
-   Breaks out of the content column when present at the top of a
-   page so it spans the full content width like the home page,
-   sitting directly under the blue navbar above the breadcrumb. */
+/* ── Hero band — full content-grid width above the three columns ─
+   The `overrides/main.html` template renders a <section.md-hero-band>
+   between the navbar and the md-main__inner row whenever a page has
+   `hero:` set in its YAML frontmatter. This block spans the same
+   md-grid width as the navbar tabs above it, so the hero aligns
+   with the left edge of the left sidebar and the right edge of the
+   right TOC sidebar — identical alignment to the home page hero.
+
+   The legacy `.hero-banner` rule below still styles inline `![](){.hero-banner}`
+   images for any pages we haven't migrated yet (and keeps them working
+   if they aren't using the YAML frontmatter approach). */
+.md-hero-band {
+  padding: 0 0.8rem;          /* match md-main__inner side padding */
+  margin: 0 auto;
+  background: transparent;
+}
+.md-hero-band__grid {
+  padding: 0.4rem 0 1.25rem;  /* small gap below navbar, room before content */
+  margin: 0 auto;
+  max-width: 76rem;            /* match md-grid */
+}
+.md-hero-band__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
+  aspect-ratio: 1200 / 320;
+  object-fit: cover;
+}
+[data-md-color-scheme="slate"] .md-hero-band__image {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+/* When the band is present, tighten the top of the content area so
+   the article H1 sits close to the hero rather than leaving an
+   awkward gap. */
+.md-hero-band + .md-main .md-content__inner > .md-typeset > h1:first-child,
+.md-hero-band + .md-main .md-content__inner > .md-typeset > p.md-toc__prev + h1 {
+  margin-top: 0.25rem;
+}
+
+/* Legacy inline-image hero (still used by pages we haven't migrated)
+   ─────────────────────────────────────────────────────────────── */
 .hero-banner {
   width: 100%;
   max-width: 1280px;
@@ -76,26 +115,12 @@
   object-fit: cover;
 }
 
-/* On pages where the hero is the FIRST child of the article body
-   (which is true for every landing page using ![...](){.hero-banner}
-   as the first markdown line), pull the breadcrumb BELOW the hero
-   visually so the page hierarchy reads: navbar → hero → breadcrumb
-   → content, matching the home page's clean visual flow. */
-.md-typeset > p:first-child > img.hero-banner {
-  /* Negative top margin pulls the hero up flush with the navbar */
-  margin-top: -0.4rem;
-}
-.md-typeset > p:first-child:has(img.hero-banner) {
-  margin: 0 0 1.5rem 0;
-}
-/* Hide the breadcrumb on hero-landing pages so the hero is the first
-   thing under the blue navbar, matching the home page treatment. */
-.md-content:has(> .md-content__inner > .md-typeset > p:first-child > img.hero-banner)
-  ~ .md-content__inner > nav.md-breadcrumbs,
-.md-content__inner:has(> .md-typeset > p:first-child > img.hero-banner)
-  > nav.md-breadcrumbs,
-.md-typeset:has(> p:first-child > img.hero-banner)
-  > nav.md-breadcrumbs:first-of-type {
+/* Hide the breadcrumb on pages that have a hero banner so the page
+   hierarchy reads: blue navbar → hero band → article H1 → content,
+   matching the home page's clean visual flow. The hero band is
+   rendered as a sibling element BEFORE .md-main, so we target any
+   breadcrumb that lives inside an .md-main preceded by the band. */
+.md-hero-band ~ .md-main nav.md-breadcrumbs {
   display: none;
 }
 

@@ -1,4 +1,7 @@
-![Telecom Analytics — Churn, network quality on Fabric](../assets/heroes/telecommunications.svg){ .hero-banner }
+---
+hero: assets/heroes/telecommunications.svg
+hero_alt: "Telecom Analytics — Churn, network quality on Fabric"
+---
 
 # 📡 Telecommunications — Network Performance & Churn Prediction
 

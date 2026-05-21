@@ -1,4 +1,7 @@
-![Architecture — Reference architectures, decisions, and best practices for Fabric](assets/heroes/architecture.svg){ .hero-banner }
+---
+hero: assets/heroes/architecture.svg
+hero_alt: "Architecture — Reference architectures, decisions, and best practices for Fabric"
+---
 
 # 🏗️ Architecture Documentation
 

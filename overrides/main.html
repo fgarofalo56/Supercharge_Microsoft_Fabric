@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{#-
+  Page hero banner — renders a full-width band ABOVE the three-column
+  md-main__inner (left nav + content + right TOC). Driven by the page
+  YAML frontmatter:
+
+      ---
+      hero: assets/heroes/architecture.svg
+      hero_alt: Architecture overview
+      ---
+
+  When `hero:` is set, the banner spans the same content-grid width as
+  the navbar tabs above it — same look as the home page's hero, but the
+  sidebars stay rendered below it. The image is loaded eagerly so it's
+  the first thing painted on the page.
+-#}
+{% block hero %}
+  {% if page and page.meta and page.meta.hero %}
+    {% set hero_src = page.meta.hero %}
+    {%- if hero_src.startswith("assets/") -%}
+      {% set hero_src = base_url ~ "/" ~ hero_src %}
+    {%- endif -%}
+    <section class="md-hero-band" data-md-component="hero-band">
+      <div class="md-grid md-hero-band__grid">
+        <img
+          class="md-hero-band__image hero-banner"
+          src="{{ hero_src }}"
+          alt="{{ page.meta.hero_alt or page.title }}"
+          loading="eager"
+          decoding="async">
+      </div>
+    </section>
+  {% endif %}
+{% endblock %}

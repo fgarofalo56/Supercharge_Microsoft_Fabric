@@ -20,6 +20,7 @@ docs_dir: docs
 # Theme Configuration
 theme:
   name: material
+  custom_dir: overrides
   language: en
   
   # Color palette with dark/light toggle

@@ -1,4 +1,7 @@
-![Healthcare Analytics — EHR, claims, population health on Fabric](../assets/heroes/healthcare.svg){ .hero-banner }
+---
+hero: assets/heroes/healthcare.svg
+hero_alt: "Healthcare Analytics — EHR, claims, population health on Fabric"
+---
 
 # 🏥 Healthcare — Patient Analytics & Clinical Intelligence
 

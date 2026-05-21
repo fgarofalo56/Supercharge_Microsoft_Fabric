@@ -65,6 +65,35 @@ python ms_learn.py "Direct Lake limitations"
 
 ## Deploy
 
+### Automatic — GitHub Actions (recommended)
+
+A workflow at `.github/workflows/deploy-copilot.yml` deploys this Function on
+every push to `main` that touches `azure-functions/copilot-chat/**`.
+
+**One-time setup** (Settings → Secrets and variables → Actions):
+
+| Type | Name | Value |
+|---|---|---|
+| Variable | `COPILOT_FUNCTIONAPP_NAME` | Your Azure Function App name (e.g. `fabby-copilot-prod`) |
+| Variable | `COPILOT_FUNCTION_URL` | *(optional)* `https://<app>.azurewebsites.net/api/chat` — smoke-tested on deploy |
+| Secret | `COPILOT_FUNCTIONAPP_PUBLISH_PROFILE` | XML from Azure Portal → Function App → **Get publish profile** |
+
+Without `COPILOT_FUNCTIONAPP_NAME` set, the workflow no-ops and prints the setup hint.
+
+Then in the Azure Portal, under your Function App's **Configuration → Application settings**, set:
+
+| Setting | Required? | Notes |
+|---|---|---|
+| `AZURE_OPENAI_ENDPOINT` | Yes | e.g. `https://my-instance.openai.azure.com` |
+| `AZURE_OPENAI_KEY` | Yes | API key |
+| `AZURE_OPENAI_DEPLOYMENT` | Yes | e.g. `gpt-4o-mini` |
+| `ALLOWED_ORIGINS` | Yes | `https://fgarofalo56.github.io` (comma-separated) |
+| `GITHUB_TOKEN` | Optional | PAT with `issues: write` — enables auto content-gap filing |
+| `GITHUB_REPO` | Optional | `fgarofalo56/Suppercharge_Microsoft_Fabric` |
+| `GITHUB_ISSUE_LABEL` | Optional | default: `content-gap,copilot-suggested` |
+
+### Manual — Azure CLI
+
 ```bash
 az login
 az functionapp deployment source config-zip \

@@ -4,10 +4,9 @@ description: Supercharge Microsoft Fabric — Casino & Gaming Industry POC with 
 hide:
   - navigation
   - toc
+hero: assets/heroes/home.svg
+hero_alt: "Supercharge Microsoft Fabric — Casino & gaming POC + federal expansions on F64 capacity"
 ---
-
-![Supercharge Microsoft Fabric — Casino & gaming POC + federal expansions on F64 capacity](assets/heroes/home.svg){ .hero-banner }
-
 # Supercharge Microsoft Fabric
 
 **Transform your operations with enterprise-grade analytics powered by Microsoft Fabric**

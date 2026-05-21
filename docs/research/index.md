@@ -1,4 +1,7 @@
-![White Papers — Research, maturity models, and platform comparisons for Fabric](../assets/heroes/white-papers.svg){ .hero-banner }
+---
+hero: assets/heroes/white-papers.svg
+hero_alt: "White Papers — Research, maturity models, and platform comparisons for Fabric"
+---
 
 # Research & White Papers
 

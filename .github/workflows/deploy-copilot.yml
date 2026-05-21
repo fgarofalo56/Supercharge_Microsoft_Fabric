@@ -1,0 +1,97 @@
+name: Deploy Copilot Function
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'azure-functions/copilot-chat/**'
+      - '.github/workflows/deploy-copilot.yml'
+  workflow_dispatch:
+
+env:
+  AZURE_FUNCTIONAPP_NAME: ${{ vars.COPILOT_FUNCTIONAPP_NAME }}
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'azure-functions/copilot-chat'
+  PYTHON_VERSION: '3.11'
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Build + deploy to Azure Functions
+    runs-on: ubuntu-latest
+    if: ${{ vars.COPILOT_FUNCTIONAPP_NAME != '' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install dependencies into deployment directory
+        shell: bash
+        working-directory: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+        run: |
+          python -m pip install --upgrade pip
+          # Install runtime deps into .python_packages so Azure picks them up
+          pip install --target=".python_packages/lib/site-packages" -r requirements.txt
+
+      - name: Smoke-test Python files compile
+        shell: bash
+        working-directory: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+        run: |
+          python -c "import ast; [ast.parse(open(f).read()) for f in ['function_app.py','ms_learn.py','github_issue.py']]"
+          echo "Syntax check passed"
+
+      - name: Deploy to Azure Functions
+        uses: Azure/functions-action@v1
+        with:
+          app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
+          package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+          publish-profile: ${{ secrets.COPILOT_FUNCTIONAPP_PUBLISH_PROFILE }}
+          scm-do-build-during-deployment: true
+          enable-oryx-build: true
+
+      - name: Smoke-test deployed endpoint
+        env:
+          ENDPOINT: ${{ vars.COPILOT_FUNCTION_URL }}
+        if: ${{ vars.COPILOT_FUNCTION_URL != '' }}
+        shell: bash
+        run: |
+          # OPTIONS preflight should always return 204/200 even unauthenticated
+          set -e
+          echo "Checking ${ENDPOINT}…"
+          for i in 1 2 3 4 5; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" -X OPTIONS \
+              -H "Origin: https://fgarofalo56.github.io" "${ENDPOINT}" || true)
+            if [ "${code}" = "204" ] || [ "${code}" = "200" ]; then
+              echo "✓ Endpoint responding (HTTP ${code})"
+              exit 0
+            fi
+            echo "Attempt ${i}: HTTP ${code} — retrying in 10s…"
+            sleep 10
+          done
+          echo "::warning::Endpoint smoke test inconclusive (last HTTP: ${code}). Check Function App logs."
+
+  skip:
+    name: Deploy skipped (COPILOT_FUNCTIONAPP_NAME not set)
+    runs-on: ubuntu-latest
+    if: ${{ vars.COPILOT_FUNCTIONAPP_NAME == '' }}
+    steps:
+      - name: Show setup hint
+        run: |
+          echo "::notice::Copilot deploy skipped — set the COPILOT_FUNCTIONAPP_NAME repository variable to enable it."
+          echo "Required GitHub repo configuration:"
+          echo "  Variables (Settings → Secrets and variables → Actions → Variables):"
+          echo "    COPILOT_FUNCTIONAPP_NAME    — your Azure Function App name"
+          echo "    COPILOT_FUNCTION_URL        — (optional) full URL to /api/chat for smoke test"
+          echo "  Secrets (Settings → Secrets and variables → Actions → Secrets):"
+          echo "    COPILOT_FUNCTIONAPP_PUBLISH_PROFILE — download from Azure Portal > Function App > Get publish profile"
+          echo ""
+          echo "Then update the following Function App settings in Azure Portal:"
+          echo "    AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_KEY, AZURE_OPENAI_DEPLOYMENT, ALLOWED_ORIGINS"
+          echo "  Optional (enables auto-issue filing on MS Learn fallback):"
+          echo "    GITHUB_TOKEN, GITHUB_REPO, GITHUB_ISSUE_LABEL"

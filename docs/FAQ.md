@@ -1,4 +1,7 @@
-![Reference — Glossary, FAQ, cheat sheets, style guide, and the data dictionary](assets/heroes/reference.svg){ .hero-banner }
+---
+hero: assets/heroes/reference.svg
+hero_alt: "Reference — Glossary, FAQ, cheat sheets, style guide, and the data dictionary"
+---
 
 # 💬 Frequently Asked Questions (FAQ)
 

@@ -1,4 +1,7 @@
-![Manufacturing & IoT — Factory telemetry, predictive maintenance on Fabric](../assets/heroes/manufacturing.svg){ .hero-banner }
+---
+hero: assets/heroes/manufacturing.svg
+hero_alt: "Manufacturing & IoT — Factory telemetry, predictive maintenance on Fabric"
+---
 
 # ⚙️ Manufacturing — IoT Telemetry & Predictive Maintenance
 

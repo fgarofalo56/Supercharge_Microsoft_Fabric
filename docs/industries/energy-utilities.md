@@ -1,4 +1,7 @@
-![Energy & Utilities — Smart grid, load forecasting on Fabric](../assets/heroes/energy-utilities.svg){ .hero-banner }
+---
+hero: assets/heroes/energy-utilities.svg
+hero_alt: "Energy & Utilities — Smart grid, load forecasting on Fabric"
+---
 
 # ⚡ Energy & Utilities — Smart Grid Analytics & Renewable Forecasting
 

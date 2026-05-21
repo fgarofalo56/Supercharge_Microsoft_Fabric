@@ -1,4 +1,7 @@
-![Reference — Field Questions: Real customer scenarios answered](assets/heroes/reference.svg){ .hero-banner }
+---
+hero: assets/heroes/reference.svg
+hero_alt: "Reference — Field Questions: Real customer scenarios answered"
+---
 
 # 🛠️ Field Questions — Real Customer Scenarios
 

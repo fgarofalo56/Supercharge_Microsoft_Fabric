@@ -1,10 +1,9 @@
 ---
 title: Getting Started
 description: Get up and running with the Microsoft Fabric POC
+hero: assets/heroes/getting-started.svg
+hero_alt: Get Started — 30-minute onboarding from prerequisites to first Direct Lake report
 ---
-
-![Get Started — 30-minute onboarding from prerequisites to first Direct Lake report](../assets/heroes/getting-started.svg){ .hero-banner }
-
 # Getting Started
 
 Everything you need to provision, configure, and deploy your Microsoft Fabric POC environment.

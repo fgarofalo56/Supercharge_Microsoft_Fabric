@@ -1,4 +1,7 @@
-![Financial Services Analytics — Fraud, AML, customer 360 on Fabric](../assets/heroes/financial-services.svg){ .hero-banner }
+---
+hero: assets/heroes/financial-services.svg
+hero_alt: "Financial Services Analytics — Fraud, AML, customer 360 on Fabric"
+---
 
 # 🏦 Financial Services — Fraud Detection & Risk Analytics
 

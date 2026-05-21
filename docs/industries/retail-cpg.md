@@ -1,4 +1,7 @@
-![Retail & CPG — Demand forecasting, customer segmentation on Fabric](../assets/heroes/retail-cpg.svg){ .hero-banner }
+---
+hero: assets/heroes/retail-cpg.svg
+hero_alt: "Retail & CPG — Demand forecasting, customer segmentation on Fabric"
+---
 
 # 🛒 Retail & CPG — Demand Forecasting & Customer 360
 

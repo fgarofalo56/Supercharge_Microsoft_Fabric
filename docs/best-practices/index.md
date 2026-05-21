@@ -1,10 +1,9 @@
 ---
 title: Best Practices
 description: Enterprise best practices for Microsoft Fabric implementations
+hero: assets/heroes/best-practices.svg
+hero_alt: "Best Practices — Architecture, security, performance, and operational guidance for Fabric"
 ---
-
-![Best Practices — Architecture, security, performance, and operational guidance for Fabric](../assets/heroes/best-practices.svg){ .hero-banner }
-
 # Best Practices
 
 Proven patterns, architectural guidance, and operational best practices for production Microsoft Fabric deployments.
