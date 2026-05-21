@@ -61,7 +61,10 @@
   border-left-color: var(--md-accent-fg-color);
 }
 
-/* Hero banner (top of section index pages) */
+/* Hero banner (top of section index pages) ─────────────────────
+   Breaks out of the content column when present at the top of a
+   page so it spans the full content width like the home page,
+   sitting directly under the blue navbar above the breadcrumb. */
 .hero-banner {
   width: 100%;
   max-width: 1280px;
@@ -71,6 +74,29 @@
   display: block;
   aspect-ratio: 1200 / 320;
   object-fit: cover;
+}
+
+/* On pages where the hero is the FIRST child of the article body
+   (which is true for every landing page using ![...](){.hero-banner}
+   as the first markdown line), pull the breadcrumb BELOW the hero
+   visually so the page hierarchy reads: navbar → hero → breadcrumb
+   → content, matching the home page's clean visual flow. */
+.md-typeset > p:first-child > img.hero-banner {
+  /* Negative top margin pulls the hero up flush with the navbar */
+  margin-top: -0.4rem;
+}
+.md-typeset > p:first-child:has(img.hero-banner) {
+  margin: 0 0 1.5rem 0;
+}
+/* Hide the breadcrumb on hero-landing pages so the hero is the first
+   thing under the blue navbar, matching the home page treatment. */
+.md-content:has(> .md-content__inner > .md-typeset > p:first-child > img.hero-banner)
+  ~ .md-content__inner > nav.md-breadcrumbs,
+.md-content__inner:has(> .md-typeset > p:first-child > img.hero-banner)
+  > nav.md-breadcrumbs,
+.md-typeset:has(> p:first-child > img.hero-banner)
+  > nav.md-breadcrumbs:first-of-type {
+  display: none;
 }
 
 /* Architecture diagrams (inline page content) — cap visual height so the
