@@ -78,7 +78,10 @@
   background: transparent;
 }
 .md-hero-band__grid {
-  padding: 0.4rem 0 1.25rem;  /* small gap below navbar, room before content */
+  /* Top gap matches the visual rhythm of the home page hero — a clear
+     band of page background between the blue navbar and the hero image
+     so the hero doesn't feel pinned against the nav. */
+  padding: 1.5rem 0 1.25rem;
   margin: 0 auto;
   max-width: 76rem;            /* match md-grid */
 }

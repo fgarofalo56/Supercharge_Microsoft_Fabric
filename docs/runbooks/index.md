@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/runbooks.svg
+hero_alt: Runbooks — On-call incident playbooks
+---
+
 # 📋 Operational Runbooks
 
 > **Last Updated**: 2026-05-05 | **Version**: 3.0

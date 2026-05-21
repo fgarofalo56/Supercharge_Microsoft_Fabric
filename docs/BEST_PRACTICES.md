@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/best-practices.svg
+hero_alt: Best Practices — Enterprise patterns for Fabric
+---
+
 # 🏆 Microsoft Fabric Best Practices Guide
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0

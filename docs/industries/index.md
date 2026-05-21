@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/industries.svg
+hero_alt: Industries — Vertical solutions on Microsoft Fabric
+---
+
 # 🏭 Industry Verticals
 
 <div align="center" markdown>

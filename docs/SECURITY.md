@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/compliance.svg
+hero_alt: Security — Defense-in-depth for Fabric
+---
+
 # 🔐 Security and Compliance Guide
 
 <div align="center" markdown>

@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/decisions.svg
+hero_alt: Decisions — Architecture trade-offs and ADRs
+---
+
 # Decision Trees: Interactive Architecture Guides
 
 <div align="center" markdown>

@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/runbooks.svg
+hero_alt: Disaster Recovery — BCDR procedures and verification
+---
+
 # 🔄 Disaster Recovery & Business Continuity
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0

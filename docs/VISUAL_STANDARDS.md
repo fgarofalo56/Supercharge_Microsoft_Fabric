@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/reference.svg
+hero_alt: Reference — Visual standards
+---
+
 # 🎨 Visual Design Standards
 
 > **Last Updated**: 2025-01-22 | **Version**: 1.0  

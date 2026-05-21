@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/best-practices.svg
+hero_alt: "Networking — VNets, private endpoints, gateways"
+---
+
 # 🌐 Networking & Connectivity Guide
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0

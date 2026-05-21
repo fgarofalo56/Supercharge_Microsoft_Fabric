@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 420" width="1600" height="420"
+     role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid slice">
+  <title id="title">Deployment</title>
+  <desc id="desc">Bicep IaC, fabric-cicd, deployment pipelines, GitHub Actions</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="0.7">
+      <stop offset="0%"   stop-color="#0B1226"/>
+      <stop offset="55%"  stop-color="#3F51B5"/>
+      <stop offset="100%" stop-color="#0B1226"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="78%" cy="50%" r="55%">
+      <stop offset="0%"   stop-color="#818CF8" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#818CF8" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .h-title { font-family:'IBM Plex Sans','Segoe UI','Helvetica Neue',sans-serif; font-weight:600; font-size:54px; fill:#FFFFFF; letter-spacing:-1.0px; }
+      .h-sub   { font-family:'IBM Plex Sans','Segoe UI','Helvetica Neue',sans-serif; font-weight:400; font-size:20px; fill:#FFFFFF; fill-opacity:0.84; letter-spacing:-0.2px; }
+      .h-chip  { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:700; font-size:13px; letter-spacing:2.5px; fill:#A5B4FC; }
+      .h-foot  { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:500; font-size:11px; letter-spacing:1.2px; fill:#FFFFFF; fill-opacity:0.45; }
+      .v-num   { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:700; font-size:15px; fill:#FFFFFF; letter-spacing:0.5px; }
+      .v-lbl   { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:600; font-size:13px; fill:#FFFFFF; fill-opacity:0.95; letter-spacing:0.8px; }
+      .v-cap   { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:500; font-size:11px; fill:#FFFFFF; fill-opacity:0.75; letter-spacing:1.0px; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1600" height="420" fill="url(#bg)"/>
+  <rect width="1600" height="420" fill="url(#glow)"/>
+
+  <!-- Left accent stripe -->
+  <rect x="0" y="0" width="6" height="420" fill="#A5B4FC" opacity="0.65"/>
+  <rect x="0" y="0" width="6" height="120" fill="#818CF8"/>
+
+  <!-- Bottom scan line -->
+  <rect x="0" y="408" width="1600" height="2" fill="#A5B4FC" opacity="0.25"/>
+
+  <!-- Eyebrow chip -->
+  <g transform="translate(72, 60)">
+    <rect x="0" y="0" width="380" height="34" rx="0" fill="#818CF8" fill-opacity="0.10" stroke="#818CF8" stroke-opacity="0.55"/>
+    <rect x="0" y="0" width="6" height="34" fill="#818CF8"/>
+    <text class="h-chip" x="190.0" y="22" text-anchor="middle">DEPLOYMENT · CI/CD · FABRIC-CICD</text>
+  </g>
+
+  <!-- Title -->
+  <text class="h-title" x="72" y="208">Deployment</text>
+
+  <!-- Tagline -->
+  <text class="h-sub" x="72" y="252">Bicep IaC, fabric-cicd, deployment pipelines, GitHub Actions</text>
+
+  <!-- Footer chip -->
+  <text class="h-foot" x="72" y="385">BICEP · FABRIC-CICD · DEPLOYMENT PIPELINES · BLUE/GREEN · CANARY</text>
+
+<g transform="translate(900, 60)">
+
+    <g transform="translate(0,0)">
+      <rect x="0" y="0" width="206" height="118" rx="6" fill="#818CF8" fill-opacity="0.28" stroke="#818CF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="6" height="118" fill="#818CF8"/>
+      <text class="v-num" x="18" y="32" font-size="22">01</text>
+      <text class="v-lbl" x="18" y="78" font-size="14">VALIDATE</text>
+    </g>
+<path d="M206,59 L230,59" stroke="#A5B4FC" stroke-width="1.5" fill="none" opacity="0.55"/>
+
+    <g transform="translate(230,0)">
+      <rect x="0" y="0" width="206" height="118" rx="6" fill="#818CF8" fill-opacity="0.28" stroke="#818CF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="6" height="118" fill="#818CF8"/>
+      <text class="v-num" x="18" y="32" font-size="22">02</text>
+      <text class="v-lbl" x="18" y="78" font-size="14">PLAN</text>
+    </g>
+<path d="M436,59 L460,59" stroke="#A5B4FC" stroke-width="1.5" fill="none" opacity="0.55"/>
+
+    <g transform="translate(460,0)">
+      <rect x="0" y="0" width="206" height="118" rx="6" fill="#818CF8" fill-opacity="0.28" stroke="#818CF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="6" height="118" fill="#818CF8"/>
+      <text class="v-num" x="18" y="32" font-size="22">03</text>
+      <text class="v-lbl" x="18" y="78" font-size="14">APPLY</text>
+    </g>
+
+    <g transform="translate(0,140)">
+      <rect x="0" y="0" width="206" height="118" rx="6" fill="#818CF8" fill-opacity="0.28" stroke="#818CF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="6" height="118" fill="#818CF8"/>
+      <text class="v-num" x="18" y="32" font-size="22">04</text>
+      <text class="v-lbl" x="18" y="78" font-size="14">MIGRATE</text>
+    </g>
+<path d="M206,199 L230,199" stroke="#A5B4FC" stroke-width="1.5" fill="none" opacity="0.55"/>
+
+    <g transform="translate(230,140)">
+      <rect x="0" y="0" width="206" height="118" rx="6" fill="#818CF8" fill-opacity="0.28" stroke="#818CF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="6" height="118" fill="#818CF8"/>
+      <text class="v-num" x="18" y="32" font-size="22">05</text>
+      <text class="v-lbl" x="18" y="78" font-size="14">VERIFY</text>
+    </g>
+<path d="M436,199 L460,199" stroke="#A5B4FC" stroke-width="1.5" fill="none" opacity="0.55"/>
+
+    <g transform="translate(460,140)">
+      <rect x="0" y="0" width="206" height="118" rx="6" fill="#818CF8" fill-opacity="0.28" stroke="#818CF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="6" height="118" fill="#818CF8"/>
+      <text class="v-num" x="18" y="32" font-size="22">06</text>
+      <text class="v-lbl" x="18" y="78" font-size="14">PROMOTE</text>
+    </g>
+</g>
+</svg>

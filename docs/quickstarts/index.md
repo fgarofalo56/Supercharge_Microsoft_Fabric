@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/getting-started.svg
+hero_alt: Quickstarts — Get going fast
+---
+
 # Role-Based Quickstart Guides
 
 > **Last Updated**: 2026-05-05 | **Status**: Complete

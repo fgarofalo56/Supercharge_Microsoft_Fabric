@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/reference.svg
+hero_alt: Reference — Cheat sheets
+---
+
 # Cheat Sheets
 
 > **Last Updated**: 2026-04-27 | **Version**: 1.0

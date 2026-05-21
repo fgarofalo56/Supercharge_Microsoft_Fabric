@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/reference-architecture.svg
+hero_alt: Reference Architectures — Blueprints for SMB through enterprise
+---
+
 # 🏗️ Reference Architectures for Microsoft Fabric
 
 <div align="center" markdown>

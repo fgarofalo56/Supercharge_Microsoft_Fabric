@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 420" width="1600" height="420"
+     role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid slice">
+  <title id="title">Cost &amp; Capacity</title>
+  <desc id="desc">Capacity sizing, FinOps guardrails, SKU selection, and cost forecasting</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="0.7">
+      <stop offset="0%"   stop-color="#022C22"/>
+      <stop offset="55%"  stop-color="#047857"/>
+      <stop offset="100%" stop-color="#022C22"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="78%" cy="50%" r="55%">
+      <stop offset="0%"   stop-color="#34D399" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#34D399" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .h-title { font-family:'IBM Plex Sans','Segoe UI','Helvetica Neue',sans-serif; font-weight:600; font-size:54px; fill:#FFFFFF; letter-spacing:-1.0px; }
+      .h-sub   { font-family:'IBM Plex Sans','Segoe UI','Helvetica Neue',sans-serif; font-weight:400; font-size:20px; fill:#FFFFFF; fill-opacity:0.84; letter-spacing:-0.2px; }
+      .h-chip  { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:700; font-size:13px; letter-spacing:2.5px; fill:#6EE7B7; }
+      .h-foot  { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:500; font-size:11px; letter-spacing:1.2px; fill:#FFFFFF; fill-opacity:0.45; }
+      .v-num   { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:700; font-size:15px; fill:#FFFFFF; letter-spacing:0.5px; }
+      .v-lbl   { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:600; font-size:13px; fill:#FFFFFF; fill-opacity:0.95; letter-spacing:0.8px; }
+      .v-cap   { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:500; font-size:11px; fill:#FFFFFF; fill-opacity:0.75; letter-spacing:1.0px; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1600" height="420" fill="url(#bg)"/>
+  <rect width="1600" height="420" fill="url(#glow)"/>
+
+  <!-- Left accent stripe -->
+  <rect x="0" y="0" width="6" height="420" fill="#6EE7B7" opacity="0.65"/>
+  <rect x="0" y="0" width="6" height="120" fill="#34D399"/>
+
+  <!-- Bottom scan line -->
+  <rect x="0" y="408" width="1600" height="2" fill="#6EE7B7" opacity="0.25"/>
+
+  <!-- Eyebrow chip -->
+  <g transform="translate(72, 60)">
+    <rect x="0" y="0" width="300" height="34" rx="0" fill="#34D399" fill-opacity="0.10" stroke="#34D399" stroke-opacity="0.55"/>
+    <rect x="0" y="0" width="6" height="34" fill="#34D399"/>
+    <text class="h-chip" x="150.0" y="22" text-anchor="middle">FINOPS · COST GOVERNANCE</text>
+  </g>
+
+  <!-- Title -->
+  <text class="h-title" x="72" y="208">Cost &amp; Capacity</text>
+
+  <!-- Tagline -->
+  <text class="h-sub" x="72" y="252">Capacity sizing, FinOps guardrails, SKU selection, and cost forecasting</text>
+
+  <!-- Footer chip -->
+  <text class="h-foot" x="72" y="385">F2 · F4 · F8 · F16 · F32 · F64 · F128 · F256 · F512</text>
+
+<g transform="translate(900, 84)">
+
+    <g transform="translate(0,0)">
+      <rect x="0" y="0" width="640" height="50" rx="5" fill="#34D399" fill-opacity="0.28" stroke="#34D399" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="6" height="50" fill="#34D399"/>
+      <text class="v-num" x="20" y="22">01</text>
+      <text class="v-lbl" x="60" y="22" font-size="14">CAPACITY PLANNING + SKU SELECTION</text>
+      <text class="v-cap" x="60" y="38">Right-size to workload + headroom</text>
+    </g>
+
+    <g transform="translate(0,64)">
+      <rect x="0" y="0" width="640" height="50" rx="5" fill="#34D399" fill-opacity="0.28" stroke="#34D399" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="6" height="50" fill="#34D399"/>
+      <text class="v-num" x="20" y="22">02</text>
+      <text class="v-lbl" x="60" y="22" font-size="14">AUTO-SCALE + PAUSE/RESUME</text>
+      <text class="v-cap" x="60" y="38">Cost-aware capacity lifecycle</text>
+    </g>
+
+    <g transform="translate(0,128)">
+      <rect x="0" y="0" width="640" height="50" rx="5" fill="#34D399" fill-opacity="0.28" stroke="#34D399" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="6" height="50" fill="#34D399"/>
+      <text class="v-num" x="20" y="22">03</text>
+      <text class="v-lbl" x="60" y="22" font-size="14">COST ATTRIBUTION (TAGS + DOMAINS)</text>
+      <text class="v-cap" x="60" y="38">Per-workspace + per-team chargeback</text>
+    </g>
+
+    <g transform="translate(0,192)">
+      <rect x="0" y="0" width="640" height="50" rx="5" fill="#34D399" fill-opacity="0.28" stroke="#34D399" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="6" height="50" fill="#34D399"/>
+      <text class="v-num" x="20" y="22">04</text>
+      <text class="v-lbl" x="60" y="22" font-size="14">ANOMALY DETECTION + BUDGET ALERTS</text>
+      <text class="v-cap" x="60" y="38">Spike investigation + guardrails</text>
+    </g>
+</g>
+</svg>

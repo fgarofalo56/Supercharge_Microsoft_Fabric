@@ -1,3 +1,8 @@
+---
+hero: assets/heroes/reference.svg
+hero_alt: Reference — My Resources
+---
+
 # Resource Inventory Template
 
 > Per-deployment reference sheet. Fill in your **own** Azure resource IDs locally so every tutorial pulls from one place instead of hunting through multiple portals.
