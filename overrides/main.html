@@ -1,6 +1,35 @@
 {% extends "base.html" %}
 
 {#-
+  Page <head> additions — Open Graph + Twitter card meta tags so URL
+  previews on LinkedIn / Slack / Teams / X / iMessage all show the
+  branded social card instead of a blank preview.
+-#}
+{% block extrahead %}
+  {{ super() }}
+  {%- set og_card = base_url ~ "/assets/images/og-card.png" -%}
+  {%- set page_title = page.title if page and page.title else config.site_name -%}
+  {%- set page_desc = page.meta.description if page and page.meta and page.meta.description else config.site_description -%}
+  {%- set page_url = (page.canonical_url if page and page.canonical_url else config.site_url) | default(base_url) -%}
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ config.site_name }}">
+  <meta property="og:title" content="{{ page_title }}">
+  <meta property="og:description" content="{{ page_desc }}">
+  <meta property="og:url" content="{{ page_url }}">
+  <meta property="og:image" content="{{ og_card }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Supercharge Microsoft Fabric — Enterprise reference for architecture, migrations, AI, and governance">
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page_title }}">
+  <meta name="twitter:description" content="{{ page_desc }}">
+  <meta name="twitter:image" content="{{ og_card }}">
+  <meta name="twitter:image:alt" content="Supercharge Microsoft Fabric">
+{% endblock %}
+
+{#-
   Page hero banner — renders a full-width band ABOVE the three-column
   md-main__inner (left nav + content + right TOC). Driven by the page
   YAML frontmatter:

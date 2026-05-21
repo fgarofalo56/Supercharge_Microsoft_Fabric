@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32"
+     role="img" aria-label="Supercharge Microsoft Fabric">
+  <!--
+    Navbar logo — small, transparent background variant of the favicon
+    designed to sit next to the wordmark text on the indigo nav. The
+    glyph is white + amber lightning so it reads on both indigo
+    (default scheme) and slate (dark scheme) navbar colors.
+  -->
+  <!-- Stylized white "F" -->
+  <path d="M 9 7 H 23 V 11 H 13 V 15 H 21 V 19 H 13 V 25 H 9 Z"
+        fill="#FFFFFF"/>
+  <!-- Amber lightning accent — crosses the F bar -->
+  <path d="M 24 6 L 18 18 L 22 18 L 16 28 L 21 17 L 17 17 Z"
+        fill="#FFB300"
+        opacity="0.95"/>
+</svg>

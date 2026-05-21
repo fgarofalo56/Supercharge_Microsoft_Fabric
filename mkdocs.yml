@@ -62,9 +62,9 @@ theme:
     repo: fontawesome/brands/github
     edit: material/pencil
   
-  # Custom logo and favicon (optional - uses default if not present)
-  # logo: assets/logo.png
-  # favicon: assets/favicon.ico
+  # Custom logo + favicon — see docs/assets/images/{logo,favicon}.svg
+  logo: assets/images/logo.svg
+  favicon: assets/images/favicon.svg
 
 # Hooks (post-build mutations)
 hooks:

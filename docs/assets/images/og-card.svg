@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630"
+     role="img" aria-labelledby="og-title og-desc" preserveAspectRatio="xMidYMid slice">
+  <title id="og-title">Supercharge Microsoft Fabric</title>
+  <desc id="og-desc">Enterprise reference for architecture, migrations, AI, and governance</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="0.7">
+      <stop offset="0%"   stop-color="#0B1226"/>
+      <stop offset="55%"  stop-color="#3F51B5"/>
+      <stop offset="100%" stop-color="#0B1226"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="78%" cy="50%" r="55%">
+      <stop offset="0%"   stop-color="#818CF8" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#818CF8" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .h-eyebrow { font-family:'IBM Plex Sans','Segoe UI',sans-serif; font-weight:700; font-size:18px; letter-spacing:3px; fill:#A5B4FC; }
+      .h-title   { font-family:'IBM Plex Sans','Segoe UI',sans-serif; font-weight:700; font-size:78px; fill:#FFFFFF; letter-spacing:-1.5px; }
+      .h-sub     { font-family:'IBM Plex Sans','Segoe UI',sans-serif; font-weight:400; font-size:30px; fill:#FFFFFF; fill-opacity:0.84; letter-spacing:-0.3px; }
+      .h-foot    { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:600; font-size:18px; letter-spacing:2px; fill:#FFFFFF; fill-opacity:0.55; }
+      .v-num     { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:700; font-size:18px; fill:#FFFFFF; }
+      .v-lbl     { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:600; font-size:14px; fill:#FFFFFF; fill-opacity:0.92; letter-spacing:1px; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- Left vertical accent stripe -->
+  <rect x="0" y="0" width="8" height="630" fill="#A5B4FC" opacity="0.65"/>
+  <rect x="0" y="0" width="8" height="180" fill="#FFB300"/>
+
+  <!-- Bottom scan line -->
+  <rect x="0" y="618" width="1200" height="2" fill="#A5B4FC" opacity="0.25"/>
+
+  <!-- Logo glyph (top-left) -->
+  <g transform="translate(80, 80)">
+    <path d="M 0 0 H 70 V 18 H 18 V 36 H 56 V 54 H 18 V 88 H 0 Z" fill="#FFFFFF"/>
+    <path d="M 75 -10 L 49 50 L 65 50 L 35 100 L 60 42 L 44 42 Z" fill="#FFB300" opacity="0.95"/>
+  </g>
+
+  <!-- Eyebrow chip text -->
+  <text class="h-eyebrow" x="220" y="135">MICROSOFT FABRIC · ENTERPRISE REFERENCE</text>
+
+  <!-- Title -->
+  <text class="h-title" x="80" y="320">Supercharge Microsoft Fabric</text>
+
+  <!-- Tagline -->
+  <text class="h-sub" x="80" y="380">Enterprise reference for architecture, migrations,</text>
+  <text class="h-sub" x="80" y="420">AI, and governance — built on Fabric F64.</text>
+
+  <!-- Right-side feature tiles (4 cards) -->
+  <g transform="translate(740, 90)">
+    <!-- Tile 1 -->
+    <rect x="0" y="0" width="180" height="100" rx="8" fill="#818CF8" fill-opacity="0.28" stroke="#818CF8" stroke-opacity="0.95" stroke-width="1.5"/>
+    <text class="v-num" x="18" y="32">01</text>
+    <text class="v-lbl" x="18" y="58">DATA</text>
+    <text class="v-lbl" x="18" y="76">FACTORY</text>
+
+    <!-- Tile 2 -->
+    <rect x="200" y="0" width="180" height="100" rx="8" fill="#818CF8" fill-opacity="0.28" stroke="#818CF8" stroke-opacity="0.95" stroke-width="1.5"/>
+    <text class="v-num" x="218" y="32">02</text>
+    <text class="v-lbl" x="218" y="58">DATA</text>
+    <text class="v-lbl" x="218" y="76">ENGINEERING</text>
+
+    <!-- Tile 3 -->
+    <rect x="0" y="120" width="180" height="100" rx="8" fill="#818CF8" fill-opacity="0.28" stroke="#818CF8" stroke-opacity="0.95" stroke-width="1.5"/>
+    <text class="v-num" x="18" y="152">03</text>
+    <text class="v-lbl" x="18" y="178">REAL-TIME</text>
+    <text class="v-lbl" x="18" y="196">INTELLIGENCE</text>
+
+    <!-- Tile 4 -->
+    <rect x="200" y="120" width="180" height="100" rx="8" fill="#818CF8" fill-opacity="0.28" stroke="#818CF8" stroke-opacity="0.95" stroke-width="1.5"/>
+    <text class="v-num" x="218" y="152">04</text>
+    <text class="v-lbl" x="218" y="178">POWER BI</text>
+    <text class="v-lbl" x="218" y="196">+ AI</text>
+
+    <!-- OneLake foundation band -->
+    <rect x="0" y="240" width="380" height="60" rx="8" fill="#A5B4FC" fill-opacity="0.32" stroke="#A5B4FC" stroke-opacity="0.95" stroke-width="1.5"/>
+    <text class="v-num" x="18" y="270">00</text>
+    <text class="v-lbl" x="18" y="290" font-size="13">ONELAKE · DELTA · ICEBERG · SHORTCUTS</text>
+  </g>
+
+  <!-- Footer chip -->
+  <text class="h-foot" x="80" y="590">F64 CAPACITY · 333+ PAGES · 56 TUTORIALS · 28 FEATURES</text>
+</svg>

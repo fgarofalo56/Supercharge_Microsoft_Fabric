@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32"
+     role="img" aria-label="Supercharge Microsoft Fabric">
+  <!--
+    Favicon — a stylized "F" lightning glyph in the project's indigo
+    brand color. Built from two interlocking shapes so it reads cleanly
+    at 16x16 (browser tab) and scales up to 512x512 (touch icons).
+  -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"  stop-color="#3F51B5"/>
+      <stop offset="100%" stop-color="#1A237E"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded indigo square background -->
+  <rect x="0" y="0" width="32" height="32" rx="7" fill="url(#g)"/>
+
+  <!-- Stylized F with a forward "supercharge" tilt -->
+  <path d="M 9 7 H 23 V 11 H 13 V 15 H 21 V 19 H 13 V 25 H 9 Z"
+        fill="#FFFFFF"/>
+
+  <!-- Lightning bolt — clean zigzag, reads at 16x16 -->
+  <path d="M 24 6 L 18 18 L 22 18 L 16 28 L 21 17 L 17 17 Z"
+        fill="#FFB300"
+        opacity="0.95"/>
+</svg>
