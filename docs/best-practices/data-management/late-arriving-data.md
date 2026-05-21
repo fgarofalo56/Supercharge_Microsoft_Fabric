@@ -1,5 +1,3 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Data Management](../index.md) > Late-Arriving Data
-
 # ⏱️ Late-Arriving Data on Microsoft Fabric
 
 <div align="center" markdown>
@@ -16,29 +14,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Anchor:** [Master Data Management](master-data-management.md) (Wave 3)
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🌀 The Five Late-Arrival Scenarios](#-the-five-late-arrival-scenarios)
-- [⏰ Watermark Concepts](#-watermark-concepts)
-- [🔁 Idempotency Patterns](#-idempotency-patterns)
-- [🥉 Bronze Patterns](#-bronze-patterns)
-- [🥈 Silver Patterns](#-silver-patterns)
-- [🥇 Gold Patterns](#-gold-patterns)
-- [🌊 Streaming with Watermarks](#-streaming-with-watermarks)
-- [🔄 Backfill Procedure](#-backfill-procedure)
-- [✏️ Correction Procedure](#-correction-procedure)
-- [🐛 Reprocessing After Bug Discovery](#-reprocessing-after-bug-discovery)
-- [📜 Auditability](#-auditability)
-- [🔍 Detecting Late Data](#-detecting-late-data)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Implementation](#️-federal-implementation)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Implementation Checklist](#-implementation-checklist)
-- [📚 References](#-references)
 
 ---
 

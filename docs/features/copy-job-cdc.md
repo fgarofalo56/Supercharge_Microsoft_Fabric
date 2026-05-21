@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Copy Job CDC
-
 # 📋 Copy Job - Continuous Ingestion with Change Data Capture
 
 <div align="center" markdown>
@@ -15,22 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [⚙️ Configuration](#️-configuration)
-- [🔄 CDC Patterns](#-cdc-patterns)
-- [📐 Source & Destination Mapping](#-source--destination-mapping)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Agency Implementation](#️-federal-agency-implementation)
-- [📊 Monitoring and Troubleshooting](#-monitoring-and-troubleshooting)
-- [⚡ Performance Optimization](#-performance-optimization)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

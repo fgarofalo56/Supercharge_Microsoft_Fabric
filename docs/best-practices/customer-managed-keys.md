@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > Customer-Managed Keys
-
 # 🔐 Customer-Managed Keys (CMK) for Microsoft Fabric
 
 <div align="center" markdown>
@@ -15,22 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [⚙️ Key Vault Setup](#️-key-vault-setup)
-- [🗃️ SQL Database CMK](#️-sql-database-cmk)
-- [💾 Storage Account CMK](#-storage-account-cmk)
-- [🔄 Key Rotation](#-key-rotation)
-- [🎰 Casino Compliance](#-casino-compliance)
-- [🏛️ Federal Compliance Mapping](#️-federal-compliance-mapping)
-- [📊 Monitoring & Alerting](#-monitoring--alerting)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

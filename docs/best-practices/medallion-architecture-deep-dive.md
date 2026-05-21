@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > Medallion Architecture Deep Dive
-
 # 🏗️ Medallion Architecture Deep Dive
 
 <div align="center" markdown>
@@ -15,22 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [🥉 Bronze Patterns](#-bronze-patterns)
-- [🥈 Silver Patterns](#-silver-patterns)
-- [🥇 Gold Patterns](#-gold-patterns)
-- [🔧 Table Maintenance](#-table-maintenance)
-- [📝 Naming Conventions](#-naming-conventions)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Implementation](#️-federal-implementation)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📚 References](#-references)
 
 ---
 

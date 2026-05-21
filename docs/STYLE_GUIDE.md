@@ -1,25 +1,7 @@
-[Home](index.md) > [Docs](./index.md) > Style Guide
-
 # 📝 Documentation Style Guide
 
 > **Last Updated**: 2025-01-22 | **Version**: 1.0  
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
-
----
-
-## 📑 Table of Contents
-
-- [Overview](#-overview)
-- [Document Structure](#-document-structure)
-- [Visual Elements](#-visual-elements)
-- [Mermaid Diagrams](#-mermaid-diagrams)
-- [Icons & Emoji](#-icons--emoji)
-- [Code Blocks](#-code-blocks)
-- [Tables](#-tables)
-- [Links & Navigation](#-links--navigation)
-- [Images & Media](#-images--media)
-- [Templates](#-templates)
-- [Quick Reference](#-quick-reference)
 
 ---
 
@@ -644,15 +626,6 @@ docs/
 > **Status**: Draft | Review | Final
 
 Brief one-paragraph description of this document's purpose.
-
----
-
-## 📑 Table of Contents
-
-- [Overview](#overview)
-- [Section 1](#section-1)
-- [Section 2](#section-2)
-- [Related Documents](#-related-documents)
 
 ---
 

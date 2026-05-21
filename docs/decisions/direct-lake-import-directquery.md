@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Decision Trees](./) > Direct Lake vs Import vs DirectQuery
-
 # Direct Lake vs Import vs DirectQuery
 
 <div align="center" markdown>

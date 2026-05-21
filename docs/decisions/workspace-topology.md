@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Decision Trees](./) > Workspace Topology
-
 # Workspace Topology
 
 <div align="center" markdown>

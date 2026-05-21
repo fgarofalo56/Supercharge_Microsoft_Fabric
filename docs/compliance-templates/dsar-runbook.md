@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../..) > [Compliance Templates](.) > DSAR Runbook
-
 # 📨 DSAR (Data Subject Access Request) Runbook
 
 <div align="center" markdown>
@@ -21,37 +19,6 @@
 > 📋 **TEMPLATE — Clone and customize for your organization.** This runbook is delivered as a working template. Fill in `{{PLACEHOLDERS}}`, swap example regulatory references for your jurisdiction, and align timing/escalation paths to your privacy-program SLAs before placing into operation. Track template revisions through your organization's document-control process.
 
 > **Disclaimer:** This document provides operational and technical guidance for fulfilling Data Subject Access Requests (DSARs) on Microsoft Fabric. It is **not** legal advice. The applicability of GDPR, CCPA/CPRA, state privacy laws (Virginia VCDPA, Colorado CPA, Connecticut CTDPA, Utah UCPA, Texas TDPSA, etc.), Privacy Act, HIPAA, and sector-specific obligations is fact-specific. Engage qualified privacy counsel to validate the request-handling decisions, exemption applications, identity-verification thresholds, and cross-border-transfer answers that apply to your organization. Statutes and regulator guidance evolve; verify timing requirements and exemption criteria against current law before relying on them.
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [📋 Regulatory Coverage](#-regulatory-coverage)
-- [🚨 Severity Classification](#-severity-classification)
-- [👥 Roles & Responsibilities](#-roles--responsibilities)
-- [📞 Communications Tree](#-communications-tree)
-- [🔄 DSAR Lifecycle Overview](#-dsar-lifecycle-overview)
-- [🟢 Phase 1 — Intake (0-72 hours)](#-phase-1--intake-0-72-hours)
-- [🔍 Phase 2 — Locate](#-phase-2--locate)
-- [⚖️ Phase 3 — Determine Action](#️-phase-3--determine-action)
-- [⚙️ Phase 4 — Execute](#️-phase-4--execute)
-- [✅ Phase 5 — Verify](#-phase-5--verify)
-- [📤 Phase 6 — Respond to Subject](#-phase-6--respond-to-subject)
-- [📜 Phase 7 — Audit Log](#-phase-7--audit-log)
-- [🛡️ Exemption Decision Framework](#️-exemption-decision-framework)
-- [📨 Communication Templates](#-communication-templates)
-- [⏱️ Timing & SLA](#️-timing--sla)
-- [🔺 Escalation](#-escalation)
-- [🌍 Multi-Tenant / Cross-Border Considerations](#-multi-tenant--cross-border-considerations)
-- [📚 Record Keeping](#-record-keeping)
-- [📝 Forms & Templates Provided](#-forms--templates-provided)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Implementation](#️-federal-implementation)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Implementation Checklist](#-implementation-checklist)
-- [🪞 Post-Request Review](#-post-request-review)
-- [📚 References](#-references)
 
 ---
 

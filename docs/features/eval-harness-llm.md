@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > LLM Evaluation Harness on Fabric
-
 # 🧪 LLM Evaluation Harness on Fabric
 
 <div align="center" markdown>
@@ -16,30 +14,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Wave 2 Anchor:** [MLOps for Fabric Production](../best-practices/mlops-fabric-production.md)
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🪜 The Evaluation Hierarchy](#-the-evaluation-hierarchy)
-- [🏗️ Reference Architecture](#️-reference-architecture)
-- [🧬 Eval Test Set Construction](#-eval-test-set-construction)
-- [📏 Evaluation Metric Types](#-evaluation-metric-types)
-- [⚖️ LLM-as-Judge Pattern Deep Dive](#️-llm-as-judge-pattern-deep-dive)
-- [🧰 Frameworks Comparison](#-frameworks-comparison)
-- [🔄 CI Integration](#-ci-integration)
-- [🏭 Implementation in Fabric](#-implementation-in-fabric)
-- [📈 Production Eval (Continuous)](#-production-eval-continuous)
-- [🧪 Regression Testing for Prompt Changes](#-regression-testing-for-prompt-changes)
-- [🧪 A/B Eval for Production Models](#-ab-eval-for-production-models)
-- [💰 Cost Considerations](#-cost-considerations)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Implementation](#️-federal-implementation)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Production Eval Checklist](#-production-eval-checklist)
-- [📦 Templates Provided](#-templates-provided)
-- [📚 References](#-references)
 
 ---
 

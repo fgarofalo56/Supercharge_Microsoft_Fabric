@@ -1,5 +1,3 @@
-[Home](../../index.md) > [Docs](../../) > [Best Practices](../index.md) > [Operations](../index.md) > Observability Stack
-
 # 🔭 Observability Stack: Log Analytics + Workspace Monitoring + Action Groups + Grafana
 
 <div align="center" markdown>
@@ -16,25 +14,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Phase:** 14 Wave 1 (Feature 1.11)
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Reference Architecture](#️-reference-architecture)
-- [📡 Telemetry Sources](#-telemetry-sources)
-- [🗄️ Storage Layer Choices](#️-storage-layer-choices)
-- [📚 Standard KQL Library](#-standard-kql-library)
-- [🚨 Alert Wiring](#-alert-wiring)
-- [📊 Dashboards](#-dashboards)
-- [⚡ Data Activator for Business Events](#-data-activator-for-business-events)
-- [🧵 Distributed Tracing](#-distributed-tracing)
-- [💰 Cost Considerations](#-cost-considerations)
-- [✅ Implementation Checklist](#-implementation-checklist)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Related Runbooks & Best Practices](#-related-runbooks--best-practices)
-- [📚 References](#-references)
 
 ---
 

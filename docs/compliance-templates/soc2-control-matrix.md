@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](..) > [Compliance Templates](./) > SOC 2 Control Matrix Template
-
 # SOC 2 Control Matrix Template — Microsoft Fabric Workloads
 
 <div align="center" markdown>
@@ -34,30 +32,6 @@
 > 4. Maintain this document as a living artifact throughout the examination period
 >
 > The anchor source-of-truth for the underlying mapping is [`docs/best-practices/security/soc2-type2-readiness.md`](../best-practices/security/soc2-type2-readiness.md). This template is the customer-facing operationalization of that mapping.
-
----
-
-## Table of Contents
-
-- [How to Use This Template](#how-to-use-this-template)
-- [Cover Page](#cover-page)
-- [Section 1 — System Boundary](#section-1--system-boundary)
-- [Section 2 — Common Criteria (CC) Matrix](#section-2--common-criteria-cc-matrix)
-- [Section 3 — Security TSC Matrix](#section-3--security-tsc-matrix)
-- [Section 4 — Availability TSC Matrix](#section-4--availability-tsc-matrix)
-- [Section 5 — Processing Integrity TSC Matrix](#section-5--processing-integrity-tsc-matrix)
-- [Section 6 — Confidentiality TSC Matrix](#section-6--confidentiality-tsc-matrix)
-- [Section 7 — Privacy TSC Matrix](#section-7--privacy-tsc-matrix)
-- [Section 8 — Carve-Out: Microsoft as Subservice Organization](#section-8--carve-out-microsoft-as-subservice-organization)
-- [Section 9 — Exception Register](#section-9--exception-register)
-- [Section 10 — Control Test Calendar](#section-10--control-test-calendar)
-- [Section 11 — Evidence Index](#section-11--evidence-index)
-- [Section 12 — Sign-Off](#section-12--sign-off)
-- [Section 13 — Glossary](#section-13--glossary)
-- [Appendix A — Sample KQL Queries for Continuous Evidence](#appendix-a--sample-kql-queries-for-continuous-evidence)
-- [Appendix B — Sample Bicep Snippets](#appendix-b--sample-bicep-snippets)
-- [Appendix C — Sample Evidence Collection Automation](#appendix-c--sample-evidence-collection-automation)
-- [Appendix D — References](#appendix-d--references)
 
 ---
 

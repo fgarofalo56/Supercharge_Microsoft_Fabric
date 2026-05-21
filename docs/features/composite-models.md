@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Composite Models
-
 # 🔀 Composite Models - Mixed Storage Mode Semantic Models
 
 <div align="center" markdown>
@@ -15,23 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-21` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [⚙️ Storage Modes](#️-storage-modes)
-- [🔗 Relationship Rules](#-relationship-rules)
-- [📊 Query Delegation and Performance](#-query-delegation-and-performance)
-- [📐 Aggregation Tables](#-aggregation-tables)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Agency Implementation](#️-federal-agency-implementation)
-- [🔐 Security](#-security)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
-- [🔗 Related Documents](#-related-documents)
 
 ---
 

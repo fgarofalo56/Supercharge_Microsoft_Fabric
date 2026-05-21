@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > Monitoring & Observability
-
 # 📊 Monitoring & Observability for Microsoft Fabric
 
 <div align="center" markdown>
@@ -15,23 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [⚡ Capacity Monitoring](#-capacity-monitoring)
-- [🔍 Workspace Monitoring](#-workspace-monitoring)
-- [📈 Custom Dashboards](#-custom-dashboards)
-- [🚨 Alerting Strategy](#-alerting-strategy)
-- [📋 Runbooks](#-runbooks)
-- [🎰 Casino NOC Dashboard](#-casino-noc-dashboard)
-- [🏛️ Federal FISMA Continuous Monitoring](#️-federal-fisma-continuous-monitoring)
-- [🔧 Operational Maturity Model](#-operational-maturity-model)
-- [⚠️ Common Issues](#️-common-issues)
-- [📚 References](#-references)
 
 ---
 

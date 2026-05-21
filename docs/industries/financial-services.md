@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Industries](./) > Financial Services
-
 ![Financial Services Analytics — Fraud, AML, customer 360 on Fabric](../assets/heroes/financial-services.svg){ .hero-banner }
 
 # 🏦 Financial Services — Fraud Detection & Risk Analytics
@@ -22,17 +20,6 @@
 ---
 
 > *"Financial institutions process billions of transactions daily — detecting the fraudulent ones in real time is not optional, it is existential."*
-
----
-
-## 📑 Table of Contents
-
-- [Scenario Overview](#-scenario-overview)
-- [Regulatory Landscape](#-regulatory-landscape)
-- [Data Flow Architecture](#-data-flow-architecture)
-- [Why Fabric for Financial Services](#-why-fabric-for-financial-services)
-- [Getting Started](#-getting-started)
-- [References](#-references)
 
 ---
 

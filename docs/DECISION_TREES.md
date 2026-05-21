@@ -1,24 +1,9 @@
 # Decision Trees: Choosing the Right Fabric Component
 
-> [Home](index.md) > [Docs](./) > Decision Trees
-
 > **Last Updated**: 2026-04-27 | **Version**: 1.0
 > **Status**: Active | **Maintainer**: Architecture Team
 
 This document provides structured decision flowcharts for the most common "which Fabric component should I use?" questions. Each section contains a Mermaid flowchart, a comparison table, a "Choose X when..." summary, and a real-world example drawn from the POC.
-
----
-
-## Table of Contents
-
-- [1. Lakehouse vs Warehouse vs SQL Database](#1-lakehouse-vs-warehouse-vs-sql-database)
-- [2. Real-Time Intelligence vs Batch Processing](#2-real-time-intelligence-vs-batch-processing)
-- [3. Direct Lake vs Import vs DirectQuery](#3-direct-lake-vs-import-vs-directquery)
-- [4. Notebooks vs Spark Job Definitions vs Pipelines](#4-notebooks-vs-spark-job-definitions-vs-pipelines)
-- [5. Mirroring vs Shortcuts vs Pipeline Copy](#5-mirroring-vs-shortcuts-vs-pipeline-copy)
-- [6. Eventhouse vs Lakehouse for Time-Series](#6-eventhouse-vs-lakehouse-for-time-series)
-- [7. Variable Libraries vs Pipeline Parameters vs Spark Config](#7-variable-libraries-vs-pipeline-parameters-vs-spark-config)
-- [Cross-Reference: Related Docs](#cross-reference-related-docs)
 
 ---
 

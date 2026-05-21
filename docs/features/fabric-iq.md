@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Fabric IQ
-
 # 🧠 Fabric IQ - Natural Language Analytics
 
 
@@ -16,27 +14,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 2.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 What is Fabric IQ](#-what-is-fabric-iq)
-- [🏗️ Architecture Overview](#️-architecture-overview)
-- [⚙️ Setup and Configuration](#️-setup-and-configuration)
-- [🔄 How It Works: NL to SQL/DAX Translation](#-how-it-works-nl-to-sqldax-translation)
-- [🔌 Integration Points](#-integration-points)
-- [🏛️ Agency Use Cases](#️-agency-use-cases)
-- [📐 Data Preparation Best Practices](#-data-preparation-best-practices)
-- [📊 Semantic Model Optimization](#-semantic-model-optimization)
-- [⚠️ Limitations and Workarounds](#️-limitations-and-workarounds)
-- [🔐 Security Considerations](#-security-considerations)
-- [📚 References](#-references)
-- [🧬 Ontology Items](#-ontology-items)
-- [📋 Plan Items](#-plan-items)
-- [🕸️ Knowledge Graph](#️-knowledge-graph)
-- [🤖 Data Agents Integration](#-data-agents-integration)
-- [🔄 Fabric IQ Evolution](#-fabric-iq-evolution)
 
 ---
 

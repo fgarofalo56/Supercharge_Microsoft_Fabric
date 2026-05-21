@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > Responsible AI Framework for Fabric
-
 # 🧭 Responsible AI Framework for Fabric
 
 <div align="center" markdown>
@@ -16,27 +14,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Wave 2 Feature:** 2.4
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview — The 6 Microsoft Responsible AI Principles](#-overview--the-6-microsoft-responsible-ai-principles)
-- [💼 Why This Matters Beyond Compliance](#-why-this-matters-beyond-compliance)
-- [⚖️ Regulatory Landscape](#️-regulatory-landscape)
-- [🚦 Risk Assessment & Classification](#-risk-assessment--classification)
-- [⚖️ Pillar 1 — Fairness](#️-pillar-1--fairness)
-- [🔍 Pillar 2 — Explainability (SHAP / LIME)](#-pillar-2--explainability-shap--lime)
-- [📜 Pillar 3 — Transparency](#-pillar-3--transparency)
-- [🔒 Pillar 4 — Privacy](#-pillar-4--privacy)
-- [🛡️ Pillar 5 — Reliability & Safety](#️-pillar-5--reliability--safety)
-- [👥 Pillar 6 — Accountability](#-pillar-6--accountability)
-- [🏗️ Implementation in Fabric](#️-implementation-in-fabric)
-- [🏛️ Domain Implementations](#️-domain-implementations)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 RAI Review Checklist](#-rai-review-checklist)
-- [📝 Templates](#-templates)
-- [📚 References](#-references)
 
 ---
 

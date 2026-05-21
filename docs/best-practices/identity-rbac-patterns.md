@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > Identity & RBAC Patterns
-
 # 🔑 Identity & RBAC Patterns for Microsoft Fabric
 
 <div align="center" markdown>
@@ -15,22 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [👥 Workspace Roles](#-workspace-roles)
-- [📦 Item-Level Permissions](#-item-level-permissions)
-- [🔒 Data Security](#-data-security)
-- [🤖 Service Identity](#-service-identity)
-- [🎰 Casino RBAC Model](#-casino-rbac-model)
-- [🏛️ Federal RBAC Model](#️-federal-rbac-model)
-- [🔄 Lifecycle & Governance](#-lifecycle--governance)
-- [⚠️ Common Pitfalls](#️-common-pitfalls)
-- [📚 References](#-references)
 
 ---
 

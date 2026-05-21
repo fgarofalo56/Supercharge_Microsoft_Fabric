@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Eventhouse Vector Database
-
 # 🧬 Eventhouse as a Vector Database - AI-Powered Semantic Search
 
 <div align="center" markdown>
@@ -15,23 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [⚙️ Setup and Configuration](#️-setup-and-configuration)
-- [🔍 Vector Operations in KQL](#-vector-operations-in-kql)
-- [📝 AI Embed Text Plugin](#-ai-embed-text-plugin)
-- [💬 AI Chat Completion Plugin](#-ai-chat-completion-plugin)
-- [🎰 Casino Compliance Document Search](#-casino-compliance-document-search)
-- [🏛️ Federal Policy RAG](#️-federal-policy-rag)
-- [🤖 Integration with Data Agents](#-integration-with-data-agents)
-- [⚡ Performance Tuning](#-performance-tuning)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

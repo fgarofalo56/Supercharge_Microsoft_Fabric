@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](..) > [Runbooks](index.md) > Incident Response Template
-
 # 🚨 Incident Response Template
 
 > **Last Updated**: 2026-04-27 | **Phase**: 14 (Wave 1) | **Anchor Runbook**
@@ -14,23 +12,6 @@
 ![Severity](https://img.shields.io/badge/Severity-All%20Levels-orange)
 
 </div>
-
----
-
-## 📑 Table of Contents
-
-1. [How to Use This Template](#how-to-use-this-template)
-2. [Severity Matrix](#severity-matrix)
-3. [Incident Response Lifecycle](#incident-response-lifecycle)
-4. [Phase 1 — Detect & Triage](#phase-1--detect--triage-0-15-min)
-5. [Phase 2 — Mitigate](#phase-2--mitigate-15-60-min)
-6. [Phase 3 — Resolve](#phase-3--resolve)
-7. [Phase 4 — Post-Incident Review](#phase-4--post-incident-review-pir)
-8. [Communication Tree](#communication-tree)
-9. [Incident Channel Conventions](#incident-channel-conventions)
-10. [Blameless Postmortem Template](#blameless-postmortem-template)
-11. [Quick-Reference Commands](#quick-reference-commands)
-12. [Related Runbooks](#related-runbooks)
 
 ---
 

@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > Power BI Best Practices
-
 # 📊 Power BI Best Practices for Microsoft Fabric
 
 <div align="center" markdown>
@@ -15,23 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-21` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🧮 DAX Optimization](#-dax-optimization)
-- [🏗️ Semantic Model Design](#️-semantic-model-design)
-- [⚡ Report Performance](#-report-performance)
-- [🔷 Direct Lake Optimization](#-direct-lake-optimization)
-- [🔄 Incremental Refresh & Aggregations](#-incremental-refresh--aggregations)
-- [🧩 Calculation Groups & Field Parameters](#-calculation-groups--field-parameters)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Agency Implementation](#️-federal-agency-implementation)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
-- [🔗 Related Documents](#-related-documents)
 
 ---
 

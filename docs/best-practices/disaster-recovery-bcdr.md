@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > Disaster Recovery & Business Continuity
-
 # 🛡️ Disaster Recovery & Business Continuity for Microsoft Fabric
 
 <div align="center" markdown>
@@ -15,22 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ BCDR Architecture](#️-bcdr-architecture)
-- [⏱️ RTO/RPO Targets](#️-rtorpo-targets)
-- [💾 OneLake BCDR](#-onelake-bcdr)
-- [🔄 Failover Procedures](#-failover-procedures)
-- [🧪 DR Testing](#-dr-testing)
-- [🎰 Casino BCDR Requirements](#-casino-bcdr-requirements)
-- [🏛️ Federal BCDR Requirements](#️-federal-bcdr-requirements)
-- [📊 Monitoring & Readiness](#-monitoring--readiness)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

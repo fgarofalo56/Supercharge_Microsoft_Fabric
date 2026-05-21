@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../index.md) > [Diagrams](../ARCHITECTURE.md) > Cost Breakdown
-
 # 💰 Cost Breakdown Diagram
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
@@ -12,16 +10,6 @@
 ![SKU](https://img.shields.io/badge/SKU-F64-blue)
 
 </div>
-
----
-
-## 📑 Table of Contents
-
-- [Production POC Cost Distribution](#production-poc-cost-distribution)
-- [Cost Comparison by Environment](#cost-comparison-by-environment)
-- [Fabric SKU Cost Comparison](#fabric-sku-cost-comparison)
-- [Cost Optimization Opportunities](#cost-optimization-opportunities)
-- [Monthly Cost Forecast](#monthly-cost-forecast)
 
 ---
 

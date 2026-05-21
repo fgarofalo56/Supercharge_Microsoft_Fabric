@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Fabric MCP
-
 # 🤖 Fabric MCP Server - AI Agent Data Access
 
 <div align="center" markdown>
@@ -15,21 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [⚙️ Available Tools](#️-available-tools)
-- [🔌 Integration Patterns](#-integration-patterns)
-- [🔐 Authentication & Governance](#-authentication--governance)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Agency Implementation](#️-federal-agency-implementation)
-- [📊 Advanced Scenarios](#-advanced-scenarios)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

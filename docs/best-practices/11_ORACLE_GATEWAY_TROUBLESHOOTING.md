@@ -12,24 +12,6 @@
 ![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
 
 </div>
-
-## 📑 Table of Contents
-
-- [Overview](#-overview)
-- [Step-by-Step Configuration Guide](#-step-by-step-configuration-guide)
-- [Common Issues Checklist](#-common-issues-checklist)
-- [Gateway Configuration](#-gateway-configuration)
-- [ForEach Parallelism Issues](#-foreach-parallelism-issues)
-- [Enable Oracle Parallel Copy](#-enable-oracle-parallel-copy)
-- [Oracle Connection Limits](#-oracle-connection-limits)
-- [Complete Optimized Pipeline Example](#-complete-optimized-pipeline-example)
-- [Monitoring and Diagnostics](#-monitoring-and-diagnostics)
-- [Troubleshooting Decision Tree](#-troubleshooting-decision-tree)
-- [Quick Fix Summary](#-quick-fix-summary)
-- [Anti-Virus Exclusions](#-anti-virus-exclusions)
-- [Gateway Cluster for High Availability](#-gateway-cluster-for-high-availability)
-- [Related Documents](#-related-documents)
-
 ---
 
 ## 📋 Overview

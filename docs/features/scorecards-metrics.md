@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Scorecards & Metrics
-
 # 🎯 Scorecards & Metrics - KPI Goal Tracking
 
 <div align="center" markdown>
@@ -15,23 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-21` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [⚙️ Creating Scorecards](#️-creating-scorecards)
-- [📏 Status Rules and Scoring](#-status-rules-and-scoring)
-- [🔄 Automated Check-Ins](#-automated-check-ins)
-- [🔗 Connected Goals and Hierarchies](#-connected-goals-and-hierarchies)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Agency Implementation](#️-federal-agency-implementation)
-- [🔐 Security](#-security)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
-- [🔗 Related Documents](#-related-documents)
 
 ---
 

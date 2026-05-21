@@ -1,7 +1,5 @@
 # 📖 Glossary
 
-> 🏠 [Home](index.md) > 📚 [Docs](./) > 📖 Glossary
-
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
@@ -12,20 +10,6 @@
 ![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
 
 </div>
-
----
-
-## 📑 Table of Contents
-
-- [🔷 Microsoft Fabric Terms](#-microsoft-fabric-terms)
-- [🏛️ Medallion Architecture](#️-medallion-architecture)
-- [🎰 Casino/Gaming Industry Terms](#-casinogaming-industry-terms)
-- [⚙️ Data Engineering Terms](#️-data-engineering-terms)
-- [📋 Compliance & Regulatory Terms](#-compliance--regulatory-terms)
-- [☁️ Azure/Cloud Terms](#️-azurecloud-terms)
-- [🔐 Security Terms](#-security-terms)
-- [📊 Analytics & BI Terms](#-analytics--bi-terms)
-- [🏛️ Federal Agency Terms](#️-federal-agency-terms)
 
 ---
 

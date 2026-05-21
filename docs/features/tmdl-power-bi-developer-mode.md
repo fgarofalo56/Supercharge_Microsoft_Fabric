@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > TMDL & Power BI Developer Mode
-
 # 🛠️ TMDL & Power BI Developer Mode - Source-Controlled Semantic Models
 
 <div align="center" markdown>
@@ -15,25 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0
-
----
-
-## Table of Contents
-
-- [Overview](#-overview)
-- [Architecture](#-architecture)
-- [TMDL File Structure](#-tmdl-file-structure)
-- [Power BI Developer Mode](#-power-bi-developer-mode)
-- [Source Control Integration](#-source-control-integration)
-- [Editing TMDL](#-editing-tmdl)
-- [CI/CD for Semantic Models](#-cicd-for-semantic-models)
-- [DAX Patterns in TMDL](#-dax-patterns-in-tmdl)
-- [Migration from Legacy Formats](#-migration-from-legacy-formats)
-- [Format Comparison](#-format-comparison)
-- [Casino Implementation](#-casino-implementation)
-- [Federal Agency Implementation](#-federal-agency-implementation)
-- [Limitations](#-limitations)
-- [References](#-references)
 
 ---
 

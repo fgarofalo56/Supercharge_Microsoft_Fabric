@@ -1,5 +1,3 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Security](../index.md) > Audit Trail Immutability
-
 # 📜 Audit Trail Immutability: Tamper-Evident Workflows for Compliance
 
 <div align="center" markdown>
@@ -18,29 +16,6 @@
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Wave 5 Feature:** 5.9 | **Anchor:** [SOC 2 Type II Readiness](soc2-type2-readiness.md)
 
 > **Disclaimer:** This document provides architectural and technical guidance for audit-trail immutability on Microsoft Fabric. It is **not** legal advice, regulatory interpretation, or a guarantee of compliance with any specific statute (SOX, HIPAA, GDPR, PCI-DSS, 21 CFR Part 11, NIGC MICS, FedRAMP). Audit-evidence requirements vary by jurisdiction, regulator, and contract. Engage qualified legal counsel and your audit firm before relying on these patterns to satisfy any specific obligation.
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview: Why Audit Immutability](#-overview-why-audit-immutability)
-- [🧱 The Three Audit Trail Properties](#-the-three-audit-trail-properties)
-- [⚖️ Regulatory Drivers](#️-regulatory-drivers)
-- [📂 What to Audit — The Catalog](#-what-to-audit--the-catalog)
-- [🏗️ Implementation Layers](#️-implementation-layers)
-- [🔒 WORM Storage Patterns](#-worm-storage-patterns)
-- [🧬 Tamper Evidence](#-tamper-evidence)
-- [📐 Schema Pattern](#-schema-pattern)
-- [⚙️ Implementation in Fabric](#️-implementation-in-fabric)
-- [⏳ Retention Policy Implementation](#-retention-policy-implementation)
-- [🔑 Access Patterns](#-access-patterns)
-- [✅ Verification Procedures](#-verification-procedures)
-- [🕵️ Forensic Use](#️-forensic-use)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Implementation](#️-federal-implementation)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Implementation Checklist](#-implementation-checklist)
-- [📚 References](#-references)
 
 ---
 

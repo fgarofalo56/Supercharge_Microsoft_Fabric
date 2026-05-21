@@ -1,5 +1,3 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Security](../index.md) > ISO 27001:2022 Mapping
-
 # 🌐 ISO 27001:2022 Annex A Controls → Fabric Implementation Mapping
 
 <div align="center" markdown>
@@ -18,26 +16,6 @@
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Companion to:** [SOC 2 Type II Readiness](soc2-type2-readiness.md)
 
 > **Disclaimer:** This document provides architectural and technical guidance for ISO/IEC 27001:2022 implementation on Microsoft Fabric. It is **not** legal, certification, or audit advice. Engage an accredited certification body (e.g., BSI, TÜV, Schellman) to perform the actual ISO 27001 certification audit. Verify control mappings with your registrar before relying on them in a Stage 1 or Stage 2 audit. ISO 27001 is a management-system standard — technology controls alone are insufficient.
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [📋 ISO 27001 vs SOC 2](#-iso-27001-vs-soc-2)
-- [🔄 The ISMS Lifecycle (PDCA)](#-the-isms-lifecycle-pdca)
-- [🗂️ Annex A Structure (2022 Reorganization)](#️-annex-a-structure-2022-reorganization)
-- [🏢 A.5 Organizational Controls](#-a5-organizational-controls)
-- [👥 A.6 People Controls](#-a6-people-controls)
-- [🏗️ A.7 Physical Controls](#️-a7-physical-controls)
-- [💻 A.8 Technological Controls](#-a8-technological-controls)
-- [📝 Statement of Applicability (SoA) Template](#-statement-of-applicability-soa-template)
-- [⚖️ Risk Treatment Plan Pattern](#️-risk-treatment-plan-pattern)
-- [📅 Implementation Roadmap](#-implementation-roadmap)
-- [🔗 Doing ISO 27001 + SOC 2 Together](#-doing-iso-27001--soc-2-together)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Implementation Checklist](#-implementation-checklist)
-- [📚 References](#-references)
 
 ---
 

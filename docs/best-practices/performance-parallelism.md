@@ -22,18 +22,6 @@ Performance optimization in Microsoft Fabric spans multiple workloads: Copy Acti
 
 ---
 
-## 🧭 Table of Contents
-
-- [📦 Copy Activity Optimization](#-copy-activity-optimization)
-- [✨ Spark Notebook Performance](#-spark-notebook-performance)
-- [🔄 Pipeline Parallelism](#-pipeline-parallelism)
-- [⚡ Direct Lake Performance](#-direct-lake-performance)
-- [🔍 KQL Query Performance](#-kql-query-performance)
-- [📈 Benchmark Guidelines by Data Volume](#-benchmark-guidelines-by-data-volume)
-- [💰 Cost vs Performance Trade-Offs](#-cost-vs-performance-trade-offs)
-
----
-
 ## 📦 Copy Activity Optimization
 
 ### Data Integration Units (DIU)

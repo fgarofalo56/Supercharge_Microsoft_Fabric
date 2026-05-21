@@ -1,5 +1,3 @@
-[Home](index.md) > [Docs](./) > Fabric Features April 2026
-
 # 📋 Microsoft Fabric - Comprehensive Feature Inventory (April 2026)
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0

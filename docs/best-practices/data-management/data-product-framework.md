@@ -1,5 +1,3 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Data Management](../index.md) > Data Product Framework
-
 # 📦 Data Product Framework on Microsoft Fabric
 
 <div align="center" markdown>
@@ -16,28 +14,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Wave 3 Sibling of:** [Master Data Management](master-data-management.md)
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [⭐ The Five Data Product Tenets](#-the-five-data-product-tenets)
-- [🧪 What Counts as a Data Product (and What Doesn't)](#-what-counts-as-a-data-product-and-what-doesnt)
-- [🪪 Data Product Card Template](#-data-product-card-template)
-- [♻️ Lifecycle Stages](#️-lifecycle-stages)
-- [🔍 Discoverability Patterns](#-discoverability-patterns)
-- [🛣️ Consumption Path Documentation](#️-consumption-path-documentation)
-- [📜 SLA Specification](#-sla-specification)
-- [👥 Ownership Model (RACI)](#-ownership-model-raci)
-- [💰 Cost Attribution](#-cost-attribution)
-- [🪦 Deprecation Process](#-deprecation-process)
-- [🌐 Federation & Sharing](#-federation--sharing)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Implementation](#️-federal-implementation)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Implementation Checklist](#-implementation-checklist)
-- [📚 References](#-references)
 
 ---
 

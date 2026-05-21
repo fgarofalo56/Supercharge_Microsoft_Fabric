@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > VNet Data Gateway
-
 # 🔒 VNet Data Gateway - Secure Connectivity from Your Virtual Network
 
 <div align="center" markdown>
@@ -15,23 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-21` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [⚙️ Setup & Requirements](#️-setup--requirements)
-- [🔀 Gateway Comparison](#-gateway-comparison)
-- [🔌 Supported Data Sources](#-supported-data-sources)
-- [🔐 Security & Network Configuration](#-security--network-configuration)
-- [📊 Performance & Scaling](#-performance--scaling)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Agency Implementation](#️-federal-agency-implementation)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
-- [🔗 Related Documents](#-related-documents)
 
 ---
 

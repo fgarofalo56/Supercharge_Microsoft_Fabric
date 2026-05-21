@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > API for GraphQL
-
 # 🔗 API for GraphQL - Unified Data Access Layer
 
 <div align="center" markdown>
@@ -15,21 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [⚙️ Setup and Configuration](#️-setup-and-configuration)
-- [🔄 CI/CD Integration](#-cicd-integration)
-- [🔧 Advanced Patterns](#-advanced-patterns)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Agency Implementation](#️-federal-agency-implementation)
-- [🔐 Security](#-security)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

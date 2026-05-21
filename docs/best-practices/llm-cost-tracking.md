@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > LLM Cost Tracking & FinOps for AI Workloads
-
 # 💸 LLM Cost Tracking & FinOps for AI Workloads
 
 <div align="center" markdown>
@@ -16,31 +14,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Anchor:** [MLOps for Fabric Production](mlops-fabric-production.md) (Wave 2)
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Why LLM Cost Tracking](#-why-llm-cost-tracking)
-- [🧾 LLM Cost Surfaces in Fabric](#-llm-cost-surfaces-in-fabric)
-- [🧮 Token Economics 101](#-token-economics-101)
-- [💵 Pricing Snapshot](#-pricing-snapshot)
-- [🏗️ Reference Architecture](#️-reference-architecture)
-- [🛠️ Tracking Implementation](#️-tracking-implementation)
-- [🏷️ Cost Attribution Tags](#️-cost-attribution-tags)
-- [📊 Budgeting & Alerts](#-budgeting--alerts)
-- [🚦 Rate Limiting Patterns](#-rate-limiting-patterns)
-- [♻️ Caching Strategies](#️-caching-strategies)
-- [🔁 Fallback Model Strategy](#-fallback-model-strategy)
-- [🔍 RAG-Specific Cost Patterns](#-rag-specific-cost-patterns)
-- [⚙️ Optimization Techniques](#️-optimization-techniques)
-- [📈 KQL Cost Library](#-kql-cost-library)
-- [🖥️ Cost Dashboard](#️-cost-dashboard)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Implementation](#️-federal-implementation)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Implementation Checklist](#-implementation-checklist)
-- [📚 References](#-references)
 
 ---
 

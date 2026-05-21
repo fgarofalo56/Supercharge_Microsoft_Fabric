@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Federated Fabric for GCC
-
 # Federated Fabric for GCC — Using Microsoft Fabric in Commercial from Government Cloud
 
 <div align="center" markdown>
@@ -15,38 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-29` | **Version:** 1.0.0
-
----
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Current State: Fabric and GCC](#current-state-fabric-and-gcc)
-- [Understanding the Cloud Boundaries](#understanding-the-cloud-boundaries)
-- [Federated Fabric Architecture](#federated-fabric-architecture)
-- [Data Classification: What Can Leave GCC](#data-classification-what-can-leave-gcc)
-- [Prerequisites and Requirements](#prerequisites-and-requirements)
-- [Step-by-Step: Setting Up Federated Fabric](#step-by-step-setting-up-federated-fabric)
-  - [Phase 1: Establish a Commercial Tenant](#phase-1-establish-a-commercial-tenant)
-  - [Phase 2: Configure Cross-Cloud B2B in Entra ID](#phase-2-configure-cross-cloud-b2b-in-entra-id)
-  - [Phase 3: Provision Fabric Capacity and Workspaces](#phase-3-provision-fabric-capacity-and-workspaces)
-  - [Phase 4: Bridge Data from GCC to Commercial Fabric](#phase-4-bridge-data-from-gcc-to-commercial-fabric)
-  - [Phase 5: Configure External Data Sharing](#phase-5-configure-external-data-sharing)
-  - [Phase 6: Set Up Governance and Monitoring](#phase-6-set-up-governance-and-monitoring)
-- [Architecture Patterns](#architecture-patterns)
-  - [Pattern A: Full Commercial Tenant for Analytics](#pattern-a-full-commercial-tenant-for-analytics)
-  - [Pattern B: ADLS Gen2 Bridge (Hybrid)](#pattern-b-adls-gen2-bridge-hybrid)
-  - [Pattern C: Export-and-Load with Data Pipelines](#pattern-c-export-and-load-with-data-pipelines)
-- [Security and Compliance Deep Dive](#security-and-compliance-deep-dive)
-- [Networking and Connectivity](#networking-and-connectivity)
-- [Licensing and Cost Considerations](#licensing-and-cost-considerations)
-- [Best Practices](#best-practices)
-- [Gotchas and Common Pitfalls](#gotchas-and-common-pitfalls)
-- [Frequently Asked Questions](#frequently-asked-questions)
-- [When Fabric Comes to GCC: Migration Path](#when-fabric-comes-to-gcc-migration-path)
-- [Casino POC: Federated Pattern Example](#casino-poc-federated-pattern-example)
-- [Federal Agency Considerations](#federal-agency-considerations)
-- [References](#references)
 
 ---
 

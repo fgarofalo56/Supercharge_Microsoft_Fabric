@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Industries](./) > Manufacturing
-
 ![Manufacturing & IoT — Factory telemetry, predictive maintenance on Fabric](../assets/heroes/manufacturing.svg){ .hero-banner }
 
 # ⚙️ Manufacturing — IoT Telemetry & Predictive Maintenance
@@ -22,17 +20,6 @@
 ---
 
 > *"Unplanned downtime costs industrial manufacturers an estimated $50 billion per year — predictive maintenance powered by streaming telemetry can cut that figure in half."*
-
----
-
-## 📑 Table of Contents
-
-- [Scenario Overview](#-scenario-overview)
-- [Regulatory Landscape](#-regulatory-landscape)
-- [Data Flow Architecture](#-data-flow-architecture)
-- [Why Fabric for Manufacturing](#-why-fabric-for-manufacturing)
-- [Getting Started](#-getting-started)
-- [References](#-references)
 
 ---
 

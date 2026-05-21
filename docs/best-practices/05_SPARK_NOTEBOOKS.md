@@ -12,26 +12,6 @@
 ![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
 
 </div>
-
-## 📑 Table of Contents
-
-- [Overview](#-overview)
-- [Spark Capacity and Cluster Planning](#-spark-capacity-and-cluster-planning)
-- [Native Execution Engine (NEE)](#-native-execution-engine-nee)
-- [Session Configuration](#-session-configuration)
-- [Read Optimization](#-read-optimization)
-- [Write Optimization](#-write-optimization)
-- [Shuffle Optimization](#-shuffle-optimization)
-- [High Concurrency Mode](#-high-concurrency-mode)
-- [Parallel Notebook Execution](#-parallel-notebook-execution)
-- [Library Management](#-library-management)
-- [Resource Profiles](#-resource-profiles)
-- [Monitoring and Profiling](#-monitoring-and-profiling)
-- [Delta Lake Best Practices](#-delta-lake-best-practices)
-- [Notebook Organization](#-notebook-organization)
-- [Performance Checklist](#-performance-checklist)
-- [Related Documents](#-related-documents)
-
 ---
 
 ## 📋 Overview

@@ -12,24 +12,6 @@
 ![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
 
 </div>
-
-## 📑 Table of Contents
-
-- [Overview](#-overview)
-- [Lakehouse Architecture](#-lakehouse-architecture)
-- [Medallion Architecture](#-medallion-architecture)
-- [Delta Lake Configuration](#-delta-lake-configuration)
-- [V-Order Optimization](#-v-order-optimization)
-- [Partitioning Strategy](#-partitioning-strategy)
-- [Z-ORDER Clustering](#-z-order-clustering)
-- [Table Maintenance](#-table-maintenance)
-- [Lakehouse UI Maintenance](#-lakehouse-ui-maintenance)
-- [Shortcuts](#-shortcuts)
-- [File Organization](#-file-organization)
-- [Best Practices Checklist](#-best-practices-checklist)
-- [Common Issues and Solutions](#-common-issues-and-solutions)
-- [Related Documents](#-related-documents)
-
 ---
 
 ## 📋 Overview

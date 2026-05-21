@@ -12,21 +12,6 @@
 ![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
 
 </div>
-
-## 📑 Table of Contents
-
-- [Overview](#-overview)
-- [ETL vs ELT Decision Framework](#-etl-vs-elt-decision-framework)
-- [Copy Activity Optimization](#-copy-activity-optimization)
-- [Load Patterns](#-load-patterns)
-- [Pipeline Performance Optimization](#-pipeline-performance-optimization)
-- [Pipeline Patterns for Large Tables](#-pipeline-patterns-for-large-tables)
-- [Sink Optimization](#-sink-optimization)
-- [Error Handling and Retry](#-error-handling-and-retry)
-- [Performance Benchmarks](#-performance-benchmarks)
-- [Best Practices Checklist](#-best-practices-checklist)
-- [Related Documents](#-related-documents)
-
 ---
 
 ## 📋 Overview

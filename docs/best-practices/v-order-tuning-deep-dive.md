@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > V-Order Tuning Deep Dive
-
 # 🔀 V-Order Tuning Deep Dive
 
 <div align="center" markdown>
@@ -15,24 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [📊 What V-Order Is](#-what-v-order-is)
-- [⚡ When V-Order Helps](#-when-v-order-helps)
-- [⚠️ When V-Order Hurts](#-when-v-order-hurts)
-- [🔧 OPTIMIZE with V-Order](#-optimize-with-v-order)
-- [📐 ZORDER vs V-Order](#-zorder-vs-v-order)
-- [📏 File Size Tuning](#-file-size-tuning)
-- [🔄 Compaction Strategies](#-compaction-strategies)
-- [📈 Measuring Effectiveness](#-measuring-effectiveness)
-- [🎰 Casino Industry Tuning](#-casino-industry-tuning)
-- [🏛️ Federal Agency Tuning](#-federal-agency-tuning)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📚 References](#-references)
 
 ---
 

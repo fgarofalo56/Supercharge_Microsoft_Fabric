@@ -1,5 +1,3 @@
-[Home](../../index.md) > [Docs](../../) > [Best Practices](../index.md) > Local Spark Debugging
-
 # Local PySpark Debugging for Fabric Development
 
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue)
@@ -9,26 +7,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0
-
----
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Prerequisites](#prerequisites)
-- [Local PySpark Installation](#local-pyspark-installation)
-- [Java and JDK Setup](#java-and-jdk-setup)
-- [Mocking mssparkutils](#mocking-mssparkutils)
-- [Creating Local Test Fixtures](#creating-local-test-fixtures)
-- [VS Code Debugger Configuration](#vs-code-debugger-configuration)
-- [Local Delta Lake Operations](#local-delta-lake-operations)
-- [Limitations and Workarounds](#limitations-and-workarounds)
-- [DuckDB for Quick SQL Validation](#duckdb-for-quick-sql-validation)
-- [Docker Compose for Local Spark](#docker-compose-for-local-spark)
-- [Debugging Workflow Examples](#debugging-workflow-examples)
-- [Performance Tips](#performance-tips)
-- [Troubleshooting](#troubleshooting)
-- [References](#references)
 
 ---
 

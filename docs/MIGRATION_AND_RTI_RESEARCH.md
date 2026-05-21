@@ -1,5 +1,3 @@
-[Home](index.md) > [Docs](./) > Migration & RTI Research
-
 # 🔄 Database Migration Paths & Advanced Real-Time Intelligence Research
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
@@ -15,19 +13,6 @@
 
 > Research compiled: 2026-03-11
 > Sources: Microsoft Learn, Brave Web Search, Microsoft Docs MCP
-
----
-
-## 📑 Table of Contents
-
-- [🏗️ Part 1: Database Migration Paths to Microsoft Fabric](#️-part-1-database-migration-paths-to-microsoft-fabric)
-  - [1. Teradata to Microsoft Fabric](#1-teradata-to-microsoft-fabric)
-  - [2. Snowflake to Microsoft Fabric](#2-snowflake-to-microsoft-fabric)
-  - [3. IBM DB2 as Source for Microsoft Fabric](#3-ibm-db2-as-source-for-microsoft-fabric)
-- [⚡ Part 2: Advanced Real-Time Intelligence & Streaming](#-part-2-advanced-real-time-intelligence--streaming)
-  - [4. Multiple Source Connectors for Fabric Eventstreams/RTI](#4-multiple-source-connectors-for-fabric-eventstreamsrti)
-  - [5. Event Processing Patterns](#5-event-processing-patterns)
-- [🔗 Key Reference Links Summary](#-key-reference-links-summary)
 
 ---
 

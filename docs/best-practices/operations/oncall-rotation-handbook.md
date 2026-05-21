@@ -1,5 +1,3 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > Operations > On-Call Rotation Handbook
-
 # 📟 On-Call Rotation Handbook
 
 <div align="center" markdown>
@@ -16,26 +14,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Phase:** 14 (Wave 1, Feature 1.9)
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Purpose & Audience](#-purpose--audience)
-- [🔁 Rotation Models](#-rotation-models)
-- [⭐ Recommended Rotation for Fabric Platforms](#-recommended-rotation-for-fabric-platforms)
-- [👥 Roles & Responsibilities](#-roles--responsibilities)
-- [✅ Pre-Shift Checklist](#-pre-shift-checklist)
-- [⏱️ During-Shift Expectations](#️-during-shift-expectations)
-- [🤝 Handoff Procedure](#-handoff-procedure)
-- [📡 Paging Integration with Fabric](#-paging-integration-with-fabric)
-- [🧹 Alert Quality Standards](#-alert-quality-standards)
-- [💚 Engineer Wellbeing](#-engineer-wellbeing)
-- [🎓 Onboarding New On-Call](#-onboarding-new-on-call)
-- [💰 Compensation Policy Template](#-compensation-policy-template)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📅 Sample On-Call Calendar](#-sample-on-call-calendar)
-- [📚 Related Runbooks & Best Practices](#-related-runbooks--best-practices)
 
 ---
 

@@ -1,5 +1,3 @@
-[Home](../../index.md) > [Docs](../../) > [Best Practices](../index.md) > Dev Container Setup
-
 # Dev Container Setup for Fabric Development
 
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue)
@@ -9,26 +7,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0
-
----
-
-## Table of Contents
-
-- [Overview](#overview)
-- [What is a Dev Container](#what-is-a-dev-container)
-- [Prerequisites](#prerequisites)
-- [Quick Start](#quick-start)
-- [Dockerfile](#dockerfile)
-- [devcontainer.json](#devcontainerjson)
-- [VS Code Extensions and Features](#vs-code-extensions-and-features)
-- [Volume Mounts and Credential Caching](#volume-mounts-and-credential-caching)
-- [Pre-Built Tasks](#pre-built-tasks)
-- [Docker Compose for Multi-Service Setup](#docker-compose-for-multi-service-setup)
-- [GitHub Codespaces Compatibility](#github-codespaces-compatibility)
-- [Environment Variables](#environment-variables)
-- [Customization](#customization)
-- [Troubleshooting](#troubleshooting)
-- [References](#references)
 
 ---
 

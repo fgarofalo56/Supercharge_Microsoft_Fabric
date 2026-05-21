@@ -1,7 +1,5 @@
 # 🔐 Security and Compliance Guide
 
-> 🏠 [Home](index.md) > 📚 [Docs](./) > 🔐 Security
-
 <div align="center" markdown>
 
 # 🔐 Security
@@ -17,21 +15,6 @@
 ---
 
 **Last Updated:** `2025-01-21` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🛡️ Security Architecture](#️-security-architecture)
-- [👤 Identity and Access Management](#-identity-and-access-management)
-- [🔒 Data Protection](#-data-protection)
-- [🔐 Repository Security](#-repository-security)
-- [🌐 Network Security](#-network-security)
-- [📋 Compliance Requirements](#-compliance-requirements)
-- [📊 Audit and Monitoring](#-audit-and-monitoring)
-- [🚨 Incident Response](#-incident-response)
-- [✅ Security Checklists](#-security-checklists)
-- [📚 References](#-references)
 
 ---
 

@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Industries](./) > Healthcare
-
 ![Healthcare Analytics — EHR, claims, population health on Fabric](../assets/heroes/healthcare.svg){ .hero-banner }
 
 # 🏥 Healthcare — Patient Analytics & Clinical Intelligence
@@ -22,17 +20,6 @@
 ---
 
 > *"The healthcare industry generates roughly 30% of the world's data volume, yet most clinical insights still arrive too late to change patient outcomes."*
-
----
-
-## 📑 Table of Contents
-
-- [Scenario Overview](#-scenario-overview)
-- [Regulatory Landscape](#-regulatory-landscape)
-- [Data Flow Architecture](#-data-flow-architecture)
-- [Why Fabric for Healthcare](#-why-fabric-for-healthcare)
-- [Getting Started](#-getting-started)
-- [References](#-references)
 
 ---
 

@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > Capacity Planning & Cost Optimization
-
 # 💰 Capacity Planning & Cost Optimization for Microsoft Fabric
 
 <div align="center" markdown>
@@ -15,21 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [📊 SKU Selection Guide](#-sku-selection-guide)
-- [⚡ Capacity Unit Cost Model](#-capacity-unit-cost-model)
-- [🔧 Optimization Strategies](#-optimization-strategies)
-- [📈 Monitoring & Cost Governance](#-monitoring--cost-governance)
-- [🎰 Casino Industry Capacity Planning](#-casino-industry-capacity-planning)
-- [🏛️ Federal Agency Capacity Planning](#️-federal-agency-capacity-planning)
-- [🌳 Decision Trees](#-decision-trees)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📚 References](#-references)
 
 ---
 

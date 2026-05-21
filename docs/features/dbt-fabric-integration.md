@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > dbt Integration with Fabric
-
 # 🔧 dbt Integration with Microsoft Fabric
 
 <div align="center" markdown>
@@ -15,24 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [⚙️ Setup and Configuration](#️-setup-and-configuration)
-- [📂 Project Structure](#-project-structure)
-- [📐 Model Patterns](#-model-patterns)
-- [✅ Testing Patterns](#-testing-patterns)
-- [📖 Documentation Generation](#-documentation-generation)
-- [⏰ Scheduling and Orchestration](#-scheduling-and-orchestration)
-- [🎰 Casino Analytics Example](#-casino-analytics-example)
-- [🏛️ Federal Data Example](#️-federal-data-example)
-- [🔄 Migration from PySpark Notebooks](#-migration-from-pyspark-notebooks)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

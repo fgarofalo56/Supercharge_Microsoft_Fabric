@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Real-Time Intelligence
-
 # ⚡ Real-Time Intelligence (RTI) Comprehensive Guide
 
 
@@ -16,32 +14,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 2.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ RTI Components](#️-rti-components)
-- [📐 Architecture Patterns](#-architecture-patterns)
-- [📥 Eventstream Setup](#-eventstream-setup)
-- [🏠 Eventhouse Configuration](#-eventhouse-configuration)
-- [🔍 KQL Query Patterns](#-kql-query-patterns)
-- [📊 Real-Time Dashboards](#-real-time-dashboards)
-- [🔔 Data Activator](#-data-activator)
-- [📡 Business Events](#-business-events)
-- [🔮 Anomaly Detection](#-anomaly-detection)
-- [🗺️ Fabric Maps](#️-fabric-maps)
-- [💻 Eventstream SQL Operator](#-eventstream-sql-operator)
-- [📋 Schema Registry](#-schema-registry)
-- [🔺 DeltaFlow Transformation](#-deltaflow-transformation)
-- [🏭 Digital Twin Builder](#-digital-twin-builder)
-- [🤖 MCP for Real-Time Intelligence](#-mcp-for-real-time-intelligence)
-- [🔌 New Connectors (2025-2026)](#-new-connectors-2025-2026)
-- [🏛️ Domain Use Cases](#️-domain-use-cases)
-- [⚡ Performance Tuning](#-performance-tuning)
-- [💰 Cost Management](#-cost-management)
-- [📚 References](#-references)
 
 ---
 

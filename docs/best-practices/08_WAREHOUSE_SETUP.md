@@ -12,23 +12,6 @@
 ![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
 
 </div>
-
-## 📑 Table of Contents
-
-- [Overview](#-overview)
-- [Warehouse vs Lakehouse SQL Endpoint](#-warehouse-vs-lakehouse-sql-endpoint)
-- [Schema Design](#-schema-design)
-- [Data Type Optimization](#-data-type-optimization)
-- [Statistics Management](#-statistics-management)
-- [Query Optimization](#-query-optimization)
-- [Ingestion Best Practices](#-ingestion-best-practices)
-- [V-Order in Warehouse](#-v-order-in-warehouse)
-- [Performance Monitoring](#-performance-monitoring)
-- [Concurrency and Locking](#-concurrency-and-locking)
-- [Warehouse Design Patterns](#-warehouse-design-patterns)
-- [Checklist](#-checklist)
-- [Related Documents](#-related-documents)
-
 ---
 
 ## 📋 Overview

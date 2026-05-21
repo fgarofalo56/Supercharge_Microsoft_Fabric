@@ -1,7 +1,5 @@
 # 💰 Azure Cost Estimation Guide
 
-> 🏠 [Home](index.md) > 📚 [Docs](./) > 💰 Cost Estimation
-
 <div align="center" markdown>
 
 # 💰 Cost Estimation
@@ -17,26 +15,6 @@
 ---
 
 **Last Updated:** `2025-01-21` | **Version:** 1.0.0
-
----
-
-## Table of Contents
-
-- [Executive Summary](#executive-summary)
-- [Detailed Cost Breakdown](#detailed-cost-breakdown)
-  - [Microsoft Fabric Capacity](#microsoft-fabric-capacity)
-  - [Azure Storage (ADLS Gen2)](#azure-storage-adls-gen2)
-  - [Microsoft Purview](#microsoft-purview)
-  - [Azure Key Vault](#azure-key-vault)
-  - [Log Analytics](#log-analytics)
-  - [Networking (Private Endpoints)](#networking-private-endpoints)
-- [Cost Scenarios](#cost-scenarios)
-  - [Scenario 1: POC Demo (3 Days)](#scenario-1-poc-demo-3-days)
-  - [Scenario 2: Development (1 Month)](#scenario-2-development-1-month)
-  - [Scenario 3: Production Pilot (1 Month)](#scenario-3-production-pilot-1-month)
-- [Cost Optimization Strategies](#cost-optimization-strategies)
-- [Azure Pricing Calculator](#azure-pricing-calculator)
-- [Cost Monitoring](#cost-monitoring)
 
 ---
 

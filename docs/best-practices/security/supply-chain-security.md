@@ -1,5 +1,3 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Security](../index.md) > Supply Chain Security
-
 # 🔗 Supply Chain Security: Notebook + Library + Connector Vetting
 
 <div align="center" markdown>
@@ -18,31 +16,6 @@
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Wave 5 Feature:** 5.8 | **Anchor:** [SOC 2 Type II Readiness](soc2-type2-readiness.md)
 
 > **Disclaimer:** This document provides architectural and technical guidance for supply chain security on Microsoft Fabric. It is **not** a substitute for a formal third-party risk management program, secure software development lifecycle (SSDLC) certification, or legal counsel. Coordinate with your organization's CISO, procurement, and legal teams before relying on these patterns in regulated environments.
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview: The Supply Chain Threat Landscape](#-overview-the-supply-chain-threat-landscape)
-- [🌐 Fabric-Specific Supply Chain Attack Surface](#-fabric-specific-supply-chain-attack-surface)
-- [📦 SBOM (Software Bill of Materials)](#-sbom-software-bill-of-materials)
-- [📌 Pinning Dependencies](#-pinning-dependencies)
-- [🔍 Vulnerability Scanning](#-vulnerability-scanning)
-- [📓 Notebook Vetting Process](#-notebook-vetting-process)
-- [🔌 Connector Vetting](#-connector-vetting)
-- [🧊 Iceberg & Shortcut Source Vetting](#-iceberg--shortcut-source-vetting)
-- [🌍 Environment File Pattern](#-environment-file-pattern)
-- [🛠️ Custom Components & Scripts](#️-custom-components--scripts)
-- [🏷️ Build Provenance (SLSA)](#️-build-provenance-slsa)
-- [🔁 Cross-Tenant Risk](#-cross-tenant-risk)
-- [🤝 Vendor Management Program](#-vendor-management-program)
-- [🚨 Compromise Detection](#-compromise-detection)
-- [🆘 Incident Response](#-incident-response)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Implementation](#️-federal-implementation)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Implementation Checklist](#-implementation-checklist)
-- [📚 References](#-references)
 
 ---
 

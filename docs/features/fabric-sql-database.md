@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Fabric SQL Database
-
 # 🗄️ Fabric SQL Database - Operational OLTP in Microsoft Fabric
 
 <div align="center" markdown>
@@ -15,22 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [⚙️ Key Features](#️-key-features)
-- [🔧 Setup and Configuration](#-setup-and-configuration)
-- [🔄 Data Virtualization](#-data-virtualization)
-- [🛡️ Dynamic Data Masking](#️-dynamic-data-masking)
-- [🔑 Customer-Managed Keys](#-customer-managed-keys)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Agency Implementation](#️-federal-agency-implementation)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

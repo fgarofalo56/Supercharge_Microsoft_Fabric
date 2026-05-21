@@ -1,68 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" width="1200" height="320"
-     role="img" aria-label="Retail and CPG Analytics">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 420" width="1600" height="420"
+     role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid slice">
+  <title id="title">Retail &amp; CPG</title>
+  <desc id="desc">Demand forecasting, customer segmentation, store ops on Fabric</desc>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#1A237E"/>
-      <stop offset="55%" stop-color="#3F51B5"/>
-      <stop offset="100%" stop-color="#5C6BC0"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="0.7">
+      <stop offset="0%"   stop-color="#4C0519"/>
+      <stop offset="55%"  stop-color="#9F1239"/>
+      <stop offset="100%" stop-color="#4C0519"/>
     </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#FFC107" stop-opacity="0.95"/>
-      <stop offset="100%" stop-color="#FFC107" stop-opacity="0.4"/>
-    </linearGradient>
-    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-    </pattern>
-    <filter id="blur"><feGaussianBlur stdDeviation="40"/></filter>
+    <radialGradient id="glow" cx="78%" cy="50%" r="55%">
+      <stop offset="0%"   stop-color="#FB7185" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#FB7185" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .h-title { font-family:'IBM Plex Sans','Segoe UI','Helvetica Neue',sans-serif; font-weight:600; font-size:54px; fill:#FFFFFF; letter-spacing:-1.0px; }
+      .h-sub   { font-family:'IBM Plex Sans','Segoe UI','Helvetica Neue',sans-serif; font-weight:400; font-size:20px; fill:#FFFFFF; fill-opacity:0.84; letter-spacing:-0.2px; }
+      .h-chip  { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:700; font-size:13px; letter-spacing:2.5px; fill:#FDA4AF; }
+      .h-foot  { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:500; font-size:11px; letter-spacing:1.2px; fill:#FFFFFF; fill-opacity:0.45; }
+      .v-num   { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:700; font-size:15px; fill:#FFFFFF; letter-spacing:0.5px; }
+      .v-lbl   { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:600; font-size:13px; fill:#FFFFFF; fill-opacity:0.95; letter-spacing:0.8px; }
+      .v-cap   { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:500; font-size:11px; fill:#FFFFFF; fill-opacity:0.75; letter-spacing:1.0px; }
+    </style>
   </defs>
 
   <!-- Background -->
-  <rect width="1200" height="320" fill="url(#bg)"/>
-  <rect width="1200" height="320" fill="url(#grid)"/>
+  <rect width="1600" height="420" fill="url(#bg)"/>
+  <rect width="1600" height="420" fill="url(#glow)"/>
 
-  <!-- Decorative ambient blobs -->
-  <circle cx="180" cy="60"  r="120" fill="#FFC107" opacity="0.20" filter="url(#blur)"/>
-  <circle cx="960" cy="280" r="160" fill="#5C6BC0" opacity="0.30" filter="url(#blur)"/>
+  <!-- Left accent stripe -->
+  <rect x="0" y="0" width="6" height="420" fill="#FDA4AF" opacity="0.65"/>
+  <rect x="0" y="0" width="6" height="120" fill="#FB7185"/>
 
-  <!-- Accent bar on the left -->
-  <rect x="0" y="80" width="6" height="160" fill="url(#accent)" rx="3"/>
+  <!-- Bottom scan line -->
+  <rect x="0" y="408" width="1600" height="2" fill="#FDA4AF" opacity="0.25"/>
 
-  <!-- Title + tagline -->
-  <text x="56" y="148" font-family="Inter, system-ui, sans-serif" font-size="44" font-weight="700"
-        fill="#FFFFFF" letter-spacing="-0.5">Retail and CPG Analytics</text>
-  <text x="56" y="194" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="400"
-        fill="rgba(255,255,255,0.85)" letter-spacing="0.2">Demand forecasting, customer segmentation, and store ops on Fabric</text>
-
-  <!-- Subtle "Microsoft Fabric" eyebrow -->
-  <text x="56" y="100" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600"
-        fill="#FFC107" letter-spacing="2" text-transform="uppercase">MICROSOFT FABRIC</text>
-
-
-  <g transform="translate(1048,-8)">
-    <rect x="-12" y="-12" width="120" height="120" rx="16" ry="16"
-          fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
-    <svg x="0" y="0" width="96" height="96" viewBox="0 0 18 18"
-         preserveAspectRatio="xMidYMid meet">
-      <defs><clipPath id="a704ce45-5ca0-410c-9835-3f7dd166dfb6"><path d="M9.71,1.185a.711.711,0,0,1,.711-.711h4.263a.71.71,0,0,1,.71.711v15.63a.71.71,0,0,1-.71.711H3.316a.71.71,0,0,1-.71-.711V9.71A.71.71,0,0,1,3.316,9H6.158V5.448a.711.711,0,0,1,.711-.711H9.71Z" fill="none" /></clipPath><linearGradient id="a7d0ea34-430c-4819-b9b1-0a8a2dfdd52b" x1="214.573" y1="491.263" x2="222.068" y2="507.151" gradientTransform="translate(-206 -490.699)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#e6ad10" /><stop offset="1" stop-color="#c87e0e" /></linearGradient><linearGradient id="fa41d3b0-0611-4d16-b103-b71ec870a9cb" x1="211.689" y1="495.678" x2="217.993" y2="507.903" gradientTransform="translate(-206 -490.699)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f6d751" /><stop offset="1" stop-color="#e6ad10" /></linearGradient><linearGradient id="ea08d23a-67c8-409f-90e3-67e0ce891091" x1="209.39" y1="499.368" x2="212.873" y2="507.624" gradientTransform="translate(-206 -490.699)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f9e589" /><stop offset="1" stop-color="#f6d751" /></linearGradient></defs><g clip-path="url(#a704ce45-5ca0-410c-9835-3f7dd166dfb6)"><g><path d="M15.394.474V17.526H9.71V.474Z" fill="url(#a7d0ea34-430c-4819-b9b1-0a8a2dfdd52b)" /><path d="M11.842,5.448V17.526H6.158V4.737h4.973A.711.711,0,0,1,11.842,5.448Z" fill="url(#fa41d3b0-0611-4d16-b103-b71ec870a9cb)" /><path d="M2.606,9v8.526H8.29V9.71A.711.711,0,0,0,7.579,9Z" fill="url(#ea08d23a-67c8-409f-90e3-67e0ce891091)" /></g></g>
-    </svg>
+  <!-- Eyebrow chip -->
+  <g transform="translate(72, 60)">
+    <rect x="0" y="0" width="350" height="34" rx="0" fill="#FB7185" fill-opacity="0.10" stroke="#FB7185" stroke-opacity="0.55"/>
+    <rect x="0" y="0" width="6" height="34" fill="#FB7185"/>
+    <text class="h-chip" x="175.0" y="22" text-anchor="middle">RETAIL &amp; CPG · DEMAND SIGNALS</text>
   </g>
 
-  <g transform="translate(1048,112)">
-    <rect x="-12" y="-12" width="120" height="120" rx="16" ry="16"
-          fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
-    <svg x="0" y="0" width="96" height="96" viewBox="0 0 18 18"
-         preserveAspectRatio="xMidYMid meet">
-      <defs><linearGradient id="e1bcfd0f-68b5-4f66-9501-e6a7245a18e7" x1="1.1" y1="169" x2="11.12" y2="169" gradientTransform="translate(0 -160)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#50c7e8" /><stop offset="0.25" stop-color="#4cc3e4" /><stop offset="0.51" stop-color="#41b6da" /><stop offset="0.77" stop-color="#2fa2c8" /><stop offset="1" stop-color="#1989b2" /></linearGradient></defs><title>Icon-166Artboard 1</title><path id="bc892891-989d-4c43-80d3-d2b4546a974f" d="M15.8,17.5H2.2L1.1,13.4H16.9Z" fill="#198ab3" /><polygon points="6.9 0.5 6.9 6.9 1.1 13.4 2.2 17.5 11.1 6.9 11.1 0.5 6.9 0.5" fill="url(#e1bcfd0f-68b5-4f66-9501-e6a7245a18e7)" /><path id="e6be01d6-345d-4df4-bbdb-151aa8edaa1f" d="M15.8,17.5,9.6,11.1l2.6-3,4.7,5.3Z" fill="#32bedd" />
-    </svg>
-  </g>
+  <!-- Title -->
+  <text class="h-title" x="72" y="208">Retail &amp; CPG</text>
 
-  <g transform="translate(1048,232)">
-    <rect x="-12" y="-12" width="120" height="120" rx="16" ry="16"
-          fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
-    <svg x="0" y="0" width="96" height="96" viewBox="0 0 18 18"
-         preserveAspectRatio="xMidYMid meet">
-      <defs><radialGradient id="b25d0836-964a-4c84-8c20-855f66e8345e" cx="-105.006" cy="-10.409" r="5.954" gradientTransform="translate(117.739 19.644) scale(1.036 1.027)" gradientUnits="userSpaceOnUse"><stop offset="0.183" stop-color="#5ea0ef" /><stop offset="1" stop-color="#0078d4" /></radialGradient><clipPath id="b36c7f5d-2ef1-4760-8a25-eeb9661f4e47"><path d="M14.969,7.53A6.137,6.137,0,1,1,7.574,2.987,6.137,6.137,0,0,1,14.969,7.53Z" fill="none" /></clipPath></defs><title>Icon-databases-121</title><path d="M2.954,5.266a.175.175,0,0,1-.176-.176h0A2.012,2.012,0,0,0,.769,3.081a.176.176,0,0,1-.176-.175h0a.176.176,0,0,1,.176-.176A2.012,2.012,0,0,0,2.778.72.175.175,0,0,1,2.954.544h0A.175.175,0,0,1,3.13.72h0A2.012,2.012,0,0,0,5.139,2.729a.175.175,0,0,1,.176.176h0a.175.175,0,0,1-.176.176h0A2.011,2.011,0,0,0,3.13,5.09.177.177,0,0,1,2.954,5.266Z" fill="#50e6ff" /><path d="M15.611,17.456a.141.141,0,0,1-.141-.141h0a1.609,1.609,0,0,0-1.607-1.607.141.141,0,0,1-.141-.14h0a.141.141,0,0,1,.141-.141h0a1.608,1.608,0,0,0,1.607-1.607.141.141,0,0,1,.141-.141h0a.141.141,0,0,1,.141.141h0a1.608,1.608,0,0,0,1.607,1.607.141.141,0,1,1,0,.282h0a1.609,1.609,0,0,0-1.607,1.607A.141.141,0,0,1,15.611,17.456Z" fill="#50e6ff" /><g><path d="M14.969,7.53A6.137,6.137,0,1,1,7.574,2.987,6.137,6.137,0,0,1,14.969,7.53Z" fill="url(#b25d0836-964a-4c84-8c20-855f66e8345e)" /><g clip-path="url(#b36c7f5d-2ef1-4760-8a25-eeb9661f4e47)"><path d="M5.709,13.115A1.638,1.638,0,1,0,5.714,9.84,1.307,1.307,0,0,0,5.721,9.7,1.651,1.651,0,0,0,4.06,8.064H2.832a6.251,6.251,0,0,0,1.595,5.051Z" fill="#f2f2f2" /><path d="M15.045,7.815c0-.015,0-.03-.007-.044a5.978,5.978,0,0,0-1.406-2.88,1.825,1.825,0,0,0-.289-.09,1.806,1.806,0,0,0-2.3,1.663,2,2,0,0,0-.2-.013,1.737,1.737,0,0,0-.581,3.374,1.451,1.451,0,0,0,.541.1h2.03A13.453,13.453,0,0,0,15.045,7.815Z" fill="#f2f2f2" /></g></g><path d="M17.191,3.832c-.629-1.047-2.1-1.455-4.155-1.149a14.606,14.606,0,0,0-2.082.452,6.456,6.456,0,0,1,1.528.767c.241-.053.483-.116.715-.151A7.49,7.49,0,0,1,14.3,3.662a2.188,2.188,0,0,1,1.959.725h0c.383.638.06,1.729-.886,3a16.723,16.723,0,0,1-4.749,4.051A16.758,16.758,0,0,1,4.8,13.7c-1.564.234-2.682,0-3.065-.636s-.06-1.73.886-2.995c.117-.157.146-.234.279-.392a6.252,6.252,0,0,1,.026-1.63A11.552,11.552,0,0,0,1.756,9.419C.517,11.076.181,12.566.809,13.613a3.165,3.165,0,0,0,2.9,1.249,8.434,8.434,0,0,0,1.251-.1,17.855,17.855,0,0,0,6.219-2.4,17.808,17.808,0,0,0,5.061-4.332C17.483,6.369,17.819,4.88,17.191,3.832Z" fill="#50e6ff" />
-    </svg>
-  </g>
+  <!-- Tagline -->
+  <text class="h-sub" x="72" y="252">Demand forecasting, customer segmentation, store ops on Fabric</text>
+
+  <!-- Footer chip -->
+  <text class="h-foot" x="72" y="385">POS · LOYALTY · WEATHER · DEMAND · INVENTORY · CLICKSTREAM</text>
+
+<g transform="translate(900, 84)">
+
+    <g transform="translate(0,0)">
+      <rect x="0" y="0" width="640" height="50" rx="5" fill="#FB7185" fill-opacity="0.28" stroke="#FB7185" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="6" height="50" fill="#FB7185"/>
+      <text class="v-num" x="20" y="22">01</text>
+      <text class="v-lbl" x="60" y="22" font-size="14">DEMAND FORECASTING (AUTOML)</text>
+      <text class="v-cap" x="60" y="38">SKU × store × day, weather + promo lift</text>
+    </g>
+
+    <g transform="translate(0,64)">
+      <rect x="0" y="0" width="640" height="50" rx="5" fill="#FB7185" fill-opacity="0.28" stroke="#FB7185" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="6" height="50" fill="#FB7185"/>
+      <text class="v-num" x="20" y="22">02</text>
+      <text class="v-lbl" x="60" y="22" font-size="14">CUSTOMER SEGMENTATION</text>
+      <text class="v-cap" x="60" y="38">RFM, behavioral clusters, churn risk</text>
+    </g>
+
+    <g transform="translate(0,128)">
+      <rect x="0" y="0" width="640" height="50" rx="5" fill="#FB7185" fill-opacity="0.28" stroke="#FB7185" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="6" height="50" fill="#FB7185"/>
+      <text class="v-num" x="20" y="22">03</text>
+      <text class="v-lbl" x="60" y="22" font-size="14">STORE OPS DASHBOARDS</text>
+      <text class="v-cap" x="60" y="38">Conversion, basket size, labor productivity</text>
+    </g>
+
+    <g transform="translate(0,192)">
+      <rect x="0" y="0" width="640" height="50" rx="5" fill="#FB7185" fill-opacity="0.28" stroke="#FB7185" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="6" height="50" fill="#FB7185"/>
+      <text class="v-num" x="20" y="22">04</text>
+      <text class="v-lbl" x="60" y="22" font-size="14">REAL-TIME CLICKSTREAM</text>
+      <text class="v-cap" x="60" y="38">Eventstream → personalization model → site</text>
+    </g>
+</g>
 </svg>

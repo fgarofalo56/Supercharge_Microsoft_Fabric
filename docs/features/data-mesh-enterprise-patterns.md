@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Data Mesh Enterprise Patterns
-
 # 🏛️ Data Mesh & Enterprise Architecture Patterns
 
 
@@ -16,21 +14,6 @@
 ---
 
 **Last Updated:** `2026-03-12` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🧩 Data Mesh Principles in Fabric](#-data-mesh-principles-in-fabric)
-- [🏗️ Workspace Topology](#️-workspace-topology)
-- [📦 Data Product Contracts](#-data-product-contracts)
-- [🔀 Cross-Domain Patterns](#-cross-domain-patterns)
-- [📈 Large-Scale Enterprise Considerations](#-large-scale-enterprise-considerations)
-- [🔄 Migration Path: Centralized to Mesh](#-migration-path-centralized-to-mesh)
-- [🛡️ Governance at Scale](#️-governance-at-scale)
-- [📐 Reference Architecture](#-reference-architecture)
-- [📚 References](#-references)
 
 ---
 

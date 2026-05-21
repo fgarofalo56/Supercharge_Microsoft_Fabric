@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > Decision Trees
-
 # Decision Trees: Interactive Architecture Guides
 
 <div align="center" markdown>

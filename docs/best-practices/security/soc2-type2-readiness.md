@@ -1,5 +1,3 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Security](../index.md) > SOC 2 Type II Readiness
-
 # 🔐 SOC 2 Type II Readiness on Microsoft Fabric
 
 <div align="center" markdown>
@@ -18,27 +16,6 @@
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Anchor for:** Wave 5 Security & Compliance doc set
 
 > **Disclaimer:** This document provides architectural and technical guidance for SOC 2 Type II readiness on Microsoft Fabric. It is **not** legal or auditing advice. Engage a qualified CPA firm to perform the actual SOC 2 examination. Verify control mappings with your audit firm before relying on them in an examination.
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [📋 SOC 2 Fundamentals](#-soc-2-fundamentals)
-- [🔍 Trust Services Criteria → Fabric Controls](#-trust-services-criteria--fabric-controls)
-- [🏗️ Reference Architecture](#️-reference-architecture)
-- [⚙️ Common Criteria (CC) Implementation](#️-common-criteria-cc-implementation)
-- [🔒 Security TSC Implementation](#-security-tsc-implementation)
-- [⚡ Availability TSC Implementation](#-availability-tsc-implementation)
-- [🧩 Processing Integrity TSC Implementation](#-processing-integrity-tsc-implementation)
-- [🤐 Confidentiality TSC Implementation](#-confidentiality-tsc-implementation)
-- [👤 Privacy TSC Implementation](#-privacy-tsc-implementation)
-- [📊 Evidence Collection](#-evidence-collection)
-- [🗂️ Control Matrix Template](#️-control-matrix-template)
-- [📅 Examination Period Preparation](#-examination-period-preparation)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Production Readiness Checklist](#-production-readiness-checklist)
-- [📚 References](#-references)
 
 ---
 

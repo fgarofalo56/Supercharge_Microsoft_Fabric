@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Cross-Database Queries
-
 # 🔗 Cross-Database Queries in Microsoft Fabric
 
 <div align="center" markdown>
@@ -15,23 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-21` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [📝 Syntax & Three-Part Naming](#-syntax--three-part-naming)
-- [🔀 Supported Query Patterns](#-supported-query-patterns)
-- [⚡ Performance Considerations](#-performance-considerations)
-- [🔐 Authentication & Security](#-authentication--security)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Agency Implementation](#️-federal-agency-implementation)
-- [📊 Advanced Scenarios](#-advanced-scenarios)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
-- [🔗 Related Documents](#-related-documents)
 
 ---
 

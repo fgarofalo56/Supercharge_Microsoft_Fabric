@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](..) > [Compliance Templates](./) > SAR Template
-
 # 🔍 Suspicious Activity Report Template
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0

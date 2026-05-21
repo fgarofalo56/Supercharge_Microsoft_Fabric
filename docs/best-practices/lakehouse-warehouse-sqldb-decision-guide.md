@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > Lakehouse vs Warehouse vs SQL Database Decision Guide
-
 # 🏗️ Lakehouse vs Warehouse vs SQL Database — Decision Guide
 
 <div align="center" markdown>
@@ -15,24 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-21` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [📊 Feature Comparison Matrix](#-feature-comparison-matrix)
-- [🔍 Deep Dive: Each Store](#-deep-dive-each-store)
-- [🌳 Decision Trees](#-decision-trees)
-- [⚡ Performance Characteristics](#-performance-characteristics)
-- [🔐 Security Model Comparison](#-security-model-comparison)
-- [🔄 Hybrid Patterns](#-hybrid-patterns)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Agency Implementation](#️-federal-agency-implementation)
-- [🔀 Migration Paths](#-migration-paths)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
-- [🔗 Related Documents](#-related-documents)
 
 ---
 

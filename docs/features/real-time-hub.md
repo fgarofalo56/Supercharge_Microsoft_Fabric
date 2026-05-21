@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Real-Time Hub
-
 # 📡 Real-Time Hub — Event Discovery and Sharing
 
 <div align="center" markdown>
@@ -15,19 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-21` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [⚙️ Event Sources](#️-event-sources)
-- [🔄 Streams and Topics](#-streams-and-topics)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Implementation](#️-federal-implementation)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

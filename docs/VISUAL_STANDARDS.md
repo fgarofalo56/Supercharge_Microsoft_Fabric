@@ -1,5 +1,3 @@
-[Home](index.md) > [Docs](./index.md) > Visual Standards
-
 # 🎨 Visual Design Standards
 
 > **Last Updated**: 2025-01-22 | **Version**: 1.0  
@@ -8,19 +6,6 @@
 **Quick Reference Guide for Visual Consistency**
 
 This document defines the visual design system for all documentation. Use this as your go-to reference when creating or updating docs to ensure visual consistency across the repository.
-
----
-
-## 📑 Table of Contents
-
-- [Color Palette](#-color-palette)
-- [Icon & Emoji Standards](#-icon--emoji-standards)
-- [Badge Standards](#-badge-standards)
-- [Callout Box Styles](#-callout-box-styles)
-- [Table Formatting](#-table-formatting)
-- [Mermaid Diagram Styles](#-mermaid-diagram-styles)
-- [Progress Tracker Templates](#-progress-tracker-templates)
-- [Quick Reference Card](#-quick-reference-card)
 
 ---
 

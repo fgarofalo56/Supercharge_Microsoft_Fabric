@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > Reference Architectures
-
 # 🏗️ Reference Architectures for Microsoft Fabric
 
 <div align="center" markdown>

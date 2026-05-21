@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > OneLake Catalog
-
 # 📚 OneLake Catalog - Unified Data Discovery & Governance Hub
 
 <div align="center" markdown>
@@ -15,21 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [⚙️ Discovery Features](#️-discovery-features)
-- [🏷️ Endorsement & Certification](#️-endorsement--certification)
-- [🛡️ Govern Tab](#️-govern-tab)
-- [🔍 Search API & MCP](#-search-api--mcp)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Agency Implementation](#️-federal-agency-implementation)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

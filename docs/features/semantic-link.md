@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Semantic Link
-
 # 🔗 Semantic Link - Bridge Spark Notebooks and Power BI
 
 <div align="center" markdown>
@@ -15,20 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [⚙️ Core API](#️-core-api)
-- [🧪 Statistical Functions](#-statistical-functions)
-- [🔄 Write-Back Patterns](#-write-back-patterns)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Agency Implementation](#️-federal-agency-implementation)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

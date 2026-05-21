@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > OneLake Shortcuts: S3, GCS, Dataverse
-
 # 🔗 OneLake Shortcuts - Multi-Cloud Data Federation
 
 <div align="center" markdown>
@@ -15,26 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0
-
----
-
-## Table of Contents
-
-- [Overview](#-overview)
-- [Architecture](#-architecture)
-- [Shortcut Types](#-shortcut-types)
-- [Multi-Cloud Federation Patterns](#-multi-cloud-federation-patterns)
-- [Authentication per Source](#-authentication-per-source)
-- [Refresh Behavior and Caching](#-refresh-behavior-and-caching)
-- [Cost Implications](#-cost-implications)
-- [Security](#-security)
-- [Performance](#-performance)
-- [Decision Tree: Shortcut vs Copy](#-decision-tree-shortcut-vs-copy)
-- [REST API for Shortcuts](#-rest-api-for-shortcuts)
-- [Casino Implementation](#-casino-implementation)
-- [Federal Agency Implementation](#-federal-agency-implementation)
-- [Limitations](#-limitations)
-- [References](#-references)
 
 ---
 

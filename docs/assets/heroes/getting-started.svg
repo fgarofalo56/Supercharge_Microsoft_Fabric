@@ -1,68 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" width="1200" height="320"
-     role="img" aria-label="Get Started">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 420" width="1600" height="420"
+     role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid slice">
+  <title id="title">Get Started</title>
+  <desc id="desc">Provision Fabric, configure capacity, deploy your first Direct Lake report</desc>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#1A237E"/>
-      <stop offset="55%" stop-color="#3F51B5"/>
-      <stop offset="100%" stop-color="#5C6BC0"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="0.7">
+      <stop offset="0%"   stop-color="#082F49"/>
+      <stop offset="55%"  stop-color="#0078D4"/>
+      <stop offset="100%" stop-color="#082F49"/>
     </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#FFC107" stop-opacity="0.95"/>
-      <stop offset="100%" stop-color="#FFC107" stop-opacity="0.4"/>
-    </linearGradient>
-    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-    </pattern>
-    <filter id="blur"><feGaussianBlur stdDeviation="40"/></filter>
+    <radialGradient id="glow" cx="78%" cy="50%" r="55%">
+      <stop offset="0%"   stop-color="#38BDF8" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .h-title { font-family:'IBM Plex Sans','Segoe UI','Helvetica Neue',sans-serif; font-weight:600; font-size:54px; fill:#FFFFFF; letter-spacing:-1.0px; }
+      .h-sub   { font-family:'IBM Plex Sans','Segoe UI','Helvetica Neue',sans-serif; font-weight:400; font-size:20px; fill:#FFFFFF; fill-opacity:0.84; letter-spacing:-0.2px; }
+      .h-chip  { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:700; font-size:13px; letter-spacing:2.5px; fill:#7DD3FC; }
+      .h-foot  { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:500; font-size:11px; letter-spacing:1.2px; fill:#FFFFFF; fill-opacity:0.45; }
+      .v-num   { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:700; font-size:15px; fill:#FFFFFF; letter-spacing:0.5px; }
+      .v-lbl   { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:600; font-size:13px; fill:#FFFFFF; fill-opacity:0.95; letter-spacing:0.8px; }
+      .v-cap   { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:500; font-size:11px; fill:#FFFFFF; fill-opacity:0.75; letter-spacing:1.0px; }
+    </style>
   </defs>
 
   <!-- Background -->
-  <rect width="1200" height="320" fill="url(#bg)"/>
-  <rect width="1200" height="320" fill="url(#grid)"/>
+  <rect width="1600" height="420" fill="url(#bg)"/>
+  <rect width="1600" height="420" fill="url(#glow)"/>
 
-  <!-- Decorative ambient blobs -->
-  <circle cx="180" cy="60"  r="120" fill="#FFC107" opacity="0.20" filter="url(#blur)"/>
-  <circle cx="960" cy="280" r="160" fill="#5C6BC0" opacity="0.30" filter="url(#blur)"/>
+  <!-- Left accent stripe -->
+  <rect x="0" y="0" width="6" height="420" fill="#7DD3FC" opacity="0.65"/>
+  <rect x="0" y="0" width="6" height="120" fill="#38BDF8"/>
 
-  <!-- Accent bar on the left -->
-  <rect x="0" y="80" width="6" height="160" fill="url(#accent)" rx="3"/>
+  <!-- Bottom scan line -->
+  <rect x="0" y="408" width="1600" height="2" fill="#7DD3FC" opacity="0.25"/>
 
-  <!-- Title + tagline -->
-  <text x="56" y="148" font-family="Inter, system-ui, sans-serif" font-size="44" font-weight="700"
-        fill="#FFFFFF" letter-spacing="-0.5">Get Started</text>
-  <text x="56" y="194" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="400"
-        fill="rgba(255,255,255,0.85)" letter-spacing="0.2">30-minute onboarding — capacity, lakehouse, role-based quickstarts</text>
-
-  <!-- Subtle "Microsoft Fabric" eyebrow -->
-  <text x="56" y="100" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600"
-        fill="#FFC107" letter-spacing="2" text-transform="uppercase">MICROSOFT FABRIC</text>
-
-
-  <g transform="translate(1048,-8)">
-    <rect x="-12" y="-12" width="120" height="120" rx="16" ry="16"
-          fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
-    <svg x="0" y="0" width="96" height="96" viewBox="0 0 18 18"
-         preserveAspectRatio="xMidYMid meet">
-      <defs><linearGradient id="f710a364-083f-494c-9d96-89b92ee2d5a8" x1="0.5" y1="9.77" x2="9" y2="9.77" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#005ba1" /><stop offset="0.07" stop-color="#0060a9" /><stop offset="0.36" stop-color="#0071c8" /><stop offset="0.52" stop-color="#0078d4" /><stop offset="0.64" stop-color="#0074cd" /><stop offset="0.81" stop-color="#006abb" /><stop offset="0.99" stop-color="#005ba1" /></linearGradient></defs><title>Icon-databases-126</title><g><path d="M13.25,10.48V6.57a.14.14,0,0,0-.24-.1l-4,4L4.85,14.63V17.5H16.93a.56.56,0,0,0,.57-.57V6.57a.14.14,0,0,0-.24-.1Z" fill="#005ba1" /><path d="M4.75,3.58C2.4,3.58.5,2.89.5,2V7.67h0v9.26a.56.56,0,0,0,.57.57H9V2C9,2.89,7.1,3.58,4.75,3.58Z" fill="url(#f710a364-083f-494c-9d96-89b92ee2d5a8)" /><rect x="12.91" y="12.97" width="2.27" height="2.27" rx="0.28" fill="#fff" /><rect x="8.97" y="12.97" width="2.27" height="2.27" rx="0.28" fill="#fff" /><rect x="5.03" y="12.97" width="2.27" height="2.27" rx="0.28" fill="#fff" /><path d="M9,2c0,.85-1.9,1.54-4.25,1.54S.5,2.89.5,2,2.4.5,4.75.5,9,1.19,9,2" fill="#eaeaea" /><path d="M8,1.91c0,.55-1.46,1-3.26,1s-3.26-.43-3.26-1S3,.94,4.75.94,8,1.37,8,1.91" fill="#50e6ff" /><path d="M4.75,2.14a8.07,8.07,0,0,0-2.58.37,7.64,7.64,0,0,0,2.58.38,7.64,7.64,0,0,0,2.58-.38A8.07,8.07,0,0,0,4.75,2.14Z" fill="#198ab3" /></g>
-    </svg>
+  <!-- Eyebrow chip -->
+  <g transform="translate(72, 60)">
+    <rect x="0" y="0" width="370" height="34" rx="0" fill="#38BDF8" fill-opacity="0.10" stroke="#38BDF8" stroke-opacity="0.55"/>
+    <rect x="0" y="0" width="6" height="34" fill="#38BDF8"/>
+    <text class="h-chip" x="185.0" y="22" text-anchor="middle">GET STARTED · 30 MIN ONBOARDING</text>
   </g>
 
-  <g transform="translate(1048,112)">
-    <rect x="-12" y="-12" width="120" height="120" rx="16" ry="16"
-          fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
-    <svg x="0" y="0" width="96" height="96" viewBox="0 0 18 18"
-         preserveAspectRatio="xMidYMid meet">
-      <defs><linearGradient id="a891901b-79ae-490a-8568-9c4334417d35" x1="9" y1="5.38" x2="9" gradientUnits="userSpaceOnUse"><stop offset="0.199" stop-color="#005ba1" /><stop offset="1" stop-color="#0078d4" /></linearGradient><linearGradient id="bbdaa009-2281-4da8-9e89-6f41689e91a7" x1="9" y1="12.713" x2="9" y2="5.287" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#198ab3" /><stop offset="0.172" stop-color="#32bedd" /><stop offset="0.5" stop-color="#50e6ff" /><stop offset="0.5" stop-color="#4fe4fd" /><stop offset="0.5" stop-color="#4bddf8" /><stop offset="0.5" stop-color="#44d2ee" /><stop offset="0.5" stop-color="#3ac1e0" /><stop offset="0.5" stop-color="#2dabce" /><stop offset="0.5" stop-color="#1d90b8" /><stop offset="0.5" stop-color="#198ab3" /><stop offset="0.662" stop-color="#32bedd" /><stop offset="0.975" stop-color="#50e6ff" /></linearGradient></defs><path d="M9,0,1.15,4.49v8.97L9,18l7.85-4.49v-9Zm6.4,12.57L9,16.27,2.6,12.609V5.38L9,1.68l6.4,3.71Z" fill="#0078d4" /><polygon points="9 0 9 0 1.15 4.49 2.6 5.38 9 1.68 9 1.68 15.4 5.38 16.85 4.49 9 0" fill="url(#a891901b-79ae-490a-8568-9c4334417d35)" /><path d="M12.74,10.475a.73.73,0,0,0-.323-.286A5.835,5.835,0,0,0,7.939,6.843L14.416,3.1,12.91,2.236,5.534,6.5A.75.75,0,0,0,5.91,7.9.684.684,0,0,0,6,7.877l.125.523a4.319,4.319,0,0,1,4.837,2.238L3.613,14.885l1.5.866L12.466,11.5a.729.729,0,0,0,.242-.236l.075-.018c-.007-.029-.018-.055-.025-.084A.735.735,0,0,0,12.74,10.475Z" fill="#50e6ff" /><path d="M12.091,9.013a1.85,1.85,0,1,0,1.85,1.85A1.85,1.85,0,0,0,12.091,9.013ZM5.909,5.267a1.85,1.85,0,1,0,1.85,1.85A1.85,1.85,0,0,0,5.909,5.267Z" fill="url(#bbdaa009-2281-4da8-9e89-6f41689e91a7)" />
-    </svg>
-  </g>
+  <!-- Title -->
+  <text class="h-title" x="72" y="208">Get Started</text>
 
-  <g transform="translate(1048,232)">
-    <rect x="-12" y="-12" width="120" height="120" rx="16" ry="16"
-          fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
-    <svg x="0" y="0" width="96" height="96" viewBox="0 0 18 18"
-         preserveAspectRatio="xMidYMid meet">
-      <defs><clipPath id="a704ce45-5ca0-410c-9835-3f7dd166dfb6"><path d="M9.71,1.185a.711.711,0,0,1,.711-.711h4.263a.71.71,0,0,1,.71.711v15.63a.71.71,0,0,1-.71.711H3.316a.71.71,0,0,1-.71-.711V9.71A.71.71,0,0,1,3.316,9H6.158V5.448a.711.711,0,0,1,.711-.711H9.71Z" fill="none" /></clipPath><linearGradient id="a7d0ea34-430c-4819-b9b1-0a8a2dfdd52b" x1="214.573" y1="491.263" x2="222.068" y2="507.151" gradientTransform="translate(-206 -490.699)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#e6ad10" /><stop offset="1" stop-color="#c87e0e" /></linearGradient><linearGradient id="fa41d3b0-0611-4d16-b103-b71ec870a9cb" x1="211.689" y1="495.678" x2="217.993" y2="507.903" gradientTransform="translate(-206 -490.699)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f6d751" /><stop offset="1" stop-color="#e6ad10" /></linearGradient><linearGradient id="ea08d23a-67c8-409f-90e3-67e0ce891091" x1="209.39" y1="499.368" x2="212.873" y2="507.624" gradientTransform="translate(-206 -490.699)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f9e589" /><stop offset="1" stop-color="#f6d751" /></linearGradient></defs><g clip-path="url(#a704ce45-5ca0-410c-9835-3f7dd166dfb6)"><g><path d="M15.394.474V17.526H9.71V.474Z" fill="url(#a7d0ea34-430c-4819-b9b1-0a8a2dfdd52b)" /><path d="M11.842,5.448V17.526H6.158V4.737h4.973A.711.711,0,0,1,11.842,5.448Z" fill="url(#fa41d3b0-0611-4d16-b103-b71ec870a9cb)" /><path d="M2.606,9v8.526H8.29V9.71A.711.711,0,0,0,7.579,9Z" fill="url(#ea08d23a-67c8-409f-90e3-67e0ce891091)" /></g></g>
-    </svg>
-  </g>
+  <!-- Tagline -->
+  <text class="h-sub" x="72" y="252">Provision Fabric, configure capacity, deploy your first Direct Lake report</text>
+
+  <!-- Footer chip -->
+  <text class="h-foot" x="72" y="385">6 MILESTONES · 30 MIN · BICEP-FIRST</text>
+
+<g transform="translate(900, 60)">
+
+    <g transform="translate(0,0)">
+      <rect x="0" y="0" width="206" height="118" rx="6" fill="#38BDF8" fill-opacity="0.28" stroke="#38BDF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="6" height="118" fill="#38BDF8"/>
+      <text class="v-num" x="18" y="32" font-size="22">01</text>
+      <text class="v-lbl" x="18" y="78" font-size="14">PREREQS</text>
+    </g>
+<path d="M206,59 L230,59" stroke="#7DD3FC" stroke-width="1.5" fill="none" opacity="0.55"/>
+
+    <g transform="translate(230,0)">
+      <rect x="0" y="0" width="206" height="118" rx="6" fill="#38BDF8" fill-opacity="0.28" stroke="#38BDF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="6" height="118" fill="#38BDF8"/>
+      <text class="v-num" x="18" y="32" font-size="22">02</text>
+      <text class="v-lbl" x="18" y="78" font-size="14">DEPLOY</text>
+    </g>
+<path d="M436,59 L460,59" stroke="#7DD3FC" stroke-width="1.5" fill="none" opacity="0.55"/>
+
+    <g transform="translate(460,0)">
+      <rect x="0" y="0" width="206" height="118" rx="6" fill="#38BDF8" fill-opacity="0.28" stroke="#38BDF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="6" height="118" fill="#38BDF8"/>
+      <text class="v-num" x="18" y="32" font-size="22">03</text>
+      <text class="v-lbl" x="18" y="78" font-size="14">CONFIGURE</text>
+    </g>
+
+    <g transform="translate(0,140)">
+      <rect x="0" y="0" width="206" height="118" rx="6" fill="#38BDF8" fill-opacity="0.28" stroke="#38BDF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="6" height="118" fill="#38BDF8"/>
+      <text class="v-num" x="18" y="32" font-size="22">04</text>
+      <text class="v-lbl" x="18" y="78" font-size="14">LAKEHOUSE</text>
+    </g>
+<path d="M206,199 L230,199" stroke="#7DD3FC" stroke-width="1.5" fill="none" opacity="0.55"/>
+
+    <g transform="translate(230,140)">
+      <rect x="0" y="0" width="206" height="118" rx="6" fill="#38BDF8" fill-opacity="0.28" stroke="#38BDF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="6" height="118" fill="#38BDF8"/>
+      <text class="v-num" x="18" y="32" font-size="22">05</text>
+      <text class="v-lbl" x="18" y="78" font-size="14">REPORT</text>
+    </g>
+<path d="M436,199 L460,199" stroke="#7DD3FC" stroke-width="1.5" fill="none" opacity="0.55"/>
+
+    <g transform="translate(460,140)">
+      <rect x="0" y="0" width="206" height="118" rx="6" fill="#38BDF8" fill-opacity="0.28" stroke="#38BDF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="6" height="118" fill="#38BDF8"/>
+      <text class="v-num" x="18" y="32" font-size="22">06</text>
+      <text class="v-lbl" x="18" y="78" font-size="14">GOVERN</text>
+    </g>
+</g>
 </svg>

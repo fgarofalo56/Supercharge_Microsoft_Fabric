@@ -12,22 +12,6 @@
 ![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
 
 </div>
-
-## 📑 Table of Contents
-
-- [Overview](#-overview)
-- [Gateway Types](#-gateway-types)
-- [Gateway Sizing Guidelines](#-gateway-sizing-guidelines)
-- [Parallel and Concurrent Connections](#-parallel-and-concurrent-connections)
-- [Performance Optimization](#-performance-optimization)
-- [High Availability Clustering](#-high-availability-clustering)
-- [Gateway for Fabric Pipelines](#-gateway-for-fabric-pipelines)
-- [Monitoring and Troubleshooting](#-monitoring-and-troubleshooting)
-- [Gateway Configuration Script](#-gateway-configuration-script)
-- [Best Practices Summary](#-best-practices-summary)
-- [Capacity Planning Calculator](#-capacity-planning-calculator)
-- [Related Documents](#-related-documents)
-
 ---
 
 ## 📋 Overview

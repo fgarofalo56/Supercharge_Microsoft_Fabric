@@ -1,68 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" width="1200" height="320"
-     role="img" aria-label="Best Practices">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 420" width="1600" height="420"
+     role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid slice">
+  <title id="title">Best Practices</title>
+  <desc id="desc">Architecture, security, performance, and operational guidance for Fabric</desc>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#1A237E"/>
-      <stop offset="55%" stop-color="#3F51B5"/>
-      <stop offset="100%" stop-color="#5C6BC0"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="0.7">
+      <stop offset="0%"   stop-color="#0B1226"/>
+      <stop offset="55%"  stop-color="#3F51B5"/>
+      <stop offset="100%" stop-color="#0B1226"/>
     </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#FFC107" stop-opacity="0.95"/>
-      <stop offset="100%" stop-color="#FFC107" stop-opacity="0.4"/>
-    </linearGradient>
-    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-    </pattern>
-    <filter id="blur"><feGaussianBlur stdDeviation="40"/></filter>
+    <radialGradient id="glow" cx="78%" cy="50%" r="55%">
+      <stop offset="0%"   stop-color="#818CF8" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#818CF8" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .h-title { font-family:'IBM Plex Sans','Segoe UI','Helvetica Neue',sans-serif; font-weight:600; font-size:54px; fill:#FFFFFF; letter-spacing:-1.0px; }
+      .h-sub   { font-family:'IBM Plex Sans','Segoe UI','Helvetica Neue',sans-serif; font-weight:400; font-size:20px; fill:#FFFFFF; fill-opacity:0.84; letter-spacing:-0.2px; }
+      .h-chip  { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:700; font-size:13px; letter-spacing:2.5px; fill:#A5B4FC; }
+      .h-foot  { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:500; font-size:11px; letter-spacing:1.2px; fill:#FFFFFF; fill-opacity:0.45; }
+      .v-num   { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:700; font-size:15px; fill:#FFFFFF; letter-spacing:0.5px; }
+      .v-lbl   { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:600; font-size:13px; fill:#FFFFFF; fill-opacity:0.95; letter-spacing:0.8px; }
+      .v-cap   { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:500; font-size:11px; fill:#FFFFFF; fill-opacity:0.75; letter-spacing:1.0px; }
+    </style>
   </defs>
 
   <!-- Background -->
-  <rect width="1200" height="320" fill="url(#bg)"/>
-  <rect width="1200" height="320" fill="url(#grid)"/>
+  <rect width="1600" height="420" fill="url(#bg)"/>
+  <rect width="1600" height="420" fill="url(#glow)"/>
 
-  <!-- Decorative ambient blobs -->
-  <circle cx="180" cy="60"  r="120" fill="#FFC107" opacity="0.20" filter="url(#blur)"/>
-  <circle cx="960" cy="280" r="160" fill="#5C6BC0" opacity="0.30" filter="url(#blur)"/>
+  <!-- Left accent stripe -->
+  <rect x="0" y="0" width="6" height="420" fill="#A5B4FC" opacity="0.65"/>
+  <rect x="0" y="0" width="6" height="120" fill="#818CF8"/>
 
-  <!-- Accent bar on the left -->
-  <rect x="0" y="80" width="6" height="160" fill="url(#accent)" rx="3"/>
+  <!-- Bottom scan line -->
+  <rect x="0" y="408" width="1600" height="2" fill="#A5B4FC" opacity="0.25"/>
 
-  <!-- Title + tagline -->
-  <text x="56" y="148" font-family="Inter, system-ui, sans-serif" font-size="44" font-weight="700"
-        fill="#FFFFFF" letter-spacing="-0.5">Best Practices</text>
-  <text x="56" y="194" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="400"
-        fill="rgba(255,255,255,0.85)" letter-spacing="0.2">Architecture, security, performance, and operational guidance for Fabric</text>
-
-  <!-- Subtle "Microsoft Fabric" eyebrow -->
-  <text x="56" y="100" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600"
-        fill="#FFC107" letter-spacing="2" text-transform="uppercase">MICROSOFT FABRIC</text>
-
-
-  <g transform="translate(1048,-8)">
-    <rect x="-12" y="-12" width="120" height="120" rx="16" ry="16"
-          fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
-    <svg x="0" y="0" width="96" height="96" viewBox="0 0 18 18"
-         preserveAspectRatio="xMidYMid meet">
-      <defs><linearGradient id="a891901b-79ae-490a-8568-9c4334417d35" x1="9" y1="5.38" x2="9" gradientUnits="userSpaceOnUse"><stop offset="0.199" stop-color="#005ba1" /><stop offset="1" stop-color="#0078d4" /></linearGradient><linearGradient id="bbdaa009-2281-4da8-9e89-6f41689e91a7" x1="9" y1="12.713" x2="9" y2="5.287" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#198ab3" /><stop offset="0.172" stop-color="#32bedd" /><stop offset="0.5" stop-color="#50e6ff" /><stop offset="0.5" stop-color="#4fe4fd" /><stop offset="0.5" stop-color="#4bddf8" /><stop offset="0.5" stop-color="#44d2ee" /><stop offset="0.5" stop-color="#3ac1e0" /><stop offset="0.5" stop-color="#2dabce" /><stop offset="0.5" stop-color="#1d90b8" /><stop offset="0.5" stop-color="#198ab3" /><stop offset="0.662" stop-color="#32bedd" /><stop offset="0.975" stop-color="#50e6ff" /></linearGradient></defs><path d="M9,0,1.15,4.49v8.97L9,18l7.85-4.49v-9Zm6.4,12.57L9,16.27,2.6,12.609V5.38L9,1.68l6.4,3.71Z" fill="#0078d4" /><polygon points="9 0 9 0 1.15 4.49 2.6 5.38 9 1.68 9 1.68 15.4 5.38 16.85 4.49 9 0" fill="url(#a891901b-79ae-490a-8568-9c4334417d35)" /><path d="M12.74,10.475a.73.73,0,0,0-.323-.286A5.835,5.835,0,0,0,7.939,6.843L14.416,3.1,12.91,2.236,5.534,6.5A.75.75,0,0,0,5.91,7.9.684.684,0,0,0,6,7.877l.125.523a4.319,4.319,0,0,1,4.837,2.238L3.613,14.885l1.5.866L12.466,11.5a.729.729,0,0,0,.242-.236l.075-.018c-.007-.029-.018-.055-.025-.084A.735.735,0,0,0,12.74,10.475Z" fill="#50e6ff" /><path d="M12.091,9.013a1.85,1.85,0,1,0,1.85,1.85A1.85,1.85,0,0,0,12.091,9.013ZM5.909,5.267a1.85,1.85,0,1,0,1.85,1.85A1.85,1.85,0,0,0,5.909,5.267Z" fill="url(#bbdaa009-2281-4da8-9e89-6f41689e91a7)" />
-    </svg>
+  <!-- Eyebrow chip -->
+  <g transform="translate(72, 60)">
+    <rect x="0" y="0" width="420" height="34" rx="0" fill="#818CF8" fill-opacity="0.10" stroke="#818CF8" stroke-opacity="0.55"/>
+    <rect x="0" y="0" width="6" height="34" fill="#818CF8"/>
+    <text class="h-chip" x="210.0" y="22" text-anchor="middle">BEST PRACTICES · ENTERPRISE PATTERNS</text>
   </g>
 
-  <g transform="translate(1048,112)">
-    <rect x="-12" y="-12" width="120" height="120" rx="16" ry="16"
-          fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
-    <svg x="0" y="0" width="96" height="96" viewBox="0 0 18 18"
-         preserveAspectRatio="xMidYMid meet">
-      <defs><linearGradient id="f020fb7e-2243-4501-8153-5d69bd3c34f7" x1="9.88" y1="8.59" x2="11.52" y2="10.23" gradientTransform="translate(2.03 -0.4) rotate(-0.08)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#86d633" /><stop offset="1" stop-color="#5e9624" /></linearGradient><linearGradient id="b3c2bc94-8c7c-48a2-9719-6ee899a43a97" x1="6.18" y1="8.59" x2="7.81" y2="10.23" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#86d633" /><stop offset="1" stop-color="#5e9624" /></linearGradient><linearGradient id="e900c35d-0958-4d4f-b28f-302eeaaf52f5" x1="2.48" y1="8.59" x2="4.11" y2="10.23" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#86d633" /><stop offset="1" stop-color="#5e9624" /></linearGradient></defs><title>Icon-networking-61</title><circle cx="12.74" cy="8.99" r="1.16" fill="url(#f020fb7e-2243-4501-8153-5d69bd3c34f7)" /><circle cx="9.04" cy="9" r="1.16" fill="url(#b3c2bc94-8c7c-48a2-9719-6ee899a43a97)" /><circle cx="5.34" cy="9" r="1.16" fill="url(#e900c35d-0958-4d4f-b28f-302eeaaf52f5)" /><path d="M2.61,7.28h.94a.3.3,0,0,1,.3.3v6.94a.6.6,0,0,1-.6.6H2.31a0,0,0,0,1,0,0V7.58a.3.3,0,0,1,.3-.3Z" transform="translate(13.18 16.93) rotate(134.92)" fill="#50e6ff" /><path d="M2.56,2.91H3.5a.3.3,0,0,1,.3.3v7.43a0,0,0,0,1,0,0H2.86a.6.6,0,0,1-.6-.6V3.21a.3.3,0,0,1,.3-.3Z" transform="translate(5.66 -0.16) rotate(44.92)" fill="#1490df" /><path d="M14.15,7.28h.94a.6.6,0,0,1,.6.6v6.94a.3.3,0,0,1-.3.3h-.94a.3.3,0,0,1-.3-.3V7.28a0,0,0,0,1,0,0Z" transform="translate(12.32 -7.28) rotate(45.08)" fill="#50e6ff" /><path d="M14.81,2.91h.94a0,0,0,0,1,0,0v7.43a.3.3,0,0,1-.3.3H14.5a.3.3,0,0,1-.3-.3V3.51a.6.6,0,0,1,.6-.6Z" transform="translate(30.36 0.99) rotate(135.08)" fill="#1490df" />
-    </svg>
-  </g>
+  <!-- Title -->
+  <text class="h-title" x="72" y="208">Best Practices</text>
 
-  <g transform="translate(1048,232)">
-    <rect x="-12" y="-12" width="120" height="120" rx="16" ry="16"
-          fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
-    <svg x="0" y="0" width="96" height="96" viewBox="0 0 18 18"
-         preserveAspectRatio="xMidYMid meet">
-      <defs><radialGradient id="fb114c93-7c16-4540-899a-0796041629e6" cx="9" cy="9" r="8.5" gradientUnits="userSpaceOnUse"><stop offset="0.18" stop-color="#5ea0ef" /><stop offset="0.56" stop-color="#5c9fee" /><stop offset="0.69" stop-color="#559ced" /><stop offset="0.78" stop-color="#4a97e9" /><stop offset="0.86" stop-color="#3990e4" /><stop offset="0.93" stop-color="#2387de" /><stop offset="0.99" stop-color="#087bd6" /><stop offset="1" stop-color="#0078d4" /></radialGradient><radialGradient id="ec478bd3-5b38-4e7f-b661-11f355578bff" cx="38.95" cy="182.07" r="9.88" gradientTransform="translate(-28.71 -163.24) scale(0.94 0.94)" gradientUnits="userSpaceOnUse"><stop offset="0.27" stop-color="#ffd70f" /><stop offset="0.49" stop-color="#ffcb12" /><stop offset="0.88" stop-color="#feac19" /><stop offset="1" stop-color="#fea11b" /></radialGradient></defs><title>Icon-security-245</title><path id="aacf8311-a317-400f-b613-74bd00da5ce3" d="M9,.5A8.5,8.5,0,1,0,17.5,9,8.51,8.51,0,0,0,9,.5ZM9,16.34A7.34,7.34,0,1,1,16.34,9,7.34,7.34,0,0,1,9,16.34Z" fill="url(#fb114c93-7c16-4540-899a-0796041629e6)" /><circle cx="9" cy="9" r="7.34" fill="#fff" /><g><path id="bd983c41-db73-40ec-a4f4-da1213fc9924" d="M13.44,7.33a1.84,1.84,0,0,0,0-2.59h0L10.29,1.58a1.83,1.83,0,0,0-2.58,0h0L4.56,4.74a1.84,1.84,0,0,0,0,2.59L7.18,10a.51.51,0,0,1,.15.36v4.88a.63.63,0,0,0,.18.44l1.2,1.2a.41.41,0,0,0,.58,0l1.16-1.16h0l.68-.68a.25.25,0,0,0,0-.34l-.49-.49a.27.27,0,0,1,0-.37l.49-.49a.25.25,0,0,0,0-.34l-.49-.49a.27.27,0,0,1,0-.37l.49-.49a.25.25,0,0,0,0-.34l-.68-.69v-.25ZM9,2.35A1,1,0,0,1,9,4.42,1,1,0,1,1,9,2.35Z" fill="url(#ec478bd3-5b38-4e7f-b661-11f355578bff)" /><path id="ad2e7e44-9bfd-4775-8bf4-8ef26a544921" d="M8.18,15.3h0a.23.23,0,0,0,.38-.17v-4a.24.24,0,0,0-.11-.2h0a.22.22,0,0,0-.34.2v4A.28.28,0,0,0,8.18,15.3Z" fill="#ff9300" opacity="0.75" /><rect id="a996fbff-3936-4b24-b407-369336c143ba" x="6.48" y="5.79" width="5.17" height="0.61" rx="0.28" fill="#ff9300" opacity="0.75" /><rect id="bb12d31c-3352-4a18-87dd-a169a4a8721d" x="6.48" y="6.78" width="5.17" height="0.61" rx="0.28" fill="#ff9300" opacity="0.75" /></g>
-    </svg>
-  </g>
+  <!-- Tagline -->
+  <text class="h-sub" x="72" y="252">Architecture, security, performance, and operational guidance for Fabric</text>
+
+  <!-- Footer chip -->
+  <text class="h-foot" x="72" y="385">MEDALLION · CMK · OAP · FINOPS · BCDR · CDC · SCD</text>
+
+<g transform="translate(900, 80)">
+
+    <g transform="translate(0,0)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#818CF8" fill-opacity="0.28" stroke="#818CF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#818CF8"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">MEDALLION DEEP DIVE</text>
+    </g>
+
+    <g transform="translate(172,0)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#818CF8" fill-opacity="0.28" stroke="#818CF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#818CF8"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">MULTI-TENANT</text>
+    </g>
+
+    <g transform="translate(344,0)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#818CF8" fill-opacity="0.28" stroke="#818CF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#818CF8"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">ETL · ELT</text>
+    </g>
+
+    <g transform="translate(516,0)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#818CF8" fill-opacity="0.28" stroke="#818CF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#818CF8"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">STAR SCHEMA</text>
+    </g>
+
+    <g transform="translate(0,72)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#818CF8" fill-opacity="0.28" stroke="#818CF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#818CF8"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">DIRECT LAKE</text>
+    </g>
+
+    <g transform="translate(172,72)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#818CF8" fill-opacity="0.28" stroke="#818CF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#818CF8"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">V-ORDER</text>
+    </g>
+
+    <g transform="translate(344,72)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#818CF8" fill-opacity="0.28" stroke="#818CF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#818CF8"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">DR · BCDR</text>
+    </g>
+
+    <g transform="translate(516,72)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#818CF8" fill-opacity="0.28" stroke="#818CF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#818CF8"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">FINOPS</text>
+    </g>
+
+    <g transform="translate(0,144)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#818CF8" fill-opacity="0.28" stroke="#818CF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#818CF8"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">CMK</text>
+    </g>
+
+    <g transform="translate(172,144)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#818CF8" fill-opacity="0.28" stroke="#818CF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#818CF8"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">OAP</text>
+    </g>
+
+    <g transform="translate(344,144)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#818CF8" fill-opacity="0.28" stroke="#818CF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#818CF8"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">RBAC</text>
+    </g>
+
+    <g transform="translate(516,144)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#818CF8" fill-opacity="0.28" stroke="#818CF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#818CF8"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">NETWORK SEC</text>
+    </g>
+</g>
 </svg>

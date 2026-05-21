@@ -1,33 +1,9 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > fabric-cicd Deployment
-
 # CI/CD for Microsoft Fabric with `fabric-cicd`
 
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue)
 ![Updated](https://img.shields.io/badge/Updated-April_2026-green)
 ![Status](https://img.shields.io/badge/Status-GA-brightgreen)
 ![Library](https://img.shields.io/badge/fabric--cicd-GA_Feb_2026-purple)
-
----
-
-## Table of Contents
-
-- [Overview](#overview)
-- [What is fabric-cicd?](#what-is-fabric-cicd)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Authentication](#authentication)
-- [Project Structure](#project-structure)
-- [Deployment Script](#deployment-script)
-- [GitHub Actions Workflow](#github-actions-workflow)
-- [Environment Promotion](#environment-promotion)
-- [Item Types](#item-types)
-- [Parameter Overrides](#parameter-overrides)
-- [Dependency Management](#dependency-management)
-- [Dry Run Mode](#dry-run-mode)
-- [Troubleshooting](#troubleshooting)
-- [Casino Implementation](#casino-implementation)
-- [Federal Agency Implementation](#federal-agency-implementation)
-- [References](#references)
 
 ---
 

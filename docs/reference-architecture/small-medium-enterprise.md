@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Reference Architectures](index.md) > Small-Medium Enterprise
-
 # 🏢 Small-Medium Enterprise Reference Architecture
 
 
@@ -16,20 +14,6 @@
 ---
 
 **Last Updated:** `2026-05-05` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Architecture Overview](#-architecture-overview)
-- [🏗️ Architecture Diagram](#️-architecture-diagram)
-- [📦 Component Table](#-component-table)
-- [📏 Capacity Sizing Guidance](#-capacity-sizing-guidance)
-- [🔒 Network Architecture](#-network-architecture)
-- [💰 Cost Estimation Framework](#-cost-estimation-framework)
-- [🚀 Deploy This Architecture](#-deploy-this-architecture)
-- [⚖️ Tradeoffs and Limitations](#️-tradeoffs-and-limitations)
-- [📚 References](#-references)
 
 ---
 

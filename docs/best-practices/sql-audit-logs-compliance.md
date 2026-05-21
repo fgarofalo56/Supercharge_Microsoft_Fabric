@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > SQL Audit Logs & Compliance
-
 # 🔒 SQL Audit Logs & Compliance
 
 <div align="center" markdown>
@@ -15,22 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [⚙️ Configuration](#️-configuration)
-- [🔍 KQL Audit Queries](#-kql-audit-queries)
-- [🎰 Casino Compliance Monitoring](#-casino-compliance-monitoring)
-- [🏛️ Federal Agency Audit Requirements](#️-federal-agency-audit-requirements)
-- [📊 Retention Policies](#-retention-policies)
-- [🔔 Alerting Integration](#-alerting-integration)
-- [📈 Audit Dashboards](#-audit-dashboards)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

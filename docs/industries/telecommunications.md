@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Industries](./) > Telecommunications
-
 ![Telecom Analytics — Churn, network quality on Fabric](../assets/heroes/telecommunications.svg){ .hero-banner }
 
 # 📡 Telecommunications — Network Performance & Churn Prediction
@@ -21,17 +19,6 @@
 ---
 
 > *"Telecom operators sit on petabytes of network and subscriber data — the ones that analyze it in real time will win on experience, not just coverage."*
-
----
-
-## 📑 Table of Contents
-
-- [Scenario Overview](#-scenario-overview)
-- [Regulatory Landscape](#-regulatory-landscape)
-- [Data Flow Architecture](#-data-flow-architecture)
-- [Why Fabric for Telecommunications](#-why-fabric-for-telecommunications)
-- [Getting Started](#-getting-started)
-- [References](#-references)
 
 ---
 

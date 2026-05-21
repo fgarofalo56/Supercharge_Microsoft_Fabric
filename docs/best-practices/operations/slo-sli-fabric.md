@@ -1,5 +1,3 @@
-[Home](../../index.md) > [Docs](../../) > [Best Practices](../index.md) > [Operations](../index.md) > SLO/SLI for Fabric
-
 # 🎯 SLO/SLI Definitions for Fabric Workspaces
 
 <div align="center" markdown>
@@ -16,25 +14,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Phase:** 14 (Wave 1) | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Why SLO/SLI for Fabric](#-why-slosli-for-fabric)
-- [📖 Glossary](#-glossary)
-- [🟡 The Four Golden Signals (Adapted for Fabric)](#-the-four-golden-signals-adapted-for-fabric)
-- [📚 Recommended SLI Catalog by Item Type](#-recommended-sli-catalog-by-item-type)
-- [🎚️ Recommended SLO Targets](#️-recommended-slo-targets)
-- [💰 Error Budget Methodology](#-error-budget-methodology)
-- [🔥 Burn-Rate Alerts (Multi-Window)](#-burn-rate-alerts-multi-window)
-- [💻 KQL Queries for Each SLI](#-kql-queries-for-each-sli)
-- [🚨 Wiring SLOs → Alerts → Pages](#-wiring-slos--alerts--pages)
-- [📅 SLO Review Cadence](#-slo-review-cadence)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Sample SLO Document Template](#-sample-slo-document-template)
-- [🔗 Related Runbooks & Best-Practice Docs](#-related-runbooks--best-practice-docs)
-- [📚 References](#-references)
 
 ---
 

@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Data Agents
-
 # 🤖 Fabric Data Agents - Conversational AI for Enterprise Data
 
 <div align="center" markdown>
@@ -15,23 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [⚙️ Setup and Configuration](#️-setup-and-configuration)
-- [🔧 Fabric Data Agent SDK](#-fabric-data-agent-sdk)
-- [🤖 Multi-Agent Orchestration](#-multi-agent-orchestration)
-- [🔌 Integration with Copilot Studio](#-integration-with-copilot-studio)
-- [🎰 Casino Compliance Agent](#-casino-compliance-agent)
-- [🏛️ Federal Data Analysis Agents](#️-federal-data-analysis-agents)
-- [📊 Agent Evaluation](#-agent-evaluation)
-- [🔐 Security and Governance](#-security-and-governance)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

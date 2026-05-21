@@ -1,5 +1,3 @@
-[Home](index.md) > [Docs](./) > Disaster Recovery
-
 # 🔄 Disaster Recovery & Business Continuity
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
@@ -12,20 +10,6 @@
 ![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
 
 </div>
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [⏱️ Recovery Objectives](#️-recovery-objectives)
-- [🏗️ Architecture: Multi-Region Deployment](#️-architecture-multi-region-deployment)
-- [💾 Backup Strategy](#-backup-strategy)
-- [🔀 Failover Procedures](#-failover-procedures)
-- [📡 Monitoring & Alerting](#-monitoring--alerting)
-- [🧪 Testing Schedule](#-testing-schedule)
-- [📞 Contact Information](#-contact-information)
-- [📋 Regulatory Compliance](#-regulatory-compliance)
 
 ---
 

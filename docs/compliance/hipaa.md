@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Compliance](./) > HIPAA
-
 # 🏥 HIPAA Compliance Mapping for Microsoft Fabric
 
 <div align="center" markdown>
@@ -15,17 +13,6 @@
 ---
 
 **Last Updated:** `2026-05-05` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [📊 Control Mapping Table](#-control-mapping-table)
-- [🤝 Shared Responsibility Model](#-shared-responsibility-model)
-- [⚠️ Gap Analysis and Limitations](#️-gap-analysis-and-limitations)
-- [✅ Implementation Checklist](#-implementation-checklist)
-- [📚 References](#-references)
 
 ---
 

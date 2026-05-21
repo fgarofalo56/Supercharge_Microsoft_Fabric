@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Workspace Monitoring
-
 # 📊 Workspace Monitoring - Observability for Fabric Workloads
 
 <div align="center" markdown>
@@ -15,22 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [⚙️ Available System Tables](#️-available-system-tables)
-- [📊 Querying Patterns](#-querying-patterns)
-- [🔔 Alerting and Automation](#-alerting-and-automation)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Agency Implementation](#️-federal-agency-implementation)
-- [📐 Dashboard Templates](#-dashboard-templates)
-- [⚡ Performance and Retention](#-performance-and-retention)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

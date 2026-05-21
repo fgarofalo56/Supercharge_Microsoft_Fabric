@@ -12,24 +12,6 @@
 ![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
 
 </div>
-
-## 📑 Table of Contents
-
-- [Overview](#-overview)
-- [Quick Decision Matrix](#-quick-decision-matrix)
-- [Tool Comparison](#-tool-comparison)
-- [Decision Tree: Data Movement](#-decision-tree-data-movement)
-- [Decision Tree: Storage Destination](#-decision-tree-storage-destination)
-- [Scenario-Based Recommendations](#-scenario-based-recommendations)
-- [Tool Selection by Persona](#-tool-selection-by-persona)
-- [Performance Considerations](#-performance-considerations)
-- [Cost Considerations](#-cost-considerations)
-- [Hybrid Patterns](#-hybrid-patterns)
-- [Anti-Patterns to Avoid](#-anti-patterns-to-avoid)
-- [Quick Reference Card](#-quick-reference-card)
-- [Decision Checklist](#-decision-checklist)
-- [Related Documents](#-related-documents)
-
 ---
 
 ## 📋 Overview

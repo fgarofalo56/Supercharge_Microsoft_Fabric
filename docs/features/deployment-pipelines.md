@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Deployment Pipelines
-
 # 🚀 Deployment Pipelines — Stage-Based Promotion in Fabric
 
 <div align="center" markdown>
@@ -15,21 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-21` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [⚙️ Configuration](#️-configuration)
-- [🔄 Deployment Workflow](#-deployment-workflow)
-- [📐 Deployment Rules](#-deployment-rules)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Agency Implementation](#️-federal-agency-implementation)
-- [🔗 API and Automation](#-api-and-automation)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

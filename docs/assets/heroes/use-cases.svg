@@ -1,68 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" width="1200" height="320"
-     role="img" aria-label="Industry Use Cases">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 420" width="1600" height="420"
+     role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid slice">
+  <title id="title">Use Cases</title>
+  <desc id="desc">Applied analytics for healthcare, finance, retail, manufacturing, federal</desc>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#1A237E"/>
-      <stop offset="55%" stop-color="#3F51B5"/>
-      <stop offset="100%" stop-color="#5C6BC0"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="0.7">
+      <stop offset="0%"   stop-color="#1E1B4B"/>
+      <stop offset="55%"  stop-color="#5C2D91"/>
+      <stop offset="100%" stop-color="#1E1B4B"/>
     </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#FFC107" stop-opacity="0.95"/>
-      <stop offset="100%" stop-color="#FFC107" stop-opacity="0.4"/>
-    </linearGradient>
-    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-    </pattern>
-    <filter id="blur"><feGaussianBlur stdDeviation="40"/></filter>
+    <radialGradient id="glow" cx="78%" cy="50%" r="55%">
+      <stop offset="0%"   stop-color="#A78BFA" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#A78BFA" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .h-title { font-family:'IBM Plex Sans','Segoe UI','Helvetica Neue',sans-serif; font-weight:600; font-size:54px; fill:#FFFFFF; letter-spacing:-1.0px; }
+      .h-sub   { font-family:'IBM Plex Sans','Segoe UI','Helvetica Neue',sans-serif; font-weight:400; font-size:20px; fill:#FFFFFF; fill-opacity:0.84; letter-spacing:-0.2px; }
+      .h-chip  { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:700; font-size:13px; letter-spacing:2.5px; fill:#C4B5FD; }
+      .h-foot  { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:500; font-size:11px; letter-spacing:1.2px; fill:#FFFFFF; fill-opacity:0.45; }
+      .v-num   { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:700; font-size:15px; fill:#FFFFFF; letter-spacing:0.5px; }
+      .v-lbl   { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:600; font-size:13px; fill:#FFFFFF; fill-opacity:0.95; letter-spacing:0.8px; }
+      .v-cap   { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:500; font-size:11px; fill:#FFFFFF; fill-opacity:0.75; letter-spacing:1.0px; }
+    </style>
   </defs>
 
   <!-- Background -->
-  <rect width="1200" height="320" fill="url(#bg)"/>
-  <rect width="1200" height="320" fill="url(#grid)"/>
+  <rect width="1600" height="420" fill="url(#bg)"/>
+  <rect width="1600" height="420" fill="url(#glow)"/>
 
-  <!-- Decorative ambient blobs -->
-  <circle cx="180" cy="60"  r="120" fill="#FFC107" opacity="0.20" filter="url(#blur)"/>
-  <circle cx="960" cy="280" r="160" fill="#5C6BC0" opacity="0.30" filter="url(#blur)"/>
+  <!-- Left accent stripe -->
+  <rect x="0" y="0" width="6" height="420" fill="#C4B5FD" opacity="0.65"/>
+  <rect x="0" y="0" width="6" height="120" fill="#A78BFA"/>
 
-  <!-- Accent bar on the left -->
-  <rect x="0" y="80" width="6" height="160" fill="url(#accent)" rx="3"/>
+  <!-- Bottom scan line -->
+  <rect x="0" y="408" width="1600" height="2" fill="#C4B5FD" opacity="0.25"/>
 
-  <!-- Title + tagline -->
-  <text x="56" y="148" font-family="Inter, system-ui, sans-serif" font-size="44" font-weight="700"
-        fill="#FFFFFF" letter-spacing="-0.5">Industry Use Cases</text>
-  <text x="56" y="194" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="400"
-        fill="rgba(255,255,255,0.85)" letter-spacing="0.2">Applied analytics for healthcare, finance, retail, manufacturing, and federal</text>
-
-  <!-- Subtle "Microsoft Fabric" eyebrow -->
-  <text x="56" y="100" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600"
-        fill="#FFC107" letter-spacing="2" text-transform="uppercase">MICROSOFT FABRIC</text>
-
-
-  <g transform="translate(1048,-8)">
-    <rect x="-12" y="-12" width="120" height="120" rx="16" ry="16"
-          fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
-    <svg x="0" y="0" width="96" height="96" viewBox="0 0 18 18"
-         preserveAspectRatio="xMidYMid meet">
-      <defs><radialGradient id="b25d0836-964a-4c84-8c20-855f66e8345e" cx="-105.006" cy="-10.409" r="5.954" gradientTransform="translate(117.739 19.644) scale(1.036 1.027)" gradientUnits="userSpaceOnUse"><stop offset="0.183" stop-color="#5ea0ef" /><stop offset="1" stop-color="#0078d4" /></radialGradient><clipPath id="b36c7f5d-2ef1-4760-8a25-eeb9661f4e47"><path d="M14.969,7.53A6.137,6.137,0,1,1,7.574,2.987,6.137,6.137,0,0,1,14.969,7.53Z" fill="none" /></clipPath></defs><title>Icon-databases-121</title><path d="M2.954,5.266a.175.175,0,0,1-.176-.176h0A2.012,2.012,0,0,0,.769,3.081a.176.176,0,0,1-.176-.175h0a.176.176,0,0,1,.176-.176A2.012,2.012,0,0,0,2.778.72.175.175,0,0,1,2.954.544h0A.175.175,0,0,1,3.13.72h0A2.012,2.012,0,0,0,5.139,2.729a.175.175,0,0,1,.176.176h0a.175.175,0,0,1-.176.176h0A2.011,2.011,0,0,0,3.13,5.09.177.177,0,0,1,2.954,5.266Z" fill="#50e6ff" /><path d="M15.611,17.456a.141.141,0,0,1-.141-.141h0a1.609,1.609,0,0,0-1.607-1.607.141.141,0,0,1-.141-.14h0a.141.141,0,0,1,.141-.141h0a1.608,1.608,0,0,0,1.607-1.607.141.141,0,0,1,.141-.141h0a.141.141,0,0,1,.141.141h0a1.608,1.608,0,0,0,1.607,1.607.141.141,0,1,1,0,.282h0a1.609,1.609,0,0,0-1.607,1.607A.141.141,0,0,1,15.611,17.456Z" fill="#50e6ff" /><g><path d="M14.969,7.53A6.137,6.137,0,1,1,7.574,2.987,6.137,6.137,0,0,1,14.969,7.53Z" fill="url(#b25d0836-964a-4c84-8c20-855f66e8345e)" /><g clip-path="url(#b36c7f5d-2ef1-4760-8a25-eeb9661f4e47)"><path d="M5.709,13.115A1.638,1.638,0,1,0,5.714,9.84,1.307,1.307,0,0,0,5.721,9.7,1.651,1.651,0,0,0,4.06,8.064H2.832a6.251,6.251,0,0,0,1.595,5.051Z" fill="#f2f2f2" /><path d="M15.045,7.815c0-.015,0-.03-.007-.044a5.978,5.978,0,0,0-1.406-2.88,1.825,1.825,0,0,0-.289-.09,1.806,1.806,0,0,0-2.3,1.663,2,2,0,0,0-.2-.013,1.737,1.737,0,0,0-.581,3.374,1.451,1.451,0,0,0,.541.1h2.03A13.453,13.453,0,0,0,15.045,7.815Z" fill="#f2f2f2" /></g></g><path d="M17.191,3.832c-.629-1.047-2.1-1.455-4.155-1.149a14.606,14.606,0,0,0-2.082.452,6.456,6.456,0,0,1,1.528.767c.241-.053.483-.116.715-.151A7.49,7.49,0,0,1,14.3,3.662a2.188,2.188,0,0,1,1.959.725h0c.383.638.06,1.729-.886,3a16.723,16.723,0,0,1-4.749,4.051A16.758,16.758,0,0,1,4.8,13.7c-1.564.234-2.682,0-3.065-.636s-.06-1.73.886-2.995c.117-.157.146-.234.279-.392a6.252,6.252,0,0,1,.026-1.63A11.552,11.552,0,0,0,1.756,9.419C.517,11.076.181,12.566.809,13.613a3.165,3.165,0,0,0,2.9,1.249,8.434,8.434,0,0,0,1.251-.1,17.855,17.855,0,0,0,6.219-2.4,17.808,17.808,0,0,0,5.061-4.332C17.483,6.369,17.819,4.88,17.191,3.832Z" fill="#50e6ff" />
-    </svg>
+  <!-- Eyebrow chip -->
+  <g transform="translate(72, 60)">
+    <rect x="0" y="0" width="360" height="34" rx="0" fill="#A78BFA" fill-opacity="0.10" stroke="#A78BFA" stroke-opacity="0.55"/>
+    <rect x="0" y="0" width="6" height="34" fill="#A78BFA"/>
+    <text class="h-chip" x="180.0" y="22" text-anchor="middle">USE CASES · INDUSTRY VERTICALS</text>
   </g>
 
-  <g transform="translate(1048,112)">
-    <rect x="-12" y="-12" width="120" height="120" rx="16" ry="16"
-          fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
-    <svg x="0" y="0" width="96" height="96" viewBox="0 0 18 18"
-         preserveAspectRatio="xMidYMid meet">
-      <defs><linearGradient id="bf1f93aa-5175-40a2-82a6-8b8653d30d7a" x1="11.08" y1="31.2" x2="11.08" y2="15.71" gradientTransform="translate(0 -14.32) scale(1 0.99)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#949494" /><stop offset="0.33" stop-color="#9b9b9b" /><stop offset="0.82" stop-color="#aeafb0" /><stop offset="1" stop-color="#b6b8b9" /></linearGradient></defs><title>Icon-analytics-147</title><g><path d="M18,9.69V7.9l-.1-.09-1.84-.62L15.59,6l.91-1.88.1-.21L16,3.3l-.7-.69-.24.12-1.8.91L12.05,3.3l-.78-2H9.48l-.09.09L8.77,3.22l-1.26.47-2.08-1L4.15,3.94l.12.24L5.23,6a6,6,0,0,1,3.2-.86A6.26,6.26,0,0,1,12,6.28a3.32,3.32,0,0,1,.36.26l0,0a3.25,3.25,0,0,1,.93,1.35h0A3,3,0,0,1,13.5,9a3.23,3.23,0,0,1-3.25,3.23,3.27,3.27,0,0,1-1.87-.59,6.31,6.31,0,0,1-4,1.75l-.19.39,1.28,1.29L5.73,15,7.53,14l1.24.51.79,2.16h1.8l.07-.25.64-1.91L13.29,14l2.11,1,1.27-1.26-.12-.24-.93-1.79L16,10.46Z" fill="url(#bf1f93aa-5175-40a2-82a6-8b8653d30d7a)" /><path d="M4,10.65H4A3.6,3.6,0,0,1,1.44,9.6.46.46,0,1,1,2.09,9,2.65,2.65,0,0,0,4,9.73H4A2.62,2.62,0,0,0,5.88,9a3.55,3.55,0,0,1,2.55-1A3.64,3.64,0,0,1,11,9a.46.46,0,1,1-.65.65,2.69,2.69,0,0,0-1.89-.78h0a2.61,2.61,0,0,0-1.88.78A3.61,3.61,0,0,1,4,10.65Z" fill="#50e6ff" /><path d="M4,8.82H4A1.79,1.79,0,0,1,2.74,8.3a.46.46,0,0,1,.65-.65A.84.84,0,0,0,4,7.9H4a1.08,1.08,0,0,0,.6-.25,5.46,5.46,0,0,1,7.67,0,.46.46,0,0,1-.65.65,4.55,4.55,0,0,0-6.41,0A1.94,1.94,0,0,1,4,8.82Z" fill="#50e6ff" /><path d="M4,12.48A5.41,5.41,0,0,1,.13,10.89a.47.47,0,0,1,0-.64.47.47,0,0,1,.66,0A4.47,4.47,0,0,0,4,11.57,4.5,4.5,0,0,0,7.2,10.24a1.94,1.94,0,0,1,1.21-.49,1.83,1.83,0,0,1,1.25.52.46.46,0,0,1,0,.65.47.47,0,0,1-.66,0,.83.83,0,0,0-.59-.25h0a1,1,0,0,0-.6.26A5.41,5.41,0,0,1,4,12.48Z" fill="#32bedd" /></g>
-    </svg>
-  </g>
+  <!-- Title -->
+  <text class="h-title" x="72" y="208">Use Cases</text>
 
-  <g transform="translate(1048,232)">
-    <rect x="-12" y="-12" width="120" height="120" rx="16" ry="16"
-          fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
-    <svg x="0" y="0" width="96" height="96" viewBox="0 0 18 18"
-         preserveAspectRatio="xMidYMid meet">
-      <defs><radialGradient id="fb114c93-7c16-4540-899a-0796041629e6" cx="9" cy="9" r="8.5" gradientUnits="userSpaceOnUse"><stop offset="0.18" stop-color="#5ea0ef" /><stop offset="0.56" stop-color="#5c9fee" /><stop offset="0.69" stop-color="#559ced" /><stop offset="0.78" stop-color="#4a97e9" /><stop offset="0.86" stop-color="#3990e4" /><stop offset="0.93" stop-color="#2387de" /><stop offset="0.99" stop-color="#087bd6" /><stop offset="1" stop-color="#0078d4" /></radialGradient><radialGradient id="ec478bd3-5b38-4e7f-b661-11f355578bff" cx="38.95" cy="182.07" r="9.88" gradientTransform="translate(-28.71 -163.24) scale(0.94 0.94)" gradientUnits="userSpaceOnUse"><stop offset="0.27" stop-color="#ffd70f" /><stop offset="0.49" stop-color="#ffcb12" /><stop offset="0.88" stop-color="#feac19" /><stop offset="1" stop-color="#fea11b" /></radialGradient></defs><title>Icon-security-245</title><path id="aacf8311-a317-400f-b613-74bd00da5ce3" d="M9,.5A8.5,8.5,0,1,0,17.5,9,8.51,8.51,0,0,0,9,.5ZM9,16.34A7.34,7.34,0,1,1,16.34,9,7.34,7.34,0,0,1,9,16.34Z" fill="url(#fb114c93-7c16-4540-899a-0796041629e6)" /><circle cx="9" cy="9" r="7.34" fill="#fff" /><g><path id="bd983c41-db73-40ec-a4f4-da1213fc9924" d="M13.44,7.33a1.84,1.84,0,0,0,0-2.59h0L10.29,1.58a1.83,1.83,0,0,0-2.58,0h0L4.56,4.74a1.84,1.84,0,0,0,0,2.59L7.18,10a.51.51,0,0,1,.15.36v4.88a.63.63,0,0,0,.18.44l1.2,1.2a.41.41,0,0,0,.58,0l1.16-1.16h0l.68-.68a.25.25,0,0,0,0-.34l-.49-.49a.27.27,0,0,1,0-.37l.49-.49a.25.25,0,0,0,0-.34l-.49-.49a.27.27,0,0,1,0-.37l.49-.49a.25.25,0,0,0,0-.34l-.68-.69v-.25ZM9,2.35A1,1,0,0,1,9,4.42,1,1,0,1,1,9,2.35Z" fill="url(#ec478bd3-5b38-4e7f-b661-11f355578bff)" /><path id="ad2e7e44-9bfd-4775-8bf4-8ef26a544921" d="M8.18,15.3h0a.23.23,0,0,0,.38-.17v-4a.24.24,0,0,0-.11-.2h0a.22.22,0,0,0-.34.2v4A.28.28,0,0,0,8.18,15.3Z" fill="#ff9300" opacity="0.75" /><rect id="a996fbff-3936-4b24-b407-369336c143ba" x="6.48" y="5.79" width="5.17" height="0.61" rx="0.28" fill="#ff9300" opacity="0.75" /><rect id="bb12d31c-3352-4a18-87dd-a169a4a8721d" x="6.48" y="6.78" width="5.17" height="0.61" rx="0.28" fill="#ff9300" opacity="0.75" /></g>
-    </svg>
-  </g>
+  <!-- Tagline -->
+  <text class="h-sub" x="72" y="252">Applied analytics for healthcare, finance, retail, manufacturing, federal</text>
+
+  <!-- Footer chip -->
+  <text class="h-foot" x="72" y="385">HEALTHCARE · FINANCE · MANUFACTURING · RETAIL · ENERGY · FEDERAL</text>
+
+<g transform="translate(900, 80)">
+
+    <g transform="translate(0,0)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#A78BFA" fill-opacity="0.28" stroke="#A78BFA" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#A78BFA"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">HEALTHCARE</text>
+    </g>
+
+    <g transform="translate(172,0)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#A78BFA" fill-opacity="0.28" stroke="#A78BFA" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#A78BFA"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">FINANCIAL SVC</text>
+    </g>
+
+    <g transform="translate(344,0)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#A78BFA" fill-opacity="0.28" stroke="#A78BFA" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#A78BFA"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">MANUFACTURING</text>
+    </g>
+
+    <g transform="translate(516,0)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#A78BFA" fill-opacity="0.28" stroke="#A78BFA" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#A78BFA"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">RETAIL &amp; CPG</text>
+    </g>
+
+    <g transform="translate(0,72)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#A78BFA" fill-opacity="0.28" stroke="#A78BFA" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#A78BFA"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">ENERGY</text>
+    </g>
+
+    <g transform="translate(172,72)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#A78BFA" fill-opacity="0.28" stroke="#A78BFA" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#A78BFA"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">TELECOM</text>
+    </g>
+
+    <g transform="translate(344,72)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#A78BFA" fill-opacity="0.28" stroke="#A78BFA" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#A78BFA"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">PHARMA</text>
+    </g>
+
+    <g transform="translate(516,72)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#A78BFA" fill-opacity="0.28" stroke="#A78BFA" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#A78BFA"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">MEDIA</text>
+    </g>
+
+    <g transform="translate(0,144)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#A78BFA" fill-opacity="0.28" stroke="#A78BFA" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#A78BFA"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">FEDERAL JUSTICE</text>
+    </g>
+
+    <g transform="translate(172,144)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#A78BFA" fill-opacity="0.28" stroke="#A78BFA" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#A78BFA"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">TRIBAL HEALTH</text>
+    </g>
+
+    <g transform="translate(344,144)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#A78BFA" fill-opacity="0.28" stroke="#A78BFA" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#A78BFA"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">USDA · SBA</text>
+    </g>
+
+    <g transform="translate(516,144)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#A78BFA" fill-opacity="0.28" stroke="#A78BFA" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#A78BFA"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">DOT · FAA</text>
+    </g>
+</g>
 </svg>

@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > Model Monitoring & Drift Detection
-
 # 📡 Model Monitoring & Drift Detection
 
 <div align="center" markdown>
@@ -16,27 +14,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Wave 2 Sub-Topic of:** [MLOps for Fabric Production](mlops-fabric-production.md)
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🧭 Drift Type Taxonomy](#-drift-type-taxonomy)
-- [📐 Statistical Methods](#-statistical-methods)
-- [🏗️ Reference Architecture](#️-reference-architecture)
-- [⚙️ Implementation in Fabric](#️-implementation-in-fabric)
-- [🔍 KQL Drift Library](#-kql-drift-library)
-- [📉 Performance Drift Patterns](#-performance-drift-patterns)
-- [🌀 Concept Drift Detection](#-concept-drift-detection)
-- [🚨 Alert Wiring](#-alert-wiring)
-- [🔁 Retraining Trigger Patterns](#-retraining-trigger-patterns)
-- [🛡️ False Positive Mitigation](#️-false-positive-mitigation)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Implementation](#️-federal-implementation)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Implementation Checklist](#-implementation-checklist)
-- [📚 References](#-references)
 
 ---
 

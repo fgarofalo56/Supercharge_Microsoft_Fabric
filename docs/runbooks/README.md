@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](..) > Runbooks
-
 # 📋 Operational Runbooks
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0

@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > AutoML & ML Model Endpoints
-
 # 🤖 AutoML & ML Model Endpoints - Automated Training and Real-Time Serving
 
 <div align="center" markdown>
@@ -15,21 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture Overview](#️-architecture-overview)
-- [⚙️ AutoML Configuration](#️-automl-configuration)
-- [🤖 Model Training Workflow](#-model-training-workflow)
-- [🔌 ML Model Endpoints](#-ml-model-endpoints)
-- [📊 Monitoring and Drift Detection](#-monitoring-and-drift-detection)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Agency Implementation](#️-federal-agency-implementation)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

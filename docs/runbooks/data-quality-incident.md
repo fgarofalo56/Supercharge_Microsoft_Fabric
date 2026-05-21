@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](..) > [Runbooks](index.md) > Data Quality Incident
-
 # 🧪 Data Quality Incident Runbook
 
 > **Last Updated**: 2026-05-05 | **Version**: 2.0
@@ -14,21 +12,6 @@
 ![Pattern](https://img.shields.io/badge/Pattern-Quarantine--First-orange)
 
 </div>
-
----
-
-## 📑 Table of Contents
-
-1. [Trigger Conditions](#trigger-conditions)
-2. [Severity Classification](#severity-classification)
-3. [Decision Flowchart](#decision-flowchart)
-4. [Step-by-Step Procedure](#step-by-step-procedure)
-5. [Quarantine Procedures](#quarantine-procedures)
-6. [Stakeholder Communication](#stakeholder-communication)
-7. [Remediation Patterns](#remediation-patterns)
-8. [Escalation Path](#escalation-path)
-9. [Post-Incident Review Checklist](#post-incident-review-checklist)
-10. [Related Documents](#related-documents)
 
 ---
 

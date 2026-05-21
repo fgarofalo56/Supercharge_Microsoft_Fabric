@@ -2,12 +2,7 @@
 
 # 🏗️ Architecture Documentation
 
-> 🏠 [Home](index.md) > 📚 [Docs](./) > 🏗️ Architecture
-
-
 <div align="center" markdown>
-
-# 🏗️ Architecture
 
 **System Design & Technical Foundation**
 
@@ -20,24 +15,6 @@
 ---
 
 **Last Updated:** `2025-01-21` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏛️ High-Level Architecture](#️-high-level-architecture)
-- [🥉🥈🥇 Medallion Architecture](#-medallion-architecture)
-  - [🥉 Bronze Layer (Raw Data)](#-bronze-layer-raw-data)
-  - [🥈 Silver Layer (Cleansed Data)](#-silver-layer-cleansed-data)
-  - [🥇 Gold Layer (Business Ready)](#-gold-layer-business-ready)
-- [⚡ Real-Time Intelligence Architecture](#-real-time-intelligence-architecture)
-- [📊 Data Governance](#-data-governance)
-- [🔐 Security Architecture](#-security-architecture)
-- [📈 Capacity Planning](#-capacity-planning)
-- [🔄 Disaster Recovery](#-disaster-recovery)
-- [📡 Monitoring & Alerting](#-monitoring--alerting)
-- [🛠️ Technology Decisions](#️-technology-decisions)
 
 ---
 

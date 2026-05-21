@@ -22,22 +22,6 @@ Robust error handling and monitoring are essential for production-grade Microsof
 
 ---
 
-## 🧭 Table of Contents
-
-- [🏗️ Pipeline Error Architecture](#-pipeline-error-architecture)
-- [💾 Production Error Table Design](#-production-error-table-design)
-- [🔧 Stored Procedures](#-stored-procedures)
-- [🏷️ Error Classification Taxonomy](#-error-classification-taxonomy)
-- [🔁 Pipeline Error Patterns](#-pipeline-error-patterns)
-- [🐍 PySpark Error Handling](#-pyspark-error-handling)
-- [🔔 Monitoring with Data Activator](#-monitoring-with-data-activator)
-- [📢 Alert Escalation Matrix](#-alert-escalation-matrix)
-- [🔍 KQL Queries for Error Analysis](#-kql-queries-for-error-analysis)
-- [📊 Operational Dashboards](#-operational-dashboards)
-- [📓 Runbook Integration](#-runbook-integration)
-
----
-
 ## 🏗️ Pipeline Error Architecture
 
 ### Design Principles

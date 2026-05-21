@@ -1,5 +1,3 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Data Management](../index.md) > Data Contracts
-
 # 📜 Data Contracts on Microsoft Fabric
 
 <div align="center" markdown>
@@ -16,26 +14,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Wave 3 anchor:** [master-data-management.md](master-data-management.md)
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Why Data Contracts](#-why-data-contracts)
-- [🧩 What's in a Contract](#-whats-in-a-contract)
-- [📄 Contract Specification Format](#-contract-specification-format)
-- [🛡️ Contract Enforcement Layers](#️-contract-enforcement-layers)
-- [✅ GE Expectation Suite Pattern](#-ge-expectation-suite-pattern)
-- [🚧 Breaking Change Policy](#-breaking-change-policy)
-- [🔄 Schema Evolution on Delta](#-schema-evolution-on-delta)
-- [📝 Contract Negotiation Process](#-contract-negotiation-process)
-- [🔢 Versioning Strategy (semver)](#-versioning-strategy-semver)
-- [📦 Contract as Code](#-contract-as-code)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Implementation](#️-federal-implementation)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Implementation Checklist](#-implementation-checklist)
-- [📚 References](#-references)
 
 ---
 

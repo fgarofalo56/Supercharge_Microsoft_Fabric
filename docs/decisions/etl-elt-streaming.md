@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Decision Trees](./) > ETL vs ELT vs Streaming
-
 # ETL vs ELT vs Streaming
 
 <div align="center" markdown>

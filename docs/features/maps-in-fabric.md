@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Maps in Fabric
-
 # 🗺️ Maps in Fabric — Native Geospatial Visualization
 
 <div align="center" markdown>
@@ -15,22 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-22` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture Overview](#️-architecture-overview)
-- [⚙️ Setup and Configuration](#️-setup-and-configuration)
-- [🗺️ Map Visual Types](#️-map-visual-types)
-- [🔍 Geospatial KQL Functions](#-geospatial-kql-functions)
-- [🎰 Casino Floor Use Cases](#-casino-floor-use-cases)
-- [🏛️ Federal Use Cases](#️-federal-use-cases)
-- [🔌 Integration Points](#-integration-points)
-- [⚡ Performance Considerations](#-performance-considerations)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

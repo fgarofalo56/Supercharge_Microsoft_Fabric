@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](..) > [Runbooks](index.md) > Capacity Throttling
-
 # 🔥 Capacity Throttling Runbook
 
 > **Last Updated**: 2026-05-05 | **Version**: 1.0
@@ -14,20 +12,6 @@
 ![Severity](https://img.shields.io/badge/Severity-SEV1%E2%80%93SEV3-orange)
 
 </div>
-
----
-
-## 📑 Table of Contents
-
-1. [Trigger Conditions](#trigger-conditions)
-2. [Severity Classification](#severity-classification)
-3. [Decision Flowchart](#decision-flowchart)
-4. [Step-by-Step Procedure](#step-by-step-procedure)
-5. [Smoothing and Rejection Behavior](#smoothing-and-rejection-behavior)
-6. [CU Optimization Actions](#cu-optimization-actions)
-7. [Escalation Path](#escalation-path)
-8. [Post-Incident Review Checklist](#post-incident-review-checklist)
-9. [Related Documents](#related-documents)
 
 ---
 

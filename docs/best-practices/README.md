@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](..) > Best Practices
-
 # 💡 Best Practices Guide
 
 > **Last Updated**: 2026-04-21 | **Version**: 2.1

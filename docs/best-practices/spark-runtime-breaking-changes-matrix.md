@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > Spark Runtime Breaking Changes Matrix
-
 # ⚙️ Spark Runtime Breaking Changes Matrix
 
 <div align="center" markdown>
@@ -15,24 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [📊 Runtime Version Matrix](#-runtime-version-matrix)
-- [🐍 Python Version Changes](#-python-version-changes)
-- [📦 Library Breaking Changes](#-library-breaking-changes)
-- [🔺 Delta Lake Protocol Versions](#-delta-lake-protocol-versions)
-- [⚡ Spark Configuration Changes](#-spark-configuration-changes)
-- [🔧 Migration Checklist](#-migration-checklist)
-- [🧪 Testing Strategy](#-testing-strategy)
-- [🔙 Rollback Procedures](#-rollback-procedures)
-- [🎰 Casino Workload Impact](#-casino-workload-impact)
-- [🏛️ Federal Workload Impact](#-federal-workload-impact)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📚 References](#-references)
 
 ---
 

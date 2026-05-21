@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Decision Trees](./) > Fabric vs Databricks vs Synapse
-
 # Fabric vs Databricks vs Synapse
 
 <div align="center" markdown>

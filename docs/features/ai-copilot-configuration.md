@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > AI Copilot Configuration
-
 # 🤖 AI Copilot Configuration & Setup
 
 <div align="center" markdown>
@@ -15,19 +13,6 @@
 ---
 
 **Last Updated:** `2026-03-12` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [⚙️ Enabling Copilot](#️-enabling-copilot)
-- [📊 Copilot per Workload](#-copilot-per-workload)
-- [📐 Configuration Best Practices](#-configuration-best-practices)
-- [🔐 Security and Compliance](#-security-and-compliance)
-- [🏢 Enterprise Rollout](#-enterprise-rollout)
-- [⚠️ Limitations and Known Issues](#️-limitations-and-known-issues)
-- [📚 References](#-references)
 
 ---
 

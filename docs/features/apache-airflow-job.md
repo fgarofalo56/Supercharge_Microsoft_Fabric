@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Apache Airflow Job
-
 # 🌬️ Apache Airflow Job - Managed Orchestration in Fabric
 
 <div align="center" markdown>
@@ -15,23 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0
-
----
-
-## Table of Contents
-
-- [Overview](#-overview)
-- [Architecture](#-architecture)
-- [When to Use Airflow vs Alternatives](#-when-to-use-airflow-vs-alternatives)
-- [Environment Setup](#-environment-setup)
-- [DAG Authoring Patterns](#-dag-authoring-patterns)
-- [Fabric-Specific Operators](#-fabric-specific-operators)
-- [Monitoring and Logging](#-monitoring-and-logging)
-- [CI/CD for DAGs](#-cicd-for-dags)
-- [Casino Implementation](#-casino-implementation)
-- [Federal Agency Implementation](#-federal-agency-implementation)
-- [Limitations](#-limitations)
-- [References](#-references)
 
 ---
 

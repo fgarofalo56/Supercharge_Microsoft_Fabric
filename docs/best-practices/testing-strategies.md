@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > Testing Strategies
-
 # 🧪 Testing Strategies for Microsoft Fabric
 
 <div align="center" markdown>
@@ -15,23 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🔺 Testing Pyramid](#-testing-pyramid)
-- [🧩 Unit Testing](#-unit-testing)
-- [🔗 Integration Testing](#-integration-testing)
-- [📐 Data Quality Testing](#-data-quality-testing)
-- [🔄 Regression Testing](#-regression-testing)
-- [🎰 Casino Compliance Testing](#-casino-compliance-testing)
-- [🏛️ Federal Data Quality (DQAF)](#️-federal-data-quality-dqaf)
-- [🚀 CI/CD Integration](#-cicd-integration)
-- [📊 Test Reporting & Metrics](#-test-reporting--metrics)
-- [⚠️ Anti-Patterns](#️-anti-patterns)
-- [📚 References](#-references)
 
 ---
 

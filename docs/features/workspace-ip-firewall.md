@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Workspace IP Firewall
-
 # 🛡️ Workspace IP Firewall & Surge Protection
 
 <div align="center" markdown>
@@ -15,23 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-21` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [⚙️ IP Firewall Configuration](#️-ip-firewall-configuration)
-- [🔄 Trusted Service Bypass](#-trusted-service-bypass)
-- [🏷️ Azure Service Tags](#️-azure-service-tags)
-- [⚡ Surge Protection](#-surge-protection)
-- [🔗 Integration with Private Endpoints](#-integration-with-private-endpoints)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Agency Implementation](#️-federal-agency-implementation)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
-- [🔗 Related Documents](#-related-documents)
 
 ---
 

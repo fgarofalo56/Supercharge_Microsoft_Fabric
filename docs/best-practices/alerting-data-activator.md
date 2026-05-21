@@ -22,21 +22,6 @@ Data Activator is Microsoft Fabric's no-code experience for automatically monito
 
 ---
 
-## 🧭 Table of Contents
-
-- [⚙️ Data Activator Fundamentals](#-data-activator-fundamentals)
-- [🔧 Reflex Item Configuration](#-reflex-item-configuration)
-- [🚨 Alert Patterns](#-alert-patterns)
-- [🔗 Integration Patterns](#-integration-patterns)
-- [🏢 Domain-Specific Alert Configurations](#-domain-specific-alert-configurations)
-- [🔇 Alert Fatigue Prevention](#-alert-fatigue-prevention)
-- [📊 Monitoring Dashboards](#-monitoring-dashboards)
-- [📞 On-Call Rotation Patterns](#-on-call-rotation-patterns)
-- [📓 Runbook Templates](#-runbook-templates)
-- [✅ Testing and Validation](#-testing-and-validation)
-
----
-
 ## ⚙️ Data Activator Fundamentals
 
 ### What is Data Activator?

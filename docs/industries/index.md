@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > Industry Verticals
-
 # 🏭 Industry Verticals
 
 <div align="center" markdown>

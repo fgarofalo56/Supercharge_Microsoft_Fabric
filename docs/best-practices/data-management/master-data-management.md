@@ -1,5 +1,3 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Data Management](../index.md) > Master Data Management
-
 # 🏛️ Master Data Management on Microsoft Fabric
 
 <div align="center" markdown>
@@ -16,26 +14,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Anchor for:** Wave 3 Data Management doc set
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ MDM Topology Choices](#️-mdm-topology-choices)
-- [🧩 Reference Architecture on Fabric](#-reference-architecture-on-fabric)
-- [🔍 Match Strategies](#-match-strategies)
-- [🔀 Merge & Survivorship Rules](#-merge--survivorship-rules)
-- [👤 Golden Record Pattern](#-golden-record-pattern)
-- [🔁 Bidirectional Sync](#-bidirectional-sync)
-- [🆔 Stable Identifier Strategy](#-stable-identifier-strategy)
-- [📜 Stewardship & Override Workflow](#-stewardship--override-workflow)
-- [📊 MDM Quality Metrics](#-mdm-quality-metrics)
-- [🎰 Casino Implementation: Player Master](#-casino-implementation-player-master)
-- [🏛️ Federal Implementation: Beneficiary Master](#️-federal-implementation-beneficiary-master)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Production Readiness Checklist](#-production-readiness-checklist)
-- [📚 References](#-references)
 
 ---
 

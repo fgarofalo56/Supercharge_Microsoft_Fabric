@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Spark Environments & Job Definitions
-
 # ⚙️ Spark Environments & Job Definitions
 
 <div align="center" markdown>
@@ -15,20 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-21` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🌍 Environments](#-environments)
-- [📦 Library Management](#-library-management)
-- [⚙️ Spark Configuration](#️-spark-configuration)
-- [🏃 Spark Job Definitions](#-spark-job-definitions)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Implementation](#️-federal-implementation)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

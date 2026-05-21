@@ -1,5 +1,3 @@
-[Home](../../index.md) > [Docs](../../) > [Best Practices](../index.md) > VS Code Fabric Workflow
-
 # VS Code Workflow for Microsoft Fabric Development
 
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue)
@@ -9,23 +7,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0
-
----
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Fabric Extension Setup](#fabric-extension-setup)
-- [Workspace Connection](#workspace-connection)
-- [Syncing Items Between VS Code and Fabric](#syncing-items-between-vs-code-and-fabric)
-- [Local Editing Workflow](#local-editing-workflow)
-- [Debugging Notebooks Locally](#debugging-notebooks-locally)
-- [Extensions Ecosystem](#extensions-ecosystem)
-- [Settings Configuration](#settings-configuration)
-- [Keyboard Shortcuts and Productivity](#keyboard-shortcuts-and-productivity)
-- [Comparison: VS Code vs Fabric Web UI vs Tabular Editor](#comparison-vs-code-vs-fabric-web-ui-vs-tabular-editor)
-- [Troubleshooting](#troubleshooting)
-- [References](#references)
 
 ---
 

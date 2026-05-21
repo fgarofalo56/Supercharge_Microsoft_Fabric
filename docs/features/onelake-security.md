@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > OneLake Security
-
 # 🔐 OneLake Security - Unified Data Protection
 
 <div align="center" markdown>
@@ -15,22 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Security Model Architecture](#️-security-model-architecture)
-- [📁 Folder-Level Security](#-folder-level-security)
-- [📊 Row-Level Security](#-row-level-security)
-- [🔒 Column-Level Security](#-column-level-security)
-- [🔑 Data Access Roles API](#-data-access-roles-api)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Agency Implementation](#️-federal-agency-implementation)
-- [🔄 Migration from Legacy Security](#-migration-from-legacy-security)
-- [⚠️ Limitations and Preview Status](#️-limitations-and-preview-status)
-- [📚 References](#-references)
 
 ---
 

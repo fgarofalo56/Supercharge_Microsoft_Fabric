@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > Multi-Tenant Workspace Architecture
-
 # 🏢 Multi-Tenant Workspace Architecture for Microsoft Fabric
 
 <div align="center" markdown>
@@ -15,22 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [📐 Topology Patterns](#-topology-patterns)
-- [🔒 Isolation Strategies](#-isolation-strategies)
-- [🤖 Automation](#-automation)
-- [🔑 Identity & Access Management](#-identity--access-management)
-- [🎰 Casino Industry: Multi-Property Operator](#-casino-industry-multi-property-operator)
-- [🏛️ Federal Agency: Agency-per-Workspace](#️-federal-agency-agency-per-workspace)
-- [📊 Monitoring & Governance](#-monitoring--governance)
-- [⚠️ Limitations & Considerations](#️-limitations--considerations)
-- [📚 References](#-references)
 
 ---
 

@@ -12,22 +12,6 @@
 ![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
 
 </div>
-
-## 📑 Table of Contents
-
-- [Overview](#-overview)
-- [Key Concepts](#-key-concepts)
-- [Expressions and Functions](#-expressions-and-functions)
-- [Metadata Configuration Table](#-metadata-configuration-table)
-- [Pipeline Architecture](#-pipeline-architecture)
-- [Dynamic Copy Activity](#-dynamic-copy-activity)
-- [Parameterizing Connections](#-parameterizing-connections)
-- [Advanced Patterns](#-advanced-patterns)
-- [Error Handling and Logging](#-error-handling-and-logging)
-- [Best Practices Checklist](#-best-practices-checklist)
-- [Common Expression Functions](#-common-expression-functions)
-- [Related Documents](#-related-documents)
-
 ---
 
 ## 📋 Overview

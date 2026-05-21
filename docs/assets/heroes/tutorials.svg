@@ -1,68 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" width="1200" height="320"
-     role="img" aria-label="Step-by-Step Tutorials">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 420" width="1600" height="420"
+     role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid slice">
+  <title id="title">Tutorials</title>
+  <desc id="desc">Hands-on guides — environment, medallion, AI, migrations, industry deep dives</desc>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#1A237E"/>
-      <stop offset="55%" stop-color="#3F51B5"/>
-      <stop offset="100%" stop-color="#5C6BC0"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="0.7">
+      <stop offset="0%"   stop-color="#082F49"/>
+      <stop offset="55%"  stop-color="#0078D4"/>
+      <stop offset="100%" stop-color="#082F49"/>
     </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#FFC107" stop-opacity="0.95"/>
-      <stop offset="100%" stop-color="#FFC107" stop-opacity="0.4"/>
-    </linearGradient>
-    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-    </pattern>
-    <filter id="blur"><feGaussianBlur stdDeviation="40"/></filter>
+    <radialGradient id="glow" cx="78%" cy="50%" r="55%">
+      <stop offset="0%"   stop-color="#38BDF8" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .h-title { font-family:'IBM Plex Sans','Segoe UI','Helvetica Neue',sans-serif; font-weight:600; font-size:54px; fill:#FFFFFF; letter-spacing:-1.0px; }
+      .h-sub   { font-family:'IBM Plex Sans','Segoe UI','Helvetica Neue',sans-serif; font-weight:400; font-size:20px; fill:#FFFFFF; fill-opacity:0.84; letter-spacing:-0.2px; }
+      .h-chip  { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:700; font-size:13px; letter-spacing:2.5px; fill:#7DD3FC; }
+      .h-foot  { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:500; font-size:11px; letter-spacing:1.2px; fill:#FFFFFF; fill-opacity:0.45; }
+      .v-num   { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:700; font-size:15px; fill:#FFFFFF; letter-spacing:0.5px; }
+      .v-lbl   { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:600; font-size:13px; fill:#FFFFFF; fill-opacity:0.95; letter-spacing:0.8px; }
+      .v-cap   { font-family:'JetBrains Mono','SF Mono','Consolas',monospace; font-weight:500; font-size:11px; fill:#FFFFFF; fill-opacity:0.75; letter-spacing:1.0px; }
+    </style>
   </defs>
 
   <!-- Background -->
-  <rect width="1200" height="320" fill="url(#bg)"/>
-  <rect width="1200" height="320" fill="url(#grid)"/>
+  <rect width="1600" height="420" fill="url(#bg)"/>
+  <rect width="1600" height="420" fill="url(#glow)"/>
 
-  <!-- Decorative ambient blobs -->
-  <circle cx="180" cy="60"  r="120" fill="#FFC107" opacity="0.20" filter="url(#blur)"/>
-  <circle cx="960" cy="280" r="160" fill="#5C6BC0" opacity="0.30" filter="url(#blur)"/>
+  <!-- Left accent stripe -->
+  <rect x="0" y="0" width="6" height="420" fill="#7DD3FC" opacity="0.65"/>
+  <rect x="0" y="0" width="6" height="120" fill="#38BDF8"/>
 
-  <!-- Accent bar on the left -->
-  <rect x="0" y="80" width="6" height="160" fill="url(#accent)" rx="3"/>
+  <!-- Bottom scan line -->
+  <rect x="0" y="408" width="1600" height="2" fill="#7DD3FC" opacity="0.25"/>
 
-  <!-- Title + tagline -->
-  <text x="56" y="148" font-family="Inter, system-ui, sans-serif" font-size="44" font-weight="700"
-        fill="#FFFFFF" letter-spacing="-0.5">Step-by-Step Tutorials</text>
-  <text x="56" y="194" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="400"
-        fill="rgba(255,255,255,0.85)" letter-spacing="0.2">55 hands-on tutorials from bronze ingestion to MLOps</text>
-
-  <!-- Subtle "Microsoft Fabric" eyebrow -->
-  <text x="56" y="100" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600"
-        fill="#FFC107" letter-spacing="2" text-transform="uppercase">MICROSOFT FABRIC</text>
-
-
-  <g transform="translate(1048,-8)">
-    <rect x="-12" y="-12" width="120" height="120" rx="16" ry="16"
-          fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
-    <svg x="0" y="0" width="96" height="96" viewBox="0 0 18 18"
-         preserveAspectRatio="xMidYMid meet">
-      <defs><linearGradient id="b403aca7-f387-4434-96b4-ae157edc835f" x1="-175.993" y1="-343.723" x2="-175.993" y2="-359.232" gradientTransform="translate(212.573 370.548) scale(1.156 1.029)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fea11b" /><stop offset="0.284" stop-color="#fea51a" /><stop offset="0.547" stop-color="#feb018" /><stop offset="0.8" stop-color="#ffc314" /><stop offset="1" stop-color="#ffd70f" /></linearGradient></defs><title>Icon-compute-29</title><g><path d="M2.37,7.475H3.2a.267.267,0,0,1,.267.267v6.148a.533.533,0,0,1-.533.533H2.1a0,0,0,0,1,0,0V7.741a.267.267,0,0,1,.267-.267Z" transform="translate(12.507 16.705) rotate(134.919)" fill="#50e6ff" /><path d="M2.325,3.6h.833a.267.267,0,0,1,.267.267v6.583a0,0,0,0,1,0,0H2.591a.533.533,0,0,1-.533-.533V3.865A.267.267,0,0,1,2.325,3.6Z" transform="translate(5.759 0.114) rotate(44.919)" fill="#1490df" /></g><g><path d="M14.53,7.475h.833a.533.533,0,0,1,.533.533v6.148a.267.267,0,0,1-.267.267H14.8a.267.267,0,0,1-.267-.267V7.475a0,0,0,0,1,0,0Z" transform="translate(12.223 -7.555) rotate(45.081)" fill="#50e6ff" /><path d="M15.108,3.6h.833a0,0,0,0,1,0,0v6.583a.267.267,0,0,1-.267.267h-.833a.267.267,0,0,1-.267-.267V4.131a.533.533,0,0,1,.533-.533Z" transform="translate(31.022 1.222) rotate(135.081)" fill="#1490df" /></g><path d="M8.459,9.9H4.87a.193.193,0,0,1-.2-.181.166.166,0,0,1,.018-.075L8.991,1.13a.206.206,0,0,1,.186-.106h4.245a.193.193,0,0,1,.2.181.165.165,0,0,1-.035.1L8.534,7.966h4.928a.193.193,0,0,1,.2.181.176.176,0,0,1-.052.122L5.421,16.788c-.077.046-.624.5-.356-.189h0Z" fill="url(#b403aca7-f387-4434-96b4-ae157edc835f)" />
-    </svg>
+  <!-- Eyebrow chip -->
+  <g transform="translate(72, 60)">
+    <rect x="0" y="0" width="330" height="34" rx="0" fill="#38BDF8" fill-opacity="0.10" stroke="#38BDF8" stroke-opacity="0.55"/>
+    <rect x="0" y="0" width="6" height="34" fill="#38BDF8"/>
+    <text class="h-chip" x="165.0" y="22" text-anchor="middle">STEP-BY-STEP · 56 TUTORIALS</text>
   </g>
 
-  <g transform="translate(1048,112)">
-    <rect x="-12" y="-12" width="120" height="120" rx="16" ry="16"
-          fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
-    <svg x="0" y="0" width="96" height="96" viewBox="0 0 18 18"
-         preserveAspectRatio="xMidYMid meet">
-      <defs><linearGradient id="e1bcfd0f-68b5-4f66-9501-e6a7245a18e7" x1="1.1" y1="169" x2="11.12" y2="169" gradientTransform="translate(0 -160)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#50c7e8" /><stop offset="0.25" stop-color="#4cc3e4" /><stop offset="0.51" stop-color="#41b6da" /><stop offset="0.77" stop-color="#2fa2c8" /><stop offset="1" stop-color="#1989b2" /></linearGradient></defs><title>Icon-166Artboard 1</title><path id="bc892891-989d-4c43-80d3-d2b4546a974f" d="M15.8,17.5H2.2L1.1,13.4H16.9Z" fill="#198ab3" /><polygon points="6.9 0.5 6.9 6.9 1.1 13.4 2.2 17.5 11.1 6.9 11.1 0.5 6.9 0.5" fill="url(#e1bcfd0f-68b5-4f66-9501-e6a7245a18e7)" /><path id="e6be01d6-345d-4df4-bbdb-151aa8edaa1f" d="M15.8,17.5,9.6,11.1l2.6-3,4.7,5.3Z" fill="#32bedd" />
-    </svg>
-  </g>
+  <!-- Title -->
+  <text class="h-title" x="72" y="208">Tutorials</text>
 
-  <g transform="translate(1048,232)">
-    <rect x="-12" y="-12" width="120" height="120" rx="16" ry="16"
-          fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
-    <svg x="0" y="0" width="96" height="96" viewBox="0 0 18 18"
-         preserveAspectRatio="xMidYMid meet">
-      <defs><linearGradient id="ba6b54e9-66d7-42e0-a289-95171eaf47f3" x1="9" y1="1.796" x2="9" y2="6.371" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#9cebff" /><stop offset="1" stop-color="#50e6ff" /></linearGradient><linearGradient id="e5c23c93-889c-4cfe-8adf-72bfa2a5b6e4" x1="3.374" y1="12.14" x2="3.374" y2="18.457" gradientUnits="userSpaceOnUse"><stop offset="0.001" stop-color="#b4ec36" /><stop offset="1" stop-color="#86d633" /></linearGradient><linearGradient id="fb46250a-f4a9-418f-b6ae-1a568665f153" x1="14.626" y1="12.14" x2="14.626" y2="18.457" gradientTransform="translate(-0.02 29.273) rotate(-90)" gradientUnits="userSpaceOnUse"><stop offset="0.001" stop-color="#b4ec36" /><stop offset="1" stop-color="#86d633" /></linearGradient></defs><g id="a9693b19-30a4-439f-a536-87fc73c5ba8c"><g><path d="M13.851,9.047H10.939A1.518,1.518,0,0,1,9.421,7.529V4.33H8.579v3.2A1.518,1.518,0,0,1,7.061,9.047H4.149a1.2,1.2,0,0,0-1.2,1.2v2.338h.841V10.244a.355.355,0,0,1,.356-.355H7.061A2.353,2.353,0,0,0,8.8,9.125a.278.278,0,0,1,.408,0,2.353,2.353,0,0,0,1.735.764h2.912a.354.354,0,0,1,.355.355v2.338h.841V10.244A1.2,1.2,0,0,0,13.851,9.047Z" fill="#0078d4" /><rect x="5.626" y="-0.02" width="6.747" height="6.747" rx="0.604" fill="url(#ba6b54e9-66d7-42e0-a289-95171eaf47f3)" /><rect y="11.273" width="6.747" height="6.747" rx="0.604" fill="url(#e5c23c93-889c-4cfe-8adf-72bfa2a5b6e4)" /><rect x="11.253" y="11.273" width="6.747" height="6.747" rx="0.604" transform="translate(29.273 0.02) rotate(90)" fill="url(#fb46250a-f4a9-418f-b6ae-1a568665f153)" /></g></g>
-    </svg>
-  </g>
+  <!-- Tagline -->
+  <text class="h-sub" x="72" y="252">Hands-on guides — environment, medallion, AI, migrations, industry deep dives</text>
+
+  <!-- Footer chip -->
+  <text class="h-foot" x="72" y="385">BRONZE → SILVER → GOLD · MLOPS · RAG · 10 MIGRATION PATHS</text>
+
+<g transform="translate(900, 80)">
+
+    <g transform="translate(0,0)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#38BDF8" fill-opacity="0.28" stroke="#38BDF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#38BDF8"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">00 ENV SETUP</text>
+    </g>
+
+    <g transform="translate(172,0)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#38BDF8" fill-opacity="0.28" stroke="#38BDF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#38BDF8"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">01 BRONZE</text>
+    </g>
+
+    <g transform="translate(344,0)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#38BDF8" fill-opacity="0.28" stroke="#38BDF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#38BDF8"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">02 SILVER</text>
+    </g>
+
+    <g transform="translate(516,0)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#38BDF8" fill-opacity="0.28" stroke="#38BDF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#38BDF8"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">03 GOLD</text>
+    </g>
+
+    <g transform="translate(0,72)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#38BDF8" fill-opacity="0.28" stroke="#38BDF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#38BDF8"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">04 REAL-TIME</text>
+    </g>
+
+    <g transform="translate(172,72)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#38BDF8" fill-opacity="0.28" stroke="#38BDF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#38BDF8"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">05 DIRECT LAKE</text>
+    </g>
+
+    <g transform="translate(344,72)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#38BDF8" fill-opacity="0.28" stroke="#38BDF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#38BDF8"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">09 ML</text>
+    </g>
+
+    <g transform="translate(516,72)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#38BDF8" fill-opacity="0.28" stroke="#38BDF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#38BDF8"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">13 MIGRATION</text>
+    </g>
+
+    <g transform="translate(0,144)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#38BDF8" fill-opacity="0.28" stroke="#38BDF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#38BDF8"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">39 MLOPS</text>
+    </g>
+
+    <g transform="translate(172,144)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#38BDF8" fill-opacity="0.28" stroke="#38BDF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#38BDF8"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">40 RAG</text>
+    </g>
+
+    <g transform="translate(344,144)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#38BDF8" fill-opacity="0.28" stroke="#38BDF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#38BDF8"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">55 PALANTIR</text>
+    </g>
+
+    <g transform="translate(516,144)">
+      <rect x="0" y="0" width="160" height="60" rx="4" fill="#38BDF8" fill-opacity="0.28" stroke="#38BDF8" stroke-opacity="0.95" stroke-width="1.2"/>
+      <rect x="0" y="0" width="4" height="60" fill="#38BDF8"/>
+      <text class="v-lbl" x="14" y="35" font-size="11">56 INFORMATICA</text>
+    </g>
+</g>
 </svg>

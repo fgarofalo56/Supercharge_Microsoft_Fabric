@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > Migration Patterns
-
 # 🔄 Migration Patterns for Microsoft Fabric
 
 <div align="center" markdown>
@@ -29,21 +27,6 @@
 > | Amazon Redshift | [Tutorial 43](../tutorials/43-redshift-to-fabric/README.md) | RA3/DC2 cluster, Spectrum, Glue Catalog, WLM, multi-cloud egress |
 > | Google BigQuery | [Tutorial 44](../tutorials/44-bigquery-to-fabric/README.md) | Slots, partitioning/clustering, Dataflow, BQML, Looker, GCP egress |
 > | On-Prem SSAS/SSIS/SSRS | [Tutorial 45](../tutorials/45-onprem-ssas-ssis-ssrs/README.md) | MSBI stack — Tabular & Multidim cubes, packages, RDL reports |
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Migration Framework](#️-migration-framework)
-- [🗂️ Source-Specific Patterns](#️-source-specific-patterns)
-- [📐 Schema Migration](#-schema-migration)
-- [✅ Validation Framework](#-validation-framework)
-- [💰 Cost Comparison & TCO](#-cost-comparison--tco)
-- [🎰 Casino Industry Migration](#-casino-industry-migration)
-- [🏛️ Federal Agency Migration](#️-federal-agency-migration)
-- [⚠️ Common Pitfalls](#️-common-pitfalls)
-- [📚 References](#-references)
 
 ---
 

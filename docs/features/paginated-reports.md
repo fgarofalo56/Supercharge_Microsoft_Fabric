@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Paginated Reports
-
 # 🖨️ Paginated Reports - Pixel-Perfect Enterprise Reporting
 
 <div align="center" markdown>
@@ -15,23 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-21` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [⚙️ Authoring with Report Builder](#️-authoring-with-report-builder)
-- [🔌 Data Sources in Fabric](#-data-sources-in-fabric)
-- [📐 Parameters and Subreports](#-parameters-and-subreports)
-- [📤 Export Formats and Subscriptions](#-export-formats-and-subscriptions)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Agency Implementation](#️-federal-agency-implementation)
-- [🔐 Security and RLS](#-security-and-rls)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
-- [🔗 Related Documents](#-related-documents)
 
 ---
 

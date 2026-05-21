@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > Feature Store on OneLake
-
 # 🏪 Feature Store on OneLake
 
 <div align="center" markdown>
@@ -16,29 +14,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Wave:** 2 (MLOps & ML/AI Production)
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Why a Feature Store](#-why-a-feature-store)
-- [🏛️ The Three Feature Store Pillars](#️-the-three-feature-store-pillars)
-- [🗂️ Feature Table Schema Pattern](#️-feature-table-schema-pattern)
-- [⏳ Point-in-Time Correctness](#-point-in-time-correctness)
-- [🚦 Offline vs Online Feature Patterns](#-offline-vs-online-feature-patterns)
-- [📝 Naming Conventions](#-naming-conventions)
-- [🔢 Versioning Strategy](#-versioning-strategy)
-- [🔍 Discovery & Documentation](#-discovery--documentation)
-- [⚙️ Computation Patterns](#️-computation-patterns)
-- [🎰 Casino Implementation: fs_player_engagement](#-casino-implementation-fs_player_engagement)
-- [🏛️ Federal Implementation: fs_loan_applicant](#️-federal-implementation-fs_loan_applicant)
-- [🚢 Serving Patterns](#-serving-patterns)
-- [🛡️ Governance](#️-governance)
-- [🧬 Lineage](#-lineage)
-- [💰 Cost Considerations](#-cost-considerations)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Implementation Checklist](#-implementation-checklist)
-- [📚 References](#-references)
 
 ---
 

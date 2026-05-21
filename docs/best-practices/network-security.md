@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > Network Security
-
 # 🔒 Network Security for Microsoft Fabric
 
 <div align="center" markdown>
@@ -15,22 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Network Architecture](#️-network-architecture)
-- [🔐 Private Endpoints](#-private-endpoints)
-- [🌐 Managed VNet](#-managed-vnet)
-- [🛡️ IP Firewall](#️-ip-firewall)
-- [🏢 On-Premises Connectivity](#-on-premises-connectivity)
-- [🎰 Casino Network Requirements](#-casino-network-requirements)
-- [🏛️ Federal Network Requirements](#️-federal-network-requirements)
-- [🔍 Troubleshooting](#-troubleshooting)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

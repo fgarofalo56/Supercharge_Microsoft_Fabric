@@ -12,20 +12,6 @@
 ![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
 
 </div>
-
-## 📑 Table of Contents
-
-- [Overview](#-overview)
-- [Oracle Extraction Patterns](#-oracle-extraction-patterns)
-- [SQL Server Extraction Patterns](#-sql-server-extraction-patterns)
-- [Logical Partitioning Patterns](#-logical-partitioning-patterns)
-- [Performance Benchmarks](#-performance-benchmarks)
-- [Gateway Optimization for Large Extractions](#-gateway-optimization-for-large-extractions)
-- [Incremental Load Patterns](#-incremental-load-patterns)
-- [Full Load vs Incremental Decision](#-full-load-vs-incremental-decision)
-- [Checklist](#-checklist)
-- [Related Documents](#-related-documents)
-
 ---
 
 ## 📋 Overview

@@ -1,5 +1,3 @@
-[Home](../../index.md) > [Docs](../../) > [Best Practices](../index.md) > Git Workflow for Fabric
-
 # Git Workflow for Microsoft Fabric Development
 
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue)
@@ -9,26 +7,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0
-
----
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Fabric Git Integration Architecture](#fabric-git-integration-architecture)
-- [Branch Strategy](#branch-strategy)
-- [Repository Structure for Fabric Items](#repository-structure-for-fabric-items)
-- [PR Workflow](#pr-workflow)
-- [Conflict Resolution for Fabric Files](#conflict-resolution-for-fabric-files)
-- [fabric-cicd Deployment Integration](#fabric-cicd-deployment-integration)
-- [Handling Merge Conflicts in Notebooks](#handling-merge-conflicts-in-notebooks)
-- [.gitignore Patterns](#gitignore-patterns)
-- [Protected Branches and Policies](#protected-branches-and-policies)
-- [Code Review Checklist](#code-review-checklist)
-- [Commit Message Convention](#commit-message-convention)
-- [Multi-Developer Workflow](#multi-developer-workflow)
-- [Troubleshooting](#troubleshooting)
-- [References](#references)
 
 ---
 

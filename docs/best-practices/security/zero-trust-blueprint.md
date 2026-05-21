@@ -1,5 +1,3 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Security](../index.md) > Zero-Trust Blueprint
-
 # 🛡️ Zero-Trust Architecture Blueprint for Microsoft Fabric
 
 <div align="center" markdown>
@@ -18,30 +16,6 @@
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Sibling of:** [SOC 2 Type II Readiness](soc2-type2-readiness.md) (Wave 5 anchor)
 
 > **Disclaimer:** This document provides architectural and technical guidance for designing a zero-trust posture on Microsoft Fabric. It is **not** a turn-key control set — every organization must tune Conditional Access, device compliance, and policy-as-code to its own risk tolerance, regulatory regime, and user population. Validate every policy in audit-only mode before enforcement.
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🌐 Why Zero Trust for Fabric](#-why-zero-trust-for-fabric)
-- [🏛️ The Six Zero-Trust Pillars](#️-the-six-zero-trust-pillars)
-- [🏗️ Reference Architecture](#️-reference-architecture)
-- [🆔 Pillar 1 — Identity](#-pillar-1--identity)
-- [💻 Pillar 2 — Devices & Endpoints](#-pillar-2--devices--endpoints)
-- [🌐 Pillar 3 — Network](#-pillar-3--network)
-- [📦 Pillar 4 — Applications](#-pillar-4--applications)
-- [🔐 Pillar 5 — Data](#-pillar-5--data)
-- [🏗️ Pillar 6 — Infrastructure](#️-pillar-6--infrastructure)
-- [🔁 Continuous Verification](#-continuous-verification)
-- [🗺️ Implementation Roadmap (Crawl/Walk/Run)](#️-implementation-roadmap-crawlwalkrun)
-- [📜 Conditional Access Policy Bundles](#-conditional-access-policy-bundles)
-- [✅ Validation Tests](#-validation-tests)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Implementation](#️-federal-implementation)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Implementation Checklist](#-implementation-checklist)
-- [📚 References](#-references)
 
 ---
 

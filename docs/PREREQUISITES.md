@@ -1,7 +1,5 @@
 # 📋 Prerequisites Guide
 
-> 🏠 [Home](index.md) > 📚 [Docs](./) > 📋 Prerequisites
-
 <div align="center" markdown>
 
 # 📋 Prerequisites
@@ -17,20 +15,6 @@
 ---
 
 **Last Updated:** `2025-01-21` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [☁️ Azure Requirements](#️-azure-requirements)
-- [💻 Local Development Environment](#-local-development-environment)
-- [🔑 Microsoft Entra ID Configuration](#-microsoft-entra-id-configuration)
-- [🌐 Network Requirements](#-network-requirements)
-- [✅ Pre-Deployment Checklist](#-pre-deployment-checklist)
-- [📝 Environment Variables Reference](#-environment-variables-reference)
-- [🧪 Validation Script](#-validation-script)
-- [🔧 Troubleshooting](#-troubleshooting)
-- [📚 Next Steps](#-next-steps)
 
 ---
 

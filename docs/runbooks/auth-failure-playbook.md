@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](..) > [Runbooks](index.md) > Authentication Failure Playbook
-
 # 🔑 Authentication Failure Playbook
 
 > **Last Updated**: 2026-04-27 | **Phase**: 14 (Wave 1) | **Anchor**: [incident-response-template.md](incident-response-template.md)
@@ -14,23 +12,6 @@
 ![Severity](https://img.shields.io/badge/Severity-SEV1%E2%80%93SEV3-orange)
 
 </div>
-
----
-
-## 📑 Table of Contents
-
-1. [Symptoms](#symptoms)
-2. [Severity Classification](#severity-classification)
-3. [Identity-Type Triage Matrix](#identity-type-triage-matrix)
-4. [Triage Decision Tree](#triage-decision-tree)
-5. [Diagnostic Steps](#diagnostic-steps)
-6. [Resolution Procedures](#resolution-procedures)
-7. [Verification](#verification)
-8. [Rollback](#rollback)
-9. [Post-Incident Actions](#post-incident-actions)
-10. [Escalation](#escalation)
-11. [Quick-Reference Commands](#quick-reference-commands)
-12. [Related Runbooks](#related-runbooks)
 
 ---
 

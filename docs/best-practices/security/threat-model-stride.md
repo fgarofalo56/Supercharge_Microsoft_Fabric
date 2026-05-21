@@ -1,5 +1,3 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Security](../index.md) > STRIDE Threat Model
-
 # 🛡️ STRIDE Threat Modeling for Fabric Reference Architecture
 
 <div align="center" markdown>
@@ -18,27 +16,6 @@
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Companion to:** [SOC 2 Type II Readiness](soc2-type2-readiness.md) (CC3.1)
 
 > **Disclaimer:** This document provides a reference STRIDE threat model for the Microsoft Fabric reference architecture in this repository. It is **not** a substitute for a tailored threat model of your production environment. Your data, integrations, regulatory exposure, and threat landscape will differ. Engage a qualified security architect to validate and extend this model for your specific deployment.
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [📋 What is STRIDE](#-what-is-stride)
-- [🆚 When to Use STRIDE (vs PASTA, OCTAVE, ATT&CK)](#-when-to-use-stride-vs-pasta-octave-attck)
-- [🔄 Threat Modeling Process](#-threat-modeling-process)
-- [🏗️ Reference Architecture Data Flow](#️-reference-architecture-data-flow)
-- [🧩 Per-Component STRIDE Analysis](#-per-component-stride-analysis)
-- [📊 Consolidated Threat Catalog](#-consolidated-threat-catalog)
-- [🔗 Mitigation Mapping to Existing Docs](#-mitigation-mapping-to-existing-docs)
-- [✍️ Residual Risk Acceptance](#️-residual-risk-acceptance)
-- [📅 Threat Model Maintenance](#-threat-model-maintenance)
-- [🛠️ Tooling Recommendations](#️-tooling-recommendations)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Implementation](#️-federal-implementation)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Implementation Checklist](#-implementation-checklist)
-- [📚 References](#-references)
 
 ---
 

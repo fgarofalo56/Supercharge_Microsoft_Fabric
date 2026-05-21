@@ -22,21 +22,6 @@ Data governance in Microsoft Fabric spans classification, protection, access con
 
 ---
 
-## 🧭 Table of Contents
-
-- [🟣 Microsoft Purview in Fabric](#-microsoft-purview-in-fabric)
-- [🏷️ Classification Taxonomy](#-classification-taxonomy)
-- [🔐 Row-Level Security](#-row-level-security)
-- [👁️ Column-Level Security](#-column-level-security)
-- [✅ Data Quality Governance](#-data-quality-governance)
-- [⚖️ Compliance Frameworks](#-compliance-frameworks)
-- [:handshake: Data Sharing and External Access](#-data-sharing-and-external-access)
-- [🔎 Audit and Monitoring](#-audit-and-monitoring)
-- [:new: Default Domain Sensitivity Labels (GA 2026)](#-default-domain-sensitivity-labels-ga-2026)
-- [:recycle: Data Retention and Lifecycle Management](#-data-retention-and-lifecycle-management)
-
----
-
 ## 🟣 Microsoft Purview in Fabric
 
 ### Workspace-Level Governance

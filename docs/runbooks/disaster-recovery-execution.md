@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](..) > [Runbooks](index.md) > Disaster Recovery Execution
-
 # 🌐 Disaster Recovery Execution Runbook
 
 > **Last Updated**: 2026-05-05 | **Version**: 1.0
@@ -14,22 +12,6 @@
 ![Severity](https://img.shields.io/badge/Severity-SEV1-critical)
 
 </div>
-
----
-
-## 📑 Table of Contents
-
-1. [Trigger Conditions](#trigger-conditions)
-2. [Severity Classification](#severity-classification)
-3. [Decision Flowchart](#decision-flowchart)
-4. [Step-by-Step Procedure](#step-by-step-procedure)
-5. [OneLake Replication Verification](#onelake-replication-verification)
-6. [Capacity Redeployment](#capacity-redeployment)
-7. [Data Validation](#data-validation)
-8. [Failback Procedure](#failback-procedure)
-9. [Escalation Path](#escalation-path)
-10. [Post-Incident Review Checklist](#post-incident-review-checklist)
-11. [Related Documents](#related-documents)
 
 ---
 

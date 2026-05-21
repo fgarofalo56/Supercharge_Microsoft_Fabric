@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Mirroring
-
 # 🔄 Mirroring - Near-Real-Time Database Replication
 
 
@@ -16,22 +14,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [🔌 Supported Sources](#-supported-sources)
-- [⚙️ Configuration & Setup](#️-configuration--setup)
-- [🔄 Change Data Capture Mechanics](#-change-data-capture-mechanics)
-- [📊 Monitoring Mirroring](#-monitoring-mirroring)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Agency Implementation](#️-federal-agency-implementation)
-- [🔐 Security & Governance](#-security--governance)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

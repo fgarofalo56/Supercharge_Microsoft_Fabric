@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](..) > [Runbooks](index.md) > Tenant Migration: Dev → Staging → Prod
-
 # 🚀 Tenant Migration: Dev → Staging → Prod Promotion
 
 > **Last Updated**: 2026-04-27 | **Phase**: 14 (Wave 1) | **Feature 1.6**
@@ -14,23 +12,6 @@
 ![Promotion](https://img.shields.io/badge/Promotion-Dev%E2%86%92Staging%E2%86%92Prod-orange)
 
 </div>
-
----
-
-## 📑 Table of Contents
-
-1. [Use Cases](#use-cases)
-2. [Pre-Requisites](#pre-requisites)
-3. [Standard Promotion Procedure](#standard-promotion-procedure)
-4. [Rollback Procedure](#rollback-procedure)
-5. [Hotfix Procedure](#hotfix-procedure)
-6. [Verification Checklist](#verification-checklist)
-7. [Post-Promotion Actions](#post-promotion-actions)
-8. [Escalation](#escalation)
-9. [Quick-Reference Commands](#quick-reference-commands)
-10. [Promotion & Rollback Flow Diagrams](#promotion--rollback-flow-diagrams)
-11. [Common Failure Modes](#common-failure-modes)
-12. [Related Runbooks](#related-runbooks)
 
 ---
 

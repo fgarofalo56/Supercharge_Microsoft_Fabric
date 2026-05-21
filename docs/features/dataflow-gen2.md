@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Dataflow Gen2
-
 # 🔄 Dataflow Gen2 — Low-Code ETL with Power Query
 
 <div align="center" markdown>
@@ -15,22 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-21` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [⚙️ Configuration](#️-configuration)
-- [🔀 Power Query M Patterns](#-power-query-m-patterns)
-- [📐 Data Destinations](#-data-destinations)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Agency Implementation](#️-federal-agency-implementation)
-- [📊 Scheduling and Orchestration](#-scheduling-and-orchestration)
-- [⚡ Performance Optimization](#-performance-optimization)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

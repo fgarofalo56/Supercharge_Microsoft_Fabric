@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > OneLake Iceberg Interoperability
-
 # 🧊 OneLake Iceberg Interoperability
 
 <div align="center" markdown>
@@ -15,22 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [🔄 Delta-as-Iceberg Virtualization](#-delta-as-iceberg-virtualization)
-- [❄️ Snowflake Bidirectional](#️-snowflake-bidirectional)
-- [🔌 OneLake Table APIs](#-onelake-table-apis)
-- [🎰 Casino Use Cases](#-casino-use-cases)
-- [🏛️ Federal Use Cases](#️-federal-use-cases)
-- [⚙️ Configuration Guide](#️-configuration-guide)
-- [📊 Performance Considerations](#-performance-considerations)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

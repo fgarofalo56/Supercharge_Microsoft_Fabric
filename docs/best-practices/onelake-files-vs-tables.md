@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > OneLake Files vs Tables
-
 # 📂 OneLake Files vs Tables Decision Guide
 
 <div align="center" markdown>
@@ -15,22 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [📊 Decision Matrix](#-decision-matrix)
-- [📁 Files Section Deep Dive](#-files-section-deep-dive)
-- [📋 Tables Section Deep Dive](#-tables-section-deep-dive)
-- [⚡ Performance Comparison](#-performance-comparison)
-- [🔄 Files-to-Tables Promotion](#-files-to-tables-promotion)
-- [🎰 Casino Industry Patterns](#-casino-industry-patterns)
-- [🏛️ Federal Agency Patterns](#-federal-agency-patterns)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [🌳 Decision Flowchart](#-decision-flowchart)
-- [📚 References](#-references)
 
 ---
 

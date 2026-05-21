@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](..) > [Runbooks](index.md) > Multi-Region Failover
-
 # 🌐 Multi-Region Failover Runbook
 
 > **Last Updated**: 2026-04-27 | **Phase**: 14 (Wave 1) | **Feature**: 1.5
@@ -14,25 +12,6 @@
 ![Severity](https://img.shields.io/badge/Severity-SEV1-critical)
 
 </div>
-
----
-
-## 📑 Table of Contents
-
-1. [Pre-Requisites](#pre-requisites)
-2. [Symptoms](#symptoms)
-3. [Severity Classification](#severity-classification)
-4. [Decision Matrix: Failover vs Wait](#decision-matrix-failover-vs-wait)
-5. [Failover Procedure](#failover-procedure)
-6. [Verification](#verification)
-7. [Failback Procedure](#failback-procedure)
-8. [Post-Incident Actions](#post-incident-actions)
-9. [Escalation](#escalation)
-10. [Communication Tree Reference](#communication-tree-reference)
-11. [Quick-Reference Commands](#quick-reference-commands)
-12. [Diagrams](#diagrams)
-13. [Related Runbooks](#related-runbooks)
-14. [Related Best-Practice Docs](#related-best-practice-docs)
 
 ---
 

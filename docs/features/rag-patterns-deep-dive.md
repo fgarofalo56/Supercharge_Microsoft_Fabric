@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > RAG Patterns Deep Dive
-
 # 🔎 RAG Patterns Deep Dive — Production Retrieval-Augmented Generation on Fabric
 
 <div align="center" markdown>
@@ -16,27 +14,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Wave 2 Feature:** 2.6
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Reference Architecture](#️-reference-architecture)
-- [✂️ Chunking Strategies](#️-chunking-strategies)
-- [🧬 Embedding Models](#-embedding-models)
-- [💾 Storing Embeddings in Eventhouse](#-storing-embeddings-in-eventhouse)
-- [🔍 Retrieval Patterns](#-retrieval-patterns)
-- [🏆 Reranking](#-reranking)
-- [🪡 Generation Strategies](#-generation-strategies)
-- [📏 Evaluation Metrics](#-evaluation-metrics)
-- [⚙️ Implementation in Fabric](#️-implementation-in-fabric)
-- [🛡️ Production Concerns](#️-production-concerns)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Implementation](#️-federal-implementation)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Production Checklist](#-production-checklist)
-- [📚 References](#-references)
 
 ---
 

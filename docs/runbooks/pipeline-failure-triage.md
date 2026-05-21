@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](..) > [Runbooks](index.md) > Pipeline Failure Triage
-
 # 🛠️ Pipeline Failure Triage
 
 > **Last Updated**: 2026-04-27 | **Phase**: 14 (Wave 1) | **Feature**: 1.3
@@ -14,25 +12,6 @@
 ![Severity](https://img.shields.io/badge/Severity-SEV2--SEV3-orange)
 
 </div>
-
----
-
-## 📑 Table of Contents
-
-1. [Symptoms](#symptoms)
-2. [Severity Classification](#severity-classification)
-3. [Symptom → Cause Matrix](#symptom--cause-matrix)
-4. [Diagnostic Steps](#diagnostic-steps)
-5. [Resolution Procedures](#resolution-procedures)
-6. [Quarantine Pattern](#quarantine-pattern)
-7. [Verification](#verification)
-8. [Rollback](#rollback)
-9. [Post-Incident Actions](#post-incident-actions)
-10. [Escalation Path](#escalation-path)
-11. [Quick-Reference Commands](#quick-reference-commands)
-12. [Decision Tree](#decision-tree)
-13. [Related Runbooks](#related-runbooks)
-14. [Related Best-Practice Docs](#related-best-practice-docs)
 
 ---
 

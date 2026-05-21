@@ -1,5 +1,3 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Security](../index.md) > CCPA / CPRA Privacy Rights
-
 # 🛡️ CCPA / CPRA Privacy Rights Implementation on Microsoft Fabric
 
 <div align="center" markdown>
@@ -18,29 +16,6 @@
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Wave 5 Feature:** 5.4 | **Anchor:** [SOC 2 Type II](soc2-type2-readiness.md)
 
 > **Disclaimer:** This document provides architectural and technical guidance for implementing CCPA and CPRA consumer privacy rights on Microsoft Fabric. It is **not** legal advice. CCPA/CPRA enforcement is delegated to the California Privacy Protection Agency (CPPA) and California Attorney General; their interpretations evolve. Engage qualified privacy counsel to validate your compliance program. Verify all definitions, thresholds, and timing requirements with current California statute and CPPA regulations before relying on them in production.
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [📋 CCPA vs GDPR](#-ccpa-vs-gdpr)
-- [⚖️ The Seven CCPA Consumer Rights](#️-the-seven-ccpa-consumer-rights)
-- [🚫 Do Not Sell or Share](#-do-not-sell-or-share)
-- [🔐 Sensitive Personal Information (SPI)](#-sensitive-personal-information-spi)
-- [🏗️ Fabric Implementation](#️-fabric-implementation)
-- [📨 DSAR Workflow](#-dsar-workflow)
-- [📋 Categories Disclosure Requirements](#-categories-disclosure-requirements)
-- [🚦 GPC and Opt-Out Implementation](#-gpc-and-opt-out-implementation)
-- [🛡️ SPI Limitation Implementation](#️-spi-limitation-implementation)
-- [🤝 Service Provider vs Third Party](#-service-provider-vs-third-party)
-- [💰 Pricing & Non-Discrimination](#-pricing--non-discrimination)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal & Multi-State Implementation](#️-federal--multi-state-implementation)
-- [🌍 Doing Both CCPA and GDPR](#-doing-both-ccpa-and-gdpr)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Implementation Checklist](#-implementation-checklist)
-- [📚 References](#-references)
 
 ---
 

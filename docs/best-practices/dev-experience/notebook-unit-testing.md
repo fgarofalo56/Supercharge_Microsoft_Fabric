@@ -1,5 +1,3 @@
-[Home](../../index.md) > [Docs](../../) > [Best Practices](../index.md) > Notebook Unit Testing
-
 # Unit Testing Microsoft Fabric Notebooks
 
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue)
@@ -9,25 +7,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0
-
----
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Why Unit Test Fabric Notebooks](#why-unit-test-fabric-notebooks)
-- [Test Pyramid for Data Engineering](#test-pyramid-for-data-engineering)
-- [Extracting Testable Functions](#extracting-testable-functions)
-- [pytest with Local Spark](#pytest-with-local-spark)
-- [Mocking mssparkutils and notebookutils](#mocking-mssparkutils-and-notebookutils)
-- [conftest.py Fixtures](#conftestpy-fixtures)
-- [Writing Tests: Complete Examples](#writing-tests-complete-examples)
-- [nbval for Notebook Execution Testing](#nbval-for-notebook-execution-testing)
-- [Coverage Reporting](#coverage-reporting)
-- [CI Pipeline Integration](#ci-pipeline-integration)
-- [Best Practices](#best-practices)
-- [Anti-Patterns](#anti-patterns)
-- [References](#references)
 
 ---
 

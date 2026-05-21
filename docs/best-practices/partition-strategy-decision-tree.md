@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > Partition Strategy Decision Tree
-
 # 🌲 Partition Strategy Decision Tree
 
 <div align="center" markdown>
@@ -15,26 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [📊 Partition Fundamentals](#-partition-fundamentals)
-- [🌲 Decision Flowchart](#-decision-flowchart)
-- [📐 Column Selection Criteria](#-column-selection-criteria)
-- [⚠️ Over-Partitioning Problem](#-over-partitioning-problem)
-- [⚠️ Under-Partitioning Problem](#-under-partitioning-problem)
-- [📅 Date-Based Partitioning](#-date-based-partitioning)
-- [🔀 Multi-Column Partitioning](#-multi-column-partitioning)
-- [🔍 Partition Pruning Verification](#-partition-pruning-verification)
-- [💧 Liquid Clustering Alternative](#-liquid-clustering-alternative)
-- [🔧 Compaction with Partitions](#-compaction-with-partitions)
-- [🎰 Casino Industry Patterns](#-casino-industry-patterns)
-- [🏛️ Federal Agency Patterns](#-federal-agency-patterns)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📚 References](#-references)
 
 ---
 

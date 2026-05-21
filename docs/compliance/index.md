@@ -1,7 +1,5 @@
 ![Compliance Frameworks — FedRAMP, HIPAA, SOC 2, PCI DSS, GDPR, NIST mapped to Fabric controls](../assets/heroes/compliance.svg){ .hero-banner }
 
-[Home](../index.md) > [Docs](../) > Compliance Frameworks
-
 # 🏛️ Compliance Framework Mappings for Microsoft Fabric
 
 <div align="center" markdown>

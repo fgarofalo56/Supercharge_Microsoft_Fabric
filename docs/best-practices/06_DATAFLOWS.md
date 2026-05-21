@@ -12,24 +12,6 @@
 ![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
 
 </div>
-
-## 📑 Table of Contents
-
-- [Overview](#-overview)
-- [Key Performance Areas](#-key-performance-areas)
-- [Query Folding](#-query-folding)
-- [Fast Copy](#-fast-copy)
-- [Staging for Complex Transformations](#-staging-for-complex-transformations)
-- [Modern Evaluator](#-modern-evaluator)
-- [Partitioned Compute (Preview)](#-partitioned-compute-preview)
-- [Data Destinations](#-data-destinations)
-- [Performance Patterns](#-performance-patterns)
-- [Optimization Checklist](#-optimization-checklist)
-- [Common Issues and Solutions](#-common-issues-and-solutions)
-- [Dataflow vs Pipeline Decision](#-dataflow-vs-pipeline-decision)
-- [Best Practices Summary](#-best-practices-summary)
-- [Related Documents](#-related-documents)
-
 ---
 
 ## 📋 Overview

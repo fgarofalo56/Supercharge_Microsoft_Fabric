@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Prompt Engineering for Fabric Workloads
-
 # 🎯 Prompt Engineering for Fabric Workloads
 
 <div align="center" markdown>
@@ -16,30 +14,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Anchor:** [MLOps for Fabric Production](../best-practices/mlops-fabric-production.md)
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [📜 Prompt as Code](#-prompt-as-code)
-- [🧬 Anatomy of a Production Prompt](#-anatomy-of-a-production-prompt)
-- [📚 Prompt Patterns Catalog](#-prompt-patterns-catalog)
-- [🧱 Structured Output Techniques](#-structured-output-techniques)
-- [🪡 Prompt Templating](#-prompt-templating)
-- [💸 Prompt Caching for Cost](#-prompt-caching-for-cost)
-- [📏 Long-Context Strategies](#-long-context-strategies)
-- [💬 Multi-Turn Conversation Handling](#-multi-turn-conversation-handling)
-- [🛡️ Prompt Injection & Security](#️-prompt-injection--security)
-- [🏷️ Provider-Specific Best Practices](#️-provider-specific-best-practices)
-- [🧰 Implementation in Fabric](#-implementation-in-fabric)
-- [🧪 Testing Prompts](#-testing-prompts)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Implementation](#️-federal-implementation)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Production Checklist](#-production-checklist)
-- [📦 Templates Provided](#-templates-provided)
-- [📚 References](#-references)
 
 ---
 

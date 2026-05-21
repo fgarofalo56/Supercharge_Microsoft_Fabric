@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](..) > [Runbooks](index.md) > Capacity Throttling Response
-
 # 🚨 Capacity Throttling Response
 
 > **Last Updated**: 2026-04-27 | **Phase**: 14 (Wave 1)
@@ -15,23 +13,6 @@
 ![Severity](https://img.shields.io/badge/Severity-SEV1%E2%80%93SEV3-orange)
 
 </div>
-
----
-
-## 📑 Table of Contents
-
-1. [Symptoms](#-symptoms)
-2. [Severity Classification](#-severity-classification)
-3. [Diagnostic Steps](#-diagnostic-steps)
-4. [Common Root Causes](#-common-root-causes)
-5. [Resolution Procedures](#-resolution-procedures)
-6. [Verification](#-verification)
-7. [Rollback (Scale-Down)](#-rollback-scale-down)
-8. [Post-Incident Actions](#-post-incident-actions)
-9. [Escalation Path](#-escalation-path)
-10. [Quick-Reference Commands](#-quick-reference-commands)
-11. [Related Runbooks](#-related-runbooks)
-12. [Related Best-Practice Docs](#-related-best-practice-docs)
 
 ---
 

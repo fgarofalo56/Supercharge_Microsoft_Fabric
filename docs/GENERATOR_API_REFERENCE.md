@@ -1,5 +1,3 @@
-[Home](index.md) > [Docs](./) > Generator API Reference
-
 # 🔌 Generator API Reference
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
@@ -14,37 +12,6 @@
 </div>
 
 **TL;DR** -- This document covers all 19 data generators in the `data_generation/generators/` package. Every generator inherits from `BaseGenerator`, which provides reproducible seeding, output serialization (DataFrame, Parquet, JSON), batch iteration, and PII masking helpers. Generators span four domains: Casino/Gaming (6), Federal Agency (7), Analytics (3), and Streaming (3).
-
----
-
-## 📑 Table of Contents
-
-1. [🔧 BaseGenerator Interface](#-basegenerator-interface)
-2. [🎰 Casino Generators](#-casino-generators)
-   - [SlotMachineGenerator](#slotmachinegenerator)
-   - [PlayerGenerator](#playergenerator)
-   - [FinancialGenerator](#financialgenerator)
-   - [ComplianceGenerator](#compliancegenerator)
-   - [SecurityGenerator](#securitygenerator)
-   - [TableGamesGenerator](#tablegamesgenerator)
-3. [🏛️ Federal Generators](#️-federal-generators)
-   - [USDAGenerator](#usdagenerator)
-   - [SBAGenerator](#sbagenerator)
-   - [NOAAGenerator](#noaagenerator)
-   - [EPAGenerator](#epagenerator)
-   - [DOIGenerator](#doigenerator)
-   - [TribalHealthcareGenerator](#tribalhealthcaregenerator)
-   - [DOTFAAGenerator](#dotfaagenerator)
-4. [📹 Analytics Generators](#-analytics-generators)
-   - [VideoAnalyticsGenerator](#videoanalyticsgenerator)
-   - [PeopleMovementGenerator](#peoplemoovementgenerator)
-   - [GeolocationGenerator](#geolocationgenerator)
-5. [⚡ Streaming Generators](#-streaming-generators)
-   - [EventHubProducer](#eventhubproducer)
-   - [MultiSourceSimulator](#multisourcesimulator)
-   - [IoTDeviceSimulator](#iotdevicesimulator)
-6. [🧩 Extension Guide](#-extension-guide)
-7. [📋 Return Value Schemas](#-return-value-schemas)
 
 ---
 

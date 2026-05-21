@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > ETL/ELT Comparison Guide
-
 # 🔄 ETL/ELT Comparison Guide — Choosing the Right Data Movement Method
 
 <div align="center" markdown>
@@ -15,20 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-21` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [📊 Method-by-Method Comparison](#-method-by-method-comparison)
-- [🔧 Same Dataset — Five Ways](#-same-dataset--five-ways)
-- [💰 Cost and Performance Comparison](#-cost-and-performance-comparison)
-- [🧭 Decision Matrix](#-decision-matrix)
-- [🔀 Migration Paths](#-migration-paths)
-- [🎰 Casino Recommendations](#-casino-recommendations)
-- [🏛️ Federal Agency Recommendations](#️-federal-agency-recommendations)
-- [📚 References](#-references)
 
 ---
 

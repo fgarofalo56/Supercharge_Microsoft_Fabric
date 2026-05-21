@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Industries](./) > Energy & Utilities
-
 ![Energy & Utilities — Smart grid, load forecasting on Fabric](../assets/heroes/energy-utilities.svg){ .hero-banner }
 
 # ⚡ Energy & Utilities — Smart Grid Analytics & Renewable Forecasting
@@ -22,17 +20,6 @@
 ---
 
 > *"The modern grid generates terabytes of AMI, SCADA, and weather data daily — the utilities that turn that data into real-time decisions will lead the energy transition."*
-
----
-
-## 📑 Table of Contents
-
-- [Scenario Overview](#-scenario-overview)
-- [Regulatory Landscape](#-regulatory-landscape)
-- [Data Flow Architecture](#-data-flow-architecture)
-- [Why Fabric for Energy and Utilities](#-why-fabric-for-energy-and-utilities)
-- [Getting Started](#-getting-started)
-- [References](#-references)
 
 ---
 

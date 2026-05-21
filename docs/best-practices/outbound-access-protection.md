@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > Outbound Access Protection
-
 # 🛡️ Outbound Access Protection (OAP)
 
 <div align="center" markdown>
@@ -15,22 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [⚙️ Configuration](#️-configuration)
-- [📋 Rule Types](#-rule-types)
-- [🎰 Casino Data Protection](#-casino-data-protection)
-- [🏛️ Federal Data Exfiltration Prevention](#️-federal-data-exfiltration-prevention)
-- [🔒 Multi-Workspace Strategy](#-multi-workspace-strategy)
-- [📊 Monitoring & Alerting](#-monitoring--alerting)
-- [🔧 PowerShell & API Management](#-powershell--api-management)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

@@ -1,5 +1,3 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Data Management](../index.md) > Reference Data Versioning
-
 # 📚 Reference Data Versioning on Microsoft Fabric
 
 <div align="center" markdown>
@@ -16,28 +14,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Companion to:** [Master Data Management](master-data-management.md)
-
----
-
-## 📑 Table of Contents
-
-- [🎯 What Is Reference Data](#-what-is-reference-data)
-- [🧾 Examples of Reference Data](#-examples-of-reference-data)
-- [⚠️ The Reference Data Problem](#️-the-reference-data-problem)
-- [📅 Effective-Dating Schema Pattern](#-effective-dating-schema-pattern)
-- [🕒 Bitemporal Reference Data](#-bitemporal-reference-data)
-- [🔧 Maintenance Patterns](#-maintenance-patterns)
-- [📡 Distribution Patterns](#-distribution-patterns)
-- [🏷️ Versioning Strategy](#️-versioning-strategy)
-- [🌳 Hierarchies & Recursive Structures](#-hierarchies--recursive-structures)
-- [🔗 AS-OF Joins for Historical Correctness](#-as-of-joins-for-historical-correctness)
-- [🔁 Cross-System Synchronization](#-cross-system-synchronization)
-- [🧹 Code Set Hygiene](#-code-set-hygiene)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Implementation](#️-federal-implementation)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Implementation Checklist](#-implementation-checklist)
-- [📚 References](#-references)
 
 ---
 

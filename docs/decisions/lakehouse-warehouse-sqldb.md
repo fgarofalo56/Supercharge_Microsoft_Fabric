@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Decision Trees](./) > Lakehouse vs Warehouse vs SQL Database
-
 # Lakehouse vs Warehouse vs SQL Database
 
 <div align="center" markdown>

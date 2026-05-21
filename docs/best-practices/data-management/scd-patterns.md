@@ -1,5 +1,3 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Data Management](../index.md) > SCD Patterns
-
 # 🕰️ Slowly Changing Dimension (SCD) Patterns in Delta Lake
 
 <div align="center" markdown>
@@ -16,29 +14,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Wave 3 Feature:** 3.6
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [📚 The Six SCD Types](#-the-six-scd-types)
-- [🧭 Decision Matrix: Which SCD Type to Use](#-decision-matrix-which-scd-type-to-use)
-- [1️⃣ Type 1 — Overwrite](#1️⃣-type-1--overwrite)
-- [2️⃣ Type 2 — Row Versioning (Deep Dive)](#2️⃣-type-2--row-versioning-deep-dive)
-- [3️⃣ Type 3 — Previous-Value Column](#3️⃣-type-3--previous-value-column)
-- [4️⃣ Type 4 — History Table](#4️⃣-type-4--history-table)
-- [6️⃣ Type 6 — Hybrid (1 + 2 + 3)](#6️⃣-type-6--hybrid-1--2--3)
-- [🔷 Delta-Specific Considerations](#-delta-specific-considerations)
-- [⚡ Performance Tuning](#-performance-tuning)
-- [🔁 Concurrency](#-concurrency)
-- [📜 Auditability](#-auditability)
-- [🔗 Joining SCD2 to Facts (As-Of Joins)](#-joining-scd2-to-facts-as-of-joins)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Implementation](#️-federal-implementation)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Implementation Checklist](#-implementation-checklist)
-- [📚 References](#-references)
 
 ---
 

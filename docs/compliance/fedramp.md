@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Compliance](./) > FedRAMP
-
 # ☁️ FedRAMP Compliance Mapping for Microsoft Fabric
 
 <div align="center" markdown>
@@ -15,18 +13,6 @@
 ---
 
 **Last Updated:** `2026-05-05` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [📊 Fabric FedRAMP Authorization Status](#-fabric-fedramp-authorization-status)
-- [🗺️ Control Mapping Table](#️-control-mapping-table)
-- [🤝 Shared Responsibility Model](#-shared-responsibility-model)
-- [⚠️ Gap Analysis and Limitations](#️-gap-analysis-and-limitations)
-- [✅ Implementation Checklist](#-implementation-checklist)
-- [📚 References](#-references)
 
 ---
 

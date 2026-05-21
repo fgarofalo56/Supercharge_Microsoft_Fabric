@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Notebook Resources & Environments
-
 # 📦 Notebook Resources & Environments - Dependency Management in Fabric
 
 <div align="center" markdown>
@@ -15,24 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0
-
----
-
-## Table of Contents
-
-- [Overview](#-overview)
-- [Architecture](#-architecture)
-- [Notebook Resource Files](#-notebook-resource-files)
-- [Notebook Chaining with %run](#-notebook-chaining-with-run)
-- [Fabric Environments](#-fabric-environments)
-- [Library Management](#-library-management)
-- [Environment Pinning and Versioning](#-environment-pinning-and-versioning)
-- [Shared Environments Across Workspaces](#-shared-environments-across-workspaces)
-- [Casino Implementation](#-casino-implementation)
-- [Federal Agency Implementation](#-federal-agency-implementation)
-- [Best Practices](#-best-practices)
-- [Limitations](#-limitations)
-- [References](#-references)
 
 ---
 

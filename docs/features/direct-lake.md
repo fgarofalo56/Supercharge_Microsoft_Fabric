@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Direct Lake
-
 # ⚡ Direct Lake - Zero-Copy Power BI over OneLake
 
 
@@ -16,22 +14,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [⚙️ Configuration](#️-configuration)
-- [📊 Framing & Performance](#-framing--performance)
-- [📏 Guardrails & Fallback](#-guardrails--fallback)
-- [🔄 Refresh & Sync](#-refresh--sync)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Agency Implementation](#️-federal-agency-implementation)
-- [🔐 Security](#-security)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

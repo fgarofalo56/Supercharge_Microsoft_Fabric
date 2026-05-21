@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > Lakehouse Schema Versioning
-
 # 🔄 Lakehouse Schema Versioning
 
 <div align="center" markdown>
@@ -15,24 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [📊 Change Classification](#-change-classification)
-- [🟢 Non-Breaking Changes](#-non-breaking-changes)
-- [🔴 Breaking Changes](#-breaking-changes)
-- [🔧 mergeSchema vs overwriteSchema](#-mergeschema-vs-overwriteschema)
-- [📝 Dual-Write Pattern](#-dual-write-pattern)
-- [🗂️ Schema Registry](#-schema-registry)
-- [⚠️ Deprecation Workflow](#-deprecation-workflow)
-- [🧪 Testing Schema Changes](#-testing-schema-changes)
-- [🎰 Casino Industry Examples](#-casino-industry-examples)
-- [🏛️ Federal Agency Examples](#-federal-agency-examples)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📚 References](#-references)
 
 ---
 

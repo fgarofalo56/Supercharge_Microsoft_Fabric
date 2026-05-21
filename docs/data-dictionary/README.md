@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](..) > Data Dictionary
-
 # 📖 Data Dictionary
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
@@ -18,16 +16,6 @@
 ## 📖 Overview
 
 This data dictionary provides comprehensive documentation for all tables in the Casino Analytics data platform. Each layer (Bronze, Silver, Gold) maintains specific schemas optimized for their purpose.
-
----
-
-## 📑 Table of Contents
-
-- [Bronze Layer Tables](#bronze-layer-tables)
-- [Silver Layer Tables](#silver-layer-tables)
-- [Gold Layer Tables](#gold-layer-tables)
-- [Real-Time Tables (Eventhouse)](#real-time-tables)
-- [Reference Data](#reference-data)
 
 ---
 

@@ -12,21 +12,6 @@
 ![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
 
 </div>
-
-## 📑 Table of Contents
-
-- [Overview](#-overview)
-- [Workspace Organization Patterns](#-workspace-organization-patterns)
-- [Workspace Configuration Checklist](#-workspace-configuration-checklist)
-- [Domain Organization](#-domain-organization)
-- [Naming Conventions](#-naming-conventions)
-- [Workspace Roles and Permissions](#-workspace-roles-and-permissions)
-- [Git Integration Best Practices](#-git-integration-best-practices)
-- [Anti-Patterns to Avoid](#-anti-patterns-to-avoid)
-- [Implementation Checklist](#-implementation-checklist)
-- [Sample Workspace Setup Script](#-sample-workspace-setup-script)
-- [Related Documents](#-related-documents)
-
 ---
 
 ## 📋 Overview

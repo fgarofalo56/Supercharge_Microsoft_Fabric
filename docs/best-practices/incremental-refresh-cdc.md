@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > Incremental Refresh & CDC Patterns
-
 # 🔄 Incremental Refresh & CDC Patterns for Microsoft Fabric
 
 <div align="center" markdown>
@@ -15,22 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [🔀 Delta MERGE Patterns](#-delta-merge-patterns)
-- [📌 Watermark Management](#-watermark-management)
-- [📊 Semantic Model Incremental Refresh](#-semantic-model-incremental-refresh)
-- [🎰 Casino Industry Patterns](#-casino-industry-patterns)
-- [🏛️ Federal Agency Patterns](#️-federal-agency-patterns)
-- [⚡ Performance Optimization](#-performance-optimization)
-- [✅ Testing & Validation](#-testing--validation)
-- [⚠️ Common Pitfalls](#️-common-pitfalls)
-- [📚 References](#-references)
 
 ---
 

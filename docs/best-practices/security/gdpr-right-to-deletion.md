@@ -1,5 +1,3 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Security](../index.md) > GDPR Right to Deletion
-
 # 🗑️ GDPR Right to Deletion (Right to be Forgotten) on Microsoft Fabric
 
 <div align="center" markdown>
@@ -18,28 +16,6 @@
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Companion to:** [SOC 2 Type II Readiness](soc2-type2-readiness.md) (Wave 5 anchor)
 
 > **Disclaimer:** This document provides architectural and technical guidance for implementing GDPR Article 17 ("Right to Erasure" / "Right to be Forgotten") on Microsoft Fabric. It is **not** legal advice. GDPR application is fact-specific — consult qualified privacy counsel for the lawful basis, exemptions, retention obligations, and cross-border implications that apply to your organization. Where this document refers to retention obligations (e.g., BSA, HIPAA, Privacy Act), those references are illustrative; verify with regulatory counsel before relying on them.
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [📜 Article 17 — What It Requires](#-article-17--what-it-requires)
-- [⚖️ The Six Lawful Bases & When Erasure Applies](#️-the-six-lawful-bases--when-erasure-applies)
-- [🛡️ Erasure Exemptions — What You Don't Have To Delete](#️-erasure-exemptions--what-you-dont-have-to-delete)
-- [🔗 The Cascade Problem](#-the-cascade-problem)
-- [🧾 DSAR Workflow End-to-End](#-dsar-workflow-end-to-end)
-- [🪜 Cascade Deletion Pattern in Fabric](#-cascade-deletion-pattern-in-fabric)
-- [🎭 Pseudonymization vs Anonymization vs Deletion](#-pseudonymization-vs-anonymization-vs-deletion)
-- [🛠️ Implementation in Fabric](#️-implementation-in-fabric)
-- [⚠️ Special Considerations](#️-special-considerations)
-- [📜 Audit Logging the Deletion](#-audit-logging-the-deletion)
-- [✅ Verification Pattern](#-verification-pattern)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Implementation](#️-federal-implementation)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Implementation Checklist](#-implementation-checklist)
-- [📚 References](#-references)
 
 ---
 

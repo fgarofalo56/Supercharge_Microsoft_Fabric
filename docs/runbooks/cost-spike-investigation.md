@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](..) > [Runbooks](index.md) > Cost Spike Investigation
-
 # 📈 Cost Spike Investigation Runbook
 
 > **Last Updated**: 2026-05-05 | **Version**: 1.0
@@ -14,20 +12,6 @@
 ![Severity](https://img.shields.io/badge/Severity-SEV2%E2%80%93SEV4-yellow)
 
 </div>
-
----
-
-## 📑 Table of Contents
-
-1. [Trigger Conditions](#trigger-conditions)
-2. [Severity Classification](#severity-classification)
-3. [Decision Flowchart](#decision-flowchart)
-4. [Step-by-Step Procedure](#step-by-step-procedure)
-5. [Burst vs Sustained Analysis](#burst-vs-sustained-analysis)
-6. [Optimization Actions](#optimization-actions)
-7. [Escalation Path](#escalation-path)
-8. [Post-Incident Review Checklist](#post-incident-review-checklist)
-9. [Related Documents](#related-documents)
 
 ---
 

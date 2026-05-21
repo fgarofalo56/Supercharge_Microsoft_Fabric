@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Graph in Fabric
-
 # 🔗 Graph in Fabric — Relationship Modeling and Graph Analytics
 
 <div align="center" markdown>
@@ -15,21 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-22` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture Overview](#️-architecture-overview)
-- [⚙️ Setup and Configuration](#️-setup-and-configuration)
-- [🔍 Graph Query Patterns](#-graph-query-patterns)
-- [🎰 Casino Fraud Detection Use Case](#-casino-fraud-detection-use-case)
-- [🏛️ Federal Use Cases](#️-federal-use-cases)
-- [🔌 Integration Points](#-integration-points)
-- [⚡ Performance Considerations](#-performance-considerations)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../index.md) > [Diagrams](../ARCHITECTURE.md) > Architecture Overview
-
 # 🏗️ Architecture Overview Diagram
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
@@ -12,19 +10,6 @@
 ![Platform](https://img.shields.io/badge/Platform-Microsoft%20Fabric-purple)
 
 </div>
-
----
-
-## 📑 Table of Contents
-
-- [🏛️ High-Level Architecture](#️-high-level-architecture)
-- [🎰 Data Flow - Slot Telemetry](#-data-flow---slot-telemetry)
-- [⚡ Real-Time Architecture](#-real-time-architecture)
-- [📋 Compliance Data Flow](#-compliance-data-flow)
-- [🔐 Security & Governance](#-security--governance)
-- [🚀 Deployment Architecture](#-deployment-architecture)
-- [🤖 Machine Learning Pipeline](#-machine-learning-pipeline)
-- [🛠️ How to Use These Diagrams](#️-how-to-use-these-diagrams)
 
 ---
 

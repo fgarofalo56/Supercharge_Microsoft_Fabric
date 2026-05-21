@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Industries](./) > Retail & CPG
-
 ![Retail & CPG — Demand forecasting, customer segmentation on Fabric](../assets/heroes/retail-cpg.svg){ .hero-banner }
 
 # 🛒 Retail & CPG — Demand Forecasting & Customer 360
@@ -22,17 +20,6 @@
 ---
 
 > *"Retailers that act on data in minutes instead of days convert 23% more shoppers and waste 18% less inventory."*
-
----
-
-## 📑 Table of Contents
-
-- [Scenario Overview](#-scenario-overview)
-- [Regulatory Landscape](#-regulatory-landscape)
-- [Data Flow Architecture](#-data-flow-architecture)
-- [Why Fabric for Retail and CPG](#-why-fabric-for-retail-and-cpg)
-- [Getting Started](#-getting-started)
-- [References](#-references)
 
 ---
 

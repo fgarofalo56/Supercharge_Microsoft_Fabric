@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > MLOps for Fabric Production
-
 # 🚀 MLOps for Fabric Production
 
 <div align="center" markdown>
@@ -16,27 +14,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Anchor for:** Wave 2 ML/AI doc set
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ MLOps Reference Architecture](#️-mlops-reference-architecture)
-- [🗂️ Model Registry (MLflow in Fabric)](#️-model-registry-mlflow-in-fabric)
-- [🧪 Experiment Tracking](#-experiment-tracking)
-- [🏋️ Training Pipelines](#️-training-pipelines)
-- [🚦 Model Validation Gates](#-model-validation-gates)
-- [🚢 Deployment Patterns](#-deployment-patterns)
-- [🐤 Canary, A/B, and Champion-Challenger](#-canary-ab-and-champion-challenger)
-- [📈 Production Monitoring](#-production-monitoring)
-- [🔁 Retraining Triggers](#-retraining-triggers)
-- [💰 Cost Attribution & FinOps](#-cost-attribution--finops)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Implementation](#️-federal-implementation)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Production Readiness Checklist](#-production-readiness-checklist)
-- [📚 References](#-references)
 
 ---
 

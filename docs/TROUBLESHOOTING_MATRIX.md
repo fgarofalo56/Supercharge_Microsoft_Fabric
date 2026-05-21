@@ -1,26 +1,9 @@
 # Troubleshooting Matrix
 
-> [Home](index.md) > [Docs](./) > Troubleshooting Matrix
-
 > **Last Updated**: 2026-04-27 | **Version**: 1.0
 > **Status**: Active | **Maintainer**: Engineering Team
 
 A symptom-indexed troubleshooting guide for Microsoft Fabric. Find your symptom, confirm the root cause with diagnostic steps, apply the resolution, and prevent recurrence.
-
----
-
-## Table of Contents
-
-- [Performance Issues](#performance-issues)
-- [Capacity and Throttling](#capacity-and-throttling)
-- [Authentication and Access](#authentication-and-access)
-- [Ingestion and Streaming](#ingestion-and-streaming)
-- [Refresh Failures](#refresh-failures)
-- [Pipeline Failures](#pipeline-failures)
-- [Notebook Failures](#notebook-failures)
-- [Data Quality Issues](#data-quality-issues)
-- [Deployment Failures](#deployment-failures)
-- [Cost Surprises](#cost-surprises)
 
 ---
 

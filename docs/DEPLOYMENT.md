@@ -1,7 +1,5 @@
 # 🚀 Deployment Guide
 
-> 🏠 [Home](index.md) > 📚 [Docs](./) > 🚀 Deployment
-
 <div align="center" markdown>
 
 # 🚀 Deployment Guide
@@ -17,24 +15,6 @@
 ---
 
 **Last Updated:** `2025-01-21` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [📊 Visual Overview](#-visual-overview)
-- [📋 Prerequisites](#-prerequisites)
-- [🛠️ Quick Deployment](#️-quick-deployment)
-- [🐳 Docker Deployment](#-docker-deployment)
-- [📜 Script-Based Deployment](#-script-based-deployment)
-- [🌍 Environment-Specific Deployment](#-environment-specific-deployment)
-- [🔄 GitHub Actions Deployment](#-github-actions-deployment)
-- [⚙️ Post-Deployment Configuration](#️-post-deployment-configuration)
-- [✅ Deployment Verification](#-deployment-verification)
-- [🔧 Troubleshooting](#-troubleshooting)
-- [🗑️ Cleanup](#️-cleanup)
-- [💰 Cost Optimization](#-cost-optimization)
-- [📚 Next Steps](#-next-steps)
 
 ---
 

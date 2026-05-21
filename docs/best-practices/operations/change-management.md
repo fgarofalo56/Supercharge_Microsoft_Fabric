@@ -1,5 +1,3 @@
-[Home](../../index.md) > [Docs](../../) > [Best Practices](../index.md) > [Operations](../index.md) > Change Management
-
 # 🛡️ Change Management for Fabric Platforms
 
 <div align="center" markdown>
@@ -16,27 +14,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Phase 14 Wave 1 — Feature 1.10**
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Why Change Management for Fabric](#-why-change-management-for-fabric)
-- [🧭 Change Lifecycle](#-change-lifecycle)
-- [🗂️ Change Classification Matrix](#️-change-classification-matrix)
-- [📝 RFC Template](#-rfc-template)
-- [👥 CAB (Change Advisory Board) Process](#-cab-change-advisory-board-process)
-- [🧊 Freeze Windows](#-freeze-windows)
-- [📅 Change Calendar](#-change-calendar)
-- [⚖️ Risk Assessment Framework](#️-risk-assessment-framework)
-- [↩️ Rollback Policy](#️-rollback-policy)
-- [🔁 Integration with fabric-cicd + Deployment Pipelines](#-integration-with-fabric-cicd--deployment-pipelines)
-- [🧾 Audit Trail Requirements](#-audit-trail-requirements)
-- [✅ Post-Change Verification](#-post-change-verification)
-- [🚨 Failed Change Procedure](#-failed-change-procedure)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Templates Provided](#-templates-provided)
-- [📚 Related Runbooks & Best-Practice Docs](#-related-runbooks--best-practice-docs)
 
 ---
 

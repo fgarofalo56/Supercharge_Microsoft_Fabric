@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Digital Twin Builder
-
 # 🏗️ Digital Twin Builder - Real-Time Entity Modeling
 
 <div align="center" markdown>
@@ -15,22 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 What is Digital Twin Builder](#-what-is-digital-twin-builder)
-- [🏗️ Architecture Overview](#️-architecture-overview)
-- [⚙️ Setup and Configuration](#️-setup-and-configuration)
-- [📐 Entity Modeling Patterns](#-entity-modeling-patterns)
-- [🔄 Real-Time Data Binding](#-real-time-data-binding)
-- [🎰 Casino Floor Use Case](#-casino-floor-use-case)
-- [🏛️ Federal Facility Use Cases](#️-federal-facility-use-cases)
-- [🔌 Integration Points](#-integration-points)
-- [⚡ Performance Considerations](#-performance-considerations)
-- [⚠️ Limitations and Preview Status](#️-limitations-and-preview-status)
-- [📚 References](#-references)
 
 ---
 

@@ -1,5 +1,3 @@
-[Home](index.md) > [Docs](./) > Quick Start
-
 # 🚀 Quick Start Guide
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
@@ -18,19 +16,6 @@
 > **📌 This guide follows Path B (Quickstart)** — no Azure infrastructure deployment required. You only need a Fabric capacity and workspace. For the production-aligned Path A (Bicep + ADLS shortcuts), see [Tutorial 00 Step 4](tutorials/00-environment-setup/README.md#-step-4-connect-external-storage-path-a-only).
 
 > For the full walkthrough with screenshots and explanations, see [Tutorial 00: Environment Setup](tutorials/00-environment-setup/README.md).
-
----
-
-## 📑 Table of Contents
-
-- [📋 Prerequisites](#-prerequisites)
-- [🔧 Step 1: Clone and Configure](#-step-1-clone-and-configure)
-- [☁️ Step 2: Deploy Infrastructure](#️-step-2-deploy-infrastructure)
-- [🏗️ Step 3: Create Workspace and Lakehouses](#️-step-3-create-workspace-and-lakehouses)
-- [🎲 Step 4: Generate Sample Data](#-step-4-generate-sample-data)
-- [📓 Step 5: Run Your First Notebook](#-step-5-run-your-first-notebook)
-- [🗺️ Where to Go Next](#️-where-to-go-next)
-- [🔧 Troubleshooting](#-troubleshooting)
 
 ---
 

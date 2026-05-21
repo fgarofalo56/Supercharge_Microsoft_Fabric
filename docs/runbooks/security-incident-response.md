@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](..) > [Runbooks](index.md) > Security Incident Response
-
 # 🛡️ Security Incident Response Runbook
 
 > **Last Updated**: 2026-05-05 | **Version**: 1.0
@@ -14,21 +12,6 @@
 ![Severity](https://img.shields.io/badge/Severity-SEV1%E2%80%93SEV2-red)
 
 </div>
-
----
-
-## 📑 Table of Contents
-
-1. [Trigger Conditions](#trigger-conditions)
-2. [Severity Classification](#severity-classification)
-3. [Decision Flowchart](#decision-flowchart)
-4. [Step-by-Step Procedure](#step-by-step-procedure)
-5. [Audit Log Investigation](#audit-log-investigation)
-6. [Credential Rotation Procedures](#credential-rotation-procedures)
-7. [Purview Alert Triage](#purview-alert-triage)
-8. [Escalation Path](#escalation-path)
-9. [Post-Incident Review Checklist](#post-incident-review-checklist)
-10. [Related Documents](#related-documents)
 
 ---
 

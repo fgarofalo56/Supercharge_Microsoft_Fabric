@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > FinOps & Cost Governance
-
 # 💸 FinOps & Cost Governance for Microsoft Fabric
 
 <div align="center" markdown>
@@ -15,24 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-21` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [📊 FinOps Framework for Fabric](#-finops-framework-for-fabric)
-- [💰 Cost Allocation & Chargeback](#-cost-allocation--chargeback)
-- [📐 Capacity Right-Sizing](#-capacity-right-sizing)
-- [⏸️ Pause/Resume Automation](#️-pauseresume-automation)
-- [🔔 Budget Alerts & Action Groups](#-budget-alerts--action-groups)
-- [📈 CU Consumption Monitoring](#-cu-consumption-monitoring)
-- [⚡ Smoothing vs Bursting](#-smoothing-vs-bursting)
-- [🔧 Cost Optimization Strategies](#-cost-optimization-strategies)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Implementation](#️-federal-implementation)
-- [🚫 Limitations](#-limitations)
-- [📚 References](#-references)
 
 ---
 

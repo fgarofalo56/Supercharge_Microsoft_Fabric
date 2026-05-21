@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Translytical Task Flows
-
 # 🔄 Translytical Task Flows - Visual Orchestration and Write-Back from Power BI
 
 <div align="center" markdown>
@@ -15,20 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture Overview](#️-architecture-overview)
-- [⚙️ Task Flow Types](#️-task-flow-types)
-- [🔄 Write-Back Patterns](#-write-back-patterns)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Agency Implementation](#️-federal-agency-implementation)
-- [🔐 Security and Governance](#-security-and-governance)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

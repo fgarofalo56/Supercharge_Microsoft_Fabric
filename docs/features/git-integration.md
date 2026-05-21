@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Git Integration
-
 # 🔀 Git Integration for Fabric
 
 <div align="center" markdown>
@@ -15,20 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-21` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [⚙️ Configuration](#️-configuration)
-- [🔄 Sync Workflows](#-sync-workflows)
-- [👥 Multi-Developer Patterns](#-multi-developer-patterns)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Implementation](#️-federal-implementation)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

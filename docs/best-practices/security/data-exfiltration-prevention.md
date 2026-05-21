@@ -1,5 +1,3 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Security](../index.md) > Data Exfiltration Prevention
-
 # 🚪 Data Exfiltration Prevention on Microsoft Fabric
 
 <div align="center" markdown>
@@ -18,30 +16,6 @@
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Anchor:** [SOC 2 Type II Readiness](soc2-type2-readiness.md) (Wave 5)
 
 > **Disclaimer:** This document describes architectural and technical controls to reduce the likelihood and impact of data exfiltration. It is not a guarantee. A determined insider with sufficient privilege can defeat any control. Layered defense, behavior monitoring, and process controls are equally important. Engage your security and legal teams before relying on these patterns in regulated environments.
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview — The Exfiltration Threat Model](#-overview--the-exfiltration-threat-model)
-- [🛣️ Exfiltration Vectors in Fabric](#️-exfiltration-vectors-in-fabric)
-- [🛡️ Layered Defense Model](#️-layered-defense-model)
-- [🚧 OAP — Outbound Access Protection (Deep Dive)](#-oap--outbound-access-protection-deep-dive)
-- [📥 COPY INTO Restrictions](#-copy-into-restrictions)
-- [📤 Power BI Export Restrictions](#-power-bi-export-restrictions)
-- [📓 Notebook Download Restrictions](#-notebook-download-restrictions)
-- [🌐 Cross-Tenant Sharing Controls](#-cross-tenant-sharing-controls)
-- [🔍 DLP Integration (Microsoft Purview)](#-dlp-integration-microsoft-purview)
-- [🏷️ Sensitivity Label Enforcement](#️-sensitivity-label-enforcement)
-- [📈 Egress Monitoring](#-egress-monitoring)
-- [🕵️ Detective Controls](#️-detective-controls)
-- [👁️ Insider Threat Patterns](#️-insider-threat-patterns)
-- [🤝 Vendor / Third-Party Controls](#-vendor--third-party-controls)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Implementation](#️-federal-implementation)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Implementation Checklist](#-implementation-checklist)
-- [📚 References](#-references)
 
 ---
 

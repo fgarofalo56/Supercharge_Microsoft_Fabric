@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Spark Job Definitions Deep Dive
-
 # 🔥 Spark Job Definitions - Production-Grade Spark in Fabric
 
 <div align="center" markdown>
@@ -15,24 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0
-
----
-
-## Table of Contents
-
-- [Overview](#-overview)
-- [SJD vs Notebooks Decision Matrix](#-sjd-vs-notebooks-decision-matrix)
-- [Language Support](#-language-support)
-- [Anatomy of an SJD](#-anatomy-of-an-sjd)
-- [Parameterization](#-parameterization)
-- [Environment and Library Management](#-environment-and-library-management)
-- [Error Handling and Retry](#-error-handling-and-retry)
-- [Performance Considerations](#-performance-considerations)
-- [CI/CD Integration](#-cicd-integration)
-- [Casino Implementation](#-casino-implementation)
-- [Federal Agency Implementation](#-federal-agency-implementation)
-- [Limitations](#-limitations)
-- [References](#-references)
 
 ---
 

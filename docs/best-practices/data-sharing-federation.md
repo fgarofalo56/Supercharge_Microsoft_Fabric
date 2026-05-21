@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > Data Sharing & Federation
-
 # 🔗 Data Sharing & Federation for Microsoft Fabric
 
 <div align="center" markdown>
@@ -15,22 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [🔗 Shortcut Patterns](#-shortcut-patterns)
-- [📤 Fabric Data Sharing](#-fabric-data-sharing)
-- [🌐 External Federation](#-external-federation)
-- [🔒 Security & Governance](#-security--governance)
-- [🎰 Casino Industry Sharing](#-casino-industry-sharing)
-- [🏛️ Federal Agency Sharing](#️-federal-agency-sharing)
-- [📊 Monitoring & Auditing](#-monitoring--auditing)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

@@ -1,20 +1,9 @@
 # Cheat Sheets
 
-> [Home](index.md) > [Docs](./) > Cheat Sheets
-
 > **Last Updated**: 2026-04-27 | **Version**: 1.0
 > **Status**: Active | **Maintainer**: Engineering Team
 
 Quick-reference cheat sheets for the four primary languages used in this POC: PySpark, KQL, T-SQL, and DAX. Each section is organized for fast lookup during development.
-
----
-
-## Table of Contents
-
-- [PySpark + Fabric Cheat Sheet](#pyspark--fabric-cheat-sheet)
-- [KQL Essentials](#kql-essentials)
-- [T-SQL Fabric Quirks](#t-sql-fabric-quirks)
-- [DAX Patterns](#dax-patterns)
 
 ---
 

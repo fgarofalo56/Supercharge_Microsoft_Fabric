@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](..) > [Compliance Templates](./) > W-2G Template
-
 # 🎰 W-2G Gambling Winnings Template
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0

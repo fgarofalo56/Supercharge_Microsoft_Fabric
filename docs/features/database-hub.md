@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Database Hub
-
 # 🗄️ Database Hub — Unified Database Management
 
 <div align="center" markdown>
@@ -19,21 +17,6 @@
 ---
 
 > ⚠️ **Early Access Notice**: Database Hub is currently in **Early Access** (announced March 2026). Features, UI, and capabilities may change significantly before general availability. Do not use for production-critical workflows. Early Access requires opt-in via Fabric Admin portal.
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture Overview](#️-architecture-overview)
-- [⚙️ Setup and Configuration](#️-setup-and-configuration)
-- [📊 Core Capabilities](#-core-capabilities)
-- [🎰 Casino Use Case](#-casino-use-case)
-- [🏛️ Federal Use Case](#️-federal-use-case)
-- [🔌 Integration Points](#-integration-points)
-- [⚡ Performance and Health Monitoring](#-performance-and-health-monitoring)
-- [⚠️ Limitations and Early Access Status](#️-limitations-and-early-access-status)
-- [📚 References](#-references)
 
 ---
 

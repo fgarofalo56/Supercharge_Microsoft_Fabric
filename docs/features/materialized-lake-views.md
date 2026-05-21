@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Materialized Lake Views
-
 # 🏔️ Materialized Lake Views - Pre-Computed Analytics Acceleration
 
 <div align="center" markdown>
@@ -15,21 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [⚙️ Creating Materialized Views](#️-creating-materialized-views)
-- [🔄 Refresh Strategies](#-refresh-strategies)
-- [📊 Performance Benefits](#-performance-benefits)
-- [🎰 Casino KPI Views](#-casino-kpi-views)
-- [🏛️ Federal Dashboard Views](#️-federal-dashboard-views)
-- [🔌 Direct Lake Integration](#-direct-lake-integration)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

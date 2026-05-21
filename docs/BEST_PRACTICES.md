@@ -1,7 +1,5 @@
 # 🏆 Microsoft Fabric Best Practices Guide
 
-> 🏠 [Home](index.md) > 📚 [Docs](./) > 🏆 Best Practices
-
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
@@ -12,21 +10,6 @@
 ![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
 
 </div>
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Workspace Organization](#️-workspace-organization)
-- [📁 Folder Structure & Hierarchy](#-folder-structure--hierarchy)
-- [🔄 Environment Strategy (Dev/Test/Prod)](#-environment-strategy-devtestprod)
-- [🏅 Medallion Architecture Placement](#-medallion-architecture-placement)
-- [🔐 Security Best Practices](#-security-best-practices)
-- [📊 Naming Conventions](#-naming-conventions)
-- [⚡ Performance Optimization](#-performance-optimization)
-- [💰 Cost Management](#-cost-management)
-- [📖 Deep-Dive Guides](#-deep-dive-guides)
 
 ---
 

@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > User Data Functions
-
 # ⚡ User Data Functions - Serverless Compute in Fabric
 
 <div align="center" markdown>
@@ -15,24 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0
-
----
-
-## Table of Contents
-
-- [Overview](#-overview)
-- [Architecture](#-architecture)
-- [Use Cases](#-use-cases)
-- [Creating Functions](#-creating-functions)
-- [Triggers and Bindings](#-triggers-and-bindings)
-- [Integration with Fabric Services](#-integration-with-fabric-services)
-- [Authentication and Identity](#-authentication-and-identity)
-- [Performance and Scaling](#-performance-and-scaling)
-- [Comparison: UDFs vs Azure Functions](#-comparison-udfs-vs-azure-functions)
-- [Casino Implementation](#-casino-implementation)
-- [Federal Agency Implementation](#-federal-agency-implementation)
-- [Limitations](#-limitations)
-- [References](#-references)
 
 ---
 

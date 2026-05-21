@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > Query Optimization Deep Dive
-
 # 🚀 Query Optimization Deep Dive
 
 <div align="center" markdown>
@@ -15,26 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🔍 Predicate Pushdown](#-predicate-pushdown)
-- [📡 Broadcast Joins](#-broadcast-joins)
-- [⚡ Adaptive Query Execution](#-adaptive-query-execution)
-- [🔀 Shuffle Partition Tuning](#-shuffle-partition-tuning)
-- [💾 Caching Strategies](#-caching-strategies)
-- [⚖️ Skew Handling](#-skew-handling)
-- [🪣 Bucketing vs Partitioning](#-bucketing-vs-partitioning)
-- [📊 Statistics Collection](#-statistics-collection)
-- [🔥 Photon Engine in Fabric](#-photon-engine-in-fabric)
-- [📈 Query Plan Analysis](#-query-plan-analysis)
-- [🎰 Casino Query Optimization](#-casino-query-optimization)
-- [🏛️ Federal Query Optimization](#-federal-query-optimization)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📚 References](#-references)
 
 ---
 

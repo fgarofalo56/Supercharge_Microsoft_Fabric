@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Fabric Unified Admin Monitoring
-
 # 📊 Fabric Unified Admin Monitoring (FUAM) - Tenant-Wide Observability
 
 <div align="center" markdown>
@@ -15,24 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0
-
----
-
-## Table of Contents
-
-- [Overview](#-overview)
-- [Architecture](#-architecture)
-- [Admin Monitoring Workspace](#-admin-monitoring-workspace)
-- [Key Metrics and Tables](#-key-metrics-and-tables)
-- [KQL Queries for Capacity Analytics](#-kql-queries-for-capacity-analytics)
-- [Custom Admin Dashboards](#-custom-admin-dashboards)
-- [Alerting on Capacity Anomalies](#-alerting-on-capacity-anomalies)
-- [Comparison: FUAM vs Workspace Monitoring](#-comparison-fuam-vs-workspace-monitoring)
-- [RBAC for Admin Monitoring](#-rbac-for-admin-monitoring)
-- [Casino Implementation](#-casino-implementation)
-- [Federal Agency Implementation](#-federal-agency-implementation)
-- [Limitations](#-limitations)
-- [References](#-references)
 
 ---
 

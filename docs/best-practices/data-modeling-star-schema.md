@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > Data Modeling & Star Schema
-
 # ⭐ Data Modeling & Star Schema Best Practices for Microsoft Fabric
 
 <div align="center" markdown>
@@ -15,23 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-21` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [📐 Dimensional Modeling Principles](#-dimensional-modeling-principles)
-- [📊 Fact Table Design](#-fact-table-design)
-- [🏷️ Dimension Design](#️-dimension-design)
-- [🔗 Advanced Dimension Patterns](#-advanced-dimension-patterns)
-- [🌐 Conformed Dimensions](#-conformed-dimensions)
-- [⚡ Direct Lake Optimization](#-direct-lake-optimization)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Implementation](#️-federal-implementation)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📉 Limitations](#-limitations)
-- [📚 References](#-references)
 
 ---
 

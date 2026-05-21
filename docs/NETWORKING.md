@@ -1,7 +1,5 @@
 # 🌐 Networking & Connectivity Guide
 
-> 🏠 [Home](index.md) > 📚 [Docs](./) > 🌐 Networking & Connectivity
-
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
@@ -12,20 +10,6 @@
 ![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
 
 </div>
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Network Architecture](#️-network-architecture)
-- [🔒 Private Endpoints](#-private-endpoints)
-- [🛤️ ExpressRoute Configuration](#️-expressroute-configuration)
-- [🔐 VPN Best Practices](#-vpn-best-practices)
-- [🖥️ Self-Hosted Integration Runtime (SHIR)](#️-self-hosted-integration-runtime-shir)
-- [🚪 On-Premises Data Gateway](#-on-premises-data-gateway)
-- [🌍 Multi-Cloud Connectivity](#-multi-cloud-connectivity)
-- [🎰 Casino/Gaming Compliance Considerations](#-casinogaming-compliance-considerations)
 
 ---
 

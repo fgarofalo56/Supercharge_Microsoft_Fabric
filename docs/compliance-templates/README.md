@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](..) > [Compliance Templates](./) > Overview
-
 # 📋 Compliance Templates
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0

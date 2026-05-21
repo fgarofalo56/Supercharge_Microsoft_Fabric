@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](..) > [Compliance Templates](./) > CTR Template
-
 # 💰 Currency Transaction Report Template
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0

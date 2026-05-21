@@ -2,8 +2,6 @@
 
 # 💬 Frequently Asked Questions (FAQ)
 
-> 🏠 [Home](index.md) > 📚 [Docs](./) > 💬 FAQ
-
 > **Last Updated**: 2026-04-27 | **Version**: 3.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
@@ -17,26 +15,13 @@
 
 ---
 
-## 📑 Table of Contents
-
-- [🎯 General Questions](#-general-questions)
-- [📋 Prerequisites & Setup](#-prerequisites--setup)
-- [🚀 Deployment Questions](#-deployment-questions)
-- [🎲 Data Generation](#-data_generation)
-- [📖 Tutorial Questions](#-tutorial-questions)
-- [📊 Power BI & Reporting](#-power-bi--reporting)
-- [🔐 Security & Compliance](#-security--compliance)
-- [🔧 Troubleshooting](#-troubleshooting)
-- [💰 Cost & Licensing](#-cost--licensing)
-- [🐳 Docker & Dev Containers](#-docker--dev-containers)
-- [🏗️ Architecture Deep Dive](#-architecture-deep-dive)
-- [⚡ Performance Tuning](#-performance-tuning)
-- [🤖 MLOps & AI](#-mlops--ai)
-- [🔄 Migrations](#-migrations)
-- [🛠️ Dev Experience](#-dev-experience)
-- [📜 Compliance Frameworks](#-compliance-frameworks)
-
----
+!!! tip "Looking for answers to specific operational questions?"
+    See **[Field Questions](FIELD_QUESTIONS.md)** for detailed answers to scenarios
+    that come up in real customer engagements: Power BI mashup errors with VNet
+    sources, creating views on mirrored Databricks tables, Unity Catalog →
+    Fabric permission inheritance, Direct Lake on multi-source semantic
+    models, SharePoint → Fabric Pipeline triggers, Fabric SQL Database
+    ingestion patterns, and DataFlow Gen2 + gateway → Lakehouse issues.
 
 ## 🎯 General Questions
 

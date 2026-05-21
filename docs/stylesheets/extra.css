@@ -397,3 +397,123 @@ img.service-icon {
   font-size: 0.8rem;
   border-left-width: 3px;
 }
+
+/* ── Mermaid dark-mode text contrast ─────────────────────────────
+   Mermaid auto-generates node fills (yellow, lime, pink) where it
+   defaults to white text — unreadable on slate. Force dark text
+   on every node label so contrast holds against any fill. */
+[data-md-color-scheme="slate"] .mermaid .node text,
+[data-md-color-scheme="slate"] .mermaid g.label text,
+[data-md-color-scheme="slate"] .mermaid .nodeLabel,
+[data-md-color-scheme="slate"] .mermaid foreignObject div {
+  color: #0f172a !important;
+  fill: #0f172a !important;
+}
+/* But edge labels float outside the nodes — those need light text */
+[data-md-color-scheme="slate"] .mermaid .edgeLabel,
+[data-md-color-scheme="slate"] .mermaid .edgeLabel rect {
+  background-color: #1f2937 !important;
+  color: #e2e8f0 !important;
+  fill: #e2e8f0 !important;
+}
+[data-md-color-scheme="slate"] .mermaid .edgeLabel foreignObject div {
+  color: #e2e8f0 !important;
+  background-color: transparent !important;
+}
+
+/* ── Code block horizontal scrollbar visibility ────────────────
+   Long Python/SQL lines clip without a scrollbar hint on Windows.
+   Force a visible 8px scrollbar so users know they can scroll. */
+.md-typeset pre > code,
+.md-typeset .highlight pre {
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--md-default-fg-color--lighter) transparent;
+}
+.md-typeset pre::-webkit-scrollbar,
+.md-typeset .highlight pre::-webkit-scrollbar {
+  height: 8px;
+}
+.md-typeset pre::-webkit-scrollbar-thumb,
+.md-typeset .highlight pre::-webkit-scrollbar-thumb {
+  background: var(--md-default-fg-color--lighter);
+  border-radius: 4px;
+}
+.md-typeset pre::-webkit-scrollbar-thumb:hover,
+.md-typeset .highlight pre::-webkit-scrollbar-thumb:hover {
+  background: var(--md-default-fg-color--light);
+}
+[data-md-color-scheme="slate"] .md-typeset pre::-webkit-scrollbar-thumb,
+[data-md-color-scheme="slate"] .md-typeset .highlight pre::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ── Inline emoji in headings sized to match ─────────────────────
+   Section emoji icons (📋 🎯 ⚙️) render larger than the H2 text
+   next to them. Normalize so they sit on the heading baseline. */
+.md-typeset h1 .twemoji,
+.md-typeset h2 .twemoji,
+.md-typeset h3 .twemoji {
+  height: 1em;
+  width: auto;
+  vertical-align: -0.12em;
+  margin-right: 0.15em;
+}
+
+/* ── Embedded raster diagrams need padding on slate ──────────────
+   PNG/JPG architecture screenshots (e.g., from Microsoft Learn)
+   land as bright-white blocks floating on the dark page. Wrap
+   them in a soft container so the seam reads as intentional. */
+[data-md-color-scheme="slate"] .md-typeset img[src$=".png"]:not(.hero-banner):not(.twemoji):not([alt=""]),
+[data-md-color-scheme="slate"] .md-typeset img[src*="learn.microsoft.com"] {
+  background: #fafafa;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+/* ── Right-rail TOC active state on slate ────────────────────────
+   The active section indicator is too subtle on dark. Bump it
+   so users can see where they are in the page. */
+[data-md-color-scheme="slate"] .md-nav--secondary .md-nav__link--active {
+  color: var(--md-accent-fg-color) !important;
+  font-weight: 600;
+}
+
+/* ── Right-rail TOC: hide emoji icons in TOC links ───────────────
+   The TOC bullet list shows emoji icons that mirror in-page H2
+   emojis — fine in moderation, noisy on long pages with 14+ TOC
+   items. Suppress the emoji image so the TOC reads as a clean
+   text outline. */
+.md-nav--secondary .md-nav__link img.twemoji {
+  display: none;
+}
+
+/* ── Status badge row alignment ──────────────────────────────────
+   The CATEGORY/STATUS/UPDATED shields render as inline-blocks
+   with random vertical alignment. Force consistent vertical
+   alignment and wrapping behavior. */
+.md-typeset p img[src*="img.shields.io"] {
+  vertical-align: middle;
+  margin: 0 2px;
+}
+.md-typeset div[align="center"] p:has(img[src*="img.shields.io"]) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  align-items: center;
+}
+
+/* ── Horizontal rule subtlety ────────────────────────────────────
+   Doc pages have many `---` HRs separating sections; the default
+   solid line is heavy. Soften them so they read as section breaks
+   not blocking dividers. */
+.md-typeset hr {
+  border: 0;
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+  margin: 2rem 0;
+}
+[data-md-color-scheme="slate"] .md-typeset hr {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}

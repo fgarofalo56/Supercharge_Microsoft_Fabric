@@ -1,5 +1,3 @@
-[Home](../../index.md) > [Docs](../..) > [Best Practices](../index.md) > [Data Management](../index.md) > Business Glossary Automation
-
 # 📖 Business Glossary Automation with Microsoft Purview
 
 <div align="center" markdown>
@@ -16,30 +14,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0 | **Anchor:** [Master Data Management](master-data-management.md)
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Why a Business Glossary](#-why-a-business-glossary)
-- [⚠️ The Glossary–Schema Drift Problem](#️-the-glossaryschema-drift-problem)
-- [🧱 The Three Layers](#-the-three-layers)
-- [🔗 Mapping Layers](#-mapping-layers)
-- [⚙️ Purview Setup for Fabric](#️-purview-setup-for-fabric)
-- [📝 Term Definition Standards](#-term-definition-standards)
-- [🌳 Term Hierarchies](#-term-hierarchies)
-- [🔁 Automated Sync Patterns](#-automated-sync-patterns)
-- [🏷️ Sensitivity Labels](#️-sensitivity-labels)
-- [🔍 Discovery UX](#-discovery-ux)
-- [👥 Stewardship Workflow](#-stewardship-workflow)
-- [📊 KPI Specification Pattern](#-kpi-specification-pattern)
-- [🔄 Translytical Task Flow Integration](#-translytical-task-flow-integration)
-- [🤖 AI-Assisted Glossary](#-ai-assisted-glossary)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Implementation](#️-federal-implementation)
-- [🚫 Anti-Patterns](#-anti-patterns)
-- [📋 Implementation Checklist](#-implementation-checklist)
-- [📚 References](#-references)
 
 ---
 

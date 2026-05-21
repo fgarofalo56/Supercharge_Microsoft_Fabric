@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Fabric REST APIs
-
 # 🔌 Fabric REST APIs - Programmatic Platform Management
 
 <div align="center" markdown>
@@ -15,25 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-21` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ API Surface Architecture](#️-api-surface-architecture)
-- [🔐 Authentication](#-authentication)
-- [⚙️ Workspace Management](#️-workspace-management)
-- [📦 Item CRUD Operations](#-item-crud-operations)
-- [⏳ Long-Running Operations](#-long-running-operations)
-- [📊 Capacity Management](#-capacity-management)
-- [📄 Pagination](#-pagination)
-- [🚨 Error Handling](#-error-handling)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Agency Implementation](#️-federal-agency-implementation)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
-- [🔗 Related Documents](#-related-documents)
 
 ---
 

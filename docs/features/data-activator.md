@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Data Activator
-
 # 🔔 Data Activator — Real-Time Alerting and Actions
 
 <div align="center" markdown>
@@ -15,21 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-21` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ Architecture](#️-architecture)
-- [⚙️ Configuration](#️-configuration)
-- [📐 Trigger Patterns](#-trigger-patterns)
-- [🎰 Casino Implementation](#-casino-implementation)
-- [🏛️ Federal Agency Implementation](#️-federal-agency-implementation)
-- [🔗 Integration Patterns](#-integration-patterns)
-- [📊 Monitoring and Troubleshooting](#-monitoring-and-troubleshooting)
-- [⚠️ Limitations](#️-limitations)
-- [📚 References](#-references)
 
 ---
 

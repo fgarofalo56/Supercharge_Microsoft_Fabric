@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Features](./) > Variable Libraries
-
 # 🔧 Variable Libraries - Parameterized Pipelines & Environments
 
 <div align="center" markdown>
@@ -15,23 +13,6 @@
 ---
 
 **Last Updated:** `2026-04-27` | **Version:** 1.0.0
-
----
-
-## Table of Contents
-
-- [Overview](#-overview)
-- [Architecture](#-architecture)
-- [Creating Variable Libraries](#-creating-variable-libraries)
-- [Environment-Specific Values](#-environment-specific-values)
-- [Secrets and Key Vault Integration](#-secrets-and-key-vault-integration)
-- [Using Variables in Fabric Items](#-using-variables-in-fabric-items)
-- [Comparison Matrix](#-comparison-matrix)
-- [Best Practices](#-best-practices)
-- [Casino Implementation](#-casino-implementation)
-- [Federal Agency Implementation](#-federal-agency-implementation)
-- [Limitations](#-limitations)
-- [References](#-references)
 
 ---
 

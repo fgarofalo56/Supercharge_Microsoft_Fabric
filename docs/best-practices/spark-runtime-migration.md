@@ -1,5 +1,3 @@
-[Home](../index.md) > [Docs](../) > [Best Practices](./) > Spark Runtime 2.0 Migration
-
 # Spark Runtime 2.0 Migration Guide
 
 <div align="center" markdown>
@@ -13,22 +11,6 @@
 ---
 
 **Last Updated:** `2026-04-13` | **Version:** 1.0.0
-
----
-
-## 📑 Table of Contents
-
-- [🎯 Overview](#-overview)
-- [🏗️ What Changed](#️-what-changed)
-- [⚠️ Breaking Changes](#️-breaking-changes)
-- [📋 Migration Checklist](#-migration-checklist)
-- [📓 Notebook Compatibility](#-notebook-compatibility)
-- [⚡ Performance Improvements](#-performance-improvements)
-- [🧪 Testing Strategy](#-testing-strategy)
-- [🔄 Rollback Plan](#-rollback-plan)
-- [🎰 Casino POC Impact](#-casino-poc-impact)
-- [🏛️ Federal POC Impact](#️-federal-poc-impact)
-- [📚 References](#-references)
 
 ---
 
