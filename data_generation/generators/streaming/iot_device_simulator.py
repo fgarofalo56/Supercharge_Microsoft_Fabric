@@ -261,8 +261,7 @@ class IoTDeviceSimulator(BaseGenerator):
         """
         if device_type not in self._fleet:
             raise ValueError(
-                f"Unknown device_type '{device_type}'. "
-                f"Choose from: {self.DEVICE_TYPES}"
+                f"Unknown device_type '{device_type}'. Choose from: {self.DEVICE_TYPES}"
             )
 
         device = self.rng.choice(self._fleet[device_type])  # type: ignore[arg-type]

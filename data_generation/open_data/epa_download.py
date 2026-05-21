@@ -178,7 +178,11 @@ def _request_with_retry(
     for attempt in range(1, MAX_RETRIES + 1):
         try:
             resp = requests.get(
-                url, params=params, headers=headers, stream=stream, timeout=timeout,
+                url,
+                params=params,
+                headers=headers,
+                stream=stream,
+                timeout=timeout,
             )
             resp.raise_for_status()
             return resp
@@ -186,7 +190,7 @@ def _request_with_retry(
             if attempt == MAX_RETRIES:
                 logger.error("Request failed after %d attempts: %s", MAX_RETRIES, exc)
                 raise
-            wait = BACKOFF_BASE ** attempt
+            wait = BACKOFF_BASE**attempt
             logger.warning(
                 "Attempt %d/%d failed (%s). Retrying in %ds...",
                 attempt,
@@ -198,7 +202,9 @@ def _request_with_retry(
     raise RuntimeError("Exceeded max retries")
 
 
-def _save_dataframe(df: pd.DataFrame, output_dir: str, filename_stem: str) -> tuple[Path, Path]:
+def _save_dataframe(
+    df: pd.DataFrame, output_dir: str, filename_stem: str
+) -> tuple[Path, Path]:
     """Save DataFrame as CSV + Parquet."""
     out = Path(output_dir)
     out.mkdir(parents=True, exist_ok=True)
@@ -213,6 +219,7 @@ def _save_dataframe(df: pd.DataFrame, output_dir: str, filename_stem: str) -> tu
 # ---------------------------------------------------------------------------
 # Download functions
 # ---------------------------------------------------------------------------
+
 
 def download_air_quality(
     api_key: str,
@@ -245,7 +252,10 @@ def download_air_quality(
     """
     logger.info(
         "Downloading AQS data: state=%s, parameter=%s, %s to %s",
-        state_code, parameter, start_date, end_date,
+        state_code,
+        parameter,
+        start_date,
+        end_date,
     )
 
     # Resolve named parameter to code
@@ -361,7 +371,9 @@ def download_tri_data(
     """
     logger.info(
         "Downloading TRI data for years %d-%d (state=%s)",
-        year_start, year_end, state,
+        year_start,
+        year_end,
+        state,
     )
 
     frames: list[pd.DataFrame] = []
@@ -389,9 +401,7 @@ def download_tri_data(
                 df_year.rename(columns=TRI_COLUMN_MAP, inplace=True)
 
                 if state and "state" in df_year.columns:
-                    df_year = df_year[
-                        df_year["state"].str.upper() == state.upper()
-                    ]
+                    df_year = df_year[df_year["state"].str.upper() == state.upper()]
 
                 frames.append(df_year)
 
@@ -418,10 +428,18 @@ def download_tri_data(
 
     # Numeric conversions
     numeric_cols = [
-        "fugitive_air", "stack_air", "water_release",
-        "underground_release", "land_treatment", "surface_impoundment",
-        "other_disposal", "total_releases", "onsite_release_total",
-        "offsite_release_total", "latitude", "longitude",
+        "fugitive_air",
+        "stack_air",
+        "water_release",
+        "underground_release",
+        "land_treatment",
+        "surface_impoundment",
+        "other_disposal",
+        "total_releases",
+        "onsite_release_total",
+        "offsite_release_total",
+        "latitude",
+        "longitude",
     ]
     for col in numeric_cols:
         if col in df.columns:
@@ -506,7 +524,13 @@ def download_echo_compliance(
     df.rename(columns=ECHO_COLUMN_MAP, inplace=True)
 
     # Numeric conversions
-    for col in ("latitude", "longitude", "inspection_count", "formal_action_count", "quarters_in_noncompliance"):
+    for col in (
+        "latitude",
+        "longitude",
+        "inspection_count",
+        "formal_action_count",
+        "quarters_in_noncompliance",
+    ):
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors="coerce")
 
@@ -613,6 +637,7 @@ def download_water_quality(
 # Validation
 # ---------------------------------------------------------------------------
 
+
 def validate_download(file_path: str) -> dict[str, Any]:
     """
     Validate a downloaded EPA dataset file.
@@ -684,6 +709,7 @@ def validate_download(file_path: str) -> dict[str, Any]:
 # ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
+
 
 def main() -> None:
     """Command-line interface for EPA open-data downloads."""

@@ -72,7 +72,13 @@ NOTEBOOK_LANGUAGE_WEIGHTS: list[float] = [0.65, 0.25, 0.10]
 PIPELINE_SCHEDULES: list[str] = ["hourly", "daily", "weekly", "manual", "event-driven"]
 PIPELINE_SCHEDULE_WEIGHTS: list[float] = [0.18, 0.50, 0.10, 0.15, 0.07]
 
-PIPELINE_RUN_STATUSES: list[str] = ["Succeeded", "Succeeded", "Succeeded", "Failed", "InProgress"]
+PIPELINE_RUN_STATUSES: list[str] = [
+    "Succeeded",
+    "Succeeded",
+    "Succeeded",
+    "Failed",
+    "InProgress",
+]
 PIPELINE_RUN_STATUS_WEIGHTS: list[float] = [0.55, 0.18, 0.12, 0.10, 0.05]
 
 # Realistic complexity band distribution targeted by the generator.
@@ -507,7 +513,9 @@ class SynapseWorkloadInventoryGenerator(BaseGenerator):
             "tables": tables,
             "pipelines": pipelines,
             "notebooks": notebooks,
-            "dependency_graph": self._build_dependency_graph(tables, pipelines, notebooks),
+            "dependency_graph": self._build_dependency_graph(
+                tables, pipelines, notebooks
+            ),
             "generated_at": datetime.now(timezone.utc).isoformat(),
         }
 
@@ -551,7 +559,9 @@ class SynapseWorkloadInventoryGenerator(BaseGenerator):
             count_for_schema = schema_counts[schema]
             pool = per_schema_pools[schema]
             for i in range(count_for_schema):
-                name = self._unique_table_name(pool, taken=names_by_schema[schema], idx=i)
+                name = self._unique_table_name(
+                    pool, taken=names_by_schema[schema], idx=i
+                )
                 table = self._build_one_table(schema, name, names_by_schema)
                 tables.append(table)
                 names_by_schema[schema].append(name)
@@ -601,7 +611,11 @@ class SynapseWorkloadInventoryGenerator(BaseGenerator):
 
         # Optional partitioning (more common on bronze/silver large tables).
         partitioned_by: str | None = None
-        if schema in {"bronze", "silver"} and row_count > 1_000_000 and self.rng.random() < 0.55:
+        if (
+            schema in {"bronze", "silver"}
+            and row_count > 1_000_000
+            and self.rng.random() < 0.55
+        ):
             partitioned_by = str(self.rng.choice(PARTITION_COLUMN_CANDIDATES))
 
         last_used_days_ago = self._weighted_last_used()
@@ -609,18 +623,30 @@ class SynapseWorkloadInventoryGenerator(BaseGenerator):
         # Dependencies: silver reads bronze (1-3 deps), gold reads silver (1-2 deps).
         dependencies: list[str] = []
         if schema == "silver" and existing_names_by_schema.get("bronze"):
-            k = int(self.rng.integers(1, min(4, len(existing_names_by_schema["bronze"]) + 1)))
+            k = int(
+                self.rng.integers(
+                    1, min(4, len(existing_names_by_schema["bronze"]) + 1)
+                )
+            )
             sampled = self.rng.choice(
                 existing_names_by_schema["bronze"], size=k, replace=False
             )
             dependencies = [f"bronze.{n}" for n in sampled]
         elif schema == "gold" and existing_names_by_schema.get("silver"):
-            k = int(self.rng.integers(1, min(3, len(existing_names_by_schema["silver"]) + 1)))
+            k = int(
+                self.rng.integers(
+                    1, min(3, len(existing_names_by_schema["silver"]) + 1)
+                )
+            )
             sampled = self.rng.choice(
                 existing_names_by_schema["silver"], size=k, replace=False
             )
             dependencies = [f"silver.{n}" for n in sampled]
-        elif schema == "staging" and existing_names_by_schema.get("ref") and self.rng.random() < 0.30:
+        elif (
+            schema == "staging"
+            and existing_names_by_schema.get("ref")
+            and self.rng.random() < 0.30
+        ):
             ref_dep = str(self.rng.choice(existing_names_by_schema["ref"]))
             dependencies = [f"ref.{ref_dep}"]
 
@@ -653,7 +679,7 @@ class SynapseWorkloadInventoryGenerator(BaseGenerator):
         """Build ``total`` pipelines with realistic activity counts and source/sink edges."""
         pipelines: list[SynapsePipelineMeta] = []
         # ~15 % of pipelines contain a Mapping Data Flow (the migration "hard part").
-        target_data_flows = max(1, int(round(total * 0.15)))
+        target_data_flows = max(1, round(total * 0.15))
 
         bronze_silver_tables = [t for t in tables if t.schema in {"bronze", "silver"}]
         all_table_fqns = [t.fqn for t in tables]
@@ -678,7 +704,9 @@ class SynapseWorkloadInventoryGenerator(BaseGenerator):
             source_count = int(self.rng.integers(1, 5))
             sink_count = int(self.rng.integers(1, 4))
 
-            schedule = str(self.weighted_choice(PIPELINE_SCHEDULES, PIPELINE_SCHEDULE_WEIGHTS))
+            schedule = str(
+                self.weighted_choice(PIPELINE_SCHEDULES, PIPELINE_SCHEDULE_WEIGHTS)
+            )
             last_run_status = str(
                 self.weighted_choice(PIPELINE_RUN_STATUSES, PIPELINE_RUN_STATUS_WEIGHTS)
             )
@@ -686,9 +714,11 @@ class SynapseWorkloadInventoryGenerator(BaseGenerator):
             # Dependencies: tables this pipeline reads/writes.
             dep_pool = bronze_silver_tables if bronze_silver_tables else tables
             dep_size = min(source_count + sink_count, max(1, len(dep_pool)))
-            sampled = self.rng.choice(
-                [t.fqn for t in dep_pool], size=dep_size, replace=False
-            ) if dep_pool else []
+            sampled = (
+                self.rng.choice([t.fqn for t in dep_pool], size=dep_size, replace=False)
+                if dep_pool
+                else []
+            )
             dependencies = [str(d) for d in sampled]
 
             # 10 % of pipelines have an Execute Pipeline edge to an upstream pipeline.
@@ -771,9 +801,7 @@ class SynapseWorkloadInventoryGenerator(BaseGenerator):
             dependencies: list[str] = []
             if dep_count > 0 and all_table_fqns:
                 dep_size = min(dep_count, len(all_table_fqns))
-                sampled = self.rng.choice(
-                    all_table_fqns, size=dep_size, replace=False
-                )
+                sampled = self.rng.choice(all_table_fqns, size=dep_size, replace=False)
                 dependencies = [str(d) for d in sampled]
 
             notebook_name = f"nb_{self._notebook_purpose(i)}_{i:02d}"
@@ -847,7 +875,7 @@ class SynapseWorkloadInventoryGenerator(BaseGenerator):
             "external": 600.0,
         }.get(table_type, 500.0)
         size_bytes = row_count * avg_bytes_per_row
-        size_gb = size_bytes / (1024.0 ** 3)
+        size_gb = size_bytes / (1024.0**3)
         # Add 5-15 % jitter for realism.
         jitter = 1.0 + float(self.rng.uniform(-0.05, 0.15))
         return max(0.001, size_gb * jitter)
@@ -924,7 +952,9 @@ class SynapseWorkloadInventoryGenerator(BaseGenerator):
             cells = int(item.get("cell_count", 0))
             magics = int(item.get("magic_command_count", 0))
             lang = str(item.get("language", "python")).lower()
-            lang_penalty = {"python": 0, "sql": 0, "scala": 5, "csharp": 15}.get(lang, 5)
+            lang_penalty = {"python": 0, "sql": 0, "scala": 5, "csharp": 15}.get(
+                lang, 5
+            )
             score = cells + (magics * 2) + lang_penalty
         else:
             score = 0
@@ -945,15 +975,21 @@ class SynapseWorkloadInventoryGenerator(BaseGenerator):
         pool: list[dict[str, Any]] = []
         for t in ws["tables"]:
             row = t.to_csv_row()
-            row["complexity_score"], row["complexity_band"] = self.compute_complexity(row)
+            row["complexity_score"], row["complexity_band"] = self.compute_complexity(
+                row
+            )
             pool.append(row)
         for p in ws["pipelines"]:
             row = p.to_csv_row()
-            row["complexity_score"], row["complexity_band"] = self.compute_complexity(row)
+            row["complexity_score"], row["complexity_band"] = self.compute_complexity(
+                row
+            )
             pool.append(row)
         for n in ws["notebooks"]:
             row = n.to_csv_row()
-            row["complexity_score"], row["complexity_band"] = self.compute_complexity(row)
+            row["complexity_score"], row["complexity_band"] = self.compute_complexity(
+                row
+            )
             pool.append(row)
         self._record_pool = pool
 

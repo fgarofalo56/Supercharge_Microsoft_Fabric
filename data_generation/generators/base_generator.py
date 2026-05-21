@@ -247,7 +247,12 @@ class BaseGenerator(ABC):
 
     def generate_uuid(self) -> str:
         """Generate a UUID seeded by ``self.rng`` so output is reproducible."""
-        return str(uuid.UUID(bytes=bytes(self.rng.integers(0, 256, size=16, dtype="uint8")), version=4))
+        return str(
+            uuid.UUID(
+                bytes=bytes(self.rng.integers(0, 256, size=16, dtype="uint8")),
+                version=4,
+            )
+        )
 
     def hash_value(self, value: str, salt: str | None = None) -> str:
         """HMAC-SHA-256 hash of a value using a required salt.
@@ -261,7 +266,9 @@ class BaseGenerator(ABC):
         import hmac
         import os
 
-        effective_salt = salt if salt is not None else os.environ.get("FABRIC_POC_HASH_SALT")
+        effective_salt = (
+            salt if salt is not None else os.environ.get("FABRIC_POC_HASH_SALT")
+        )
         if not effective_salt:
             raise ValueError(
                 "hash_value requires a non-empty salt. Either pass salt=... or "

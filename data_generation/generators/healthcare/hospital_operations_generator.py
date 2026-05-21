@@ -16,7 +16,6 @@ All data is HIPAA-safe:
 from datetime import datetime, timedelta
 from typing import Any
 
-import numpy as np
 import pandas as pd
 
 from data_generation.generators.base_generator import BaseGenerator
@@ -54,36 +53,93 @@ TOP_25_DRG = [
 ]
 
 COMMON_ICD10 = [
-    "A41.9", "I50.9", "J18.9", "J44.1", "N39.0", "E11.9", "I21.9",
-    "K92.2", "N17.9", "J96.01", "I63.9", "R55", "L03.116", "E87.1",
-    "K21.0", "J15.9", "I10", "E11.65", "I48.91", "R06.02",
+    "A41.9",
+    "I50.9",
+    "J18.9",
+    "J44.1",
+    "N39.0",
+    "E11.9",
+    "I21.9",
+    "K92.2",
+    "N17.9",
+    "J96.01",
+    "I63.9",
+    "R55",
+    "L03.116",
+    "E87.1",
+    "K21.0",
+    "J15.9",
+    "I10",
+    "E11.65",
+    "I48.91",
+    "R06.02",
 ]
 
 COMMON_CPT = [
-    "99213", "99214", "99223", "99232", "99233", "99238", "99291",
-    "36415", "71046", "74177", "93000", "93306", "85025", "80053",
-    "43239", "27447", "33533", "47562", "49505", "99285",
+    "99213",
+    "99214",
+    "99223",
+    "99232",
+    "99233",
+    "99238",
+    "99291",
+    "36415",
+    "71046",
+    "74177",
+    "93000",
+    "93306",
+    "85025",
+    "80053",
+    "43239",
+    "27447",
+    "33533",
+    "47562",
+    "49505",
+    "99285",
 ]
 
 PAYER_MIX = ["Medicare", "Medicaid", "Commercial", "Self-Pay", "Tricare"]
 PAYER_WEIGHTS = [0.35, 0.20, 0.30, 0.10, 0.05]
 
 DENIAL_REASONS = [
-    None, None, None, None, None, None, None,  # ~70% no denial
-    "CO-4",   # Procedure code inconsistent with modifier
+    None,
+    None,
+    None,
+    None,
+    None,
+    None,
+    None,  # ~70% no denial
+    "CO-4",  # Procedure code inconsistent with modifier
     "CO-16",  # Lack of information
     "CO-29",  # Time limit for filing has expired
     "CO-50",  # Non-covered service
-    "PR-1",   # Deductible amount
+    "PR-1",  # Deductible amount
     "CO-97",  # Benefit included in payment of another service
 ]
 
-UNITS = ["ICU", "MICU", "SICU", "PCU", "MedSurg", "Telemetry", "ED", "L&D", "NICU", "Ortho"]
+UNITS = [
+    "ICU",
+    "MICU",
+    "SICU",
+    "PCU",
+    "MedSurg",
+    "Telemetry",
+    "ED",
+    "L&D",
+    "NICU",
+    "Ortho",
+]
 SHIFTS = ["Day", "Evening", "Night"]
 
 DISPOSITIONS = [
-    "Home", "Home Health", "SNF", "Rehab", "LTAC",
-    "Transfer", "AMA", "Expired",
+    "Home",
+    "Home Health",
+    "SNF",
+    "Rehab",
+    "LTAC",
+    "Transfer",
+    "AMA",
+    "Expired",
 ]
 DISPOSITION_WEIGHTS = [0.45, 0.15, 0.12, 0.08, 0.05, 0.05, 0.03, 0.07]
 
@@ -178,7 +234,9 @@ class HospitalOperationsGenerator(BaseGenerator):
         """Generate a single medical claim record."""
         self._claim_seq += 1
         claim_id = f"CLM-{self._claim_seq:010d}"
-        encounter_id = f"ENC-{int(self.rng.integers(1, max(self._encounter_seq, 1) + 1)):08d}"
+        encounter_id = (
+            f"ENC-{int(self.rng.integers(1, max(self._encounter_seq, 1) + 1)):08d}"
+        )
 
         cpt = str(self.rng.choice(COMMON_CPT))
         icd10 = str(self.rng.choice(COMMON_ICD10))
@@ -262,6 +320,7 @@ class HospitalOperationsGenerator(BaseGenerator):
 
 if __name__ == "__main__":
     import os
+
     os.environ.setdefault("FABRIC_POC_HASH_SALT", "demo-salt-do-not-use-in-prod")
 
     gen = HospitalOperationsGenerator(seed=42)

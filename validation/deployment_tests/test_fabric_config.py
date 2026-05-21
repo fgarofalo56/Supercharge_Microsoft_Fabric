@@ -73,9 +73,9 @@ class TestFabricCapacitySKU:
 
         # Verify all defined SKUs are valid
         for sku in defined_skus:
-            assert (
-                sku in VALID_FABRIC_SKUS
-            ), f"Invalid Fabric SKU in allowed values: {sku}"
+            assert sku in VALID_FABRIC_SKUS, (
+                f"Invalid Fabric SKU in allowed values: {sku}"
+            )
 
     def test_all_valid_skus_are_allowed(self, main_bicep_path: Path):
         """Test that all valid Fabric SKUs are available."""
@@ -94,9 +94,9 @@ class TestFabricCapacitySKU:
             # At minimum, common SKUs should be available
             essential_skus = ["F2", "F64"]
             for sku in essential_skus:
-                assert (
-                    sku in defined_skus
-                ), f"Essential SKU {sku} should be in allowed values"
+                assert sku in defined_skus, (
+                    f"Essential SKU {sku} should be in allowed values"
+                )
 
     def test_module_sku_parameter_validation(self, module_bicep_files: dict[str, Path]):
         """Test that Fabric module validates SKU parameter."""
@@ -107,9 +107,9 @@ class TestFabricCapacitySKU:
         content = fabric_path.read_text(encoding="utf-8")
 
         # Should have @allowed decorator on skuName parameter
-        assert (
-            "@allowed" in content
-        ), "Fabric module should validate SKU parameter with @allowed"
+        assert "@allowed" in content, (
+            "Fabric module should validate SKU parameter with @allowed"
+        )
 
     def test_default_sku_is_reasonable(self, parsed_param_files: dict[str, Any]):
         """Test that default SKU values are reasonable for each environment."""
@@ -145,16 +145,18 @@ class TestFabricAdminEmail:
             default_clean = default_value.strip("'\"")
             assert (
                 "@contoso.com" in default_clean or "example" in default_clean.lower()
-            ), f"Admin email default should be obvious placeholder, got: {default_value}"
+            ), (
+                f"Admin email default should be obvious placeholder, got: {default_value}"
+            )
 
     def test_admin_email_passed_to_module(self, main_bicep_path: Path):
         """Test that admin email is passed to Fabric module."""
         content = main_bicep_path.read_text(encoding="utf-8")
 
         # Should pass fabricAdminEmail to module
-        assert (
-            "adminEmail: fabricAdminEmail" in content or "adminEmail:" in content
-        ), "Admin email should be passed to Fabric module"
+        assert "adminEmail: fabricAdminEmail" in content or "adminEmail:" in content, (
+            "Admin email should be passed to Fabric module"
+        )
 
     def test_module_uses_admin_email(self, module_bicep_files: dict[str, Path]):
         """Test that Fabric module uses admin email in capacity configuration."""
@@ -165,13 +167,13 @@ class TestFabricAdminEmail:
         content = fabric_path.read_text(encoding="utf-8")
 
         # Should use adminEmail in administration.members
-        assert (
-            "administration:" in content
-        ), "Fabric capacity should have administration block"
+        assert "administration:" in content, (
+            "Fabric capacity should have administration block"
+        )
         assert "members:" in content, "Fabric capacity should have members array"
-        assert (
-            "adminEmail" in content
-        ), "Fabric capacity should reference adminEmail parameter"
+        assert "adminEmail" in content, (
+            "Fabric capacity should reference adminEmail parameter"
+        )
 
     def test_admin_email_in_param_files(self, parsed_param_files: dict[str, Any]):
         """Test that all environment param files specify admin email."""
@@ -180,9 +182,9 @@ class TestFabricAdminEmail:
             assert email, f"Environment {env} should specify fabricAdminEmail"
 
             # Basic email format validation
-            assert (
-                "@" in email
-            ), f"Admin email for {env} should be valid email format: {email}"
+            assert "@" in email, (
+                f"Admin email for {env} should be valid email format: {email}"
+            )
 
 
 class TestFabricTags:
@@ -190,18 +192,18 @@ class TestFabricTags:
 
     def test_tags_param_defined(self, parsed_main_bicep):
         """Test that tags parameter is defined."""
-        assert (
-            "tags" in parsed_main_bicep.parameters
-        ), "Tags parameter should be defined in main.bicep"
+        assert "tags" in parsed_main_bicep.parameters, (
+            "Tags parameter should be defined in main.bicep"
+        )
 
     def test_default_tags_applied(self, main_bicep_path: Path):
         """Test that default tags are applied to resources."""
         content = main_bicep_path.read_text(encoding="utf-8")
 
         # Should have defaultTags variable
-        assert (
-            "var defaultTags" in content or "defaultTags" in content
-        ), "Should have default tags variable"
+        assert "var defaultTags" in content or "defaultTags" in content, (
+            "Should have default tags variable"
+        )
 
         # Default tags should include essential metadata
         essential_tags = ["Environment", "Project", "ManagedBy"]
@@ -216,9 +218,9 @@ class TestFabricTags:
 
         content = fabric_path.read_text(encoding="utf-8")
 
-        assert (
-            "param tags object" in content
-        ), "Fabric module should accept tags parameter"
+        assert "param tags object" in content, (
+            "Fabric module should accept tags parameter"
+        )
 
     def test_fabric_capacity_has_tags(self, module_bicep_files: dict[str, Path]):
         """Test that Fabric capacity resource has tags applied."""
@@ -230,9 +232,9 @@ class TestFabricTags:
 
         # Find the fabricCapacity resource and check for tags
         resource_pattern = r"resource\s+fabricCapacity[^{]+\{[^}]+tags:"
-        assert re.search(
-            resource_pattern, content, re.DOTALL
-        ), "Fabric capacity resource should have tags property"
+        assert re.search(resource_pattern, content, re.DOTALL), (
+            "Fabric capacity resource should have tags property"
+        )
 
     def test_environment_specific_tags(self, parsed_param_files: dict[str, Any]):
         """Test that environments have appropriate tags."""
@@ -240,9 +242,9 @@ class TestFabricTags:
             tags_value = params.parameters.get("tags", "")
 
             # Environment-specific tags should include environment info
-            assert (
-                "Environment" in tags_value or env in tags_value.lower()
-            ), f"Tags for {env} should include environment information"
+            assert "Environment" in tags_value or env in tags_value.lower(), (
+                f"Tags for {env} should include environment information"
+            )
 
     def test_production_compliance_tags(self, parsed_param_files: dict[str, Any]):
         """Test that production has compliance-related tags."""
@@ -274,9 +276,9 @@ class TestFabricCapacityProperties:
 
         content = fabric_path.read_text(encoding="utf-8")
 
-        assert (
-            "tier: 'Fabric'" in content
-        ), "Fabric capacity should have tier set to 'Fabric'"
+        assert "tier: 'Fabric'" in content, (
+            "Fabric capacity should have tier set to 'Fabric'"
+        )
 
     def test_capacity_outputs_defined(self, parsed_module_files: dict[str, Any]):
         """Test that Fabric module outputs capacity properties."""
@@ -307,9 +309,9 @@ class TestFabricCapacityProperties:
         api_version = match.group(1)
         year = int(api_version.split("-")[0])
 
-        assert (
-            year >= 2023
-        ), f"Fabric API version should be 2023 or later, got: {api_version}"
+        assert year >= 2023, (
+            f"Fabric API version should be 2023 or later, got: {api_version}"
+        )
 
 
 class TestFabricModuleStructure:
@@ -324,9 +326,9 @@ class TestFabricModuleStructure:
         content = fabric_path.read_text(encoding="utf-8")
 
         # Should have header comment
-        assert content.strip().startswith("//") or content.strip().startswith(
-            "/*"
-        ), "Fabric module should have header documentation"
+        assert content.strip().startswith("//") or content.strip().startswith("/*"), (
+            "Fabric module should have header documentation"
+        )
 
     def test_module_parameters_have_descriptions(
         self, module_bicep_files: dict[str, Path]
@@ -388,9 +390,9 @@ class TestFabricIntegration:
         """Test that Fabric module is deployed from main.bicep."""
         content = main_bicep_path.read_text(encoding="utf-8")
 
-        assert (
-            "module fabric" in content or "fabric-capacity.bicep" in content
-        ), "main.bicep should deploy Fabric module"
+        assert "module fabric" in content or "fabric-capacity.bicep" in content, (
+            "main.bicep should deploy Fabric module"
+        )
 
     def test_fabric_depends_on_resource_group(self, main_bicep_path: Path):
         """Test that Fabric deployment is scoped to resource group."""
@@ -398,18 +400,18 @@ class TestFabricIntegration:
 
         # Find fabric module deployment
         fabric_pattern = r"module\s+fabric[^{]+\{[^}]+scope:\s*resourceGroup"
-        assert re.search(
-            fabric_pattern, content, re.DOTALL
-        ), "Fabric module should be scoped to resource group"
+        assert re.search(fabric_pattern, content, re.DOTALL), (
+            "Fabric module should be scoped to resource group"
+        )
 
     def test_fabric_outputs_exposed_from_main(self, parsed_main_bicep):
         """Test that Fabric outputs are exposed from main.bicep."""
         expected_outputs = ["fabricCapacityName", "fabricCapacityId"]
 
         for output in expected_outputs:
-            assert (
-                output in parsed_main_bicep.outputs
-            ), f"main.bicep should expose {output} output"
+            assert output in parsed_main_bicep.outputs, (
+                f"main.bicep should expose {output} output"
+            )
 
 
 class TestFabricEnvironmentConfiguration:
@@ -433,9 +435,9 @@ class TestFabricEnvironmentConfiguration:
 
         # Production should have Fabric SKU
         sku = prod_params.parameters.get("fabricCapacitySku", "").strip("'\"")
-        assert (
-            sku in VALID_FABRIC_SKUS
-        ), f"Prod should have valid Fabric SKU, got: {sku}"
+        assert sku in VALID_FABRIC_SKUS, (
+            f"Prod should have valid Fabric SKU, got: {sku}"
+        )
 
     def test_consistent_location_across_environments(
         self,

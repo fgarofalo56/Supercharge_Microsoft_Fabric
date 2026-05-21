@@ -38,9 +38,9 @@ class TestSlotTelemetrySchemaCompliance:
         if pattern:
             regex = re.compile(pattern)
             for machine_id in sample_slot_data["machine_id"].dropna().head(100):
-                assert regex.match(
-                    machine_id
-                ), f"machine_id '{machine_id}' doesn't match pattern {pattern}"
+                assert regex.match(machine_id), (
+                    f"machine_id '{machine_id}' doesn't match pattern {pattern}"
+                )
 
     def test_event_type_enum(self, sample_slot_data, slot_telemetry_schema):
         """Verify event_type values are from schema enum."""
@@ -83,9 +83,9 @@ class TestSlotTelemetrySchemaCompliance:
             if field in sample_slot_data.columns:
                 values = sample_slot_data[field].dropna()
                 violations = values[values < min_val]
-                assert (
-                    len(violations) == 0
-                ), f"{field} has values below minimum {min_val}"
+                assert len(violations) == 0, (
+                    f"{field} has values below minimum {min_val}"
+                )
 
     def test_player_id_pattern(self, sample_slot_data, slot_telemetry_schema):
         """Verify player_id matches schema pattern when present."""
@@ -95,9 +95,9 @@ class TestSlotTelemetrySchemaCompliance:
         if pattern:
             regex = re.compile(pattern)
             for player_id in sample_slot_data["player_id"].dropna().head(100):
-                assert regex.match(
-                    player_id
-                ), f"player_id '{player_id}' doesn't match pattern"
+                assert regex.match(player_id), (
+                    f"player_id '{player_id}' doesn't match pattern"
+                )
 
 
 class TestPlayerProfileSchemaCompliance:
@@ -132,9 +132,9 @@ class TestPlayerProfileSchemaCompliance:
         if "ssn_hash" in sample_player_data.columns:
             hex_pattern = re.compile(r"^[a-fA-F0-9]+$")
             for ssn_hash in sample_player_data["ssn_hash"].dropna().head(100):
-                assert hex_pattern.match(
-                    ssn_hash
-                ), f"ssn_hash contains non-hex: {ssn_hash}"
+                assert hex_pattern.match(ssn_hash), (
+                    f"ssn_hash contains non-hex: {ssn_hash}"
+                )
 
     def test_no_raw_ssn_exposed(self, sample_player_data):
         """Verify no raw SSN is exposed in any field."""
@@ -155,9 +155,9 @@ class TestPlayerProfileSchemaCompliance:
         if "marketing_opt_in" in sample_player_data.columns:
             values = sample_player_data["marketing_opt_in"].dropna()
             for val in values.head(100):
-                assert isinstance(
-                    val, (bool, np.bool_)
-                ), f"marketing_opt_in not boolean: {val}"
+                assert isinstance(val, (bool, np.bool_)), (
+                    f"marketing_opt_in not boolean: {val}"
+                )
 
 
 class TestComplianceFilingSchemaCompliance:
@@ -190,9 +190,9 @@ class TestComplianceFilingSchemaCompliance:
 
         amounts = sample_compliance_data["amount"].dropna()
         violations = amounts[amounts < min_amount]
-        assert (
-            len(violations) == 0
-        ), f"Found {len(violations)} amounts below {min_amount}"
+        assert len(violations) == 0, (
+            f"Found {len(violations)} amounts below {min_amount}"
+        )
 
     def test_filing_status_enum(self, sample_compliance_data, compliance_filing_schema):
         """Verify filing_status values are valid."""
@@ -247,9 +247,9 @@ class TestFinancialTransactionSchemaCompliance:
 
         for _, row in sample_financial_data.head(100).iterrows():
             if row["amount"] >= 10000:
-                assert row[
-                    "ctr_required"
-                ], f"ctr_required not set for amount ${row['amount']}"
+                assert row["ctr_required"], (
+                    f"ctr_required not set for amount ${row['amount']}"
+                )
 
     def test_payment_method_enum(
         self, sample_financial_data, financial_transaction_schema
@@ -284,13 +284,14 @@ class TestSchemaFieldTypes:
         import datetime as _dt
 
         import pandas as _pd
+
         for field in string_fields:
             if field in sample_slot_data.columns:
                 non_null = sample_slot_data[field].dropna()
                 for val in non_null.head(50):
-                    assert isinstance(
-                        val, (str, _pd.Timestamp, _dt.date)
-                    ), f"{field} contains non-string: {type(val)}"
+                    assert isinstance(val, (str, _pd.Timestamp, _dt.date)), (
+                        f"{field} contains non-string: {type(val)}"
+                    )
 
     def test_number_fields_are_numeric(self, sample_slot_data, slot_telemetry_schema):
         """Verify number-typed fields contain numbers."""
@@ -310,9 +311,9 @@ class TestSchemaFieldTypes:
             if field in sample_slot_data.columns:
                 non_null = sample_slot_data[field].dropna()
                 for val in non_null.head(50):
-                    assert isinstance(
-                        val, (int, float, np.integer, np.floating)
-                    ), f"{field} contains non-numeric: {type(val)}"
+                    assert isinstance(val, (int, float, np.integer, np.floating)), (
+                        f"{field} contains non-numeric: {type(val)}"
+                    )
 
     def test_datetime_fields_valid(
         self, sample_slot_data, slot_telemetry_schema, validate_iso_datetime
@@ -327,9 +328,9 @@ class TestSchemaFieldTypes:
         for field in datetime_fields:
             if field in sample_slot_data.columns:
                 for val in sample_slot_data[field].dropna().head(50):
-                    assert validate_iso_datetime(
-                        val
-                    ), f"{field} has invalid datetime: {val}"
+                    assert validate_iso_datetime(val), (
+                        f"{field} has invalid datetime: {val}"
+                    )
 
 
 class TestSchemaEnumValidation:
@@ -343,9 +344,9 @@ class TestSchemaEnumValidation:
         generated_types = set(sample_slot_data["event_type"].dropna().unique())
 
         invalid_types = generated_types - valid_types
-        assert (
-            len(invalid_types) == 0
-        ), f"Invalid event types generated: {invalid_types}"
+        assert len(invalid_types) == 0, (
+            f"Invalid event types generated: {invalid_types}"
+        )
 
     def test_all_zones_valid(self, sample_slot_data, slot_telemetry_schema):
         """Verify all generated zones are schema-valid."""
@@ -398,9 +399,9 @@ class TestSchemaConstraintValidation:
         # Financial amounts should be positive
         if "amount" in sample_financial_data.columns:
             min_amount = sample_financial_data["amount"].dropna().min()
-            assert (
-                min_amount > 0
-            ), f"Financial amount has non-positive value: {min_amount}"
+            assert min_amount > 0, (
+                f"Financial amount has non-positive value: {min_amount}"
+            )
 
     def test_id_patterns_match_schema(self, sample_slot_data, slot_telemetry_schema):
         """Verify ID fields match schema patterns."""

@@ -3,6 +3,7 @@
 Uses an in-memory GX context so the committed yml (which has a schema quirk
 for this version of GE) is not touched.
 """
+
 import json
 import sys
 import warnings
@@ -10,13 +11,13 @@ from pathlib import Path
 
 warnings.filterwarnings("ignore")
 
-import great_expectations as gx  # noqa: E402
-import pandas as pd  # noqa: E402
-from great_expectations.core.expectation_configuration import (  # noqa: E402
+import great_expectations as gx
+import pandas as pd
+from great_expectations.core.expectation_configuration import (
     ExpectationConfiguration,
 )
-from great_expectations.core.expectation_suite import ExpectationSuite  # noqa: E402
-from great_expectations.expectations.registry import (  # noqa: E402
+from great_expectations.core.expectation_suite import ExpectationSuite
+from great_expectations.expectations.registry import (
     get_expectation_impl,
 )
 

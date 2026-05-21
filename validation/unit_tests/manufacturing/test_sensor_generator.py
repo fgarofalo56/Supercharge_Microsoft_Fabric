@@ -10,14 +10,13 @@ import pytest
 
 from data_generation.generators.manufacturing.sensor_generator import (
     MACHINE_TYPES,
-    SENSOR_RANGES,
     ManufacturingSensorGenerator,
 )
-
 
 # ---------------------------------------------------------------------------
 # Fixtures
 # ---------------------------------------------------------------------------
+
 
 @pytest.fixture
 def generator():
@@ -35,6 +34,7 @@ def large_dataset(generator):
 # Basic generation
 # ---------------------------------------------------------------------------
 
+
 class TestGenerateSensors:
     """Tests for basic sensor record generation."""
 
@@ -42,9 +42,15 @@ class TestGenerateSensors:
         record = generator.generate_record()
         assert isinstance(record, dict)
         required = [
-            "sensor_id", "machine_id", "machine_type", "timestamp",
-            "vibration_mm_s", "temperature_c", "current_a",
-            "pressure_bar", "rpm",
+            "sensor_id",
+            "machine_id",
+            "machine_type",
+            "timestamp",
+            "vibration_mm_s",
+            "temperature_c",
+            "current_a",
+            "pressure_bar",
+            "rpm",
         ]
         for field in required:
             assert field in record, f"Missing field: {field}"
@@ -56,6 +62,7 @@ class TestGenerateSensors:
 
     def test_generate_returns_dataframe(self, generator):
         import pandas as pd
+
         df = generator.generate(num_records=10, show_progress=False)
         assert isinstance(df, pd.DataFrame)
 
@@ -70,6 +77,7 @@ class TestGenerateSensors:
 # ---------------------------------------------------------------------------
 # Value ranges
 # ---------------------------------------------------------------------------
+
 
 class TestVibrationRange:
     """Vibration values should be non-negative and mostly within normal range."""
@@ -103,6 +111,7 @@ class TestTemperatureRange:
 # Machine types
 # ---------------------------------------------------------------------------
 
+
 class TestMachineTypes:
     """Machine types should match the defined set."""
 
@@ -124,6 +133,7 @@ class TestMachineTypes:
 # Degradation pattern
 # ---------------------------------------------------------------------------
 
+
 class TestDegradationPattern:
     """Degraded machines should show increasing sensor values over time."""
 
@@ -132,28 +142,26 @@ class TestDegradationPattern:
 
     def test_degradation_increases_vibration(self):
         """Generate sequential records for a degraded machine and verify trend."""
-        gen = ManufacturingSensorGenerator(
-            seed=99, num_machines=5, degradation_pct=1.0
-        )
+        gen = ManufacturingSensorGenerator(seed=99, num_machines=5, degradation_pct=1.0)
         # All machines degrade -- generate enough records to see progression
         records = gen.generate_batch(200)
 
         # Group by machine, check that later records have higher vibration
-        degraded_id = list(gen._degraded_ids)[0]
+        degraded_id = next(iter(gen._degraded_ids))
         machine_records = [r for r in records if r["machine_id"] == degraded_id]
 
         if len(machine_records) >= 10:
             first_half = machine_records[: len(machine_records) // 2]
             second_half = machine_records[len(machine_records) // 2 :]
             avg_first = sum(r["vibration_mm_s"] for r in first_half) / len(first_half)
-            avg_second = sum(r["vibration_mm_s"] for r in second_half) / len(second_half)
+            avg_second = sum(r["vibration_mm_s"] for r in second_half) / len(
+                second_half
+            )
             # Second half should have higher average vibration
             assert avg_second >= avg_first * 0.9  # allow some noise tolerance
 
     def test_degradation_state_advances(self):
-        gen = ManufacturingSensorGenerator(
-            seed=42, num_machines=5, degradation_pct=1.0
-        )
+        gen = ManufacturingSensorGenerator(seed=42, num_machines=5, degradation_pct=1.0)
         initial_states = dict(gen._degradation_state)
         gen.generate(num_records=100, show_progress=False)
         for mid in gen._degraded_ids:
@@ -163,6 +171,7 @@ class TestDegradationPattern:
 # ---------------------------------------------------------------------------
 # Work orders
 # ---------------------------------------------------------------------------
+
 
 class TestWorkOrders:
     """Work order generation tests."""
@@ -186,6 +195,7 @@ class TestWorkOrders:
 # ---------------------------------------------------------------------------
 # Reproducibility
 # ---------------------------------------------------------------------------
+
 
 class TestReproducibility:
     """Same seed should produce identical output."""
@@ -216,6 +226,7 @@ class TestReproducibility:
 # Machine inventory
 # ---------------------------------------------------------------------------
 
+
 class TestMachineInventory:
     """Tests for get_machines accessor."""
 
@@ -225,5 +236,10 @@ class TestMachineInventory:
 
     def test_machine_columns(self, generator):
         machines_df = generator.get_machines()
-        for col_name in ["machine_id", "machine_type", "install_dt", "last_maintenance_dt"]:
+        for col_name in [
+            "machine_id",
+            "machine_type",
+            "install_dt",
+            "last_maintenance_dt",
+        ]:
             assert col_name in machines_df.columns

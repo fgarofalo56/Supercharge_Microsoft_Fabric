@@ -182,6 +182,7 @@ CENSUS_AG_SCHEMA: dict[str, str] = {
 # Internal helpers
 # ---------------------------------------------------------------------------
 
+
 def _request_with_retry(
     method: str,
     url: str,
@@ -228,8 +229,7 @@ def _request_with_retry(
             last_exc = exc
             if attempt < max_retries:
                 logger.warning(
-                    "Request to %s failed (attempt %d/%d): %s. "
-                    "Retrying in %.1f s ...",
+                    "Request to %s failed (attempt %d/%d): %s. Retrying in %.1f s ...",
                     url,
                     attempt,
                     max_retries,
@@ -271,6 +271,7 @@ def _add_metadata_columns(df: pd.DataFrame, source_name: str) -> pd.DataFrame:
     df["_source"] = source_name
     # Batch ID: first 8 chars of a hash of the current timestamp
     import hashlib
+
     batch_id = hashlib.sha256(now.encode()).hexdigest()[:8]
     df["_batch_id"] = batch_id
     return df
@@ -332,6 +333,7 @@ def _save_parquet(df: pd.DataFrame, file_path: Path) -> Path:
 # ---------------------------------------------------------------------------
 # 1. NASS QuickStats API
 # ---------------------------------------------------------------------------
+
 
 def download_nass_quickstats(
     api_key: str,
@@ -415,13 +417,20 @@ def download_nass_quickstats(
             except requests.HTTPError as exc:
                 # NASS returns 400 when there are no results for a query
                 if "400" in str(exc):
-                    logger.debug("No results for %s/%d - skipping", commodity_upper, year)
+                    logger.debug(
+                        "No results for %s/%d - skipping", commodity_upper, year
+                    )
                     break
                 raise
 
             rows = data.get("data", [])
             if not rows:
-                logger.debug("No rows returned for %s/%d (offset=%d)", commodity_upper, year, offset)
+                logger.debug(
+                    "No rows returned for %s/%d (offset=%d)",
+                    commodity_upper,
+                    year,
+                    offset,
+                )
                 break
 
             all_records.extend(rows)
@@ -450,7 +459,9 @@ def download_nass_quickstats(
         )
         # Return an empty parquet with the correct schema
         df = pd.DataFrame(columns=list(CROP_PRODUCTION_SCHEMA.keys()))
-        file_path = out / f"nass_{commodity_upper.lower()}_{year_start}_{year_end}.parquet"
+        file_path = (
+            out / f"nass_{commodity_upper.lower()}_{year_start}_{year_end}.parquet"
+        )
         return _save_parquet(df, file_path)
 
     df = pd.DataFrame(all_records)
@@ -506,10 +517,7 @@ def _map_nass_to_schema(df: pd.DataFrame) -> pd.DataFrame:
     # Clean the value column - NASS uses "(D)" for withheld data and commas
     if "value" in df.columns:
         df["value"] = (
-            df["value"]
-            .astype(str)
-            .str.replace(",", "", regex=False)
-            .str.strip()
+            df["value"].astype(str).str.replace(",", "", regex=False).str.strip()
         )
         # Replace non-numeric markers with NaN
         df["value"] = pd.to_numeric(df["value"], errors="coerce")
@@ -522,11 +530,12 @@ def _map_nass_to_schema(df: pd.DataFrame) -> pd.DataFrame:
 
     # Build full county FIPS (state_fips + county_code) when county is present
     if "county_fips" in df.columns and "state_fips" in df.columns:
-        mask = df["county_fips"].notna() & (df["county_fips"].astype(str).str.strip() != "")
-        df.loc[mask, "county_fips"] = (
-            df.loc[mask, "state_fips"].astype(str).str.zfill(2)
-            + df.loc[mask, "county_fips"].astype(str).str.zfill(3)
+        mask = df["county_fips"].notna() & (
+            df["county_fips"].astype(str).str.strip() != ""
         )
+        df.loc[mask, "county_fips"] = df.loc[mask, "state_fips"].astype(str).str.zfill(
+            2
+        ) + df.loc[mask, "county_fips"].astype(str).str.zfill(3)
 
     return df
 
@@ -534,6 +543,7 @@ def _map_nass_to_schema(df: pd.DataFrame) -> pd.DataFrame:
 # ---------------------------------------------------------------------------
 # 2. FSIS Recall Data
 # ---------------------------------------------------------------------------
+
 
 def download_fsis_recalls(
     output_dir: str | Path = DEFAULT_OUTPUT_DIR,
@@ -573,9 +583,7 @@ def download_fsis_recalls(
 
     # Filter by year if requested
     if year_start is not None and "recall_date" in df.columns:
-        df["_recall_year"] = pd.to_datetime(
-            df["recall_date"], errors="coerce"
-        ).dt.year
+        df["_recall_year"] = pd.to_datetime(df["recall_date"], errors="coerce").dt.year
         df = df[df["_recall_year"] >= year_start].drop(columns=["_recall_year"])
         logger.info("After year filter (>= %d): %d records", year_start, len(df))
 
@@ -663,6 +671,7 @@ def _map_fsis_to_schema(df: pd.DataFrame) -> pd.DataFrame:
 # 3. SNAP Retailer Locator
 # ---------------------------------------------------------------------------
 
+
 def download_snap_retailers(
     output_dir: str | Path = DEFAULT_OUTPUT_DIR,
     state_fips: str | None = None,
@@ -717,7 +726,9 @@ def download_snap_retailers(
             resp = _request_with_retry("GET", SNAP_BASE_URL, params=params)
             data = resp.json()
         except requests.HTTPError:
-            logger.warning("SNAP query failed at offset %d, stopping pagination", offset)
+            logger.warning(
+                "SNAP query failed at offset %d, stopping pagination", offset
+            )
             break
 
         features = data.get("features", [])
@@ -788,6 +799,7 @@ def _flatten_snap_features(features: list[dict[str, Any]]) -> pd.DataFrame:
 # ---------------------------------------------------------------------------
 # 4. Census of Agriculture
 # ---------------------------------------------------------------------------
+
 
 def download_census_of_agriculture(
     output_dir: str | Path = DEFAULT_OUTPUT_DIR,
@@ -932,6 +944,7 @@ def _download_census_bulk(census_year: int, out: Path) -> Path:
 # 5. Validation
 # ---------------------------------------------------------------------------
 
+
 def validate_download(file_path: str | Path) -> dict[str, Any]:
     """
     Validate a downloaded parquet file.
@@ -1026,7 +1039,9 @@ def validate_download(file_path: str | Path) -> dict[str, Any]:
     for i in range(len(schema)):
         field = schema.field(i)
         if "id" in field.name.lower() and not pa.types.is_string(field.type):
-            if not pa.types.is_large_string(field.type) and not pa.types.is_dictionary(field.type):
+            if not pa.types.is_large_string(field.type) and not pa.types.is_dictionary(
+                field.type
+            ):
                 result["schema_issues"].append(
                     f"Column '{field.name}' looks like an ID but has type {field.type}"
                 )
@@ -1040,6 +1055,7 @@ def validate_download(file_path: str | Path) -> dict[str, Any]:
 # ---------------------------------------------------------------------------
 # 6. CLI entry point
 # ---------------------------------------------------------------------------
+
 
 def main() -> None:
     """CLI entry point for downloading USDA open datasets."""

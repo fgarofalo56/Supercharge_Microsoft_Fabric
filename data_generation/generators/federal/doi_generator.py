@@ -172,9 +172,7 @@ def _pick_alert(rng: np.random.Generator, magnitude: float) -> str | None:
         weights = [0.30, 0.45, 0.18, 0.07, 0.00]
     else:
         weights = [0.10, 0.30, 0.35, 0.25, 0.00]
-    return _ALERTS[
-        int(rng.choice(len(_ALERTS), p=np.array(weights, dtype=float)))
-    ]
+    return _ALERTS[int(rng.choice(len(_ALERTS), p=np.array(weights, dtype=float)))]
 
 
 def _significance(rng: np.random.Generator, magnitude: float) -> int:
@@ -655,9 +653,7 @@ class DOIGenerator(BaseGenerator):
             designation_date = desig_dt.strftime("%Y-%m-%d")
 
         # ── permit ────────────────────────────────────────────────────────────
-        permit_type: str | None = str(
-            self.rng.choice(_PERMIT_TYPES, p=_PERMIT_WEIGHTS)
-        )
+        permit_type: str | None = str(self.rng.choice(_PERMIT_TYPES, p=_PERMIT_WEIGHTS))
         if permit_type == "None":
             permit_type = None
 

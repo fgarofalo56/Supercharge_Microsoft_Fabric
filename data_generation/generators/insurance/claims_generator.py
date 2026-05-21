@@ -25,32 +25,95 @@ LINES_OF_BUSINESS = ["auto", "home", "commercial", "workers_comp"]
 LOB_WEIGHTS = [0.40, 0.25, 0.20, 0.15]
 
 LOSS_TYPES: dict[str, list[str]] = {
-    "auto": ["collision", "comprehensive", "bodily_injury", "property_damage", "uninsured_motorist", "pip"],
-    "home": ["fire", "water_damage", "wind_hail", "theft", "liability", "other_structural"],
-    "commercial": ["general_liability", "property_damage", "business_interruption", "product_liability", "professional_liability", "cyber"],
-    "workers_comp": ["slip_fall", "strain_sprain", "laceration", "fracture", "repetitive_stress", "occupational_illness"],
+    "auto": [
+        "collision",
+        "comprehensive",
+        "bodily_injury",
+        "property_damage",
+        "uninsured_motorist",
+        "pip",
+    ],
+    "home": [
+        "fire",
+        "water_damage",
+        "wind_hail",
+        "theft",
+        "liability",
+        "other_structural",
+    ],
+    "commercial": [
+        "general_liability",
+        "property_damage",
+        "business_interruption",
+        "product_liability",
+        "professional_liability",
+        "cyber",
+    ],
+    "workers_comp": [
+        "slip_fall",
+        "strain_sprain",
+        "laceration",
+        "fracture",
+        "repetitive_stress",
+        "occupational_illness",
+    ],
 }
 
-CLAIM_STATUSES = ["open", "under_investigation", "reserved", "closed_paid", "closed_no_pay", "reopened", "subrogation"]
+CLAIM_STATUSES = [
+    "open",
+    "under_investigation",
+    "reserved",
+    "closed_paid",
+    "closed_no_pay",
+    "reopened",
+    "subrogation",
+]
 STATUS_WEIGHTS = [0.15, 0.10, 0.20, 0.30, 0.10, 0.05, 0.10]
 
 STATES = [
-    "CA", "TX", "FL", "NY", "PA", "IL", "OH", "GA", "NC", "MI",
-    "NJ", "VA", "WA", "AZ", "MA", "TN", "IN", "MO", "MD", "WI",
-    "CO", "MN", "SC", "AL", "LA", "KY", "OR", "OK", "CT", "UT",
+    "CA",
+    "TX",
+    "FL",
+    "NY",
+    "PA",
+    "IL",
+    "OH",
+    "GA",
+    "NC",
+    "MI",
+    "NJ",
+    "VA",
+    "WA",
+    "AZ",
+    "MA",
+    "TN",
+    "IN",
+    "MO",
+    "MD",
+    "WI",
+    "CO",
+    "MN",
+    "SC",
+    "AL",
+    "LA",
+    "KY",
+    "OR",
+    "OK",
+    "CT",
+    "UT",
 ]
 
 SEVERITY_RANGES: dict[str, tuple[float, float]] = {
-    "auto":         (500.0, 150_000.0),
-    "home":         (1_000.0, 500_000.0),
-    "commercial":   (2_000.0, 1_000_000.0),
+    "auto": (500.0, 150_000.0),
+    "home": (1_000.0, 500_000.0),
+    "commercial": (2_000.0, 1_000_000.0),
     "workers_comp": (1_000.0, 250_000.0),
 }
 
 PREMIUM_RANGES: dict[str, tuple[float, float]] = {
-    "auto":         (800.0, 8_000.0),
-    "home":         (1_200.0, 15_000.0),
-    "commercial":   (3_000.0, 25_000.0),
+    "auto": (800.0, 8_000.0),
+    "home": (1_200.0, 15_000.0),
+    "commercial": (3_000.0, 25_000.0),
     "workers_comp": (2_000.0, 20_000.0),
 }
 
@@ -102,13 +165,15 @@ class InsuranceClaimsGenerator(BaseGenerator):
     def _generate_adjusters(self) -> None:
         """Pre-generate adjuster roster."""
         for i in range(self.num_adjusters):
-            self._adjusters.append({
-                "adjuster_id": f"ADJ-{i + 1:04d}",
-                "adjuster_name": self.faker.name(),
-                "speciality": str(self.rng.choice(LINES_OF_BUSINESS)),
-                "years_experience": int(self.rng.integers(1, 30)),
-                "state_licensed": str(self.rng.choice(STATES)),
-            })
+            self._adjusters.append(
+                {
+                    "adjuster_id": f"ADJ-{i + 1:04d}",
+                    "adjuster_name": self.faker.name(),
+                    "speciality": str(self.rng.choice(LINES_OF_BUSINESS)),
+                    "years_experience": int(self.rng.integers(1, 30)),
+                    "state_licensed": str(self.rng.choice(STATES)),
+                }
+            )
 
     def _generate_policies(self) -> None:
         """Pre-generate policy book."""
@@ -122,16 +187,18 @@ class InsuranceClaimsGenerator(BaseGenerator):
                 self.end_date,
             )
             expiry_dt = effective_dt + timedelta(days=365)
-            self._policies.append({
-                "policy_id": f"POL-{i + 1:06d}",
-                "line_of_business": lob,
-                "effective_dt": effective_dt.isoformat()[:10],
-                "expiry_dt": expiry_dt.isoformat()[:10],
-                "premium": premium,
-                "state": state,
-                "agent_id": f"AGT-{int(self.rng.integers(1, 201)):04d}",
-                "insured_name": self.faker.name(),
-            })
+            self._policies.append(
+                {
+                    "policy_id": f"POL-{i + 1:06d}",
+                    "line_of_business": lob,
+                    "effective_dt": effective_dt.isoformat()[:10],
+                    "expiry_dt": expiry_dt.isoformat()[:10],
+                    "premium": premium,
+                    "state": state,
+                    "agent_id": f"AGT-{int(self.rng.integers(1, 201)):04d}",
+                    "insured_name": self.faker.name(),
+                }
+            )
 
     # ------------------------------------------------------------------
     # Public accessors
@@ -169,11 +236,13 @@ class InsuranceClaimsGenerator(BaseGenerator):
         sev_lo, sev_hi = SEVERITY_RANGES[lob]
         mu = np.log((sev_lo + sev_hi) / 4)
         sigma = 0.8
-        reserve_amt = float(np.clip(
-            self.rng.lognormal(mean=mu, sigma=sigma),
-            sev_lo,
-            sev_hi,
-        ))
+        reserve_amt = float(
+            np.clip(
+                self.rng.lognormal(mean=mu, sigma=sigma),
+                sev_lo,
+                sev_hi,
+            )
+        )
         reserve_amt = round(reserve_amt, 2)
 
         # Paid amount (0 to reserve depending on status)

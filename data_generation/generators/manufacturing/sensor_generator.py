@@ -19,7 +19,6 @@ import math
 from datetime import datetime, timedelta
 from typing import Any
 
-import numpy as np
 import pandas as pd
 
 from data_generation.generators.base_generator import BaseGenerator
@@ -35,10 +34,34 @@ SENSOR_NAMES = ["vibration_mm_s", "temperature_c", "current_a", "pressure_bar", 
 
 # Normal operating ranges per sensor
 SENSOR_RANGES: dict[str, dict[str, tuple[float, float]]] = {
-    "CNC":      {"vibration_mm_s": (0.5, 4.5), "temperature_c": (25, 60), "current_a": (8, 40),  "pressure_bar": (4.0, 7.5), "rpm": (800, 12000)},
-    "press":    {"vibration_mm_s": (1.0, 5.0), "temperature_c": (30, 70), "current_a": (15, 50), "pressure_bar": (5.0, 9.0), "rpm": (0, 0)},
-    "robot":    {"vibration_mm_s": (0.3, 3.0), "temperature_c": (22, 50), "current_a": (5, 25),  "pressure_bar": (3.0, 6.0), "rpm": (0, 0)},
-    "conveyor": {"vibration_mm_s": (0.2, 2.5), "temperature_c": (20, 45), "current_a": (3, 15),  "pressure_bar": (0, 0),     "rpm": (100, 600)},
+    "CNC": {
+        "vibration_mm_s": (0.5, 4.5),
+        "temperature_c": (25, 60),
+        "current_a": (8, 40),
+        "pressure_bar": (4.0, 7.5),
+        "rpm": (800, 12000),
+    },
+    "press": {
+        "vibration_mm_s": (1.0, 5.0),
+        "temperature_c": (30, 70),
+        "current_a": (15, 50),
+        "pressure_bar": (5.0, 9.0),
+        "rpm": (0, 0),
+    },
+    "robot": {
+        "vibration_mm_s": (0.3, 3.0),
+        "temperature_c": (22, 50),
+        "current_a": (5, 25),
+        "pressure_bar": (3.0, 6.0),
+        "rpm": (0, 0),
+    },
+    "conveyor": {
+        "vibration_mm_s": (0.2, 2.5),
+        "temperature_c": (20, 45),
+        "current_a": (3, 15),
+        "pressure_bar": (0, 0),
+        "rpm": (100, 600),
+    },
 }
 
 WORK_ORDER_TYPES = ["preventive", "corrective", "predictive"]
@@ -104,17 +127,13 @@ class ManufacturingSensorGenerator(BaseGenerator):
         """Create machine inventory with type, install date, last maintenance."""
         machines: list[dict[str, Any]] = []
         for i in range(self.num_machines):
-            mtype = str(
-                self.rng.choice(MACHINE_TYPES, p=MACHINE_TYPE_WEIGHTS)
-            )
+            mtype = str(self.rng.choice(MACHINE_TYPES, p=MACHINE_TYPE_WEIGHTS))
             prefix = mtype.upper()[:3]
             machine_id = f"{prefix}-{i + 1:04d}"
             install_dt = self.start_date - timedelta(
                 days=int(self.rng.integers(180, 3650))
             )
-            last_maint = self.start_date - timedelta(
-                days=int(self.rng.integers(1, 90))
-            )
+            last_maint = self.start_date - timedelta(days=int(self.rng.integers(1, 90)))
             machines.append(
                 {
                     "machine_id": machine_id,
@@ -130,7 +149,11 @@ class ManufacturingSensorGenerator(BaseGenerator):
     # ------------------------------------------------------------------
 
     def _apply_degradation(
-        self, machine_id: str, base_vibration: float, base_temp: float, base_current: float
+        self,
+        machine_id: str,
+        base_vibration: float,
+        base_temp: float,
+        base_current: float,
     ) -> tuple[float, float, float]:
         """Apply gradual degradation to sensor values for flagged machines."""
         if machine_id not in self._degraded_ids:
@@ -229,9 +252,7 @@ class ManufacturingSensorGenerator(BaseGenerator):
         records: list[dict[str, Any]] = []
         for _ in range(num_orders):
             machine = self.machines[int(self.rng.integers(0, self.num_machines))]
-            wo_type = str(
-                self.rng.choice(WORK_ORDER_TYPES, p=WORK_ORDER_WEIGHTS)
-            )
+            wo_type = str(self.rng.choice(WORK_ORDER_TYPES, p=WORK_ORDER_WEIGHTS))
             scheduled = self.random_datetime()
             duration_hrs = float(self.rng.uniform(0.5, 8.0))
             completed = scheduled + timedelta(hours=duration_hrs)

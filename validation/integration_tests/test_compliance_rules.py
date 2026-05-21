@@ -31,9 +31,9 @@ class TestCTRThreshold:
 
         # All CTR records should have amount >= $10,000
         for _, record in ctr_records.iterrows():
-            assert (
-                record["amount"] >= self.CTR_THRESHOLD
-            ), f"CTR generated for amount ${record['amount']} (below threshold)"
+            assert record["amount"] >= self.CTR_THRESHOLD, (
+                f"CTR generated for amount ${record['amount']} (below threshold)"
+            )
 
     def test_ctr_not_generated_for_small_amounts(self, sample_compliance_data):
         """Verify CTR records are NOT generated for amounts < $10,000."""
@@ -43,9 +43,9 @@ class TestCTRThreshold:
 
         # Should not find any CTR with amount < $10,000
         invalid_ctrs = ctr_records[ctr_records["amount"] < self.CTR_THRESHOLD]
-        assert (
-            len(invalid_ctrs) == 0
-        ), f"Found {len(invalid_ctrs)} CTR records below threshold"
+        assert len(invalid_ctrs) == 0, (
+            f"Found {len(invalid_ctrs)} CTR records below threshold"
+        )
 
     def test_ctr_required_flag_in_financial(self, sample_financial_data):
         """Verify ctr_required flag is set correctly in financial transactions."""
@@ -58,9 +58,9 @@ class TestCTRThreshold:
         ]
 
         for _, txn in large_txns.iterrows():
-            assert txn[
-                "ctr_required"
-            ], f"ctr_required not set for ${txn['amount']} transaction"
+            assert txn["ctr_required"], (
+                f"ctr_required not set for ${txn['amount']} transaction"
+            )
 
     def test_ctr_not_required_for_small_amounts(self, sample_financial_data):
         """Verify ctr_required is not set for amounts < $10,000."""
@@ -73,9 +73,9 @@ class TestCTRThreshold:
         ]
 
         for _, txn in small_txns.iterrows():
-            assert not txn[
-                "ctr_required"
-            ], f"ctr_required incorrectly set for ${txn['amount']} transaction"
+            assert not txn["ctr_required"], (
+                f"ctr_required incorrectly set for ${txn['amount']} transaction"
+            )
 
 
 class TestW2GThreshold:
@@ -102,9 +102,9 @@ class TestW2GThreshold:
 
         # All W-2G records should be >= $600 (minimum for any game)
         for _, record in w2g_records.iterrows():
-            assert (
-                record["amount"] >= self.MINIMUM_W2G_THRESHOLD
-            ), f"W-2G generated for ${record['amount']} (below minimum)"
+            assert record["amount"] >= self.MINIMUM_W2G_THRESHOLD, (
+                f"W-2G generated for ${record['amount']} (below minimum)"
+            )
 
     def test_slot_w2g_threshold(self, sample_compliance_data):
         """Verify slot W-2G records are >= $1,200."""
@@ -118,9 +118,9 @@ class TestW2GThreshold:
         ]
 
         for _, record in slot_w2g.iterrows():
-            assert (
-                record["amount"] >= 1200
-            ), f"Slot W-2G for ${record['amount']} (threshold is $1,200)"
+            assert record["amount"] >= 1200, (
+                f"Slot W-2G for ${record['amount']} (threshold is $1,200)"
+            )
 
     def test_w2g_has_jackpot_details(self, sample_compliance_data):
         """Verify W-2G records include jackpot details."""
@@ -232,9 +232,9 @@ class TestPIIMasking:
         masked_pattern = re.compile(r"^XXX-XX-\d{4}$")
 
         for ssn_masked in sample_player_data["ssn_masked"].dropna().head(100):
-            assert masked_pattern.match(
-                ssn_masked
-            ), f"SSN mask format invalid: {ssn_masked}"
+            assert masked_pattern.match(ssn_masked), (
+                f"SSN mask format invalid: {ssn_masked}"
+            )
 
     def test_no_raw_ssn_in_data(self, sample_player_data):
         """Verify no raw SSN (###-##-####) appears in any field."""
@@ -277,9 +277,9 @@ class TestPIIMasking:
         record = gen.generate_record()
 
         # Email should be masked (contains @masked.com or similar)
-        assert (
-            "@masked.com" in record["email"] or "@" not in record["email"][:10]
-        ), f"Email may not be masked: {record['email']}"
+        assert "@masked.com" in record["email"] or "@" not in record["email"][:10], (
+            f"Email may not be masked: {record['email']}"
+        )
 
     def test_address_masking_when_disabled(self, player_generator):
         """Test address is masked when include_pii is False."""
@@ -290,9 +290,9 @@ class TestPIIMasking:
         record = gen.generate_record()
 
         # Address should contain masked indicator
-        assert (
-            "Masked" in record["address"] or "***" in record["address"]
-        ), f"Address may not be masked: {record['address']}"
+        assert "Masked" in record["address"] or "***" in record["address"], (
+            f"Address may not be masked: {record['address']}"
+        )
 
     def test_names_partially_masked(self, player_generator):
         """Test names are partially masked when include_pii is False."""
@@ -303,12 +303,12 @@ class TestPIIMasking:
         record = gen.generate_record()
 
         # Names should show only first initial
-        assert (
-            "***" in record["first_name"]
-        ), f"First name may not be masked: {record['first_name']}"
-        assert (
-            "***" in record["last_name"]
-        ), f"Last name may not be masked: {record['last_name']}"
+        assert "***" in record["first_name"], (
+            f"First name may not be masked: {record['first_name']}"
+        )
+        assert "***" in record["last_name"], (
+            f"Last name may not be masked: {record['last_name']}"
+        )
 
     def test_phone_masked(self, player_generator):
         """Test phone is masked when include_pii is False."""

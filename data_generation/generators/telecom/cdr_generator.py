@@ -15,16 +15,16 @@ and cell site reference data for a regional wireless carrier.
 from __future__ import annotations
 
 import sys
-from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Any
-
-import numpy as np
+from typing import TYPE_CHECKING, Any
 
 # Allow running from repo root
 sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 
 from data_generation.generators.base_generator import BaseGenerator
+
+if TYPE_CHECKING:
+    from datetime import datetime
 
 
 class TelecomCDRGenerator(BaseGenerator):
@@ -102,17 +102,19 @@ class TelecomCDRGenerator(BaseGenerator):
             tenure = int(self.rng.integers(1, 120))
             churn = bool(self.rng.random() < self.CHURN_RATE)
 
-            subscribers.append({
-                "subscriber_id": f"SUB-{i:07d}",
-                "plan_type": plan,
-                "tenure_months": tenure,
-                "monthly_charge": round(
-                    float(self.rng.uniform(charge_min, charge_max)), 2
-                ),
-                "data_usage_gb": round(float(self.rng.uniform(0.5, 80.0)), 2),
-                "churn_flag": churn,
-                "cpni_consent": bool(self.rng.random() < 0.85),
-            })
+            subscribers.append(
+                {
+                    "subscriber_id": f"SUB-{i:07d}",
+                    "plan_type": plan,
+                    "tenure_months": tenure,
+                    "monthly_charge": round(
+                        float(self.rng.uniform(charge_min, charge_max)), 2
+                    ),
+                    "data_usage_gb": round(float(self.rng.uniform(0.5, 80.0)), 2),
+                    "churn_flag": churn,
+                    "cpni_consent": bool(self.rng.random() < 0.85),
+                }
+            )
         return subscribers
 
     def _generate_cell_sites(self) -> list[dict[str, Any]]:
@@ -124,14 +126,16 @@ class TelecomCDRGenerator(BaseGenerator):
             lon = round(float(self.rng.uniform(-123.0, -71.0)), 6)
 
             for sector in ["A", "B", "C"]:
-                sites.append({
-                    "cell_id": f"CELL-{i:05d}",
-                    "sector": sector,
-                    "latitude": lat,
-                    "longitude": lon,
-                    "technology": tech,
-                    "azimuth": {"A": 0, "B": 120, "C": 240}[sector],
-                })
+                sites.append(
+                    {
+                        "cell_id": f"CELL-{i:05d}",
+                        "sector": sector,
+                        "latitude": lat,
+                        "longitude": lon,
+                        "technology": tech,
+                        "azimuth": {"A": 0, "B": 120, "C": 240}[sector],
+                    }
+                )
         return sites
 
     # -------------------------------------------------------------------
@@ -144,16 +148,13 @@ class TelecomCDRGenerator(BaseGenerator):
         subscriber = self._subscribers[
             int(self.rng.integers(0, len(self._subscribers)))
         ]
-        cell_site = self._cell_sites[
-            int(self.rng.integers(0, len(self._cell_sites)))
-        ]
+        cell_site = self._cell_sites[int(self.rng.integers(0, len(self._cell_sites)))]
 
         call_type = self.weighted_choice(self.CALL_TYPES, self.CALL_TYPE_WEIGHTS)
         rat_type = self.weighted_choice(self.RAT_TYPES, self.RAT_WEIGHTS)
         start_dt = self.random_datetime()
 
         # Apply peak-hour weighting: bias toward evening for data
-        hour = start_dt.hour
         if call_type == "data" and self.rng.random() < 0.4:
             # Shift toward evening peak (18-23)
             start_dt = start_dt.replace(hour=int(self.rng.integers(18, 24)))
@@ -207,11 +208,13 @@ class TelecomCDRGenerator(BaseGenerator):
     def get_subscriber_df(self):
         """Return subscribers as a pandas DataFrame."""
         import pandas as pd
+
         return pd.DataFrame(self._subscribers)
 
     def get_cell_site_df(self):
         """Return cell sites as a pandas DataFrame."""
         import pandas as pd
+
         return pd.DataFrame(self._cell_sites)
 
 
@@ -225,8 +228,12 @@ if __name__ == "__main__":
     print(f"\nGenerated {len(df)} CDR records")
     print(f"Call type distribution:\n{df['call_type'].value_counts()}")
     print(f"\nSubscriber pool: {len(generator.subscribers)} subscribers")
-    print(f"Churn rate: {sum(1 for s in generator.subscribers if s['churn_flag'])}/{len(generator.subscribers)}")
-    print(f"Cell sites: {len(generator.cell_sites)} sectors across {generator.num_cell_sites} sites")
+    print(
+        f"Churn rate: {sum(1 for s in generator.subscribers if s['churn_flag'])}/{len(generator.subscribers)}"
+    )
+    print(
+        f"Cell sites: {len(generator.cell_sites)} sectors across {generator.num_cell_sites} sites"
+    )
 
     # Save sample output
     output_dir = Path("data_generation/output")

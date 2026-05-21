@@ -15,10 +15,7 @@ from __future__ import annotations
 from datetime import datetime, timedelta
 from typing import Any
 
-import numpy as np
-
 from data_generation.generators.base_generator import BaseGenerator
-
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -230,9 +227,7 @@ class TrialGenerator(BaseGenerator):
             )
         )
         ethnicity = str(
-            self.rng.choice(
-                ["Hispanic or Latino", "Not Hispanic or Latino", "Unknown"]
-            )
+            self.rng.choice(["Hispanic or Latino", "Not Hispanic or Latino", "Unknown"])
         )
 
         record: dict[str, Any] = {
@@ -313,10 +308,18 @@ class TrialGenerator(BaseGenerator):
         protocol_deviation_flag = abs(deviation_days) > 3
 
         # Vital signs (if applicable)
-        systolic_bp = int(self.rng.integers(90, 180)) if self.rng.random() < 0.7 else None
+        systolic_bp = (
+            int(self.rng.integers(90, 180)) if self.rng.random() < 0.7 else None
+        )
         diastolic_bp = int(self.rng.integers(55, 110)) if systolic_bp else None
-        heart_rate = int(self.rng.integers(50, 110)) if self.rng.random() < 0.7 else None
-        weight_kg = round(float(self.rng.uniform(45.0, 140.0)), 1) if self.rng.random() < 0.5 else None
+        heart_rate = (
+            int(self.rng.integers(50, 110)) if self.rng.random() < 0.7 else None
+        )
+        weight_kg = (
+            round(float(self.rng.uniform(45.0, 140.0)), 1)
+            if self.rng.random() < 0.5
+            else None
+        )
 
         record: dict[str, Any] = {
             "visit_id": self.generate_uuid(),

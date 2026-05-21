@@ -39,12 +39,16 @@ class TestComplianceThresholdsConfig:
 
     def test_config_file_exists(self):
         """Config file should exist at expected path."""
-        config_path = PROJECT_ROOT / "data_generation" / "config" / "compliance_thresholds.yaml"
+        config_path = (
+            PROJECT_ROOT / "data_generation" / "config" / "compliance_thresholds.yaml"
+        )
         assert config_path.exists(), f"Missing config: {config_path}"
 
     def test_config_loads_valid_yaml(self):
         """Config file should parse as valid YAML."""
-        config_path = PROJECT_ROOT / "data_generation" / "config" / "compliance_thresholds.yaml"
+        config_path = (
+            PROJECT_ROOT / "data_generation" / "config" / "compliance_thresholds.yaml"
+        )
         with open(config_path) as f:
             config = yaml.safe_load(f)
         assert isinstance(config, dict)
@@ -157,9 +161,9 @@ class TestCompliancePipelineIntegration:
         """W-2G withholding should use configured federal + state rates."""
         records = [self.compliance_gen.generate_record() for _ in range(SAMPLE_SIZE)]
         w2g_with_withholding = [
-            r for r in records
-            if r["filing_type"] == "W2G"
-            and r.get("withholding_amount", 0) > 0
+            r
+            for r in records
+            if r["filing_type"] == "W2G" and r.get("withholding_amount", 0) > 0
         ]
 
         if not w2g_with_withholding:
@@ -171,6 +175,8 @@ class TestCompliancePipelineIntegration:
         )
 
         for record in w2g_with_withholding:
-            assert record["withholding_rate"] == pytest.approx(expected_rate, abs=0.001), (
+            assert record["withholding_rate"] == pytest.approx(
+                expected_rate, abs=0.001
+            ), (
                 f"Withholding rate {record['withholding_rate']} != expected {expected_rate}"
             )

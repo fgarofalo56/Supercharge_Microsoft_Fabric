@@ -416,12 +416,22 @@ def bicep_cli_available() -> bool:
         # read the path, downstream tests would fail with a path-translation
         # error rather than a real Bicep error -- skip them instead.
         probe = subprocess.run(
-            ["az", "bicep", "build", "--file", str(INFRA_ROOT / "main.bicep"), "--stdout"],
+            [
+                "az",
+                "bicep",
+                "build",
+                "--file",
+                str(INFRA_ROOT / "main.bicep"),
+                "--stdout",
+            ],
             capture_output=True,
             text=True,
             timeout=120,
         )
-        return not (probe.returncode != 0 and "Could not find a part of the path" in probe.stderr)
+        return not (
+            probe.returncode != 0
+            and "Could not find a part of the path" in probe.stderr
+        )
     except (subprocess.SubprocessError, FileNotFoundError):
         return False
 

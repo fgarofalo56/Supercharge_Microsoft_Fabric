@@ -221,9 +221,9 @@ class TestSparkImports:
                 has_builder = "SparkSession.builder" in content
                 has_spark_var = "spark" in content.lower()
 
-                assert (
-                    has_builder or has_spark_var
-                ), f"{notebook.name} has SparkSession but unclear initialization"
+                assert has_builder or has_spark_var, (
+                    f"{notebook.name} has SparkSession but unclear initialization"
+                )
 
 
 class TestDeltaImports:
@@ -427,9 +427,9 @@ class TestNotebookStructure:
             # Shared utility modules under notebooks/utils/ are exempt.
             if "utils" in notebook.parts:
                 continue
-            assert pattern.match(
-                notebook.name
-            ), f"{notebook.name} doesn't follow naming convention"
+            assert pattern.match(notebook.name), (
+                f"{notebook.name} doesn't follow naming convention"
+            )
 
     def test_layer_directories_exist(self, notebooks_dir):
         """Verify expected layer directories exist."""

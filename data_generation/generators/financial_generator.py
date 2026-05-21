@@ -153,7 +153,9 @@ class FinancialGenerator(BaseGenerator):
             "currency": "USD",
             "payment_method": self._get_payment_method(txn_type),
             "ctr_required": ctr_required,
-            "ctr_filed": bool(ctr_required and self.rng.random() > 0.02),  # 98% compliance
+            "ctr_filed": bool(
+                ctr_required and self.rng.random() > 0.02
+            ),  # 98% compliance
             "ctr_reference": (
                 f"CTR-{self.rng.integers(1000000, 9999999)}" if ctr_required else None
             ),

@@ -39,7 +39,7 @@ import argparse
 import json
 import random
 from dataclasses import asdict, dataclass, field
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -463,9 +463,7 @@ class DatabricksWorkloadInventoryGenerator(BaseGenerator):
         """
 
         tables = [self._generate_table() for _ in range(self.table_count)]
-        workflows = [
-            self._generate_workflow(i + 1) for i in range(self.workflow_count)
-        ]
+        workflows = [self._generate_workflow(i + 1) for i in range(self.workflow_count)]
         dlt_pipelines = [self._generate_dlt(i) for i in range(self.dlt_count)]
         notebooks = [self._generate_notebook(i) for i in range(self.notebook_count)]
         models = [self._generate_mlflow_model(i) for i in range(self.model_count)]
@@ -676,7 +674,17 @@ class DatabricksWorkloadInventoryGenerator(BaseGenerator):
             ["bronze", "silver", "gold", "ml", "compliance", "ops", "rti"]
         )
         domain_hint = self._py_rng.choice(
-            ["slot", "table_game", "loyalty", "usda", "noaa", "epa", "doj", "ihs", "faa"]
+            [
+                "slot",
+                "table_game",
+                "loyalty",
+                "usda",
+                "noaa",
+                "epa",
+                "doj",
+                "ihs",
+                "faa",
+            ]
         )
         name = f"wf_{prefix}_{domain_hint}_{idx:03d}"
 
@@ -757,8 +765,13 @@ class DatabricksWorkloadInventoryGenerator(BaseGenerator):
         libraries = self._py_rng.sample(lib_pool, min(num_libs, len(lib_pool)))
 
         owner = self._py_rng.choice(
-            ["alice@contoso.com", "bob@contoso.com", "carol@contoso.com",
-             "dave@contoso.com", "eve@contoso.com"]
+            [
+                "alice@contoso.com",
+                "bob@contoso.com",
+                "carol@contoso.com",
+                "dave@contoso.com",
+                "eve@contoso.com",
+            ]
         )
         domain = self._py_rng.choice(
             ["bronze", "silver", "gold", "ml", "compliance", "ops"]

@@ -123,23 +123,23 @@ class TestResourceGroupNaming:
 
         if match:
             rg_name = match.group(1)
-            assert rg_name.startswith(
-                "rg-"
-            ), f"Resource group name should start with 'rg-', got: {rg_name}"
+            assert rg_name.startswith("rg-"), (
+                f"Resource group name should start with 'rg-', got: {rg_name}"
+            )
         else:
             # Check for concatenated names
-            assert (
-                "var resourceGroupName = 'rg-" in content
-            ), "Resource group name should start with 'rg-' prefix"
+            assert "var resourceGroupName = 'rg-" in content, (
+                "Resource group name should start with 'rg-' prefix"
+            )
 
     def test_rg_name_uses_environment_suffix(self, main_bicep_path: Path):
         """Test that resource group name includes environment."""
         content = main_bicep_path.read_text(encoding="utf-8")
 
         # Should include ${environment} in the name
-        assert (
-            "${environment}" in content or "environment}" in content
-        ), "Resource group name should include environment parameter"
+        assert "${environment}" in content or "environment}" in content, (
+            "Resource group name should include environment parameter"
+        )
 
 
 class TestStorageAccountNaming:
@@ -157,9 +157,9 @@ class TestStorageAccountNaming:
         main_content = (INFRA_ROOT / "main.bicep").read_text(encoding="utf-8")
 
         # Look for storageAccountName variable
-        assert (
-            "'st${" in main_content or "storageAccountName = 'st" in main_content
-        ), "Storage account name should start with 'st' prefix"
+        assert "'st${" in main_content or "storageAccountName = 'st" in main_content, (
+            "Storage account name should start with 'st' prefix"
+        )
 
     def test_storage_name_lowercase_only(self, main_bicep_path: Path):
         """Test that storage account names are lowercase."""
@@ -173,9 +173,9 @@ class TestStorageAccountNaming:
             name_template = match.group(1)
             # Check that static parts are lowercase
             static_parts = re.sub(r"\$\{[^}]+\}", "", name_template)
-            assert (
-                static_parts == static_parts.lower()
-            ), f"Storage account name should be lowercase: {name_template}"
+            assert static_parts == static_parts.lower(), (
+                f"Storage account name should be lowercase: {name_template}"
+            )
 
     def test_storage_name_no_special_chars(self, main_bicep_path: Path):
         """Test that storage account names have no special characters."""
@@ -189,9 +189,9 @@ class TestStorageAccountNaming:
             # Remove variable interpolations
             static_parts = re.sub(r"\$\{[^}]+\}", "x", name_template)
             # Should only contain alphanumeric
-            assert re.match(
-                r"^[a-z0-9]+$", static_parts
-            ), f"Storage account name should only contain lowercase alphanumeric: {name_template}"
+            assert re.match(r"^[a-z0-9]+$", static_parts), (
+                f"Storage account name should only contain lowercase alphanumeric: {name_template}"
+            )
 
 
 class TestKeyVaultNaming:
@@ -201,9 +201,9 @@ class TestKeyVaultNaming:
         """Test that Key Vault uses 'kv-' prefix."""
         content = main_bicep_path.read_text(encoding="utf-8")
 
-        assert (
-            "'kv-${" in content or "keyVaultName = 'kv-" in content
-        ), "Key Vault name should start with 'kv-' prefix"
+        assert "'kv-${" in content or "keyVaultName = 'kv-" in content, (
+            "Key Vault name should start with 'kv-' prefix"
+        )
 
     def test_keyvault_name_length(
         self, main_bicep_path: Path, parsed_param_files: dict[str, Any]
@@ -219,9 +219,9 @@ class TestKeyVaultNaming:
             if prefix:
                 # Calculate expected length: kv- + prefix + - + env
                 expected_length = 3 + len(prefix) + 1 + len(env)
-                assert (
-                    expected_length <= 24
-                ), f"Key Vault name for {env} would exceed 24 chars: {expected_length}"
+                assert expected_length <= 24, (
+                    f"Key Vault name for {env} would exceed 24 chars: {expected_length}"
+                )
 
 
 class TestLogAnalyticsNaming:
@@ -231,9 +231,9 @@ class TestLogAnalyticsNaming:
         """Test that Log Analytics uses 'log-' prefix."""
         content = main_bicep_path.read_text(encoding="utf-8")
 
-        assert (
-            "'log-${" in content or "logAnalyticsName = 'log-" in content
-        ), "Log Analytics name should start with 'log-' prefix"
+        assert "'log-${" in content or "logAnalyticsName = 'log-" in content, (
+            "Log Analytics name should start with 'log-' prefix"
+        )
 
 
 class TestManagedIdentityNaming:
@@ -243,9 +243,9 @@ class TestManagedIdentityNaming:
         """Test that Managed Identity uses 'id-' prefix."""
         content = main_bicep_path.read_text(encoding="utf-8")
 
-        assert (
-            "'id-${" in content or "managedIdentityName = 'id-" in content
-        ), "Managed Identity name should start with 'id-' prefix"
+        assert "'id-${" in content or "managedIdentityName = 'id-" in content, (
+            "Managed Identity name should start with 'id-' prefix"
+        )
 
 
 class TestNetworkingNaming:
@@ -255,9 +255,9 @@ class TestNetworkingNaming:
         """Test that VNet uses 'vnet-' prefix."""
         content = main_bicep_path.read_text(encoding="utf-8")
 
-        assert (
-            "'vnet-${" in content or "vnetName = 'vnet-" in content
-        ), "Virtual Network name should start with 'vnet-' prefix"
+        assert "'vnet-${" in content or "vnetName = 'vnet-" in content, (
+            "Virtual Network name should start with 'vnet-' prefix"
+        )
 
     def test_subnet_prefix_used(self, module_bicep_files: dict[str, Path]):
         """Test that subnets use 'snet-' prefix."""
@@ -279,9 +279,9 @@ class TestNetworkingNaming:
         content = vnet_path.read_text(encoding="utf-8")
 
         # Check for NSG names
-        assert (
-            "nsg-" in content
-        ), "Network Security Group names should start with 'nsg-' prefix"
+        assert "nsg-" in content, (
+            "Network Security Group names should start with 'nsg-' prefix"
+        )
 
 
 class TestPrivateEndpointNaming:
@@ -305,9 +305,9 @@ class TestPrivateEndpointNaming:
             for bicep_file in all_bicep_files:
                 content = bicep_file.read_text(encoding="utf-8")
                 if "Microsoft.Network/privateEndpoints" in content:
-                    assert (
-                        "'pe-" in content
-                    ), f"Private endpoint in {bicep_file.name} should use 'pe-' prefix"
+                    assert "'pe-" in content, (
+                        f"Private endpoint in {bicep_file.name} should use 'pe-' prefix"
+                    )
 
 
 class TestPurviewNaming:
@@ -317,9 +317,9 @@ class TestPurviewNaming:
         """Test that Purview uses 'pview' prefix."""
         content = main_bicep_path.read_text(encoding="utf-8")
 
-        assert (
-            "'pview${" in content or "purviewAccountName = 'pview" in content
-        ), "Purview account name should start with 'pview' prefix"
+        assert "'pview${" in content or "purviewAccountName = 'pview" in content, (
+            "Purview account name should start with 'pview' prefix"
+        )
 
     def test_purview_name_no_hyphens(self, main_bicep_path: Path):
         """Test that Purview name doesn't contain hyphens (not allowed)."""
@@ -332,9 +332,9 @@ class TestPurviewNaming:
             name_template = match.group(1)
             # Static parts should not have hyphens
             static_parts = re.sub(r"\$\{[^}]+\}", "", name_template)
-            assert (
-                "-" not in static_parts
-            ), f"Purview name should not contain hyphens: {name_template}"
+            assert "-" not in static_parts, (
+                f"Purview name should not contain hyphens: {name_template}"
+            )
 
 
 class TestFabricNaming:
@@ -344,9 +344,9 @@ class TestFabricNaming:
         """Test that Fabric uses 'fabric' prefix."""
         content = main_bicep_path.read_text(encoding="utf-8")
 
-        assert (
-            "'fabric${" in content or "fabricCapacityName = 'fabric" in content
-        ), "Fabric capacity name should start with 'fabric' prefix"
+        assert "'fabric${" in content or "fabricCapacityName = 'fabric" in content, (
+            "Fabric capacity name should start with 'fabric' prefix"
+        )
 
 
 class TestNamingConsistency:
@@ -375,9 +375,9 @@ class TestNamingConsistency:
         """Test that environment parameter matches expected values."""
         for env, params in parsed_param_files.items():
             env_value = params.parameters.get("environment", "").strip("'\"")
-            assert (
-                env_value == env
-            ), f"Environment value '{env_value}' doesn't match file name '{env}'"
+            assert env_value == env, (
+                f"Environment value '{env_value}' doesn't match file name '{env}'"
+            )
 
 
 class TestNameLengthValidation:
@@ -437,12 +437,12 @@ class TestCharacterRestrictions:
             template = match.group(1)
             # Remove interpolations
             static = re.sub(r"\$\{[^}]+\}", "", template)
-            assert (
-                static == static.lower()
-            ), f"Storage account static parts must be lowercase: {static}"
-            assert re.match(
-                r"^[a-z0-9]*$", static
-            ), f"Storage account must be alphanumeric only: {static}"
+            assert static == static.lower(), (
+                f"Storage account static parts must be lowercase: {static}"
+            )
+            assert re.match(r"^[a-z0-9]*$", static), (
+                f"Storage account must be alphanumeric only: {static}"
+            )
 
     def test_no_consecutive_hyphens(self, main_bicep_path: Path):
         """Test that resource names don't have consecutive hyphens."""
@@ -456,9 +456,9 @@ class TestCharacterRestrictions:
 
             # Check static parts for consecutive hyphens
             static = re.sub(r"\$\{[^}]+\}", "x", name_template)
-            assert (
-                "--" not in static
-            ), f"{var_name} should not have consecutive hyphens: {name_template}"
+            assert "--" not in static, (
+                f"{var_name} should not have consecutive hyphens: {name_template}"
+            )
 
     def test_names_dont_end_with_hyphen(self, main_bicep_path: Path):
         """Test that resource names don't end with a hyphen."""

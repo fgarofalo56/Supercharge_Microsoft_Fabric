@@ -128,7 +128,7 @@ class TableGamesGenerator(BaseGenerator):
         dealers = []
         for i in range(150):
             dealer = {
-                "dealer_id": f"DLR-{i+1:04d}",
+                "dealer_id": f"DLR-{i + 1:04d}",
                 "first_name": self.faker.first_name(),
                 "last_name": self.faker.last_name(),
                 "certifications": self.rng.choice(
@@ -239,9 +239,7 @@ class TableGamesGenerator(BaseGenerator):
                 self.rng.uniform(min_amount * 0.5, max_amount * 1.5), 0
             )
 
-        record["chip_denomination"] = float(
-            self.rng.choice([1, 5, 25, 100, 500, 1000])
-        )
+        record["chip_denomination"] = float(self.rng.choice([1, 5, 25, 100, 500, 1000]))
 
         return record
 
@@ -276,7 +274,9 @@ class TableGamesGenerator(BaseGenerator):
         record["player_id"] = f"PLY-{self.rng.integers(1, 10000):06d}"
         record["player_rating_id"] = f"RAT-{self.generate_uuid()[:8]}"
 
-        avg_bet = self.rng.uniform(table["min_bet"], max(table["min_bet"] + 1, table["max_bet"] * 0.3))
+        avg_bet = self.rng.uniform(
+            table["min_bet"], max(table["min_bet"] + 1, table["max_bet"] * 0.3)
+        )
         hours = round(self.rng.uniform(0.5, 6), 1)
         hands = int(hours * self.rng.integers(30, 80))
 

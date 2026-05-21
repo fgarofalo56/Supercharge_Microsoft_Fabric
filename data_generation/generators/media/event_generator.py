@@ -19,11 +19,8 @@ Compliance:
 
 from __future__ import annotations
 
-import uuid
 from datetime import datetime, timedelta
 from typing import Any
-
-import numpy as np
 
 from data_generation.generators.base_generator import BaseGenerator
 
@@ -46,8 +43,16 @@ AGE_WEIGHTS = [0.12, 0.15, 0.73]
 REGIONS = ["US", "GB", "DE", "FR", "JP", "BR", "IN", "AU", "CA", "MX"]
 
 GENRES = [
-    "drama", "comedy", "action", "thriller", "sci-fi",
-    "documentary", "animation", "horror", "romance", "kids",
+    "drama",
+    "comedy",
+    "action",
+    "thriller",
+    "sci-fi",
+    "documentary",
+    "animation",
+    "horror",
+    "romance",
+    "kids",
 ]
 
 RATINGS = ["G", "PG", "PG-13", "R", "TV-Y", "TV-Y7", "TV-G", "TV-PG", "TV-14", "TV-MA"]
@@ -72,7 +77,9 @@ class MediaEventGenerator(BaseGenerator):
         catalog_size: int = _CATALOG_SIZE,
         user_pool_size: int = _USER_POOL_SIZE,
     ):
-        super().__init__(seed=seed, locale=locale, start_date=start_date, end_date=end_date)
+        super().__init__(
+            seed=seed, locale=locale, start_date=start_date, end_date=end_date
+        )
 
         self.catalog_size = catalog_size
         self.user_pool_size = user_pool_size
@@ -105,16 +112,22 @@ class MediaEventGenerator(BaseGenerator):
         for i in range(self.catalog_size):
             genre = str(self.rng.choice(GENRES))
             is_kids = genre == "kids"
-            rating = str(self.rng.choice(["TV-Y", "TV-Y7", "TV-G", "G"])) if is_kids else str(self.rng.choice(RATINGS))
-            catalog.append({
-                "content_id": f"CTN-{i + 1:05d}",
-                "title": f"{self.faker.catch_phrase()} {'Kids' if is_kids else ''}".strip(),
-                "genre": genre,
-                "release_year": int(self.rng.integers(2015, 2027)),
-                "duration_min": int(self.rng.choice([22, 30, 44, 52, 60, 90, 120])),
-                "rating": rating,
-                "is_original": bool(self.rng.random() < 0.35),
-            })
+            rating = (
+                str(self.rng.choice(["TV-Y", "TV-Y7", "TV-G", "G"]))
+                if is_kids
+                else str(self.rng.choice(RATINGS))
+            )
+            catalog.append(
+                {
+                    "content_id": f"CTN-{i + 1:05d}",
+                    "title": f"{self.faker.catch_phrase()} {'Kids' if is_kids else ''}".strip(),
+                    "genre": genre,
+                    "release_year": int(self.rng.integers(2015, 2027)),
+                    "duration_min": int(self.rng.choice([22, 30, 44, 52, 60, 90, 120])),
+                    "rating": rating,
+                    "is_original": bool(self.rng.random() < 0.35),
+                }
+            )
         return catalog
 
     def _build_user_pool(self) -> list[dict[str, Any]]:
@@ -127,16 +140,18 @@ class MediaEventGenerator(BaseGenerator):
                 tier = str(self.rng.choice(["free", "basic"]))
             else:
                 tier = str(self.weighted_choice(PLAN_TIERS, PLAN_WEIGHTS))
-            users.append({
-                "user_id": f"USR-{i + 1:06d}",
-                "plan_tier": tier,
-                "signup_dt": self.random_datetime(
-                    start=self.start_date - timedelta(days=365),
-                    end=self.start_date,
-                ).isoformat(),
-                "age_bucket": age_bucket,
-                "region": str(self.rng.choice(REGIONS)),
-            })
+            users.append(
+                {
+                    "user_id": f"USR-{i + 1:06d}",
+                    "plan_tier": tier,
+                    "signup_dt": self.random_datetime(
+                        start=self.start_date - timedelta(days=365),
+                        end=self.start_date,
+                    ).isoformat(),
+                    "age_bucket": age_bucket,
+                    "region": str(self.rng.choice(REGIONS)),
+                }
+            )
         return users
 
     # ------------------------------------------------------------------
@@ -147,9 +162,30 @@ class MediaEventGenerator(BaseGenerator):
         """Return a relative probability weight for the given hour (0-23)."""
         # Evening peak 19-23, morning trough 3-6
         weights = [
-            0.02, 0.01, 0.01, 0.005, 0.005, 0.01, 0.02, 0.03,  # 0-7
-            0.03, 0.04, 0.03, 0.03, 0.04, 0.04, 0.03, 0.04,    # 8-15
-            0.05, 0.06, 0.07, 0.09, 0.10, 0.10, 0.08, 0.05,    # 16-23
+            0.02,
+            0.01,
+            0.01,
+            0.005,
+            0.005,
+            0.01,
+            0.02,
+            0.03,  # 0-7
+            0.03,
+            0.04,
+            0.03,
+            0.03,
+            0.04,
+            0.04,
+            0.03,
+            0.04,  # 8-15
+            0.05,
+            0.06,
+            0.07,
+            0.09,
+            0.10,
+            0.10,
+            0.08,
+            0.05,  # 16-23
         ]
         return weights[hour]
 

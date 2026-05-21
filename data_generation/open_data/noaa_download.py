@@ -75,7 +75,11 @@ WEATHER_HEADERS = {
 }
 
 # Storm Events file-type prefixes used in the bulk download
-STORM_FILE_TYPES = ["StormEvents_details", "StormEvents_fatalities", "StormEvents_locations"]
+STORM_FILE_TYPES = [
+    "StormEvents_details",
+    "StormEvents_fatalities",
+    "StormEvents_locations",
+]
 
 # Schema alignment: map weather.gov observation properties to our standard
 WEATHER_OBS_MAP = {
@@ -135,7 +139,11 @@ def _request_with_retry(
     for attempt in range(1, MAX_RETRIES + 1):
         try:
             resp = requests.get(
-                url, params=params, headers=headers, stream=stream, timeout=timeout,
+                url,
+                params=params,
+                headers=headers,
+                stream=stream,
+                timeout=timeout,
             )
             resp.raise_for_status()
             return resp
@@ -143,7 +151,7 @@ def _request_with_retry(
             if attempt == MAX_RETRIES:
                 logger.error("Request failed after %d attempts: %s", MAX_RETRIES, exc)
                 raise
-            wait = BACKOFF_BASE ** attempt
+            wait = BACKOFF_BASE**attempt
             logger.warning(
                 "Attempt %d/%d failed (%s). Retrying in %ds...",
                 attempt,
@@ -155,7 +163,9 @@ def _request_with_retry(
     raise RuntimeError("Exceeded max retries")
 
 
-def _save_dataframe(df: pd.DataFrame, output_dir: str, filename_stem: str) -> tuple[Path, Path]:
+def _save_dataframe(
+    df: pd.DataFrame, output_dir: str, filename_stem: str
+) -> tuple[Path, Path]:
     """Save DataFrame as CSV + Parquet."""
     out = Path(output_dir)
     out.mkdir(parents=True, exist_ok=True)
@@ -191,6 +201,7 @@ def _parse_damage(value: str | None) -> float | None:
 # Download functions
 # ---------------------------------------------------------------------------
 
+
 def download_weather_observations(
     output_dir: str,
     station_ids: list[str] | None = None,
@@ -216,13 +227,21 @@ def download_weather_observations(
     """
     if station_ids is None:
         station_ids = [
-            "KJFK", "KLAX", "KORD", "KATL", "KDFW", "KDEN",
-            "KPHX", "KSEA", "KMIA", "KBOS", "KLAS", "KMSP",
+            "KJFK",
+            "KLAX",
+            "KORD",
+            "KATL",
+            "KDFW",
+            "KDEN",
+            "KPHX",
+            "KSEA",
+            "KMIA",
+            "KBOS",
+            "KLAS",
+            "KMSP",
         ]
 
-    logger.info(
-        "Downloading weather observations for %d stations", len(station_ids)
-    )
+    logger.info("Downloading weather observations for %d stations", len(station_ids))
 
     all_records: list[dict[str, Any]] = []
 
@@ -248,13 +267,19 @@ def download_weather_observations(
             coords = geom.get("coordinates", [None, None]) if geom else [None, None]
 
             record: dict[str, Any] = {
-                "observation_id": props.get("@id", "").split("/")[-1] if props.get("@id") else None,
+                "observation_id": props.get("@id", "").split("/")[-1]
+                if props.get("@id")
+                else None,
                 "station_id": station,
-                "station_name": props.get("station", "").split("/")[-1] if props.get("station") else station,
+                "station_name": props.get("station", "").split("/")[-1]
+                if props.get("station")
+                else station,
                 "timestamp": props.get("timestamp"),
                 "latitude": coords[1] if len(coords) > 1 else None,
                 "longitude": coords[0] if len(coords) > 0 else None,
-                "elevation_m": props.get("elevation", {}).get("value") if isinstance(props.get("elevation"), dict) else None,
+                "elevation_m": props.get("elevation", {}).get("value")
+                if isinstance(props.get("elevation"), dict)
+                else None,
                 "temperature_c": _nested_value(props, "temperature"),
                 "dewpoint_c": _nested_value(props, "dewpoint"),
                 "humidity_pct": _nested_value(props, "relativeHumidity"),
@@ -328,6 +353,7 @@ def download_storm_events(
 
             # Find the matching filename in the HTML listing
             import re
+
             matches = re.findall(
                 rf'href="({file_pattern}[^"]*\.csv\.gz)"', listing_text
             )
@@ -351,7 +377,9 @@ def download_storm_events(
                 year,
             )
             # Fallback: try a common pattern
-            file_url = f"{STORM_EVENTS_BASE}/StormEvents_details-ftp_v1.0_d{year}.csv.gz"
+            file_url = (
+                f"{STORM_EVENTS_BASE}/StormEvents_details-ftp_v1.0_d{year}.csv.gz"
+            )
 
         try:
             resp = _request_with_retry(file_url, stream=True)
@@ -389,7 +417,12 @@ def download_storm_events(
             df[col] = df[col].apply(_parse_damage)
 
     # Numeric columns
-    for col in ("injuries_direct", "injuries_indirect", "deaths_direct", "deaths_indirect"):
+    for col in (
+        "injuries_direct",
+        "injuries_indirect",
+        "deaths_direct",
+        "deaths_indirect",
+    ):
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0).astype(int)
 
@@ -441,7 +474,10 @@ def download_climate_data(
 
     logger.info(
         "Downloading CDO climate data (%s) for %d stations, %s to %s",
-        dataset_id, len(station_ids), start_date, end_date,
+        dataset_id,
+        len(station_ids),
+        start_date,
+        end_date,
     )
 
     headers = {"token": api_key}
@@ -464,12 +500,16 @@ def download_climate_data(
 
             try:
                 resp = _request_with_retry(
-                    f"{CDO_API_BASE}/data", params=params, headers=headers,
+                    f"{CDO_API_BASE}/data",
+                    params=params,
+                    headers=headers,
                 )
                 data = resp.json()
             except Exception:
                 logger.exception(
-                    "CDO API failed for station %s at offset %d", station, offset,
+                    "CDO API failed for station %s at offset %d",
+                    station,
+                    offset,
                 )
                 break
 
@@ -538,7 +578,9 @@ def download_tide_data(
     """
     logger.info(
         "Downloading CO-OPS tide data for station %s (%s to %s)",
-        station_id, start_date, end_date,
+        station_id,
+        start_date,
+        end_date,
     )
 
     # CO-OPS API limits to 31 days per request for 6-minute data, or 1 year
@@ -624,6 +666,7 @@ def download_tide_data(
 # Validation
 # ---------------------------------------------------------------------------
 
+
 def validate_download(file_path: str) -> dict[str, Any]:
     """
     Validate a downloaded NOAA dataset file.
@@ -696,6 +739,7 @@ def validate_download(file_path: str) -> dict[str, Any]:
 # CLI
 # ---------------------------------------------------------------------------
 
+
 def main() -> None:
     """Command-line interface for NOAA open-data downloads."""
     parser = argparse.ArgumentParser(
@@ -721,13 +765,13 @@ def main() -> None:
         "--stations",
         default=None,
         help="Comma-separated station IDs (e.g. KJFK,KLAX for weather; "
-             "GHCND:USW00094728 for climate; 8518750 for tides)",
+        "GHCND:USW00094728 for climate; 8518750 for tides)",
     )
     parser.add_argument(
         "--start-date",
         default=None,
         help="Start date (ISO format for weather/climate; YYYYMMDD for tides; "
-             "year integer for storms)",
+        "year integer for storms)",
     )
     parser.add_argument(
         "--end-date",

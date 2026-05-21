@@ -19,15 +19,12 @@ Compliance:
 """
 
 import hashlib
-import math
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import Any
 
-import numpy as np
 import pandas as pd
 
 from data_generation.generators.base_generator import BaseGenerator
-
 
 # Realistic MCC (Merchant Category Code) distribution
 MCC_CODES: dict[str, list[str]] = {
@@ -80,7 +77,9 @@ class TransactionGenerator(BaseGenerator):
         num_customers: int = 2000,
         fraud_rate: float = 0.0015,
     ):
-        super().__init__(seed=seed, locale=locale, start_date=start_date, end_date=end_date)
+        super().__init__(
+            seed=seed, locale=locale, start_date=start_date, end_date=end_date
+        )
 
         if not 0.0 <= fraud_rate <= 1.0:
             raise ValueError(f"fraud_rate must be between 0 and 1, got {fraud_rate}")
@@ -115,25 +114,27 @@ class TransactionGenerator(BaseGenerator):
         customers = []
         for i in range(self.num_customers):
             raw_pan = self.synthetic_card_number()
-            card_hash = hashlib.sha256(
-                f"{raw_pan}-{self.seed}".encode()
-            ).hexdigest()
+            card_hash = hashlib.sha256(f"{raw_pan}-{self.seed}".encode()).hexdigest()
 
             acct_type = str(self.rng.choice(ACCOUNT_TYPES))
             risk_rating = str(self.weighted_choice(RISK_RATINGS, RISK_WEIGHTS))
             home_lat = float(self.rng.uniform(25.0, 48.0))
             home_lon = float(self.rng.uniform(-122.0, -73.0))
 
-            customers.append({
-                "acct_id": f"ACCT-{i + 1:07d}",
-                "card_hash": card_hash,
-                "acct_type": acct_type,
-                "risk_rating": risk_rating,
-                "balance": round(float(self.rng.lognormal(mean=9.0, sigma=1.5)), 2),
-                "home_lat": home_lat,
-                "home_lon": home_lon,
-                "avg_txn_amount": round(float(self.rng.lognormal(mean=3.5, sigma=1.0)), 2),
-            })
+            customers.append(
+                {
+                    "acct_id": f"ACCT-{i + 1:07d}",
+                    "card_hash": card_hash,
+                    "acct_type": acct_type,
+                    "risk_rating": risk_rating,
+                    "balance": round(float(self.rng.lognormal(mean=9.0, sigma=1.5)), 2),
+                    "home_lat": home_lat,
+                    "home_lon": home_lon,
+                    "avg_txn_amount": round(
+                        float(self.rng.lognormal(mean=3.5, sigma=1.0)), 2
+                    ),
+                }
+            )
         return customers
 
     def generate_record(self) -> dict[str, Any]:
@@ -178,7 +179,9 @@ class TransactionGenerator(BaseGenerator):
                 merchant_lon = customer["home_lon"] + float(self.rng.uniform(10, 30))
             elif pattern_roll < 0.80:
                 fraud_pattern = "amount_spike"
-                amount = round(customer["avg_txn_amount"] * float(self.rng.uniform(5, 20)), 2)
+                amount = round(
+                    customer["avg_txn_amount"] * float(self.rng.uniform(5, 20)), 2
+                )
             else:
                 fraud_pattern = "structuring"
                 amount = round(float(self.rng.uniform(8000, 9999)), 2)
@@ -211,16 +214,18 @@ class TransactionGenerator(BaseGenerator):
 
         Excludes raw PAN -- only ``card_hash`` is included (PCI DSS Req 3.4).
         """
-        return pd.DataFrame([
-            {
-                "acct_id": c["acct_id"],
-                "card_hash": c["card_hash"],
-                "acct_type": c["acct_type"],
-                "risk_rating": c["risk_rating"],
-                "balance": c["balance"],
-            }
-            for c in self._customers
-        ])
+        return pd.DataFrame(
+            [
+                {
+                    "acct_id": c["acct_id"],
+                    "card_hash": c["card_hash"],
+                    "acct_type": c["acct_type"],
+                    "risk_rating": c["risk_rating"],
+                    "balance": c["balance"],
+                }
+                for c in self._customers
+            ]
+        )
 
 
 # ---------------------------------------------------------------------------
@@ -244,11 +249,15 @@ if __name__ == "__main__":
         fraud_rate=args.fraud_rate,
     )
 
-    print(f"Generating {args.records:,} transactions for {args.customers:,} customers...")
+    print(
+        f"Generating {args.records:,} transactions for {args.customers:,} customers..."
+    )
     df = gen.generate(num_records=args.records)
 
     print(f"Fraud rate: {df['is_fraud'].mean():.4%}")
-    print(f"Fraud patterns: {df[df['is_fraud']]['fraud_pattern'].value_counts().to_dict()}")
+    print(
+        f"Fraud patterns: {df[df['is_fraud']]['fraud_pattern'].value_counts().to_dict()}"
+    )
 
     gen.to_parquet(df, f"{args.output}/transactions.parquet")
     print(f"Saved to {args.output}/transactions.parquet")

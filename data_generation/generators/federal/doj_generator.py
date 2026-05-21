@@ -22,7 +22,10 @@ from ..base_generator import BaseGenerator
 # NIBRS Offense Codes (30 most common FBI NIBRS categories)
 # ---------------------------------------------------------------------------
 NIBRS_OFFENSES: dict[str, dict[str, str]] = {
-    "09A": {"description": "Murder and Nonnegligent Manslaughter", "category": "Persons"},
+    "09A": {
+        "description": "Murder and Nonnegligent Manslaughter",
+        "category": "Persons",
+    },
     "09B": {"description": "Negligent Manslaughter", "category": "Persons"},
     "100": {"description": "Kidnapping/Abduction", "category": "Persons"},
     "11A": {"description": "Rape", "category": "Persons"},
@@ -41,12 +44,21 @@ NIBRS_OFFENSES: dict[str, dict[str, str]] = {
     "23H": {"description": "All Other Larceny", "category": "Property"},
     "240": {"description": "Motor Vehicle Theft", "category": "Property"},
     "250": {"description": "Counterfeiting/Forgery", "category": "Property"},
-    "26A": {"description": "False Pretenses/Swindle/Confidence Game", "category": "Property"},
-    "26B": {"description": "Credit Card/Automated Teller Machine Fraud", "category": "Property"},
+    "26A": {
+        "description": "False Pretenses/Swindle/Confidence Game",
+        "category": "Property",
+    },
+    "26B": {
+        "description": "Credit Card/Automated Teller Machine Fraud",
+        "category": "Property",
+    },
     "26C": {"description": "Impersonation", "category": "Property"},
     "270": {"description": "Embezzlement", "category": "Property"},
     "280": {"description": "Stolen Property Offenses", "category": "Property"},
-    "290": {"description": "Destruction/Damage/Vandalism of Property", "category": "Property"},
+    "290": {
+        "description": "Destruction/Damage/Vandalism of Property",
+        "category": "Property",
+    },
     "35A": {"description": "Drug/Narcotic Violations", "category": "Society"},
     "35B": {"description": "Drug Equipment Violations", "category": "Society"},
     "370": {"description": "Pornography/Obscene Material", "category": "Society"},
@@ -58,28 +70,137 @@ NIBRS_CODES = list(NIBRS_OFFENSES.keys())
 
 # Weighted toward most common offenses
 NIBRS_WEIGHTS: list[float] = [
-    0.0082, 0.001, 0.0051, 0.0154, 0.0021, 0.0154, 0.0462, 0.1232, 0.0411,
-    0.0051, 0.0616, 0.0051, 0.0031, 0.0821, 0.0308, 0.0513, 0.1027, 0.0513,
-    0.0154, 0.0308, 0.0205, 0.0103, 0.0103, 0.0154, 0.0821,
-    0.0821, 0.0308, 0.0103, 0.0051, 0.0361,
+    0.0082,
+    0.001,
+    0.0051,
+    0.0154,
+    0.0021,
+    0.0154,
+    0.0462,
+    0.1232,
+    0.0411,
+    0.0051,
+    0.0616,
+    0.0051,
+    0.0031,
+    0.0821,
+    0.0308,
+    0.0513,
+    0.1027,
+    0.0513,
+    0.0154,
+    0.0308,
+    0.0205,
+    0.0103,
+    0.0103,
+    0.0154,
+    0.0821,
+    0.0821,
+    0.0308,
+    0.0103,
+    0.0051,
+    0.0361,
 ]
 
 # ---------------------------------------------------------------------------
 # Federal Districts (94 judicial districts)
 # ---------------------------------------------------------------------------
 FEDERAL_DISTRICTS: list[str] = [
-    "SDNY", "EDNY", "NDIL", "CDCA", "SDCA", "NDCA", "EDPA", "WDPA",
-    "DMD", "EDVA", "WDVA", "SDFL", "MDFL", "NDFL", "SDTX", "WDTX",
-    "NDTX", "EDTX", "EDMI", "WDMI", "NJ", "MA", "CT", "EDLA",
-    "WDLA", "MDLA", "EDMO", "WDMO", "NDG", "SDG", "EDWI", "WDWI",
-    "CO", "AZ", "NV", "OR", "EDWA", "WDWA", "MN", "SDIA", "NDIA",
-    "EDAR", "WDAR", "EDKY", "WDKY", "MDNC", "EDNC", "WDNC", "EDTN",
-    "MDTN", "WDTN", "NDOH", "SDOH", "EDIN", "NDIN", "SDIN", "NDAL",
-    "MDAL", "SDAL", "NDMS", "SDMS", "NDOK", "EDOK", "WDOK", "KS",
-    "NE", "NM", "UT", "ID", "MT", "WY", "NDWV", "SDWV", "SC",
-    "HI", "AK", "ME", "NH", "VT", "RI", "DC", "PR", "USVI",
-    "GUAM", "CNMI", "EDSC", "WDSC", "NDGA", "MDGA", "SDGA",
-    "EDNY_MAG", "SDNY_MAG", "CDCA_MAG", "SDCA_MAG", "NDIL_MAG",
+    "SDNY",
+    "EDNY",
+    "NDIL",
+    "CDCA",
+    "SDCA",
+    "NDCA",
+    "EDPA",
+    "WDPA",
+    "DMD",
+    "EDVA",
+    "WDVA",
+    "SDFL",
+    "MDFL",
+    "NDFL",
+    "SDTX",
+    "WDTX",
+    "NDTX",
+    "EDTX",
+    "EDMI",
+    "WDMI",
+    "NJ",
+    "MA",
+    "CT",
+    "EDLA",
+    "WDLA",
+    "MDLA",
+    "EDMO",
+    "WDMO",
+    "NDG",
+    "SDG",
+    "EDWI",
+    "WDWI",
+    "CO",
+    "AZ",
+    "NV",
+    "OR",
+    "EDWA",
+    "WDWA",
+    "MN",
+    "SDIA",
+    "NDIA",
+    "EDAR",
+    "WDAR",
+    "EDKY",
+    "WDKY",
+    "MDNC",
+    "EDNC",
+    "WDNC",
+    "EDTN",
+    "MDTN",
+    "WDTN",
+    "NDOH",
+    "SDOH",
+    "EDIN",
+    "NDIN",
+    "SDIN",
+    "NDAL",
+    "MDAL",
+    "SDAL",
+    "NDMS",
+    "SDMS",
+    "NDOK",
+    "EDOK",
+    "WDOK",
+    "KS",
+    "NE",
+    "NM",
+    "UT",
+    "ID",
+    "MT",
+    "WY",
+    "NDWV",
+    "SDWV",
+    "SC",
+    "HI",
+    "AK",
+    "ME",
+    "NH",
+    "VT",
+    "RI",
+    "DC",
+    "PR",
+    "USVI",
+    "GUAM",
+    "CNMI",
+    "EDSC",
+    "WDSC",
+    "NDGA",
+    "MDGA",
+    "SDGA",
+    "EDNY_MAG",
+    "SDNY_MAG",
+    "CDCA_MAG",
+    "SDCA_MAG",
+    "NDIL_MAG",
 ]
 
 # District weighting: use uniform distribution (rng.choice handles it)
@@ -124,30 +245,85 @@ OFFENSE_CATEGORIES: list[str] = [
 ]
 
 OFFENSE_WEIGHTS: list[float] = [
-    0.28, 0.18, 0.14, 0.12, 0.05, 0.04, 0.03, 0.03,
-    0.03, 0.02, 0.03, 0.01, 0.01, 0.03,
+    0.28,
+    0.18,
+    0.14,
+    0.12,
+    0.05,
+    0.04,
+    0.03,
+    0.03,
+    0.03,
+    0.02,
+    0.03,
+    0.01,
+    0.01,
+    0.03,
 ]
 
 # ---------------------------------------------------------------------------
 # DEA Field Divisions (23 divisions)
 # ---------------------------------------------------------------------------
 DEA_DIVISIONS: list[str] = [
-    "Atlanta", "Boston", "Caribbean", "Chicago", "Dallas",
-    "Denver", "Detroit", "El Paso", "Houston", "Los Angeles",
-    "Louisville", "Miami", "Newark", "New England", "New Orleans",
-    "New York", "Philadelphia", "Phoenix", "San Diego", "San Francisco",
-    "Seattle", "St. Louis", "Washington DC",
+    "Atlanta",
+    "Boston",
+    "Caribbean",
+    "Chicago",
+    "Dallas",
+    "Denver",
+    "Detroit",
+    "El Paso",
+    "Houston",
+    "Los Angeles",
+    "Louisville",
+    "Miami",
+    "Newark",
+    "New England",
+    "New Orleans",
+    "New York",
+    "Philadelphia",
+    "Phoenix",
+    "San Diego",
+    "San Francisco",
+    "Seattle",
+    "St. Louis",
+    "Washington DC",
 ]
 
 DEA_WEIGHTS: list[float] = [
-    0.0377, 0.0283, 0.0472, 0.0566, 0.0472, 0.0283, 0.0377, 0.0660, 0.0566, 0.0755,
-    0.0283, 0.0660, 0.0377, 0.0283, 0.0377, 0.0566, 0.0377, 0.0472, 0.0566, 0.0377,
-    0.0283, 0.0283, 0.0285,
+    0.0377,
+    0.0283,
+    0.0472,
+    0.0566,
+    0.0472,
+    0.0283,
+    0.0377,
+    0.0660,
+    0.0566,
+    0.0755,
+    0.0283,
+    0.0660,
+    0.0377,
+    0.0283,
+    0.0377,
+    0.0566,
+    0.0377,
+    0.0472,
+    0.0566,
+    0.0377,
+    0.0283,
+    0.0283,
+    0.0285,
 ]
 
 DRUG_TYPES: list[str] = [
-    "Cocaine", "Heroin", "Fentanyl", "Methamphetamine",
-    "Cannabis", "MDMA", "Other",
+    "Cocaine",
+    "Heroin",
+    "Fentanyl",
+    "Methamphetamine",
+    "Cannabis",
+    "MDMA",
+    "Other",
 ]
 
 DRUG_WEIGHTS: list[float] = [0.18, 0.10, 0.22, 0.25, 0.15, 0.03, 0.07]
@@ -197,69 +373,207 @@ ANTITRUST_INDUSTRIES: dict[str, str] = {
 
 ANTITRUST_INDUSTRY_CODES = list(ANTITRUST_INDUSTRIES.keys())
 ANTITRUST_INDUSTRY_WEIGHTS: list[float] = [
-    0.04, 0.05, 0.08, 0.07, 0.08, 0.06, 0.06, 0.04,
-    0.06, 0.12, 0.08, 0.04, 0.06, 0.03, 0.08, 0.05,
+    0.04,
+    0.05,
+    0.08,
+    0.07,
+    0.08,
+    0.06,
+    0.06,
+    0.04,
+    0.06,
+    0.12,
+    0.08,
+    0.04,
+    0.06,
+    0.03,
+    0.08,
+    0.05,
 ]
 
 CARTEL_TYPES: list[str] = [
-    "Price-fixing", "Bid-rigging", "Market Allocation", "None",
+    "Price-fixing",
+    "Bid-rigging",
+    "Market Allocation",
+    "None",
 ]
 CARTEL_WEIGHTS: list[float] = [0.35, 0.25, 0.15, 0.25]
 
 DOJ_ACTIONS: list[str] = [
-    "Approved", "Challenged", "Consent Decree", "Blocked", "Abandoned",
+    "Approved",
+    "Challenged",
+    "Consent Decree",
+    "Blocked",
+    "Abandoned",
 ]
 DOJ_ACTION_WEIGHTS: list[float] = [0.55, 0.15, 0.12, 0.05, 0.13]
 
 # US states (shared with other generators)
 US_STATES = [
-    "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
-    "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
-    "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
-    "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
-    "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY",
-    "DC", "PR",
+    "AL",
+    "AK",
+    "AZ",
+    "AR",
+    "CA",
+    "CO",
+    "CT",
+    "DE",
+    "FL",
+    "GA",
+    "HI",
+    "ID",
+    "IL",
+    "IN",
+    "IA",
+    "KS",
+    "KY",
+    "LA",
+    "ME",
+    "MD",
+    "MA",
+    "MI",
+    "MN",
+    "MS",
+    "MO",
+    "MT",
+    "NE",
+    "NV",
+    "NH",
+    "NJ",
+    "NM",
+    "NY",
+    "NC",
+    "ND",
+    "OH",
+    "OK",
+    "OR",
+    "PA",
+    "RI",
+    "SC",
+    "SD",
+    "TN",
+    "TX",
+    "UT",
+    "VT",
+    "VA",
+    "WA",
+    "WV",
+    "WI",
+    "WY",
+    "DC",
+    "PR",
 ]
 
 STATE_WEIGHTS: list[float] = [
-    0.0143, 0.0048, 0.0210, 0.0095, 0.1144, 0.0172, 0.0105, 0.0038, 0.0629, 0.0315,
-    0.0048, 0.0057, 0.0381, 0.0200, 0.0095, 0.0086, 0.0133, 0.0143, 0.0038, 0.0181,
-    0.0210, 0.0305, 0.0172, 0.0095, 0.0181, 0.0038, 0.0057, 0.0095, 0.0038, 0.0276,
-    0.0067, 0.0601, 0.0315, 0.0029, 0.0353, 0.0124, 0.0124, 0.0391, 0.0038, 0.0153,
-    0.0029, 0.0210, 0.0858, 0.0095, 0.0019, 0.0257, 0.0229, 0.0057, 0.0181, 0.0019,
-    0.0076, 0.0047,
+    0.0143,
+    0.0048,
+    0.0210,
+    0.0095,
+    0.1144,
+    0.0172,
+    0.0105,
+    0.0038,
+    0.0629,
+    0.0315,
+    0.0048,
+    0.0057,
+    0.0381,
+    0.0200,
+    0.0095,
+    0.0086,
+    0.0133,
+    0.0143,
+    0.0038,
+    0.0181,
+    0.0210,
+    0.0305,
+    0.0172,
+    0.0095,
+    0.0181,
+    0.0038,
+    0.0057,
+    0.0095,
+    0.0038,
+    0.0276,
+    0.0067,
+    0.0601,
+    0.0315,
+    0.0029,
+    0.0353,
+    0.0124,
+    0.0124,
+    0.0391,
+    0.0038,
+    0.0153,
+    0.0029,
+    0.0210,
+    0.0858,
+    0.0095,
+    0.0019,
+    0.0257,
+    0.0229,
+    0.0057,
+    0.0181,
+    0.0019,
+    0.0076,
+    0.0047,
 ]
 
 # ---------------------------------------------------------------------------
 # Agency Types (for crime_stats ORI codes)
 # ---------------------------------------------------------------------------
 AGENCY_TYPES: list[str] = [
-    "City", "County", "State", "Federal", "Tribal",
+    "City",
+    "County",
+    "State",
+    "Federal",
+    "Tribal",
 ]
 AGENCY_TYPE_WEIGHTS: list[float] = [0.55, 0.25, 0.10, 0.07, 0.03]
 
 WEAPON_TYPES: list[str] = [
-    "None", "Firearm", "Knife/Cutting Instrument", "Other",
+    "None",
+    "Firearm",
+    "Knife/Cutting Instrument",
+    "Other",
 ]
 WEAPON_WEIGHTS: list[float] = [0.55, 0.22, 0.10, 0.13]
 
 LOCATION_TYPES: list[str] = [
-    "Residence/Home", "Highway/Road/Alley", "Parking Lot/Garage",
-    "Commercial/Office Building", "Convenience Store", "Department Store",
-    "Restaurant", "School/College", "Hotel/Motel", "Bar/Nightclub",
-    "Government/Public Building", "Church/Synagogue/Temple",
-    "Park/Playground", "Drug Store/Doctor/Hospital", "Other/Unknown",
+    "Residence/Home",
+    "Highway/Road/Alley",
+    "Parking Lot/Garage",
+    "Commercial/Office Building",
+    "Convenience Store",
+    "Department Store",
+    "Restaurant",
+    "School/College",
+    "Hotel/Motel",
+    "Bar/Nightclub",
+    "Government/Public Building",
+    "Church/Synagogue/Temple",
+    "Park/Playground",
+    "Drug Store/Doctor/Hospital",
+    "Other/Unknown",
 ]
 
 CLEARANCE_STATUSES: list[str] = [
-    "Cleared by Arrest", "Not Cleared", "Exceptionally Cleared",
+    "Cleared by Arrest",
+    "Not Cleared",
+    "Exceptionally Cleared",
 ]
 CLEARANCE_WEIGHTS: list[float] = [0.38, 0.52, 0.10]
 
 POPULATION_GROUPS: list[str] = [
-    "City 250K+", "City 100K-249K", "City 50K-99K",
-    "City 25K-49K", "City 10K-24K", "City <10K",
-    "County 100K+", "County 25K-99K", "County <25K",
+    "City 250K+",
+    "City 100K-249K",
+    "City 50K-99K",
+    "City 25K-49K",
+    "City 10K-24K",
+    "City <10K",
+    "County 100K+",
+    "County 25K-99K",
+    "County <25K",
 ]
 
 
@@ -467,8 +781,13 @@ class DOJGenerator(BaseGenerator):
         agency_type = self.weighted_choice(AGENCY_TYPES, AGENCY_TYPE_WEIGHTS)
 
         # ORI code format: 2-letter state + agency type prefix + 5-digit number
-        ori_prefix = {"City": "PD", "County": "SO", "State": "SP",
-                      "Federal": "FB", "Tribal": "TB"}
+        ori_prefix = {
+            "City": "PD",
+            "County": "SO",
+            "State": "SP",
+            "Federal": "FB",
+            "Tribal": "TB",
+        }
         ori_num = int(self.rng.integers(10000, 99999))
         ori_code = f"{state}{ori_prefix[agency_type]}{ori_num}"
 
@@ -540,8 +859,14 @@ class DOJGenerator(BaseGenerator):
         departure = self.weighted_choice(
             cfg["departure_types"], cfg["departure_weights"]
         )
-        fine_amount = round(self.rng.uniform(0, 250_000), 2) if self.rng.random() < 0.30 else 0.0
-        restitution = round(self.rng.uniform(0, 5_000_000), 2) if self.rng.random() < 0.20 else 0.0
+        fine_amount = (
+            round(self.rng.uniform(0, 250_000), 2) if self.rng.random() < 0.30 else 0.0
+        )
+        restitution = (
+            round(self.rng.uniform(0, 5_000_000), 2)
+            if self.rng.random() < 0.20
+            else 0.0
+        )
 
         record: dict[str, Any] = {
             "case_id": self.generate_uuid(),
@@ -654,12 +979,18 @@ class DOJGenerator(BaseGenerator):
             "case_id": self.generate_uuid(),
             "case_type": case_type,
             "filing_date": filing_dt.strftime("%Y-%m-%d"),
-            "resolution_date": resolution_dt.strftime("%Y-%m-%d") if resolution_dt else None,
+            "resolution_date": resolution_dt.strftime("%Y-%m-%d")
+            if resolution_dt
+            else None,
             "case_status": case_status,
             "industry_sector": industry_code,
             "industry_name": ANTITRUST_INDUSTRIES[industry_code],
-            "acquiring_party": self.faker.company() if case_type == "Merger Review" else None,
-            "target_party": self.faker.company() if case_type == "Merger Review" else None,
+            "acquiring_party": self.faker.company()
+            if case_type == "Merger Review"
+            else None,
+            "target_party": self.faker.company()
+            if case_type == "Merger Review"
+            else None,
             "transaction_value_usd": transaction_value,
             "hhi_pre_merger": hhi_pre if case_type == "Merger Review" else None,
             "hhi_post_merger": hhi_post if case_type == "Merger Review" else None,
@@ -670,8 +1001,12 @@ class DOJGenerator(BaseGenerator):
             "cartel_type": cartel_type,
             "affected_commerce_usd": round(
                 transaction_value * self.rng.uniform(0.5, 3.0), 2
-            ) if case_type == "Criminal" else None,
-            "defendant_count": int(self.rng.integers(1, 12)) if case_type == "Criminal" else None,
+            )
+            if case_type == "Criminal"
+            else None,
+            "defendant_count": int(self.rng.integers(1, 12))
+            if case_type == "Criminal"
+            else None,
             "hsr_filing_flag": case_type == "Merger Review",
             "second_request_flag": (
                 case_type == "Merger Review" and self.rng.random() < 0.04
@@ -746,24 +1081,56 @@ class DOJGenerator(BaseGenerator):
             )
         elif case_type == "Civil":
             # Civil penalties: generally lower
-            return round(self.rng.uniform(0, 10_000_000), 2) if self.rng.random() < 0.30 else 0.0
+            return (
+                round(self.rng.uniform(0, 10_000_000), 2)
+                if self.rng.random() < 0.30
+                else 0.0
+            )
         else:
             return 0.0  # Merger reviews don't carry direct penalties
 
     def _generate_market_definition(self, industry_code: str) -> str:
         """Generate a plausible relevant market definition."""
         markets: dict[str, list[str]] = {
-            "21": ["US crude oil production", "Permian Basin natural gas", "coal mining equipment"],
+            "21": [
+                "US crude oil production",
+                "Permian Basin natural gas",
+                "coal mining equipment",
+            ],
             "22": ["Southeast electric power generation", "natural gas distribution"],
-            "31": ["packaged snack foods", "carbonated soft drinks", "poultry processing"],
-            "32": ["commodity chemicals", "containerboard packaging", "generic pharmaceuticals"],
-            "33": ["automotive semiconductors", "enterprise networking equipment", "steel flat products"],
+            "31": [
+                "packaged snack foods",
+                "carbonated soft drinks",
+                "poultry processing",
+            ],
+            "32": [
+                "commodity chemicals",
+                "containerboard packaging",
+                "generic pharmaceuticals",
+            ],
+            "33": [
+                "automotive semiconductors",
+                "enterprise networking equipment",
+                "steel flat products",
+            ],
             "42": ["pharmaceutical distribution", "foodservice distribution"],
             "44": ["new automobile dealerships", "consumer electronics retail"],
             "45": ["sporting goods retail", "e-commerce marketplace platforms"],
-            "48": ["domestic air travel", "ocean container shipping", "railroad freight"],
-            "51": ["broadband internet service", "enterprise cloud computing", "digital advertising"],
-            "52": ["commercial banking", "health insurance exchange", "payment processing"],
+            "48": [
+                "domestic air travel",
+                "ocean container shipping",
+                "railroad freight",
+            ],
+            "51": [
+                "broadband internet service",
+                "enterprise cloud computing",
+                "digital advertising",
+            ],
+            "52": [
+                "commercial banking",
+                "health insurance exchange",
+                "payment processing",
+            ],
             "53": ["commercial real estate brokerage", "single-family rental housing"],
             "54": ["management consulting", "IT staffing services"],
             "56": ["commercial waste hauling", "temporary staffing"],
@@ -796,11 +1163,21 @@ class DOJGenerator(BaseGenerator):
         if self.rng.random() < 0.15:
             op_prefixes = ["Operation", "Project", "Task Force"]
             op_names = [
-                "Dark Web", "Pipeline", "Fury", "Crystal Clear",
-                "Border Shield", "Deadfall", "Snowfall", "Overdrive",
-                "Iron Curtain", "Blue Lightning", "Rolling Thunder",
+                "Dark Web",
+                "Pipeline",
+                "Fury",
+                "Crystal Clear",
+                "Border Shield",
+                "Deadfall",
+                "Snowfall",
+                "Overdrive",
+                "Iron Curtain",
+                "Blue Lightning",
+                "Rolling Thunder",
             ]
-            operation_name = f"{self.rng.choice(op_prefixes)} {self.rng.choice(op_names)}"
+            operation_name = (
+                f"{self.rng.choice(op_prefixes)} {self.rng.choice(op_names)}"
+            )
 
         record: dict[str, Any] = {
             "seizure_id": self.generate_uuid(),

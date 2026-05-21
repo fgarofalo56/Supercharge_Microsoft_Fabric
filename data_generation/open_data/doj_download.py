@@ -40,10 +40,7 @@ Library::
 from __future__ import annotations
 
 import argparse
-import contextlib
-import json
 import logging
-import os
 import time
 from pathlib import Path
 from typing import Any
@@ -67,7 +64,9 @@ logging.basicConfig(
 FBI_CRIME_BASE_URL = "https://api.usa.gov/crime/fbi/sapi/api/nibrs"
 FBI_BULK_URL = "https://cde.ucr.cjis.gov/LATEST/webapp"
 SENTENCING_BASE_URL = "https://www.ussc.gov/sites/default/files/pdf/research-and-publications/annual-reports-and-sourcebooks"
-ANTITRUST_CASES_URL = "https://catalog.data.gov/dataset/antitrust-division-select-case-filings"
+ANTITRUST_CASES_URL = (
+    "https://catalog.data.gov/dataset/antitrust-division-select-case-filings"
+)
 HSR_FILINGS_URL = "https://catalog.data.gov/dataset/hsr-merger-filings-by-month"
 DEA_SEIZURES_URL = "https://www.dea.gov/data-and-statistics/drug-data-analysis"
 
@@ -141,15 +140,56 @@ NIBRS_OFFENSE_CODES = [
 
 # State FIPS codes for API calls
 STATE_FIPS = {
-    "AL": "01", "AK": "02", "AZ": "04", "AR": "05", "CA": "06", "CO": "08",
-    "CT": "09", "DE": "10", "FL": "12", "GA": "13", "HI": "15", "ID": "16",
-    "IL": "17", "IN": "18", "IA": "19", "KS": "20", "KY": "21", "LA": "22",
-    "ME": "23", "MD": "24", "MA": "25", "MI": "26", "MN": "27", "MS": "28",
-    "MO": "29", "MT": "30", "NE": "31", "NV": "32", "NH": "33", "NJ": "34",
-    "NM": "35", "NY": "36", "NC": "37", "ND": "38", "OH": "39", "OK": "40",
-    "OR": "41", "PA": "42", "RI": "44", "SC": "45", "SD": "46", "TN": "47",
-    "TX": "48", "UT": "49", "VT": "50", "VA": "51", "WA": "53", "WV": "54",
-    "WI": "55", "WY": "56"
+    "AL": "01",
+    "AK": "02",
+    "AZ": "04",
+    "AR": "05",
+    "CA": "06",
+    "CO": "08",
+    "CT": "09",
+    "DE": "10",
+    "FL": "12",
+    "GA": "13",
+    "HI": "15",
+    "ID": "16",
+    "IL": "17",
+    "IN": "18",
+    "IA": "19",
+    "KS": "20",
+    "KY": "21",
+    "LA": "22",
+    "ME": "23",
+    "MD": "24",
+    "MA": "25",
+    "MI": "26",
+    "MN": "27",
+    "MS": "28",
+    "MO": "29",
+    "MT": "30",
+    "NE": "31",
+    "NV": "32",
+    "NH": "33",
+    "NJ": "34",
+    "NM": "35",
+    "NY": "36",
+    "NC": "37",
+    "ND": "38",
+    "OH": "39",
+    "OK": "40",
+    "OR": "41",
+    "PA": "42",
+    "RI": "44",
+    "SC": "45",
+    "SD": "46",
+    "TN": "47",
+    "TX": "48",
+    "UT": "49",
+    "VT": "50",
+    "VA": "51",
+    "WA": "53",
+    "WV": "54",
+    "WI": "55",
+    "WY": "56",
 }
 
 # Schema alignment: map raw DOJ column names to our standard names
@@ -248,7 +288,7 @@ def _request_with_retry(
             if attempt == MAX_RETRIES:
                 logger.error("Request failed after %d attempts: %s", MAX_RETRIES, exc)
                 raise
-            wait = BACKOFF_BASE ** attempt
+            wait = BACKOFF_BASE**attempt
             logger.warning(
                 "Attempt %d/%d failed (%s). Retrying in %ds...",
                 attempt,
@@ -284,6 +324,7 @@ def _save_dataframe(
 # Download functions
 # ---------------------------------------------------------------------------
 
+
 def download_fbi_crime_data(
     output_dir: str,
     state_filter: str | None = None,
@@ -313,13 +354,18 @@ def download_fbi_crime_data(
     """
     logger.info(
         "Downloading FBI crime data (state=%s, year=%s, offense=%s, sample=%s)",
-        state_filter, year, offense, sample_size
+        state_filter,
+        year,
+        offense,
+        sample_size,
     )
 
     all_records: list[dict[str, Any]] = []
 
     # Determine which offense codes to fetch
-    offense_codes = [offense] if offense else NIBRS_OFFENSE_CODES[:10]  # Sample first 10
+    offense_codes = (
+        [offense] if offense else NIBRS_OFFENSE_CODES[:10]
+    )  # Sample first 10
 
     # Determine which states to fetch
     if state_filter:
@@ -333,7 +379,7 @@ def download_fbi_crime_data(
     pbar = tqdm(
         total=len(states_to_fetch) * len(offense_codes),
         desc="FBI crime data",
-        unit="request"
+        unit="request",
     )
 
     for state_code in states_to_fetch:
@@ -376,8 +422,7 @@ def download_fbi_crime_data(
 
             except Exception as exc:
                 logger.warning(
-                    "Failed to fetch %s/%s data: %s",
-                    state_code, offense_code, exc
+                    "Failed to fetch %s/%s data: %s", state_code, offense_code, exc
                 )
                 pbar.update(1)
                 continue
@@ -451,7 +496,9 @@ def download_sentencing_data(
     """
     logger.info(
         "Downloading sentencing data (year=%s, district=%s, sample=%s)",
-        year, district, sample_size
+        year,
+        district,
+        sample_size,
     )
 
     # Since direct USSC data access requires complex parsing of PDF reports,
@@ -461,8 +508,21 @@ def download_sentencing_data(
 
     # Federal districts (sample)
     districts = [
-        "CACD", "SDNY", "EDNY", "NDIL", "EDVA", "WDTX", "SDFL", "EDPA",
-        "NDGA", "CDCA", "EDMI", "WDWA", "NDAL", "SDTX", "MDFL"
+        "CACD",
+        "SDNY",
+        "EDNY",
+        "NDIL",
+        "EDVA",
+        "WDTX",
+        "SDFL",
+        "EDPA",
+        "NDGA",
+        "CDCA",
+        "EDMI",
+        "WDWA",
+        "NDAL",
+        "SDTX",
+        "MDFL",
     ]
 
     if district:
@@ -484,13 +544,13 @@ def download_sentencing_data(
 
     records = []
     import random
+
     random.seed(42)  # For reproducible results
 
-    for i in range(target_size):
+    for _i in range(target_size):
         # Select offense type based on frequency weights
         offense_choice = random.choices(
-            offense_patterns,
-            weights=[pattern[3] for pattern in offense_patterns]
+            offense_patterns, weights=[pattern[3] for pattern in offense_patterns]
         )[0]
 
         offense_name, min_months, max_months, _ = offense_choice
@@ -499,10 +559,7 @@ def download_sentencing_data(
         # Generate realistic sentencing data
         guideline_min = random.randint(min_months, max_months - 12)
         guideline_max = guideline_min + random.randint(6, 24)
-        actual_sentence = random.randint(
-            max(0, guideline_min - 12),
-            guideline_max + 12
-        )
+        actual_sentence = random.randint(max(0, guideline_min - 12), guideline_max + 12)
 
         record = {
             "fiscal_year": target_year,
@@ -511,25 +568,31 @@ def download_sentencing_data(
             "guideline_min": guideline_min,
             "guideline_max": guideline_max,
             "sentence_months": actual_sentence,
-            "defendant_race": random.choice([
-                "White", "Black", "Hispanic", "Asian", "Other", "Unknown"
-            ]),
+            "defendant_race": random.choice(
+                ["White", "Black", "Hispanic", "Asian", "Other", "Unknown"]
+            ),
             "defendant_gender": random.choice(["Male", "Female", "Unknown"]),
             "defendant_age": random.randint(18, 75),
-            "citizenship": random.choice([
-                "US Citizen", "Legal Resident", "Illegal Alien", "Unknown"
-            ]),
-            "education": random.choice([
-                "Less than HS", "High School", "Some College", "College Grad", "Unknown"
-            ]),
-            "criminal_history_category": random.choice([
-                "I", "II", "III", "IV", "V", "VI"
-            ]),
+            "citizenship": random.choice(
+                ["US Citizen", "Legal Resident", "Illegal Alien", "Unknown"]
+            ),
+            "education": random.choice(
+                [
+                    "Less than HS",
+                    "High School",
+                    "Some College",
+                    "College Grad",
+                    "Unknown",
+                ]
+            ),
+            "criminal_history_category": random.choice(
+                ["I", "II", "III", "IV", "V", "VI"]
+            ),
             "safety_valve_applied": random.choice([True, False]),
             "mandatory_minimum": random.choice([True, False]),
-            "departure": random.choice([
-                "None", "Downward", "Upward", "Substantial Assistance"
-            ]),
+            "departure": random.choice(
+                ["None", "Downward", "Upward", "Substantial Assistance"]
+            ),
             "zone": random.choice(["A", "B", "C", "D"]),
         }
 
@@ -571,8 +634,7 @@ def download_antitrust_cases(
         DataFrame of antitrust case records.
     """
     logger.info(
-        "Downloading antitrust cases (case_type=%s, sample=%s)",
-        case_type, sample_size
+        "Downloading antitrust cases (case_type=%s, sample=%s)", case_type, sample_size
     )
 
     target_size = sample_size or 500
@@ -589,23 +651,40 @@ def download_antitrust_cases(
 
     # Industry sectors commonly involved in antitrust
     industries = [
-        "Technology", "Healthcare", "Financial Services", "Telecommunications",
-        "Energy", "Agriculture", "Manufacturing", "Transportation", "Media",
-        "Pharmaceuticals", "Construction", "Defense", "Retail", "Aerospace"
+        "Technology",
+        "Healthcare",
+        "Financial Services",
+        "Telecommunications",
+        "Energy",
+        "Agriculture",
+        "Manufacturing",
+        "Transportation",
+        "Media",
+        "Pharmaceuticals",
+        "Construction",
+        "Defense",
+        "Retail",
+        "Aerospace",
     ]
 
     # Court jurisdictions
     courts = [
-        "District of Columbia", "Southern District of New York",
-        "Northern District of California", "Eastern District of Virginia",
-        "District of Delaware", "Central District of California",
-        "Northern District of Illinois", "Western District of Washington",
-        "Eastern District of Pennsylvania", "Southern District of Florida"
+        "District of Columbia",
+        "Southern District of New York",
+        "Northern District of California",
+        "Eastern District of Virginia",
+        "District of Delaware",
+        "Central District of California",
+        "Northern District of Illinois",
+        "Western District of Washington",
+        "Eastern District of Pennsylvania",
+        "Southern District of Florida",
     ]
 
     records = []
     import random
     from datetime import datetime, timedelta
+
     random.seed(42)
 
     # Filter case types if specified
@@ -614,11 +693,10 @@ def download_antitrust_cases(
         if not case_types:
             case_types = [(case_type, 1.0)]
 
-    for i in range(target_size):
+    for _i in range(target_size):
         # Select case type based on frequency
         selected_case_type = random.choices(
-            case_types,
-            weights=[ct[1] for ct in case_types]
+            case_types, weights=[ct[1] for ct in case_types]
         )[0][0]
 
         # Generate filing date (last 5 years)
@@ -651,13 +729,19 @@ def download_antitrust_cases(
             "filing_date": filing_date.strftime("%Y-%m-%d"),
             "case_type": selected_case_type,
             "court": random.choice(courts),
-            "district": random.choice(courts).split()[-1] if "District" in random.choice(courts) else "Federal",
+            "district": random.choice(courts).split()[-1]
+            if "District" in random.choice(courts)
+            else "Federal",
             "status": status,
             "industry": random.choice(industries),
             "case_number": case_number,
             "description": f"{selected_case_type} case involving {random.choice(industries).lower()} sector",
             "settlement_amount": financial_penalty,
-            "resolution_date": (filing_date + timedelta(days=random.randint(365, 1095))).strftime("%Y-%m-%d") if status in ["Settled", "Dismissed", "Judgment", "Closed"] else None,
+            "resolution_date": (
+                filing_date + timedelta(days=random.randint(365, 1095))
+            ).strftime("%Y-%m-%d")
+            if status in ["Settled", "Dismissed", "Judgment", "Closed"]
+            else None,
         }
 
         records.append(record)
@@ -672,7 +756,9 @@ def download_antitrust_cases(
 
     # Convert financial penalty to numeric
     if "financial_penalty" in df.columns:
-        df["financial_penalty"] = pd.to_numeric(df["financial_penalty"], errors="coerce")
+        df["financial_penalty"] = pd.to_numeric(
+            df["financial_penalty"], errors="coerce"
+        )
 
     logger.info("Antitrust cases: %d rows", len(df))
     _save_dataframe(df, output_dir, "doj_antitrust_cases")
@@ -703,14 +789,25 @@ def download_hsr_filings(
     # Generate monthly HSR statistics based on historical patterns
     records = []
     months = [
-        "October", "November", "December", "January", "February", "March",
-        "April", "May", "June", "July", "August", "September"
+        "October",
+        "November",
+        "December",
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
     ]
 
     import random
+
     random.seed(42)
 
-    for i, month in enumerate(months):
+    for _i, month in enumerate(months):
         # Seasonal patterns in merger activity
         if month in ["December", "August"]:  # Lower activity
             base_filings = random.randint(150, 220)
@@ -721,14 +818,12 @@ def download_hsr_filings(
 
         # Second request rate (typically 1-3% of filings)
         second_requests = random.randint(
-            max(1, int(base_filings * 0.01)),
-            int(base_filings * 0.03)
+            max(1, int(base_filings * 0.01)), int(base_filings * 0.03)
         )
 
         # Early terminations (typically 80-95% of filings)
         early_terminations = random.randint(
-            int(base_filings * 0.80),
-            int(base_filings * 0.95)
+            int(base_filings * 0.80), int(base_filings * 0.95)
         )
 
         # Transaction value estimates
@@ -789,10 +884,7 @@ def download_dea_seizures(
     Returns:
         DataFrame of drug seizure records.
     """
-    logger.info(
-        "Downloading DEA seizure data (drug_type=%s, year=%s)",
-        drug_type, year
-    )
+    logger.info("Downloading DEA seizure data (drug_type=%s, year=%s)", drug_type, year)
 
     target_year = year or 2023
 
@@ -810,9 +902,21 @@ def download_dea_seizures(
 
     # DEA regions
     dea_regions = [
-        "New York", "Miami", "Chicago", "Houston", "Los Angeles",
-        "Phoenix", "Seattle", "Denver", "Atlanta", "El Paso",
-        "Detroit", "Philadelphia", "San Francisco", "St. Louis", "New Orleans"
+        "New York",
+        "Miami",
+        "Chicago",
+        "Houston",
+        "Los Angeles",
+        "Phoenix",
+        "Seattle",
+        "Denver",
+        "Atlanta",
+        "El Paso",
+        "Detroit",
+        "Philadelphia",
+        "San Francisco",
+        "St. Louis",
+        "New Orleans",
     ]
 
     # Filter by drug type if specified
@@ -827,6 +931,7 @@ def download_dea_seizures(
 
     records = []
     import random
+
     random.seed(42)
 
     # Generate seizure records for each region and drug type
@@ -837,19 +942,18 @@ def download_dea_seizures(
 
             # Total quantity seized (kg)
             total_quantity = random.randint(
-                seizure_count * min_qty,
-                seizure_count * max_qty
+                seizure_count * min_qty, seizure_count * max_qty
             )
 
             # Estimated value ($1000-$5000 per kg depending on drug type)
             if "Fentanyl" in drug_name:
                 value_per_kg = random.randint(10000, 50000)  # High value
             elif "Cocaine" in drug_name or "Heroin" in drug_name:
-                value_per_kg = random.randint(5000, 20000)   # Medium-high value
+                value_per_kg = random.randint(5000, 20000)  # Medium-high value
             elif "Marijuana" in drug_name:
-                value_per_kg = random.randint(500, 2000)     # Lower value
+                value_per_kg = random.randint(500, 2000)  # Lower value
             else:
-                value_per_kg = random.randint(2000, 10000)   # Medium value
+                value_per_kg = random.randint(2000, 10000)  # Medium value
 
             estimated_value = total_quantity * value_per_kg
 
@@ -862,15 +966,30 @@ def download_dea_seizures(
                 "region": region,
                 "state": random.choice(list(STATE_FIPS.keys())),
                 "estimated_value": estimated_value,
-                "seizure_type": random.choice([
-                    "Border Seizure", "Domestic Operation", "Mail Interception",
-                    "Airport Seizure", "Traffic Stop", "Search Warrant",
-                    "Undercover Operation", "Task Force Operation"
-                ]),
-                "source_country": random.choice([
-                    "Mexico", "Colombia", "China", "India", "Canada",
-                    "Unknown", "Domestic", "Multiple Countries"
-                ]),
+                "seizure_type": random.choice(
+                    [
+                        "Border Seizure",
+                        "Domestic Operation",
+                        "Mail Interception",
+                        "Airport Seizure",
+                        "Traffic Stop",
+                        "Search Warrant",
+                        "Undercover Operation",
+                        "Task Force Operation",
+                    ]
+                ),
+                "source_country": random.choice(
+                    [
+                        "Mexico",
+                        "Colombia",
+                        "China",
+                        "India",
+                        "Canada",
+                        "Unknown",
+                        "Domestic",
+                        "Multiple Countries",
+                    ]
+                ),
             }
 
             records.append(record)
@@ -899,6 +1018,7 @@ def download_dea_seizures(
 # ---------------------------------------------------------------------------
 # Validation
 # ---------------------------------------------------------------------------
+
 
 def validate_download(file_path: str) -> dict[str, Any]:
     """
@@ -967,7 +1087,9 @@ def validate_download(file_path: str) -> dict[str, Any]:
         sentencing_required = {"case_year", "primary_offense", "sentence_months"}
         sentencing_missing = sentencing_required - present
         if sentencing_missing:
-            result["warnings"].append(f"Missing sentencing columns: {sentencing_missing}")
+            result["warnings"].append(
+                f"Missing sentencing columns: {sentencing_missing}"
+            )
 
     elif "antitrust" in path.name:
         antitrust_required = {"case_title", "filing_date", "case_type"}
@@ -977,17 +1099,19 @@ def validate_download(file_path: str) -> dict[str, Any]:
 
     # Check numeric columns are properly typed
     numeric_cols = [
-        "incident_count", "sentence_months", "financial_penalty",
-        "filing_count", "quantity_seized_kg", "estimated_value_usd"
+        "incident_count",
+        "sentence_months",
+        "financial_penalty",
+        "filing_count",
+        "quantity_seized_kg",
+        "estimated_value_usd",
     ]
 
     for col in numeric_cols:
         if col in df.columns:
             non_numeric = pd.to_numeric(df[col], errors="coerce").isna().sum()
             if non_numeric > 0:
-                result["warnings"].append(
-                    f"{non_numeric} non-numeric values in {col}"
-                )
+                result["warnings"].append(f"{non_numeric} non-numeric values in {col}")
 
     result["valid"] = len(result["warnings"]) == 0
     return result
@@ -997,6 +1121,7 @@ def validate_download(file_path: str) -> dict[str, Any]:
 # CLI
 # ---------------------------------------------------------------------------
 
+
 def main() -> None:
     """Command-line interface for DOJ open-data downloads."""
     parser = argparse.ArgumentParser(
@@ -1004,7 +1129,14 @@ def main() -> None:
     )
     parser.add_argument(
         "--dataset",
-        choices=["fbi_crime", "sentencing", "antitrust_cases", "hsr_filings", "dea_seizures", "all"],
+        choices=[
+            "fbi_crime",
+            "sentencing",
+            "antitrust_cases",
+            "hsr_filings",
+            "dea_seizures",
+            "all",
+        ],
         default="all",
         help="Which dataset to download (default: all)",
     )

@@ -19,10 +19,7 @@ import math
 from datetime import datetime, timedelta
 from typing import Any
 
-import numpy as np
-
 from data_generation.generators.base_generator import BaseGenerator
-
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -83,9 +80,7 @@ class MeterReadingGenerator(BaseGenerator):
         """Pre-generate a fleet of meter assets."""
         meters: list[dict[str, Any]] = []
         for i in range(self.num_meters):
-            rate_class = str(
-                self.rng.choice(RATE_CLASSES, p=RATE_WEIGHTS)
-            )
+            rate_class = str(self.rng.choice(RATE_CLASSES, p=RATE_WEIGHTS))
             district = str(self.rng.choice(DISTRICTS))
             feeder_prefix = str(self.rng.choice(FEEDER_PREFIXES))
             meters.append(
@@ -243,7 +238,9 @@ class MeterReadingGenerator(BaseGenerator):
             "cause_code": cause_code,
             "cause_description": cause_desc,
             "customers_affected": customers,
-            "equipment_failed": cause_desc.split()[0] if "EQUIPMENT" in cause_code else None,
+            "equipment_failed": cause_desc.split()[0]
+            if "EQUIPMENT" in cause_code
+            else None,
             "weather_related": weather_related,
             "major_event": customers > 5000 or duration_min > 1440,
         }

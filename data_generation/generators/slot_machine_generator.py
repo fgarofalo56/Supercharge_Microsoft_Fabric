@@ -89,7 +89,7 @@ class SlotMachineGenerator(BaseGenerator):
         machines = []
         for i in range(self.num_machines):
             machine = {
-                "machine_id": f"SLOT-{i+1:04d}",
+                "machine_id": f"SLOT-{i + 1:04d}",
                 "asset_number": f"AST-{self.faker.unique.random_number(digits=8)}",
                 "location_id": f"LOC-{self.rng.integers(1, 20):03d}",
                 "zone": self.rng.choice(self.ZONES),

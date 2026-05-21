@@ -435,9 +435,9 @@ class TestEventValidation:
                 "enum", []
             )
             if valid_types:
-                assert (
-                    event["event_type"] in valid_types
-                ), f"Invalid event_type: {event['event_type']}"
+                assert event["event_type"] in valid_types, (
+                    f"Invalid event_type: {event['event_type']}"
+                )
 
     def test_machine_id_format_in_stream(self, validate_machine_id_format):
         """Verify streamed events have valid machine IDs."""
@@ -447,9 +447,9 @@ class TestEventValidation:
 
         for _ in range(50):
             event = producer.generate_event()
-            assert validate_machine_id_format(
-                event["machine_id"]
-            ), f"Invalid machine_id: {event['machine_id']}"
+            assert validate_machine_id_format(event["machine_id"]), (
+                f"Invalid machine_id: {event['machine_id']}"
+            )
 
 
 class TestAsyncMode:

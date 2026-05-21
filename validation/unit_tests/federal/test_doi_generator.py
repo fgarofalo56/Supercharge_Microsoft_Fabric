@@ -30,9 +30,9 @@ class TestDOIGenerator:
         for _ in range(100):
             record = doi_generator.generate_record(domain="earthquake")
             mag = record["magnitude"]
-            assert (
-                -1 <= mag <= 10
-            ), f"Magnitude {mag} is outside the expected -1 to 10 range"
+            assert -1 <= mag <= 10, (
+                f"Magnitude {mag} is outside the expected -1 to 10 range"
+            )
 
     def test_earthquake_depth_positive(self, doi_generator):
         """Earthquake depth in kilometres must be non-negative."""
@@ -47,9 +47,9 @@ class TestDOIGenerator:
 
         for _ in range(100):
             record = doi_generator.generate_record(domain="earthquake")
-            assert (
-                record["mag_type"] in valid_mag_types
-            ), f"Unexpected mag_type: {record['mag_type']}"
+            assert record["mag_type"] in valid_mag_types, (
+                f"Unexpected mag_type: {record['mag_type']}"
+            )
 
     def test_earthquake_coordinates(self, doi_generator):
         """Earthquake coordinates must be within valid geographic bounds."""
@@ -100,17 +100,17 @@ class TestDOIGenerator:
 
         for _ in range(100):
             record = doi_generator.generate_record(domain="land_use")
-            assert (
-                record["managing_agency"] in valid_agencies
-            ), f"Unexpected managing_agency: {record['managing_agency']}"
+            assert record["managing_agency"] in valid_agencies, (
+                f"Unexpected managing_agency: {record['managing_agency']}"
+            )
 
     def test_land_acres_positive(self, doi_generator):
         """total_acres must be strictly greater than zero."""
         for _ in range(100):
             record = doi_generator.generate_record(domain="land_use")
-            assert (
-                record["total_acres"] > 0
-            ), f"total_acres {record['total_acres']} is not positive"
+            assert record["total_acres"] > 0, (
+                f"total_acres {record['total_acres']} is not positive"
+            )
 
     def test_land_fire_risk_valid(self, doi_generator):
         """fire_risk_level must be one of the five NIFC levels or None."""
@@ -118,9 +118,9 @@ class TestDOIGenerator:
 
         for _ in range(100):
             record = doi_generator.generate_record(domain="land_use")
-            assert (
-                record["fire_risk_level"] in valid_levels
-            ), f"Unexpected fire_risk_level: {record['fire_risk_level']}"
+            assert record["fire_risk_level"] in valid_levels, (
+                f"Unexpected fire_risk_level: {record['fire_risk_level']}"
+            )
 
     # ------------------------------------------------------------------ #
     # Batch / metadata                                                     #

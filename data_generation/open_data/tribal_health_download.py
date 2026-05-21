@@ -82,9 +82,7 @@ HRSA_HEALTH_CENTER_API = "https://data.hrsa.gov/api/data"
 HRSA_UDS_URL = "https://data.hrsa.gov/data/download?data=UDS"
 
 # HRSA SODA-compatible endpoint for health center locations
-HRSA_HEALTH_CENTER_GEOJSON = (
-    "https://data.hrsa.gov/data/download?data=HC"
-)
+HRSA_HEALTH_CENTER_GEOJSON = "https://data.hrsa.gov/data/download?data=HC"
 
 # IHS (Indian Health Service) publicly available statistics
 IHS_STATS_BASE = "https://www.ihs.gov"
@@ -103,7 +101,9 @@ CDC_DIABETES_ATLAS = f"{CDC_DATA_BASE}/incr-7ytk.json"
 
 # CMS Medicaid endpoints
 CMS_DATA_BASE = "https://data.cms.gov/data-api/v1/dataset"
-CMS_MEDICAID_ENROLLMENT = f"{CDC_DATA_BASE}/7s6b-dkma.json"  # CMS Medicaid enrollment via data.cdc.gov mirror
+CMS_MEDICAID_ENROLLMENT = (
+    f"{CDC_DATA_BASE}/7s6b-dkma.json"  # CMS Medicaid enrollment via data.cdc.gov mirror
+)
 CMS_MEDICAID_MANAGED_CARE = "https://data.cms.gov/data-api/v1/dataset/9781661f-0e22-4tried-8949-a7bca0faef2c/data"
 
 MAX_RETRIES = 3
@@ -344,7 +344,7 @@ def _request_with_retry(
             if attempt == MAX_RETRIES:
                 logger.error("Request failed after %d attempts: %s", MAX_RETRIES, exc)
                 raise
-            wait = BACKOFF_BASE ** attempt
+            wait = BACKOFF_BASE**attempt
             logger.warning(
                 "Attempt %d/%d failed (%s). Retrying in %ds...",
                 attempt,
@@ -379,6 +379,7 @@ def _save_dataframe(
 # ---------------------------------------------------------------------------
 # Download functions
 # ---------------------------------------------------------------------------
+
 
 def download_hrsa_health_centers(
     output_dir: str,
@@ -517,7 +518,9 @@ def download_hrsa_health_centers(
 
                 chunk_df = pd.read_csv(tmp_path, low_memory=False, dtype=str)
                 frames.append(chunk_df)
-                logger.info("Downloaded HRSA %s: %d rows", Path(url).stem, len(chunk_df))
+                logger.info(
+                    "Downloaded HRSA %s: %d rows", Path(url).stem, len(chunk_df)
+                )
 
                 with contextlib.suppress(OSError):
                     os.remove(tmp_path)
@@ -533,9 +536,7 @@ def download_hrsa_health_centers(
     # ---------------------------------------------------------------
     if not frames:
         logger.info("Attempting HRSA Data Warehouse listing download...")
-        warehouse_url = (
-            "https://findahealthcenter.hrsa.gov/data/geojson"
-        )
+        warehouse_url = "https://findahealthcenter.hrsa.gov/data/geojson"
         try:
             resp = _request_with_retry(warehouse_url)
             geojson = resp.json()
@@ -550,7 +551,9 @@ def download_hrsa_health_centers(
                     records.append(props)
                 chunk_df = pd.DataFrame(records)
                 frames.append(chunk_df)
-                logger.info("Downloaded %d health center locations from GeoJSON", len(chunk_df))
+                logger.info(
+                    "Downloaded %d health center locations from GeoJSON", len(chunk_df)
+                )
         except Exception:
             logger.warning("Failed to download HRSA GeoJSON data")
 
@@ -575,9 +578,11 @@ def download_hrsa_health_centers(
     # Map state to area office
     if "facility_state" in df.columns:
         df["area_office"] = df["facility_state"].map(
-            lambda s: STATE_TO_AREA_OFFICE.get(str(s).upper(), "Nashville")
-            if pd.notna(s)
-            else "Nashville"
+            lambda s: (
+                STATE_TO_AREA_OFFICE.get(str(s).upper(), "Nashville")
+                if pd.notna(s)
+                else "Nashville"
+            )
         )
     else:
         df["area_office"] = "Unknown"
@@ -597,7 +602,9 @@ def download_hrsa_health_centers(
         df["provider_type"] = "physician"
 
     # Tribal affiliation context
-    df["tribal_affiliation"] = None  # HRSA data does not have tribal affiliation per record
+    df["tribal_affiliation"] = (
+        None  # HRSA data does not have tribal affiliation per record
+    )
 
     # Add insurance breakdown columns if not present
     for col in ["medicaid_patients", "medicare_patients", "uninsured_patients"]:
@@ -1154,7 +1161,9 @@ def download_cdc_tribal_health(
         logger.warning("Failed to download CDC Diabetes Atlas data")
 
     if not frames:
-        logger.warning("No CDC tribal health data downloaded. Returning empty DataFrame.")
+        logger.warning(
+            "No CDC tribal health data downloaded. Returning empty DataFrame."
+        )
         return pd.DataFrame()
 
     df = pd.concat(frames, ignore_index=True)
@@ -1173,24 +1182,46 @@ def download_cdc_tribal_health(
     # ---------------------------------------------------------------
     # Map health topics to ICD-10 codes
     topic_to_icd10: dict[str, dict[str, str]] = {
-        "Diabetes": {"code": "E11.9", "desc": "Type 2 diabetes mellitus without complications"},
-        "Cardiovascular Disease": {"code": "I10", "desc": "Essential (primary) hypertension"},
-        "Chronic Obstructive Pulmonary Disease": {"code": "J44.1", "desc": "COPD with acute exacerbation"},
-        "Obesity": {"code": "E66.01", "desc": "Morbid (severe) obesity due to excess calories"},
+        "Diabetes": {
+            "code": "E11.9",
+            "desc": "Type 2 diabetes mellitus without complications",
+        },
+        "Cardiovascular Disease": {
+            "code": "I10",
+            "desc": "Essential (primary) hypertension",
+        },
+        "Chronic Obstructive Pulmonary Disease": {
+            "code": "J44.1",
+            "desc": "COPD with acute exacerbation",
+        },
+        "Obesity": {
+            "code": "E66.01",
+            "desc": "Morbid (severe) obesity due to excess calories",
+        },
         "Alcohol": {"code": "F10.20", "desc": "Alcohol dependence, uncomplicated"},
-        "Mental Health": {"code": "F32.1", "desc": "Major depressive disorder, single episode, moderate"},
+        "Mental Health": {
+            "code": "F32.1",
+            "desc": "Major depressive disorder, single episode, moderate",
+        },
         "Oral Health": {"code": "K02.9", "desc": "Dental caries, unspecified"},
-        "Chronic Kidney Disease": {"code": "N18.9", "desc": "Chronic kidney disease, unspecified"},
+        "Chronic Kidney Disease": {
+            "code": "N18.9",
+            "desc": "Chronic kidney disease, unspecified",
+        },
         "Asthma": {"code": "J45.20", "desc": "Mild intermittent asthma, uncomplicated"},
         "Immunization": {"code": "Z23", "desc": "Encounter for immunization"},
     }
 
     if "health_topic" in df.columns:
         df["icd10_code"] = df["health_topic"].map(
-            lambda t: topic_to_icd10.get(str(t), {}).get("code") if pd.notna(t) else None
+            lambda t: (
+                topic_to_icd10.get(str(t), {}).get("code") if pd.notna(t) else None
+            )
         )
         df["diagnosis_description"] = df["health_topic"].map(
-            lambda t: topic_to_icd10.get(str(t), {}).get("desc") if pd.notna(t) else None
+            lambda t: (
+                topic_to_icd10.get(str(t), {}).get("desc") if pd.notna(t) else None
+            )
         )
     else:
         df["icd10_code"] = None
@@ -1203,9 +1234,11 @@ def download_cdc_tribal_health(
     # Map state to IHS area office
     if "state" in df.columns:
         df["area_office"] = df["state"].map(
-            lambda s: STATE_TO_AREA_OFFICE.get(str(s).upper(), "Nashville")
-            if pd.notna(s)
-            else "Nashville"
+            lambda s: (
+                STATE_TO_AREA_OFFICE.get(str(s).upper(), "Nashville")
+                if pd.notna(s)
+                else "Nashville"
+            )
         )
     else:
         df["area_office"] = "Unknown"
@@ -1269,14 +1302,31 @@ def download_cms_medicaid_tribal(
     # ---------------------------------------------------------------
     # States with highest AI/AN Medicaid enrollment
     tribal_priority_states = [
-        "AK", "AZ", "CA", "CO", "ID", "KS", "MI", "MN", "MT", "NC",
-        "ND", "NE", "NM", "NV", "NY", "OK", "OR", "SD", "UT", "WA",
-        "WI", "WY",
+        "AK",
+        "AZ",
+        "CA",
+        "CO",
+        "ID",
+        "KS",
+        "MI",
+        "MN",
+        "MT",
+        "NC",
+        "ND",
+        "NE",
+        "NM",
+        "NV",
+        "NY",
+        "OK",
+        "OR",
+        "SD",
+        "UT",
+        "WA",
+        "WI",
+        "WY",
     ]
 
-    target_states = (
-        [state_filter.upper()] if state_filter else tribal_priority_states
-    )
+    target_states = [state_filter.upper()] if state_filter else tribal_priority_states
 
     # CMS Medicaid enrollment endpoint
     cms_urls = [
@@ -1292,7 +1342,9 @@ def download_cms_medicaid_tribal(
         if frames:
             break
 
-        for state in tqdm(target_states, desc=f"CMS Medicaid states (source {url_idx + 1})"):
+        for state in tqdm(
+            target_states, desc=f"CMS Medicaid states (source {url_idx + 1})"
+        ):
             params: dict[str, Any] = {
                 "$limit": 5000,
                 "$order": "year DESC",
@@ -1491,9 +1543,11 @@ def download_cms_medicaid_tribal(
     # Map state to IHS area office
     if "state" in df.columns:
         df["area_office"] = df["state"].map(
-            lambda s: STATE_TO_AREA_OFFICE.get(str(s).upper(), "Nashville")
-            if pd.notna(s)
-            else "Nashville"
+            lambda s: (
+                STATE_TO_AREA_OFFICE.get(str(s).upper(), "Nashville")
+                if pd.notna(s)
+                else "Nashville"
+            )
         )
     else:
         df["area_office"] = "Unknown"
@@ -1517,6 +1571,7 @@ def download_cms_medicaid_tribal(
 # ---------------------------------------------------------------------------
 # Validation
 # ---------------------------------------------------------------------------
+
 
 def validate_download(file_path: str) -> dict[str, Any]:
     """
@@ -1606,9 +1661,7 @@ def validate_download(file_path: str) -> dict[str, Any]:
             original_na = df[col].isna().sum()
             bad_values = non_numeric - original_na
             if bad_values > 0:
-                result["warnings"].append(
-                    f"{bad_values} non-numeric values in {col}"
-                )
+                result["warnings"].append(f"{bad_values} non-numeric values in {col}")
 
     result["valid"] = len(result["warnings"]) == 0
     return result
@@ -1617,6 +1670,7 @@ def validate_download(file_path: str) -> dict[str, Any]:
 # ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
+
 
 def main() -> None:
     """Command-line interface for tribal health open-data downloads."""

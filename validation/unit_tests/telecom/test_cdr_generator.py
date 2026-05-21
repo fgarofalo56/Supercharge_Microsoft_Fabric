@@ -12,10 +12,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 
 from data_generation.generators.telecom.cdr_generator import TelecomCDRGenerator
 
-
 # -------------------------------------------------------------------
 # Fixtures
 # -------------------------------------------------------------------
+
 
 @pytest.fixture
 def generator():
@@ -38,6 +38,7 @@ def sample_records(generator, sample_size):
 # Tests
 # -------------------------------------------------------------------
 
+
 class TestGenerateCDRs:
     """Test CDR record generation."""
 
@@ -50,9 +51,17 @@ class TestGenerateCDRs:
         """Test that all required fields are in each record."""
         record = generator.generate_record()
         required = [
-            "cdr_id", "subscriber_id", "call_type", "start_dt",
-            "duration_sec", "bytes_up", "bytes_down", "cell_id",
-            "sector", "rat_type", "rated_amount",
+            "cdr_id",
+            "subscriber_id",
+            "call_type",
+            "start_dt",
+            "duration_sec",
+            "bytes_up",
+            "bytes_down",
+            "cell_id",
+            "sector",
+            "rat_type",
+            "rated_amount",
         ]
         for field in required:
             assert field in record, f"Missing field: {field}"
@@ -146,7 +155,7 @@ class TestReproducibility:
         records1 = gen1.generate(20, show_progress=False).to_dict("records")
         records2 = gen2.generate(20, show_progress=False).to_dict("records")
 
-        for r1, r2 in zip(records1, records2):
+        for r1, r2 in zip(records1, records2, strict=False):
             assert r1["cdr_id"] == r2["cdr_id"]
             assert r1["subscriber_id"] == r2["subscriber_id"]
             assert r1["call_type"] == r2["call_type"]

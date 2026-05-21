@@ -50,14 +50,18 @@ class ComplianceGenerator(BaseGenerator):
     FILING_TYPES = ["CTR", "SAR", "W2G"]
 
     # W-2G thresholds by game type (loaded from config or defaults)
-    W2G_THRESHOLDS = get_threshold("w2g", "thresholds", {
-        "Slots": 1200,
-        "Video Poker": 1200,
-        "Keno": 1500,
-        "Bingo": 1200,
-        "Poker Tournament": 5000,
-        "Table Games": 600,
-    })
+    W2G_THRESHOLDS = get_threshold(
+        "w2g",
+        "thresholds",
+        {
+            "Slots": 1200,
+            "Video Poker": 1200,
+            "Keno": 1500,
+            "Bingo": 1200,
+            "Poker Tournament": 5000,
+            "Table Games": 600,
+        },
+    )
 
     # CTR threshold (loaded from config or default)
     CTR_THRESHOLD = get_threshold("ctr", "threshold", 10000)
@@ -68,25 +72,33 @@ class ComplianceGenerator(BaseGenerator):
     SAR_STRUCTURING_UPPER = get_threshold("sar", "structuring_upper", 9900)
     SAR_FILING_DEADLINE_DAYS = get_threshold("sar", "filing_deadline_days", 30)
 
-    SAR_CATEGORIES = get_threshold("sar", "categories", [
-        "Structuring",
-        "Unusual Transaction Pattern",
-        "Third Party Activity",
-        "Identity Concerns",
-        "Employee Involvement",
-        "Counterfeit Currency",
-        "Wire Transfer Anomaly",
-        "Chip Walking",
-        "Credit Abuse",
-        "Other Suspicious Activity",
-    ])
+    SAR_CATEGORIES = get_threshold(
+        "sar",
+        "categories",
+        [
+            "Structuring",
+            "Unusual Transaction Pattern",
+            "Third Party Activity",
+            "Identity Concerns",
+            "Employee Involvement",
+            "Counterfeit Currency",
+            "Wire Transfer Anomaly",
+            "Chip Walking",
+            "Credit Abuse",
+            "Other Suspicious Activity",
+        ],
+    )
 
     # Withholding rates
-    FEDERAL_WITHHOLDING_RATE = get_threshold("w2g", "withholding", {}).get("federal_rate", 0.24)
-    STATE_WITHHOLDING_RATE = get_threshold("w2g", "withholding", {}).get("state_rate", 0.06)
-    MANDATORY_WITHHOLDING_THRESHOLD = get_threshold(
-        "w2g", "withholding", {}
-    ).get("mandatory_withholding_threshold", 5000)
+    FEDERAL_WITHHOLDING_RATE = get_threshold("w2g", "withholding", {}).get(
+        "federal_rate", 0.24
+    )
+    STATE_WITHHOLDING_RATE = get_threshold("w2g", "withholding", {}).get(
+        "state_rate", 0.06
+    )
+    MANDATORY_WITHHOLDING_THRESHOLD = get_threshold("w2g", "withholding", {}).get(
+        "mandatory_withholding_threshold", 5000
+    )
 
     FILING_STATUS = ["Draft", "Pending Review", "Filed", "Rejected", "Amended"]
 
@@ -243,9 +255,12 @@ class ComplianceGenerator(BaseGenerator):
 
         # CTR must be filed within configured deadline
         record["filing_date"] = (
-            timestamp + timedelta(days=int(self.rng.integers(1, self.CTR_FILING_DEADLINE_DAYS)))
+            timestamp
+            + timedelta(days=int(self.rng.integers(1, self.CTR_FILING_DEADLINE_DAYS)))
         ).strftime("%Y-%m-%d")
-        record["due_date"] = (timestamp + timedelta(days=self.CTR_FILING_DEADLINE_DAYS)).strftime("%Y-%m-%d")
+        record["due_date"] = (
+            timestamp + timedelta(days=self.CTR_FILING_DEADLINE_DAYS)
+        ).strftime("%Y-%m-%d")
 
         record["status"] = self.weighted_choice(
             self.FILING_STATUS,
@@ -282,9 +297,12 @@ class ComplianceGenerator(BaseGenerator):
 
         # SAR must be filed within configured deadline
         record["filing_date"] = (
-            timestamp + timedelta(days=int(self.rng.integers(1, self.SAR_FILING_DEADLINE_DAYS)))
+            timestamp
+            + timedelta(days=int(self.rng.integers(1, self.SAR_FILING_DEADLINE_DAYS)))
         ).strftime("%Y-%m-%d")
-        record["due_date"] = (timestamp + timedelta(days=self.SAR_FILING_DEADLINE_DAYS)).strftime("%Y-%m-%d")
+        record["due_date"] = (
+            timestamp + timedelta(days=self.SAR_FILING_DEADLINE_DAYS)
+        ).strftime("%Y-%m-%d")
 
         record["status"] = self.weighted_choice(
             ["Draft", "Pending Review", "Filed"],
@@ -383,14 +401,19 @@ class ComplianceGenerator(BaseGenerator):
             # Keep each transaction just under CTR threshold
             amount = min(
                 remaining,
-                round(self.rng.uniform(self.SAR_STRUCTURING_LOWER, self.SAR_STRUCTURING_UPPER), 2),
+                round(
+                    self.rng.uniform(
+                        self.SAR_STRUCTURING_LOWER, self.SAR_STRUCTURING_UPPER
+                    ),
+                    2,
+                ),
             )
             remaining -= amount
 
             timestamp = base_date + timedelta(hours=int(self.rng.integers(1, 8)) * i)
 
             record = {
-                "transaction_id": f"TXN-STRUCT-{i+1:02d}",
+                "transaction_id": f"TXN-STRUCT-{i + 1:02d}",
                 "player_id": player_id,
                 "timestamp": timestamp,
                 "amount": amount,

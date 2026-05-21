@@ -76,12 +76,8 @@ BTS_CARRIERS_API = f"{BTS_BASE}/Tables.asp"
 
 # FAA data endpoints
 FAA_AIRPORTS_API = "https://services6.arcgis.com/ssFJjBXIUyZDrSYZ/arcgis/rest/services"
-FAA_AIRPORT_FACILITIES = (
-    f"{FAA_AIRPORTS_API}/US_Airport/FeatureServer/0/query"
-)
-FAA_RUNWAY_DATA = (
-    f"{FAA_AIRPORTS_API}/US_Runway/FeatureServer/0/query"
-)
+FAA_AIRPORT_FACILITIES = f"{FAA_AIRPORTS_API}/US_Airport/FeatureServer/0/query"
+FAA_RUNWAY_DATA = f"{FAA_AIRPORTS_API}/US_Runway/FeatureServer/0/query"
 
 # FAA ASRS (managed by NASA)
 ASRS_BASE = "https://asrs.arc.nasa.gov"
@@ -101,23 +97,89 @@ RATE_LIMIT_SLEEP = 1.0  # seconds between API calls
 # Valid carrier codes (major US airlines, IATA)
 # ---------------------------------------------------------------------------
 VALID_CARRIER_CODES = [
-    "AA", "DL", "UA", "WN", "B6", "AS", "NK", "F9", "G4", "HA",
-    "SY", "MQ", "OO", "YX", "OH", "9E", "QX", "YV", "ZW", "CP",
+    "AA",
+    "DL",
+    "UA",
+    "WN",
+    "B6",
+    "AS",
+    "NK",
+    "F9",
+    "G4",
+    "HA",
+    "SY",
+    "MQ",
+    "OO",
+    "YX",
+    "OH",
+    "9E",
+    "QX",
+    "YV",
+    "ZW",
+    "CP",
 ]
 
 # Major US airport IATA codes
 VALID_AIRPORT_CODES = [
-    "ATL", "DFW", "DEN", "ORD", "LAX", "CLT", "MCO", "LAS", "PHX",
-    "MIA", "SEA", "IAH", "JFK", "EWR", "SFO", "MSP", "BOS", "DTW",
-    "FLL", "PHL", "LGA", "BWI", "SLC", "SAN", "IAD", "DCA", "MDW",
-    "TPA", "PDX", "HNL", "STL", "BNA", "AUS", "HOU", "OAK", "MSY",
-    "RDU", "SJC", "SMF", "SNA", "CLE", "IND", "PIT", "CMH", "MCI",
-    "SAT", "MKE", "ABQ", "ANC", "ONT",
+    "ATL",
+    "DFW",
+    "DEN",
+    "ORD",
+    "LAX",
+    "CLT",
+    "MCO",
+    "LAS",
+    "PHX",
+    "MIA",
+    "SEA",
+    "IAH",
+    "JFK",
+    "EWR",
+    "SFO",
+    "MSP",
+    "BOS",
+    "DTW",
+    "FLL",
+    "PHL",
+    "LGA",
+    "BWI",
+    "SLC",
+    "SAN",
+    "IAD",
+    "DCA",
+    "MDW",
+    "TPA",
+    "PDX",
+    "HNL",
+    "STL",
+    "BNA",
+    "AUS",
+    "HOU",
+    "OAK",
+    "MSY",
+    "RDU",
+    "SJC",
+    "SMF",
+    "SNA",
+    "CLE",
+    "IND",
+    "PIT",
+    "CMH",
+    "MCI",
+    "SAT",
+    "MKE",
+    "ABQ",
+    "ANC",
+    "ONT",
 ]
 
 # Delay cause categories (FAA/BTS classification)
 DELAY_CAUSES = [
-    "CARRIER", "WEATHER", "NAS", "SECURITY", "LATE_AIRCRAFT",
+    "CARRIER",
+    "WEATHER",
+    "NAS",
+    "SECURITY",
+    "LATE_AIRCRAFT",
 ]
 
 # ---------------------------------------------------------------------------
@@ -236,7 +298,7 @@ def _request_with_retry(
             if attempt == MAX_RETRIES:
                 logger.error("Request failed after %d attempts: %s", MAX_RETRIES, exc)
                 raise
-            wait = BACKOFF_BASE ** attempt
+            wait = BACKOFF_BASE**attempt
             logger.warning(
                 "Attempt %d/%d failed (%s). Retrying in %ds...",
                 attempt,
@@ -270,6 +332,7 @@ def _save_dataframe(
 # ---------------------------------------------------------------------------
 # Download functions
 # ---------------------------------------------------------------------------
+
 
 def download_bts_flight_data(
     output_dir: str,
@@ -378,7 +441,9 @@ def download_bts_flight_data(
                     csv_names = [n for n in zf.namelist() if n.endswith(".csv")]
                     if csv_names:
                         with zf.open(csv_names[0]) as csv_file:
-                            chunk_df = pd.read_csv(csv_file, low_memory=False, dtype=str)
+                            chunk_df = pd.read_csv(
+                                csv_file, low_memory=False, dtype=str
+                            )
                             frames.append(chunk_df)
                             logger.info(
                                 "BTS ZIP %d/%02d: %d rows", year, m, len(chunk_df)
@@ -434,7 +499,9 @@ def download_bts_flight_data(
                         "carrier_delay_minutes": max(0, round(random.gauss(2, 10), 1)),
                         "weather_delay_minutes": max(0, round(random.gauss(1, 8), 1)),
                         "nas_delay_minutes": max(0, round(random.gauss(3, 12), 1)),
-                        "security_delay_minutes": max(0, round(random.gauss(0.1, 1), 1)),
+                        "security_delay_minutes": max(
+                            0, round(random.gauss(0.1, 1), 1)
+                        ),
                         "late_aircraft_delay_minutes": max(
                             0, round(random.gauss(3, 15), 1)
                         ),
@@ -504,8 +571,8 @@ def download_bts_flight_data(
     existing_delay_cols = {c: v for c, v in delay_cols.items() if c in df.columns}
 
     if existing_delay_cols:
-        df["delay_cause"] = df[list(existing_delay_cols.keys())].idxmax(axis=1).map(
-            existing_delay_cols
+        df["delay_cause"] = (
+            df[list(existing_delay_cols.keys())].idxmax(axis=1).map(existing_delay_cols)
         )
         # Only set delay_cause for flights that were actually delayed
         if "arrival_delay_minutes" in df.columns:
@@ -669,9 +736,21 @@ def download_faa_safety_reports(
         ]
 
         aircraft_types = [
-            "B737", "A320", "B777", "A321", "B787", "E175",
-            "CRJ-900", "A319", "B757", "ERJ-145", "PA-28",
-            "C172", "B767", "A330", "MD-88",
+            "B737",
+            "A320",
+            "B777",
+            "A321",
+            "B787",
+            "E175",
+            "CRJ-900",
+            "A319",
+            "B757",
+            "ERJ-145",
+            "PA-28",
+            "C172",
+            "B767",
+            "A330",
+            "MD-88",
         ]
 
         far_parts = ["Part 121", "Part 135", "Part 91", "Part 129"]
@@ -693,20 +772,28 @@ def download_faa_safety_reports(
                     "airport_code": random.choice(VALID_AIRPORT_CODES[:30]),
                     "state": random.choice(
                         [
-                            "CA", "TX", "FL", "NY", "IL", "GA", "VA",
-                            "CO", "AZ", "WA", "NV", "NC", "OH", "PA",
+                            "CA",
+                            "TX",
+                            "FL",
+                            "NY",
+                            "IL",
+                            "GA",
+                            "VA",
+                            "CO",
+                            "AZ",
+                            "WA",
+                            "NV",
+                            "NC",
+                            "OH",
+                            "PA",
                         ]
                     ),
                     "altitude_msl": random.randint(0, 40000),
-                    "weather_conditions": random.choice(
-                        ["VMC", "IMC", "VMC/IMC"]
-                    ),
+                    "weather_conditions": random.choice(["VMC", "IMC", "VMC/IMC"]),
                     "light_conditions": random.choice(
                         ["Daylight", "Night", "Dawn", "Dusk"]
                     ),
-                    "severity": random.choice(
-                        ["Minor", "Moderate", "Serious", "None"]
-                    ),
+                    "severity": random.choice(["Minor", "Moderate", "Serious", "None"]),
                     "primary_problem": random.choice(
                         [
                             "Human Factors",
@@ -990,6 +1077,7 @@ def download_faa_airport_data(
 # Validation
 # ---------------------------------------------------------------------------
 
+
 def validate_download(file_path: str) -> dict[str, Any]:
     """
     Validate a downloaded DOT/FAA dataset file for schema conformance.
@@ -1091,6 +1179,7 @@ def validate_download(file_path: str) -> dict[str, Any]:
 # ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
+
 
 def main() -> None:
     """Command-line interface for DOT/FAA open-data downloads."""

@@ -7,14 +7,20 @@ rules, and metadata columns.
 Fixtures are provided by the federal conftest.py (doj_generator, sample_size).
 """
 
-import re
-
 # Valid reference sets for assertions
 VALID_OFFENSE_CATEGORIES = {"Persons", "Property", "Society"}
 VALID_CLEARANCE_STATUSES = {"Cleared by Arrest", "Not Cleared", "Exceptionally Cleared"}
 VALID_CASE_TYPES = {"Criminal", "Civil", "Merger Review"}
 VALID_DOJ_ACTIONS = {"Approved", "Challenged", "Consent Decree", "Blocked", "Abandoned"}
-VALID_DRUG_TYPES = {"Cocaine", "Heroin", "Fentanyl", "Methamphetamine", "Cannabis", "MDMA", "Other"}
+VALID_DRUG_TYPES = {
+    "Cocaine",
+    "Heroin",
+    "Fentanyl",
+    "Methamphetamine",
+    "Cannabis",
+    "MDMA",
+    "Other",
+}
 VALID_DRUG_SCHEDULES = {"I", "II"}
 VALID_DEPARTURE_TYPES = {"None", "Above", "Below", "Substantial Assistance"}
 
@@ -87,7 +93,10 @@ class TestDOJGeneratorFederalCases:
         """guideline_range_max_months >= guideline_range_min_months."""
         for _ in range(100):
             record = doj_generator.generate_record(domain="federal_cases")
-            assert record["guideline_range_max_months"] >= record["guideline_range_min_months"]
+            assert (
+                record["guideline_range_max_months"]
+                >= record["guideline_range_min_months"]
+            )
 
     def test_departure_type_valid(self, doj_generator):
         """departure_type is a valid value."""
@@ -216,7 +225,7 @@ class TestDOJGeneratorGeneral:
         """Passing an invalid domain raises ValueError."""
         try:
             doj_generator.generate_record(domain="invalid")
-            assert False, "Expected ValueError"
+            raise AssertionError("Expected ValueError")
         except ValueError:
             pass
 

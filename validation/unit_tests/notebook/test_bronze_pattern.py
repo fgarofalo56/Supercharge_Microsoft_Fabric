@@ -31,7 +31,6 @@ from pyspark.sql.types import (
     TimestampType,
 )
 
-
 # ---------------------------------------------------------------------------
 # Extracted Bronze helpers -- mirror the notebook logic so it becomes testable
 # ---------------------------------------------------------------------------
@@ -53,11 +52,7 @@ PRIMARY_KEY_COLUMNS = ["event_id"]
 
 def read_source(spark: SparkSession, path: str, schema: StructType) -> DataFrame:
     """Read a Parquet source with an explicit schema (DROPMALFORMED mode)."""
-    return (
-        spark.read.schema(schema)
-        .option("mode", "DROPMALFORMED")
-        .parquet(path)
-    )
+    return spark.read.schema(schema).option("mode", "DROPMALFORMED").parquet(path)
 
 
 def reject_null_primary_keys(df: DataFrame, pk_cols: list[str]) -> DataFrame:

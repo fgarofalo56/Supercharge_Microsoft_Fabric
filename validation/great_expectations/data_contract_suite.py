@@ -116,7 +116,7 @@ try:  # pragma: no cover - exercised only when GE is missing
     )
 
     _GE_AVAILABLE = True
-    _GE_IMPORT_ERROR: Optional[BaseException] = None
+    _GE_IMPORT_ERROR: BaseException | None = None
 except ImportError as _err:  # pragma: no cover
     gx = None  # type: ignore[assignment]
     ExpectationConfiguration = None  # type: ignore[assignment,misc]
@@ -150,8 +150,8 @@ class ContractViolationError(Exception):
         self,
         contract_id: str,
         contract_version: str,
-        failures: List[Dict[str, Any]],
-        message: Optional[str] = None,
+        failures: list[dict[str, Any]],
+        message: str | None = None,
     ) -> None:
         self.contract_id = contract_id
         self.contract_version = contract_version
@@ -174,7 +174,7 @@ _REQUIRED_TOP_LEVEL: tuple[str, ...] = ("product", "version", "schema")
 _REQUIRED_COLUMN_KEYS: tuple[str, ...] = ("name", "type")
 
 
-def _normalise_contract(raw: Dict[str, Any]) -> Dict[str, Any]:
+def _normalise_contract(raw: dict[str, Any]) -> dict[str, Any]:
     """Normalise the two accepted contract layouts into one flat dict.
 
     The repo's ``data-contracts.md`` documents a nested form
@@ -185,7 +185,7 @@ def _normalise_contract(raw: Dict[str, Any]) -> Dict[str, Any]:
     """
     if "contract" in raw and isinstance(raw["contract"], dict):
         c = raw["contract"]
-        flat: Dict[str, Any] = {
+        flat: dict[str, Any] = {
             "product": c.get("id"),
             "version": c.get("version"),
             "producer": c.get("owner") or c.get("producer") or {},
@@ -201,12 +201,16 @@ def _normalise_contract(raw: Dict[str, Any]) -> Dict[str, Any]:
     return raw
 
 
-def _flatten_quality(quality: Dict[str, Any], volume: Dict[str, Any]) -> Dict[str, Any]:
+def _flatten_quality(quality: dict[str, Any], volume: dict[str, Any]) -> dict[str, Any]:
     """Best-effort flatten of nested ``quality`` + ``volume`` blocks."""
-    out: Dict[str, Any] = {}
+    out: dict[str, Any] = {}
     completeness = quality.get("completeness")
     if isinstance(completeness, list):
-        per_col = {entry["column"]: entry["min_pct"] for entry in completeness if "column" in entry}
+        per_col = {
+            entry["column"]: entry["min_pct"]
+            for entry in completeness
+            if "column" in entry
+        }
         out["completeness"] = {"per_column": per_col}
     elif isinstance(completeness, dict):
         out["completeness"] = completeness
@@ -220,14 +224,16 @@ def _flatten_quality(quality: Dict[str, Any], volume: Dict[str, Any]) -> Dict[st
             "max": volume.get("peak_rows_per_hour"),
         }
         if any(v is not None for v in rows.values()):
-            out["volume"] = {"expected_rows_per_day": {
-                "min": volume.get("baseline_rows_per_day"),
-                "max": volume.get("baseline_rows_per_day"),
-            }}
+            out["volume"] = {
+                "expected_rows_per_day": {
+                    "min": volume.get("baseline_rows_per_day"),
+                    "max": volume.get("baseline_rows_per_day"),
+                }
+            }
     return out
 
 
-def load_contract(path: Path) -> Dict[str, Any]:
+def load_contract(path: Path) -> dict[str, Any]:
     """Load and validate a data contract YAML file.
 
     Parameters
@@ -265,7 +271,9 @@ def load_contract(path: Path) -> Dict[str, Any]:
     if missing:
         raise ValueError(f"Contract {path} missing required keys: {missing}")
     if not isinstance(contract["schema"], list) or not contract["schema"]:
-        raise ValueError(f"Contract {path}: 'schema' must be a non-empty list of columns")
+        raise ValueError(
+            f"Contract {path}: 'schema' must be a non-empty list of columns"
+        )
     for idx, col in enumerate(contract["schema"]):
         for key in _REQUIRED_COLUMN_KEYS:
             if key not in col:
@@ -287,7 +295,7 @@ def load_contract(path: Path) -> Dict[str, Any]:
 
 
 # Map contract types to GE physical type names (Spark backend).
-_TYPE_MAP: Dict[str, str] = {
+_TYPE_MAP: dict[str, str] = {
     "string": "StringType",
     "int": "IntegerType",
     "integer": "IntegerType",
@@ -303,7 +311,7 @@ _TYPE_MAP: Dict[str, str] = {
 }
 
 
-def _physical_type(contract_type: str) -> Optional[str]:
+def _physical_type(contract_type: str) -> str | None:
     """Translate a contract type (e.g. ``decimal(18,2)``) to a GE Spark type."""
     if not contract_type:
         return None
@@ -320,7 +328,7 @@ def _require_ge() -> None:
         ) from _GE_IMPORT_ERROR
 
 
-def generate_suite(contract: Dict[str, Any], suite_name: str) -> "ExpectationSuite":
+def generate_suite(contract: dict[str, Any], suite_name: str) -> ExpectationSuite:
     """Generate a Great Expectations suite from a contract dict.
 
     Builds:
@@ -367,7 +375,7 @@ def generate_suite(contract: Dict[str, Any], suite_name: str) -> "ExpectationSui
             "generated_by": "validation.great_expectations.data_contract_suite",
         },
     )
-    configs: List["ExpectationConfiguration"] = []
+    configs: list[ExpectationConfiguration] = []
 
     columns = contract["schema"]
     column_names = [c["name"] for c in columns]
@@ -379,8 +387,9 @@ def generate_suite(contract: Dict[str, Any], suite_name: str) -> "ExpectationSui
         )
     )
 
-    completeness_per_col: Dict[str, float] = (
-        contract.get("quality_slas", {}).get("completeness", {}).get("per_column", {}) or {}
+    completeness_per_col: dict[str, float] = (
+        contract.get("quality_slas", {}).get("completeness", {}).get("per_column", {})
+        or {}
     )
 
     for col in columns:
@@ -401,8 +410,10 @@ def generate_suite(contract: Dict[str, Any], suite_name: str) -> "ExpectationSui
                 )
             )
 
-        if col.get("not_null") or (col.get("required") and not col.get("nullable", False)):
-            kwargs: Dict[str, Any] = {"column": name}
+        if col.get("not_null") or (
+            col.get("required") and not col.get("nullable", False)
+        ):
+            kwargs: dict[str, Any] = {"column": name}
             if name in completeness_per_col:
                 kwargs["mostly"] = completeness_per_col[name] / 100.0
             configs.append(
@@ -502,7 +513,7 @@ def generate_suite(contract: Dict[str, Any], suite_name: str) -> "ExpectationSui
 # ---------------------------------------------------------------------------
 
 
-def build_checkpoint(contract: Dict[str, Any], datasource_name: str) -> Dict[str, Any]:
+def build_checkpoint(contract: dict[str, Any], datasource_name: str) -> dict[str, Any]:
     """Wrap the suite into a runnable Checkpoint config.
 
     Returns a dict that GE accepts via ``add_or_update_checkpoint``. We return
@@ -537,35 +548,45 @@ def build_checkpoint(contract: Dict[str, Any], datasource_name: str) -> Dict[str
         "run_name_template": "%Y%m%d-%H%M%S-" + cp_name,
         "expectation_suite_name": suite_name,
         "action_list": [
-            {"name": "store_validation_result",
-             "action": {"class_name": "StoreValidationResultAction"}},
-            {"name": "store_evaluation_params",
-             "action": {"class_name": "StoreEvaluationParametersAction"}},
-            {"name": "update_data_docs",
-             "action": {"class_name": "UpdateDataDocsAction"}},
-        ],
-        "validations": [{
-            "batch_request": {
-                "datasource_name": datasource_name,
-                "data_connector_name": "runtime_data_connector",
-                "data_asset_name": contract["product"],
-                "batch_identifiers": {"default_identifier_name": contract["version"]},
+            {
+                "name": "store_validation_result",
+                "action": {"class_name": "StoreValidationResultAction"},
             },
-            "expectation_suite_name": suite_name,
-        }],
+            {
+                "name": "store_evaluation_params",
+                "action": {"class_name": "StoreEvaluationParametersAction"},
+            },
+            {
+                "name": "update_data_docs",
+                "action": {"class_name": "UpdateDataDocsAction"},
+            },
+        ],
+        "validations": [
+            {
+                "batch_request": {
+                    "datasource_name": datasource_name,
+                    "data_connector_name": "runtime_data_connector",
+                    "data_asset_name": contract["product"],
+                    "batch_identifiers": {
+                        "default_identifier_name": contract["version"]
+                    },
+                },
+                "expectation_suite_name": suite_name,
+            }
+        ],
     }
 
 
-def _suite_name_for(contract: Dict[str, Any]) -> str:
+def _suite_name_for(contract: dict[str, Any]) -> str:
     """Derive a deterministic suite name from the contract product."""
     return contract["product"].replace(".", "_") + "_contract_suite"
 
 
 def validate_contract(
-    contract: Dict[str, Any],
+    contract: dict[str, Any],
     datasource: str,
     table: str,
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     """Run the contract checkpoint and summarise the outcome.
 
     Parameters
@@ -609,7 +630,7 @@ def validate_contract(
         },
     )
 
-    failures: List[Dict[str, Any]] = []
+    failures: list[dict[str, Any]] = []
     total_records = 0
     validated_records = 0
     for run in result.run_results.values():
@@ -618,24 +639,24 @@ def validate_contract(
             res = r.get("result", {}) or {}
             total_records = max(total_records, int(res.get("element_count") or 0))
             validated_records = max(
-                validated_records, int(res.get("element_count") or 0) - int(
-                    res.get("unexpected_count") or 0
-                ),
+                validated_records,
+                int(res.get("element_count") or 0)
+                - int(res.get("unexpected_count") or 0),
             )
             if not r.get("success", False):
                 kwargs = r.get("expectation_config", {}).get("kwargs", {})
-                failures.append({
-                    "expectation_type": r.get("expectation_config", {}).get(
-                        "expectation_type"
-                    ),
-                    "column": kwargs.get("column") or kwargs.get("column_list"),
-                    "observed_value": res.get("observed_value"),
-                    "unexpected_count": res.get("unexpected_count"),
-                })
+                failures.append(
+                    {
+                        "expectation_type": r.get("expectation_config", {}).get(
+                            "expectation_type"
+                        ),
+                        "column": kwargs.get("column") or kwargs.get("column_list"),
+                        "observed_value": res.get("observed_value"),
+                        "unexpected_count": res.get("unexpected_count"),
+                    }
+                )
 
-    success_rate = (
-        validated_records / total_records if total_records else 1.0
-    )
+    success_rate = validated_records / total_records if total_records else 1.0
     return {
         "success": bool(result.success),
         "failures": failures,
@@ -648,7 +669,9 @@ def validate_contract(
     }
 
 
-def enforce_contract(contract_path: Path, table: str, datasource: str = "default") -> None:
+def enforce_contract(
+    contract_path: Path, table: str, datasource: str = "default"
+) -> None:
     """Top-level CI entry: load, generate, run; raise on any violation.
 
     Designed to be wired into the CI pipeline as a fail-fast gate. On
@@ -694,7 +717,7 @@ def enforce_contract(contract_path: Path, table: str, datasource: str = "default
 
 def quarantine_violations(
     table: str,
-    violations: List[Dict[str, Any]],
+    violations: list[dict[str, Any]],
     dlq_table: str,
 ) -> int:
     """Move offending rows from ``table`` to ``dlq_table``.
@@ -719,7 +742,8 @@ def quarantine_violations(
     except ImportError:
         logger.warning(
             "PySpark not available; skipping quarantine of %d violation(s) from %s",
-            len(violations), table,
+            len(violations),
+            table,
         )
         return -1
 
@@ -733,7 +757,7 @@ def quarantine_violations(
 
     # Build a per-column predicate: each violation contributes a WHERE clause
     # matching either the unexpected_value or NULL on the failed column.
-    predicates: List[str] = []
+    predicates: list[str] = []
     for v in violations:
         col = v.get("column")
         if not col or isinstance(col, list):
@@ -749,12 +773,9 @@ def quarantine_violations(
     where = " OR ".join(predicates)
     logger.info("Quarantining rows from %s -> %s WHERE %s", table, dlq_table, where)
     spark.sql(
-        f"CREATE TABLE IF NOT EXISTS {dlq_table} AS "
-        f"SELECT * FROM {table} WHERE 1=0"
+        f"CREATE TABLE IF NOT EXISTS {dlq_table} AS SELECT * FROM {table} WHERE 1=0"
     )
-    spark.sql(
-        f"INSERT INTO {dlq_table} SELECT * FROM {table} WHERE {where}"
-    )
+    spark.sql(f"INSERT INTO {dlq_table} SELECT * FROM {table} WHERE {where}")
     count_df = spark.sql(f"SELECT COUNT(*) AS n FROM {table} WHERE {where}")
     n = int(count_df.collect()[0]["n"])
     spark.sql(f"DELETE FROM {table} WHERE {where}")
@@ -767,7 +788,7 @@ def quarantine_violations(
 # ---------------------------------------------------------------------------
 
 
-def _format_report(report: Dict[str, Any]) -> str:
+def _format_report(report: dict[str, Any]) -> str:
     """Render a human-readable validation report."""
     lines = [
         "=" * 72,
@@ -790,27 +811,40 @@ def _format_report(report: Dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
-def _cli(argv: Optional[List[str]] = None) -> int:
+def _cli(argv: list[str] | None = None) -> int:
     """CLI entry point. Returns process exit code."""
     parser = argparse.ArgumentParser(
         prog="data_contract_suite",
         description="Generate and enforce GE expectation suites from data contracts.",
     )
-    parser.add_argument("--contract", type=Path, required=True,
-                        help="Path to contract YAML.")
-    parser.add_argument("--table", type=str, required=True,
-                        help="Fully-qualified table to validate.")
-    parser.add_argument("--datasource", type=str, default="default",
-                        help="GE datasource name (default: 'default').")
-    parser.add_argument("--mode", choices=("report", "enforce", "quarantine"),
-                        default="report",
-                        help="report=print only; enforce=raise on fail; "
-                             "quarantine=move bad rows to DLQ.")
-    parser.add_argument("--dlq-table", type=str, default=None,
-                        help="DLQ table for --mode=quarantine "
-                             "(default: '<table>_dlq').")
-    parser.add_argument("--verbose", "-v", action="store_true",
-                        help="Enable INFO logging.")
+    parser.add_argument(
+        "--contract", type=Path, required=True, help="Path to contract YAML."
+    )
+    parser.add_argument(
+        "--table", type=str, required=True, help="Fully-qualified table to validate."
+    )
+    parser.add_argument(
+        "--datasource",
+        type=str,
+        default="default",
+        help="GE datasource name (default: 'default').",
+    )
+    parser.add_argument(
+        "--mode",
+        choices=("report", "enforce", "quarantine"),
+        default="report",
+        help="report=print only; enforce=raise on fail; "
+        "quarantine=move bad rows to DLQ.",
+    )
+    parser.add_argument(
+        "--dlq-table",
+        type=str,
+        default=None,
+        help="DLQ table for --mode=quarantine (default: '<table>_dlq').",
+    )
+    parser.add_argument(
+        "--verbose", "-v", action="store_true", help="Enable INFO logging."
+    )
     args = parser.parse_args(argv)
 
     logging.basicConfig(

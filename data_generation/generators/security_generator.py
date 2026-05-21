@@ -164,7 +164,7 @@ class SecurityGenerator(BaseGenerator):
             access_levels = self._get_access_levels(dept)
 
             employee = {
-                "employee_id": f"EMP-{i+1:05d}",
+                "employee_id": f"EMP-{i + 1:05d}",
                 "badge_number": f"BDG-{self.rng.integers(10000, 99999)}",
                 "department": dept,
                 "access_levels": access_levels,

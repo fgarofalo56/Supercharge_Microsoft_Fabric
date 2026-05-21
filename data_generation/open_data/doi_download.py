@@ -73,13 +73,13 @@ RATE_LIMIT_SLEEP = 0.5
 
 # USGS NWIS common parameter codes
 NWIS_PARAMETER_CODES = {
-    "discharge": "00060",       # Discharge, cubic feet per second
-    "gage_height": "00065",     # Gage height, feet
-    "temperature": "00010",     # Temperature, water, degrees Celsius
-    "dissolved_oxygen": "00300", # Dissolved oxygen, mg/L
-    "ph": "00400",              # pH, standard units
-    "conductance": "00095",     # Specific conductance, microsiemens/cm
-    "turbidity": "63680",       # Turbidity, FNU
+    "discharge": "00060",  # Discharge, cubic feet per second
+    "gage_height": "00065",  # Gage height, feet
+    "temperature": "00010",  # Temperature, water, degrees Celsius
+    "dissolved_oxygen": "00300",  # Dissolved oxygen, mg/L
+    "ph": "00400",  # pH, standard units
+    "conductance": "00095",  # Specific conductance, microsiemens/cm
+    "turbidity": "63680",  # Turbidity, FNU
 }
 
 # Well-known NPS park codes for default downloads
@@ -123,7 +123,11 @@ def _request_with_retry(
     for attempt in range(1, MAX_RETRIES + 1):
         try:
             resp = requests.get(
-                url, params=params, headers=headers, stream=stream, timeout=timeout,
+                url,
+                params=params,
+                headers=headers,
+                stream=stream,
+                timeout=timeout,
             )
             resp.raise_for_status()
             return resp
@@ -131,7 +135,7 @@ def _request_with_retry(
             if attempt == MAX_RETRIES:
                 logger.error("Request failed after %d attempts: %s", MAX_RETRIES, exc)
                 raise
-            wait = BACKOFF_BASE ** attempt
+            wait = BACKOFF_BASE**attempt
             logger.warning(
                 "Attempt %d/%d failed (%s). Retrying in %ds...",
                 attempt,
@@ -143,7 +147,9 @@ def _request_with_retry(
     raise RuntimeError("Exceeded max retries")
 
 
-def _save_dataframe(df: pd.DataFrame, output_dir: str, filename_stem: str) -> tuple[Path, Path]:
+def _save_dataframe(
+    df: pd.DataFrame, output_dir: str, filename_stem: str
+) -> tuple[Path, Path]:
     """Save DataFrame as CSV + Parquet."""
     out = Path(output_dir)
     out.mkdir(parents=True, exist_ok=True)
@@ -158,6 +164,7 @@ def _save_dataframe(df: pd.DataFrame, output_dir: str, filename_stem: str) -> tu
 # ---------------------------------------------------------------------------
 # Download functions
 # ---------------------------------------------------------------------------
+
 
 def download_earthquakes(
     output_dir: str,
@@ -183,7 +190,9 @@ def download_earthquakes(
     """
     logger.info(
         "Downloading USGS earthquakes: %s to %s, M >= %.1f",
-        start_date, end_date, min_magnitude,
+        start_date,
+        end_date,
+        min_magnitude,
     )
 
     from datetime import datetime, timedelta
@@ -196,7 +205,9 @@ def download_earthquakes(
     current = dt_start
 
     # Calculate total months for progress bar
-    total_months = (dt_end.year - dt_start.year) * 12 + (dt_end.month - dt_start.month) + 1
+    total_months = (
+        (dt_end.year - dt_start.year) * 12 + (dt_end.month - dt_start.month) + 1
+    )
     pbar = tqdm(total=total_months, desc="Earthquake months", unit="month")
 
     while current < dt_end:
@@ -204,7 +215,9 @@ def download_earthquakes(
         if current.month == 12:
             chunk_end = datetime(current.year + 1, 1, 1) - timedelta(seconds=1)
         else:
-            chunk_end = datetime(current.year, current.month + 1, 1) - timedelta(seconds=1)
+            chunk_end = datetime(current.year, current.month + 1, 1) - timedelta(
+                seconds=1
+            )
         chunk_end = min(chunk_end, dt_end)
 
         params = {
@@ -237,7 +250,9 @@ def download_earthquakes(
 
             record: dict[str, Any] = {
                 "event_id": feature.get("id"),
-                "usgs_id": props.get("ids", "").strip(",") if props.get("ids") else None,
+                "usgs_id": props.get("ids", "").strip(",")
+                if props.get("ids")
+                else None,
                 "time": props.get("time"),  # milliseconds since epoch
                 "latitude": coords[1] if len(coords) > 1 else None,
                 "longitude": coords[0] if len(coords) > 0 else None,
@@ -337,7 +352,10 @@ def download_water_data(
 
     logger.info(
         "Downloading NWIS water data: %d sites, %d parameters, %s to %s",
-        len(site_ids), len(parameter_codes), start_date, end_date,
+        len(site_ids),
+        len(parameter_codes),
+        start_date,
+        end_date,
     )
 
     all_records: list[dict[str, Any]] = []
@@ -345,7 +363,7 @@ def download_water_data(
     # NWIS accepts up to ~100 sites per request; batch if needed
     batch_size = 50
     site_batches = [
-        site_ids[i:i + batch_size] for i in range(0, len(site_ids), batch_size)
+        site_ids[i : i + batch_size] for i in range(0, len(site_ids), batch_size)
     ]
 
     for batch in tqdm(site_batches, desc="NWIS site batches"):
@@ -453,7 +471,8 @@ def download_park_visitation(
 
     logger.info(
         "Downloading NPS visitation for %d parks from %d",
-        len(park_codes), year_start,
+        len(park_codes),
+        year_start,
     )
 
     all_records: list[dict[str, Any]] = []
@@ -471,11 +490,14 @@ def download_park_visitation(
             resp = _request_with_retry(url, timeout=60)
             # The response is CSV text
             from io import StringIO
+
             df_park = pd.read_csv(StringIO(resp.text))
 
             # NPS CSV typically has columns: Year, Month, RecreationVisitors, etc.
             # Normalize column names
-            df_park.columns = [c.strip().replace(" ", "_").lower() for c in df_park.columns]
+            df_park.columns = [
+                c.strip().replace(" ", "_").lower() for c in df_park.columns
+            ]
 
             if "year" in df_park.columns:
                 df_park["year"] = pd.to_numeric(df_park["year"], errors="coerce")
@@ -498,7 +520,11 @@ def download_park_visitation(
                     f"?Park={park_code}"
                 )
                 resp = _request_with_retry(alt_url, timeout=60)
-                logger.info("Fallback URL succeeded for %s (%d bytes)", park_code, len(resp.content))
+                logger.info(
+                    "Fallback URL succeeded for %s (%d bytes)",
+                    park_code,
+                    len(resp.content),
+                )
             except Exception:
                 logger.debug("Fallback also failed for %s", park_code)
             continue
@@ -525,7 +551,12 @@ def download_park_visitation(
             df.rename(columns={old: new}, inplace=True)
 
     # Numeric conversions
-    for col in ("recreation_visitors", "non_recreation_visitors", "recreation_hours", "year"):
+    for col in (
+        "recreation_visitors",
+        "non_recreation_visitors",
+        "recreation_hours",
+        "year",
+    ):
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors="coerce")
 
@@ -557,7 +588,6 @@ def download_species_data(
 
     # ECOS species report in CSV format
 
-
     # ECOS provides a downloadable report; try multiple access patterns
     report_urls = [
         # Direct CSV export endpoint
@@ -574,12 +604,17 @@ def download_species_data(
         try:
             resp = _request_with_retry(report_url, timeout=90)
 
-            if resp.headers.get("Content-Type", "").startswith("text/csv") or "csv" in report_url:
+            if (
+                resp.headers.get("Content-Type", "").startswith("text/csv")
+                or "csv" in report_url
+            ):
                 from io import StringIO
+
                 df = pd.read_csv(StringIO(resp.text), low_memory=False)
             else:
                 # Try parsing as CSV anyway
                 from io import StringIO
+
                 df = pd.read_csv(StringIO(resp.text), low_memory=False)
 
             if not df.empty:
@@ -632,6 +667,7 @@ def download_species_data(
 # ---------------------------------------------------------------------------
 # Validation
 # ---------------------------------------------------------------------------
+
 
 def validate_download(file_path: str) -> dict[str, Any]:
     """
@@ -702,9 +738,7 @@ def validate_download(file_path: str) -> dict[str, Any]:
         mag = pd.to_numeric(df["magnitude"], errors="coerce")
         invalid_mags = mag.isna().sum()
         if invalid_mags > 0:
-            result["warnings"].append(
-                f"{invalid_mags} non-numeric magnitude values"
-            )
+            result["warnings"].append(f"{invalid_mags} non-numeric magnitude values")
 
     result["valid"] = len(result["warnings"]) == 0
     return result
@@ -713,6 +747,7 @@ def validate_download(file_path: str) -> dict[str, Any]:
 # ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
+
 
 def main() -> None:
     """Command-line interface for DOI open-data downloads."""
@@ -771,7 +806,7 @@ def main() -> None:
         "--status-filter",
         default=None,
         help="ESA listing status filter for species data "
-             "(e.g. endangered, threatened, candidate)",
+        "(e.g. endangered, threatened, candidate)",
     )
 
     args = parser.parse_args()

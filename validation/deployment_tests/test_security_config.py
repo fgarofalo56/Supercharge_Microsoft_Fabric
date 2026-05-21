@@ -27,9 +27,9 @@ class TestKeyVaultSecurity:
 
         content = security_path.read_text(encoding="utf-8")
 
-        assert (
-            "enableSoftDelete: true" in content
-        ), "Key Vault should have soft delete enabled"
+        assert "enableSoftDelete: true" in content, (
+            "Key Vault should have soft delete enabled"
+        )
 
     def test_keyvault_purge_protection_enabled(
         self, module_bicep_files: dict[str, Path]
@@ -41,9 +41,9 @@ class TestKeyVaultSecurity:
 
         content = security_path.read_text(encoding="utf-8")
 
-        assert (
-            "enablePurgeProtection: true" in content
-        ), "Key Vault should have purge protection enabled for production safety"
+        assert "enablePurgeProtection: true" in content, (
+            "Key Vault should have purge protection enabled for production safety"
+        )
 
     def test_keyvault_uses_rbac_authorization(
         self, module_bicep_files: dict[str, Path]
@@ -55,9 +55,9 @@ class TestKeyVaultSecurity:
 
         content = security_path.read_text(encoding="utf-8")
 
-        assert (
-            "enableRbacAuthorization: true" in content
-        ), "Key Vault should use RBAC authorization (recommended over access policies)"
+        assert "enableRbacAuthorization: true" in content, (
+            "Key Vault should use RBAC authorization (recommended over access policies)"
+        )
 
     def test_keyvault_soft_delete_retention(self, module_bicep_files: dict[str, Path]):
         """Test that Key Vault has adequate soft delete retention."""
@@ -73,12 +73,12 @@ class TestKeyVaultSecurity:
 
         if match:
             retention_days = int(match.group(1))
-            assert (
-                retention_days >= 7
-            ), f"Soft delete retention should be at least 7 days, got: {retention_days}"
-            assert (
-                retention_days <= 90
-            ), f"Soft delete retention should not exceed 90 days, got: {retention_days}"
+            assert retention_days >= 7, (
+                f"Soft delete retention should be at least 7 days, got: {retention_days}"
+            )
+            assert retention_days <= 90, (
+                f"Soft delete retention should not exceed 90 days, got: {retention_days}"
+            )
 
     def test_keyvault_network_acls_configured(
         self, module_bicep_files: dict[str, Path]
@@ -90,12 +90,12 @@ class TestKeyVaultSecurity:
 
         content = security_path.read_text(encoding="utf-8")
 
-        assert (
-            "networkAcls:" in content
-        ), "Key Vault should have network ACLs configured"
-        assert (
-            "bypass: 'AzureServices'" in content
-        ), "Key Vault should bypass Azure services for trusted access"
+        assert "networkAcls:" in content, (
+            "Key Vault should have network ACLs configured"
+        )
+        assert "bypass: 'AzureServices'" in content, (
+            "Key Vault should bypass Azure services for trusted access"
+        )
 
     def test_keyvault_diagnostic_settings(self, module_bicep_files: dict[str, Path]):
         """Test that Key Vault has diagnostic settings configured."""
@@ -105,9 +105,9 @@ class TestKeyVaultSecurity:
 
         content = security_path.read_text(encoding="utf-8")
 
-        assert (
-            "diagnosticSettings" in content
-        ), "Key Vault should have diagnostic settings configured"
+        assert "diagnosticSettings" in content, (
+            "Key Vault should have diagnostic settings configured"
+        )
         assert "audit" in content.lower(), "Key Vault should have audit logging enabled"
 
 
@@ -122,9 +122,9 @@ class TestStorageAccountSecurity:
 
         content = storage_path.read_text(encoding="utf-8")
 
-        assert (
-            "supportsHttpsTrafficOnly: true" in content
-        ), "Storage account should require HTTPS traffic only"
+        assert "supportsHttpsTrafficOnly: true" in content, (
+            "Storage account should require HTTPS traffic only"
+        )
 
     def test_storage_minimum_tls_version(self, module_bicep_files: dict[str, Path]):
         """Test that storage account uses TLS 1.2 minimum."""
@@ -134,9 +134,9 @@ class TestStorageAccountSecurity:
 
         content = storage_path.read_text(encoding="utf-8")
 
-        assert (
-            "minimumTlsVersion: 'TLS1_2'" in content
-        ), "Storage account should require TLS 1.2 minimum"
+        assert "minimumTlsVersion: 'TLS1_2'" in content, (
+            "Storage account should require TLS 1.2 minimum"
+        )
 
     def test_storage_public_access_disabled(self, module_bicep_files: dict[str, Path]):
         """Test that storage account has public blob access disabled."""
@@ -146,9 +146,9 @@ class TestStorageAccountSecurity:
 
         content = storage_path.read_text(encoding="utf-8")
 
-        assert (
-            "allowBlobPublicAccess: false" in content
-        ), "Storage account should disable public blob access"
+        assert "allowBlobPublicAccess: false" in content, (
+            "Storage account should disable public blob access"
+        )
 
     def test_storage_encryption_enabled(self, module_bicep_files: dict[str, Path]):
         """Test that storage account has encryption enabled."""
@@ -158,12 +158,12 @@ class TestStorageAccountSecurity:
 
         content = storage_path.read_text(encoding="utf-8")
 
-        assert (
-            "encryption:" in content
-        ), "Storage account should have encryption configured"
-        assert (
-            "keySource: 'Microsoft.Storage'" in content or "keySource:" in content
-        ), "Storage account should specify encryption key source"
+        assert "encryption:" in content, (
+            "Storage account should have encryption configured"
+        )
+        assert "keySource: 'Microsoft.Storage'" in content or "keySource:" in content, (
+            "Storage account should specify encryption key source"
+        )
 
     def test_storage_container_public_access_none(
         self, module_bicep_files: dict[str, Path]
@@ -180,9 +180,9 @@ class TestStorageAccountSecurity:
         matches = re.findall(container_pattern, content, re.DOTALL)
 
         for access_level in matches:
-            assert (
-                access_level == "None"
-            ), f"Container should have publicAccess: 'None', got: {access_level}"
+            assert access_level == "None", (
+                f"Container should have publicAccess: 'None', got: {access_level}"
+            )
 
     def test_storage_soft_delete_enabled(self, module_bicep_files: dict[str, Path]):
         """Test that storage account has blob soft delete enabled."""
@@ -192,9 +192,9 @@ class TestStorageAccountSecurity:
 
         content = storage_path.read_text(encoding="utf-8")
 
-        assert (
-            "deleteRetentionPolicy:" in content
-        ), "Storage account should have blob soft delete configured"
+        assert "deleteRetentionPolicy:" in content, (
+            "Storage account should have blob soft delete configured"
+        )
         assert "enabled: true" in content, "Blob soft delete should be enabled"
 
 
@@ -225,9 +225,9 @@ class TestPrivateEndpointConfiguration:
 
         content = storage_path.read_text(encoding="utf-8")
 
-        assert (
-            "param privateEndpointSubnetId" in content
-        ), "Private endpoint should accept subnet ID parameter"
+        assert "param privateEndpointSubnetId" in content, (
+            "Private endpoint should accept subnet ID parameter"
+        )
 
     def test_network_acls_updated_with_private_endpoint(
         self,
@@ -269,9 +269,9 @@ class TestPrivateEndpointConfiguration:
                         break
 
                 if "Microsoft.Network/privateEndpoints" in content:
-                    assert (
-                        found_group
-                    ), f"Private endpoint in {module} should specify group ID from {group_ids}"
+                    assert found_group, (
+                        f"Private endpoint in {module} should specify group ID from {group_ids}"
+                    )
 
 
 class TestManagedIdentityConfiguration:
@@ -285,9 +285,9 @@ class TestManagedIdentityConfiguration:
 
         content = security_path.read_text(encoding="utf-8")
 
-        assert (
-            "Microsoft.ManagedIdentity/userAssignedIdentities" in content
-        ), "User-assigned managed identity should be created"
+        assert "Microsoft.ManagedIdentity/userAssignedIdentities" in content, (
+            "User-assigned managed identity should be created"
+        )
 
     def test_managed_identity_outputs(self, parsed_module_files: dict[str, Any]):
         """Test that managed identity outputs required properties."""
@@ -319,9 +319,9 @@ class TestManagedIdentityConfiguration:
 
             content = module_path.read_text(encoding="utf-8")
 
-            assert (
-                "Microsoft.Authorization/roleAssignments" in content
-            ), f"Module {module} should have role assignments for managed identity"
+            assert "Microsoft.Authorization/roleAssignments" in content, (
+                f"Module {module} should have role assignments for managed identity"
+            )
 
 
 class TestRBACConfiguration:
@@ -337,9 +337,9 @@ class TestRBACConfiguration:
 
         # Storage Blob Data Contributor role ID
         contributor_role = "ba92f5b4-2d11-453d-a403-e96b0029c9fe"
-        assert (
-            contributor_role in content
-        ), "Storage module should assign Storage Blob Data Contributor role"
+        assert contributor_role in content, (
+            "Storage module should assign Storage Blob Data Contributor role"
+        )
 
     def test_keyvault_secrets_user_role(self, module_bicep_files: dict[str, Path]):
         """Test that Key Vault module assigns Key Vault Secrets User role."""
@@ -351,9 +351,9 @@ class TestRBACConfiguration:
 
         # Key Vault Secrets User role ID
         secrets_user_role = "4633458b-17de-408a-b874-0445c86b69e6"
-        assert (
-            secrets_user_role in content
-        ), "Security module should assign Key Vault Secrets User role"
+        assert secrets_user_role in content, (
+            "Security module should assign Key Vault Secrets User role"
+        )
 
     def test_role_assignments_use_guid(self, module_bicep_files: dict[str, Path]):
         """Test that role assignments use guid() for unique names."""
@@ -361,9 +361,9 @@ class TestRBACConfiguration:
             content = module_path.read_text(encoding="utf-8")
 
             if "Microsoft.Authorization/roleAssignments" in content:
-                assert (
-                    "guid(" in content
-                ), f"Role assignments in {module_name} should use guid() for unique naming"
+                assert "guid(" in content, (
+                    f"Role assignments in {module_name} should use guid() for unique naming"
+                )
 
     def test_role_assignments_specify_principal_type(
         self,
@@ -374,9 +374,9 @@ class TestRBACConfiguration:
             content = module_path.read_text(encoding="utf-8")
 
             if "Microsoft.Authorization/roleAssignments" in content:
-                assert (
-                    "principalType:" in content
-                ), f"Role assignments in {module_name} should specify principalType"
+                assert "principalType:" in content, (
+                    f"Role assignments in {module_name} should specify principalType"
+                )
 
 
 class TestPurviewSecurity:
@@ -391,9 +391,9 @@ class TestPurviewSecurity:
         content = purview_path.read_text(encoding="utf-8")
 
         assert "identity:" in content, "Purview should have managed identity configured"
-        assert (
-            "type: 'SystemAssigned'" in content
-        ), "Purview should use system-assigned managed identity"
+        assert "type: 'SystemAssigned'" in content, (
+            "Purview should use system-assigned managed identity"
+        )
 
     def test_purview_public_access_conditional(
         self, module_bicep_files: dict[str, Path]
@@ -406,12 +406,12 @@ class TestPurviewSecurity:
         content = purview_path.read_text(encoding="utf-8")
 
         # Should have conditional public access based on private endpoint
-        assert (
-            "publicNetworkAccess:" in content
-        ), "Purview should specify publicNetworkAccess setting"
-        assert (
-            "enablePrivateEndpoint" in content
-        ), "Purview public access should be conditional on private endpoint setting"
+        assert "publicNetworkAccess:" in content, (
+            "Purview should specify publicNetworkAccess setting"
+        )
+        assert "enablePrivateEndpoint" in content, (
+            "Purview public access should be conditional on private endpoint setting"
+        )
 
 
 class TestNetworkSecurity:
@@ -425,9 +425,9 @@ class TestNetworkSecurity:
 
         content = vnet_path.read_text(encoding="utf-8")
 
-        assert (
-            "DenyAllInbound" in content or "access: 'Deny'" in content
-        ), "NSG should have deny-all inbound rule"
+        assert "DenyAllInbound" in content or "access: 'Deny'" in content, (
+            "NSG should have deny-all inbound rule"
+        )
 
     def test_private_endpoint_subnet_policies_disabled(
         self,
@@ -440,9 +440,9 @@ class TestNetworkSecurity:
 
         content = vnet_path.read_text(encoding="utf-8")
 
-        assert (
-            "privateEndpointNetworkPolicies: 'Disabled'" in content
-        ), "Private endpoint subnet should have network policies disabled"
+        assert "privateEndpointNetworkPolicies: 'Disabled'" in content, (
+            "Private endpoint subnet should have network policies disabled"
+        )
 
     def test_service_endpoints_configured(self, module_bicep_files: dict[str, Path]):
         """Test that service endpoints are configured for Azure services."""
@@ -456,9 +456,9 @@ class TestNetworkSecurity:
         expected_services = ["Microsoft.Storage", "Microsoft.KeyVault"]
 
         for service in expected_services:
-            assert (
-                service in content
-            ), f"VNet should have service endpoint for {service}"
+            assert service in content, (
+                f"VNet should have service endpoint for {service}"
+            )
 
 
 class TestDiagnosticSettings:
@@ -495,9 +495,9 @@ class TestDiagnosticSettings:
             content = module_path.read_text(encoding="utf-8")
 
             if "diagnosticSettings" in content:
-                assert (
-                    "workspaceId:" in content
-                ), f"Diagnostic settings in {module_name} should send to Log Analytics"
+                assert "workspaceId:" in content, (
+                    f"Diagnostic settings in {module_name} should send to Log Analytics"
+                )
 
 
 if __name__ == "__main__":

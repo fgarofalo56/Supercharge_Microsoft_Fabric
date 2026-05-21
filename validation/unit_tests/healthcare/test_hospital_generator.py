@@ -20,8 +20,8 @@ import pytest
 os.environ.setdefault("FABRIC_POC_HASH_SALT", "test-salt-unit-tests")
 
 from data_generation.generators.healthcare.hospital_operations_generator import (
-    HospitalOperationsGenerator,
     TOP_25_DRG,
+    HospitalOperationsGenerator,
 )
 
 
@@ -152,7 +152,7 @@ class TestReproducibility:
         records1 = [gen1.generate_admission() for _ in range(10)]
         records2 = [gen2.generate_admission() for _ in range(10)]
 
-        for r1, r2 in zip(records1, records2):
+        for r1, r2 in zip(records1, records2, strict=False):
             assert r1["encounter_id"] == r2["encounter_id"]
             assert r1["mrn_hash"] == r2["mrn_hash"]
             assert r1["drg_code"] == r2["drg_code"]

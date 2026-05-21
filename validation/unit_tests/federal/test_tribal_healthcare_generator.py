@@ -64,9 +64,9 @@ class TestTribalHealthcareGenerator:
         """All encounter_type values must come from the defined set."""
         for _ in range(sample_size):
             record = tribal_healthcare_generator.generate_record()
-            assert (
-                record["encounter_type"] in _VALID_ENCOUNTER_TYPES
-            ), f"Unexpected encounter_type '{record['encounter_type']}'"
+            assert record["encounter_type"] in _VALID_ENCOUNTER_TYPES, (
+                f"Unexpected encounter_type '{record['encounter_type']}'"
+            )
 
     # ------------------------------------------------------------------
     # Facility validation
@@ -76,9 +76,9 @@ class TestTribalHealthcareGenerator:
         """facility_id must be one of the 20 known IHS facility IDs."""
         for _ in range(sample_size):
             record = tribal_healthcare_generator.generate_record()
-            assert (
-                record["facility_id"] in _VALID_FACILITY_IDS
-            ), f"Unexpected facility_id '{record['facility_id']}'"
+            assert record["facility_id"] in _VALID_FACILITY_IDS, (
+                f"Unexpected facility_id '{record['facility_id']}'"
+            )
 
     # ------------------------------------------------------------------
     # ICD-10 diagnosis codes
@@ -88,9 +88,9 @@ class TestTribalHealthcareGenerator:
         """icd10_code must be one of the known ICD-10 codes."""
         for _ in range(sample_size):
             record = tribal_healthcare_generator.generate_record()
-            assert (
-                record["icd10_code"] in _VALID_ICD10_CODES
-            ), f"Unexpected icd10_code '{record['icd10_code']}'"
+            assert record["icd10_code"] in _VALID_ICD10_CODES, (
+                f"Unexpected icd10_code '{record['icd10_code']}'"
+            )
 
     # ------------------------------------------------------------------
     # Tribal affiliation enum
@@ -100,9 +100,9 @@ class TestTribalHealthcareGenerator:
         """tribal_affiliation must be one of the 30 known tribes."""
         for _ in range(sample_size):
             record = tribal_healthcare_generator.generate_record()
-            assert (
-                record["tribal_affiliation"] in _VALID_TRIBAL_AFFILIATIONS
-            ), f"Unexpected tribal_affiliation '{record['tribal_affiliation']}'"
+            assert record["tribal_affiliation"] in _VALID_TRIBAL_AFFILIATIONS, (
+                f"Unexpected tribal_affiliation '{record['tribal_affiliation']}'"
+            )
 
     # ------------------------------------------------------------------
     # Demographics validation
@@ -112,15 +112,15 @@ class TestTribalHealthcareGenerator:
         """age_group, gender, and insurance_type must be valid enum values."""
         for _ in range(sample_size):
             record = tribal_healthcare_generator.generate_record()
-            assert (
-                record["age_group"] in _VALID_AGE_GROUPS
-            ), f"Unexpected age_group '{record['age_group']}'"
-            assert (
-                record["gender"] in _VALID_GENDERS
-            ), f"Unexpected gender '{record['gender']}'"
-            assert (
-                record["insurance_type"] in _VALID_INSURANCE_TYPES
-            ), f"Unexpected insurance_type '{record['insurance_type']}'"
+            assert record["age_group"] in _VALID_AGE_GROUPS, (
+                f"Unexpected age_group '{record['age_group']}'"
+            )
+            assert record["gender"] in _VALID_GENDERS, (
+                f"Unexpected gender '{record['gender']}'"
+            )
+            assert record["insurance_type"] in _VALID_INSURANCE_TYPES, (
+                f"Unexpected insurance_type '{record['insurance_type']}'"
+            )
 
     # ------------------------------------------------------------------
     # HIPAA compliance flags
@@ -130,12 +130,12 @@ class TestTribalHealthcareGenerator:
         """hipaa_consent and phi_masked must always be True."""
         for _ in range(sample_size):
             record = tribal_healthcare_generator.generate_record()
-            assert (
-                record["hipaa_consent"] is True
-            ), "hipaa_consent must be True for de-identified data"
-            assert (
-                record["phi_masked"] is True
-            ), "phi_masked must be True for de-identified data"
+            assert record["hipaa_consent"] is True, (
+                "hipaa_consent must be True for de-identified data"
+            )
+            assert record["phi_masked"] is True, (
+                "phi_masked must be True for de-identified data"
+            )
 
     # ------------------------------------------------------------------
     # Lab result abnormal flag validation
@@ -148,15 +148,15 @@ class TestTribalHealthcareGenerator:
             record = tribal_healthcare_generator.generate_record()
             if record["lab_test_name"] is not None:
                 found_lab = True
-                assert (
-                    record["lab_abnormal_flag"] in _VALID_LAB_ABNORMAL_FLAGS
-                ), f"Unexpected lab_abnormal_flag '{record['lab_abnormal_flag']}'"
-                assert (
-                    record["lab_result_value"] is not None
-                ), "lab_result_value must not be None when lab_test_name is set"
-                assert (
-                    record["lab_result_unit"] is not None
-                ), "lab_result_unit must not be None when lab_test_name is set"
+                assert record["lab_abnormal_flag"] in _VALID_LAB_ABNORMAL_FLAGS, (
+                    f"Unexpected lab_abnormal_flag '{record['lab_abnormal_flag']}'"
+                )
+                assert record["lab_result_value"] is not None, (
+                    "lab_result_value must not be None when lab_test_name is set"
+                )
+                assert record["lab_result_unit"] is not None, (
+                    "lab_result_unit must not be None when lab_test_name is set"
+                )
 
         assert found_lab, "No lab results seen in 500 records"
 
@@ -169,12 +169,12 @@ class TestTribalHealthcareGenerator:
         for _ in range(sample_size):
             record = tribal_healthcare_generator.generate_record()
             pid = record["patient_id"]
-            assert pid.startswith(
-                "PAT-"
-            ), f"patient_id must start with 'PAT-', got '{pid}'"
-            assert (
-                len(pid) == 12
-            ), f"patient_id must be 12 chars (PAT- + 8 hex), got '{pid}' (len={len(pid)})"
+            assert pid.startswith("PAT-"), (
+                f"patient_id must start with 'PAT-', got '{pid}'"
+            )
+            assert len(pid) == 12, (
+                f"patient_id must be 12 chars (PAT- + 8 hex), got '{pid}' (len={len(pid)})"
+            )
 
     # ------------------------------------------------------------------
     # Batch generation
@@ -197,9 +197,9 @@ class TestTribalHealthcareGenerator:
         assert "_ingested_at" in record, "_ingested_at metadata column missing"
         assert "_source" in record, "_source metadata column missing"
         assert "_batch_id" in record, "_batch_id metadata column missing"
-        assert (
-            record["_source"] == "TribalHealthcareGenerator"
-        ), f"Expected _source='TribalHealthcareGenerator', got '{record['_source']}'"
+        assert record["_source"] == "TribalHealthcareGenerator", (
+            f"Expected _source='TribalHealthcareGenerator', got '{record['_source']}'"
+        )
 
     # ------------------------------------------------------------------
     # Medication conditional presence
@@ -212,11 +212,11 @@ class TestTribalHealthcareGenerator:
             record = tribal_healthcare_generator.generate_record()
             if record["encounter_type"] == "pharmacy":
                 found_pharmacy = True
-                assert (
-                    record["medication_name"] is not None
-                ), "pharmacy encounter must have medication_name"
-                assert (
-                    record["medication_ndc"] is not None
-                ), "pharmacy encounter must have medication_ndc"
+                assert record["medication_name"] is not None, (
+                    "pharmacy encounter must have medication_name"
+                )
+                assert record["medication_ndc"] is not None, (
+                    "pharmacy encounter must have medication_ndc"
+                )
 
         assert found_pharmacy, "No pharmacy encounters seen in 500 records"

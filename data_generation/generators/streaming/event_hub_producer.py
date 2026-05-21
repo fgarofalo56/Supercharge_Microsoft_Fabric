@@ -187,7 +187,7 @@ class EventHubProducer:
                 last_exception = e
                 if attempt < self.max_retries:
                     delay = min(
-                        self.base_delay * (DEFAULT_BACKOFF_FACTOR ** attempt),
+                        self.base_delay * (DEFAULT_BACKOFF_FACTOR**attempt),
                         self.max_delay,
                     )
                     self._retry_count += 1
@@ -228,7 +228,6 @@ class EventHubProducer:
         async with AsyncEventHubProducerClient.from_connection_string(
             self.connection_string, eventhub_name=self.eventhub_name
         ) as producer:
-
             while self._running:
                 # Check termination conditions
                 if duration_seconds and (time.time() - start_time) >= duration_seconds:
@@ -270,7 +269,7 @@ class EventHubProducer:
                 last_exception = e
                 if attempt < self.max_retries:
                     delay = min(
-                        self.base_delay * (DEFAULT_BACKOFF_FACTOR ** attempt),
+                        self.base_delay * (DEFAULT_BACKOFF_FACTOR**attempt),
                         self.max_delay,
                     )
                     self._retry_count += 1

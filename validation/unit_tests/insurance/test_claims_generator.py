@@ -84,7 +84,9 @@ class TestFraudRate:
     def test_fraud_rate_within_bounds(self, claims_df):
         """Fraud rate should be near 2% (allow 0.5%-5% for 1K samples)."""
         fraud_rate = claims_df["fraud_flag"].mean()
-        assert 0.005 <= fraud_rate <= 0.05, f"Fraud rate {fraud_rate:.3f} outside expected bounds"
+        assert 0.005 <= fraud_rate <= 0.05, (
+            f"Fraud rate {fraud_rate:.3f} outside expected bounds"
+        )
 
     def test_fraud_flag_is_boolean(self, claims_df):
         assert claims_df["fraud_flag"].dtype == bool
@@ -114,13 +116,19 @@ class TestPolicyClaimLinkage:
     def test_policy_id_format(self, claims_df):
         assert claims_df["policy_id"].str.startswith("POL-").all()
 
-    def test_policy_id_references_generated_policies(self, generator: InsuranceClaimsGenerator):
+    def test_policy_id_references_generated_policies(
+        self, generator: InsuranceClaimsGenerator
+    ):
         valid_ids = {p["policy_id"] for p in generator.policies}
         for _ in range(100):
             record = generator.generate_record()
-            assert record["policy_id"] in valid_ids, f"Orphan policy: {record['policy_id']}"
+            assert record["policy_id"] in valid_ids, (
+                f"Orphan policy: {record['policy_id']}"
+            )
 
-    def test_adjuster_id_references_generated_adjusters(self, generator: InsuranceClaimsGenerator):
+    def test_adjuster_id_references_generated_adjusters(
+        self, generator: InsuranceClaimsGenerator
+    ):
         valid_ids = {a["adjuster_id"] for a in generator.adjusters}
         for _ in range(100):
             record = generator.generate_record()
@@ -158,21 +166,43 @@ class TestReproducibility:
     """Test that seeded generators produce identical output."""
 
     def test_same_seed_same_output(self):
-        gen1 = InsuranceClaimsGenerator(seed=123, num_policies=50, num_adjusters=5,
-                                         start_date=datetime(2024, 1, 1), end_date=datetime(2024, 6, 30))
-        gen2 = InsuranceClaimsGenerator(seed=123, num_policies=50, num_adjusters=5,
-                                         start_date=datetime(2024, 1, 1), end_date=datetime(2024, 6, 30))
+        gen1 = InsuranceClaimsGenerator(
+            seed=123,
+            num_policies=50,
+            num_adjusters=5,
+            start_date=datetime(2024, 1, 1),
+            end_date=datetime(2024, 6, 30),
+        )
+        gen2 = InsuranceClaimsGenerator(
+            seed=123,
+            num_policies=50,
+            num_adjusters=5,
+            start_date=datetime(2024, 1, 1),
+            end_date=datetime(2024, 6, 30),
+        )
         df1 = gen1.generate(num_records=50, show_progress=False)
         df2 = gen2.generate(num_records=50, show_progress=False)
         # Drop Faker-generated columns (Faker RNG can diverge from numpy RNG)
         deterministic_cols = [c for c in df1.columns if c != "claimant_name"]
-        assert df1[deterministic_cols].equals(df2[deterministic_cols]), "Same seed must produce identical output"
+        assert df1[deterministic_cols].equals(df2[deterministic_cols]), (
+            "Same seed must produce identical output"
+        )
 
     def test_different_seed_different_output(self):
-        gen1 = InsuranceClaimsGenerator(seed=1, num_policies=50, num_adjusters=5,
-                                         start_date=datetime(2024, 1, 1), end_date=datetime(2024, 6, 30))
-        gen2 = InsuranceClaimsGenerator(seed=2, num_policies=50, num_adjusters=5,
-                                         start_date=datetime(2024, 1, 1), end_date=datetime(2024, 6, 30))
+        gen1 = InsuranceClaimsGenerator(
+            seed=1,
+            num_policies=50,
+            num_adjusters=5,
+            start_date=datetime(2024, 1, 1),
+            end_date=datetime(2024, 6, 30),
+        )
+        gen2 = InsuranceClaimsGenerator(
+            seed=2,
+            num_policies=50,
+            num_adjusters=5,
+            start_date=datetime(2024, 1, 1),
+            end_date=datetime(2024, 6, 30),
+        )
         df1 = gen1.generate(num_records=50, show_progress=False)
         df2 = gen2.generate(num_records=50, show_progress=False)
         assert not df1.equals(df2), "Different seeds should produce different output"

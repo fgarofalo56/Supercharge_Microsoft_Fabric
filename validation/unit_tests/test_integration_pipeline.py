@@ -56,6 +56,7 @@ END_DATE = datetime(2024, 12, 31)
 # Helper functions: simulate medallion layer transforms
 # ===========================================================================
 
+
 def _bronze_ingest(records: list[dict]) -> pd.DataFrame:
     """Simulate Bronze layer: raw append-only ingestion with no transformations."""
     df = pd.DataFrame(records)
@@ -63,7 +64,9 @@ def _bronze_ingest(records: list[dict]) -> pd.DataFrame:
     return df
 
 
-def _silver_dedup(df: pd.DataFrame, key_column: str) -> tuple[pd.DataFrame, pd.DataFrame]:
+def _silver_dedup(
+    df: pd.DataFrame, key_column: str
+) -> tuple[pd.DataFrame, pd.DataFrame]:
     """
     Simulate Silver layer deduplication by business key.
 
@@ -75,7 +78,9 @@ def _silver_dedup(df: pd.DataFrame, key_column: str) -> tuple[pd.DataFrame, pd.D
     return deduped, duplicates
 
 
-def _silver_validate_not_null(df: pd.DataFrame, required_cols: list[str]) -> tuple[pd.DataFrame, pd.DataFrame]:
+def _silver_validate_not_null(
+    df: pd.DataFrame, required_cols: list[str]
+) -> tuple[pd.DataFrame, pd.DataFrame]:
     """
     Simulate Silver layer null validation.
 
@@ -86,7 +91,9 @@ def _silver_validate_not_null(df: pd.DataFrame, required_cols: list[str]) -> tup
     return df[mask].copy(), df[~mask].copy()
 
 
-def _silver_validate_range(df: pd.DataFrame, column: str, low: float, high: float) -> tuple[pd.DataFrame, pd.DataFrame]:
+def _silver_validate_range(
+    df: pd.DataFrame, column: str, low: float, high: float
+) -> tuple[pd.DataFrame, pd.DataFrame]:
     """
     Simulate Silver layer range validation.
 
@@ -100,7 +107,9 @@ def _silver_validate_range(df: pd.DataFrame, column: str, low: float, high: floa
     return df[in_range].copy(), df[~in_range].copy()
 
 
-def _silver_compute_dq_score(df: pd.DataFrame, required_cols: list[str]) -> pd.DataFrame:
+def _silver_compute_dq_score(
+    df: pd.DataFrame, required_cols: list[str]
+) -> pd.DataFrame:
     """
     Compute a data quality score: fraction of required columns that are non-null.
     """
@@ -113,7 +122,9 @@ def _silver_compute_dq_score(df: pd.DataFrame, required_cols: list[str]) -> pd.D
     return result
 
 
-def _gold_aggregate(df: pd.DataFrame, group_col: str, agg_col: str, agg_func: str = "sum") -> pd.DataFrame:
+def _gold_aggregate(
+    df: pd.DataFrame, group_col: str, agg_col: str, agg_func: str = "sum"
+) -> pd.DataFrame:
     """
     Simulate Gold layer aggregation.
 
@@ -128,10 +139,16 @@ def _gold_aggregate(df: pd.DataFrame, group_col: str, agg_col: str, agg_func: st
     temp = temp.dropna(subset=[agg_col])
     if temp.empty:
         return pd.DataFrame()
-    return temp.groupby(group_col).agg(**{
-        f"{agg_col}_{agg_func}": (agg_col, agg_func),
-        "record_count": (agg_col, "count"),
-    }).reset_index()
+    return (
+        temp.groupby(group_col)
+        .agg(
+            **{
+                f"{agg_col}_{agg_func}": (agg_col, agg_func),
+                "record_count": (agg_col, "count"),
+            }
+        )
+        .reset_index()
+    )
 
 
 # ===========================================================================
@@ -144,7 +161,9 @@ class TestCasinoIntegrationPipeline:
 
     @pytest.fixture(autouse=True)
     def setup(self):
-        self.gen = SlotMachineGenerator(num_machines=20, seed=SEED, start_date=START_DATE, end_date=END_DATE)
+        self.gen = SlotMachineGenerator(
+            num_machines=20, seed=SEED, start_date=START_DATE, end_date=END_DATE
+        )
         self.records = [self.gen.generate_record() for _ in range(SAMPLE_SIZE)]
 
     def test_generator_produces_valid_bronze_data(self):
@@ -153,8 +172,14 @@ class TestCasinoIntegrationPipeline:
 
         # Required Bronze columns for slot telemetry
         required = [
-            "event_id", "machine_id", "event_type", "event_timestamp",
-            "denomination", "machine_type", "manufacturer", "_source",
+            "event_id",
+            "machine_id",
+            "event_type",
+            "event_timestamp",
+            "denomination",
+            "machine_type",
+            "manufacturer",
+            "_source",
         ]
         for col in required:
             assert col in df.columns, f"Missing Bronze column: {col}"
@@ -167,6 +192,7 @@ class TestCasinoIntegrationPipeline:
         # Validate data types (pandas 2.x may return StringDtype for inferred
         # string columns; accept either object or any string-like dtype).
         import pandas as _pd
+
         assert df["denomination"].dtype in (np.float64, float, object)
         event_id_dtype = df["event_id"].dtype
         assert event_id_dtype == object or _pd.api.types.is_string_dtype(event_id_dtype)
@@ -174,9 +200,16 @@ class TestCasinoIntegrationPipeline:
 
         # Validate event_type is from allowed set
         valid_types = {
-            "GAME_PLAY", "JACKPOT", "METER_UPDATE", "DOOR_OPEN",
-            "DOOR_CLOSE", "BILL_IN", "TICKET_OUT", "TILT",
-            "POWER_OFF", "POWER_ON",
+            "GAME_PLAY",
+            "JACKPOT",
+            "METER_UPDATE",
+            "DOOR_OPEN",
+            "DOOR_CLOSE",
+            "BILL_IN",
+            "TICKET_OUT",
+            "TILT",
+            "POWER_OFF",
+            "POWER_ON",
         }
         assert set(df["event_type"].unique()).issubset(valid_types)
 
@@ -192,17 +225,23 @@ class TestCasinoIntegrationPipeline:
         silver, null_rejects = _silver_validate_not_null(
             silver, ["event_id", "machine_id", "event_type"]
         )
-        assert len(null_rejects) == 0, "Silver should have no null event_id/machine_id/event_type"
+        assert len(null_rejects) == 0, (
+            "Silver should have no null event_id/machine_id/event_type"
+        )
 
         # Compute DQ score
         silver = _silver_compute_dq_score(
             silver, ["event_id", "machine_id", "event_type", "denomination", "coin_in"]
         )
         assert "_dq_score" in silver.columns
-        assert silver["_dq_score"].min() > 0.0, "Every Silver record has at least some fields"
+        assert silver["_dq_score"].min() > 0.0, (
+            "Every Silver record has at least some fields"
+        )
 
         # Validate denomination > 0
-        denom_valid, _denom_invalid = _silver_validate_range(silver, "denomination", 0.001, 1000.0)
+        denom_valid, _denom_invalid = _silver_validate_range(
+            silver, "denomination", 0.001, 1000.0
+        )
         assert len(denom_valid) == len(silver), "All denominations should be positive"
 
     def test_silver_to_gold_aggregations(self):
@@ -258,22 +297,40 @@ class TestUSDAIntegrationPipeline:
     @pytest.fixture(autouse=True)
     def setup(self):
         self.gen = USDAGenerator(seed=SEED, start_date=START_DATE, end_date=END_DATE)
-        self.records = [self.gen.generate_record(domain="crop_production") for _ in range(SAMPLE_SIZE)]
+        self.records = [
+            self.gen.generate_record(domain="crop_production")
+            for _ in range(SAMPLE_SIZE)
+        ]
 
     def test_generator_produces_valid_bronze_data(self):
         """Generator output matches Bronze layer expected schema."""
         df = _bronze_ingest(self.records)
 
         required = [
-            "record_id", "commodity", "year", "state_fips", "state_name",
-            "statisticcat_desc", "unit_desc", "value", "source_desc",
-            "agg_level_desc", "_source",
+            "record_id",
+            "commodity",
+            "year",
+            "state_fips",
+            "state_name",
+            "statisticcat_desc",
+            "unit_desc",
+            "value",
+            "source_desc",
+            "agg_level_desc",
+            "_source",
         ]
         for col in required:
             assert col in df.columns, f"Missing Bronze column: {col}"
 
         # No nulls in core required fields
-        for col in ["record_id", "commodity", "year", "state_fips", "state_name", "value"]:
+        for col in [
+            "record_id",
+            "commodity",
+            "year",
+            "state_fips",
+            "state_name",
+            "value",
+        ]:
             null_count = df[col].isnull().sum()
             assert null_count == 0, f"Bronze column '{col}' has {null_count} nulls"
 
@@ -281,8 +338,16 @@ class TestUSDAIntegrationPipeline:
 
         # Validate commodity is from known set
         valid_commodities = {
-            "CORN", "SOYBEANS", "WHEAT", "COTTON", "RICE",
-            "BARLEY", "OATS", "SORGHUM", "HAY", "POTATOES",
+            "CORN",
+            "SOYBEANS",
+            "WHEAT",
+            "COTTON",
+            "RICE",
+            "BARLEY",
+            "OATS",
+            "SORGHUM",
+            "HAY",
+            "POTATOES",
         }
         assert set(df["commodity"].unique()).issubset(valid_commodities)
 
@@ -299,12 +364,17 @@ class TestUSDAIntegrationPipeline:
         assert len(silver) + len(dupes) == len(bronze)
 
         # Validate value > 0 (crop stats should be positive)
-        value_valid, _value_invalid = _silver_validate_range(silver, "value", 0.0, float("inf"))
-        assert len(value_valid) == len(silver), "All crop production values should be >= 0"
+        value_valid, _value_invalid = _silver_validate_range(
+            silver, "value", 0.0, float("inf")
+        )
+        assert len(value_valid) == len(silver), (
+            "All crop production values should be >= 0"
+        )
 
         # Compute DQ score
         silver = _silver_compute_dq_score(
-            silver, ["record_id", "commodity", "year", "state_fips", "value", "cv_percent"]
+            silver,
+            ["record_id", "commodity", "year", "state_fips", "value", "cv_percent"],
         )
         # cv_percent can be null for CENSUS records, so DQ < 1.0 is expected for some
         assert silver["_dq_score"].min() >= 0.5, "DQ score should be at least 50%"
@@ -360,16 +430,26 @@ class TestSBAIntegrationPipeline:
     @pytest.fixture(autouse=True)
     def setup(self):
         self.gen = SBAGenerator(seed=SEED, start_date=START_DATE, end_date=END_DATE)
-        self.records = [self.gen.generate_record(domain="ppp") for _ in range(SAMPLE_SIZE)]
+        self.records = [
+            self.gen.generate_record(domain="ppp") for _ in range(SAMPLE_SIZE)
+        ]
 
     def test_generator_produces_valid_bronze_data(self):
         """Generator output matches Bronze layer expected schema."""
         df = _bronze_ingest(self.records)
 
         required = [
-            "loan_id", "program_type", "loan_amount", "approval_date",
-            "borrower_name", "borrower_state", "naics_code",
-            "loan_status", "term_months", "interest_rate", "_source",
+            "loan_id",
+            "program_type",
+            "loan_amount",
+            "approval_date",
+            "borrower_name",
+            "borrower_state",
+            "naics_code",
+            "loan_status",
+            "term_months",
+            "interest_rate",
+            "_source",
         ]
         for col in required:
             assert col in df.columns, f"Missing Bronze column: {col}"
@@ -397,7 +477,9 @@ class TestSBAIntegrationPipeline:
         assert len(silver) + len(dupes) == len(bronze)
 
         # Validate loan_amount range ($20K minimum for PPP)
-        valid, _invalid = _silver_validate_range(silver, "loan_amount", 0.01, 10_000_001.0)
+        valid, _invalid = _silver_validate_range(
+            silver, "loan_amount", 0.01, 10_000_001.0
+        )
         assert len(valid) == len(silver), "All loan amounts should be within range"
 
         # Validate term_months is reasonable
@@ -406,13 +488,21 @@ class TestSBAIntegrationPipeline:
 
         # Compute DQ score
         silver = _silver_compute_dq_score(
-            silver, ["loan_id", "loan_amount", "borrower_name", "borrower_city", "naics_code"]
+            silver,
+            ["loan_id", "loan_amount", "borrower_name", "borrower_city", "naics_code"],
         )
         # borrower_city can be null (~5%) so some DQ < 1.0
         assert silver["_dq_score"].min() >= 0.6, "DQ score should be at least 60%"
 
         # Validate business_type is from known set
-        valid_types = {"SOLE_PROPRIETORSHIP", "LLC", "CORPORATION", "PARTNERSHIP", "NON_PROFIT", "OTHER"}
+        valid_types = {
+            "SOLE_PROPRIETORSHIP",
+            "LLC",
+            "CORPORATION",
+            "PARTNERSHIP",
+            "NON_PROFIT",
+            "OTHER",
+        }
         assert set(silver["business_type"].unique()).issubset(valid_types)
 
     def test_silver_to_gold_aggregations(self):
@@ -463,16 +553,26 @@ class TestNOAAIntegrationPipeline:
     @pytest.fixture(autouse=True)
     def setup(self):
         self.gen = NOAAGenerator(seed=SEED, start_date=START_DATE, end_date=END_DATE)
-        self.records = [self.gen.generate_record(domain="weather") for _ in range(SAMPLE_SIZE)]
+        self.records = [
+            self.gen.generate_record(domain="weather") for _ in range(SAMPLE_SIZE)
+        ]
 
     def test_generator_produces_valid_bronze_data(self):
         """Generator output matches Bronze layer expected schema."""
         df = _bronze_ingest(self.records)
 
         required = [
-            "observation_id", "station_id", "station_name", "timestamp",
-            "latitude", "longitude", "parameter", "value", "unit",
-            "quality_flag", "_source",
+            "observation_id",
+            "station_id",
+            "station_name",
+            "timestamp",
+            "latitude",
+            "longitude",
+            "parameter",
+            "value",
+            "unit",
+            "quality_flag",
+            "_source",
         ]
         for col in required:
             assert col in df.columns, f"Missing Bronze column: {col}"
@@ -485,9 +585,24 @@ class TestNOAAIntegrationPipeline:
 
         # Validate station_id is from known set
         valid_stations = {
-            "KJFK", "KLAX", "KORD", "KATL", "KDFW", "KDEN", "KPHX",
-            "KSEA", "KMIA", "KBOS", "KLAS", "KMSP", "KIAH", "KSLC",
-            "KPIT", "KDTW", "KSTL", "KMCO",
+            "KJFK",
+            "KLAX",
+            "KORD",
+            "KATL",
+            "KDFW",
+            "KDEN",
+            "KPHX",
+            "KSEA",
+            "KMIA",
+            "KBOS",
+            "KLAS",
+            "KMSP",
+            "KIAH",
+            "KSLC",
+            "KPIT",
+            "KDTW",
+            "KSTL",
+            "KMCO",
         }
         assert set(df["station_id"].unique()).issubset(valid_stations)
 
@@ -512,14 +627,21 @@ class TestNOAAIntegrationPipeline:
 
         # Compute DQ score
         silver_clean = _silver_compute_dq_score(
-            silver_clean, ["observation_id", "station_id", "parameter", "value", "quality_flag"]
+            silver_clean,
+            ["observation_id", "station_id", "parameter", "value", "quality_flag"],
         )
         assert silver_clean["_dq_score"].min() >= 0.8
 
         # Validate parameter is from known set
         valid_params = {
-            "TEMPERATURE", "DEWPOINT", "HUMIDITY", "WIND_SPEED",
-            "WIND_DIRECTION", "PRESSURE", "VISIBILITY", "PRECIPITATION",
+            "TEMPERATURE",
+            "DEWPOINT",
+            "HUMIDITY",
+            "WIND_SPEED",
+            "WIND_DIRECTION",
+            "PRESSURE",
+            "VISIBILITY",
+            "PRECIPITATION",
             "CLOUD_COVER",
         }
         assert set(silver_clean["parameter"].unique()).issubset(valid_params)
@@ -571,17 +693,29 @@ class TestEPAIntegrationPipeline:
 
     @pytest.fixture(autouse=True)
     def setup(self):
-        self.gen = EPAGenerator(seed=SEED, start_date=START_DATE, end_date=END_DATE, domain="air_quality")
-        self.records = [self.gen.generate_record(domain="air_quality") for _ in range(SAMPLE_SIZE)]
+        self.gen = EPAGenerator(
+            seed=SEED, start_date=START_DATE, end_date=END_DATE, domain="air_quality"
+        )
+        self.records = [
+            self.gen.generate_record(domain="air_quality") for _ in range(SAMPLE_SIZE)
+        ]
 
     def test_generator_produces_valid_bronze_data(self):
         """Generator output matches Bronze layer expected schema."""
         df = _bronze_ingest(self.records)
 
         required = [
-            "record_id", "site_id", "parameter", "parameter_code",
-            "date_local", "aqi_value", "aqi_category", "concentration",
-            "units", "state_code", "_source",
+            "record_id",
+            "site_id",
+            "parameter",
+            "parameter_code",
+            "date_local",
+            "aqi_value",
+            "aqi_category",
+            "concentration",
+            "units",
+            "state_code",
+            "_source",
         ]
         for col in required:
             assert col in df.columns, f"Missing Bronze column: {col}"
@@ -601,8 +735,12 @@ class TestEPAIntegrationPipeline:
 
         # Validate AQI category is from known set
         valid_categories = {
-            "GOOD", "MODERATE", "UNHEALTHY_SENSITIVE",
-            "UNHEALTHY", "VERY_UNHEALTHY", "HAZARDOUS",
+            "GOOD",
+            "MODERATE",
+            "UNHEALTHY_SENSITIVE",
+            "UNHEALTHY",
+            "VERY_UNHEALTHY",
+            "HAZARDOUS",
         }
         assert set(df["aqi_category"].unique()).issubset(valid_categories)
 
@@ -615,8 +753,12 @@ class TestEPAIntegrationPipeline:
         assert len(silver) + len(dupes) == len(bronze)
 
         # Validate concentration >= 0
-        conc_valid, _conc_invalid = _silver_validate_range(silver, "concentration", 0.0, float("inf"))
-        assert len(conc_valid) == len(silver), "All concentrations should be non-negative"
+        conc_valid, _conc_invalid = _silver_validate_range(
+            silver, "concentration", 0.0, float("inf")
+        )
+        assert len(conc_valid) == len(silver), (
+            "All concentrations should be non-negative"
+        )
 
         # Validate AQI category matches AQI value
         for _, row in silver.iterrows():
@@ -637,7 +779,15 @@ class TestEPAIntegrationPipeline:
 
         # Compute DQ score
         silver = _silver_compute_dq_score(
-            silver, ["record_id", "site_id", "parameter", "concentration", "sample_duration", "county_name"]
+            silver,
+            [
+                "record_id",
+                "site_id",
+                "parameter",
+                "concentration",
+                "sample_duration",
+                "county_name",
+            ],
         )
         # sample_duration and county_name can be null, so DQ may be < 1.0
         assert silver["_dq_score"].min() >= 0.5
@@ -691,16 +841,27 @@ class TestDOIIntegrationPipeline:
     @pytest.fixture(autouse=True)
     def setup(self):
         self.gen = DOIGenerator(seed=SEED, start_date=START_DATE, end_date=END_DATE)
-        self.records = [self.gen.generate_record(domain="earthquake") for _ in range(SAMPLE_SIZE)]
+        self.records = [
+            self.gen.generate_record(domain="earthquake") for _ in range(SAMPLE_SIZE)
+        ]
 
     def test_generator_produces_valid_bronze_data(self):
         """Generator output matches Bronze layer expected schema."""
         df = _bronze_ingest(self.records)
 
         required = [
-            "event_id", "time", "latitude", "longitude", "depth_km",
-            "magnitude", "mag_type", "place", "event_type", "status",
-            "significance", "_source",
+            "event_id",
+            "time",
+            "latitude",
+            "longitude",
+            "depth_km",
+            "magnitude",
+            "mag_type",
+            "place",
+            "event_type",
+            "status",
+            "significance",
+            "_source",
         ]
         for col in required:
             assert col in df.columns, f"Missing Bronze column: {col}"
@@ -722,7 +883,13 @@ class TestDOIIntegrationPipeline:
         assert (df["longitude"] >= -180).all() and (df["longitude"] <= 180).all()
 
         # Validate event_type
-        valid_types = {"EARTHQUAKE", "QUARRY_BLAST", "EXPLOSION", "VOLCANIC_ERUPTION", "ICE_QUAKE"}
+        valid_types = {
+            "EARTHQUAKE",
+            "QUARRY_BLAST",
+            "EXPLOSION",
+            "VOLCANIC_ERUPTION",
+            "ICE_QUAKE",
+        }
         assert set(df["event_type"].unique()).issubset(valid_types)
 
     def test_bronze_to_silver_transformations(self):
@@ -738,7 +905,9 @@ class TestDOIIntegrationPipeline:
         assert len(mag_valid) == len(silver), "All magnitudes should be 0-10"
 
         # Validate depth range
-        depth_valid, _depth_invalid = _silver_validate_range(silver, "depth_km", 0.0, 800.0)
+        depth_valid, _depth_invalid = _silver_validate_range(
+            silver, "depth_km", 0.0, 800.0
+        )
         assert len(depth_valid) == len(silver), "All depths should be 0-800 km"
 
         # Validate significance is within 0-1000
@@ -747,7 +916,17 @@ class TestDOIIntegrationPipeline:
 
         # Compute DQ score
         silver = _silver_compute_dq_score(
-            silver, ["event_id", "magnitude", "depth_km", "latitude", "longitude", "felt", "mmi", "alert"]
+            silver,
+            [
+                "event_id",
+                "magnitude",
+                "depth_km",
+                "latitude",
+                "longitude",
+                "felt",
+                "mmi",
+                "alert",
+            ],
         )
         # felt, mmi, alert are often null for small earthquakes
         assert silver["_dq_score"].min() >= 0.4
@@ -800,7 +979,9 @@ class TestTribalHealthIntegrationPipeline:
 
     @pytest.fixture(autouse=True)
     def setup(self):
-        self.gen = TribalHealthcareGenerator(seed=SEED, start_date=START_DATE, end_date=END_DATE)
+        self.gen = TribalHealthcareGenerator(
+            seed=SEED, start_date=START_DATE, end_date=END_DATE
+        )
         self.records = [self.gen.generate_record() for _ in range(SAMPLE_SIZE)]
 
     def test_generator_produces_valid_bronze_data(self):
@@ -808,31 +989,57 @@ class TestTribalHealthIntegrationPipeline:
         df = _bronze_ingest(self.records)
 
         required = [
-            "record_id", "patient_id", "facility_id", "facility_name",
-            "encounter_type", "encounter_date", "icd10_code",
-            "icd10_description", "tribal_affiliation", "service_unit",
-            "area_office", "age_group", "gender", "insurance_type",
-            "hipaa_consent", "phi_masked", "_source",
+            "record_id",
+            "patient_id",
+            "facility_id",
+            "facility_name",
+            "encounter_type",
+            "encounter_date",
+            "icd10_code",
+            "icd10_description",
+            "tribal_affiliation",
+            "service_unit",
+            "area_office",
+            "age_group",
+            "gender",
+            "insurance_type",
+            "hipaa_consent",
+            "phi_masked",
+            "_source",
         ]
         for col in required:
             assert col in df.columns, f"Missing Bronze column: {col}"
 
         # Core fields must never be null
-        for col in ["record_id", "patient_id", "facility_id", "encounter_type",
-                     "icd10_code", "tribal_affiliation"]:
+        for col in [
+            "record_id",
+            "patient_id",
+            "facility_id",
+            "encounter_type",
+            "icd10_code",
+            "tribal_affiliation",
+        ]:
             null_count = df[col].isnull().sum()
             assert null_count == 0, f"Bronze column '{col}' has {null_count} nulls"
 
         assert len(df) == SAMPLE_SIZE
 
         # Validate HIPAA compliance flags
-        assert (df["hipaa_consent"] == True).all(), "All records must have HIPAA consent"
+        assert (df["hipaa_consent"] == True).all(), (
+            "All records must have HIPAA consent"
+        )
         assert (df["phi_masked"] == True).all(), "All records must have PHI masked"
 
         # Validate encounter_type from known set
         valid_encounter_types = {
-            "outpatient", "inpatient", "emergency", "telehealth",
-            "dental", "behavioral_health", "pharmacy", "laboratory",
+            "outpatient",
+            "inpatient",
+            "emergency",
+            "telehealth",
+            "dental",
+            "behavioral_health",
+            "pharmacy",
+            "laboratory",
         }
         assert set(df["encounter_type"].unique()).issubset(valid_encounter_types)
 
@@ -854,27 +1061,44 @@ class TestTribalHealthIntegrationPipeline:
 
         # Validate ICD-10 code format (letter followed by digits and optional dot)
         icd10_pattern = silver["icd10_code"].str.match(r"^[A-Z]\d{2}")
-        assert icd10_pattern.all(), "All ICD-10 codes should start with letter + 2 digits"
+        assert icd10_pattern.all(), (
+            "All ICD-10 codes should start with letter + 2 digits"
+        )
 
         # Validate facility_id format
-        assert silver["facility_id"].str.startswith("IHS-").all(), "All facility IDs start with IHS-"
+        assert silver["facility_id"].str.startswith("IHS-").all(), (
+            "All facility IDs start with IHS-"
+        )
 
         # Validate lab results when present
         lab_records = silver[silver["lab_test_name"].notnull()]
         if len(lab_records) > 0:
-            assert (lab_records["lab_result_value"].notnull()).all(), "Lab records must have result values"
-            assert (lab_records["lab_result_unit"].notnull()).all(), "Lab records must have result units"
+            assert (lab_records["lab_result_value"].notnull()).all(), (
+                "Lab records must have result values"
+            )
+            assert (lab_records["lab_result_unit"].notnull()).all(), (
+                "Lab records must have result units"
+            )
             # Validate abnormal flags are from known set
             valid_flags = {"N", "L", "H", "LL", "HH"}
             actual_flags = set(lab_records["lab_abnormal_flag"].dropna().unique())
-            assert actual_flags.issubset(valid_flags), f"Invalid lab flags: {actual_flags - valid_flags}"
+            assert actual_flags.issubset(valid_flags), (
+                f"Invalid lab flags: {actual_flags - valid_flags}"
+            )
 
         # Compute DQ score
         silver = _silver_compute_dq_score(
-            silver, [
-                "record_id", "patient_id", "encounter_type", "icd10_code",
-                "cpt_code", "provider_id", "medication_name", "lab_test_name",
-            ]
+            silver,
+            [
+                "record_id",
+                "patient_id",
+                "encounter_type",
+                "icd10_code",
+                "cpt_code",
+                "provider_id",
+                "medication_name",
+                "lab_test_name",
+            ],
         )
         # cpt_code, provider_id, medication_name, lab_test_name can be null
         assert silver["_dq_score"].min() >= 0.3
@@ -888,19 +1112,25 @@ class TestTribalHealthIntegrationPipeline:
         # Use a numeric proxy: create a count column
         silver_for_gold = silver.copy()
         silver_for_gold["encounter_count"] = 1
-        gold = _gold_aggregate(silver_for_gold, "tribal_affiliation", "encounter_count", "sum")
+        gold = _gold_aggregate(
+            silver_for_gold, "tribal_affiliation", "encounter_count", "sum"
+        )
         if not gold.empty:
             assert "encounter_count_sum" in gold.columns
             assert (gold["record_count"] > 0).all()
             assert gold["tribal_affiliation"].is_unique
 
         # Gold KPI: encounter count by encounter_type
-        gold_type = _gold_aggregate(silver_for_gold, "encounter_type", "encounter_count", "sum")
+        gold_type = _gold_aggregate(
+            silver_for_gold, "encounter_type", "encounter_count", "sum"
+        )
         if not gold_type.empty:
             assert gold_type["encounter_type"].is_unique
 
         # Gold KPI: count by area_office
-        gold_area = _gold_aggregate(silver_for_gold, "area_office", "encounter_count", "sum")
+        gold_area = _gold_aggregate(
+            silver_for_gold, "area_office", "encounter_count", "sum"
+        )
         if not gold_area.empty:
             assert gold_area["area_office"].is_unique
 
@@ -919,7 +1149,9 @@ class TestTribalHealthIntegrationPipeline:
 
         silver_for_gold = silver_valid.copy()
         silver_for_gold["encounter_count"] = 1
-        gold = _gold_aggregate(silver_for_gold, "encounter_type", "encounter_count", "sum")
+        gold = _gold_aggregate(
+            silver_for_gold, "encounter_type", "encounter_count", "sum"
+        )
         if not gold.empty:
             assert len(gold) <= len(silver_valid)
 
@@ -935,23 +1167,40 @@ class TestDotFaaIntegrationPipeline:
     @pytest.fixture(autouse=True)
     def setup(self):
         self.gen = DOTFAAGenerator(seed=SEED, start_date=START_DATE, end_date=END_DATE)
-        self.records = [self.gen.generate_record(domain="flight_operations") for _ in range(SAMPLE_SIZE)]
+        self.records = [
+            self.gen.generate_record(domain="flight_operations")
+            for _ in range(SAMPLE_SIZE)
+        ]
 
     def test_generator_produces_valid_bronze_data(self):
         """Generator output matches Bronze layer expected schema."""
         df = _bronze_ingest(self.records)
 
         required = [
-            "record_id", "data_domain", "carrier_code", "carrier_name",
-            "origin_airport", "destination_airport", "departure_date",
-            "flight_number", "aircraft_type", "tail_number", "_source",
+            "record_id",
+            "data_domain",
+            "carrier_code",
+            "carrier_name",
+            "origin_airport",
+            "destination_airport",
+            "departure_date",
+            "flight_number",
+            "aircraft_type",
+            "tail_number",
+            "_source",
         ]
         for col in required:
             assert col in df.columns, f"Missing Bronze column: {col}"
 
         # Core fields must not be null
-        for col in ["record_id", "carrier_code", "origin_airport", "destination_airport",
-                     "departure_date", "data_domain"]:
+        for col in [
+            "record_id",
+            "carrier_code",
+            "origin_airport",
+            "destination_airport",
+            "departure_date",
+            "data_domain",
+        ]:
             null_count = df[col].isnull().sum()
             assert null_count == 0, f"Bronze column '{col}' has {null_count} nulls"
 
@@ -962,17 +1211,61 @@ class TestDotFaaIntegrationPipeline:
 
         # Validate carrier codes are from known set
         valid_carriers = {
-            "AA", "DL", "UA", "WN", "B6", "AS", "NK", "F9", "HA", "G4",
-            "SY", "MX", "QX", "OH", "OO", "YX", "9E", "MQ", "YV", "CP",
+            "AA",
+            "DL",
+            "UA",
+            "WN",
+            "B6",
+            "AS",
+            "NK",
+            "F9",
+            "HA",
+            "G4",
+            "SY",
+            "MX",
+            "QX",
+            "OH",
+            "OO",
+            "YX",
+            "9E",
+            "MQ",
+            "YV",
+            "CP",
         }
         assert set(df["carrier_code"].unique()).issubset(valid_carriers)
 
         # Validate airport codes are from known set
         valid_airports = {
-            "ATL", "ORD", "DFW", "DEN", "LAX", "JFK", "SFO", "SEA",
-            "MCO", "MIA", "LAS", "PHX", "IAH", "CLT", "EWR", "MSP",
-            "DTW", "BOS", "PHL", "LGA", "FLL", "BWI", "DCA", "SAN",
-            "TPA", "PDX", "SLC", "STL", "BNA", "AUS",
+            "ATL",
+            "ORD",
+            "DFW",
+            "DEN",
+            "LAX",
+            "JFK",
+            "SFO",
+            "SEA",
+            "MCO",
+            "MIA",
+            "LAS",
+            "PHX",
+            "IAH",
+            "CLT",
+            "EWR",
+            "MSP",
+            "DTW",
+            "BOS",
+            "PHL",
+            "LGA",
+            "FLL",
+            "BWI",
+            "DCA",
+            "SAN",
+            "TPA",
+            "PDX",
+            "SLC",
+            "STL",
+            "BNA",
+            "AUS",
         }
         assert set(df["origin_airport"].unique()).issubset(valid_airports)
         assert set(df["destination_airport"].unique()).issubset(valid_airports)
@@ -996,7 +1289,14 @@ class TestDotFaaIntegrationPipeline:
             assert (valid_delays >= 0).all(), "Delay minutes must be non-negative"
 
         # Validate delay_cause is from known set
-        valid_causes = {"none", "carrier", "weather", "nas", "security", "late_aircraft"}
+        valid_causes = {
+            "none",
+            "carrier",
+            "weather",
+            "nas",
+            "security",
+            "late_aircraft",
+        }
         non_null_causes = silver["delay_cause"].dropna()
         if len(non_null_causes) > 0:
             assert set(non_null_causes.unique()).issubset(valid_causes)
@@ -1008,11 +1308,18 @@ class TestDotFaaIntegrationPipeline:
 
         # Compute DQ score
         silver = _silver_compute_dq_score(
-            silver, [
-                "record_id", "carrier_code", "origin_airport", "destination_airport",
-                "scheduled_departure", "actual_departure", "delay_minutes",
-                "aircraft_type", "passengers",
-            ]
+            silver,
+            [
+                "record_id",
+                "carrier_code",
+                "origin_airport",
+                "destination_airport",
+                "scheduled_departure",
+                "actual_departure",
+                "delay_minutes",
+                "aircraft_type",
+                "passengers",
+            ],
         )
         # actual_departure and delay_minutes are null for cancelled flights
         assert silver["_dq_score"].min() >= 0.5
@@ -1043,8 +1350,12 @@ class TestDotFaaIntegrationPipeline:
 
         # Gold KPI: total passengers per origin airport
         silver_pax = silver.copy()
-        silver_pax["passengers"] = pd.to_numeric(silver_pax["passengers"], errors="coerce")
-        gold_airport = _gold_aggregate(silver_pax, "origin_airport", "passengers", "sum")
+        silver_pax["passengers"] = pd.to_numeric(
+            silver_pax["passengers"], errors="coerce"
+        )
+        gold_airport = _gold_aggregate(
+            silver_pax, "origin_airport", "passengers", "sum"
+        )
         if not gold_airport.empty:
             assert gold_airport["origin_airport"].is_unique
 
@@ -1053,7 +1364,9 @@ class TestDotFaaIntegrationPipeline:
         silver_for_cancel["_cancelled_int"] = silver_for_cancel["cancelled"].apply(
             lambda x: 1 if x is True else 0
         )
-        gold_cancel = _gold_aggregate(silver_for_cancel, "carrier_code", "_cancelled_int", "mean")
+        gold_cancel = _gold_aggregate(
+            silver_for_cancel, "carrier_code", "_cancelled_int", "mean"
+        )
         if not gold_cancel.empty:
             # Cancellation rate should be between 0 and 1
             assert (gold_cancel["_cancelled_int_mean"] >= 0).all()
@@ -1066,7 +1379,8 @@ class TestDotFaaIntegrationPipeline:
 
         silver, dupes = _silver_dedup(bronze, "record_id")
         silver_valid, silver_rejects = _silver_validate_not_null(
-            silver, ["record_id", "carrier_code", "origin_airport", "destination_airport"]
+            silver,
+            ["record_id", "carrier_code", "origin_airport", "destination_airport"],
         )
         assert len(silver) <= len(bronze)
         assert len(silver) + len(dupes) == len(bronze)
@@ -1074,7 +1388,9 @@ class TestDotFaaIntegrationPipeline:
 
         # Gold aggregation produces fewer rows than Silver
         silver_pax = silver_valid.copy()
-        silver_pax["passengers"] = pd.to_numeric(silver_pax["passengers"], errors="coerce")
+        silver_pax["passengers"] = pd.to_numeric(
+            silver_pax["passengers"], errors="coerce"
+        )
         gold = _gold_aggregate(silver_pax, "carrier_code", "passengers", "sum")
         if not gold.empty:
             assert len(gold) <= len(silver_valid)

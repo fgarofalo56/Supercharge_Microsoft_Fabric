@@ -36,7 +36,10 @@ from generators.streaming.event_hub_producer import (
 def _force_eventhub_available(monkeypatch):
     monkeypatch.setattr(_eh_mod, "EVENTHUB_AVAILABLE", True)
     monkeypatch.setattr(
-        _eh_mod, "EventData", lambda body=None: MagicMock(name="EventData"), raising=False
+        _eh_mod,
+        "EventData",
+        lambda body=None: MagicMock(name="EventData"),
+        raising=False,
     )
     yield
 
@@ -179,7 +182,7 @@ class TestEventHubRetryLogic:
         # Each delay should be larger than the previous
         for i in range(1, len(delays)):
             assert delays[i] > delays[i - 1], (
-                f"Delay {i} ({delays[i]}) should be > delay {i-1} ({delays[i-1]})"
+                f"Delay {i} ({delays[i]}) should be > delay {i - 1} ({delays[i - 1]})"
             )
 
     def test_backoff_respects_max_delay(self):

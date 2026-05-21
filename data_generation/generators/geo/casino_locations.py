@@ -674,9 +674,9 @@ def generate_us_casino_locations(count: int = 100) -> list[dict[str, Any]]:
             table_games=table_games,
             poker_tables=poker_tables,
             sports_book=random.random() > 0.3,  # nosec B311 - synthetic data only
-            opened_date=f"{opened_year}-{random.randint(1,12):02d}-{random.randint(1,28):02d}",  # nosec B311 - synthetic data only
+            opened_date=f"{opened_year}-{random.randint(1, 12):02d}-{random.randint(1, 28):02d}",  # nosec B311 - synthetic data only
             last_renovation=(
-                f"{random.randint(opened_year+1, 2024)}-{random.randint(1,12):02d}-01"  # nosec B311 - synthetic data only
+                f"{random.randint(opened_year + 1, 2024)}-{random.randint(1, 12):02d}-01"  # nosec B311 - synthetic data only
                 if random.random() > 0.3  # nosec B311 - synthetic data only
                 else None
             ),
@@ -737,9 +737,9 @@ def generate_global_casino_locations(count: int = 50) -> list[dict[str, Any]]:
             "table_games": table_games,
             "poker_tables": poker_tables,
             "sports_book": random.random() > 0.4,  # nosec B311 - synthetic data only
-            "opened_date": f"{opened_year}-{random.randint(1,12):02d}-{random.randint(1,28):02d}",  # nosec B311 - synthetic data only
+            "opened_date": f"{opened_year}-{random.randint(1, 12):02d}-{random.randint(1, 28):02d}",  # nosec B311 - synthetic data only
             "last_renovation": (
-                f"{random.randint(opened_year+1, 2024)}-{random.randint(1,12):02d}-01"  # nosec B311 - synthetic data only
+                f"{random.randint(opened_year + 1, 2024)}-{random.randint(1, 12):02d}-01"  # nosec B311 - synthetic data only
                 if random.random() > 0.4  # nosec B311 - synthetic data only
                 else None
             ),

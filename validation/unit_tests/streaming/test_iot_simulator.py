@@ -59,9 +59,9 @@ class TestIoTDeviceSimulator:
         """Generating with device_type='slot_machine' must yield device_type='SLOT_MACHINE'."""
         record = iot_simulator.generate_record(device_type="slot_machine")
 
-        assert (
-            record["device_type"] == "SLOT_MACHINE"
-        ), f"Expected SLOT_MACHINE, got {record['device_type']}"
+        assert record["device_type"] == "SLOT_MACHINE", (
+            f"Expected SLOT_MACHINE, got {record['device_type']}"
+        )
 
     def test_all_device_types(self, iot_simulator):
         """Each of the seven device types must produce a valid record with the correct enum."""
@@ -76,9 +76,9 @@ class TestIoTDeviceSimulator:
         }
         for device_key, expected_enum in expected_enums.items():
             record = iot_simulator.generate_record(device_type=device_key)
-            assert (
-                record is not None
-            ), f"No record returned for device_type='{device_key}'"
+            assert record is not None, (
+                f"No record returned for device_type='{device_key}'"
+            )
             assert record["device_type"] == expected_enum, (
                 f"device_type='{device_key}' should yield enum '{expected_enum}', "
                 f"got '{record['device_type']}'"
@@ -96,9 +96,9 @@ class TestIoTDeviceSimulator:
                 f"telemetry must be a dict for device_type='{device_key}', "
                 f"got {type(record['telemetry'])}"
             )
-            assert (
-                len(record["telemetry"]) > 0
-            ), f"telemetry must not be empty for device_type='{device_key}'"
+            assert len(record["telemetry"]) > 0, (
+                f"telemetry must not be empty for device_type='{device_key}'"
+            )
 
     def test_slot_telemetry_fields(self, iot_simulator):
         """Slot machine telemetry must contain all machine-specific meter fields."""
@@ -106,9 +106,9 @@ class TestIoTDeviceSimulator:
         telemetry = record["telemetry"]
 
         for field in _SLOT_TELEMETRY_FIELDS:
-            assert (
-                field in telemetry
-            ), f"Slot telemetry missing expected field '{field}'"
+            assert field in telemetry, (
+                f"Slot telemetry missing expected field '{field}'"
+            )
 
     # ------------------------------------------------------------------
     # Protocol
@@ -134,9 +134,9 @@ class TestIoTDeviceSimulator:
             for _ in range(20):
                 record = iot_simulator.generate_record(device_type=device_key)
                 rssi = record["signal_strength_dbm"]
-                assert isinstance(
-                    rssi, int
-                ), f"signal_strength_dbm must be int, got {type(rssi)}"
+                assert isinstance(rssi, int), (
+                    f"signal_strength_dbm must be int, got {type(rssi)}"
+                )
                 assert -100 <= rssi <= 0, (
                     f"signal_strength_dbm {rssi} is outside [-100, 0] "
                     f"for device_type='{device_key}'"
@@ -153,9 +153,9 @@ class TestIoTDeviceSimulator:
         )
 
         assert isinstance(batch, list), "generate_batch must return a list"
-        assert (
-            len(batch) == sample_size
-        ), f"Expected {sample_size} records, got {len(batch)}"
+        assert len(batch) == sample_size, (
+            f"Expected {sample_size} records, got {len(batch)}"
+        )
 
     # ------------------------------------------------------------------
     # Fleet snapshot

@@ -51,9 +51,9 @@ class TestBronzeToSilverTransformation:
 
         # No negative values should remain
         negative_count = (df_silver["coin_in"].dropna() < 0).sum()
-        assert (
-            negative_count == 0
-        ), f"Silver layer has {negative_count} negative coin_in values"
+        assert negative_count == 0, (
+            f"Silver layer has {negative_count} negative coin_in values"
+        )
 
     def test_timestamp_to_date_extraction(self, sample_slot_data):
         """Verify event_date is correctly extracted from event_timestamp."""
@@ -76,9 +76,9 @@ class TestBronzeToSilverTransformation:
         # Verify event_date is populated
         valid_timestamps = df_bronze["event_timestamp"].notna().sum()
         valid_dates = df_silver["event_date"].notna().sum()
-        assert (
-            valid_dates == valid_timestamps
-        ), "Date extraction failed for some timestamps"
+        assert valid_dates == valid_timestamps, (
+            "Date extraction failed for some timestamps"
+        )
 
     def test_hour_extraction(self, sample_slot_data):
         """Verify event_hour is correctly extracted from event_timestamp."""
@@ -119,9 +119,9 @@ class TestBronzeToSilverTransformation:
         lowercase_count = (
             df_silver["event_type"].str.contains("[a-z]", regex=True, na=False).sum()
         )
-        assert (
-            lowercase_count == 0
-        ), f"Silver layer has {lowercase_count} lowercase event_types"
+        assert lowercase_count == 0, (
+            f"Silver layer has {lowercase_count} lowercase event_types"
+        )
 
     def test_deduplication(self, sample_slot_data):
         """Verify deduplication removes exact duplicates."""
@@ -264,9 +264,9 @@ class TestSilverToGoldAggregation:
         # Verify calculation
         for _, row in df_gold.head(10).iterrows():
             expected_net_win = row["total_coin_in"] - row["total_coin_out"]
-            assert (
-                abs(row["net_win"] - expected_net_win) < 0.01
-            ), "Net win calculation error"
+            assert abs(row["net_win"] - expected_net_win) < 0.01, (
+                "Net win calculation error"
+            )
 
     def test_hold_percentage_calculation(self, sample_slot_data):
         """Verify hold percentage is calculated correctly."""
@@ -297,9 +297,9 @@ class TestSilverToGoldAggregation:
         theoretical_win = total_coin_in * THEORETICAL_HOLD
 
         assert theoretical_win >= 0, "Theoretical win should not be negative"
-        assert (
-            theoretical_win == total_coin_in * 0.08
-        ), "Theoretical win calculation error"
+        assert theoretical_win == total_coin_in * 0.08, (
+            "Theoretical win calculation error"
+        )
 
     def test_unique_player_count(self, sample_slot_data):
         """Verify unique player count is calculated correctly."""
@@ -342,9 +342,9 @@ class TestDataTypeConsistency:
                 non_null = df[col].dropna()
                 if len(non_null) > 0:
                     # All non-null values should be numeric
-                    assert pd.api.types.is_numeric_dtype(
-                        non_null
-                    ), f"{col} is not numeric type"
+                    assert pd.api.types.is_numeric_dtype(non_null), (
+                        f"{col} is not numeric type"
+                    )
 
     def test_string_types_preserved(self, sample_slot_data):
         """Verify string types are preserved through transformations."""
@@ -357,9 +357,9 @@ class TestDataTypeConsistency:
                 non_null = df[col].dropna()
                 if len(non_null) > 0:
                     # All non-null values should be string-like
-                    assert all(
-                        isinstance(v, str) for v in non_null
-                    ), f"{col} contains non-string values"
+                    assert all(isinstance(v, str) for v in non_null), (
+                        f"{col} contains non-string values"
+                    )
 
     def test_decimal_precision_maintained(self, sample_slot_data):
         """Verify decimal precision is maintained for currency values."""
@@ -431,9 +431,9 @@ class TestNullHandling:
 
         # net_win should not have nulls after coalescing
         null_net_wins = df["net_win"].isna().sum()
-        assert (
-            null_net_wins == 0
-        ), f"Net win has {null_net_wins} null values after coalescing"
+        assert null_net_wins == 0, (
+            f"Net win has {null_net_wins} null values after coalescing"
+        )
 
 
 class TestCrossLayerConsistency:
@@ -490,9 +490,9 @@ class TestCrossLayerConsistency:
         grouped_coin_out = grouped["coin_out"].sum()
 
         # Should match (with floating point tolerance)
-        assert (
-            abs(direct_coin_in - grouped_coin_in) < 0.01
-        ), "Aggregation coin_in mismatch"
-        assert (
-            abs(direct_coin_out - grouped_coin_out) < 0.01
-        ), "Aggregation coin_out mismatch"
+        assert abs(direct_coin_in - grouped_coin_in) < 0.01, (
+            "Aggregation coin_in mismatch"
+        )
+        assert abs(direct_coin_out - grouped_coin_out) < 0.01, (
+            "Aggregation coin_out mismatch"
+        )

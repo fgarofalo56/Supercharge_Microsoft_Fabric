@@ -94,27 +94,17 @@ def simulate_silver(df: pd.DataFrame, id_col: str) -> pd.DataFrame:
     return silver
 
 
-def simulate_gold_agg(
-    df: pd.DataFrame, group_col: str, agg_col: str
-) -> pd.DataFrame:
+def simulate_gold_agg(df: pd.DataFrame, group_col: str, agg_col: str) -> pd.DataFrame:
     """Simulate Gold layer: aggregate by group column."""
     if group_col not in df.columns or agg_col not in df.columns:
         # Fallback: group by _source_file (always present in bronze)
         if "_source_file" in df.columns:
-            return (
-                df.groupby("_source_file")
-                .size()
-                .reset_index(name="record_count")
-            )
+            return df.groupby("_source_file").size().reset_index(name="record_count")
         return pd.DataFrame({"record_count": [len(df)]})
     # Fill NaN group values to avoid dropping rows in groupby
     work_df = df.copy()
     work_df[group_col] = work_df[group_col].fillna("_unknown_")
-    return (
-        work_df.groupby(group_col)
-        .agg(record_count=(agg_col, "count"))
-        .reset_index()
-    )
+    return work_df.groupby(group_col).agg(record_count=(agg_col, "count")).reset_index()
 
 
 # =============================================================================

@@ -113,7 +113,13 @@ jobs:
 
       - name: Run Unit Tests
         env:
-          PYTHONPATH: data_generation
+          # Two-entry PYTHONPATH lets tests import both `from generators.*`
+          # (legacy casino/federal tests) and `from data_generation.generators.*`
+          # (newer industry generators like energy, telecom, etc.).
+          PYTHONPATH: .:data_generation
+          # PlayerGenerator requires a hash salt; in CI we use a fixed
+          # non-secret value (real deployments source from Key Vault).
+          FABRIC_POC_HASH_SALT: ci-only-fixed-salt-not-for-production-use-only-32+chars
         run: |
           pytest validation/unit_tests/ \
             -v \
@@ -159,6 +165,9 @@ jobs:
       - name: Test Casino Generators
         env:
           PYTHONPATH: data_generation
+          # PlayerGenerator requires a hash salt; in CI we use a fixed
+          # non-secret value (real deployments source from Key Vault).
+          FABRIC_POC_HASH_SALT: ci-only-fixed-salt-not-for-production-use-only-32+chars
         run: |
           python -c "
           from generators.slot_machine_generator import SlotMachineGenerator

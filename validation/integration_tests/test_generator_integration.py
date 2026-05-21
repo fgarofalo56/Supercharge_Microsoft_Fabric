@@ -34,9 +34,9 @@ class TestGeneratorInstantiation:
     def test_generators_have_schemas(self, all_generators):
         """Verify all generators expose schema definitions."""
         for name, generator in all_generators.items():
-            assert hasattr(generator, "schema") or hasattr(
-                generator, "_schema"
-            ), f"{name} generator missing schema"
+            assert hasattr(generator, "schema") or hasattr(generator, "_schema"), (
+                f"{name} generator missing schema"
+            )
             schema = (
                 generator.schema if hasattr(generator, "schema") else generator._schema
             )
@@ -46,20 +46,20 @@ class TestGeneratorInstantiation:
     def test_generators_have_generate_record(self, all_generators):
         """Verify all generators have generate_record method."""
         for name, generator in all_generators.items():
-            assert hasattr(
-                generator, "generate_record"
-            ), f"{name} generator missing generate_record method"
+            assert hasattr(generator, "generate_record"), (
+                f"{name} generator missing generate_record method"
+            )
             record = generator.generate_record()
-            assert isinstance(
-                record, dict
-            ), f"{name} generate_record doesn't return dict"
+            assert isinstance(record, dict), (
+                f"{name} generate_record doesn't return dict"
+            )
 
     def test_generators_have_generate_batch(self, all_generators):
         """Verify all generators can generate batches."""
         for name, generator in all_generators.items():
-            assert hasattr(
-                generator, "generate"
-            ), f"{name} generator missing generate method"
+            assert hasattr(generator, "generate"), (
+                f"{name} generator missing generate method"
+            )
             df = generator.generate(10, show_progress=False)
             assert len(df) == 10, f"{name} generate didn't return expected count"
 
@@ -150,14 +150,14 @@ class TestPlayerIdCompatibility:
             assert prefix in valid_prefixes, f"Slot uses unexpected prefix: {prefix}"
 
         for prefix in financial_prefixes:
-            assert (
-                prefix in valid_prefixes
-            ), f"Financial uses unexpected prefix: {prefix}"
+            assert prefix in valid_prefixes, (
+                f"Financial uses unexpected prefix: {prefix}"
+            )
 
         for prefix in compliance_prefixes:
-            assert (
-                prefix in valid_prefixes
-            ), f"Compliance uses unexpected prefix: {prefix}"
+            assert prefix in valid_prefixes, (
+                f"Compliance uses unexpected prefix: {prefix}"
+            )
 
 
 class TestDateRangeConsistency:
@@ -176,9 +176,9 @@ class TestDateRangeConsistency:
                         ts.replace("Z", "+00:00").replace("+00:00", "")
                     )
                 # Allow some tolerance for timezone differences
-                assert ts >= start_date - timedelta(
-                    days=1
-                ), f"Date {ts} before range start"
+                assert ts >= start_date - timedelta(days=1), (
+                    f"Date {ts} before range start"
+                )
                 assert ts <= end_date + timedelta(days=1), f"Date {ts} after range end"
 
     def test_compliance_dates_in_range(self, sample_compliance_data, fixed_date_range):
@@ -199,9 +199,9 @@ class TestDateRangeConsistency:
                     ts = datetime.fromisoformat(
                         ts.replace("Z", "+00:00").replace("+00:00", "")
                     )
-                assert ts >= start_date - timedelta(
-                    days=1
-                ), f"Date {ts} before range start"
+                assert ts >= start_date - timedelta(days=1), (
+                    f"Date {ts} before range start"
+                )
                 assert ts <= end_date + timedelta(days=1), f"Date {ts} after range end"
 
     def test_financial_dates_in_range(self, sample_financial_data, fixed_date_range):
@@ -215,9 +215,9 @@ class TestDateRangeConsistency:
                     ts = datetime.fromisoformat(
                         ts.replace("Z", "+00:00").replace("+00:00", "")
                     )
-                assert ts >= start_date - timedelta(
-                    days=1
-                ), f"Date {ts} before range start"
+                assert ts >= start_date - timedelta(days=1), (
+                    f"Date {ts} before range start"
+                )
                 assert ts <= end_date + timedelta(days=1), f"Date {ts} after range end"
 
     def test_table_games_dates_in_range(
@@ -233,9 +233,9 @@ class TestDateRangeConsistency:
                     ts = datetime.fromisoformat(
                         ts.replace("Z", "+00:00").replace("+00:00", "")
                     )
-                assert ts >= start_date - timedelta(
-                    days=1
-                ), f"Date {ts} before range start"
+                assert ts >= start_date - timedelta(days=1), (
+                    f"Date {ts} before range start"
+                )
                 assert ts <= end_date + timedelta(days=1), f"Date {ts} after range end"
 
     def test_all_generators_same_date_range(self, all_generators, fixed_date_range):
@@ -243,12 +243,12 @@ class TestDateRangeConsistency:
         start_date, end_date = fixed_date_range
 
         for name, generator in all_generators.items():
-            assert (
-                generator.start_date == start_date
-            ), f"{name} generator has different start_date"
-            assert (
-                generator.end_date == end_date
-            ), f"{name} generator has different end_date"
+            assert generator.start_date == start_date, (
+                f"{name} generator has different start_date"
+            )
+            assert generator.end_date == end_date, (
+                f"{name} generator has different end_date"
+            )
 
 
 class TestSeedReproducibility:
@@ -353,9 +353,9 @@ class TestGeneratorMetadataColumns:
             record = generator.generate_record()
 
             for meta_col in expected_metadata:
-                assert (
-                    meta_col in record
-                ), f"{name} generator missing metadata column: {meta_col}"
+                assert meta_col in record, (
+                    f"{name} generator missing metadata column: {meta_col}"
+                )
 
     def test_source_metadata_matches_generator(self, all_generators):
         """Verify _source metadata matches generator class name."""
@@ -387,9 +387,9 @@ class TestGeneratorOutputFormats:
 
         for name, generator in all_generators.items():
             df = generator.generate(10, show_progress=False)
-            assert isinstance(
-                df, pd.DataFrame
-            ), f"{name} generator did not produce DataFrame"
+            assert isinstance(df, pd.DataFrame), (
+                f"{name} generator did not produce DataFrame"
+            )
 
     def test_generators_support_parquet_output(self, slot_generator, temp_output_dir):
         """Verify generators can output to Parquet format."""

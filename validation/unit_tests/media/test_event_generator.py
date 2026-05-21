@@ -46,9 +46,17 @@ class TestGenerateEvents:
 
     def test_required_fields_present(self, sample_events):
         required = [
-            "event_id", "user_id", "content_id", "event_type",
-            "event_timestamp", "position_sec", "device_type",
-            "bitrate_kbps", "plan_tier", "age_bucket", "region",
+            "event_id",
+            "user_id",
+            "content_id",
+            "event_type",
+            "event_timestamp",
+            "position_sec",
+            "device_type",
+            "bitrate_kbps",
+            "plan_tier",
+            "age_bucket",
+            "region",
         ]
         for record in sample_events[:10]:
             for field in required:
@@ -147,7 +155,7 @@ class TestReproducibility:
         batch1 = gen1.generate_batch(20)
         batch2 = gen2.generate_batch(20)
 
-        for r1, r2 in zip(batch1, batch2):
+        for r1, r2 in zip(batch1, batch2, strict=False):
             assert r1["event_id"] == r2["event_id"]
             assert r1["user_id"] == r2["user_id"]
             assert r1["content_id"] == r2["content_id"]
@@ -161,7 +169,11 @@ class TestReproducibility:
         batch2 = gen2.generate_batch(10)
 
         # At least some records should differ
-        diffs = sum(1 for r1, r2 in zip(batch1, batch2) if r1["event_id"] != r2["event_id"])
+        diffs = sum(
+            1
+            for r1, r2 in zip(batch1, batch2, strict=False)
+            if r1["event_id"] != r2["event_id"]
+        )
         assert diffs > 0, "Different seeds should produce different output"
 
     def test_catalog_reproducibility(self):
@@ -171,7 +183,7 @@ class TestReproducibility:
         cat1 = gen1.get_catalog()
         cat2 = gen2.get_catalog()
 
-        for c1, c2 in zip(cat1, cat2):
+        for c1, c2 in zip(cat1, cat2, strict=False):
             assert c1["content_id"] == c2["content_id"]
             assert c1["genre"] == c2["genre"]
             assert c1["duration_min"] == c2["duration_min"]

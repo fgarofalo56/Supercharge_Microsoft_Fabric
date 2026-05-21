@@ -15,12 +15,12 @@ Features:
 from __future__ import annotations
 
 import math
-from datetime import datetime, timedelta
-from typing import Any
-
-import numpy as np
+from typing import TYPE_CHECKING, Any
 
 from data_generation.generators.base_generator import BaseGenerator
+
+if TYPE_CHECKING:
+    from datetime import datetime
 
 # ---------------------------------------------------------------------------
 # Reference data
@@ -28,7 +28,14 @@ from data_generation.generators.base_generator import BaseGenerator
 
 CATEGORIES = {
     "Grocery": {
-        "subcategories": ["Dairy", "Bakery", "Produce", "Frozen", "Snacks", "Beverages"],
+        "subcategories": [
+            "Dairy",
+            "Bakery",
+            "Produce",
+            "Frozen",
+            "Snacks",
+            "Beverages",
+        ],
         "price_range": (1.50, 25.00),
         "weight": 0.35,
     },
@@ -60,9 +67,21 @@ CATEGORIES = {
 }
 
 BRANDS = [
-    "StoreBrand", "NaturePlus", "FreshCo", "PrimeLine", "ValueMax",
-    "UrbanEdge", "TechNova", "HomeEssentials", "GreenLeaf", "ActiveLife",
-    "QuickBite", "StyleFirst", "ProGear", "BrightStar", "PureBasics",
+    "StoreBrand",
+    "NaturePlus",
+    "FreshCo",
+    "PrimeLine",
+    "ValueMax",
+    "UrbanEdge",
+    "TechNova",
+    "HomeEssentials",
+    "GreenLeaf",
+    "ActiveLife",
+    "QuickBite",
+    "StyleFirst",
+    "ProGear",
+    "BrightStar",
+    "PureBasics",
 ]
 
 STORE_FORMATS = ["big-box", "express", "online"]
@@ -78,8 +97,15 @@ SEGMENT_WEIGHTS = [0.05, 0.15, 0.30, 0.30, 0.20]
 
 # US federal holidays (month, day) for seasonality
 HOLIDAY_DATES = [
-    (1, 1), (2, 14), (5, 27), (7, 4), (9, 2),
-    (10, 31), (11, 28), (12, 25), (12, 31),
+    (1, 1),
+    (2, 14),
+    (5, 27),
+    (7, 4),
+    (9, 2),
+    (10, 31),
+    (11, 28),
+    (12, 25),
+    (12, 31),
 ]
 
 
@@ -132,11 +158,13 @@ class RetailSalesGenerator(BaseGenerator):
         for i in range(1, self.num_stores + 1):
             fmt = self.weighted_choice(STORE_FORMATS, STORE_FORMAT_WEIGHTS)
             region = self.rng.choice(REGIONS)
-            stores.append({
-                "store_id": f"STR-{i:04d}",
-                "format": fmt,
-                "region": region,
-            })
+            stores.append(
+                {
+                    "store_id": f"STR-{i:04d}",
+                    "format": fmt,
+                    "region": region,
+                }
+            )
         return stores
 
     def _build_products(self) -> list[dict[str, Any]]:
@@ -150,30 +178,32 @@ class RetailSalesGenerator(BaseGenerator):
             lo, hi = info["price_range"]
             price = round(float(self.rng.uniform(lo, hi)), 2)
             cost = round(price * float(self.rng.uniform(0.40, 0.75)), 2)
-            products.append({
-                "sku": f"SKU-{i:06d}",
-                "category": cat,
-                "subcategory": subcat,
-                "brand": self.rng.choice(BRANDS),
-                "unit_price": price,
-                "cost": cost,
-            })
+            products.append(
+                {
+                    "sku": f"SKU-{i:06d}",
+                    "category": cat,
+                    "subcategory": subcat,
+                    "brand": self.rng.choice(BRANDS),
+                    "unit_price": price,
+                    "cost": cost,
+                }
+            )
         return products
 
     def _build_customers(self) -> list[dict[str, Any]]:
         customers = []
         for i in range(1, self.num_customers + 1):
             segment = self.weighted_choice(CUSTOMER_SEGMENTS, SEGMENT_WEIGHTS)
-            join_dt = self.faker.date_between(
-                start_date="-5y", end_date="today"
+            join_dt = self.faker.date_between(start_date="-5y", end_date="today")
+            customers.append(
+                {
+                    "customer_id": f"CUST-{i:07d}",
+                    "loyalty_id": f"LYL-{i:010d}",
+                    "segment": segment,
+                    "join_dt": str(join_dt),
+                    "lifetime_spend": round(float(self.rng.uniform(50, 25000)), 2),
+                }
             )
-            customers.append({
-                "customer_id": f"CUST-{i:07d}",
-                "loyalty_id": f"LYL-{i:010d}",
-                "segment": segment,
-                "join_dt": str(join_dt),
-                "lifetime_spend": round(float(self.rng.uniform(50, 25000)), 2),
-            })
         return customers
 
     # ------------------------------------------------------------------

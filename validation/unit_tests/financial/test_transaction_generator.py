@@ -46,10 +46,21 @@ class TestTransactionGeneration:
         assert len(transactions) == 5000
 
         required_cols = [
-            "txn_id", "txn_timestamp", "acct_id", "card_hash",
-            "channel", "merchant_name", "merchant_mcc", "mcc_category",
-            "amount", "currency", "auth_code", "merchant_lat",
-            "merchant_lon", "is_fraud", "fraud_pattern",
+            "txn_id",
+            "txn_timestamp",
+            "acct_id",
+            "card_hash",
+            "channel",
+            "merchant_name",
+            "merchant_mcc",
+            "mcc_category",
+            "amount",
+            "currency",
+            "auth_code",
+            "merchant_lat",
+            "merchant_lon",
+            "is_fraud",
+            "fraud_pattern",
         ]
         for col_name in required_cols:
             assert col_name in transactions.columns, f"Missing column: {col_name}"
@@ -71,7 +82,9 @@ class TestPCICompliance:
         for card_hash in transactions["card_hash"]:
             # Must be 64-char hex (SHA-256)
             assert len(card_hash) == 64, f"card_hash wrong length: {len(card_hash)}"
-            assert re.match(r"^[0-9a-f]{64}$", card_hash), f"Not hex: {card_hash[:20]}..."
+            assert re.match(r"^[0-9a-f]{64}$", card_hash), (
+                f"Not hex: {card_hash[:20]}..."
+            )
             # Must NOT be a numeric-only string (raw PAN)
             assert not card_hash.isdigit(), "Raw PAN detected in card_hash!"
 
@@ -92,7 +105,12 @@ class TestFraudRate:
 
     def test_fraud_patterns_valid(self, transactions):
         """Fraud records must have a valid pattern; non-fraud must have None."""
-        valid_patterns = {"velocity_burst", "geo_anomaly", "amount_spike", "structuring"}
+        valid_patterns = {
+            "velocity_burst",
+            "geo_anomaly",
+            "amount_spike",
+            "structuring",
+        }
 
         fraud_rows = transactions[transactions["is_fraud"]]
         non_fraud_rows = transactions[~transactions["is_fraud"]]
@@ -100,7 +118,9 @@ class TestFraudRate:
         for pattern in fraud_rows["fraud_pattern"]:
             assert pattern in valid_patterns, f"Invalid fraud pattern: {pattern}"
 
-        assert non_fraud_rows["fraud_pattern"].isna().all(), "Non-fraud has fraud_pattern set"
+        assert non_fraud_rows["fraud_pattern"].isna().all(), (
+            "Non-fraud has fraud_pattern set"
+        )
 
 
 class TestMCCCodes:
@@ -120,9 +140,7 @@ class TestMCCCodes:
         for _, row in transactions.head(100).iterrows():
             category = row["mcc_category"]
             mcc = row["merchant_mcc"]
-            assert mcc in MCC_CODES[category], (
-                f"MCC {mcc} not in category {category}"
-            )
+            assert mcc in MCC_CODES[category], f"MCC {mcc} not in category {category}"
 
 
 class TestAmountValidation:
@@ -145,19 +163,42 @@ class TestReproducibility:
         """Two generators with the same seed must produce identical output."""
         fixed_start = datetime(2026, 1, 1)
         fixed_end = datetime(2026, 1, 31)
-        gen1 = TransactionGenerator(seed=123, num_customers=50, fraud_rate=0.002, start_date=fixed_start, end_date=fixed_end)
-        gen2 = TransactionGenerator(seed=123, num_customers=50, fraud_rate=0.002, start_date=fixed_start, end_date=fixed_end)
+        gen1 = TransactionGenerator(
+            seed=123,
+            num_customers=50,
+            fraud_rate=0.002,
+            start_date=fixed_start,
+            end_date=fixed_end,
+        )
+        gen2 = TransactionGenerator(
+            seed=123,
+            num_customers=50,
+            fraud_rate=0.002,
+            start_date=fixed_start,
+            end_date=fixed_end,
+        )
 
         df1 = gen1.generate(num_records=100, show_progress=False)
         df2 = gen2.generate(num_records=100, show_progress=False)
 
         # Compare seeded columns (merchant_name uses Faker which may vary)
         seeded_cols = [
-            "txn_id", "txn_timestamp", "acct_id", "card_hash",
-            "channel", "merchant_mcc", "mcc_category", "amount",
-            "currency", "auth_code", "is_fraud", "fraud_pattern",
+            "txn_id",
+            "txn_timestamp",
+            "acct_id",
+            "card_hash",
+            "channel",
+            "merchant_mcc",
+            "mcc_category",
+            "amount",
+            "currency",
+            "auth_code",
+            "is_fraud",
+            "fraud_pattern",
         ]
-        assert df1[seeded_cols].equals(df2[seeded_cols]), "Same seed produced different results"
+        assert df1[seeded_cols].equals(df2[seeded_cols]), (
+            "Same seed produced different results"
+        )
 
     def test_different_seeds_differ(self):
         """Different seeds must produce different output."""

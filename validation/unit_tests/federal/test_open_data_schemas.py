@@ -26,6 +26,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "data_generation"))
 # Helper: generic schema alignment (mirrors open_data._align_schema)
 # ---------------------------------------------------------------------------
 
+
 def _align_schema(df: pd.DataFrame, target_schema: dict[str, str]) -> pd.DataFrame:
     """
     Reproduce the _align_schema logic from usda_download.py for testing.
@@ -58,6 +59,7 @@ def _align_schema(df: pd.DataFrame, target_schema: dict[str, str]) -> pd.DataFra
 # ===========================================================================
 # USDA Crop Production
 # ===========================================================================
+
 
 class TestUSDACropSchemaAlignment:
     """Verify that NASS QuickStats API responses align to generator schema."""
@@ -182,6 +184,7 @@ class TestUSDACropSchemaAlignment:
 # USDA Food Safety
 # ===========================================================================
 
+
 class TestUSDAFoodSafetySchemaAlignment:
     """Verify that FSIS recall CSV data aligns to generator schema."""
 
@@ -267,6 +270,7 @@ class TestUSDAFoodSafetySchemaAlignment:
 # ===========================================================================
 # SBA PPP Loans
 # ===========================================================================
+
 
 class TestSBAPPPSchemaAlignment:
     """Verify that SBA PPP FOIA column mapping produces expected schema."""
@@ -362,6 +366,7 @@ class TestSBAPPPSchemaAlignment:
 # NOAA Weather
 # ===========================================================================
 
+
 class TestNOAAWeatherSchemaAlignment:
     """Verify NOAA weather observation schema alignment."""
 
@@ -454,6 +459,7 @@ class TestNOAAWeatherSchemaAlignment:
 # ===========================================================================
 # EPA Air Quality
 # ===========================================================================
+
 
 class TestEPAAirQualitySchemaAlignment:
     """Verify EPA AQS air quality monitoring schema alignment."""
@@ -555,6 +561,7 @@ class TestEPAAirQualitySchemaAlignment:
 # ===========================================================================
 # DOI Earthquake
 # ===========================================================================
+
 
 class TestDOIEarthquakeSchemaAlignment:
     """Verify USGS earthquake event schema alignment."""

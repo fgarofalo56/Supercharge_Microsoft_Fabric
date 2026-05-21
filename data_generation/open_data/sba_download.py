@@ -219,7 +219,7 @@ def _request_with_retry(
             if attempt == MAX_RETRIES:
                 logger.error("Request failed after %d attempts: %s", MAX_RETRIES, exc)
                 raise
-            wait = BACKOFF_BASE ** attempt
+            wait = BACKOFF_BASE**attempt
             logger.warning(
                 "Attempt %d/%d failed (%s). Retrying in %ds...",
                 attempt,
@@ -255,6 +255,7 @@ def _save_dataframe(
 # Download functions
 # ---------------------------------------------------------------------------
 
+
 def download_ppp_loans(
     output_dir: str,
     state_filter: str | None = None,
@@ -277,7 +278,9 @@ def download_ppp_loans(
     Returns:
         Combined DataFrame of PPP loan records.
     """
-    logger.info("Downloading PPP FOIA data (state=%s, sample=%s)", state_filter, sample_size)
+    logger.info(
+        "Downloading PPP FOIA data (state=%s, sample=%s)", state_filter, sample_size
+    )
 
     frames: list[pd.DataFrame] = []
     base_url = "https://data.sba.gov/dataset/ppp-foia/resource/"
@@ -435,7 +438,11 @@ def download_sbir_awards(
             break
 
         # The SBIR API returns results under varying keys; adapt as needed
-        results = data if isinstance(data, list) else data.get("results", data.get("response", {}).get("docs", []))
+        results = (
+            data
+            if isinstance(data, list)
+            else data.get("results", data.get("response", {}).get("docs", []))
+        )
 
         if not results:
             logger.info("No more SBIR results at offset %d", start)
@@ -471,6 +478,7 @@ def download_sbir_awards(
 # ---------------------------------------------------------------------------
 # Validation
 # ---------------------------------------------------------------------------
+
 
 def validate_download(file_path: str) -> dict[str, Any]:
     """
@@ -543,6 +551,7 @@ def validate_download(file_path: str) -> dict[str, Any]:
 # ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
+
 
 def main() -> None:
     """Command-line interface for SBA open-data downloads."""

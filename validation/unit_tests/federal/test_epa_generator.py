@@ -32,9 +32,9 @@ class TestEPAGenerator:
 
         for _ in range(100):
             record = epa_generator.generate_record(domain="air_quality")
-            assert (
-                record["parameter"] in valid_parameters
-            ), f"Unexpected parameter: {record['parameter']}"
+            assert record["parameter"] in valid_parameters, (
+                f"Unexpected parameter: {record['parameter']}"
+            )
 
     def test_aqi_range(self, epa_generator):
         """AQI values must fall within the EPA-defined 0–500 scale."""
@@ -72,9 +72,9 @@ class TestEPAGenerator:
 
         for _ in range(50):
             record = epa_generator.generate_record(domain="air_quality")
-            assert pattern.match(
-                record["site_id"]
-            ), f"site_id '{record['site_id']}' does not match pattern SS-CCC-SSSS"
+            assert pattern.match(record["site_id"]), (
+                f"site_id '{record['site_id']}' does not match pattern SS-CCC-SSSS"
+            )
 
     # ------------------------------------------------------------------ #
     # Water quality                                                        #
@@ -95,9 +95,9 @@ class TestEPAGenerator:
 
         for _ in range(100):
             record = epa_generator.generate_record(domain="water_quality")
-            assert (
-                record["system_type"] in valid_types
-            ), f"Unexpected system_type: {record['system_type']}"
+            assert record["system_type"] in valid_types, (
+                f"Unexpected system_type: {record['system_type']}"
+            )
 
     def test_mcl_violation_logic(self, epa_generator):
         """When mcl_violation is True, result_value must exceed the MCL."""
@@ -117,9 +117,9 @@ class TestEPAGenerator:
                         f"got {result}"
                     )
                 else:
-                    assert (
-                        result > mcl
-                    ), f"MCL violation expected result_value ({result}) > MCL ({mcl})"
+                    assert result > mcl, (
+                        f"MCL violation expected result_value ({result}) > MCL ({mcl})"
+                    )
             if violation_records_found >= 3:
                 break
 

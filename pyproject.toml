@@ -35,15 +35,18 @@ ignore = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"validation/unit_tests/**" = ["N802", "N803", "E712", "F841"]
+"validation/unit_tests/**" = ["N802", "N803", "E402", "E712", "E721", "F841", "SIM102"]
 # Notebook .py source files use Databricks/Fabric magic markers (# COMMAND, # MAGIC)
 # and depend on runtime-injected globals (spark, dbutils -> mssparkutils), so
 # disable several rules that don't apply to notebook semantics.
 "notebooks/**" = ["E402", "F401", "F811", "F821", "F541", "E712", "N806", "N816", "RUF005", "B007"]
 "**/__init__.py" = ["F401"]
 "validation/integration_tests/**" = ["F401", "UP035", "N806", "E402", "E741", "SIM102", "E712", "F841"]
-"validation/deployment_tests/**" = ["F401", "UP035"]
-"validation/great_expectations/**" = ["F401"]
+"validation/deployment_tests/**" = ["F401", "UP035", "N806"]
+"validation/great_expectations/**" = ["F401", "UP035", "E402", "TC003"]
+# data_generation/open_data has scanner functions with nested ID-type checks that
+# read more clearly as nested conditionals than a single combined boolean.
+"data_generation/open_data/**" = ["SIM102"]
 "scripts/**" = ["E402", "F401"]
 
 [tool.ruff.lint.isort]

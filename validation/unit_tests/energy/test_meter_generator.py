@@ -10,17 +10,17 @@ Tests cover:
 - Seed-based reproducibility
 """
 
-from datetime import datetime, timedelta
+from datetime import datetime
 
 import pandas as pd
 import pytest
 
 from data_generation.generators.energy.meter_generator import MeterReadingGenerator
 
-
 # -----------------------------------------------------------------------
 # Fixtures
 # -----------------------------------------------------------------------
+
 
 @pytest.fixture
 def generator():
@@ -43,6 +43,7 @@ def sample_records(generator):
 # Tests
 # -----------------------------------------------------------------------
 
+
 class TestMeterReadingGenerator:
     """Tests for MeterReadingGenerator."""
 
@@ -51,8 +52,13 @@ class TestMeterReadingGenerator:
         record = generator.generate_record()
         assert record is not None
         required = [
-            "meter_id", "reading_timestamp", "kwh_delivered",
-            "voltage_a", "power_factor", "demand_kw", "tamper_flag",
+            "meter_id",
+            "reading_timestamp",
+            "kwh_delivered",
+            "voltage_a",
+            "power_factor",
+            "demand_kw",
+            "tamper_flag",
             "read_quality",
         ]
         for field in required:
@@ -60,18 +66,19 @@ class TestMeterReadingGenerator:
 
     def test_kwh_non_negative(self, sample_records):
         """All kWh values must be >= 0."""
-        assert (sample_records["kwh_delivered"] >= 0).all(), \
+        assert (sample_records["kwh_delivered"] >= 0).all(), (
             "Found negative kwh_delivered values"
-        assert (sample_records["kwh_received"] >= 0).all(), \
+        )
+        assert (sample_records["kwh_received"] >= 0).all(), (
             "Found negative kwh_received values"
+        )
 
     def test_voltage_range(self, sample_records):
         """Voltage should be within a reasonable range (most within 108-132V)."""
         voltages = sample_records["voltage_a"]
         # Allow statistical outliers but 99% should be in 105-135
         within = ((voltages >= 105) & (voltages <= 135)).mean()
-        assert within > 0.95, \
-            f"Only {within:.1%} of voltages in 105-135V range"
+        assert within > 0.95, f"Only {within:.1%} of voltages in 105-135V range"
 
     def test_load_curve_shape(self, generator):
         """Evening hours should have higher avg demand than overnight."""
@@ -81,8 +88,9 @@ class TestMeterReadingGenerator:
         overnight = records[records["hour"].isin([1, 2, 3, 4])]["demand_kw"].mean()
         evening = records[records["hour"].isin([18, 19, 20])]["demand_kw"].mean()
 
-        assert evening > overnight, \
+        assert evening > overnight, (
             f"Evening demand ({evening:.2f}) should exceed overnight ({overnight:.2f})"
+        )
 
     def test_interval_spacing(self, sample_records):
         """Timestamps should be aligned to 15-minute boundaries."""
@@ -90,17 +98,24 @@ class TestMeterReadingGenerator:
         minutes = timestamps.dt.minute
         # All minutes should be 0, 15, 30, or 45
         valid_minutes = minutes.isin([0, 15, 30, 45])
-        assert valid_minutes.all(), \
+        assert valid_minutes.all(), (
             f"Found non-15-min-aligned timestamps: {minutes[~valid_minutes].unique()}"
+        )
 
     def test_reproducibility(self):
         """Same seed should produce identical output."""
-        gen1 = MeterReadingGenerator(seed=99, num_meters=50,
-                                     start_date=datetime(2025, 1, 1),
-                                     end_date=datetime(2025, 1, 7))
-        gen2 = MeterReadingGenerator(seed=99, num_meters=50,
-                                     start_date=datetime(2025, 1, 1),
-                                     end_date=datetime(2025, 1, 7))
+        gen1 = MeterReadingGenerator(
+            seed=99,
+            num_meters=50,
+            start_date=datetime(2025, 1, 1),
+            end_date=datetime(2025, 1, 7),
+        )
+        gen2 = MeterReadingGenerator(
+            seed=99,
+            num_meters=50,
+            start_date=datetime(2025, 1, 1),
+            end_date=datetime(2025, 1, 7),
+        )
 
         r1 = gen1.generate_record()
         r2 = gen2.generate_record()
@@ -134,5 +149,6 @@ class TestMeterReadingGenerator:
         """Rate class distribution should be roughly weighted."""
         dist = sample_records["rate_class"].value_counts(normalize=True)
         # Residential should be the majority
-        assert dist.get("RESIDENTIAL", 0) > 0.5, \
+        assert dist.get("RESIDENTIAL", 0) > 0.5, (
             f"Residential share too low: {dist.get('RESIDENTIAL', 0):.1%}"
+        )

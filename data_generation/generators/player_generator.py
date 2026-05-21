@@ -179,9 +179,7 @@ class PlayerGenerator(BaseGenerator):
             "total_actual_win_loss": actual_wl,
             "average_daily_theo": round(total_theo / max(total_visits, 1), 2),
             "preferred_game": self.rng.choice(self.PREFERRED_GAMES),
-            "communication_preference": self.rng.choice(
-                self.COMMUNICATION_PREFERENCES
-            ),
+            "communication_preference": self.rng.choice(self.COMMUNICATION_PREFERENCES),
             "marketing_opt_in": bool(self.rng.random() > 0.3),
             "marketing_channel": self.rng.choice(self.MARKETING_CHANNELS),
             "host_assigned": (

@@ -82,9 +82,9 @@ class TestPlayerDemographics:
 
         for player in players:
             for field in required_fields:
-                assert (
-                    field in player
-                ), f"Required field '{field}' missing from player record"
+                assert field in player, (
+                    f"Required field '{field}' missing from player record"
+                )
 
     # ------------------------------------------------------------------
     # Player ID format
@@ -96,12 +96,12 @@ class TestPlayerDemographics:
 
         for player in players:
             pid = player["player_id"]
-            assert pid.startswith(
-                "PLY"
-            ), f"player_id must start with 'PLY', got '{pid}'"
-            assert (
-                len(pid) == 11
-            ), f"player_id must be 11 chars (PLY + 8 digits), got '{pid}' (len={len(pid)})"
+            assert pid.startswith("PLY"), (
+                f"player_id must start with 'PLY', got '{pid}'"
+            )
+            assert len(pid) == 11, (
+                f"player_id must be 11 chars (PLY + 8 digits), got '{pid}' (len={len(pid)})"
+            )
 
     # ------------------------------------------------------------------
     # Enum field validation
@@ -112,27 +112,27 @@ class TestPlayerDemographics:
         players = player_demographics_seeded(100, _DEFAULT_CASINO)
 
         for player in players:
-            assert (
-                player["age_group"] in _VALID_AGE_GROUPS
-            ), f"Unexpected age_group '{player['age_group']}'"
+            assert player["age_group"] in _VALID_AGE_GROUPS, (
+                f"Unexpected age_group '{player['age_group']}'"
+            )
 
     def test_gender_valid(self, player_demographics_seeded):
         """gender must be one of Male, Female, or Non-binary."""
         players = player_demographics_seeded(100, _DEFAULT_CASINO)
 
         for player in players:
-            assert (
-                player["gender"] in _VALID_GENDERS
-            ), f"Unexpected gender '{player['gender']}'"
+            assert player["gender"] in _VALID_GENDERS, (
+                f"Unexpected gender '{player['gender']}'"
+            )
 
     def test_market_type_valid(self, player_demographics_seeded):
         """market_type must be Primary, Secondary, Tertiary, or Destination."""
         players = player_demographics_seeded(100, _DEFAULT_CASINO)
 
         for player in players:
-            assert (
-                player["market_type"] in _VALID_MARKET_TYPES
-            ), f"Unexpected market_type '{player['market_type']}'"
+            assert player["market_type"] in _VALID_MARKET_TYPES, (
+                f"Unexpected market_type '{player['market_type']}'"
+            )
 
     # ------------------------------------------------------------------
     # Distance and market type consistency
@@ -143,9 +143,9 @@ class TestPlayerDemographics:
         players = player_demographics_seeded(100, _DEFAULT_CASINO)
 
         for player in players:
-            assert (
-                player["distance_to_casino_miles"] >= 0
-            ), f"distance must be >= 0, got {player['distance_to_casino_miles']}"
+            assert player["distance_to_casino_miles"] >= 0, (
+                f"distance must be >= 0, got {player['distance_to_casino_miles']}"
+            )
 
     # ------------------------------------------------------------------
     # Haversine distance utility
@@ -171,18 +171,18 @@ class TestPlayerDemographics:
         players = player_demographics_seeded(100, _DEFAULT_CASINO)
 
         for player in players:
-            assert (
-                player["lifetime_value"] >= 0
-            ), f"lifetime_value must be >= 0, got {player['lifetime_value']}"
+            assert player["lifetime_value"] >= 0, (
+                f"lifetime_value must be >= 0, got {player['lifetime_value']}"
+            )
 
     def test_loyalty_tier_valid(self, player_demographics_seeded):
         """loyalty_tier must be one of the 6 defined tiers."""
         players = player_demographics_seeded(100, _DEFAULT_CASINO)
 
         for player in players:
-            assert (
-                player["loyalty_tier"] in _VALID_LOYALTY_TIERS
-            ), f"Unexpected loyalty_tier '{player['loyalty_tier']}'"
+            assert player["loyalty_tier"] in _VALID_LOYALTY_TIERS, (
+                f"Unexpected loyalty_tier '{player['loyalty_tier']}'"
+            )
 
     def test_get_loyalty_tier_thresholds(self):
         """get_loyalty_tier must return correct tiers based on LTV thresholds."""
@@ -191,9 +191,9 @@ class TestPlayerDemographics:
         assert get_loyalty_tier(30000) == "Gold", "LTV 30000 should be Gold"
         assert get_loyalty_tier(60000) == "Platinum", "LTV 60000 should be Platinum"
         assert get_loyalty_tier(150000) == "Diamond", "LTV 150000 should be Diamond"
-        assert (
-            get_loyalty_tier(300000) == "Seven Stars"
-        ), "LTV 300000 should be Seven Stars"
+        assert get_loyalty_tier(300000) == "Seven Stars", (
+            "LTV 300000 should be Seven Stars"
+        )
 
     # ------------------------------------------------------------------
     # GeoJSON export
@@ -204,12 +204,12 @@ class TestPlayerDemographics:
         players = player_demographics_seeded(10, _DEFAULT_CASINO)
         geojson = create_player_geojson(players)
 
-        assert (
-            geojson["type"] == "FeatureCollection"
-        ), f"GeoJSON type must be 'FeatureCollection', got '{geojson['type']}'"
-        assert (
-            len(geojson["features"]) == 10
-        ), f"Expected 10 features, got {len(geojson['features'])}"
+        assert geojson["type"] == "FeatureCollection", (
+            f"GeoJSON type must be 'FeatureCollection', got '{geojson['type']}'"
+        )
+        assert len(geojson["features"]) == 10, (
+            f"Expected 10 features, got {len(geojson['features'])}"
+        )
 
         feature = geojson["features"][0]
         assert feature["type"] == "Feature", "Feature type must be 'Feature'"
@@ -224,9 +224,9 @@ class TestPlayerDemographics:
         players = player_demographics_seeded(50, _DEFAULT_CASINO)
         summary = generate_market_summary(players)
 
-        assert (
-            summary["total_players"] == 50
-        ), f"Expected total_players=50, got {summary['total_players']}"
+        assert summary["total_players"] == 50, (
+            f"Expected total_players=50, got {summary['total_players']}"
+        )
         assert "by_market_type" in summary, "Summary must have 'by_market_type'"
         assert "by_loyalty_tier" in summary, "Summary must have 'by_loyalty_tier'"
         assert "distance_stats" in summary, "Summary must have 'distance_stats'"
@@ -241,6 +241,6 @@ class TestPlayerDemographics:
         random.seed(42)
         for _ in range(100):
             bracket = get_income_bracket(60000)
-            assert (
-                bracket in _VALID_INCOME_BRACKETS
-            ), f"Unexpected income bracket '{bracket}'"
+            assert bracket in _VALID_INCOME_BRACKETS, (
+                f"Unexpected income bracket '{bracket}'"
+            )

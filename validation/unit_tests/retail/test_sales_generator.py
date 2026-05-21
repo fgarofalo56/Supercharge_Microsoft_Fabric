@@ -51,13 +51,27 @@ class TestGenerateSales:
         assert len(df) == 20
 
         expected_cols = {
-            "txn_id", "txn_timestamp", "store_id", "sku",
-            "category", "subcategory", "brand", "qty",
-            "unit_price", "discount_pct", "line_total",
-            "payment_method", "loyalty_id", "customer_segment",
-            "store_format", "region",
-            "card_token", "card_last4",
-            "_ingested_at", "_source", "_batch_id",
+            "txn_id",
+            "txn_timestamp",
+            "store_id",
+            "sku",
+            "category",
+            "subcategory",
+            "brand",
+            "qty",
+            "unit_price",
+            "discount_pct",
+            "line_total",
+            "payment_method",
+            "loyalty_id",
+            "customer_segment",
+            "store_format",
+            "region",
+            "card_token",
+            "card_last4",
+            "_ingested_at",
+            "_source",
+            "_batch_id",
         }
         assert expected_cols.issubset(set(df.columns))
 
@@ -166,13 +180,17 @@ class TestReproducibility:
 
     def test_reproducibility(self):
         """Two generators with same seed produce identical records."""
-        gen_a = RetailSalesGenerator(seed=99, num_stores=5, num_skus=20, num_customers=50)
-        gen_b = RetailSalesGenerator(seed=99, num_stores=5, num_skus=20, num_customers=50)
+        gen_a = RetailSalesGenerator(
+            seed=99, num_stores=5, num_skus=20, num_customers=50
+        )
+        gen_b = RetailSalesGenerator(
+            seed=99, num_stores=5, num_skus=20, num_customers=50
+        )
 
         records_a = gen_a.generate_batch(10)
         records_b = gen_b.generate_batch(10)
 
-        for a, b in zip(records_a, records_b):
+        for a, b in zip(records_a, records_b, strict=False):
             assert a["txn_id"] == b["txn_id"]
             assert a["sku"] == b["sku"]
             assert a["qty"] == b["qty"]
@@ -181,8 +199,12 @@ class TestReproducibility:
 
     def test_different_seeds_differ(self):
         """Different seeds produce different output."""
-        gen_a = RetailSalesGenerator(seed=1, num_stores=5, num_skus=20, num_customers=50)
-        gen_b = RetailSalesGenerator(seed=2, num_stores=5, num_skus=20, num_customers=50)
+        gen_a = RetailSalesGenerator(
+            seed=1, num_stores=5, num_skus=20, num_customers=50
+        )
+        gen_b = RetailSalesGenerator(
+            seed=2, num_stores=5, num_skus=20, num_customers=50
+        )
 
         rec_a = gen_a.generate_record()
         rec_b = gen_b.generate_record()
