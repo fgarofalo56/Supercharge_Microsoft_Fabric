@@ -24,7 +24,8 @@ from typing import Any
 import pandas as pd
 
 from data_generation.generators.base_generator import BaseGenerator
-from data_generation.generators.better_together.retail_generator import REGIONS
+
+from .retail_generator import REGIONS
 
 PERSONAS: tuple[dict[str, Any], ...] = (
     {
