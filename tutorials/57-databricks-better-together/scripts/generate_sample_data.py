@@ -51,7 +51,16 @@ def main(output_root: Path, seed: int) -> None:
     retail = BetterTogetherRetailGenerator(seed=seed).generate_all()
     for name, df in retail.items():
         path = retail_root / f"{name}.parquet"
-        df.to_parquet(path, engine="pyarrow", index=False)
+        # coerce_timestamps='us' is required for Spark/Delta — Spark cannot
+        # ingest the nanosecond timestamps that pyarrow writes by default
+        # (Illegal Parquet type: INT64 (TIMESTAMP(NANOS,false))).
+        df.to_parquet(
+            path,
+            engine="pyarrow",
+            index=False,
+            coerce_timestamps="us",
+            allow_truncated_timestamps=True,
+        )
         print(f"  - {name:<14} {len(df):>7,} rows  -> {path.name}")
 
     print(f"[Tutorial 57] Writing persona seed data to {persona_root}")
