@@ -1,0 +1,569 @@
+/// =============================================================================
+/// Tutorial 57 — Better Together Semantic Model (Direct Lake)
+/// =============================================================================
+///
+/// Demonstrates row-level security (RLS) and object-level security (OLS) on a
+/// Direct Lake semantic model whose source tables are mirrored from Databricks
+/// Unity Catalog via the Fabric Databricks mirror.
+///
+/// THREE roles, applied progressively in the three companion Power BI reports:
+///
+///   - Regional Manager — sees only their region's rows (dynamic RLS via
+///                        USERPRINCIPALNAME() → mapping table).
+///   - Finance Analyst  — sees all regions, BUT the customer_id column is
+///                        masked (OLS hides; a derived hashed measure is shown).
+///   - Executive        — sees everything (no filter, no OLS).
+///
+/// Scheduled refresh is owned by the SP `sp-better-together-refresh` — see
+/// the security automation notebook for how that identity is registered.
+/// =============================================================================
+
+model Model
+    culture: en-US
+    defaultPowerBIDataSourceVersion: powerBI_V3
+    sourceQueryCulture: en-US
+
+    annotation PBI_QueryOrder = ["dim_date", "dim_region", "dim_customer", "dim_product", "fact_sales", "fact_returns", "_RLS Mapping", "_Measures"]
+    annotation __PBI_TimeIntelligenceEnabled = true
+
+/// =============================================================================
+/// DATA SOURCE — Direct Lake on the Gold Lakehouse
+/// =============================================================================
+
+dataSource 'DirectLake'
+    connectionString: "Data Source=powerbi://api.powerbi.com/v1.0/myorg/[Better Together];Initial Catalog=lh_btfabric_gold"
+    type: sql
+
+/// =============================================================================
+/// DIMENSIONS
+/// =============================================================================
+
+table dim_region
+    lineageTag: bt-dim-region
+
+    column region_code
+        dataType: string
+        lineageTag: bt-region-code
+        summarizeBy: none
+        sourceColumn: region_code
+
+    column country
+        dataType: string
+        lineageTag: bt-region-country
+        summarizeBy: none
+        sourceColumn: country
+
+    column supercluster
+        dataType: string
+        lineageTag: bt-region-super
+        summarizeBy: none
+        sourceColumn: supercluster
+
+    partition 'dim_region-dl' = entity
+        mode: directLake
+        source
+            entityPath: dim_region
+            schemaName: dbo
+            expressionSource: 'DirectLake'
+
+table dim_customer
+    lineageTag: bt-dim-customer
+
+    column customer_id
+        dataType: string
+        lineageTag: bt-cust-id
+        summarizeBy: none
+        sourceColumn: customer_id
+
+    column region_code
+        dataType: string
+        lineageTag: bt-cust-region
+        summarizeBy: none
+        sourceColumn: region_code
+
+    column loyalty_tier
+        dataType: string
+        lineageTag: bt-cust-tier
+        summarizeBy: none
+        sourceColumn: loyalty_tier
+
+    column customer_created_at
+        dataType: dateTime
+        formatString: Short Date
+        lineageTag: bt-cust-created
+        summarizeBy: none
+        sourceColumn: customer_created_at
+
+    partition 'dim_customer-dl' = entity
+        mode: directLake
+        source
+            entityPath: dim_customer
+            schemaName: dbo
+            expressionSource: 'DirectLake'
+
+table dim_product
+    lineageTag: bt-dim-product
+
+    column product_id
+        dataType: string
+        lineageTag: bt-prod-id
+        summarizeBy: none
+        sourceColumn: product_id
+
+    column sku
+        dataType: string
+        lineageTag: bt-prod-sku
+        summarizeBy: none
+        sourceColumn: sku
+
+    column name
+        dataType: string
+        lineageTag: bt-prod-name
+        summarizeBy: none
+        sourceColumn: name
+
+    column category
+        dataType: string
+        lineageTag: bt-prod-cat
+        summarizeBy: none
+        sourceColumn: category
+
+    column unit_cost
+        dataType: decimal
+        formatString: \$#,##0.00
+        lineageTag: bt-prod-cost
+        summarizeBy: none
+        sourceColumn: unit_cost
+
+    column unit_price
+        dataType: decimal
+        formatString: \$#,##0.00
+        lineageTag: bt-prod-price
+        summarizeBy: none
+        sourceColumn: unit_price
+
+    partition 'dim_product-dl' = entity
+        mode: directLake
+        source
+            entityPath: dim_product
+            schemaName: dbo
+            expressionSource: 'DirectLake'
+
+table dim_date
+    lineageTag: bt-dim-date
+    dataCategory: Time
+
+    column date_key
+        dataType: int64
+        lineageTag: bt-date-key
+        summarizeBy: none
+        sourceColumn: date_key
+        isKey
+
+    column date
+        dataType: dateTime
+        formatString: Short Date
+        lineageTag: bt-date-date
+        summarizeBy: none
+        sourceColumn: date
+        dataCategory: PaddedDateTableDates
+
+    column year
+        dataType: int64
+        lineageTag: bt-date-year
+        summarizeBy: none
+        sourceColumn: year
+
+    column quarter
+        dataType: int64
+        lineageTag: bt-date-q
+        summarizeBy: none
+        sourceColumn: quarter
+
+    column month
+        dataType: int64
+        lineageTag: bt-date-m
+        summarizeBy: none
+        sourceColumn: month
+
+    column month_name
+        dataType: string
+        lineageTag: bt-date-mn
+        summarizeBy: none
+        sourceColumn: month_name
+        sortByColumn: month
+
+    column day_of_month
+        dataType: int64
+        lineageTag: bt-date-dom
+        summarizeBy: none
+        sourceColumn: day_of_month
+
+    column day_of_week
+        dataType: int64
+        lineageTag: bt-date-dow
+        summarizeBy: none
+        sourceColumn: day_of_week
+
+    column day_name
+        dataType: string
+        lineageTag: bt-date-dn
+        summarizeBy: none
+        sourceColumn: day_name
+        sortByColumn: day_of_week
+
+    column iso_week
+        dataType: int64
+        lineageTag: bt-date-w
+        summarizeBy: none
+        sourceColumn: iso_week
+
+    partition 'dim_date-dl' = entity
+        mode: directLake
+        source
+            entityPath: dim_date
+            schemaName: dbo
+            expressionSource: 'DirectLake'
+
+/// =============================================================================
+/// FACTS
+/// =============================================================================
+
+table fact_sales
+    lineageTag: bt-fact-sales
+
+    column order_line_id
+        dataType: string
+        lineageTag: bt-fs-line
+        summarizeBy: none
+        sourceColumn: order_line_id
+        isHidden
+
+    column order_id
+        dataType: string
+        lineageTag: bt-fs-order
+        summarizeBy: none
+        sourceColumn: order_id
+
+    column customer_id
+        dataType: string
+        lineageTag: bt-fs-cust
+        summarizeBy: none
+        sourceColumn: customer_id
+
+    column product_id
+        dataType: string
+        lineageTag: bt-fs-prod
+        summarizeBy: none
+        sourceColumn: product_id
+
+    column region_code
+        dataType: string
+        lineageTag: bt-fs-region
+        summarizeBy: none
+        sourceColumn: region_code
+
+    column date_key
+        dataType: int64
+        lineageTag: bt-fs-date
+        summarizeBy: none
+        sourceColumn: date_key
+
+    column quantity
+        dataType: int64
+        lineageTag: bt-fs-qty
+        summarizeBy: sum
+        sourceColumn: quantity
+
+    column unit_price
+        dataType: decimal
+        formatString: \$#,##0.00
+        lineageTag: bt-fs-price
+        summarizeBy: none
+        sourceColumn: unit_price
+
+    column revenue
+        dataType: decimal
+        formatString: \$#,##0.00
+        lineageTag: bt-fs-rev
+        summarizeBy: sum
+        sourceColumn: revenue
+
+    column cost
+        dataType: decimal
+        formatString: \$#,##0.00
+        lineageTag: bt-fs-cost
+        summarizeBy: sum
+        sourceColumn: cost
+
+    column gross_profit
+        dataType: decimal
+        formatString: \$#,##0.00
+        lineageTag: bt-fs-gp
+        summarizeBy: sum
+        sourceColumn: gross_profit
+
+    partition 'fact_sales-dl' = entity
+        mode: directLake
+        source
+            entityPath: fact_sales
+            schemaName: dbo
+            expressionSource: 'DirectLake'
+
+table fact_returns
+    lineageTag: bt-fact-returns
+
+    column return_id
+        dataType: string
+        lineageTag: bt-fr-id
+        summarizeBy: none
+        sourceColumn: return_id
+
+    column order_id
+        dataType: string
+        lineageTag: bt-fr-order
+        summarizeBy: none
+        sourceColumn: order_id
+
+    column customer_id
+        dataType: string
+        lineageTag: bt-fr-cust
+        summarizeBy: none
+        sourceColumn: customer_id
+
+    column product_id
+        dataType: string
+        lineageTag: bt-fr-prod
+        summarizeBy: none
+        sourceColumn: product_id
+
+    column region_code
+        dataType: string
+        lineageTag: bt-fr-region
+        summarizeBy: none
+        sourceColumn: region_code
+
+    column date_key
+        dataType: int64
+        lineageTag: bt-fr-date
+        summarizeBy: none
+        sourceColumn: date_key
+
+    column quantity
+        dataType: int64
+        lineageTag: bt-fr-qty
+        summarizeBy: sum
+        sourceColumn: quantity
+
+    column refund_amount
+        dataType: decimal
+        formatString: \$#,##0.00
+        lineageTag: bt-fr-amt
+        summarizeBy: sum
+        sourceColumn: refund_amount
+
+    column reason
+        dataType: string
+        lineageTag: bt-fr-reason
+        summarizeBy: none
+        sourceColumn: reason
+
+    partition 'fact_returns-dl' = entity
+        mode: directLake
+        source
+            entityPath: fact_returns
+            schemaName: dbo
+            expressionSource: 'DirectLake'
+
+/// =============================================================================
+/// RLS MAPPING — calculated table powering dynamic RLS
+/// =============================================================================
+/// Maps user principal name -> region(s) they may see. In production this lives
+/// in a small Delta table maintained by the security automation notebook so the
+/// model has no embedded credentials.
+
+table '_RLS Mapping'
+    lineageTag: bt-rls-map
+
+    column upn
+        dataType: string
+        lineageTag: bt-rls-upn
+        summarizeBy: none
+        sourceColumn: upn
+
+    column region_code
+        dataType: string
+        lineageTag: bt-rls-region
+        summarizeBy: none
+        sourceColumn: region_code
+
+    partition '_RLS Mapping-dl' = entity
+        mode: directLake
+        source
+            entityPath: rls_user_region_map
+            schemaName: dbo
+            expressionSource: 'DirectLake'
+
+/// =============================================================================
+/// RELATIONSHIPS
+/// =============================================================================
+
+relationship 'rel_sales_to_region'
+    fromTable: fact_sales
+    fromColumn: region_code
+    toTable: dim_region
+    toColumn: region_code
+
+relationship 'rel_sales_to_customer'
+    fromTable: fact_sales
+    fromColumn: customer_id
+    toTable: dim_customer
+    toColumn: customer_id
+
+relationship 'rel_sales_to_product'
+    fromTable: fact_sales
+    fromColumn: product_id
+    toTable: dim_product
+    toColumn: product_id
+
+relationship 'rel_sales_to_date'
+    fromTable: fact_sales
+    fromColumn: date_key
+    toTable: dim_date
+    toColumn: date_key
+
+relationship 'rel_returns_to_region'
+    fromTable: fact_returns
+    fromColumn: region_code
+    toTable: dim_region
+    toColumn: region_code
+
+relationship 'rel_returns_to_customer'
+    fromTable: fact_returns
+    fromColumn: customer_id
+    toTable: dim_customer
+    toColumn: customer_id
+
+relationship 'rel_returns_to_date'
+    fromTable: fact_returns
+    fromColumn: date_key
+    toTable: dim_date
+    toColumn: date_key
+
+/// =============================================================================
+/// MEASURES TABLE
+/// =============================================================================
+
+table '_Measures'
+    lineageTag: bt-measures
+
+    measure 'Revenue' = SUM(fact_sales[revenue])
+        formatString: \$#,##0
+        lineageTag: bt-m-rev
+
+    measure 'Cost' = SUM(fact_sales[cost])
+        formatString: \$#,##0
+        lineageTag: bt-m-cost
+
+    measure 'Gross Profit' = SUM(fact_sales[gross_profit])
+        formatString: \$#,##0
+        lineageTag: bt-m-gp
+
+    measure 'Gross Margin %' = DIVIDE([Gross Profit], [Revenue])
+        formatString: 0.0%
+        lineageTag: bt-m-gm
+
+    measure 'Refunds' = SUM(fact_returns[refund_amount])
+        formatString: \$#,##0
+        lineageTag: bt-m-ref
+
+    measure 'Net Revenue' = [Revenue] - [Refunds]
+        formatString: \$#,##0
+        lineageTag: bt-m-net
+
+    measure 'Orders' = DISTINCTCOUNT(fact_sales[order_id])
+        formatString: #,##0
+        lineageTag: bt-m-orders
+
+    measure 'Customers' = DISTINCTCOUNT(fact_sales[customer_id])
+        formatString: #,##0
+        lineageTag: bt-m-cust
+
+    measure 'AOV' = DIVIDE([Revenue], [Orders])
+        formatString: \$#,##0.00
+        lineageTag: bt-m-aov
+
+    measure 'Revenue YoY %' =
+        VAR Curr = [Revenue]
+        VAR Prior = CALCULATE([Revenue], SAMEPERIODLASTYEAR(dim_date[date]))
+        RETURN DIVIDE(Curr - Prior, Prior)
+        formatString: 0.0%
+        lineageTag: bt-m-yoy
+
+    partition '_Measures-static' = calculated
+        mode: import
+        source = "{1}"
+
+/// =============================================================================
+/// ROLES (Row-Level Security)
+/// =============================================================================
+///
+/// All three roles use dynamic filters keyed off USERPRINCIPALNAME() so the
+/// model has zero hard-coded users. The mapping table _RLS Mapping is curated
+/// by the security automation notebook and lives in the gold lakehouse.
+
+role 'RegionalManager'
+    modelPermission: read
+
+    /// Customers, sales, returns filtered by the user's allowed regions.
+    tablePermission dim_customer
+        filterExpression:
+            ```
+            [region_code] IN
+              SELECTCOLUMNS(
+                FILTER('_RLS Mapping', '_RLS Mapping'[upn] = USERPRINCIPALNAME()),
+                "r", '_RLS Mapping'[region_code]
+              )
+            ```
+
+    tablePermission fact_sales
+        filterExpression:
+            ```
+            [region_code] IN
+              SELECTCOLUMNS(
+                FILTER('_RLS Mapping', '_RLS Mapping'[upn] = USERPRINCIPALNAME()),
+                "r", '_RLS Mapping'[region_code]
+              )
+            ```
+
+    tablePermission fact_returns
+        filterExpression:
+            ```
+            [region_code] IN
+              SELECTCOLUMNS(
+                FILTER('_RLS Mapping', '_RLS Mapping'[upn] = USERPRINCIPALNAME()),
+                "r", '_RLS Mapping'[region_code]
+              )
+            ```
+
+role 'FinanceAnalyst'
+    modelPermission: read
+
+    /// Sees everything, but customer_id is hidden via OLS (object-level
+    /// security). The Power BI report compensates with a hashed/aggregated
+    /// view of customers via the Customers measure.
+    tablePermission dim_customer
+        filterExpression: TRUE()
+
+    tablePermission fact_sales
+        filterExpression: TRUE()
+
+    tablePermission fact_returns
+        filterExpression: TRUE()
+
+    annotation PBI_OLS_HiddenColumns_dim_customer = "customer_id"
+    annotation PBI_OLS_HiddenColumns_fact_sales = "customer_id"
+
+role 'Executive'
+    modelPermission: read
+    /// Full access, no filters, no OLS hiding.
