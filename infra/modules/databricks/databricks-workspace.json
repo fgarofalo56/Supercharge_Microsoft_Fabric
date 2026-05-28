@@ -1,0 +1,128 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.42.1.51946",
+      "templateHash": "8037786695165247875"
+    }
+  },
+  "parameters": {
+    "location": {
+      "type": "string",
+      "metadata": {
+        "description": "Azure region for the Databricks workspace"
+      }
+    },
+    "projectPrefix": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 10,
+      "metadata": {
+        "description": "Project prefix used for resource naming (3-10 chars)"
+      }
+    },
+    "environment": {
+      "type": "string",
+      "allowedValues": [
+        "dev",
+        "staging",
+        "prod"
+      ],
+      "metadata": {
+        "description": "Deployment environment"
+      }
+    },
+    "tags": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "Tags to apply to resources"
+      }
+    },
+    "vnetId": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Optional VNet integration — when supplied, the workspace is injected into the supplied VNet using \"VNet injection\" (Customer-managed VNet)."
+      }
+    },
+    "publicSubnetName": {
+      "type": "string",
+      "defaultValue": "snet-databricks-public",
+      "metadata": {
+        "description": "Public subnet name inside the supplied VNet (used only when vnetId is set)."
+      }
+    },
+    "privateSubnetName": {
+      "type": "string",
+      "defaultValue": "snet-databricks-private",
+      "metadata": {
+        "description": "Private subnet name inside the supplied VNet (used only when vnetId is set)."
+      }
+    },
+    "disablePublicIp": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "When true, public network access to the control plane is disabled (requires private link)."
+      }
+    }
+  },
+  "variables": {
+    "workspaceName": "[format('dbw-{0}-{1}', parameters('projectPrefix'), parameters('environment'))]",
+    "managedResourceGroupName": "[format('rg-dbw-{0}-{1}-managed', parameters('projectPrefix'), parameters('environment'))]",
+    "managedResourceGroupId": "[format('{0}/resourceGroups/{1}', subscription().id, variables('managedResourceGroupName'))]",
+    "useCustomVnet": "[not(empty(parameters('vnetId')))]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Databricks/workspaces",
+      "apiVersion": "2024-05-01",
+      "name": "[variables('workspaceName')]",
+      "location": "[parameters('location')]",
+      "tags": "[union(parameters('tags'), createObject('Purpose', 'Better Together with Fabric', 'Tutorial', '57-databricks-better-together'))]",
+      "sku": {
+        "name": "premium"
+      },
+      "properties": {
+        "managedResourceGroupId": "[variables('managedResourceGroupId')]",
+        "parameters": "[union(createObject('enableNoPublicIp', createObject('value', parameters('disablePublicIp'))), if(variables('useCustomVnet'), createObject('customVirtualNetworkId', createObject('value', parameters('vnetId')), 'customPublicSubnetName', createObject('value', parameters('publicSubnetName')), 'customPrivateSubnetName', createObject('value', parameters('privateSubnetName'))), createObject()))]"
+      },
+      "metadata": {
+        "description": "Azure Databricks workspace — Premium SKU (required for Unity Catalog)."
+      }
+    }
+  ],
+  "outputs": {
+    "workspaceId": {
+      "type": "string",
+      "metadata": {
+        "description": "Workspace resource ID — use with the Databricks REST API and Fabric mirror registration."
+      },
+      "value": "[resourceId('Microsoft.Databricks/workspaces', variables('workspaceName'))]"
+    },
+    "workspaceUrl": {
+      "type": "string",
+      "metadata": {
+        "description": "Workspace URL (use for Databricks CLI configuration)."
+      },
+      "value": "[format('https://{0}', reference(resourceId('Microsoft.Databricks/workspaces', variables('workspaceName')), '2024-05-01').workspaceUrl)]"
+    },
+    "workspaceName": {
+      "type": "string",
+      "metadata": {
+        "description": "Workspace name."
+      },
+      "value": "[variables('workspaceName')]"
+    },
+    "managedResourceGroup": {
+      "type": "string",
+      "metadata": {
+        "description": "Managed resource group created by Databricks (contains DBFS storage, compute, etc.)."
+      },
+      "value": "[variables('managedResourceGroupName')]"
+    }
+  }
+}
