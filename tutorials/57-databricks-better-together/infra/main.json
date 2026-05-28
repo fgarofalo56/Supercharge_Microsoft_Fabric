@@ -1,0 +1,994 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.42.1.51946",
+      "templateHash": "11947869766075342025"
+    }
+  },
+  "parameters": {
+    "location": {
+      "type": "string",
+      "defaultValue": "eastus2",
+      "metadata": {
+        "description": "Azure region for all resources"
+      }
+    },
+    "projectPrefix": {
+      "type": "string",
+      "defaultValue": "btfabric",
+      "minLength": 3,
+      "maxLength": 10,
+      "metadata": {
+        "description": "Project prefix used for naming (3-10 chars). Lowercase letters and digits only."
+      }
+    },
+    "environment": {
+      "type": "string",
+      "defaultValue": "dev",
+      "allowedValues": [
+        "dev",
+        "staging",
+        "prod"
+      ],
+      "metadata": {
+        "description": "Deployment environment"
+      }
+    },
+    "resourceGroupName": {
+      "type": "string",
+      "defaultValue": "[format('rg-{0}-tut57-{1}', parameters('projectPrefix'), parameters('environment'))]",
+      "metadata": {
+        "description": "Resource group name. Created if it does not exist."
+      }
+    },
+    "tags": {
+      "type": "object",
+      "defaultValue": {
+        "Project": "Supercharge Microsoft Fabric",
+        "Tutorial": "57-databricks-better-together",
+        "ManagedBy": "Bicep"
+      },
+      "metadata": {
+        "description": "Tags applied to every resource."
+      }
+    },
+    "disablePublicIp": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "When true, the Databricks workspace is created with public IP disabled (Private Link required)."
+      }
+    },
+    "logAnalyticsWorkspaceId": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Optional: existing Log Analytics workspace resource ID for diagnostics. Empty string deploys without diagnostics."
+      }
+    },
+    "deployDatabricks": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "When false (default), the Databricks workspace module is skipped — assume an existing UC-enabled DBW. Set to true to deploy a fresh one."
+      }
+    },
+    "existingDatabricksWorkspaceUrl": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "When deployDatabricks=false, the existing Databricks workspace URL is recorded as an output for downstream notebooks. Empty string is allowed."
+      }
+    },
+    "deployLandingStorage": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "When false (default), no landing-zone storage account is deployed — the tutorial uploads sample data straight to UC volumes. Set to true and supply landingStoragePrincipalId if you want an Azure-side staging area."
+      }
+    },
+    "landingStoragePrincipalId": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Required when deployLandingStorage=true: the principalId of the managed identity / SP that should receive Storage Blob Data Contributor on the landing storage account."
+      }
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Resources/resourceGroups",
+      "apiVersion": "2023-07-01",
+      "name": "[parameters('resourceGroupName')]",
+      "location": "[parameters('location')]",
+      "tags": "[parameters('tags')]",
+      "metadata": {
+        "description": "Resource group containing all tutorial 57 resources."
+      }
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2025-04-01",
+      "name": "[format('kv-{0}-{1}', parameters('projectPrefix'), parameters('environment'))]",
+      "resourceGroup": "[parameters('resourceGroupName')]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "projectPrefix": {
+            "value": "[parameters('projectPrefix')]"
+          },
+          "environment": {
+            "value": "[parameters('environment')]"
+          },
+          "tags": {
+            "value": "[parameters('tags')]"
+          },
+          "logAnalyticsWorkspaceId": {
+            "value": "[parameters('logAnalyticsWorkspaceId')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.42.1.51946",
+              "templateHash": "10583678036575901884"
+            }
+          },
+          "parameters": {
+            "location": {
+              "type": "string",
+              "metadata": {
+                "description": "Azure region for the Key Vault"
+              }
+            },
+            "projectPrefix": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 10,
+              "metadata": {
+                "description": "Project prefix used for naming (3-10 chars)"
+              }
+            },
+            "environment": {
+              "type": "string",
+              "allowedValues": [
+                "dev",
+                "staging",
+                "prod"
+              ],
+              "metadata": {
+                "description": "Deployment environment"
+              }
+            },
+            "tags": {
+              "type": "object",
+              "defaultValue": {},
+              "metadata": {
+                "description": "Tags to apply"
+              }
+            },
+            "tenantId": {
+              "type": "string",
+              "defaultValue": "[subscription().tenantId]",
+              "metadata": {
+                "description": "Tenant ID — defaults to the subscription tenant."
+              }
+            },
+            "enablePurgeProtection": {
+              "type": "bool",
+              "defaultValue": true,
+              "metadata": {
+                "description": "Enable purge protection (cannot be disabled once enabled)."
+              }
+            },
+            "softDeleteRetentionDays": {
+              "type": "int",
+              "defaultValue": 90,
+              "minValue": 7,
+              "maxValue": 90,
+              "metadata": {
+                "description": "Soft-delete retention in days (7-90)."
+              }
+            },
+            "disablePublicAccess": {
+              "type": "bool",
+              "defaultValue": false,
+              "metadata": {
+                "description": "Disable public network access (requires private endpoint)."
+              }
+            },
+            "logAnalyticsWorkspaceId": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Optional Log Analytics workspace ID for diagnostics. Empty string skips diag setup."
+              }
+            }
+          },
+          "variables": {
+            "nameSuffix": "[substring(uniqueString(resourceGroup().id, subscription().subscriptionId), 0, 4)]",
+            "keyVaultName": "[format('kv-{0}-{1}-{2}', parameters('projectPrefix'), parameters('environment'), variables('nameSuffix'))]"
+          },
+          "resources": [
+            {
+              "type": "Microsoft.KeyVault/vaults",
+              "apiVersion": "2023-07-01",
+              "name": "[variables('keyVaultName')]",
+              "location": "[parameters('location')]",
+              "tags": "[union(parameters('tags'), createObject('Purpose', 'Tutorial 57 secrets store'))]",
+              "properties": {
+                "tenantId": "[parameters('tenantId')]",
+                "sku": {
+                  "family": "A",
+                  "name": "standard"
+                },
+                "enableRbacAuthorization": true,
+                "enableSoftDelete": true,
+                "softDeleteRetentionInDays": "[parameters('softDeleteRetentionDays')]",
+                "enablePurgeProtection": "[if(parameters('enablePurgeProtection'), true(), null())]",
+                "publicNetworkAccess": "[if(parameters('disablePublicAccess'), 'Disabled', 'Enabled')]",
+                "networkAcls": "[if(parameters('disablePublicAccess'), createObject('bypass', 'AzureServices', 'defaultAction', 'Deny'), createObject('bypass', 'AzureServices', 'defaultAction', 'Allow'))]"
+              },
+              "metadata": {
+                "description": "Azure Key Vault with RBAC authorization."
+              }
+            },
+            {
+              "condition": "[not(empty(parameters('logAnalyticsWorkspaceId')))]",
+              "type": "Microsoft.Insights/diagnosticSettings",
+              "apiVersion": "2021-05-01-preview",
+              "scope": "[resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))]",
+              "name": "[format('diag-{0}', variables('keyVaultName'))]",
+              "properties": {
+                "workspaceId": "[parameters('logAnalyticsWorkspaceId')]",
+                "logs": [
+                  {
+                    "categoryGroup": "audit",
+                    "enabled": true
+                  }
+                ],
+                "metrics": [
+                  {
+                    "category": "AllMetrics",
+                    "enabled": true
+                  }
+                ]
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))]"
+              ],
+              "metadata": {
+                "description": "Diagnostic settings — only deployed when logAnalyticsWorkspaceId is supplied."
+              }
+            }
+          ],
+          "outputs": {
+            "keyVaultId": {
+              "type": "string",
+              "metadata": {
+                "description": "Key Vault resource ID."
+              },
+              "value": "[resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))]"
+            },
+            "keyVaultName": {
+              "type": "string",
+              "metadata": {
+                "description": "Key Vault name."
+              },
+              "value": "[variables('keyVaultName')]"
+            },
+            "keyVaultUri": {
+              "type": "string",
+              "metadata": {
+                "description": "Key Vault DNS URI."
+              },
+              "value": "[reference(resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName')), '2023-07-01').vaultUri]"
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[subscriptionResourceId('Microsoft.Resources/resourceGroups', parameters('resourceGroupName'))]"
+      ],
+      "metadata": {
+        "description": "Key Vault for tutorial secrets (Databricks PAT, SP client secret)."
+      }
+    },
+    {
+      "condition": "[and(parameters('deployLandingStorage'), not(empty(parameters('landingStoragePrincipalId'))))]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2025-04-01",
+      "name": "[format('st-{0}-{1}', parameters('projectPrefix'), parameters('environment'))]",
+      "resourceGroup": "[parameters('resourceGroupName')]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "storageAccountName": {
+            "value": "[format('st{0}{1}{2}', parameters('projectPrefix'), parameters('environment'), take(uniqueString(subscriptionResourceId('Microsoft.Resources/resourceGroups', parameters('resourceGroupName'))), 4))]"
+          },
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "logAnalyticsWorkspaceId": {
+            "value": "[parameters('logAnalyticsWorkspaceId')]"
+          },
+          "managedIdentityPrincipalId": {
+            "value": "[parameters('landingStoragePrincipalId')]"
+          },
+          "tags": {
+            "value": "[parameters('tags')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.42.1.51946",
+              "templateHash": "2721744039564570563"
+            }
+          },
+          "parameters": {
+            "storageAccountName": {
+              "type": "string",
+              "metadata": {
+                "description": "Name of the storage account"
+              }
+            },
+            "location": {
+              "type": "string",
+              "metadata": {
+                "description": "Azure region for deployment"
+              }
+            },
+            "logAnalyticsWorkspaceId": {
+              "type": "string",
+              "metadata": {
+                "description": "Log Analytics workspace ID for diagnostics"
+              }
+            },
+            "managedIdentityPrincipalId": {
+              "type": "string",
+              "metadata": {
+                "description": "Principal ID of the managed identity for RBAC"
+              }
+            },
+            "enablePrivateEndpoint": {
+              "type": "bool",
+              "defaultValue": false,
+              "metadata": {
+                "description": "Enable private endpoint"
+              }
+            },
+            "privateEndpointSubnetId": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Subnet ID for private endpoint"
+              }
+            },
+            "tags": {
+              "type": "object",
+              "defaultValue": {},
+              "metadata": {
+                "description": "Tags to apply to resources"
+              }
+            },
+            "enableCmk": {
+              "type": "bool",
+              "defaultValue": false,
+              "metadata": {
+                "description": "Enable Customer-Managed Keys for storage encryption"
+              }
+            },
+            "keyVaultKeyUri": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Key Vault key URI for CMK encryption (required when enableCmk is true). Format: https://<vault>.vault.azure.net/keys/<keyname>[/<version>]"
+              }
+            },
+            "keyVaultIdentityId": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "User-assigned managed identity resource ID for Key Vault access (required when enableCmk is true)"
+              }
+            }
+          },
+          "variables": {
+            "cmkSegments": "[split(parameters('keyVaultKeyUri'), '/')]",
+            "cmkVaultUri": "[if(parameters('enableCmk'), format('{0}//{1}/', variables('cmkSegments')[0], variables('cmkSegments')[2]), '')]",
+            "cmkKeyName": "[if(parameters('enableCmk'), variables('cmkSegments')[4], '')]",
+            "cmkKeyVersion": "[if(and(parameters('enableCmk'), greaterOrEquals(length(variables('cmkSegments')), 6)), variables('cmkSegments')[5], '')]",
+            "storageBlobDataContributorRoleId": "ba92f5b4-2d11-453d-a403-e96b0029c9fe",
+            "vnetId": "[if(parameters('enablePrivateEndpoint'), substring(parameters('privateEndpointSubnetId'), 0, lastIndexOf(parameters('privateEndpointSubnetId'), '/subnets/')), '')]"
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Storage/storageAccounts",
+              "apiVersion": "2023-05-01",
+              "name": "[parameters('storageAccountName')]",
+              "location": "[parameters('location')]",
+              "tags": "[parameters('tags')]",
+              "kind": "StorageV2",
+              "sku": {
+                "name": "Standard_ZRS"
+              },
+              "identity": "[if(and(parameters('enableCmk'), not(empty(parameters('keyVaultIdentityId')))), createObject('type', 'UserAssigned', 'userAssignedIdentities', createObject(format('{0}', parameters('keyVaultIdentityId')), createObject())), if(parameters('enableCmk'), createObject('type', 'SystemAssigned'), createObject('type', 'None')))]",
+              "properties": {
+                "accessTier": "Hot",
+                "isHnsEnabled": true,
+                "minimumTlsVersion": "TLS1_2",
+                "supportsHttpsTrafficOnly": true,
+                "allowBlobPublicAccess": false,
+                "allowSharedKeyAccess": false,
+                "publicNetworkAccess": "[if(parameters('enablePrivateEndpoint'), 'Disabled', 'Enabled')]",
+                "networkAcls": {
+                  "defaultAction": "[if(parameters('enablePrivateEndpoint'), 'Deny', 'Allow')]",
+                  "bypass": "AzureServices"
+                },
+                "encryption": {
+                  "keySource": "[if(parameters('enableCmk'), 'Microsoft.Keyvault', 'Microsoft.Storage')]",
+                  "keyvaultproperties": "[if(parameters('enableCmk'), createObject('keyname', variables('cmkKeyName'), 'keyvaulturi', variables('cmkVaultUri'), 'keyversion', variables('cmkKeyVersion')), null())]",
+                  "services": {
+                    "blob": {
+                      "enabled": true,
+                      "keyType": "Account"
+                    },
+                    "file": {
+                      "enabled": true,
+                      "keyType": "Account"
+                    },
+                    "table": {
+                      "enabled": true,
+                      "keyType": "Account"
+                    },
+                    "queue": {
+                      "enabled": true,
+                      "keyType": "Account"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "Microsoft.Storage/storageAccounts/blobServices",
+              "apiVersion": "2023-01-01",
+              "name": "[format('{0}/{1}', parameters('storageAccountName'), 'default')]",
+              "properties": {
+                "deleteRetentionPolicy": {
+                  "enabled": true,
+                  "days": 30
+                },
+                "containerDeleteRetentionPolicy": {
+                  "enabled": true,
+                  "days": 30
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+              "apiVersion": "2023-01-01",
+              "name": "[format('{0}/{1}/{2}', parameters('storageAccountName'), 'default', 'bronze')]",
+              "properties": {
+                "publicAccess": "None",
+                "metadata": {
+                  "layer": "bronze",
+                  "description": "Raw data ingestion layer"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageAccountName'), 'default')]"
+              ]
+            },
+            {
+              "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+              "apiVersion": "2023-01-01",
+              "name": "[format('{0}/{1}/{2}', parameters('storageAccountName'), 'default', 'silver')]",
+              "properties": {
+                "publicAccess": "None",
+                "metadata": {
+                  "layer": "silver",
+                  "description": "Cleansed and validated data layer"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageAccountName'), 'default')]"
+              ]
+            },
+            {
+              "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+              "apiVersion": "2023-01-01",
+              "name": "[format('{0}/{1}/{2}', parameters('storageAccountName'), 'default', 'gold')]",
+              "properties": {
+                "publicAccess": "None",
+                "metadata": {
+                  "layer": "gold",
+                  "description": "Business-ready aggregations layer"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageAccountName'), 'default')]"
+              ]
+            },
+            {
+              "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+              "apiVersion": "2023-01-01",
+              "name": "[format('{0}/{1}/{2}', parameters('storageAccountName'), 'default', 'landing')]",
+              "properties": {
+                "publicAccess": "None",
+                "metadata": {
+                  "description": "Landing zone for external data"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageAccountName'), 'default')]"
+              ]
+            },
+            {
+              "type": "Microsoft.Storage/storageAccounts/managementPolicies",
+              "apiVersion": "2023-01-01",
+              "name": "[format('{0}/{1}', parameters('storageAccountName'), 'default')]",
+              "properties": {
+                "policy": {
+                  "rules": [
+                    {
+                      "name": "bronze-tiering",
+                      "enabled": true,
+                      "type": "Lifecycle",
+                      "definition": {
+                        "filters": {
+                          "blobTypes": [
+                            "blockBlob"
+                          ],
+                          "prefixMatch": [
+                            "bronze/"
+                          ]
+                        },
+                        "actions": {
+                          "baseBlob": {
+                            "tierToCool": {
+                              "daysAfterModificationGreaterThan": 90
+                            },
+                            "tierToArchive": {
+                              "daysAfterModificationGreaterThan": 365
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "landing-cleanup",
+                      "enabled": true,
+                      "type": "Lifecycle",
+                      "definition": {
+                        "filters": {
+                          "blobTypes": [
+                            "blockBlob"
+                          ],
+                          "prefixMatch": [
+                            "landing/"
+                          ]
+                        },
+                        "actions": {
+                          "baseBlob": {
+                            "delete": {
+                              "daysAfterModificationGreaterThan": 30
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Insights/diagnosticSettings",
+              "apiVersion": "2021-05-01-preview",
+              "scope": "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageAccountName'), 'default')]",
+              "name": "storage-diagnostics",
+              "properties": {
+                "workspaceId": "[parameters('logAnalyticsWorkspaceId')]",
+                "logs": [
+                  {
+                    "category": "StorageRead",
+                    "enabled": true
+                  },
+                  {
+                    "category": "StorageWrite",
+                    "enabled": true
+                  },
+                  {
+                    "category": "StorageDelete",
+                    "enabled": true
+                  }
+                ],
+                "metrics": [
+                  {
+                    "category": "Transaction",
+                    "enabled": true
+                  }
+                ]
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageAccountName'), 'default')]"
+              ]
+            },
+            {
+              "type": "Microsoft.Authorization/roleAssignments",
+              "apiVersion": "2022-04-01",
+              "scope": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]",
+              "name": "[guid(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), parameters('managedIdentityPrincipalId'), variables('storageBlobDataContributorRoleId'))]",
+              "properties": {
+                "roleDefinitionId": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', variables('storageBlobDataContributorRoleId'))]",
+                "principalId": "[parameters('managedIdentityPrincipalId')]",
+                "principalType": "ServicePrincipal"
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
+              ]
+            },
+            {
+              "condition": "[parameters('enablePrivateEndpoint')]",
+              "type": "Microsoft.Network/privateEndpoints",
+              "apiVersion": "2023-05-01",
+              "name": "[format('pe-{0}', parameters('storageAccountName'))]",
+              "location": "[parameters('location')]",
+              "tags": "[parameters('tags')]",
+              "properties": {
+                "subnet": {
+                  "id": "[parameters('privateEndpointSubnetId')]"
+                },
+                "privateLinkServiceConnections": [
+                  {
+                    "name": "storage-connection",
+                    "properties": {
+                      "privateLinkServiceId": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]",
+                      "groupIds": [
+                        "dfs"
+                      ]
+                    }
+                  }
+                ]
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
+              ]
+            },
+            {
+              "condition": "[parameters('enablePrivateEndpoint')]",
+              "type": "Microsoft.Network/privateDnsZones",
+              "apiVersion": "2024-06-01",
+              "name": "[format('privatelink.dfs.{0}', environment().suffixes.storage)]",
+              "location": "global",
+              "tags": "[parameters('tags')]"
+            },
+            {
+              "condition": "[parameters('enablePrivateEndpoint')]",
+              "type": "Microsoft.Network/privateDnsZones",
+              "apiVersion": "2024-06-01",
+              "name": "[format('privatelink.blob.{0}', environment().suffixes.storage)]",
+              "location": "global",
+              "tags": "[parameters('tags')]"
+            },
+            {
+              "condition": "[parameters('enablePrivateEndpoint')]",
+              "type": "Microsoft.Network/privateDnsZones/virtualNetworkLinks",
+              "apiVersion": "2020-06-01",
+              "name": "[format('{0}/{1}', format('privatelink.dfs.{0}', environment().suffixes.storage), format('link-{0}-dfs', parameters('storageAccountName')))]",
+              "location": "global",
+              "tags": "[parameters('tags')]",
+              "properties": {
+                "registrationEnabled": false,
+                "virtualNetwork": {
+                  "id": "[variables('vnetId')]"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Network/privateDnsZones', format('privatelink.dfs.{0}', environment().suffixes.storage))]"
+              ]
+            },
+            {
+              "condition": "[parameters('enablePrivateEndpoint')]",
+              "type": "Microsoft.Network/privateDnsZones/virtualNetworkLinks",
+              "apiVersion": "2020-06-01",
+              "name": "[format('{0}/{1}', format('privatelink.blob.{0}', environment().suffixes.storage), format('link-{0}-blob', parameters('storageAccountName')))]",
+              "location": "global",
+              "tags": "[parameters('tags')]",
+              "properties": {
+                "registrationEnabled": false,
+                "virtualNetwork": {
+                  "id": "[variables('vnetId')]"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Network/privateDnsZones', format('privatelink.blob.{0}', environment().suffixes.storage))]"
+              ]
+            },
+            {
+              "condition": "[parameters('enablePrivateEndpoint')]",
+              "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
+              "apiVersion": "2023-05-01",
+              "name": "[format('{0}/{1}', format('pe-{0}', parameters('storageAccountName')), 'default')]",
+              "properties": {
+                "privateDnsZoneConfigs": [
+                  {
+                    "name": "dfs",
+                    "properties": {
+                      "privateDnsZoneId": "[resourceId('Microsoft.Network/privateDnsZones', format('privatelink.dfs.{0}', environment().suffixes.storage))]"
+                    }
+                  }
+                ]
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Network/privateDnsZones', format('privatelink.dfs.{0}', environment().suffixes.storage))]",
+                "[resourceId('Microsoft.Network/privateEndpoints', format('pe-{0}', parameters('storageAccountName')))]"
+              ]
+            }
+          ],
+          "outputs": {
+            "storageAccountName": {
+              "type": "string",
+              "metadata": {
+                "description": "The name of the storage account"
+              },
+              "value": "[parameters('storageAccountName')]"
+            },
+            "storageAccountId": {
+              "type": "string",
+              "metadata": {
+                "description": "The resource ID of the storage account"
+              },
+              "value": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
+            },
+            "dfsEndpoint": {
+              "type": "string",
+              "metadata": {
+                "description": "The DFS endpoint for ADLS Gen2"
+              },
+              "value": "[reference(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2023-05-01').primaryEndpoints.dfs]"
+            },
+            "blobEndpoint": {
+              "type": "string",
+              "metadata": {
+                "description": "The blob endpoint"
+              },
+              "value": "[reference(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2023-05-01').primaryEndpoints.blob]"
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[subscriptionResourceId('Microsoft.Resources/resourceGroups', parameters('resourceGroupName'))]"
+      ],
+      "metadata": {
+        "description": "Landing zone storage account (ADLS Gen2) for staging synthetic data before upload to UC. Only deployed when deployLandingStorage=true AND landingStoragePrincipalId is supplied."
+      }
+    },
+    {
+      "condition": "[parameters('deployDatabricks')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2025-04-01",
+      "name": "[format('dbw-{0}-{1}', parameters('projectPrefix'), parameters('environment'))]",
+      "resourceGroup": "[parameters('resourceGroupName')]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "projectPrefix": {
+            "value": "[parameters('projectPrefix')]"
+          },
+          "environment": {
+            "value": "[parameters('environment')]"
+          },
+          "tags": {
+            "value": "[parameters('tags')]"
+          },
+          "disablePublicIp": {
+            "value": "[parameters('disablePublicIp')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.42.1.51946",
+              "templateHash": "8037786695165247875"
+            }
+          },
+          "parameters": {
+            "location": {
+              "type": "string",
+              "metadata": {
+                "description": "Azure region for the Databricks workspace"
+              }
+            },
+            "projectPrefix": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 10,
+              "metadata": {
+                "description": "Project prefix used for resource naming (3-10 chars)"
+              }
+            },
+            "environment": {
+              "type": "string",
+              "allowedValues": [
+                "dev",
+                "staging",
+                "prod"
+              ],
+              "metadata": {
+                "description": "Deployment environment"
+              }
+            },
+            "tags": {
+              "type": "object",
+              "defaultValue": {},
+              "metadata": {
+                "description": "Tags to apply to resources"
+              }
+            },
+            "vnetId": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Optional VNet integration — when supplied, the workspace is injected into the supplied VNet using \"VNet injection\" (Customer-managed VNet)."
+              }
+            },
+            "publicSubnetName": {
+              "type": "string",
+              "defaultValue": "snet-databricks-public",
+              "metadata": {
+                "description": "Public subnet name inside the supplied VNet (used only when vnetId is set)."
+              }
+            },
+            "privateSubnetName": {
+              "type": "string",
+              "defaultValue": "snet-databricks-private",
+              "metadata": {
+                "description": "Private subnet name inside the supplied VNet (used only when vnetId is set)."
+              }
+            },
+            "disablePublicIp": {
+              "type": "bool",
+              "defaultValue": false,
+              "metadata": {
+                "description": "When true, public network access to the control plane is disabled (requires private link)."
+              }
+            }
+          },
+          "variables": {
+            "workspaceName": "[format('dbw-{0}-{1}', parameters('projectPrefix'), parameters('environment'))]",
+            "managedResourceGroupName": "[format('rg-dbw-{0}-{1}-managed', parameters('projectPrefix'), parameters('environment'))]",
+            "managedResourceGroupId": "[format('{0}/resourceGroups/{1}', subscription().id, variables('managedResourceGroupName'))]",
+            "useCustomVnet": "[not(empty(parameters('vnetId')))]"
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Databricks/workspaces",
+              "apiVersion": "2024-05-01",
+              "name": "[variables('workspaceName')]",
+              "location": "[parameters('location')]",
+              "tags": "[union(parameters('tags'), createObject('Purpose', 'Better Together with Fabric', 'Tutorial', '57-databricks-better-together'))]",
+              "sku": {
+                "name": "premium"
+              },
+              "properties": {
+                "managedResourceGroupId": "[variables('managedResourceGroupId')]",
+                "parameters": "[union(createObject('enableNoPublicIp', createObject('value', parameters('disablePublicIp'))), if(variables('useCustomVnet'), createObject('customVirtualNetworkId', createObject('value', parameters('vnetId')), 'customPublicSubnetName', createObject('value', parameters('publicSubnetName')), 'customPrivateSubnetName', createObject('value', parameters('privateSubnetName'))), createObject()))]"
+              },
+              "metadata": {
+                "description": "Azure Databricks workspace — Premium SKU (required for Unity Catalog)."
+              }
+            }
+          ],
+          "outputs": {
+            "workspaceId": {
+              "type": "string",
+              "metadata": {
+                "description": "Workspace resource ID — use with the Databricks REST API and Fabric mirror registration."
+              },
+              "value": "[resourceId('Microsoft.Databricks/workspaces', variables('workspaceName'))]"
+            },
+            "workspaceUrl": {
+              "type": "string",
+              "metadata": {
+                "description": "Workspace URL (use for Databricks CLI configuration)."
+              },
+              "value": "[format('https://{0}', reference(resourceId('Microsoft.Databricks/workspaces', variables('workspaceName')), '2024-05-01').workspaceUrl)]"
+            },
+            "workspaceName": {
+              "type": "string",
+              "metadata": {
+                "description": "Workspace name."
+              },
+              "value": "[variables('workspaceName')]"
+            },
+            "managedResourceGroup": {
+              "type": "string",
+              "metadata": {
+                "description": "Managed resource group created by Databricks (contains DBFS storage, compute, etc.)."
+              },
+              "value": "[variables('managedResourceGroupName')]"
+            }
+          }
+        }
+      },
+      "dependsOn": [
+        "[subscriptionResourceId('Microsoft.Resources/resourceGroups', parameters('resourceGroupName'))]"
+      ],
+      "metadata": {
+        "description": "Azure Databricks workspace — Premium SKU for Unity Catalog support. Only deployed when deployDatabricks=true."
+      }
+    }
+  ],
+  "outputs": {
+    "resourceGroup": {
+      "type": "string",
+      "metadata": {
+        "description": "Tutorial deployment resource group."
+      },
+      "value": "[parameters('resourceGroupName')]"
+    },
+    "keyVaultUri": {
+      "type": "string",
+      "metadata": {
+        "description": "Key Vault URI — used by notebooks via `notebookutils.credentials.getSecret`."
+      },
+      "value": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, parameters('resourceGroupName')), 'Microsoft.Resources/deployments', format('kv-{0}-{1}', parameters('projectPrefix'), parameters('environment'))), '2025-04-01').outputs.keyVaultUri.value]"
+    },
+    "databricksWorkspaceUrl": {
+      "type": "string",
+      "metadata": {
+        "description": "Databricks workspace URL — fresh deploy URL if deployDatabricks=true, otherwise the existing one supplied by parameter."
+      },
+      "value": "[coalesce(tryGet(if(parameters('deployDatabricks'), reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, parameters('resourceGroupName')), 'Microsoft.Resources/deployments', format('dbw-{0}-{1}', parameters('projectPrefix'), parameters('environment'))), '2025-04-01'), null()), 'outputs', 'workspaceUrl', 'value'), parameters('existingDatabricksWorkspaceUrl'))]"
+    },
+    "databricksWorkspaceId": {
+      "type": "string",
+      "metadata": {
+        "description": "Databricks workspace resource ID — needed for Fabric mirror item creation REST call. Empty string when using existing."
+      },
+      "value": "[coalesce(tryGet(if(parameters('deployDatabricks'), reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, parameters('resourceGroupName')), 'Microsoft.Resources/deployments', format('dbw-{0}-{1}', parameters('projectPrefix'), parameters('environment'))), '2025-04-01'), null()), 'outputs', 'workspaceId', 'value'), '')]"
+    },
+    "landingStorageAccount": {
+      "type": "string",
+      "metadata": {
+        "description": "Landing zone storage account name — empty string when deployLandingStorage=false."
+      },
+      "value": "[coalesce(tryGet(if(and(parameters('deployLandingStorage'), not(empty(parameters('landingStoragePrincipalId')))), reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', subscription().subscriptionId, parameters('resourceGroupName')), 'Microsoft.Resources/deployments', format('st-{0}-{1}', parameters('projectPrefix'), parameters('environment'))), '2025-04-01'), null()), 'outputs', 'storageAccountName', 'value'), '')]"
+    }
+  }
+}
