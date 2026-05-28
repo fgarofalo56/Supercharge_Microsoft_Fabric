@@ -27,8 +27,16 @@ from data_generation.generators.base_generator import BaseGenerator
 from data_generation.generators.better_together.retail_generator import REGIONS
 
 PERSONAS: tuple[dict[str, Any], ...] = (
-    {"persona": "regional_sales_manager", "per_region": True, "group": "grp-sales-mgr-{region}"},
-    {"persona": "regional_analyst", "per_region": True, "group": "grp-analyst-{region}"},
+    {
+        "persona": "regional_sales_manager",
+        "per_region": True,
+        "group": "grp-sales-mgr-{region}",
+    },
+    {
+        "persona": "regional_analyst",
+        "per_region": True,
+        "group": "grp-analyst-{region}",
+    },
     {"persona": "finance_analyst", "per_region": False, "group": "grp-finance"},
     {"persona": "exec", "per_region": False, "group": "grp-exec"},
     {"persona": "audit", "per_region": False, "group": "grp-audit"},
@@ -48,9 +56,13 @@ class UserPersonaGenerator(BaseGenerator):
         self.domain = domain
 
     def generate_record(self) -> dict[str, Any]:
-        raise NotImplementedError("Use generate_all() — emits users + groups + memberships.")
+        raise NotImplementedError(
+            "Use generate_all() — emits users + groups + memberships."
+        )
 
-    def _make_user(self, persona: str, group_name: str, region: str | None) -> dict[str, Any]:
+    def _make_user(
+        self, persona: str, group_name: str, region: str | None
+    ) -> dict[str, Any]:
         first = self.faker.first_name()
         last = self.faker.last_name()
         suffix = f"-{region.lower()}" if region else ""

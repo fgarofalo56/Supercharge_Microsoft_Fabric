@@ -15,13 +15,13 @@ file is a flat list of recipes you can copy/paste into a real notebook.
 
 | # | Notebook | Audience | When to open it |
 |---|---|---|---|
-| 00 | `00_index.py` | Everyone | First time — read the conventions |
-| 01 | `01_connectivity.py` | Data engineers, integration leads | "How do I connect Fabric to ___ ?" |
-| 02 | `02_lakehouse_warehouse_ops.py` | Data engineers | Delta, MERGE, OPTIMIZE, schemas, partitioning |
-| 03 | `03_security_identity.py` | Security engineers | RLS, CLS, DDM, tokens, MSAL, Key Vault |
-| 04 | `04_admin_governance.py` | Platform admins | REST APIs for workspaces, lakehouses, Git, deployment pipelines |
-| 05 | `05_automation_utilities.py` | Automation engineers | `notebookutils` everything, DAG runs, parameters |
-| 06 | `06_troubleshooting.py` | Everyone (eventually) | Symptom → cause → fix table |
+| 00 | `00_guide_index.py` | Everyone | First time — read the conventions |
+| 01 | `01_guide_connectivity.py` | Data engineers, integration leads | "How do I connect Fabric to ___ ?" |
+| 02 | `02_guide_lakehouse_warehouse_ops.py` | Data engineers | Delta, MERGE, OPTIMIZE, schemas, partitioning |
+| 03 | `03_guide_security_identity.py` | Security engineers | RLS, CLS, DDM, tokens, MSAL, Key Vault |
+| 04 | `04_guide_admin_governance.py` | Platform admins | REST APIs for workspaces, lakehouses, Git, deployment pipelines |
+| 05 | `05_guide_automation_utilities.py` | Automation engineers | `notebookutils` everything, DAG runs, parameters |
+| 06 | `06_guide_troubleshooting.py` | Everyone (eventually) | Symptom → cause → fix table |
 
 ## Why "Hitchhiker's Guide"?
 

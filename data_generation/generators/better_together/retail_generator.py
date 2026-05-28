@@ -130,7 +130,9 @@ class BetterTogetherRetailGenerator(BaseGenerator):
         order_counter = 0
         line_counter = 0
         prod_ids = products["product_id"].to_list()
-        prod_prices = dict(zip(products["product_id"], products["unit_price"], strict=False))
+        prod_prices = dict(
+            zip(products["product_id"], products["unit_price"], strict=False)
+        )
 
         for _, cust in customers.iterrows():
             n_orders = max(0, int(self.rng.poisson(self.avg_orders_per_customer)))
@@ -183,11 +185,15 @@ class BetterTogetherRetailGenerator(BaseGenerator):
                             "order_id": order_id,
                             "customer_id": cust["customer_id"],
                             "region": cust["region"],
-                            "return_timestamp": order_ts + timedelta(
-                                days=int(self.rng.integers(1, 30))
-                            ),
+                            "return_timestamp": order_ts
+                            + timedelta(days=int(self.rng.integers(1, 30))),
                             "reason": self.rng.choice(
-                                ["defective", "wrong_item", "no_longer_needed", "other"],
+                                [
+                                    "defective",
+                                    "wrong_item",
+                                    "no_longer_needed",
+                                    "other",
+                                ],
                                 p=[0.35, 0.20, 0.30, 0.15],
                             ),
                             "refund_amount": round(order_total, 2),
