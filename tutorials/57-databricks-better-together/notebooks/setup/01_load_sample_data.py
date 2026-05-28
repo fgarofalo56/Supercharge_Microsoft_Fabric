@@ -60,14 +60,34 @@ print(f"Files present: {sorted(available)}")
 
 # MAGIC %md
 # MAGIC ## 2. Load each parquet into Delta in `retail_raw`
+# MAGIC
+# MAGIC PyArrow writes nanosecond timestamps by default, which Spark/Delta
+# MAGIC cannot ingest (`Illegal Parquet type: INT64 (TIMESTAMP(NANOS,false))`).
+# MAGIC The generator script now coerces to microseconds at write time, but we
+# MAGIC keep a defensive read-side cast here so older parquet drops still load.
 
 # COMMAND ----------
+
+import pyarrow as pa
+import pyarrow.parquet as pq
 
 for table in TABLES:
     source = f"{LANDING_PATH}/retail/{table}.parquet"
     target = f"{CATALOG_NAME}.{RAW_SCHEMA}.{table}"
 
-    df = spark.read.parquet(source)
+    arrow_tbl = pq.read_table(source)
+    new_fields = []
+    needs_cast = False
+    for fld in arrow_tbl.schema:
+        if pa.types.is_timestamp(fld.type) and fld.type.unit == "ns":
+            new_fields.append(fld.with_type(pa.timestamp("us")))
+            needs_cast = True
+        else:
+            new_fields.append(fld)
+    if needs_cast:
+        arrow_tbl = arrow_tbl.cast(pa.schema(new_fields))
+
+    df = spark.createDataFrame(arrow_tbl.to_pandas())
     df.write.format("delta").mode("overwrite").saveAsTable(target)
 
     count = spark.table(target).count()
