@@ -258,6 +258,7 @@ nav:
         - Identity & RBAC Patterns: best-practices/identity-rbac-patterns.md
         - Customer-Managed Keys: best-practices/customer-managed-keys.md
         - Outbound Access Protection: best-practices/outbound-access-protection.md
+        - OneLake Defense-in-Depth: best-practices/security/onelake-defense-in-depth.md
         - Zero Trust Blueprint: best-practices/security/zero-trust-blueprint.md
         - Threat Model (STRIDE): best-practices/security/threat-model-stride.md
         - Data Exfiltration Prevention: best-practices/security/data-exfiltration-prevention.md
@@ -408,6 +409,10 @@ nav:
         - "45 — On-Prem SSAS/SSIS/SSRS → Fabric": tutorials/45-onprem-ssas-ssis-ssrs/README.md
         - "55 — Palantir Foundry → Fabric": tutorials/55-palantir-to-fabric/README.md
         - "56 — Informatica → Fabric": tutorials/56-informatica-to-fabric/README.md
+        - "57 — Databricks Better Together":
+          - Overview: tutorials/57-databricks-better-together/README.md
+          - Test Plan: tutorials/57-databricks-better-together/TEST_PLAN.md
+          - Semantic Model & Reports: tutorials/57-databricks-better-together/semantic-model/README.md
       - Industry Deep Dives:
         - "46 — Commercial Healthcare": tutorials/46-commercial-healthcare/README.md
         - "47 — Financial Services": tutorials/47-financial-services/README.md
@@ -434,6 +439,7 @@ nav:
       - Gold Notebooks: notebooks/gold/README.md
       - ML Notebooks: notebooks/ml/README.md
       - Real-Time Notebooks: notebooks/real-time/README.md
+      - Hitchhiker's Guide to Fabric: notebooks/hitchhikers-guide/README.md
     - Sample Apps:
       - Logic App Orchestrator: sample-apps/logic-app-orchestrator/README.md
       - Power Apps Canvas Consumer: sample-apps/power-apps-canvas-consumer/README.md
