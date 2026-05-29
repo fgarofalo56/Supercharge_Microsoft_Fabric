@@ -484,5 +484,5 @@ Direct Lake is the recommended connectivity mode for Power BI in Fabric. It prov
 
 ---
 
-> 📖 **Documentation maintained by:** Microsoft Fabric POC Team
+> 📖 **Documentation maintained by:** Frank Garofalo
 > 🔗 **Repository:** [Suppercharge_Microsoft_Fabric](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric)

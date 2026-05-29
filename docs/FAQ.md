@@ -1832,6 +1832,6 @@ az group delete --name "rg-fabric-poc-dev" --yes
 
 ---
 
-> 📖 **Documentation maintained by:** Microsoft Fabric POC Team
+> 📖 **Documentation maintained by:** Frank Garofalo
 > 🔗 **Repository:** [Suppercharge_Microsoft_Fabric](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric)
 > 🔄 **Last Updated:** 2025-01-21

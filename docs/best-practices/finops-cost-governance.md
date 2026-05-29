@@ -666,7 +666,7 @@ def federal_cost_report(capacity_cost: float, ws_cu: dict) -> list[dict]:
 |-------|-------|
 | **Title** | FinOps & Cost Governance for Microsoft Fabric |
 | **Category** | Best Practices — Cost Governance |
-| **Author** | Supercharge Microsoft Fabric POC Team |
+| **Author** | Frank Garofalo |
 | **Version** | 1.0.0 |
 | **Created** | 2026-04-21 |
 | **Last Updated** | 2026-04-21 |

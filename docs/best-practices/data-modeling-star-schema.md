@@ -815,7 +815,7 @@ df_dim_agency.write.format("delta").mode("overwrite").saveAsTable("lh_gold.dim_a
 |-------|-------|
 | **Title** | Data Modeling & Star Schema Best Practices |
 | **Category** | Best Practices — Data Modeling |
-| **Author** | Supercharge Microsoft Fabric POC Team |
+| **Author** | Frank Garofalo |
 | **Version** | 1.0.0 |
 | **Created** | 2026-04-21 |
 | **Last Updated** | 2026-04-21 |

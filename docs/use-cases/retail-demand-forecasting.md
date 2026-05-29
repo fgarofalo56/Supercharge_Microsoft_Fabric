@@ -438,5 +438,5 @@ FabricAuditLogs
 ---
 
 *Last Updated: 2026-04-27*
-*Author: Fabric POC Team*
+*Author: Frank Garofalo*
 *Compliance Review: PCI-DSS v4.0 scope validated*

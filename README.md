@@ -15,7 +15,7 @@
 ![Tests](https://img.shields.io/badge/Tests-612_Passing-brightgreen?style=for-the-badge)
 ![Phase](https://img.shields.io/badge/Phase_11-Complete-brightgreen?style=for-the-badge)
 
-**Transform your casino operations with enterprise-grade analytics powered by Microsoft Fabric**
+**A hands-on Microsoft Fabric reference for data teams in regulated industries** — it starts in casino & gaming, bridges through Tribal Nations gaming and health, and extends out to federal agency analytics, all on the same medallion + governance backbone.
 
 *Real-time insights • Medallion Architecture • Regulatory Compliance • Direct Lake BI*
 
@@ -29,6 +29,9 @@
 ---
 
 </div>
+
+> [!IMPORTANT]
+> **Personal project — not an official Microsoft product.** This is a personal, community-built reference maintained by [Frank Garofalo](https://github.com/fgarofalo56). It is **not** a sanctioned Microsoft deliverable or official Microsoft Fabric documentation, and the opinions here are the author's own. The compliance pages (FedRAMP, HIPAA, NIST 800-53, NIGC MICS, Title 31/BSA, etc.) are **reference control mappings for education and POC scoping — not authorizations, attestations, or certifications.**
 
 ## 📍 Navigation
 

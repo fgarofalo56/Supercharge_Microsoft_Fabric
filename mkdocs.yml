@@ -1,9 +1,16 @@
 # MkDocs Configuration for Supercharge Microsoft Fabric
 # https://squidfunk.github.io/mkdocs-material/
 
-site_name: Suppercharge Microsoft Fabric
-site_description: Casino/Gaming Industry POC for Microsoft Fabric
-site_author: Microsoft Fabric POC Team
+# NOTE: site_name drives the browser <title>, the OG/Twitter card site_name,
+# and the navbar logo title — keep it spelled "Supercharge" (one p). The repo
+# slug below is still "Suppercharge_…"; renaming that is tracked separately so
+# inbound links / redirects can be handled without breaking shares.
+site_name: Supercharge Microsoft Fabric
+site_description: >-
+  A personal, community reference for Microsoft Fabric — a casino & gaming
+  analytics POC that bridges to Tribal Nations and federal agency data domains.
+  Not an official Microsoft product.
+site_author: Frank Garofalo
 site_url: https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/
 
 # Repository
