@@ -313,3 +313,20 @@ Companion files outside this directory:
 - `data_generation/generators/better_together/` — sample-data generators
 - `infra/modules/databricks/databricks-workspace.bicep` — DBW module
 - `infra/modules/security/key-vault.bicep` — Key Vault module
+
+## 📓 Open the notebooks
+
+> The docs site renders this page, not the `.py` notebooks. The links below
+> open each notebook's source on GitHub — download/copy it, then import into
+> your workspace (Databricks for setup, Fabric for mirroring/gold/security).
+
+| Notebook | Runs in | Purpose |
+|---|---|---|
+| [`setup/00_create_unity_catalog.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/tutorials/57-databricks-better-together/notebooks/setup/00_create_unity_catalog.py) | Databricks | UC catalog + schemas + volume |
+| [`setup/01_load_sample_data.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/tutorials/57-databricks-better-together/notebooks/setup/01_load_sample_data.py) | Databricks | Load 5 Delta tables + secure views |
+| [`mirroring/01_register_full_catalog_mirror.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/tutorials/57-databricks-better-together/notebooks/mirroring/01_register_full_catalog_mirror.py) | Fabric | Full catalog mirror (REST) |
+| [`mirroring/02_register_partial_mirror.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/tutorials/57-databricks-better-together/notebooks/mirroring/02_register_partial_mirror.py) | Fabric | Inclusion + exclusion-list mirrors |
+| [`mirroring/03_query_mirror_from_spark.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/tutorials/57-databricks-better-together/notebooks/mirroring/03_query_mirror_from_spark.py) | Fabric | Read the mirror (Spark / T-SQL / sempy) |
+| [`mirroring/04_compare_mirror_vs_shortcut_vs_iceberg.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/tutorials/57-databricks-better-together/notebooks/mirroring/04_compare_mirror_vs_shortcut_vs_iceberg.py) | Fabric | Decision matrix |
+| [`gold/01_gold_star_schema.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/tutorials/57-databricks-better-together/notebooks/gold/01_gold_star_schema.py) | Fabric | Direct-Lake star schema from the mirror |
+| [`security/01_apply_defense_in_depth.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/tutorials/57-databricks-better-together/notebooks/security/01_apply_defense_in_depth.py) | Fabric | Entra groups, OneLake RLS/CLS, Warehouse RLS/DDM |
