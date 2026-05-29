@@ -19,6 +19,11 @@
 
 ---
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
+---
+
 ## 📋 Table of Contents
 
 - [1. Pre-Demo Checklist](#1-pre-demo-checklist)
@@ -1106,7 +1111,7 @@ SlotEvents
 | "How long to deploy?" | "Infrastructure deploys in ~1 hour. Full data pipeline with your data: 2-3 weeks typical." |
 | "Can this handle our scale?" | "Fabric scales to petabytes. We'd need to size capacity based on your specific requirements." |
 | "What about compliance?" | "We've built in patterns for NIGC MICS, FinCEN CTR/SAR, W-2G. Customizable for your jurisdiction." |
-| "Differences from Databricks/Snowflake?" | "Fabric is fully integrated - compute, storage, BI, governance in one platform. No data movement." |
+| "How does this compare to other data platforms?" | "Fabric's emphasis is tight integration of compute, storage, BI, and governance in one SaaS platform, which can reduce data movement. Competing platforms have their own strengths — recommend evaluating against your specific requirements and each vendor's current documentation." |
 
 ---
 

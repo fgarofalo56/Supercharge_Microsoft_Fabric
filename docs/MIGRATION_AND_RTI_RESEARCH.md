@@ -19,6 +19,9 @@ type: deep-dive
 > Research compiled: 2026-03-11
 > Sources: Microsoft Learn, Brave Web Search, Microsoft Docs MCP
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ---
 
 ## 🏗️ Part 1: Database Migration Paths to Microsoft Fabric
@@ -294,15 +297,17 @@ Microsoft offers multiple pathways for Snowflake integration/migration, ranging 
 
 #### Cost Comparison Considerations
 
-| Factor | Snowflake | Microsoft Fabric |
-|--------|-----------|-----------------|
+The table below contrasts a referenced competitor's published pricing and capability model with Microsoft Fabric. The competitor's details are summarized in good faith from its publicly available documentation; the two platforms take different but each valid architectural approaches, so the right choice depends on workload and existing investments. Always verify the competitor's current pricing against its official documentation.
+
+| Factor | Referenced competitor | Microsoft Fabric |
+|--------|-----------------------|-----------------|
 | Pricing Model | Per-second compute + storage | Capacity Units (CU) - single SKU |
 | Data Storage | Per-TB/month | Included in capacity (OneLake) |
-| Compute Scaling | Auto-scale warehouses | Capacity-based, workload management |
-| Cross-workload | Separate tools needed | Unified platform (DW, DE, DS, BI) |
-| Real-Time | Snowpipe + Streams | Eventstreams + Eventhouse (native) |
-| BI | Requires external tool | Power BI included natively |
-| Governance | Snowflake governance | Microsoft Purview (integrated) |
+| Compute Scaling | Auto-scale warehouses (mature, granular) | Capacity-based, workload management |
+| Cross-workload | Strong analytics engine; BI/DE via partner tools | Unified platform (DW, DE, DS, BI) |
+| Real-Time | Continuous-ingest + change-stream features | Eventstreams + Eventhouse (native) |
+| BI | Pairs with external BI tools | Power BI included natively |
+| Governance | Native governance features | Microsoft Purview (integrated) |
 
 #### Sample Migration Steps (5-Phase)
 

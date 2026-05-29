@@ -5,6 +5,9 @@ type: feature
 ---
 # Insurance Claims Analytics - P&C Carrier Use Case
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ## Executive Summary
 
 A mid-market Property & Casualty (P&C) insurance carrier with **$3 billion in gross written premium (GWP)**, approximately **500,000 active policies** across four lines of business, and **120,000 claims per year** deploys Microsoft Fabric to unify claims intake, fraud detection, loss reserving, and statutory reporting into a single lakehouse platform. The solution replaces fragmented legacy systems (AS/400 policy admin, Guidewire ClaimCenter, standalone fraud vendor, Excel-based reserving) with an end-to-end analytics architecture that delivers **ML-driven severity triage at FNOL**, **graph-based fraud ring detection**, **automated loss triangle development**, and **NAIC-compliant statutory data feeds** -- all on a single Fabric F64 capacity.

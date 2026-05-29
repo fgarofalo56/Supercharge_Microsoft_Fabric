@@ -22,6 +22,11 @@ type: deep-dive
 
 ---
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
+---
+
 ## 🎯 Overview
 
 For most of the last decade, data was treated as a **byproduct** — exhaust from operational systems that a central data team scraped together into reports. The pattern broke at scale: central teams became bottlenecks, data quality lived nowhere, consumers had no way to know whether a table was "trustworthy" or "someone's experiment from 2022", and ownership was a finger-pointing exercise. The **Data Product** discipline reframes the question. A data set with no owner, no SLA, no contract, and no lifecycle is not a data product — it's organizational risk pretending to be an asset.

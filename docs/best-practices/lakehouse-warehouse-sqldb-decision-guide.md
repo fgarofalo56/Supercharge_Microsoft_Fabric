@@ -15,6 +15,9 @@ type: deep-dive
 
 </div>
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ---
 
 **Last Updated:** `2026-04-21` | **Version:** 1.0.0
@@ -539,9 +542,9 @@ flowchart TB
 | Azure SQL Database | SQL Database (mirror) or Lakehouse (shortcut) | Mirroring or Shortcut |
 | Azure Synapse (dedicated pool) | Warehouse | Pipeline migration |
 | Azure Data Lake Gen2 | Lakehouse | Shortcut (zero-copy) |
-| Databricks Delta Lake | Lakehouse | Shortcut or Pipeline |
+| Competitor lakehouse (Delta tables) | Lakehouse | Shortcut or Pipeline |
 | On-premises SQL Server | SQL Database or Warehouse | Pipeline + Gateway |
-| Snowflake | Warehouse or Lakehouse | Pipeline |
+| Competitor cloud data warehouse | Warehouse or Lakehouse | Pipeline |
 
 ---
 

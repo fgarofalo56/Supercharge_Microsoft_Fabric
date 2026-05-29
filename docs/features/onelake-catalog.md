@@ -21,6 +21,11 @@ type: feature
 
 ---
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
+---
+
 ## 🎯 Overview
 
 OneLake Catalog is Microsoft Fabric's unified data discovery hub that provides a centralized experience for browsing, searching, tagging, endorsing, and governing all items across your Fabric estate. Available as a **Generally Available** feature, OneLake Catalog replaces the fragmented experience of navigating between workspaces, Lakehouses, Warehouses, and semantic models to find the right dataset -- instead offering a single searchable catalog that spans the entire organization's Fabric footprint.

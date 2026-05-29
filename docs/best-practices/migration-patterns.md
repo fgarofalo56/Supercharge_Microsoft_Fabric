@@ -7,7 +7,7 @@ type: deep-dive
 
 <div align="center" markdown>
 
-**Structured Migration Playbook from Legacy Analytics to Microsoft Fabric**
+**Structured Migration Playbook from Existing Analytics Platforms to Microsoft Fabric**
 
 ![Category](https://img.shields.io/badge/Category-Migration-teal?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
@@ -35,9 +35,14 @@ type: deep-dive
 
 ---
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
+---
+
 ## 🎯 Overview
 
-Migrating to Microsoft Fabric from legacy analytics platforms requires a structured approach that minimizes risk, preserves data fidelity, and captures the full value of Fabric's unified platform. This guide provides battle-tested migration patterns for moving from Oracle, SQL Server, Teradata, SAS, Snowflake, Databricks, and Azure Synapse Analytics into Fabric's Lakehouse, Warehouse, and Eventhouse workloads.
+Migrating to Microsoft Fabric from another analytics platform benefits from a structured approach that minimizes risk and preserves data fidelity. This guide provides migration patterns for moving from Oracle, SQL Server, Teradata, SAS, Snowflake, Databricks, and Azure Synapse Analytics into Fabric's Lakehouse, Warehouse, and Eventhouse workloads. Each of these source platforms is a capable, well-established product, and many remain excellent choices in their own right; the guidance below describes how to move a workload to Fabric when that is the chosen direction. Source-platform behavior, component names, and feature mappings are based on each vendor's publicly available documentation (as of this doc's date) — always verify against the vendor's current official documentation.
 
 ### Migration Principles
 
@@ -518,7 +523,7 @@ Snowflake migrations can leverage Iceberg table endpoints for zero-copy reads or
 
 ### Databricks Migration Pattern
 
-Databricks-to-Fabric migrations are the smoothest because both platforms use Delta Lake natively.
+Databricks-to-Fabric migrations are often relatively low-friction because both platforms use Delta Lake natively. Databricks is a strong, mature lakehouse and ML platform; the notes below describe the mechanics of moving to Fabric, not a judgment that one platform is universally better.
 
 **Option A: ADLS Shortcuts (zero-copy)**
 
@@ -541,7 +546,7 @@ For cross-cloud or cross-organization sharing, use the Delta Sharing protocol.
 
 ### 🔷 Azure Synapse Analytics Migration Pattern
 
-Azure Synapse → Fabric is the **most-asked enterprise migration** because Synapse and Fabric share Microsoft DNA, but the architectural shift from DWUs to CUs and from Spark/SQL silos to a unified capacity is real. The migration pivots on three big wins: Dedicated SQL pool DDL converts cleanly to Fabric Warehouse (drop the `DISTRIBUTION` and `CLUSTERED COLUMNSTORE` clauses; Fabric handles those automatically via V-Order), ADLS Gen2 storage moves to OneLake via shortcut (no data copy), and Synapse Spark notebooks port with mostly mechanical `mssparkutils` adjustments.
+Azure Synapse → Fabric is one of the **most common enterprise migrations** because Synapse and Fabric share Microsoft DNA (both are Microsoft platforms, so this is not a third-party migration), but the architectural shift from DWUs to CUs and from Spark/SQL silos to a unified capacity is real. The migration pivots on three big wins: Dedicated SQL pool DDL converts cleanly to Fabric Warehouse (drop the `DISTRIBUTION` and `CLUSTERED COLUMNSTORE` clauses; Fabric handles those automatically via V-Order), ADLS Gen2 storage moves to OneLake via shortcut (no data copy), and Synapse Spark notebooks port with mostly mechanical `mssparkutils` adjustments.
 
 **Detailed playbook:** [Tutorial 41 — Synapse → Fabric](../tutorials/41-synapse-to-fabric/README.md)
 
@@ -579,13 +584,13 @@ Azure Synapse → Fabric is the **most-asked enterprise migration** because Syna
 | DW6000c | F256 |
 | DW15000c | F1024 |
 
-> 💡 **When to use this approach:** Existing Azure Synapse Analytics estate (Dedicated SQL pool, Spark pool, or both). Goal is unified capacity model, Direct Lake BI, and elimination of Spark/SQL billing silos. Synapse SQL pools are entering sustaining mode — Fabric is where new investment lands. Validate F-SKU sizing empirically during coexistence; CU pool also serves Power BI and RTI.
+> 💡 **When to use this approach:** Existing Azure Synapse Analytics estate (Dedicated SQL pool, Spark pool, or both). Goal is unified capacity model, Direct Lake BI, and consolidation of Spark/SQL billing. Per Microsoft's public guidance, new analytics investment is increasingly directed at Fabric; confirm the current support and roadmap position for Synapse against Microsoft's official documentation. Validate F-SKU sizing empirically during coexistence; CU pool also serves Power BI and RTI.
 
 ---
 
 ### 🧱 Databricks Migration Pattern (Detailed)
 
-Databricks → Fabric is the **smoothest cloud-to-cloud migration** because both platforms speak Delta Lake natively. The technical lift is small; the strategic question is bigger — moving onto a Microsoft platform that bundles BI, real-time, governance, and ML alongside Spark, with a single capacity-based commercial model. The migration pivots on Delta-table movement (shortcut-in-place or rewrite for V-Order), Unity Catalog → OneLake Catalog governance translation, `dbutils` → `mssparkutils` shim, Workflows → Fabric Pipelines, and MLflow registry export-import.
+Databricks → Fabric is often a **relatively low-friction cloud-to-cloud migration** because both platforms speak Delta Lake natively. Databricks is a capable, widely adopted lakehouse and ML platform with deep Spark and MLflow heritage, and remains the right choice for many teams. The technical lift of moving to Fabric is typically small; the strategic question is bigger — whether a Microsoft platform that bundles BI, real-time, governance, and ML alongside Spark, with a single capacity-based commercial model, fits your needs better. The migration pivots on Delta-table movement (shortcut-in-place or rewrite for V-Order), Unity Catalog → OneLake Catalog governance translation, `dbutils` → `mssparkutils` shim, Workflows → Fabric Pipelines, and MLflow registry export-import.
 
 **Detailed playbook:** [Tutorial 42 — Databricks → Fabric](../tutorials/42-databricks-to-fabric/README.md)
 
@@ -606,9 +611,11 @@ Databricks → Fabric is the **smoothest cloud-to-cloud migration** because both
 | Cluster pools (DBU) | Fabric Spark capacity (CU) | Auto-scales within F-SKU |
 | Photon engine | V-Order + Native Execution Engine | Different code path, similar perf |
 
-#### V-Order Benefits (vs. Photon-only Optimization)
+#### V-Order and Direct Lake vs. Photon Optimization (per public docs)
 
-| Benefit | Databricks | Fabric |
+The comparison below reflects each platform's publicly documented behavior; the approaches differ in design rather than one being strictly superior. Verify current behavior against each vendor's official documentation.
+
+| Aspect | Databricks | Fabric |
 |---------|-----------|--------|
 | BI hot-path latency | Photon cluster + cached | Direct Lake (no copy, no refresh) |
 | File compaction | `OPTIMIZE` (compaction only) | `OPTIMIZE table VORDER` (V-Order + compaction) |
@@ -632,7 +639,7 @@ Databricks → Fabric is the **smoothest cloud-to-cloud migration** because both
 
 ### 🟧 Amazon Redshift Migration Pattern
 
-Amazon Redshift → Fabric is a **multi-cloud migration** — increasingly common as enterprises consolidate analytics estates onto Microsoft Fabric while keeping operational workloads in AWS. The migration pivots on `UNLOAD` to S3 (Parquet/Snappy), OneLake shortcuts to S3 (zero-copy, zero AWS egress on shortcuts), Redshift PostgreSQL DDL → Fabric T-SQL, and **stripping** Redshift-specific physical tuning clauses (`DISTKEY`, `SORTKEY`, `ENCODE`) which V-Order replaces automatically. Spectrum external tables are the cheapest part of the migration — same S3 prefix becomes a OneLake shortcut with no data movement.
+Amazon Redshift → Fabric is a **multi-cloud migration** — one that some enterprises pursue when consolidating analytics estates onto Microsoft Fabric while keeping operational workloads in AWS. Amazon Redshift is a mature, high-performance cloud data warehouse, and Redshift Spectrum's S3-native model is a genuine strength that this approach builds on rather than replaces. The migration pivots on `UNLOAD` to S3 (Parquet/Snappy), OneLake shortcuts to S3 (zero-copy, zero AWS egress on shortcuts), Redshift PostgreSQL DDL → Fabric T-SQL, and **stripping** Redshift-specific physical tuning clauses (`DISTKEY`, `SORTKEY`, `ENCODE`) which V-Order replaces automatically. Spectrum external tables are the cheapest part of the migration — same S3 prefix becomes a OneLake shortcut with no data movement.
 
 **Detailed playbook:** [Tutorial 43 — Redshift → Fabric](../tutorials/43-redshift-to-fabric/README.md)
 
@@ -674,7 +681,7 @@ Spectrum tables already live as files on S3. The fastest possible migration: cre
 
 ### 🔵 Google BigQuery Migration Pattern
 
-Google BigQuery → Fabric is a **multi-cloud migration** where dialect translation and cross-cloud egress are the two dominant cost drivers. The migration pivots on BigQuery `EXPORT DATA OPTIONS(format='PARQUET')` to GCS, OneLake shortcuts to GCS during coexistence (zero copy), Standard SQL → T-SQL dialect translation (the translator handles ~80% mechanically), partitioning + clustering → Delta partitioning + Z-Order, and JS UDFs → PySpark notebook UDFs. STRUCT and ARRAY columns are the hardest type-mapping problem — T-SQL has no native equivalents, so they land as JSON `varchar(max)` or move to Lakehouse for native Spark complex-type handling.
+Google BigQuery → Fabric is a **multi-cloud migration** where dialect translation and cross-cloud egress are the two dominant cost drivers. BigQuery is a powerful, highly scalable serverless warehouse with strong native support for nested STRUCT/ARRAY data; this approach is about moving to Fabric where that fits an organization's strategy, not a claim that one platform is universally better. The migration pivots on BigQuery `EXPORT DATA OPTIONS(format='PARQUET')` to GCS, OneLake shortcuts to GCS during coexistence (zero copy), Standard SQL → T-SQL dialect translation (the translator handles ~80% mechanically), partitioning + clustering → Delta partitioning + Z-Order, and JS UDFs → PySpark notebook UDFs. STRUCT and ARRAY columns are the hardest type-mapping problem — T-SQL has no native equivalents, so they land as JSON `varchar(max)` or move to Lakehouse for native Spark complex-type handling.
 
 **Detailed playbook:** [Tutorial 44 — BigQuery → Fabric](../tutorials/44-bigquery-to-fabric/README.md)
 
@@ -1075,7 +1082,7 @@ def generate_validation_report(
 
 ### TCO Template
 
-Use this template to compare legacy platform costs against Microsoft Fabric for equivalent workloads.
+Use this template to compare your source platform's costs against Microsoft Fabric for equivalent workloads. The template is a neutral worksheet — it does not assert that Fabric is cheaper. Outcomes vary widely by workload, licensing, reservations, and region; the "Savings" column may be positive or negative for a given organization. Populate it with your own verified figures and your source vendor's current pricing rather than assuming a result.
 
 | Cost Category | Legacy Platform | Microsoft Fabric | Savings |
 |--------------|-----------------|------------------|---------|

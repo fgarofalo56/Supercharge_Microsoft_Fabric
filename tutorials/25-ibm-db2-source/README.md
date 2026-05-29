@@ -51,11 +51,14 @@
 | :arrow_left: **Previous** | [24-Snowflake to Fabric](../24-snowflake-to-fabric/README.md) |
 | ➡️ **Next** | [26-Multi-Source Streaming](../26-multi-source-streaming/README.md) |
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ---
 
 ## 📖 Overview
 
-This tutorial provides a comprehensive guide for connecting **IBM DB2** as a data source for **Microsoft Fabric**. Many casino and gaming organizations run core systems --- cage transaction processing, player tracking, regulatory reporting --- on DB2 mainframes that have been in production for decades.
+This tutorial provides a guide for connecting **IBM DB2** as a data source for **Microsoft Fabric**. Many casino and gaming organizations run core systems --- cage transaction processing, player tracking, regulatory reporting --- on IBM DB2 mainframes, a robust and long-proven platform that has been in production for decades. DB2 behavior, catalog structures, and connectivity details described here are based on IBM's publicly available documentation (as of this doc's date); always verify against IBM's current official documentation.
 
 IBM DB2 comes in three primary variants, each with distinct connectivity considerations:
 

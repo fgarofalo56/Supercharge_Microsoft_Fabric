@@ -5,9 +5,12 @@ type: feature
 ---
 # Financial Services: Real-Time Fraud Detection & Regulatory Compliance
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ## Executive Summary
 
-This use case demonstrates how a mid-tier commercial bank with **$45 billion in assets under management (AUM)** and **2 million retail accounts** leverages Microsoft Fabric to unify real-time fraud detection, anti-money laundering (AML) monitoring, credit risk scoring, and regulatory reporting into a single analytics platform. The architecture replaces a fragmented legacy stack of batch-oriented SAS models, siloed data warehouses, and manual reconciliation processes with a modern lakehouse that delivers sub-second fraud decisioning and continuous compliance.
+This use case demonstrates how a mid-tier commercial bank with **$45 billion in assets under management (AUM)** and **2 million retail accounts** leverages Microsoft Fabric to unify real-time fraud detection, anti-money laundering (AML) monitoring, credit risk scoring, and regulatory reporting into a single analytics platform. The architecture replaces a fragmented legacy stack of batch-oriented statistical-modeling tools, siloed data warehouses, and manual reconciliation processes with a modern lakehouse that delivers sub-second fraud decisioning and continuous compliance.
 
 ### Key Outcomes
 
@@ -31,7 +34,7 @@ Financial institutions face a converging set of pressures:
 1. **Fraud escalation** - Card-not-present (CNP) fraud grew 30% YoY to $9.49B in US losses (Nilson Report 2025). Real-time authorization decisioning is table stakes.
 2. **Regulatory burden** - Banks must comply with BSA/AML (31 CFR 1020), SOX Section 404, PCI DSS v4.0, Basel III capital adequacy, and GLBA privacy requirements simultaneously.
 3. **Stress testing mandates** - CCAR and DFAST require banks with >$10B assets to run quarterly macro-economic scenario analyses across the full loan portfolio.
-4. **Legacy modernization** - Most mid-tier banks run 15-20 year old SAS/Teradata stacks that cannot support real-time ML scoring or streaming ingestion.
+4. **Legacy modernization** - Many mid-tier banks still run 15-20 year old statistical-modeling and data-warehouse stacks built before real-time ML scoring or streaming ingestion were common; those platforms remain capable for their original batch workloads but were not designed for sub-second decisioning.
 
 ### Regulatory Framework
 

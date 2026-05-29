@@ -7,6 +7,9 @@ type: deep-dive
 
 > A structured framework for evaluating an organization's readiness to adopt Fabric AI capabilities — Copilot, AutoML, Semantic Link, Data Agents, and AI Functions — with a maturity model, assessment questionnaire, and implementation roadmap.
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ## Executive Summary
 
 Microsoft Fabric's AI capabilities span a broad spectrum, from no-code Copilot assistance to advanced Data Agents that autonomously orchestrate multi-step analytics workflows. However, organizations cannot simply "turn on AI" — successful adoption requires foundational maturity in data quality, governance, infrastructure, skills, and organizational culture. This assessment framework helps enterprise leaders evaluate where they stand today and chart a realistic path to AI-powered analytics.

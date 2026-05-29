@@ -19,6 +19,9 @@ hero_alt: Decisions — Architecture trade-offs and ADRs
 
 **Last Updated:** `2026-05-05` | **Version:** 1.0.0
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ---
 
 ## When to Use These Guides
@@ -55,7 +58,7 @@ These interactive decision trees help you navigate the most common "which should
 
     [:octicons-arrow-right-24: Navigate decision tree](direct-lake-import-directquery.md)
 
--   **[Fabric vs Databricks vs Synapse](fabric-databricks-synapse.md)**
+-   **[Fabric vs. competing analytics platforms](fabric-databricks-synapse.md)**
 
     ---
 

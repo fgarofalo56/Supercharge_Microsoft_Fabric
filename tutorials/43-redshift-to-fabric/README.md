@@ -17,6 +17,9 @@
 
 ---
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ## 🟧 Tutorial 43: Amazon Redshift → Microsoft Fabric Migration
 
 | | |
@@ -47,19 +50,21 @@
 
 ## 📖 Overview
 
-Amazon Redshift → Fabric is a **multi-cloud migration** — and increasingly common as enterprises consolidate analytics estates onto Microsoft Fabric while keeping operational workloads in AWS. This tutorial walks through extracting Redshift workloads via `UNLOAD` to S3, bringing the data into OneLake (via S3 shortcut or copy), converting Redshift PostgreSQL-flavored DDL into Fabric Warehouse T-SQL, and rationalizing distribution/sort keys, RA3 nodes, and WLM rules into the Fabric capacity model.
+Amazon Redshift → Fabric is a **multi-cloud migration** — a path some enterprises take to consolidate analytics estates onto Microsoft Fabric while keeping operational workloads in AWS. Redshift is a strong, widely-deployed cloud data warehouse with deep AWS-ecosystem integration; this playbook is not an argument that one platform is universally better, but a practical guide for teams that have already decided to move. It walks through extracting Redshift workloads via `UNLOAD` to S3, bringing the data into OneLake (via S3 shortcut or copy), converting Redshift PostgreSQL-flavored DDL into Fabric Warehouse T-SQL, and rationalizing distribution/sort keys, RA3 nodes, and WLM rules into the Fabric capacity model.
 
-### Why Migrate from Redshift to Fabric?
+### Comparing Redshift and Fabric
+
+The table below summarizes differences based on each vendor's publicly available documentation (as of this doc's date). It is descriptive, not a scorecard — Redshift's per-table tuning controls, for example, are a strength for teams that want fine-grained physical control, whereas Fabric favors automatic optimization.
 
 | Concern | Redshift Behavior | Fabric Behavior |
 |---------|-------------------|-----------------|
 | **Compute model** | RA3/DC2 nodes, fixed cluster size or Concurrency Scaling | CU pool shared across all workloads (warehouse, Spark, BI, real-time) |
-| **Storage** | Managed storage on RA3 + S3 (Spectrum); separate egress costs | OneLake unified; S3 readable in place via shortcut |
-| **Performance tuning** | DISTKEY / SORTKEY / encoding decisions per table | V-Order automatic; no DISTKEY/SORTKEY to maintain |
-| **BI integration** | QuickSight or third-party (Tableau, Power BI via ODBC) | Power BI Direct Lake (no copy, no refresh) |
-| **Real-time** | Kinesis + Redshift Streaming Ingestion (separate billing) | Eventstream + Eventhouse native |
-| **Multi-cloud reality** | Locks analytics into AWS region/billing | Reads S3 from Azure via shortcut; supports M365 / Power BI integration |
-| **TCO** | Node-hours + S3 + egress + concurrency scaling charges | Single F-SKU bundles compute, storage, BI, governance |
+| **Storage** | Managed storage on RA3 + S3 (Spectrum) | OneLake unified; S3 readable in place via shortcut |
+| **Performance tuning** | DISTKEY / SORTKEY / encoding give explicit per-table control | V-Order applies automatically; no DISTKEY/SORTKEY to maintain |
+| **BI integration** | QuickSight or other BI tools via ODBC/connectors | Power BI Direct Lake (no copy, no refresh) |
+| **Real-time** | Kinesis + Redshift Streaming Ingestion (separately billed) | Eventstream + Eventhouse native |
+| **Multi-cloud reality** | Tightly integrated with AWS region/billing | Reads S3 from Azure via shortcut; supports M365 / Power BI integration |
+| **Cost shape** | Node-hours + S3 + egress + concurrency scaling charges | Single F-SKU bundles compute, storage, BI, governance |
 
 ### What This Tutorial Covers
 

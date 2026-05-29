@@ -10,6 +10,9 @@ type: feature
 
 ---
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ## Executive Summary
 
 Commercial healthcare delivery in the United States operates at the intersection of clinical care, regulatory compliance, financial pressure, and operational complexity. A 350-bed regional health system processes more than 30,000 inpatient admissions annually, generates 1.2 million ambulatory encounters, files 2.4 million claims, and manages a 1,400-clinician workforce — while operating on margins frequently below 3%. Hospital systems that fail to optimize operations face catastrophic financial consequences: readmissions alone generate over $2 billion annually in CMS penalties, and operational inefficiencies in supply chain, staffing, and length-of-stay routinely exceed 8% of total expense.
@@ -42,7 +45,7 @@ A modern community-based health system runs the most complex enterprise IT envir
 - Real-time monitoring streams from medical devices (telemetry, vital signs, ventilators, infusion pumps)
 - External feeds (state HIE, payer eligibility, e-prescribing networks, public health reporting)
 
-These systems were never designed to be analyzed together. Reporting is fragmented across 4-12 BI tools (Tableau, Crystal Reports, Power BI, native EHR dashboards, vendor-supplied analytics). Critical decisions — a CFO trying to understand denial trends, a CMO investigating a quality outlier, a CNO planning unit staffing — require pulling data from 4-7 sources, manually reconciling differences, and building one-off Excel models that age out within hours.
+These systems were never designed to be analyzed together. Reporting is fragmented across 4-12 BI tools (a mix of third-party BI and reporting platforms, Power BI, native EHR dashboards, and vendor-supplied analytics). Critical decisions — a CFO trying to understand denial trends, a CMO investigating a quality outlier, a CNO planning unit staffing — require pulling data from 4-7 sources, manually reconciling differences, and building one-off Excel models that age out within hours.
 
 ### The Five Operational Domains This Use Case Addresses
 
@@ -59,7 +62,7 @@ These systems were never designed to be analyzed together. Reporting is fragment
 The status quo in commercial healthcare analytics is some combination of:
 
 1. **EHR-vendor analytics packages** — strong on clinical data the EHR owns, but weak on cross-vendor data, slow to evolve, and frequently behind on modern formats (still bulk-exporting CSVs in 2026)
-2. **Enterprise data warehouse (EDW)** — typically a 15-year-old SQL Server or Teradata platform with stale ETL pipelines and a backlog of 200+ unfulfilled report requests
+2. **Enterprise data warehouse (EDW)** — typically a long-established SQL Server or third-party data-warehouse platform that, while proven for its original batch workloads, often carries stale ETL pipelines and a backlog of 200+ unfulfilled report requests
 3. **Department-level BI** — point solutions that solved one problem (e.g., OR utilization) but never integrate with the rest of the organization
 4. **Manual reconciliation** — Excel macros, Access databases, and tribal knowledge held by a small number of analytics power users
 

@@ -21,6 +21,9 @@ type: feature
 
 ---
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ## 🎯 Overview
 
 Copy Job is a Microsoft Fabric workspace item (Preview) designed for **continuous, low-code data ingestion with built-in change data capture (CDC)**. It fills a critical gap in the Fabric data movement spectrum -- between the one-shot Copy Activity (which runs once per pipeline execution) and database Mirroring (which provides full real-time replication). Copy Job provides a middle ground: **scheduled incremental ingestion** that automatically tracks what has changed since the last run and loads only the delta.

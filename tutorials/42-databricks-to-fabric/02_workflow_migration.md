@@ -15,6 +15,9 @@
 
 ---
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ## 📖 Overview
 
 This is the deep-dive reference for **Step 5** of [Tutorial 42](./README.md): converting **Databricks Workflows / Jobs** to **Fabric Data Pipelines** and **Spark Job Definitions**. The parent tutorial gives you the high-level activity-mapping table; this doc gives you the canonical translation matrix, cluster/trigger/parameter handling, three worked examples (simple notebook, multi-task DAG, and DLT → Materialized Lake View), DLT-specific guidance, bulk-export tooling, and migration anti-patterns.

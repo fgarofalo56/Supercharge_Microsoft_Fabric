@@ -16,6 +16,9 @@ type: reference
 
 </div>
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ---
 
 !!! tip "Looking for answers to specific operational questions?"
@@ -1556,6 +1559,12 @@ See: [Data Agents](features/data-agents.md) | [Fabric IQ](features/fabric-iq.md)
 ---
 
 ## 🔄 Migrations
+
+> **Note on third-party platforms.** The migration notes below describe how to move
+> *into* Microsoft Fabric. Details about each source platform are summarized from
+> that vendor's publicly available documentation and may change; always confirm
+> against the vendor's current official docs. Nothing here claims expertise in, or
+> authority over, those third-party products.
 
 ### How do I migrate from Synapse Analytics?
 

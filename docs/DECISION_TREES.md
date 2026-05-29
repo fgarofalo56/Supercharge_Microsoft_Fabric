@@ -10,6 +10,9 @@ type: decision
 
 This document provides structured decision flowcharts for the most common "which Fabric component should I use?" questions. Each section contains a Mermaid flowchart, a comparison table, a "Choose X when..." summary, and a real-world example drawn from the POC.
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ---
 
 ## 1. Lakehouse vs Warehouse vs SQL Database
@@ -211,9 +214,9 @@ See: [Spark Environments & Job Definitions](features/spark-environments-job-defi
 ```mermaid
 flowchart TD
     A[External data source<br/>needs to reach Fabric] --> B{Source type?}
-    B -->|"Azure SQL, Cosmos DB,<br/>Snowflake, supported DB"| C{Need continuous<br/>near-real-time sync?}
+    B -->|"Azure SQL, Cosmos DB,<br/>supported databases"| C{Need continuous<br/>near-real-time sync?}
     B -->|"ADLS Gen2, S3,<br/>GCS, Dataverse"| D{Need to copy<br/>or just reference?}
-    B -->|"On-prem SQL Server,<br/>Oracle, DB2"| E[Pipeline Copy Activity<br/>via Data Gateway]
+    B -->|"On-prem SQL Server<br/>or other relational DBs"| E[Pipeline Copy Activity<br/>via Data Gateway]
     C -->|Yes, CDC/change feed| F[Mirroring]
     C -->|No, periodic sync OK| G{Acceptable latency?}
     G -->|Minutes| H[Pipeline Copy<br/>with incremental load]
@@ -233,7 +236,7 @@ flowchart TD
 |---|---|---|---|
 | **Data Movement** | Continuous replication | No movement (reference) | Scheduled copy |
 | **Latency** | Near-real-time (seconds-minutes) | Zero (reads source directly) | Minutes to hours |
-| **Supported Sources** | Azure SQL, Cosmos DB, Snowflake, more | ADLS, S3, GCS, Dataverse, OneLake | Any (via connectors + gateways) |
+| **Supported Sources** | Azure SQL, Cosmos DB, and other supported databases | ADLS, S3, GCS, Dataverse, OneLake | Any (via connectors + gateways) |
 | **Data Ownership** | Replicated copy in OneLake | Source owns data | Copied to OneLake |
 | **Transformation** | None (raw replication) | None (passthrough) | Full ETL in pipeline |
 | **Cost** | Replication CU + storage | Minimal (query-time CU only) | Copy CU + storage |
@@ -242,7 +245,7 @@ flowchart TD
 
 ### Choose X When...
 
-- **Choose Mirroring** when you need continuous, near-real-time replication from a supported database (Azure SQL, Cosmos DB, Snowflake) without building custom CDC pipelines. Data is automatically converted to Delta format in OneLake.
+- **Choose Mirroring** when you need continuous, near-real-time replication from a supported database (for example, Azure SQL or Cosmos DB, among other supported sources) without building custom CDC pipelines. Data is automatically converted to Delta format in OneLake.
 - **Choose Shortcuts** when you want to query data in-place without copying it, the source is ADLS Gen2/S3/GCS/Dataverse, and you want to avoid storage duplication. Ideal for cross-workspace or cross-cloud data federation.
 - **Choose Pipeline Copy** when the source requires a data gateway (on-premises), you need transformation during ingestion, the source is not supported by mirroring or shortcuts, or you need full control over scheduling and error handling.
 

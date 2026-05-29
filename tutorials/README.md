@@ -6,6 +6,11 @@
 
 ---
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services (for example, the Teradata, SAS, Snowflake, and IBM DB2 migration/connectivity tutorials). That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
+---
+
 ## 📑 Table of Contents
 
 - [🎯 Overview](#-overview)
@@ -200,7 +205,7 @@ Complete tutorials in sequence for the best learning experience:
 | | [22 - Networking Connectivity](./22-networking-connectivity/README.md) | Private endpoints, ExpressRoute, VPN, multi-cloud | ~3.5 hours |
 | | [23 - SHIR & Data Gateways](./23-shir-data-gateways/README.md) | Self-hosted runtime, on-premises gateways, hybrid | ~2.5 hours |
 | 🟢 **Migration & Streaming** | | | |
-| | [24 - Snowflake to Fabric](./24-snowflake-to-fabric/README.md) | Snowflake migration, schema mapping, cost comparison | ~3 hours |
+| | [24 - Snowflake to Fabric](./24-snowflake-to-fabric/README.md) | Snowflake migration, schema mapping, cost planning | ~3 hours |
 | | [25 - IBM DB2 Source](./25-ibm-db2-source/README.md) | DB2 connectivity, CDC, EBCDIC handling | ~3 hours |
 | | [26 - Multi-Source Streaming](./26-multi-source-streaming/README.md) | 8 CDC & IoT streaming connectors | ~3 hours |
 | 🔴 **Analytics & Federal Expansions** | | | |

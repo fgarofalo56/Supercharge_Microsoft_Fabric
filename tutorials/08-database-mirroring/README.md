@@ -17,6 +17,9 @@
 
 ---
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ## 🔄 Tutorial 08: Database Mirroring - Real-Time Replication
 
 | | |
@@ -292,7 +295,7 @@ Choose tables to mirror from your Snowflake data warehouse:
 2. Click **Start mirroring**
 3. Monitor initial sync progress
 
-> 💡 **Tip:** Snowflake mirroring uses Snowflake Streams under the hood. Ensure your Snowflake account has sufficient storage for stream metadata.
+> 💡 **Tip:** Based on Snowflake's publicly available documentation, Snowflake mirroring uses Snowflake Streams under the hood. Ensure your Snowflake account has sufficient storage for stream metadata, and verify current behavior against Snowflake's official docs.
 
 ---
 

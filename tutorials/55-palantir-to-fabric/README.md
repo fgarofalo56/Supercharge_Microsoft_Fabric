@@ -23,6 +23,11 @@
 
 ---
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
+---
+
 ## 📋 Table of Contents
 
 - [Overview](#-overview)
@@ -41,7 +46,7 @@
 
 ## 📖 Overview
 
-Palantir Foundry is an end-to-end data platform with a strong ontology layer (semantic objects + properties + links), transforms (Python or SQL), datasets (Parquet + Delta in the platform's object store), pipelines, and apps. Migrations from Foundry to Microsoft Fabric typically cluster around four motivations:
+Palantir Foundry is an end-to-end data platform with a strong ontology layer (semantic objects + properties + links), transforms (Python or SQL), datasets (Parquet + Delta in the platform's object store), pipelines, and apps. It is a capable, mature platform, and the ontology and operational-decision tooling it pioneered are genuine strengths. The descriptions of Foundry here are based on Palantir's **publicly available documentation** (as of this page's date); always verify against Palantir's current official docs. Organizations choose to migrate from Foundry to Microsoft Fabric for several reasons — usually some combination of:
 
 1. **License consolidation** — collapsing Foundry, Power BI, and Azure analytics spend into a single Fabric F-SKU.
 2. **Microsoft-native tooling** — preferring Power BI, Purview, Entra ID, and Microsoft Defender over Foundry-native equivalents.
@@ -56,21 +61,23 @@ This tutorial covers the canonical migration path: **export Foundry datasets and
 
 ## 🎯 Why migrate
 
-| Pain point in Foundry | What Fabric offers in its place |
+The table below maps common drivers for choosing Fabric to the Fabric capability that addresses them. It reflects Foundry behavior as described in Palantir's publicly available documentation; where Foundry is the better fit for a given need, stay on Foundry. This is a comparison from a Microsoft Fabric perspective, not an authoritative assessment of Foundry.
+
+| Driver for considering Fabric | What Fabric offers |
 |---|---|
-| Foundry ontology locked into the platform | **Fabric IQ ontology** — open, queryable from notebooks, agents, and Power BI |
-| Per-seat + per-pipeline pricing | F64 capacity covers all workloads under one SKU |
-| Foundry Forge (apps) | Power Apps + Translytical Task Flows + Power BI |
-| Foundry AIP (LLM agents) | Data Agents, Azure OpenAI, and the Fabric MCP server |
-| Foundry's proprietary dataset format | OneLake Delta tables (open Parquet + Delta Lake spec) |
-| Limited Microsoft 365 / Teams / Entra integration | Native — Entra ID, Teams cards, Outlook embedded reports |
-| Egress costs when integrating with non-Foundry sources | OneLake shortcuts (S3, GCS, ADLS, Dataverse) — zero copy |
+| Want the semantic layer to be queryable outside the platform | **Fabric IQ ontology** — queryable from notebooks, agents, and Power BI |
+| Prefer a single-SKU pricing model | F64 capacity covers all workloads under one SKU |
+| Replacing Foundry Forge (apps) | Power Apps + Translytical Task Flows + Power BI |
+| Replacing Foundry AIP (LLM agents) | Data Agents, Azure OpenAI, and the Fabric MCP server |
+| Want data in an open table format | OneLake Delta tables (open Parquet + Delta Lake spec) |
+| Deep Microsoft 365 / Teams / Entra integration is a priority | Native — Entra ID, Teams cards, Outlook embedded reports |
+| Reducing egress when integrating non-Foundry sources | OneLake shortcuts (S3, GCS, ADLS, Dataverse) — zero copy |
 
 ---
 
 ## 🧭 Component mapping
 
-The canonical Foundry → Fabric translation:
+The Foundry → Fabric translation below is based on Palantir's publicly documented component model (as of this page's date). Verify specifics against Palantir's current official documentation:
 
 | Palantir Foundry component | Microsoft Fabric equivalent | Notes |
 |---|---|---|

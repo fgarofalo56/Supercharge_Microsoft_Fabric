@@ -15,6 +15,11 @@
 
 ---
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
+---
+
 ## 📋 Tutorial 13: Enterprise Migration Planning & Delivery
 
 | | |
@@ -48,7 +53,7 @@
 
 ## 📖 Overview
 
-This comprehensive guide provides everything needed to plan, execute, and deliver a **full enterprise migration** from legacy data platforms (Teradata, Informatica, Oracle, etc.) to **Microsoft Fabric**. It includes:
+This comprehensive guide provides everything needed to plan, execute, and deliver a **full enterprise migration** from existing data platforms (Teradata, Informatica, Oracle, etc.) to **Microsoft Fabric**. These are mature, capable platforms; references to them here are based on each vendor's **publicly available documentation** and are not an authoritative assessment of those products. A migration is the right call only when Fabric is a better fit for your specific needs — where the incumbent platform remains the stronger choice, staying put is a valid outcome. The guide includes:
 
 - **6-month migration timeline** with 3-week sprint cadence
 - **POC to Production** complete journey
@@ -65,12 +70,14 @@ This guide is designed for Data Platform Architects, Program Managers, and Techn
 
 ### Business Objectives
 
-| Objective | Target | Measurement |
+These are **example program targets to set and then validate empirically for your estate** — not guaranteed outcomes and not a claim about any specific source platform's performance or cost. Actual results depend heavily on your current contracts, workloads, and tuning; set your own baselines.
+
+| Objective | Example target (validate) | Measurement |
 |-----------|--------|-------------|
-| **Cost Reduction** | 40-60% TCO reduction | Annual infrastructure spend |
-| **Time to Insight** | 10x faster analytics | Query response time, report refresh |
-| **Operational Efficiency** | 50% less maintenance | Support tickets, manual interventions |
-| **Data Democratization** | 3x more users | Active analytics users |
+| **Cost Reduction** | Set a TCO-reduction goal from your own baseline | Annual infrastructure spend |
+| **Time to Insight** | Faster analytics vs. your measured baseline | Query response time, report refresh |
+| **Operational Efficiency** | Less maintenance vs. your baseline | Support tickets, manual interventions |
+| **Data Democratization** | More active users vs. your baseline | Active analytics users |
 | **Innovation Enablement** | New AI/ML capabilities | Use cases enabled |
 
 ### Technical Objectives
@@ -93,11 +100,11 @@ This guide is designed for Data Platform Architects, Program Managers, and Techn
 
 ```mermaid
 flowchart TB
-    subgraph Source["🏢 Legacy Environment"]
+    subgraph Source["🏢 Source Environment"]
         TD[(Teradata<br/>Data Warehouse)]
         INFA[Informatica<br/>ETL Platform]
         ORACLE[(Oracle<br/>Database)]
-        LEGACY_BI[Legacy<br/>BI Tools]
+        LEGACY_BI[Existing<br/>BI Tools]
     end
 
     subgraph Network["🔒 Secure Connectivity"]
