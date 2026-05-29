@@ -736,7 +736,7 @@ Collect the following:
 
 | Version | Date | Changes | Author |
 |---------|------|---------|--------|
-| 1.0 | 2026-01-21 | Initial release | POC Team |
+| 1.0 | 2026-01-21 | Initial release | Frank Garofalo |
 
 ---
 

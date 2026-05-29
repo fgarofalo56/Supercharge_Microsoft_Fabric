@@ -1322,7 +1322,7 @@ After the demo, share this link for feedback:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
-| 1.0.0 | 2025-01-21 | POC Team | Initial release |
+| 1.0.0 | 2025-01-21 | Frank Garofalo | Initial release |
 
 ---
 

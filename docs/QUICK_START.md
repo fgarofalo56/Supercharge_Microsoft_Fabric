@@ -213,7 +213,7 @@ You should see rows with columns like `machine_id`, `casino_id`, `event_type`, `
 
 ---
 
-> 📖 **Documentation maintained by:** Microsoft Fabric POC Team
+> 📖 **Documentation maintained by:** Frank Garofalo
 > 🔗 **Repository:** [Suppercharge_Microsoft_Fabric](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric)
 
 **Total Time:** ~15 minutes (mostly waiting for Bicep deployment and Spark cold start).
