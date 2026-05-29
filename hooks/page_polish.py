@@ -21,6 +21,14 @@ handlers; mkdocs runs them in YAML order, so order in `mkdocs.yml` matters.
 from __future__ import annotations
 import re
 
+try:
+    # mkdocs gives page.next_page.url / previous_page.url as SITE-ROOT-relative
+    # paths (e.g. "features/x/"). Inserted verbatim into a sub-path page they
+    # 404, so rebase them against the current page's URL.
+    from mkdocs.utils import get_relative_url
+except Exception:  # pragma: no cover - mkdocs always present at build time
+    get_relative_url = None
+
 # ── 1. Code-block language badges ───────────────────────────────────
 # Match the .highlight wrapper and pull the language class out. The
 # wrapper class order varies — pymdownx-superfences may emit either
@@ -90,10 +98,19 @@ def _build_next_steps(page) -> str | None:
     if not prev and not nxt:
         return None
 
+    # Rebase a site-root-relative nav URL against the current page so the
+    # link resolves from any depth (e.g. "/tutorials/" → "../features/x/").
+    page_url = getattr(page, "url", "") or ""
+
+    def _rel(url: str) -> str:
+        if get_relative_url is not None:
+            return get_relative_url(url, page_url)
+        return url
+
     cards: list[str] = []
     if prev is not None and getattr(prev, "url", None) and getattr(prev, "title", None):
         cards.append(
-            f'<a class="next-step" href="{prev.url}">'
+            f'<a class="next-step" href="{_rel(prev.url)}">'
             f'<span class="next-step__label">← Previous</span>'
             f'<span class="next-step__title">{prev.title}</span>'
             f'<span class="next-step__arrow">Read more →</span>'
@@ -101,7 +118,7 @@ def _build_next_steps(page) -> str | None:
         )
     if nxt is not None and getattr(nxt, "url", None) and getattr(nxt, "title", None):
         cards.append(
-            f'<a class="next-step" href="{nxt.url}">'
+            f'<a class="next-step" href="{_rel(nxt.url)}">'
             f'<span class="next-step__label">Next →</span>'
             f'<span class="next-step__title">{nxt.title}</span>'
             f'<span class="next-step__arrow">Read more →</span>'
