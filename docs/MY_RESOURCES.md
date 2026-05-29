@@ -7,6 +7,9 @@ type: reference
 
 > Per-deployment reference sheet. Fill in your **own** Azure resource IDs locally so every tutorial pulls from one place instead of hunting through multiple portals.
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 !!! warning "Do not commit real values to this file"
     The template below uses placeholders only. **Keep your real GUIDs, tenant IDs, subscription IDs, resource names, and managed-identity object IDs out of this file before committing.** Connection strings, access keys, SAS tokens, and any other secrets belong in Key Vault and should be referenced by **secret name only** from your notebooks and pipelines.
 

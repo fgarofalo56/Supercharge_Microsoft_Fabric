@@ -965,6 +965,8 @@ flowchart LR
     T26 --> T27 --> T28 --> T29 --> T30 --> T31
 ```
 
+> **Note on third-party references:** The migration tutorials (Teradata, Snowflake, IBM DB2) and any platform comparisons reference non-Microsoft products. That information is publicly sourced from each vendor's official documentation and offered for good-faith comparison only; this personal project does not claim authority over those products. Always verify against the vendor's current docs.
+
 <table>
 <tr>
 <th>🎯 Level</th>
@@ -1034,7 +1036,7 @@ flowchart LR
 </tr>
 <tr>
 <td><a href="tutorials/24-snowflake-to-fabric/README.md"><b>24 - Snowflake to Fabric</b></a></td>
-<td>Snowflake migration & cost comparison</td>
+<td>Snowflake migration & cost planning</td>
 <td><code>~3 hours</code></td>
 </tr>
 <tr>

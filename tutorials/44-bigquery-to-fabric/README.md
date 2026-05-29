@@ -17,6 +17,9 @@
 
 ---
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ## 🔵 Tutorial 44: Google BigQuery → Microsoft Fabric Migration
 
 | | |
@@ -47,20 +50,22 @@
 
 ## 📖 Overview
 
-Google BigQuery is a high-performance serverless data warehouse, but a growing number of enterprises are consolidating analytics on Microsoft Fabric to reduce multi-cloud sprawl, simplify BI delivery, and unify governance with the rest of their Microsoft estate. This tutorial walks through migrating each BigQuery workload type into its Fabric equivalent — including the dialect translation, partitioning/clustering conversion, and the cross-cloud egress strategy that makes or breaks the project economics.
+Google BigQuery is a high-performance serverless data warehouse with notable strengths — fast ad-hoc scans, separation of storage and compute, and tight integration with the wider Google Cloud ecosystem. Some enterprises nonetheless choose to consolidate analytics on Microsoft Fabric to reduce multi-cloud sprawl, simplify BI delivery, or unify governance with the rest of their Microsoft estate. This tutorial is a practical guide for teams that have decided to make that move — not a claim that either platform is universally superior. It walks through migrating each BigQuery workload type into its Fabric equivalent — including the dialect translation, partitioning/clustering conversion, and the cross-cloud egress strategy that makes or breaks the project economics.
 
-### Why Migrate from BigQuery to Fabric?
+### Comparing BigQuery and Fabric
+
+The table below summarizes differences based on each vendor's publicly available documentation (as of this doc's date). It is descriptive rather than a verdict; BigQuery's serverless, per-query elasticity, for instance, is a genuine strength for spiky ad-hoc workloads.
 
 | Concern | BigQuery Behavior | Fabric Behavior |
 |---------|-------------------|-----------------|
-| **Cloud surface** | GCP-only (project, IAM, VPC-SC, billing) | Azure-native, integrates with M365, Entra, Purview |
-| **Compute model** | Slots (on-demand or reserved), per-query billing | CU pool — predictable, all workloads share |
+| **Cloud surface** | GCP-native (project, IAM, VPC-SC, billing) | Azure-native; integrates with M365, Entra, Purview |
+| **Compute model** | Slots (on-demand or reserved), per-query billing — elastic for spiky workloads | CU pool — predictable fixed capacity, shared across workloads |
 | **Storage** | BigQuery managed storage + GCS | OneLake unified — one copy, shortcut to GCS during transition |
-| **BI integration** | Looker (separate license, separate tool) or external | Power BI Direct Lake — no copy, no refresh, included |
-| **Real-time** | Pub/Sub + Dataflow + BigQuery streaming inserts | Eventstream + Eventhouse native, lower TCO |
+| **BI integration** | Looker (separate license/tool) or other BI tools | Power BI Direct Lake — no copy, no refresh, included |
+| **Real-time** | Pub/Sub + Dataflow + BigQuery streaming inserts | Eventstream + Eventhouse native |
 | **ML lifecycle** | BigQuery ML inline + Vertex AI | Fabric AutoML + notebooks + Azure ML interop |
 | **Governance** | Data Catalog + IAM + DLP (separate services) | Microsoft Purview unified across the estate |
-| **Egress economics** | Reads cross-cloud incur egress fees from GCP | Once data is in OneLake, no further egress |
+| **Egress economics** | Cross-cloud reads incur egress fees from GCP | Once data is in OneLake, no further cross-cloud egress |
 
 ### What This Tutorial Covers
 

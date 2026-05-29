@@ -18,6 +18,9 @@ type: reference
 
 **TL;DR** -- This document covers all 19 data generators in the `data_generation/generators/` package. Every generator inherits from `BaseGenerator`, which provides reproducible seeding, output serialization (DataFrame, Parquet, JSON), batch iteration, and PII masking helpers. Generators span four domains: Casino/Gaming (6), Federal Agency (7), Analytics (3), and Streaming (3).
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ---
 
 ## # BaseGenerator Interface

@@ -13,6 +13,9 @@
 
 > 🏠 **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > 📖 **[Tutorials](../index.md)** > 🔄 **Teradata Migration**
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ---
 
 ## 🔄 Tutorial 10: Teradata to Microsoft Fabric Migration
@@ -47,13 +50,15 @@
 
 ## 📖 Overview
 
-This tutorial provides a comprehensive guide for migrating from **Teradata** data warehouse to **Microsoft Fabric**. You will learn migration strategies, SQL translation patterns, ETL conversion techniques, and best practices for a successful data warehouse modernization.
+This tutorial provides a guide for migrating from a **Teradata** data warehouse to **Microsoft Fabric**. You will learn migration strategies, SQL translation patterns, ETL conversion techniques, and practical steps for a data warehouse modernization. Teradata-side behavior described here is based on Teradata's publicly available documentation (as of this doc's date); always verify against Teradata's current official documentation.
 
-Teradata has been a leading enterprise data warehouse platform for decades. Microsoft Fabric provides a unified analytics platform that can serve as a modern replacement, offering:
+Teradata is a mature, capable enterprise data warehouse platform that has served large analytics workloads for decades and remains a strong choice for many organizations. Microsoft Fabric is a unified analytics platform that some teams choose as a target when consolidating onto the Microsoft stack, offering:
 - **Unified Data Lake** with OneLake and Delta Lake format
-- **Lakehouse architecture** combining the best of data lakes and warehouses
+- **Lakehouse architecture** combining data lake and warehouse patterns
 - **Integrated analytics** from ingestion to Power BI reporting
 - **Pay-per-use pricing** with capacity-based or consumption models
+
+The right platform depends on your requirements; this playbook focuses on the mechanics of moving a workload to Fabric when that is the chosen direction.
 
 ---
 
@@ -855,22 +860,24 @@ flowchart LR
 
 ### 6.3 Third-Party Migration Tools for Teradata
 
+> The following third-party tools are summarized from each vendor's publicly available documentation. Capabilities change often — verify current behavior, support, and pricing with each vendor directly. Listing here is not an endorsement.
+
 #### Datometry (Network-Level Translation)
 
-Datometry provides real-time SQL translation at the network layer, allowing Teradata applications to run on Fabric without code changes.
+Per Datometry's public documentation, Datometry provides SQL translation at the network layer, with the goal of allowing Teradata applications to run against a new target with reduced code changes.
 
-| Feature | Capability |
+| Feature | Capability (per vendor docs) |
 |---------|------------|
-| **SQL Translation** | Automatic Teradata-to-T-SQL conversion |
-| **Application Compatibility** | Existing apps work without modification |
-| **Performance** | Query optimization for Fabric |
-| **Migration Speed** | Up to 90% faster migrations |
+| **SQL Translation** | Teradata-to-T-SQL conversion |
+| **Application Compatibility** | Aims to run existing apps with minimal modification |
+| **Performance** | Query optimization for the target platform |
+| **Migration Speed** | Vendor reports reduced migration effort; validate for your workload |
 
 #### Raven (Datametica/Onix)
 
-Raven automates code conversion for SQL, ETL, and stored procedures.
+Per the vendor's public documentation, Raven automates code conversion for SQL, ETL, and stored procedures.
 
-| Feature | Capability |
+| Feature | Capability (per vendor docs) |
 |---------|------------|
 | **SQL Conversion** | Teradata to Spark SQL / T-SQL |
 | **ETL Migration** | Informatica/Ab Initio to Data Factory |
@@ -1044,7 +1051,7 @@ flowchart LR
 4. Enable CDC capture on Teradata tables
 5. Start replication task
 
-> 💡 **Tip:** Qlik Replicate supports 40+ heterogeneous sources including Teradata, providing a unified CDC solution for complex environments.
+> 💡 **Tip:** Per Qlik's public documentation, Qlik Replicate supports many heterogeneous sources including Teradata, and can serve as a CDC option for complex environments. Verify current source support and licensing with Qlik.
 
 ---
 
@@ -1384,12 +1391,12 @@ After migrating from Teradata to Microsoft Fabric, validating query performance 
 
 ### 10.1 Query Performance Comparison
 
-The following table shows representative benchmarks for a 500 million-row `slot_transactions` fact table. Teradata numbers assume a 10-node system; Fabric numbers use an F64 capacity with V-ORDER enabled.
+The following table shows illustrative, non-authoritative benchmark figures for a 500 million-row `slot_transactions` fact table. These are hypothetical reference points for planning, not measured results, and Teradata is a high-performance platform whose tuned numbers will often differ from those shown. Teradata numbers assume a 10-node system; Fabric numbers use an F64 capacity with V-ORDER enabled. Always benchmark both platforms with your own data and configuration.
 
 | Query Pattern | Example | Teradata (10-node) | Fabric Lakehouse (F64) | Fabric Warehouse (F64) | Notes |
 |---------------|---------|--------------------:|----------------------:|----------------------:|-------|
 | **Point lookup (indexed)** | Single transaction by ID | 0.3 s | 0.8 s | 0.4 s | Teradata PI advantage; Fabric improves with Z-ORDER |
-| **Full scan + aggregation** | Daily revenue across all machines | 12 s | 9 s | 11 s | Fabric columnar + V-ORDER excels |
+| **Full scan + aggregation** | Daily revenue across all machines | 12 s | 9 s | 11 s | Fabric columnar + V-ORDER performs well on scans |
 | **Complex join + window** | Player lifetime value with ranking | 45 s | 28 s | 35 s | Spark scales well with window functions |
 | **QUALIFY-equivalent** | Latest session per player | 18 s | 14 s | 16 s | CTE approach in Fabric is efficient |
 | **Time-series rollup** | Hourly coin-in aggregation, 90 days | 22 s | 10 s | 15 s | Delta Lake partition pruning is very effective |

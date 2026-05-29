@@ -17,6 +17,9 @@
 
 ---
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ## 🤝 Tutorial 57: Databricks Better Together — Mirroring, Security, and the Defense-in-Depth Story
 
 | | |
@@ -206,8 +209,10 @@ Three notebooks, run in order from a Fabric notebook:
 | `notebooks/mirroring/03_query_mirror_from_spark.py` | (no register) | Read the mirror from Spark, T-SQL, sempy. |
 | `notebooks/mirroring/04_compare_mirror_vs_shortcut_vs_iceberg.py` | (reference) | Side-by-side decision matrix. |
 
-> ⚠️ UC row filters / column masks are **not** carried through the mirror —
-> you must re-author security in Fabric. That's exactly what Step 8 does.
+> ⚠️ Per Microsoft's publicly documented mirroring behavior, Unity Catalog row
+> filters / column masks are **not** carried through the mirror — you re-author
+> security in Fabric. That's exactly what Step 8 does. (Verify against the
+> current Databricks and Fabric docs, as both evolve.)
 
 ## 🏗️ Step 6 — Gold star schema
 

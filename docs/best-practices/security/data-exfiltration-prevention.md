@@ -22,6 +22,9 @@ type: compliance
 
 > **Disclaimer:** This document describes architectural and technical controls to reduce the likelihood and impact of data exfiltration. It is not a guarantee. A determined insider with sufficient privilege can defeat any control. Layered defense, behavior monitoring, and process controls are equally important. Engage your security and legal teams before relying on these patterns in regulated environments.
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ---
 
 ## 🎯 Overview — The Exfiltration Threat Model

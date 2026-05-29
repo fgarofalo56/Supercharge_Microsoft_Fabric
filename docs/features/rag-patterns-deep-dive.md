@@ -22,6 +22,11 @@ type: feature
 
 ---
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
+---
+
 ## 🎯 Overview
 
 Retrieval-Augmented Generation (RAG) grounds an LLM's response in a curated corpus of your own documents. Instead of relying solely on the model's parametric knowledge, RAG **retrieves** relevant passages from a vector store at query time and **augments** the prompt with that context, letting the model **generate** an answer that cites real sources. RAG is the dominant pattern for enterprise AI assistants because it produces fewer hallucinations, supports citations, respects access control, and stays current as documents change — all without retraining the model.
@@ -129,7 +134,7 @@ Pure vector search misses **lexical matches** — exact identifiers, codes, acro
 
 ### Eventhouse as the Primary Store
 
-Eventhouse with Vector16 encoding is our default vector store: it co-locates structured filters (date, doc type, tenant) with vector similarity in a single KQL query, eliminating the cross-system joins that plague Pinecone/Weaviate setups. See [Eventhouse Vector Database](eventhouse-vector-database.md) for the storage primitives.
+Eventhouse with Vector16 encoding is our default vector store on Fabric because it co-locates structured filters (date, doc type, tenant) with vector similarity in a single KQL query, avoiding the cross-system joins that arise when a standalone, external vector database sits alongside the analytics store. Dedicated vector databases remain a strong choice in many architectures — pick the store that best fits your stack. See [Eventhouse Vector Database](eventhouse-vector-database.md) for the storage primitives.
 
 ---
 

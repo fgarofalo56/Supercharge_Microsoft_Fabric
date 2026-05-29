@@ -23,6 +23,11 @@
 
 ---
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
+---
+
 ## 📋 Table of Contents
 
 - [Overview](#-overview)
@@ -42,7 +47,7 @@
 
 ## 📖 Overview
 
-Informatica is the long-standing ETL/data-integration incumbent for many enterprises. The two main product lines for migration source are:
+Informatica is a long-established, widely deployed ETL/data-integration platform with deep connectivity, mature data-quality and MDM capabilities, and a large skills base — genuine strengths that any migration should account for. The descriptions of Informatica products here are based on Informatica's **publicly available documentation** (as of this page's date); always verify against Informatica's current official docs. The two main product lines for migration source are:
 
 1. **PowerCenter** — the classic on-prem ETL platform (mappings, workflows, sessions, repositories).
 2. **Intelligent Data Management Cloud (IDMC / formerly IICS)** — the SaaS successor with Data Integration, Data Quality, MDM, B2B Gateway, and more.
@@ -55,22 +60,24 @@ This tutorial covers migrations **from either product** **to Microsoft Fabric**.
 
 ## 🎯 Why migrate
 
-| Pain point in Informatica | What Fabric offers in its place |
+The table below maps common drivers for choosing Fabric to the Fabric capability that addresses them. It reflects Informatica behavior as described in Informatica's publicly available documentation; where Informatica is the better fit for a given need, stay on Informatica. This is a comparison from a Microsoft Fabric perspective, not an authoritative assessment of Informatica.
+
+| Driver for considering Fabric | What Fabric offers |
 |---|---|
-| Per-mapping / per-IPU pricing | Fabric F-SKU covers all workloads under one capacity |
-| Mapping designer thick client (PowerCenter) | Browser-based Dataflows Gen2 and Data Factory |
-| Repository management overhead | Fabric workspaces + Git integration native |
-| Custom transformations in Java/C/Python locked into Informatica | PySpark notebooks — any Python, any package |
-| PowerExchange CDC license cost | Fabric Mirroring (Azure SQL DB, Cosmos DB, Snowflake, Databricks) — free with capacity |
-| Data Quality product separate | Great Expectations / built-in Fabric DQ + Purview classification |
-| MDM as a separate product | Fabric IQ ontology + Data Activator + Translytical task flows |
-| Limited Microsoft 365 / Entra integration | Native Entra ID, sensitivity labels, Defender |
+| Prefer a single-capacity pricing model over per-mapping / per-IPU | Fabric F-SKU covers all workloads under one capacity |
+| Prefer browser-based authoring to the PowerCenter thick client | Browser-based Dataflows Gen2 and Data Factory |
+| Want native Git-based source control for artifacts | Fabric workspaces + Git integration native |
+| Want custom transformations in open Python rather than Informatica-specific code | PySpark notebooks — any Python, any package |
+| Consolidating CDC into the analytics platform | Fabric Mirroring (Azure SQL DB, Cosmos DB, Snowflake, Databricks) — included with capacity |
+| Prefer integrated DQ over a separate product | Great Expectations / built-in Fabric DQ + Purview classification |
+| Prefer integrated master-data patterns over a separate MDM product | Fabric IQ ontology + Data Activator + Translytical task flows |
+| Deep Microsoft 365 / Entra integration is a priority | Native Entra ID, sensitivity labels, Defender |
 
 ---
 
 ## 🧭 Component mapping
 
-The canonical translation matrix:
+The translation matrix below is based on Informatica's publicly documented component model (as of this page's date). Verify specifics against Informatica's current official documentation:
 
 | Informatica component | Microsoft Fabric equivalent | Notes |
 |---|---|---|
@@ -374,16 +381,18 @@ See [Mirroring](../../features/mirroring.md) for the configuration details.
 
 ## 💰 License and cost analysis
 
-A typical PowerCenter → Fabric migration delivers 50-70% cost reduction in steady state, but the migration year often costs more than continuing PowerCenter due to parallel running. Plan for it.
+Cost outcomes vary widely by estate, contract terms, and workload mix, so treat any figures here as illustrative only — build your own model from your actual Informatica contract and a measured Fabric capacity sizing. Some organizations see meaningful steady-state savings; others, depending on their licensing and usage, see less. Note too that the migration year often costs more than simply continuing on Informatica because both platforms run in parallel — plan for it.
 
-| Cost line | PowerCenter steady-state | Fabric steady-state |
+Informatica licensing is negotiated per-customer and is not generally published; the ranges below are rough, illustrative placeholders only and are **not** sourced from Informatica's official pricing. Replace them with your own contracted numbers before making any decision.
+
+| Cost line | Informatica steady-state (illustrative only) | Fabric steady-state |
 |---|---|---|
-| Platform license | $500K-$2M/year | F64 capacity ≈ $100K-$200K/year (covers all workloads) |
-| Per-mapping IPU (IDMC) | Variable, $10-100K/year | Included |
-| PowerExchange CDC license | $50K-$300K/year per source | Free with capacity |
-| Data Quality license | $30K-$150K/year | Free (Great Expectations + Purview) |
-| MDM license | $100K-$500K/year | Free (Fabric IQ + Translytical) |
-| Hardware / hosting | $50K-$200K/year (on-prem PowerCenter) | None (SaaS) |
+| Platform license | Varies by contract | F64 capacity (covers all workloads) — see Azure pricing |
+| Per-mapping IPU (IDMC) | Varies by usage | Included |
+| PowerExchange CDC license | Varies by source count | Included with capacity |
+| Data Quality license | Varies by contract | Included (Great Expectations + Purview) |
+| MDM license | Varies by contract | Included (Fabric IQ + Translytical) |
+| Hardware / hosting | Applies to on-prem PowerCenter | None (SaaS) |
 
 Migration year additional costs:
 

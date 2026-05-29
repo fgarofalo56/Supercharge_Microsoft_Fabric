@@ -19,6 +19,9 @@ type: decision
 
 **Last Updated:** `2026-05-05` | **Version:** 1.0.0
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ---
 
 ## TL;DR
@@ -30,7 +33,7 @@ Use **Lakehouse** when your team writes PySpark and needs schema-on-read flexibi
 ## When This Question Comes Up
 
 - Starting a new Fabric project and choosing the primary data store
-- Migrating an existing SQL Server, Synapse, or Databricks workload to Fabric
+- Migrating an existing SQL Server, Synapse, or competing-platform workload to Fabric
 - A team with mixed T-SQL and PySpark skills needs to pick a default engine
 - You need to expose data to Power BI via Direct Lake and must decide where Delta tables live
 - An application requires both analytical queries and operational transactions

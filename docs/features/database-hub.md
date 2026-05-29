@@ -21,6 +21,11 @@ type: feature
 
 ---
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
+---
+
 > ⚠️ **Early Access Notice**: Database Hub is currently in **Early Access** (announced March 2026). Features, UI, and capabilities may change significantly before general availability. Do not use for production-critical workflows. Early Access requires opt-in via Fabric Admin portal.
 
 ---

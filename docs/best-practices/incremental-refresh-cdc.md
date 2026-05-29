@@ -21,6 +21,11 @@ type: deep-dive
 
 ---
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
+---
+
 ## 🎯 Overview
 
 Incremental refresh and change data capture (CDC) patterns are essential for production-grade data pipelines that must process only new or changed data rather than reloading entire datasets. This guide covers Delta Lake MERGE operations, watermark-based change detection, SCD Type 1 and Type 2 implementations, and Power BI semantic model incremental refresh — all tuned for casino gaming and federal agency workloads in Microsoft Fabric.

@@ -16,6 +16,9 @@
 
 ---
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ## 🧱 Tutorial 42: Databricks → Microsoft Fabric Migration
 
 | | |
@@ -46,23 +49,25 @@
 
 ## 📖 Overview
 
-Databricks → Fabric is the **smoothest cloud-to-cloud migration** because both platforms speak Delta Lake natively. The technical lift is small; the strategic question is bigger — moving onto a Microsoft platform that bundles BI, real-time, governance, and ML alongside Spark, with a single capacity-based commercial model and tighter Microsoft 365 integration.
+Databricks → Fabric tends to be a relatively **smooth cloud-to-cloud migration** because both platforms speak Delta Lake natively. Databricks is a mature, best-in-class lakehouse and Spark platform with deep ML/AI tooling, and for many teams it is the right long-term home. This tutorial is for teams that have decided to consolidate onto a Microsoft platform that bundles BI, real-time, governance, and ML alongside Spark, with a single capacity-based commercial model and tighter Microsoft 365 integration — not an argument that one platform is better than the other.
 
-### Why Migrate from Databricks to Fabric?
+### Comparing Databricks and Fabric
+
+The table below summarizes differences based on each vendor's publicly available documentation (as of this doc's date). It is descriptive, not a ranking — Databricks' Photon engine, DLT, and Unity Catalog are genuine strengths, and the most cost-effective choice depends entirely on your workload mix.
 
 | Concern | Databricks Behavior | Fabric Behavior |
 |---------|---------------------|-----------------|
-| **Compute model** | DBUs per cluster, separate billing per workspace | Capacity Units (CUs) shared across Spark, SQL, Power BI, RTI, ML |
+| **Compute model** | DBUs per cluster, billed per workspace | Capacity Units (CUs) shared across Spark, SQL, Power BI, RTI, ML |
 | **Storage** | Customer-managed ADLS / S3 / GCS | OneLake unified, but ADLS shortcuts work too (no copy) |
 | **BI integration** | Power BI via DBSQL connector or DirectQuery | Direct Lake (no copy, no refresh) on Delta — read-from-OneLake |
 | **Real-time** | Structured Streaming + DLT (Delta Live Tables) | Eventstream + Eventhouse + Materialized Lake Views |
-| **Governance** | Unity Catalog (Databricks-native) | OneLake Catalog + Microsoft Purview (org-wide) |
+| **Governance** | Unity Catalog (Databricks-native, mature) | OneLake Catalog + Microsoft Purview (org-wide) |
 | **MLOps** | MLflow (managed) + Model Serving | Fabric MLflow + AutoML + Real-Time Endpoints |
-| **DBSQL Warehouses** | Photon-accelerated SQL warehouses (separate billing) | Fabric Warehouse + SQL endpoint over Lakehouse |
+| **DBSQL Warehouses** | Photon-accelerated SQL warehouses (separately billed) | Fabric Warehouse + SQL endpoint over Lakehouse |
 | **Notebook UX** | Databricks notebooks | Fabric notebooks (similar; `mssparkutils` API differences) |
 | **Workflows** | Databricks Workflows / Jobs | Fabric Data Pipelines |
 | **DLT (Declarative)** | Delta Live Tables | Materialized Lake Views (Wave 9) |
-| **Cost predictability** | Variable (per-DBU + storage + serverless DBSQL surcharge) | Predictable monthly F-SKU |
+| **Cost shape** | Variable (per-DBU + storage + serverless DBSQL surcharge) | Fixed monthly F-SKU — predictability differs by workload pattern |
 | **Microsoft estate fit** | Bring your own M365 / Power BI / Purview | Native, single tenant, single bill |
 
 ### What This Tutorial Covers

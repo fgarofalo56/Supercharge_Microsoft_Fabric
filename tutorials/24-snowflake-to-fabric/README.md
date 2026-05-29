@@ -16,6 +16,9 @@
 
 ---
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ## ❄️ Tutorial 24: Snowflake to Microsoft Fabric Migration
 
 | | |
@@ -57,15 +60,15 @@
 
 This tutorial provides a comprehensive guide for migrating from **Snowflake** to **Microsoft Fabric**. You will learn how to assess your Snowflake environment, translate SQL and objects, move data efficiently, and validate the results -- all using casino/gaming industry examples.
 
-### Why Migrate from Snowflake to Microsoft Fabric?
+### Why Some Teams Move from Snowflake to Microsoft Fabric
 
-Snowflake is a powerful cloud-native data warehouse, but organizations are increasingly consolidating onto Microsoft Fabric for its **unified analytics platform** approach. Key drivers include:
+Snowflake is a mature, capable cloud-native data warehouse with deep strengths in elastic compute, multi-cloud reach, and data sharing — for many teams it remains an excellent fit. Some organizations nonetheless choose to consolidate analytics onto Microsoft Fabric, typically for its **unified analytics platform** approach. Based on Snowflake's publicly available documentation (as of this doc's date) and Microsoft's, common considerations include:
 
-- **Unified Platform** -- Fabric combines data engineering, data warehousing, real-time analytics, data science, and Power BI into a single SaaS experience. Snowflake requires separate tools for BI, orchestration, and ML.
-- **Cost Consolidation** -- Snowflake's credit-based pricing for compute and separate storage billing can lead to unpredictable costs. Fabric's capacity-based model (CU) bundles compute, storage, and all workloads into a single SKU.
-- **OneLake & Open Formats** -- All data in Fabric lives in OneLake using Delta Lake (Parquet). No proprietary formats, no vendor lock-in on storage.
-- **Microsoft 365 Integration** -- Native integration with Teams, SharePoint, Excel, and Power BI means analytics reach every knowledge worker without additional licensing.
-- **Governance** -- Microsoft Purview provides unified governance, lineage, and sensitivity labels across the entire estate.
+- **Unified Platform** -- Fabric combines data engineering, data warehousing, real-time analytics, data science, and Power BI into a single SaaS experience. With Snowflake, BI, orchestration, and ML are typically assembled from additional tools or partner services.
+- **Cost Model** -- Snowflake uses credit-based pricing for compute with separately metered storage; Fabric uses a capacity-based model (CU) that bundles compute, storage, and all workloads into a single SKU. Which is more cost-effective depends heavily on your usage pattern — neither is universally cheaper.
+- **OneLake & Open Formats** -- All data in Fabric lives in OneLake using Delta Lake (Parquet). (Snowflake also supports open formats such as Iceberg per its public docs; evaluate based on your storage and interoperability needs.)
+- **Microsoft 365 Integration** -- Native integration with Teams, SharePoint, Excel, and Power BI can make analytics reach Microsoft 365 users with less additional tooling.
+- **Governance** -- Microsoft Purview provides unified governance, lineage, and sensitivity labels across the estate.
 
 ### Cost Comparison at a Glance
 
@@ -79,7 +82,7 @@ Snowflake is a powerful cloud-native data warehouse, but organizations are incre
 | **Data Science** | Snowpark (credit cost) | Fabric Notebooks included |
 | **Governance** | Snowflake Horizon (Enterprise+) | Microsoft Purview included |
 
-> 💡 **Tip:** For a casino running a 2XL Snowflake warehouse 12 hours/day, annual compute alone costs ~$140K in credits. An F64 Fabric capacity covers equivalent workloads plus BI, real-time, and governance for ~$36K/year.
+> 💡 **Tip:** The table above maps roughly equivalent capabilities per each vendor's public documentation; it is not a like-for-like price quote. Cost outcomes vary widely with concurrency, idle time, data volume, and existing Microsoft licensing. As one illustrative scenario, a casino running a 2XL Snowflake warehouse 12 hours/day might incur on the order of ~$140K/year in compute credits, while an F64 Fabric capacity (which also covers BI, real-time, and governance) lists around ~$36K/year — but always model your own workload before drawing conclusions.
 
 ---
 
@@ -1426,16 +1429,18 @@ pie title Annual Cost Comparison - Casino Analytics Platform
 
 > ⚠️ **Important:** This is a simplified comparison for a specific workload profile. Actual savings depend on usage patterns, concurrency, data volumes, and existing Microsoft licensing. Always perform a detailed TCO analysis for your specific environment.
 
-### 8.4 Hidden Cost Advantages of Fabric
+### 8.4 What Fabric Bundles vs. Separately Priced Components
 
-| Fabric Included Feature | Snowflake Separate Cost |
+The following components are included in Fabric capacity, whereas in a Snowflake-centered stack they are commonly licensed or metered separately (per public pricing as of this doc's date). Whether bundling is an advantage depends on whether you would otherwise buy those components — many Snowflake shops already standardize on some of these tools.
+
+| Fabric Included Feature | Commonly Separate in a Snowflake Stack |
 |-------------------------|------------------------|
-| Power BI (Direct Lake) | Tableau/Looker licensing |
-| Data Factory pipelines | Airflow/dbt Cloud |
+| Power BI (Direct Lake) | A separately licensed BI tool |
+| Data Factory pipelines | A separate orchestration tool (e.g., Airflow, dbt Cloud) |
 | Eventstreams (real-time) | Snowpipe credits + streaming costs |
 | Fabric Notebooks (Spark) | Snowpark credits |
 | Microsoft Purview (governance) | Snowflake Horizon (Enterprise+) |
-| OneLake (unified storage) | S3/ADLS + Snowflake storage |
+| OneLake (unified storage) | Object storage + Snowflake storage |
 | Copilot AI assistance | Third-party AI tools |
 
 ---

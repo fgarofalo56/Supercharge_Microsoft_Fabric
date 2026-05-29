@@ -21,6 +21,11 @@ type: feature
 
 ---
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
+---
+
 ## 🎯 Overview
 
 **Fabric Environments** and **Spark Job Definitions** are two complementary features for production Spark workloads:
@@ -170,7 +175,7 @@ spark.databricks.delta.properties.defaults.enableChangeDataFeed=true
 
 ### What Is a Spark Job Definition?
 
-A Spark Job Definition (SJD) runs a PySpark `.py` script as a batch job — no notebook UI, no interactive cells. It's the Fabric equivalent of submitting a Spark job in Databricks Jobs or Synapse Spark pools.
+A Spark Job Definition (SJD) runs a PySpark `.py` script as a batch job — no notebook UI, no interactive cells. It plays a similar role to headless Spark batch submission on other Spark platforms, or to Azure Synapse Spark pools.
 
 ### When to Use SJD vs. Notebook
 

@@ -15,6 +15,11 @@
 
 ---
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
+---
+
 ## 🔌 Tutorial 11: SAS Connectivity to Microsoft Fabric
 
 | | |
@@ -55,7 +60,7 @@ SAS remains a critical analytics platform in many enterprises, especially in:
 - **Gaming/Casino** - Player analytics and compliance reporting
 - **Insurance** - Claims analysis and fraud detection
 
-Connecting SAS to Fabric enables you to leverage existing SAS analytics while modernizing your data platform.
+Connecting SAS to Fabric enables you to leverage existing SAS analytics while modernizing your data platform. The SAS configuration details in this tutorial (LIBNAME options, SAS/ACCESS behavior, ODBC/OLE DB usage) are based on SAS's **publicly available documentation** (as of this page's date); always verify against SAS's current official docs for your specific SAS version and licensing.
 
 ---
 
