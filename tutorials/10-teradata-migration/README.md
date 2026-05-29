@@ -13,7 +13,7 @@
 
 > 🏠 **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > 📖 **[Tutorials](../index.md)** > 🔄 **Teradata Migration**
 
-!!! note "Third-party references — publicly sourced, good-faith comparison"
+!!! info "Third-party references — publicly sourced, good-faith comparison"
     This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
 
 ---
@@ -860,7 +860,8 @@ flowchart LR
 
 ### 6.3 Third-Party Migration Tools for Teradata
 
-> The following third-party tools are summarized from each vendor's publicly available documentation. Capabilities change often — verify current behavior, support, and pricing with each vendor directly. Listing here is not an endorsement.
+!!! info "Third-party tools — publicly sourced, not an endorsement"
+    The following third-party tools are summarized from each vendor's publicly available documentation. Capabilities change often — verify current behavior, support, and pricing with each vendor directly. Listing here is not an endorsement.
 
 #### Datometry (Network-Level Translation)
 

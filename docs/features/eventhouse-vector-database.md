@@ -21,6 +21,9 @@ type: feature
 
 ---
 
+!!! info "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ## 🎯 Overview
 
 Microsoft Fabric's Eventhouse — the core engine behind Real-Time Intelligence — can function as a **vector database** for AI and machine learning scenarios. By combining KQL's powerful analytical capabilities with vector storage, embedding generation, and similarity search, Eventhouse enables Retrieval-Augmented Generation (RAG), semantic search, and AI-powered analytics directly within the Fabric ecosystem.
@@ -38,7 +41,7 @@ Microsoft Fabric's Eventhouse — the core engine behind Real-Time Intelligence 
 
 ### Why Eventhouse for Vector Search?
 
-Traditional vector databases are standalone systems that require separate infrastructure, ETL pipelines, and operational overhead. Eventhouse eliminates this complexity by embedding vector capabilities directly into the real-time analytics engine you're already using:
+Dedicated vector databases such as Pinecone, Weaviate, and Qdrant are mature, capable systems with rich features — including approximate-nearest-neighbor (ANN) indexes that Eventhouse does not offer (see [Limitations](#-limitations)) — and they remain the stronger choice for very large or ANN-heavy vector workloads. The trade-off is that they are standalone systems requiring separate infrastructure, ETL pipelines, and operational overhead. Eventhouse takes a different approach: it embeds vector capabilities directly into the real-time analytics engine you're already using, which is compelling when your vectors live alongside structured Fabric data:
 
 ```
 Traditional Approach:                    Fabric Eventhouse Approach:

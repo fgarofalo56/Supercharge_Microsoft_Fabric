@@ -210,7 +210,7 @@ nav:
       - Cost Breakdown: diagrams/cost-breakdown.md
     - Decision Trees:
       - Overview: decisions/index.md
-      - Fabric vs Databricks vs Synapse: decisions/fabric-databricks-synapse.md
+      - Fabric vs Competitor vs Synapse: decisions/fabric-databricks-synapse.md
       - Lakehouse vs Warehouse vs SQL DB: decisions/lakehouse-warehouse-sqldb.md
       - Direct Lake vs Import vs DirectQuery: decisions/direct-lake-import-directquery.md
       - ETL vs ELT vs Streaming: decisions/etl-elt-streaming.md
