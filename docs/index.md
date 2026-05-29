@@ -5,7 +5,8 @@ hide:
   - navigation
   - toc
 hero: assets/heroes/home.svg
-hero_alt: "Supercharge Microsoft Fabric — Casino & gaming POC + federal expansions on F64 capacity"
+hero_alt: "Supercharge Microsoft Fabric — a hands-on Fabric reference for regulated industries: casino & gaming, Tribal Nations, and federal agency analytics, on F64 capacity"
+last_reviewed: 2026-05-29
 ---
 # Supercharge Microsoft Fabric
 
@@ -23,7 +24,7 @@ hero_alt: "Supercharge Microsoft Fabric — Casino & gaming POC + federal expans
 
 ## Three Core Paradigms
 
-This POC is built on three paradigms that define how data flows from source to insight inside Microsoft Fabric.
+This reference is built on three paradigms that define how data flows from source to insight inside Microsoft Fabric.
 
 **OneLake** is the unified storage layer. It's Delta Lake–native — Fabric engines read and write Delta tables to a single lake with no data movement — and interoperates with Apache Iceberg via metadata virtualization (shortcuts and the Iceberg/Delta translation layer), so Iceberg readers and writers can work against the same data.
 
@@ -37,21 +38,18 @@ Together they give you a single pipeline from raw events to executive dashboards
 
 ## How this relates to CSA-in-a-Box
 
-<!-- TODO(frank): PLACEHOLDER — confirm and finalize before publishing.
-     1. Replace the (#) links with the real CSA-in-a-Box URL.
-     2. Disambiguate the three brand names so a newcomer isn't lost:
-          - CSA-in-a-Box → ?
-          - CSA Loom      → ?   (the /fiab/ slug — "Fabric-in-a-Box"?)
-          - "fiab"        → ?
-     3. Mirror this same blurb on the CSA-in-a-Box home page so both repos
-        cross-link and tell the same "which repo, when" story. -->
+This project is a **Microsoft Fabric reference** — use it once you've committed to Fabric (the SaaS, Microsoft-managed platform) and want hands-on patterns, tutorials, POC agendas, and governance mappings on F64 capacity.
 
-This project is a **Microsoft Fabric reference**: use it once you've committed to Fabric and want hands-on patterns, tutorials, and governance mappings on F64 capacity.
+Its sibling, **[CSA-in-a-Box](https://fgarofalo56.github.io/csa-inabox/)**, is the **Azure-native, build-your-own PaaS/IaaS** alternative: the same Data Mesh + Data Fabric + Data Lakehouse capabilities assembled from Azure services you own and operate — for teams who can't get Fabric yet, or who deliberately don't want SaaS and need full control of the environment. **[CSA Loom](https://fgarofalo56.github.io/csa-inabox/fiab/)** is the productized, Fabric-like console layer over CSA-in-a-Box.
 
-Its sibling, **[CSA-in-a-Box](#)** *(TODO: link)*, takes the **platform-agnostic / build-your-own** angle and includes "vs Microsoft Fabric" comparisons — use it when you're still deciding whether to adopt Fabric, or want a non-Fabric option.
+### Which one do I use?
 
-!!! tip "Which one do I use?"
-    **Already on Fabric** → you're in the right place (this repo). **Still choosing a platform, or want a non-Fabric alternative** → start with CSA-in-a-Box. *(Placeholder positioning — Frank to confirm the CSA-in-a-Box vs CSA Loom vs "fiab" naming and finalize the links.)*
+| Your situation | Use |
+| --- | --- |
+| Fabric is GA in your cloud and you want it (SaaS, Microsoft-managed) | **Microsoft Fabric** — and **this repo** for hands-on depth |
+| Fabric isn't available in your cloud yet (Azure Government / DoD / IC) | **[CSA-in-a-Box](https://fgarofalo56.github.io/csa-inabox/)** |
+| You could get Fabric but won't take SaaS — you need control / sovereignty / custom networking | **[CSA-in-a-Box](https://fgarofalo56.github.io/csa-inabox/)** (a permanent choice, by design) |
+| You want the CSA stack with a Fabric-like console + guided deploy | **[CSA Loom](https://fgarofalo56.github.io/csa-inabox/fiab/)** |
 
 ---
 
@@ -173,13 +171,13 @@ Its sibling, **[CSA-in-a-Box](#)** *(TODO: link)*, takes the **platform-agnostic
 
 </div>
 
-[:octicons-arrow-right-24: View all features](features/fabric-iq.md){ .md-button }
+[:octicons-arrow-right-24: View all features](features/index.md){ .md-button }
 
 ---
 
 ## Compliance & Governance
 
-This POC addresses casino/gaming regulations (NIGC MICS, Title 31/BSA, IRS Gaming) and supports **8 federal agency domains** — USDA, SBA, NOAA, EPA, DOI, DOT/FAA, Tribal Healthcare, and DOJ.
+This reference covers casino/gaming regulations (NIGC MICS, Title 31/BSA, IRS Gaming) and supports **8 federal agency domains** — USDA, SBA, NOAA, EPA, DOI, DOT/FAA, Tribal Healthcare, and DOJ.
 
 !!! warning "These are reference mappings, not authorizations"
     The compliance and governance pages illustrate how Fabric controls *can* map to each framework, for education and POC scoping. They are **not** ATOs, attestations, audits, or certifications, and they don't represent the compliance posture of any production system.
@@ -213,7 +211,7 @@ This POC addresses casino/gaming regulations (NIGC MICS, Title 31/BSA, IRS Gamin
 
     Full documentation index and guides
 
-    [:octicons-arrow-right-24: Browse docs](index.md)
+    [:octicons-arrow-right-24: Browse docs](getting-started/index.md)
 
 -   :material-cog:{ .lg .middle } __Infrastructure__
 
@@ -227,13 +225,15 @@ This POC addresses casino/gaming regulations (NIGC MICS, Title 31/BSA, IRS Gamin
 
     ---
 
-    F64 24/7 ≈ $9,500–$12,500/mo (commercial list, as of Jan 2025). Azure Government pricing differs — see the guide.
+    F64 capacity sizing, commercial vs Azure Government. Pricing changes often — verify current rates on the Azure pricing calculator.
 
     [:octicons-arrow-right-24: Cost details](COST_ESTIMATION.md)
 
 </div>
 
 ---
+
+> **Currency:** Last reviewed 2026-05-29. Microsoft Fabric features and pricing change frequently — verify against Microsoft Learn and the Azure pricing calculator before relying on any figure here.
 
 <div align="center" markdown>
 

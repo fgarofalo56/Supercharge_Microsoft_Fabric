@@ -102,6 +102,21 @@ This repository provides a **complete, production-ready proof-of-concept** envir
 
 ---
 
+## 🧭 How this relates to CSA-in-a-Box
+
+This repo is a **Microsoft Fabric reference** — use it once you've committed to Fabric (the SaaS, Microsoft-managed platform) and want hands-on patterns, tutorials, POC agendas, and governance mappings on F64 capacity.
+
+Its sibling, **[CSA-in-a-Box](https://fgarofalo56.github.io/csa-inabox/)**, is the **Azure-native, build-your-own PaaS/IaaS** alternative: the same Data Mesh + Data Fabric + Data Lakehouse capabilities assembled from Azure services you own and operate — for teams who can't get Fabric yet, or who deliberately don't want SaaS and need full control of the environment. **[CSA Loom](https://fgarofalo56.github.io/csa-inabox/fiab/)** is the productized, Fabric-like console layer over CSA-in-a-Box.
+
+| Your situation | Use |
+| --- | --- |
+| Fabric is GA in your cloud and you want it (SaaS, Microsoft-managed) | **Microsoft Fabric** — and **this repo** for hands-on depth |
+| Fabric isn't available in your cloud yet (Azure Government / DoD / IC) | **[CSA-in-a-Box](https://fgarofalo56.github.io/csa-inabox/)** |
+| You could get Fabric but won't take SaaS — you need control / sovereignty / custom networking | **[CSA-in-a-Box](https://fgarofalo56.github.io/csa-inabox/)** (a permanent choice, by design) |
+| You want the CSA stack with a Fabric-like console + guided deploy | **[CSA Loom](https://fgarofalo56.github.io/csa-inabox/fiab/)** |
+
+---
+
 ## 👥 Target Audience
 
 <table>
