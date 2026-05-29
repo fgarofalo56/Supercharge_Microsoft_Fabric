@@ -46,13 +46,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Login to Azure
-        uses: azure/login@v3
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
+      # NOTE: `az bicep build`/`lint` are purely local compilation — they need
+      # no Azure authentication. (Previously this job ran `azure/login`, which
+      # made every push to main fail at login when the AZURE_* OIDC secrets are
+      # not configured, and spammed a "Deployment Failed" issue each time.)
       - name: Build Bicep
         run: |
           az bicep build --file infra/main.bicep
@@ -67,6 +64,11 @@ jobs:
     name: What-If Analysis
     runs-on: ubuntu-latest
     needs: validate
+    # Deployment requires Azure OIDC credentials (AZURE_CLIENT_ID / TENANT_ID /
+    # SUBSCRIPTION_ID). Until those are configured, run the deploy chain only on
+    # explicit manual dispatch — push to main just validates Bicep. This keeps
+    # main green and stops the auto-filed "Deployment Failed" issues.
+    if: github.event_name == 'workflow_dispatch'
     environment: ${{ inputs.environment || 'dev' }}
     outputs:
       changes: ${{ steps.whatif.outputs.changes }}
@@ -113,7 +115,7 @@ jobs:
     name: Deploy to ${{ inputs.environment || 'dev' }}
     runs-on: ubuntu-latest
     needs: what-if
-    if: needs.what-if.outputs.changes == 'true' || github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'workflow_dispatch'
     environment:
       name: ${{ inputs.environment || 'dev' }}
       url: https://portal.azure.com
@@ -189,7 +191,9 @@ jobs:
     name: Notify on Failure
     runs-on: ubuntu-latest
     needs: [validate, what-if, deploy, smoke-test]
-    if: failure()
+    # Only raise a tracking issue for real (manual) deployment failures — never
+    # for push-triggered validation runs.
+    if: failure() && github.event_name == 'workflow_dispatch'
     steps:
       - name: Create Issue on Failure
         uses: actions/github-script@v9
