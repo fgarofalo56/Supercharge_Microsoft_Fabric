@@ -22,6 +22,9 @@ type: deep-dive
 
 ---
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ## 🎯 Why LLM Cost Tracking
 
 Fabric's AI surface area exploded in 2025-2026: Copilot in every workload, Data Agents on every domain, AI Functions on every Spark cluster, Eventhouse vector search, and an open door to Azure OpenAI / Anthropic / OpenAI from any notebook. Each of these consumes tokens. Tokens cost real money — and unlike CU consumption, they don't show up cleanly on a single Fabric capacity meter.
