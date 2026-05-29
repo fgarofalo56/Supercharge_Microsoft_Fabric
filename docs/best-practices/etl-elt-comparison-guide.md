@@ -15,6 +15,9 @@ type: deep-dive
 
 </div>
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ---
 
 **Last Updated:** `2026-04-21` | **Version:** 1.0.0
@@ -326,8 +329,8 @@ Spark Notebook ────► Dataflow Gen2
 | SSIS packages | Spark Notebook | SQL Server migration | High (rewrite) |
 | SSIS packages | Dataflow Gen2 | SQL Server migration | Medium (visual rebuild) |
 | Power BI Dataflows | Dataflow Gen2 | Power BI → Fabric migration | Low (same M language) |
-| ADB Notebooks | Spark Notebooks | Databricks → Fabric migration | Medium (runtime differences) |
-| Informatica / Talend | Dataflow Gen2 or Notebook | Legacy ETL modernization | High (rebuild) |
+| Competitor Spark notebooks | Spark Notebooks | Competitor lakehouse → Fabric migration | Medium (runtime differences) |
+| Third-party legacy ETL tools | Dataflow Gen2 or Notebook | Legacy ETL modernization | High (rebuild) |
 
 ---
 

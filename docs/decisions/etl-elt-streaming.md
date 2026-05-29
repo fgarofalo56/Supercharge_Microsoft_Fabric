@@ -15,6 +15,9 @@ type: decision
 
 </div>
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ---
 
 **Last Updated:** `2026-05-05` | **Version:** 1.0.0
@@ -30,7 +33,7 @@ Use **ELT** as the default pattern in Fabric -- land raw data in OneLake first, 
 ## When This Question Comes Up
 
 - Designing the initial data ingestion architecture for a new Fabric workspace
-- Migrating SSIS, ADF, or Informatica pipelines to Fabric
+- Migrating SSIS, ADF, or third-party legacy ETL pipelines to Fabric
 - A stakeholder demands "real-time" dashboards and you need to assess if streaming is justified
 - Data sources include a mix of batch databases, file drops, APIs, and event streams
 - Compliance requires PII to be stripped before data lands in the lakehouse

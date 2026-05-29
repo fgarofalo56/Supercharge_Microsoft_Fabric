@@ -7,6 +7,9 @@ type: deep-dive
 
 > How to implement Data Mesh principles using Fabric constructs — workspaces as domains, OneLake as federated storage, Purview as the governance plane, and data products delivered via lakehouses and semantic models. Includes maturity levels, assessment criteria, and a migration path from centralized to mesh.
 
+!!! note "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ## Executive Summary
 
 Data Mesh is an organizational and architectural paradigm that treats data as a product, owned and operated by the business domains that produce it, rather than centrally managed by a monolithic data team. The four pillars of Data Mesh — domain-oriented ownership, data as a product, self-serve data infrastructure, and federated computational governance — map naturally onto Microsoft Fabric's architecture, but successful implementation requires deliberate organizational change alongside technical configuration.
