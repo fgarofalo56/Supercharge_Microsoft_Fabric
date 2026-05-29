@@ -19,6 +19,9 @@ type: deep-dive
 </div>
 ---
 
+!!! info "Third-party references — publicly sourced, good-faith comparison"
+    This page references non-Microsoft products and services. That information is drawn from each vendor's **publicly available documentation** and is offered for honest, good-faith comparison only. This is a personal project written from a Microsoft Fabric and Azure perspective; it does **not** claim expertise in, or authority over, any third-party product, and nothing here is an official statement by, or endorsed by, those vendors. Capabilities, pricing, and features change often — always verify against the vendor's current official documentation. Where a third-party offering is the stronger choice, we say so plainly.
+
 ## 📋 Overview
 
 This guide addresses common issues when moving data from on-premises Oracle to Microsoft Fabric, including slow gateway performance, ForEach loops not running in parallel, and maximizing concurrent connections.

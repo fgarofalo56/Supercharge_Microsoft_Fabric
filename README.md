@@ -980,7 +980,8 @@ flowchart LR
     T26 --> T27 --> T28 --> T29 --> T30 --> T31
 ```
 
-> **Note on third-party references:** The migration tutorials (Teradata, Snowflake, IBM DB2) and any platform comparisons reference non-Microsoft products. That information is publicly sourced from each vendor's official documentation and offered for good-faith comparison only; this personal project does not claim authority over those products. Always verify against the vendor's current docs.
+> [!NOTE]
+> **Third-party references are publicly sourced.** The migration tutorials (Teradata, Snowflake, IBM DB2) and any platform comparisons reference non-Microsoft products. That information is publicly sourced from each vendor's official documentation and offered for good-faith comparison only; this personal project does not claim authority over those products. Always verify against the vendor's current docs.
 
 <table>
 <tr>
