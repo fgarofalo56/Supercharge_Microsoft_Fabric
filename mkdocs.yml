@@ -28,6 +28,16 @@ copyright: >-
 # Documentation directory (default: docs/)
 docs_dir: docs
 
+# Link validation — surfaces the off-site / .md / 404 / bad-anchor class of bug
+# at build time. Kept at `warn` (deploy does not use --strict) so the build
+# never fails; warnings show in the Actions log. `absolute_links: warn` flags
+# any internal link that should be relative (e.g. a github.com/blob URL).
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
+  anchors: warn
+
 # Theme Configuration
 theme:
   name: material
