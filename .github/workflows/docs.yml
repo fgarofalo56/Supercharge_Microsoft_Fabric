@@ -16,6 +16,11 @@ on:
       - 'notebooks/**/README.md'
       - 'infra/README.md'
       - 'mkdocs.yml'
+      # Build-time hooks and theme overrides change the rendered HTML, so a
+      # change to either must rebuild the docs (previously omitted — so a
+      # hooks/ or overrides/ fix never published without a manual dispatch).
+      - 'hooks/**'
+      - 'overrides/**'
       - 'README.md'
       - 'CHANGELOG.md'
       - 'CONTRIBUTING.md'
