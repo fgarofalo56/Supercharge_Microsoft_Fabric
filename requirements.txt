@@ -20,7 +20,7 @@ azure-keyvault-secrets>=4.7.0
 azure-eventhub>=5.11.0
 
 # Utilities
-python-dotenv>=1.0.0
+python-dotenv>=1.2.2
 tqdm>=4.67.3
 click>=8.1.0
 pyyaml>=6.0.0
