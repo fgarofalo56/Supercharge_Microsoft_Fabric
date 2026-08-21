@@ -10,19 +10,46 @@ on:
       - 'notebooks/**'
       - '*.py'
       - 'requirements*.txt'
+  # No path filter on pull_request. A required status check must report on
+  # EVERY pull request: a job that never starts because of a path filter is
+  # reported as "Expected -- Waiting for status", which blocks the PR forever
+  # rather than passing it. Relevance is decided by the `changes` job below,
+  # which lets irrelevant PRs finish in seconds instead of skipping silently.
   pull_request:
-    paths:
-      - 'data_generation/**'
-      - 'validation/**'
-      - 'notebooks/**'
-      - '*.py'
-      - 'requirements*.txt'
   workflow_dispatch:
 
 jobs:
+  # Single source of truth for "does this PR touch Python?". Downstream jobs
+  # gate on this instead of on workflow-level path filters, so they always
+  # produce a conclusion that branch protection can read.
+  changes:
+    name: Detect Changes
+    runs-on: ubuntu-latest
+    outputs:
+      python: ${{ steps.filter.outputs.python }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Filter changed paths
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            python:
+              - 'data_generation/**'
+              - 'validation/**'
+              - 'notebooks/**'
+              - '*.py'
+              - 'requirements*.txt'
+              - 'pyproject.toml'
+              - '.github/workflows/run-tests.yml'
+
   lint-and-typecheck:
     name: Lint & Type Check
     runs-on: ubuntu-latest
+    needs: changes
+    if: needs.changes.outputs.python == 'true'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -45,14 +72,25 @@ jobs:
       - name: Run ruff formatter check
         run: python -m ruff format --check --diff data_generation/ validation/
 
+      # MYPYPATH must NOT include data_generation: with --explicit-package-bases
+      # from the repo root it makes mypy resolve the same file as both
+      # "generators.base_generator" and "data_generation.generators.base_generator",
+      # which is a hard error ("Source file found twice under different module
+      # names") that blocked every PR touching Python since the setting was added.
+      # Advisory, not blocking: the MYPYPATH bug above made mypy abort before it
+      # checked anything, so 121 pre-existing type errors accumulated behind a
+      # green-looking gate. Fixing the crash exposes them all at once. Report
+      # them without blocking merges until they are burned down, then delete
+      # continue-on-error to make this a real gate again.
       - name: Run mypy type checking
-        env:
-          MYPYPATH: data_generation
+        continue-on-error: true
         run: python -m mypy data_generation/generators/ --ignore-missing-imports --namespace-packages --explicit-package-bases
 
   security-scan:
     name: Security Scanning
     runs-on: ubuntu-latest
+    needs: changes
+    if: needs.changes.outputs.python == 'true'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -96,6 +134,8 @@ jobs:
   unit-tests:
     name: Unit Tests
     runs-on: ubuntu-latest
+    needs: changes
+    if: needs.changes.outputs.python == 'true'
     strategy:
       matrix:
         python-version: ['3.10', '3.11']
@@ -151,6 +191,8 @@ jobs:
   data-generator-tests:
     name: Data Generator Tests
     runs-on: ubuntu-latest
+    needs: changes
+    if: needs.changes.outputs.python == 'true'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -260,6 +302,8 @@ jobs:
   open-data-syntax:
     name: Open Data Script Validation
     runs-on: ubuntu-latest
+    needs: changes
+    if: needs.changes.outputs.python == 'true'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -338,6 +382,8 @@ jobs:
   notebook-validation:
     name: Validate Notebooks
     runs-on: ubuntu-latest
+    needs: changes
+    if: needs.changes.outputs.python == 'true'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -375,6 +421,8 @@ jobs:
   integration-tests:
     name: Integration Tests
     runs-on: ubuntu-latest
+    needs: changes
+    if: needs.changes.outputs.python == 'true'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -411,6 +459,8 @@ jobs:
   great-expectations:
     name: Data Quality Tests
     runs-on: ubuntu-latest
+    needs: changes
+    if: needs.changes.outputs.python == 'true'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -497,6 +547,43 @@ jobs:
           else
             echo "No sample data found - skipping GE validation"
           fi
+
+  # THE required status check. Branch protection points at this one job
+  # ("CI Gate") rather than at the individual lanes, because the lanes are
+  # conditional: on a docs-only or actions-only PR they are skipped, and a
+  # required check that never reports leaves the PR stuck on "Expected --
+  # Waiting for status" forever.
+  #
+  # The verdict logic is deliberately explicit about the three-way outcome:
+  #   success -> pass
+  #   skipped -> pass (the change genuinely did not touch Python)
+  #   failure/cancelled -> FAIL
+  # `if: always()` only controls whether this job RUNS; without the explicit
+  # check below it would report green while its dependencies burned, which is
+  # exactly the failure mode that makes a required check worthless.
+  ci-gate:
+    name: CI Gate
+    runs-on: ubuntu-latest
+    needs: [changes, lint-and-typecheck, security-scan, unit-tests, data-generator-tests, open-data-syntax, notebook-validation, integration-tests, great-expectations]
+    if: always()
+    steps:
+      - name: Verify no required lane failed
+        env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          echo "Lane results: $RESULTS"
+          failed=0
+          for r in $RESULTS; do
+            case "$r" in
+              success|skipped) ;;
+              *) echo "::error::A required lane reported '$r'"; failed=1 ;;
+            esac
+          done
+          if [ "$failed" -ne 0 ]; then
+            echo "CI Gate: FAIL"
+            exit 1
+          fi
+          echo "CI Gate: PASS"
 
   test-summary:
     name: Test Summary

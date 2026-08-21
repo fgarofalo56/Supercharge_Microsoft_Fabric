@@ -1,0 +1,68 @@
+name: Dependabot Auto-Merge
+
+# Enables GitHub's native auto-merge on Dependabot PRs for low-risk updates.
+#
+# "Auto-merge" here means: queue the PR to merge *once its required status
+# checks pass*. It does not bypass branch protection -- if a required check
+# fails the PR stays open. Configure required checks under
+# Settings > Branches > main > Require status checks to pass.
+#
+# Scope is deliberately narrow: patch and minor updates only. Major bumps stay
+# manual because they carry breaking changes that a green test suite does not
+# necessarily catch (e.g. great-expectations 0.18 -> 1.18 rewrote the
+# checkpoint API used by validation/).
+
+on: pull_request_target
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    name: Enable auto-merge
+    runs-on: ubuntu-latest
+    # PR author, not github.actor: github.actor reflects whoever triggered this
+    # particular run, so a human touching the PR would make this guard fail open
+    # (or shut). pull_request.user.login is a stable property of the PR.
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    steps:
+      # Parses the Dependabot PR into structured metadata (update type,
+      # package name, ecosystem) rather than scraping the PR title.
+      - name: Fetch Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Approving is required because main enforces 1 approving review, and
+      # Dependabot cannot approve its own PR. This is the step that converts a
+      # human gate into an automated one -- limited to patch/minor by the
+      # condition below.
+      - name: Approve patch and minor updates
+        if: |
+          steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
+          steps.metadata.outputs.update-type == 'version-update:semver-minor'
+        run: gh pr review --approve "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Enable auto-merge for patch and minor updates
+        if: |
+          steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
+          steps.metadata.outputs.update-type == 'version-update:semver-minor'
+        run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Label major updates for manual review
+        if: steps.metadata.outputs.update-type == 'version-update:semver-major'
+        run: |
+          gh pr edit "$PR_URL" --add-label "needs-manual-review"
+          gh pr comment "$PR_URL" --body \
+            "Major version bump (\`${{ steps.metadata.outputs.previous-version }}\` -> \`${{ steps.metadata.outputs.new-version }}\`) - auto-merge intentionally not enabled. Please review breaking changes before merging."
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
