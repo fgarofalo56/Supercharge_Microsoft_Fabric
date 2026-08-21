@@ -22,7 +22,10 @@ jobs:
   auto-merge:
     name: Enable auto-merge
     runs-on: ubuntu-latest
-    if: github.actor == 'dependabot[bot]'
+    # PR author, not github.actor: github.actor reflects whoever triggered this
+    # particular run, so a human touching the PR would make this guard fail open
+    # (or shut). pull_request.user.login is a stable property of the PR.
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
     steps:
       # Parses the Dependabot PR into structured metadata (update type,
       # package name, ecosystem) rather than scraping the PR title.

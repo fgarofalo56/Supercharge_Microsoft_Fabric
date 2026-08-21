@@ -396,12 +396,12 @@ Pre-generated sample datasets are available for quick exploration without runnin
 import pandas as pd
 
 # Load sample slot data
-df = pd.read_parquet('../sample-data/bronze/slot_telemetry_sample.parquet')
+df = pd.read_parquet("../sample-data/bronze/slot_telemetry_sample.parquet")
 print(f"Records: {len(df)}")
 print(df.head())
 
 # Or use CSV
-df = pd.read_csv('../sample-data/bronze/slot_telemetry_sample.csv')
+df = pd.read_csv("../sample-data/bronze/slot_telemetry_sample.csv")
 ```
 
 ### Schema Definitions
