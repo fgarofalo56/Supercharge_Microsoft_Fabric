@@ -215,16 +215,15 @@ batch_request = RuntimeBatchRequest(
     data_connector_name="runtime_data_connector",
     data_asset_name="slot_data",
     runtime_parameters={"batch_data": df},
-    batch_identifiers={"default_identifier_name": "validation_run"}
+    batch_identifiers={"default_identifier_name": "validation_run"},
 )
 
 # Run checkpoint with runtime batch
 results = context.run_checkpoint(
     checkpoint_name="slot_machine_checkpoint",
-    validations=[{
-        "batch_request": batch_request,
-        "expectation_suite_name": "slot_machine_suite"
-    }]
+    validations=[
+        {"batch_request": batch_request, "expectation_suite_name": "slot_machine_suite"}
+    ],
 )
 
 # Check results
@@ -257,7 +256,7 @@ validator = context.get_validator(
     data_asset_name="slot_telemetry",
     expectation_suite_name="slot_machine_suite",
     batch_identifiers={"table_name": "slot_telemetry", "layer": "bronze"},
-    batch_data=df
+    batch_data=df,
 )
 
 # Run validation
@@ -326,14 +325,13 @@ To add custom expectations, create a Python file in the `plugins/` directory:
 # plugins/custom_expectations.py
 from great_expectations.expectations.expectation import ColumnMapExpectation
 
+
 class ExpectColumnValuesToBeValidMachineId(ColumnMapExpectation):
     """Expect column values to be valid casino machine IDs."""
 
     map_metric = "column_values.match_regex"
     success_keys = ("regex",)
-    default_kwarg_values = {
-        "regex": r"^(SLOT|TBL)-[A-Z0-9]{2,4}-[0-9]{3,4}$"
-    }
+    default_kwarg_values = {"regex": r"^(SLOT|TBL)-[A-Z0-9]{2,4}-[0-9]{3,4}$"}
 
     library_metadata = {
         "maturity": "experimental",
