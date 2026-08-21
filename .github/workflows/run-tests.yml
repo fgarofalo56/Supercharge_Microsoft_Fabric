@@ -103,7 +103,13 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
+          # setuptools is upgraded explicitly, not pinned in requirements: the
+          # runner image ships 79.0.1, which PYSEC-2026-3447 flags (MANIFEST.in
+          # exclusions bypassed via Unicode NFD/NFC mismatch, fixed in 83.0.0).
+          # It is a build-time sdist concern rather than a runtime path here,
+          # but pip-audit --strict scans the whole environment, so the fix is to
+          # upgrade the tool rather than add another --ignore-vuln entry.
+          python -m pip install --upgrade pip 'setuptools>=83.0.0'
           pip install -r requirements.txt
           pip install bandit pip-audit
 
