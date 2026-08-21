@@ -46,6 +46,18 @@ jobs:
     name: What-If Analysis
     runs-on: ubuntu-latest
     needs: validate
+    # Skip on Dependabot PRs. They run with the Dependabot secret store, not the
+    # repository one, so AZURE_CLIENT_ID/TENANT_ID resolve to empty strings and
+    # azure/login fails with "Not all values are present" -- a red check that
+    # says nothing about the change. A workflow-version bump matches this
+    # workflow's own path filter, so every actions bump tripped it.
+    # Test on the PR AUTHOR, not github.actor. github.actor is whoever caused
+    # this particular run -- if a human clicks "Update branch" on a Dependabot
+    # PR, github.actor becomes that human and the guard silently stops working.
+    # pull_request.user.login is a property of the PR itself and is stable
+    # across reruns. (Observed: run 32507800544 skipped the guard for exactly
+    # this reason.)
+    if: github.event.pull_request.user.login != 'dependabot[bot]'
     # Environment protection: configure required reviewers in GitHub Settings
     # Settings > Environments > "infra-preview" > Add protection rules
     environment: infra-preview
