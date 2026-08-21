@@ -22,7 +22,10 @@ jobs:
   auto-merge:
     name: Enable auto-merge
     runs-on: ubuntu-latest
-    if: github.actor == 'dependabot[bot]'
+    # PR author, not github.actor: github.actor reflects whoever triggered this
+    # particular run, so a human touching the PR would make this guard fail open
+    # (or shut). pull_request.user.login is a stable property of the PR.
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
     steps:
       # Parses the Dependabot PR into structured metadata (update type,
       # package name, ecosystem) rather than scraping the PR title.
@@ -36,26 +39,56 @@ jobs:
       # Dependabot cannot approve its own PR. This is the step that converts a
       # human gate into an automated one -- limited to patch/minor by the
       # condition below.
+      # Requirement-range bumps (">=1.3.0" -> ">=1.4.0", how this repo pins its
+      # pip deps) carry NO semver update-type -- Dependabot emits null, because
+      # a floor change is not a version change. Comparing against
+      # 'version-update:semver-*' therefore never matched and nothing merged.
+      #
+      # For those, derive the bump from the versions in the PR title instead,
+      # and fail closed: anything we cannot parse as a major-unchanged bump is
+      # treated as major and left for a human.
+      - name: Classify update
+        id: classify
+        env:
+          UPDATE_TYPE: ${{ steps.metadata.outputs.update-type }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          case "$UPDATE_TYPE" in
+            version-update:semver-patch|version-update:semver-minor)
+              echo "safe=true"  >> "$GITHUB_OUTPUT"; echo "major=false" >> "$GITHUB_OUTPUT" ;;
+            version-update:semver-major)
+              echo "safe=false" >> "$GITHUB_OUTPUT"; echo "major=true"  >> "$GITHUB_OUTPUT" ;;
+            *)
+              # Extract "from X to Y" and compare major components.
+              from=$(printf '%s' "$PR_TITLE" | sed -n 's/.*from[^0-9]*\([0-9][0-9.]*\).*/\1/p')
+              to=$(printf   '%s' "$PR_TITLE" | sed -n 's/.*to[^0-9]*\([0-9][0-9.]*\).*/\1/p')
+              if [ -n "$from" ] && [ -n "$to" ] && \
+                 [ "${from%%.*}" = "${to%%.*}" ] && [ "${from%%.*}" != "0" ]; then
+                echo "safe=true"  >> "$GITHUB_OUTPUT"; echo "major=false" >> "$GITHUB_OUTPUT"
+              else
+                # Unparseable, 0.x (where minor bumps are breaking), or a real
+                # major change -> require a human.
+                echo "safe=false" >> "$GITHUB_OUTPUT"; echo "major=true" >> "$GITHUB_OUTPUT"
+              fi ;;
+          esac
+          echo "Classified '$PR_TITLE' (update-type=${UPDATE_TYPE:-null})"
+
       - name: Approve patch and minor updates
-        if: |
-          steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
-          steps.metadata.outputs.update-type == 'version-update:semver-minor'
+        if: steps.classify.outputs.safe == 'true'
         run: gh pr review --approve "$PR_URL"
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Enable auto-merge for patch and minor updates
-        if: |
-          steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
-          steps.metadata.outputs.update-type == 'version-update:semver-minor'
+        if: steps.classify.outputs.safe == 'true'
         run: gh pr merge --auto --squash "$PR_URL"
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Label major updates for manual review
-        if: steps.metadata.outputs.update-type == 'version-update:semver-major'
+        if: steps.classify.outputs.major == 'true'
         run: |
           gh pr edit "$PR_URL" --add-label "needs-manual-review"
           gh pr comment "$PR_URL" --body \

@@ -207,8 +207,7 @@ class TestNewFeature:
 ```python
 @pytest.mark.compliance
 @pytest.mark.slow
-def test_complex_compliance_rule(self, sample_compliance_data):
-    ...
+def test_complex_compliance_rule(self, sample_compliance_data): ...
 ```
 
 ### 3. Add Fixtures if Needed

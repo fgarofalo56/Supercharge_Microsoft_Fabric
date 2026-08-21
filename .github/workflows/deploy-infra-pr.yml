@@ -51,7 +51,13 @@ jobs:
     # azure/login fails with "Not all values are present" -- a red check that
     # says nothing about the change. A workflow-version bump matches this
     # workflow's own path filter, so every actions bump tripped it.
-    if: github.actor != 'dependabot[bot]'
+    # Test on the PR AUTHOR, not github.actor. github.actor is whoever caused
+    # this particular run -- if a human clicks "Update branch" on a Dependabot
+    # PR, github.actor becomes that human and the guard silently stops working.
+    # pull_request.user.login is a property of the PR itself and is stable
+    # across reruns. (Observed: run 32507800544 skipped the guard for exactly
+    # this reason.)
+    if: github.event.pull_request.user.login != 'dependabot[bot]'
     # Environment protection: configure required reviewers in GitHub Settings
     # Settings > Environments > "infra-preview" > Add protection rules
     environment: infra-preview
