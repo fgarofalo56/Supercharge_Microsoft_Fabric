@@ -245,21 +245,26 @@ pytest validation/deployment_tests/ --cov=. --cov-report=html
 def project_root() -> Path:
     """Project root directory"""
 
+
 @pytest.fixture
 def infra_root() -> Path:
     """infra/ directory path"""
+
 
 @pytest.fixture
 def main_bicep_path() -> Path:
     """Path to main.bicep"""
 
+
 @pytest.fixture
 def all_bicep_files() -> List[Path]:
     """All .bicep files in infra/"""
 
+
 @pytest.fixture
 def module_bicep_files() -> Dict[str, Path]:
     """Module files by name (e.g., {'fabric': Path, 'storage': Path})"""
+
 
 @pytest.fixture
 def environment_params() -> Dict[str, Path]:
@@ -273,9 +278,11 @@ def environment_params() -> Dict[str, Path]:
 def parsed_main_bicep() -> BicepFile:
     """Parsed main.bicep with parameters, resources, outputs"""
 
+
 @pytest.fixture
 def parsed_module_files() -> Dict[str, BicepFile]:
     """All parsed module files"""
+
 
 @pytest.fixture
 def parsed_param_files() -> Dict[str, BicepParamFile]:
@@ -289,13 +296,16 @@ def parsed_param_files() -> Dict[str, BicepParamFile]:
 def azure_cli_available() -> bool:
     """True if Azure CLI is installed"""
 
+
 @pytest.fixture
 def azure_logged_in() -> bool:
     """True if logged into Azure CLI"""
 
+
 @pytest.fixture
 def bicep_cli_available() -> bool:
     """True if Bicep CLI is available"""
+
 
 @pytest.fixture
 def mock_azure_context() -> Dict:
@@ -309,9 +319,11 @@ def mock_azure_context() -> Dict:
 def require_azure_cli():
     """Skips test if Azure CLI not available"""
 
+
 @pytest.fixture
 def require_azure_login():
     """Skips test if not logged into Azure"""
+
 
 @pytest.fixture
 def require_bicep_cli():
@@ -473,8 +485,9 @@ class TestNewResource:
 
         content = module_path.read_text(encoding="utf-8")
 
-        assert "requiredProperty:" in content, \
+        assert "requiredProperty:" in content, (
             "New resource should have required property"
+        )
 ```
 
 ## License

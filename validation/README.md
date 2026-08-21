@@ -209,7 +209,7 @@ suite = context.add_expectation_suite("new_suite")
 # Add expectations
 suite.add_expectation(
     expectation_type="expect_column_values_to_not_be_null",
-    kwargs={"column": "player_id"}
+    kwargs={"column": "player_id"},
 )
 ```
 
@@ -439,7 +439,7 @@ suite = context.add_expectation_suite("my_new_suite")
 # Add expectations
 suite.add_expectation(
     expectation_type="expect_column_values_to_be_between",
-    kwargs={"column": "amount", "min_value": 0, "max_value": 1000000}
+    kwargs={"column": "amount", "min_value": 0, "max_value": 1000000},
 )
 
 # Save
@@ -456,6 +456,7 @@ context.save_expectation_suite(suite)
 # Example: unit_tests/test_new_feature.py
 import pytest
 from generators import MyNewGenerator
+
 
 class TestMyNewGenerator:
     @pytest.fixture
@@ -481,6 +482,7 @@ class TestMyNewGenerator:
 ```python
 # Example: integration_tests/test_new_pipeline.py
 import pytest
+
 
 @pytest.mark.slow
 class TestNewPipeline:

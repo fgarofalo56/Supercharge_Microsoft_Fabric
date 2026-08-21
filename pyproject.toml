@@ -63,8 +63,12 @@ disallow_untyped_defs = false
 check_untyped_defs = true
 ignore_missing_imports = true
 
+# Module path is "data_generation.generators.*" because mypy resolves package
+# bases from the repo root. The old "generators.*" pattern only matched when
+# MYPYPATH=data_generation was set, which itself broke the run -- so this
+# strictness rule was never actually enforced.
 [[tool.mypy.overrides]]
-module = "generators.*"
+module = "data_generation.generators.*"
 disallow_untyped_defs = true
 
 [[tool.mypy.overrides]]
