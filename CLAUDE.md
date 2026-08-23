@@ -24,7 +24,7 @@
 infra/              - Bicep IaC modules and deployments
 docs/               - Architecture, deployment, best practices, feature docs
   best-practices/   - Error handling, alerting, performance, governance, CI/CD, CMK, OAP, capacity, BCDR, testing, RBAC, network, medallion, migration, observability, multi-tenant, sharing, CDC
-  features/         - 50 feature docs: Fabric IQ, RTI, Copilot, Data Mesh, DTB, Data Agents, OneLake Security, Mirroring, Direct Lake, SQL DB, GraphQL, Semantic Link, Catalog, AutoML, Translytical, MCP, Monitoring, Copy Job, Iceberg, dbt, MLV, Vector DB
+  features/         - 55 feature docs: Fabric IQ, RTI, Copilot, Data Mesh, DTB, Data Agents, OneLake Security, Mirroring, Direct Lake, SQL DB, GraphQL, Semantic Link, Catalog, AutoML, Translytical, MCP, Monitoring, Copy Job, Iceberg, dbt, MLV, Vector DB
 tutorials/          - 58 step-by-step tutorials (00-57)
 poc-agenda/         - 3-day workshop materials
 data_generation/    - 17 Python data generators (casino, federal, streaming, analytics)

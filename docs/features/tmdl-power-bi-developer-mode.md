@@ -555,6 +555,36 @@ measure 'Selected KPI' =
 
 ---
 
+## Report-Authoring Surface Updates (2026)
+
+Three recent Power BI authoring enhancements change how reports against these models are built. They live in the report layer (not TMDL), but they affect the models and patterns you author here.
+
+### Modern Visual Defaults — Fluent 2
+
+New reports use **Fluent 2** visual defaults: updated typography, spacing, color ramps, and container styling aligned with the Microsoft Fluent design system. Practical impact:
+
+- **Existing reports are unchanged** — Fluent 2 applies to newly created visuals/reports, so no regression risk to deployed content.
+- **Theme files** — if the POC ships custom JSON themes, validate them against Fluent 2 defaults; some legacy theme properties are superseded by the new defaults.
+- **Screenshots in docs** — tutorial screenshots pre-Fluent 2 will look dated; regenerate when a tutorial is next revised.
+
+### Custom Totals (Preview, Mar 2026)
+
+Table and matrix visuals now support **custom totals**: instead of the total row always re-evaluating the measure over the full filter context, you can set the total to the **sum, min, max, count, or distinct count of the displayed rows**. Right-click a numeric column or use the Build pane → **Customize total calculation**.
+
+Custom totals are implemented **on top of visual calculations** — which matters for modeling:
+
+- The total logic lives in the **visual**, not the semantic model — it won't appear in TMDL or travel with the model.
+- For totals that must be governed and reused across reports, keep them as **model measures** (or [DAX UDFs](dax-user-defined-functions.md)); use custom totals for report-specific presentation.
+- Casino POC example: a cage-transaction matrix where the total row shows *count of displayed transactions* (audit sampling) rather than the grand total.
+
+### Series Label Leader Lines
+
+Line charts and related visuals now support **leader lines for series labels** — connectors that visually link each label to its data point, with smart layout to avoid overlaps in dense charts. Enable per-visual in the formatting pane under series labels.
+
+POC example: the floor-performance line chart with 15+ machines becomes readable when each end-of-line label is leader-lined to its series instead of stacked ambiguously.
+
+---
+
 ## Migration from Legacy Formats
 
 ### PBIX to TMDL

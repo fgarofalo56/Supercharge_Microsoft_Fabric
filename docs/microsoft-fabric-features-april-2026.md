@@ -633,7 +633,7 @@ Based on the CLAUDE.md project notes, these features were addressed:
 
 ### Potential Gaps to Investigate
 
-Reconciled against the current `docs/features/` inventory (50 feature docs). **20 of 30** former gaps are now covered; **10 remain open**.
+Reconciled against the current `docs/features/` inventory (55 feature docs). **All 30 former gaps are now covered.**
 
 | # | Feature | Status | Coverage |
 |---|---------|--------|----------|
@@ -641,31 +641,31 @@ Reconciled against the current `docs/features/` inventory (50 feature docs). **2
 | 2 | Translytical Task Flows (GA Mar 2026) | ✅ Covered | `translytical-task-flows.md` |
 | 3 | User Data Functions | ✅ Covered | `user-data-functions.md` |
 | 4 | TMDL View in web modeling | ✅ Covered | `tmdl-power-bi-developer-mode.md` |
-| 5 | DAX user-defined functions | ⬜ Open | — |
+| 5 | DAX user-defined functions | ✅ Covered | `dax-user-defined-functions.md` |
 | 6 | Fabric MCP / Data Factory MCP | ✅ Covered | `fabric-mcp.md` |
 | 7 | MCP for RTI (Activator/Eventhouse) | ✅ Covered | `fabric-mcp.md` |
-| 8 | Modern visual defaults (Fluent 2) | ⬜ Open | — |
+| 8 | Modern visual defaults (Fluent 2) | ✅ Covered | `tmdl-power-bi-developer-mode.md` |
 | 9 | MERGE support (GA Jan 2026) | ✅ Covered | `fabric-sql-database.md` |
-| 10 | ANY_VALUE aggregate (GA Mar 2026) | ⬜ Open | — |
+| 10 | ANY_VALUE aggregate (GA Mar 2026) | ✅ Covered | `best-practices/08_WAREHOUSE_SETUP.md` |
 | 11 | Workspace IP firewall rules (GA Mar 2026) | ✅ Covered | `workspace-ip-firewall.md` |
 | 12 | Workspace-level surge protection | ✅ Covered | `workspace-ip-firewall.md` |
-| 13 | Fabric Extensibility Toolkit (GA Mar 2026) | ⬜ Open | — |
+| 13 | Fabric Extensibility Toolkit (GA Mar 2026) | ✅ Covered | `fabric-extensibility-toolkit.md` |
 | 14 | Oracle database mirroring (GA Mar 2026) | ✅ Covered | `mirroring.md` |
 | 15 | SAP database mirroring (GA Mar 2026) | ✅ Covered | `mirroring.md` |
 | 16 | OneLake Catalog search API | ✅ Covered | `onelake-catalog.md` |
 | 17 | AutoML low-code UX (GA Mar 2026) | ✅ Covered | `automl-model-endpoints.md` |
-| 18 | AI-Powered Prompt Transform (GA Mar 2026) | ⬜ Open | — |
+| 18 | AI-Powered Prompt Transform (GA Mar 2026) | ✅ Covered | `dataflow-gen2-ai-prompt-transform.md` |
 | 19 | DeltaFlow transformation | ✅ Covered | `real-time-intelligence.md` |
-| 20 | Eventhouse entity diagrams | ⬜ Open | — |
+| 20 | Eventhouse entity diagrams | ✅ Covered | `eventhouse-entity-diagrams.md` |
 | 21 | Prebuilt Foundry Tools | ✅ Covered | `data-agents.md`, `fabric-mcp.md` |
 | 22 | Data Agents + Azure AI Agent Service | ✅ Covered | `data-agents.md` |
 | 23 | Semantic Link GA (Feb 2026) | ✅ Covered | `semantic-link.md` |
 | 24 | Copy job CDC support | ✅ Covered | `copy-job-cdc.md` |
 | 25 | Workspace monitoring | ✅ Covered | `workspace-monitoring.md` |
-| 26 | PowerShell gateway model (GA Mar 2026) | ⬜ Open | — |
-| 27 | Incremental/Proactive statistics (GA Dec 2025) | ⬜ Open | — |
-| 28 | Custom totals (Preview Mar 2026) | ⬜ Open | — |
-| 29 | Series label leader lines | ⬜ Open | — |
+| 26 | PowerShell gateway model (GA Mar 2026) | ✅ Covered | `gateway-powershell-automation.md` |
+| 27 | Incremental/Proactive statistics (GA Dec 2025) | ✅ Covered | `best-practices/08_WAREHOUSE_SETUP.md` |
+| 28 | Custom totals (Preview Mar 2026) | ✅ Covered | `tmdl-power-bi-developer-mode.md` |
+| 29 | Series label leader lines | ✅ Covered | `tmdl-power-bi-developer-mode.md` |
 | 30 | Copilot pane UX update | ✅ Covered | `ai-copilot-configuration.md` |
 
 ---

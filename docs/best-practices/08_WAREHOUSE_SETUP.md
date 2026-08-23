@@ -183,12 +183,25 @@ UPDATE STATISTICS fact_daily_slot_performance (stat_player_id)
 WITH FULLSCAN;
 ```
 
+### Built-in Optimizations (GA Dec 2025)
+
+Fabric Data Warehouse includes two fully managed statistics optimizations that reduce the manual tuning burden:
+
+#### Incremental Statistics Refresh
+
+When a column's statistic is automatically refreshed, the engine normally scans a sample of the **entire column**. With incremental refresh, the engine samples only rows **added since the last refresh** and merges them with existing histograms. The engine automatically determines when this faster method applies — it benefits large tables with mostly `INSERT` activity since the last refresh (exactly the POC's append-only fact-table pattern).
+
+#### Proactive Statistics Refresh
+
+Proactive refresh is a fully managed process that **front-loads statistic refreshes after data changes**, reducing the likelihood that a `SELECT` query stalls during plan generation while statistics update. It applies only to automatically generated histogram statistics (the `_WA_Sys_*` naming convention) and is **enabled by default**. It can be configured via `ALTER DATABASE ... SET` options if a workload requires opting out.
+
 ### Statistics Best Practices
 
-1. **Update after large loads** - Statistics become stale
+1. **Update after large loads** - Statistics become stale (proactive refresh reduces, but does not eliminate, this for manual statistics)
 2. **Use FULLSCAN for critical columns** - More accurate than sampling
 3. **Monitor auto-generated statistics** - Check for accuracy
 4. **Create statistics proactively** - Before heavy query workloads
+5. **Let incremental/proactive refresh work** - Avoid unnecessary manual `UPDATE STATISTICS` on auto-created `_WA_Sys_*` histograms; focus manual effort on user-created statistics
 
 ### Viewing Statistics
 
@@ -241,6 +254,24 @@ GROUP BY machine_id;
 SELECT *
 FROM fact_daily_slot_performance;  -- Avoid in production
 ```
+
+### ANY_VALUE for Non-Grouped Columns (GA Mar 2026)
+
+When you need a representative value from a column that isn't in the `GROUP BY`, use `ANY_VALUE` instead of the `MIN`/`MAX` workaround. It is clearer in intent and avoids the aggregation cost of computing a min/max you don't care about:
+
+```sql
+-- Good: intent is explicit — any machine name for the grouped id
+SELECT machine_id, ANY_VALUE(machine_name) AS machine_name, SUM(total_bets)
+FROM fact_daily_slot_performance
+GROUP BY machine_id;
+
+-- Older workaround: functionally similar but obscures intent
+SELECT machine_id, MAX(machine_name) AS machine_name, SUM(total_bets)
+FROM fact_daily_slot_performance
+GROUP BY machine_id;
+```
+
+Use `ANY_VALUE` when the column is functionally dependent on the group key (e.g., one name per `machine_id`). If values genuinely differ within a group, decide which one you need — `ANY_VALUE` makes no guarantee about which row's value is returned.
 
 ### Use Appropriate JOINs
 
