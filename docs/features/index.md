@@ -2,7 +2,7 @@
 title: Features
 description: Microsoft Fabric platform features and capabilities
 hero: assets/heroes/features.svg
-hero_alt: "Build on Fabric — 26 features across foundation, data engineering, AI, real-time, and ops"
+hero_alt: "Build on Fabric — 50 features across foundation, data engineering, AI, real-time, and ops"
 ---
 # Features
 

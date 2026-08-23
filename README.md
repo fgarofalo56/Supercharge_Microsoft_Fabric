@@ -11,9 +11,9 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Dev Container](https://img.shields.io/badge/Dev%20Container-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)
-![Tutorials](https://img.shields.io/badge/Tutorials-38-blue?style=for-the-badge)
-![Tests](https://img.shields.io/badge/Tests-612_Passing-brightgreen?style=for-the-badge)
-![Phase](https://img.shields.io/badge/Phase_11-Complete-brightgreen?style=for-the-badge)
+![Tutorials](https://img.shields.io/badge/Tutorials-58-blue?style=for-the-badge)
+![Tests](https://img.shields.io/badge/Tests-431_Passing-brightgreen?style=for-the-badge)
+![Phase](https://img.shields.io/badge/Phase_15-Complete-brightgreen?style=for-the-badge)
 
 **A hands-on Microsoft Fabric reference for data teams in regulated industries** — it starts in casino & gaming, bridges through Tribal Nations gaming and health, and extends out to federal agency analytics, all on the same medallion + governance backbone.
 
@@ -511,11 +511,11 @@ flowchart TD
 ## 🆕 Phase 9-10: New Fabric Experience
 
 > [!NOTE]
-> **Phases 9-10 Complete** — Full coverage of the new Microsoft Fabric experience (July 2025 – April 2026 GA wave) with 40+ new documents, 8 Bicep modules, and 269/269 tests passing.
+> **Phases 9-10 Complete** — Full coverage of the new Microsoft Fabric experience (July 2025 – April 2026 GA wave) with 40+ new documents, 8 Bicep modules, and 431/431 tests passing.
 
 Phases 9 and 10 modernize the POC for the new Fabric experience, covering every major feature and enterprise best practice.
 
-### New Feature Documentation (22 features)
+### New Feature Documentation (50 features)
 
 | Category | Features |
 |:---------|:---------|
@@ -546,7 +546,7 @@ Phases 9 and 10 modernize the POC for the new Fabric experience, covering every 
 | `alerts-and-budgets.bicep` | Capacity alerts & budget management |
 | `workspace-identity.bicep` | Workspace Identity (GA 2026) |
 
-> 👉 See [Feature Documentation](docs/features/) and [Best Practices](docs/best-practices/README.md) for the complete guides.
+> 👉 See [Feature Documentation](docs/features/) and [Best Practices](docs/best-practices/index.md) for the complete guides.
 
 ---
 

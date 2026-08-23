@@ -548,6 +548,7 @@ nav:
     - Infrastructure:
       - Overview: infra/README.md
       - Bicep Module Index: infra/modules/README.md
+      - Bicep Module Reference (auto-generated): BICEP_MODULES.md
       - Contributing: CONTRIBUTING.md
     - Power BI Reports:
       - Reports & Semantic Model: reports/README.md

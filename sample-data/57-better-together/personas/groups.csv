@@ -1,0 +1,14 @@
+group_name,description
+grp-analyst-apac,Tutorial 57 synthetic group: grp-analyst-apac
+grp-analyst-emea,Tutorial 57 synthetic group: grp-analyst-emea
+grp-analyst-us-east,Tutorial 57 synthetic group: grp-analyst-us-east
+grp-analyst-us-west,Tutorial 57 synthetic group: grp-analyst-us-west
+grp-audit,Tutorial 57 synthetic group: grp-audit
+grp-data-engineer,Tutorial 57 synthetic group: grp-data-engineer
+grp-exec,Tutorial 57 synthetic group: grp-exec
+grp-finance,Tutorial 57 synthetic group: grp-finance
+grp-sales-mgr-apac,Tutorial 57 synthetic group: grp-sales-mgr-apac
+grp-sales-mgr-emea,Tutorial 57 synthetic group: grp-sales-mgr-emea
+grp-sales-mgr-us-east,Tutorial 57 synthetic group: grp-sales-mgr-us-east
+grp-sales-mgr-us-west,Tutorial 57 synthetic group: grp-sales-mgr-us-west
+grp-service-principals,Tutorial 57 synthetic group: grp-service-principals
