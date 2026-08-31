@@ -3,7 +3,7 @@
 
 # Testing
 pytest>=9.0.3
-pytest-cov>=4.1.0
+pytest-cov>=7.1.0
 pytest-asyncio>=1.4.0
 
 # Linting & Formatting
