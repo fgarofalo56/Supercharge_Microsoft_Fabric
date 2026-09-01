@@ -1,0 +1,14 @@
+user_id,upn,display_name,first_name,last_name,persona,region,group_name,is_service_principal
+U-regional_sales_manager-us-east-523b7841,brad.lawrence-us-east@btdemo.example.com,Brad Lawrence,Brad,Lawrence,regional_sales_manager,US-EAST,grp-sales-mgr-us-east,False
+U-regional_sales_manager-us-west-d55abb44,tiffany.roberts-us-west@btdemo.example.com,Tiffany Roberts,Tiffany,Roberts,regional_sales_manager,US-WEST,grp-sales-mgr-us-west,False
+U-regional_sales_manager-emea-e991c954,nicole.smith-emea@btdemo.example.com,Nicole Smith,Nicole,Smith,regional_sales_manager,EMEA,grp-sales-mgr-emea,False
+U-regional_sales_manager-apac-e1cb9068,cassandra.gray-apac@btdemo.example.com,Cassandra Gray,Cassandra,Gray,regional_sales_manager,APAC,grp-sales-mgr-apac,False
+U-regional_analyst-us-east-a5c83846,jessica.vega-us-east@btdemo.example.com,Jessica Vega,Jessica,Vega,regional_analyst,US-EAST,grp-analyst-us-east,False
+U-regional_analyst-us-west-fe488269,christina.cunningham-us-west@btdemo.example.com,Christina Cunningham,Christina,Cunningham,regional_analyst,US-WEST,grp-analyst-us-west,False
+U-regional_analyst-emea-2d42cc5f,eric.willis-emea@btdemo.example.com,Eric Willis,Eric,Willis,regional_analyst,EMEA,grp-analyst-emea,False
+U-regional_analyst-apac-3cc2fb11,bridget.diaz-apac@btdemo.example.com,Bridget Diaz,Bridget,Diaz,regional_analyst,APAC,grp-analyst-apac,False
+U-finance_analyst-global-6a4adaa3,tina.wyatt@btdemo.example.com,Tina Wyatt,Tina,Wyatt,finance_analyst,ALL,grp-finance,False
+U-exec-global-636afcb6,sean.little@btdemo.example.com,Sean Little,Sean,Little,exec,ALL,grp-exec,False
+U-audit-global-b5985fe0,brent.peterson@btdemo.example.com,Brent Peterson,Brent,Peterson,audit,ALL,grp-audit,False
+U-data_engineer-global-4caabacc,steven.armstrong@btdemo.example.com,Steven Armstrong,Steven,Armstrong,data_engineer,ALL,grp-data-engineer,False
+SP-better-together-refresh,sp-better-together-refresh@btdemo.example.com,SP — Semantic Model Refresh,ServicePrincipal,Refresh,service_principal,ALL,grp-service-principals,True

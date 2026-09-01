@@ -633,37 +633,40 @@ Based on the CLAUDE.md project notes, these features were addressed:
 
 ### Potential Gaps to Investigate
 
-Features that may NOT be covered yet:
-1. **Direct Lake in OneLake GA** (Mar 2026) - Major GA milestone; Desktop support
-2. **Translytical Task Flows** (GA Mar 2026) - Write-back from Power BI reports
-3. **User Data Functions** - Serverless C#/.NET workload
-4. **TMDL View in web modeling** - Code-first semantic modeling
-5. **DAX user-defined functions** - New DAX extensibility
-6. **Fabric MCP / Data Factory MCP** - Model Context Protocol servers
-7. **MCP for RTI** - MCP servers for Activator and Eventhouse
-8. **Modern visual defaults (Fluent 2)** - New Power BI theme
-9. **MERGE support** (GA Jan 2026) - T-SQL MERGE in warehouse
-10. **ANY_VALUE aggregate** (GA Mar 2026) - New T-SQL function
-11. **Workspace IP firewall rules** (GA Mar 2026) - Security feature
-12. **Workspace-level surge protection** - Capacity controls
-13. **Fabric Extensibility Toolkit** (GA Mar 2026) - Custom workloads
-14. **Oracle database mirroring** (GA Mar 2026) - New mirroring source
-15. **SAP database mirroring** (GA Mar 2026) - New mirroring source
-16. **OneLake Catalog search API** - Discovery API
-17. **AutoML low-code UX** (GA Mar 2026) - Data Science
-18. **AI-Powered Prompt Transform** (GA Mar 2026) - Data Factory AI
-19. **DeltaFlow transformation** - Eventstream CDC transform
-20. **Eventhouse entity diagrams** - Visual data modeling in KQL
-21. **Prebuilt Foundry Tools** - Azure AI integration
-22. **Data Agents + Azure AI Agent Service** - Agent framework integration
-23. **Semantic Link GA** (Feb 2026) - Cross-workload semantic layer
-24. **Copy job CDC support** - Data Factory replication
-25. **Workspace monitoring** - Observability
-26. **PowerShell gateway model** (GA Mar 2026) - Gateway automation
-27. **Incremental/Proactive statistics** (GA Dec 2025) - Warehouse performance
-28. **Custom totals** (Preview Mar 2026) - Power BI visual calculations
-29. **Series label leader lines** - Power BI chart enhancement
-30. **Copilot pane UX update** - Updated Copilot experience
+Reconciled against the current `docs/features/` inventory (55 feature docs). **All 30 former gaps are now covered.**
+
+| # | Feature | Status | Coverage |
+|---|---------|--------|----------|
+| 1 | Direct Lake in OneLake GA (Mar 2026) | ✅ Covered | `direct-lake.md` |
+| 2 | Translytical Task Flows (GA Mar 2026) | ✅ Covered | `translytical-task-flows.md` |
+| 3 | User Data Functions | ✅ Covered | `user-data-functions.md` |
+| 4 | TMDL View in web modeling | ✅ Covered | `tmdl-power-bi-developer-mode.md` |
+| 5 | DAX user-defined functions | ✅ Covered | `dax-user-defined-functions.md` |
+| 6 | Fabric MCP / Data Factory MCP | ✅ Covered | `fabric-mcp.md` |
+| 7 | MCP for RTI (Activator/Eventhouse) | ✅ Covered | `fabric-mcp.md` |
+| 8 | Modern visual defaults (Fluent 2) | ✅ Covered | `tmdl-power-bi-developer-mode.md` |
+| 9 | MERGE support (GA Jan 2026) | ✅ Covered | `fabric-sql-database.md` |
+| 10 | ANY_VALUE aggregate (GA Mar 2026) | ✅ Covered | `best-practices/08_WAREHOUSE_SETUP.md` |
+| 11 | Workspace IP firewall rules (GA Mar 2026) | ✅ Covered | `workspace-ip-firewall.md` |
+| 12 | Workspace-level surge protection | ✅ Covered | `workspace-ip-firewall.md` |
+| 13 | Fabric Extensibility Toolkit (GA Mar 2026) | ✅ Covered | `fabric-extensibility-toolkit.md` |
+| 14 | Oracle database mirroring (GA Mar 2026) | ✅ Covered | `mirroring.md` |
+| 15 | SAP database mirroring (GA Mar 2026) | ✅ Covered | `mirroring.md` |
+| 16 | OneLake Catalog search API | ✅ Covered | `onelake-catalog.md` |
+| 17 | AutoML low-code UX (GA Mar 2026) | ✅ Covered | `automl-model-endpoints.md` |
+| 18 | AI-Powered Prompt Transform (GA Mar 2026) | ✅ Covered | `dataflow-gen2-ai-prompt-transform.md` |
+| 19 | DeltaFlow transformation | ✅ Covered | `real-time-intelligence.md` |
+| 20 | Eventhouse entity diagrams | ✅ Covered | `eventhouse-entity-diagrams.md` |
+| 21 | Prebuilt Foundry Tools | ✅ Covered | `data-agents.md`, `fabric-mcp.md` |
+| 22 | Data Agents + Azure AI Agent Service | ✅ Covered | `data-agents.md` |
+| 23 | Semantic Link GA (Feb 2026) | ✅ Covered | `semantic-link.md` |
+| 24 | Copy job CDC support | ✅ Covered | `copy-job-cdc.md` |
+| 25 | Workspace monitoring | ✅ Covered | `workspace-monitoring.md` |
+| 26 | PowerShell gateway model (GA Mar 2026) | ✅ Covered | `gateway-powershell-automation.md` |
+| 27 | Incremental/Proactive statistics (GA Dec 2025) | ✅ Covered | `best-practices/08_WAREHOUSE_SETUP.md` |
+| 28 | Custom totals (Preview Mar 2026) | ✅ Covered | `tmdl-power-bi-developer-mode.md` |
+| 29 | Series label leader lines | ✅ Covered | `tmdl-power-bi-developer-mode.md` |
+| 30 | Copilot pane UX update | ✅ Covered | `ai-copilot-configuration.md` |
 
 ---
 

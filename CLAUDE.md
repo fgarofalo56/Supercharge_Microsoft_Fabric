@@ -6,7 +6,7 @@
 **Type:** Infrastructure + Documentation + Data Engineering
 **Primary Stack:** Bicep, Python, PySpark, KQL, DAX
 **Target Platform:** Microsoft Fabric (F64 SKU)
-**Phase Status:** Phase 13 In Progress (DOJ Domain + Use Cases, 2026-04-23)
+**Phase Status:** Phase 15 Complete (Layout, Visual Impact & CSA-in-a-Box, 2026-05-05)
 
 ## Key Technologies
 
@@ -24,8 +24,8 @@
 infra/              - Bicep IaC modules and deployments
 docs/               - Architecture, deployment, best practices, feature docs
   best-practices/   - Error handling, alerting, performance, governance, CI/CD, CMK, OAP, capacity, BCDR, testing, RBAC, network, medallion, migration, observability, multi-tenant, sharing, CDC
-  features/         - 22 feature docs: Fabric IQ, RTI, Copilot, Data Mesh, DTB, Data Agents, OneLake Security, Mirroring, Direct Lake, SQL DB, GraphQL, Semantic Link, Catalog, AutoML, Translytical, MCP, Monitoring, Copy Job, Iceberg, dbt, MLV, Vector DB
-tutorials/          - 38 step-by-step tutorials (00-38)
+  features/         - 55 feature docs: Fabric IQ, RTI, Copilot, Data Mesh, DTB, Data Agents, OneLake Security, Mirroring, Direct Lake, SQL DB, GraphQL, Semantic Link, Catalog, AutoML, Translytical, MCP, Monitoring, Copy Job, Iceberg, dbt, MLV, Vector DB
+tutorials/          - 58 step-by-step tutorials (00-57)
 poc-agenda/         - 3-day workshop materials
 data_generation/    - 17 Python data generators (casino, federal, streaming, analytics)
   open_data/        - Real federal dataset download scripts (USDA, SBA, NOAA, EPA, DOI, DOJ)
@@ -35,7 +35,7 @@ notebooks/          - 58+ Fabric-importable notebooks (medallion + streaming + f
   gold/             - 19 Gold KPI/analytics notebooks (+ digital twin, AI functions)
   docs/use-cases/   - Applied analytics use cases with published references
 scripts/            - Deployment scripts (fabric-cicd)
-validation/         - 612 unit tests + 9 Great Expectations suites
+validation/         - 431 unit tests + 9 Great Expectations suites
 ```
 
 ## Coding Conventions
@@ -102,7 +102,7 @@ validation/         - 612 unit tests + 9 Great Expectations suites
 # Validate Bicep
 az bicep build --file infra/main.bicep
 
-# Run all 134 unit tests
+# Run all 431 unit tests
 pytest validation/unit_tests/ -v
 
 # Run by category
@@ -235,7 +235,7 @@ Phase 11 is a pure audit remediation — no new features, only correctness fixes
 | Bicep modules | Deleted metadata-only stub modules |
 | Notebooks (65) | Bulk-fixed for Fabric compatibility: `dbutils` → `mssparkutils`, `/tmp` → OneLake checkpoints, `lh_bronze.*` namespace |
 | Utilities | Added `bronze_utils.py` shared helper |
-| Test suite | Restored full suite to 612 passing tests |
+| Test suite | Restored full suite to 431 passing tests |
 | Documentation | Fixed broken tutorial nav links, Tutorial 19/36 false terminals, Tutorial 15 progress tracker, clone URL typos |
 
 ## Archon Project ID

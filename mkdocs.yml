@@ -319,6 +319,7 @@ nav:
       - Data Engineering:
         - Copy Job CDC: features/copy-job-cdc.md
         - Dataflow Gen2: features/dataflow-gen2.md
+        - AI-Powered Prompt Transform: features/dataflow-gen2-ai-prompt-transform.md
         - dbt Integration: features/dbt-fabric-integration.md
         - Materialized Lake Views: features/materialized-lake-views.md
         - Apache Airflow Job: features/apache-airflow-job.md
@@ -352,6 +353,7 @@ nav:
         - Paginated Reports: features/paginated-reports.md
         - Scorecards & Metrics: features/scorecards-metrics.md
         - TMDL Power BI Developer Mode: features/tmdl-power-bi-developer-mode.md
+        - DAX User-Defined Functions: features/dax-user-defined-functions.md
       - Spatial & Graph:
         - Graph in Fabric: features/graph-in-fabric.md
         - Maps in Fabric: features/maps-in-fabric.md
@@ -362,8 +364,11 @@ nav:
         - Deployment Pipelines: features/deployment-pipelines.md
         - Git Integration: features/git-integration.md
         - Fabric REST APIs: features/fabric-rest-apis.md
+        - Fabric Extensibility Toolkit: features/fabric-extensibility-toolkit.md
+        - Eventhouse Entity Diagrams: features/eventhouse-entity-diagrams.md
       - Security & Networking:
         - VNet Data Gateway: features/vnet-data-gateway.md
+        - Gateway PowerShell Automation: features/gateway-powershell-automation.md
         - Workspace IP Firewall: features/workspace-ip-firewall.md
         - Federated Fabric for GCC: features/federated-fabric-gcc.md
     - Tutorials:
@@ -548,6 +553,7 @@ nav:
     - Infrastructure:
       - Overview: infra/README.md
       - Bicep Module Index: infra/modules/README.md
+      - Bicep Module Reference (auto-generated): BICEP_MODULES.md
       - Contributing: CONTRIBUTING.md
     - Power BI Reports:
       - Reports & Semantic Model: reports/README.md

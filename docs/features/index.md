@@ -2,7 +2,7 @@
 title: Features
 description: Microsoft Fabric platform features and capabilities
 hero: assets/heroes/features.svg
-hero_alt: "Build on Fabric — 26 features across foundation, data engineering, AI, real-time, and ops"
+hero_alt: "Build on Fabric — 55 features across foundation, data engineering, AI, real-time, and ops"
 ---
 # Features
 
@@ -52,6 +52,14 @@ Explore the full spectrum of Microsoft Fabric capabilities — from real-time in
 
     [:octicons-arrow-right-24: Use Semantic Link](semantic-link.md)
 
+-   :material-auto-fix:{ .lg .middle } __AI Prompt Transform__
+
+    ---
+
+    Enrich and transform Dataflow Gen2 data with governed natural-language prompts.
+
+    [:octicons-arrow-right-24: Prompt Transform](dataflow-gen2-ai-prompt-transform.md)
+
 </div>
 
 ## Real-Time & Streaming
@@ -89,6 +97,14 @@ Explore the full spectrum of Microsoft Fabric capabilities — from real-time in
     Change data capture with Copy Job for incremental data movement and synchronization.
 
     [:octicons-arrow-right-24: Copy Job CDC](copy-job-cdc.md)
+
+-   :material-graph-outline:{ .lg .middle } __Eventhouse Entity Diagrams__
+
+    ---
+
+    Explore KQL database entities, dependencies, and ingestion paths as an interactive graph.
+
+    [:octicons-arrow-right-24: Entity Diagrams](eventhouse-entity-diagrams.md)
 
 </div>
 
@@ -252,6 +268,14 @@ Explore the full spectrum of Microsoft Fabric capabilities — from real-time in
 
     [:octicons-arrow-right-24: Dataflow Gen2](dataflow-gen2.md)
 
+-   :material-puzzle:{ .lg .middle } __Extensibility Toolkit__
+
+    ---
+
+    Build custom item types, editors, and workloads that run natively in the Fabric portal.
+
+    [:octicons-arrow-right-24: Extensibility Toolkit](fabric-extensibility-toolkit.md)
+
 </div>
 
 ## Analytics & BI
@@ -298,6 +322,14 @@ Explore the full spectrum of Microsoft Fabric capabilities — from real-time in
 
     [:octicons-arrow-right-24: Cross-Database Queries](cross-database-queries.md)
 
+-   :material-function-variant:{ .lg .middle } __DAX User-Defined Functions__
+
+    ---
+
+    Centralize parameterized DAX business logic as reusable semantic-model functions.
+
+    [:octicons-arrow-right-24: DAX UDFs](dax-user-defined-functions.md)
+
 </div>
 
 ## Connectivity & Security
@@ -327,5 +359,13 @@ Explore the full spectrum of Microsoft Fabric capabilities — from real-time in
     Restrict workspace access to approved IP ranges for network security.
 
     [:octicons-arrow-right-24: IP Firewall](workspace-ip-firewall.md)
+
+-   :material-powershell:{ .lg .middle } __Gateway PowerShell Automation__
+
+    ---
+
+    Automate on-premises gateway inventory, health checks, maintenance, and recovery.
+
+    [:octicons-arrow-right-24: Gateway Automation](gateway-powershell-automation.md)
 
 </div>
