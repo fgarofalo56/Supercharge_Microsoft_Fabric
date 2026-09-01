@@ -4,6 +4,6 @@
 mkdocs>=1.6.1
 mkdocs-material>=9.7.7
 mkdocs-minify-plugin>=0.8.0
-pymdown-extensions>=10.21.3
+pymdown-extensions>=11.0.2
 pillow>=12.2.0
 cairosvg>=2.9.0
