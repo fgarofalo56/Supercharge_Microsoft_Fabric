@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 GitHub Discussions
+    url: https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: 📖 Microsoft Fabric Documentation
+    url: https://learn.microsoft.com/en-us/fabric/
+    about: Official Microsoft Fabric documentation
+  - name: 🗺️ Microsoft Fabric Roadmap
+    url: https://learn.microsoft.com/en-us/fabric/release-plan/
+    about: Check if a missing feature is already on the Fabric roadmap
+  - name: 🤝 Contributing Guide
+    url: https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/CONTRIBUTING.md
+    about: Learn how to contribute to this project
