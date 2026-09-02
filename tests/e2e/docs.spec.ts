@@ -64,12 +64,12 @@ test.describe('Documentation Site Health', () => {
     const tabCount = await navTabs.count();
     expect(tabCount).toBeGreaterThan(3);
 
-    // Verify key sections are in navigation. The nav was restructured to an
-    // 8-tab IA where Tutorials sits under "Build" (not a top-level tab),
-    // so we assert the new top-level tabs instead.
+    // Verify key sections are in navigation. Top-level tabs per mkdocs.yml:
+    // Home / Get Started / Architecture / Features / Use Cases / Research /
+    // Operate / Reference. Tutorials sit under Get Started, not a top tab.
     const navText = await page.locator('.md-tabs').textContent();
     expect(navText).toContain('Home');
-    expect(navText).toContain('Build');
+    expect(navText).toContain('Get Started');
     expect(navText).toContain('Architecture');
     expect(navText).toContain('Use Cases');
   });
