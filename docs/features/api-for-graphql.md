@@ -1190,7 +1190,7 @@ ON dbo.gaming_sessions;
 - [fabric-cicd Deployment](../best-practices/fabric-cicd-deployment.md) -- CI/CD deployment patterns
 - [OneLake Security](onelake-security.md) -- Securing data sources exposed through GraphQL
 - [Real-Time Intelligence](real-time-intelligence.md) -- Real-time data patterns
-- [Architecture](../ARCHITECTURE.md) -- System architecture overview
+- [Architecture](../architecture.md) -- System architecture overview
 
 ---
 

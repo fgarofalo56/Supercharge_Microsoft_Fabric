@@ -38,7 +38,7 @@ type: feature
 | Real-time patient vitals monitoring | Eventstream → Eventhouse → Data Activator alerts | < 5 sec | [RTI](../features/real-time-intelligence.md), [Alerting](../best-practices/alerting-data-activator.md) |
 | Readmission risk prediction | Lakehouse Gold + AutoML model endpoint | Hourly scoring | [AutoML](../features/automl-model-endpoints.md), [MLOps](../best-practices/mlops-fabric-production.md) |
 | Medical device telemetry | Eventstream → Eventhouse with Digital Twin Builder | < 2 sec | [Digital Twin Builder](../features/digital-twin-builder.md), [RTI](../features/real-time-intelligence.md) |
-| Population health dashboards | Warehouse star schema + Direct Lake | Daily | [Warehouse Setup](../best-practices/08_WAREHOUSE_SETUP.md), [Direct Lake](../features/direct-lake.md) |
+| Population health dashboards | Warehouse star schema + Direct Lake | Daily | [Warehouse Setup](../best-practices/08-warehouse-setup.md), [Direct Lake](../features/direct-lake.md) |
 
 ---
 

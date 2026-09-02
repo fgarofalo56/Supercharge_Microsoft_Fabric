@@ -178,10 +178,10 @@ nav:
   # ============================================================
   - Get Started:
     - Welcome: getting-started/index.md
-    - Quick Start: QUICK_START.md
-    - Prerequisites: PREREQUISITES.md
-    - Deployment: DEPLOYMENT.md
-    - Cost Estimation: COST_ESTIMATION.md
+    - Quick Start: quick-start.md
+    - Prerequisites: prerequisites.md
+    - Deployment: deployment.md
+    - Cost Estimation: cost-estimation.md
     - AI Copilot Chat: chat.md
     - Role-Based Quickstarts:
       - Overview: quickstarts/index.md
@@ -195,10 +195,10 @@ nav:
   # 3. ARCHITECTURE — how the platform is designed and why
   # ============================================================
   - Architecture:
-    - Overview: ARCHITECTURE.md
-    - Security: SECURITY.md
-    - Networking: NETWORKING.md
-    - Disaster Recovery: DISASTER_RECOVERY.md
+    - Overview: architecture.md
+    - Security: security.md
+    - Networking: networking.md
+    - Disaster Recovery: disaster-recovery.md
     - Reference Architectures:
       - Overview: reference-architecture/index.md
       - Small-Medium Enterprise: reference-architecture/small-medium-enterprise.md
@@ -215,23 +215,23 @@ nav:
       - Direct Lake vs Import vs DirectQuery: decisions/direct-lake-import-directquery.md
       - ETL vs ELT vs Streaming: decisions/etl-elt-streaming.md
       - Workspace Topology: decisions/workspace-topology.md
-      - Decision Trees Index: DECISION_TREES.md
+      - Decision Trees Index: decision-trees.md
       - Partition Strategy: best-practices/partition-strategy-decision-tree.md
     - Best Practices:
       - Overview: best-practices/index.md
-      - Best Practices Index: BEST_PRACTICES.md
+      - Best Practices Index: best-practices.md
       - Foundations:
-        - Workspaces & Naming: best-practices/01_WORKSPACES_NAMING.md
-        - Data Gateway: best-practices/02_DATA_GATEWAY.md
-        - Pipelines & Data Movement: best-practices/03_PIPELINES_DATA_MOVEMENT.md
-        - Metadata-Driven Pipelines: best-practices/04_METADATA_DRIVEN_PIPELINES.md
-        - Spark & Notebooks: best-practices/05_SPARK_NOTEBOOKS.md
-        - Dataflows Gen2: best-practices/06_DATAFLOWS.md
-        - Lakehouse Setup: best-practices/07_LAKEHOUSE_SETUP.md
-        - Warehouse Setup: best-practices/08_WAREHOUSE_SETUP.md
-        - Source-Specific Patterns: best-practices/09_SOURCE_SPECIFIC_PATTERNS.md
-        - Decision Guide: best-practices/10_DECISION_GUIDE.md
-        - Oracle Gateway Troubleshooting: best-practices/11_ORACLE_GATEWAY_TROUBLESHOOTING.md
+        - Workspaces & Naming: best-practices/01-workspaces-naming.md
+        - Data Gateway: best-practices/02-data-gateway.md
+        - Pipelines & Data Movement: best-practices/03-pipelines-data-movement.md
+        - Metadata-Driven Pipelines: best-practices/04-metadata-driven-pipelines.md
+        - Spark & Notebooks: best-practices/05-spark-notebooks.md
+        - Dataflows Gen2: best-practices/06-dataflows.md
+        - Lakehouse Setup: best-practices/07-lakehouse-setup.md
+        - Warehouse Setup: best-practices/08-warehouse-setup.md
+        - Source-Specific Patterns: best-practices/09-source-specific-patterns.md
+        - Decision Guide: best-practices/10-decision-guide.md
+        - Oracle Gateway Troubleshooting: best-practices/11-oracle-gateway-troubleshooting.md
       - Architecture & Design:
         - Medallion Architecture Deep Dive: best-practices/medallion-architecture-deep-dive.md
         - Multi-Tenant Workspace Architecture: best-practices/multi-tenant-workspace-architecture.md
@@ -514,7 +514,7 @@ nav:
     - Enterprise Data Platform Comparison: research/enterprise-data-platform-comparison.md
     - AI Readiness Assessment: research/ai-readiness-assessment.md
     - Data Mesh Maturity Model: research/data-mesh-maturity-model.md
-    - Migration & RTI Research: MIGRATION_AND_RTI_RESEARCH.md
+    - Migration & RTI Research: migration-and-rti-research.md
 
   # ============================================================
   # 7. OPERATE — Day-2 ops, runbooks, compliance, infrastructure
@@ -544,16 +544,16 @@ nav:
       - NIST 800-53: compliance/nist-800-53.md
     - Compliance Templates:
       - Overview: compliance-templates/README.md
-      - CTR Template: compliance-templates/CTR_TEMPLATE.md
-      - MICS Template: compliance-templates/MICS_TEMPLATE.md
-      - SAR Template: compliance-templates/SAR_TEMPLATE.md
-      - W-2G Template: compliance-templates/W2G_TEMPLATE.md
+      - CTR Template: compliance-templates/ctr-template.md
+      - MICS Template: compliance-templates/mics-template.md
+      - SAR Template: compliance-templates/sar-template.md
+      - W-2G Template: compliance-templates/w2g-template.md
       - DSAR Runbook: compliance-templates/dsar-runbook.md
       - SOC 2 Control Matrix: compliance-templates/soc2-control-matrix.md
     - Infrastructure:
       - Overview: infra/README.md
       - Bicep Module Index: infra/modules/README.md
-      - Bicep Module Reference (auto-generated): BICEP_MODULES.md
+      - Bicep Module Reference (auto-generated): bicep-modules.md
       - Contributing: CONTRIBUTING.md
     - Power BI Reports:
       - Reports & Semantic Model: reports/README.md
@@ -573,19 +573,19 @@ nav:
       - Sample Data: sample-data/README.md
       - Dev Container: dev-container/README.md
       - Git Hooks: git-hooks/README.md
-    - Troubleshooting Matrix: TROUBLESHOOTING_MATRIX.md
+    - Troubleshooting Matrix: troubleshooting-matrix.md
 
   # ============================================================
   # 8. REFERENCE — lookup material, glossaries, schemas
   # ============================================================
   - Reference:
-    - FAQ: FAQ.md
-    - Field Questions: FIELD_QUESTIONS.md
-    - Glossary: GLOSSARY.md
-    - Style Guide: STYLE_GUIDE.md
-    - Visual Standards: VISUAL_STANDARDS.md
-    - Cheat Sheets: CHEAT_SHEETS.md
-    - Generator API Reference: GENERATOR_API_REFERENCE.md
+    - FAQ: faq.md
+    - Field Questions: field-questions.md
+    - Glossary: glossary.md
+    - Style Guide: style-guide.md
+    - Visual Standards: visual-standards.md
+    - Cheat Sheets: cheat-sheets.md
+    - Generator API Reference: generator-api-reference.md
     - Data Dictionary: data-dictionary/README.md
-    - My Resources: MY_RESOURCES.md
+    - My Resources: my-resources.md
     - Changelog: CHANGELOG.md

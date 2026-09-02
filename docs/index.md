@@ -17,7 +17,7 @@ last_reviewed: 2026-05-29
 !!! info "Personal project — not an official Microsoft product"
     This is a personal, community-built reference maintained by [Frank Garofalo](https://github.com/fgarofalo56). It is **not** a sanctioned Microsoft deliverable, nor official Microsoft Fabric product documentation, and opinions here are the author's own. The compliance pages (FedRAMP, HIPAA, NIST 800-53, NIGC MICS, Title 31/BSA, etc.) are **reference control mappings for education and POC scoping — not authorizations, attestations, or certifications.**
 
-[Quick Start](PREREQUISITES.md){ .md-button .md-button--primary }
+[Quick Start](prerequisites.md){ .md-button .md-button--primary }
 [Tutorials](tutorials/index.md){ .md-button }
 
 ---
@@ -63,7 +63,7 @@ Its sibling, **[CSA-in-a-Box](https://fgarofalo56.github.io/csa-inabox/)**, is t
 
     Prerequisites, Azure setup, one-click Bicep deployment
 
-    [:octicons-arrow-right-24: Get started](PREREQUISITES.md)
+    [:octicons-arrow-right-24: Get started](prerequisites.md)
 
 -   :material-school:{ .lg .middle } __Tutorials__
 
@@ -79,7 +79,7 @@ Its sibling, **[CSA-in-a-Box](https://fgarofalo56.github.io/csa-inabox/)**, is t
 
     System design, component overview, data flow diagrams
 
-    [:octicons-arrow-right-24: View architecture](ARCHITECTURE.md)
+    [:octicons-arrow-right-24: View architecture](architecture.md)
 
 -   :material-calendar-check:{ .lg .middle } __3-Day POC Agenda__
 
@@ -189,7 +189,7 @@ This reference covers casino/gaming regulations (NIGC MICS, Title 31/BSA, IRS Ga
 | **IRS Gaming** | W-2G, 1042-S reporting |
 | **State Gaming Commissions** | Jurisdiction-specific requirements |
 
-[:octicons-arrow-right-24: Security documentation](SECURITY.md){ .md-button }
+[:octicons-arrow-right-24: Security documentation](security.md){ .md-button }
 
 ---
 
@@ -227,7 +227,7 @@ This reference covers casino/gaming regulations (NIGC MICS, Title 31/BSA, IRS Ga
 
     F64 capacity sizing, commercial vs Azure Government. Pricing changes often — verify current rates on the Azure pricing calculator.
 
-    [:octicons-arrow-right-24: Cost details](COST_ESTIMATION.md)
+    [:octicons-arrow-right-24: Cost details](cost-estimation.md)
 
 </div>
 

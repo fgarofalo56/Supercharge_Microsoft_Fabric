@@ -561,8 +561,8 @@ After completing prerequisites:
 
 | Step | Document | Description |
 |------|----------|-------------|
-| 1 | [🏗️ Architecture](ARCHITECTURE.md) | Review system design |
-| 2 | [🚀 Deployment](DEPLOYMENT.md) | Deploy infrastructure |
+| 1 | [🏗️ Architecture](architecture.md) | Review system design |
+| 2 | [🚀 Deployment](deployment.md) | Deploy infrastructure |
 | 3 | [Tutorial 00](tutorials/00-environment-setup/README.md) | Hands-on setup |
 
 ---
@@ -571,9 +571,9 @@ After completing prerequisites:
 
 | Document | Description |
 |----------|-------------|
-| [🏗️ Architecture](ARCHITECTURE.md) | System architecture and design |
-| [🚀 Deployment Guide](DEPLOYMENT.md) | Infrastructure deployment |
-| [🔐 Security Guide](SECURITY.md) | Security controls and compliance |
+| [🏗️ Architecture](architecture.md) | System architecture and design |
+| [🚀 Deployment Guide](deployment.md) | Infrastructure deployment |
+| [🔐 Security Guide](security.md) | Security controls and compliance |
 
 ---
 

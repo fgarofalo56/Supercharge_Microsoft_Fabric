@@ -857,7 +857,7 @@ SharePoint Lists are widely used for lightweight data tracking across organizati
 - [Network Security](../best-practices/network-security.md) — Private endpoints and gateway configuration
 - [Incremental Refresh & CDC](../best-practices/incremental-refresh-cdc.md) — Delta MERGE patterns used by mirroring
 - [Real-Time Intelligence](real-time-intelligence.md) — Streaming complement to mirroring
-- [Architecture](../ARCHITECTURE.md) — System architecture overview
+- [Architecture](../architecture.md) — System architecture overview
 
 ---
 

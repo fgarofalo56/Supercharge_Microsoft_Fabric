@@ -1004,7 +1004,7 @@ The following capabilities are not in scope for Digital Twin Builder and should 
 - [Fabric IQ](fabric-iq.md) -- Natural language querying for twin data
 - [AI Copilot Configuration](ai-copilot-configuration.md) -- KQL Copilot for Eventhouse twin queries
 - [Data Mesh Enterprise Patterns](data-mesh-enterprise-patterns.md) -- Cross-domain twin architecture
-- [Architecture](../ARCHITECTURE.md) -- System architecture overview
+- [Architecture](../architecture.md) -- System architecture overview
 
 ---
 

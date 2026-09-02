@@ -1292,8 +1292,8 @@ When the agent returns incorrect or incomplete results:
 - [AI Copilot Configuration](ai-copilot-configuration.md) -- Built-in Copilot features comparison
 - [Real-Time Intelligence](real-time-intelligence.md) -- KQL database integration for agents
 - [Data Mesh Enterprise Patterns](data-mesh-enterprise-patterns.md) -- Cross-domain agent architecture
-- [Architecture](../ARCHITECTURE.md) -- System architecture overview
-- [Security](../SECURITY.md) -- Security and compliance framework
+- [Architecture](../architecture.md) -- System architecture overview
+- [Security](../security.md) -- Security and compliance framework
 
 ---
 

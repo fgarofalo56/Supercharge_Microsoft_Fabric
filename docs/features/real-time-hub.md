@@ -353,7 +353,7 @@ Federal agencies with shared Fabric tenants (e.g., USDA + NOAA sharing capacity)
 - [Real-Time Intelligence](real-time-intelligence.md) — Eventstreams and Eventhouse for analytics
 - [Data Activator](data-activator.md) — Alerting triggered from Real-Time Hub events
 - [Data Sharing & Federation](../best-practices/data-sharing-federation.md) — Cross-workspace sharing
-- [Architecture](../ARCHITECTURE.md) — System architecture
+- [Architecture](../architecture.md) — System architecture
 
 ---
 

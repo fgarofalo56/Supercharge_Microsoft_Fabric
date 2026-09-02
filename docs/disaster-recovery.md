@@ -445,9 +445,9 @@ FOLLOW-UP: [Actions]
 
 | Document | Description |
 |----------|-------------|
-| [🏗️ Architecture](ARCHITECTURE.md) | System architecture and design |
-| [🔐 Security Guide](SECURITY.md) | Security controls and compliance |
-| [🚀 Deployment Guide](DEPLOYMENT.md) | Infrastructure deployment |
+| [🏗️ Architecture](architecture.md) | System architecture and design |
+| [🔐 Security Guide](security.md) | Security controls and compliance |
+| [🚀 Deployment Guide](deployment.md) | Infrastructure deployment |
 
 ---
 

@@ -70,4 +70,4 @@ Each quickstart follows the same structure:
 | **Common Pitfalls** | Mistakes to avoid based on real-world patterns |
 | **Related Resources** | Grid cards linking to the most relevant docs |
 
-Already familiar with Fabric? Jump straight to the [general Quick Start Guide](../QUICK_START.md) for the fastest path to a running POC.
+Already familiar with Fabric? Jump straight to the [general Quick Start Guide](../quick-start.md) for the fastest path to a running POC.

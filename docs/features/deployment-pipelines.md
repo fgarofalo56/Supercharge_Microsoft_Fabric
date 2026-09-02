@@ -466,7 +466,7 @@ jobs:
 - [Fabric CI/CD Deployment](../best-practices/fabric-cicd-deployment.md) — Git-based CI/CD with fabric-cicd Python CLI
 - [Workspace Monitoring](workspace-monitoring.md) — Monitor deployed workspaces
 - [Identity & RBAC Patterns](../best-practices/identity-rbac-patterns.md) — Role-based access for deployment stages
-- [Architecture](../ARCHITECTURE.md) — System architecture overview
+- [Architecture](../architecture.md) — System architecture overview
 
 ---
 

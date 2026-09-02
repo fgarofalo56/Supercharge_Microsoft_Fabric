@@ -102,7 +102,7 @@ description: Template for delegating documentation tasks to Copilot coding agent
 
 ## References
 <!-- Helpful context -->
-- Style guide: `docs/STYLE_GUIDE.md`
+- Style guide: `docs/style-guide.md`
 - Similar documentation: [link]
 - Related code: `src/path/to/code`
 

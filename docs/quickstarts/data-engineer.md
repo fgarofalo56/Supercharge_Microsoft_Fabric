@@ -45,7 +45,7 @@ Follow these steps in order to get a working medallion pipeline running:
 |-----|-------|----------|
 | 1 | Complete 30-minute path above | Tutorials 00-03, 06 |
 | 2 | Add real-time streaming ingestion | [Tutorial 04: Real-Time Analytics](../tutorials/04-real-time-analytics/README.md) |
-| 3 | Set up Lakehouse schemas and shortcuts | [Lakehouse Setup Best Practices](../best-practices/07_LAKEHOUSE_SETUP.md) |
+| 3 | Set up Lakehouse schemas and shortcuts | [Lakehouse Setup Best Practices](../best-practices/07-lakehouse-setup.md) |
 | 4 | Implement data quality checks | [Testing Strategies](../best-practices/testing-strategies.md) |
 | 5 | Configure CI/CD for notebook deployment | [fabric-cicd Deployment](../best-practices/fabric-cicd-deployment.md) |
 
@@ -56,9 +56,9 @@ Follow these steps in order to get a working medallion pipeline running:
 | Feature | Doc Link | Why It Matters |
 |---------|----------|----------------|
 | Medallion Architecture | [Deep Dive](../best-practices/medallion-architecture-deep-dive.md) | The foundational pattern for all data transformation layers |
-| Spark Notebooks | [Best Practices](../best-practices/05_SPARK_NOTEBOOKS.md) | Your primary development tool for PySpark transformations |
-| Data Factory Pipelines | [Pipelines & Data Movement](../best-practices/03_PIPELINES_DATA_MOVEMENT.md) | Orchestration, scheduling, and dependency management |
-| Lakehouse Setup | [Setup Guide](../best-practices/07_LAKEHOUSE_SETUP.md) | Delta Lake storage, schema enforcement, and table management |
+| Spark Notebooks | [Best Practices](../best-practices/05-spark-notebooks.md) | Your primary development tool for PySpark transformations |
+| Data Factory Pipelines | [Pipelines & Data Movement](../best-practices/03-pipelines-data-movement.md) | Orchestration, scheduling, and dependency management |
+| Lakehouse Setup | [Setup Guide](../best-practices/07-lakehouse-setup.md) | Delta Lake storage, schema enforcement, and table management |
 | Mirroring | [Mirroring Guide](../features/mirroring.md) | Near-real-time replication from operational databases |
 | Incremental Refresh & CDC | [CDC Patterns](../best-practices/incremental-refresh-cdc.md) | Efficient data loading without full reprocessing |
 | Dataflow Gen2 | [Dataflow Gen2](../features/dataflow-gen2.md) | Low-code/no-code ETL for lighter transformations |
@@ -99,7 +99,7 @@ Follow these steps in order to get a working medallion pipeline running:
 
     Metadata-driven pipelines, error handling, retry patterns, and scheduling strategies.
 
-    [:octicons-arrow-right-24: Metadata-Driven Pipelines](../best-practices/04_METADATA_DRIVEN_PIPELINES.md)
+    [:octicons-arrow-right-24: Metadata-Driven Pipelines](../best-practices/04-metadata-driven-pipelines.md)
 
 -   :material-speedometer:{ .lg .middle } __Performance Tuning__
 

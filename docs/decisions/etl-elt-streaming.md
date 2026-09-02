@@ -197,7 +197,7 @@ flowchart TD
 
 ## Related Links
 
-- [Pipelines & Data Movement](../best-practices/03_PIPELINES_DATA_MOVEMENT.md) -- Pipeline best practices
+- [Pipelines & Data Movement](../best-practices/03-pipelines-data-movement.md) -- Pipeline best practices
 - [Real-Time Intelligence](../features/real-time-intelligence.md) -- Eventstream and Eventhouse
 - [Dataflow Gen2](../features/dataflow-gen2.md) -- Low-code data transforms
 - [Copy Job CDC](../features/copy-job-cdc.md) -- Change data capture via Copy Job

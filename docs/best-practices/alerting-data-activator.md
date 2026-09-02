@@ -1011,8 +1011,8 @@ Effective alerting in Microsoft Fabric requires:
 |----------|-------------|
 | [Error Handling & Monitoring](./error-handling-monitoring.md) | Error architecture and classification |
 | [Performance & Parallelism](./performance-parallelism.md) | Performance monitoring baselines |
-| [Disaster Recovery](../DISASTER_RECOVERY.md) | Recovery procedures |
-| [Security Guide](../SECURITY.md) | Compliance and access controls |
+| [Disaster Recovery](../disaster-recovery.md) | Recovery procedures |
+| [Security Guide](../security.md) | Compliance and access controls |
 
 ---
 

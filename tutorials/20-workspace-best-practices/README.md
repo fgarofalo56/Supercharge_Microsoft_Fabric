@@ -600,7 +600,7 @@ tags = {
 
 ## 📖 Additional Resources
 
-- [Best Practices Documentation](../../BEST_PRACTICES.md)
+- [Best Practices Documentation](../../best-practices.md)
 - [Microsoft Fabric Workspace Documentation](https://learn.microsoft.com/en-us/fabric/get-started/workspaces)
 - [Deployment Pipelines](https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/intro-to-deployment-pipelines)
 

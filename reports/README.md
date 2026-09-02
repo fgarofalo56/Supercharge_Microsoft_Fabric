@@ -315,7 +315,7 @@ Gold layer tables are pre-aggregated for optimal Direct Lake performance:
 |----------|-------------|
 | [Setup Guide](setup-guide.md) | Step-by-step setup instructions |
 | [DAX Measures](dax-measures.md) | Complete measure reference |
-| [Architecture](../ARCHITECTURE.md) | System architecture |
+| [Architecture](../architecture.md) | System architecture |
 | [Gold Layer Tutorial](../tutorials/03-gold-layer/README.md) | Gold table creation |
 | [Direct Lake Tutorial](../tutorials/05-direct-lake-powerbi/README.md) | Direct Lake setup |
 

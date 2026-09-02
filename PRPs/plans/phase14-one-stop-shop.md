@@ -69,7 +69,7 @@ Deliver Phase 14 across **9 sequential waves**, mirroring the Phase 7 harness pa
 ╔═══════════════════════════════════════════════════════════════════════════════╗
 ║                               AFTER STATE                                      ║
 ╠═══════════════════════════════════════════════════════════════════════════════╣
-║  USER_FLOW: Architect lands on repo → DECISION_TREES.md routes them to        ║
+║  USER_FLOW: Architect lands on repo → decision-trees.md routes them to        ║
 ║             correct domain → finds Synapse migration tutorial → finds         ║
 ║             SRE runbook → finds fraud detection vertical → finds Streamlit    ║
 ║             consumer app → ships in week, not quarter                         ║
@@ -492,10 +492,10 @@ For each vertical, deliver: 1 use-case doc (5-8K words), 1 generator, 3 medallio
 | # | Task | Action | Description |
 |---|------|--------|-------------|
 | 9.1 | Reorganize `docs/best-practices/` | REFACTOR | Move existing docs into subdirs: `architecture/`, `operations/`, `security/`, `performance/`, `data-management/`, `dev-experience/`. Add 301-style index redirects in old location. |
-| 9.2 | `docs/DECISION_TREES.md` | CREATE | Master decision matrix: Lakehouse vs Warehouse vs SQL DB, RTI vs batch, Direct Lake vs Import, Notebooks vs SJD vs Pipelines, Mirroring vs Shortcut vs Pipeline |
-| 9.3 | `docs/TROUBLESHOOTING_MATRIX.md` | CREATE | Symptom-indexed: slow query, capacity throttle, auth failure, ingestion lag, Power BI refresh failure |
-| 9.4 | `docs/CHEAT_SHEETS.md` | CREATE | PySpark+Fabric API cheat sheet, KQL essentials, T-SQL Fabric quirks, DAX patterns |
-| 9.5 | `docs/FAQ.md` | UPDATE | Add 25+ new entries: query perf, MLOps, migrations, security, dev experience |
+| 9.2 | `docs/decision-trees.md` | CREATE | Master decision matrix: Lakehouse vs Warehouse vs SQL DB, RTI vs batch, Direct Lake vs Import, Notebooks vs SJD vs Pipelines, Mirroring vs Shortcut vs Pipeline |
+| 9.3 | `docs/troubleshooting-matrix.md` | CREATE | Symptom-indexed: slow query, capacity throttle, auth failure, ingestion lag, Power BI refresh failure |
+| 9.4 | `docs/cheat-sheets.md` | CREATE | PySpark+Fabric API cheat sheet, KQL essentials, T-SQL Fabric quirks, DAX patterns |
+| 9.5 | `docs/faq.md` | UPDATE | Add 25+ new entries: query perf, MLOps, migrations, security, dev experience |
 | 9.6 | `notebooks/README.md` | CREATE | Cross-reference index: each notebook → tutorial → feature doc |
 | 9.7 | `infra/modules/README.md` | CREATE | Bicep module index, parameter reference, feature mapping |
 | 9.8 | `docs/use-cases/*.md` | EXPAND | Bring all 10 existing use-case docs to 5K+ words with arch diagrams, cost models, ROI |

@@ -732,7 +732,7 @@ Ad-Hoc Analytics                    → On-demand only
 - [Fabric IQ](fabric-iq.md) — Materialized views improve Fabric IQ query confidence and speed
 - [AI Copilot Configuration](ai-copilot-configuration.md) — Copilot leverages materialized views for faster responses
 - [Data Mesh Enterprise Patterns](data-mesh-enterprise-patterns.md) — Cross-domain materialized views in mesh architectures
-- [Architecture](../ARCHITECTURE.md) — System architecture overview
+- [Architecture](../architecture.md) — System architecture overview
 
 ---
 

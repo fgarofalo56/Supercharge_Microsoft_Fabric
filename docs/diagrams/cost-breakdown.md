@@ -298,11 +298,11 @@ flowchart TB
 
 | Document | Description |
 |----------|-------------|
-| [Cost Estimation Guide](../COST_ESTIMATION.md) | Detailed cost breakdown and scenarios |
+| [Cost Estimation Guide](../cost-estimation.md) | Detailed cost breakdown and scenarios |
 | [Architecture Overview](architecture-overview.md) | System architecture diagrams |
-| [Deployment Guide](../DEPLOYMENT.md) | Infrastructure deployment instructions |
+| [Deployment Guide](../deployment.md) | Infrastructure deployment instructions |
 | [Capacity Planning](../best-practices/capacity-planning-cost-optimization.md) | SKU selection and cost optimization |
 
 ---
 
-[⬆️ Back to Top](#-cost-breakdown-diagram) | [📚 Parent](../ARCHITECTURE.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#-cost-breakdown-diagram) | [📚 Parent](../architecture.md) | [🏠 Home](../index.md)

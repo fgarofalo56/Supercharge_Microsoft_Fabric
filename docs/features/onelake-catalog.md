@@ -859,7 +859,7 @@ The federal governance dashboard aggregates metrics across all agency domains:
 - [Data Mesh Enterprise Patterns](data-mesh-enterprise-patterns.md) -- Domain-based organization that drives catalog structure
 - [Data Agents](data-agents.md) -- AI agents that use catalog search for data discovery
 - [Fabric IQ](fabric-iq.md) -- Natural language querying that can leverage catalog metadata
-- [Architecture](../ARCHITECTURE.md) -- System architecture overview
+- [Architecture](../architecture.md) -- System architecture overview
 
 ---
 

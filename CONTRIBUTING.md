@@ -277,9 +277,9 @@ Suppercharge_Microsoft_Fabric/
 |   +-- environments/          # Environment-specific parameters
 |
 |-- docs/                      # Documentation
-|   |-- ARCHITECTURE.md        # Detailed architecture
-|   |-- DEPLOYMENT.md          # Deployment guide
-|   +-- SECURITY.md            # Security & compliance
+|   |-- architecture.md        # Detailed architecture
+|   |-- deployment.md          # Deployment guide
+|   +-- security.md            # Security & compliance
 |
 |-- tutorials/                 # Step-by-step tutorials
 |   |-- 00-environment-setup/

@@ -658,4 +658,4 @@ for table in spark.catalog.listTables():
 
 ---
 
-[Back to Docs](index.md) | [FAQ](FAQ.md) | [Decision Trees](DECISION_TREES.md)
+[Back to Docs](index.md) | [FAQ](faq.md) | [Decision Trees](decision-trees.md)

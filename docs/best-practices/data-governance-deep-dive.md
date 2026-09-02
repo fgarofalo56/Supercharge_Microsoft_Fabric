@@ -1240,11 +1240,11 @@ Comprehensive data governance in Microsoft Fabric requires:
 
 ## Related Documents
 
-- [Security Guide](../SECURITY.md) -- Security architecture and controls
+- [Security Guide](../security.md) -- Security architecture and controls
 - [Compliance Templates](../compliance-templates/README.md) -- CTR, SAR, W-2G, MICS templates
 - [Error Handling & Monitoring](./error-handling-monitoring.md) -- Error logging and alerting
 - [Alerting & Data Activator](./alerting-data-activator.md) -- Compliance alert patterns
-- [Workspaces & Naming](./01_WORKSPACES_NAMING.md) -- Workspace organization
+- [Workspaces & Naming](./01-workspaces-naming.md) -- Workspace organization
 
 ---
 

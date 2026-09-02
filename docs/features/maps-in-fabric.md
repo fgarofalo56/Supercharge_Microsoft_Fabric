@@ -417,7 +417,7 @@ FederalLandParcels
 - [Graph in Fabric](graph-in-fabric.md) -- Combine graph analytics with geospatial visualization
 - [Digital Twin Builder](digital-twin-builder.md) -- Entity modeling with location-aware properties
 - [Workspace Monitoring](workspace-monitoring.md) -- Monitor RTI dashboard performance
-- [Architecture](../ARCHITECTURE.md) -- System architecture overview
+- [Architecture](../architecture.md) -- System architecture overview
 
 ---
 

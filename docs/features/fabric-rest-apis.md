@@ -605,7 +605,7 @@ def provision_usda_grant_workspaces(headers, capacity_id, fiscal_year):
 - [OneLake Security](onelake-security.md) — Workspace Identity for API authentication
 - [Network Security](../best-practices/network-security.md) — Private endpoints for API calls
 - [Data Agents](data-agents.md) — Agents that use REST APIs internally
-- [Architecture](../ARCHITECTURE.md) — System architecture overview
+- [Architecture](../architecture.md) — System architecture overview
 
 ---
 

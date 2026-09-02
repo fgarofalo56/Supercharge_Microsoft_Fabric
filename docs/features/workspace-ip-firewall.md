@@ -514,7 +514,7 @@ FabricFirewallEvents
 - [Workspace Monitoring](workspace-monitoring.md) — Monitor workspace access and usage
 - [Fabric REST APIs](fabric-rest-apis.md) — API-level firewall rule management
 - [Customer-Managed Keys](../best-practices/customer-managed-keys.md) — Encryption at rest
-- [Architecture](../ARCHITECTURE.md) — System architecture overview
+- [Architecture](../architecture.md) — System architecture overview
 
 ---
 

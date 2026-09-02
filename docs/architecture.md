@@ -473,9 +473,9 @@ Direct Lake is the recommended connectivity mode for Power BI in Fabric. It prov
 
 | Document | Description |
 |----------|-------------|
-| [🚀 Deployment Guide](DEPLOYMENT.md) | Infrastructure deployment instructions |
-| [🔐 Security Guide](SECURITY.md) | Security controls and compliance |
-| [📋 Prerequisites](PREREQUISITES.md) | Setup requirements |
+| [🚀 Deployment Guide](deployment.md) | Infrastructure deployment instructions |
+| [🔐 Security Guide](security.md) | Security controls and compliance |
+| [📋 Prerequisites](prerequisites.md) | Setup requirements |
 | [📊 Architecture Diagrams](diagrams/architecture-overview.md) | Detailed Mermaid diagrams |
 
 ---

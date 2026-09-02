@@ -366,11 +366,11 @@ Before choosing a tool, answer these questions:
 
 | Document | Description |
 |----------|-------------|
-| [Pipelines & Data Movement](./03_PIPELINES_DATA_MOVEMENT.md) | Pipeline optimization patterns |
-| [Dataflows Gen2](./06_DATAFLOWS.md) | Dataflow performance optimization |
-| [Spark & Notebooks](./05_SPARK_NOTEBOOKS.md) | Spark best practices |
-| [Lakehouse Setup](./07_LAKEHOUSE_SETUP.md) | Lakehouse architecture and configuration |
-| [Warehouse Setup](./08_WAREHOUSE_SETUP.md) | Warehouse schema design and optimization |
+| [Pipelines & Data Movement](./03-pipelines-data-movement.md) | Pipeline optimization patterns |
+| [Dataflows Gen2](./06-dataflows.md) | Dataflow performance optimization |
+| [Spark & Notebooks](./05-spark-notebooks.md) | Spark best practices |
+| [Lakehouse Setup](./07-lakehouse-setup.md) | Lakehouse architecture and configuration |
+| [Warehouse Setup](./08-warehouse-setup.md) | Warehouse schema design and optimization |
 | [Real-Time Intelligence](../features/real-time-intelligence.md) | Eventstream and Eventhouse features |
 
 ---

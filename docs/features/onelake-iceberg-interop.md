@@ -951,7 +951,7 @@ flowchart LR
 - [Data Sharing & Federation](../best-practices/data-sharing-federation.md) -- Shortcut patterns and external federation
 - [Direct Lake](direct-lake.md) -- Direct Lake semantic models over Iceberg/Delta tables
 - [AI Copilot Configuration](ai-copilot-configuration.md) -- Copilot for multi-format data exploration
-- [Architecture](../ARCHITECTURE.md) -- System architecture overview
+- [Architecture](../architecture.md) -- System architecture overview
 
 ---
 

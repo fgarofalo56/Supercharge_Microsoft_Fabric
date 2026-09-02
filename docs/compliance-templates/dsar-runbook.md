@@ -1749,10 +1749,10 @@ Findings feed into the next quarterly Privacy Office review and (where systemic)
 ### Compliance Templates (peers)
 
 - [SOC 2 Control Matrix Template](soc2-control-matrix.md) (Wave 5)
-- [CTR Template](CTR_TEMPLATE.md)
-- [SAR Template](SAR_TEMPLATE.md)
-- [W-2G Template](W2G_TEMPLATE.md)
-- [MICS Template](MICS_TEMPLATE.md)
+- [CTR Template](ctr-template.md)
+- [SAR Template](sar-template.md)
+- [W-2G Template](w2g-template.md)
+- [MICS Template](mics-template.md)
 
 ---
 

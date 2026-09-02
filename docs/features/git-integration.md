@@ -372,7 +372,7 @@ casino-fabric/
 - [Deployment Pipelines](deployment-pipelines.md) — Stage-based promotion
 - [Fabric CI/CD Deployment](../best-practices/fabric-cicd-deployment.md) — Programmatic deployment with fabric-cicd
 - [Identity & RBAC Patterns](../best-practices/identity-rbac-patterns.md) — Access control
-- [Architecture](../ARCHITECTURE.md) — System architecture
+- [Architecture](../architecture.md) — System architecture
 
 ---
 

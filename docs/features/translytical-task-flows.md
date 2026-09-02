@@ -919,7 +919,7 @@ Every Task Flow execution generates an audit record:
 - [Data Agents](data-agents.md) -- AI agents that can invoke Task Flows programmatically
 - [Data Mesh Enterprise Patterns](data-mesh-enterprise-patterns.md) -- Cross-domain write-back governance
 - [Digital Twin Builder](digital-twin-builder.md) -- Write-back for twin configuration updates
-- [Architecture](../ARCHITECTURE.md) -- System architecture overview
+- [Architecture](../architecture.md) -- System architecture overview
 
 ---
 

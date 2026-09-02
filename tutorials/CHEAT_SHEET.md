@@ -436,4 +436,4 @@ az deployment sub show --name main --query "properties.outputs"
 
 ---
 
-> 📖 **Full Documentation:** [Quick Start](../QUICK_START.md) | [Architecture](../ARCHITECTURE.md) | [Tutorials](./index.md)
+> 📖 **Full Documentation:** [Quick Start](../quick-start.md) | [Architecture](../architecture.md) | [Tutorials](./index.md)

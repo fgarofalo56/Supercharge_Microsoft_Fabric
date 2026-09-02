@@ -842,7 +842,7 @@ These steps are now fully supported under Microsoft SLAs and recommended for pro
 - [Data Governance Deep Dive](../best-practices/data-governance-deep-dive.md) — Governance for ETL pipelines
 - [Performance Best Practices](../best-practices/performance-parallelism.md) — Delta table optimization post-ingestion
 - [Fabric CI/CD Deployment](../best-practices/fabric-cicd-deployment.md) — Deploy Fabric items via CI/CD
-- [Architecture](../ARCHITECTURE.md) — System architecture overview
+- [Architecture](../architecture.md) — System architecture overview
 
 ---
 

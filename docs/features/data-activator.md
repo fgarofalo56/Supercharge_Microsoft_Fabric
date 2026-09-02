@@ -570,7 +570,7 @@ Rule: HighVolumeAlert
 - [Workspace Monitoring](workspace-monitoring.md) — Infrastructure monitoring for Fabric workspaces
 - [Alerting Best Practices](../best-practices/alerting-data-activator.md) — Alert rule design and fatigue prevention
 - [Copy Job CDC](copy-job-cdc.md) — Incremental ingestion that feeds Data Activator via Eventstream
-- [Architecture](../ARCHITECTURE.md) — System architecture overview
+- [Architecture](../architecture.md) — System architecture overview
 
 ---
 

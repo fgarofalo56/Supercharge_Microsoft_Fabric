@@ -852,7 +852,7 @@ Copy Job → Monitor → Watermark State
 - [Data Governance Deep Dive](../best-practices/data-governance-deep-dive.md) -- Governance for incremental ingestion
 - [Performance Best Practices](../best-practices/performance-parallelism.md) -- Delta table optimization post-ingestion
 - [Fabric CI/CD Deployment](../best-practices/fabric-cicd-deployment.md) -- Deploy Copy Job configurations via CI/CD
-- [Architecture](../ARCHITECTURE.md) -- System architecture overview
+- [Architecture](../architecture.md) -- System architecture overview
 
 ---
 

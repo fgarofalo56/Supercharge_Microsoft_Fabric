@@ -391,9 +391,9 @@ def generate_mics_compliance_report(report_month: str):
 | Document | Description |
 |----------|-------------|
 | [Compliance Templates Overview](./README.md) | Index of all compliance templates |
-| [CTR Template](./CTR_TEMPLATE.md) | Currency Transaction Report template |
-| [SAR Template](./SAR_TEMPLATE.md) | Suspicious Activity Report template |
-| [W-2G Template](./W2G_TEMPLATE.md) | Gambling winnings tax reporting |
+| [CTR Template](./ctr-template.md) | Currency Transaction Report template |
+| [SAR Template](./sar-template.md) | Suspicious Activity Report template |
+| [W-2G Template](./w2g-template.md) | Gambling winnings tax reporting |
 | [Data Dictionary](../data-dictionary/README.md) | Table schemas and field definitions |
 
 ---

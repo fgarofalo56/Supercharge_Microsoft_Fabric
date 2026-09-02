@@ -148,7 +148,7 @@ For cloud-native VNet-isolated sources without on-prem infrastructure, see [VNet
 | **Two modules** | PowerShell 5 scripts (`OnPremisesDataGatewayHAMgmt`) vs. PowerShell 7 cmdlets — pick per your runner environment |
 | **Permissions** | Cmdlets act as the signed-in gateway administrator; use a dedicated service account for automation |
 | **Scope** | Manages **on-premises data gateway** clusters only — VNet gateways and personal-mode gateways have different management surfaces |
-| **Secrets** | Never hardcode credentials in runbooks; pull from Key Vault (see [Security guidelines](../SECURITY.md)) |
+| **Secrets** | Never hardcode credentials in runbooks; pull from Key Vault (see [Security guidelines](../security.md)) |
 
 ---
 

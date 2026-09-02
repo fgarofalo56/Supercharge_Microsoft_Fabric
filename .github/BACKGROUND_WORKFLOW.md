@@ -721,7 +721,7 @@ manage_task("update", task_id="...", status="review")
 | Document                                             | Description                |
 | ---------------------------------------------------- | -------------------------- |
 | [copilot-instructions.md](./copilot-instructions.md) | Main Copilot configuration |
-| [STYLE_GUIDE.md](../docs/STYLE_GUIDE.md)             | Documentation standards    |
+| [style-guide.md](../docs/style-guide.md)             | Documentation standards    |
 | [agents/](./agents/)                                 | Agent definition files     |
 | [Harness Skill](./skills/autonomous-agent-harness/)  | Autonomous agent harness   |
 

@@ -559,7 +559,7 @@ Transactions
 - [Fabric MCP](fabric-mcp.md) -- MCP Server for programmatic graph query execution
 - [OneLake Security](onelake-security.md) -- Security controls on graph data
 - [Monitoring & Observability](../best-practices/monitoring-observability.md) -- Monitoring graph query performance
-- [Architecture](../ARCHITECTURE.md) -- System architecture overview
+- [Architecture](../architecture.md) -- System architecture overview
 
 ---
 

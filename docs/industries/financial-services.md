@@ -32,7 +32,7 @@ type: feature
 |----------|---------------|----------------|--------------|
 | Real-time fraud detection | Eventstream → Eventhouse anomaly detection → Data Activator | < 2 sec | [RTI](../features/real-time-intelligence.md), [Alerting](../best-practices/alerting-data-activator.md) |
 | Anti-money laundering (AML) | Lakehouse medallion with transaction graph analysis | Daily batch | [Medallion Architecture](../best-practices/medallion-architecture-deep-dive.md), [Graph in Fabric](../features/graph-in-fabric.md) |
-| Regulatory capital reporting (Basel III/IV) | Warehouse star schema + Direct Lake | Monthly/Quarterly | [Warehouse Setup](../best-practices/08_WAREHOUSE_SETUP.md), [Direct Lake](../features/direct-lake.md) |
+| Regulatory capital reporting (Basel III/IV) | Warehouse star schema + Direct Lake | Monthly/Quarterly | [Warehouse Setup](../best-practices/08-warehouse-setup.md), [Direct Lake](../features/direct-lake.md) |
 | Credit risk scoring | Gold layer + AutoML model endpoint | Hourly scoring | [AutoML](../features/automl-model-endpoints.md), [MLOps](../best-practices/mlops-fabric-production.md) |
 | Market data analytics | Eventstream from exchange feeds → Eventhouse | < 1 sec | [RTI](../features/real-time-intelligence.md), [Eventhouse Vector DB](../features/eventhouse-vector-database.md) |
 | Customer 360 for wealth management | Lakehouse Gold + Semantic Link | Near-real-time | [Semantic Link](../features/semantic-link.md), [Data Sharing](../best-practices/data-sharing-federation.md) |
@@ -138,7 +138,7 @@ flowchart LR
 2. **Stream transaction events** — Configure [Eventstreams](../features/real-time-intelligence.md) to ingest card authorization events from Event Hub into Eventhouse.
 3. **Apply PCI-DSS controls** — Enable [OneLake Security](../features/onelake-security.md) CLS for PAN masking, [CMK](../best-practices/customer-managed-keys.md), and [Network Security](../best-practices/network-security.md) private endpoints.
 4. **Build fraud detection** — Use Eventhouse KQL anomaly detection on the transaction stream and wire [Data Activator](../best-practices/alerting-data-activator.md) alerts.
-5. **Create regulatory reports** — Build [Warehouse](../best-practices/08_WAREHOUSE_SETUP.md) aggregation tables and connect [Direct Lake](../features/direct-lake.md) for Basel/SOX dashboards.
+5. **Create regulatory reports** — Build [Warehouse](../best-practices/08-warehouse-setup.md) aggregation tables and connect [Direct Lake](../features/direct-lake.md) for Basel/SOX dashboards.
 6. **Deploy credit risk models** — Train and deploy scoring models via [AutoML](../features/automl-model-endpoints.md) on Gold-layer feature tables.
 
 ---

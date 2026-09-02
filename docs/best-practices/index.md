@@ -21,7 +21,7 @@ Proven patterns, architectural guidance, and operational best practices for prod
 
     Naming conventions, workspace organization, and environment structure.
 
-    [:octicons-arrow-right-24: Workspace guide](01_WORKSPACES_NAMING.md)
+    [:octicons-arrow-right-24: Workspace guide](01-workspaces-naming.md)
 
 -   :material-lan-connect:{ .lg .middle } __Data Gateway__
 
@@ -29,7 +29,7 @@ Proven patterns, architectural guidance, and operational best practices for prod
 
     On-premises data gateway setup, configuration, and management.
 
-    [:octicons-arrow-right-24: Gateway guide](02_DATA_GATEWAY.md)
+    [:octicons-arrow-right-24: Gateway guide](02-data-gateway.md)
 
 -   :material-home-analytics:{ .lg .middle } __Lakehouse Setup__
 
@@ -37,7 +37,7 @@ Proven patterns, architectural guidance, and operational best practices for prod
 
     Lakehouse architecture, schema design, and optimization patterns.
 
-    [:octicons-arrow-right-24: Lakehouse setup](07_LAKEHOUSE_SETUP.md)
+    [:octicons-arrow-right-24: Lakehouse setup](07-lakehouse-setup.md)
 
 -   :material-warehouse:{ .lg .middle } __Warehouse Setup__
 
@@ -45,7 +45,7 @@ Proven patterns, architectural guidance, and operational best practices for prod
 
     Data Warehouse configuration, loading patterns, and query tuning.
 
-    [:octicons-arrow-right-24: Warehouse setup](08_WAREHOUSE_SETUP.md)
+    [:octicons-arrow-right-24: Warehouse setup](08-warehouse-setup.md)
 
 </div>
 
@@ -59,7 +59,7 @@ Proven patterns, architectural guidance, and operational best practices for prod
 
     Pipeline design, Copy Activity optimization, and data movement patterns.
 
-    [:octicons-arrow-right-24: Pipeline guide](03_PIPELINES_DATA_MOVEMENT.md)
+    [:octicons-arrow-right-24: Pipeline guide](03-pipelines-data-movement.md)
 
 -   :material-cog-transfer:{ .lg .middle } __Metadata-Driven Pipelines__
 
@@ -67,7 +67,7 @@ Proven patterns, architectural guidance, and operational best practices for prod
 
     Dynamic, configuration-driven pipelines for scalable data ingestion.
 
-    [:octicons-arrow-right-24: Metadata pipelines](04_METADATA_DRIVEN_PIPELINES.md)
+    [:octicons-arrow-right-24: Metadata pipelines](04-metadata-driven-pipelines.md)
 
 -   :material-notebook:{ .lg .middle } __Spark & Notebooks__
 
@@ -75,7 +75,7 @@ Proven patterns, architectural guidance, and operational best practices for prod
 
     PySpark optimization, notebook best practices, and Spark configuration.
 
-    [:octicons-arrow-right-24: Spark guide](05_SPARK_NOTEBOOKS.md)
+    [:octicons-arrow-right-24: Spark guide](05-spark-notebooks.md)
 
 -   :material-pipe-wrench:{ .lg .middle } __Dataflows Gen2__
 
@@ -83,7 +83,7 @@ Proven patterns, architectural guidance, and operational best practices for prod
 
     Power Query dataflow patterns for low-code transformations.
 
-    [:octicons-arrow-right-24: Dataflow guide](06_DATAFLOWS.md)
+    [:octicons-arrow-right-24: Dataflow guide](06-dataflows.md)
 
 -   :material-refresh-auto:{ .lg .middle } __Incremental Refresh & CDC__
 
@@ -113,7 +113,7 @@ Proven patterns, architectural guidance, and operational best practices for prod
 
     Source-specific ingestion patterns for Oracle and SQL Server.
 
-    [:octicons-arrow-right-24: Source patterns](09_SOURCE_SPECIFIC_PATTERNS.md)
+    [:octicons-arrow-right-24: Source patterns](09-source-specific-patterns.md)
 
 -   :material-wrench:{ .lg .middle } __Oracle Gateway Troubleshooting__
 
@@ -121,7 +121,7 @@ Proven patterns, architectural guidance, and operational best practices for prod
 
     Common Oracle gateway issues, diagnostics, and resolution steps.
 
-    [:octicons-arrow-right-24: Troubleshooting](11_ORACLE_GATEWAY_TROUBLESHOOTING.md)
+    [:octicons-arrow-right-24: Troubleshooting](11-oracle-gateway-troubleshooting.md)
 
 -   :material-database-export:{ .lg .middle } __Migration Patterns__
 
@@ -151,7 +151,7 @@ Proven patterns, architectural guidance, and operational best practices for prod
 
     Choosing between Fabric compute engines, storage layers, and patterns.
 
-    [:octicons-arrow-right-24: Decision guide](10_DECISION_GUIDE.md)
+    [:octicons-arrow-right-24: Decision guide](10-decision-guide.md)
 
 -   :material-layers-triple:{ .lg .middle } __Medallion Architecture Deep Dive__
 

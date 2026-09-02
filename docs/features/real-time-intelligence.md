@@ -1637,8 +1637,8 @@ flowchart TB
 - [Workspace Monitoring](workspace-monitoring.md) -- System tables for monitoring RTI workloads
 - [Mirroring](mirroring.md) -- Near-real-time DB replication as alternative to streaming
 - [Direct Lake](direct-lake.md) -- Direct Lake semantic models over RTI-landed data
-- [Architecture](../ARCHITECTURE.md) -- System architecture overview
-- [Migration & RTI Research](../MIGRATION_AND_RTI_RESEARCH.md) -- Migration paths and RTI research notes
+- [Architecture](../architecture.md) -- System architecture overview
+- [Migration & RTI Research](../migration-and-rti-research.md) -- Migration paths and RTI research notes
 
 ---
 

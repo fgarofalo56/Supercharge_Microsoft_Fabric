@@ -78,7 +78,7 @@ Show the user:
 | `.github/copilot-instructions.md` | Main instructions file |
 | `.github/BACKGROUND_WORKFLOW.md` | Multi-agent workflow docs |
 | `PRPs/` | PRP framework templates |
-| `docs/STYLE_GUIDE.md` | Documentation standards |
+| `docs/style-guide.md` | Documentation standards |
 
 ## Options
 

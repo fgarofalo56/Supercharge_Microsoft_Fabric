@@ -1219,8 +1219,8 @@ flowchart LR
 - [OneLake Security](onelake-security.md) -- Storage-level security for Direct Lake access
 - [Materialized Lake Views](materialized-lake-views.md) -- Pre-computed views for Direct Lake
 - [Data Mesh Enterprise Patterns](data-mesh-enterprise-patterns.md) -- Cross-domain Direct Lake strategies
-- [Architecture](../ARCHITECTURE.md) -- System architecture overview
-- [Security](../SECURITY.md) -- Security and compliance framework
+- [Architecture](../architecture.md) -- System architecture overview
+- [Security](../security.md) -- Security and compliance framework
 
 ---
 

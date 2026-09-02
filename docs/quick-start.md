@@ -203,9 +203,9 @@ You should see rows with columns like `machine_id`, `casino_id`, `event_type`, `
 
 | Document | Description |
 |----------|-------------|
-| [📋 Prerequisites](PREREQUISITES.md) | Full prerequisites guide |
-| [🏗️ Architecture](ARCHITECTURE.md) | System architecture |
-| [🚀 Deployment](DEPLOYMENT.md) | Detailed deployment guide |
+| [📋 Prerequisites](prerequisites.md) | Full prerequisites guide |
+| [🏗️ Architecture](architecture.md) | System architecture |
+| [🚀 Deployment](deployment.md) | Detailed deployment guide |
 
 ---
 

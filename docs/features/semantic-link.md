@@ -1036,7 +1036,7 @@ print(relationships)
 - [Data Agents](data-agents.md) -- AI agents that can use Semantic Link for data access
 - [AI Copilot Configuration](ai-copilot-configuration.md) -- Copilot features powered by semantic model metadata
 - [Data Mesh Enterprise Patterns](data-mesh-enterprise-patterns.md) -- Cross-domain semantic model governance
-- [Architecture](../ARCHITECTURE.md) -- System architecture overview
+- [Architecture](../architecture.md) -- System architecture overview
 
 ---
 

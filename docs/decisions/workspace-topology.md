@@ -249,7 +249,7 @@ Multi-Capacity:
 
 ## Related Links
 
-- [Workspaces & Naming](../best-practices/01_WORKSPACES_NAMING.md) -- Workspace naming conventions
+- [Workspaces & Naming](../best-practices/01-workspaces-naming.md) -- Workspace naming conventions
 - [Multi-Tenant Architecture](../best-practices/multi-tenant-workspace-architecture.md) -- Multi-tenant patterns
 - [Identity & RBAC](../best-practices/identity-rbac-patterns.md) -- Access control patterns
 - [OneLake Security](../features/onelake-security.md) -- Data-level security in OneLake

@@ -748,7 +748,7 @@ az keyvault set-policy --name "kv-fabric-gateway" `
 
 ## 📖 Additional Resources
 
-- [Networking Documentation](../../NETWORKING.md)
+- [Networking Documentation](../../networking.md)
 - [Self-Hosted IR Documentation](https://learn.microsoft.com/en-us/azure/data-factory/create-self-hosted-integration-runtime)
 - [On-Premises Data Gateway](https://learn.microsoft.com/en-us/data-integration/gateway/service-gateway-onprem)
 

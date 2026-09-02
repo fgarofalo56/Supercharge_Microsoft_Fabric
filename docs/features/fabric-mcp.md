@@ -1087,7 +1087,7 @@ The following operations are explicitly blocked by the MCP Server governance eng
 - [Real-Time Intelligence](real-time-intelligence.md) -- RTI data accessible via MCP Eventhouse tools
 - [OneLake Security](onelake-security.md) -- Fine-grained security enforced by MCP governance engine
 - [Data Governance Deep Dive](../best-practices/data-governance-deep-dive.md) -- Purview policies and sensitivity labels
-- [Architecture](../ARCHITECTURE.md) -- System architecture overview
+- [Architecture](../architecture.md) -- System architecture overview
 
 ---
 

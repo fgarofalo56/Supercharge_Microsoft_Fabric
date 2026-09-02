@@ -950,10 +950,10 @@ Performance optimization in Microsoft Fabric follows a layered approach:
 
 | Document | Description |
 |----------|-------------|
-| [Pipelines & Data Movement](./03_PIPELINES_DATA_MOVEMENT.md) | Pipeline configuration details |
-| [Spark & Notebooks](./05_SPARK_NOTEBOOKS.md) | Spark configuration and NEE |
-| [Lakehouse Setup](./07_LAKEHOUSE_SETUP.md) | Delta Lake table management |
-| [Warehouse Configuration](./08_WAREHOUSE_SETUP.md) | SQL optimization |
+| [Pipelines & Data Movement](./03-pipelines-data-movement.md) | Pipeline configuration details |
+| [Spark & Notebooks](./05-spark-notebooks.md) | Spark configuration and NEE |
+| [Lakehouse Setup](./07-lakehouse-setup.md) | Delta Lake table management |
+| [Warehouse Configuration](./08-warehouse-setup.md) | SQL optimization |
 | [Error Handling & Monitoring](./error-handling-monitoring.md) | Performance-related error handling |
 
 ---

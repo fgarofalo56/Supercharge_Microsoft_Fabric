@@ -1091,7 +1091,7 @@ df_cross_agency.write.format("delta").mode("overwrite").saveAsTable(
 
 ## Related Documents
 
-- [Lakehouse Setup](./07_LAKEHOUSE_SETUP.md) — Initial lakehouse provisioning and configuration
+- [Lakehouse Setup](./07-lakehouse-setup.md) — Initial lakehouse provisioning and configuration
 - [Performance & Parallelism](./performance-parallelism.md) — Spark optimization patterns
 - [Data Governance Deep Dive](./data-governance-deep-dive.md) — Classification, sensitivity labels, RLS
 - [Error Handling & Monitoring](./error-handling-monitoring.md) — Pipeline error tracking and alerts

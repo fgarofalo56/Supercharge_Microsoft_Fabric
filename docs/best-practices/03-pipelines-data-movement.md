@@ -577,10 +577,10 @@ flowchart LR
 
 | Document | Description |
 |----------|-------------|
-| [Metadata-Driven Pipelines](./04_METADATA_DRIVEN_PIPELINES.md) | Dynamic, configuration-based pipeline patterns |
-| [Data Gateway Optimization](./02_DATA_GATEWAY.md) | Gateway configuration for on-premises sources |
-| [Source-Specific Patterns](./09_SOURCE_SPECIFIC_PATTERNS.md) | Oracle and SQL Server extraction patterns |
-| [Decision Guide](./10_DECISION_GUIDE.md) | Choosing the right data movement tool |
+| [Metadata-Driven Pipelines](./04-metadata-driven-pipelines.md) | Dynamic, configuration-based pipeline patterns |
+| [Data Gateway Optimization](./02-data-gateway.md) | Gateway configuration for on-premises sources |
+| [Source-Specific Patterns](./09-source-specific-patterns.md) | Oracle and SQL Server extraction patterns |
+| [Decision Guide](./10-decision-guide.md) | Choosing the right data movement tool |
 | [Incremental Refresh & CDC](./incremental-refresh-cdc.md) | Advanced incremental and CDC patterns |
 | [Copy Job CDC](../features/copy-job-cdc.md) | Copy Job CDC feature documentation |
 

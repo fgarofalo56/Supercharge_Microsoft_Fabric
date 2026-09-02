@@ -211,4 +211,4 @@ Prefer filing via `gh issue create` with the matching template body, or use the 
 - [Microsoft Fabric Roadmap](https://learn.microsoft.com/en-us/fabric/release-plan/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Delta Lake Documentation](https://docs.delta.io/)
-- Internal: `docs/index.md`, `docs/QUICK_START.md`, `docs/TROUBLESHOOTING_MATRIX.md`, `CONTRIBUTING.md`
+- Internal: `docs/index.md`, `docs/quick-start.md`, `docs/troubleshooting-matrix.md`, `CONTRIBUTING.md`

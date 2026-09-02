@@ -34,7 +34,7 @@ type: feature
 | Outage prediction & restoration | Gold feature store + AutoML classification model | 15-min intervals | [AutoML](../features/automl-model-endpoints.md), [Data Activator](../best-practices/alerting-data-activator.md) |
 | Renewable generation forecasting | Lakehouse Gold + AutoML time-series model | Hourly | [AutoML](../features/automl-model-endpoints.md), [Semantic Link](../features/semantic-link.md) |
 | Grid digital twin | Digital Twin Builder with SCADA binding | < 5 sec | [Digital Twin Builder](../features/digital-twin-builder.md), [RTI](../features/real-time-intelligence.md) |
-| Regulatory compliance reporting | Warehouse star schema + Direct Lake | Monthly/Quarterly | [Warehouse Setup](../best-practices/08_WAREHOUSE_SETUP.md), [Direct Lake](../features/direct-lake.md) |
+| Regulatory compliance reporting | Warehouse star schema + Direct Lake | Monthly/Quarterly | [Warehouse Setup](../best-practices/08-warehouse-setup.md), [Direct Lake](../features/direct-lake.md) |
 | Vegetation management (wildfire risk) | Lakehouse Gold with geospatial + weather overlays | Daily | [Maps in Fabric](../features/maps-in-fabric.md), [Medallion Architecture](../best-practices/medallion-architecture-deep-dive.md) |
 
 ---

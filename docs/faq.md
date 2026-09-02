@@ -22,7 +22,7 @@ type: reference
 ---
 
 !!! tip "Looking for answers to specific operational questions?"
-    See **[Field Questions](FIELD_QUESTIONS.md)** for detailed answers to scenarios
+    See **[Field Questions](field-questions.md)** for detailed answers to scenarios
     that come up in real customer engagements: Power BI mashup errors with VNet
     sources, creating views on mirrored Databricks tables, Unity Catalog →
     Fabric permission inheritance, Direct Lake on multi-source semantic
@@ -135,7 +135,7 @@ az provider register --namespace Microsoft.Storage
 az provider register --namespace Microsoft.KeyVault
 ```
 
-See [Prerequisites Guide](PREREQUISITES.md) for complete details.
+See [Prerequisites Guide](prerequisites.md) for complete details.
 
 </details>
 
@@ -156,7 +156,7 @@ See [Prerequisites Guide](PREREQUISITES.md) for complete details.
 
 **Can I start smaller?** Yes, but expect slower performance with F2/F4. Good for learning tutorials but not representative of production performance.
 
-See [Cost Estimation Guide](COST_ESTIMATION.md) for detailed pricing.
+See [Cost Estimation Guide](cost-estimation.md) for detailed pricing.
 
 ---
 
@@ -177,7 +177,7 @@ See [Cost Estimation Guide](COST_ESTIMATION.md) for detailed pricing.
 
 **Easiest Setup:** Use GitHub Codespaces (zero installation) or VS Code Dev Container.
 
-See [Prerequisites - Dev Container Setup](PREREQUISITES.md#dev-container-setup-alternative-to-local-installation).
+See [Prerequisites - Dev Container Setup](prerequisites.md#dev-container-setup-alternative-to-local-installation).
 
 ---
 
@@ -246,7 +246,7 @@ After initial setup, Contributor is sufficient for day-to-day operations.
 | 📜 **PowerShell Scripts** | Automated CI/CD workflows | ~30 minutes |
 | 🔄 **GitHub Actions** | Continuous deployment pipelines | One-time setup |
 
-See [Deployment Guide](DEPLOYMENT.md) for detailed instructions.
+See [Deployment Guide](deployment.md) for detailed instructions.
 
 ---
 
@@ -379,7 +379,7 @@ az group delete --name "rg-fabric-poc-dev" --yes --no-wait
 az lock delete --name "CanNotDelete" --resource-group "rg-fabric-poc-dev"
 ```
 
-See [Deployment Guide - Cleanup](DEPLOYMENT.md#️-cleanup) for details.
+See [Deployment Guide - Cleanup](deployment.md#️-cleanup) for details.
 
 ---
 
@@ -881,7 +881,7 @@ See [Reports README](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabri
 - Filter by user email: `USERPRINCIPALNAME()`
 - Dynamic filtering from lookup table
 
-See [Security Guide - Row-Level Security](SECURITY.md#row-level-security-rls) for complete examples.
+See [Security Guide - Row-Level Security](security.md#row-level-security-rls) for complete examples.
 
 </details>
 
@@ -907,7 +907,7 @@ See [Security Guide - Row-Level Security](SECURITY.md#row-level-security-rls) fo
 - W-2G auto-generation ($1,200 slots, $600 keno)
 - 5-year data retention policies
 
-See [Security Guide - Compliance Requirements](SECURITY.md#-compliance-requirements).
+See [Security Guide - Compliance Requirements](security.md#-compliance-requirements).
 
 </details>
 
@@ -936,7 +936,7 @@ See [Security Guide - Compliance Requirements](SECURITY.md#-compliance-requireme
 
 **Testing Only:** Use `--include-pii` flag for development (never in production).
 
-See [Security Guide - PII Handling](SECURITY.md#pii-handling).
+See [Security Guide - PII Handling](security.md#pii-handling).
 
 </details>
 
@@ -965,7 +965,7 @@ See [Security Guide - PII Handling](SECURITY.md#pii-handling).
 2. Remove from Git history with BFG Repo-Cleaner
 3. Report per your security policy
 
-See [Security Guide - Repository Security](SECURITY.md#-repository-security).
+See [Security Guide - Repository Security](security.md#-repository-security).
 
 ---
 
@@ -993,7 +993,7 @@ See [Security Guide - Repository Security](SECURITY.md#-repository-security).
 **Configuration:**
 Edit `infra/modules/network.bicep` to enable private endpoints.
 
-See [Security Guide - Network Security](SECURITY.md#-network-security).
+See [Security Guide - Network Security](security.md#-network-security).
 
 </details>
 
@@ -1171,7 +1171,7 @@ df.repartition(10).write.format("delta").save("Tables/silver_slot_clean")
 
 **Major Cost Driver:** Fabric capacity (75-80% of total cost).
 
-See [Cost Estimation Guide](COST_ESTIMATION.md) for detailed scenarios.
+See [Cost Estimation Guide](cost-estimation.md) for detailed scenarios.
 
 ---
 
@@ -1230,7 +1230,7 @@ Stop-FabricCapacity -Time "18:00" -Days "Mon-Fri"
 
 ---
 
-See [Cost Estimation - Optimization Strategies](COST_ESTIMATION.md#cost-optimization-strategies).
+See [Cost Estimation - Optimization Strategies](cost-estimation.md#cost-optimization-strategies).
 
 </details>
 
@@ -1410,7 +1410,7 @@ docker-compose pull
 
 The POC chose Lakehouse as the primary store for three reasons: (1) the diverse data formats across 9 industry verticals (Parquet, CSV, JSON) favor schema-on-read flexibility; (2) the PySpark-first notebook workflow aligns naturally with Lakehouse's Spark engine; and (3) Direct Lake mode provides zero-copy Power BI connectivity without Import refresh schedules. Warehouse is the better choice for T-SQL-heavy teams or migrations from Synapse Dedicated SQL Pool.
 
-See: [DECISION_TREES.md](DECISION_TREES.md#1-lakehouse-vs-warehouse-vs-sql-database) | [Lakehouse/Warehouse/SQL DB Decision Guide](best-practices/lakehouse-warehouse-sqldb-decision-guide.md)
+See: [decision-trees.md](decision-trees.md#1-lakehouse-vs-warehouse-vs-sql-database) | [Lakehouse/Warehouse/SQL DB Decision Guide](best-practices/lakehouse-warehouse-sqldb-decision-guide.md)
 
 ---
 
@@ -1440,7 +1440,7 @@ The recommended pattern for this POC is a **per-environment** workspace layout:
 
 Each workspace contains three Lakehouses (`lh_bronze`, `lh_silver`, `lh_gold`), one Warehouse (for T-SQL consumers), and one Eventhouse (for real-time). For multi-tenant scenarios, see [Multi-Tenant Workspace Architecture](best-practices/multi-tenant-workspace-architecture.md).
 
-See: [Workspace Naming](best-practices/01_WORKSPACES_NAMING.md)
+See: [Workspace Naming](best-practices/01-workspaces-naming.md)
 
 ---
 
@@ -1448,7 +1448,7 @@ See: [Workspace Naming](best-practices/01_WORKSPACES_NAMING.md)
 
 Use **shortcuts** when you want to query data in-place without storage duplication (e.g., referencing ADLS Gen2 landing zones or cross-workspace tables). Use **copy** (pipeline Copy Activity) when you need to transform data during ingestion, the source requires a data gateway, or you want full control over the data lifecycle in OneLake. Shortcuts are free (no storage cost); copies consume storage.
 
-See: [DECISION_TREES.md](DECISION_TREES.md#5-mirroring-vs-shortcuts-vs-pipeline-copy) | [Shortcut Transformations Notebook](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/bronze/17_bronze_shortcut_transformations.py)
+See: [decision-trees.md](decision-trees.md#5-mirroring-vs-shortcuts-vs-pipeline-copy) | [Shortcut Transformations Notebook](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/bronze/17_bronze_shortcut_transformations.py)
 
 ---
 
@@ -1499,7 +1499,7 @@ For POC-scale data (~700K-1M records per table), the most impactful settings are
 | `spark.sql.autoBroadcastJoinThreshold` | 10485760 | 10485760 | 10 MB is fine for POC dimension tables |
 | `spark.sql.adaptive.enabled` | true | true | AQE auto-tunes at runtime |
 
-See: [CHEAT_SHEETS.md](CHEAT_SHEETS.md#spark-configuration-for-fabric) | [Spark Notebooks Best Practices](best-practices/05_SPARK_NOTEBOOKS.md)
+See: [cheat-sheets.md](cheat-sheets.md#spark-configuration-for-fabric) | [Spark Notebooks Best Practices](best-practices/05-spark-notebooks.md)
 
 ---
 
@@ -1512,7 +1512,7 @@ Direct Lake falls back to DirectQuery when: (1) the model contains calculated ta
 3. Monitor fallback using Power BI Performance Analyzer
 4. Keep Gold tables V-Order optimized
 
-See: [Direct Lake](features/direct-lake.md) | [CHEAT_SHEETS.md](CHEAT_SHEETS.md#direct-lake-specific)
+See: [Direct Lake](features/direct-lake.md) | [cheat-sheets.md](cheat-sheets.md#direct-lake-specific)
 
 ---
 
@@ -1693,7 +1693,7 @@ See: [Testing Strategies](best-practices/testing-strategies.md)
 | **CCPA** | California | Consumer data inventory, opt-out mechanisms |
 | **PCI-DSS** | Payment | Card number masking, Key Vault (HSM-backed) for card data |
 
-See: [Security](SECURITY.md) | [SQL Audit Logs](best-practices/sql-audit-logs-compliance.md) | [CMK](best-practices/customer-managed-keys.md)
+See: [Security](security.md) | [SQL Audit Logs](best-practices/sql-audit-logs-compliance.md) | [CMK](best-practices/customer-managed-keys.md)
 
 ---
 
@@ -1793,11 +1793,11 @@ See: [Customer-Managed Keys](best-practices/customer-managed-keys.md) | [Network
 | Resource | Link |
 |----------|------|
 | 🏠 **Main README** | [README.md](index.md) |
-| 🏗️ **Architecture** | [ARCHITECTURE.md](ARCHITECTURE.md) |
-| 🚀 **Deployment** | [DEPLOYMENT.md](DEPLOYMENT.md) |
-| 📋 **Prerequisites** | [PREREQUISITES.md](PREREQUISITES.md) |
-| 🔐 **Security** | [SECURITY.md](SECURITY.md) |
-| 💰 **Cost Estimation** | [COST_ESTIMATION.md](COST_ESTIMATION.md) |
+| 🏗️ **Architecture** | [architecture.md](architecture.md) |
+| 🚀 **Deployment** | [deployment.md](deployment.md) |
+| 📋 **Prerequisites** | [prerequisites.md](prerequisites.md) |
+| 🔐 **Security** | [security.md](security.md) |
+| 💰 **Cost Estimation** | [cost-estimation.md](cost-estimation.md) |
 | 📖 **Tutorials** | [tutorials/](tutorials/index.md) |
 | 🎲 **Data Generation** | [data_generation/](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/data_generation) |
 | 📊 **Reports** | [reports/](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/reports) |

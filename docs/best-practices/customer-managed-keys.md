@@ -558,7 +558,7 @@ AzureDiagnostics
 
 ## Related Documents
 
-- [Security Guide](../SECURITY.md) -- Workspace security and access controls
+- [Security Guide](../security.md) -- Workspace security and access controls
 - [Data Governance Deep Dive](./data-governance-deep-dive.md) -- Classification, RLS, compliance
 - [Error Handling & Monitoring](./error-handling-monitoring.md) -- Centralized error tracking
 - [Alerting & Data Activator](./alerting-data-activator.md) -- Alert configuration patterns

@@ -21,7 +21,7 @@ You are a documentation management specialist focused on maintaining high-qualit
   - README.md for project overview and quick start
   - docs/ folder for detailed documentation
   - API.md for endpoint documentation
-  - ARCHITECTURE.md for system design
+  - architecture.md for system design
   - CONTRIBUTING.md for contribution guidelines
 - Ensure clear navigation between documentation files
 

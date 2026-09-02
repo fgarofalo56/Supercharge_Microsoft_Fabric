@@ -203,7 +203,7 @@ flowchart TD
 - [Direct Lake](../features/direct-lake.md) -- Zero-copy Power BI connectivity
 - [Fabric SQL Database](../features/fabric-sql-database.md) -- SQL Database feature deep dive
 - [Mirroring](../features/mirroring.md) -- Database mirroring to OneLake
-- [Lakehouse Setup](../best-practices/07_LAKEHOUSE_SETUP.md) -- Lakehouse configuration best practices
-- [Warehouse Setup](../best-practices/08_WAREHOUSE_SETUP.md) -- Warehouse configuration best practices
+- [Lakehouse Setup](../best-practices/07-lakehouse-setup.md) -- Lakehouse configuration best practices
+- [Warehouse Setup](../best-practices/08-warehouse-setup.md) -- Warehouse configuration best practices
 - [Medallion Architecture](../best-practices/medallion-architecture-deep-dive.md) -- Bronze/Silver/Gold patterns
-- [Component Decision Trees](../DECISION_TREES.md) -- Additional component-level flowcharts
+- [Component Decision Trees](../decision-trees.md) -- Additional component-level flowcharts

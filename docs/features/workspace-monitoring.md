@@ -946,7 +946,7 @@ current_month.write \
 - [Data Governance Deep Dive](../best-practices/data-governance-deep-dive.md) -- Governance and audit trail architecture
 - [SQL Audit Logs Compliance](../best-practices/sql-audit-logs-compliance.md) -- SQL-level audit logging
 - [Performance Best Practices](../best-practices/performance-parallelism.md) -- Optimizing workload performance
-- [Architecture](../ARCHITECTURE.md) -- System architecture overview
+- [Architecture](../architecture.md) -- System architecture overview
 
 ---
 

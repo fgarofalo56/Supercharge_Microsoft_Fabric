@@ -1106,7 +1106,7 @@ Fabric Admin Portal → Capacity Settings → fabric-capacity-federal
 - [OneLake Security](onelake-security.md) -- Securing replicated data in OneLake
 - [Real-Time Intelligence](real-time-intelligence.md) -- Complementary real-time analytics
 - [Data Agents](data-agents.md) -- Natural language querying over SQL Database data
-- [Architecture](../ARCHITECTURE.md) -- System architecture overview
+- [Architecture](../architecture.md) -- System architecture overview
 
 ---
 

@@ -396,9 +396,9 @@ flowchart TD
 | Resource | Description |
 |----------|-------------|
 | [main.bicep](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/main.bicep) | Root orchestration template |
-| [Deployment Guide](../../DEPLOYMENT.md) | Full deployment instructions |
-| [Architecture](../../ARCHITECTURE.md) | System architecture overview |
-| [Cost Estimation](../../COST_ESTIMATION.md) | SKU sizing and cost projections |
+| [Deployment Guide](../../deployment.md) | Full deployment instructions |
+| [Architecture](../../architecture.md) | System architecture overview |
+| [Cost Estimation](../../cost-estimation.md) | SKU sizing and cost projections |
 | [Network Security](../../best-practices/network-security.md) | Private endpoint patterns |
 | [CMK](../../best-practices/customer-managed-keys.md) | Customer-managed key configuration |
 | [CI/CD](../../best-practices/fabric-cicd-deployment.md) | Automated deployment patterns |

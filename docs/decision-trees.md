@@ -61,7 +61,7 @@ flowchart TD
 
 This POC uses **Lakehouse** as the primary store for all medallion layers (`lh_bronze`, `lh_silver`, `lh_gold`). The choice was driven by the need to process diverse data formats (Parquet from data generators, JSON from streaming sources, CSV from federal open data downloads) and the PySpark-first notebook workflow. Direct Lake mode connects Gold tables directly to Power BI dashboards without data duplication.
 
-See: [Lakehouse/Warehouse/SQL DB Decision Guide](best-practices/lakehouse-warehouse-sqldb-decision-guide.md) | [Decision Guide](best-practices/10_DECISION_GUIDE.md)
+See: [Lakehouse/Warehouse/SQL DB Decision Guide](best-practices/lakehouse-warehouse-sqldb-decision-guide.md) | [Decision Guide](best-practices/10-decision-guide.md)
 
 ---
 
@@ -203,7 +203,7 @@ flowchart TD
 
 This POC uses **notebooks for development** and **pipelines for orchestration**. Each medallion layer has individual notebooks (e.g., `01_bronze_slot_telemetry.py`) developed interactively, then orchestrated by a Fabric pipeline that runs Bronze notebooks in parallel, waits for completion, then triggers Silver notebooks sequentially, followed by Gold. Pipeline parameters control `batch_date` and `source_path` across environments.
 
-See: [Spark Environments & Job Definitions](features/spark-environments-job-definitions.md) | [Pipeline Best Practices](best-practices/03_PIPELINES_DATA_MOVEMENT.md) | [fabric-cicd Deployment](best-practices/fabric-cicd-deployment.md)
+See: [Spark Environments & Job Definitions](features/spark-environments-job-definitions.md) | [Pipeline Best Practices](best-practices/03-pipelines-data-movement.md) | [fabric-cicd Deployment](best-practices/fabric-cicd-deployment.md)
 
 ---
 
@@ -440,7 +440,7 @@ flowchart TD
 
 This POC targets F64 because it provides sufficient CU for: parallel Bronze notebook execution (6 notebooks concurrently), real-time Eventstream ingestion, interactive notebook development, and Power BI Direct Lake queries -- all without throttling. For development iterations, scale down to F4 and pause overnight to reduce costs by ~93%.
 
-See: [Capacity Planning](best-practices/capacity-planning-cost-optimization.md) | [Cost Estimation](COST_ESTIMATION.md)
+See: [Capacity Planning](best-practices/capacity-planning-cost-optimization.md) | [Cost Estimation](cost-estimation.md)
 
 ---
 
@@ -482,17 +482,17 @@ See: [Testing Strategies](best-practices/testing-strategies.md) | [Medallion Dee
 
 | Decision Area | Primary Doc | Supporting Docs |
 |---|---|---|
-| Lakehouse vs Warehouse vs SQL DB | [Decision Guide](best-practices/lakehouse-warehouse-sqldb-decision-guide.md) | [Warehouse Setup](best-practices/08_WAREHOUSE_SETUP.md), [SQL Database](features/fabric-sql-database.md) |
+| Lakehouse vs Warehouse vs SQL DB | [Decision Guide](best-practices/lakehouse-warehouse-sqldb-decision-guide.md) | [Warehouse Setup](best-practices/08-warehouse-setup.md), [SQL Database](features/fabric-sql-database.md) |
 | Real-Time vs Batch | [RTI](features/real-time-intelligence.md) | [Streaming Notebooks](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/streaming/), [Eventstream](features/real-time-hub.md) |
 | Direct Lake vs Import vs DQ | [Direct Lake](features/direct-lake.md) | [Power BI Best Practices](best-practices/power-bi-best-practices.md) |
-| Notebooks vs Jobs vs Pipelines | [Spark Environments](features/spark-environments-job-definitions.md) | [Pipeline Patterns](best-practices/03_PIPELINES_DATA_MOVEMENT.md), [CI/CD](best-practices/fabric-cicd-deployment.md) |
-| Mirroring vs Shortcuts vs Copy | [Mirroring](features/mirroring.md) | [Shortcut Notebook](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/bronze/17_bronze_shortcut_transformations.py), [Source Patterns](best-practices/09_SOURCE_SPECIFIC_PATTERNS.md) |
-| Eventhouse vs Lakehouse | [RTI](features/real-time-intelligence.md) | [Vector DB](features/eventhouse-vector-database.md), [Lakehouse Setup](best-practices/07_LAKEHOUSE_SETUP.md) |
+| Notebooks vs Jobs vs Pipelines | [Spark Environments](features/spark-environments-job-definitions.md) | [Pipeline Patterns](best-practices/03-pipelines-data-movement.md), [CI/CD](best-practices/fabric-cicd-deployment.md) |
+| Mirroring vs Shortcuts vs Copy | [Mirroring](features/mirroring.md) | [Shortcut Notebook](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/bronze/17_bronze_shortcut_transformations.py), [Source Patterns](best-practices/09-source-specific-patterns.md) |
+| Eventhouse vs Lakehouse | [RTI](features/real-time-intelligence.md) | [Vector DB](features/eventhouse-vector-database.md), [Lakehouse Setup](best-practices/07-lakehouse-setup.md) |
 | Config Management | [OneLake Security](features/onelake-security.md) | [Workspace Identity](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/security/workspace-identity.bicep), [CMK](best-practices/customer-managed-keys.md) |
 | Adding a New Vertical | [Notebook Index](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/README.md) | [USDA Tutorial](tutorials/32-usda-agriculture/README.md), [DOJ Tutorial](tutorials/38-doj-justice/README.md) |
-| Capacity Sizing | [Capacity Planning](best-practices/capacity-planning-cost-optimization.md) | [Cost Estimation](COST_ESTIMATION.md), [Alerts & Budgets](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/monitoring/alerts-and-budgets.bicep) |
+| Capacity Sizing | [Capacity Planning](best-practices/capacity-planning-cost-optimization.md) | [Cost Estimation](cost-estimation.md), [Alerts & Budgets](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/monitoring/alerts-and-budgets.bicep) |
 | Data Quality Strategy | [Testing Strategies](best-practices/testing-strategies.md) | [Medallion Deep Dive](best-practices/medallion-architecture-deep-dive.md), [Great Expectations](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/validation) |
-| General Decision Guide | [10_DECISION_GUIDE.md](best-practices/10_DECISION_GUIDE.md) | This document (detailed flowcharts) |
+| General Decision Guide | [10-decision-guide.md](best-practices/10-decision-guide.md) | This document (detailed flowcharts) |
 
 ---
 
@@ -500,4 +500,4 @@ See: [Testing Strategies](best-practices/testing-strategies.md) | [Medallion Dee
 
 ---
 
-[Back to Docs](index.md) | [Architecture](ARCHITECTURE.md) | [Best Practices](best-practices/index.md)
+[Back to Docs](index.md) | [Architecture](architecture.md) | [Best Practices](best-practices/index.md)

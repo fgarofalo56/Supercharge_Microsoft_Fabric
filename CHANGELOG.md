@@ -398,7 +398,7 @@ Major release transforming the POC into a comprehensive Microsoft Fabric enterpr
 - **notebooks/ml/README.md** - Machine learning documentation
 
 #### Quick Reference Documents
-- **docs/QUICK_START.md** - 5-minute getting started guide
+- **docs/quick-start.md** - 5-minute getting started guide
 - **tutorials/CHEAT_SHEET.md** - Printable PySpark/KQL/DAX reference card
 
 #### MkDocs Documentation Site
@@ -417,7 +417,7 @@ Major release transforming the POC into a comprehensive Microsoft Fabric enterpr
 ### Fixed
 - Fixed 10 broken icons8.com image links (replaced with emoji)
 - Fixed GitHub badge URLs (corrected username)
-- Fixed markdown rendering issues in docs/STYLE_GUIDE.md
+- Fixed markdown rendering issues in docs/style-guide.md
 - Fixed broken image reference in tutorials/08-database-mirroring
 
 ---
@@ -456,7 +456,7 @@ Major release transforming the POC into a comprehensive Microsoft Fabric enterpr
   - Real-Time Floor Monitor
 
 #### Cost Estimation
-- **docs/COST_ESTIMATION.md** - Comprehensive Azure cost guide
+- **docs/cost-estimation.md** - Comprehensive Azure cost guide
   - Detailed Fabric capacity pricing matrix
   - Environment-specific cost scenarios (POC, Dev, Production)
   - Cost optimization strategies
@@ -493,11 +493,11 @@ Major release transforming the POC into a comprehensive Microsoft Fabric enterpr
   - New navigation sections for Docker, Dev Container, Power BI, Cost Estimation, Sample Data
   - Updated Quick Start with three deployment options (Docker, Dev Container, Azure)
   - Expanded Repository Structure with new directories
-- **docs/DEPLOYMENT.md** - Added:
+- **docs/deployment.md** - Added:
   - Docker Deployment section
   - Script-Based Deployment section
   - Cost optimization quick reference
-- **docs/PREREQUISITES.md** - Added:
+- **docs/prerequisites.md** - Added:
   - Docker Desktop as optional tool
   - Dev Containers extension
   - Dev Container quick start guide
@@ -533,10 +533,10 @@ Major release transforming the POC into a comprehensive Microsoft Fabric enterpr
 
 #### Documentation
 - **docs/** - Comprehensive documentation suite
-  - `ARCHITECTURE.md` - System architecture and design patterns
-  - `DEPLOYMENT.md` - Step-by-step deployment guide
-  - `PREREQUISITES.md` - Setup requirements
-  - `SECURITY.md` - Security controls and compliance
+  - `architecture.md` - System architecture and design patterns
+  - `deployment.md` - Step-by-step deployment guide
+  - `prerequisites.md` - Setup requirements
+  - `security.md` - Security controls and compliance
   - `diagrams/` - Architecture diagrams
 
 #### Tutorials

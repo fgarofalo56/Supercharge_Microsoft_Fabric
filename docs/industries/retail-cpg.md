@@ -33,7 +33,7 @@ type: feature
 | Point-of-sale streaming analytics | Eventstream → Eventhouse → Real-Time Dashboard | < 5 sec | [RTI](../features/real-time-intelligence.md), [Alerting](../best-practices/alerting-data-activator.md) |
 | Demand forecasting | Lakehouse Gold + AutoML time-series model | Daily/Weekly | [AutoML](../features/automl-model-endpoints.md), [Semantic Link](../features/semantic-link.md) |
 | Customer 360 | Lakehouse medallion + Direct Lake semantic model | Near-real-time | [Direct Lake](../features/direct-lake.md), [Data Sharing](../best-practices/data-sharing-federation.md) |
-| Supply chain visibility | Lakehouse Silver + Warehouse star schema | Hourly | [Warehouse Setup](../best-practices/08_WAREHOUSE_SETUP.md), [Mirroring](../features/mirroring.md) |
+| Supply chain visibility | Lakehouse Silver + Warehouse star schema | Hourly | [Warehouse Setup](../best-practices/08-warehouse-setup.md), [Mirroring](../features/mirroring.md) |
 | Promotion effectiveness analysis | Gold aggregation + Direct Lake | Daily | [Medallion Architecture](../best-practices/medallion-architecture-deep-dive.md), [Power BI](../best-practices/power-bi-best-practices.md) |
 | Shrinkage and loss prevention | Eventstream from loss-prevention sensors → Eventhouse | < 10 sec | [RTI](../features/real-time-intelligence.md), [Data Activator](../best-practices/alerting-data-activator.md) |
 

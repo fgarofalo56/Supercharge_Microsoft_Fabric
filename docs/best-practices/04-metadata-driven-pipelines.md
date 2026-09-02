@@ -469,11 +469,11 @@ flowchart TD
 
 | Document | Description |
 |----------|-------------|
-| [Pipelines & Data Movement](./03_PIPELINES_DATA_MOVEMENT.md) | Copy activity optimization and load patterns |
-| [Source-Specific Patterns](./09_SOURCE_SPECIFIC_PATTERNS.md) | Oracle and SQL Server extraction patterns |
+| [Pipelines & Data Movement](./03-pipelines-data-movement.md) | Copy activity optimization and load patterns |
+| [Source-Specific Patterns](./09-source-specific-patterns.md) | Oracle and SQL Server extraction patterns |
 | [Error Handling & Alerting](./error-handling-monitoring.md) | Comprehensive error handling patterns |
 | [Monitoring & Observability](./monitoring-observability.md) | Pipeline monitoring and alerting |
-| [Decision Guide](./10_DECISION_GUIDE.md) | Choosing the right data movement tool |
+| [Decision Guide](./10-decision-guide.md) | Choosing the right data movement tool |
 
 ---
 

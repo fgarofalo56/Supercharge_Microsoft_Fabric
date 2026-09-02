@@ -620,8 +620,8 @@ flowchart LR
 - [Scorecards & Metrics](scorecards-metrics.md) -- KPI tracking complement to paginated reporting
 - [Fabric IQ](fabric-iq.md) -- Natural language queries for ad-hoc analysis
 - [OneLake Security](onelake-security.md) -- Storage-level security for underlying data
-- [Architecture](../ARCHITECTURE.md) -- System architecture overview
-- [Security](../SECURITY.md) -- Security and compliance framework
+- [Architecture](../architecture.md) -- System architecture overview
+- [Security](../security.md) -- Security and compliance framework
 
 ---
 

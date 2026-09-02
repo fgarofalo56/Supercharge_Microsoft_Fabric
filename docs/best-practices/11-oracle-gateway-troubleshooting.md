@@ -841,10 +841,10 @@ Example: 3 nodes × 32 = 96 concurrent operations
 
 | Document | Description |
 |----------|-------------|
-| [Data Gateway Optimization](./02_DATA_GATEWAY.md) | General gateway configuration and sizing |
-| [Source-Specific Patterns](./09_SOURCE_SPECIFIC_PATTERNS.md) | Oracle and SQL Server extraction patterns |
-| [Pipelines & Data Movement](./03_PIPELINES_DATA_MOVEMENT.md) | Pipeline optimization patterns |
-| [Metadata-Driven Pipelines](./04_METADATA_DRIVEN_PIPELINES.md) | Dynamic pipeline configuration |
+| [Data Gateway Optimization](./02-data-gateway.md) | General gateway configuration and sizing |
+| [Source-Specific Patterns](./09-source-specific-patterns.md) | Oracle and SQL Server extraction patterns |
+| [Pipelines & Data Movement](./03-pipelines-data-movement.md) | Pipeline optimization patterns |
+| [Metadata-Driven Pipelines](./04-metadata-driven-pipelines.md) | Dynamic pipeline configuration |
 | [Network Security](./network-security.md) | Network security and firewall rules |
 
 ---

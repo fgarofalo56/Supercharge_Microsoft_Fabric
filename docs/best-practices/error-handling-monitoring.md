@@ -1288,10 +1288,10 @@ Effective error handling in Microsoft Fabric requires:
 
 | Document | Description |
 |----------|-------------|
-| [Pipelines & Data Movement](./03_PIPELINES_DATA_MOVEMENT.md) | Pipeline configuration patterns |
+| [Pipelines & Data Movement](./03-pipelines-data-movement.md) | Pipeline configuration patterns |
 | [Alerting & Data Activator](./alerting-data-activator.md) | Detailed alerting setup |
-| [Disaster Recovery](../DISASTER_RECOVERY.md) | Recovery procedures |
-| [Security Guide](../SECURITY.md) | Compliance and access controls |
+| [Disaster Recovery](../disaster-recovery.md) | Recovery procedures |
+| [Security Guide](../security.md) | Compliance and access controls |
 
 ---
 

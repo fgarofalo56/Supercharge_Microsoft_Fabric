@@ -497,9 +497,9 @@ Use the Fabric workspace to manage your warehouse. Access settings via the works
 
 | Document | Description |
 |----------|-------------|
-| [Lakehouse Setup & Organization](./07_LAKEHOUSE_SETUP.md) | Lakehouse architecture and comparison |
-| [Spark & Notebooks](./05_SPARK_NOTEBOOKS.md) | Spark-based data processing |
-| [Decision Guide](./10_DECISION_GUIDE.md) | Warehouse vs Lakehouse decision criteria |
+| [Lakehouse Setup & Organization](./07-lakehouse-setup.md) | Lakehouse architecture and comparison |
+| [Spark & Notebooks](./05-spark-notebooks.md) | Spark-based data processing |
+| [Decision Guide](./10-decision-guide.md) | Warehouse vs Lakehouse decision criteria |
 | [Fabric SQL Database](../features/fabric-sql-database.md) | Fabric SQL Database feature documentation |
 | [Direct Lake](../features/direct-lake.md) | Direct Lake connectivity for Power BI |
 

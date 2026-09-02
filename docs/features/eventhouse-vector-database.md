@@ -1162,7 +1162,7 @@ ComplianceDocVectors
 - [Fabric IQ](fabric-iq.md) — How vector search enhances Fabric IQ and Data Agents
 - [AI Copilot Configuration](ai-copilot-configuration.md) — Azure OpenAI integration and tenant settings
 - [Data Mesh Enterprise Patterns](data-mesh-enterprise-patterns.md) — Cross-domain vector search in mesh architectures
-- [Architecture](../ARCHITECTURE.md) — System architecture overview
+- [Architecture](../architecture.md) — System architecture overview
 
 ---
 

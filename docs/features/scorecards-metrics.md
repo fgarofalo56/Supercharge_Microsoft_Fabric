@@ -475,8 +475,8 @@ Scorecard: EPA Inspection Coverage FY2026
 - [Composite Models](composite-models.md) -- Mixing storage modes for scorecard data sources
 - [Fabric IQ](fabric-iq.md) -- Natural language queries about goal status
 - [Workspace Monitoring](workspace-monitoring.md) -- Capacity and usage monitoring alongside KPIs
-- [Architecture](../ARCHITECTURE.md) -- System architecture overview
-- [Security](../SECURITY.md) -- Security and compliance framework
+- [Architecture](../architecture.md) -- System architecture overview
+- [Security](../security.md) -- Security and compliance framework
 
 ---
 

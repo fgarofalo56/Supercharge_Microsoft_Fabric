@@ -138,28 +138,28 @@ jobs:
 
       - name: Generate Module Documentation
         run: |
-          echo "# Bicep Modules" > docs/BICEP_MODULES.md
-          echo "" >> docs/BICEP_MODULES.md
-          echo "Auto-generated documentation for Bicep modules." >> docs/BICEP_MODULES.md
-          echo "" >> docs/BICEP_MODULES.md
+          echo "# Bicep Modules" > docs/bicep-modules.md
+          echo "" >> docs/bicep-modules.md
+          echo "Auto-generated documentation for Bicep modules." >> docs/bicep-modules.md
+          echo "" >> docs/bicep-modules.md
 
           for dir in infra/modules/*/; do
             MODULE_NAME=$(basename "$dir")
-            echo "## $MODULE_NAME" >> docs/BICEP_MODULES.md
-            echo "" >> docs/BICEP_MODULES.md
+            echo "## $MODULE_NAME" >> docs/bicep-modules.md
+            echo "" >> docs/bicep-modules.md
 
             for file in "$dir"*.bicep; do
               if [ -f "$file" ]; then
                 FILENAME=$(basename "$file")
-                echo "### $FILENAME" >> docs/BICEP_MODULES.md
-                echo "" >> docs/BICEP_MODULES.md
+                echo "### $FILENAME" >> docs/bicep-modules.md
+                echo "" >> docs/bicep-modules.md
 
                 # Extract parameters
-                echo "**Parameters:**" >> docs/BICEP_MODULES.md
+                echo "**Parameters:**" >> docs/bicep-modules.md
                 grep -E "^@description|^param " "$file" | while read -r line; do
-                  echo "- $line" >> docs/BICEP_MODULES.md
+                  echo "- $line" >> docs/bicep-modules.md
                 done
-                echo "" >> docs/BICEP_MODULES.md
+                echo "" >> docs/bicep-modules.md
               fi
             done
           done
@@ -168,4 +168,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "docs: Update Bicep module documentation [skip ci]"
-          file_pattern: docs/BICEP_MODULES.md
+          file_pattern: docs/bicep-modules.md

@@ -23,10 +23,10 @@ This directory contains templates and data extraction scripts for gaming regulat
 
 | Template | Regulation | Authority | Filing Deadline |
 |----------|------------|-----------|-----------------|
-| [CTR Template](./CTR_TEMPLATE.md) | Title 31 / BSA | FinCEN | 15 days |
-| [W-2G Template](./W2G_TEMPLATE.md) | IRS Gaming | IRS | Jan 31 / Mar 31 |
-| [SAR Template](./SAR_TEMPLATE.md) | BSA | FinCEN | 30 days |
-| [NIGC MICS](./MICS_TEMPLATE.md) | NIGC Regulations | NIGC | Varies |
+| [CTR Template](./ctr-template.md) | Title 31 / BSA | FinCEN | 15 days |
+| [W-2G Template](./w2g-template.md) | IRS Gaming | IRS | Jan 31 / Mar 31 |
+| [SAR Template](./sar-template.md) | BSA | FinCEN | 30 days |
+| [NIGC MICS](./mics-template.md) | NIGC Regulations | NIGC | Varies |
 
 ---
 
@@ -125,10 +125,10 @@ flowchart LR
 
 | Document | Description |
 |----------|-------------|
-| [CTR Template](./CTR_TEMPLATE.md) | Currency Transaction Report data extraction template |
-| [SAR Template](./SAR_TEMPLATE.md) | Suspicious Activity Report detection and filing |
-| [W-2G Template](./W2G_TEMPLATE.md) | Gambling winnings tax reporting template |
-| [MICS Template](./MICS_TEMPLATE.md) | NIGC Minimum Internal Control Standards |
+| [CTR Template](./ctr-template.md) | Currency Transaction Report data extraction template |
+| [SAR Template](./sar-template.md) | Suspicious Activity Report detection and filing |
+| [W-2G Template](./w2g-template.md) | Gambling winnings tax reporting template |
+| [MICS Template](./mics-template.md) | NIGC Minimum Internal Control Standards |
 | [Data Governance](../best-practices/data-governance-deep-dive.md) | Governance and compliance frameworks |
 
 ---

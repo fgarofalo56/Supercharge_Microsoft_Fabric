@@ -166,7 +166,7 @@ Open these tabs in order (left to right):
 
 #### A.2 Architecture Overview (2 min)
 
-**[Show: Architecture diagram from README or ARCHITECTURE.md]**
+**[Show: Architecture diagram from README or architecture.md]**
 
 **Navigation:**
 1. Open browser Tab 1 (Fabric Portal)
@@ -1138,7 +1138,7 @@ SlotEvents
 
 **Alternative: Show Architecture + Screenshots**
 
-1. Display architecture diagram from `docs/ARCHITECTURE.md`
+1. Display architecture diagram from `docs/architecture.md`
 2. Walk through Bronze layer concepts verbally
 3. Show sample data files in `sample-data/` folder
 
@@ -1194,7 +1194,7 @@ by zone
 
 **Alternative: Use Mermaid Lineage Diagram**
 
-1. Open `docs/ARCHITECTURE.md`
+1. Open `docs/architecture.md`
 2. Show lineage section with Mermaid diagram
 
 **Talking Points:**

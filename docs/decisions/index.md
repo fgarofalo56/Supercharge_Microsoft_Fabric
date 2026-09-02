@@ -96,8 +96,8 @@ Each decision tree follows a consistent structure:
 
 | Resource | Description |
 |----------|-------------|
-| [Component Decision Trees](../DECISION_TREES.md) | Detailed component-level decision flowcharts |
-| [Architecture Overview](../ARCHITECTURE.md) | End-to-end system architecture |
+| [Component Decision Trees](../decision-trees.md) | Detailed component-level decision flowcharts |
+| [Architecture Overview](../architecture.md) | End-to-end system architecture |
 | [Best Practices Index](../best-practices/index.md) | Enterprise best practice guides |
 | [Capacity Planning](../best-practices/capacity-planning-cost-optimization.md) | Cost and capacity optimization |
 | [Medallion Architecture](../best-practices/medallion-architecture-deep-dive.md) | Medallion pattern deep dive |

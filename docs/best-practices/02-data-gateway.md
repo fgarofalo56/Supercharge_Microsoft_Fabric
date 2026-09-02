@@ -365,10 +365,10 @@ for key, value in sizing.items():
 
 | Document | Description |
 |----------|-------------|
-| [Workspaces & Naming Conventions](./01_WORKSPACES_NAMING.md) | Workspace organization and naming standards |
-| [Pipelines & Data Movement](./03_PIPELINES_DATA_MOVEMENT.md) | Pipeline optimization and load patterns |
-| [Source-Specific Patterns](./09_SOURCE_SPECIFIC_PATTERNS.md) | Oracle and SQL Server extraction patterns |
-| [Oracle Gateway Troubleshooting](./11_ORACLE_GATEWAY_TROUBLESHOOTING.md) | Gateway troubleshooting for Oracle workloads |
+| [Workspaces & Naming Conventions](./01-workspaces-naming.md) | Workspace organization and naming standards |
+| [Pipelines & Data Movement](./03-pipelines-data-movement.md) | Pipeline optimization and load patterns |
+| [Source-Specific Patterns](./09-source-specific-patterns.md) | Oracle and SQL Server extraction patterns |
+| [Oracle Gateway Troubleshooting](./11-oracle-gateway-troubleshooting.md) | Gateway troubleshooting for Oracle workloads |
 | [Network Security](./network-security.md) | Network security and firewall configuration |
 
 ---

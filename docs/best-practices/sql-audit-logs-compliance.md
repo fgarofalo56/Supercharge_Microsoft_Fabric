@@ -684,7 +684,7 @@ FabricSQLAuditLogs
 - [Error Handling & Monitoring](./error-handling-monitoring.md) -- Pipeline error architecture and classification
 - [Alerting & Data Activator](./alerting-data-activator.md) -- Detailed alerting setup and reflex patterns
 - [Data Governance Deep Dive](./data-governance-deep-dive.md) -- Purview integration and sensitivity labels
-- [Security Guide](../SECURITY.md) -- Compliance frameworks and access controls
+- [Security Guide](../security.md) -- Compliance frameworks and access controls
 
 ---
 

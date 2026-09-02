@@ -536,12 +536,12 @@ Use backticks for:
 Always at document top:
 
 ```markdown
-[Home](index.md) > [Docs](./index.md) > [API](GLOSSARY.md) > Authentication
+[Home](index.md) > [Docs](./index.md) > [API](glossary.md) > Authentication
 ```
 
 **Rendered:**
 
-[Home](index.md) > [Docs](./index.md) > [API](GLOSSARY.md) > Authentication
+[Home](index.md) > [Docs](./index.md) > [API](glossary.md) > Authentication
 
 ### Internal Links
 

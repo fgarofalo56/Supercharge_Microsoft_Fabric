@@ -42,7 +42,7 @@
 | [🎯 Overview](#-overview) | What this POC delivers |
 | [👥 Target Audience](#-target-audience) | Who should use this |
 | [🚀 Quick Start](#-quick-start) | Get up and running |
-| [⚡ 5-Minute Quick Start](docs/QUICK_START.md) | Fastest path to first results |
+| [⚡ 5-Minute Quick Start](docs/quick-start.md) | Fastest path to first results |
 | [📋 Cheat Sheet](tutorials/CHEAT_SHEET.md) | Quick reference & commands |
 | [🐳 Docker Support](#-docker-support) | Container-based deployment |
 | [💻 Dev Container](#-dev-container) | One-click development setup |
@@ -222,7 +222,7 @@ See [Dev Container](#-dev-container) for configuration details.
 
 ### Azure Deployment
 
-> 📋 **Prerequisites:** Complete the full [Prerequisites Guide](docs/PREREQUISITES.md) before starting deployment. This includes Azure subscription setup, tool installation, and resource provider registration.
+> 📋 **Prerequisites:** Complete the full [Prerequisites Guide](docs/prerequisites.md) before starting deployment. This includes Azure subscription setup, tool installation, and resource provider registration.
 
 #### Prerequisites Checklist
 
@@ -714,7 +714,7 @@ Understand Azure costs before deployment with our comprehensive cost guide.
 
 > 💡 **Pro Tip:** Enable auto-pause on dev/staging environments to automatically suspend compute during idle periods. This can reduce costs by up to 76% for non-production workloads.
 
-For detailed cost scenarios and optimization strategies, see [docs/COST_ESTIMATION.md](docs/COST_ESTIMATION.md).
+For detailed cost scenarios and optimization strategies, see [docs/cost-estimation.md](docs/cost-estimation.md).
 
 ---
 
@@ -848,11 +848,11 @@ Suppercharge_Microsoft_Fabric/
 │       └── prod/                      # Production configuration
 │
 ├── 📁 docs/                           # 📚 Documentation
-│   ├── ARCHITECTURE.md                # Detailed architecture guide
-│   ├── DEPLOYMENT.md                  # Deployment procedures
-│   ├── SECURITY.md                    # Security & compliance guide
-│   ├── PREREQUISITES.md               # Setup requirements
-│   └── COST_ESTIMATION.md             # Azure cost planning
+│   ├── architecture.md                # Detailed architecture guide
+│   ├── deployment.md                  # Deployment procedures
+│   ├── security.md                    # Security & compliance guide
+│   ├── prerequisites.md               # Setup requirements
+│   └── cost-estimation.md             # Azure cost planning
 │
 ├── 📁 tutorials/                      # 📖 Step-by-step tutorials
 │   ├── 00-environment-setup/          # Initial setup
@@ -1115,7 +1115,7 @@ Then open [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser.
 
 | Resource | Description |
 |:---------|:------------|
-| [⚡ 5-Minute Quick Start](docs/QUICK_START.md) | Fastest path to generating data and exploring the POC |
+| [⚡ 5-Minute Quick Start](docs/quick-start.md) | Fastest path to generating data and exploring the POC |
 | [📋 Cheat Sheet](tutorials/CHEAT_SHEET.md) | Commands, shortcuts, and quick reference for all components |
 
 ### Build Documentation

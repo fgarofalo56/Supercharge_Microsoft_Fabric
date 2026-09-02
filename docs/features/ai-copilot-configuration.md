@@ -850,8 +850,8 @@ federal_prompts:
 - [Fabric IQ](fabric-iq.md) -- Natural language analytics powered by Copilot
 - [Real-Time Intelligence](real-time-intelligence.md) -- KQL Copilot in Eventhouse
 - [Data Mesh Enterprise Patterns](data-mesh-enterprise-patterns.md) -- Copilot governance across domains
-- [Security](../SECURITY.md) -- Security and compliance framework
-- [Architecture](../ARCHITECTURE.md) -- System architecture overview
+- [Security](../security.md) -- Security and compliance framework
+- [Architecture](../architecture.md) -- System architecture overview
 
 ---
 

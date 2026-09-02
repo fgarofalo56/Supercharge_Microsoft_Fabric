@@ -261,7 +261,7 @@ Before starting the tutorials, ensure you have:
 
 - [ ] Azure subscription with Fabric enabled
 - [ ] Fabric capacity (F64 recommended, F2 minimum)
-- [ ] Completed the [Prerequisites Guide](../PREREQUISITES.md)
+- [ ] Completed the [Prerequisites Guide](../prerequisites.md)
 - [ ] Generated sample data (optional but recommended)
 
 ### 🔀 Choose Your Path
@@ -282,9 +282,9 @@ Before starting the tutorials, ensure you have:
 
 | Document | Description |
 |:---------|:------------|
-| [🏗️ Architecture](../ARCHITECTURE.md) | System architecture and design |
-| [🚀 Deployment Guide](../DEPLOYMENT.md) | Infrastructure deployment |
-| [📋 Prerequisites](../PREREQUISITES.md) | Setup requirements |
+| [🏗️ Architecture](../architecture.md) | System architecture and design |
+| [🚀 Deployment Guide](../deployment.md) | Infrastructure deployment |
+| [📋 Prerequisites](../prerequisites.md) | Setup requirements |
 | [📅 POC Agenda](../poc-agenda/README.md) | 3-Day workshop schedule |
 | [📋 Templates](./templates/README.md) | Progress tracker templates |
 

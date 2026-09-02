@@ -372,7 +372,7 @@ Database Hub aggregates performance metrics from all registered databases:
 - [OneLake Catalog](onelake-catalog.md) -- Data discovery that complements Database Hub
 - [Workspace Monitoring](workspace-monitoring.md) -- Workspace-level monitoring alongside database monitoring
 - [Identity & RBAC Patterns](../best-practices/identity-rbac-patterns.md) -- Access control for database assets
-- [Architecture](../ARCHITECTURE.md) -- System architecture overview
+- [Architecture](../architecture.md) -- System architecture overview
 
 ---
 

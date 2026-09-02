@@ -275,9 +275,9 @@ flowchart TD
 | Document | Description |
 |----------|-------------|
 | [Compliance Templates Overview](./README.md) | Index of all compliance templates |
-| [SAR Template](./SAR_TEMPLATE.md) | Suspicious Activity Report template |
-| [W-2G Template](./W2G_TEMPLATE.md) | Gambling winnings tax reporting |
-| [MICS Template](./MICS_TEMPLATE.md) | NIGC compliance template |
+| [SAR Template](./sar-template.md) | Suspicious Activity Report template |
+| [W-2G Template](./w2g-template.md) | Gambling winnings tax reporting |
+| [MICS Template](./mics-template.md) | NIGC compliance template |
 | [Data Governance](../best-practices/data-governance-deep-dive.md) | Governance and compliance frameworks |
 
 ---

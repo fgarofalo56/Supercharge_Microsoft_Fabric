@@ -16,7 +16,7 @@ Everything you need to provision, configure, and deploy your Microsoft Fabric PO
 
     Required Azure subscriptions, permissions, tooling, and access needed before deployment.
 
-    [:octicons-arrow-right-24: Check prerequisites](../PREREQUISITES.md)
+    [:octicons-arrow-right-24: Check prerequisites](../prerequisites.md)
 
 -   :material-rocket-launch:{ .lg .middle } __Deployment Guide__
 
@@ -24,7 +24,7 @@ Everything you need to provision, configure, and deploy your Microsoft Fabric PO
 
     Step-by-step Bicep deployment with environment parameters, what-if analysis, and validation.
 
-    [:octicons-arrow-right-24: Deploy now](../DEPLOYMENT.md)
+    [:octicons-arrow-right-24: Deploy now](../deployment.md)
 
 -   :material-calculator:{ .lg .middle } __Cost Estimation__
 
@@ -32,6 +32,6 @@ Everything you need to provision, configure, and deploy your Microsoft Fabric PO
 
     SKU sizing, CU consumption estimates, and monthly cost projections for F64 capacity.
 
-    [:octicons-arrow-right-24: Estimate costs](../COST_ESTIMATION.md)
+    [:octicons-arrow-right-24: Estimate costs](../cost-estimation.md)
 
 </div>

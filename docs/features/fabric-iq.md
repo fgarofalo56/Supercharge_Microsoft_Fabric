@@ -1042,8 +1042,8 @@ If you already have Fabric IQ v1 configured with semantic model metadata, synony
 - [AI Copilot Configuration](ai-copilot-configuration.md) -- Full Copilot enablement guide
 - [Real-Time Intelligence](real-time-intelligence.md) -- RTI integration with IQ
 - [Data Mesh Enterprise Patterns](data-mesh-enterprise-patterns.md) -- Cross-domain IQ strategies
-- [Architecture](../ARCHITECTURE.md) -- System architecture overview
-- [Security](../SECURITY.md) -- Security and compliance framework
+- [Architecture](../architecture.md) -- System architecture overview
+- [Security](../security.md) -- Security and compliance framework
 
 ---
 

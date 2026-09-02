@@ -245,9 +245,9 @@ sequenceDiagram
 | Document | Description |
 |----------|-------------|
 | [Compliance Templates Overview](./README.md) | Index of all compliance templates |
-| [CTR Template](./CTR_TEMPLATE.md) | Currency Transaction Report template |
-| [SAR Template](./SAR_TEMPLATE.md) | Suspicious Activity Report template |
-| [MICS Template](./MICS_TEMPLATE.md) | NIGC compliance template |
+| [CTR Template](./ctr-template.md) | Currency Transaction Report template |
+| [SAR Template](./sar-template.md) | Suspicious Activity Report template |
+| [MICS Template](./mics-template.md) | NIGC compliance template |
 | [Data Dictionary](../data-dictionary/README.md) | Table schemas and field definitions |
 
 ---

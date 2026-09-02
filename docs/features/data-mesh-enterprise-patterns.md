@@ -1305,9 +1305,9 @@ flowchart TB
 - [Fabric IQ](fabric-iq.md) -- Natural language analytics across domains
 - [Real-Time Intelligence](real-time-intelligence.md) -- Streaming architecture patterns
 - [AI Copilot Configuration](ai-copilot-configuration.md) -- Copilot governance across domains
-- [Architecture](../ARCHITECTURE.md) -- System architecture overview
-- [Security](../SECURITY.md) -- Security and compliance framework
-- [Best Practices: Workspaces & Naming](../best-practices/01_WORKSPACES_NAMING.md) -- Naming conventions
+- [Architecture](../architecture.md) -- System architecture overview
+- [Security](../security.md) -- Security and compliance framework
+- [Best Practices: Workspaces & Naming](../best-practices/01-workspaces-naming.md) -- Naming conventions
 
 ---
 

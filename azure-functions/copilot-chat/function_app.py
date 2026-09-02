@@ -292,7 +292,7 @@ infra/              — Bicep IaC modules
 docs/               — 38 feature docs + 37 best-practice guides
   features/         — Fabric IQ, Direct Lake, Mirroring, Dataflow Gen2, GraphQL, Maps, etc.
   best-practices/   — Medallion, capacity, BCDR, security, FinOps, testing
-  FIELD_QUESTIONS.md — answers to 5 enterprise scenarios (VNet mashup, mirror views, etc.)
+  field-questions.md — answers to 5 enterprise scenarios (VNet mashup, mirror views, etc.)
 tutorials/          — 38 step-by-step tutorials (00–37)
 data_generation/    — 16 Python generators (casino + federal + streaming)
 notebooks/          — 55+ Fabric-importable notebooks (bronze / silver / gold)

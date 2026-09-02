@@ -31,7 +31,7 @@ type: feature
 |----------|---------------|----------------|--------------|
 | Network performance monitoring | Eventstream → Eventhouse KQL + Real-Time Dashboard | < 5 sec | [RTI](../features/real-time-intelligence.md), [Alerting](../best-practices/alerting-data-activator.md) |
 | Churn prediction | Gold feature store + AutoML classification | Daily scoring | [AutoML](../features/automl-model-endpoints.md), [Semantic Link](../features/semantic-link.md) |
-| CDR analytics (billing, fraud) | Lakehouse medallion + Warehouse aggregation | Hourly | [Medallion Architecture](../best-practices/medallion-architecture-deep-dive.md), [Warehouse Setup](../best-practices/08_WAREHOUSE_SETUP.md) |
+| CDR analytics (billing, fraud) | Lakehouse medallion + Warehouse aggregation | Hourly | [Medallion Architecture](../best-practices/medallion-architecture-deep-dive.md), [Warehouse Setup](../best-practices/08-warehouse-setup.md) |
 | 5G capacity planning | Lakehouse Gold + AutoML time-series forecasting | Daily | [AutoML](../features/automl-model-endpoints.md), [Maps in Fabric](../features/maps-in-fabric.md) |
 | Customer 360 for telco | Lakehouse Gold + Direct Lake semantic model | Near-real-time | [Direct Lake](../features/direct-lake.md), [Data Sharing](../best-practices/data-sharing-federation.md) |
 | Cell tower digital twin | Digital Twin Builder with RAN telemetry | < 10 sec | [Digital Twin Builder](../features/digital-twin-builder.md), [RTI](../features/real-time-intelligence.md) |

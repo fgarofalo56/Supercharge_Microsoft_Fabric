@@ -584,4 +584,4 @@ SWITCH(
 
 ---
 
-[Back to Docs](index.md) | [Decision Trees](DECISION_TREES.md) | [Troubleshooting](TROUBLESHOOTING_MATRIX.md)
+[Back to Docs](index.md) | [Decision Trees](decision-trees.md) | [Troubleshooting](troubleshooting-matrix.md)

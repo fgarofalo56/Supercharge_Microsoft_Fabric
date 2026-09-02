@@ -728,9 +728,9 @@ df.write \
 
 | Document | Description |
 |----------|-------------|
-| [🏗️ Architecture](./ARCHITECTURE.md) | System architecture overview |
-| [🚀 Deployment Guide](./DEPLOYMENT.md) | Infrastructure deployment |
-| [🔐 Security Guide](./SECURITY.md) | Security configuration |
+| [🏗️ Architecture](./architecture.md) | System architecture overview |
+| [🚀 Deployment Guide](./deployment.md) | Infrastructure deployment |
+| [🔐 Security Guide](./security.md) | Security configuration |
 | [📖 Tutorial 20: Best Practices](tutorials/20-workspace-best-practices/README.md) | Hands-on best practices tutorial |
 
 ---

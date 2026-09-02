@@ -1223,8 +1223,8 @@ Based on the Microsoft Fabric roadmap and public announcements:
 - [Identity & RBAC Patterns](../best-practices/identity-rbac-patterns.md) -- Workspace roles, item permissions, RLS/CLS/OLS
 - [Customer-Managed Keys](../best-practices/customer-managed-keys.md) -- BYOK encryption for Fabric
 - [OneLake Catalog](onelake-catalog.md) -- Data discovery with security-aware access
-- [Architecture](../ARCHITECTURE.md) -- System architecture overview
-- [Security](../SECURITY.md) -- Security and compliance framework
+- [Architecture](../architecture.md) -- System architecture overview
+- [Security](../security.md) -- Security and compliance framework
 
 ---
 

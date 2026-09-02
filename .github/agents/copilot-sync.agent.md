@@ -52,7 +52,7 @@ Invoke this agent when you need to:
 | **Pre-commit Config**   | `.pre-commit-config.yaml`         | Secret detection hooks (gitleaks)        |
 | **Worktree Helper**     | `scripts/worktree-helper.ps1`     | Git worktree PowerShell utilities        |
 | **PRP Framework**       | `PRPs/`                           | Product Requirement Prompt templates     |
-| **Style Guide**         | `docs/STYLE_GUIDE.md`             | Documentation standards                  |
+| **Style Guide**         | `docs/style-guide.md`             | Documentation standards                  |
 
 ---
 

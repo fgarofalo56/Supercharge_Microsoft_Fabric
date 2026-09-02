@@ -825,9 +825,9 @@ flowchart LR
 
 | Document | Description |
 |----------|-------------|
-| [🏗️ Architecture](ARCHITECTURE.md) | System architecture and design |
-| [🚀 Deployment Guide](DEPLOYMENT.md) | Infrastructure deployment |
-| [📋 Prerequisites](PREREQUISITES.md) | Setup requirements |
+| [🏗️ Architecture](architecture.md) | System architecture and design |
+| [🚀 Deployment Guide](deployment.md) | Infrastructure deployment |
+| [📋 Prerequisites](prerequisites.md) | Setup requirements |
 
 ---
 

@@ -646,7 +646,7 @@ Reconciled against the current `docs/features/` inventory (55 feature docs). **A
 | 7 | MCP for RTI (Activator/Eventhouse) | ✅ Covered | `fabric-mcp.md` |
 | 8 | Modern visual defaults (Fluent 2) | ✅ Covered | `tmdl-power-bi-developer-mode.md` |
 | 9 | MERGE support (GA Jan 2026) | ✅ Covered | `fabric-sql-database.md` |
-| 10 | ANY_VALUE aggregate (GA Mar 2026) | ✅ Covered | `best-practices/08_WAREHOUSE_SETUP.md` |
+| 10 | ANY_VALUE aggregate (GA Mar 2026) | ✅ Covered | `best-practices/08-warehouse-setup.md` |
 | 11 | Workspace IP firewall rules (GA Mar 2026) | ✅ Covered | `workspace-ip-firewall.md` |
 | 12 | Workspace-level surge protection | ✅ Covered | `workspace-ip-firewall.md` |
 | 13 | Fabric Extensibility Toolkit (GA Mar 2026) | ✅ Covered | `fabric-extensibility-toolkit.md` |
@@ -663,7 +663,7 @@ Reconciled against the current `docs/features/` inventory (55 feature docs). **A
 | 24 | Copy job CDC support | ✅ Covered | `copy-job-cdc.md` |
 | 25 | Workspace monitoring | ✅ Covered | `workspace-monitoring.md` |
 | 26 | PowerShell gateway model (GA Mar 2026) | ✅ Covered | `gateway-powershell-automation.md` |
-| 27 | Incremental/Proactive statistics (GA Dec 2025) | ✅ Covered | `best-practices/08_WAREHOUSE_SETUP.md` |
+| 27 | Incremental/Proactive statistics (GA Dec 2025) | ✅ Covered | `best-practices/08-warehouse-setup.md` |
 | 28 | Custom totals (Preview Mar 2026) | ✅ Covered | `tmdl-power-bi-developer-mode.md` |
 | 29 | Series label leader lines | ✅ Covered | `tmdl-power-bi-developer-mode.md` |
 | 30 | Copilot pane UX update | ✅ Covered | `ai-copilot-configuration.md` |
@@ -687,9 +687,9 @@ Reconciled against the current `docs/features/` inventory (55 feature docs). **A
 
 | Document | Description |
 |----------|-------------|
-| [🏗️ Architecture](ARCHITECTURE.md) | System architecture and design |
-| [🚀 Deployment Guide](DEPLOYMENT.md) | Infrastructure deployment |
-| [📖 Glossary](GLOSSARY.md) | Technical terms reference |
+| [🏗️ Architecture](architecture.md) | System architecture and design |
+| [🚀 Deployment Guide](deployment.md) | Infrastructure deployment |
+| [📖 Glossary](glossary.md) | Technical terms reference |
 
 ---
 

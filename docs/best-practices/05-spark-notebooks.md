@@ -479,9 +479,9 @@ Examples:
 
 | Document | Description |
 |----------|-------------|
-| [Lakehouse Setup & Organization](./07_LAKEHOUSE_SETUP.md) | Delta Lake configuration and table maintenance |
-| [Pipelines & Data Movement](./03_PIPELINES_DATA_MOVEMENT.md) | Pipeline optimization for data movement |
-| [Decision Guide](./10_DECISION_GUIDE.md) | When to use Spark vs other tools |
+| [Lakehouse Setup & Organization](./07-lakehouse-setup.md) | Delta Lake configuration and table maintenance |
+| [Pipelines & Data Movement](./03-pipelines-data-movement.md) | Pipeline optimization for data movement |
+| [Decision Guide](./10-decision-guide.md) | When to use Spark vs other tools |
 | [Testing Strategies](./testing-strategies.md) | Unit and integration testing patterns |
 | [Monitoring & Observability](./monitoring-observability.md) | Spark monitoring and performance tracking |
 

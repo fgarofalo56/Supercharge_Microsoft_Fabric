@@ -793,7 +793,7 @@ az network express-route show \
 
 ## 📖 Additional Resources
 
-- [Networking Documentation](../../NETWORKING.md)
+- [Networking Documentation](../../networking.md)
 - [Private Endpoints for Fabric](https://learn.microsoft.com/en-us/fabric/security/security-private-links-overview)
 - [ExpressRoute Documentation](https://learn.microsoft.com/en-us/azure/expressroute/)
 

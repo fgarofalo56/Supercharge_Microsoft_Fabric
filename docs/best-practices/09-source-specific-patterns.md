@@ -492,10 +492,10 @@ flowchart TD
 
 | Document | Description |
 |----------|-------------|
-| [Data Gateway Optimization](./02_DATA_GATEWAY.md) | Gateway configuration and sizing |
-| [Pipelines & Data Movement](./03_PIPELINES_DATA_MOVEMENT.md) | Pipeline optimization patterns |
-| [Oracle Gateway Troubleshooting](./11_ORACLE_GATEWAY_TROUBLESHOOTING.md) | Oracle-specific gateway troubleshooting |
-| [Metadata-Driven Pipelines](./04_METADATA_DRIVEN_PIPELINES.md) | Dynamic pipeline configuration |
+| [Data Gateway Optimization](./02-data-gateway.md) | Gateway configuration and sizing |
+| [Pipelines & Data Movement](./03-pipelines-data-movement.md) | Pipeline optimization patterns |
+| [Oracle Gateway Troubleshooting](./11-oracle-gateway-troubleshooting.md) | Oracle-specific gateway troubleshooting |
+| [Metadata-Driven Pipelines](./04-metadata-driven-pipelines.md) | Dynamic pipeline configuration |
 | [Migration Patterns](./migration-patterns.md) | Enterprise migration strategies |
 | [Mirroring](../features/mirroring.md) | Database mirroring feature |
 

@@ -417,7 +417,7 @@ flowchart LR
 - [Mirroring](../features/mirroring.md) — Database Mirroring feature doc
 - [Medallion Architecture Deep Dive](medallion-architecture-deep-dive.md) — Medallion layer patterns
 - [Performance Best Practices](performance-parallelism.md) — Delta table optimization
-- [Architecture](../ARCHITECTURE.md) — System architecture overview
+- [Architecture](../architecture.md) — System architecture overview
 
 ---
 

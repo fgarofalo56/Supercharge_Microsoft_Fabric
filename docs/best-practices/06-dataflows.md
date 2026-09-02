@@ -379,11 +379,11 @@ flowchart LR
 
 | Document | Description |
 |----------|-------------|
-| [Pipelines & Data Movement](./03_PIPELINES_DATA_MOVEMENT.md) | Pipeline-based data movement patterns |
-| [Decision Guide](./10_DECISION_GUIDE.md) | When to use Dataflow vs Pipeline |
-| [Lakehouse Setup & Organization](./07_LAKEHOUSE_SETUP.md) | Lakehouse destination configuration |
-| [Warehouse Setup & Configuration](./08_WAREHOUSE_SETUP.md) | Warehouse destination requirements |
-| [Data Gateway Optimization](./02_DATA_GATEWAY.md) | Gateway configuration for on-premises sources |
+| [Pipelines & Data Movement](./03-pipelines-data-movement.md) | Pipeline-based data movement patterns |
+| [Decision Guide](./10-decision-guide.md) | When to use Dataflow vs Pipeline |
+| [Lakehouse Setup & Organization](./07-lakehouse-setup.md) | Lakehouse destination configuration |
+| [Warehouse Setup & Configuration](./08-warehouse-setup.md) | Warehouse destination requirements |
+| [Data Gateway Optimization](./02-data-gateway.md) | Gateway configuration for on-premises sources |
 
 ---
 

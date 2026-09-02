@@ -684,7 +684,7 @@ Use this as the workflow-migration sub-checklist for Step 5 of [Tutorial 42](./R
 - **[Tutorial 41 — Synapse → Fabric](../41-synapse-to-fabric/README.md)** (style anchor; overlapping Pipeline patterns)
 - **[Spark Environments & Job Definitions](../../features/spark-environments-job-definitions.md)** (Environment YAML, SJD authoring)
 - **[Deployment Pipelines](../../features/deployment-pipelines.md)** (stage promotion + Variable Library)
-- **[Pipelines & Data Movement Best Practices](../../best-practices/03_PIPELINES_DATA_MOVEMENT.md)** (ETL/ELT, copy activity tuning)
+- **[Pipelines & Data Movement Best Practices](../../best-practices/03-pipelines-data-movement.md)** (ETL/ELT, copy activity tuning)
 - **[Materialized Lake Views](../../features/materialized-lake-views.md)** (DLT replacement)
 - **[Copy Job CDC](../../features/copy-job-cdc.md)** (autoLoader replacement)
 - **[Real-Time Intelligence](../../features/real-time-intelligence.md)** (continuous-trigger replacement)

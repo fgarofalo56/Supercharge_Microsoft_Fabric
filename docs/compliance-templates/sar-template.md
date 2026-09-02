@@ -351,9 +351,9 @@ FinancialTransactions
 | Document | Description |
 |----------|-------------|
 | [Compliance Templates Overview](./README.md) | Index of all compliance templates |
-| [CTR Template](./CTR_TEMPLATE.md) | Currency Transaction Report template |
-| [W-2G Template](./W2G_TEMPLATE.md) | Gambling winnings tax reporting |
-| [MICS Template](./MICS_TEMPLATE.md) | NIGC compliance template |
+| [CTR Template](./ctr-template.md) | Currency Transaction Report template |
+| [W-2G Template](./w2g-template.md) | Gambling winnings tax reporting |
+| [MICS Template](./mics-template.md) | NIGC compliance template |
 | [Alerting & Data Activator](../best-practices/alerting-data-activator.md) | Alert patterns and integration |
 
 ---

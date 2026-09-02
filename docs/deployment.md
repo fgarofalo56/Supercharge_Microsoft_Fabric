@@ -170,7 +170,7 @@ stateDiagram-v2
 
 ## 📋 Prerequisites
 
-Before deploying, ensure you have completed all items in the [Prerequisites Guide](PREREQUISITES.md).
+Before deploying, ensure you have completed all items in the [Prerequisites Guide](prerequisites.md).
 
 ### Azure Requirements
 
@@ -823,7 +823,7 @@ az lock delete --name "CanNotDelete" --resource-group "rg-fabric-poc-dev"
 
 ## 💰 Cost Optimization
 
-For detailed cost estimates and optimization strategies, see the comprehensive [Cost Estimation Guide](COST_ESTIMATION.md).
+For detailed cost estimates and optimization strategies, see the comprehensive [Cost Estimation Guide](cost-estimation.md).
 
 ### Quick Cost Reference
 
@@ -863,7 +863,7 @@ az monitor metrics alert create \
 
 ### Related Cost Resources
 
-- [Cost Estimation Guide](COST_ESTIMATION.md) - Detailed cost breakdown and scenarios
+- [Cost Estimation Guide](cost-estimation.md) - Detailed cost breakdown and scenarios
 - [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) - Current pricing
 
 ---
@@ -884,9 +884,9 @@ After successful deployment, proceed with these guides:
 
 | Document | Description |
 |----------|-------------|
-| [🏗️ Architecture](ARCHITECTURE.md) | System architecture and design |
-| [🔐 Security Guide](SECURITY.md) | Security controls and compliance |
-| [📋 Prerequisites](PREREQUISITES.md) | Setup requirements |
+| [🏗️ Architecture](architecture.md) | System architecture and design |
+| [🔐 Security Guide](security.md) | Security controls and compliance |
+| [📋 Prerequisites](prerequisites.md) | Setup requirements |
 
 ---
 

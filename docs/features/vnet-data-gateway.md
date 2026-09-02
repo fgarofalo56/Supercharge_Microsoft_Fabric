@@ -534,7 +534,7 @@ epa_connection = {
 - [Identity & RBAC Patterns](../best-practices/identity-rbac-patterns.md) — Service principal auth for gateway connections
 - [Customer-Managed Keys](../best-practices/customer-managed-keys.md) — Encryption for data at rest
 - [Disaster Recovery & BCDR](../best-practices/disaster-recovery-bcdr.md) — Gateway HA and failover
-- [Architecture](../ARCHITECTURE.md) — System architecture overview
+- [Architecture](../architecture.md) — System architecture overview
 
 ---
 

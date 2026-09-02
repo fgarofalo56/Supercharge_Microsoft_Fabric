@@ -424,12 +424,12 @@ Reference these diagrams for lineage documentation in Microsoft Purview data cat
 
 | Document | Description |
 |----------|-------------|
-| [Architecture](../ARCHITECTURE.md) | Full architecture documentation |
-| [Deployment Guide](../DEPLOYMENT.md) | Infrastructure deployment |
-| [Security Guide](../SECURITY.md) | Security controls |
+| [Architecture](../architecture.md) | Full architecture documentation |
+| [Deployment Guide](../deployment.md) | Infrastructure deployment |
+| [Security Guide](../security.md) | Security controls |
 | [Cost Breakdown](./cost-breakdown.md) | Cost analysis diagrams |
 | [Data Dictionary](../data-dictionary/README.md) | Table schemas and field definitions |
 
 ---
 
-[⬆️ Back to Top](#-architecture-overview-diagram) | [📚 Parent](../ARCHITECTURE.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#-architecture-overview-diagram) | [📚 Parent](../architecture.md) | [🏠 Home](../index.md)

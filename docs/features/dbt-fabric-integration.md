@@ -1337,7 +1337,7 @@ The Fabric Warehouse SQL engine supports most T-SQL syntax but has some differen
 - [Fabric IQ](fabric-iq.md) -- Natural language queries over dbt-produced Gold tables
 - [AI Copilot Configuration](ai-copilot-configuration.md) -- Copilot-assisted SQL authoring
 - [Data Mesh Enterprise Patterns](data-mesh-enterprise-patterns.md) -- Cross-domain dbt project patterns
-- [Architecture](../ARCHITECTURE.md) -- System architecture overview
+- [Architecture](../architecture.md) -- System architecture overview
 
 ---
 

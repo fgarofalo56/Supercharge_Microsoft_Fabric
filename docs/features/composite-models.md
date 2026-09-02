@@ -616,8 +616,8 @@ RLS applies independently per storage mode:
 - [Scorecards & Metrics](scorecards-metrics.md) -- KPI tracking with composite model measures
 - [Fabric IQ](fabric-iq.md) -- Natural language queries over composite semantic models
 - [Materialized Lake Views](materialized-lake-views.md) -- Pre-computed views for aggregation tables
-- [Architecture](../ARCHITECTURE.md) -- System architecture overview
-- [Security](../SECURITY.md) -- Security and compliance framework
+- [Architecture](../architecture.md) -- System architecture overview
+- [Security](../security.md) -- Security and compliance framework
 
 ---
 

@@ -452,10 +452,10 @@ Tables/
 
 | Document | Description |
 |----------|-------------|
-| [Spark & Notebooks](./05_SPARK_NOTEBOOKS.md) | Spark optimization and notebook patterns |
-| [Warehouse Setup & Configuration](./08_WAREHOUSE_SETUP.md) | Warehouse schema design and comparison |
+| [Spark & Notebooks](./05-spark-notebooks.md) | Spark optimization and notebook patterns |
+| [Warehouse Setup & Configuration](./08-warehouse-setup.md) | Warehouse schema design and comparison |
 | [Medallion Architecture Deep Dive](./medallion-architecture-deep-dive.md) | Advanced medallion architecture patterns |
-| [Decision Guide](./10_DECISION_GUIDE.md) | Lakehouse vs Warehouse decision criteria |
+| [Decision Guide](./10-decision-guide.md) | Lakehouse vs Warehouse decision criteria |
 | [Direct Lake](../features/direct-lake.md) | Direct Lake connectivity for Power BI |
 
 ---

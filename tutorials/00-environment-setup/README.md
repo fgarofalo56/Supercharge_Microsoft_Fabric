@@ -17,7 +17,7 @@
 
 ---
 
-> For the 5-minute version, see [docs/QUICK_START.md](../../QUICK_START.md).
+> For the 5-minute version, see [docs/quick-start.md](../../quick-start.md).
 
 ## 📖 Overview
 
@@ -78,7 +78,7 @@ Your Fabric capacity must be **Running** before any notebooks or data processing
 | **Running** | Ready to use | Proceed to Step 2 |
 | **Paused** | Manually paused to save cost | Click **Resume** — takes 1-2 minutes |
 | **Deallocated** | Stopped by Azure | Click **Resume** — may take 2-3 minutes |
-| **Not found** | No capacity provisioned | Deploy via Bicep (see [QUICK_START.md](../../QUICK_START.md) Step 2) or start a trial |
+| **Not found** | No capacity provisioned | Deploy via Bicep (see [quick-start.md](../../quick-start.md) Step 2) or start a trial |
 
 ### Verify from the Fabric portal
 

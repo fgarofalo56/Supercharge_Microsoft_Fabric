@@ -26,7 +26,7 @@ Follow these steps to establish baseline platform operations:
    [:octicons-arrow-right-24: Tutorial 00: Environment Setup](../tutorials/00-environment-setup/README.md)
 
 2. **Configure workspace structure and naming** - Set up a workspace hierarchy that scales with your organization's teams and environments.
-   [:octicons-arrow-right-24: Workspaces & Naming Best Practices](../best-practices/01_WORKSPACES_NAMING.md)
+   [:octicons-arrow-right-24: Workspaces & Naming Best Practices](../best-practices/01-workspaces-naming.md)
 
 3. **Establish RBAC policies** - Define who can do what across workspaces using Fabric's identity and role-based access model.
    [:octicons-arrow-right-24: Identity & RBAC Patterns](../best-practices/identity-rbac-patterns.md)
@@ -72,7 +72,7 @@ Follow these steps to establish baseline platform operations:
 
 1. **Under-provisioning capacity for burst workloads** - A single F64 capacity shared by many workloads can throttle during peak hours. Use capacity metrics to identify utilization patterns and consider smoothing or scaling strategies.
 
-2. **Flat workspace structure** - Putting everything in one workspace makes RBAC unmanageable. Design a workspace-per-domain or workspace-per-environment hierarchy from the start. See [Workspaces & Naming](../best-practices/01_WORKSPACES_NAMING.md).
+2. **Flat workspace structure** - Putting everything in one workspace makes RBAC unmanageable. Design a workspace-per-domain or workspace-per-environment hierarchy from the start. See [Workspaces & Naming](../best-practices/01-workspaces-naming.md).
 
 3. **No disaster recovery plan** - Without a tested BCDR plan, a regional outage means extended downtime. Document and test recovery procedures quarterly.
 

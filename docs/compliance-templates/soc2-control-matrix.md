@@ -1181,10 +1181,10 @@ Set-AzStorageBlobContent -File $csvPath `
 ### Companion Templates (this directory)
 
 - [DSAR Runbook Template](./dsar-runbook.md) — Privacy TSC P5 implementation (landing batch 5b)
-- [CTR Template](./CTR_TEMPLATE.md) — gaming-specific compliance
-- [SAR Template](./SAR_TEMPLATE.md) — gaming-specific compliance
-- [W-2G Template](./W2G_TEMPLATE.md) — gaming-specific compliance
-- [MICS Template](./MICS_TEMPLATE.md) — gaming-specific compliance
+- [CTR Template](./ctr-template.md) — gaming-specific compliance
+- [SAR Template](./sar-template.md) — gaming-specific compliance
+- [W-2G Template](./w2g-template.md) — gaming-specific compliance
+- [MICS Template](./mics-template.md) — gaming-specific compliance
 
 ---
 

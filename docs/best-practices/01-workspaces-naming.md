@@ -437,10 +437,10 @@ Write-Host "Created workspace: $($workspace.id)"
 
 | Document | Description |
 |----------|-------------|
-| [Data Gateway Optimization](./02_DATA_GATEWAY.md) | Gateway configuration and performance tuning |
-| [Lakehouse Setup & Organization](./07_LAKEHOUSE_SETUP.md) | Lakehouse architecture and Delta Lake configuration |
-| [Warehouse Setup & Configuration](./08_WAREHOUSE_SETUP.md) | Warehouse schema design and optimization |
-| [Decision Guide](./10_DECISION_GUIDE.md) | Choosing the right tool for your scenario |
+| [Data Gateway Optimization](./02-data-gateway.md) | Gateway configuration and performance tuning |
+| [Lakehouse Setup & Organization](./07-lakehouse-setup.md) | Lakehouse architecture and Delta Lake configuration |
+| [Warehouse Setup & Configuration](./08-warehouse-setup.md) | Warehouse schema design and optimization |
+| [Decision Guide](./10-decision-guide.md) | Choosing the right tool for your scenario |
 | [Identity & RBAC Patterns](./identity-rbac-patterns.md) | Advanced role-based access control |
 
 ---

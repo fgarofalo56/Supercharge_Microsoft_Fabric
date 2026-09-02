@@ -37,7 +37,7 @@ type: feature
 | Predictive maintenance | Gold feature store + AutoML anomaly model | Hourly scoring | [AutoML](../features/automl-model-endpoints.md), [MLOps](../best-practices/mlops-fabric-production.md) |
 | Digital twin of production line | Digital Twin Builder with real-time sensor binding | < 5 sec | [Digital Twin Builder](../features/digital-twin-builder.md), [RTI](../features/real-time-intelligence.md) |
 | Quality analytics (SPC/SQC) | Lakehouse Gold + Direct Lake control charts | Near-real-time | [Direct Lake](../features/direct-lake.md), [Medallion Architecture](../best-practices/medallion-architecture-deep-dive.md) |
-| Supply chain & MES integration | Lakehouse Bronze → Silver with Mirroring from ERP | Hourly | [Mirroring](../features/mirroring.md), [Warehouse Setup](../best-practices/08_WAREHOUSE_SETUP.md) |
+| Supply chain & MES integration | Lakehouse Bronze → Silver with Mirroring from ERP | Hourly | [Mirroring](../features/mirroring.md), [Warehouse Setup](../best-practices/08-warehouse-setup.md) |
 | Energy consumption optimization | Eventstream from smart meters → Eventhouse KQL | < 10 sec | [RTI](../features/real-time-intelligence.md), [Data Activator](../best-practices/alerting-data-activator.md) |
 
 ---

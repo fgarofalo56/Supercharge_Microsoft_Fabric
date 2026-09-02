@@ -522,7 +522,7 @@ flowchart TD
 | Document | Description |
 |----------|-------------|
 | [Error Handling & Monitoring](../best-practices/error-handling-monitoring.md) | Pipeline error architecture, classification, taxonomy |
-| [Pipelines & Data Movement](../best-practices/03_PIPELINES_DATA_MOVEMENT.md) | Pipeline patterns, retry policies, error activity wiring |
+| [Pipelines & Data Movement](../best-practices/03-pipelines-data-movement.md) | Pipeline patterns, retry policies, error activity wiring |
 | [Copy Job CDC](../features/copy-job-cdc.md) | Watermark management, CDC failure modes, replay |
 | [Alerting & Data Activator](../best-practices/alerting-data-activator.md) | Wiring alerts that page this runbook |
 | [Monitoring & Observability](../best-practices/monitoring-observability.md) | KQL dashboards, FabricPipelineRuns schema |

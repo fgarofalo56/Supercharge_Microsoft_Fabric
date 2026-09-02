@@ -1145,7 +1145,7 @@ print(f"Endpoint URL: {endpoint.scoring_uri}")
 - [Data Agents](data-agents.md) -- AI agents that consume ML endpoint predictions
 - [AI Copilot Configuration](ai-copilot-configuration.md) -- Copilot assistance for notebook-based ML workflows
 - [Digital Twin Builder](digital-twin-builder.md) -- Digital twins enhanced with predictive models
-- [Architecture](../ARCHITECTURE.md) -- System architecture overview
+- [Architecture](../architecture.md) -- System architecture overview
 
 ---
 

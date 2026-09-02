@@ -820,8 +820,8 @@ module networkArchitecture 'network.bicep' = {
 
 | Document | Description |
 |----------|-------------|
-| [🔐 Security Guide](./SECURITY.md) | Security best practices |
-| [🏆 Best Practices](./BEST_PRACTICES.md) | Workspace organization |
+| [🔐 Security Guide](./security.md) | Security best practices |
+| [🏆 Best Practices](./best-practices.md) | Workspace organization |
 | [📖 Tutorial 22](tutorials/22-networking-connectivity/README.md) | Networking hands-on tutorial |
 | [📖 Tutorial 23](tutorials/23-shir-data-gateways/README.md) | SHIR & Gateway tutorial |
 

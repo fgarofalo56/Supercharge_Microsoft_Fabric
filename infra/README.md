@@ -407,10 +407,10 @@ az bicep build --file infra/main.bicep
 
 | Document | Description |
 |----------|-------------|
-| [📋 Prerequisites](../PREREQUISITES.md) | Full prerequisites guide |
-| [🚀 Deployment Guide](../DEPLOYMENT.md) | Complete deployment walkthrough |
-| [💰 Cost Estimation](../COST_ESTIMATION.md) | Detailed cost analysis |
-| [🔐 Security Guide](../SECURITY.md) | Security best practices |
+| [📋 Prerequisites](../prerequisites.md) | Full prerequisites guide |
+| [🚀 Deployment Guide](../deployment.md) | Complete deployment walkthrough |
+| [💰 Cost Estimation](../cost-estimation.md) | Detailed cost analysis |
+| [🔐 Security Guide](../security.md) | Security best practices |
 
 ---
 
