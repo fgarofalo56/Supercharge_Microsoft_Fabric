@@ -10,16 +10,27 @@ This module exposes them as plain Python functions and falls back to a
 graceful empty result on failure so the Copilot never crashes when MS
 Learn is rate-limited or offline.
 """
+
 from __future__ import annotations
+
 import json
 import logging
-import time
 import uuid
 
 import httpx
 
 MCP_URL = "https://learn.microsoft.com/api/mcp"
 HTTP_TIMEOUT = 25.0
+
+
+def _try_parse_json(text: str):
+    """Parse text as JSON, returning None when it isn't valid JSON."""
+    if not text or text[0] not in "{[":
+        return None
+    try:
+        return json.loads(text)
+    except ValueError:
+        return None
 
 
 def _call_mcp(tool: str, arguments: dict) -> list[dict]:
@@ -46,15 +57,18 @@ def _call_mcp(tool: str, arguments: dict) -> list[dict]:
         if r.status_code != 200:
             logging.warning("MS Learn MCP %s -> HTTP %s", tool, r.status_code)
             return []
-        # The server may respond as SSE frames or single JSON.
+        # The server responds as SSE frames ("event: message\ndata: {...}").
+        # Collect every data: payload and use the last one — earlier frames
+        # may be progress notifications.
         text = r.text.strip()
         body: dict = {}
-        if text.startswith("data:"):
-            # Take the last `data:` frame.
-            for line in reversed(text.splitlines()):
-                if line.startswith("data:"):
-                    body = json.loads(line[5:].strip())
-                    break
+        data_lines = [
+            line.split("data:", 1)[1].strip()
+            for line in text.splitlines()
+            if line.lstrip().startswith("data:")
+        ]
+        if data_lines:
+            body = json.loads(data_lines[-1])
         else:
             body = r.json()
         result = body.get("result", {}) if isinstance(body, dict) else {}
@@ -62,20 +76,29 @@ def _call_mcp(tool: str, arguments: dict) -> list[dict]:
         items: list[dict] = []
         for c in content:
             if isinstance(c, dict) and c.get("type") == "text":
-                # Each text block may contain a JSON-encoded list of refs;
-                # otherwise it's a plain text answer. We try to parse, then
-                # fall back to a single excerpt.
+                # The text block is a JSON-encoded envelope:
+                #   {"results": [{"title": ..., "content": ..., "contentUrl": ...}]}
+                # Older shapes may be a bare list/dict or plain text.
                 txt = str(c.get("text", "")).strip()
-                try:
-                    parsed = json.loads(txt)
-                    if isinstance(parsed, list):
-                        items.extend(parsed)
-                        continue
-                    if isinstance(parsed, dict):
-                        items.append(parsed)
-                        continue
-                except Exception:
-                    pass
+                parsed = _try_parse_json(txt)
+                if isinstance(parsed, dict) and isinstance(parsed.get("results"), list):
+                    for entry in parsed["results"]:
+                        if isinstance(entry, dict):
+                            items.append(
+                                {
+                                    "title": entry.get("title") or "Microsoft Learn",
+                                    "url": entry.get("contentUrl") or entry.get("url"),
+                                    "excerpt": str(entry.get("content") or "")[:600],
+                                }
+                            )
+                    continue
+                if isinstance(parsed, list):
+                    items.extend(parsed)
+                    continue
+                if isinstance(parsed, dict):
+                    items.append(parsed)
+                    continue
+                # Not JSON — the text block is a plain-text answer.
                 items.append({"excerpt": txt[:600], "title": "Microsoft Learn"})
         return items
     except Exception as e:
@@ -119,6 +142,7 @@ def format_citations(refs: list[dict]) -> str:
 # Diagnostic helper — only used for local smoke tests.
 if __name__ == "__main__":
     import sys
+
     q = " ".join(sys.argv[1:]) or "Direct Lake limitations"
     refs = search_docs(q, max_results=3)
     print(json.dumps(refs, indent=2))

@@ -20,25 +20,43 @@ Ask about architecture, tutorials, compliance rules, PySpark patterns, troublesh
 
 ## Architecture
 
-The Copilot Chat widget connects your browser directly to an Azure OpenAI-powered backend via a serverless Azure Function. User questions are grounded against a search index built from the full documentation set.
+The Copilot Chat widget connects your browser to an Azure OpenAI-powered backend via a serverless Azure Function (Python). Every question is grounded against **actual repository content** — the MkDocs search index (all docs/tutorials) plus a generated code manifest (notebooks, generators, Bicep modules) — before the model is called. If the question is a real Fabric/Azure topic the repo doesn't cover, the backend falls back to Microsoft Learn and auto-files a `content-gap` GitHub issue.
 
 ```mermaid
 flowchart LR
     User["User Browser"]
     Widget["Chat Widget<br/>(copilot-chat.js)"]
-    AzFunc["Azure Function<br/>(Node.js / Python)"]
-    AOAI["Azure OpenAI<br/>(GPT-4o)"]
-    Search["Azure AI Search<br/>(docs index)"]
+    AzFunc["Azure Function<br/>(Python — function_app.py)"]
+    Ground["Repo Grounding<br/>(repo_grounding.py)"]
+    SearchIdx["MkDocs search_index.json<br/>(docs + tutorials)"]
+    Manifest["code_manifest.json<br/>(notebooks, generators, Bicep)"]
+    AOAI["Azure OpenAI<br/>(GPT-4o-mini)"]
+    Learn["Microsoft Learn MCP<br/>(ms_learn.py)"]
+    GH["GitHub Issues<br/>(github_issue.py / feedback.py)"]
+    Table["Azure Table Storage<br/>(feedback events)"]
 
     User -->|"Types question"| Widget
-    Widget -->|"POST /api/chat<br/>ndjson stream"| AzFunc
-    AzFunc -->|"Retrieval query"| Search
-    Search -->|"Grounding docs"| AzFunc
-    AzFunc -->|"Chat completion"| AOAI
-    AOAI -->|"Streamed tokens"| AzFunc
-    AzFunc -->|"ndjson chunks"| Widget
-    Widget -->|"Progressive render"| User
+    Widget -->|"POST /api/chat"| AzFunc
+    AzFunc -->|"retrieve(question)"| Ground
+    Ground --> SearchIdx
+    Ground --> Manifest
+    Ground -->|"chunks injected as system context"| AzFunc
+    AzFunc -->|"Chat completion + tools"| AOAI
+    AOAI -->|"search_microsoft_learn<br/>(only if repo doesn't cover it)"| Learn
+    Learn -->|"Learn refs"| AzFunc
+    AzFunc -->|"content-gap issue<br/>(on Learn fallback)"| GH
+    AzFunc -->|"reply + grounding flags"| Widget
+    Widget -->|"Rendered markdown"| User
+
+    Widget -->|"POST /api/feedback<br/>(thumbs up/down)"| AzFunc
+    AzFunc -->|"all feedback"| Table
+    AzFunc -->|"thumbs-down + comment"| GH
+
+    Widget -->|"POST /api/request<br/>(docs topic / problem report)"| AzFunc
+    AzFunc -->|"templated issue"| GH
 ```
+
+When the backend is unreachable, the widget falls back to client-side search over the same MkDocs `search_index.json`.
 
 ## Features
 
@@ -56,6 +74,18 @@ flowchart LR
 | **SHA-256 tokens** | Client-generated request tokens via SubtleCrypto |
 | **Offline fallback** | Falls back to MkDocs search index when the backend is unreachable |
 | **Injection guard** | Client-side prompt injection pattern detection |
+| **Repo grounding** | Every question retrieves matching chunks from the MkDocs search index **and** a generated code manifest (notebooks, generators, Bicep modules) before the model is called |
+| **Learn fallback** | Real Fabric/Azure topics the repo doesn't cover fall back to Microsoft Learn; a `content-gap` issue is auto-filed so the gap gets documented |
+| **Thumbs up/down feedback** | Per-message feedback buttons; thumbs-down opens a comment box. All feedback lands in Azure Table Storage, and thumbs-down with a comment files a GitHub issue |
+| **Request / report menu** | Header menu to request a documentation topic or report a problem — filed as GitHub issues using the repo's `documentation-request.md` / `bug_report.md` templates |
+
+## Feedback & Requests
+
+The widget closes the loop between readers and the repo backlog:
+
+- **Thumbs up/down** appear under every assistant reply. Ratings are stored in Azure Table Storage (`CopilotFeedback`) with the question, reply excerpt, page path, and a session ID for correlation.
+- **Thumbs-down + comment** additionally creates a GitHub issue (labelled `copilot-feedback`) so maintainers see actionable criticism, not just a score.
+- **Header menu (⋮)** offers *Request a docs topic* and *Report a problem*. Both POST to `/api/request` and file issues using the repo's own templates (`documentation-request.md`, `bug_report.md`), rate-limited per client.
 
 ## Configuration
 
@@ -64,12 +94,16 @@ Set `window.COPILOT_CONFIG` before the script loads to override defaults:
 ```javascript
 window.COPILOT_CONFIG = {
   apiEndpoint: "https://your-function.azurewebsites.net/api/chat",
+  feedbackEndpoint: "https://your-function.azurewebsites.net/api/feedback",
+  requestEndpoint: "https://your-function.azurewebsites.net/api/request",
   siteUrl: "https://your-site.github.io/your-repo/",
   repoUrl: "https://github.com/your-org/your-repo",
   maxHistory: 20,
   rateLimitMs: 1500
 };
 ```
+
+If `feedbackEndpoint` / `requestEndpoint` are omitted they are derived from `apiEndpoint`. The backend needs `GITHUB_TOKEN` (issue filing) and `AzureWebJobsStorage` (feedback table) configured — see `azure-functions/copilot-chat/README.md`.
 
 ---
 

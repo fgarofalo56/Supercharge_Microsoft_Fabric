@@ -18,6 +18,8 @@
   var CONFIG = Object.assign(
     {
       apiEndpoint: "https://fabric-copilot-docs-ldai.azurewebsites.net/api/chat",
+      feedbackEndpoint: "https://fabric-copilot-docs-ldai.azurewebsites.net/api/feedback",
+      requestEndpoint: "https://fabric-copilot-docs-ldai.azurewebsites.net/api/request",
       maxHistory: 20,
       rateLimitMs: 1500,
       siteUrl: "https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/",
@@ -41,6 +43,8 @@
   var sessionStart = Date.now();
   var highlightLoaded = false;
   var highlightLoading = false;
+  var sessionId = null;
+  var lastUserMessage = "";
 
   /* ── Client-side security ─────────────────────────────────────── */
   var MAX_MESSAGE_LENGTH = 2000;
@@ -100,6 +104,172 @@
         hex += ("0" + arr[i].toString(16)).slice(-2);
       }
       return hex;
+    });
+  }
+
+  /* ── Session ID (for feedback correlation) ───────────────────── */
+  generateToken("session:" + sessionStart + ":" + Math.random()).then(function (t) {
+    sessionId = t.substring(0, 32);
+  });
+
+  /* ── Feedback: thumbs up/down per assistant message ──────────── */
+  function sendFeedback(rating, comment, userMsg, assistantMsg) {
+    if (!CONFIG.feedbackEndpoint) return;
+    var payload = {
+      rating: rating,
+      comment: (comment || "").substring(0, 2000),
+      userMessage: (userMsg || "").substring(0, 1000),
+      assistantReply: (assistantMsg || "").substring(0, 1000),
+      pagePath: window.location.pathname,
+      sessionId: sessionId || "",
+    };
+    fetch(CONFIG.feedbackEndpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    }).catch(function () { /* feedback is best-effort */ });
+  }
+
+  function attachFeedbackUI(msgDiv, userMsg, assistantMsg) {
+    var wrap = document.createElement("div");
+    wrap.className = "copilot-feedback";
+
+    var upBtn = document.createElement("button");
+    upBtn.className = "copilot-fb-btn";
+    upBtn.title = "Helpful";
+    upBtn.setAttribute("aria-label", "Thumbs up");
+    upBtn.textContent = "\uD83D\uDC4D";
+
+    var downBtn = document.createElement("button");
+    downBtn.className = "copilot-fb-btn";
+    downBtn.title = "Not helpful";
+    downBtn.setAttribute("aria-label", "Thumbs down");
+    downBtn.textContent = "\uD83D\uDC4E";
+
+    var thanks = document.createElement("span");
+    thanks.className = "copilot-fb-thanks";
+    thanks.textContent = "Thanks!";
+    thanks.style.display = "none";
+
+    upBtn.addEventListener("click", function () {
+      sendFeedback("up", "", userMsg, assistantMsg);
+      upBtn.classList.add("copilot-fb-active");
+      downBtn.style.display = "none";
+      thanks.style.display = "inline";
+    });
+
+    downBtn.addEventListener("click", function () {
+      // Show comment box
+      if (wrap.querySelector(".copilot-fb-comment")) return;
+      var commentBox = document.createElement("div");
+      commentBox.className = "copilot-fb-comment";
+      commentBox.innerHTML =
+        '<textarea placeholder="What went wrong? (optional — files a GitHub issue)" rows="2"></textarea>' +
+        '<div class="copilot-fb-comment-actions">' +
+          '<button type="button" class="copilot-fb-submit">Send</button>' +
+          '<button type="button" class="copilot-fb-skip">Skip</button>' +
+        '</div>';
+      wrap.appendChild(commentBox);
+      var textarea = commentBox.querySelector("textarea");
+      textarea.focus();
+
+      commentBox.querySelector(".copilot-fb-submit").addEventListener("click", function () {
+        sendFeedback("down", textarea.value, userMsg, assistantMsg);
+        commentBox.remove();
+        downBtn.classList.add("copilot-fb-active");
+        upBtn.style.display = "none";
+        thanks.style.display = "inline";
+      });
+      commentBox.querySelector(".copilot-fb-skip").addEventListener("click", function () {
+        sendFeedback("down", "", userMsg, assistantMsg);
+        commentBox.remove();
+        downBtn.classList.add("copilot-fb-active");
+        upBtn.style.display = "none";
+        thanks.style.display = "inline";
+      });
+    });
+
+    wrap.appendChild(upBtn);
+    wrap.appendChild(downBtn);
+    wrap.appendChild(thanks);
+    msgDiv.appendChild(wrap);
+  }
+
+  /* ── Request dialog (docs topic / problem report) ────────────── */
+  function openRequestDialog(kind) {
+    var existing = document.getElementById("copilot-request-dialog");
+    if (existing) existing.remove();
+
+    var isDocs = kind === "docs-topic";
+    var dialog = document.createElement("div");
+    dialog.id = "copilot-request-dialog";
+    dialog.innerHTML =
+      '<div class="copilot-request-backdrop"></div>' +
+      '<div class="copilot-request-card" role="dialog" aria-modal="true">' +
+        '<h3>' + (isDocs ? "Request a docs topic" : "Report a problem") + '</h3>' +
+        '<input type="text" id="copilot-req-title" maxlength="150" placeholder="' +
+          (isDocs ? "Topic, e.g. 'OneLake Security for federal agencies'" : "Short summary") + '">' +
+        '<textarea id="copilot-req-desc" rows="5" maxlength="3000" placeholder="' +
+          (isDocs ? "What should the docs cover? Who is it for?" : "What broke? Steps to reproduce, expected vs actual.") +
+        '"></textarea>' +
+        '<div class="copilot-request-status" id="copilot-req-status"></div>' +
+        '<div class="copilot-request-actions">' +
+          '<button type="button" id="copilot-req-cancel">Cancel</button>' +
+          '<button type="button" id="copilot-req-submit" class="copilot-req-primary">' +
+            (isDocs ? "Request topic" : "File report") + '</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(dialog);
+
+    function close() { dialog.remove(); }
+    dialog.querySelector(".copilot-request-backdrop").addEventListener("click", close);
+    dialog.querySelector("#copilot-req-cancel").addEventListener("click", close);
+
+    dialog.querySelector("#copilot-req-submit").addEventListener("click", function () {
+      var title = dialog.querySelector("#copilot-req-title").value.trim();
+      var desc = dialog.querySelector("#copilot-req-desc").value.trim();
+      var status = dialog.querySelector("#copilot-req-status");
+      if (!title || !desc) {
+        status.textContent = "Both fields are required.";
+        status.className = "copilot-request-status copilot-request-error";
+        return;
+      }
+      var submitBtn = dialog.querySelector("#copilot-req-submit");
+      submitBtn.disabled = true;
+      status.textContent = "Filing issue...";
+      status.className = "copilot-request-status";
+
+      fetch(CONFIG.requestEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          kind: kind,
+          title: title,
+          description: desc,
+          pagePath: window.location.pathname,
+        }),
+      })
+        .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
+        .then(function (res) {
+          if (res.ok && res.data.issue_url) {
+            status.innerHTML = 'Filed! <a href="' + escapeHtml(res.data.issue_url) + '" target="_blank" rel="noopener noreferrer">View issue</a>';
+            status.className = "copilot-request-status copilot-request-ok";
+            setTimeout(close, 2500);
+          } else if (res.ok) {
+            status.textContent = "Received — thank you!";
+            status.className = "copilot-request-status copilot-request-ok";
+            setTimeout(close, 2000);
+          } else {
+            status.textContent = res.data.error || "Something went wrong.";
+            status.className = "copilot-request-status copilot-request-error";
+            submitBtn.disabled = false;
+          }
+        })
+        .catch(function () {
+          status.textContent = "Network error — try again later.";
+          status.className = "copilot-request-status copilot-request-error";
+          submitBtn.disabled = false;
+        });
     });
   }
 
@@ -505,6 +675,9 @@
             '<span id="copilot-title">Fabric Copilot</span>' +
           '</div>' +
           '<div id="copilot-header-right">' +
+            '<button id="copilot-menu" title="Requests &amp; feedback" aria-label="Requests and feedback menu">' +
+              '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg>' +
+            '</button>' +
             '<button id="copilot-clear" title="Clear conversation" aria-label="Clear conversation">' +
               '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>' +
             '</button>' +
@@ -541,6 +714,30 @@
     document.getElementById("copilot-btn").addEventListener("click", function () { togglePanel(); });
     document.getElementById("copilot-form").addEventListener("submit", onSubmit);
     document.getElementById("copilot-clear").addEventListener("click", clearChat);
+
+    // Header menu: request docs topic / report a problem
+    document.getElementById("copilot-menu").addEventListener("click", function (e) {
+      e.stopPropagation();
+      var existing = document.getElementById("copilot-menu-dropdown");
+      if (existing) { existing.remove(); return; }
+      var menu = document.createElement("div");
+      menu.id = "copilot-menu-dropdown";
+      menu.innerHTML =
+        '<button type="button" data-kind="docs-topic">\uD83D\uDCDD Request a docs topic</button>' +
+        '<button type="button" data-kind="problem-report">\uD83D\uDC1B Report a problem</button>';
+      document.getElementById("copilot-header-right").appendChild(menu);
+      menu.addEventListener("click", function (ev) {
+        var kind = ev.target.getAttribute("data-kind");
+        if (kind) {
+          menu.remove();
+          openRequestDialog(kind);
+        }
+      });
+      document.addEventListener("click", function closeMenu() {
+        menu.remove();
+        document.removeEventListener("click", closeMenu);
+      });
+    });
     document.getElementById("copilot-fullscreen").addEventListener("click", function () {
       window.open(getBaseUrl() + "chat/", "_blank");
     });
@@ -674,6 +871,11 @@
 
     if (streaming) {
       div.id = "copilot-streaming";
+    } else if (role === "assistant" && content !== CONFIG.welcomeMessage) {
+      // Attach thumbs up/down to real assistant answers (not the welcome
+      // message, not the streaming placeholder — that gets attached in
+      // finalizeStreaming).
+      attachFeedbackUI(div, lastUserMessage, content);
     }
 
     highlightAllBlocks();
@@ -694,7 +896,16 @@
   /* ── Finalize streaming ────────────────────────────────────────── */
   function finalizeStreaming() {
     var el = document.getElementById("copilot-streaming");
-    if (el) el.removeAttribute("id");
+    if (el) {
+      el.removeAttribute("id");
+      // Attach feedback UI to the finalized assistant message.
+      var lastAssistant = chatHistory.length > 0 && chatHistory[chatHistory.length - 1].role === "assistant"
+        ? chatHistory[chatHistory.length - 1].content
+        : "";
+      if (lastAssistant && !el.querySelector(".copilot-feedback")) {
+        attachFeedbackUI(el, lastUserMessage, lastAssistant);
+      }
+    }
     isStreaming = false;
     document.getElementById("copilot-send").disabled = false;
     document.getElementById("copilot-input").disabled = false;
@@ -740,6 +951,7 @@
       return;
     }
 
+    lastUserMessage = message;
     addMessage("user", message);
     chatHistory.push({ role: "user", content: message });
 

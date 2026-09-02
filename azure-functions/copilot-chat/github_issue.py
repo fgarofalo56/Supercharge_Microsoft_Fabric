@@ -13,7 +13,9 @@ Configuration via env vars (set in Azure Function App settings):
 
 Silently no-ops when GITHUB_TOKEN is unset so dev / local runs don't error.
 """
+
 from __future__ import annotations
+
 import hashlib
 import logging
 import os
@@ -35,7 +37,9 @@ def _fingerprint(question: str) -> str:
     return hashlib.sha256(norm.encode("utf-8")).hexdigest()[:16]
 
 
-def file_content_gap(question: str, learn_refs: list[dict], summary: str = "") -> str | None:
+def file_content_gap(
+    question: str, learn_refs: list[dict], summary: str = ""
+) -> str | None:
     """File a content-gap GitHub issue. Returns the issue URL or None."""
     token = os.environ.get("GITHUB_TOKEN")
     repo = os.environ.get("GITHUB_REPO")
@@ -51,7 +55,11 @@ def file_content_gap(question: str, learn_refs: list[dict], summary: str = "") -
         _dedupe.clear()
     _dedupe.add(fp)
 
-    labels = [l.strip() for l in os.environ.get("GITHUB_ISSUE_LABEL", DEFAULT_LABELS).split(",") if l.strip()]
+    labels = [
+        lbl.strip()
+        for lbl in os.environ.get("GITHUB_ISSUE_LABEL", DEFAULT_LABELS).split(",")
+        if lbl.strip()
+    ]
 
     # Build the body
     cite_lines = []

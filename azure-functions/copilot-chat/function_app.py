@@ -41,17 +41,18 @@ import time
 from collections import defaultdict
 
 import azure.functions as func
-from openai import AzureOpenAI
-
+from feedback import record_feedback
 from github_issue import file_content_gap
-from ms_learn import format_citations, search_docs
+from ms_learn import search_docs
+from openai import AzureOpenAI
+from repo_grounding import format_grounding_context, retrieve
 
 app = func.FunctionApp()
 
 # ── Rate limiting (in-memory, per-instance) ─────────────────────
 _rate_store: dict[str, list[float]] = defaultdict(list)
-RATE_LIMIT = 20        # requests per window
-RATE_WINDOW = 60       # seconds
+RATE_LIMIT = 20  # requests per window
+RATE_WINDOW = 60  # seconds
 MAX_TRACKED_IPS = 10000
 
 
@@ -59,7 +60,8 @@ def _rate_limited(ip: str) -> bool:
     now = time.time()
     if len(_rate_store) > MAX_TRACKED_IPS:
         stale_keys = [
-            k for k, v in _rate_store.items()
+            k
+            for k, v in _rate_store.items()
             if not v or (now - v[-1]) > RATE_WINDOW * 2
         ]
         for k in stale_keys:
@@ -163,12 +165,46 @@ _SNARKY_REDIRECTS = [
 def _snarky_offtopic(text: str) -> str:
     # Extract a 1-3 word "topic" hint to splice into the redirect.
     words = re.findall(r"[A-Za-z][A-Za-z']{2,}", text)
-    topic_words = [w for w in words if w.lower() not in {
-        "the", "what", "where", "when", "who", "how", "why", "tell", "give",
-        "show", "find", "for", "and", "this", "that", "with", "from", "your",
-        "you", "are", "is", "was", "were", "have", "has", "did", "does", "do",
-        "today", "tonight", "yesterday", "tomorrow", "today's",
-    }]
+    topic_words = [
+        w
+        for w in words
+        if w.lower()
+        not in {
+            "the",
+            "what",
+            "where",
+            "when",
+            "who",
+            "how",
+            "why",
+            "tell",
+            "give",
+            "show",
+            "find",
+            "for",
+            "and",
+            "this",
+            "that",
+            "with",
+            "from",
+            "your",
+            "you",
+            "are",
+            "is",
+            "was",
+            "were",
+            "have",
+            "has",
+            "did",
+            "does",
+            "do",
+            "today",
+            "tonight",
+            "yesterday",
+            "tomorrow",
+            "today's",
+        }
+    ]
     topic = " ".join(topic_words[:3]) or "that"
     template = random.choice(_SNARKY_REDIRECTS)
     return template.format(topic=topic.lower())
@@ -184,7 +220,7 @@ MAX_TOTAL_HISTORY_CHARS = 12000
 def _sanitize_history(history: list) -> list:
     clean = []
     total_chars = 0
-    recent = history[-(MAX_HISTORY_TURNS * 2):]
+    recent = history[-(MAX_HISTORY_TURNS * 2) :]
     for msg in recent:
         if not isinstance(msg, dict):
             continue
@@ -324,7 +360,9 @@ def _json_response(payload: dict, status: int, cors: dict) -> func.HttpResponse:
     )
 
 
-@app.route(route="chat", methods=["POST", "OPTIONS"], auth_level=func.AuthLevel.ANONYMOUS)
+@app.route(
+    route="chat", methods=["POST", "OPTIONS"], auth_level=func.AuthLevel.ANONYMOUS
+)
 def chat(req: func.HttpRequest) -> func.HttpResponse:
     origin = req.headers.get("Origin")
     cors = _cors_headers(origin)
@@ -366,9 +404,13 @@ def chat(req: func.HttpRequest) -> func.HttpResponse:
 
     # ── Security Gate 1: prompt injection ────────────────────────
     if _detect_injection(user_message):
-        logging.warning("Prompt injection blocked from %s: %s", client_ip, user_message[:100])
+        logging.warning(
+            "Prompt injection blocked from %s: %s", client_ip, user_message[:100]
+        )
         return _json_response(
-            {"reply": "Nice try. I'm staying in Fabric mode. Ask me about lakehouses or compliance and we're back in business. 🛡️"},
+            {
+                "reply": "Nice try. I'm staying in Fabric mode. Ask me about lakehouses or compliance and we're back in business. 🛡️"
+            },
             200,
             cors,
         )
@@ -394,13 +436,26 @@ def chat(req: func.HttpRequest) -> func.HttpResponse:
 
     messages = [{"role": "system", "content": SYSTEM_PROMPT}]
 
+    # ── Repo grounding: retrieve relevant docs/code chunks ────────
+    grounding_chunks: list[dict] = []
+    try:
+        grounding_chunks = retrieve(user_message)
+        grounding_block = format_grounding_context(grounding_chunks)
+        if grounding_block:
+            messages.append({"role": "system", "content": grounding_block})
+    except Exception as e:
+        # Grounding is additive — never block the chat on it.
+        logging.warning("repo grounding failed (continuing without): %s", e)
+
     page_path = str(page_context.get("path", ""))[:200]
     page_title = str(page_context.get("title", ""))[:200]
     if page_path:
-        messages.append({
-            "role": "system",
-            "content": f"The user is currently viewing: {page_title} ({page_path})",
-        })
+        messages.append(
+            {
+                "role": "system",
+                "content": f"The user is currently viewing: {page_title} ({page_path})",
+            }
+        )
 
     messages.extend(history)
     messages.append({"role": "user", "content": user_message})
@@ -431,21 +486,23 @@ def chat(req: func.HttpRequest) -> func.HttpResponse:
         if choice.message.tool_calls:
             # Append the assistant's tool-call message so the next turn
             # can reference it.
-            messages.append({
-                "role": "assistant",
-                "content": choice.message.content or "",
-                "tool_calls": [
-                    {
-                        "id": tc.id,
-                        "type": "function",
-                        "function": {
-                            "name": tc.function.name,
-                            "arguments": tc.function.arguments,
-                        },
-                    }
-                    for tc in choice.message.tool_calls
-                ],
-            })
+            messages.append(
+                {
+                    "role": "assistant",
+                    "content": choice.message.content or "",
+                    "tool_calls": [
+                        {
+                            "id": tc.id,
+                            "type": "function",
+                            "function": {
+                                "name": tc.function.name,
+                                "arguments": tc.function.arguments,
+                            },
+                        }
+                        for tc in choice.message.tool_calls
+                    ],
+                }
+            )
             for tc in choice.message.tool_calls:
                 if tc.function.name != "search_microsoft_learn":
                     continue
@@ -457,19 +514,26 @@ def chat(req: func.HttpRequest) -> func.HttpResponse:
                 refs = search_docs(query, max_results=5)
                 learn_refs_used.extend(refs)
                 used_ms_learn = True
-                tool_result = json.dumps([
+                tool_result = json.dumps(
+                    [
+                        {
+                            "title": r.get("title") or "Microsoft Learn",
+                            "url": r.get("url")
+                            or r.get("source")
+                            or r.get("link")
+                            or "",
+                            "excerpt": (r.get("excerpt") or r.get("text") or "")[:500],
+                        }
+                        for r in refs
+                    ]
+                )
+                messages.append(
                     {
-                        "title": r.get("title") or "Microsoft Learn",
-                        "url": r.get("url") or r.get("source") or r.get("link") or "",
-                        "excerpt": (r.get("excerpt") or r.get("text") or "")[:500],
+                        "role": "tool",
+                        "tool_call_id": tc.id,
+                        "content": tool_result,
                     }
-                    for r in refs
-                ])
-                messages.append({
-                    "role": "tool",
-                    "tool_call_id": tc.id,
-                    "content": tool_result,
-                })
+                )
 
             # Second call — model produces the final grounded answer.
             second = client.chat.completions.create(
@@ -482,8 +546,13 @@ def chat(req: func.HttpRequest) -> func.HttpResponse:
         else:
             reply = choice.message.content or ""
 
-        # If MS Learn was used, file a content-gap issue in the background.
-        if used_ms_learn and learn_refs_used:
+        # File a content-gap issue only when the question went UNANSWERED:
+        # the repo grounding had nothing to say AND the Learn fallback
+        # either wasn't triggered or returned nothing usable. A Learn
+        # search that produced citations means the user got an answer —
+        # that's a covered topic, not a gap.
+        unanswered = not grounding_chunks and not learn_refs_used
+        if unanswered:
             file_content_gap(
                 question=user_message,
                 learn_refs=learn_refs_used,
@@ -495,6 +564,8 @@ def chat(req: func.HttpRequest) -> func.HttpResponse:
                 "reply": reply,
                 "groundedFromMsLearn": used_ms_learn,
                 "msLearnCitationCount": len(learn_refs_used),
+                "groundedFromRepo": bool(grounding_chunks),
+                "repoCitationCount": len(grounding_chunks),
             },
             200,
             cors,
@@ -510,7 +581,205 @@ def chat(req: func.HttpRequest) -> func.HttpResponse:
     except Exception as e:
         logging.error("Azure OpenAI error: %s — %s", type(e).__name__, e)
         return _json_response(
-            {"error": "Couldn't generate a reply. Try again — Fabby's gremlins are working on it."},
+            {
+                "error": "Couldn't generate a reply. Try again — Fabby's gremlins are working on it."
+            },
             500,
             cors,
         )
+
+
+# ── /feedback — thumbs up/down per assistant message ────────────
+# Separate, tighter rate limit: feedback is cheap to abuse and each
+# thumbs-down-with-comment can file a GitHub issue.
+FEEDBACK_RATE_LIMIT = 10  # per window
+FEEDBACK_RATE_WINDOW = 300  # 5 minutes
+
+
+def _client_ip(req: func.HttpRequest) -> str:
+    forwarded = req.headers.get("X-Forwarded-For", "")
+    if forwarded:
+        return forwarded.split(",")[-1].strip()
+    return req.headers.get("X-Real-IP", "unknown")
+
+
+def _rate_limited_custom(ip: str, limit: int, window: int, bucket: str) -> bool:
+    key = f"{bucket}:{ip}"
+    now = time.time()
+    _rate_store[key] = [t for t in _rate_store[key] if now - t < window]
+    if len(_rate_store[key]) >= limit:
+        return True
+    _rate_store[key].append(now)
+    return False
+
+
+@app.route(
+    route="feedback", methods=["POST", "OPTIONS"], auth_level=func.AuthLevel.ANONYMOUS
+)
+def feedback(req: func.HttpRequest) -> func.HttpResponse:
+    origin = req.headers.get("Origin")
+    cors = _cors_headers(origin)
+
+    if req.method == "POST" and not cors:
+        return func.HttpResponse(
+            json.dumps({"error": "Origin not allowed"}),
+            status_code=403,
+            headers={"Content-Type": "application/json"},
+        )
+    if req.method == "OPTIONS":
+        return func.HttpResponse(status_code=204, headers=cors)
+
+    client_ip = _client_ip(req)
+    if _rate_limited_custom(
+        client_ip, FEEDBACK_RATE_LIMIT, FEEDBACK_RATE_WINDOW, "feedback"
+    ):
+        return _json_response(
+            {"error": "Rate-limited. Thanks, we have enough feedback for now."},
+            429,
+            cors,
+        )
+
+    try:
+        body = req.get_json()
+    except Exception:
+        return _json_response({"error": "Invalid JSON"}, 400, cors)
+
+    rating = str(body.get("rating", "")).strip().lower()
+    comment = str(body.get("comment", ""))[:2000]
+    user_message = str(body.get("userMessage", ""))[:1000]
+    assistant_reply = str(body.get("assistantReply", ""))[:1000]
+    page_path = str(body.get("pagePath", ""))[:300]
+    session_id = str(body.get("sessionId", ""))[:64]
+
+    if rating not in ("up", "down"):
+        return _json_response({"error": "rating must be 'up' or 'down'"}, 400, cors)
+
+    result = record_feedback(
+        rating=rating,
+        comment=comment,
+        user_message=user_message,
+        assistant_reply=assistant_reply,
+        page_path=page_path,
+        session_id=session_id,
+    )
+    return _json_response({"ok": True, **result}, 200, cors)
+
+
+# ── /request — docs-topic requests + problem reports ────────────
+# Files GitHub issues using the repo's existing templates. Tighter
+# rate limit than /chat since every call can create an issue.
+REQUEST_RATE_LIMIT = 5
+REQUEST_RATE_WINDOW = 3600  # 1 hour
+
+_REQUEST_KINDS = {"docs-topic", "problem-report"}
+
+
+def _file_request_issue(
+    kind: str, title: str, description: str, page_path: str
+) -> str | None:
+    """File a docs-request or problem-report issue. Returns URL or None."""
+    token = os.environ.get("GITHUB_TOKEN")
+    repo = os.environ.get("GITHUB_REPO")
+    if not token or not repo:
+        logging.info("request: GITHUB_TOKEN/REPO unset — logged only")
+        return None
+
+    if kind == "docs-topic":
+        labels = ["documentation", "copilot-suggested"]
+        body = (
+            f"## Documentation Request (via Copilot widget)\n\n"
+            f"**Topic:** {title}\n\n"
+            f"### What documentation is needed?\n\n{description}\n\n"
+            f"### Context\n\n- Submitted from page: `{page_path or 'unknown'}`\n"
+            f"- Source: Copilot chat widget 'Request docs topic' menu\n\n"
+            "---\n_Filed automatically by the Copilot /request route. "
+            "Template: `.github/ISSUE_TEMPLATE/documentation-request.md`_"
+        )
+        issue_title = f"[DOCS] {title}"[:200]
+    else:
+        labels = ["bug", "triage", "copilot-suggested"]
+        body = (
+            f"## Problem Report (via Copilot widget)\n\n"
+            f"**Summary:** {title}\n\n"
+            f"### Description\n\n{description}\n\n"
+            f"### Context\n\n- Submitted from page: `{page_path or 'unknown'}`\n"
+            f"- Source: Copilot chat widget 'Report a problem' menu\n\n"
+            "---\n_Filed automatically by the Copilot /request route. "
+            "Template: `.github/ISSUE_TEMPLATE/bug_report.md`_"
+        )
+        issue_title = f"[BUG] {title}"[:200]
+
+    try:
+        import httpx
+
+        with httpx.Client(timeout=15.0) as client:
+            r = client.post(
+                f"https://api.github.com/repos/{repo}/issues",
+                headers={
+                    "Authorization": f"Bearer {token}",
+                    "Accept": "application/vnd.github+json",
+                    "X-GitHub-Api-Version": "2022-11-28",
+                },
+                json={"title": issue_title, "body": body, "labels": labels},
+            )
+        if r.status_code in (200, 201):
+            return r.json().get("html_url")
+        logging.warning(
+            "request: GitHub issue HTTP %s — %s", r.status_code, r.text[:200]
+        )
+        return None
+    except Exception as e:
+        logging.warning("request: GitHub issue failed — %s", e)
+        return None
+
+
+@app.route(
+    route="request", methods=["POST", "OPTIONS"], auth_level=func.AuthLevel.ANONYMOUS
+)
+def request_route(req: func.HttpRequest) -> func.HttpResponse:
+    origin = req.headers.get("Origin")
+    cors = _cors_headers(origin)
+
+    if req.method == "POST" and not cors:
+        return func.HttpResponse(
+            json.dumps({"error": "Origin not allowed"}),
+            status_code=403,
+            headers={"Content-Type": "application/json"},
+        )
+    if req.method == "OPTIONS":
+        return func.HttpResponse(status_code=204, headers=cors)
+
+    client_ip = _client_ip(req)
+    if _rate_limited_custom(
+        client_ip, REQUEST_RATE_LIMIT, REQUEST_RATE_WINDOW, "request"
+    ):
+        return _json_response(
+            {"error": "Rate-limited. You can file more requests in about an hour."},
+            429,
+            cors,
+        )
+
+    try:
+        body = req.get_json()
+    except Exception:
+        return _json_response({"error": "Invalid JSON"}, 400, cors)
+
+    kind = str(body.get("kind", "")).strip()
+    title = str(body.get("title", "")).strip()[:150]
+    description = str(body.get("description", "")).strip()[:3000]
+    page_path = str(body.get("pagePath", ""))[:300]
+
+    if kind not in _REQUEST_KINDS:
+        return _json_response(
+            {"error": f"kind must be one of {sorted(_REQUEST_KINDS)}"}, 400, cors
+        )
+    if not title or not description:
+        return _json_response(
+            {"error": "title and description are required"}, 400, cors
+        )
+
+    issue_url = _file_request_issue(kind, title, description, page_path)
+    logging.info(
+        "request: kind=%s title=%r issue=%s", kind, title[:60], bool(issue_url)
+    )
+    return _json_response({"ok": True, "issue_url": issue_url}, 200, cors)
