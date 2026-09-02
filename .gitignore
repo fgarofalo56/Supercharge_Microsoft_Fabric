@@ -246,3 +246,9 @@ tests/e2e/test-results/
 # Windows null device artifacts
 nul
 .playwright-mcp/
+
+# Agent workspace (ATLAS FORGE session state)
+.forge/
+
+# Local mkdocs build logs (CI builds after copying tutorials/ into docs/)
+mkdocs_warnings.txt

@@ -8,10 +8,18 @@
     "AZURE_OPENAI_DEPLOYMENT": "gpt-4o-mini",
     "ALLOWED_ORIGINS": "https://fgarofalo56.github.io,http://localhost:8000",
 
-    "_comment_github": "Optional — when set, the Copilot files a 'content-gap' issue whenever it falls back to MS Learn. Leave empty in dev to disable.",
+    "_comment_github": "Optional — when set, the Copilot files 'content-gap' issues on MS Learn fallback, feedback issues on thumbs-down-with-comment, and docs/bug issues from /request. Leave empty in dev to disable.",
     "GITHUB_TOKEN": "",
     "GITHUB_REPO": "fgarofalo56/Suppercharge_Microsoft_Fabric",
-    "GITHUB_ISSUE_LABEL": "content-gap,copilot-suggested"
+    "GITHUB_ISSUE_LABEL": "content-gap,copilot-suggested",
+    "GITHUB_FEEDBACK_LABEL": "copilot-feedback,triage",
+
+    "_comment_feedback": "Optional — feedback storage. Defaults to AzureWebJobsStorage when unset. In dev with UseDevelopmentStorage, feedback is logged only.",
+    "FEEDBACK_TABLE_CONNECTION": "",
+    "FEEDBACK_TABLE_NAME": "copilotfeedback",
+
+    "_comment_grounding": "Optional — override the docs-site origin used to fetch search_index.json for repo grounding.",
+    "DOCS_SITE_URL": "https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric"
   },
   "Host": {
     "CORS": "https://fgarofalo56.github.io,http://localhost:8000",

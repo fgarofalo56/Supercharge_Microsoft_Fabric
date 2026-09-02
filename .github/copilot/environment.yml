@@ -5,34 +5,21 @@
 base:
   # Operating system preference
   os: "ubuntu-latest"
-  
+
   # Shell to use
   shell: "bash"
 
 # Language runtimes
 runtimes:
-  node:
-    version: "20"
-    package_manager: "npm"  # npm, yarn, pnpm
-    install_command: "npm ci"
-    
   python:
     version: "3.11"
-    package_manager: "pip"  # pip, poetry, pipenv
-    install_command: "pip install -r requirements.txt"
+    package_manager: "uv"  # project uses uv
+    install_command: "uv pip install -r requirements.txt -r requirements-dev.txt"
     virtual_env: true
-    
-  dotnet:
-    version: "8.0"
-    install_command: "dotnet restore"
-    
-  go:
-    version: "1.22"
-    install_command: "go mod download"
-    
-  rust:
-    version: "stable"
-    install_command: "cargo build"
+
+  bicep:
+    version: "latest"
+    install_command: "az bicep install"
 
 # Database services (for integration tests)
 services:
@@ -40,12 +27,12 @@ services:
     enabled: false
     version: "16"
     port: 5432
-    
+
   redis:
     enabled: false
     version: "7"
     port: 6379
-    
+
   mysql:
     enabled: false
     version: "8"
@@ -54,71 +41,79 @@ services:
 # Environment variables
 # Note: Secrets should be configured via GitHub Secrets, not here
 env:
-  NODE_ENV: "test"
   LOG_LEVEL: "warn"
   CI: "true"
+  # PII salt must be provided; agent must not hardcode a fallback
+  FABRIC_POC_HASH_SALT: "${FABRIC_POC_HASH_SALT}"
 
 # Pre-task setup commands
 setup:
-  - name: "Install dependencies"
+  - name: "Install uv and Python dependencies"
     run: |
-      if [ -f "package.json" ]; then npm ci; fi
-      if [ -f "requirements.txt" ]; then pip install -r requirements.txt; fi
-      if [ -f "go.mod" ]; then go mod download; fi
-      
-  - name: "Setup test database"
+      pip install uv
+      uv pip install -r requirements.txt -r requirements-dev.txt
+      uv pip install -e .
+
+  - name: "Install Azure CLI and Bicep"
     run: |
-      if [ -f "scripts/setup-test-db.sh" ]; then ./scripts/setup-test-db.sh; fi
+      if ! command -v az &> /dev/null; then
+        curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+      fi
+      az bicep install
 
 # Validation commands (run before submitting PR)
 validation:
   - name: "Lint"
     run: |
-      if [ -f "package.json" ]; then npm run lint || true; fi
-      if [ -f "pyproject.toml" ]; then ruff check . || true; fi
-      
+      uv run ruff check .
+
   - name: "Type check"
     run: |
-      if [ -f "tsconfig.json" ]; then npx tsc --noEmit || true; fi
-      if [ -f "pyproject.toml" ]; then mypy . || true; fi
-      
-  - name: "Test"
+      uv run mypy data_generation scripts || true
+
+  - name: "Unit tests"
     run: |
-      if [ -f "package.json" ]; then npm test; fi
-      if [ -f "pytest.ini" ] || [ -f "pyproject.toml" ]; then pytest; fi
-      if [ -f "go.mod" ]; then go test ./...; fi
+      uv run pytest validation/unit_tests/ -v
+
+  - name: "Bicep validation"
+    run: |
+      az bicep build --file infra/main.bicep
+
+  - name: "Notebook pattern validation"
+    run: |
+      uv run pytest validation/unit_tests/notebook/ -v
 
 # Post-task cleanup
 cleanup:
   - name: "Remove temp files"
     run: |
-      rm -rf .tmp .cache __pycache__ *.pyc
+      rm -rf .tmp .cache __pycache__ *.pyc .pytest_cache
 
 # Resource limits
 resources:
   # Maximum memory (MB)
-  max_memory: 4096
-  
+  max_memory: 8192
+
   # Maximum CPU cores
-  max_cpu: 2
-  
+  max_cpu: 4
+
   # Maximum disk space (MB)
-  max_disk: 10240
+  max_disk: 20480
 
 # Network access
 network:
   # Allow outbound network access (for package installs)
   outbound_allowed: true
-  
+
   # Allowed domains for network access
   allowed_domains:
-    - "registry.npmjs.org"
     - "pypi.org"
-    - "proxy.golang.org"
-    - "crates.io"
-    - "nuget.org"
+    - "files.pythonhosted.org"
     - "github.com"
-    
+    - "aka.ms"
+    - "learn.microsoft.com"
+    - "registry.npmjs.org"
+
   # Block these domains
   blocked_domains:
     - "*.local"
