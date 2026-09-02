@@ -58,13 +58,11 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install \
-            mkdocs-material>=9.5.0 \
-            mkdocs-minify-plugin>=0.8.0 \
-            pymdown-extensions>=10.0 \
-            pillow \
-            cairosvg \
-            linkchecker
+          # Single source of truth for docs deps — keeps CI in step with local
+          # builds. A hardcoded list here previously drifted and dropped
+          # mkdocs-redirects, which aborts the build as a config error.
+          pip install -r requirements-docs.txt
+          pip install linkchecker
 
       - name: Prepare documentation structure
         run: |
