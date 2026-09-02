@@ -133,7 +133,7 @@ function W2GThreshold =
         SWITCH (
             UPPER ( gameType ),
             "SLOTS", 1200,
-            "KENO", 1500,
+            "KENO", 600,
             "POKER", 5000,
             BLANK ()
         )

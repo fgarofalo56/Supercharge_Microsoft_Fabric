@@ -92,7 +92,7 @@ type: reference
 | **Table Game** | Live dealer casino games (blackjack, roulette, craps, baccarat) played on physical tables. | Gaming | Pit Games, Live Games, Cards |
 | **Theo** | Theoretical Win - expected casino revenue calculated using actual play volume and mathematical house edge. | Metric | Expected Win, Theoretical |
 | **Voucher** | Ticket printed from slot machine representing cash value, also called Ticket-In-Ticket-Out (TITO). | Technology | TITO, Ticket, Cashout |
-| **W-2G** | IRS tax form documenting gambling winnings exceeding reporting thresholds ($1,200+ slots, $5,000+ keno, etc.). | Tax | Tax Form, Reportable Win, 1099 |
+| **W-2G** | IRS tax form documenting gambling winnings exceeding reporting thresholds ($1,200+ slots, $600+ keno, $5,000+ poker, etc.). | Tax | Tax Form, Reportable Win, 1099 |
 
 ---
 

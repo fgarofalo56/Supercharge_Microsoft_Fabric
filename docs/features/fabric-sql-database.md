@@ -715,7 +715,8 @@ CREATE TABLE dbo.w2g_filings (
     tax_withheld       DECIMAL(15,2) DEFAULT 0,
     w2g_threshold      AS (CASE
         WHEN game_type = 'slots' AND winning_amount >= 1200 THEN 1
-        WHEN game_type IN ('keno', 'bingo') AND winning_amount >= 1500 THEN 1
+        WHEN game_type = 'keno' AND winning_amount >= 600 THEN 1
+        WHEN game_type = 'bingo' AND winning_amount >= 1200 THEN 1
         WHEN game_type = 'poker' AND winning_amount >= 5000 THEN 1
         WHEN game_type = 'table' AND winning_amount >= 600 THEN 1
         ELSE 0

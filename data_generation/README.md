@@ -297,7 +297,7 @@ The compliance generator includes realistic patterns for regulatory filings:
 | Game Type | Threshold |
 |-----------|-----------|
 | Slots | >= $1,200 |
-| Keno | >= $1,500 |
+| Keno | >= $600 |
 | Poker Tournaments | >= $5,000 |
 | Table Games | >= $600 (300:1 odds) |
 

@@ -37,7 +37,7 @@ w2g:
   thresholds:
     Slots: 1200
     Video Poker: 1200
-    Keno: 1500
+    Keno: 600  # Repo constant (stricter than IRS $1,500)
     Bingo: 1200
     Poker Tournament: 5000
     Table Games: 600  # At 300:1 odds or greater

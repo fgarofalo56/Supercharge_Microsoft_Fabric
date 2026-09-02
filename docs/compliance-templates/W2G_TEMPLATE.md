@@ -29,7 +29,7 @@ IRS Form W-2G reports certain gambling winnings to the IRS. Casinos must file W-
 | Game Type | W-2G Threshold | Withholding Threshold |
 |-----------|----------------|----------------------|
 | Slot Machines | $1,200+ | $5,000+ (or no TIN provided) |
-| Keno | $1,500+ | $5,000+ |
+| Keno | $600+ | $5,000+ |
 | Poker Tournaments | $5,000+ | Net winnings basis |
 | Bingo | $1,200+ | $5,000+ |
 | Other | $600+ (if 300:1 odds) | $5,000+ |

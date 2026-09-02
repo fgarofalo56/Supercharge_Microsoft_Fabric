@@ -299,7 +299,7 @@ ComplianceGenerator(
 |-------------------|-----------|
 | Slots             | $1,200    |
 | Video Poker       | $1,200    |
-| Keno              | $1,500    |
+| Keno              | $600      |
 | Bingo             | $1,200    |
 | Poker Tournament  | $5,000    |
 | Table Games       | $600      |

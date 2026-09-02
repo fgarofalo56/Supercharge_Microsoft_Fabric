@@ -221,7 +221,8 @@ suite.add_expectation(
 | SAR (Suspicious Activity Report) | Variable | Bank Secrecy Act |
 | W-2G General | >= $600 | IRS |
 | W-2G Slots | >= $1,200 | IRS |
-| W-2G Bingo/Keno | >= $1,500 | IRS |
+| W-2G Bingo | >= $1,200 | IRS |
+| W-2G Keno | >= $600 | Repo constant |
 | W-2G Poker Tournament | >= $5,000 | IRS |
 
 ---

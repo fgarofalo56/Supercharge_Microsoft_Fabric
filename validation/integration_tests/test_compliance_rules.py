@@ -86,7 +86,7 @@ class TestW2GThreshold:
         "Slots": 1200,
         "Video Slots": 1200,
         "Video Poker": 1200,
-        "Keno": 1500,
+        "Keno": 600,
         "Bingo": 1200,
         "Poker Tournament": 5000,
         "Table Games": 600,  # At 300:1 odds or greater

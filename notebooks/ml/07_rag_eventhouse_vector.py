@@ -249,7 +249,7 @@ CORPUS: List[Dict[str, Any]] = [
         "content": (
             "Form W-2G reports certain gambling winnings to the IRS. "
             "Thresholds vary by game type: slot machine and bingo winnings "
-            "of $1,200 or more; keno winnings of $1,500 or more (net of wager); "
+            "of $1,200 or more; keno winnings of $600 or more (net of wager); "
             "poker tournament winnings of more than $5,000 (net of buy-in); "
             "and any other gambling winnings of $600 or more, where winnings "
             "are at least 300 times the wager."

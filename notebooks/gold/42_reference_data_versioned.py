@@ -298,22 +298,22 @@ BASELINE_2020 = [
     ("NV", "Nevada",     "slots",  0.000,  1200.0),  # NV has no state withholding on slots
     ("NV", "Nevada",     "table",  0.000,  5000.0),
     ("NV", "Nevada",     "poker",  0.000,  5000.0),
-    ("NV", "Nevada",     "keno",   0.000,  1500.0),
+    ("NV", "Nevada",     "keno",   0.000,  600.0),
 
     ("NJ", "New Jersey", "slots",  0.030,  1200.0),
     ("NJ", "New Jersey", "table",  0.080,  5000.0),
     ("NJ", "New Jersey", "poker",  0.080,  5000.0),
-    ("NJ", "New Jersey", "keno",   0.030,  1500.0),
+    ("NJ", "New Jersey", "keno",   0.030,  600.0),
 
     ("CA", "California", "slots",  0.070,  1200.0),
     ("CA", "California", "table",  0.070,  5000.0),
     # CA had no poker withholding in 2020 — added later
-    ("CA", "California", "keno",   0.070,  1500.0),
+    ("CA", "California", "keno",   0.070,  600.0),
 
     ("NY", "New York",   "slots",  0.0850, 1200.0),
     ("NY", "New York",   "table",  0.0882, 5000.0),
     ("NY", "New York",   "poker",  0.0882, 5000.0),
-    ("NY", "New York",   "keno",   0.0850, 1500.0),
+    ("NY", "New York",   "keno",   0.0850, 600.0),
 ]
 
 for code, name, cat, rate, thr in BASELINE_2020:

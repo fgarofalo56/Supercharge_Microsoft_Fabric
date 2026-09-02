@@ -56,7 +56,7 @@ class ComplianceGenerator(BaseGenerator):
         {
             "Slots": 1200,
             "Video Poker": 1200,
-            "Keno": 1500,
+            "Keno": 600,
             "Bingo": 1200,
             "Poker Tournament": 5000,
             "Table Games": 600,

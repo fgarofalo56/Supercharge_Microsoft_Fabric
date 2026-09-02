@@ -645,7 +645,7 @@ Casino glossary leans heavily on **regulatory** and **player-tier** terminology.
 | `CTR Filing` | Cash transactions > $10,000 in a single gaming day, aggregated per player | 31 CFR 1021.311 |
 | `SAR Pattern` | Multiple cash transactions $8,000–$9,999 within 24 hours by same player | 31 CFR 1021.320 |
 | `W-2G Slot Win` | Slot win ≥ $1,200 (gross, single jackpot) | IRS Form W-2G instructions |
-| `W-2G Keno Win` | Keno net win ≥ $1,500 | IRS Form W-2G instructions |
+| `W-2G Keno Win` | Keno net win ≥ $600 | Repo compliance constant (stricter than IRS $1,500) |
 | `W-2G Poker Win` | Poker tournament net win ≥ $5,000 | IRS Form W-2G instructions |
 | `Title 31 Logbook Entry` | Aggregate cash transactions > $10,000 per gaming day | 31 USC 5331 |
 
