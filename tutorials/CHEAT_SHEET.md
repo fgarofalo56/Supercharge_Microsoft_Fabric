@@ -280,7 +280,7 @@ YoY Growth = DIVIDE([GGR] - [SPLY Revenue], [SPLY Revenue], 0) * 100
 | **SAR** (Suspicious Activity Report) | **$5,000+** | Pattern of transactions designed to evade CTR |
 | **Structuring Alert** | **$8,000-$9,999** | Multiple transactions just below CTR threshold |
 | **W-2G (Slots)** | **$1,200** | Single jackpot win |
-| **W-2G (Keno)** | **$1,500** | Single keno win |
+| **W-2G (Keno)** | **$600** | Single keno win |
 | **W-2G (Table Games)** | **$5,000** | Poker tournament win (300:1 odds) |
 | **W-2G (Bingo)** | **$1,200** | Single bingo win |
 
@@ -422,7 +422,7 @@ az deployment sub show --name main --query "properties.outputs"
 │  COMPLIANCE THRESHOLDS                                      │
 ├─────────────────────────────────────────────────────────────┤
 │  CTR:     $10,000 (cash in 24h)    W-2G Slots:  $1,200     │
-│  SAR:     $5,000+ (suspicious)     W-2G Keno:   $1,500     │
+│  SAR:     $5,000+ (suspicious)     W-2G Keno:   $600       │
 │  Struct:  $8,000-$9,999            W-2G Poker:  $5,000     │
 ├─────────────────────────────────────────────────────────────┤
 │  KEY METRICS                                                │

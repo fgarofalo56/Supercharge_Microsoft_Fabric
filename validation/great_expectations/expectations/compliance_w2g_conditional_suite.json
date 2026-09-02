@@ -8,7 +8,8 @@
       "IRS Form W-2G requirements",
       "General threshold: $600",
       "Slot machine threshold: $1,200 (reduced by wager)",
-      "Bingo/Keno threshold: $1,500",
+      "Bingo threshold: $1,200",
+      "Keno threshold: $600",
       "Poker tournament threshold: $5,000"
     ],
     "usage_note": "Apply this suite to W2G-filtered data only"
