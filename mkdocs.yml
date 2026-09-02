@@ -98,6 +98,45 @@ plugins:
       separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
   - minify:
       minify_html: true
+  - redirects:
+      redirect_maps:
+        # Renamed from SCREAMING_SNAKE to kebab-case (#106)
+        ARCHITECTURE.md: architecture.md
+        BEST_PRACTICES.md: best-practices.md
+        BICEP_MODULES.md: bicep-modules.md
+        CHEAT_SHEETS.md: cheat-sheets.md
+        COST_ESTIMATION.md: cost-estimation.md
+        DECISION_TREES.md: decision-trees.md
+        DEPLOYMENT.md: deployment.md
+        DISASTER_RECOVERY.md: disaster-recovery.md
+        FAQ.md: faq.md
+        FIELD_QUESTIONS.md: field-questions.md
+        GENERATOR_API_REFERENCE.md: generator-api-reference.md
+        GLOSSARY.md: glossary.md
+        MIGRATION_AND_RTI_RESEARCH.md: migration-and-rti-research.md
+        MY_RESOURCES.md: my-resources.md
+        NETWORKING.md: networking.md
+        PREREQUISITES.md: prerequisites.md
+        QUICK_START.md: quick-start.md
+        SECURITY.md: security.md
+        STYLE_GUIDE.md: style-guide.md
+        TROUBLESHOOTING_MATRIX.md: troubleshooting-matrix.md
+        VISUAL_STANDARDS.md: visual-standards.md
+        best-practices/01_WORKSPACES_NAMING.md: best-practices/01-workspaces-naming.md
+        best-practices/02_DATA_GATEWAY.md: best-practices/02-data-gateway.md
+        best-practices/03_PIPELINES_DATA_MOVEMENT.md: best-practices/03-pipelines-data-movement.md
+        best-practices/04_METADATA_DRIVEN_PIPELINES.md: best-practices/04-metadata-driven-pipelines.md
+        best-practices/05_SPARK_NOTEBOOKS.md: best-practices/05-spark-notebooks.md
+        best-practices/06_DATAFLOWS.md: best-practices/06-dataflows.md
+        best-practices/07_LAKEHOUSE_SETUP.md: best-practices/07-lakehouse-setup.md
+        best-practices/08_WAREHOUSE_SETUP.md: best-practices/08-warehouse-setup.md
+        best-practices/09_SOURCE_SPECIFIC_PATTERNS.md: best-practices/09-source-specific-patterns.md
+        best-practices/10_DECISION_GUIDE.md: best-practices/10-decision-guide.md
+        best-practices/11_ORACLE_GATEWAY_TROUBLESHOOTING.md: best-practices/11-oracle-gateway-troubleshooting.md
+        compliance-templates/CTR_TEMPLATE.md: compliance-templates/ctr-template.md
+        compliance-templates/MICS_TEMPLATE.md: compliance-templates/mics-template.md
+        compliance-templates/SAR_TEMPLATE.md: compliance-templates/sar-template.md
+        compliance-templates/W2G_TEMPLATE.md: compliance-templates/w2g-template.md
 
 # Markdown Extensions
 markdown_extensions:
@@ -302,10 +341,10 @@ nav:
         - CI/CD with fabric-cicd: best-practices/fabric-cicd-deployment.md
 
   # ============================================================
-  # 4. BUILD — features, tutorials, hands-on workshops
+  # 4. FEATURES — features, tutorials, hands-on workshops
   # ============================================================
-  - Build:
-    - Features:
+  - Features:
+    - Feature Catalog:
       - Overview: features/index.md
       - April 2026 Features Snapshot: microsoft-fabric-features-april-2026.md
       - Foundation:
@@ -507,9 +546,9 @@ nav:
     - Published References: use-cases/references/README.md
 
   # ============================================================
-  # 6. WHITE PAPERS — research, maturity models, frameworks
+  # 6. RESEARCH — white papers, maturity models, frameworks
   # ============================================================
-  - White Papers:
+  - Research:
     - Overview: research/index.md
     - Enterprise Data Platform Comparison: research/enterprise-data-platform-comparison.md
     - AI Readiness Assessment: research/ai-readiness-assessment.md
@@ -579,13 +618,13 @@ nav:
   # 8. REFERENCE — lookup material, glossaries, schemas
   # ============================================================
   - Reference:
-    - FAQ: faq.md
-    - Field Questions: field-questions.md
     - Glossary: glossary.md
-    - Style Guide: style-guide.md
-    - Visual Standards: visual-standards.md
-    - Cheat Sheets: cheat-sheets.md
     - Generator API Reference: generator-api-reference.md
     - Data Dictionary: data-dictionary/README.md
+    - Cheat Sheets: cheat-sheets.md
+    - Style Guide: style-guide.md
+    - Visual Standards: visual-standards.md
+    - Field Questions: field-questions.md
+    - FAQ: faq.md
     - My Resources: my-resources.md
     - Changelog: CHANGELOG.md
