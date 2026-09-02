@@ -44,15 +44,24 @@ jobs:
         shell: bash
         working-directory: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
         run: |
-          python -c "import ast; [ast.parse(open(f).read()) for f in ['function_app.py','ms_learn.py','github_issue.py']]"
+          python -c "import ast,glob; [ast.parse(open(f).read()) for f in glob.glob('*.py')]"
           echo "Syntax check passed"
+
+      # Authenticate before deploying. functions-action falls back to RBAC
+      # when publish-profile is empty, but RBAC needs a prior azure/login --
+      # without it the action dies at ValidateAzureResource with no credential.
+      - name: Azure login (OIDC)
+        uses: azure/login@v3
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Deploy to Azure Functions
         uses: Azure/functions-action@v1
         with:
           app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
-          publish-profile: ${{ secrets.COPILOT_FUNCTIONAPP_PUBLISH_PROFILE }}
           scm-do-build-during-deployment: true
           enable-oryx-build: true
 
