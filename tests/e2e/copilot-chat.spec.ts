@@ -83,6 +83,43 @@ test.describe('Copilot Chat Widget', () => {
     expect(allowOrigin).toBe('https://fgarofalo56.github.io');
   });
 
+  test('backend rejects cross-origin POST from a disallowed origin', async ({
+    request,
+  }) => {
+    const response = await request.post(BACKEND_ORIGIN + '/api/chat', {
+      headers: {
+        'Content-Type': 'application/json',
+        Origin: 'https://evil.example.com',
+      },
+      data: {
+        message: 'What is the CTR compliance threshold?',
+        history: [],
+      },
+      timeout: 30000,
+    });
+    expect(response.status()).toBe(403);
+    const body = await response.json();
+    expect(body.error).toMatch(/origin not allowed/i);
+    // And the response must NOT leak an allow-origin header for the bad origin
+    const allowOrigin = response.headers()['access-control-allow-origin'];
+    expect(allowOrigin ?? '').not.toContain('evil.example.com');
+  });
+
+  test('backend OPTIONS preflight from a disallowed origin gets no allow-origin', async ({
+    request,
+  }) => {
+    const response = await request.fetch(BACKEND_ORIGIN + '/api/chat', {
+      method: 'OPTIONS',
+      headers: {
+        Origin: 'https://evil.example.com',
+        'Access-Control-Request-Method': 'POST',
+        'Access-Control-Request-Headers': 'Content-Type',
+      },
+    });
+    const allowOrigin = response.headers()['access-control-allow-origin'];
+    expect(allowOrigin ?? '').not.toContain('evil.example.com');
+  });
+
   test('full chat round-trip through the UI', async ({ page }) => {
     test.setTimeout(90000);
     await page.goto(CHAT_PAGE);
@@ -160,7 +197,7 @@ test.describe('Compliance Threshold Content (post-correction)', () => {
   test('glossary no longer claims keno threshold is $5,000', async ({
     page,
   }) => {
-    const response = await page.goto('./GLOSSARY/');
+    const response = await page.goto('./glossary/');
     test.skip(response?.status() === 404, 'Glossary page not found');
 
     const content = await page.textContent('body');
