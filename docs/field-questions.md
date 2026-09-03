@@ -551,5 +551,5 @@ Source: [Gateway considerations for DataFlow Gen2 destinations](https://learn.mi
 ---
 
 *If you have a scenario not covered here, file an issue at*
-*[fgarofalo56/Suppercharge_Microsoft_Fabric/issues](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/issues)*
+*[fgarofalo56/Supercharge_Microsoft_Fabric/issues](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/issues)*
 *and tag it `field-question`.*

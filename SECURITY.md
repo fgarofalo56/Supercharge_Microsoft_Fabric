@@ -9,7 +9,7 @@
 **Do NOT open a public GitHub issue for security vulnerabilities.**
 
 Report privately via GitHub Security Advisories:
-[https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/security/advisories/new](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/security/advisories/new)
+[https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/security/advisories/new](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/security/advisories/new)
 
 We operate a **90-day coordinated disclosure window**. After 90 days from your initial
 report (or sooner if a fix is released), the vulnerability may be disclosed publicly.

@@ -31,7 +31,7 @@ export default defineConfig({
   use: {
     /* Base URL from environment or default to GitHub Pages */
     /* Ensure trailing slash for GitHub Pages compatibility */
-    baseURL: (process.env.BASE_URL || 'https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric').replace(/\/?$/, '/'),
+    baseURL: (process.env.BASE_URL || 'https://fgarofalo56.github.io/Supercharge_Microsoft_Fabric').replace(/\/?$/, '/'),
 
     /* Collect trace on first retry */
     trace: 'on-first-retry',

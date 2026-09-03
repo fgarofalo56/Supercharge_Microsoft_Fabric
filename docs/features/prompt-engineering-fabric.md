@@ -812,7 +812,7 @@ FROM lh_silver.silver_compliance_questions
 WHERE batch_id = @batch_id;
 ```
 
-See [`notebooks/gold/17_gold_ai_functions_compliance.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/17_gold_ai_functions_compliance.py) for a working AI Functions notebook.
+See [`notebooks/gold/17_gold_ai_functions_compliance.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/gold/17_gold_ai_functions_compliance.py) for a working AI Functions notebook.
 
 ### Pattern: Data Agent with Custom Prompt
 

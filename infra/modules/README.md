@@ -1,6 +1,6 @@
 # Bicep Module Index
 
-> **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** | **[Main Bicep](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/main.bicep)** | **[Environments](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/infra/environments)** | **[Docs](../../index.md)**
+> **[Home](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md)** | **[Main Bicep](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/infra/main.bicep)** | **[Environments](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/tree/main/infra/environments)** | **[Docs](../../index.md)**
 
 Complete reference for all Bicep IaC modules in this POC. Each module is self-contained, parameterized, and designed for composition via `main.bicep`.
 
@@ -395,7 +395,7 @@ flowchart TD
 
 | Resource | Description |
 |----------|-------------|
-| [main.bicep](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/main.bicep) | Root orchestration template |
+| [main.bicep](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/infra/main.bicep) | Root orchestration template |
 | [Deployment Guide](../../deployment.md) | Full deployment instructions |
 | [Architecture](../../architecture.md) | System architecture overview |
 | [Cost Estimation](../../cost-estimation.md) | SKU sizing and cost projections |
@@ -405,4 +405,4 @@ flowchart TD
 
 ---
 
-[Back to Top](#bicep-module-index) | [Main README](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)
+[Back to Top](#bicep-module-index) | [Main README](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md)

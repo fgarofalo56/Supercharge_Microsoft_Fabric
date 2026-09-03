@@ -79,7 +79,7 @@ Most RAG tutorials stop at "embed your PDFs, run cosine similarity, stuff the to
 
 This tutorial teaches you to build a **production-grade RAG system** for casino BSA/AML/MICS compliance Q&A on Microsoft Fabric. You will ingest a regulatory corpus, chunk it intelligently, embed it, store the vectors in Eventhouse with Vector16 encoding, retrieve passages with **hybrid vector + BM25 search fused via Reciprocal Rank Fusion**, rerank the top-N with a cross-encoder, generate cited answers via Azure OpenAI or AI Functions, expose the system through a Fabric Data Agent, and continuously evaluate quality with a golden test set, an LLM-as-judge harness, a CI quality gate, and a Real-Time Dashboard for retrieval analytics.
 
-The tutorial mirrors the patterns documented in [`docs/features/rag-patterns-deep-dive.md`](../../features/rag-patterns-deep-dive.md), [`docs/features/eventhouse-vector-database.md`](../../features/eventhouse-vector-database.md), [`docs/features/eval-harness-llm.md`](../../features/eval-harness-llm.md), and the runnable reference notebook [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py). Use it as the reference implementation when shipping any RAG workload on Fabric — casino, federal, healthcare, or otherwise.
+The tutorial mirrors the patterns documented in [`docs/features/rag-patterns-deep-dive.md`](../../features/rag-patterns-deep-dive.md), [`docs/features/eventhouse-vector-database.md`](../../features/eventhouse-vector-database.md), [`docs/features/eval-harness-llm.md`](../../features/eval-harness-llm.md), and the runnable reference notebook [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py). Use it as the reference implementation when shipping any RAG workload on Fabric — casino, federal, healthcare, or otherwise.
 
 > **💡 Why production RAG is different**
 >
@@ -380,7 +380,7 @@ spark.createDataFrame([], eval_schema).write \
 
 For this tutorial we use 18 synthetic compliance documents bundled with the reference notebook. In production you would parse PDFs, DOCX, HTML, or Confluence exports.
 
-> **📓 Notebook Reference**: [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py) — section *1. Synthetic Compliance Corpus*
+> **📓 Notebook Reference**: [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py) — section *1. Synthetic Compliance Corpus*
 
 ### 3.1 Corpus Structure
 
@@ -1450,18 +1450,18 @@ Continue your learning journey:
 | Step | Source File | Purpose |
 |------|-------------|---------|
 | 1 | KQL Queryset on `kqldb_rag` | Eventhouse provisioning |
-| 2-3 | [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py) §1 | Synthetic corpus |
-| 4 | [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py) §2 | Recursive chunker |
-| 5 | [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py) §3 | Embedding (3 strategies) |
-| 6 | [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py) §4 | Eventhouse persistence |
+| 2-3 | [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py) §1 | Synthetic corpus |
+| 4 | [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py) §2 | Recursive chunker |
+| 5 | [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py) §3 | Embedding (3 strategies) |
+| 6 | [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py) §4 | Eventhouse persistence |
 | 7-9 | [`docs/features/rag-patterns-deep-dive.md`](../../features/rag-patterns-deep-dive.md) | Hybrid retrieval patterns |
 | 10 | [`docs/features/rag-patterns-deep-dive.md`](../../features/rag-patterns-deep-dive.md#-reranking) | Reranker comparison |
-| 11 | [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py) §9-10 | Generation + citations |
+| 11 | [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py) §9-10 | Generation + citations |
 | 12 | [`docs/features/eventhouse-vector-database.md`](../../features/eventhouse-vector-database.md) | Real-Time Dashboard |
 | 13-14 | [`docs/features/eval-harness-llm.md`](../../features/eval-harness-llm.md) | Eval harness reference |
 | 15 | `.github/workflows/rag-eval.yml` (to create) | CI quality gate |
 | 16 | [`docs/features/data-agents.md`](../../features/data-agents.md) | Data Agent setup |
-| 17-20 | [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py) §11-13 | Production logging, cost, drift, feedback |
+| 17-20 | [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py) §11-13 | Production logging, cost, drift, feedback |
 
 ---
 
@@ -1513,7 +1513,7 @@ Continue your learning journey:
 
 <div align="center" markdown>
 
-**Questions or issues?** Open an issue in the [GitHub repository](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/issues)
+**Questions or issues?** Open an issue in the [GitHub repository](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/issues)
 
 *Tutorial 40 — Phase 14 Wave 2 Feature 2.15*
 

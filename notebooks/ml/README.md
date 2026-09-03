@@ -1,4 +1,4 @@
-# [Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md) > [Notebooks](../README.md) > ML Layer
+# [Home](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md) > [Notebooks](../README.md) > ML Layer
 
 ## 🤖 Machine Learning Notebooks
 
@@ -13,8 +13,8 @@ The ML layer leverages Fabric's integrated data science capabilities to build, t
 
 | Notebook | Purpose | Input | Output |
 |----------|---------|-------|--------|
-| [`01_ml_player_churn_prediction.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/01_ml_player_churn_prediction.py) | Predict player churn risk using behavioral features | `gold.dim_player_360`, `gold.fact_slot_performance` | `ml.player_churn_scores` |
-| [`02_ml_fraud_detection.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/02_ml_fraud_detection.py) | Detect fraudulent activity patterns and anomalies | `silver.financial_reconciled`, `silver.security_enriched` | `ml.fraud_risk_scores` |
+| [`01_ml_player_churn_prediction.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/01_ml_player_churn_prediction.py) | Predict player churn risk using behavioral features | `gold.dim_player_360`, `gold.fact_slot_performance` | `ml.player_churn_scores` |
+| [`02_ml_fraud_detection.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/02_ml_fraud_detection.py) | Detect fraudulent activity patterns and anomalies | `silver.financial_reconciled`, `silver.security_enriched` | `ml.fraud_risk_scores` |
 
 ---
 
@@ -76,7 +76,7 @@ graph TB
 
 ## 📊 Model Details
 
-### Player Churn Prediction ([`01_ml_player_churn_prediction.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/01_ml_player_churn_prediction.py))
+### Player Churn Prediction ([`01_ml_player_churn_prediction.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/01_ml_player_churn_prediction.py))
 
 | Aspect | Details |
 |--------|---------|
@@ -141,7 +141,7 @@ with mlflow.start_run(run_name="churn_model_v1"):
 
 ---
 
-### Fraud Detection ([`02_ml_fraud_detection.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/02_ml_fraud_detection.py))
+### Fraud Detection ([`02_ml_fraud_detection.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/02_ml_fraud_detection.py))
 
 | Aspect | Details |
 |--------|---------|

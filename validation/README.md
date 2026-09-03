@@ -1,6 +1,6 @@
 # :white_check_mark: Validation & Testing Framework
 
-> **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** | **[Data Generation](../data_generation/)** | **[Notebooks](../notebooks/)** | **[Tutorials](../tutorials/)**
+> **[Home](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md)** | **[Data Generation](../data_generation/)** | **[Notebooks](../notebooks/)** | **[Tutorials](../tutorials/)**
 
 Comprehensive data quality validation and testing for the Microsoft Fabric Casino POC and Phase 7 federal, streaming, and analytics expansions.
 
@@ -545,12 +545,12 @@ The [Phase 7 Regression Report](phase7_regression_report.md) provides comprehens
 |----------|-------------|
 | [Data Generation](../data_generation/README.md) | Generate test data |
 | [Notebooks](../notebooks/README.md) | Fabric notebooks to test |
-| [CI/CD Workflows](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/.github/workflows) | Automated testing pipelines |
+| [CI/CD Workflows](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/tree/main/.github/workflows) | Automated testing pipelines |
 
 ---
 
 <div align="center" markdown>
 
-**[Back to Top](#white_check_mark-validation--testing-framework)** | **[Main README](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)**
+**[Back to Top](#white_check_mark-validation--testing-framework)** | **[Main README](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md)**
 
 </div>

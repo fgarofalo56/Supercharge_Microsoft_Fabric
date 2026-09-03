@@ -3,7 +3,7 @@
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
-> **🏠 [Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > **📖 [Tutorials](../index.md)** > **📊 Direct Lake & Power BI**
+> **🏠 [Home](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md)** > **📖 [Tutorials](../index.md)** > **📊 Direct Lake & Power BI**
 
 ---
 
@@ -131,13 +131,13 @@ Before starting this tutorial, ensure you have:
 - [ ] ✅ Completed [Tutorial 03: Gold Layer](../03-gold-layer/README.md)
 - [ ] ✅ Gold tables populated in `lh_gold` Lakehouse:
   - `gold_slot_performance`, `gold_player_360`, `gold_compliance_reporting`, `gold_table_analytics`, `gold_financial_summary`, `gold_security_dashboard` (fact tables from Tutorial 03)
-  - `dim_date`, `dim_machine` (dimensions — created by [notebooks/gold/00_gold_dim_tables.py](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/00_gold_dim_tables.py))
-  - `gold_player_slot_daily` (player-grain fact — created by [notebooks/gold/07_gold_player_slot_daily.py](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/07_gold_player_slot_daily.py))
-  - `gold_player_table_daily` (player-grain fact — created by [notebooks/gold/08_gold_player_table_daily.py](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/08_gold_player_table_daily.py))
+  - `dim_date`, `dim_machine` (dimensions — created by [notebooks/gold/00_gold_dim_tables.py](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/gold/00_gold_dim_tables.py))
+  - `gold_player_slot_daily` (player-grain fact — created by [notebooks/gold/07_gold_player_slot_daily.py](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/gold/07_gold_player_slot_daily.py))
+  - `gold_player_table_daily` (player-grain fact — created by [notebooks/gold/08_gold_player_table_daily.py](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/gold/08_gold_player_table_daily.py))
 - [ ] ✅ Power BI license (Pro or Premium Per User)
 - [ ] ✅ Fabric workspace with semantic model creation permissions
 
-> **⚠️ Run the three prerequisite notebooks first.** Tutorial 03 does not create `dim_date`, `dim_machine`, `gold_player_slot_daily`, or `gold_player_table_daily`. Run [notebooks/gold/00_gold_dim_tables.py](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/00_gold_dim_tables.py), [notebooks/gold/07_gold_player_slot_daily.py](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/07_gold_player_slot_daily.py), and [notebooks/gold/08_gold_player_table_daily.py](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/08_gold_player_table_daily.py) against your Silver/Gold lakehouses before proceeding. Each takes under a minute.
+> **⚠️ Run the three prerequisite notebooks first.** Tutorial 03 does not create `dim_date`, `dim_machine`, `gold_player_slot_daily`, or `gold_player_table_daily`. Run [notebooks/gold/00_gold_dim_tables.py](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/gold/00_gold_dim_tables.py), [notebooks/gold/07_gold_player_slot_daily.py](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/gold/07_gold_player_slot_daily.py), and [notebooks/gold/08_gold_player_table_daily.py](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/gold/08_gold_player_table_daily.py) against your Silver/Gold lakehouses before proceeding. Each takes under a minute.
 
 > **⚠️ License Note**
 >
@@ -169,9 +169,9 @@ Before starting this tutorial, ensure you have:
 
 > **Missing tables from the picker?**
 >
-> - `dim_date` / `dim_machine` → run [notebooks/gold/00_gold_dim_tables.py](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/00_gold_dim_tables.py)
-> - `gold_player_slot_daily` → run [notebooks/gold/07_gold_player_slot_daily.py](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/07_gold_player_slot_daily.py)
-> - `gold_player_table_daily` → run [notebooks/gold/08_gold_player_table_daily.py](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/08_gold_player_table_daily.py)
+> - `dim_date` / `dim_machine` → run [notebooks/gold/00_gold_dim_tables.py](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/gold/00_gold_dim_tables.py)
+> - `gold_player_slot_daily` → run [notebooks/gold/07_gold_player_slot_daily.py](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/gold/07_gold_player_slot_daily.py)
+> - `gold_player_table_daily` → run [notebooks/gold/08_gold_player_table_daily.py](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/gold/08_gold_player_table_daily.py)
 
 5. Configure semantic model:
 
@@ -1237,7 +1237,7 @@ Continue your learning journey:
 
 <div align="center" markdown>
 
-**Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues)
+**Questions or issues?** Open an issue in the [GitHub repository](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/issues)
 
 *Tutorial 05 of 10 in the Microsoft Fabric Casino POC Series*
 

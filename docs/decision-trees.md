@@ -108,7 +108,7 @@ flowchart TD
 
 The POC runs **both paths** for slot telemetry. The `01_realtime_slot_streaming.py` notebook feeds Eventstream data into the Eventhouse for sub-second casino floor monitoring (KQL queries in `02_kql_casino_floor.kql`). Simultaneously, batch notebooks (`01_bronze_slot_telemetry.py` through `01_gold_slot_performance.py`) process daily aggregations for historical trend analysis and Power BI dashboards.
 
-See: [Real-Time Intelligence](features/real-time-intelligence.md) | [Streaming Notebooks](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/streaming/)
+See: [Real-Time Intelligence](features/real-time-intelligence.md) | [Streaming Notebooks](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/streaming/)
 
 ---
 
@@ -253,7 +253,7 @@ flowchart TD
 
 The POC demonstrates all three patterns. **Shortcuts** are used in `17_bronze_shortcut_transformations.py` to reference external ADLS data without duplication. **Pipeline Copy** patterns are documented in streaming notebooks (`01_sql_server_cdc.py` through `05_oracle_cdc.py`) for on-premises source ingestion. **Mirroring** patterns are covered in Tutorial 08 (Database Mirroring).
 
-See: [Mirroring](features/mirroring.md) | [Shortcut Transformations Notebook](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/bronze/17_bronze_shortcut_transformations.py) | [Tutorial 08](tutorials/08-database-mirroring/README.md)
+See: [Mirroring](features/mirroring.md) | [Shortcut Transformations Notebook](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/bronze/17_bronze_shortcut_transformations.py) | [Tutorial 08](tutorials/08-database-mirroring/README.md)
 
 ---
 
@@ -347,7 +347,7 @@ flowchart TD
 
 This POC uses a layered approach. **Pipeline parameters** pass `batch_date` and `source_path` to notebooks. Each notebook reads these via the `_get_arg` helper shim. **Key Vault** stores the Event Hub connection string for streaming notebooks. **Workspace Identity** (deployed via `workspace-identity.bicep`) enables credential-free access to ADLS Gen2 and Key Vault. Spark session configuration sets `spark.sql.shuffle.partitions` to 8 for POC-scale data.
 
-See: [Spark Environments & Job Definitions](features/spark-environments-job-definitions.md) | [Workspace Identity Module](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/security/workspace-identity.bicep) | [OneLake Security](features/onelake-security.md)
+See: [Spark Environments & Job Definitions](features/spark-environments-job-definitions.md) | [Workspace Identity Module](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/infra/modules/security/workspace-identity.bicep) | [OneLake Security](features/onelake-security.md)
 
 ---
 
@@ -483,15 +483,15 @@ See: [Testing Strategies](best-practices/testing-strategies.md) | [Medallion Dee
 | Decision Area | Primary Doc | Supporting Docs |
 |---|---|---|
 | Lakehouse vs Warehouse vs SQL DB | [Decision Guide](best-practices/lakehouse-warehouse-sqldb-decision-guide.md) | [Warehouse Setup](best-practices/08-warehouse-setup.md), [SQL Database](features/fabric-sql-database.md) |
-| Real-Time vs Batch | [RTI](features/real-time-intelligence.md) | [Streaming Notebooks](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/streaming/), [Eventstream](features/real-time-hub.md) |
+| Real-Time vs Batch | [RTI](features/real-time-intelligence.md) | [Streaming Notebooks](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/streaming/), [Eventstream](features/real-time-hub.md) |
 | Direct Lake vs Import vs DQ | [Direct Lake](features/direct-lake.md) | [Power BI Best Practices](best-practices/power-bi-best-practices.md) |
 | Notebooks vs Jobs vs Pipelines | [Spark Environments](features/spark-environments-job-definitions.md) | [Pipeline Patterns](best-practices/03-pipelines-data-movement.md), [CI/CD](best-practices/fabric-cicd-deployment.md) |
-| Mirroring vs Shortcuts vs Copy | [Mirroring](features/mirroring.md) | [Shortcut Notebook](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/bronze/17_bronze_shortcut_transformations.py), [Source Patterns](best-practices/09-source-specific-patterns.md) |
+| Mirroring vs Shortcuts vs Copy | [Mirroring](features/mirroring.md) | [Shortcut Notebook](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/bronze/17_bronze_shortcut_transformations.py), [Source Patterns](best-practices/09-source-specific-patterns.md) |
 | Eventhouse vs Lakehouse | [RTI](features/real-time-intelligence.md) | [Vector DB](features/eventhouse-vector-database.md), [Lakehouse Setup](best-practices/07-lakehouse-setup.md) |
-| Config Management | [OneLake Security](features/onelake-security.md) | [Workspace Identity](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/security/workspace-identity.bicep), [CMK](best-practices/customer-managed-keys.md) |
-| Adding a New Vertical | [Notebook Index](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/README.md) | [USDA Tutorial](tutorials/32-usda-agriculture/README.md), [DOJ Tutorial](tutorials/38-doj-justice/README.md) |
-| Capacity Sizing | [Capacity Planning](best-practices/capacity-planning-cost-optimization.md) | [Cost Estimation](cost-estimation.md), [Alerts & Budgets](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/monitoring/alerts-and-budgets.bicep) |
-| Data Quality Strategy | [Testing Strategies](best-practices/testing-strategies.md) | [Medallion Deep Dive](best-practices/medallion-architecture-deep-dive.md), [Great Expectations](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/validation) |
+| Config Management | [OneLake Security](features/onelake-security.md) | [Workspace Identity](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/infra/modules/security/workspace-identity.bicep), [CMK](best-practices/customer-managed-keys.md) |
+| Adding a New Vertical | [Notebook Index](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/README.md) | [USDA Tutorial](tutorials/32-usda-agriculture/README.md), [DOJ Tutorial](tutorials/38-doj-justice/README.md) |
+| Capacity Sizing | [Capacity Planning](best-practices/capacity-planning-cost-optimization.md) | [Cost Estimation](cost-estimation.md), [Alerts & Budgets](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/infra/modules/monitoring/alerts-and-budgets.bicep) |
+| Data Quality Strategy | [Testing Strategies](best-practices/testing-strategies.md) | [Medallion Deep Dive](best-practices/medallion-architecture-deep-dive.md), [Great Expectations](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/tree/main/validation) |
 | General Decision Guide | [10-decision-guide.md](best-practices/10-decision-guide.md) | This document (detailed flowcharts) |
 
 ---

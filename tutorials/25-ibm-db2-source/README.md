@@ -943,11 +943,11 @@ Continue to **[Tutorial 26: Multi-Source Real-Time Intelligence](../26-multi-sou
 
 | Resource | Description |
 |---|---|
-| [`scripts/db2_migration_utils.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/tutorials/25-ibm-db2-source) | Python utilities (EBCDIC, packed decimal converters) |
-| [`scripts/db2_type_mapping.sql`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/tutorials/25-ibm-db2-source) | Complete type mapping reference |
-| [`scripts/db2_sql_translation.sql`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/tutorials/25-ibm-db2-source) | SQL translation examples |
-| [`scripts/db2_catalog_queries.sql`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/tutorials/25-ibm-db2-source) | System catalog queries for all variants |
-| [`templates/db2_migration_checklist.md`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/tutorials/25-ibm-db2-source) | Migration checklist |
+| [`scripts/db2_migration_utils.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/tree/main/tutorials/25-ibm-db2-source) | Python utilities (EBCDIC, packed decimal converters) |
+| [`scripts/db2_type_mapping.sql`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/tree/main/tutorials/25-ibm-db2-source) | Complete type mapping reference |
+| [`scripts/db2_sql_translation.sql`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/tree/main/tutorials/25-ibm-db2-source) | SQL translation examples |
+| [`scripts/db2_catalog_queries.sql`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/tree/main/tutorials/25-ibm-db2-source) | System catalog queries for all variants |
+| [`templates/db2_migration_checklist.md`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/tree/main/tutorials/25-ibm-db2-source) | Migration checklist |
 
 ---
 
@@ -971,7 +971,7 @@ Continue to **[Tutorial 26: Multi-Source Real-Time Intelligence](../26-multi-sou
 
 ---
 
-> :speech_balloon: **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
+> :speech_balloon: **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/issues).
 
 ---
 

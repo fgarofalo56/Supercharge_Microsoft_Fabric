@@ -725,7 +725,7 @@ Run SSRS, SSAS, and Fabric Power BI **side by side**:
 - Mirroring/Copy Job CDC replicates to Fabric continuously
 - Both stacks render the same reports for the same users
 - Daily diff report (counts, key aggregations) confirms parity
-- Action Group alerts on parity drift (see [alerts-and-budgets.bicep](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/alerts-and-budgets.bicep))
+- Action Group alerts on parity drift (see [alerts-and-budgets.bicep](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/infra/modules/alerts-and-budgets.bicep))
 
 > 💡 **Tip**: This period is **expensive** (running both stacks at the same time). Budget for it, but don't extend it past 8 weeks. If users haven't validated by week 6, escalate.
 

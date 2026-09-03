@@ -90,7 +90,7 @@ FABRIC WORKSPACES
 The Fabric extension maps a **workspace** to a **local folder**. This repo uses the following mapping:
 
 ```
-E:\Repos\...\Suppercharge_Microsoft_Fabric\
+E:\Repos\...\Supercharge_Microsoft_Fabric\
   notebooks/          --> Workspace: Casino-POC-Dev (Notebooks)
   semantic-models/    --> Workspace: Casino-POC-Dev (Semantic Models)
   pipelines/          --> Workspace: Casino-POC-Dev (Pipelines)

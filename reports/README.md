@@ -1,6 +1,6 @@
 # Power BI Reports & Semantic Model
 
-> **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > **Reports**
+> **[Home](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md)** > **Reports**
 
 **Last Updated:** `2025-01-21` | **Version:** 1.0.0
 
@@ -322,4 +322,4 @@ Gold layer tables are pre-aggregated for optimal Direct Lake performance:
 ---
 
 > **Documentation maintained by:** Frank Garofalo
-> **Repository:** [Suppercharge_Microsoft_Fabric](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric)
+> **Repository:** [Supercharge_Microsoft_Fabric](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric)

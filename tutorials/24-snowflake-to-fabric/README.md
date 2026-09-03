@@ -1686,12 +1686,12 @@ This tutorial includes the following supplementary files:
 
 | Resource | Description |
 |----------|-------------|
-| [`scripts/snowflake_assessment_queries.sql`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/tutorials/24-snowflake-to-fabric) | Snowflake inventory and complexity assessment queries |
-| [`scripts/sql_translation_patterns.sql`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/tutorials/24-snowflake-to-fabric) | Side-by-side SQL translation examples |
-| [`scripts/snowflake_migration_notebook.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/tutorials/24-snowflake-to-fabric) | PySpark notebook for full and incremental migration |
-| [`scripts/udf_migration_examples.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/tutorials/24-snowflake-to-fabric) | JavaScript UDF to PySpark UDF conversion examples |
-| [`templates/snowflake_migration_assessment.md`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/tutorials/24-snowflake-to-fabric) | Assessment template for your Snowflake environment |
-| [`templates/cost_comparison_calculator.md`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/tutorials/24-snowflake-to-fabric) | TCO comparison worksheet |
+| [`scripts/snowflake_assessment_queries.sql`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/tree/main/tutorials/24-snowflake-to-fabric) | Snowflake inventory and complexity assessment queries |
+| [`scripts/sql_translation_patterns.sql`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/tree/main/tutorials/24-snowflake-to-fabric) | Side-by-side SQL translation examples |
+| [`scripts/snowflake_migration_notebook.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/tree/main/tutorials/24-snowflake-to-fabric) | PySpark notebook for full and incremental migration |
+| [`scripts/udf_migration_examples.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/tree/main/tutorials/24-snowflake-to-fabric) | JavaScript UDF to PySpark UDF conversion examples |
+| [`templates/snowflake_migration_assessment.md`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/tree/main/tutorials/24-snowflake-to-fabric) | Assessment template for your Snowflake environment |
+| [`templates/cost_comparison_calculator.md`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/tree/main/tutorials/24-snowflake-to-fabric) | TCO comparison worksheet |
 
 ---
 
@@ -1717,7 +1717,7 @@ This tutorial includes the following supplementary files:
 
 ---
 
-> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
+> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/issues).
 
 ---
 

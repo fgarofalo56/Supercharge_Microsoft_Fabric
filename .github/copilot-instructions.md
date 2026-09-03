@@ -11,7 +11,7 @@
 **Type:** Infrastructure + Documentation + Data Engineering
 **Primary Stack:** Bicep, Python, PySpark, KQL, DAX
 **Target Platform:** Microsoft Fabric (F64 SKU)
-**Repository:** https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric
+**Repository:** https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric
 
 ### Key Technologies
 
@@ -28,7 +28,7 @@
 ## Repository Structure
 
 ```text
-Suppercharge_Microsoft_Fabric/
+Supercharge_Microsoft_Fabric/
 ├── infra/                  # Bicep IaC modules and deployments
 │   ├── main.bicep          # Root orchestration (Workspace Identity, Tags, CMK)
 │   ├── modules/            # fabric-capacity, workspace-identity, warehouse, sql-database, pipeline, alerts-and-budgets, storage-account

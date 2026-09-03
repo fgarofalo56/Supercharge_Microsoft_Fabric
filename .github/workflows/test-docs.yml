@@ -68,7 +68,7 @@ jobs:
           if [[ -n "${{ github.event.inputs.base_url }}" ]]; then
             echo "base_url=${{ github.event.inputs.base_url }}" >> $GITHUB_OUTPUT
           else
-            echo "base_url=https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/" >> $GITHUB_OUTPUT
+            echo "base_url=https://fgarofalo56.github.io/Supercharge_Microsoft_Fabric/" >> $GITHUB_OUTPUT
           fi
 
       - name: Wait for deployment to propagate

@@ -424,7 +424,7 @@ ls sample-data/bronze/
 
 Output location: `./output` directory
 
-See [Data Generation Guide](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/README.md) for complete documentation.
+See [Data Generation Guide](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/data_generation/README.md) for complete documentation.
 
 </details>
 
@@ -469,7 +469,7 @@ docker-compose run --rm demo-generator  # 7 days, smaller volumes
 - Peak gaming hours: 7pm-2am (weekends higher)
 - CTR generation: ~0.5% of transactions
 
-See [Data Generation - Data Quality Features](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/README.md#data-quality-features).
+See [Data Generation - Data Quality Features](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/data_generation/README.md#data-quality-features).
 
 ---
 
@@ -812,7 +812,7 @@ Users with free licenses can view reports published to Fabric capacity workspace
 
 **Location:** `reports/report-definitions/`
 
-See [Reports README](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/reports/README.md) for import instructions.
+See [Reports README](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/reports/README.md) for import instructions.
 
 ---
 
@@ -1448,7 +1448,7 @@ See: [Workspace Naming](best-practices/01-workspaces-naming.md)
 
 Use **shortcuts** when you want to query data in-place without storage duplication (e.g., referencing ADLS Gen2 landing zones or cross-workspace tables). Use **copy** (pipeline Copy Activity) when you need to transform data during ingestion, the source requires a data gateway, or you want full control over the data lifecycle in OneLake. Shortcuts are free (no storage cost); copies consume storage.
 
-See: [decision-trees.md](decision-trees.md#5-mirroring-vs-shortcuts-vs-pipeline-copy) | [Shortcut Transformations Notebook](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/bronze/17_bronze_shortcut_transformations.py)
+See: [decision-trees.md](decision-trees.md#5-mirroring-vs-shortcuts-vs-pipeline-copy) | [Shortcut Transformations Notebook](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/bronze/17_bronze_shortcut_transformations.py)
 
 ---
 
@@ -1456,7 +1456,7 @@ See: [decision-trees.md](decision-trees.md#5-mirroring-vs-shortcuts-vs-pipeline-
 
 Workspace Identity is a managed identity scoped to a Fabric workspace. It enables credential-free authentication to Azure resources (Storage, Key Vault, Purview) from notebooks and pipelines -- no service principal secrets to rotate. Use it whenever your notebooks access Azure resources. The POC deploys it via `infra/modules/security/workspace-identity.bicep`.
 
-See: [OneLake Security](features/onelake-security.md) | [Workspace Identity Module](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/security/workspace-identity.bicep)
+See: [OneLake Security](features/onelake-security.md) | [Workspace Identity Module](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/infra/modules/security/workspace-identity.bicep)
 
 ---
 
@@ -1530,7 +1530,7 @@ The POC includes three ML notebooks:
 
 All models use MLflow for experiment tracking and model registry.
 
-See: [ML Notebooks](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/) | [AutoML Model Endpoints](features/automl-model-endpoints.md)
+See: [ML Notebooks](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/) | [AutoML Model Endpoints](features/automl-model-endpoints.md)
 
 ---
 
@@ -1546,7 +1546,7 @@ See: [AutoML Model Endpoints](features/automl-model-endpoints.md)
 
 Yes. Fabric AI Functions (`ai_summarize`, `ai_classify`, `ai_translate`, etc.) are available in Spark SQL for inline LLM-powered transformations. The POC demonstrates compliance-aware usage in `17_gold_ai_functions_compliance.py`, including token cost estimation and PII guardrails.
 
-See: [AI Copilot Configuration](features/ai-copilot-configuration.md) | [AI Functions Notebook](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/17_gold_ai_functions_compliance.py)
+See: [AI Copilot Configuration](features/ai-copilot-configuration.md) | [AI Functions Notebook](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/gold/17_gold_ai_functions_compliance.py)
 
 ---
 
@@ -1612,7 +1612,7 @@ Both are covered in the POC:
 
 For both, the typical pattern is: set up an on-premises Data Gateway, configure a pipeline Copy Activity, and land data in the Bronze Lakehouse.
 
-See: [Tutorial 10: Teradata Migration](tutorials/10-teradata-migration/README.md) | [IBM DB2 CDC Notebook](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/streaming/04_ibm_db2_cdc.py)
+See: [Tutorial 10: Teradata Migration](tutorials/10-teradata-migration/README.md) | [IBM DB2 CDC Notebook](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/streaming/04_ibm_db2_cdc.py)
 
 ---
 
@@ -1703,7 +1703,7 @@ See: [Security](security.md) | [SQL Audit Logs](best-practices/sql-audit-logs-co
 
 **Suspicious Activity Reports (SAR):** The Silver layer detects structuring patterns -- multiple transactions between $8,000-$9,999 by the same individual within 24 hours. The fraud detection ML model (`02_ml_fraud_detection.py`) provides additional anomaly scoring.
 
-See: [Compliance Reporting Notebook](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/03_gold_compliance_reporting.py)
+See: [Compliance Reporting Notebook](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/gold/03_gold_compliance_reporting.py)
 
 ---
 
@@ -1758,8 +1758,8 @@ See: [Customer-Managed Keys](best-practices/customer-managed-keys.md) | [Network
 ### Where do I report issues or contribute?
 
 **GitHub Repository:**
-- 🐛 **Report bugs**: [Open an issue](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/issues)
-- 💡 **Feature requests**: [Start a discussion](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/discussions)
+- 🐛 **Report bugs**: [Open an issue](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/issues)
+- 💡 **Feature requests**: [Start a discussion](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/discussions)
 - 🔧 **Pull requests**: See [Contributing Guide](CONTRIBUTING.md)
 
 **Before Opening an Issue:**
@@ -1799,8 +1799,8 @@ See: [Customer-Managed Keys](best-practices/customer-managed-keys.md) | [Network
 | 🔐 **Security** | [security.md](security.md) |
 | 💰 **Cost Estimation** | [cost-estimation.md](cost-estimation.md) |
 | 📖 **Tutorials** | [tutorials/](tutorials/index.md) |
-| 🎲 **Data Generation** | [data_generation/](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/data_generation) |
-| 📊 **Reports** | [reports/](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/reports) |
+| 🎲 **Data Generation** | [data_generation/](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/tree/main/data_generation) |
+| 📊 **Reports** | [reports/](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/tree/main/reports) |
 | 📅 **POC Agenda** | [poc-agenda/](poc-agenda/README.md) |
 
 ---
@@ -1828,9 +1828,9 @@ az group delete --name "rg-fabric-poc-dev" --yes
 **Need help?** Try these resources in order:
 
 1. 📖 Check this FAQ
-2. 🔍 Search [existing issues](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/issues)
-3. 💬 Ask in [GitHub Discussions](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/discussions)
-4. 🐛 [Open a new issue](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/issues/new)
+2. 🔍 Search [existing issues](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/issues)
+3. 💬 Ask in [GitHub Discussions](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/discussions)
+4. 🐛 [Open a new issue](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/issues/new)
 
 ---
 
@@ -1839,5 +1839,5 @@ az group delete --name "rg-fabric-poc-dev" --yes
 ---
 
 > 📖 **Documentation maintained by:** Frank Garofalo
-> 🔗 **Repository:** [Suppercharge_Microsoft_Fabric](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric)
+> 🔗 **Repository:** [Supercharge_Microsoft_Fabric](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric)
 > 🔄 **Last Updated:** 2025-01-21

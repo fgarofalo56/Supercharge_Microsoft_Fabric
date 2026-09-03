@@ -8,7 +8,7 @@
 
 </div>
 
-> 🏠 **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > 📖 **[Tutorials](../index.md)** > 💊 **Pharma Clinical Trial Analytics**
+> 🏠 **[Home](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md)** > 📖 **[Tutorials](../index.md)** > 💊 **Pharma Clinical Trial Analytics**
 
 ---
 

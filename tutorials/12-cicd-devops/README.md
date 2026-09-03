@@ -11,7 +11,7 @@
 
 </div>
 
-> 🏠 **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > 📖 **[Tutorials](../index.md)** > 🔄 **CI/CD & DevOps**
+> 🏠 **[Home](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md)** > 📖 **[Tutorials](../index.md)** > 🔄 **CI/CD & DevOps**
 
 ---
 

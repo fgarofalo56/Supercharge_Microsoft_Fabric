@@ -580,7 +580,7 @@ The Bronze layer stores **raw video analytics events** exactly as received from 
 
 ### 4.1 Bronze Table Schema
 
-The schema aligns with the project's [`video_event_schema.json`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/schemas/analytics/video_event_schema.json):
+The schema aligns with the project's [`video_event_schema.json`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/data_generation/schemas/analytics/video_event_schema.json):
 
 ```python
 # Fabric Notebook: 01_bronze_video_security_events.py
@@ -1341,7 +1341,7 @@ VideoSecurityEvents
 
 9. **Retain Bronze data for compliance.** Casino surveillance footage retention requirements vary by jurisdiction (typically 7-30 days for video, 1 year for metadata). Configure Bronze Delta table retention to meet your state gaming commission requirements.
 
-10. **Test with the data generator.** Use the included [`video_analytics_generator.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/generators/analytics/video_analytics_generator.py) to produce realistic synthetic events for development and testing without requiring physical camera infrastructure.
+10. **Test with the data generator.** Use the included [`video_analytics_generator.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/data_generation/generators/analytics/video_analytics_generator.py) to produce realistic synthetic events for development and testing without requiring physical camera infrastructure.
 
 ---
 
@@ -1418,9 +1418,9 @@ Continue your learning journey:
 
 | Resource | Description |
 |----------|-------------|
-| [`data_generation/schemas/analytics/video_event_schema.json`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/schemas/analytics/video_event_schema.json) | Video event JSON schema definition |
-| [`data_generation/generators/analytics/video_analytics_generator.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/generators/analytics/video_analytics_generator.py) | Synthetic video event generator |
-| [`validation/unit_tests/analytics/test_video_analytics_generator.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/validation/unit_tests/analytics/test_video_analytics_generator.py) | Unit tests for video generator |
+| [`data_generation/schemas/analytics/video_event_schema.json`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/data_generation/schemas/analytics/video_event_schema.json) | Video event JSON schema definition |
+| [`data_generation/generators/analytics/video_analytics_generator.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/data_generation/generators/analytics/video_analytics_generator.py) | Synthetic video event generator |
+| [`validation/unit_tests/analytics/test_video_analytics_generator.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/validation/unit_tests/analytics/test_video_analytics_generator.py) | Unit tests for video generator |
 
 **External Documentation:**
 
@@ -1443,7 +1443,7 @@ Continue your learning journey:
 
 ---
 
-> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues).
+> 💬 **Questions or issues?** Open an issue in the [GitHub repository](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/issues).
 
 ---
 

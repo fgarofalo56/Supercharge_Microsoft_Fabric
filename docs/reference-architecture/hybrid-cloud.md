@@ -226,14 +226,14 @@ flowchart TB
 
 | Resource | Bicep Module | Description |
 |:---------|:-------------|:------------|
-| Fabric Capacity | [`infra/modules/fabric/fabric-capacity.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/fabric/fabric-capacity.bicep) | Analytics capacity |
-| Eventhouse | [`infra/modules/fabric/fabric-eventhouse.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/fabric/fabric-eventhouse.bicep) | Real-time analytics engine |
-| Eventstream | [`infra/modules/fabric/fabric-eventstream.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/fabric/fabric-eventstream.bicep) | Event routing |
-| Storage Account | [`infra/modules/storage/storage-account.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/storage/storage-account.bicep) | ADLS Gen2 landing zone |
-| VNet | [`infra/modules/networking/vnet.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/networking/vnet.bicep) | Hub-spoke network |
-| Private Endpoints | [`infra/modules/networking/private-endpoint.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/networking/private-endpoint.bicep) | Private Link for all services |
-| Security / Workspace Identity | [`infra/modules/security/workspace-identity.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/security/workspace-identity.bicep) | Managed identity for cross-service auth |
-| Alerts & Budgets | [`infra/modules/monitoring/alerts-and-budgets.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/monitoring/alerts-and-budgets.bicep) | Cost and performance alerts |
+| Fabric Capacity | [`infra/modules/fabric/fabric-capacity.bicep`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/infra/modules/fabric/fabric-capacity.bicep) | Analytics capacity |
+| Eventhouse | [`infra/modules/fabric/fabric-eventhouse.bicep`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/infra/modules/fabric/fabric-eventhouse.bicep) | Real-time analytics engine |
+| Eventstream | [`infra/modules/fabric/fabric-eventstream.bicep`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/infra/modules/fabric/fabric-eventstream.bicep) | Event routing |
+| Storage Account | [`infra/modules/storage/storage-account.bicep`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/infra/modules/storage/storage-account.bicep) | ADLS Gen2 landing zone |
+| VNet | [`infra/modules/networking/vnet.bicep`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/infra/modules/networking/vnet.bicep) | Hub-spoke network |
+| Private Endpoints | [`infra/modules/networking/private-endpoint.bicep`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/infra/modules/networking/private-endpoint.bicep) | Private Link for all services |
+| Security / Workspace Identity | [`infra/modules/security/workspace-identity.bicep`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/infra/modules/security/workspace-identity.bicep) | Managed identity for cross-service auth |
+| Alerts & Budgets | [`infra/modules/monitoring/alerts-and-budgets.bicep`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/infra/modules/monitoring/alerts-and-budgets.bicep) | Cost and performance alerts |
 
 ### Step-by-Step Tutorials
 

@@ -218,8 +218,8 @@ All other tools (Python, Azure CLI, Bicep, etc.) are pre-installed in the contai
 
 ```bash
 # Quick start with Dev Container
-git clone https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric.git
-code Suppercharge_Microsoft_Fabric
+git clone https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric.git
+code Supercharge_Microsoft_Fabric
 # Then click "Reopen in Container" when prompted
 ```
 
@@ -307,7 +307,7 @@ az ad app federated-credential create \
   --parameters '{
     "name": "github-actions-main",
     "issuer": "https://token.actions.githubusercontent.com",
-    "subject": "repo:YOUR_ORG/Suppercharge_Microsoft_Fabric:ref:refs/heads/main",
+    "subject": "repo:YOUR_ORG/Supercharge_Microsoft_Fabric:ref:refs/heads/main",
     "audiences": ["api://AzureADTokenExchange"]
   }'
 ```
@@ -582,4 +582,4 @@ After completing prerequisites:
 ---
 
 > 📖 **Documentation maintained by:** Frank Garofalo
-> 🔗 **Repository:** [Suppercharge_Microsoft_Fabric](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric)
+> 🔗 **Repository:** [Supercharge_Microsoft_Fabric](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric)

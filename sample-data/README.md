@@ -410,4 +410,4 @@ For issues with sample data generation, check:
 2. Running from the correct directory
 3. Sufficient disk space for output
 
-For POC-related questions, see the main [README](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md) or [CONTRIBUTING](../CONTRIBUTING.md) guide.
+For POC-related questions, see the main [README](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md) or [CONTRIBUTING](../CONTRIBUTING.md) guide.

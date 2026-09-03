@@ -78,14 +78,14 @@ You will not just *train a model* — you will operate it. When you finish, the 
 By the end of this tutorial, you will be able to:
 
 - [ ] Configure a Fabric workspace with Git integration, MLflow tracking, and ML Model items enabled
-- [ ] Run the canonical [`04_mlops_model_registry.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/04_mlops_model_registry.py) notebook to train a baseline + challenger model with full reproducibility metadata
+- [ ] Run the canonical [`04_mlops_model_registry.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/04_mlops_model_registry.py) notebook to train a baseline + challenger model with full reproducibility metadata
 - [ ] Read MLflow experiment metrics, artifacts, and signatures from the registry UI and via `MlflowClient`
 - [ ] Author and run all five validation gates (performance, holdout stability, fairness, latency, calibration) and interpret pass/fail
 - [ ] Promote a model through `None → Staging → Production` using stage transitions (never UI clicks for prod)
 - [ ] Set up a Fabric Pipeline that runs holdout-based champion/challenger evaluation on a schedule
 - [ ] Deploy a registered model as an ML Model Endpoint (Preview) via the Fabric REST API and smoke-test it under 200ms p99
 - [ ] Wire a batch inference Fabric Pipeline that loads `models:/{name}/Production` and writes scores to Gold
-- [ ] Run [`05_drift_detection.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/05_drift_detection.py) to populate `lh_gold.ml_drift_metrics` and `lh_gold.ml_retrain_triggers`
+- [ ] Run [`05_drift_detection.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/05_drift_detection.py) to populate `lh_gold.ml_drift_metrics` and `lh_gold.ml_retrain_triggers`
 - [ ] Wire drift alerts to an Azure Monitor Action Group and trigger a Logic App on threshold breach
 - [ ] Close the loop: drift alert → retrain pipeline → re-validate → re-promote → audit log entry
 - [ ] Use the Production Readiness Checklist from `mlops-fabric-production.md` to certify the model
@@ -179,13 +179,13 @@ flowchart TB
 | Component | Fabric Item | Purpose |
 |-----------|-------------|---------|
 | **Source data** | Lakehouse `lh_gold` | `fact_daily_slot_revenue` populated by Tutorials 01-03 |
-| **Training notebook** | Notebook | [`04_mlops_model_registry.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/04_mlops_model_registry.py) — full lifecycle anchor |
+| **Training notebook** | Notebook | [`04_mlops_model_registry.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/04_mlops_model_registry.py) — full lifecycle anchor |
 | **Experiment tracking** | MLflow (built-in) | Per-run params, metrics, artifacts, lineage |
 | **Registry** | ML Model item | Versioned models with `Staging` and `Production` stages |
 | **Validation gates** | GitHub Actions + pytest | Gate every promotion in CI |
 | **Online serving** | ML Model Endpoint (Preview) | REST API for low-latency scoring |
 | **Batch serving** | Data Pipeline + Notebook | Nightly bulk scoring |
-| **Drift monitor** | Notebook + Eventhouse | [`05_drift_detection.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/05_drift_detection.py) on schedule |
+| **Drift monitor** | Notebook + Eventhouse | [`05_drift_detection.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/05_drift_detection.py) on schedule |
 | **Alerts** | Azure Monitor Action Group | Fan out to Teams + Logic App |
 | **Retrain trigger** | Logic App | Calls Fabric REST `/jobs/instances` to start retrain pipeline |
 
@@ -205,7 +205,7 @@ Default lakehouses:  lh_bronze, lh_silver, lh_gold
 Data Science:        Enabled
 ML Model items:      Enabled
 ML Model Endpoint:   Enabled (Preview)
-Git integration:     Connected to <your-org>/Suppercharge_Microsoft_Fabric, branch main
+Git integration:     Connected to <your-org>/Supercharge_Microsoft_Fabric, branch main
 ```
 
 ### 1.2 Connect Git
@@ -234,8 +234,8 @@ FABRIC_SP_OBJECT_ID       # SP object id (workspace contributor)
 ## 🛠️ Step 2: Clone the Repo and Configure Local Env
 
 ```bash
-git clone https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric.git
-cd Suppercharge_Microsoft_Fabric
+git clone https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric.git
+cd Supercharge_Microsoft_Fabric
 cp .env.example .env
 ```
 
@@ -305,7 +305,7 @@ print(f"Date range: {df.agg({'play_date': 'min'}).collect()[0][0]} to {df.agg({'
 
 ## 🛠️ Step 5: Train the Baseline Model
 
-Open [`notebooks/ml/04_mlops_model_registry.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/04_mlops_model_registry.py). This is the anchor notebook for the entire tutorial — every subsequent step references it.
+Open [`notebooks/ml/04_mlops_model_registry.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/04_mlops_model_registry.py). This is the anchor notebook for the entire tutorial — every subsequent step references it.
 
 ### 5.1 Run the notebook
 
@@ -638,7 +638,7 @@ unscored["scored_at"] = pd.Timestamp.utcnow()
 
 ## 🛠️ Step 15: Set Up Drift Detection
 
-Open [`notebooks/ml/05_drift_detection.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/05_drift_detection.py). The notebook computes four drift types — data, prediction, performance, concept — and writes results to `lh_gold.ml_drift_metrics` and `lh_gold.ml_retrain_triggers`.
+Open [`notebooks/ml/05_drift_detection.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/05_drift_detection.py). The notebook computes four drift types — data, prediction, performance, concept — and writes results to `lh_gold.ml_drift_metrics` and `lh_gold.ml_retrain_triggers`.
 
 ### 15.1 First manual run
 
@@ -903,15 +903,15 @@ spark.sql("VACUUM lh_gold.slot_revenue_forecasts RETAIN 168 HOURS")
 
 | Step | Source File |
 |------|-------------|
-| 1 | [`infra/main.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/main.bicep), [`infra/modules/security/workspace-identity.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/security/workspace-identity.bicep) |
-| 1 | [`.github/workflows/deploy-fabric.yml`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/.github/workflows/deploy-fabric.yml) |
-| 1 | [`scripts/fabric-cicd-deploy.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/scripts/fabric-cicd-deploy.py) |
+| 1 | [`infra/main.bicep`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/infra/main.bicep), [`infra/modules/security/workspace-identity.bicep`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/infra/modules/security/workspace-identity.bicep) |
+| 1 | [`.github/workflows/deploy-fabric.yml`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/.github/workflows/deploy-fabric.yml) |
+| 1 | [`scripts/fabric-cicd-deploy.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/scripts/fabric-cicd-deploy.py) |
 | 4 | [Tutorial 01](../01-bronze-layer/README.md), [Tutorial 02](../02-silver-layer/README.md), [Tutorial 03](../03-gold-layer/README.md) |
-| 5–11 | [`notebooks/ml/04_mlops_model_registry.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/04_mlops_model_registry.py) |
+| 5–11 | [`notebooks/ml/04_mlops_model_registry.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/04_mlops_model_registry.py) |
 | 8 | [`docs/best-practices/mlops-fabric-production.md`](../../best-practices/mlops-fabric-production.md) § Validation Gates |
 | 12–13 | Fabric REST API (ML Model Endpoints — Preview) |
-| 14 | [`notebooks/ml/01_ml_player_churn_prediction.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/01_ml_player_churn_prediction.py) (batch scoring pattern) |
-| 15 | [`notebooks/ml/05_drift_detection.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/05_drift_detection.py) |
+| 14 | [`notebooks/ml/01_ml_player_churn_prediction.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/01_ml_player_churn_prediction.py) (batch scoring pattern) |
+| 15 | [`notebooks/ml/05_drift_detection.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/05_drift_detection.py) |
 | 15 | [`docs/best-practices/model-monitoring-drift-detection.md`](../../best-practices/model-monitoring-drift-detection.md) |
 | 16 | [`docs/best-practices/operations/observability-stack.md`](../../best-practices/operations/observability-stack.md) |
 | 16 | [`docs/best-practices/operations/slo-sli-fabric.md`](../../best-practices/operations/slo-sli-fabric.md) |
@@ -992,9 +992,9 @@ Congratulations — you have shipped a production-grade ML model on Microsoft Fa
 
 **Related notebooks:**
 
-- [`06_feature_store_demo.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/06_feature_store_demo.py) — point-in-time feature retrieval
-- [`07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py) — RAG patterns on Eventhouse
-- [`08_responsible_ai_audit.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/08_responsible_ai_audit.py) — fairness audit on the casino models
+- [`06_feature_store_demo.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/06_feature_store_demo.py) — point-in-time feature retrieval
+- [`07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py) — RAG patterns on Eventhouse
+- [`08_responsible_ai_audit.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/08_responsible_ai_audit.py) — fairness audit on the casino models
 
 ---
 
@@ -1004,8 +1004,8 @@ Congratulations — you have shipped a production-grade ML model on Microsoft Fa
 |----------|------|
 | MLOps anchor doc | [`docs/best-practices/mlops-fabric-production.md`](../../best-practices/mlops-fabric-production.md) |
 | Drift detection anchor doc | [`docs/best-practices/model-monitoring-drift-detection.md`](../../best-practices/model-monitoring-drift-detection.md) |
-| Registry notebook | [`notebooks/ml/04_mlops_model_registry.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/04_mlops_model_registry.py) |
-| Drift notebook | [`notebooks/ml/05_drift_detection.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/05_drift_detection.py) |
+| Registry notebook | [`notebooks/ml/04_mlops_model_registry.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/04_mlops_model_registry.py) |
+| Drift notebook | [`notebooks/ml/05_drift_detection.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/05_drift_detection.py) |
 | Fabric MLflow docs | [Microsoft Learn — MLflow in Fabric](https://learn.microsoft.com/en-us/fabric/data-science/mlflow-autologging) |
 | ML Model Endpoints (Preview) | [Microsoft Learn — ML Model Endpoints](https://learn.microsoft.com/en-us/fabric/data-science/model-endpoints-overview) |
 | fabric-cicd | [`docs/best-practices/fabric-cicd-deployment.md`](../../best-practices/fabric-cicd-deployment.md) |
@@ -1022,7 +1022,7 @@ Congratulations — you have shipped a production-grade ML model on Microsoft Fa
 
 <div align="center" markdown>
 
-**Questions or issues?** Open an issue in the [GitHub repository](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/issues)
+**Questions or issues?** Open an issue in the [GitHub repository](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/issues)
 
 *Tutorial 39 — End-to-End MLOps — Phase 14 Wave 2 canonical walkthrough*
 

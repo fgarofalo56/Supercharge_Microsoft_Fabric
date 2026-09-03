@@ -284,7 +284,7 @@ Major release transforming the POC into a comprehensive Microsoft Fabric enterpr
 
 ### Fixed
 - All 74 `../index.md` broken links in `tutorials/**/README.md` replaced with `../README.md`
-- 39 occurrences of `Supercharge_Microsoft_Fabric` (single 'p') corrected to `Suppercharge_Microsoft_Fabric`
+- 39 occurrences of `Supercharge_Microsoft_Fabric` (single 'p') corrected to `Supercharge_Microsoft_Fabric`
 - CI workflow: fixed GitHub Actions action versions and deploy-fabric conditional logic
 - README.md and other docs: removed all `future-expansions/` links (directory deleted)
 - README.md: removed "Production-Ready" self-certification language and empty Acknowledgments section
@@ -614,7 +614,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute to th
 
 ## 📄 License
 
-This project is licensed under the MIT License - see [LICENSE](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/LICENSE) for details.
+This project is licensed under the MIT License - see [LICENSE](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/LICENSE) for details.
 
 ---
 

@@ -579,7 +579,7 @@ print("RPMS Query configured for encounter extraction")
 print(f"Query targets: PCC_ENCOUNTER, PCC_DIAGNOSIS, PCC_PROVIDER")
 ```
 
-> **⚠️ Production Note**: For this tutorial, we use the included synthetic data generator ([`tribal_healthcare_generator.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/generators/federal/tribal_healthcare_generator.py)) rather than connecting to a live RPMS system. The generator produces realistic IHS encounter data with proper schema compliance. See [Tutorial 23: SHIR & Data Gateways](../23-shir-data-gateways/README.md) for production SHIR setup.
+> **⚠️ Production Note**: For this tutorial, we use the included synthetic data generator ([`tribal_healthcare_generator.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/data_generation/generators/federal/tribal_healthcare_generator.py)) rather than connecting to a live RPMS system. The generator produces realistic IHS encounter data with proper schema compliance. See [Tutorial 23: SHIR & Data Gateways](../23-shir-data-gateways/README.md) for production SHIR setup.
 
 ---
 
@@ -587,11 +587,11 @@ print(f"Query targets: PCC_ENCOUNTER, PCC_DIAGNOSIS, PCC_PROVIDER")
 
 The Bronze layer ingests raw encounter data with **two non-negotiable gates**: PHI masking verification and HIPAA consent verification. Records failing either gate are quarantined, never ingested.
 
-> **📓 Notebook Reference**: [`notebooks/bronze/07_bronze_tribal_health.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/bronze/07_bronze_tribal_health.py)
+> **📓 Notebook Reference**: [`notebooks/bronze/07_bronze_tribal_health.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/bronze/07_bronze_tribal_health.py)
 
 ### 3.1 Schema Definition
 
-The schema aligns with the tribal health encounter schema defined in [`data_generation/schemas/federal/tribal_health_schema.json`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/schemas/federal/tribal_health_schema.json).
+The schema aligns with the tribal health encounter schema defined in [`data_generation/schemas/federal/tribal_health_schema.json`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/data_generation/schemas/federal/tribal_health_schema.json).
 
 ```python
 # Schema definition for Bronze layer ingestion
@@ -734,7 +734,7 @@ print(f"Audit log: Entry written for run {RUN_ID}")
 
 The Silver layer transforms raw encounters into clinically validated, FHIR-aligned records with hashed patient identifiers and enriched diagnosis metadata.
 
-> **📓 Notebook Reference**: [`notebooks/silver/07_silver_tribal_health.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/silver/07_silver_tribal_health.py)
+> **📓 Notebook Reference**: [`notebooks/silver/07_silver_tribal_health.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/silver/07_silver_tribal_health.py)
 
 ### 4.1 Patient ID Hashing
 
@@ -887,7 +887,7 @@ spark.sql("OPTIMIZE lh_silver.silver_tribal_health_encounters ZORDER BY (patient
 
 The Gold layer builds comprehensive patient views and population health aggregations from the validated Silver data.
 
-> **📓 Notebook Reference**: [`notebooks/gold/07_gold_tribal_health_360.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/07_gold_tribal_health_360.py)
+> **📓 Notebook Reference**: [`notebooks/gold/07_gold_tribal_health_360.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/gold/07_gold_tribal_health_360.py)
 
 ### 5.1 Patient Encounter Timeline
 
@@ -1429,11 +1429,11 @@ Continue your learning journey:
 | HL7 FHIR R4 Encounter | [hl7.org/fhir/encounter.html](https://hl7.org/fhir/encounter.html) |
 | HIPAA Compliance on Azure | [Microsoft Learn](https://learn.microsoft.com/en-us/compliance/regulatory/offering-hipaa-hitech) |
 | Fabric Row-Level Security | [Microsoft Learn](https://learn.microsoft.com/en-us/fabric/security/service-admin-row-level-security) |
-| Tribal Health Schema | [`data_generation/schemas/federal/tribal_health_schema.json`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/schemas/federal/tribal_health_schema.json) |
-| Bronze Notebook | [`notebooks/bronze/07_bronze_tribal_health.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/bronze/07_bronze_tribal_health.py) |
-| Silver Notebook | [`notebooks/silver/07_silver_tribal_health.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/silver/07_silver_tribal_health.py) |
-| Gold Notebook | [`notebooks/gold/07_gold_tribal_health_360.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/07_gold_tribal_health_360.py) |
-| Data Generator | [`data_generation/generators/federal/tribal_healthcare_generator.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/generators/federal/tribal_healthcare_generator.py) |
+| Tribal Health Schema | [`data_generation/schemas/federal/tribal_health_schema.json`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/data_generation/schemas/federal/tribal_health_schema.json) |
+| Bronze Notebook | [`notebooks/bronze/07_bronze_tribal_health.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/bronze/07_bronze_tribal_health.py) |
+| Silver Notebook | [`notebooks/silver/07_silver_tribal_health.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/silver/07_silver_tribal_health.py) |
+| Gold Notebook | [`notebooks/gold/07_gold_tribal_health_360.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/gold/07_gold_tribal_health_360.py) |
+| Data Generator | [`data_generation/generators/federal/tribal_healthcare_generator.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/data_generation/generators/federal/tribal_healthcare_generator.py) |
 
 ---
 
@@ -1447,7 +1447,7 @@ Continue your learning journey:
 
 <div align="center" markdown>
 
-**Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues)
+**Questions or issues?** Open an issue in the [GitHub repository](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/issues)
 
 *Tutorial 30 of 31 in the Microsoft Fabric Casino POC Series*
 

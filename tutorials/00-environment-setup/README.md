@@ -3,7 +3,7 @@
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
-> 🏠 **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > 📖 **[Tutorials](../index.md)** > ⚙️ **Environment Setup**
+> 🏠 **[Home](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md)** > 📖 **[Tutorials](../index.md)** > ⚙️ **Environment Setup**
 
 ---
 
@@ -219,7 +219,7 @@ For local data generation and development, set up Python:
 
 ### Python environment setup
 
-Run these commands in a terminal from the **repo root** (`Suppercharge_Microsoft_Fabric/`):
+Run these commands in a terminal from the **repo root** (`Supercharge_Microsoft_Fabric/`):
 
 ```bash
 # Create virtual environment

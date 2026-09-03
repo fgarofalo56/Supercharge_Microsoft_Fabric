@@ -784,7 +784,7 @@ Database server is not running or not accessible.
 
 | Document | Description |
 |----------|-------------|
-| [copilot-instructions.md](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/.github/copilot-instructions.md) | Copilot configuration |
+| [copilot-instructions.md](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/.github/copilot-instructions.md) | Copilot configuration |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Contribution guidelines |
 | [README.md](index.md) | Project overview |
 

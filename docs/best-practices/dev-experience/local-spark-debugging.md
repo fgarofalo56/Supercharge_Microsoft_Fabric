@@ -50,7 +50,7 @@ Local PySpark debugging lets you set breakpoints, inspect DataFrames, and step t
 ### Step 1: Create Virtual Environment
 
 ```bash
-cd E:/Repos/GitHub/MyDemoRepos/Suppercharge_Microsoft_Fabric
+cd E:/Repos/GitHub/MyDemoRepos/Supercharge_Microsoft_Fabric
 
 # Create venv
 python -m venv .venv

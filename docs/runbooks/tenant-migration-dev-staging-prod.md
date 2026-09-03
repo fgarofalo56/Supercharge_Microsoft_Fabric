@@ -135,7 +135,7 @@ validate → deploy-dev (dry-run by default on push)
 Watch the workflow run:
 
 ```bash
-gh run watch --repo fgarofalo56/Suppercharge_Microsoft_Fabric
+gh run watch --repo fgarofalo56/Supercharge_Microsoft_Fabric
 ```
 
 If validate fails, **stop**. Do not bypass — fix the underlying issue and re-merge.

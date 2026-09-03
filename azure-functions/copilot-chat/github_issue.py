@@ -8,7 +8,7 @@ sees a real backlog of content the docs should add next.
 
 Configuration via env vars (set in Azure Function App settings):
   GITHUB_TOKEN        — fine-scoped PAT with `issues: write` on this repo
-  GITHUB_REPO         — "owner/repo"   (e.g. "fgarofalo56/Suppercharge_Microsoft_Fabric")
+  GITHUB_REPO         — "owner/repo"   (e.g. "fgarofalo56/Supercharge_Microsoft_Fabric")
   GITHUB_ISSUE_LABEL  — comma-separated labels (default: "content-gap,copilot-suggested")
 
 Silently no-ops when GITHUB_TOKEN is unset so dev / local runs don't error.

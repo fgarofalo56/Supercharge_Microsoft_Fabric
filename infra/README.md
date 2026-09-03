@@ -1,6 +1,6 @@
 # 🏗️ Infrastructure as Code
 
-> 🏠 [Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md) > 📚 [Docs](../index.md) > 🏗️ Infrastructure
+> 🏠 [Home](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md) > 📚 [Docs](../index.md) > 🏗️ Infrastructure
 
 **Last Updated:** 2025-01-28 | **Version:** 1.0.0
 
@@ -414,5 +414,5 @@ az bicep build --file infra/main.bicep
 
 ---
 
-[⬆️ Back to top](#️-infrastructure-as-code) | [🏠 Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)
+[⬆️ Back to top](#️-infrastructure-as-code) | [🏠 Home](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md)
 

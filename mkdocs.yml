@@ -3,27 +3,28 @@
 
 # NOTE: site_name drives the browser <title>, the OG/Twitter card site_name,
 # and the navbar logo title — keep it spelled "Supercharge" (one p). The repo
-# slug below is still "Suppercharge_…"; renaming that is tracked separately so
-# inbound links / redirects can be handled without breaking shares.
+# was renamed from Suppercharge_Microsoft_Fabric to Supercharge_Microsoft_Fabric
+# on 2026-09-03 (GitHub issue #105); GitHub auto-redirects the old slug for
+# both web and git-clone traffic indefinitely.
 site_name: Supercharge Microsoft Fabric
 site_description: >-
   A personal, community reference for Microsoft Fabric — a casino & gaming
   analytics POC that bridges to Tribal Nations and federal agency data domains.
   Not an official Microsoft product.
 site_author: Frank Garofalo
-site_url: https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/
+site_url: https://fgarofalo56.github.io/Supercharge_Microsoft_Fabric/
 
 # Repository
-repo_name: Suppercharge_Microsoft_Fabric
-repo_url: https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric
-edit_uri: edit/master/docs/
+repo_name: Supercharge_Microsoft_Fabric
+repo_url: https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric
+edit_uri: edit/main/docs/
 
 # Copyright
 copyright: >-
   Copyright &copy; 2026 Supercharge Microsoft Fabric &middot;
-  <a href="https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric">GitHub</a> &middot;
-  <a href="https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/issues">Issues</a> &middot;
-  <a href="https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/field-questions/">Field Questions</a>
+  <a href="https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric">GitHub</a> &middot;
+  <a href="https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/issues">Issues</a> &middot;
+  <a href="https://fgarofalo56.github.io/Supercharge_Microsoft_Fabric/field-questions/">Field Questions</a>
 
 # Documentation directory (default: docs/)
 docs_dir: docs
@@ -198,7 +199,7 @@ extra_javascript:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric
+      link: https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric
       name: GitHub Repository
   
   generator: false

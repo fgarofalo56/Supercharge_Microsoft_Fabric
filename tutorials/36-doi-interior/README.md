@@ -8,7 +8,7 @@
 
 </div>
 
-> 🏠 **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > 📖 **[Tutorials](../index.md)** > 🏔️ **DOI Natural Resources Analytics**
+> 🏠 **[Home](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md)** > 📖 **[Tutorials](../index.md)** > 🏔️ **DOI Natural Resources Analytics**
 
 ---
 
@@ -227,7 +227,7 @@ Before starting this tutorial, ensure you have:
 > **📋 Data Source Options**
 >
 > This tutorial supports two data ingestion paths:
-> 1. **Synthetic Generator** (recommended for learning): Use [`doi_generator.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/generators/federal/doi_generator.py) to generate realistic DOI data locally
+> 1. **Synthetic Generator** (recommended for learning): Use [`doi_generator.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/data_generation/generators/federal/doi_generator.py) to generate realistic DOI data locally
 > 2. **DOI APIs**: Connect directly to USGS Earthquake API, NWIS, NPS Stats, and FWS ECOS for real data
 >
 > Both paths converge at the same Bronze schema. The real-time earthquake streaming component uses the USGS GeoJSON API.
@@ -342,7 +342,7 @@ for feature in eq_data["features"][:5]:
 
 The Bronze layer captures raw data from all four DOI sub-agencies with geospatial coordinates and source metadata preserved.
 
-> **📓 Notebook Reference**: [`notebooks/bronze/16_bronze_doi.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/bronze/16_bronze_doi.py) *(coming soon)*
+> **📓 Notebook Reference**: [`notebooks/bronze/16_bronze_doi.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/bronze/16_bronze_doi.py) *(coming soon)*
 
 ### 2.1 Earthquake Schema
 
@@ -515,7 +515,7 @@ print(f"Bronze FWS species: {df_fws_bronze.count():,}")
 
 The Silver layer validates earthquake magnitudes and coordinates, standardizes water measurement units, cleans NPS visitation anomalies, and classifies species by conservation priority.
 
-> **📓 Notebook Reference**: [`notebooks/silver/16_silver_doi.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/silver/16_silver_doi.py) *(coming soon)*
+> **📓 Notebook Reference**: [`notebooks/silver/16_silver_doi.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/silver/16_silver_doi.py) *(coming soon)*
 
 ### 3.1 Earthquake Validation and Enrichment
 
@@ -814,7 +814,7 @@ doi_earthquake_stream
 
 The Gold layer builds decision-ready aggregations: seismic risk indices, water resource dashboards, park performance metrics, and biodiversity indicators.
 
-> **📓 Notebook Reference**: [`notebooks/gold/16_gold_doi_analytics.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/16_gold_doi_analytics.py) *(coming soon)*
+> **📓 Notebook Reference**: [`notebooks/gold/16_gold_doi_analytics.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/gold/16_gold_doi_analytics.py) *(coming soon)*
 
 ### 5.1 Seismic Risk Index
 
@@ -1229,9 +1229,9 @@ Continue your learning journey:
 | FWS ECOS Species | [ecos.fws.gov](https://ecos.fws.gov/ecp/) |
 | BLM Public Land Statistics | [blm.gov/about/data](https://www.blm.gov/about/data) |
 | USGS Data Citation Guide | [usgs.gov/data-management/data-citation](https://www.usgs.gov/data-management/data-citation) |
-| Earthquake Schema | [`data_generation/schemas/federal/doi_earthquake_schema.json`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/schemas/federal/doi_earthquake_schema.json) |
-| Land Use Schema | [`data_generation/schemas/federal/doi_land_use_schema.json`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/schemas/federal/doi_land_use_schema.json) |
-| Data Generator | [`data_generation/generators/federal/doi_generator.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/generators/federal/doi_generator.py) |
+| Earthquake Schema | [`data_generation/schemas/federal/doi_earthquake_schema.json`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/data_generation/schemas/federal/doi_earthquake_schema.json) |
+| Land Use Schema | [`data_generation/schemas/federal/doi_land_use_schema.json`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/data_generation/schemas/federal/doi_land_use_schema.json) |
+| Data Generator | [`data_generation/generators/federal/doi_generator.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/data_generation/generators/federal/doi_generator.py) |
 
 ---
 
@@ -1245,7 +1245,7 @@ Continue your learning journey:
 
 <div align="center" markdown>
 
-**Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues)
+**Questions or issues?** Open an issue in the [GitHub repository](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/issues)
 
 *Tutorial 36 of 36 in the Microsoft Fabric Casino POC Series*
 

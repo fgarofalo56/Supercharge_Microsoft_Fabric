@@ -338,6 +338,6 @@ Avoid these common mistakes when pursuing AI readiness:
 - [Fabric Copilot & AI](../features/fabric-iq.md) — Copilot capabilities and configuration
 - [Data Agents](../features/data-agents.md) — Autonomous analytics agents
 - [Semantic Link](../features/semantic-link.md) — BI-to-Spark bidirectional integration
-- [AI Functions Compliance](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/17_gold_ai_functions_compliance.py) — Embedding AI in Spark transformations
+- [AI Functions Compliance](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/gold/17_gold_ai_functions_compliance.py) — Embedding AI in Spark transformations
 - [Eventhouse Vector Database](../features/eventhouse-vector-database.md) — RAG patterns with KQL
 - [Testing Strategies](../best-practices/testing-strategies.md) — Including ML model validation

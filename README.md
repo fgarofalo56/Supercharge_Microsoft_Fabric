@@ -19,7 +19,7 @@
 
 *Real-time insights • Medallion Architecture • Regulatory Compliance • Direct Lake BI*
 
-[📚 Documentation](https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/) •
+[📚 Documentation](https://fgarofalo56.github.io/Supercharge_Microsoft_Fabric/) •
 [🚀 Quick Start](#-quick-start) •
 [🐳 Docker](#-docker-support) •
 [📖 Tutorials](#-tutorials) •
@@ -182,8 +182,8 @@ The fastest way to generate sample data and explore the POC.
 
 ```bash
 # Clone the repository
-git clone https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric.git
-cd Suppercharge_Microsoft_Fabric
+git clone https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric.git
+cd Supercharge_Microsoft_Fabric
 
 # Generate demo data (1000 events, 7 days)
 docker-compose run --rm demo-generator
@@ -249,8 +249,8 @@ See [Dev Container](#-dev-container) for configuration details.
 **Clone the Repository**
 
 ```bash
-git clone https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric.git
-cd Suppercharge_Microsoft_Fabric
+git clone https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric.git
+cd Supercharge_Microsoft_Fabric
 ```
 
 </td>
@@ -819,7 +819,7 @@ For generating larger custom datasets, see [data_generation/README.md](data_gene
 ## 📂 Repository Structure
 
 ```
-Suppercharge_Microsoft_Fabric/
+Supercharge_Microsoft_Fabric/
 │
 ├── 📁 .devcontainer/                  # 💻 Dev Container configuration
 │   ├── devcontainer.json              # VS Code/Codespaces config
@@ -1225,7 +1225,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 **[⬆ Back to Top](#-supercharge-microsoft-fabric-)**
 
-[![GitHub stars](https://img.shields.io/github/stars/fgarofalo56/Suppercharge_Microsoft_Fabric?style=social)](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric)
-[![GitHub forks](https://img.shields.io/github/forks/fgarofalo56/Suppercharge_Microsoft_Fabric?style=social)](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/fork)
+[![GitHub stars](https://img.shields.io/github/stars/fgarofalo56/Supercharge_Microsoft_Fabric?style=social)](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric)
+[![GitHub forks](https://img.shields.io/github/forks/fgarofalo56/Supercharge_Microsoft_Fabric?style=social)](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/fork)
 
 </div>

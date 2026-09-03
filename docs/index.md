@@ -203,7 +203,7 @@ This reference covers casino/gaming regulations (NIGC MICS, Title 31/BSA, IRS Ga
 
     Source code, issues, and releases
 
-    [:octicons-arrow-right-24: Open on GitHub](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric)
+    [:octicons-arrow-right-24: Open on GitHub](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric)
 
 -   :material-file-document-multiple:{ .lg .middle } __Documentation__
 
@@ -219,7 +219,7 @@ This reference covers casino/gaming regulations (NIGC MICS, Title 31/BSA, IRS Ga
 
     Bicep IaC modules for Azure deployment
 
-    [:octicons-arrow-right-24: View infra](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/infra)
+    [:octicons-arrow-right-24: View infra](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/tree/main/infra)
 
 -   :material-currency-usd:{ .lg .middle } __Cost Estimation__
 
@@ -239,6 +239,6 @@ This reference covers casino/gaming regulations (NIGC MICS, Title 31/BSA, IRS Ga
 
 **License:** MIT · **Maintained by:** [Frank Garofalo](https://github.com/fgarofalo56) · A personal/community project — not affiliated with, sponsored by, or endorsed by Microsoft.
 
-[:material-github: View on GitHub](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric){ .md-button }
+[:material-github: View on GitHub](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric){ .md-button }
 
 </div>

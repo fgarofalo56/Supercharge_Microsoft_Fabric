@@ -914,4 +914,4 @@ Unit tests should complete in under a second. Use 5-10 rows.
 - [This POC: Testing Strategies](../testing-strategies.md)
 - [This POC: Local Spark Debugging](./local-spark-debugging.md)
 - [This POC: CI/CD with fabric-cicd](../fabric-cicd-deployment.md)
-- [This POC: Validation Suite](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/validation)
+- [This POC: Validation Suite](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/tree/main/validation)

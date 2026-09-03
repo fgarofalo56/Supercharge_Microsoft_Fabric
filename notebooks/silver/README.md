@@ -1,4 +1,4 @@
-# [Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md) > [Notebooks](../README.md) > Silver Layer
+# [Home](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md) > [Notebooks](../README.md) > Silver Layer
 
 ## 🥈 Silver Layer Notebooks
 
@@ -13,22 +13,22 @@ The Silver layer transforms raw Bronze data into cleansed, validated datasets. T
 
 | Notebook | Purpose | Input | Output |
 |----------|---------|-------|--------|
-| [`01_silver_slot_cleansed.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/silver/01_silver_slot_cleansed.py) | Cleanse slot telemetry, validate ranges, dedupe | `bronze.slot_telemetry` | `silver.slot_cleansed` |
-| [`02_silver_player_master.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/silver/02_silver_player_master.py) | Create player master with SCD Type 2, hash PII | `bronze.player_profile` | `silver.player_master` |
-| [`03_silver_table_enriched.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/silver/03_silver_table_enriched.py) | Enrich table games with dealer/pit info | `bronze.table_games` | `silver.table_enriched` |
-| [`04_silver_financial_reconciled.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/silver/04_silver_financial_reconciled.py) | Reconcile transactions, detect anomalies | `bronze.financial_transactions` | `silver.financial_reconciled` |
-| [`05_silver_security_enriched.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/silver/05_silver_security_enriched.py) | Enrich security events with location/zone data | `bronze.security_events` | `silver.security_enriched` |
-| [`06_silver_compliance_validated.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/silver/06_silver_compliance_validated.py) | Validate compliance rules, flag violations | `bronze.compliance_events` | `silver.compliance_validated` |
-| [`07_silver_tribal_health.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/silver/07_silver_tribal_health.py) | HIPAA-compliant healthcare data cleansing, PHI masking | `bronze.tribal_health` | `silver.tribal_health` |
-| [`08_silver_dot_faa.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/silver/08_silver_dot_faa.py) | Aviation safety data validation and standardization | `bronze.dot_faa` | `silver.dot_faa` |
-| [`09_silver_video_analytics.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/silver/09_silver_video_analytics.py) | Video analytics event cleansing and enrichment | `bronze.video_analytics` | `silver.video_analytics` |
-| [`10_silver_people_movement.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/silver/10_silver_people_movement.py) | Movement data validation and zone assignment | `bronze.people_movement` | `silver.people_movement` |
-| [`11_silver_geolocation.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/silver/11_silver_geolocation.py) | Geolocation data cleansing, H3 indexing | `bronze.geolocation` | `silver.geolocation` |
-| [`12_silver_usda.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/silver/12_silver_usda.py) | USDA crop production & food safety validation | `bronze.usda_*` | `silver.usda_crop_production`, `silver.usda_food_safety` |
-| [`13_silver_sba.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/silver/13_silver_sba.py) | SBA loan data cleansing, NAICS validation | `bronze.sba_*` | `silver.sba_ppp_loans`, `silver.sba_7a_504_loans` |
-| [`14_silver_noaa.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/silver/14_silver_noaa.py) | NOAA weather/storm/climate data validation | `bronze.noaa_*` | `silver.noaa_weather`, `silver.noaa_storm_events`, `silver.noaa_climate` |
-| [`15_silver_epa.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/silver/15_silver_epa.py) | EPA environmental data validation, AQI classification | `bronze.epa_*` | `silver.epa_air_quality`, `silver.epa_toxic_releases`, `silver.epa_water_quality` |
-| [`16_silver_doi.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/silver/16_silver_doi.py) | DOI natural resources data validation | `bronze.doi_*` | `silver.doi_earthquakes`, `silver.doi_water_data`, `silver.doi_park_visitation` |
+| [`01_silver_slot_cleansed.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/silver/01_silver_slot_cleansed.py) | Cleanse slot telemetry, validate ranges, dedupe | `bronze.slot_telemetry` | `silver.slot_cleansed` |
+| [`02_silver_player_master.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/silver/02_silver_player_master.py) | Create player master with SCD Type 2, hash PII | `bronze.player_profile` | `silver.player_master` |
+| [`03_silver_table_enriched.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/silver/03_silver_table_enriched.py) | Enrich table games with dealer/pit info | `bronze.table_games` | `silver.table_enriched` |
+| [`04_silver_financial_reconciled.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/silver/04_silver_financial_reconciled.py) | Reconcile transactions, detect anomalies | `bronze.financial_transactions` | `silver.financial_reconciled` |
+| [`05_silver_security_enriched.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/silver/05_silver_security_enriched.py) | Enrich security events with location/zone data | `bronze.security_events` | `silver.security_enriched` |
+| [`06_silver_compliance_validated.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/silver/06_silver_compliance_validated.py) | Validate compliance rules, flag violations | `bronze.compliance_events` | `silver.compliance_validated` |
+| [`07_silver_tribal_health.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/silver/07_silver_tribal_health.py) | HIPAA-compliant healthcare data cleansing, PHI masking | `bronze.tribal_health` | `silver.tribal_health` |
+| [`08_silver_dot_faa.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/silver/08_silver_dot_faa.py) | Aviation safety data validation and standardization | `bronze.dot_faa` | `silver.dot_faa` |
+| [`09_silver_video_analytics.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/silver/09_silver_video_analytics.py) | Video analytics event cleansing and enrichment | `bronze.video_analytics` | `silver.video_analytics` |
+| [`10_silver_people_movement.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/silver/10_silver_people_movement.py) | Movement data validation and zone assignment | `bronze.people_movement` | `silver.people_movement` |
+| [`11_silver_geolocation.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/silver/11_silver_geolocation.py) | Geolocation data cleansing, H3 indexing | `bronze.geolocation` | `silver.geolocation` |
+| [`12_silver_usda.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/silver/12_silver_usda.py) | USDA crop production & food safety validation | `bronze.usda_*` | `silver.usda_crop_production`, `silver.usda_food_safety` |
+| [`13_silver_sba.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/silver/13_silver_sba.py) | SBA loan data cleansing, NAICS validation | `bronze.sba_*` | `silver.sba_ppp_loans`, `silver.sba_7a_504_loans` |
+| [`14_silver_noaa.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/silver/14_silver_noaa.py) | NOAA weather/storm/climate data validation | `bronze.noaa_*` | `silver.noaa_weather`, `silver.noaa_storm_events`, `silver.noaa_climate` |
+| [`15_silver_epa.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/silver/15_silver_epa.py) | EPA environmental data validation, AQI classification | `bronze.epa_*` | `silver.epa_air_quality`, `silver.epa_toxic_releases`, `silver.epa_water_quality` |
+| [`16_silver_doi.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/silver/16_silver_doi.py) | DOI natural resources data validation | `bronze.doi_*` | `silver.doi_earthquakes`, `silver.doi_water_data`, `silver.doi_park_visitation` |
 
 ---
 

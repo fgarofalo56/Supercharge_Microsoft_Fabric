@@ -3,7 +3,7 @@
 > **Last Updated**: 2026-04-27 | **Version**: 1.0
 > **Status**: Phase 14 - Commercial Verticals | **Vertical**: Energy & Utilities
 
-> :house: **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > :book: **[Tutorials](../index.md)** > ⚡ **Energy & Utilities**
+> :house: **[Home](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md)** > :book: **[Tutorials](../index.md)** > ⚡ **Energy & Utilities**
 
 ---
 
@@ -393,4 +393,4 @@ DROP TABLE IF EXISTS lh_gold.gold_revenue_protection;
 
 ---
 
-> :house: **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > :book: **[Tutorials](../index.md)** > ⚡ **Energy & Utilities**
+> :house: **[Home](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md)** > :book: **[Tutorials](../index.md)** > ⚡ **Energy & Utilities**

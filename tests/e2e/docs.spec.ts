@@ -12,7 +12,7 @@ import { test, expect, Page } from '@playwright/test';
  */
 
 // Test configuration
-const BASE_URL = process.env.BASE_URL || 'https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/';
+const BASE_URL = process.env.BASE_URL || 'https://fgarofalo56.github.io/Supercharge_Microsoft_Fabric/';
 
 // Helper to normalize URLs
 function normalizeUrl(url: string): string {

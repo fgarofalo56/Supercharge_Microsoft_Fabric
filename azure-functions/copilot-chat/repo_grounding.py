@@ -36,7 +36,7 @@ import httpx
 # ── Configuration ───────────────────────────────────────────────
 DOCS_SITE_URL = os.environ.get(
     "DOCS_SITE_URL",
-    "https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric",
+    "https://fgarofalo56.github.io/Supercharge_Microsoft_Fabric",
 ).rstrip("/")
 SEARCH_INDEX_URL = f"{DOCS_SITE_URL}/search/search_index.json"
 MANIFEST_PATH = Path(__file__).resolve().parent / "code_manifest.json"

@@ -8,7 +8,7 @@
 
 </div>
 
-> 🏠 **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > 📖 **[Tutorials](../index.md)** > ⚖️ **DOJ Justice Analytics**
+> 🏠 **[Home](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md)** > 📖 **[Tutorials](../index.md)** > ⚖️ **DOJ Justice Analytics**
 
 ---
 
@@ -729,5 +729,5 @@ In this tutorial you built a complete DOJ Justice Analytics pipeline:
 | Navigation | |
 |---|---|
 | ⬅️ **Previous** | [37-Graph Analytics](../37-graph-analytics/README.md) |
-| 🏠 **Home** | [README](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md) |
+| 🏠 **Home** | [README](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md) |
 | 📖 **All Tutorials** | [Tutorial Index](../index.md) |

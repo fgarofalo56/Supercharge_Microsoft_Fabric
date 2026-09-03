@@ -44,7 +44,7 @@ Follow these steps to train and evaluate your first model in Fabric:
 | Day | Focus | Resource |
 |-----|-------|----------|
 | 1 | Complete 30-minute path above | Tutorials 00, 03, 09 + AutoML docs |
-| 2 | Build a churn prediction model with Spark ML | [ML Notebook: Player Churn](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/01_ml_player_churn_prediction.py) |
+| 2 | Build a churn prediction model with Spark ML | [ML Notebook: Player Churn](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/01_ml_player_churn_prediction.py) |
 | 3 | Set up the Feature Store for reusable features | [Feature Store Guide](../best-practices/feature-store-onelake.md) |
 | 4 | Implement vector search with Eventhouse | [Vector Database](../features/eventhouse-vector-database.md) |
 | 5 | Deploy a model and configure drift detection | [MLOps Production Guide](../best-practices/mlops-fabric-production.md) |

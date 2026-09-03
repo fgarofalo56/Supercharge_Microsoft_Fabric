@@ -368,7 +368,7 @@ flowchart LR
 
 ### Bicep snippet — Action Group with severity routing
 
-This pattern lives in the Wave 1 Bicep modules; full module: [`infra/modules/monitoring/action-group.bicep`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/monitoring/action-group.bicep) (when implemented).
+This pattern lives in the Wave 1 Bicep modules; full module: [`infra/modules/monitoring/action-group.bicep`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/infra/modules/monitoring/action-group.bicep) (when implemented).
 
 ```bicep
 @description('Action group for on-call paging — severity-routed')

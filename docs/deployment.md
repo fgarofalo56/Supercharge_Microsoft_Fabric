@@ -224,8 +224,8 @@ Follow these steps for a rapid deployment to the development environment.
 
 ```bash
 # Clone repository
-git clone https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric.git
-cd Suppercharge_Microsoft_Fabric
+git clone https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric.git
+cd Supercharge_Microsoft_Fabric
 
 # Copy environment template
 cp .env.sample .env
@@ -599,7 +599,7 @@ az ad app federated-credential create \
   --parameters '{
     "name": "github-main",
     "issuer": "https://token.actions.githubusercontent.com",
-    "subject": "repo:<your-org>/Suppercharge_Microsoft_Fabric:ref:refs/heads/main",
+    "subject": "repo:<your-org>/Supercharge_Microsoft_Fabric:ref:refs/heads/main",
     "audiences": ["api://AzureADTokenExchange"]
   }'
 
@@ -609,7 +609,7 @@ az ad app federated-credential create \
   --parameters '{
     "name": "github-pr",
     "issuer": "https://token.actions.githubusercontent.com",
-    "subject": "repo:<your-org>/Suppercharge_Microsoft_Fabric:pull_request",
+    "subject": "repo:<your-org>/Supercharge_Microsoft_Fabric:pull_request",
     "audiences": ["api://AzureADTokenExchange"]
   }'
 ```
@@ -876,7 +876,7 @@ After successful deployment, proceed with these guides:
 |------|-------|-------------|
 | 1 | [Tutorial 00: Environment Setup](tutorials/00-environment-setup/README.md) | Configure your workspace |
 | 2 | [Tutorial 01: Bronze Layer](tutorials/01-bronze-layer/README.md) | Build ingestion pipelines |
-| 3 | [Generate Sample Data](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/README.md) | Create test datasets |
+| 3 | [Generate Sample Data](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/data_generation/README.md) | Create test datasets |
 
 ---
 
@@ -895,4 +895,4 @@ After successful deployment, proceed with these guides:
 ---
 
 > 📖 **Documentation maintained by:** Frank Garofalo
-> 🔗 **Repository:** [Suppercharge_Microsoft_Fabric](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric)
+> 🔗 **Repository:** [Supercharge_Microsoft_Fabric](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric)

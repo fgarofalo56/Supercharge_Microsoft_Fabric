@@ -935,7 +935,7 @@ Congratulations! You have built a complete DOT/FAA aviation analytics pipeline o
 **Review & Consolidate:**
 - Revisit [Tutorial 00: Environment Setup](../00-environment-setup/README.md) through Tutorial 31 to ensure all components are deployed and validated
 - Run the full regression test suite in `validation/unit_tests/` to confirm end-to-end data quality
-- Review the [Phase 7 PRP](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/.claude/phase7-prp.md) for any remaining feature items
+- Review the [Phase 7 PRP](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/.claude/phase7-prp.md) for any remaining feature items
 
 **Related Tutorials:**
 - [Tutorial 07: Governance & Purview](../07-governance-purview/README.md) -- Apply Purview data classification and lineage to DOT/FAA datasets
@@ -974,7 +974,7 @@ Congratulations! You have built a complete DOT/FAA aviation analytics pipeline o
 
 <div align="center" markdown>
 
-**Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues)
+**Questions or issues?** Open an issue in the [GitHub repository](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/issues)
 
 *Tutorial 31 of 31 in the Microsoft Fabric Casino & Federal Analytics POC Series*
 

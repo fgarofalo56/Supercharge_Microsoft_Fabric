@@ -501,7 +501,7 @@ tags: {
 | [Architecture Guide](architecture.md) | System architecture and components |
 | [Deployment Guide](deployment.md) | Infrastructure deployment instructions |
 | [Prerequisites](prerequisites.md) | Setup requirements |
-| [Cost Tags Module](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/cost-tags.bicep) | Bicep module for cost allocation |
+| [Cost Tags Module](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/infra/cost-tags.bicep) | Bicep module for cost allocation |
 
 ---
 
@@ -523,4 +523,4 @@ tags: {
 ---
 
 > **Documentation maintained by:** Frank Garofalo
-> **Repository:** [Suppercharge_Microsoft_Fabric](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric)
+> **Repository:** [Supercharge_Microsoft_Fabric](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric)

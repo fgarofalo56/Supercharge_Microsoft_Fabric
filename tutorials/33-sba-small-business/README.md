@@ -8,7 +8,7 @@
 
 </div>
 
-> 🏠 **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > 📖 **[Tutorials](../index.md)** > 🏦 **SBA Small Business Analytics**
+> 🏠 **[Home](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md)** > 📖 **[Tutorials](../index.md)** > 🏦 **SBA Small Business Analytics**
 
 ---
 
@@ -223,7 +223,7 @@ Before starting this tutorial, ensure you have:
 > **📋 Data Source Options**
 >
 > This tutorial supports two data ingestion paths:
-> 1. **Synthetic Generator** (recommended for learning): Use [`sba_generator.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/generators/federal/sba_generator.py) to generate realistic SBA loan data locally
+> 1. **Synthetic Generator** (recommended for learning): Use [`sba_generator.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/data_generation/generators/federal/sba_generator.py) to generate realistic SBA loan data locally
 > 2. **Open Data Download**: Download real PPP, 7(a), and 504 data from [data.sba.gov](https://data.sba.gov/) for production-grade analytics
 >
 > Both paths converge at the same Bronze schema. The tutorial walks through both options.
@@ -245,7 +245,7 @@ SBA provides some of the most comprehensive open data in the federal government.
 
 ### 1.2 Option A: Synthetic Data Generator
 
-The synthetic generator produces realistic SBA loan data matching the schema defined in [`sba_loan_schema.json`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/schemas/federal/sba_loan_schema.json).
+The synthetic generator produces realistic SBA loan data matching the schema defined in [`sba_loan_schema.json`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/data_generation/schemas/federal/sba_loan_schema.json).
 
 ```python
 # Generate synthetic SBA loan data for development
@@ -338,7 +338,7 @@ for name, url in SBA_DATA_URLS.items():
 
 The Bronze layer captures raw SBA loan records from all program types with full source tracking and original field preservation.
 
-> **📓 Notebook Reference**: [`notebooks/bronze/13_bronze_sba.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/bronze/13_bronze_sba.py)
+> **📓 Notebook Reference**: [`notebooks/bronze/13_bronze_sba.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/bronze/13_bronze_sba.py)
 
 ### 2.1 Schema Definition
 
@@ -486,7 +486,7 @@ spark.sql("""
 
 The Silver layer unifies records across all four SBA programs, standardizes geographic and industry codes, validates loan amounts against program limits, and creates lookup tables for lender and NAICS analysis.
 
-> **📓 Notebook Reference**: [`notebooks/silver/13_silver_sba.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/silver/13_silver_sba.py)
+> **📓 Notebook Reference**: [`notebooks/silver/13_silver_sba.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/silver/13_silver_sba.py)
 
 ### 3.1 NAICS Code Validation and Enrichment
 
@@ -672,7 +672,7 @@ print(f"Lender master: {df_lender_master.count():,} unique lenders")
 
 The Gold layer builds business-facing aggregations: portfolio summaries by program and geography, economic impact calculations, lender performance scorecards, and PPP forgiveness tracking.
 
-> **📓 Notebook Reference**: [`notebooks/gold/13_gold_sba_analytics.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/13_gold_sba_analytics.py)
+> **📓 Notebook Reference**: [`notebooks/gold/13_gold_sba_analytics.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/gold/13_gold_sba_analytics.py)
 
 ### 4.1 Portfolio Summary
 
@@ -1212,11 +1212,11 @@ Continue your learning journey:
 | 7(a)/504 FOIA Data | [SBA 7a/504 FOIA](https://data.sba.gov/dataset/7-a-504-foia) |
 | SBIR/STTR Awards | [sbir.gov](https://www.sbir.gov/) |
 | NAICS Code Reference | [Census Bureau NAICS](https://www.census.gov/naics/) |
-| SBA Loan Schema | [`data_generation/schemas/federal/sba_loan_schema.json`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/schemas/federal/sba_loan_schema.json) |
-| Bronze Notebook | [`notebooks/bronze/13_bronze_sba.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/bronze/13_bronze_sba.py) |
-| Silver Notebook | [`notebooks/silver/13_silver_sba.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/silver/13_silver_sba.py) |
-| Gold Notebook | [`notebooks/gold/13_gold_sba_analytics.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/13_gold_sba_analytics.py) |
-| Data Generator | [`data_generation/generators/federal/sba_generator.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/generators/federal/sba_generator.py) |
+| SBA Loan Schema | [`data_generation/schemas/federal/sba_loan_schema.json`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/data_generation/schemas/federal/sba_loan_schema.json) |
+| Bronze Notebook | [`notebooks/bronze/13_bronze_sba.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/bronze/13_bronze_sba.py) |
+| Silver Notebook | [`notebooks/silver/13_silver_sba.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/silver/13_silver_sba.py) |
+| Gold Notebook | [`notebooks/gold/13_gold_sba_analytics.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/gold/13_gold_sba_analytics.py) |
+| Data Generator | [`data_generation/generators/federal/sba_generator.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/data_generation/generators/federal/sba_generator.py) |
 
 ---
 
@@ -1230,7 +1230,7 @@ Continue your learning journey:
 
 <div align="center" markdown>
 
-**Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues)
+**Questions or issues?** Open an issue in the [GitHub repository](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/issues)
 
 *Tutorial 33 of 36 in the Microsoft Fabric Casino POC Series*
 

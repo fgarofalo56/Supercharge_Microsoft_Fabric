@@ -22,9 +22,9 @@
       requestEndpoint: "https://fabric-copilot-docs-ldai.azurewebsites.net/api/request",
       maxHistory: 20,
       rateLimitMs: 1500,
-      siteUrl: "https://fgarofalo56.github.io/Suppercharge_Microsoft_Fabric/",
-      repoUrl: "https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric",
-      repoBranch: "master",
+      siteUrl: "https://fgarofalo56.github.io/Supercharge_Microsoft_Fabric/",
+      repoUrl: "https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric",
+      repoBranch: "main",
       docsDir: "docs",
       welcomeMessage:
         "Hi! I'm the **Supercharge Fabric Copilot**. Ask me anything about the codebase, tutorials, architecture, compliance rules, or troubleshooting.\n\nI can **search the documentation** and provide direct links to relevant pages. Try asking about *\"Data Flow\"*, *\"medallion architecture\"*, or *\"compliance thresholds\"*.",
@@ -543,7 +543,7 @@
       var url = new URL(link.getAttribute("href"));
       return url.pathname.replace(/[^/]*$/, "");
     }
-    return "/Suppercharge_Microsoft_Fabric/";
+    return "/Supercharge_Microsoft_Fabric/";
   }
 
   function loadSearchIndex(callback) {

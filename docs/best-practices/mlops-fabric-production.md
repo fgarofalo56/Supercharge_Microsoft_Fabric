@@ -556,7 +556,7 @@ spark.conf.set("spark.fabric.model", "casino-slot-revenue-forecast-prophet")
 | Slot Anomaly | Hardware fault prediction | Stream | None — operational only |
 | Marketing Lift | Promotion uplift modeling | Batch | Opt-in tracking required |
 
-See [notebooks/ml/01_ml_player_churn_prediction.py](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/01_ml_player_churn_prediction.py) and [notebooks/ml/02_ml_fraud_detection.py](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/ml/02_ml_fraud_detection.py).
+See [notebooks/ml/01_ml_player_churn_prediction.py](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/01_ml_player_churn_prediction.py) and [notebooks/ml/02_ml_fraud_detection.py](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/02_ml_fraud_detection.py).
 
 ---
 

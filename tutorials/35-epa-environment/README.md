@@ -8,7 +8,7 @@
 
 </div>
 
-> 🏠 **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > 📖 **[Tutorials](../index.md)** > 🌿 **EPA Environmental Analytics**
+> 🏠 **[Home](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md)** > 📖 **[Tutorials](../index.md)** > 🌿 **EPA Environmental Analytics**
 
 ---
 
@@ -229,7 +229,7 @@ Before starting this tutorial, ensure you have:
 > **📋 Data Source Options**
 >
 > This tutorial supports two data ingestion paths:
-> 1. **Synthetic Generator** (recommended for learning): Use [`epa_generator.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/generators/federal/epa_generator.py) to generate realistic EPA environmental data locally
+> 1. **Synthetic Generator** (recommended for learning): Use [`epa_generator.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/data_generation/generators/federal/epa_generator.py) to generate realistic EPA environmental data locally
 > 2. **EPA APIs + Bulk Downloads**: Connect to real EPA data from AQS, Envirofacts, TRI, and ECHO for production analytics
 >
 > Both paths converge at the same Bronze schema.
@@ -336,7 +336,7 @@ print(f"AQS records: {len(aqs_data.get('Data', []))}")
 
 The Bronze layer captures raw environmental monitoring data from all four EPA domains with facility registry identifiers and measurement metadata.
 
-> **📓 Notebook Reference**: [`notebooks/bronze/15_bronze_epa.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/bronze/15_bronze_epa.py) *(coming soon)*
+> **📓 Notebook Reference**: [`notebooks/bronze/15_bronze_epa.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/bronze/15_bronze_epa.py) *(coming soon)*
 
 ### 2.1 Air Quality Schema
 
@@ -495,7 +495,7 @@ print(f"Bronze water compliance: {df_water_bronze.count():,}")
 
 The Silver layer standardizes pollutant concentrations, calculates the Air Quality Index (AQI) from raw measurements, normalizes TRI release quantities, and validates water compliance records against regulatory thresholds.
 
-> **📓 Notebook Reference**: [`notebooks/silver/15_silver_epa.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/silver/15_silver_epa.py) *(coming soon)*
+> **📓 Notebook Reference**: [`notebooks/silver/15_silver_epa.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/silver/15_silver_epa.py) *(coming soon)*
 
 ### 3.1 AQI Calculation from Raw Concentrations
 
@@ -765,7 +765,7 @@ epa_aqi_stream
 
 The Gold layer builds decision-ready aggregations: AQI indices by geography, facility risk profiles, water compliance scorecards, and environmental justice indicators.
 
-> **📓 Notebook Reference**: [`notebooks/gold/15_gold_epa_analytics.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/gold/15_gold_epa_analytics.py) *(coming soon)*
+> **📓 Notebook Reference**: [`notebooks/gold/15_gold_epa_analytics.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/gold/15_gold_epa_analytics.py) *(coming soon)*
 
 ### 5.1 AQI Index by Geography
 
@@ -1189,9 +1189,9 @@ Continue your learning journey:
 | ECHO Compliance | [echo.epa.gov](https://echo.epa.gov/) |
 | EJScreen | [epa.gov/ejscreen](https://www.epa.gov/ejscreen) |
 | GHGRP | [epa.gov/ghgreporting](https://www.epa.gov/ghgreporting) |
-| Air Quality Schema | [`data_generation/schemas/federal/epa_air_quality_schema.json`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/schemas/federal/epa_air_quality_schema.json) |
-| Water Quality Schema | [`data_generation/schemas/federal/epa_water_quality_schema.json`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/schemas/federal/epa_water_quality_schema.json) |
-| Data Generator | [`data_generation/generators/federal/epa_generator.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/data_generation/generators/federal/epa_generator.py) |
+| Air Quality Schema | [`data_generation/schemas/federal/epa_air_quality_schema.json`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/data_generation/schemas/federal/epa_air_quality_schema.json) |
+| Water Quality Schema | [`data_generation/schemas/federal/epa_water_quality_schema.json`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/data_generation/schemas/federal/epa_water_quality_schema.json) |
+| Data Generator | [`data_generation/generators/federal/epa_generator.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/data_generation/generators/federal/epa_generator.py) |
 
 ---
 
@@ -1205,7 +1205,7 @@ Continue your learning journey:
 
 <div align="center" markdown>
 
-**Questions or issues?** Open an issue in the [GitHub repository](https://github.com/frgarofa/Suppercharge_Microsoft_Fabric/issues)
+**Questions or issues?** Open an issue in the [GitHub repository](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/issues)
 
 *Tutorial 35 of 36 in the Microsoft Fabric Casino POC Series*
 

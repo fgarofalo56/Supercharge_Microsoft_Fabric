@@ -1,4 +1,4 @@
-# [Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md) > [Notebooks](../README.md) > Real-Time Layer
+# [Home](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md) > [Notebooks](../README.md) > Real-Time Layer
 
 ## ⚡ Real-Time Notebooks
 
@@ -13,7 +13,7 @@ The Real-Time layer processes streaming data from slot machines, table games, an
 
 | Notebook | Purpose | Input | Output |
 |----------|---------|-------|--------|
-| [`01_realtime_slot_streaming.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/real-time/01_realtime_slot_streaming.py) | Process live slot machine events, detect anomalies | Eventstream: `es-slot-telemetry` | Eventhouse: `slot_events_live` |
+| [`01_realtime_slot_streaming.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/real-time/01_realtime_slot_streaming.py) | Process live slot machine events, detect anomalies | Eventstream: `es-slot-telemetry` | Eventhouse: `slot_events_live` |
 | `02_kql_casino_floor.kql` | KQL queries for floor monitoring dashboards | Eventhouse tables | Real-Time Dashboard |
 
 ---
@@ -71,7 +71,7 @@ graph LR
 |------|-----------|-------------|
 | 1 | **Eventstream Setup** | Configure `es-slot-telemetry` with Event Hub source |
 | 2 | **Eventhouse Tables** | Create destination tables with proper schema |
-| 3 | **Streaming Job** | Deploy [`01_realtime_slot_streaming.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/real-time/01_realtime_slot_streaming.py) as continuous job |
+| 3 | **Streaming Job** | Deploy [`01_realtime_slot_streaming.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/real-time/01_realtime_slot_streaming.py) as continuous job |
 | 4 | **KQL Dashboards** | Import `02_kql_casino_floor.kql` queries |
 | 5 | **Activator Rules** | Configure real-time alerts |
 
@@ -81,7 +81,7 @@ graph LR
 
 ## 🔧 Key Transformations
 
-### Streaming Notebook ([`01_realtime_slot_streaming.py`](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/real-time/01_realtime_slot_streaming.py))
+### Streaming Notebook ([`01_realtime_slot_streaming.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/real-time/01_realtime_slot_streaming.py))
 
 | Transformation | Description | Latency Target |
 |----------------|-------------|----------------|
@@ -313,4 +313,4 @@ by floor_section, x_coord, y_coord
 
 ---
 
-> **Next Steps**: After real-time pipeline is operational, configure [Activator alerts](../../features/data-activator.md) and build [Real-Time Dashboards](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/tree/main/reports).
+> **Next Steps**: After real-time pipeline is operational, configure [Activator alerts](../../features/data-activator.md) and build [Real-Time Dashboards](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/tree/main/reports).

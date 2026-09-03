@@ -503,8 +503,8 @@ Chronic airline delays at hub airports may correlate with reduced business trave
 
 - [Federal Justice Analytics](federal-justice-analytics.md) — DOJ law enforcement analytics patterns
 - [Antitrust Analytics](antitrust-analytics.md) — DOJ market concentration and enforcement analysis
-- [NOAA Weather Notebooks](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/bronze/12_bronze_noaa_storm_events.py) — Weather data ingestion for cross-domain correlation
-- [EPA Air Quality Notebooks](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/notebooks/bronze/14_bronze_epa_air_quality.py) — Air quality data for emissions analysis
+- [NOAA Weather Notebooks](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/bronze/12_bronze_noaa_storm_events.py) — Weather data ingestion for cross-domain correlation
+- [EPA Air Quality Notebooks](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/bronze/14_bronze_epa_air_quality.py) — Air quality data for emissions analysis
 - [Medallion Architecture Deep Dive](../best-practices/medallion-architecture-deep-dive.md) — Bronze/Silver/Gold layering patterns
 - [Real-Time Intelligence](../features/real-time-intelligence.md) — Eventstream patterns for streaming transportation telemetry
 - [Network Security Best Practices](../best-practices/network-security.md) — Securing PII in crash victim data

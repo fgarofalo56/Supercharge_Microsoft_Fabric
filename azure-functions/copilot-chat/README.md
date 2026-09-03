@@ -66,7 +66,7 @@ python azure-functions/copilot-chat/build_code_manifest.py
 | Variable | Example |
 |---|---|
 | `GITHUB_TOKEN` | fine-scoped PAT with `issues: write` on this repo |
-| `GITHUB_REPO` | `fgarofalo56/Suppercharge_Microsoft_Fabric` |
+| `GITHUB_REPO` | `fgarofalo56/Supercharge_Microsoft_Fabric` |
 | `GITHUB_ISSUE_LABEL` | `content-gap,copilot-suggested` (default) |
 | `GITHUB_FEEDBACK_LABEL` | `copilot-feedback,triage` (default) |
 

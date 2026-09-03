@@ -54,7 +54,7 @@ When you open the project in VS Code, it detects `.devcontainer/` and offers to 
 |  Bicep CLI    +  az CLI  +  gh CLI               |
 |  pytest       +  delta-spark  +  DuckDB          |
 |                                                   |
-|  /workspaces/Suppercharge_Microsoft_Fabric/  <----+-- Mounted from host
+|  /workspaces/Supercharge_Microsoft_Fabric/  <----+-- Mounted from host
 |                                                   |
 |  VS Code Server (runs inside container)           |
 +--------------------------------------------------+
@@ -86,8 +86,8 @@ When you open the project in VS Code, it detects `.devcontainer/` and offers to 
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric.git
-cd Suppercharge_Microsoft_Fabric
+git clone https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric.git
+cd Supercharge_Microsoft_Fabric
 
 # 2. Open in VS Code
 code .
@@ -168,7 +168,7 @@ ENV PYSPARK_DRIVER_PYTHON=python3
 ENV SPARK_LOG_LEVEL=WARN
 
 # ── Working Directory ─────────────────────────────────────────
-WORKDIR /workspaces/Suppercharge_Microsoft_Fabric
+WORKDIR /workspaces/Supercharge_Microsoft_Fabric
 
 # ── Healthcheck ────────────────────────────────────────────────
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
@@ -273,8 +273,8 @@ nbval==0.11.0
         "python.analysis.typeCheckingMode": "basic",
         "python.analysis.autoImportCompletions": true,
         "python.analysis.extraPaths": [
-          "/workspaces/Suppercharge_Microsoft_Fabric/data_generation",
-          "/workspaces/Suppercharge_Microsoft_Fabric/notebooks"
+          "/workspaces/Supercharge_Microsoft_Fabric/data_generation",
+          "/workspaces/Supercharge_Microsoft_Fabric/notebooks"
         ],
         "python.languageServer": "Pylance",
 
@@ -549,7 +549,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ..:/workspaces/Suppercharge_Microsoft_Fabric:cached
+      - ..:/workspaces/Supercharge_Microsoft_Fabric:cached
       - azure-cache:/home/vscode/.azure
     command: sleep infinity
     environment:
@@ -608,7 +608,7 @@ Update `devcontainer.json` to use Docker Compose:
   "name": "Fabric POC Dev (Full Stack)",
   "dockerComposeFile": "docker-compose.yml",
   "service": "devcontainer",
-  "workspaceFolder": "/workspaces/Suppercharge_Microsoft_Fabric",
+  "workspaceFolder": "/workspaces/Supercharge_Microsoft_Fabric",
   // ... rest of devcontainer.json settings
 }
 ```

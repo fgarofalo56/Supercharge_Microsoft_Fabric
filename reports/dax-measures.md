@@ -1,6 +1,6 @@
 # DAX Measures Reference
 
-> **[Home](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/README.md)** > **[Reports](README.md)** > **DAX Measures**
+> **[Home](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md)** > **[Reports](README.md)** > **DAX Measures**
 
 **Last Updated:** `2025-01-21` | **Version:** 1.0.0
 

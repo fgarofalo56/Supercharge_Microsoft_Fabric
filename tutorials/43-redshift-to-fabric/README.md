@@ -562,7 +562,7 @@ Output: a recommended workspace + capacity assignment plan, e.g.:
 | `bi_queue` | Power BI / QuickSight | `ws-fabric-bi` | Shared F64 |
 | `adhoc_queue` | Analyst ad-hoc | `ws-fabric-analyst` | Shared F64 with throttle |
 
-> 💡 **Tip**: Use [Action Groups + budget alerts](https://github.com/fgarofalo56/Suppercharge_Microsoft_Fabric/blob/main/infra/modules/monitoring/alerts-and-budgets.bicep) (Wave 1 Bicep module) to alert on CU saturation, the equivalent of Redshift WLM queue queueing time.
+> 💡 **Tip**: Use [Action Groups + budget alerts](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/infra/modules/monitoring/alerts-and-budgets.bicep) (Wave 1 Bicep module) to alert on CU saturation, the equivalent of Redshift WLM queue queueing time.
 
 ### Step 10 — Size Fabric Capacity from Redshift Node-Hours
 
