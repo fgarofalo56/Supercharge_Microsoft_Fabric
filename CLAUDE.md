@@ -6,7 +6,7 @@
 **Type:** Infrastructure + Documentation + Data Engineering
 **Primary Stack:** Bicep, Python, PySpark, KQL, DAX
 **Target Platform:** Microsoft Fabric (F64 SKU)
-**Phase Status:** Phase 15 Complete (Layout, Visual Impact & CSA-in-a-Box, 2026-05-05)
+**Phase Status:** Phase 15 Complete (Layout, Visual Impact & CSA-in-a-Box, 2026-05-05). Since then: doc-site polish, tutorial-57 (Databricks Better Together), positioning/branding/CI fixes, and a repo-grounded Copilot agent (2026-05 to 2026-09) have shipped as unphased maintenance — see `git log --since=2026-05-05`. **Phase 14 ("One-Stop Shop Completion")** is fully scoped at `PRPs/plans/phase14-one-stop-shop.md` (9 waves, ~85 features: SRE runbooks, MLOps maturity, data management maturity, migration playbooks, security frameworks, commercial verticals, Fabric feature gaps, dev experience, structural refactor) but **not yet started** — status `READY FOR HARNESS INITIALIZATION`.
 
 ## Key Technologies
 
