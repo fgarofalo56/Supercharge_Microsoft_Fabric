@@ -1,17 +1,22 @@
 # =============================================================================
 # Microsoft Fabric Item Deployment using fabric-cicd (GA, Feb 2026)
 # =============================================================================
-# Deploy Fabric items (notebooks, lakehouses, semantic models) across
-# Dev -> Staging -> Production using the fabric-cicd Python library.
+# Deploy Fabric items (notebooks, lakehouses, semantic models) to the dev
+# workspace using the fabric-cicd Python library.
 #
 # Gate model:
 #   - push to main              -> dev (dry-run by default, live if dry_run=false)
 #   - workflow_dispatch env=dev -> dev
-#   - workflow_dispatch env=stg -> staging  (requires environment approval)
-#   - workflow_dispatch env=prd -> production (requires environment approval)
 #
-# Dev/Staging/Production are GitHub Environments. Protection rules
-# (required reviewers, wait timers, secrets) MUST be configured there.
+# Only the dev tier exists today: casino-fabric-poc is the sole Fabric
+# workspace backing this project. Staging and production jobs were removed
+# rather than left as dead config pointing at secrets that were never set.
+# To reinstate them, create the workspaces, add FABRIC_STAGING_WORKSPACE_ID /
+# FABRIC_PROD_WORKSPACE_ID to the matching GitHub Environments, and restore
+# the jobs from git history.
+#
+# dev is a GitHub Environment. Protection rules (required reviewers, wait
+# timers, secrets) MUST be configured there.
 # =============================================================================
 
 name: Deploy Fabric Items
@@ -26,13 +31,11 @@ on:
   workflow_dispatch:
     inputs:
       target_environment:
-        description: 'Target environment (dev/staging/prod). Required.'
+        description: 'Target environment. Only dev exists today.'
         required: true
         type: choice
         options:
           - dev
-          - staging
-          - prod
       dry_run:
         description: 'Dry run (preview changes only)'
         required: false
@@ -50,6 +53,10 @@ concurrency:
 env:
   PYTHON_VERSION: '3.11'
   FABRIC_CICD_VERSION: '==1.0.0'
+  # Compatible-release pin: accepts 1.25.x patches, blocks 1.26+ minor jumps.
+  # Unpinned floats are how the FabricWorkspace token_credential signature
+  # change reached CI undetected (see 6c25e91).
+  AZURE_IDENTITY_VERSION: '~=1.25.3'
 
 jobs:
   # ---------------------------------------------------------------------------
@@ -71,7 +78,7 @@ jobs:
       - name: Install fabric-cicd
         run: |
           pip install "fabric-cicd${{ env.FABRIC_CICD_VERSION }}"
-          pip install azure-identity
+          pip install "azure-identity${{ env.AZURE_IDENTITY_VERSION }}"
 
       - name: Validate item definitions
         run: |
@@ -107,7 +114,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install "fabric-cicd${{ env.FABRIC_CICD_VERSION }}"
-          pip install azure-identity
+          pip install "azure-identity${{ env.AZURE_IDENTITY_VERSION }}"
 
       - name: Azure Login (OIDC)
         uses: azure/login@v3
@@ -127,91 +134,3 @@ jobs:
             --item-type-in-scope Notebook Lakehouse SemanticModel \
             $( [ "$DRY_RUN" = "true" ] && echo "--dry-run" )
 
-  # ---------------------------------------------------------------------------
-  # Stage 3: Deploy to Staging (manual only)
-  # ---------------------------------------------------------------------------
-  deploy-staging:
-    name: Deploy to Staging
-    needs: validate
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_environment == 'staging'
-    runs-on: ubuntu-latest
-    environment: staging
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
-
-      - name: Set up Python
-        uses: actions/setup-python@v7
-        with:
-          python-version: ${{ env.PYTHON_VERSION }}
-          cache: 'pip'
-
-      - name: Install dependencies
-        run: |
-          pip install "fabric-cicd${{ env.FABRIC_CICD_VERSION }}"
-          pip install azure-identity
-
-      - name: Azure Login (OIDC)
-        uses: azure/login@v3
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
-      - name: Deploy to Staging workspace
-        env:
-          FABRIC_WORKSPACE_ID: ${{ secrets.FABRIC_STAGING_WORKSPACE_ID }}
-          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
-        run: |
-          python scripts/fabric-cicd-deploy.py \
-            --workspace-id "$FABRIC_WORKSPACE_ID" \
-            --environment staging \
-            --item-type-in-scope Notebook Lakehouse SemanticModel \
-            $( [ "$DRY_RUN" = "true" ] && echo "--dry-run" )
-
-  # ---------------------------------------------------------------------------
-  # Stage 4: Deploy to Production (manual only, requires approval)
-  # ---------------------------------------------------------------------------
-  deploy-prod:
-    name: Deploy to Production
-    needs: validate
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_environment == 'prod'
-    runs-on: ubuntu-latest
-    environment: production
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
-
-      - name: Set up Python
-        uses: actions/setup-python@v7
-        with:
-          python-version: ${{ env.PYTHON_VERSION }}
-          cache: 'pip'
-
-      - name: Install dependencies
-        run: |
-          pip install "fabric-cicd${{ env.FABRIC_CICD_VERSION }}"
-          pip install azure-identity
-
-      - name: Azure Login (OIDC)
-        uses: azure/login@v3
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
-      - name: Deploy to Production workspace
-        env:
-          FABRIC_WORKSPACE_ID: ${{ secrets.FABRIC_PROD_WORKSPACE_ID }}
-          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
-        run: |
-          python scripts/fabric-cicd-deploy.py \
-            --workspace-id "$FABRIC_WORKSPACE_ID" \
-            --environment prod \
-            --item-type-in-scope Notebook Lakehouse SemanticModel \
-            $( [ "$DRY_RUN" = "true" ] && echo "--dry-run" )
-
-      - name: Post-deployment smoke test
-        run: |
-          python scripts/fabric_smoke_test.py \
-            --workspace-id "${{ secrets.FABRIC_PROD_WORKSPACE_ID }}"
