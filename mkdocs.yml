@@ -288,6 +288,7 @@ nav:
         - Spark Runtime Migration: best-practices/spark-runtime-migration.md
         - Spark Runtime Breaking Changes: best-practices/spark-runtime-breaking-changes-matrix.md
         - Disaster Recovery & BCDR: best-practices/disaster-recovery-bcdr.md
+        - Fabric DR - Authoritative Answers: best-practices/fabric-dr-authoritative-answers.md
         - Capacity Planning & Cost: best-practices/capacity-planning-cost-optimization.md
         - Monitoring & Observability: best-practices/monitoring-observability.md
         - Error Handling & Monitoring: best-practices/error-handling-monitoring.md
