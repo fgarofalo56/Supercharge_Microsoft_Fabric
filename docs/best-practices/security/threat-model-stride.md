@@ -697,4 +697,4 @@ Before declaring "threat model ready" for SOC 2 / ISO / FedRAMP review:
 
 ---
 
-[⬆️ Back to Top](#️-stride-threat-modeling-for-fabric-reference-architecture) | [📚 Security Index](.) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#stride-threat-modeling-for-fabric-reference-architecture) | [📚 Security Index](../../best-practices.md#security-best-practices) | [🏠 Home](../../index.md)

@@ -1,6 +1,6 @@
 # 🎲 Data Generation
 
-> **[Home](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md)** | **[Tutorials](../tutorials/)** | **[Notebooks](../notebooks/)** | **[Validation](../validation/)**
+> **[Home](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md)** | **[Tutorials](../docs/tutorials/)** | **[Notebooks](../notebooks/)** | **[Validation](../validation/)**
 
 Synthetic data generators for casino/gaming, federal agencies, streaming CDC, and analytics scenarios in the Microsoft Fabric POC.
 
@@ -72,10 +72,10 @@ Pre-generated sample datasets are available for quick exploration:
 
 ```bash
 # View available sample data
-ls ../sample-data/bronze/
+ls ../docs/sample-data/bronze/
 
 # Copy sample data to output
-cp -r ../sample-data/bronze/* ./output/
+cp -r ../docs/sample-data/bronze/* ./output/
 ```
 
 See [Sample Data](#sample-data) section for details.
@@ -385,28 +385,26 @@ Pre-generated sample datasets are available for quick exploration without runnin
 
 | Dataset | Records | Format | Location |
 |---------|---------|--------|----------|
-| Slot Telemetry | 10,000 | CSV/Parquet | `../sample-data/bronze/slot_telemetry_sample.*` |
-| Player Profiles | 500 | CSV/Parquet | `../sample-data/bronze/player_profiles_sample.*` |
-| Table Games | 2,000 | CSV/Parquet | `../sample-data/bronze/table_games_sample.*` |
-| Financial | 1,000 | CSV/Parquet | `../sample-data/bronze/financial_sample.*` |
+| Slot Telemetry | 90 | CSV | `../docs/sample-data/bronze/slot_telemetry_sample.csv` |
+| Player Profiles | 25 | CSV | `../docs/sample-data/bronze/player_profile_sample.csv` |
+| Table Games | 40 | CSV | `../docs/sample-data/bronze/table_games_sample.csv` |
+| Financial | 30 | CSV | `../docs/sample-data/bronze/financial_transactions_sample.csv` |
 
 ### Using Sample Data
 
 ```python
 import pandas as pd
 
-# Load sample slot data
-df = pd.read_parquet("../sample-data/bronze/slot_telemetry_sample.parquet")
+# Run from the data_generation directory and load the shipped CSV.
+df = pd.read_csv("../docs/sample-data/bronze/slot_telemetry_sample.csv")
 print(f"Records: {len(df)}")
 print(df.head())
 
-# Or use CSV
-df = pd.read_csv("../sample-data/bronze/slot_telemetry_sample.csv")
 ```
 
 ### Schema Definitions
 
-Schema definitions are available in `../sample-data/schemas/` describing:
+Schema definitions are available in `schemas/` describing:
 - Column names and data types
 - Business descriptions
 - Valid value ranges
@@ -471,10 +469,10 @@ Schema files are in `schemas/` with subdirectories for each category.
 
 | Resource | Description |
 |----------|-------------|
-| [Bronze Layer Tutorial](../tutorials/01-bronze-layer/README.md) | How to ingest generated data |
+| [Bronze Layer Tutorial](../docs/tutorials/01-bronze-layer/README.md) | How to ingest generated data |
 | [Validation Tests](../validation/README.md) | Data quality testing |
 | [Notebooks](../notebooks/README.md) | Fabric notebooks for processing |
-| [Sample Data](../sample-data/) | Pre-generated datasets |
+| [Sample Data](../docs/sample-data/) | Pre-generated datasets |
 | [Docker Compose](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/docker-compose.yml) | Container orchestration |
 
 ---

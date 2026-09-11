@@ -3,9 +3,9 @@ hero: assets/heroes/best-practices.svg
 hero_alt: "Best practice — Pipelines & Data Movement"
 type: deep-dive
 ---
-[Home](../index.md) > [Best Practices](./) > Pipelines & Data Movement
+[Home](../index.md) > [Best Practices](../best-practices.md) > Pipelines & Data Movement
 
-# 🔄 Pipelines & Data Movement
+# 🔄 Pipelines & Data Movement {#pipelines--data-movement}
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -586,4 +586,4 @@ flowchart LR
 
 ---
 
-[⬆️ Back to Top](#-pipelines--data-movement) | [📚 Best Practices](./) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#pipelines--data-movement) | [📚 Best Practices](../best-practices.md) | [🏠 Home](../index.md)

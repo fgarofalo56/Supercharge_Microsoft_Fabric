@@ -26,8 +26,8 @@ on:
     branches: [main]
     paths:
       - 'notebooks/**'
-      - 'reports/semantic-model/**'
-      - 'reports/report-definitions/**'
+      - 'docs/reports/semantic-model/**'
+      - 'docs/reports/report-definitions/**'
   workflow_dispatch:
     inputs:
       target_environment:

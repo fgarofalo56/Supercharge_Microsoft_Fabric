@@ -189,7 +189,7 @@ What Git integration does **not** save you from rebuilding:
 
 !!! tip "Practical implication"
     A repo-first operating model (this project's own `fabric-cicd` pipeline is
-    an example — see [`scripts/fabric-cicd-deploy.py`](../../scripts/fabric-cicd-deploy.py))
+    an example — see `scripts/fabric-cicd-deploy.py`)
     converts an unbounded rebuild into a bounded, scripted redeploy. That is
     the highest-leverage DR investment available before spending money on a
     second active region.
@@ -291,7 +291,7 @@ These are qualitative comparisons. No public Learn source publishes concrete
 RTO/RPO numbers or cost multipliers for Fabric specifically — treat any
 numeric target in a customer conversation as something *you* set contractually
 with Microsoft and validate by testing your own runbook (see
-[Can DR be tested?](#4️⃣-can-dr-be-tested)), not as a platform guarantee.
+[Can DR be tested?](#4-can-dr-be-tested)), not as a platform guarantee.
 
 | | **A. Microsoft-managed geo-replication only** | **B. Scripted recovery automation** | **C. Active-active, two regions** |
 |---|---|---|---|
@@ -306,7 +306,7 @@ with Microsoft and validate by testing your own runbook (see
     Option B is the practical middle ground for most Fabric estates: it keeps
     cost close to Option A while converting the "unbounded manual rebuild"
     risk of Option A into a measured, drillable, improvable process. This
-    project's own [`fabric-cicd` deployment pipeline](../../scripts/fabric-cicd-deploy.py)
+    project's own `fabric-cicd` deployment pipeline (`scripts/fabric-cicd-deploy.py`)
     is exactly this pattern — Git as the source of truth, scripted redeploy
     on demand.
 

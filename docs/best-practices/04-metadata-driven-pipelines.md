@@ -3,7 +3,7 @@ hero: assets/heroes/best-practices.svg
 hero_alt: Best practice — Metadata-Driven Pipelines
 type: deep-dive
 ---
-[Home](../index.md) > [Best Practices](./) > Metadata-Driven Pipelines
+[Home](../index.md) > [Best Practices](../best-practices.md) > Metadata-Driven Pipelines
 
 # 🧩 Metadata-Driven Pipelines
 
@@ -477,4 +477,4 @@ flowchart TD
 
 ---
 
-[⬆️ Back to Top](#-metadata-driven-pipelines) | [📚 Best Practices](./) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#metadata-driven-pipelines) | [📚 Best Practices](../best-practices.md) | [🏠 Home](../index.md)

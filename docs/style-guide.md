@@ -790,4 +790,4 @@ Database server is not running or not accessible.
 
 ---
 
-[⬆️ Back to Top](#-documentation-style-guide) | [📚 Docs](./index.md) | [🏠 Home](index.md)
+[⬆️ Back to Top](#documentation-style-guide) | [📚 Docs](./index.md) | [🏠 Home](index.md)

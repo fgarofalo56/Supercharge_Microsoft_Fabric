@@ -379,7 +379,7 @@ az group delete --name "rg-fabric-poc-dev" --yes --no-wait
 az lock delete --name "CanNotDelete" --resource-group "rg-fabric-poc-dev"
 ```
 
-See [Deployment Guide - Cleanup](deployment.md#️-cleanup) for details.
+See [Deployment Guide - Cleanup](deployment.md#cleanup) for details.
 
 ---
 
@@ -965,7 +965,7 @@ See [Security Guide - PII Handling](security.md#pii-handling).
 2. Remove from Git history with BFG Repo-Cleaner
 3. Report per your security policy
 
-See [Security Guide - Repository Security](security.md#-repository-security).
+See [Security Guide - Repository Security](security.md#repository-security).
 
 ---
 
@@ -1315,7 +1315,7 @@ docker-compose run --rm data-generator --slots 100000 --players 5000
 
 Output: `./output` directory
 
-See [Docker Support](index.md#-docker-support) in main README.
+See [Docker Support](index.md) in the main documentation.
 
 ---
 
@@ -1834,7 +1834,7 @@ az group delete --name "rg-fabric-poc-dev" --yes
 
 ---
 
-[⬆️ Back to top](#-frequently-asked-questions-faq)
+[⬆️ Back to top](#frequently-asked-questions-faq)
 
 ---
 

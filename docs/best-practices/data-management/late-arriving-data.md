@@ -334,7 +334,7 @@ from pyspark.sql.functions import unix_timestamp, percentile_approx, col
     )).show()
 ```
 
-Plot p50/p95/p99 lag daily. A spike in p99 with stable p50 = isolated late-batch event. A spike in p50 = source-system regression. See [Detecting Late Data](#-detecting-late-data).
+Plot p50/p95/p99 lag daily. A spike in p99 with stable p50 = isolated late-batch event. A spike in p50 = source-system regression. See [Detecting Late Data](#detecting-late-data).
 
 ---
 
@@ -583,7 +583,7 @@ A backfill is a deliberate, parameterized re-execution of the pipeline over a hi
 7. **Notify consumers.**
    - Post to `#data-restatements` Teams channel with: window, reason, rows added, KPI deltas if material.
    - Update [data product card](data-product-framework.md) `last_restated_at`.
-8. **Log in audit table.** (see [Auditability](#-auditability))
+8. **Log in audit table.** (see [Auditability](#auditability))
 
 ### Idempotency Guarantees Backfill Safety
 
@@ -947,4 +947,4 @@ Before declaring a pipeline "production" with respect to late-arrival handling:
 
 ---
 
-[⬆️ Back to Top](#-late-arriving-data-on-microsoft-fabric) | [📚 Data Management Index](.) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#late-arriving-data-on-microsoft-fabric) | [📚 Data Management Index](late-arriving-data.md) | [🏠 Home](../../index.md)

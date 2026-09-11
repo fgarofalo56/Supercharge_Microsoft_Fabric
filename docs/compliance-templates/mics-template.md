@@ -398,4 +398,4 @@ def generate_mics_compliance_report(report_month: str):
 
 ---
 
-[⬆️ Back to Top](#-mics-compliance-template) | [📚 Parent](./) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#mics-compliance-template) | [📚 Compliance Templates](README.md) | [🏠 Home](../index.md)

@@ -823,4 +823,4 @@ Before declaring a reference data set "production-ready":
 
 ---
 
-[⬆️ Back to Top](#-reference-data-versioning-on-microsoft-fabric) | [📚 Data Management Index](.) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#reference-data-versioning-on-microsoft-fabric) | [📚 Data Management Index](reference-data-versioning.md) | [🏠 Home](../../index.md)

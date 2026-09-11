@@ -23,7 +23,7 @@ from great_expectations.expectations.registry import (
 
 ROOT = Path(__file__).parent
 EXPECT_DIR = ROOT / "expectations"
-SAMPLE = ROOT.parent.parent / "sample-data" / "bronze"
+SAMPLE = ROOT.parent.parent / "docs" / "sample-data" / "bronze"
 
 # Map each sample CSV to its primary suite
 PAIRS = [

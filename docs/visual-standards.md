@@ -1009,4 +1009,4 @@ gantt
 
 ---
 
-[⬆️ Back to Top](#-visual-design-standards) | [📚 Docs](./index.md) | [🏠 Home](index.md)
+[⬆️ Back to Top](#visual-design-standards) | [📚 Docs](./index.md) | [🏠 Home](index.md)

@@ -3,9 +3,9 @@ hero: assets/heroes/best-practices.svg
 hero_alt: "Best practice — Performance & Parallelism Best Practices"
 type: deep-dive
 ---
-[Home](../index.md) > [Best Practices](./) > Performance & Parallelism
+[Home](../index.md) > [Best Practices](../best-practices.md) > Performance & Parallelism
 
-# 🚀 Performance & Parallelism Best Practices
+# 🚀 Performance & Parallelism Best Practices {#performance--parallelism-best-practices}
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -958,4 +958,4 @@ Performance optimization in Microsoft Fabric follows a layered approach:
 
 ---
 
-[Back to Top](#-performance--parallelism-best-practices) | [Best Practices](./) | [Home](../index.md)
+[Back to Top](#performance--parallelism-best-practices) | [Best Practices](../best-practices.md) | [Home](../index.md)

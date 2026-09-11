@@ -744,7 +744,7 @@ df.write \
 
 ---
 
-[⬆️ Back to top](#-microsoft-fabric-best-practices-guide) | [🏠 Home](index.md)
+[⬆️ Back to top](#microsoft-fabric-best-practices-guide) | [🏠 Home](index.md)
 
 ---
 

@@ -3,9 +3,9 @@ hero: assets/heroes/best-practices.svg
 hero_alt: "Best practice — Error Handling & Monitoring Best Practices"
 type: deep-dive
 ---
-[Home](../index.md) > [Best Practices](./) > Error Handling & Monitoring
+[Home](../index.md) > [Best Practices](../best-practices.md) > Error Handling & Monitoring
 
-# ⚠️ Error Handling & Monitoring Best Practices
+# ⚠️ Error Handling & Monitoring Best Practices {#error-handling--monitoring-best-practices}
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -1295,4 +1295,4 @@ Effective error handling in Microsoft Fabric requires:
 
 ---
 
-[Back to Top](#-error-handling--monitoring-best-practices) | [Best Practices](./) | [Home](../index.md)
+[Back to Top](#error-handling--monitoring-best-practices) | [Best Practices](../best-practices.md) | [Home](../index.md)

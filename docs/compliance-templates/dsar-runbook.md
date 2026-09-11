@@ -263,7 +263,7 @@ Apply the **risk tier** that matches the data sensitivity, not just the request 
 
 #### 1.4 Send Acknowledgment
 
-Per regime — see [Communication Templates](#-communication-templates) §A:
+Per regime — see [Communication Templates](#communication-templates) §A:
 
 - **CCPA:** Within **10 business days** of receipt — must explain how the consumer can verify
 - **GDPR:** Initial acknowledgment within reasonable time; substantive response within **30 days**
@@ -271,7 +271,7 @@ Per regime — see [Communication Templates](#-communication-templates) §A:
 
 #### 1.5 Severity Triage
 
-Apply the [severity matrix](#-severity-classification). Update ticket. If SEV1, page Incident Commander immediately.
+Apply the [severity matrix](#severity-classification). Update ticket. If SEV1, page Incident Commander immediately.
 
 ### Exit
 
@@ -321,7 +321,7 @@ Identity verified. DSAR_ID has a ticket and severity. Coordinator has scoped the
 
 #### 2.1 Run the Subject Locator
 
-Execute the subject-locator notebook documented in [GDPR Right to Deletion §Implementation in Fabric](../best-practices/security/gdpr-right-to-deletion.md#️-implementation-in-fabric):
+Execute the subject-locator notebook documented in [GDPR Right to Deletion §Implementation in Fabric](../best-practices/security/gdpr-right-to-deletion.md#implementation-in-fabric):
 
 ```
 notebooks/privacy/01_dsar_subject_locator.py
@@ -429,7 +429,7 @@ Multiple actions may apply per table for a multi-faceted request (access + delet
 
 #### 3.2 Apply Exemption Decision Framework
 
-See [Exemption Decision Framework](#️-exemption-decision-framework) for the full decision logic.
+See [Exemption Decision Framework](#exemption-decision-framework) for the full decision logic.
 
 #### 3.3 Privacy Officer + Legal Sign-Off
 
@@ -481,7 +481,7 @@ Plan is approved and persisted.
 
 #### 4.1 Cascading Deletion (if applicable)
 
-Run the deletion-executor notebook from [GDPR Right to Deletion](../best-practices/security/gdpr-right-to-deletion.md#️-implementation-in-fabric):
+Run the deletion-executor notebook from [GDPR Right to Deletion](../best-practices/security/gdpr-right-to-deletion.md#implementation-in-fabric):
 
 ```
 notebooks/privacy/02_dsar_deletion_executor.py
@@ -550,7 +550,7 @@ Deliver via secure channel (see Phase 6).
 
 #### 4.5 Sub-Processor Notification
 
-Article 17(2) and CCPA service-provider clauses: notify each sub-processor that received the subject's data of the DSAR action. Use the standard [sub-processor notification template](#-communication-templates) §F.
+Article 17(2) and CCPA service-provider clauses: notify each sub-processor that received the subject's data of the DSAR action. Use the standard [sub-processor notification template](#communication-templates) §F.
 
 ### Exit
 
@@ -703,7 +703,7 @@ Verification passed. Artifacts produced.
 
 #### 6.1 Compose Response
 
-Use the appropriate [Communication Template](#-communication-templates):
+Use the appropriate [Communication Template](#communication-templates):
 
 | Request Type | Template |
 |---------------|----------|
@@ -772,7 +772,7 @@ Response delivered.
 
 #### 7.1 Finalize Audit Log Row
 
-Persist the final audit-log row for this DSAR_ID. The schema and immutability requirements are owned by [Audit Trail Immutability](../best-practices/security/audit-trail-immutability.md) and [GDPR Right to Deletion §Audit Logging](../best-practices/security/gdpr-right-to-deletion.md#-audit-logging-the-deletion).
+Persist the final audit-log row for this DSAR_ID. The schema and immutability requirements are owned by [Audit Trail Immutability](../best-practices/security/audit-trail-immutability.md) and [GDPR Right to Deletion §Audit Logging](../best-practices/security/gdpr-right-to-deletion.md#audit-logging-the-deletion).
 
 | Column | Value |
 |--------|-------|
@@ -864,7 +864,7 @@ flowchart TD
 
 ### Pseudonymize-Don't-Delete Pattern
 
-When deletion is blocked by retention but identity disclosure is no longer required, replace identifiers with salted irreversible tokens. The transactional event remains for the regulator; the subject is no longer trivially re-identifiable. See [GDPR Right to Deletion §Pseudonymization](../best-practices/security/gdpr-right-to-deletion.md#-pseudonymization-vs-anonymization-vs-deletion) for the technical pattern.
+When deletion is blocked by retention but identity disclosure is no longer required, replace identifiers with salted irreversible tokens. The transactional event remains for the regulator; the subject is no longer trivially re-identifiable. See [GDPR Right to Deletion §Pseudonymization](../best-practices/security/gdpr-right-to-deletion.md#pseudonymization-vs-anonymization-vs-deletion) for the technical pattern.
 
 > ⚠️ A pseudonymized record is **still personal data under GDPR**. Communicate honestly to the subject that their data was retained under exemption with identifying columns replaced.
 
@@ -1299,7 +1299,7 @@ Escalate to **SEV1 + Privacy Officer + Legal Counsel** when any of the following
 3. Daily standup at fixed time until resolved
 4. All subject-facing communication reviewed by Comms + Legal
 5. Privacy Officer signs every outbound message
-6. Post-resolution review within 7 days (see [Post-Request Review](#-post-request-review))
+6. Post-resolution review within 7 days (see [Post-Request Review](#post-request-review))
 
 ---
 
@@ -1756,4 +1756,4 @@ Findings feed into the next quarterly Privacy Office review and (where systemic)
 
 ---
 
-[⬆️ Back to Top](#-dsar-data-subject-access-request-runbook) | [📚 Compliance Templates](.) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#dsar-data-subject-access-request-runbook) | [📚 Compliance Templates](README.md) | [🏠 Home](../index.md)

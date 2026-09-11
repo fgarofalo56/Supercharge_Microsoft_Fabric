@@ -3,7 +3,7 @@ hero: assets/heroes/best-practices.svg
 hero_alt: Best practice — Data Gateway Optimization
 type: deep-dive
 ---
-[Home](../index.md) > [Best Practices](./) > Data Gateway Optimization
+[Home](../index.md) > [Best Practices](../best-practices.md) > Data Gateway Optimization
 
 # 🌐 Data Gateway Optimization
 
@@ -373,4 +373,4 @@ for key, value in sizing.items():
 
 ---
 
-[⬆️ Back to Top](#-data-gateway-optimization) | [📚 Best Practices](./) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#data-gateway-optimization) | [📚 Best Practices](../best-practices.md) | [🏠 Home](../index.md)

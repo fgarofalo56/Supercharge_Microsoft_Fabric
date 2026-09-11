@@ -251,4 +251,4 @@ After resolving the immediate incident, apply these optimizations to prevent rec
 
 ---
 
-[⬆️ Back to Top](#-capacity-throttling-runbook) | [📋 Runbook Index](index.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#capacity-throttling-runbook) | [📋 Runbook Index](index.md) | [🏠 Home](../index.md)

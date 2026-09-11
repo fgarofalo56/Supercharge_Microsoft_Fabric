@@ -495,7 +495,7 @@ A persona-aligned dashboard set. Avoid duplicating views — assign each persona
 
 ### Power BI — Capacity Metrics App
 
-Install from AppSource for each capacity. See [Monitoring & Observability — Capacity Monitoring](../monitoring-observability.md#-capacity-monitoring) for the full setup.
+Install from AppSource for each capacity. See [Monitoring & Observability — Capacity Monitoring](../monitoring-observability.md#capacity-monitoring) for the full setup.
 
 ### RTI Dashboard on Eventhouse
 

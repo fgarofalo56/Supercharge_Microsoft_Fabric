@@ -615,4 +615,4 @@ Before declaring an MDM domain "production":
 
 ---
 
-[⬆️ Back to Top](#-master-data-management-on-microsoft-fabric) | [📚 Data Management Index](.) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#master-data-management-on-microsoft-fabric) | [📚 Data Management Index](master-data-management.md) | [🏠 Home](../../index.md)

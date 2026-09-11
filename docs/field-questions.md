@@ -387,7 +387,7 @@ team's mirror), the recommended pattern is:
    disabled, fixed identity = Workspace Identity**.
 4. Report consumers need only **Read** on the semantic model, not the mirror.
 
-Source: [Direct Lake security integration](https://learn.microsoft.com/fabric/fundamentals/direct-lake-security-integration) · [Service principals for Fabric](https://learn.microsoft.com/fabric/enterprise/powerbi/service-premium-service-principal) · [Workspace identity](best-practices/network-security.md#workspace-identity).
+Source: [Direct Lake security integration](https://learn.microsoft.com/fabric/fundamentals/direct-lake-security-integration) · [Service principals for Fabric](https://learn.microsoft.com/fabric/enterprise/powerbi/service-premium-service-principal) · [Workspace identity](best-practices/network-security.md#workspace-level-network-isolation).
 
 ---
 

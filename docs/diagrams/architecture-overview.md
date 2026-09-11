@@ -432,4 +432,4 @@ Reference these diagrams for lineage documentation in Microsoft Purview data cat
 
 ---
 
-[⬆️ Back to Top](#-architecture-overview-diagram) | [📚 Parent](../architecture.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#architecture-overview-diagram) | [📚 Parent](../architecture.md) | [🏠 Home](../index.md)

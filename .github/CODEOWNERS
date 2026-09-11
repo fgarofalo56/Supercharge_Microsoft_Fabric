@@ -30,20 +30,20 @@
 # Review for data quality and compliance
 # -----------------------------------------------------------------------------
 /data_generation/ @fgarofalo56
-/sample-data/ @fgarofalo56
+/docs/sample-data/ @fgarofalo56
 
 # -----------------------------------------------------------------------------
 # Notebooks & Analytics
 # -----------------------------------------------------------------------------
 /notebooks/ @fgarofalo56
-/reports/ @fgarofalo56
+/docs/reports/ @fgarofalo56
 
 # -----------------------------------------------------------------------------
 # Documentation
 # -----------------------------------------------------------------------------
 /docs/ @fgarofalo56
-/tutorials/ @fgarofalo56
-/poc-agenda/ @fgarofalo56
+/docs/tutorials/ @fgarofalo56
+/docs/poc-agenda/ @fgarofalo56
 *.md @fgarofalo56
 
 # -----------------------------------------------------------------------------

@@ -122,8 +122,8 @@ output/
 *.csv
 !**/schemas/*.csv
 !**/config/*.csv
-!sample-data/**/*.csv
-!sample-data/**/*.parquet
+!docs/sample-data/**/*.csv
+!docs/sample-data/**/*.parquet
 manifest.json
 deployment-outputs.json
 

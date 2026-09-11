@@ -29,6 +29,14 @@ copyright: >-
 # Documentation directory (default: docs/)
 docs_dir: docs
 
+# Supporting tutorial sub-resources (diagrams, templates, progress trackers) are
+# linked from their parent tutorial pages, not top-level nav entries. Exclude them
+# from the "not included in nav" warning so --strict stays meaningful.
+not_in_nav: |
+  /tutorials/*/diagrams/
+  /tutorials/*/templates/
+  /tutorials/templates/
+
 # Link validation — surfaces the off-site / .md / 404 / bad-anchor class of bug
 # at build time. Kept at `warn` (deploy does not use --strict) so the build
 # never fails; warnings show in the Actions log. `absolute_links: warn` flags
@@ -613,7 +621,6 @@ nav:
       - Docker Configuration: docker/README.md
       - Sample Data: sample-data/README.md
       - Dev Container: dev-container/README.md
-      - Git Hooks: git-hooks/README.md
     - Troubleshooting Matrix: troubleshooting-matrix.md
 
   # ============================================================

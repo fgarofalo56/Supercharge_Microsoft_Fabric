@@ -3,7 +3,7 @@ hero: assets/heroes/compliance.svg
 hero_alt: "Security best practice — Supply Chain Security: Notebook + Library + Connector Vetting"
 type: compliance
 ---
-# 🔗 Supply Chain Security: Notebook + Library + Connector Vetting
+# 🔗 Supply Chain Security: Notebook + Library + Connector Vetting {#supply-chain-security-notebook--library--connector-vetting}
 
 <div align="center" markdown>
 
@@ -900,4 +900,4 @@ Before declaring "supply chain secure":
 
 ---
 
-[⬆️ Back to Top](#-supply-chain-security-notebook--library--connector-vetting) | [📚 Security Index](.) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#supply-chain-security-notebook--library--connector-vetting) | [📚 Security Index](../../best-practices.md#security-best-practices) | [🏠 Home](../../index.md)
