@@ -399,7 +399,6 @@ import pandas as pd
 df = pd.read_csv("../docs/sample-data/bronze/slot_telemetry_sample.csv")
 print(f"Records: {len(df)}")
 print(df.head())
-
 ```
 
 ### Schema Definitions
