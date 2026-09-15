@@ -37,9 +37,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `docs/field-questions.md` — §6.7 rewritten as "Where are the public SLA and compliance documents, and how do we raise a request with Microsoft?": links the public SLA for Online Services, how-to-read-an-SLA guidance, per-component SLA note, compliance offerings + Service Trust Portal + Trust Center, and the Azure support-request process. No longer recommends specific non-public items to request.
 - `docs/field-questions.md` — new §6 "Fabric Disaster Recovery — Enterprise DR Strategy for a Regional Outage": field Q&A covering all six customer concerns (conflicting guidance, post-failover state, customer recovery responsibilities, DR testing feasibility, failback, cost-vs-risk) plus a "what to confirm with Microsoft in writing" list. Australia East context; cross-links the DR authoritative-answers doc and both runbooks. Version → 1.1.0.
 - `docs/features/whats-new.md` — rolling "What's New in Microsoft Fabric" release tracker (Sept/Aug/Jul 2026 highlights), grounded in Microsoft Learn, with per-feature GA/preview status and links to where this repo already covers each capability. Registered in the Feature Catalog nav.
 - `docs/best-practices/fabric-dr-authoritative-answers.md` — new §7 "Two details customers routinely miss": OneLake **soft delete** (7-day retention, independent of the DR toggle) and **BCDR billing** (BCDR Storage + higher write CU consumption, with per-tier CU rates), plus supporting sources.
+
+### Fixed
+
+- `docs/disaster-recovery.md` — reconciled with the authoritative DR guidance (version → 2.1): removed the fabricated `Microsoft.Fabric/replicationPolicies` Bicep API (OneLake geo-replication is the capacity-level DR toggle, not per-workspace Bicep); rewrote Scenario 1 failover to the Microsoft-declared model (no customer-triggered failover, no Traffic Manager/DNS cutover); reframed RTO/RPO tables as POC targets rather than platform guarantees; clarified the testing schedule drills the customer-owned rebuild, not Microsoft's failover; added a scope banner and cross-links to the authoritative-answers doc and both DR runbooks.
 
 ---
 
