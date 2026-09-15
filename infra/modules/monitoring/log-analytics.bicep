@@ -18,7 +18,7 @@ param retentionInDays int = 90
 @description('When true, disables public network access (for FedRAMP, HIPAA, private-network deployments).')
 param enablePrivateEndpoints bool = false
 
-@description('Daily ingestion cap in GB. Set 0 for unlimited.')
+@description('Daily ingestion cap in GB. Set 0 for unlimited. Max 1000 GB/day.')
 @minValue(0)
 @maxValue(1000)
 param dailyQuotaGb int = 10
