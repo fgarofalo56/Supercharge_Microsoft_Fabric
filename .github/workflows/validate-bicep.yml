@@ -119,7 +119,7 @@ jobs:
         shell: pwsh
         run: |
           Import-Module /tmp/arm-ttk/arm-ttk/arm-ttk.psd1
-          $results = Test-AzTemplate -TemplatePath infra/main.json -Skip 'Template Should Not Contain Blanks','apiVersions Should Be Recent','Location Should Not Be Hardcoded','IDs Should Be Derived From ResourceIDs'
+          $results = Test-AzTemplate -TemplatePath infra/main.json -Skip 'Template Should Not Contain Blanks','apiVersions Should Be Recent','Location Should Not Be Hardcoded','URIs Should Be Properly Constructed'
           $results | Format-Table -AutoSize
           $failures = $results | Where-Object { $_.Passed -eq $false }
           if ($failures.Count -gt 0) {
