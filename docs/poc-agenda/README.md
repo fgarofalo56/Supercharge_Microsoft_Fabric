@@ -450,6 +450,6 @@ Upon completion, the team will have:
 
 ---
 
-[⬆️ Back to Top](#-3-day-poc-agenda) | [📚 POC Agenda](./) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#3-day-poc-agenda) | [📚 POC Agenda](README.md) | [🏠 Home](../index.md)
 
 </div>

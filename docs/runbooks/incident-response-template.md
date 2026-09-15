@@ -208,7 +208,7 @@ Symptom: Power BI report stale at 9 AM
 
 ---
 
-## Phase 4 — Post-Incident Review (PIR)
+## Phase 4 — Post-Incident Review (PIR) {#phase-4--post-incident-review-pir}
 
 > **Schedule within 48 hours** of resolution for SEV1/SEV2; within 5 business days for SEV3.
 
@@ -228,7 +228,7 @@ Use the [Blameless Postmortem Template](#blameless-postmortem-template) below. P
 Every action item MUST have:
 - Owner (named individual, not team)
 - Due date
-- Tracking ticket (link to Archon task or GitHub issue)
+- Tracking ticket (link to a GitHub issue)
 - Severity (P0 for "won't survive recurrence" → P3 for nice-to-have)
 
 ---
@@ -249,7 +249,7 @@ Incident Commander  ◀──────────  VP Engineering
    CTO / CDO
 ```
 
-### External / Stakeholder Communication
+### External / Stakeholder Communication {#external--stakeholder-communication}
 
 | Audience | When | Channel | Owner |
 |----------|------|---------|-------|
@@ -305,7 +305,7 @@ Examples:
 2. **Impact statement** — one sentence, customer-facing
 3. **Incident Commander** — `@username`
 4. **Bridge link** — Teams call URL (SEV1/2 only)
-5. **Tracking ticket** — Archon or GitHub issue
+5. **Tracking ticket** — GitHub issue
 6. **Status page entry** — if external comms
 
 ### Closing the Channel
@@ -499,4 +499,4 @@ spark.sql("RESTORE TABLE gold.fact_daily_revenue TO TIMESTAMP AS OF '2026-04-27 
 
 ---
 
-[⬆️ Back to Top](#-incident-response-template) | [📚 Runbooks Index](index.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#incident-response-template) | [📚 Runbooks Index](index.md) | [🏠 Home](../index.md)

@@ -1,6 +1,6 @@
-[Home](../index.md) > [POC Agenda](./) > Day 3: BI, Governance & Mirroring
+[Home](../index.md) > [POC Agenda](day3-bi-governance-mirroring.md) > Day 3: BI, Governance & Mirroring
 
-# 📅 Day 3: BI, Governance & Database Mirroring
+# 📅 Day 3: BI, Governance & Database Mirroring {#day-3-bi-governance--database-mirroring}
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -884,6 +884,6 @@ Overall POC: ██████████ 100% Complete
 
 ---
 
-[⬆️ Back to Top](#-day-3-bi-governance--database-mirroring) | [📚 POC Agenda](./) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#day-3-bi-governance--database-mirroring) | [📚 POC Agenda](day3-bi-governance-mirroring.md) | [🏠 Home](../index.md)
 
 </div>

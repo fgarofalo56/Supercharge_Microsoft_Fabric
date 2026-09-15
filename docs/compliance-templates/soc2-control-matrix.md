@@ -3,7 +3,7 @@ hero: assets/heroes/compliance.svg
 hero_alt: Compliance template — SOC 2 Control Matrix Template — Microsoft Fabric Workloads
 type: compliance
 ---
-# SOC 2 Control Matrix Template — Microsoft Fabric Workloads
+# SOC 2 Control Matrix Template — Microsoft Fabric Workloads {#soc-2-control-matrix-template--microsoft-fabric-workloads}
 
 <div align="center" markdown>
 
@@ -210,7 +210,7 @@ flowchart LR
 
 ---
 
-## Section 2 — Common Criteria (CC) Matrix
+## Section 2 — Common Criteria (CC) Matrix {#section-2--common-criteria-cc-matrix}
 
 The Common Criteria (CC1.1 through CC9.2) are the foundation of every SOC 2 report. They map to the **Security** TSC.
 
@@ -366,7 +366,7 @@ Required only if **Privacy** is in scope. Pairs with [GDPR](../best-practices/se
 
 ---
 
-## Section 8 — Carve-Out: Microsoft as Subservice Organization
+## Section 8 — Carve-Out: Microsoft as Subservice Organization {#section-8--carve-out-microsoft-as-subservice-organization}
 
 ### 8.1 Method
 
@@ -576,7 +576,7 @@ All evidence MUST be stored on:
 
 ---
 
-## Section 12 — Sign-Off
+## Section 12 — Sign-Off {#section-12--sign-off}
 
 ### 12.1 Control Owner Attestation (Quarterly)
 

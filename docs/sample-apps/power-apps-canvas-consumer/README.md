@@ -311,4 +311,4 @@ IfError(
 - [Translytical Task Flows](https://learn.microsoft.com/fabric/data-factory/translytical-task-flows)
 - [OneLake shortcuts for Dataverse](https://learn.microsoft.com/power-platform/admin/onelake-shortcuts)
 - [Power Apps delegation](https://learn.microsoft.com/power-apps/maker/canvas-apps/delegation-overview)
-- [Casino POC Gold Layer](../../notebooks/gold/)
+- [Casino POC Gold Layer](../../notebooks/gold/README.md)

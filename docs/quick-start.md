@@ -18,7 +18,7 @@ type: quick-start
 
 **Get your Microsoft Fabric Casino Analytics POC running in under 15 minutes.**
 
-> **📌 This guide follows Path B (Quickstart)** — no Azure infrastructure deployment required. You only need a Fabric capacity and workspace. For the production-aligned Path A (Bicep + ADLS shortcuts), see [Tutorial 00 Step 4](tutorials/00-environment-setup/README.md#-step-4-connect-external-storage-path-a-only).
+> **📌 This guide follows Path B (Quickstart)** — no Azure infrastructure deployment required. You only need a Fabric capacity and workspace. For the production-aligned Path A (Bicep + ADLS shortcuts), see [Tutorial 00 Step 4](tutorials/00-environment-setup/README.md#step-4-connect-external-storage-path-a-only).
 
 > For the full walkthrough with screenshots and explanations, see [Tutorial 00: Environment Setup](tutorials/00-environment-setup/README.md).
 
@@ -209,7 +209,7 @@ You should see rows with columns like `machine_id`, `casino_id`, `event_type`, `
 
 ---
 
-[⬆️ Back to Top](#-quick-start-guide) | [📚 Docs](./) | [🏠 Home](index.md)
+[⬆️ Back to Top](#quick-start-guide) | [📚 Docs](quick-start.md) | [🏠 Home](index.md)
 
 ---
 

@@ -265,4 +265,4 @@ system_capacity_metrics
 
 ---
 
-[⬆️ Back to Top](#-cost-spike-investigation-runbook) | [📋 Runbook Index](index.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#cost-spike-investigation-runbook) | [📋 Runbook Index](index.md) | [🏠 Home](../index.md)

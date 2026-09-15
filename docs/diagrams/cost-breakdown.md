@@ -305,4 +305,4 @@ flowchart TB
 
 ---
 
-[⬆️ Back to Top](#-cost-breakdown-diagram) | [📚 Parent](../architecture.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#cost-breakdown-diagram) | [📚 Parent](../architecture.md) | [🏠 Home](../index.md)

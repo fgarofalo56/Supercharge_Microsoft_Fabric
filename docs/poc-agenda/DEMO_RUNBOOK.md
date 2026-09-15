@@ -1,6 +1,6 @@
-[Home](../index.md) > [POC Agenda](./) > Demo Runbook
+[Home](../index.md) > [POC Agenda](DEMO_RUNBOOK.md) > Demo Runbook
 
-# 🎰 Casino/Gaming Microsoft Fabric POC - Demo Runbook
+# 🎰 Casino/Gaming Microsoft Fabric POC - Demo Runbook {#casinogaming-microsoft-fabric-poc---demo-runbook}
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -668,7 +668,7 @@ SlotEvents
 
 ---
 
-### D. Power BI & Direct Lake Demo (20 min)
+### D. Power BI & Direct Lake Demo (20 min) {#d-power-bi--direct-lake-demo-20-min}
 
 **Objective:** Demonstrate sub-second analytics with Direct Lake and interactive dashboards.
 
@@ -1025,7 +1025,7 @@ SlotEvents
 
 ---
 
-### F. Wrap-up & Q&A (5 min)
+### F. Wrap-up & Q&A (5 min) {#f-wrap-up--qa-5-min}
 
 **Objective:** Reinforce key messages, provide next steps, facilitate questions.
 
@@ -1350,6 +1350,6 @@ Remember: The best demos tell a story. Guide the audience through the data journ
 
 ---
 
-[⬆️ Back to Top](#-casinogaming-microsoft-fabric-poc---demo-runbook) | [📚 POC Agenda](./) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#casinogaming-microsoft-fabric-poc---demo-runbook) | [📚 POC Agenda](DEMO_RUNBOOK.md) | [🏠 Home](../index.md)
 
 </div>

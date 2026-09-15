@@ -52,7 +52,7 @@ Use the master [Severity Matrix](incident-response-template.md#severity-matrix).
 
 ---
 
-## Symptom → Cause Matrix
+## Symptom → Cause Matrix {#symptom--cause-matrix}
 
 Map the surface error to the most-likely classification before applying a fix. Classification drives whether you **retry**, **fix-and-replay**, or **fail-forward**. See [error-handling-monitoring.md](../best-practices/error-handling-monitoring.md) for taxonomy details.
 
@@ -232,7 +232,7 @@ spark.sql("""
 
 > **CRITICAL:** Notify downstream consumers BEFORE running RESTORE — semantic models reading the table will see row counts shift. See [Verification](#verification) below.
 
-### R5 — Idempotency MERGE Pattern
+### R5 — Idempotency MERGE Pattern {#r5--idempotency-merge-pattern}
 
 **Use when:** classification is `IdempotencyKeyConflict` / duplicate keys, or replaying a partially-completed run that may double-load.
 
@@ -532,4 +532,4 @@ flowchart TD
 
 ---
 
-[⬆️ Back to Top](#-pipeline-failure-triage) | [📚 Runbooks Index](index.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#pipeline-failure-triage) | [📚 Runbooks Index](index.md) | [🏠 Home](../index.md)

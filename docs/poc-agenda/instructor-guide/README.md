@@ -1,6 +1,6 @@
-[Home](../../index.md) > [POC Agenda](../) > Instructor Guide
+[Home](../../index.md) > [POC Agenda](../README.md) > Instructor Guide
 
-# 👩‍🏫 Instructor Guide - Casino Fabric POC
+# 👩‍🏫 Instructor Guide - Casino Fabric POC {#instructor-guide---casino-fabric-poc}
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -767,6 +767,6 @@ Collect the following:
 
 ---
 
-[⬆️ Back to Top](#-instructor-guide---casino-fabric-poc) | [📚 POC Agenda](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#instructor-guide---casino-fabric-poc) | [📚 POC Agenda](../README.md) | [🏠 Home](../../index.md)
 
 </div>

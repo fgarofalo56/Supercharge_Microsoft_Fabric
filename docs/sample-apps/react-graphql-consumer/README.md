@@ -213,4 +213,4 @@ After deploying, update the Entra ID app registration:
 - [Fabric API for GraphQL](https://learn.microsoft.com/fabric/data-engineering/api-graphql-overview)
 - [MSAL.js for React](https://learn.microsoft.com/entra/identity-platform/tutorial-v2-react)
 - [Apollo Client docs](https://www.apollographql.com/docs/react/)
-- [Casino POC Gold Layer](../../notebooks/gold/)
+- [Casino POC Gold Layer](../../notebooks/gold/README.md)

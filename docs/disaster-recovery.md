@@ -3,7 +3,7 @@ hero: assets/heroes/runbooks.svg
 hero_alt: Disaster Recovery — BCDR procedures and verification
 type: runbook
 ---
-# 🔄 Disaster Recovery & Business Continuity
+# 🔄 Disaster Recovery & Business Continuity {#disaster-recovery--business-continuity}
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -451,7 +451,7 @@ FOLLOW-UP: [Actions]
 
 ---
 
-[⬆️ Back to Top](#-disaster-recovery--business-continuity) | [📚 Docs](./) | [🏠 Home](index.md)
+[⬆️ Back to Top](#disaster-recovery--business-continuity) | [📚 Docs](disaster-recovery.md) | [🏠 Home](index.md)
 
 ---
 

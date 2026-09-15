@@ -282,4 +282,4 @@ flowchart TD
 
 ---
 
-[⬆️ Back to Top](#-currency-transaction-report-template) | [📚 Parent](./) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#currency-transaction-report-template) | [📚 Parent](ctr-template.md) | [🏠 Home](../index.md)

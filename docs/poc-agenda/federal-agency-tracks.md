@@ -1,4 +1,4 @@
-[Home](../index.md) > [POC Agenda](./) > Federal Agency Tracks
+[Home](../index.md) > [POC Agenda](federal-agency-tracks.md) > Federal Agency Tracks
 
 # 🏛️ Federal Agency POC Workshop Tracks
 
@@ -240,6 +240,6 @@ Both options produce parquet files with identical schemas, so all notebooks work
 
 <div align="center" markdown>
 
-[⬆️ Back to Top](#-federal-agency-poc-workshop-tracks) | [📚 POC Agenda](./) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#federal-agency-poc-workshop-tracks) | [📚 POC Agenda](federal-agency-tracks.md) | [🏠 Home](../index.md)
 
 </div>

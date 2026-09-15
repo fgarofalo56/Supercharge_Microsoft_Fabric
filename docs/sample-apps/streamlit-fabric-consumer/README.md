@@ -255,4 +255,4 @@ user-assigned managed identity:
 - [Fabric SQL endpoint documentation](https://learn.microsoft.com/fabric/data-warehouse/sql-endpoint)
 - [pyodbc + Azure AD token auth](https://learn.microsoft.com/sql/connect/odbc/using-azure-active-directory)
 - [Streamlit deployment on Azure](https://learn.microsoft.com/azure/developer/python/tutorial-deploy-python-web-app-azure-container-apps)
-- [Casino POC Gold Layer](../../notebooks/gold/)
+- [Casino POC Gold Layer](../../notebooks/gold/README.md)

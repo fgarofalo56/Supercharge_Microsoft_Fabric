@@ -309,7 +309,7 @@ az rest --method post \
   }'
 ```
 
-> Reference IP firewall pattern: see [network-security.md §IP Firewall](../best-practices/network-security.md#️-ip-firewall).
+> Reference IP firewall pattern: see [network-security.md §IP Firewall](../best-practices/network-security.md#ip-firewall).
 
 ### F. Re-Grant Cross-Tenant Guest Access
 
@@ -530,4 +530,4 @@ curl -s -H "Authorization: Bearer $TOKEN" \
 
 ---
 
-[⬆️ Back to Top](#-authentication-failure-playbook) | [📚 Runbooks Index](index.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#authentication-failure-playbook) | [📚 Runbooks Index](index.md) | [🏠 Home](../index.md)

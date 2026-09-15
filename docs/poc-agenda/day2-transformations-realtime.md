@@ -1,6 +1,6 @@
-[Home](../index.md) > [POC Agenda](./) > Day 2: Transformations & Real-Time
+[Home](../index.md) > [POC Agenda](day2-transformations-realtime.md) > Day 2: Transformations & Real-Time
 
-# 📅 Day 2: Transformations & Real-Time Analytics
+# 📅 Day 2: Transformations & Real-Time Analytics {#day-2-transformations--real-time-analytics}
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -882,6 +882,6 @@ Overall POC: ██████░░░░ 66% Complete
 
 ---
 
-[⬆️ Back to Top](#-day-2-transformations--real-time-analytics) | [📚 POC Agenda](./) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#day-2-transformations--real-time-analytics) | [📚 POC Agenda](day2-transformations-realtime.md) | [🏠 Home](../index.md)
 
 </div>

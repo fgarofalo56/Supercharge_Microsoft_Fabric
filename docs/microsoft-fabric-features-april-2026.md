@@ -1,4 +1,4 @@
-# 📋 Microsoft Fabric - Comprehensive Feature Inventory (April 2026)
+# 📋 Microsoft Fabric - Comprehensive Feature Inventory (April 2026) {#microsoft-fabric---comprehensive-feature-inventory-april-2026}
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -693,7 +693,7 @@ Reconciled against the current `docs/features/` inventory (55 feature docs). **A
 
 ---
 
-[⬆️ Back to Top](#-microsoft-fabric---comprehensive-feature-inventory-april-2026) | [📚 Docs](./) | [🏠 Home](index.md)
+[⬆️ Back to Top](#microsoft-fabric---comprehensive-feature-inventory-april-2026) | [📚 Docs](microsoft-fabric-features-april-2026.md) | [🏠 Home](index.md)
 
 ---
 

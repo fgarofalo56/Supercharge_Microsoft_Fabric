@@ -329,4 +329,4 @@ az resource delete \
 
 ---
 
-[⬆️ Back to Top](#-disaster-recovery-execution-runbook) | [📋 Runbook Index](index.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#disaster-recovery-execution-runbook) | [📋 Runbook Index](index.md) | [🏠 Home](../index.md)
