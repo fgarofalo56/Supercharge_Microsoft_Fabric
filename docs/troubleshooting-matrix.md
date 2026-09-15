@@ -36,7 +36,7 @@ spark.sql("OPTIMIZE table_name USING VORDER")
 
 ---
 
-### Symptom: Queries ignore partition pruning -- scanning all partitions
+### Symptom: Queries ignore partition pruning -- scanning all partitions {#symptom-queries-ignore-partition-pruning----scanning-all-partitions}
 
 **Likely Cause:** Filter expression uses a transformation on the partition column (e.g., `YEAR(event_date) = 2025` instead of `event_date >= '2025-01-01'`).
 
@@ -212,7 +212,7 @@ az keyvault set-policy --name "<vault>" --object-id "<mi-object-id>" --secret-pe
 
 ## Ingestion and Streaming
 
-### Symptom: Eventstream shows increasing consumer lag / backpressure
+### Symptom: Eventstream shows increasing consumer lag / backpressure {#symptom-eventstream-shows-increasing-consumer-lag--backpressure}
 
 **Likely Cause:** Downstream processing (Lakehouse write or Eventhouse ingestion) is slower than the event production rate.
 

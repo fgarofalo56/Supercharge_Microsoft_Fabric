@@ -3,7 +3,7 @@ hero: assets/heroes/best-practices.svg
 hero_alt: Best practice — Dataflows Gen2 Best Practices
 type: deep-dive
 ---
-[Home](../index.md) > [Best Practices](./) > Dataflows Gen2
+[Home](../index.md) > [Best Practices](../best-practices.md) > Dataflows Gen2
 
 # 🔀 Dataflows Gen2 Best Practices
 
@@ -387,4 +387,4 @@ flowchart LR
 
 ---
 
-[⬆️ Back to Top](#-dataflows-gen2-best-practices) | [📚 Best Practices](./) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#dataflows-gen2-best-practices) | [📚 Best Practices](../best-practices.md) | [🏠 Home](../index.md)

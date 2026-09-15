@@ -317,4 +317,4 @@ df_gold_ready = df_silver.filter(col("quality_flag") == "PASS")
 
 ---
 
-[⬆️ Back to Top](#-data-quality-incident-runbook) | [📋 Runbook Index](index.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#data-quality-incident-runbook) | [📋 Runbook Index](index.md) | [🏠 Home](../index.md)

@@ -831,7 +831,7 @@ flowchart LR
 
 ---
 
-[⬆️ Back to top](#-security-and-compliance-guide)
+[⬆️ Back to top](#security-and-compliance-guide)
 
 ---
 

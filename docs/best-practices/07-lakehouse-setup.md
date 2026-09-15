@@ -3,9 +3,9 @@ hero: assets/heroes/best-practices.svg
 hero_alt: "Best practice — Lakehouse Setup & Organization"
 type: deep-dive
 ---
-[Home](../index.md) > [Best Practices](./) > Lakehouse Setup & Organization
+[Home](../index.md) > [Best Practices](../best-practices.md) > Lakehouse Setup & Organization
 
-# 🏠 Lakehouse Setup & Organization
+# 🏠 Lakehouse Setup & Organization {#lakehouse-setup--organization}
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -460,4 +460,4 @@ Tables/
 
 ---
 
-[⬆️ Back to Top](#-lakehouse-setup--organization) | [📚 Best Practices](./) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#lakehouse-setup--organization) | [📚 Best Practices](../best-practices.md) | [🏠 Home](../index.md)

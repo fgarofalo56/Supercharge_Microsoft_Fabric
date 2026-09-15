@@ -577,7 +577,7 @@ After completing prerequisites:
 
 ---
 
-[⬆️ Back to top](#-prerequisites-guide)
+[⬆️ Back to top](#prerequisites-guide)
 
 ---
 

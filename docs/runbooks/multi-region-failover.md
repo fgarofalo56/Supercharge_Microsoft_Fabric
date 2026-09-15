@@ -845,4 +845,4 @@ sequenceDiagram
 
 ---
 
-[⬆️ Back to Top](#-multi-region-failover-runbook) | [📚 Runbooks Index](index.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#multi-region-failover-runbook) | [📚 Runbooks Index](index.md) | [🏠 Home](../index.md)

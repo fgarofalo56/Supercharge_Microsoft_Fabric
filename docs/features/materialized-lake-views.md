@@ -647,7 +647,7 @@ flowchart LR
 
 ### Configuration Steps
 
-1. **Create the materialized view** in the Lakehouse SQL endpoint (see [Creating Views](#️-creating-materialized-views))
+1. **Create the materialized view** in the Lakehouse SQL endpoint (see [Creating Views](#creating-materialized-views))
 2. **Open the semantic model** in Power BI Desktop or the Fabric web experience
 3. **Add the materialized view** as a table source — it appears alongside regular Lakehouse tables in the model view
 4. **Build measures** on top of the materialized view columns, which are already pre-aggregated

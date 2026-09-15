@@ -208,7 +208,7 @@ Symptom: Power BI report stale at 9 AM
 
 ---
 
-## Phase 4 — Post-Incident Review (PIR)
+## Phase 4 — Post-Incident Review (PIR) {#phase-4--post-incident-review-pir}
 
 > **Schedule within 48 hours** of resolution for SEV1/SEV2; within 5 business days for SEV3.
 
@@ -249,7 +249,7 @@ Incident Commander  ◀──────────  VP Engineering
    CTO / CDO
 ```
 
-### External / Stakeholder Communication
+### External / Stakeholder Communication {#external--stakeholder-communication}
 
 | Audience | When | Channel | Owner |
 |----------|------|---------|-------|
@@ -499,4 +499,4 @@ spark.sql("RESTORE TABLE gold.fact_daily_revenue TO TIMESTAMP AS OF '2026-04-27 
 
 ---
 
-[⬆️ Back to Top](#-incident-response-template) | [📚 Runbooks Index](index.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#incident-response-template) | [📚 Runbooks Index](index.md) | [🏠 Home](../index.md)

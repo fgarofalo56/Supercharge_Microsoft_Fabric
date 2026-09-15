@@ -3,9 +3,9 @@ hero: assets/heroes/best-practices.svg
 hero_alt: "Best practice — Spark & Notebooks Best Practices"
 type: deep-dive
 ---
-[Home](../index.md) > [Best Practices](./) > Spark & Notebooks
+[Home](../index.md) > [Best Practices](../best-practices.md) > Spark & Notebooks
 
-# ⚡ Spark & Notebooks Best Practices
+# ⚡ Spark & Notebooks Best Practices {#spark--notebooks-best-practices}
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -487,4 +487,4 @@ Examples:
 
 ---
 
-[⬆️ Back to Top](#-spark--notebooks-best-practices) | [📚 Best Practices](./) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#spark--notebooks-best-practices) | [📚 Best Practices](../best-practices.md) | [🏠 Home](../index.md)

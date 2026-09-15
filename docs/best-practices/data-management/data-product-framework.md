@@ -101,7 +101,7 @@ A product publishes the **service levels it commits to**, instruments itself aga
 | Schema stability | "No breaking changes without 30-day notice + dual-write window" |
 | Accuracy | "Reconciles to source of truth ± 0.05% on daily checksum" |
 
-See the [SLA Specification](#-sla-specification) section for how these wire to SLI/SLO infra (Wave 1 anchor).
+See the [SLA Specification](#sla-specification) section for how these wire to SLI/SLO infra (Wave 1 anchor).
 
 ### 4. Self-describing
 
@@ -871,4 +871,4 @@ Before promoting a data product to **GA**:
 
 ---
 
-[⬆️ Back to Top](#-data-product-framework-on-microsoft-fabric) | [📚 Data Management Index](.) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#data-product-framework-on-microsoft-fabric) | [📚 Data Management Index](data-product-framework.md) | [🏠 Home](../../index.md)

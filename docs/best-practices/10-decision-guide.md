@@ -3,7 +3,7 @@ hero: assets/heroes/best-practices.svg
 hero_alt: "Best practice — Decision Guide: Choosing the Right Tool"
 type: deep-dive
 ---
-[Home](../index.md) > [Best Practices](./) > Decision Guide
+[Home](../index.md) > [Best Practices](../best-practices.md) > Decision Guide
 
 # 🧭 Decision Guide: Choosing the Right Tool
 
@@ -375,4 +375,4 @@ Before choosing a tool, answer these questions:
 
 ---
 
-[⬆️ Back to Top](#-decision-guide-choosing-the-right-tool) | [📚 Best Practices](./) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#decision-guide-choosing-the-right-tool) | [📚 Best Practices](../best-practices.md) | [🏠 Home](../index.md)

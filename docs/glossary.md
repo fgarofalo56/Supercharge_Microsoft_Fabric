@@ -335,7 +335,7 @@ Found a missing term or see an opportunity for improvement? Please:
 
 <div align="center" markdown>
 
-**[⬆ Back to Top](#-glossary)**
+**[⬆ Back to Top](#glossary)**
 
 ---
 

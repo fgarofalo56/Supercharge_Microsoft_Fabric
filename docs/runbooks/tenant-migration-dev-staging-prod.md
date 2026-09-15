@@ -3,7 +3,7 @@ hero: assets/heroes/runbooks.svg
 hero_alt: "Runbook — Tenant Migration: Dev → Staging → Prod Promotion"
 type: runbook
 ---
-# 🚀 Tenant Migration: Dev → Staging → Prod Promotion
+# 🚀 Tenant Migration: Dev → Staging → Prod Promotion {#tenant-migration-dev--staging--prod-promotion}
 
 > **Last Updated**: 2026-04-27 | **Phase**: 14 (Wave 1) | **Feature 1.6**
 > **Audience**: Release engineers, Platform Lead, on-call engineers, deployment approvers
@@ -140,7 +140,7 @@ gh run watch --repo fgarofalo56/Supercharge_Microsoft_Fabric
 
 If validate fails, **stop**. Do not bypass — fix the underlying issue and re-merge.
 
-### Step 3 — Validate Dev → Staging via Deployment Pipelines
+### Step 3 — Validate Dev → Staging via Deployment Pipelines {#step-3--validate-dev--staging-via-deployment-pipelines}
 
 Two paths are supported. Pick one and stick with it for the release.
 
@@ -717,4 +717,4 @@ flowchart LR
 
 ---
 
-[⬆️ Back to Top](#-tenant-migration-dev--staging--prod-promotion) | [📚 Runbooks Index](index.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#tenant-migration-dev--staging--prod-promotion) | [📚 Runbooks Index](index.md) | [🏠 Home](../index.md)

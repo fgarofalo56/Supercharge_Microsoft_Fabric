@@ -3,7 +3,7 @@ hero: assets/heroes/white-papers.svg
 hero_alt: "Migration & RTI Research — Field findings"
 type: deep-dive
 ---
-# 🔄 Database Migration Paths & Advanced Real-Time Intelligence Research
+# 🔄 Database Migration Paths & Advanced Real-Time Intelligence Research {#database-migration-paths--advanced-real-time-intelligence-research}
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -1028,7 +1028,7 @@ Fabric provides multiple mechanisms for handling late-arriving events:
 
 ---
 
-[⬆️ Back to Top](#-database-migration-paths--advanced-real-time-intelligence-research) | [📚 Docs](./) | [🏠 Home](index.md)
+[⬆️ Back to Top](#database-migration-paths--advanced-real-time-intelligence-research) | [📚 Docs](migration-and-rti-research.md) | [🏠 Home](index.md)
 
 ---
 

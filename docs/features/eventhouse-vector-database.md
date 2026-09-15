@@ -41,7 +41,7 @@ Microsoft Fabric's Eventhouse — the core engine behind Real-Time Intelligence 
 
 ### Why Eventhouse for Vector Search?
 
-Dedicated vector databases such as Pinecone, Weaviate, and Qdrant are mature, capable systems with rich features — including approximate-nearest-neighbor (ANN) indexes that Eventhouse does not offer (see [Limitations](#-limitations)) — and they remain the stronger choice for very large or ANN-heavy vector workloads. The trade-off is that they are standalone systems requiring separate infrastructure, ETL pipelines, and operational overhead. Eventhouse takes a different approach: it embeds vector capabilities directly into the real-time analytics engine you're already using, which is compelling when your vectors live alongside structured Fabric data:
+Dedicated vector databases such as Pinecone, Weaviate, and Qdrant are mature, capable systems with rich features — including approximate-nearest-neighbor (ANN) indexes that Eventhouse does not offer (see [Limitations](#limitations)) — and they remain the stronger choice for very large or ANN-heavy vector workloads. The trade-off is that they are standalone systems requiring separate infrastructure, ETL pipelines, and operational overhead. Eventhouse takes a different approach: it embeds vector capabilities directly into the real-time analytics engine you're already using, which is compelling when your vectors live alongside structured Fabric data:
 
 ```
 Traditional Approach:                    Fabric Eventhouse Approach:
@@ -1018,7 +1018,7 @@ When a compliance officer asks the Data Agent: *"Are there any patterns similar 
 }
 ```
 
-> 📝 **Cross-Reference**: For complete Data Agent setup and configuration, see [Fabric IQ — Data Agents Integration](fabric-iq.md#-data-agents-integration).
+> 📝 **Cross-Reference**: For complete Data Agent setup and configuration, see [Fabric IQ — Data Agents Integration](fabric-iq.md#data-agents-integration).
 
 ---
 

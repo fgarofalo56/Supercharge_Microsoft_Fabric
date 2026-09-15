@@ -89,7 +89,7 @@ In practice, regulators interpret this as **30 days from request**, extensible b
 
 - **Forensic erasure** (e.g., overwriting bits with random data) is not generally required for ordinary commercial data — logical deletion plus reasonable backup-rotation policy is sufficient.
 - **Immediate erasure from backups** — most DPAs accept that backups will catch up at the next rotation, provided restored data is re-deleted.
-- **Erasure when an exemption applies** — see [Exemptions](#️-erasure-exemptions--what-you-dont-have-to-delete) below.
+- **Erasure when an exemption applies** — see [Exemptions](#erasure-exemptions-what-you-dont-have-to-delete) below.
 
 ---
 
@@ -253,7 +253,7 @@ Article 12(6) permits requesting additional information to confirm identity. Ver
 
 ### Stage 3 — Locate the Subject
 
-Run the **subject locator** notebook (see [Implementation in Fabric](#️-implementation-in-fabric) below) to enumerate every table and row referencing the subject across all sources. Output is a **subject inventory**.
+Run the **subject locator** notebook (see [Implementation in Fabric](#implementation-in-fabric) below) to enumerate every table and row referencing the subject across all sources. Output is a **subject inventory**.
 
 ### Stage 4 — Determine Exemptions
 
@@ -285,7 +285,7 @@ Within 30 days (extendable to 90), provide a written response to the subject inc
 
 ### Stage 8 — Audit Log the Event
 
-Persist an immutable record (see [Audit Logging](#-audit-logging-the-deletion)). The audit log is the controller's evidence of compliance.
+Persist an immutable record (see [Audit Logging](#audit-logging-the-deletion)). The audit log is the controller's evidence of compliance.
 
 ---
 
@@ -990,4 +990,4 @@ Before declaring "GDPR Article 17 ready":
 
 ---
 
-[⬆️ Back to Top](#️-gdpr-right-to-deletion-right-to-be-forgotten-on-microsoft-fabric) | [📚 Security Index](.) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#gdpr-right-to-deletion-right-to-be-forgotten-on-microsoft-fabric) | [📚 Security Index](../../best-practices.md#security-best-practices) | [🏠 Home](../../index.md)

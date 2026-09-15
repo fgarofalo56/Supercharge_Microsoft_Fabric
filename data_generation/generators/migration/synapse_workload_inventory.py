@@ -3,7 +3,7 @@ Synapse Workload Inventory Generator
 =====================================
 
 Synthetic Azure Synapse Analytics workspace inventory used by the
-``tutorials/41-synapse-to-fabric/01_assessment.py --mock-mode`` flow as a
+``docs/tutorials/41-synapse-to-fabric/01_assessment.py --mock-mode`` flow as a
 teaching artifact for tutorial readers who do not have a real Synapse
 workspace to assess.
 

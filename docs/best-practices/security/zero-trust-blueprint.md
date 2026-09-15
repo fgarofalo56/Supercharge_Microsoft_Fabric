@@ -304,10 +304,10 @@ Even if the device is unmanaged, the **app** can be protected:
 
 | Surface | Control | Reference |
 |---------|---------|-----------|
-| Fabric Portal access | Workspace IP firewall (allow only corp egress + VPN) | [Network Security § IP Firewall](../network-security.md#-ip-firewall) |
-| ADLS Gen2 / Key Vault / Event Hubs | **Private Endpoints** + Private DNS | [Network Security § Private Endpoints](../network-security.md#-private-endpoints) |
-| Spark / Pipelines / Dataflows | Managed VNet with managed private endpoints | [Network Security § Managed VNet](../network-security.md#-managed-vnet) |
-| On-prem data sources | Self-Hosted Integration Runtime (outbound HTTPS only) | [Network Security § On-Premises](../network-security.md#-on-premises-connectivity) |
+| Fabric Portal access | Workspace IP firewall (allow only corp egress + VPN) | [Network Security § IP Firewall](../network-security.md#ip-firewall) |
+| ADLS Gen2 / Key Vault / Event Hubs | **Private Endpoints** + Private DNS | [Network Security § Private Endpoints](../network-security.md#private-endpoints) |
+| Spark / Pipelines / Dataflows | Managed VNet with managed private endpoints | [Network Security § Managed VNet](../network-security.md#managed-vnet) |
+| On-prem data sources | Self-Hosted Integration Runtime (outbound HTTPS only) | [Network Security § On-Premises](../network-security.md#on-premises-connectivity) |
 
 ### 3.2 Outbound — Default Deny, Explicit Allow
 
@@ -377,7 +377,7 @@ module wsIdentity '../security/workspace-identity.bicep' = {
 | Eventhouse query | Database-level principals; KQL row-level policies |
 | Notebook | Workspace role + Lakehouse permissions on tables read/written |
 
-> Cross-reference: [Identity & RBAC Patterns § Data Security](../identity-rbac-patterns.md#-data-security) covers RLS / CLS / OLS implementation in depth.
+> Cross-reference: [Identity & RBAC Patterns § Data Security](../identity-rbac-patterns.md#data-security) covers RLS / CLS / OLS implementation in depth.
 
 ---
 
@@ -575,7 +575,7 @@ You will fail if you try to land all six pillars at once. Sequence the rollout.
 - [ ] Sentinel ingestion of Entra sign-in + Fabric audit + Defender alerts
 - [ ] Policy-as-code: Azure Policy initiatives enforce all six pillars
 - [ ] Quarterly access reviews running, evidence captured for [SOC 2](soc2-type2-readiness.md)
-- [ ] Quarterly validation tests (see [§ Validation Tests](#-validation-tests))
+- [ ] Quarterly validation tests (see [§ Validation Tests](#validation-tests))
 - [ ] Deception: honeypot Lakehouse table + alert on any read
 - [ ] DLP policies enforced at Power BI export, Teams share, M365 outbound
 
@@ -585,7 +585,7 @@ You will fail if you try to land all six pillars at once. Sequence the rollout.
 
 Every JSON below is a starting template. Test in **Report-Only** mode before enforcement. Replace GUIDs / group names with your tenant's values. Names follow the pattern `CA-{Scope}-{Action}-{Target}`.
 
-### Policy 1 — Block Legacy Authentication
+### Policy 1 — Block Legacy Authentication {#policy-1--block-legacy-authentication}
 
 Legacy auth (POP, IMAP, SMTP, Exchange ActiveSync, basic auth) does not support MFA. Block it everywhere as the first move.
 
@@ -626,7 +626,7 @@ Invoke-MgGraphRequest -Method POST `
 
 ---
 
-### Policy 2 — Require MFA for Fabric Admin Roles
+### Policy 2 — Require MFA for Fabric Admin Roles {#policy-2--require-mfa-for-fabric-admin-roles}
 
 Phishing-resistant MFA for any directory role that can change tenant-wide Fabric settings.
 
@@ -662,7 +662,7 @@ Phishing-resistant MFA for any directory role that can change tenant-wide Fabric
 
 ---
 
-### Policy 3 — Require Compliant Device for Fabric
+### Policy 3 — Require Compliant Device for Fabric {#policy-3--require-compliant-device-for-fabric}
 
 The hard rule: no compliant device, no Fabric.
 
@@ -697,7 +697,7 @@ The excluded BYOD group falls through to a separate **App Protection Policy** th
 
 ---
 
-### Policy 4 — Block Anonymous, Tor, and High-Risk Locations
+### Policy 4 — Block Anonymous, Tor, and High-Risk Locations {#policy-4--block-anonymous-tor-and-high-risk-locations}
 
 Use Entra named locations + threat intel.
 
@@ -730,7 +730,7 @@ Use Entra named locations + threat intel.
 
 ---
 
-### Policy 5 — High-Risk Sign-In → Require MFA + Compliant Device
+### Policy 5 — High-Risk Sign-In → Require MFA + Compliant Device {#policy-5--high-risk-sign-in--require-mfa--compliant-device}
 
 Step-up when Identity Protection scores the sign-in risky.
 
@@ -760,7 +760,7 @@ Step-up when Identity Protection scores the sign-in risky.
 
 ---
 
-### Policy 6 — Session Controls for Sensitive Workspaces
+### Policy 6 — Session Controls for Sensitive Workspaces {#policy-6--session-controls-for-sensitive-workspaces}
 
 Tighten reauthentication frequency and disable persistent browser sessions for users in sensitive workspaces (casino-compliance, federal-doj, tribal-healthcare).
 
@@ -805,7 +805,7 @@ Tighten reauthentication frequency and disable persistent browser sessions for u
 
 ---
 
-### Policy 7 — High-Risk User → Password Change
+### Policy 7 — High-Risk User → Password Change {#policy-7--high-risk-user--password-change}
 
 When Identity Protection elevates a user to High risk, force a secure password change before they can do anything else.
 
@@ -832,7 +832,7 @@ When Identity Protection elevates a user to High risk, force a secure password c
 
 ---
 
-### Policy 8 — BYOD App Protection
+### Policy 8 — BYOD App Protection {#policy-8--byod-app-protection}
 
 For approved BYOD users, require an Intune App Protection Policy (MAM) instead of full device compliance.
 
@@ -1153,4 +1153,4 @@ Before declaring "zero-trust ready":
 
 ---
 
-[⬆️ Back to Top](#️-zero-trust-architecture-blueprint-for-microsoft-fabric) | [📚 Security Index](.) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#zero-trust-architecture-blueprint-for-microsoft-fabric) | [📚 Security Index](../../best-practices.md#security-best-practices) | [🏠 Home](../../index.md)

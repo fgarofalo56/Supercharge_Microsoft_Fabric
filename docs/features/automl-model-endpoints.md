@@ -427,7 +427,7 @@ print(f"Model ID: {model.model_id}")
 
 ### Step 4: Deploy to Endpoint
 
-See the [ML Model Endpoints](#-ml-model-endpoints) section below.
+See the [ML Model Endpoints](#ml-model-endpoints) section below.
 
 ---
 

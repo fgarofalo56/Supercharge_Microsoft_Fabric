@@ -520,7 +520,7 @@ stateDiagram-v2
 
 ### Power Apps Term-Proposal Form
 
-A canvas Power App writes proposals directly to Purview. Fields enforced match the [Term Definition Standards](#-term-definition-standards) section. The form refuses to submit if `realized_by` is empty.
+A canvas Power App writes proposals directly to Purview. Fields enforced match the [Term Definition Standards](#term-definition-standards) section. The form refuses to submit if `realized_by` is empty.
 
 ---
 
@@ -695,7 +695,7 @@ Casino glossary leans heavily on **regulatory** and **player-tier** terminology.
 | `HCPCS Level II` | National codes for non-physician services, supplies | CMS HCPCS |
 | `ICD-10-CM Diagnosis` | Diagnosis code per CMS ICD-10-CM | WHO/CMS |
 
-> Cross-domain federal joins (e.g., USDA + SBA on Farm Operator) require term-level approval per agency policy. See [MDM federal beneficiary section](master-data-management.md#️-federal-implementation-beneficiary-master).
+> Cross-domain federal joins (e.g., USDA + SBA on Farm Operator) require term-level approval per agency policy. See [MDM federal beneficiary section](master-data-management.md#federal-implementation-beneficiary-master).
 
 ---
 
@@ -784,4 +784,4 @@ Before declaring the glossary "production":
 
 ---
 
-[⬆️ Back to Top](#-business-glossary-automation-with-microsoft-purview) | [📚 Data Management Index](.) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#business-glossary-automation-with-microsoft-purview) | [📚 Data Management Index](business-glossary-automation.md) | [🏠 Home](../../index.md)

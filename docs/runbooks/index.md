@@ -145,4 +145,4 @@ Step-by-step procedures for detecting, triaging, and resolving operational incid
 
 ---
 
-[⬆️ Back to Top](#-operational-runbooks) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#operational-runbooks) | [🏠 Home](../index.md)

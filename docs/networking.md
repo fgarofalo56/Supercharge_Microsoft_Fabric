@@ -3,7 +3,7 @@ hero: assets/heroes/best-practices.svg
 hero_alt: "Networking — VNets, private endpoints, gateways"
 type: deep-dive
 ---
-# 🌐 Networking & Connectivity Guide
+# 🌐 Networking & Connectivity Guide {#networking--connectivity-guide}
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -837,4 +837,4 @@ module networkArchitecture 'network.bicep' = {
 
 ---
 
-[⬆️ Back to top](#-networking--connectivity-guide) | [🏠 Home](index.md)
+[⬆️ Back to top](#networking--connectivity-guide) | [🏠 Home](index.md)

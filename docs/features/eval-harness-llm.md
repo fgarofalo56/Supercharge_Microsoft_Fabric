@@ -35,7 +35,7 @@ Evaluating large language model (LLM) workloads is fundamentally harder than eva
 2. **No ground truth.** For generative tasks (summarization, drafting, Q&A, code generation), there is no single correct answer. Multiple responses can all be acceptable.
 3. **Subjectivity.** "Good" depends on context: a casino compliance bot must be precise and conservative; a marketing assistant should be creative. Quality is multi-dimensional and partially in the eye of the consumer.
 
-A production-grade **evaluation harness** addresses these properties through structured test sets, multi-metric measurement, judge models, and continuous monitoring. This doc is the LLM-specific counterpart to the [validation gates section of MLOps for Fabric Production](../best-practices/mlops-fabric-production.md#-model-validation-gates) and works alongside [Prompt Engineering for Fabric](prompt-engineering-fabric.md), [RAG Patterns Deep Dive](rag-patterns-deep-dive.md), and [Responsible AI Framework](../best-practices/responsible-ai-framework.md).
+A production-grade **evaluation harness** addresses these properties through structured test sets, multi-metric measurement, judge models, and continuous monitoring. This doc is the LLM-specific counterpart to the [validation gates section of MLOps for Fabric Production](../best-practices/mlops-fabric-production.md#model-validation-gates) and works alongside [Prompt Engineering for Fabric](prompt-engineering-fabric.md), [RAG Patterns Deep Dive](rag-patterns-deep-dive.md), and [Responsible AI Framework](../best-practices/responsible-ai-framework.md).
 
 ### What "Production-Grade LLM Eval" Means
 
@@ -48,7 +48,7 @@ A production-grade **evaluation harness** addresses these properties through str
 | **Action** | Subjective judgment | Quality gates block PRs; alerts trigger on regression |
 | **Cost control** | Unbounded | Sampling strategies, judge tiering, result caching |
 
-> 📝 **Scope:** This doc covers eval harnesses for LLM-powered features (Data Agents, Copilot prompts, RAG systems, summarization pipelines, classification via LLM). For evaluating classical ML models (AutoML, sklearn, LightGBM), see [MLOps Validation Gates](../best-practices/mlops-fabric-production.md#-model-validation-gates).
+> 📝 **Scope:** This doc covers eval harnesses for LLM-powered features (Data Agents, Copilot prompts, RAG systems, summarization pipelines, classification via LLM). For evaluating classical ML models (AutoML, sklearn, LightGBM), see [MLOps Validation Gates](../best-practices/mlops-fabric-production.md#model-validation-gates).
 
 ---
 
@@ -1124,7 +1124,7 @@ Score against the expected_behavior, not your personal preference.
 
 ### GitHub Actions Eval Workflow
 
-See the [CI Integration](#-ci-integration) section above for the canonical `llm-eval.yml`. Place at `.github/workflows/llm-eval.yml`.
+See the [CI Integration](#ci-integration) section above for the canonical `llm-eval.yml`. Place at `.github/workflows/llm-eval.yml`.
 
 ---
 
@@ -1165,7 +1165,7 @@ See the [CI Integration](#-ci-integration) section above for the canonical `llm-
 
 ---
 
-[⬆️ Back to Top](#-llm-evaluation-harness-on-fabric) | [📚 Features Index](index.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#llm-evaluation-harness-on-fabric) | [📚 Features Index](index.md) | [🏠 Home](../index.md)
 
 > 📝 **Document Metadata**
 > - **Author**: Documentation Team

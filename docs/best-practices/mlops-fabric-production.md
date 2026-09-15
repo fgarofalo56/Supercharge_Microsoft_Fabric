@@ -200,7 +200,7 @@ client.transition_model_version_stage(
 )
 ```
 
-Promotion **must** be gated by [Validation Gates](#-model-validation-gates) (CI check before merge). Manual promotion is only allowed for hotfixes via the [tenant migration runbook](../runbooks/tenant-migration-dev-staging-prod.md#hotfix-procedure).
+Promotion **must** be gated by [Validation Gates](#model-validation-gates) (CI check before merge). Manual promotion is only allowed for hotfixes via the [tenant migration runbook](../runbooks/tenant-migration-dev-staging-prod.md#hotfix-procedure).
 
 ---
 
@@ -652,4 +652,4 @@ Before promoting any model to Production stage:
 
 ---
 
-[⬆️ Back to Top](#-mlops-for-fabric-production) | [📚 Best Practices Index](index.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#mlops-for-fabric-production) | [📚 Best Practices Index](index.md) | [🏠 Home](../index.md)

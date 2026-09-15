@@ -43,7 +43,7 @@
 | [👥 Target Audience](#-target-audience) | Who should use this |
 | [🚀 Quick Start](#-quick-start) | Get up and running |
 | [⚡ 5-Minute Quick Start](docs/quick-start.md) | Fastest path to first results |
-| [📋 Cheat Sheet](tutorials/CHEAT_SHEET.md) | Quick reference & commands |
+| [📋 Cheat Sheet](docs/tutorials/CHEAT_SHEET.md) | Quick reference & commands |
 | [🐳 Docker Support](#-docker-support) | Container-based deployment |
 | [💻 Dev Container](#-dev-container) | One-click development setup |
 | [📊 Power BI Reports](#-power-bi-reports) | Pre-built report templates |
@@ -172,7 +172,7 @@ Choose your preferred deployment method:
 >
 > **Path B (Quickstart):** Skip Bicep entirely — upload generated data straight into your Fabric Lakehouse via the UI and start running notebooks immediately. Fastest path to learning the medallion architecture. Upgrade to Path A anytime.
 >
-> See [Tutorial 00 — Step 4](tutorials/00-environment-setup/README.md#-step-4-connect-external-storage-path-a-only) for details.
+> See [Tutorial 00 — Step 4](docs/tutorials/00-environment-setup/README.md#-step-4-connect-external-storage-path-a-only) for details.
 
 ---
 
@@ -322,7 +322,7 @@ az deployment sub create \
 
 **Start Learning**
 
-👉 Begin with [Tutorial 00: Environment Setup](tutorials/00-environment-setup/README.md)
+👉 Begin with [Tutorial 00: Environment Setup](docs/tutorials/00-environment-setup/README.md)
 
 </td>
 </tr>
@@ -660,7 +660,7 @@ Pre-built Power BI report templates and semantic model definitions for quick dep
 ### Report Locations
 
 ```
-reports/
+docs/reports/
 ├── report-definitions/           # Power BI report definition files
 │   ├── executive-dashboard/
 │   ├── slot-performance/
@@ -673,11 +673,11 @@ reports/
 ### How to Import
 
 1. **Connect to Fabric Workspace**: Open Power BI Desktop, connect to your Fabric workspace
-2. **Import Semantic Model**: Use the definitions in `reports/semantic-model/`
-3. **Import Reports**: Open `.pbip` files from `reports/report-definitions/`
+2. **Import Semantic Model**: Use the definitions in `docs/reports/semantic-model/`
+3. **Import Reports**: Open `.pbip` files from `docs/reports/report-definitions/`
 4. **Configure Data Source**: Point to your Gold layer Lakehouse
 
-For detailed instructions, see [reports/README.md](reports/README.md).
+For detailed instructions, see [docs/reports/README.md](docs/reports/README.md).
 
 ---
 
@@ -724,31 +724,31 @@ Pre-generated sample datasets for quick exploration without running data generat
 
 ### Available Datasets
 
-| Dataset | Records | Format | Size | Location |
-|:--------|:--------|:-------|:-----|:---------|
-| Slot Telemetry (7 days) | 10,000 | CSV/Parquet | ~10 MB | `sample-data/bronze/` |
-| Player Profiles | 500 | CSV/Parquet | ~1 MB | `sample-data/bronze/` |
-| Table Games | 2,000 | CSV/Parquet | ~2 MB | `sample-data/bronze/` |
-| Financial Transactions | 1,000 | CSV/Parquet | ~1 MB | `sample-data/bronze/` |
+| Dataset | Records | Format | Location |
+|:--------|:--------|:-------|:---------|
+| Slot Telemetry | 90 | CSV | `docs/sample-data/bronze/slot_telemetry_sample.csv` |
+| Player Profiles | 25 | CSV | `docs/sample-data/bronze/player_profile_sample.csv` |
+| Table Games | 40 | CSV | `docs/sample-data/bronze/table_games_sample.csv` |
+| Financial Transactions | 30 | CSV | `docs/sample-data/bronze/financial_transactions_sample.csv` |
 
 ### Quick Exploration
 
 ```bash
 # View sample data structure
-ls sample-data/bronze/
+ls docs/sample-data/bronze/
 
 # Load into Pandas (Python)
 import pandas as pd
-df = pd.read_parquet('sample-data/bronze/slot_telemetry_sample.parquet')
+df = pd.read_csv('docs/sample-data/bronze/slot_telemetry_sample.csv')
 df.head()
 
 # View schemas
-ls sample-data/schemas/
+ls data_generation/schemas/
 ```
 
 ### Schema Definitions
 
-Sample data includes matching schema definitions in `sample-data/schemas/` that document:
+Sample data includes matching schema definitions in `data_generation/schemas/` that document:
 - Column names and data types
 - Business descriptions
 - Valid value ranges
@@ -854,7 +854,7 @@ Supercharge_Microsoft_Fabric/
 │   ├── prerequisites.md               # Setup requirements
 │   └── cost-estimation.md             # Azure cost planning
 │
-├── 📁 tutorials/                      # 📖 Step-by-step tutorials
+├── 📁 docs/tutorials/                      # 📖 Step-by-step tutorials
 │   ├── 00-environment-setup/          # Initial setup
 │   ├── 01-bronze-layer/               # Bronze implementation
 │   ├── 02-silver-layer/               # Silver transformations
@@ -875,17 +875,17 @@ Supercharge_Microsoft_Fabric/
 │   ├── 30-tribal-healthcare/         # HIPAA-compliant IHS
 │   └── 31-federal-dot-faa/           # FedRAMP aviation
 │
-├── 📁 sample-data/                    # 📁 Pre-generated sample data
+├── 📁 docs/sample-data/                    # 📁 Pre-generated sample data
 │   ├── bronze/                        # Bronze layer samples
 │   └── schemas/                       # Schema definitions
 │
-├── 📁 reports/                        # 📊 Power BI templates
+├── 📁 docs/reports/                        # 📊 Power BI templates
 │   ├── report-definitions/            # Report .pbip files
 │   └── semantic-model/                # Direct Lake model definitions
 │       ├── tables/                    # Table definitions
 │       └── measures/                  # DAX measures
 │
-├── 📁 poc-agenda/                     # 📅 3-Day workshop materials
+├── 📁 docs/poc-agenda/                     # 📅 3-Day workshop materials
 ├── 📁 data_generation/                # 🎲 Synthetic data generators
 ├── 📁 notebooks/                      # 📓 Fabric-importable notebooks
 ├── 📁 validation/                     # ✅ Testing & data quality
@@ -927,7 +927,7 @@ A structured workshop to experience the full Microsoft Fabric platform:
 
 </details>
 
-👉 See [POC Agenda](poc-agenda/README.md) for complete schedules and materials.
+👉 See [POC Agenda](docs/poc-agenda/README.md) for complete schedules and materials.
 
 ---
 
@@ -992,102 +992,102 @@ flowchart LR
 </tr>
 <tr>
 <td rowspan="2"><b>🟢 Foundation</b><br/><sub>Start here</sub></td>
-<td><a href="tutorials/00-environment-setup/README.md"><b>00 - Environment Setup</b></a></td>
+<td><a href="docs/tutorials/00-environment-setup/README.md"><b>00 - Environment Setup</b></a></td>
 <td>Azure & Fabric workspace provisioning</td>
 <td><code>~1 hour</code></td>
 </tr>
 <tr>
-<td><a href="tutorials/01-bronze-layer/README.md"><b>01 - Bronze Layer</b></a></td>
+<td><a href="docs/tutorials/01-bronze-layer/README.md"><b>01 - Bronze Layer</b></a></td>
 <td>Raw data ingestion patterns</td>
 <td><code>~2 hours</code></td>
 </tr>
 <tr>
 <td rowspan="2"><b>🟡 Core</b><br/><sub>Essential skills</sub></td>
-<td><a href="tutorials/02-silver-layer/README.md"><b>02 - Silver Layer</b></a></td>
+<td><a href="docs/tutorials/02-silver-layer/README.md"><b>02 - Silver Layer</b></a></td>
 <td>Data cleansing & validation</td>
 <td><code>~2 hours</code></td>
 </tr>
 <tr>
-<td><a href="tutorials/03-gold-layer/README.md"><b>03 - Gold Layer</b></a></td>
+<td><a href="docs/tutorials/03-gold-layer/README.md"><b>03 - Gold Layer</b></a></td>
 <td>Business aggregations & KPIs</td>
 <td><code>~2 hours</code></td>
 </tr>
 <tr>
 <td rowspan="2"><b>🟠 Advanced</b><br/><sub>Real-time & BI</sub></td>
-<td><a href="tutorials/04-real-time-analytics/README.md"><b>04 - Real-Time Analytics</b></a></td>
+<td><a href="docs/tutorials/04-real-time-analytics/README.md"><b>04 - Real-Time Analytics</b></a></td>
 <td>Eventstreams & Eventhouse</td>
 <td><code>~3 hours</code></td>
 </tr>
 <tr>
-<td><a href="tutorials/05-direct-lake-powerbi/README.md"><b>05 - Direct Lake & Power BI</b></a></td>
+<td><a href="docs/tutorials/05-direct-lake-powerbi/README.md"><b>05 - Direct Lake & Power BI</b></a></td>
 <td>Semantic models & reports</td>
 <td><code>~2 hours</code></td>
 </tr>
 <tr>
 <td rowspan="4"><b>🔴 Enterprise</b><br/><sub>Production-ready</sub></td>
-<td><a href="tutorials/06-data-pipelines/README.md"><b>06 - Data Pipelines</b></a></td>
+<td><a href="docs/tutorials/06-data-pipelines/README.md"><b>06 - Data Pipelines</b></a></td>
 <td>Orchestration & scheduling</td>
 <td><code>~2 hours</code></td>
 </tr>
 <tr>
-<td><a href="tutorials/07-governance-purview/README.md"><b>07 - Governance & Purview</b></a></td>
+<td><a href="docs/tutorials/07-governance-purview/README.md"><b>07 - Governance & Purview</b></a></td>
 <td>Data catalog & lineage</td>
 <td><code>~2 hours</code></td>
 </tr>
 <tr>
-<td><a href="tutorials/08-database-mirroring/README.md"><b>08 - Database Mirroring</b></a></td>
+<td><a href="docs/tutorials/08-database-mirroring/README.md"><b>08 - Database Mirroring</b></a></td>
 <td>SQL Server replication</td>
 <td><code>~1 hour</code></td>
 </tr>
 <tr>
-<td><a href="tutorials/09-advanced-ai-ml/README.md"><b>09 - Advanced AI/ML</b></a></td>
+<td><a href="docs/tutorials/09-advanced-ai-ml/README.md"><b>09 - Advanced AI/ML</b></a></td>
 <td>Machine learning integration</td>
 <td><code>~3 hours</code></td>
 </tr>
 <tr>
 <td rowspan="4"><b>🟣 Migration</b><br/><sub>Platform migration</sub></td>
-<td><a href="tutorials/10-teradata-migration/README.md"><b>10 - Teradata Migration</b></a></td>
+<td><a href="docs/tutorials/10-teradata-migration/README.md"><b>10 - Teradata Migration</b></a></td>
 <td>Teradata to Fabric modernization</td>
 <td><code>~3 hours</code></td>
 </tr>
 <tr>
-<td><a href="tutorials/24-snowflake-to-fabric/README.md"><b>24 - Snowflake to Fabric</b></a></td>
+<td><a href="docs/tutorials/24-snowflake-to-fabric/README.md"><b>24 - Snowflake to Fabric</b></a></td>
 <td>Snowflake migration & cost planning</td>
 <td><code>~3 hours</code></td>
 </tr>
 <tr>
-<td><a href="tutorials/25-ibm-db2-source/README.md"><b>25 - IBM DB2 Source</b></a></td>
+<td><a href="docs/tutorials/25-ibm-db2-source/README.md"><b>25 - IBM DB2 Source</b></a></td>
 <td>DB2 connectivity & CDC patterns</td>
 <td><code>~3 hours</code></td>
 </tr>
 <tr>
-<td><a href="tutorials/26-multi-source-streaming/README.md"><b>26 - Multi-Source Streaming</b></a></td>
+<td><a href="docs/tutorials/26-multi-source-streaming/README.md"><b>26 - Multi-Source Streaming</b></a></td>
 <td>8 CDC & IoT streaming connectors</td>
 <td><code>~3 hours</code></td>
 </tr>
 <tr>
 <td rowspan="5"><b>🔵 Analytics & Expansions</b><br/><sub>Industry verticals</sub></td>
-<td><a href="tutorials/27-video-security-analytics/README.md"><b>27 - Video Security</b></a></td>
+<td><a href="docs/tutorials/27-video-security-analytics/README.md"><b>27 - Video Security</b></a></td>
 <td>AI video pipeline & edge processing</td>
 <td><code>~2.5 hours</code></td>
 </tr>
 <tr>
-<td><a href="tutorials/28-people-movement-analytics/README.md"><b>28 - People Movement</b></a></td>
+<td><a href="docs/tutorials/28-people-movement-analytics/README.md"><b>28 - People Movement</b></a></td>
 <td>Foot traffic & queue detection</td>
 <td><code>~2 hours</code></td>
 </tr>
 <tr>
-<td><a href="tutorials/29-geolocation-analytics/README.md"><b>29 - Geolocation Analytics</b></a></td>
+<td><a href="docs/tutorials/29-geolocation-analytics/README.md"><b>29 - Geolocation Analytics</b></a></td>
 <td>H3 indexing & geofencing</td>
 <td><code>~2.5 hours</code></td>
 </tr>
 <tr>
-<td><a href="tutorials/30-tribal-healthcare/README.md"><b>30 - Tribal Healthcare</b></a></td>
+<td><a href="docs/tutorials/30-tribal-healthcare/README.md"><b>30 - Tribal Healthcare</b></a></td>
 <td>HIPAA-compliant IHS analytics</td>
 <td><code>~3 hours</code></td>
 </tr>
 <tr>
-<td><a href="tutorials/31-federal-dot-faa/README.md"><b>31 - Federal DOT/FAA</b></a></td>
+<td><a href="docs/tutorials/31-federal-dot-faa/README.md"><b>31 - Federal DOT/FAA</b></a></td>
 <td>FedRAMP aviation analytics</td>
 <td><code>~2.5 hours</code></td>
 </tr>
@@ -1116,7 +1116,7 @@ Then open [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser.
 | Resource | Description |
 |:---------|:------------|
 | [⚡ 5-Minute Quick Start](docs/quick-start.md) | Fastest path to generating data and exploring the POC |
-| [📋 Cheat Sheet](tutorials/CHEAT_SHEET.md) | Commands, shortcuts, and quick reference for all components |
+| [📋 Cheat Sheet](docs/tutorials/CHEAT_SHEET.md) | Commands, shortcuts, and quick reference for all components |
 
 ### Build Documentation
 
@@ -1172,17 +1172,17 @@ Phase 7 delivered industry expansions beyond the core Casino/Gaming POC:
 
 | Expansion | Compliance | Key Capabilities | Tutorial |
 |:----------|:-----------|:-----------------|:---------|
-| 🌾 **USDA** | NASS, FSIS | Crop production, food safety recalls | [Tutorial 32](tutorials/32-usda-agriculture/README.md) |
-| 💼 **SBA** | PPP, 7(a) | Loan analytics, 20 NAICS codes | [Tutorial 33](tutorials/33-sba-small-business/README.md) |
-| 🌊 **NOAA** | CDO API | Weather observations, storm events | [Tutorial 34](tutorials/34-noaa-weather-climate/README.md) |
-| 🏭 **EPA** | AirNow, TRI | Air quality (AQI), water quality (MCL) | [Tutorial 35](tutorials/35-epa-environment/README.md) |
-| 🏔️ **DOI** | USGS, BLM | Earthquakes, land use management | [Tutorial 36](tutorials/36-doi-interior/README.md) |
-| 🏥 **Tribal Healthcare** | HIPAA, 42 CFR | IHS encounters, PHI masking, FHIR | [Tutorial 30](tutorials/30-tribal-healthcare/README.md) |
-| ✈️ **DOT/FAA** | FedRAMP, FISMA | Flight ops, safety, carrier analytics | [Tutorial 31](tutorials/31-federal-dot-faa/README.md) |
-| ⚖️ **DOJ** | FBI NIBRS, USSC | Crime stats, sentencing, antitrust, DEA | [Tutorial 38](tutorials/38-doj-justice/README.md) |
-| 📹 **Video Analytics** | — | YOLO/DeepSORT, 50 cameras, 8 event types | [Tutorial 27](tutorials/27-video-security-analytics/README.md) |
-| 🚶 **People Movement** | — | 30 zones, queue detection, heat maps | [Tutorial 28](tutorials/28-people-movement-analytics/README.md) |
-| 📍 **Geolocation** | — | H3 indexing, geofencing, proximity triggers | [Tutorial 29](tutorials/29-geolocation-analytics/README.md) |
+| 🌾 **USDA** | NASS, FSIS | Crop production, food safety recalls | [Tutorial 32](docs/tutorials/32-usda-agriculture/README.md) |
+| 💼 **SBA** | PPP, 7(a) | Loan analytics, 20 NAICS codes | [Tutorial 33](docs/tutorials/33-sba-small-business/README.md) |
+| 🌊 **NOAA** | CDO API | Weather observations, storm events | [Tutorial 34](docs/tutorials/34-noaa-weather-climate/README.md) |
+| 🏭 **EPA** | AirNow, TRI | Air quality (AQI), water quality (MCL) | [Tutorial 35](docs/tutorials/35-epa-environment/README.md) |
+| 🏔️ **DOI** | USGS, BLM | Earthquakes, land use management | [Tutorial 36](docs/tutorials/36-doi-interior/README.md) |
+| 🏥 **Tribal Healthcare** | HIPAA, 42 CFR | IHS encounters, PHI masking, FHIR | [Tutorial 30](docs/tutorials/30-tribal-healthcare/README.md) |
+| ✈️ **DOT/FAA** | FedRAMP, FISMA | Flight ops, safety, carrier analytics | [Tutorial 31](docs/tutorials/31-federal-dot-faa/README.md) |
+| ⚖️ **DOJ** | FBI NIBRS, USSC | Crime stats, sentencing, antitrust, DEA | [Tutorial 38](docs/tutorials/38-doj-justice/README.md) |
+| 📹 **Video Analytics** | — | YOLO/DeepSORT, 50 cameras, 8 event types | [Tutorial 27](docs/tutorials/27-video-security-analytics/README.md) |
+| 🚶 **People Movement** | — | 30 zones, queue detection, heat maps | [Tutorial 28](docs/tutorials/28-people-movement-analytics/README.md) |
+| 📍 **Geolocation** | — | H3 indexing, geofencing, proximity triggers | [Tutorial 29](docs/tutorials/29-geolocation-analytics/README.md) |
 
 ---
 

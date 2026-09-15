@@ -3,9 +3,9 @@ hero: assets/heroes/best-practices.svg
 hero_alt: "Best practice — Workspaces & Naming Conventions"
 type: deep-dive
 ---
-[Home](../index.md) > [Best Practices](./) > Workspaces & Naming Conventions
+[Home](../index.md) > [Best Practices](../best-practices.md) > Workspaces & Naming Conventions
 
-# ⚙️ Workspaces & Naming Conventions
+# ⚙️ Workspaces & Naming Conventions {#workspaces--naming-conventions}
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -445,4 +445,4 @@ Write-Host "Created workspace: $($workspace.id)"
 
 ---
 
-[⬆️ Back to Top](#-workspaces--naming-conventions) | [📚 Best Practices](./) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#workspaces--naming-conventions) | [📚 Best Practices](../best-practices.md) | [🏠 Home](../index.md)
