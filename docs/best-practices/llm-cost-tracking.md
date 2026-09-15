@@ -432,7 +432,7 @@ Every record in `llm_usage` carries five mandatory tags. Make them required at a
 |-----|---------|--------|-----|
 | `cost_center` | `casino-data-science` | Org chart / HR system | Finance chargeback |
 | `business_unit` | `gaming-ops` | Org chart | P&L roll-up |
-| `project` | `floor-monitoring` | Project tracker (Archon, Jira) | Feature-level ROI |
+| `project` | `floor-monitoring` | Project tracker (GitHub, Jira) | Feature-level ROI |
 | `workload` | `chat` / `completion` / `embedding` / `agent` / `aifunc` | Caller-declared | Cost-by-pattern analysis |
 | `environment` | `dev` / `staging` / `prod` | `FABRIC_ENV` env var | Prevent dev runaway from blocking prod |
 

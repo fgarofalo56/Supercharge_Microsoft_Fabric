@@ -464,7 +464,7 @@ For each top consumer:
 - [ ] Schedule PIR within 48 hr (per [anchor template §4](incident-response-template.md#phase-4--post-incident-review-pir))
 - [ ] Use [Blameless Postmortem Template](incident-response-template.md#blameless-postmortem-template)
 - [ ] Publish to `docs/postmortems/{YYYY-MM-DD}-capacity-throttle.md`
-- [ ] Track action items with owner + due date in Archon
+- [ ] Track action items with owner + due date as GitHub issues
 
 ---
 

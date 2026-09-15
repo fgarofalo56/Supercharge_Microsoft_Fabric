@@ -554,7 +554,7 @@ az fabric capacity suspend \
 | Compliance notifications (NIGC/FinCEN for casino; OMB/CISA for federal) | Incident Commander + Compliance Officer | Per regulatory deadline |
 | Gap analysis — what worked, what didn't, missing automation | Incident Commander | Within 48 hr |
 | Postmortem published | IC + Tech Lead | Within 48 hr (SEV1) |
-| Action items entered into Archon | IC | Within 5 business days |
+| Action items entered as GitHub issues | IC | Within 5 business days |
 | Update this runbook with lessons learned | Platform Lead | Within 5 business days |
 | Schedule next DR drill (if last drill > 60 days ago) | Platform Lead | Within 30 days |
 

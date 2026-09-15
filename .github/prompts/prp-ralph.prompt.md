@@ -1,19 +1,14 @@
 ---
 name: prp-ralph
-description: Integrate Ralph Wiggum iterative loops with PRP Framework for persistent plan execution.
+description: Turn a PRP plan into an atlas-forge task graph and run it wave by wave.
 mode: agent
 tools:
   - filesystem
   - terminal
-  - archon-find_projects
-  - archon-find_tasks
-  - archon-find_documents
-  - archon-manage_task
-  - archon-manage_document
 handoffs:
-  - label: Start Ralph Loop
+  - label: Run a wave
     agent: ralph-loop
-    prompt: Start the Ralph-powered PRP session
+    prompt: Run one wave of the dispatch graph for this PRP plan
   - label: View Plan
     agent: prp-orchestrator
     prompt: View the current PRP plan
@@ -91,35 +86,69 @@ Extract from plan.md:
 - Validation commands
 - Acceptance criteria
 
-### 3. Create Ralph Configuration
+### 3. Turn the plan into a FORGE task graph
 
-```python
-# Parse plan tasks
-plan_content = read_file(PLAN_PATH)
-tasks = parse_plan_tasks(plan_content)
-validation_commands = parse_validation(plan_content)
+> **`.ralph/config.json` is dead.** Nothing reads it — there was never a runner
+> behind the Ralph loop, and the `archon_project_id` / `archon_task_id` it
+> carried pointed at an MCP server that is not running. The execution state is
+> `.forge/tasks.json`, and the only things that write it are `atlas-forge plan`
+> and `atlas-forge decompose`. **`scripts/backlog_to_dag.py` is not shipped in
+> this repository.** Verified command surface:
+> [ATLAS FORGE orchestration](../FORGE_ORCHESTRATION.md).
 
-ralph_config = {
-    "loop_id": f"ralph-prp-{plan_name}-{timestamp}",
-    "archon_project_id": PROJECT_ID,
-    "archon_task_id": PLAN_TASK_ID,
-    "mode": "prp_integration",
-    "prompt_file": ".ralph/prompts/prp-loop.md",
-    "max_iterations": len(tasks) * 2,  # 2 iterations per task
-    "completion_promise": "PLAN_COMPLETE",
-    "integration": {
-        "prp": True,
-        "plan_path": PLAN_PATH,
-        "update_plan_status": True,
-        "create_report": True
-    },
-    "validation": {
-        "commands": validation_commands
-    }
-}
+Parse the plan's tasks into a proposals document — either `{"tasks": [...]}` or
+a bare list of objects with `id`, `title`, `estimate`, `needs`, `note`, where
+`needs` carries the plan's phase ordering:
+
+```json
+{"tasks": [
+  {"id": "p1-t1", "title": "<task from the plan>", "estimate": 80,
+   "needs": [], "note": "<acceptance criteria from the plan>"}
+]}
 ```
 
-### 4. Generate Plan-Aware Prompt
+Then assemble and gate it:
+
+```bash
+atlas-forge decompose --from proposals.json --json
+```
+
+`decompose` is a **gate, not a report**. If any task exceeds the diff-line
+budget it exits 1, names each offender and how many pieces it needs, and the
+oversized plan is **not** written to disk. Split those tasks in the PRP plan and
+re-run. Never raise `--budget` to make it pass.
+
+Verified options: `--repo`, `--from`, `--budget`, `--json`.
+
+### 4. Run it
+
+```bash
+atlas-forge dispatch --dry-run --json    # print the wave plan, run nothing
+atlas-forge dispatch --wave 1 --json     # one wave; each task its own worktree + full gates
+atlas-forge board --json                 # what settled, what failed, what is blocked
+```
+
+There is no `max_iterations` and no `completion_promise`. A task settles when
+its **gates pass on its own branch**; a task whose gates are red is red. Bound a
+run with the verified flags instead: `--wave`, `--parallel`, `--max-usd`,
+`--task-usd`, `--task-minutes` (default 90), `--phase`. Use `--resume` on any
+restart or the spend ceiling resets.
+
+Merge finished branches in dependency order, as a separate step:
+
+```bash
+atlas-forge integrate --branch <new-branch-name> --json
+```
+
+`integrate` re-runs the budget over the real `git diff --numstat`, which is the
+half of the check that the planner's own estimate cannot talk past.
+
+Before any of this: `dispatch` branches from `HEAD` and merges finished branches
+back, so **do not point it at a dirty tree**. This checkout holds hundreds of
+uncommitted files. Triage with the operator first, and never with
+`git checkout --`, `git restore`, `git clean`, or `git stash`.
+
+### 5. Generate Plan-Aware Prompt
 
 ```markdown
 # Ralph Loop: PRP Plan Execution

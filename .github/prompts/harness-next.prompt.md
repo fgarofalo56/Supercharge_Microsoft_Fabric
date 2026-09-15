@@ -1,88 +1,28 @@
 ---
 name: harness-next
-description: Start the next coding session in an autonomous agent harness. Picks up where previous session left off, implements one feature, maintains clean handoff.
+description: Continue one authorized work item using native tools and an evidence-backed handoff.
 mode: agent
 agent: harness-coder
 ---
 
-# ▶️ Next Coding Session
+# Next Coding Session
 
-Start a new coding session in your autonomous agent harness project.
+Follow [Native Harness Setup](harness-setup.prompt.md) and the coder role.
 
-## Session Protocol
+1. Read repository instructions and the existing GitHub issue handoff. Inspect
+   branch, commit, and dirty paths; preserve unrelated work.
+2. Reconcile in-progress work against actual files and execute a targeted baseline
+   check before selecting another authorized, unblocked item.
+3. Track session steps with native task tools. Implement one bounded item with
+   explicit acceptance criteria; execute the narrowest check after each edit.
+4. Collect actual test output and obtain independent review through available
+   native delegation. Report unavailable workers or missing checks as blockers.
+5. Record changes, commands and outcomes, review findings, remaining criteria,
+   blockers, and the next action in the existing GitHub issue.
 
-This prompt invokes the **harness-coder** agent which will:
+Respect setup's retry, time, and task limits. Stop affected operations on permission
+failure. No automatic staging, commits, push, merge, or deployment. On cancellation,
+stop new work, collect output, stop owned processes, and preserve the handoff.
 
-1. **Orient** - Read Archon session notes and git history
-2. **Verify** - Run health checks on completed features
-3. **Select** - Choose highest priority TODO task
-4. **Implement** - Write code for one feature
-5. **Test** - Coordinate with testing agent
-6. **Review** - Optional code review
-7. **Handoff** - Update Archon and commit cleanly
-
----
-
-## Before Starting
-
-Ensure:
-- [ ] Harness is initialized (ran `/harness-init` at least once)
-- [ ] Archon MCP is accessible
-- [ ] Development environment is ready
-
----
-
-## Session Execution
-
-The coding agent will:
-
-### 1. Get Bearings
-```bash
-pwd
-cat .harness/config.json
-```
-
-### 2. Query Archon
-```python
-find_tasks(filter_by="project", filter_value=PROJECT_ID)
-find_documents(project_id=PROJECT_ID, query="Session Notes")
-```
-
-### 3. Check for In-Progress Work
-If a task is in "doing" status, continue it rather than starting new.
-
-### 4. Select Next Task
-Highest `task_order` value among TODO tasks.
-
-### 5. Implement & Test
-Write code, run tests, fix issues.
-
-### 6. Update & Handoff
-Update Archon tasks and session notes, commit to git.
-
----
-
-## Parallel Execution
-
-For background execution:
-```bash
-& /harness-next
-```
-
-This runs the coding session in the background while you do other work.
-
----
-
-## Expected Output
-
-At session end, you'll see:
-- Task completed summary
-- Test results
-- Progress update (X/Y tasks)
-- Next task preview
-
----
-
-## Starting Session
-
-Beginning coding session...
+This prompt runs within the current host session. Background command tools do not
+restart agents; automatic continuation requires a separately tested supervisor.

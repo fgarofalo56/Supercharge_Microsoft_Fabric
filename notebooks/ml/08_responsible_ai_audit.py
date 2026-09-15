@@ -1117,6 +1117,6 @@ print(f"  - lh_gold.ml_promotion_audit      (1 row, block_promotion={block_promo
 # MAGIC    mix changes
 # MAGIC 4. **Tee** every prediction (with SHAP top-3 drivers) into the `ai_predictions` Eventhouse
 # MAGIC    table for the appeals workflow
-# MAGIC 5. **Sign-off:** RAI Lead in Archon before any Production-stage transition
+# MAGIC 5. **Sign-off:** RAI Lead in the project tracker before any Production-stage transition
 # MAGIC 6. **Retention:** 5 years for ECOA (Reg B §1002.12 + statute-of-limitations buffer);
 # MAGIC    sensitivity label "Confidential" on all four Gold tables

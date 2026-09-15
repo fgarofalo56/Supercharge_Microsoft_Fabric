@@ -1,19 +1,14 @@
 ---
 name: speckit-ralph
-description: Integrate Ralph Wiggum iterative loops with Spec Kit for persistent spec-driven development.
+description: Turn a Spec Kit specification into an atlas-forge task graph and run it wave by wave.
 mode: agent
 tools:
   - filesystem
   - terminal
-  - archon-find_projects
-  - archon-find_tasks
-  - archon-find_documents
-  - archon-manage_task
-  - archon-manage_document
 handoffs:
-  - label: Start Ralph Loop
+  - label: Run a wave
     agent: ralph-loop
-    prompt: Start the Ralph-powered speckit session
+    prompt: Run one wave of the dispatch graph for this specification
   - label: View Spec
     agent: speckit.specify
     prompt: View the current specification
@@ -107,27 +102,67 @@ fi
 cat "$CHECKLIST_PATH"
 ```
 
-### 4. Create Ralph Configuration
+### 4. Turn the checklist into a FORGE task graph
 
-```python
-ralph_config = {
-    "loop_id": f"ralph-speckit-{feature_name}-{timestamp}",
-    "archon_project_id": PROJECT_ID,
-    "archon_task_id": SPEC_TASK_ID,
-    "mode": "speckit_integration",
-    "prompt_file": ".ralph/prompts/speckit-loop.md",
-    "max_iterations": len(requirements) * 3,  # 3 iterations per requirement
-    "completion_promise": "SPEC_COMPLETE",
-    "integration": {
-        "speckit": True,
-        "spec_path": SPEC_PATH,
-        "checklist_path": CHECKLIST_PATH,
-        "validate_against_checklist": True
-    }
-}
+> **`.ralph/config.json` is dead.** Nothing reads it — there was never a runner
+> behind the Ralph loop, and the `archon_project_id` / `archon_task_id` it
+> carried pointed at an MCP server that is not running. Execution state is
+> `.forge/tasks.json`, written only by `atlas-forge plan` and
+> `atlas-forge decompose`. **`scripts/backlog_to_dag.py` is not shipped in this
+> repository.** Verified command surface:
+> [ATLAS FORGE orchestration](../FORGE_ORCHESTRATION.md).
+
+Each checklist requirement becomes one task, with the requirement itself as the
+acceptance criteria. Write a proposals document — `{"tasks": [...]}`, or a bare
+list of objects with `id`, `title`, `estimate`, `needs`, `note`:
+
+```json
+{"tasks": [
+  {"id": "req-001", "title": "<requirement from the checklist>", "estimate": 80,
+   "needs": [], "note": "<the acceptance criterion it must satisfy>"}
+]}
 ```
 
-### 5. Generate Spec-Aware Prompt
+Assemble and gate it:
+
+```bash
+atlas-forge decompose --from proposals.json --json
+```
+
+`decompose` is a **gate, not a report**: any task over the diff-line budget
+exits 1, is named with how many pieces it needs, and the oversized plan is not
+written to disk. Split the requirement in the spec and re-run. Never raise
+`--budget` to make it pass.
+
+Bind the acceptance criteria to the tasks so "done" has a meaning the runner can
+check, rather than a promise phrase:
+
+```bash
+atlas-forge spec --help     # new / add / list / show / compile / verify
+atlas-forge story --help    # assign / list / show / verify
+```
+
+Verify those two subcommand surfaces with `--help` before scripting them.
+
+### 5. Run it
+
+```bash
+atlas-forge dispatch --dry-run --json   # print the wave plan, run nothing
+atlas-forge dispatch --wave 1 --json    # one wave; each task its own worktree + full gates
+atlas-forge board --json                # ready / doing / done / failed / blocked_on_human
+```
+
+There is no `max_iterations` and no `completion_promise`. A task settles when
+its **gates pass on its own branch**. Bound a run with verified flags instead:
+`--wave`, `--parallel`, `--max-usd`, `--task-usd`, `--task-minutes` (default
+90), `--phase`. Use `--resume` on any restart or the spend ceiling resets.
+
+`dispatch` branches from `HEAD` and merges finished branches back, so **do not
+point it at a dirty tree** — this checkout holds hundreds of uncommitted files.
+Triage with the operator first, and never with `git checkout --`,
+`git restore`, `git clean`, or `git stash`.
+
+### 6. Generate Spec-Aware Prompt
 
 ```markdown
 # Ralph Loop: Spec Implementation

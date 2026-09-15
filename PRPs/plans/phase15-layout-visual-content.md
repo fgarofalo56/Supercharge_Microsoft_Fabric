@@ -42,6 +42,8 @@ This PRP is structured for the **Parallel Worktree Orchestrator** skill — each
 | Target Duration | 1-2 days (parallel execution) |
 | Archon Project ID | `c0f96f03-5095-4704-a167-9a3f5a3e3ed1` |
 
+> **2026-09-14:** The Archon project ID above is dead — that MCP server is not running and not installed. Orchestration now runs through the ATLAS FORGE commands; see [`.github/FORGE_ORCHESTRATION.md`](../../.github/FORGE_ORCHESTRATION.md). The rest of this plan is left as written at the time.
+
 ---
 
 ## Mandatory Reading

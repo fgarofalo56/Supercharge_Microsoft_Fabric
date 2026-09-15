@@ -1,14 +1,10 @@
 ---
 name: ralph-cancel
-description: Cancel an active Ralph Wiggum loop.
+description: Stop an in-flight atlas-forge dispatch or factory run without destroying work.
 mode: agent
 tools:
   - filesystem
   - terminal
-  - archon-find_tasks
-  - archon-find_documents
-  - archon-manage_task
-  - archon-manage_document
 ---
 
 ## User Input
@@ -19,126 +15,87 @@ $ARGUMENTS
 
 ## Purpose
 
-Cancel an active Ralph Wiggum loop gracefully.
+Stop work that is in flight, preserving everything it produced.
 
-## Execution Flow
+> The previous version of this prompt updated Archon documents and offered a
+> `--cleanup` flag that ran `git checkout .` and `git clean -fd`. **Archon is
+> not running, and those two commands would have destroyed hundreds of
+> uncommitted files in this checkout.** Both are gone. See
+> [ATLAS FORGE orchestration](../FORGE_ORCHESTRATION.md).
 
-### 1. Find Active Loop
-
-```python
-# Check local state
-config = read_file(".ralph/config.json")
-
-# Verify loop is running
-state = find_documents(
-    project_id=config["archon_project_id"],
-    query=f"Ralph Loop State: {config['loop_id']}"
-)
-
-if state["content"]["status"] != "running":
-    print("No active loop to cancel")
-    exit()
-```
-
-### 2. Update Archon State
-
-```python
-manage_document("update",
-    project_id=PROJECT_ID,
-    document_id=STATE_DOC_ID,
-    content={
-        **state["content"],
-        "status": "cancelled",
-        "cancelled_at": NOW,
-        "cancelled_by": "user",
-        "final_iteration": state["content"]["current_iteration"]
-    }
-)
-```
-
-### 3. Update Task
-
-```python
-manage_task("update",
-    task_id=TASK_ID,
-    status="todo",  # Reset to todo
-    description=f"""[ORIGINAL_DESCRIPTION]
-
----
-## Ralph Loop Cancelled
-
-### Progress at Cancellation
-- Iterations: {CURRENT}/{MAX}
-- Tests: {PASSING}/{TOTAL}
-
-### Work Completed
-{SUMMARY}
-
-### Resume Options
-- Restart: `/ralph-start --resume`
-- Continue manually
-- Reassign to different approach
-
----
-Cancelled: {NOW}
-"""
-)
-```
-
-### 4. Cleanup (Optional)
+## First, find out what is actually running
 
 ```bash
-# With --cleanup flag: revert changes
-git checkout .
-git clean -fd
-
-# With --keep flag (default): preserve changes
-# Just update state, keep files
+atlas-forge board --json
+atlas-forge factory status --json
+atlas-forge watch --json          # follows a live run; starts nothing
 ```
 
-### 5. Commit State
+`.forge/dispatch-progress.json` carries `finished`, `in_flight`, and the wave
+counters. If nothing is in flight, say so and stop — there is nothing to
+cancel.
+
+## Stopping a `dispatch` run
+
+| Command | Effect |
+|---|---|
+| `atlas-forge pause [run_id] --json` | Stop at the next **wave boundary**. In-flight tasks finish. |
+| `atlas-forge cancel [run_id] --json` | Stop and do not resume automatically. |
+
+Prefer `pause` when the current wave is doing useful work — letting it reach a
+boundary leaves the graph in a cleaner state to resume from.
+
+## Stopping a `factory` drain
 
 ```bash
-git add .ralph/
-git commit -m "Ralph loop cancelled
-
-Loop: [LOOP_ID]
-Iteration: [N]/[MAX]
-Reason: User cancelled
-"
+atlas-forge factory halt --reason "<why, for the next person>" --json
 ```
 
-## Options
+This writes a local kill file that every tick checks first. Give a real reason;
+it goes into the handoff.
+
+To undo it later:
 
 ```bash
-/ralph-cancel              # Cancel and preserve changes
-/ralph-cancel --force      # Cancel without state updates
-/ralph-cancel --cleanup    # Cancel and revert all changes
-/ralph-cancel --loop <id>  # Cancel specific loop
+atlas-forge factory resume --json     # reports whether there was a halt file
 ```
 
-## Output
+After a halt, rows can be left in `doing` with no live lane process behind
+them. Count them before changing anything:
 
-```markdown
-## 🛑 Ralph Loop Cancelled
-
-### Loop: ralph-20260122-150000
-- Final Iteration: 12/50
-- Duration: 25m
-- Changes Preserved: Yes
-
-### Task Status
-- Task: Build REST API
-- Status: Reset to "todo"
-- Assignee: Unassigned
-
-### Files Changed (Preserved)
-- src/api.ts
-- tests/api.test.ts
-- package.json
-
-### Next Steps
-- Review changes: `git status`
-- Resume later: `/ralph-start --resume`
-- Start fresh: `/ralph-start`
+```bash
+atlas-forge factory requeue --dry-run --json   # counts stale rows, writes nothing
+atlas-forge factory requeue --json             # returns them to todo
 ```
+
+## Never, under any circumstances
+
+These are prohibited in this repository. The working tree holds hundreds of
+uncommitted files that represent real unreviewed work, and there are three
+worktrees, one with an in-progress merge.
+
+- `git checkout --` / `git checkout .`
+- `git restore`
+- `git clean` (any flags)
+- `git stash` — the stash stack is shared across worktrees on this machine and
+  other sessions pop it
+- Deleting a failed task's worktree
+
+**Cancelling is not reverting.** A failed or cancelled task deliberately keeps
+its worktree so the work is still there to read. That is the evidence. If the
+operator genuinely wants changes discarded, that is their decision to make
+explicitly, on named paths, not a `--cleanup` flag on a stop command.
+
+Do not commit or push as part of cancelling.
+
+## Report
+
+What was in flight, which stop command was issued and its actual output,
+whether the run has confirmed stopped (re-read `factory status` / the progress
+file — do not assume), how many rows were left in `doing`, which worktrees and
+branches now hold unmerged work and where they are, and what the operator's
+options are for resuming:
+
+- Resume the drain: `atlas-forge factory resume`
+- Run another wave by hand: `/ralph-iterate`
+- See the state: `/ralph-status`

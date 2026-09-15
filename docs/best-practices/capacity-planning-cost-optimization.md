@@ -11,13 +11,13 @@ type: deep-dive
 
 ![Category](https://img.shields.io/badge/Category-Cost_Management-green?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
-![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-September_2026-blue?style=for-the-badge)
 
 </div>
 
 ---
 
-**Last Updated:** `2026-04-13` | **Version:** 1.0.0
+**Last Updated:** `2026-09-07` | **Version:** 1.1.0
 
 ---
 
@@ -30,10 +30,10 @@ Microsoft Fabric uses a Capacity Unit (CU) consumption model where all workloads
 | Concept | Description |
 |---------|-------------|
 | **Capacity Unit (CU)** | Universal compute currency across all Fabric workloads |
-| **SKU** | Fixed capacity tier (F2 to F2048) determining CU allocation |
-| **Burst** | Temporary ability to exceed baseline CU allocation (smoothed over 24h) |
+| **SKU** | Fixed capacity tier (F2 to F8192) determining CU allocation |
+| **Burst** | Temporary ability to exceed baseline CU allocation (burstable scale factor varies by SKU: up to 32x on F2, 12x on F8–F2048, 6x on F4096, 3x on F8192 for Warehouse/SQL endpoint workloads) |
 | **Throttling** | Performance degradation when sustained CU usage exceeds SKU capacity |
-| **Smoothing** | Fabric's mechanism to average CU usage over time windows (10s, 60s, 5m) |
+| **Smoothing** | Fabric's mechanism to spread CU accounting — interactive jobs smoothed over a minimum of 5 minutes; background/scheduled jobs over 24 hours |
 | **Pause/Resume** | Ability to stop billing by pausing capacity during idle periods |
 
 ### Cost Optimization Goals
@@ -79,6 +79,10 @@ mindmap
 | **F512** | 512 | 2048 | 512 | P4 | ~$67,277 | Enterprise production |
 | **F1024** | 1024 | 4096 | 1024 | P5 | ~$134,554 | Enterprise high-demand |
 | **F2048** | 2048 | 8192 | 2048 | — | ~$269,107 | Hyperscale enterprise |
+| **F4096** | 4096 | 16384 | 4096 | — | ~$538,214 | Hyperscale enterprise (burstable scale factor drops to 6x) |
+| **F8192** | 8192 | 32768 | 8192 | — | ~$1,076,428 | Largest available SKU (burstable scale factor drops to 3x) |
+
+> **P SKU mapping** (Premium migration): P1→F64, P2→F128, P3→F256, P4→F512, P5→F1024. Right-size from there with the Capacity Metrics app — see the [Premium to Fabric migration FAQ](https://learn.microsoft.com/power-bi/support/premium-migration-faq#sku-sizing-and-mapping).
 
 > **Note:** Costs are approximate East US list prices (pay-as-you-go). Reserved capacity (1-year or 3-year) offers 25–40% savings. Prices vary by region.
 
@@ -918,6 +922,9 @@ flowchart TD
 - [Microsoft Fabric capacity and SKUs](https://learn.microsoft.com/fabric/enterprise/licenses)
 - [Fabric capacity metrics app](https://learn.microsoft.com/fabric/enterprise/metrics-app)
 - [Understand Fabric capacity throttling](https://learn.microsoft.com/fabric/enterprise/throttling)
+- [Plan your capacity size](https://learn.microsoft.com/fabric/enterprise/plan-capacity)
+- [Burstable capacity in Fabric Data Warehouse](https://learn.microsoft.com/fabric/data-warehouse/burstable-capacity)
+- [Surge protection](https://learn.microsoft.com/fabric/enterprise/surge-protection)
 - [Pause and resume Fabric capacity](https://learn.microsoft.com/fabric/enterprise/pause-resume)
 - [Fabric pricing calculator](https://azure.microsoft.com/pricing/details/microsoft-fabric/)
 - [Smoothing and bursting in Fabric](https://learn.microsoft.com/fabric/enterprise/fabric-operations)

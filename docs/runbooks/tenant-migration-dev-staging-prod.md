@@ -469,9 +469,9 @@ After successful Prod deployment:
    Release notes: {link}
    ```
 
-4. **Update Archon Session Context document** with deploy outcome
+4. **Update the Session Context document** in the project tracker with deploy outcome
 5. **Monitor for 2 hours** post-deploy: capacity, pipeline runs, Power BI errors
-6. **Close the deploy ticket** in Archon (status = `done`)
+6. **Close the deploy ticket** in the project tracker (status = `done`)
 
 ---
 

@@ -11,7 +11,7 @@ You are the **Project Wizard**, an expert agent that guides users through creati
 - ✅ Proper folder structure
 - ✅ Security configurations (pre-commit hooks, secret detection)
 - ✅ GitHub repository with branch protection
-- ✅ Archon project for task management
+- ✅ GitHub issues seeded for task tracking, and .forge/ scaffolded
 - ✅ Customized documentation
 
 ---
@@ -125,35 +125,29 @@ Use `ask_user` to collect the following information:
    gh api repos/<org>/<project_name> -X PATCH -f security_and_analysis='{"secret_scanning":{"status":"enabled"},"secret_scanning_push_protection":{"status":"enabled"}}'
    ```
 
-### Step 5: Create Archon Project
+### Step 5: Set Up Task Tracking
 
-Use Archon MCP tools to set up project tracking:
+There is no external project-management service. Durable work items are GitHub
+issues; execution state is `.forge/` on disk.
 
-```javascript
-// Create the project
-manage_project("create", {
-  title: "<Project Name>",
-  description: "<Project Description>",
-  github_repo: "https://github.com/<org>/<project_name>"
-})
+```bash
+# Seed the first work items as issues
+gh issue create --title "Complete project setup" \
+  --body "Review and customize copied template files" --label "setup"
 
-// Create initial tasks
-manage_task("create", {
-  project_id: "<returned_project_id>",
-  title: "Complete project setup",
-  description: "Review and customize copied template files",
-  status: "todo",
-  feature: "Setup"
-})
+gh issue create --title "Define project architecture" \
+  --body "Create architecture documentation and diagrams" --label "documentation"
 
-manage_task("create", {
-  project_id: "<returned_project_id>",
-  title: "Define project architecture",
-  description: "Create architecture documentation and diagrams",
-  status: "todo",
-  feature: "Documentation"
-})
+# Set the repository up for ATLAS FORGE (surveys first, then writes)
+atlas-forge init
 ```
+
+`atlas-forge init` scaffolds the `.forge/` layout. Verified options: `--yes`/`-y`,
+`--workspace`/`--no-workspace`, `--repo`. **It does not create tasks** — a task
+graph comes later from `atlas-forge plan` and `atlas-forge decompose`, and
+nothing else writes `.forge/tasks.json`. See
+[ATLAS FORGE orchestration](../FORGE_ORCHESTRATION.md) for the verified surface,
+and do not use a flag that file has not verified.
 
 ### Step 6: Provide Summary
 
@@ -169,7 +163,7 @@ Output a summary of what was created:
 | **Location** | <full_path> |
 | **Type** | <project_type> |
 | **Repository** | https://github.com/<org>/<project_name> |
-| **Archon Project** | <project_id> |
+| **Issue tracker** | https://github.com/<org>/<project_name>/issues |
 
 ## What's Included
 - ✅ Pre-configured .gitignore
@@ -183,7 +177,7 @@ Output a summary of what was created:
 ## Next Steps
 1. Open the project in VS Code: `code <project_path>`
 2. Review and customize `README.md`
-3. Check Archon tasks: `find_tasks(project_id="<project_id>")`
+3. Check open work: `gh issue list --state open`
 4. Start building! 🚀
 ```
 
@@ -198,7 +192,7 @@ Output a summary of what was created:
 | gh CLI not installed | Provide installation instructions |
 | gh CLI not authenticated | Run `gh auth login` |
 | Pre-commit install fails | Provide manual installation steps |
-| Archon MCP not available | Skip Archon integration, note in summary |
+| atlas-forge not installed | Skip the .forge/ scaffold, note it in the summary |
 
 ---
 
@@ -225,7 +219,7 @@ The wizard supports customization through:
 | `powershell` | File operations, git commands |
 | `create` / `edit` | File customization |
 | `gh` CLI | GitHub repository management |
-| `archon-*` | Project and task management |
+| `atlas-forge` | Workspace scaffold and task orchestration |
 
 ---
 
@@ -264,7 +258,7 @@ Installing pre-commit hooks... ✅
 Creating GitHub repository... ✅
 Configuring branch protection... ✅
 Enabling secret scanning... ✅
-Creating Archon project... ✅
+Seeding GitHub issues... ✅
 
 🎉 Project created successfully!
 ...

@@ -69,25 +69,25 @@ gh api "repos/$Org/$ProjectName/branches/main/protection" -X PUT -H "Accept: app
 gh api "repos/$Org/$ProjectName" -X PATCH -f security_and_analysis='{"secret_scanning":{"status":"enabled"},"secret_scanning_push_protection":{"status":"enabled"}}'
 ```
 
-### 3. Create Archon Project
+### 3. Set Up Task Tracking
 
-```javascript
-// Create project in Archon
-manage_project("create", {
-  title: "<Project Name>",
-  description: "<description>",
-  github_repo: "https://github.com/<org>/<project_name>"
-})
+There is no external task-management service. Work items are GitHub issues;
+execution state is `.forge/` on disk.
 
-// Create setup task
-manage_task("create", {
-  project_id: "<project_id>",
-  title: "Complete project setup",
-  description: "Review and customize template files",
-  status: "todo",
-  feature: "Setup"
-})
+```bash
+# Seed the first work item
+gh issue create --title "Complete project setup" \
+  --body "Review and customize template files" --label "setup"
+
+# Scaffold the FORGE workspace (surveys first, then writes)
+atlas-forge init
 ```
+
+`atlas-forge init` verified options: `--yes`/`-y`, `--workspace`/`--no-workspace`,
+`--repo`. **It does not create tasks** — a task graph comes later from
+`atlas-forge plan` and `atlas-forge decompose`, which are the only things that
+write `.forge/tasks.json`. See
+[ATLAS FORGE orchestration](../FORGE_ORCHESTRATION.md).
 
 ### 4. Customize Files
 
@@ -101,7 +101,7 @@ Show the user:
 - ✅ What was created
 - 📍 Project location
 - 🔗 Repository URL
-- 📋 Archon project ID
+- 📋 Issue tracker URL, and any issues seeded
 - 🚀 Next steps
 
 ## Important Notes
@@ -109,7 +109,7 @@ Show the user:
 - Always ask for GitHub org (don't assume)
 - Default to Private visibility
 - Handle errors gracefully with helpful messages
-- If Archon is unavailable, skip that step but note it
+- If `atlas-forge` is not installed, skip the `.forge/` scaffold but note it
 
 ## Prerequisites Check
 

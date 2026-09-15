@@ -56,8 +56,9 @@ param capacityReservationLevel int = 100
 @maxValue(730)
 param retentionInDays int = 90
 
-@description('Daily ingestion cap in GB. Use -1 for unlimited (no cap). Recommended: cap non-prod environments to control cost.')
+@description('Daily ingestion cap in GB. Use -1 for unlimited (no cap). Recommended: cap non-prod environments to control cost. Max 1000 GB/day when capped.')
 @minValue(-1)
+@maxValue(1000)
 param dailyQuotaGb int = -1
 
 @description('Per-table retention overrides. Each item: { tableName, retentionInDays, totalRetentionInDays }. totalRetentionInDays >= retentionInDays and supports up to 4383 days for archive tier.')

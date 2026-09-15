@@ -875,7 +875,7 @@ The [Tribal Health Analytics](../use-cases/tribal-health-analytics.md) use case 
 
 ## 📋 RAI Review Checklist
 
-A model cannot be promoted to Production until every applicable item is checked. The RAI Lead signs off in Archon as the gate.
+A model cannot be promoted to Production until every applicable item is checked. The RAI Lead signs off in the project tracker as the gate.
 
 ### Design Phase
 
@@ -920,7 +920,7 @@ A model cannot be promoted to Production until every applicable item is checked.
 
 ### Operate Phase
 
-- [ ] Quarterly fairness re-audit scheduled in Archon
+- [ ] Quarterly fairness re-audit scheduled in the project tracker
 - [ ] Annual RAI review board meeting scheduled with named attendees
 - [ ] Postmortem template ready for first incident
 - [ ] Decommission criteria defined (when do we retire this model?)

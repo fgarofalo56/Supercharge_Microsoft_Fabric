@@ -11,32 +11,40 @@ type: feature
 
 ![Category](https://img.shields.io/badge/Category-DevOps-orange?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
-![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-September_2026-blue?style=for-the-badge)
 
 </div>
 
 ---
 
-**Last Updated:** `2026-04-27` | **Version:** 1.0.0
+**Last Updated:** `2026-09-07` | **Version:** 2.0.0
+
+> ⚠️ **Version 2.0.0 corrects significant inaccuracies in v1.0.0.** The previous version described a "Secret" variable type with Azure Key Vault binding that is **not part of the official variable library specification**, and omitted **value sets** — the actual GA mechanism for environment-specific configuration. This version aligns with the [official Microsoft Learn documentation](https://learn.microsoft.com/fabric/cicd/variable-library/variable-library-overview).
 
 ---
 
 ## Overview
 
-Variable Libraries in Microsoft Fabric provide a centralized mechanism for managing configuration values across pipelines, notebooks, dataflows, and Spark Job Definitions. Rather than hard-coding connection strings, thresholds, file paths, or environment flags into individual items, Variable Libraries let you define named groups of key-value pairs that are resolved at runtime.
-
-This is essential for enterprises that promote artifacts from development through staging to production -- the same pipeline definition works in every environment because environment-specific values (storage paths, database endpoints, retention days) are externalized into Variable Libraries.
+A **variable library** is a Fabric workspace item that defines a set of variables other workspace items — pipelines, notebooks, copy jobs, dataflows, lakehouse shortcuts — read at runtime. Instead of hardcoding connection strings, thresholds, file paths, or environment flags into individual items, you externalize them into a variable library so the **same item definition works in every environment**.
 
 ### Key Capabilities
 
 | Capability | Description |
 |------------|-------------|
-| **Centralized config** | Single pane of glass for all configuration values in a workspace |
-| **Environment promotion** | Same artifact, different config per environment |
-| **Secret binding** | Reference Azure Key Vault secrets without embedding credentials |
-| **Type safety** | String, integer, boolean, and secret types |
-| **REST API management** | Full CRUD via Fabric REST API for CI/CD automation |
-| **Scope inheritance** | Workspace-level defaults, item-level overrides |
+| **Centralized config** | Single item holding configuration values shared across workspace items |
+| **Value sets** | Alternative sets of values per environment (dev/test/prod); one value set is **active** per library in each workspace |
+| **Reference types** | **Connection reference** and **Item reference** variables with UI item pickers — remove environment-specific IDs from item definitions |
+| **Standard types** | String, Number, Integer, DateTime, GUID, Boolean |
+| **CI/CD native** | Managed as code — Git integration, deployment pipelines, and REST APIs |
+| **fabric-cicd support** | `fabric-cicd` deploys variable libraries **first** (before dependent items) and can **activate a value set** matching the target environment name |
+
+### Variable Types
+
+| Type | Use |
+|------|-----|
+| **String, Number, Integer, DateTime, GUID, Boolean** | Standard configuration values |
+| **Connection reference** | Parameterize connections for ETL items (pipelines, lakehouse shortcuts) — the UI shows a connection picker |
+| **Item reference** | Parameterize dependencies on other Fabric items (e.g., a notebook writing to a lakehouse in another workspace) — the UI shows an item picker |
 
 ---
 
@@ -44,450 +52,167 @@ This is essential for enterprises that promote artifacts from development throug
 
 ```mermaid
 graph TB
-    subgraph "Variable Library"
-        VG[Variable Group]
-        VG --> V1["storage_path = abfss://..."]
-        VG --> V2["retention_days = 90"]
-        VG --> V3["env = prod"]
-        VG --> V4["db_connection 🔒 → Key Vault"]
+    subgraph "Variable Library Item"
+        VL[Variable Library]
+        VL --> VS1["Value set: dev (active in dev workspace)"]
+        VL --> VS2["Value set: test"]
+        VL --> VS3["Value set: prod"]
+        VS1 --> V1["bronze_path = abfss://...dev..."]
+        VS3 --> V2["bronze_path = abfss://...prod..."]
     end
 
-    subgraph "Fabric Items"
+    subgraph "Consumer Items (same workspace)"
         P[Pipeline]
         N[Notebook]
+        CJ[Copy Job]
         DF[Dataflow Gen2]
-        SJD[Spark Job Definition]
+        SC[Lakehouse Shortcut]
     end
 
-    VG --> P
-    VG --> N
-    VG --> DF
-    VG --> SJD
-
-    subgraph "Environments"
-        DEV[Dev Workspace]
-        STG[Staging Workspace]
-        PRD[Production Workspace]
-    end
-
-    DEV --> VG1["VarLib: storage_path = dev/..."]
-    STG --> VG2["VarLib: storage_path = stg/..."]
-    PRD --> VG3["VarLib: storage_path = prod/..."]
+    VL --> P
+    VL --> N
+    VL --> CJ
+    VL --> DF
+    VL --> SC
 ```
 
-### How Variable Resolution Works
+### How Resolution Works
 
-1. A pipeline or notebook references a variable by name (e.g., `@variables('storage_path')`)
-2. At runtime, Fabric resolves the variable from the Variable Library attached to the current workspace
-3. Secret variables trigger an authenticated call to Azure Key Vault
-4. The resolved value is injected into the activity or cell execution context
+1. Each workspace holds the **same variable library definition**, but the **active value set differs** per workspace
+2. A consumer item references a variable (e.g., in a pipeline, via **Library variables** in the pipeline editor)
+3. At runtime, the item reads the value from the **active value set** of the variable library in its workspace
+4. Promoting items across dev/test/prod workspaces requires **no item changes** — only the active value set differs
 
 ---
 
-## Creating Variable Libraries
+## Creating and Using Variable Libraries
 
 ### Via the Fabric Portal
 
-1. Navigate to your workspace
-2. Select **+ New** > **Variable Library**
-3. Provide a name (e.g., `casino-config-dev`)
-4. Add variables with Name, Type, and Value
-5. For secrets, select Type = **Secret** and configure Key Vault binding
-
-### Via REST API
-
-```python
-import requests
-
-base_url = "https://api.fabric.microsoft.com/v1"
-workspace_id = "your-workspace-id"
-token = "your-bearer-token"
-
-headers = {
-    "Authorization": f"Bearer {token}",
-    "Content-Type": "application/json"
-}
-
-# Create a Variable Library
-payload = {
-    "displayName": "casino-config-dev",
-    "description": "Casino POC configuration for development environment",
-    "definition": {
-        "parts": [
-            {
-                "path": "variableLibrary.json",
-                "payload": {
-                    "variables": {
-                        "storage_account": {
-                            "type": "String",
-                            "value": "fabricpocdev"
-                        },
-                        "bronze_path": {
-                            "type": "String",
-                            "value": "abfss://bronze@onelake.dfs.fabric.microsoft.com/lh_bronze.Lakehouse/Tables"
-                        },
-                        "retention_days": {
-                            "type": "Int",
-                            "value": 90
-                        },
-                        "enable_pii_masking": {
-                            "type": "Bool",
-                            "value": True
-                        },
-                        "ctr_threshold": {
-                            "type": "Int",
-                            "value": 10000
-                        },
-                        "db_connection_string": {
-                            "type": "Secret",
-                            "keyVaultUrl": "https://kv-fabric-poc-dev.vault.azure.net/",
-                            "secretName": "sql-connection-string"
-                        }
-                    }
-                }
-            }
-        ]
-    }
-}
-
-response = requests.post(
-    f"{base_url}/workspaces/{workspace_id}/variableLibraries",
-    headers=headers,
-    json=payload
-)
-print(response.status_code, response.json())
-```
-
-### Updating Variables
-
-```python
-# Update a specific variable value
-library_id = "your-library-id"
-
-update_payload = {
-    "variables": {
-        "retention_days": {
-            "type": "Int",
-            "value": 365  # Production: longer retention
-        }
-    }
-}
-
-response = requests.patch(
-    f"{base_url}/workspaces/{workspace_id}/variableLibraries/{library_id}",
-    headers=headers,
-    json=update_payload
-)
-```
-
----
-
-## Environment-Specific Values
-
-The core value of Variable Libraries is environment promotion. The same pipeline YAML or notebook travels unchanged from dev to prod; only the Variable Library differs per workspace.
-
-### Recommended Pattern
-
-| Variable | Dev | Staging | Production |
-|----------|-----|---------|------------|
-| `env` | `dev` | `staging` | `prod` |
-| `bronze_path` | `abfss://bronze@dev-onelake/...` | `abfss://bronze@stg-onelake/...` | `abfss://bronze@prd-onelake/...` |
-| `retention_days` | `30` | `90` | `365` |
-| `enable_pii_masking` | `false` | `true` | `true` |
-| `ctr_threshold` | `10000` | `10000` | `10000` |
-| `log_level` | `DEBUG` | `INFO` | `WARNING` |
-| `max_parallelism` | `2` | `4` | `8` |
-| `db_connection` | KV-dev secret | KV-stg secret | KV-prd secret |
-
-### CI/CD Promotion Script
-
-```python
-"""
-Promote Variable Library values across environments.
-Used in GitHub Actions or Azure DevOps pipelines.
-"""
-import json
-import sys
-
-def promote_variables(source_env: str, target_env: str, overrides: dict):
-    """Read source env config, apply target overrides, push to target workspace."""
-    
-    with open(f"config/variables-{source_env}.json") as f:
-        variables = json.load(f)
-    
-    # Apply environment-specific overrides
-    for key, value in overrides.items():
-        if key in variables:
-            variables[key]["value"] = value
-    
-    # Update target workspace Variable Library via REST API
-    update_variable_library(
-        workspace_id=WORKSPACE_IDS[target_env],
-        library_id=LIBRARY_IDS[target_env],
-        variables=variables
-    )
-    print(f"Promoted {len(variables)} variables from {source_env} to {target_env}")
-
-# Usage: python promote.py staging prod
-if __name__ == "__main__":
-    OVERRIDES = {
-        "prod": {
-            "retention_days": 365,
-            "log_level": "WARNING",
-            "max_parallelism": 8
-        }
-    }
-    promote_variables(sys.argv[1], sys.argv[2], OVERRIDES.get(sys.argv[2], {}))
-```
-
----
-
-## Secrets and Key Vault Integration
-
-Variable Libraries integrate natively with Azure Key Vault for sensitive values.
-
-### Configuration
-
-```json
-{
-    "db_connection_string": {
-        "type": "Secret",
-        "keyVaultUrl": "https://kv-fabric-poc-prod.vault.azure.net/",
-        "secretName": "casino-db-connection",
-        "secretVersion": "a1b2c3d4e5f6"
-    },
-    "api_key": {
-        "type": "Secret",
-        "keyVaultUrl": "https://kv-fabric-poc-prod.vault.azure.net/",
-        "secretName": "external-api-key"
-    }
-}
-```
-
-### Requirements
-
-1. **Key Vault Access Policy**: The Fabric workspace identity (or the Entra app registration used by the pipeline) must have `Get` permission on secrets
-2. **Network Access**: If Key Vault uses private endpoints, ensure Fabric's managed VNet can reach it
-3. **Secret Rotation**: Use Key Vault versioning; update the `secretVersion` in the Variable Library or omit it to always get the latest
-
-### Reading Secrets in Notebooks
-
-```python
-# In a Fabric notebook, secret variables are resolved automatically
-# when accessed through the Variable Library binding
-
-# Option 1: Via mssparkutils (recommended)
-db_conn = mssparkutils.credentials.getSecret(
-    "https://kv-fabric-poc-prod.vault.azure.net/",
-    "casino-db-connection"
-)
-
-# Option 2: Via pipeline parameter passthrough
-# Pipeline passes secret variable as a notebook parameter
-db_conn = dbutils.widgets.get("db_connection_string")  # Already resolved
-```
-
----
-
-## Using Variables in Fabric Items
+1. In your workspace, select **New item → Variable library**
+2. Add variables with a name, type, and default value
+3. Add **value sets** (e.g., `dev`, `test`, `prod`) with environment-specific values
+4. Set the **active value set** for this library in the workspace
+5. In a consumer item (e.g., a pipeline), select **Library variables** and reference the variable
 
 ### In Pipelines
 
-```json
-{
-    "name": "Copy Bronze Data",
-    "type": "Copy",
-    "inputs": [],
-    "outputs": [],
-    "typeProperties": {
-        "source": {
-            "type": "DelimitedTextSource",
-            "storeSettings": {
-                "type": "AzureBlobFSReadSettings",
-                "filePath": "@variables('bronze_path')"
-            }
-        },
-        "sink": {
-            "type": "LakehouseTableSink",
-            "tableName": "slot_telemetry"
-        }
-    }
-}
-```
+Declare library variables in the pipeline editor (**Library variables → New**), mapping a pipeline variable to a library variable:
 
-### In Notebooks (PySpark)
+| Name | Library | Variable name | Type |
+|------|---------|---------------|------|
+| `SourceLH` | WS Variables | `Source_LH` | String |
+| `DestinationLH` | WS Variables | `Destination_LH` | String |
+| `SourceTableName` | WS Variables | `SourceTable_Name` | String |
 
-```python
-# Read variable library values passed as notebook parameters
-env = spark.conf.get("spark.fabric.variable.env", "dev")
-bronze_path = spark.conf.get("spark.fabric.variable.bronze_path")
-retention_days = int(spark.conf.get("spark.fabric.variable.retention_days", "90"))
-ctr_threshold = int(spark.conf.get("spark.fabric.variable.ctr_threshold", "10000"))
-
-print(f"Environment: {env}")
-print(f"Bronze path: {bronze_path}")
-print(f"Retention: {retention_days} days")
-
-# Use in transformations
-from pyspark.sql import functions as F
-from datetime import datetime, timedelta
-
-cutoff_date = datetime.now() - timedelta(days=retention_days)
-
-df = spark.read.format("delta").load(bronze_path)
-df_filtered = df.filter(F.col("event_timestamp") >= cutoff_date)
-
-# Compliance check using variable threshold
-df_ctr = df_filtered.filter(F.col("transaction_amount") >= ctr_threshold)
-print(f"CTR candidates: {df_ctr.count()}")
-```
+Then reference them in activities via dynamic content.
 
 ### In Dataflow Gen2
 
-Reference variables using the `@variables('name')` expression syntax in source/sink configurations and transformation steps.
+Variable libraries integrate with Dataflow Gen2 (preview, September 2025) — reference variables directly in the dataflow for dynamic behavior across environments. See [Variable libraries in Dataflow Gen2](https://learn.microsoft.com/fabric/data-factory/dataflow-gen2-variable-library-integration).
 
-### In Spark Job Definitions
+### In Notebooks
+
+Notebooks read variable library values through the notebook's variable library binding. Avoid hardcoding environment-specific settings:
 
 ```python
-# main.py for Spark Job Definition
-import argparse
-from pyspark.sql import SparkSession
+# BAD — hardcoded, environment-specific
+database_server = '<server-name>.database.windows.net'
+database_name = 'ProductSalesDev'
 
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--env", required=True)
-    parser.add_argument("--bronze-path", required=True)
-    parser.add_argument("--retention-days", type=int, default=90)
-    args = parser.parse_args()
-
-    spark = SparkSession.builder.appName(f"bronze-ingest-{args.env}").getOrCreate()
-    
-    df = spark.read.format("delta").load(args.bronze_path)
-    print(f"Loaded {df.count()} records from {args.bronze_path}")
-    
-    spark.stop()
-
-if __name__ == "__main__":
-    main()
+# GOOD — read from the variable library bound to the notebook
+# (variable names resolve from the active value set of the workspace)
 ```
+
+---
+
+## CI/CD and Environment Promotion
+
+### With Deployment Pipelines
+
+Each stage's workspace has the same variable library but a different active value set. After a one-time setup of the active value set per stage, the correct values are used automatically in each stage.
+
+### With fabric-cicd
+
+`fabric-cicd` handles variable libraries specially:
+
+1. It **always deploys the variable library first**, before any items that depend on it
+2. It can **activate a specific value set** — the value set name must match the target environment name passed to the deployment (e.g., deploy with environment `test` activates the value set named `test`)
+
+```bash
+pip install fabric-cicd
+```
+
+```python
+from fabric_cicd import deploy_with_config
+
+deploy_with_config(
+    token_credential=credential,      # service principal via env vars
+    config_file_path="deploy.yml",    # defines test/prod target workspaces
+    environment="prod",               # activates the 'prod' value set
+)
+```
+
+### Guidance
+
+- **Prefer variable libraries over deployment rules** for parameterization — they're the strategic Fabric capability for environment-specific configuration
+- When an item type doesn't support variable libraries, fall back to direct item-definition edits in Git or via the Fabric REST API
+
+---
+
+## Secrets: What Variable Libraries Do NOT Do
+
+Variable libraries have **no native "Secret" type and no Azure Key Vault binding**. Do not store credentials in variable library values.
+
+For secrets in Fabric:
+
+| Approach | Mechanism |
+|----------|-----------|
+| **Notebook access to Key Vault** | `mssparkutils.credentials.getSecret("https://<vault>.vault.azure.net/", "<secret-name>")` — requires the workspace identity or caller to have `Get` on the secret |
+| **Pipeline connections** | Store credentials in the Fabric **connection** object (not the variable library); use a **connection reference** variable to point at the right connection per environment |
+| **PII salt (this repo)** | `FABRIC_POC_HASH_SALT` env var — never hardcode, never place in a variable library |
 
 ---
 
 ## Comparison Matrix
 
-| Feature | Variable Libraries | Pipeline Parameters | Spark Config | Environment Variables |
-|---------|-------------------|--------------------|--------------|-----------------------|
-| **Scope** | Workspace-wide | Single pipeline | Spark session | OS / container level |
-| **Secret support** | Key Vault binding | Expression only | No | Manual injection |
-| **Type safety** | String, Int, Bool, Secret | String, Int, Bool, Array | String only | String only |
-| **Promotion** | Per-workspace | Per-pipeline param file | Per-environment YAML | Per-deployment |
-| **REST API** | Full CRUD | Pipeline API | Spark API | Not applicable |
-| **Git integration** | Variable Library JSON | Pipeline JSON | environment.yml | .env files (risky) |
-| **Access control** | Workspace RBAC | Pipeline RBAC | Workspace RBAC | OS-level |
-| **Best for** | Cross-item config | Pipeline-specific params | Spark tuning | System-level config |
-
-### Decision Guide
-
-```mermaid
-flowchart TD
-    A[Need to parameterize?] --> B{Same value across multiple items?}
-    B -->|Yes| C[Variable Library]
-    B -->|No| D{Spark-specific tuning?}
-    D -->|Yes| E[Spark Config / Environment YAML]
-    D -->|No| F{Pipeline-only?}
-    F -->|Yes| G[Pipeline Parameters]
-    F -->|No| H[Environment Variables]
-```
-
----
-
-## Best Practices
-
-### Naming Conventions
-
-| Pattern | Example | When to Use |
-|---------|---------|-------------|
-| `domain_setting` | `casino_ctr_threshold` | Domain-specific business rules |
-| `layer_path` | `bronze_storage_path` | Medallion layer paths |
-| `infra_setting` | `infra_max_parallelism` | Infrastructure tuning |
-| `secret_name` | `secret_db_connection` | Prefix secrets for visibility |
-
-### Versioning Strategy
-
-1. **Store Variable Library definitions in Git** alongside pipeline and notebook code
-2. **Use environment-specific JSON files**: `config/variables-dev.json`, `config/variables-prod.json`
-3. **Never commit secret values** -- only Key Vault references
-4. **Tag releases** so you can roll back variable configurations alongside code
-
-### Access Control
-
-| Role | Create Libraries | Edit Values | Read Values | Manage Secrets |
-|------|-----------------|-------------|-------------|----------------|
-| Workspace Admin | Yes | Yes | Yes | Yes |
-| Member | No | Yes | Yes | No |
-| Contributor | No | No | Yes | No |
-| Viewer | No | No | No | No |
-
-### Governance Recommendations
-
-- **Audit variable changes** using the Fabric Activity Log
-- **Limit secret access** to the minimum number of workspace members
-- **Rotate Key Vault secrets** on a defined schedule (90 days recommended)
-- **Document every variable** with a description explaining its purpose and valid values
-- **Use consistent naming** across all environments to simplify promotion scripts
+| Feature | Variable Libraries | Pipeline Parameters | Spark Config | Deployment Rules |
+|---------|-------------------|--------------------|--------------|------------------|
+| **Scope** | Workspace-wide, cross-item | Single pipeline | Spark session | Per deployment stage |
+| **Environment mechanism** | Value sets (active per library per workspace) | Param files per env | Environment YAML | Rules per stage |
+| **Reference types** | Connection + Item references | No | No | No |
+| **Git integration** | Yes (item definition) | Pipeline JSON | environment.yml | No |
+| **fabric-cicd** | Deployed first + value-set activation | Via item definitions | Via item definitions | Not supported |
+| **Best for** | Shared, environment-specific config | Pipeline-specific params | Spark tuning | Legacy PBI parameterization |
 
 ---
 
 ## Casino Implementation
 
-### Casino POC Variable Library
+The following JSON is a **conceptual configuration sketch, not an importable Fabric item definition**. Create the variables and value sets in the portal, or use the [official multi-file definition format](https://learn.microsoft.com/rest/api/fabric/articles/item-management/definitions/variable-library-definition): `variables.json`, `settings.json`, and separate `valueSets/*.json` files. Item references require identifiers rather than the display names used in this sketch.
 
 ```json
 {
-    "displayName": "casino-config",
-    "variables": {
-        "casino_id": { "type": "String", "value": "RESORT-001" },
-        "ctr_threshold": { "type": "Int", "value": 10000 },
-        "sar_lower_bound": { "type": "Int", "value": 8000 },
-        "sar_upper_bound": { "type": "Int", "value": 9999 },
-        "w2g_slot_threshold": { "type": "Int", "value": 1200 },
-        "w2g_keno_threshold": { "type": "Int", "value": 600 },
-        "w2g_poker_threshold": { "type": "Int", "value": 5000 },
-        "pii_hash_salt": {
-            "type": "Secret",
-            "keyVaultUrl": "https://kv-casino-poc.vault.azure.net/",
-            "secretName": "pii-hash-salt"
-        },
-        "bronze_path": { "type": "String", "value": "abfss://bronze@onelake.dfs.fabric.microsoft.com/lh_bronze.Lakehouse/Tables" },
-        "retention_days": { "type": "Int", "value": 365 },
-        "enable_realtime": { "type": "Bool", "value": true }
-    }
+  "displayName": "casino-config",
+  "variables": {
+    "casino_id":          { "type": "String",  "note": "Property identifier" },
+    "ctr_threshold":      { "type": "Integer", "note": "CTR filing threshold — fixed at 10000 across all envs" },
+    "sar_lower_bound":    { "type": "Integer", "note": "SAR pattern lower bound (8000)" },
+    "sar_upper_bound":    { "type": "Integer", "note": "SAR pattern upper bound (9900)" },
+    "w2g_slot_threshold": { "type": "Integer", "note": "W-2G slots threshold (1200)" },
+    "w2g_keno_threshold": { "type": "Integer", "note": "W-2G keno threshold (600)" },
+    "w2g_poker_threshold":{ "type": "Integer", "note": "W-2G poker threshold (5000)" },
+    "bronze_lakehouse":   { "type": "ItemReference", "note": "Bronze lakehouse for this environment" },
+    "source_connection":  { "type": "ConnectionReference", "note": "Source system connection for this environment" }
+  },
+  "valueSets": {
+    "dev":  { "bronze_lakehouse": "lh_bronze_dev",  "source_connection": "conn-dev" },
+    "prod": { "bronze_lakehouse": "lh_bronze_prod", "source_connection": "conn-prod" }
+  }
 }
 ```
 
----
-
-## Federal Agency Implementation
-
-### USDA Variable Library
-
-```json
-{
-    "displayName": "usda-config",
-    "variables": {
-        "agency_code": { "type": "String", "value": "USDA" },
-        "api_base_url": { "type": "String", "value": "https://quickstats.nass.usda.gov/api" },
-        "api_key": {
-            "type": "Secret",
-            "keyVaultUrl": "https://kv-federal-poc.vault.azure.net/",
-            "secretName": "usda-api-key"
-        },
-        "bronze_path": { "type": "String", "value": "abfss://bronze@onelake.dfs.fabric.microsoft.com/lh_bronze.Lakehouse/Tables/usda" },
-        "data_retention_years": { "type": "Int", "value": 7 },
-        "pii_masking_enabled": { "type": "Bool", "value": true }
-    }
-}
-```
+> Compliance thresholds (CTR $10,000; SAR $8,000–$9,900; W-2G $1,200/$600/$5,000) are **constants, not environment-specific** — define them once in the default value set and don't override per environment. The PII hash salt comes from `FABRIC_POC_HASH_SALT`, never from a variable library.
 
 ---
 
@@ -495,19 +220,37 @@ flowchart TD
 
 | Limitation | Details | Workaround |
 |------------|---------|------------|
-| **Max variables per library** | 100 variables per library | Split into multiple libraries by domain |
-| **Value size** | 4 KB per variable value | Store large configs as OneLake files |
-| **No cross-workspace references** | Libraries are workspace-scoped | Use CI/CD to sync across workspaces |
-| **Secret latency** | Key Vault calls add ~200ms per secret | Cache in session if safe to do so |
-| **No nested objects** | Flat key-value only | Use JSON strings for structured values |
-| **Audit granularity** | Change tracking at library level, not per variable | Use Git history for variable-level tracking |
+| **Workspace-scoped** | Libraries live in one workspace; consumers must be in the same workspace | Use item reference variables for cross-workspace dependencies; sync definitions via Git/fabric-cicd |
+| **No secret type** | No Key Vault binding | Use connection objects + `mssparkutils.credentials.getSecret` |
+| **Item support varies** | Not every item type reads variable libraries | Check the [supported items](https://learn.microsoft.com/fabric/cicd/git-integration/intro-to-git-integration#supported-items) matrix; fall back to item-definition edits |
+| **Active value set is per library per workspace** | Each library has one active set at a time; different libraries can select different sets | Configure each library's active set for the target environment |
 
 ---
 
 ## References
 
-- [Microsoft Fabric Variable Libraries documentation](https://learn.microsoft.com/en-us/fabric/data-factory/variable-library-overview)
-- [Azure Key Vault integration with Fabric](https://learn.microsoft.com/en-us/fabric/security/key-vault-integration)
-- [Pipeline parameterization patterns](https://learn.microsoft.com/en-us/fabric/data-factory/pipeline-parameters)
-- [Fabric REST API reference](https://learn.microsoft.com/en-us/rest/api/fabric/)
-- [Environment promotion best practices](https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines-overview)
+- [What is a variable library?](https://learn.microsoft.com/fabric/cicd/variable-library/variable-library-overview)
+- [Variable types](https://learn.microsoft.com/fabric/cicd/variable-library/variable-types)
+- [Value sets](https://learn.microsoft.com/fabric/cicd/variable-library/value-sets)
+- [Item reference variable type](https://learn.microsoft.com/fabric/cicd/variable-library/item-reference-variable-type)
+- [Variable library integration with pipelines](https://learn.microsoft.com/fabric/data-factory/variable-library-integration-with-data-pipelines)
+- [Variable libraries in Dataflow Gen2](https://learn.microsoft.com/fabric/data-factory/dataflow-gen2-variable-library-integration)
+- [Tutorial: Use variable libraries](https://learn.microsoft.com/fabric/cicd/variable-library/tutorial-variable-library)
+- [Fabric CI/CD concepts and best practices](https://learn.microsoft.com/fabric/fundamentals/understand-best-practices-fabric-cicd)
+
+---
+
+## 🔗 Related Documents
+
+- [Git Integration](git-integration.md) — Source control for variable library definitions
+- [Deployment Pipelines](deployment-pipelines.md) — Stage-based promotion with value sets
+- [Fabric CI/CD Deployment](../best-practices/fabric-cicd-deployment.md) — fabric-cicd automation
+- [Notebook Resources & Environments](notebook-resources-environments.md) — Complementary dependency management
+
+---
+
+> 📝 **Document Metadata**
+> - **Author**: Documentation Team
+> - **Reviewers**: Platform Engineering, DevOps
+> - **Classification**: Internal
+> - **Next Review**: 2026-12-07

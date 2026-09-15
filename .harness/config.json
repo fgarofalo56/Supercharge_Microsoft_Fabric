@@ -1,0 +1,27 @@
+{
+  "project_name": "Supercharge Microsoft Fabric",
+  "language": "Python",
+  "framework": "MkDocs Material (documentation site) + PySpark/Bicep assets",
+  "spec_path": ".harness/spec.md",
+  "test_command": "uv run pytest",
+  "task_authority": {
+    "durable": "GitHub issues (campaign issue #142)",
+    "execution_state": ".forge/",
+    "note": "Per issue #142 gate 4, .harness/state.json must NOT become a competing ledger. This config and spec are specification inputs only."
+  },
+  "repo": "fgarofalo56/Supercharge_Microsoft_Fabric",
+  "default_branch": "main",
+  "pilot_limits": {
+    "workers": 1,
+    "max_tasks": 3,
+    "max_minutes": 60
+  },
+  "forbidden_without_authorization": [
+    "git init",
+    "blanket staging or commit of the pre-existing dirty tree",
+    "stash, clean, restore, reset, destructive checkout",
+    "operating on worktrees under temp/",
+    "Fabric/Azure resource deployment, deletion, or billable validation",
+    "bypassing branch protections or merging unreviewed PRs"
+  ]
+}

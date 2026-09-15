@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "current_session": 4,
+  "cross_reference": {
+    "durable_record": "https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/issues/142",
+    "execution_state": ".forge/",
+    "divergence_warning": "Operator authorised this ledger on 2026-09-15, overriding issue #142 gate 4. Status here does NOT propagate to GitHub issues: marking a task done here does not close the matching issue. Reconcile both before declaring the campaign drained."
+  },
+  "tasks": [
+    {
+      "id": "task-001",
+      "title": "Reconcile PR #140 and its deferred documentation against the local tree",
+      "description": "## Requirements\n- Read-only. No edits, no staging, no merge.\n- Compare PR #140's changed files against the 345 dirty entries in this checkout.\n- Collect CI status and review state for the PR head commit.\n- Cross-check against PRPs/plans/phase14-one-stop-shop.md and phase15-layout-visual-content.md.\n\n## Acceptance Criteria\n- [ ] Every PR #140 file has a disposition: already-local, diverged, missing, or superseded\n- [ ] CI and review evidence recorded per head commit, not assumed from history\n- [ ] Deferred items named in the PR body are listed with their current state\n- [ ] Inclusion proposal written for operator approval\n\n## Test Steps\n1. `gh pr view 140 --json files,statusCheckRollup,reviews`\n2. `git status --porcelain=v1 --untracked-files=all` and diff against PR file list\n3. Confirm no working-tree mutation: dirty/staged counts unchanged after the pass",
+      "feature": "Request inventory",
+      "task_order": 100,
+      "status": "done",
+      "assignee": "harness-coder",
+      "result": "Read-only reconciliation complete. PR #140 head f051eb9: 100 files, 0 missing locally, 42 identical, 58 diverged. 13/13 CI checks SUCCESS on that head (auto-merge SKIPPED), but PR is draft, 0 reviews, REVIEW_REQUIRED, mergeState BEHIND - not eligible to merge. Key finding: local tree carries a self-referential navigation regression the PR does not; >=9 files under docs/best-practices/ link Best Practices to themselves while parent docs/best-practices.md exists. PR version is correct. No implementation performed; awaiting operator approval."
+    },
+    {
+      "id": "task-002",
+      "title": "Inventory the dirty tree and assign ownership to every entry",
+      "description": "## Requirements\n- Read-only pass over 345 dirty entries, including the 159 staged docs-rename files.\n- Cover all three worktrees; do NOT operate on those under temp/.\n- Group entries by apparent origin and intent.\n\n## Acceptance Criteria\n- [ ] Every dirty path assigned to a group with a proposed disposition\n- [ ] Staged rename set characterised separately from unstaged and untracked work\n- [ ] Worktree contents listed without modification\n- [ ] Open question raised for any entry whose owner cannot be determined\n\n## Test Steps\n1. `git status --porcelain=v1 --untracked-files=all`\n2. `git diff --cached --name-status` for the staged set\n3. `git worktree list`\n4. Re-run status after the pass; counts must be unchanged",
+      "feature": "Dirty-tree inventory",
+      "task_order": 95,
+      "status": "done",
+      "assignee": "harness-coder",
+      "result": "243 dirty entries classified: 200 modified, 43 untracked. Two populations: (a) 151 files with equal +/- = mechanical link rewrites, INCLUDING 15 that introduced the self-referential Best Practices bug - all 15 are modified, 0 pre-existing, so the working tree introduced it; (b) 49 files with real content change, net -3610 lines. Sampled (b): .github/agents+prompts deletions are the deliberate Archon removal (harness-wizard 537->68 strips archon-* tools and hardcoded model) = KEEP. docs/features/variable-libraries.md 513->256 is a FACTUAL CORRECTION not content loss - v1 documented a Secret type with Key Vault binding absent from the official spec and omitted value sets; v2 cites Microsoft Learn = KEEP. 43 untracked split: 9 new docs/features pages, 13 docs README mirrors, 6 infra/ci-runners, 4 tests, AGENTS.md, FORGE_ORCHESTRATION.md. Ownership unresolved for the 15 self-ref files - operator decision pending."
+    },
+    {
+      "id": "task-003",
+      "title": "Resolve the branch lag against origin before any dispatch",
+      "description": "## Requirements\n- Branch docs/fabric-dr-authoritative-answers is behind origin by 3 commits.\n- Determine what those commits contain and whether they conflict with local work.\n- Do not merge, rebase, pull, or reset without explicit operator approval.\n\n## Acceptance Criteria\n- [ ] The 3 upstream commits identified and summarised\n- [ ] Conflict risk against the 345 dirty entries assessed\n- [ ] Recommendation recorded; no history mutation performed\n\n## Test Steps\n1. `git fetch --dry-run` then `git log HEAD..@{u} --oneline`\n2. `git diff --name-only HEAD..@{u}` intersected with the dirty path list\n3. Confirm HEAD unchanged after the pass",
+      "feature": "Dispatch readiness",
+      "task_order": 90,
+      "status": "done",
+      "assignee": "harness-coder",
+      "result": "Divergence, not simple lag: HEAD...@{u} = 1 ahead, 3 behind (my commit 6102ca0 is the 1). Merge base 710f889. The 3 upstream commits (c9cd67e merge, fa017bb, ca8fe01) touch exactly ONE file: requirements-docs.txt - mkdocs-redirects 1.2.2->1.2.3 and pillow 12.2.0->12.3.0, both dependabot bumps. That file is NOT locally dirty. ZERO collisions against all 243 dirty entries. Integration is therefore low-risk, but NO history operation performed - merge/rebase/pull requires explicit operator approval per spec. Recommendation: safe to integrate when approved."
+    },
+    {
+      "id": "task-004",
+      "title": "Build the Fabric workload gap matrix from official sources",
+      "description": "## Requirements\n- Map each workload to existing doc, sample, walkthrough, release status, evidence date, disposition.\n- Cover Data Engineering, Data Factory, Data Science, Data Warehouse, Databases, Industry Solutions, Real-Time Intelligence, Fabric IQ, Power BI, plus OneLake, governance, security, lifecycle, capacity.\n- Update existing coverage rather than duplicating it.\n\n## Acceptance Criteria\n- [ ] Every listed workload has a row with a dated evidence reference\n- [ ] GA vs preview vs regional/SKU/permission limits distinguished per row\n- [ ] Gaps proposed as phased scope, not implemented unilaterally\n- [ ] Existing docs/features and docs/best-practices checked before proposing new pages\n\n## Test Steps\n1. Enumerate docs/features/ and docs/best-practices/ and match to workloads\n2. Verify each claim against current Microsoft documentation\n3. Confirm no new page is created without operator approval",
+      "feature": "Workload gap matrix",
+      "task_order": 80,
+      "status": "todo",
+      "assignee": "harness-coder"
+    },
+    {
+      "id": "task-005",
+      "title": "Verify documentation build, links, navigation and search",
+      "description": "## Requirements\n- Strict build behaviour; a workflow that tolerates missing content is insufficient.\n- Check internal links, navigation entries, search indexing, sample downloads, rendered walkthroughs.\n- Local verification only; no deployment.\n\n## Acceptance Criteria\n- [ ] Build run and its actual output recorded, including warnings\n- [ ] Broken internal links enumerated or confirmed absent\n- [ ] Navigation and search reachability confirmed for changed pages\n- [ ] Findings distinguish pre-existing breakage from regressions\n\n## Test Steps\n1. Run the documentation build and capture full output\n2. Inspect the link-check step's real exit status, not just its summary line\n3. `uv run pytest` for the repository test baseline",
+      "feature": "Publication verification",
+      "task_order": 70,
+      "status": "todo",
+      "assignee": "harness-coder"
+    },
+    {
+      "id": "task-006",
+      "title": "Reconcile issue #105 against actual repository and Pages redirects",
+      "description": "## Requirements\n- Issue #105 concerns the Suppercharge -> Supercharge rename with redirects.\n- Check the real repository slug and whether Pages URLs redirect.\n- Do NOT rename the repository.\n\n## Acceptance Criteria\n- [ ] Current slug and Pages behaviour recorded from observation, not assumption\n- [ ] Inbound-link breakage risk assessed\n- [ ] Recommendation recorded; no rename performed\n\n## Test Steps\n1. `gh repo view --json name,url`\n2. Check the published Pages URL's redirect behaviour\n3. Confirm the repository name is unchanged afterwards",
+      "feature": "Issue #105 reconciliation",
+      "task_order": 60,
+      "status": "todo",
+      "assignee": "harness-coder"
+    }
+  ],
+  "meta": {
+    "created_at": "2026-09-15",
+    "last_updated": "2026-09-15",
+    "last_agent": "harness-coder",
+    "source_spec": ".harness/spec.md",
+    "pilot_limits": {
+      "workers": 1,
+      "max_tasks": 3,
+      "max_minutes": 60,
+      "authorised": "pilot 2, operator-approved 2026-09-15, covers task-004 onward; pilot 1 covered task-001..003"
+    },
+    "progress": {
+      "done": 3,
+      "total": 6,
+      "percent": 50
+    },
+    "operator_decisions": {
+      "self_referential_links": "DONE - 15 files, 27 links repaired to the parent page. 0 self-referential remain; 29 links now resolve to the parent. NOTE: HEAD used a bare directory link; the working tree had broken it to self-links; the repair matches PR #140 exactly (verified f051eb9 uses the same explicit parent path).",
+      "pr_140": "SUPERSEDE - confirmed safe on the link point: the local tree now carries #140's exact link form, so closing it loses nothing there. CLOSE ACTION NOT PERFORMED - needs explicit go-ahead, and the other 57 diverged files have not been individually cleared.",
+      "upstream_integration": "DONE - merged 6b00ef8, ort strategy, 1 file changed (requirements-docs.txt), 0 conflicts. Deps now mkdocs-redirects>=1.2.3, pillow>=12.3.0. Tree untouched at 244 dirty / 0 staged."
+    }
+  }
+}

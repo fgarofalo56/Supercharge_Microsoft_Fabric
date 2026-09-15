@@ -1,17 +1,10 @@
 ---
 name: ralph-start
-description: Start the Ralph Wiggum setup wizard to configure an iterative development loop.
+description: Build a task graph for this repository with atlas-forge plan and decompose. Replaces the retired Archon/Ralph loop wizard.
 mode: agent
 tools:
   - filesystem
   - terminal
-handoffs:
-  - label: Start Ralph Loop
-    agent: ralph-loop
-    prompt: Start executing the configured Ralph loop
-  - label: Check Status
-    agent: ralph-monitor
-    prompt: Check the current Ralph loop status
 ---
 
 ## User Input
@@ -22,46 +15,91 @@ $ARGUMENTS
 
 ## Purpose
 
-Launch the Ralph Wiggum setup wizard to configure a new iterative development loop.
+Turn a goal into a validated task graph that `atlas-forge dispatch` can run.
 
-## Execution
+> **This prompt no longer starts a "Ralph Wiggum loop."** That loop was
+> described by these files but never had a runner behind it, and its state
+> lived in an Archon MCP server that is not running and not installed. The name
+> is kept only so existing links keep working. The real surface is documented
+> in [ATLAS FORGE orchestration](../FORGE_ORCHESTRATION.md) — read it before
+> running anything here, and do not use a flag it has not verified.
 
-Invoke the `@ralph-wizard` agent to guide the user through:
+## Before you plan
 
-1. **Project Selection** - Choose or create Archon project
-2. **Task Selection** - Choose task to work on or create new
-3. **Prompt Configuration** - Set up the iteration prompt
-4. **Options** - Max iterations, completion criteria, mode
-5. **Framework Integration** - Harness, SpecKit, PRP options
-6. **Create & Start** - Generate config and optionally start
+1. Read [ATLAS FORGE orchestration](../FORGE_ORCHESTRATION.md), especially the
+   safety rules. This checkout has a large amount of uncommitted work and three
+   worktrees.
+2. Run `git status --porcelain | wc -l`. If the tree is dirty, say so and
+   confirm with the operator before going further. Do **not** run
+   `git checkout --`, `git restore`, `git clean`, or `git stash` to tidy it.
+3. Check what already exists:
 
-## Quick Options
+   ```bash
+   atlas-forge board --json
+   atlas-forge dispatch --dry-run
+   ```
 
-If the user provides arguments, parse them:
+   `0 tasks in 0 waves` means `.forge/tasks.json` has not been written yet.
+   `dispatch --dry-run` reports that as `ok: false`, `status: "error"` and
+   **exit 1**, while `board` reports the same state as `status: ok` / `no
+   tasks`. The exit 1 means "no graph built yet", not that the command failed.
+
+## Plan
+
+Read-only. Nothing is written without `--dry-run` being dropped deliberately.
 
 ```bash
-# Full wizard
-/ralph-start
-
-# Quick with defaults
-/ralph-start --quick
-
-# Auto-detect everything
-/ralph-start --auto
-
-# Specify task directly
-/ralph-start --task "Build REST API for todos"
-
-# With options
-/ralph-start "Implement auth" --max-iterations 30 --mode background
+atlas-forge plan "<goal>" --dry-run --json
 ```
 
-## Output
+Read the plan out loud to the operator before saving it. Then, if it is right:
 
-After wizard completion:
-- Configuration saved to `.ralph/config.json`
-- Prompt saved to `.ralph/prompts/current.md`
-- Archon state document created
-- Task updated to "doing" status
+```bash
+atlas-forge plan "<goal>" --json
+```
 
-Offer to start the loop immediately or wait for manual start.
+Verified options: `--repo`, `--target`, `--dry-run`, `--provider`, `--model`,
+`--json`.
+
+## Decompose
+
+`decompose` is a **gate**, not a report. A plan with any task over the
+diff-line budget exits 1, and the oversized plan is not left on disk.
+
+```bash
+atlas-forge decompose --json
+```
+
+If it exits 1, it names each offending task and how many pieces it needs. Split
+those tasks and re-run. Do not raise `--budget` to make the gate pass.
+
+To assemble a proposals document into the plan instead:
+
+```bash
+atlas-forge decompose --from proposals.json --json
+```
+
+The document is `{"tasks": [...]}` or a bare list of objects with `id`,
+`title`, `estimate`, `needs`, `note`. It is written only if the check passes.
+
+Verified options: `--repo`, `--from`, `--budget`, `--json`.
+
+## Do not
+
+- Do not invent a `--quick`, `--auto`, `--max-iterations`, `--resume` or
+  `--mode` flag on `plan` or `decompose`. The verified flag lists are above.
+- Do not write `.forge/tasks.json` by hand, and do not look for
+  `scripts/backlog_to_dag.py` — **it is not shipped in this repository.** It is
+  the atlas-forge repo's own parser for its own markdown conventions.
+- Do not start `dispatch` or `factory` from this prompt. Planning and running
+  are separate steps on purpose.
+
+## Report
+
+State the goal, whether the tree was clean, the plan as `plan` returned it, the
+`decompose` verdict and exit code, and the resulting task count from
+`atlas-forge board`. Then hand off:
+
+- Run one wave: `/ralph-iterate`
+- Check progress: `/ralph-status`
+- Stop something in flight: `/ralph-cancel`

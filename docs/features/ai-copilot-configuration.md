@@ -11,13 +11,13 @@ type: feature
 
 ![Category](https://img.shields.io/badge/Category-AI_Configuration-purple?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
-![Last Updated](https://img.shields.io/badge/Updated-March_2026-blue?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-September_2026-blue?style=for-the-badge)
 
 </div>
 
 ---
 
-**Last Updated:** `2026-03-12` | **Version:** 1.0.0
+**Last Updated:** `2026-09-07` | **Version:** 1.1.0
 
 ---
 
@@ -121,11 +121,13 @@ Capacity Settings → Copilot
 
 | SKU | Copilot Available | Notes |
 |-----|-------------------|-------|
-| F2 | Yes | Minimum for Copilot |
+| F2 | Yes | Minimum paid SKU for Copilot |
 | F4 - F32 | Yes | Standard Copilot experience |
 | F64 (This POC) | Yes | Full Copilot with all features |
 | F128+ | Yes | Enterprise-scale Copilot |
-| Trial | Limited | Preview features only |
+| Trial | **No** | Copilot is not supported on trial SKUs — paid F2+/P1+ required |
+
+> **Fabric Copilot capacity:** Workspaces on **Pro, PPU, Trial, or Premium capacity** license modes can still use Copilot if their users are assigned to a dedicated [Fabric Copilot capacity](https://learn.microsoft.com/fabric/enterprise/fabric-copilot-capacity) (F2+/P1+, tenant home region, one per user). Copilot consumption then bills to the Copilot capacity instead of the workspace's capacity. Note: Fabric Copilot capacity does **not** support Fabric AI functions, and **Embedded** license-mode capacities aren't supported.
 
 ### Level 3: Workspace-Level Settings
 
@@ -802,7 +804,7 @@ federal_prompts:
 
 | Limitation | Details | Mitigation |
 |-----------|---------|-----------|
-| **F2 Minimum** | Copilot requires F2 or higher capacity | Ensure POC uses F64 (confirmed) |
+| **F2 Minimum** | Copilot requires a paid F2+/P1+ capacity (not supported on trial SKUs) | POC uses F64 (confirmed); Pro/PPU workspaces can use a Fabric Copilot capacity |
 | **English Optimized** | Best results in English; other languages have reduced accuracy | Use English for technical prompts |
 | **Schema Size** | Very large models (500+ tables) may reduce accuracy | Use display folders and focused semantic models |
 | **Complex Logic** | Multi-step business logic may not translate correctly | Break into simpler measures, document formulas |
@@ -820,7 +822,7 @@ federal_prompts:
 | **KQL** | Complex `scan` operator patterns may be incomplete | Use Copilot as starting point, refine manually |
 | **Data Factory** | Cannot build full end-to-end pipelines | Scaffolds pipeline structure; add details manually |
 
-### Known Issues (as of March 2026)
+### Known Issues (as of September 2026)
 
 | Issue | Status | Workaround |
 |-------|--------|-----------|
@@ -835,8 +837,10 @@ federal_prompts:
 
 | Resource | URL |
 |----------|-----|
-| Copilot in Microsoft Fabric Overview | https://learn.microsoft.com/fabric/get-started/copilot-fabric-overview |
-| Enable Copilot in Fabric | https://learn.microsoft.com/fabric/get-started/copilot-enable-fabric |
+| Copilot in Microsoft Fabric Overview | https://learn.microsoft.com/fabric/fundamentals/copilot-fabric-overview |
+| Enable Copilot in Fabric | https://learn.microsoft.com/fabric/fundamentals/copilot-enable-fabric |
+| Fabric Copilot capacity | https://learn.microsoft.com/fabric/enterprise/fabric-copilot-capacity |
+| Copilot consumption and billing | https://learn.microsoft.com/fabric/fundamentals/copilot-fabric-consumption |
 | Copilot for Power BI | https://learn.microsoft.com/power-bi/create-reports/copilot-introduction |
 | Copilot in Fabric Notebooks | https://learn.microsoft.com/fabric/data-engineering/copilot-notebooks-overview |
 | Copilot for SQL in Fabric | https://learn.microsoft.com/fabric/data-warehouse/copilot |
@@ -859,4 +863,4 @@ federal_prompts:
 > - **Author**: Documentation Team
 > - **Reviewers**: Fabric Admin, Security, Data Engineering, BI Team
 > - **Classification**: Internal
-> - **Next Review**: 2026-06-12
+> - **Next Review**: 2026-12-07

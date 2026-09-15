@@ -8,28 +8,33 @@ Save the current session state without ending the session.
 
 ## Save Operations
 
-### 1. Update Archon Session Memory
+### 1. Record a checkpoint on the GitHub issue
 
-```
-manage_document("update",
-  project_id="[PROJECT_ID]",
-  document_id="[SESSION_DOC_ID]",
-  content={
-    "checkpoint_time": "[CURRENT_TIMESTAMP]",
-    "current_focus": "[What we're working on]",
-    "progress": "[What's been done]",
-    "next_steps": "[What's remaining]",
-    "discoveries": [...],
-    "blockers": [...]
-  }
-)
+There is no external task-management service. The durable record is the issue
+for the work item:
+
+```bash
+gh issue comment <n> --body "Checkpoint <timestamp>
+
+Focus: <what we are working on>
+Progress: <what has been done, with the commands run and their actual results>
+Next: <what remains>
+Discoveries: <...>
+Blockers: <...>"
 ```
 
-### 2. Update Task Status (if applicable)
+Reuse the existing issue; do not open a new one per checkpoint. If `gh` is
+unavailable, say the checkpoint could not be recorded durably.
 
+### 2. Snapshot the task graph (if one exists)
+
+```bash
+atlas-forge board --json
+atlas-forge blocked --json
 ```
-manage_task("update", task_id="...", description="Checkpoint: [progress notes]")
-```
+
+FORGE keeps its own run state on disk under `.forge/` — `dispatch-progress.json`,
+`runs/`, `evidence/`. You do not need to copy it anywhere.
 
 ### 3. Git Status Check
 

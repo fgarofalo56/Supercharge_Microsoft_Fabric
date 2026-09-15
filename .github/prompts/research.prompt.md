@@ -1,43 +1,45 @@
 ---
-description: Search Archon knowledge base for documentation and code examples
+description: Research a topic using the repository, Microsoft Docs, GitHub, and the web
 ---
 
 # Research
 
-Search the Archon knowledge base for documentation and code examples.
+Investigate a topic and produce an actionable, cited report.
+
+> There is no project knowledge-base server. The `rag_search_knowledge_base`,
+> `rag_search_code_examples`, `rag_get_available_sources` and
+> `rag_read_full_page` tools this prompt used to call belonged to an Archon MCP
+> server that is not running and not installed. Search the sources that exist.
 
 ## Search Workflow
 
-### 1. Get Available Sources
+### 1. Search this repository first
 
-```
-rag_get_available_sources()
-```
+Most questions about this project are already answered here, and a repo answer
+beats a web answer.
 
-This returns a list of documentation sources with their IDs.
-
-### 2. Search Documentation
-
-```
-# General search (2-5 keywords work best)
-rag_search_knowledge_base(query="authentication JWT", match_count=5)
-
-# Search specific source
-rag_search_knowledge_base(query="vector functions", source_id="src_abc123")
+```bash
+grep -ri "<keywords>" docs/ PRPs/ notebooks/ src/ 2>/dev/null | head -40
+gh issue list --search "<keywords>" --state all     # decisions and their reasoning
 ```
 
-### 3. Find Code Examples
+`docs/`, `PRPs/plans/`, and the runbooks under `docs/runbooks/` carry most of
+the standing decisions.
 
-```
-rag_search_code_examples(query="React hooks", match_count=3)
-```
+### 2. Microsoft documentation
 
-### 4. Read Full Page
+For anything Fabric, Azure, Power BI, or Synapse, use the `microsoft.docs.mcp`
+server configured in `.vscode/mcp.json`. It is authoritative and current;
+prefer it over a general web search.
 
-```
-rag_read_full_page(page_id="...")
-rag_read_full_page(url="...")
-```
+### 3. Library and framework docs
+
+Use the Context7 MCP server where configured, for API syntax, configuration,
+and version-migration questions.
+
+### 4. The open web
+
+`WebSearch` / `WebFetch`, last, and always cited.
 
 ## Query Best Practices
 

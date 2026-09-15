@@ -42,6 +42,8 @@ Deliver Phase 14 across **9 sequential waves**, mirroring the Phase 7 harness pa
 | Target Duration | 8-12 weeks (harness-driven) |
 | Archon Project ID | `c0f96f03-5095-4704-a167-9a3f5a3e3ed1` |
 
+> **2026-09-14:** The Archon project ID above is dead — that MCP server is not running and not installed. Orchestration now runs through the ATLAS FORGE commands; see [`.github/FORGE_ORCHESTRATION.md`](../../.github/FORGE_ORCHESTRATION.md). The rest of this plan is left as written at the time.
+
 ---
 
 ## UX: Before / After
@@ -759,7 +761,7 @@ Create wave-level Archon tasks under project `c0f96f03-5095-4704-a167-9a3f5a3e3e
 
 **PRP Author:** Claude Code (Opus 4.7)
 **Date:** 2026-04-27
-**Status:** COMPLETE (2026-04-27) — 119 features delivered across 9/9 waves, 0 regressions; see `validation/phase14_regression_report.md`. Two tasks from this plan were never delivered: `tutorials/41-synapse-to-fabric/03_pipeline_migration.md` and `docs/compliance-templates/soc2-control-matrix.xlsx-template.md`.
+**Status:** COMPLETE (2026-04-27) — 119 features delivered across 9/9 waves, 0 regressions; see `validation/phase14_regression_report.md`. Maintenance reconciliation (2026-09-11): the SOC 2 template exists at `docs/compliance-templates/soc2-control-matrix.md` (different filename from the plan). The standalone pipeline guide now exists locally at `docs/tutorials/41-synapse-to-fabric/03_pipeline_migration.md`, linked from Tutorial 41 and site navigation, pending commit/review. Neither document establishes cloud execution or audit validation.
 **Estimated Calendar Time:** 8-12 weeks
 **Estimated Files:** ~225 created or modified
 **Prerequisites:** Phase 13 complete, harness configured, Archon project active

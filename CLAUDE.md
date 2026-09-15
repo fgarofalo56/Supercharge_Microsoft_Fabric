@@ -6,7 +6,7 @@
 **Type:** Infrastructure + Documentation + Data Engineering
 **Primary Stack:** Bicep, Python, PySpark, KQL, DAX
 **Target Platform:** Microsoft Fabric (F64 SKU)
-**Phase Status:** Phase 14 ("One-Stop Shop Completion") Complete (2026-04-27, 119 features across 9 waves — see `validation/phase14_regression_report.md`) and Phase 15 Complete (Layout, Visual Impact & CSA-in-a-Box, 2026-05-05). Since then: doc-site polish, tutorial-57 (Databricks Better Together), positioning/branding/CI fixes, and a repo-grounded Copilot agent (2026-05 to 2026-09) have shipped as unphased maintenance — see `git log --since=2026-05-05`. **Note:** `PRPs/plans/phase14-one-stop-shop.md` still shows a stale `READY FOR HARNESS INITIALIZATION` status line even though the work is done — needs correcting. Two Phase 14 tasks were never delivered: `tutorials/41-synapse-to-fabric/03_pipeline_migration.md` and `docs/compliance-templates/soc2-control-matrix.xlsx-template.md`.
+**Phase Status:** Phase 14 ("One-Stop Shop Completion") Complete (2026-04-27, 119 features across 9 waves — see `validation/phase14_regression_report.md`) and Phase 15 Complete (Layout, Visual Impact & CSA-in-a-Box, 2026-05-05). Since then: doc-site polish, tutorial-57 (Databricks Better Together), positioning/branding/CI fixes, and a repo-grounded Copilot agent (2026-05 to 2026-09) have shipped as unphased maintenance — see `git log --since=2026-05-05`. **Maintenance reconciliation (2026-09-11):** The Phase 14 plan already records COMPLETE. The SOC 2 matrix exists as `docs/compliance-templates/soc2-control-matrix.md` rather than the originally planned filename. The standalone pipeline guide now exists locally at `docs/tutorials/41-synapse-to-fabric/03_pipeline_migration.md` and is linked from Tutorial 41 and site navigation; it still requires commit/review. These documentation deliverables do not establish cloud migration or audit validation.
 
 ## Key Technologies
 
@@ -238,8 +238,26 @@ Phase 11 is a pure audit remediation — no new features, only correctness fixes
 | Test suite | Restored full suite to 431 passing tests |
 | Documentation | Fixed broken tutorial nav links, Tutorial 19/36 false terminals, Tutorial 15 progress tracker, clone URL typos |
 
-## Archon Project ID
+## Task tracking
 
-`c0f96f03-5095-4704-a167-9a3f5a3e3ed1`
+Work items are **GitHub issues** (`gh issue list`). The execution graph is
+`.forge/tasks.json`, written only by `atlas-forge plan` and
+`atlas-forge decompose` — never by hand. Run it with `atlas-forge dispatch`, or
+`atlas-forge factory run` for an unattended drain.
 
-Use this ID to track tasks and store project documentation in Archon.
+See [`.github/FORGE_ORCHESTRATION.md`](.github/FORGE_ORCHESTRATION.md) for the
+verified command surface. Do not use a command or flag that file has not
+verified.
+
+Two things that are NOT true here:
+
+- **`scripts/backlog_to_dag.py` is not shipped in this repository.** It is the
+  atlas-forge repo's own parser for its own markdown conventions.
+- **`atlas-forge dispatch --dry-run` reporting `0 tasks in 0 waves` is not an
+  error.** It reads `.forge/tasks.json`, and a missing file is an empty graph.
+
+The project previously tracked tasks in an Archon MCP server
+(id `c0f96f03-5095-4704-a167-9a3f5a3e3ed1`). That server is not running, is not
+installed, and is not the intended system. The id is recorded here only so that
+older references in `PRPs/plans/` can be recognised as dead. Do not try to
+connect to it.

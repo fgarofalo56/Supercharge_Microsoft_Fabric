@@ -228,7 +228,7 @@ Use the [Blameless Postmortem Template](#blameless-postmortem-template) below. P
 Every action item MUST have:
 - Owner (named individual, not team)
 - Due date
-- Tracking ticket (link to Archon task or GitHub issue)
+- Tracking ticket (link to a GitHub issue)
 - Severity (P0 for "won't survive recurrence" → P3 for nice-to-have)
 
 ---
@@ -305,7 +305,7 @@ Examples:
 2. **Impact statement** — one sentence, customer-facing
 3. **Incident Commander** — `@username`
 4. **Bridge link** — Teams call URL (SEV1/2 only)
-5. **Tracking ticket** — Archon or GitHub issue
+5. **Tracking ticket** — GitHub issue
 6. **Status page entry** — if external comms
 
 ### Closing the Channel
