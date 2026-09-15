@@ -1,6 +1,6 @@
 # Great Expectations Configuration
 # Casino Fabric POC - Comprehensive Data Quality Validation
-# Version: 0.18+
+# Legacy API: GX 0.18.x (not GX 1.x)
 
 config_version: 3.0
 
@@ -20,7 +20,8 @@ datasources:
     data_connectors:
       default_inferred_data_connector_name:
         class_name: InferredAssetFilesystemDataConnector
-        base_directory: ../sample-data/bronze/
+        # Optional generated Parquet; paths resolve from this context directory.
+        base_directory: ../../data_generation/output/
         default_regex:
           group_names:
             - data_asset_name
@@ -38,13 +39,7 @@ datasources:
       class_name: SparkDFExecutionEngine
       module_name: great_expectations.execution_engine
     data_connectors:
-      default_inferred_data_connector_name:
-        class_name: InferredAssetFilesystemDataConnector
-        base_directory: ../sample-data/silver/
-        default_regex:
-          group_names:
-            - data_asset_name
-          pattern: (.*)\.parquet
+      # No local Silver dataset is shipped; supply a runtime Spark DataFrame.
       runtime_data_connector:
         class_name: RuntimeDataConnector
         batch_identifiers:
@@ -58,13 +53,7 @@ datasources:
       class_name: SparkDFExecutionEngine
       module_name: great_expectations.execution_engine
     data_connectors:
-      default_inferred_data_connector_name:
-        class_name: InferredAssetFilesystemDataConnector
-        base_directory: ../sample-data/gold/
-        default_regex:
-          group_names:
-            - data_asset_name
-          pattern: (.*)\.parquet
+      # No local Gold dataset is shipped; supply a runtime Spark DataFrame.
       runtime_data_connector:
         class_name: RuntimeDataConnector
         batch_identifiers:
@@ -98,7 +87,8 @@ datasources:
     data_connectors:
       default_inferred_data_connector_name:
         class_name: InferredAssetFilesystemDataConnector
-        base_directory: ../data_generation/output/
+        # Optional synthetic Parquet from generate.py --federal.
+        base_directory: ../../data_generation/output/
         default_regex:
           group_names:
             - data_asset_name
@@ -117,13 +107,7 @@ datasources:
       class_name: PandasExecutionEngine
       module_name: great_expectations.execution_engine
     data_connectors:
-      default_inferred_data_connector_name:
-        class_name: InferredAssetFilesystemDataConnector
-        base_directory: ../data_generation/output/open_data/
-        default_regex:
-          group_names:
-            - data_asset_name
-          pattern: (.*)\.parquet
+      # Downloader destinations differ by agency; load the chosen file explicitly.
       runtime_data_connector:
         class_name: RuntimeDataConnector
         batch_identifiers:
@@ -141,7 +125,7 @@ datasources:
     data_connectors:
       default_inferred_data_connector_name:
         class_name: InferredAssetFilesystemDataConnector
-        base_directory: ../sample-data/
+        base_directory: ../../docs/sample-data/bronze/
         default_regex:
           group_names:
             - data_asset_name

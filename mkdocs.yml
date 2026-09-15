@@ -29,6 +29,14 @@ copyright: >-
 # Documentation directory (default: docs/)
 docs_dir: docs
 
+# Supporting tutorial sub-resources (diagrams, templates, progress trackers) are
+# linked from their parent tutorial pages, not top-level nav entries. Exclude them
+# from the "not included in nav" warning so --strict stays meaningful.
+not_in_nav: |
+  /tutorials/*/diagrams/
+  /tutorials/*/templates/
+  /tutorials/templates/
+
 # Link validation — surfaces the off-site / .md / 404 / bad-anchor class of bug
 # at build time. Kept at `warn` (deploy does not use --strict) so the build
 # never fails; warnings show in the Actions log. `absolute_links: warn` flags
@@ -357,8 +365,11 @@ nav:
         - GraphQL API: features/api-for-graphql.md
         - Real-Time Hub: features/real-time-hub.md
         - Real-Time Intelligence: features/real-time-intelligence.md
+        - DeltaFlow CDC Streams: features/deltaflow-eventstreams.md
       - Data Engineering:
         - Copy Job CDC: features/copy-job-cdc.md
+        - Warehouse ALTER COLUMN: features/warehouse-alter-column.md
+        - Warehouse ALTER DATABASE SET: features/warehouse-alter-database-set.md
         - Dataflow Gen2: features/dataflow-gen2.md
         - AI-Powered Prompt Transform: features/dataflow-gen2-ai-prompt-transform.md
         - dbt Integration: features/dbt-fabric-integration.md
@@ -383,6 +394,11 @@ nav:
         - Eventhouse Vector Database: features/eventhouse-vector-database.md
         - Semantic Link: features/semantic-link.md
         - Fabric IQ: features/fabric-iq.md
+        - Fabric IQ Planning: features/fabric-iq-planning.md
+        - Fabric IQ Conversational Analytics: features/fabric-iq-conversational-analytics.md
+        - Data Agent API: features/data-agent-api.md
+        - Warehouse AI Functions: features/warehouse-ai-functions.md
+        - Anomaly Detection (RTI): features/anomaly-detection-rti.md
         - Fabric MCP: features/fabric-mcp.md
         - Digital Twin Builder: features/digital-twin-builder.md
         - Prompt Engineering for Fabric: features/prompt-engineering-fabric.md
@@ -402,6 +418,7 @@ nav:
         - Workspace Monitoring: features/workspace-monitoring.md
         - Fabric Unified Admin Monitoring: features/fabric-unified-admin-monitoring.md
         - Data Activator: features/data-activator.md
+        - Pipeline Approval Activity: features/pipeline-approval-activity.md
         - Deployment Pipelines: features/deployment-pipelines.md
         - Git Integration: features/git-integration.md
         - Fabric REST APIs: features/fabric-rest-apis.md
@@ -463,7 +480,9 @@ nav:
         - "39 — End-to-End MLOps": tutorials/39-mlops-end-to-end/README.md
         - "40 — Production RAG": tutorials/40-rag-production/README.md
       - Cloud Migration:
-        - "41 — Synapse → Fabric": tutorials/41-synapse-to-fabric/README.md
+        - "41 — Synapse → Fabric":
+          - Overview: tutorials/41-synapse-to-fabric/README.md
+          - Pipeline Migration and Cutover: tutorials/41-synapse-to-fabric/03_pipeline_migration.md
         - "42 — Databricks → Fabric":
           - Overview: tutorials/42-databricks-to-fabric/README.md
           - Workflow Migration: tutorials/42-databricks-to-fabric/02_workflow_migration.md
@@ -613,7 +632,6 @@ nav:
       - Docker Configuration: docker/README.md
       - Sample Data: sample-data/README.md
       - Dev Container: dev-container/README.md
-      - Git Hooks: git-hooks/README.md
     - Troubleshooting Matrix: troubleshooting-matrix.md
 
   # ============================================================

@@ -13,12 +13,6 @@
     // CORE SERVERS (Always Enabled)
     // ========================================================================
 
-    // Archon - Project/Task Management & Knowledge Base
-    "archon": {
-      "url": "http://localhost:8051/mcp",
-      "type": "http"
-    },
-
     // GitHub MCP Server - Official GitHub operations
     "github": {
       "type": "http",

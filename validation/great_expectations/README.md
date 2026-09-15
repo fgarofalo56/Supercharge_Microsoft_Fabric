@@ -154,10 +154,86 @@ great_expectations checkpoint run table_games_checkpoint
 
 ### Prerequisites
 
+These runners and the configuration use **legacy GX 0.18.x APIs**, not GX 1.x.
+The project's open-ended dependency does not guarantee API compatibility. Use
+an isolated environment rather than downgrading the main project environment.
+GX 0.18.22 was tested locally; its
+[upstream requirements](https://github.com/great-expectations/great_expectations/blob/0.18.22/requirements.txt)
+constrain NumPy below 2. Parquet loading requires PyArrow. Spark sources also
+require compatible PySpark and Java; the Delta source needs Delta dependencies.
+
+### Local integration verification
+
+On 2026-09-09, an isolated Windows/Python 3.12.13 environment executed
+`tests/test_gx_local_integration.py`: **3 passed**, with three GX warnings about
+Validator-level `result_format` not being persisted. Tested versions: GX
+**0.18.22**, NumPy **1.26.4**, Pandas **2.3.3**, and PyArrow **25.0.1**.
+
+The tests copy the actual Pandas datasource definitions into ephemeral contexts
+with in-memory stores and usage reporting disabled. Coverage includes:
+
+- `casino_pandas`: shipped CSV discovery, loading, and row-count validation.
+- `federal_bronze`: temporary Parquet discovery, loading, and validation, with
+  the filesystem destination overridden to a temporary directory.
+- `federal_open_data`: a runtime DataFrame and a newly constructed checkpoint.
+
+This does **not** verify the full YAML context, Spark/Delta sources, generated
+production datasets, live downloads, domain suites, or checked-in checkpoints.
+Separate connector-contract tests check the configured Parquet destination.
+
+Reproduce from the repository root on Windows without changing the main project
+environment or dependency manifests:
+
 ```bash
-pip install great_expectations>=0.18.0
-pip install pyspark  # For Spark execution engine
+uv venv .venv-gx-audit --python 3.12
+uv pip install --python .venv-gx-audit/Scripts/python.exe "great-expectations==0.18.22" "numpy==1.26.4" "pandas==2.3.3" "pyarrow==25.0.1" pytest pyyaml
+.venv-gx-audit/Scripts/python.exe -m pytest tests/test_gx_local_integration.py --noconftest -o addopts= -q
 ```
+
+On Linux/macOS, use `.venv-gx-audit/bin/python` instead. Integration tests skip
+when GX is absent or not version 0.18.x; skips are not integration verification.
+
+### Input contracts
+
+Filesystem connector paths resolve relative to `validation/great_expectations`.
+
+| Datasource | Input | Prerequisite |
+|------------|-------|--------------|
+| `casino_bronze` | Optional Parquet in `../../data_generation/output/`, or runtime Spark DataFrame | Generate Bronze Parquet; shipped samples are CSV |
+| `casino_silver` | Runtime Spark DataFrame | Supply cleansed data; no local Silver dataset is shipped |
+| `casino_gold` | Runtime Spark DataFrame | Supply curated data; no local Gold dataset is shipped |
+| `federal_bronze` | Optional Parquet in `../../data_generation/output/`, or runtime Pandas DataFrame | Generate synthetic federal data; runtime identifiers include `agency` |
+| `federal_open_data` | Runtime Pandas DataFrame | Load a selected downloaded file; identifiers include `agency` and `dataset` |
+| `casino_pandas` | Shipped CSV in `../../docs/sample-data/bronze/`, or runtime Pandas DataFrame | No generation required for shipped samples |
+
+`data_generation/generate.py` defaults to Parquet and working-directory-relative
+`./output`. From the repository root, select `--output data_generation/output`;
+from `data_generation`, the default selects that directory. Generated filenames
+include `bronze_slot_telemetry.parquet` and, with `--federal usda,sba`,
+`bronze_usda_crop_production.parquet`. These optional files need not exist in a
+clean checkout. Copying CSV samples does not satisfy a Parquet connector. This
+producer does not generate local Silver or Gold directories.
+
+Downloader defaults are working-directory-relative: USDA uses
+`output/usda_open_data`; SBA, NOAA, EPA, DOI, DOJ, DOT/FAA, and tribal health use
+`data/sba`, `data/noaa`, `data/epa`, `data/doi`, `data/doj`, `data/dot_faa`, and
+`data/tribal`, respectively. There is no shared `output/open_data` producer
+contract. Load the selected file using its actual format and provide a runtime
+DataFrame. Live downloads are not required for shipped-sample checks.
+
+### Checkpoint execution limits
+
+Checked-in checkpoint validations request runtime batches without supplying
+actual data. Filesystem discovery does not populate those requests. Standalone
+checkpoint commands below are templates, **not a fresh-checkout quick start**;
+each validation needs runtime data and the required identifiers. The analytics
+checkpoint also references undefined datasource `analytics_bronze`.
+
+`run_all_suites.py` uses an ephemeral Pandas context, not the full YAML context
+or checked-in checkpoint wiring. `validate_data.py` also uses legacy APIs;
+match its datasource selection and file mapping to the supplied data.
+Connector/path tests do not establish that GX contexts or checkpoints execute.
+
 
 ### Running Validations
 
@@ -198,6 +274,8 @@ Data Docs will be available at: `uncommitted/data_docs/local_site/index.html`
 
 ### Python Integration
 
+Run this example from the repository root.
+
 ```python
 import great_expectations as gx
 from great_expectations.core.batch import RuntimeBatchRequest
@@ -207,7 +285,7 @@ import pandas as pd
 context = gx.get_context(context_root_dir="validation/great_expectations")
 
 # Load data
-df = pd.read_parquet("sample-data/bronze/slot_telemetry.parquet")
+df = pd.read_csv("docs/sample-data/bronze/slot_telemetry_sample.csv")
 
 # Create batch request
 batch_request = RuntimeBatchRequest(
@@ -345,7 +423,7 @@ class ExpectColumnValuesToBeValidMachineId(ColumnMapExpectation):
 
 1. **Spark not available**: Ensure PySpark is installed or use the Pandas execution engine for local testing.
 
-2. **Missing data files**: The checkpoints expect data in `../sample-data/` directory. Generate sample data first.
+2. **Missing data files**: See [Input contracts](#input-contracts). Shipped CSVs live in `docs/sample-data/bronze/`; optional generated Parquet belongs in `data_generation/output/`. Checkpoints need explicit runtime batches; filesystem discovery does not supply them.
 
 3. **Checkpoint not found**: Ensure you're running from the `great_expectations/` directory.
 

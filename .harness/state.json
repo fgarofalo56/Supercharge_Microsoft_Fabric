@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "current_session": 1,
+  "current_session": 4,
   "cross_reference": {
     "durable_record": "https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/issues/142",
     "execution_state": ".forge/",
@@ -23,8 +23,9 @@
       "description": "## Requirements\n- Read-only pass over 345 dirty entries, including the 159 staged docs-rename files.\n- Cover all three worktrees; do NOT operate on those under temp/.\n- Group entries by apparent origin and intent.\n\n## Acceptance Criteria\n- [ ] Every dirty path assigned to a group with a proposed disposition\n- [ ] Staged rename set characterised separately from unstaged and untracked work\n- [ ] Worktree contents listed without modification\n- [ ] Open question raised for any entry whose owner cannot be determined\n\n## Test Steps\n1. `git status --porcelain=v1 --untracked-files=all`\n2. `git diff --cached --name-status` for the staged set\n3. `git worktree list`\n4. Re-run status after the pass; counts must be unchanged",
       "feature": "Dirty-tree inventory",
       "task_order": 95,
-      "status": "todo",
-      "assignee": "harness-coder"
+      "status": "done",
+      "assignee": "harness-coder",
+      "result": "243 dirty entries classified: 200 modified, 43 untracked. Two populations: (a) 151 files with equal +/- = mechanical link rewrites, INCLUDING 15 that introduced the self-referential Best Practices bug - all 15 are modified, 0 pre-existing, so the working tree introduced it; (b) 49 files with real content change, net -3610 lines. Sampled (b): .github/agents+prompts deletions are the deliberate Archon removal (harness-wizard 537->68 strips archon-* tools and hardcoded model) = KEEP. docs/features/variable-libraries.md 513->256 is a FACTUAL CORRECTION not content loss - v1 documented a Secret type with Key Vault binding absent from the official spec and omitted value sets; v2 cites Microsoft Learn = KEEP. 43 untracked split: 9 new docs/features pages, 13 docs README mirrors, 6 infra/ci-runners, 4 tests, AGENTS.md, FORGE_ORCHESTRATION.md. Ownership unresolved for the 15 self-ref files - operator decision pending."
     },
     {
       "id": "task-003",
@@ -32,8 +33,9 @@
       "description": "## Requirements\n- Branch docs/fabric-dr-authoritative-answers is behind origin by 3 commits.\n- Determine what those commits contain and whether they conflict with local work.\n- Do not merge, rebase, pull, or reset without explicit operator approval.\n\n## Acceptance Criteria\n- [ ] The 3 upstream commits identified and summarised\n- [ ] Conflict risk against the 345 dirty entries assessed\n- [ ] Recommendation recorded; no history mutation performed\n\n## Test Steps\n1. `git fetch --dry-run` then `git log HEAD..@{u} --oneline`\n2. `git diff --name-only HEAD..@{u}` intersected with the dirty path list\n3. Confirm HEAD unchanged after the pass",
       "feature": "Dispatch readiness",
       "task_order": 90,
-      "status": "todo",
-      "assignee": "harness-coder"
+      "status": "done",
+      "assignee": "harness-coder",
+      "result": "Divergence, not simple lag: HEAD...@{u} = 1 ahead, 3 behind (my commit 6102ca0 is the 1). Merge base 710f889. The 3 upstream commits (c9cd67e merge, fa017bb, ca8fe01) touch exactly ONE file: requirements-docs.txt - mkdocs-redirects 1.2.2->1.2.3 and pillow 12.2.0->12.3.0, both dependabot bumps. That file is NOT locally dirty. ZERO collisions against all 243 dirty entries. Integration is therefore low-risk, but NO history operation performed - merge/rebase/pull requires explicit operator approval per spec. Recommendation: safe to integrate when approved."
     },
     {
       "id": "task-004",
@@ -71,12 +73,18 @@
     "pilot_limits": {
       "workers": 1,
       "max_tasks": 3,
-      "max_minutes": 60
+      "max_minutes": 60,
+      "authorised": "pilot 2, operator-approved 2026-09-15, covers task-004 onward; pilot 1 covered task-001..003"
     },
     "progress": {
-      "done": 1,
+      "done": 3,
       "total": 6,
-      "percent": 17
+      "percent": 50
+    },
+    "operator_decisions": {
+      "self_referential_links": "DONE - 15 files, 27 links repaired to the parent page. 0 self-referential remain; 29 links now resolve to the parent. NOTE: HEAD used a bare directory link; the working tree had broken it to self-links; the repair matches PR #140 exactly (verified f051eb9 uses the same explicit parent path).",
+      "pr_140": "SUPERSEDE - confirmed safe on the link point: the local tree now carries #140's exact link form, so closing it loses nothing there. CLOSE ACTION NOT PERFORMED - needs explicit go-ahead, and the other 57 diverged files have not been individually cleared.",
+      "upstream_integration": "DONE - merged 6b00ef8, ort strategy, 1 file changed (requirements-docs.txt), 0 conflicts. Deps now mkdocs-redirects>=1.2.3, pillow>=12.3.0. Tree untouched at 244 dirty / 0 staged."
     }
   }
 }
