@@ -103,18 +103,20 @@ gh issue reopen <number>
 gh issue edit <number> --add-label "priority"
 ```
 
-## Link to Archon
+## After creating the issue
 
-After creating issue, optionally create matching Archon task:
+The GitHub issue **is** the durable work item — there is no separate task
+service to mirror it into. To put it into the execution graph so
+`atlas-forge dispatch` can run it:
 
+```bash
+atlas-forge plan "<the issue's goal>" --dry-run   # read-only
+atlas-forge decompose                             # a GATE: over-budget tasks exit 1
+atlas-forge issues --json                         # where the graph and issues disagree
 ```
-manage_task("create",
-  project_id="[PROJECT_ID]",
-  title="[Same as issue title]",
-  description="GitHub Issue: #[number]\n[description]",
-  task_order=80
-)
-```
+
+Only `plan` and `decompose` write `.forge/tasks.json`. See
+[ATLAS FORGE orchestration](../FORGE_ORCHESTRATION.md).
 
 ## Arguments
 

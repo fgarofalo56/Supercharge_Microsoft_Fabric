@@ -13,16 +13,23 @@ Execute the complete startup checklist before we begin any work.
 - Check for `.github/copilot-instructions.md` and read it
 - Check for any project-specific configuration files
 
-### 2. Load Archon Project Context
+### 2. Load Task Context
 
-Query Archon for the current project state:
+There is no external task-management service. Read the sources that exist:
 
+```bash
+gh issue list --state open          # durable work items
+gh pr list --state open             # anything awaiting review
+atlas-forge board --json            # the task graph, if one exists
+atlas-forge blocked --json          # anything waiting on a person
+atlas-forge status --json           # this workspace's newest session
 ```
-find_projects(query="[current-codebase-name]")
-find_documents(project_id="[PROJECT_ID]", query="Session Memory")
-find_tasks(filter_by="project", filter_value="[PROJECT_ID]")
-find_tasks(filter_by="status", filter_value="doing")
-```
+
+If `atlas-forge dispatch --dry-run` says `0 tasks in 0 waves`, that means
+`.forge/tasks.json` has not been written. It exits 1 with `status: "error"`,
+while `board` calls the same state `status: ok` / `no tasks` — read it as "no
+graph built yet". If `gh` is unavailable, report the inventory as **blocked**
+rather than guessing.
 
 ### 3. Review Git Status
 
@@ -53,15 +60,15 @@ Provide a structured briefing:
 - **Last Commit**: [commit message]
 - **Uncommitted Changes**: [yes/no - list if any]
 
-### Archon Tasks
+### Open Work
 
-- **In Progress**: [list]
-- **Blocked**: [list]
+- **In Progress**: [from `atlas-forge board` "doing", and assigned open issues]
+- **Blocked**: [from `atlas-forge blocked` — include the exact question]
 - **Ready (Todo)**: [top 3]
 
 ### Session Memory
 
-- **Last Session Focus**: [from session doc]
+- **Last Session Focus**: [from the latest handoff comment on the relevant issue]
 - **Decisions Made**: [list]
 - **Blockers**: [list]
 

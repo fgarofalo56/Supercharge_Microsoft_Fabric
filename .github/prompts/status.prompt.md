@@ -8,13 +8,22 @@ Provide a comprehensive status update on the current project.
 
 ## Check Current State
 
-### 1. Archon Status
+### 1. Task Status
 
+There is no external task-management service. Read what exists:
+
+```bash
+atlas-forge board --json       # ready / doing / done / failed / blocked_on_human
+atlas-forge blocked --json     # tasks waiting on a person, and the exact question
+atlas-forge issues --json      # where the task graph and GitHub issues disagree
+gh issue list --state open
+gh pr list --state open
 ```
-find_tasks(filter_by="status", filter_value="doing")
-find_tasks(filter_by="status", filter_value="todo")
-find_documents(project_id="[PROJECT_ID]", query="Session Memory")
-```
+
+`0 tasks in 0 waves` from `atlas-forge dispatch --dry-run` means
+`.forge/tasks.json` has not been written; it exits 1 with `status: "error"`
+while `board` calls the same state `status: ok` / `no tasks`. `board`'s `ok`
+means the file could be read; it is not a build verdict.
 
 ### 2. Git Status
 
@@ -43,7 +52,7 @@ git stash list
 - **Uncommitted Changes**: [list or "clean"]
 - **Stashes**: [count]
 
-### 📋 Archon Tasks
+### 📋 Tasks and Issues
 
 | Status        | Count | Top Items |
 | ------------- | ----- | --------- |
@@ -51,6 +60,9 @@ git stash list
 | Review        | X     | [list]    |
 | Todo          | X     | [top 3]   |
 | Done (recent) | X     | [last 3]  |
+
+Give totals only for the inventory you actually reconciled, and name any source
+you could not read.
 
 ### ⚠️ Blockers
 

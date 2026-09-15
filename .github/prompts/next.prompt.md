@@ -1,5 +1,5 @@
 ---
-description: Determine what to work on next based on Archon tasks and priorities
+description: Determine what to work on next from GitHub issues and the atlas-forge task graph
 ---
 
 # What's Next?
@@ -8,29 +8,42 @@ Analyze current state and provide options for what to work on next.
 
 ## Check Current Context
 
+There is no external task-management service. Read what exists:
+
 ### 1. In-Progress Work
 
-```
-find_tasks(filter_by="status", filter_value="doing")
+```bash
+atlas-forge board --json            # the "doing" column
+gh issue list --state open --assignee @me
 ```
 
 ### 2. Pending Tasks
 
-```
-find_tasks(filter_by="status", filter_value="todo")
+```bash
+gh issue list --state open
+atlas-forge board --json            # the "ready" column
 ```
 
 ### 3. Blockers
 
-```
-find_tasks(filter_by="status", filter_value="blocked")
+```bash
+atlas-forge blocked --json          # each task waiting on a person, and the question
+gh pr list --state open             # anything stuck awaiting review
 ```
 
-### 4. Recent Session Memory
+### 4. Recent Context
 
+The last handoff is a comment on the relevant GitHub issue:
+
+```bash
+gh issue view <n> --comments
 ```
-find_documents(project_id="[PROJECT_ID]", query="Session Memory")
-```
+
+`0 tasks in 0 waves` from `atlas-forge dispatch --dry-run` means
+`.forge/tasks.json` has not been written. It exits 1 with `status: "error"`,
+while `board` calls the same state `status: ok` / `no tasks` — read it as "no
+graph built yet". If `gh` is unavailable, report the inventory as **blocked**
+rather than guessing.
 
 ## Provide Options
 

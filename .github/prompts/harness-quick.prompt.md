@@ -1,65 +1,32 @@
 ---
 name: harness-quick
-description: Quick setup for autonomous agent harness with smart defaults. Minimal questions, fast initialization.
+description: Prepare a bounded native-tool pilot using repository-derived defaults.
 mode: agent
 agent: harness-wizard
 ---
 
-# ⚡ Quick Harness Setup
+# Quick Harness Setup
 
-Fast-track harness setup with smart defaults.
+Follow [Native Harness Setup](harness-setup.prompt.md). Quick setup reduces
+questions, not verification, review, or permission requirements.
 
-## Automatic Detection
+Infer the project, languages, dependency commands, and test framework from actual
+repository files. Read existing requirements and GitHub issue handoffs before
+asking for information already present. Preserve all unrelated work.
 
-I'll automatically detect:
-- **Project name** from directory
-- **Language/Framework** from package.json, requirements.txt, go.mod, etc.
-- **Testing framework** based on existing test files
-- **Git status** from repository
+| Setting | Default |
+|---------|---------|
+| Work selection | One authorized, unblocked item with acceptance criteria |
+| Pilot budget | Three tasks or 60 minutes, whichever comes first |
+| Retry limit | Three failed attempts per task; permission failures stop immediately |
+| Model | Current host's available configured model; verify delegate routes |
+| Tracking | Native session tasks and existing GitHub issues for handoffs |
+| Checks | Narrowest real checks, plus acceptance-required integration checks |
+| Review | Independent review; report unavailable reviewers as blocked |
+| Execution | Current session; automatic restart requires a tested supervisor |
 
-## You Only Need to Provide
-
-1. **Project Description** (1-2 sentences)
-2. **Application Specification** (features to build)
-
-## Defaults Applied
-
-| Setting | Default Value |
-|---------|---------------|
-| Max Features | 30 |
-| Max Iterations | 100 |
-| Model | claude-sonnet-4 |
-| Testing | unit + integration |
-| Execution Mode | all (terminal, background, SDK) |
-
----
-
-## Quick Start
-
-Provide your project description and application specification:
-
-```
-Quick setup:
-
-Description: [Brief description of what you're building]
-
-Specification:
-[Detailed features, user flows, and requirements]
-```
-
-Example:
-
-```
-Quick setup:
-
-Description: A task management API with real-time updates
-
-Specification:
-Build a REST API for task management with:
-- User authentication (JWT)
-- CRUD operations for tasks
-- Real-time updates via WebSocket
-- Task assignment and collaboration
-- Due date reminders
-- Task categories and tags
-```
+Do not generate an arbitrary feature count, assume an SDK is installed, or launch
+unsupported background-agent commands. Reuse existing issues and obtain permission
+before creating new ones. Record baseline command results and the next action.
+No automatic commit, push, merge, or deployment. Report setup as prepared, not
+running, until actual execution and required lifecycle tests provide evidence.

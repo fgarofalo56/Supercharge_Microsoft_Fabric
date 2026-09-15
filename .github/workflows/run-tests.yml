@@ -45,6 +45,16 @@ jobs:
               - 'pyproject.toml'
               - '.github/workflows/run-tests.yml'
 
+      - name: Set up Python for repository path checks
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+
+      - name: Validate repository paths and README sample
+        run: |
+          python -m pip install pytest pandas PyYAML
+          python -m pytest tests/test_sample_data_paths.py --noconftest -q
+
   lint-and-typecheck:
     name: Lint & Type Check
     runs-on: ubuntu-latest

@@ -16,8 +16,8 @@
 - [Agent Inventory](#-agent-inventory)
 - [Best Practices](#-best-practices)
 - [Autonomous Agent Harness Integration](#-autonomous-agent-harness-integration)
-- [Ralph Wiggum Integration](#-ralph-wiggum-integration)
-- [Integration with Archon](#-integration-with-archon)
+- [Multi-Task Orchestration](#-multi-task-orchestration)
+- [Task Tracking](#-task-tracking)
 - [Troubleshooting](#-troubleshooting)
 - [Related Documents](#-related-documents)
 
@@ -505,153 +505,179 @@ Run harness sessions in background:
 
 ### Harness State Management
 
-All harness state is managed via Archon:
+Harness state lives on disk under `.forge/`, and durable cross-session work
+items live in GitHub issues. There is no external task-management service.
 
-```python
-# Project with tasks and documents
-find_projects(project_id="<harness_project_id>")
-find_tasks(filter_by="project", filter_value="<project_id>")
-find_documents(project_id="<project_id>", query="Session Notes")
+```bash
+atlas-forge board --json      # the task graph as columns
+atlas-forge status --json     # this workspace's newest session
+gh issue list --state open    # durable work items
 ```
 
+Raw state, if you need it: `.forge/dispatch-progress.json` (wave counters,
+in-flight tasks, spend), `.forge/runs/` (per-run records), `.forge/evidence/`
+(what each settled task proved).
+
 For complete harness documentation, see:
+- [ATLAS FORGE orchestration](./FORGE_ORCHESTRATION.md) — the verified command surface
 - [Autonomous Agent Harness Skill](.github/skills/autonomous-agent-harness/README.md)
 
 ---
 
-## 🔄 Ralph Wiggum Integration
+## 🔄 Multi-Task Orchestration
 
-For persistent, iterative development loops, use **Ralph Wiggum**:
+For work spanning more tasks than one session can hold, use the shipped ATLAS
+FORGE pipeline. The full verified command and flag surface is
+[ATLAS FORGE orchestration](./FORGE_ORCHESTRATION.md) — read it before running
+anything, and never use a flag it has not verified.
+
+> **What this replaces.** This section used to describe a "Ralph Wiggum loop"
+> whose state lived in an Archon MCP server. Archon is not running and not
+> installed, and **the loop had no runner behind it** — nothing shipped could
+> execute an iteration, which is why every attempt to start one went in circles.
+> The `/ralph-*` commands still exist as aliases, but they now drive the
+> pipeline below.
 
 ```mermaid
 flowchart TD
-    A["/ralph-start"] --> B["Configure Loop"]
-    B --> C["Run Iteration"]
-    C --> D{"Complete?"}
-    D -->|No| C
-    D -->|Yes| E["Task Done"]
-    D -->|Blocked| F["Report Blocker"]
-    
+    A["atlas-forge plan"] --> B["atlas-forge decompose"]
+    B -->|"over budget: exit 1"| B2["split tasks"]
+    B2 --> B
+    B -->|"gate passes"| C[".forge/tasks.json"]
+    C --> D["atlas-forge dispatch"]
+    D --> E{"gates green?"}
+    E -->|"yes"| F["atlas-forge integrate"]
+    E -->|"no"| G["branch + worktree kept for reading"]
+    E -->|"needs a person"| H["atlas-forge blocked"]
+
     style A fill:#e3f2fd
-    style C fill:#fff3e0
-    style E fill:#e8f5e9
-    style F fill:#ffebee
+    style D fill:#fff3e0
+    style F fill:#e8f5e9
+    style G fill:#ffebee
 ```
 
-### What is Ralph?
+### How it actually works
 
-Ralph Wiggum is an iterative AI development methodology where:
-- AI receives the **same prompt** each iteration
-- Previous work **persists in files** and git
-- Each iteration **sees modified files** from previous work
-- Loop continues until **completion criteria met**
+- `plan` runs **read-only**. Use `--dry-run` and read the plan before saving it.
+- `decompose` is a **gate, not a report**. Any task over the diff-line budget
+  exits 1, is named with how many pieces it needs, and the oversized plan is not
+  written to disk. Never raise `--budget` to make it pass.
+- `dispatch` gives every task its own worktree on `forge/<task-id>`, its own
+  agent, and **the full gate suite**. A task whose gates are red is red, because
+  the next thing that happens to its branch is a merge into everything else.
+- A failed task **keeps its worktree** so the work is still there to read.
+- `integrate` re-checks the real diff sizes with `git diff --numstat`, which is
+  the half of the budget check the planner's own estimate cannot talk past.
 
-### Ralph Commands
+### Commands
 
-| Command | Description |
-|---------|-------------|
-| `/ralph-start` | Launch setup wizard |
-| `/ralph-iterate` | Run single iteration manually |
-| `/ralph-status` | Check loop status |
-| `/ralph-cancel` | Cancel active loop |
+| Action | Command |
+|---|---|
+| Plan a change (read-only) | `atlas-forge plan "<goal>" --dry-run` |
+| Gate task sizes | `atlas-forge decompose` |
+| Preview the waves | `atlas-forge dispatch --dry-run` |
+| Run one wave | `atlas-forge dispatch --wave 1` |
+| Run everything | `atlas-forge dispatch` |
+| Follow a live run | `atlas-forge watch` |
+| See the board | `atlas-forge board` |
+| Stop at a wave boundary | `atlas-forge pause` |
+| Stop now, no auto-resume | `atlas-forge cancel` |
+| Merge finished branches | `atlas-forge integrate --branch <name>` |
 
-### Ralph + Framework Integration
+### Unattended drain
 
-Ralph integrates with all existing frameworks:
+| Action | Command |
+|---|---|
+| One bounded cycle | `atlas-forge factory tick` |
+| Drain until done or halted | `atlas-forge factory run` |
+| Landed commits + supervisor liveness | `atlas-forge factory status` |
+| Stop the drain | `atlas-forge factory halt --reason "<why>"` |
+| Undo the halt | `atlas-forge factory resume` |
+| Return stale `doing` rows to `todo` | `atlas-forge factory requeue` |
+
+### Framework entry points
 
 ```bash
-# Ralph + Long Run Harness
-/harness-ralph
-
-# Ralph + Spec Kit  
-/speckit-ralph specs/123-feature/spec.md
-
-# Ralph + PRP Framework
-/prp-ralph PRPs/plans/feature.plan.md
+/ralph-start                          # build a task graph from a goal
+/ralph-iterate                        # run one wave
+/ralph-status                         # read-only status
+/ralph-cancel                         # stop without destroying work
+/harness-ralph                        # bounded native-tool cycle
+/speckit-ralph specs/123-feature/spec.md   # spec -> task graph
+/prp-ralph PRPs/plans/feature.plan.md      # PRP plan -> task graph
 ```
 
-### Background Ralph Execution
+### Things that are NOT true
 
-Run Ralph loops in background mode:
-
-```bash
-# Start autonomous Ralph loop
-& /ralph-loop "Build REST API for todos" --max-iterations 50
-
-# Check status
-/ralph-status
-
-# Cancel if needed
-/ralph-cancel
-```
-
-### Ralph Execution Modes
-
-| Mode | Description | Command |
-|------|-------------|---------|
-| **Background** | Fully autonomous | `& /ralph-loop "task"` |
-| **Manual** | You control each iteration | `/ralph-iterate` |
-| **Hybrid** | Start manual, go background | `/ralph-iterate` then `& /ralph-continue` |
-
-### Loop Termination
-
-Ralph stops when:
-1. ✅ **Completion promise** detected (`<promise>COMPLETE</promise>`)
-2. ✅ **Archon task** marked done
-3. ⚠️ **Max iterations** reached
-4. 🛑 **Manual cancel** by user
-
-### Ralph + Archon State
-
-All Ralph state is managed via Archon:
-
-```python
-# Loop state in documents
-find_documents(project_id="...", query="Ralph Loop State")
-
-# Task progress tracking
-manage_task("update", task_id="...", status="doing")
-```
-
-For complete Ralph documentation, see:
-- [Ralph Wiggum Skill](./skills/ralph-wiggum/README.md)
+- **There is no `--max-iterations`, no `completion_promise`, and no
+  `.ralph/config.json`.** A task settles when its gates pass, not when a phrase
+  appears. Bound a run with `--wave`, `--parallel`, `--max-usd`, `--task-usd`,
+  `--task-minutes` (default 90), or `--phase`.
+- **`scripts/backlog_to_dag.py` is not shipped in this repository.** It is the
+  atlas-forge repo's own parser for its own markdown conventions. Only `plan`
+  and `decompose` write `.forge/tasks.json`.
+- **`0 tasks in 0 waves`** from `dispatch --dry-run` means `.forge/tasks.json`
+  has not been written. `board` calls that `status: ok` / `no tasks`;
+  `dispatch --dry-run` returns `ok: false`, `status: "error"` and **exit 1**
+  for the same state. Read that exit 1 as "no graph built yet", not as
+  "dispatch is broken".
+- **`board`'s `ok` means the file could be read.** It is not a build verdict.
+- **`factory status` reports landed commits and supervisor liveness
+  separately.** They can disagree. Report both; infer neither from the other.
 
 ---
 
-## 🔗 Integration with Archon
+## 🔗 Task Tracking
 
-All background tasks integrate with Archon for task tracking:
+Durable, cross-session work items live in **GitHub issues**. Execution state
+lives in `.forge/` on disk. There is no external task-management service.
 
 ```mermaid
 flowchart LR
-    A[📋 Get Task] --> B[🚀 Start Work]
-    B --> C[📤 Background Task]
-    C --> D[📝 Update Status]
-    D --> E[📊 Session Memory]
+    A[📋 gh issue list] --> B[🚀 plan + decompose]
+    B --> C[📤 dispatch]
+    C --> D[📝 board / blocked]
+    D --> E[📊 gh issue comment]
 
     style A fill:#e3f2fd
     style C fill:#fff3e0
     style E fill:#e8f5e9
 ```
 
-### Workflow with Archon
-
 ```bash
-# 1. Before starting - check tasks
-find_tasks(filter_by="status", filter_value="todo")
+# 1. Before starting - what is open?
+gh issue list --state open
+gh pr list --state open
 
-# 2. Mark task as in progress
-manage_task("update", task_id="...", status="doing")
+# 2. Where do the task graph and the issues disagree?
+atlas-forge issues --json
 
-# 3. Send work to background
-& /background:implement [task description]
+# 3. Do the work
+atlas-forge dispatch --wave 1
 
-# 4. When complete - update task
-manage_task("update", task_id="...", status="review")
+# 4. What needs a person, and what exactly are they being asked?
+atlas-forge blocked --json
 
-# 5. Update session memory
-# Document findings for future sessions
+# 5. Record the handoff on the issue itself
+gh issue comment <n> --body "<branch, commit, commands run, results, next action>"
 ```
+
+Reuse existing issues rather than duplicating them. If `gh` is unavailable,
+report inventory reconciliation as **blocked** rather than guessing.
+
+### Safety rules for this repository
+
+1. **The working tree is dirty and the dirt is real work.** `dispatch` and
+   `factory` branch from `HEAD` and merge finished branches back; a drain over a
+   dirty tree interleaves unreviewed work with generated work. Triage first.
+2. **Never `git checkout --`, `git restore`, `git clean`, or `git stash`.** The
+   stash stack is shared across worktrees on this machine and other sessions pop
+   it.
+3. **There are three worktrees**, one with an in-progress merge. Leave worktrees
+   you did not create alone.
+4. **Do not commit or push** unless the current task explicitly authorises it.
+5. **A prompt being read is not a runner being started.** Report what
+   `factory status` / `watch` / `board` actually printed.
 
 ---
 
@@ -754,18 +780,33 @@ manage_task("update", task_id="...", status="review")
 | Test feature     | `& @harness-tester verify [feature]` |
 | Review code      | `& @harness-reviewer check [feature]`|
 
-### Ralph Wiggum Commands (Iterative Loops)
+### Orchestration Commands (Multi-Task Runs)
 
-| Action            | Command                                    |
-| ----------------- | ------------------------------------------ |
-| Start Ralph       | `/ralph-start`                             |
-| Single iteration  | `/ralph-iterate`                           |
-| Check status      | `/ralph-status`                            |
-| Cancel loop       | `/ralph-cancel`                            |
-| Ralph + Harness   | `/harness-ralph`                           |
-| Ralph + SpecKit   | `/speckit-ralph [spec-path]`               |
-| Ralph + PRP       | `/prp-ralph [plan-path]`                   |
-| Background Ralph  | `& /ralph-loop "task" --max-iterations 50` |
+| Action                      | Command                                       |
+| --------------------------- | --------------------------------------------- |
+| Plan (read-only)            | `atlas-forge plan "<goal>" --dry-run`         |
+| Gate task sizes             | `atlas-forge decompose`                       |
+| Preview waves               | `atlas-forge dispatch --dry-run`              |
+| Run one wave                | `atlas-forge dispatch --wave 1`               |
+| Follow a live run           | `atlas-forge watch`                           |
+| See the board               | `atlas-forge board`                           |
+| Stop at a wave boundary     | `atlas-forge pause`                           |
+| Stop now                    | `atlas-forge cancel`                          |
+| Merge finished branches     | `atlas-forge integrate --branch <name>`       |
+| Unattended drain            | `atlas-forge factory run`                     |
+| Drain status                | `atlas-forge factory status`                  |
+| Stop the drain              | `atlas-forge factory halt --reason "<why>"`   |
+| Build a graph from a goal   | `/ralph-start`                                |
+| Run one wave (alias)        | `/ralph-iterate`                              |
+| Status (read-only)          | `/ralph-status`                               |
+| Stop without losing work    | `/ralph-cancel`                               |
+| Spec → task graph           | `/speckit-ralph [spec-path]`                  |
+| PRP plan → task graph       | `/prp-ralph [plan-path]`                      |
+
+> No `--max-iterations` and no background `& /ralph-loop`: a task settles when
+> its gates pass. Bound runs with `--wave`, `--parallel`, `--max-usd`,
+> `--task-usd`, `--task-minutes`. See
+> [ATLAS FORGE orchestration](./FORGE_ORCHESTRATION.md).
 
 ### Agent Quick Reference
 
@@ -779,9 +820,9 @@ manage_task("update", task_id="...", status="review")
 | `harness-coder`         | 🤖   | Long-running development |
 | `harness-tester`        | 🧪   | Harness testing |
 | `harness-reviewer`      | 👀   | Harness review |
-| `ralph-wizard`          | 🔄   | Ralph setup wizard |
-| `ralph-loop`            | ♾️   | Ralph iteration loop |
-| `ralph-monitor`         | 📊   | Ralph status monitor |
+| `ralph-wizard`          | 🔄   | Build a task graph (plan + decompose) |
+| `ralph-loop`            | ♾️   | Bounded implementation cycle |
+| `ralph-monitor`         | 📊   | Read-only run status |
 
 ---
 

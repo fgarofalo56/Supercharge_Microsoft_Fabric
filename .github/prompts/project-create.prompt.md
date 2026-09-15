@@ -1,130 +1,126 @@
 ---
-description: Create a new Archon project for a codebase or solution
+description: Set up work tracking for a codebase using GitHub issues, labels, milestones, and atlas-forge
 ---
 
-# Create Project
+# Set Up Project Tracking
 
-Create a new Archon project for tracking work on a codebase.
+Establish where work is tracked for a codebase or solution.
 
-## Project Types
+> **There is no project-management service.** This prompt used to call
+> `manage_project`, `manage_document`, `manage_task` and `find_projects` against
+> an Archon MCP server. It is not running, not installed, and not the intended
+> system. Durable work items are **GitHub issues**; the execution graph is
+> **`.forge/tasks.json`**, written only by `atlas-forge plan` and
+> `atlas-forge decompose`. See
+> [ATLAS FORGE orchestration](../FORGE_ORCHESTRATION.md), and never use a
+> command or flag that file has not verified.
 
-### Standalone Project (Single Codebase)
+## Standalone project (single codebase)
 
+The repository is the project. Nothing separate needs creating.
+
+```bash
+gh repo view --json name,description,url
+atlas-forge init          # scaffolds .forge/; surveys before it writes
 ```
-manage_project("create",
-  title="[Project Name]",
-  description="[Brief description of the project]",
-  github_repo="https://github.com/[org]/[repo]"
-)
-```
 
-### Master Project with Sub-Projects (Monorepo/Solution)
+`atlas-forge init` verified options: `--yes`/`-y`,
+`--workspace`/`--no-workspace`, `--repo`. **It does not create tasks.**
+
+## Solution with several components (monorepo)
 
 ```mermaid
 graph TD
-    A[🏗️ Master Project] --> B[📁 Frontend]
+    A[🏗️ Repository] --> B[📁 Frontend]
     A --> C[📁 Backend API]
     A --> D[📁 Shared Libraries]
     A --> E[📁 Infrastructure]
 ```
 
-**Step 1: Create Master Project**
+Components become **labels**, and phases of work become **milestones**. This
+keeps one queryable backlog instead of several that drift apart.
 
-```
-manage_project("create",
-  title="MySolution",
-  description="Full-stack application with multiple components"
-)
-# Returns: project_id = "master-123"
-```
+```bash
+gh label create "area:frontend"       --color 1d76db --description "React frontend"
+gh label create "area:api"            --color 0e8a16 --description "Backend REST API"
+gh label create "area:infra"          --color 5319e7 --description "Docker, K8s, Terraform"
+gh label create "area:shared"         --color fbca04 --description "Shared libraries"
 
-**Step 2: Create Sub-Projects**
-
-```
-manage_project("create",
-  title="Frontend",
-  parent_id="master-123",
-  description="React frontend application"
-)
-
-manage_project("create",
-  title="Backend API",
-  parent_id="master-123",
-  description="Node.js REST API"
-)
-
-manage_project("create",
-  title="Infrastructure",
-  parent_id="master-123",
-  description="Docker, K8s, Terraform configs"
-)
+gh api repos/{owner}/{repo}/milestones -f title="Phase 1 - Foundations" \
+  -f description="<what must be true when this closes>"
 ```
 
-## Initial Setup
+## Initial setup
 
-After creating a project, set up:
+### 1. Where session context lives
 
-### 1. Session Memory Document
+Handoffs go on the GitHub issue they belong to, not in a separate memory
+document:
 
-```
-manage_document("create",
-  project_id="[PROJECT_ID]",
-  title="Session Memory",
-  document_type="note",
-  content={
-    "created": "[DATE]",
-    "current_focus": "",
-    "blockers": [],
-    "decisions_made": [],
-    "next_steps": []
-  }
-)
+```bash
+gh issue comment <n> --body "<branch, commit, dirty paths, commands run and
+their actual results, remaining acceptance criteria, blockers, next action>"
 ```
 
-### 2. Initial Tasks
+Standing architectural decisions go in the repository, under `docs/` or
+`PRPs/`, where they are reviewable and versioned.
 
+### 2. Seed the first work items
+
+```bash
+gh issue create --title "Project setup and configuration" \
+  --body "Initial setup, dependencies, dev environment
+
+## Acceptance criteria
+- [ ] ..." --label "setup"
+
+gh issue create --title "Define architecture and patterns" \
+  --body "Document key architectural decisions
+
+## Acceptance criteria
+- [ ] ..." --label "documentation"
 ```
-manage_task("create", project_id="[PROJECT_ID]",
-  title="Project setup and configuration",
-  description="Initial setup, dependencies, dev environment",
-  task_order=100)
 
-manage_task("create", project_id="[PROJECT_ID]",
-  title="Define architecture and patterns",
-  description="Document key architectural decisions",
-  task_order=90)
+Give every item acceptance criteria. An item without them cannot be settled and
+should not enter the execution graph.
+
+### 3. Build the execution graph, when there is work to run
+
+```bash
+atlas-forge plan "<goal>" --dry-run   # read-only
+atlas-forge decompose                 # a GATE: over-budget tasks exit 1
+atlas-forge board                     # what the graph now says
+atlas-forge issues                    # where the graph and the issues disagree
 ```
 
-## Project Naming
+`decompose` is a gate, not a report: any task over the diff-line budget exits 1
+and the oversized plan is not written. Split the task; never raise `--budget` to
+make it pass.
+
+## Naming
 
 | Type            | Convention      | Example                           |
 | --------------- | --------------- | --------------------------------- |
-| **Standalone**  | Repository name | `my-api-service`                  |
-| **Master**      | Solution name   | `MyCompany Platform`              |
-| **Sub-project** | Component name  | `Frontend`, `API`, `Auth Service` |
+| **Repository**  | kebab-case      | `my-api-service`                  |
+| **Area label**  | `area:<component>` | `area:frontend`, `area:api`    |
+| **Milestone**   | Phase + outcome | `Phase 1 - Foundations`           |
 
-## Querying Projects
+## Querying
 
-```
-# Find all projects
-find_projects()
+```bash
+gh repo list <org> --limit 50
+gh issue list --state open
+gh issue list --state open --label "area:api"
+gh issue list --milestone "Phase 1 - Foundations"
+gh pr list --state open
 
-# Search projects
-find_projects(query="api")
-
-# Get specific project with hierarchy
-find_projects(project_id="proj-123")
-
-# Get only master projects
-find_projects(masters_only=True)
-
-# Get sub-projects of a master
-find_projects(parent_id="master-123")
+atlas-forge board --json
+atlas-forge blocked --json
 ```
 
 ## Arguments
 
 {input}
 
-If a name is provided, create with that name.
-If no name, guide through project creation.
+If a name is provided, set up tracking for that codebase.
+If no name, guide the user through it.
