@@ -1,6 +1,6 @@
 # 📋 Changelog
 
-> **Last Updated:** 2026-05-05 | **Version:** 3.1.0 | **Status:** Active
+> **Last Updated:** 2026-09-15 | **Version:** 3.2.0 | **Status:** Active
 
 <div align="center" markdown>
 
@@ -15,6 +15,7 @@
 ## 📑 Table of Contents
 
 - [🔮 Unreleased](#unreleased)
+- [🏷️ 3.2.0 — Fabric DR Guidance, Capability Pages & Migration Guides](#320-2026-09-15)
 - [🏷️ 3.1.0 — Phase 15: Layout, Visual Impact & CSA-in-a-Box Content](#310-2026-05-05)
 - [🏷️ 3.0.0 — Phase 14: One-Stop Shop Completion](#300-2026-04-27)
 - [🏷️ 2.2.0 — Phase 12: Documentation Gap Remediation](#220-2026-04-21)
@@ -34,7 +35,51 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 🔮 [Unreleased]
 
-Nothing currently unreleased.
+### Added
+
+- `docs/features/whats-new.md` — rolling "What's New in Microsoft Fabric" release tracker (Sept/Aug/Jul 2026 highlights), grounded in Microsoft Learn, with per-feature GA/preview status and links to where this repo already covers each capability. Registered in the Feature Catalog nav.
+- `docs/best-practices/fabric-dr-authoritative-answers.md` — new §7 "Two details customers routinely miss": OneLake **soft delete** (7-day retention, independent of the DR toggle) and **BCDR billing** (BCDR Storage + higher write CU consumption, with per-tier CU rates), plus supporting sources.
+
+---
+
+## 🏷️ [3.2.0] — 2026-09-15
+
+### Fabric Disaster-Recovery Guidance, Capability Pages & Migration Guides
+
+Adds authoritative disaster-recovery guidance for Microsoft Fabric, nine new Fabric capability feature pages, and a Synapse-to-Fabric pipeline migration guide. Also consolidates published documentation assets, repairs self-referential navigation links, and fixes Great Expectations sample-data paths.
+
+#### Disaster Recovery (PR #143)
+
+**Added:**
+- `docs/best-practices/fabric-dr-authoritative-answers.md` — authoritative answers to customer DR questions for Fabric: what Microsoft-managed geo-replication does and does not cover, whether Git-integrated artifacts can simply be redeployed, whether DR can be tested, and a cost-versus-risk comparison of the three recovery options (Microsoft-managed only, scripted recovery automation, active-active two regions)
+
+#### Fabric Capability Pages (PR #143)
+
+**Added:**
+- Nine new feature pages under `docs/features/`: AI Copilot configuration, anomaly detection (RTI), AutoML model endpoints, Data Agent API, Deltaflow Eventstreams, LLM eval harness, Eventhouse vector database, Fabric IQ conversational analytics, Fabric IQ planning, Git integration, materialized lake views, OneLake security, pipeline approval activity, prompt engineering for Fabric, and TMDL / Power BI developer mode
+
+#### Migration Guides (PR #143)
+
+**Added:**
+- `docs/tutorials/41-synapse-to-fabric/03_pipeline_migration.md` — standalone Synapse-to-Fabric pipeline migration and cutover guide
+- Updated cross-references across Teradata, migration-planning, Synapse, and Databricks tutorials
+
+#### Documentation Consolidation & Navigation Repair (PRs #140, #143)
+
+**Fixed:**
+- Repaired self-referential "Back to Top / Index" footer links across Best Practices, Compliance Templates, Features, and notebook section READMEs — footers now point to the correct section index rather than the page itself
+- Consolidated published README mirrors and updated cross-references
+- Corrected sample-data paths to `docs/sample-data/bronze/` and repaired Great Expectations sample-input references
+- Expanded `docs/validation/great_expectations/README.md` with GX 0.18.x legacy-API guidance, input contracts, and checkpoint execution limits
+
+#### Infrastructure & CI (PRs #143, #144)
+
+**Added:**
+- CI runner infrastructure (`infra/ci-runners/`) with ACR, Key Vault, and Container Apps environment, plus supporting test suites
+
+**Fixed:**
+- Added `@maxValue(1000)` to Log Analytics `dailyQuotaGb` for ARM-TTK compliance; skipped two ARM-TTK false positives
+- CI: dropped unbuilt staging/prod deployment tiers and pinned `azure-identity` (PR #144)
 
 ---
 
@@ -603,6 +648,9 @@ Major release transforming the POC into a comprehensive Microsoft Fabric enterpr
 
 | Version | Date | Highlights |
 |---------|------|------------|
+| 3.2.0 | 2026-09-15 | Fabric DR guidance, 9 capability pages, Synapse migration guide, nav repair |
+| 3.1.0 | 2026-05-05 | Phase 15: Layout, visual impact, CSA-in-a-Box content |
+| 3.0.0 | 2026-04-27 | Phase 14: One-Stop Shop completion |
 | 1.1.0 | 2025-01-21 | Docker, Dev Container, Power BI templates, Cost estimation, Sample data |
 | 1.0.0 | 2025-01-21 | Initial release with full POC capabilities |
 
