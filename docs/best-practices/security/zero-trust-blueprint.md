@@ -1153,4 +1153,4 @@ Before declaring "zero-trust ready":
 
 ---
 
-[⬆️ Back to Top](#zero-trust-architecture-blueprint-for-microsoft-fabric) | [📚 Security Index](zero-trust-blueprint.md) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#zero-trust-architecture-blueprint-for-microsoft-fabric) | [📚 Security Index](../../best-practices.md#security-best-practices) | [🏠 Home](../../index.md)

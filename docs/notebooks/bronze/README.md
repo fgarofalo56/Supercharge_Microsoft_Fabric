@@ -41,7 +41,7 @@ graph LR
     C --> D[04_bronze_compliance]
     D --> E[05_bronze_table_games]
     E --> F[06_bronze_security_events]
-    
+
     style A fill:#cd7f32
     style B fill:#cd7f32
     style C fill:#cd7f32
@@ -118,7 +118,7 @@ display(spark.sql("SELECT COUNT(*) as record_count FROM bronze.slot_telemetry"))
 
 # Check for recent ingestion
 display(spark.sql("""
-    SELECT 
+    SELECT
         DATE(_ingested_at) as ingestion_date,
         COUNT(*) as records
     FROM bronze.slot_telemetry

@@ -830,4 +830,4 @@ Before declaring "ISO 27001 ready":
 
 ---
 
-[⬆️ Back to Top](#iso-270012022-annex-a-controls--fabric-implementation-mapping) | [📚 Security Index](iso27001-mapping.md) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#iso-270012022-annex-a-controls--fabric-implementation-mapping) | [📚 Security Index](../../best-practices.md#security-best-practices) | [🏠 Home](../../index.md)

@@ -839,4 +839,4 @@ Before declaring CCPA/CPRA-ready:
 
 ---
 
-[⬆️ Back to Top](#ccpa-cpra-privacy-rights-implementation-on-microsoft-fabric) | [📚 Security Index](ccpa-privacy-rights.md) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#ccpa-cpra-privacy-rights-implementation-on-microsoft-fabric) | [📚 Security Index](../../best-practices.md#security-best-practices) | [🏠 Home](../../index.md)

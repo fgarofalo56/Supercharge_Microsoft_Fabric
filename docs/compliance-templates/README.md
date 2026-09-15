@@ -133,4 +133,4 @@ flowchart LR
 
 ---
 
-[⬆️ Back to Top](#compliance-templates) | [📚 Parent](README.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#compliance-templates) | [📚 Compliance Overview](../compliance/index.md) | [🏠 Home](../index.md)

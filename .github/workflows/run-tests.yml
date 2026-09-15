@@ -52,8 +52,9 @@ jobs:
 
       - name: Validate repository paths and README sample
         run: |
-          python -m pip install pytest pandas PyYAML
+          python -m pip install pytest pandas numpy PyYAML faker tqdm
           python -m pytest tests/test_sample_data_paths.py --noconftest -q
+          python -m pytest tests/test_documentation_contracts.py tests/test_gx_connector_contracts.py --noconftest -q
 
   lint-and-typecheck:
     name: Lint & Type Check

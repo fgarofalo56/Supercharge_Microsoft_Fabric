@@ -28,45 +28,45 @@ graph TB
         S1[silver.financial_reconciled]
         S2[silver.security_enriched]
     end
-    
+
     subgraph Feature Engineering
         FE1[Player Features]
         FE2[Transaction Features]
     end
-    
+
     subgraph Model Training
         M1[Churn Model<br/>XGBoost]
         M2[Fraud Model<br/>Isolation Forest]
     end
-    
+
     subgraph MLflow Registry
         REG[Model Registry]
     end
-    
+
     subgraph Predictions
         P1[player_churn_scores]
         P2[fraud_risk_scores]
     end
-    
+
     subgraph Actions
         A1[Marketing Campaigns]
         A2[Security Alerts]
     end
-    
+
     G1 --> FE1
     G2 --> FE1
     S1 --> FE2
     S2 --> FE2
-    
+
     FE1 --> M1
     FE2 --> M2
-    
+
     M1 --> REG
     M2 --> REG
-    
+
     M1 --> P1 --> A1
     M2 --> P2 --> A2
-    
+
     style M1 fill:#9b59b6
     style M2 fill:#9b59b6
     style REG fill:#3498db
@@ -123,15 +123,15 @@ with mlflow.start_run(run_name="churn_model_v1"):
         scale_pos_weight=len(y_train[y_train==0]) / len(y_train[y_train==1])
     )
     model.fit(X_train, y_train)
-    
+
     # Log metrics
     y_pred_proba = model.predict_proba(X_test)[:, 1]
     auc = roc_auc_score(y_test, y_pred_proba)
     mlflow.log_metric("auc_roc", auc)
-    
+
     # Log model
     mlflow.xgboost.log_model(model, "churn_model")
-    
+
     # Register model
     mlflow.register_model(
         f"runs:/{mlflow.active_run().info.run_id}/churn_model",
@@ -195,21 +195,21 @@ with mlflow.start_run(run_name="fraud_model_v1"):
         random_state=42
     )
     model.fit(X_scaled)
-    
+
     # Score transactions
     anomaly_scores = -model.decision_function(X_scaled)  # Higher = more anomalous
     anomaly_scores_normalized = (anomaly_scores - anomaly_scores.min()) / (anomaly_scores.max() - anomaly_scores.min())
-    
+
     df_txn['fraud_risk_score'] = anomaly_scores_normalized
     df_txn['is_anomaly'] = model.predict(X_scaled) == -1
-    
+
     # Apply rule-based flags
     df_txn['structuring_flag'] = (
-        (df_txn['transaction_amount'] >= 8000) & 
+        (df_txn['transaction_amount'] >= 8000) &
         (df_txn['transaction_amount'] < 10000) &
         (df_txn['transactions_per_day'] > 1)
     )
-    
+
     mlflow.sklearn.log_model(model, "fraud_model")
 ```
 
@@ -223,30 +223,30 @@ graph TD
         P1[Gold Layer Complete]
         P2[Feature Store Updated]
     end
-    
+
     subgraph Daily Batch
         D1[01_ml_player_churn_prediction.py]
     end
-    
+
     subgraph Near Real-Time
         R1[02_ml_fraud_detection.py<br/>Every 15 minutes]
     end
-    
+
     subgraph Model Management
         M1[Model Training<br/>Weekly]
         M2[Model Monitoring<br/>Continuous]
     end
-    
+
     P1 --> D1
     P2 --> D1
     P2 --> R1
-    
+
     D1 --> M2
     R1 --> M2
     M2 -->|Drift Detected| M1
     M1 --> D1
     M1 --> R1
-    
+
     style D1 fill:#9b59b6
     style R1 fill:#e74c3c
     style M1 fill:#3498db
@@ -290,8 +290,8 @@ graph TD
 ```python
 # Verify churn predictions distribution
 churn_dist = spark.sql("""
-    SELECT 
-        CASE 
+    SELECT
+        CASE
             WHEN churn_probability < 0.3 THEN 'LOW'
             WHEN churn_probability < 0.7 THEN 'MEDIUM'
             ELSE 'HIGH'
@@ -305,7 +305,7 @@ display(churn_dist)
 
 # Verify fraud scores
 fraud_stats = spark.sql("""
-    SELECT 
+    SELECT
         COUNT(*) as total_transactions,
         SUM(CASE WHEN is_anomaly THEN 1 ELSE 0 END) as anomalies,
         SUM(CASE WHEN structuring_flag THEN 1 ELSE 0 END) as structuring_flags,

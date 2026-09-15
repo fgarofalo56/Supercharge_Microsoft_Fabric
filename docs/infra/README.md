@@ -37,12 +37,12 @@ graph TB
         LA[📊 Log Analytics<br/>Monitoring]
         MI[🔑 Managed Identity<br/>RBAC]
     end
-    
+
     subgraph Optional["🔒 Optional (Private Endpoints)"]
         VN[🌐 Virtual Network]
         PE[🔗 Private Endpoints]
     end
-    
+
     FC --> LA
     ADLS --> KV
     PV --> ADLS
@@ -415,4 +415,3 @@ az bicep build --file infra/main.bicep
 ---
 
 [⬆️ Back to top](#infrastructure-as-code) | [🏠 Home](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md)
-

@@ -16,9 +16,9 @@ something diverges.
 
 ### Phase 0 — Sample data
 
-- [ ] Run `python tutorials/57-databricks-better-together/scripts/generate_sample_data.py`.
-- [ ] Expect: `sample-data/57-better-together/retail/*.parquet` (5 files) +
-      `sample-data/57-better-together/personas/{users,groups}.csv`.
+- [ ] Run `python docs/tutorials/57-databricks-better-together/scripts/generate_sample_data.py`.
+- [ ] Expect: `docs/sample-data/57-better-together/retail/*.parquet` (5 files) +
+      `docs/sample-data/57-better-together/personas/{users,groups}.csv`.
 - [ ] Expect: deterministic output — re-running produces byte-identical files
       (seed=57).
 
@@ -43,7 +43,7 @@ something diverges.
 
 ### Phase 3 — Load data
 
-- [ ] Upload `sample-data/57-better-together/retail/*.parquet` to
+- [ ] Upload `docs/sample-data/57-better-together/retail/*.parquet` to
       `/Volumes/better_together/retail_raw/landing/retail/`.
 - [ ] Run `notebooks/setup/01_load_sample_data.py`.
 - [ ] Expect: five tables in `retail_raw` (`customers`, `products`,
@@ -83,7 +83,7 @@ something diverges.
 
 ### Phase 6 — Defense-in-depth automation
 
-- [ ] Upload `sample-data/57-better-together/personas/*.csv` to
+- [ ] Upload `docs/sample-data/57-better-together/personas/*.csv` to
       `Files/57-better-together/personas/` in the gold lakehouse.
 - [ ] Run `notebooks/security/01_apply_defense_in_depth.py`.
 - [ ] Expect: ~13 Entra groups created (or reused), workspace role assignments
@@ -140,26 +140,26 @@ These checks run from your dev machine and don't touch Fabric/Databricks at all.
 
 ```bash
 # 1. Generators produce identical output across runs (determinism)
-python tutorials/57-databricks-better-together/scripts/generate_sample_data.py
-md5sum sample-data/57-better-together/retail/*.parquet  > /tmp/run1.md5
-rm -rf sample-data/57-better-together
-python tutorials/57-databricks-better-together/scripts/generate_sample_data.py
-md5sum sample-data/57-better-together/retail/*.parquet  > /tmp/run2.md5
+python docs/tutorials/57-databricks-better-together/scripts/generate_sample_data.py
+md5sum docs/sample-data/57-better-together/retail/*.parquet  > /tmp/run1.md5
+rm -rf docs/sample-data/57-better-together
+python docs/tutorials/57-databricks-better-together/scripts/generate_sample_data.py
+md5sum docs/sample-data/57-better-together/retail/*.parquet  > /tmp/run2.md5
 diff /tmp/run1.md5 /tmp/run2.md5   # expect empty diff
 
 # 2. Bicep static build
 az bicep build --file infra/modules/databricks/databricks-workspace.bicep
 az bicep build --file infra/modules/security/key-vault.bicep
-az bicep build --file tutorials/57-databricks-better-together/infra/main.bicep
+az bicep build --file docs/tutorials/57-databricks-better-together/infra/main.bicep
 # expect: warnings about a new Bicep release only; no errors
 
 # 3. Notebook Python syntax check (parses every .py as Python, ignoring magics)
 python -m py_compile \
-  tutorials/57-databricks-better-together/notebooks/setup/00_create_unity_catalog.py \
-  tutorials/57-databricks-better-together/notebooks/setup/01_load_sample_data.py \
-  tutorials/57-databricks-better-together/notebooks/mirroring/*.py \
-  tutorials/57-databricks-better-together/notebooks/gold/*.py \
-  tutorials/57-databricks-better-together/notebooks/security/*.py \
+  docs/tutorials/57-databricks-better-together/notebooks/setup/00_create_unity_catalog.py \
+  docs/tutorials/57-databricks-better-together/notebooks/setup/01_load_sample_data.py \
+  docs/tutorials/57-databricks-better-together/notebooks/mirroring/*.py \
+  docs/tutorials/57-databricks-better-together/notebooks/gold/*.py \
+  docs/tutorials/57-databricks-better-together/notebooks/security/*.py \
   notebooks/hitchhikers-guide/*.py
 # expect: silent (0 exit)
 

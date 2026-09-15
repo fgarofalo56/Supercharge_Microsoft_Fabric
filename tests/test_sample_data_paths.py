@@ -4,6 +4,35 @@ import ast
 from pathlib import Path
 
 
+def test_relocated_generator_cli_from_other_directory(tmp_path: Path) -> None:
+    """The moved CLI finds repository imports independently of the caller."""
+    import os
+    import runpy
+    import subprocess
+    import sys
+
+    root = Path(__file__).resolve().parents[1]
+    script = (
+        root
+        / "docs/tutorials/57-databricks-better-together/scripts/generate_sample_data.py"
+    )
+    environment = os.environ.copy()
+    environment.pop("PYTHONPATH", None)
+    result = subprocess.run(
+        [sys.executable, str(script), "--help"],
+        cwd=tmp_path,
+        env=environment,
+        capture_output=True,
+        text=True,
+        timeout=30,
+        check=False,
+    )
+    assert result.returncode == 0, result.stderr
+    assert "docs/sample-data/57-better-together" in "".join(result.stdout.split())
+    namespace = runpy.run_path(str(script))
+    assert namespace["_REPO_ROOT"] == root
+
+
 def test_gx_runner_sample_inputs_exist() -> None:
     """Every configured sample and expectation suite must exist after moves."""
     root = Path(__file__).resolve().parents[1]

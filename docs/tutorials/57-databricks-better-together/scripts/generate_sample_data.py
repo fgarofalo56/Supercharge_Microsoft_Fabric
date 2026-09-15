@@ -3,15 +3,15 @@ Tutorial 57 — Sample Data Orchestrator
 ======================================
 
 Runs both generators and writes parquet + CSV outputs into
-sample-data/57-better-together/ ready to be uploaded into Databricks UC
+docs/sample-data/57-better-together/ ready to be uploaded into Databricks UC
 volumes (or directly into a Fabric Lakehouse Files area for the
 non-Databricks path).
 
 Usage:
-    python tutorials/57-databricks-better-together/scripts/generate_sample_data.py
+    python docs/tutorials/57-databricks-better-together/scripts/generate_sample_data.py
 
 Outputs:
-    sample-data/57-better-together/
+    docs/sample-data/57-better-together/
         retail/
             customers.parquet
             products.parquet
@@ -30,8 +30,8 @@ import sys
 from pathlib import Path
 
 # Make the script runnable from any working directory by adding the repo
-# root (4 levels up from this file) to sys.path. No-op when already on path.
-_REPO_ROOT = Path(__file__).resolve().parents[3]
+# root (5 levels up from this file) to sys.path. No-op when already on path.
+_REPO_ROOT = Path(__file__).resolve().parents[4]
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
@@ -78,8 +78,8 @@ if __name__ == "__main__":
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("sample-data/57-better-together"),
-        help="Output root directory (default: sample-data/57-better-together).",
+        default=_REPO_ROOT / "docs/sample-data/57-better-together",
+        help="Output root directory (default: docs/sample-data/57-better-together).",
     )
     parser.add_argument(
         "--seed",

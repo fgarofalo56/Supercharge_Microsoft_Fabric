@@ -162,7 +162,7 @@ src/
 1. Push this directory to a GitHub repository.
 2. In Azure Portal, create a **Static Web App** linked to the repo.
 3. Set the build configuration:
-   - **App location:** `sample-apps/react-graphql-consumer`
+   - **App location:** `docs/sample-apps/react-graphql-consumer`
    - **Output location:** `build`
 4. Add environment variables in the SWA **Configuration** blade.
 

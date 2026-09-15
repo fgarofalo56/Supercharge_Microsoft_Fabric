@@ -149,10 +149,10 @@ RLS/CLS trap is avoided (see [defense-in-depth doc](../../best-practices/securit
 
 ```bash
 # from the repo root
-python tutorials/57-databricks-better-together/scripts/generate_sample_data.py
+python docs/tutorials/57-databricks-better-together/scripts/generate_sample_data.py
 ```
 
-Outputs land in `sample-data/57-better-together/`:
+Outputs land in `docs/sample-data/57-better-together/`:
 
 - `retail/` — five parquet files (customers, products, orders, order_lines, returns)
 - `personas/` — `users.csv` + `groups.csv` for the security automation later
@@ -168,15 +168,15 @@ az account set --subscription <your-subscription-id>
 
 az deployment sub create \
   --location eastus2 \
-  --template-file tutorials/57-databricks-better-together/infra/main.bicep \
-  --parameters tutorials/57-databricks-better-together/infra/dev.bicepparam
+  --template-file docs/tutorials/57-databricks-better-together/infra/main.bicep \
+  --parameters docs/tutorials/57-databricks-better-together/infra/dev.bicepparam
 ```
 
 > 💡 **Run `--what-if` first** to confirm the blast radius:
 > ```bash
 > az deployment sub what-if --location eastus2 \
->   --template-file tutorials/57-databricks-better-together/infra/main.bicep \
->   --parameters tutorials/57-databricks-better-together/infra/dev.bicepparam
+>   --template-file docs/tutorials/57-databricks-better-together/infra/main.bicep \
+>   --parameters docs/tutorials/57-databricks-better-together/infra/dev.bicepparam
 > ```
 
 The dev parameter file uses `deployDatabricks = false`. Set it to `true`
@@ -285,7 +285,7 @@ output you can verify before declaring victory.
 ## 🗂️ Files in this tutorial
 
 ```
-tutorials/57-databricks-better-together/
+docs/tutorials/57-databricks-better-together/
   README.md                  ← you are here
   TEST_PLAN.md               ← end-to-end manual test checklist
   infra/
@@ -327,11 +327,11 @@ Companion files outside this directory:
 
 | Notebook | Runs in | Purpose |
 |---|---|---|
-| [`setup/00_create_unity_catalog.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/tutorials/57-databricks-better-together/notebooks/setup/00_create_unity_catalog.py) | Databricks | UC catalog + schemas + volume |
-| [`setup/01_load_sample_data.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/tutorials/57-databricks-better-together/notebooks/setup/01_load_sample_data.py) | Databricks | Load 5 Delta tables + secure views |
-| [`mirroring/01_register_full_catalog_mirror.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/tutorials/57-databricks-better-together/notebooks/mirroring/01_register_full_catalog_mirror.py) | Fabric | Full catalog mirror (REST) |
-| [`mirroring/02_register_partial_mirror.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/tutorials/57-databricks-better-together/notebooks/mirroring/02_register_partial_mirror.py) | Fabric | Inclusion + exclusion-list mirrors |
-| [`mirroring/03_query_mirror_from_spark.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/tutorials/57-databricks-better-together/notebooks/mirroring/03_query_mirror_from_spark.py) | Fabric | Read the mirror (Spark / T-SQL / sempy) |
-| [`mirroring/04_compare_mirror_vs_shortcut_vs_iceberg.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/tutorials/57-databricks-better-together/notebooks/mirroring/04_compare_mirror_vs_shortcut_vs_iceberg.py) | Fabric | Decision matrix |
-| [`gold/01_gold_star_schema.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/tutorials/57-databricks-better-together/notebooks/gold/01_gold_star_schema.py) | Fabric | Direct-Lake star schema from the mirror |
-| [`security/01_apply_defense_in_depth.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/tutorials/57-databricks-better-together/notebooks/security/01_apply_defense_in_depth.py) | Fabric | Entra groups, OneLake RLS/CLS, Warehouse RLS/DDM |
+| [`setup/00_create_unity_catalog.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/docs/tutorials/57-databricks-better-together/notebooks/setup/00_create_unity_catalog.py) | Databricks | UC catalog + schemas + volume |
+| [`setup/01_load_sample_data.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/docs/tutorials/57-databricks-better-together/notebooks/setup/01_load_sample_data.py) | Databricks | Load 5 Delta tables + secure views |
+| [`mirroring/01_register_full_catalog_mirror.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/docs/tutorials/57-databricks-better-together/notebooks/mirroring/01_register_full_catalog_mirror.py) | Fabric | Full catalog mirror (REST) |
+| [`mirroring/02_register_partial_mirror.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/docs/tutorials/57-databricks-better-together/notebooks/mirroring/02_register_partial_mirror.py) | Fabric | Inclusion + exclusion-list mirrors |
+| [`mirroring/03_query_mirror_from_spark.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/docs/tutorials/57-databricks-better-together/notebooks/mirroring/03_query_mirror_from_spark.py) | Fabric | Read the mirror (Spark / T-SQL / sempy) |
+| [`mirroring/04_compare_mirror_vs_shortcut_vs_iceberg.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/docs/tutorials/57-databricks-better-together/notebooks/mirroring/04_compare_mirror_vs_shortcut_vs_iceberg.py) | Fabric | Decision matrix |
+| [`gold/01_gold_star_schema.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/docs/tutorials/57-databricks-better-together/notebooks/gold/01_gold_star_schema.py) | Fabric | Direct-Lake star schema from the mirror |
+| [`security/01_apply_defense_in_depth.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/docs/tutorials/57-databricks-better-together/notebooks/security/01_apply_defense_in_depth.py) | Fabric | Entra groups, OneLake RLS/CLS, Warehouse RLS/DDM |

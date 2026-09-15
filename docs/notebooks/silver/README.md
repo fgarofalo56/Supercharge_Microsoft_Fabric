@@ -44,7 +44,7 @@ graph TD
         B5[bronze.security_events]
         B6[bronze.compliance_events]
     end
-    
+
     subgraph Silver Processing
         S1[01_silver_slot_cleansed]
         S2[02_silver_player_master]
@@ -53,17 +53,17 @@ graph TD
         S5[05_silver_security_enriched]
         S6[06_silver_compliance_validated]
     end
-    
+
     B1 --> S1
     B2 --> S2
     B3 --> S3
     B4 --> S4
     B5 --> S5
     B6 --> S6
-    
+
     S2 --> S4
     S2 --> S6
-    
+
     style S1 fill:#c0c0c0
     style S2 fill:#c0c0c0
     style S3 fill:#c0c0c0
@@ -97,17 +97,17 @@ from pyspark.sql.functions import sha2, regexp_replace, when, col
 df_cleansed = (spark.table("bronze.player_profile")
     # Deduplicate by business key
     .dropDuplicates(["player_id", "_ingested_at"])
-    
+
     # Hash SSN for privacy
     .withColumn("ssn_hash", sha2(col("ssn"), 256))
     .drop("ssn")
-    
+
     # Mask card numbers (keep last 4)
     .withColumn("card_masked", regexp_replace(col("card_number"), r"\d(?=\d{4})", "*"))
-    
+
     # Validate and default null tiers
     .withColumn("player_tier", when(col("player_tier").isNull(), "BRONZE").otherwise(col("player_tier")))
-    
+
     # Add processing metadata
     .withColumn("_processed_at", current_timestamp())
     .withColumn("_is_valid", lit(True))
@@ -155,7 +155,7 @@ df_cleansed.write.format("delta").mode("overwrite").saveAsTable("silver.player_m
 slot_count = spark.sql("SELECT COUNT(*) FROM silver.slot_cleansed").first()[0]
 distinct_count = spark.sql("""
     SELECT COUNT(*) FROM (
-        SELECT DISTINCT machine_id, spin_timestamp 
+        SELECT DISTINCT machine_id, spin_timestamp
         FROM silver.slot_cleansed
     )
 """).first()[0]
@@ -163,15 +163,15 @@ assert slot_count == distinct_count, "Duplicates detected!"
 
 # Validate PII masking
 pii_exposed = spark.sql("""
-    SELECT COUNT(*) 
-    FROM silver.player_master 
+    SELECT COUNT(*)
+    FROM silver.player_master
     WHERE ssn IS NOT NULL OR LENGTH(card_number) = 16
 """).first()[0]
 assert pii_exposed == 0, "PII not properly masked!"
 
 # Check referential integrity
 orphans = spark.sql("""
-    SELECT COUNT(*) 
+    SELECT COUNT(*)
     FROM silver.financial_reconciled f
     LEFT JOIN silver.player_master p ON f.player_id = p.player_id
     WHERE p.player_id IS NULL
@@ -227,7 +227,7 @@ assert result.success, "Data quality checks failed!"
 ```python
 # Track player tier changes over time
 player_history = spark.sql("""
-    SELECT 
+    SELECT
         player_id,
         player_tier,
         effective_from,

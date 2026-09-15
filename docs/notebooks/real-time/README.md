@@ -27,37 +27,37 @@ graph LR
         TG[🃏 Table Games]
         SEC[📹 Security Systems]
     end
-    
+
     subgraph Fabric Eventstreams
         ES1[es-slot-telemetry]
         ES2[es-table-games]
         ES3[es-security-events]
     end
-    
+
     subgraph Processing
         NB[01_realtime_slot_streaming.py]
     end
-    
+
     subgraph Eventhouse
         EH1[(slot_events_live)]
         EH2[(table_events_live)]
         EH3[(security_events_live)]
     end
-    
+
     subgraph Outputs
         DASH[📊 Real-Time Dashboard]
         ALERT[🚨 Activator Alerts]
     end
-    
+
     SM --> ES1 --> NB --> EH1
     TG --> ES2 --> EH2
     SEC --> ES3 --> EH3
-    
+
     EH1 --> DASH
     EH2 --> DASH
     EH3 --> DASH
     EH1 --> ALERT
-    
+
     style NB fill:#ff6b6b
     style DASH fill:#4ecdc4
     style ALERT fill:#ffe66d
@@ -144,7 +144,7 @@ df_windowed.writeStream \
 // Real-time floor overview - Last 5 minutes
 slot_events_live
 | where event_timestamp > ago(5m)
-| summarize 
+| summarize
     total_spins = count(),
     total_coin_in = sum(wager_amount),
     total_coin_out = sum(payout_amount),
@@ -155,7 +155,7 @@ slot_events_live
 slot_events_live
 | where event_timestamp > ago(1h)
 | where payout_amount >= 1200
-| project 
+| project
     event_timestamp,
     machine_id,
     payout_amount,
@@ -283,7 +283,7 @@ slot_events_live
     machine_locations
     | project machine_id, floor_section, x_coord, y_coord
 ) on machine_id
-| summarize 
+| summarize
     activity_level = count(),
     coin_in = sum(wager_amount)
 by floor_section, x_coord, y_coord

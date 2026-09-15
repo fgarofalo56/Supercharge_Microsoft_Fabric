@@ -10,9 +10,8 @@ on:
       - 'docs/**'
       - 'tutorials/**'
       - 'poc-agenda/**'
-      # notebook README.md files are copied into the site at build time, so a
-      # change to any of them must rebuild the docs (previously omitted — so
-      # notebook-guide edits never published).
+      # Source README changes still trigger a build, but are not copied by CI.
+      # Update the corresponding committed docs/ pages in the same change.
       - 'notebooks/**/README.md'
       - 'infra/README.md'
       - 'mkdocs.yml'

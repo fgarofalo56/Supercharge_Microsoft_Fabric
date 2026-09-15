@@ -1,6 +1,6 @@
 # 🎲 Data Generation
 
-> **[Home](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md)** | **[Tutorials](../tutorials/)** | **[Notebooks](../notebooks/)** | **[Validation](../validation/)**
+> **[Home](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/README.md)** | **[Tutorials](../docs/tutorials/)** | **[Notebooks](../notebooks/)** | **[Validation](../validation/)**
 
 Synthetic data generators for casino/gaming, federal agencies, streaming CDC, and analytics scenarios in the Microsoft Fabric POC.
 
@@ -468,7 +468,7 @@ Schema files are in `schemas/` with subdirectories for each category.
 
 | Resource | Description |
 |----------|-------------|
-| [Bronze Layer Tutorial](../tutorials/01-bronze-layer/README.md) | How to ingest generated data |
+| [Bronze Layer Tutorial](../docs/tutorials/01-bronze-layer/README.md) | How to ingest generated data |
 | [Validation Tests](../validation/README.md) | Data quality testing |
 | [Notebooks](../notebooks/README.md) | Fabric notebooks for processing |
 | [Sample Data](../docs/sample-data/) | Pre-generated datasets |

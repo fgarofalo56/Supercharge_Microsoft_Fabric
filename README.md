@@ -724,12 +724,12 @@ Pre-generated sample datasets for quick exploration without running data generat
 
 ### Available Datasets
 
-| Dataset | Records | Format | Size | Location |
-|:--------|:--------|:-------|:-----|:---------|
-| Slot Telemetry (7 days) | 10,000 | CSV/Parquet | ~10 MB | `docs/sample-data/bronze/` |
-| Player Profiles | 500 | CSV/Parquet | ~1 MB | `docs/sample-data/bronze/` |
-| Table Games | 2,000 | CSV/Parquet | ~2 MB | `docs/sample-data/bronze/` |
-| Financial Transactions | 1,000 | CSV/Parquet | ~1 MB | `docs/sample-data/bronze/` |
+| Dataset | Records | Format | Location |
+|:--------|:--------|:-------|:---------|
+| Slot Telemetry | 90 | CSV | `docs/sample-data/bronze/slot_telemetry_sample.csv` |
+| Player Profiles | 25 | CSV | `docs/sample-data/bronze/player_profile_sample.csv` |
+| Table Games | 40 | CSV | `docs/sample-data/bronze/table_games_sample.csv` |
+| Financial Transactions | 30 | CSV | `docs/sample-data/bronze/financial_transactions_sample.csv` |
 
 ### Quick Exploration
 

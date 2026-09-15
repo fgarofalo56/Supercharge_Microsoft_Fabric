@@ -44,7 +44,7 @@ graph TD
         S5[silver.security_enriched]
         S6[silver.compliance_validated]
     end
-    
+
     subgraph Gold Models
         G1[01_gold_slot_performance]
         G2[02_gold_player_360]
@@ -53,7 +53,7 @@ graph TD
         G5[05_gold_financial_summary]
         G6[06_gold_security_dashboard]
     end
-    
+
     subgraph Output Tables
         F1[fact_slot_performance]
         F2[dim_player_360]
@@ -62,7 +62,7 @@ graph TD
         F5[fact_financial_summary]
         F6[fact_security_metrics]
     end
-    
+
     S1 --> G1 --> F1
     S2 --> G2
     S4 --> G2 --> F2
@@ -71,7 +71,7 @@ graph TD
     S3 --> G4 --> F4
     S4 --> G5 --> F5
     S5 --> G6 --> F6
-    
+
     style G1 fill:#ffd700
     style G2 fill:#ffd700
     style G3 fill:#ffd700
@@ -116,7 +116,7 @@ fact_slot_performance = (spark.table("silver.slot_cleansed")
         avg("session_duration_seconds").alias("avg_session_duration")
     )
     # Calculate KPIs
-    .withColumn("hold_percentage", 
+    .withColumn("hold_percentage",
         (col("net_win") / col("total_coin_in") * 100).cast("decimal(5,2)"))
     .withColumn("theoretical_rtp",
         (col("total_coin_out") / col("total_coin_in") * 100).cast("decimal(5,2)"))
@@ -148,7 +148,7 @@ dim_player_360 = (spark.table("silver.player_master")
     # Add calculated attributes
     .join(lifetime_value_df, "player_id", "left")
     .join(visit_frequency_df, "player_id", "left")
-    .withColumn("player_segment", 
+    .withColumn("player_segment",
         when(col("lifetime_value") > 100000, "VIP")
         .when(col("lifetime_value") > 10000, "HIGH")
         .when(col("lifetime_value") > 1000, "MEDIUM")
@@ -193,7 +193,7 @@ dim_player_360 = (spark.table("silver.player_master")
 ```python
 # Validate KPI calculations
 kpi_validation = spark.sql("""
-    SELECT 
+    SELECT
         SUM(CASE WHEN hold_percentage < 0 OR hold_percentage > 20 THEN 1 ELSE 0 END) as invalid_hold,
         SUM(CASE WHEN theoretical_rtp < 80 OR theoretical_rtp > 100 THEN 1 ELSE 0 END) as invalid_rtp
     FROM gold.fact_slot_performance
@@ -251,7 +251,7 @@ print(f"Files: {history.operationMetrics.get('numFiles', 'N/A')}")
 
 ```sql
 -- CTR Summary for FinCEN
-SELECT 
+SELECT
     report_date,
     player_id,
     player_name,
@@ -265,7 +265,7 @@ WHERE report_type = 'CTR'
   AND total_cash_in >= 10000
 
 -- W-2G Summary for IRS
-SELECT 
+SELECT
     tax_year,
     player_id,
     game_type,

@@ -451,7 +451,7 @@ FOLLOW-UP: [Actions]
 
 ---
 
-[⬆️ Back to Top](#disaster-recovery--business-continuity) | [📚 Docs](disaster-recovery.md) | [🏠 Home](index.md)
+[⬆️ Back to Top](#disaster-recovery--business-continuity) | [📚 Docs](index.md) | [🏠 Home](index.md)
 
 ---
 

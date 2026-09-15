@@ -1156,4 +1156,4 @@ RULES:
 
 ---
 
-[⬆️ Back to Top](#prompt-engineering-for-fabric-workloads) | [📚 Features Index](prompt-engineering-fabric.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#prompt-engineering-for-fabric-workloads) | [📚 Features Index](index.md) | [🏠 Home](../index.md)

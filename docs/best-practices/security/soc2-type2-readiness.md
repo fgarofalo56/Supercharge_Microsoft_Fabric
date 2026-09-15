@@ -550,4 +550,4 @@ Before declaring "SOC 2 Type II ready":
 
 ---
 
-[⬆️ Back to Top](#soc-2-type-ii-readiness-on-microsoft-fabric) | [📚 Security Index](soc2-type2-readiness.md) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#soc-2-type-ii-readiness-on-microsoft-fabric) | [📚 Security Index](../../best-practices.md#security-best-practices) | [🏠 Home](../../index.md)

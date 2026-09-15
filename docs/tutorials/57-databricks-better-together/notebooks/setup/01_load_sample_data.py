@@ -37,8 +37,8 @@ print(f"Writing to   : {CATALOG_NAME}.{RAW_SCHEMA}.<table>")
 # MAGIC If this fails, run the host-side script first:
 # MAGIC
 # MAGIC ```bash
-# MAGIC python tutorials/57-databricks-better-together/scripts/generate_sample_data.py
-# MAGIC databricks fs cp -r sample-data/57-better-together/retail \
+# MAGIC python docs/tutorials/57-databricks-better-together/scripts/generate_sample_data.py
+# MAGIC databricks fs cp -r docs/sample-data/57-better-together/retail \
 # MAGIC   dbfs:/Volumes/better_together/retail_raw/landing/retail
 # MAGIC ```
 

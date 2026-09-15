@@ -990,4 +990,4 @@ Before declaring "GDPR Article 17 ready":
 
 ---
 
-[⬆️ Back to Top](#gdpr-right-to-deletion-right-to-be-forgotten-on-microsoft-fabric) | [📚 Security Index](gdpr-right-to-deletion.md) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#gdpr-right-to-deletion-right-to-be-forgotten-on-microsoft-fabric) | [📚 Security Index](../../best-practices.md#security-best-practices) | [🏠 Home](../../index.md)

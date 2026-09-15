@@ -955,4 +955,4 @@ Before declaring "Data Exfiltration Prevention ready":
 
 ---
 
-[⬆️ Back to Top](#data-exfiltration-prevention-on-microsoft-fabric) | [📚 Security Index](data-exfiltration-prevention.md) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#data-exfiltration-prevention-on-microsoft-fabric) | [📚 Security Index](../../best-practices.md#security-best-practices) | [🏠 Home](../../index.md)

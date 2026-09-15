@@ -252,4 +252,4 @@ sequenceDiagram
 
 ---
 
-[⬆️ Back to Top](#w-2g-gambling-winnings-template) | [📚 Parent](w2g-template.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#w-2g-gambling-winnings-template) | [📚 Compliance Templates](README.md) | [🏠 Home](../index.md)
