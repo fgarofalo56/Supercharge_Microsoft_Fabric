@@ -356,6 +356,7 @@ nav:
   - Features:
     - Feature Catalog:
       - Overview: features/index.md
+      - What's New (Release Highlights): features/whats-new.md
       - April 2026 Features Snapshot: microsoft-fabric-features-april-2026.md
       - Foundation:
         - Mirroring: features/mirroring.md

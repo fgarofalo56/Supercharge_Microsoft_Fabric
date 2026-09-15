@@ -434,6 +434,57 @@ them, because public documentation doesn't either:
 
 ---
 
+## 7️⃣ Two details customers routinely miss
+
+These sit outside the failover narrative but change both cost and recovery
+planning. Both are confirmed on Microsoft Learn.
+
+### OneLake soft delete — independent of the DR toggle
+
+OneLake **automatically retains deleted files for 7 days** before permanent
+removal, whether or not the disaster-recovery capacity setting is on. This is
+protection against *accidental deletion / user error*, not regional loss — it
+is a separate mechanism from geo-replication and is always on.
+
+- Operationally: a dropped table or deleted file is recoverable in place for a
+  week via [Recover deleted files in OneLake][ref-soft-delete] — no failover,
+  no DR plan needed.
+- Planning impact: soft delete does **not** replace DR. It covers logical
+  deletion within the primary region; it does nothing for a regional outage.
+
+### BCDR billing — geo-replication is not free
+
+Turning on the disaster-recovery capacity setting **increases cost**, billed
+as separate line items in the [Microsoft Fabric Capacity Metrics app][ref-metrics]:
+
+- **BCDR Storage** — the geo-replicated copy of OneLake data.
+- **BCDR Operations** — write operations consume **higher capacity units** when
+  DR is enabled.
+
+Per [OneLake compute and storage consumption][ref-consumption], the BCDR
+operation rates differ by storage tier (Hot / Cool / Cold). Representative
+figures (per 10,000 operations unless noted):
+
+| Operation | Hot | Cool | Cold |
+|---|---|---|---|
+| OneLake BCDR Read (per 4 MB) | 104 CU s | 260 CU s | 2,600 CU s |
+| OneLake BCDR Write (per 4 MB) | 3,056 CU s | 5,200 CU s | 9,880 CU s |
+| OneLake BCDR Other | 104 CU s | 104 CU s | 104 CU s |
+| OneLake BCDR Iterative Read | 1,626 CU s | 1,626 CU s | 1,626 CU s |
+| OneLake BCDR Iterative Write (per 100) | 2,730 CU s | 2,730 CU s | 2,730 CU s |
+
+!!! warning "Cost belongs in the Option A/B/C decision"
+    The §6 comparison lists Option A as "lowest cost." That holds for compute,
+    but enabling DR still adds BCDR storage + higher write CU consumption on
+    the single capacity. Factor this into the cost-versus-risk trade-off —
+    DR-on is not the same price as DR-off.
+
+[ref-soft-delete]: https://learn.microsoft.com/en-us/fabric/onelake/soft-delete
+[ref-metrics]: https://learn.microsoft.com/en-us/fabric/enterprise/metrics-app
+[ref-consumption]: https://learn.microsoft.com/en-us/fabric/onelake/onelake-consumption#disaster-recovery
+
+---
+
 ## 📚 Sources
 
 - [Reliability in Microsoft Fabric][ref-reliability] — Microsoft Learn,
@@ -442,6 +493,11 @@ them, because public documentation doesn't either:
 - [Reliability considerations for Microsoft Fabric workloads][ref-waf-fabric] —
   Azure Well-Architected Framework service guide: replication model, RPO/RTO
   planning, DR testing boundaries
+- [Disaster recovery and data protection for OneLake][ref-onelake-dr] —
+  OneLake DR toggle behavior, soft delete, geo-replication status
+- [OneLake compute and storage consumption][ref-consumption] — BCDR storage
+  and operation CU rates by tier
 
 [ref-reliability]: https://learn.microsoft.com/en-us/fabric/security/disaster-recovery-guide
 [ref-waf-fabric]: https://learn.microsoft.com/en-us/azure/well-architected/service-guides/microsoft-fabric
+[ref-onelake-dr]: https://learn.microsoft.com/en-us/fabric/onelake/onelake-disaster-recovery
