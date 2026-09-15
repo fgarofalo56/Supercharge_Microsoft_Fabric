@@ -5,7 +5,7 @@ type: runbook
 ---
 # 🔄 Disaster Recovery & Business Continuity {#disaster-recovery--business-continuity}
 
-> **Last Updated**: 2026-04-15 | **Version**: 2.0
+> **Last Updated**: 2026-09-15 | **Version**: 2.1
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
 <div align="center" markdown>
@@ -22,9 +22,26 @@ type: runbook
 
 This document outlines the disaster recovery (DR) and business continuity (BC) strategy for the Microsoft Fabric Casino Analytics platform. Gaming operations require high availability and rapid recovery to meet regulatory requirements and minimize business impact.
 
+!!! warning "Read this first — scope of this page"
+    This is the **casino-POC operational runbook**: backup/export patterns, Delta
+    time-travel recovery, monitoring, and a testing schedule. For **how Fabric's
+    platform-level DR actually behaves** — what Microsoft fails over vs. what you
+    must rebuild, what is read-only after a regional failover, and the supported
+    DR patterns — see [Fabric DR — Authoritative Answers](best-practices/fabric-dr-authoritative-answers.md),
+    which is the source of truth for platform behavior. Where this page and that
+    one differ, that one wins.
+
 ---
 
 ## ⏱️ Recovery Objectives
+
+!!! info "These are POC targets, not platform guarantees"
+    Microsoft does **not** publish RTO/RPO figures for Fabric. The values below
+    are **targets this POC sets for itself** and must be validated by running the
+    DR drills in the [Testing Schedule](#-testing-schedule). Treat them as
+    contractual/internal objectives, not as a Microsoft SLA. See
+    [Fabric DR — Authoritative Answers](best-practices/fabric-dr-authoritative-answers.md)
+    for what Microsoft does and does not commit to.
 
 ### Recovery Time Objective (RTO)
 
@@ -121,23 +138,26 @@ SET TBLPROPERTIES ('delta.deletedFileRetentionDuration' = '7 days');
 
 #### Cross-Region Replication
 
-```bicep
-// Configure OneLake replication
-resource replicationPolicy 'Microsoft.Fabric/replicationPolicies@2024-01-01' = {
-  name: 'dr-replication-policy'
-  properties: {
-    sourceWorkspace: primaryWorkspaceId
-    targetWorkspace: drWorkspaceId
-    replicationType: 'Asynchronous'
-    replicationFrequency: 'PT5M'  // 5-minute intervals
-    includedItems: [
-      'Lakehouse:lh_bronze',
-      'Lakehouse:lh_silver',
-      'Lakehouse:lh_gold'
-    ]
-  }
-}
-```
+OneLake geo-replication is **not configured per-workspace in Bicep** — there is no
+`Microsoft.Fabric/replicationPolicies` resource. It is the **capacity-level disaster
+recovery setting**, toggled in the Fabric portal (or via the Fabric Admin REST API):
+
+1. Fabric portal → **Admin portal** → **Capacity settings** → select the capacity.
+2. Under **Disaster recovery**, turn the setting **on**.
+3. Note the **30-day lock**: after changing the setting you must wait 30 days before
+   changing it again.
+
+Once enabled, OneLake data in that capacity's workspaces is geo-replicated to the
+Azure-paired region asynchronously. There is **no per-item include-list and no
+customer-set replication frequency** — replication cadence is Microsoft-managed.
+
+!!! warning "Cost"
+    Enabling DR bills **BCDR Storage** plus **higher write CU consumption** (visible
+    as separate line items in the Capacity Metrics app). See
+    [OneLake consumption](https://learn.microsoft.com/fabric/onelake/onelake-consumption#disaster-recovery).
+
+For what is and isn't covered by this replication (and what stays read-only after a
+failover), see [Fabric DR — Authoritative Answers](best-practices/fabric-dr-authoritative-answers.md).
 
 ### Eventhouse Backup
 
@@ -170,27 +190,38 @@ foreach ($report in $reports) {
 
 ### Scenario 1: Primary Region Failure
 
+!!! warning "Fabric regional failover is Microsoft-declared, not customer-triggered"
+    You **cannot** self-initiate a Fabric regional failover, and there is **no
+    customer-controlled DNS / Traffic Manager cutover** for the Fabric service.
+    When Microsoft declares a regional disaster it fails the *platform* over so
+    you can sign in and read geo-replicated OneLake data — but **workspaces,
+    pipelines, notebooks, and reports are not operational** until you rebuild
+    them on a new capacity. The steps below are the **customer-executed rebuild**
+    you perform after (or in anticipation of) that Microsoft-led failover. See
+    [Fabric DR — Authoritative Answers](best-practices/fabric-dr-authoritative-answers.md)
+    for the full component-by-component breakdown.
+
 **Trigger Criteria:**
 - Primary region unavailable > 10 minutes
 - Azure status confirms regional outage
 - Automated health check failures
 
-**Failover Steps:**
+**Customer Recovery Steps (after Microsoft-led failover):**
 
 ```mermaid
 sequenceDiagram
+    participant MS as Microsoft
     participant Ops as Operations
-    participant Monitor as Monitoring
-    participant DR as DR System
-    participant DNS as Traffic Manager
+    participant Cap as New Capacity
+    participant Git as Source Control
 
-    Monitor->>Ops: Alert: Primary region down
-    Ops->>DR: Initiate failover
-    DR->>DR: Verify DR data currency
-    DR->>DR: Scale DR capacity (F16→F64)
-    DR->>DNS: Update traffic routing
-    DNS->>Ops: Failover complete
-    Ops->>Monitor: Verify DR operational
+    MS->>MS: Declare regional disaster, fail platform over
+    MS->>Ops: OneLake data readable (read-only portal)
+    Ops->>Cap: Provision new capacity (different geo)
+    Ops->>Cap: Recreate workspaces (same names)
+    Git->>Cap: Redeploy items from source control
+    Ops->>Cap: Reconnect data / restore from geo-replica
+    Ops->>Ops: Verify operational, notify stakeholders
 ```
 
 **Detailed Steps:**
@@ -205,45 +236,46 @@ sequenceDiagram
      --url "https://api.fabric.microsoft.com/v1/capacities/{capacityId}"
    ```
 
-2. **Scale DR Capacity (10 min)**
+2. **Provision a new capacity in a different geo (10–30 min)**
+
+   During a regional incident, demand for compute in the *paired* region spikes —
+   a **different geo** is more likely to have available capacity. Create a fresh
+   capacity rather than assuming a standby exists:
    ```bash
-   # Scale DR Fabric capacity from F16 to F64
-   az rest --method patch \
-     --url "https://management.azure.com/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Fabric/capacities/{capacity}" \
-     --body '{"sku": {"name": "F64", "tier": "Fabric"}}'
+   az rest --method put \
+     --url "https://management.azure.com/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Fabric/capacities/fabric-casino-dr" \
+     --body '{
+       "location": "westus2",
+       "sku": {"name": "F64", "tier": "Fabric"},
+       "properties": {"administration": {"members": ["admin@contoso.com"]}}
+     }'
    ```
 
-3. **Verify Data Currency (5 min)**
+3. **Recreate workspaces with the SAME names, then redeploy items from Git**
+
+   Same names are required for recovery scripts to resolve item references.
+   Redeploy Git-tracked items (notebooks, pipelines, semantic models, reports,
+   warehouse definitions) from source control — this project's
+   `scripts/fabric-cicd-deploy.py` does exactly this. **Data is the exception:**
+   Git holds *definitions*, not table contents.
+
+4. **Reconnect data from the geo-replicated OneLake copy**
+
+   Point the redeployed lakehouses/warehouses at the geo-replicated OneLake data
+   (readable via the ADLS Gen2 API / OneLake tools through the global endpoint).
+   For anything stored **outside** OneLake (e.g. KQL Database), restore from your
+   own backup — it is not covered by OneLake geo-replication.
    ```python
-   # Check last replication timestamp
-   df = spark.table("dr_workspace.lh_bronze.bronze_slot_telemetry")
+   # Sanity-check data currency after reconnect
+   df = spark.table("lh_bronze.bronze_slot_telemetry")
    last_record = df.agg(max("_ingestion_timestamp")).collect()[0][0]
-   print(f"Last replicated record: {last_record}")
-
-   # Acceptable data loss: < RPO (5 minutes)
-   ```
-
-4. **Update DNS/Routing (5 min)**
-   ```bash
-   # Update Traffic Manager endpoint priority
-   az network traffic-manager endpoint update \
-     --resource-group rg-fabric-networking \
-     --profile-name tm-fabric-casino \
-     --name primary-endpoint \
-     --type azureEndpoints \
-     --priority 2
-
-   az network traffic-manager endpoint update \
-     --resource-group rg-fabric-networking \
-     --profile-name tm-fabric-casino \
-     --name dr-endpoint \
-     --type azureEndpoints \
-     --priority 1
+   print(f"Last available record: {last_record}")
+   # Compare against your RPO target — actual lag is Microsoft-managed, not guaranteed
    ```
 
 5. **Verify Operational (10 min)**
-   - Confirm Power BI reports load
-   - Verify real-time dashboard data flow
+   - Confirm Power BI reports load against the rebuilt semantic models
+   - Verify real-time dashboard data flow (Eventhouse reconnected)
    - Test data pipeline execution
    - Notify stakeholders
 
@@ -351,13 +383,19 @@ SlotTelemetry
 
 ## 🧪 Testing Schedule
 
+!!! note "What 'DR test' means here"
+    A Microsoft-declared regional failover **cannot be self-triggered**, so these
+    drills exercise the **customer-owned rebuild** (provision capacity → redeploy
+    from Git → reconnect data → verify), not Microsoft's platform failover. That
+    is the part you control and the part worth measuring.
+
 | Test Type | Frequency | Duration | Participants |
 |-----------|-----------|----------|--------------|
 | Backup Verification | Weekly | 2 hours | Data Engineering |
 | Delta Time Travel | Monthly | 4 hours | Data Engineering |
-| DR Failover (Planned) | Quarterly | 8 hours | Full Team |
-| DR Failover (Unplanned) | Annually | 4 hours | Full Team |
-| Full Recovery | Annually | 24 hours | Full Team + Mgmt |
+| Recovery Rebuild Drill (scripted) | Quarterly | 8 hours | Full Team |
+| Recovery Rebuild Drill (unannounced) | Annually | 4 hours | Full Team |
+| Full Recovery (end-to-end) | Annually | 24 hours | Full Team + Mgmt |
 
 ### Test Checklist
 
@@ -371,17 +409,17 @@ SlotTelemetry
 - [ ] Confirm test window
 
 ### During Test
-- [ ] Execute failover procedure
+- [ ] Execute the customer rebuild runbook (provision capacity, redeploy from Git, reconnect data)
 - [ ] Verify data accessibility
 - [ ] Test report generation
 - [ ] Validate real-time ingestion
 - [ ] Test data pipeline execution
-- [ ] Measure actual RTO
+- [ ] Measure actual RTO against target
 
 ### Post-Test
 - [ ] Document findings
-- [ ] Calculate actual RTO/RPO
-- [ ] Failback to primary
+- [ ] Calculate actual RTO/RPO vs. target
+- [ ] Tear down the drill capacity (or hand back to primary)
 - [ ] Verify primary operational
 - [ ] Update procedures if needed
 - [ ] Stakeholder debrief
@@ -445,6 +483,10 @@ FOLLOW-UP: [Actions]
 
 | Document | Description |
 |----------|-------------|
+| [🧭 Fabric DR — Authoritative Answers](best-practices/fabric-dr-authoritative-answers.md) | **Source of truth** for platform-level DR behavior |
+| [🛡️ Disaster Recovery & BCDR](best-practices/disaster-recovery-bcdr.md) | BCDR patterns and options |
+| [🔀 Multi-Region Failover runbook](runbooks/multi-region-failover.md) | Operational failover steps |
+| [🔄 DR Execution runbook](runbooks/disaster-recovery-execution.md) | DR execution steps |
 | [🏗️ Architecture](architecture.md) | System architecture and design |
 | [🔐 Security Guide](security.md) | Security controls and compliance |
 | [🚀 Deployment Guide](deployment.md) | Infrastructure deployment |

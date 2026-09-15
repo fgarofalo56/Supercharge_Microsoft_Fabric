@@ -672,19 +672,65 @@ customer's specific topology before committing an RTO/RPO to leadership.
     into the Option A/B/C cost comparison — DR-on costs more than DR-off even
     on a single capacity. See [OneLake consumption](https://learn.microsoft.com/fabric/onelake/onelake-consumption#disaster-recovery).
 
-### 6.7 What should we ask Microsoft to confirm in writing?
+### 6.7 Where are the public SLA and compliance documents, and how do we raise a request with Microsoft?
 
-Before leadership signs off on an RTO/RPO, get Microsoft to confirm for **this
-customer's specific topology**:
+Much of what the customer wants confirmed is already published. Start with the
+public sources below; for anything not covered there, use the support-request
+process at the end.
 
-1. A **written failback statement** — sync-back behavior, customer steps, and
-   data-gap handling when Australia East returns.
-2. **RPO/RTO figures** for their capacity SKU and region pair (not published
-   publicly — set contractually and validate by testing your own runbook).
-3. **KQL Database / Queryset DR** — the supported approach, since this data
-   lives outside OneLake.
-4. Confirmation that the **current public guidance remains valid** and notice
-   of any recent DR capability changes.
+#### Service-level agreement (SLA)
+
+- **[Service Level Agreements for Online Services](https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services)**
+  — the authoritative, downloadable SLA document that includes Microsoft Fabric.
+  This is the contractual availability commitment.
+- **[How to read a service-level agreement (SLA)](https://learn.microsoft.com/azure/reliability/concept-service-level-agreements)**
+  — how to interpret an SLA correctly: what it does and doesn't guarantee, how
+  availability is defined and measured, and the conditions/exclusions that shape
+  coverage. Important context before treating any uptime figure as a DR guarantee.
+- **Component SLAs differ.** For example, the [Data Factory pipeline SLA in Fabric](https://learn.microsoft.com/fabric/data-factory/data-factory-overview)
+  is equivalent to Azure Data Factory (99.9% of operations processed; activity
+  runs initiate within four minutes of schedule 99.9% of the time). Check the
+  per-workload SLA rather than assuming one figure covers all of Fabric.
+- **Support responsiveness is separate from the service SLA.** Microsoft commits
+  to an *initial response time* for support requests but [does not provide an SLA
+  for support-request *resolution*](https://learn.microsoft.com/power-bi/support/service-support-options).
+
+#### Compliance and audit documentation
+
+- **[Standards compliance in Microsoft Fabric](https://learn.microsoft.com/fabric/governance/standards-compliance)**
+  — Fabric's adherence to compliance standards and the governing terms (Microsoft
+  Online Services Terms, Data Protection Addendum).
+- **[Microsoft compliance offerings](https://learn.microsoft.com/compliance/regulatory/offering-home)**
+  — the full catalog of certifications/attestations (ISO 27001/27017/27018/27701,
+  HIPAA, SOC, FedRAMP, etc.) grouped by global / US-government / industry /
+  regional scope.
+- **[Service Trust Portal](https://servicetrust.microsoft.com/)** — where you
+  download the actual audit reports, certificates, and assessment documents
+  (ISO, SOC, PCI, FedRAMP, and regional/industry offerings). Requires sign-in
+  with an Azure subscription or trial.
+- **[Microsoft Trust Center](https://www.microsoft.com/trustcenter)** — the
+  primary entry point for Fabric compliance information.
+
+#### How to raise a request with Microsoft
+
+For anything **not** answered by the public documents above, the supported
+channel is a Microsoft support request:
+
+1. **Azure portal → Help + support → Create a support request.** Step-by-step:
+   [Create an Azure support request](https://learn.microsoft.com/azure/azure-portal/supportability/how-to-create-azure-support-request).
+2. **Fabric-specific support options and scope** (what's break-fix vs. advisory,
+   preview-feature support, outage/SIE handling):
+   [Fabric and Power BI support overview](https://learn.microsoft.com/power-bi/support/service-support-options).
+3. **Initial response times by support plan and severity:**
+   [Support scope and responsiveness](https://azure.microsoft.com/support/plans/response/).
+4. **During an active outage**, check the [Fabric Support page](https://support.fabric.microsoft.com/support)
+   and Microsoft 365 Service Health / Message center first, then contact support
+   if no active incident is listed.
+
+> Non-public confirmations (for example, customer-specific architecture reviews
+> or contractual commitments beyond the published SLA) are handled through your
+> Microsoft account team or a support request — there is no public self-service
+> form for those.
 
 ---
 
