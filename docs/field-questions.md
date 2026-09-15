@@ -17,7 +17,7 @@ type: reference
 
 ---
 
-**Last Updated:** `2026-05-21` | **Version:** 1.0.0
+**Last Updated:** `2026-09-15` | **Version:** 1.1.0
 
 This page collects detailed answers to specific questions raised during enterprise
 Fabric adoption — scenarios that the standard product docs don't address directly
@@ -537,8 +537,163 @@ Source: [Gateway considerations for DataFlow Gen2 destinations](https://learn.mi
 
 ---
 
+## 6. Fabric Disaster Recovery — Enterprise DR Strategy for a Regional Outage
+
+> **Scenario.** A customer has adopted Fabric as their **Enterprise Data Platform**
+> and is designing their DR strategy. After reviewing multiple Microsoft articles
+> they are confused by apparently conflicting guidance, and want a definitive
+> Microsoft position: what is actually available after a Microsoft-led regional
+> failover, what the customer must rebuild themselves, whether DR can be tested,
+> what happens on failback, and how to weigh cost against business risk. Primary
+> region in this engagement: **Australia East**.
+
+This section answers each concern in Q&A form. The full, source-cited treatment
+lives in [Fabric DR — Authoritative Answers](best-practices/fabric-dr-authoritative-answers.md);
+operational steps are in the [Multi-Region Failover](runbooks/multi-region-failover.md)
+and [Disaster Recovery Execution](runbooks/disaster-recovery-execution.md) runbooks.
+
+### 6.1 The documentation seems to conflict — which statement is right?
+
+**Both are true; they describe different layers.** The apparent contradiction
+resolves once you separate *data* from *service*:
+
+- **"Services become operational after Microsoft-led recovery"** — refers to the
+  **Fabric platform and portal** being restored by Microsoft so you can sign in
+  and read data. Microsoft fails the *service* over.
+- **"Replicated data is read-only and customers must rebuild capacities,
+  workspaces, and artifacts"** — refers to **your workloads**. Geo-replicated
+  OneLake *data* survives, but the *compute and item definitions* (capacity,
+  workspaces, pipelines, notebooks, semantic models) are **not** automatically
+  recreated in the secondary region. That rebuild is the customer's job.
+
+So: Microsoft restores the **platform and your data**; you restore the
+**running workloads** on top of it. Source: [Reliability in Microsoft Fabric](https://learn.microsoft.com/fabric/security/reliability-fabric).
+
+### 6.2 What exactly is available after a Microsoft regional failover?
+
+Assuming the DR capacity setting was **on** and the primary region has an
+Azure-paired secondary where Fabric is supported:
+
+| Component | State after Microsoft-led failover |
+|-----------|-----------------------------------|
+| **Fabric portal** | Read-only. You can browse workspaces and items; write operations (create/modify) are paused. |
+| **Power BI reports** | **Viewable** (read). **Refresh, publish, and metadata edits are not supported.** |
+| **OneLake data (Lakehouse/Warehouse)** | **Readable and writable via OneLake APIs / tools** (ADLS Gen2 API, Storage Explorer, OneLake File Explorer) through the global endpoint. The items themselves don't *open* in the portal, but the data is accessible. |
+| **Pipelines / Dataflow Gen2 / Eventstream** | Cannot open or run. Protect their output by landing it in a lakehouse/warehouse (a supported DR destination). |
+| **Notebooks** | Cannot open; **code content is not saved** across the disaster. Keep notebooks in Git. |
+| **Spark Job Definitions** | Cannot open; code files accessible via OneLake; metadata/config saved. |
+| **ML Models / Experiments** | Cannot open; code and run metadata **not saved**. |
+| **KQL Database / Queryset** | **Not accessible after failover** — data is stored outside OneLake and needs a separate DR approach. |
+
+**Direct answers to the customer's sub-questions:** reports are *accessible but
+not refreshable*; pipelines *cannot run*; workspaces are *visible but not
+usable for write operations*; replicated OneLake data is *fully readable and
+writable via APIs* — but the *workloads* on top of it are not operational until
+you rebuild them.
+
+### 6.3 What recovery activities must the customer perform?
+
+If you need workloads running again (not just data readable), the customer owns
+the rebuild. The general plan:
+
+1. **Create a new Fabric capacity** in a region outside the primary geo (high
+   demand during an incident makes a different geo more likely to have compute).
+2. **Create workspaces** on that capacity — **same names** as before (required
+   for recovery scripts to resolve item references).
+3. **Recreate items with the same names** as the ones being recovered.
+4. **Restore each item** per the [experience-specific DR guidance](https://learn.microsoft.com/fabric/security/experience-specific-guidance).
+
+**Can Git-integrated artifacts simply be redeployed from Azure DevOps?**
+**Yes — this is the recommended pattern.** If your items (notebooks, pipelines,
+semantic models, reports, warehouse definitions) are under Git integration, you
+redeploy them into the new workspaces from source control rather than
+rebuilding by hand. This project's own `scripts/fabric-cicd-deploy.py` does
+exactly this. **Data is the exception** — Git holds *definitions*, not table
+contents; data comes from the geo-replicated OneLake copy (or your own backup
+for anything stored outside OneLake).
+
+### 6.4 Can DR be tested before a real outage?
+
+**Partially.** A Microsoft-declared regional failover **cannot be self-triggered**
+— only Microsoft declares it. But you *can* validate everything you control:
+
+- **Drill your own recovery runbook**: provision a second capacity, redeploy
+  from Git, reconnect data, and measure how long it takes. This tests Option B
+  (scripted recovery) end-to-end without touching production.
+- **Validate data accessibility**: confirm you can read OneLake data via the
+  ADLS Gen2 API / Storage Explorer from outside the portal.
+- **Game-day the decision logic**: rehearse the "declare / communicate / cut
+  over" process with leadership so the human steps are not first-time-under-pressure.
+
+What you **cannot** test is Microsoft's actual failover of the platform itself.
+For that you rely on Microsoft's SLA and the published reliability guidance —
+there is no customer-invoked "failover drill" button.
+
+### 6.5 What happens on failback when Australia East returns?
+
+This is the area with the **least public Microsoft documentation** — be careful
+not to over-promise. What we can say:
+
+- Geo-replication is **asynchronous and one-directional** during the outage:
+  primary → secondary. There is **no documented automatic "sync back"** of
+  changes made in the secondary region to the primary once it recovers.
+- **Data written to the secondary region during an extended outage is a
+  potential gap.** If you run workloads in the secondary for weeks, that new
+  data does not automatically flow back to Australia East.
+- **Customer responsibilities on failback** (working assumption, pending
+  Microsoft confirmation): plan a **controlled cutback** — quiesce writes in
+  the secondary, copy/migrate any delta data back, redeploy/repoint workloads
+  to the primary capacity, and validate before resuming normal operations.
+
+Treat failback as a **planned migration you design and test**, not an automatic
+platform event. Escalate to Microsoft for a written failback statement for this
+customer's specific topology before committing an RTO/RPO to leadership.
+
+### 6.6 How do we weigh cost versus business risk across the three options?
+
+| | **A. Microsoft-managed geo-replication only** | **B. Scripted recovery automation** | **C. Active-active, two regions** |
+|---|---|---|---|
+| **What it is** | Rely on OneLake geo-replication + manual rebuild-on-incident | Pre-built, tested Git-redeploy + capacity scripts, triggered on demand | Two live capacities running concurrently, workload split or mirrored |
+| **Cost** | Lowest compute, **but DR adds BCDR Storage + higher write CU** | Low-moderate — engineering time; one capacity most of the time | Highest — second capacity continuously + sync tooling |
+| **Operational complexity** | Low day-to-day; high *during* an incident | Moderate — scripts need maintenance + drills | High — ongoing dual-region ops, consistency, conflict handling |
+| **Achievable RTO** | Slow — bounded by an undrilled manual rebuild | Faster — bounded by measured script execution | Fastest — near-zero if truly active-active |
+| **Achievable RPO** | Bounded by async replication lag (not zero, not tunable) | Same as A — automation speeds rebuild, not replication | Smallest, *if* inter-region sync is near-real-time (verify per store) |
+| **When it fits** | Low-criticality, cost-sensitive, hours-to-a-day tolerance | **Most production enterprise workloads** — best leverage-per-dollar | Near-zero downtime tolerance justifying a second live capacity |
+
+!!! tip "Where most enterprises land"
+    **Option B** is the practical middle ground: cost close to A, but it converts
+    A's "unbounded manual rebuild" risk into a measured, drillable, improvable
+    process. This project's `fabric-cicd` pipeline is exactly this pattern —
+    Git as source of truth, scripted redeploy on demand.
+
+!!! warning "DR is not free"
+    Enabling the DR capacity setting bills **BCDR Storage** plus **higher write
+    CU consumption** (per-tier rates in the Capacity Metrics app). Factor this
+    into the Option A/B/C cost comparison — DR-on costs more than DR-off even
+    on a single capacity. See [OneLake consumption](https://learn.microsoft.com/fabric/onelake/onelake-consumption#disaster-recovery).
+
+### 6.7 What should we ask Microsoft to confirm in writing?
+
+Before leadership signs off on an RTO/RPO, get Microsoft to confirm for **this
+customer's specific topology**:
+
+1. A **written failback statement** — sync-back behavior, customer steps, and
+   data-gap handling when Australia East returns.
+2. **RPO/RTO figures** for their capacity SKU and region pair (not published
+   publicly — set contractually and validate by testing your own runbook).
+3. **KQL Database / Queryset DR** — the supported approach, since this data
+   lives outside OneLake.
+4. Confirmation that the **current public guidance remains valid** and notice
+   of any recent DR capability changes.
+
+---
+
 ## 📚 Related Documentation
 
+- [Fabric DR — Authoritative Answers](best-practices/fabric-dr-authoritative-answers.md) — full source-cited DR treatment
+- [Disaster Recovery & BCDR](best-practices/disaster-recovery-bcdr.md) — BCDR patterns
+- [Multi-Region Failover runbook](runbooks/multi-region-failover.md) — operational failover steps
+- [Disaster Recovery Execution runbook](runbooks/disaster-recovery-execution.md) — DR execution steps
 - [Mirroring](features/mirroring.md) — Fabric Mirroring end-to-end
 - [Direct Lake](features/direct-lake.md) — connectivity, guardrails, fallback
 - [Network Security](best-practices/network-security.md) — VNet, private endpoints, managed VNet

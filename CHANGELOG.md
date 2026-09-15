@@ -37,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `docs/field-questions.md` — new §6 "Fabric Disaster Recovery — Enterprise DR Strategy for a Regional Outage": field Q&A covering all six customer concerns (conflicting guidance, post-failover state, customer recovery responsibilities, DR testing feasibility, failback, cost-vs-risk) plus a "what to confirm with Microsoft in writing" list. Australia East context; cross-links the DR authoritative-answers doc and both runbooks. Version → 1.1.0.
 - `docs/features/whats-new.md` — rolling "What's New in Microsoft Fabric" release tracker (Sept/Aug/Jul 2026 highlights), grounded in Microsoft Learn, with per-feature GA/preview status and links to where this repo already covers each capability. Registered in the Feature Catalog nav.
 - `docs/best-practices/fabric-dr-authoritative-answers.md` — new §7 "Two details customers routinely miss": OneLake **soft delete** (7-day retention, independent of the DR toggle) and **BCDR billing** (BCDR Storage + higher write CU consumption, with per-tier CU rates), plus supporting sources.
 
