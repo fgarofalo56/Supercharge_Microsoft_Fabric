@@ -11,13 +11,13 @@ type: feature
 
 ![Category](https://img.shields.io/badge/Category-Power_BI-yellow?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
-![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-September_2026-blue?style=for-the-badge)
 
 </div>
 
 ---
 
-**Last Updated:** `2026-04-27` | **Version:** 1.0.0
+**Last Updated:** `2026-09-07` | **Version:** 1.1.0
 
 ---
 
@@ -37,6 +37,24 @@ Power BI Developer Mode is the Fabric-side feature that enables editing semantic
 | Manual deployment | CI/CD pipelines with validation |
 | No version history for model logic | Full Git history per measure/table |
 | Tight coupling of model + report | Separation of model definition from visuals |
+
+### TMDL + PBIR: The Complete Source-Controlled PBIP
+
+TMDL covers the **semantic model**; the **Power BI enhanced report format (PBIR)** covers the **report**. Together they make a Power BI Project (PBIP) fully source-controllable:
+
+| Layer | Format | Structure |
+|-------|--------|-----------|
+| Semantic model | **TMDL** | `definition/` folder — one `.tmdl` file per table, role, perspective, culture |
+| Report | **PBIR** | `definition/` folder — separate JSON files per page, visual, and bookmark |
+
+PBIR advantages over PBIR-Legacy (`report.json`):
+
+1. **Publicly documented JSON schemas** — every file carries a schema URL, giving IntelliSense and validation in VS Code; schemas are published at [microsoft/json-schemas](https://github.com/microsoft/json-schemas/tree/main/fabric/item/report/definition)
+2. **Per-object files** — copy visuals/pages/bookmarks between reports, find-and-replace across files, batch-edit visuals with scripts
+3. **Annotations** — name-value pairs on `visual`, `page`, and `report` objects for CI/CD automation (e.g., a `defaultPage` consumed by a deployment script)
+4. **Service restore** — reports converted to PBIR in the service keep a PBIR-Legacy backup for 28 days (restore via **Report settings → Restore as PBIR-Legacy**)
+
+Enable PBIR in Power BI Desktop via **File → Options and settings → Options → Preview features → "Store reports using enhanced metadata format (PBIR)"** (a separate checkbox covers PBIX files). Check the [PBIR limitations](https://learn.microsoft.com/power-bi/developer/projects/projects-report#pbir-considerations-and-limitations) before adopting — they change over time.
 
 ---
 
@@ -659,7 +677,7 @@ The casino POC semantic model is fully defined in TMDL with the following struct
 
 | Limitation | Details | Workaround |
 |------------|---------|------------|
-| **Reports not in TMDL** | TMDL covers model only, not report visuals | Use PBIP (Power BI Project) for reports |
+| **Reports not in TMDL** | TMDL covers model only, not report visuals | Use PBIP with **PBIR** (enhanced report format) — reports become per-object JSON files with public schemas |
 | **Lineage tags required** | Every object needs a unique GUID | Auto-generate with Tabular Editor |
 | **No calculated tables in Direct Lake** | Direct Lake does not support calc tables | Use Lakehouse views instead |
 | **Learning curve** | TMDL syntax is new to most teams | Start with Tabular Editor visual + TMDL preview |
@@ -672,6 +690,8 @@ The casino POC semantic model is fully defined in TMDL with the following struct
 
 - [TMDL overview](https://learn.microsoft.com/en-us/analysis-services/tmdl/tmdl-overview)
 - [Power BI Developer Mode](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview)
+- [PBIR — Power BI enhanced report format](https://learn.microsoft.com/power-bi/developer/projects/projects-report#pbir-format)
+- [Create a report in enhanced report format](https://learn.microsoft.com/power-bi/developer/embedded/projects-enhanced-report-format)
 - [Tabular Editor 3](https://docs.tabulareditor.com/)
 - [Semantic model Git integration](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration)
 - [TMDL language reference](https://learn.microsoft.com/en-us/analysis-services/tmdl/tmdl-reference)

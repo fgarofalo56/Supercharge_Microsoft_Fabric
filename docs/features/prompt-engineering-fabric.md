@@ -206,7 +206,7 @@ Retrieved chunks (from a vector store), structured rows (from Lakehouse), or in-
 
 ### 4. User Input — Sanitized, Never Trusted
 
-The user message is the **untrusted** layer. Treat it like form input from a public web form. Never let it bleed into the system prompt or instructions. See [Prompt Injection & Security](#️-prompt-injection--security).
+The user message is the **untrusted** layer. Treat it like form input from a public web form. Never let it bleed into the system prompt or instructions. See [Prompt Injection & Security](#prompt-injection-security).
 
 ### 5. Output Format Spec — JSON Schema, Structured Output
 
@@ -1156,4 +1156,4 @@ RULES:
 
 ---
 
-[⬆️ Back to Top](#-prompt-engineering-for-fabric-workloads) | [📚 Features Index](./) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#prompt-engineering-for-fabric-workloads) | [📚 Features Index](prompt-engineering-fabric.md) | [🏠 Home](../index.md)

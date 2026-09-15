@@ -11,13 +11,13 @@ type: feature
 
 ![Category](https://img.shields.io/badge/Category-Lifecycle_Management-green?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
-![Last Updated](https://img.shields.io/badge/Updated-April_2026-blue?style=for-the-badge)
+![Last Updated](https://img.shields.io/badge/Updated-September_2026-blue?style=for-the-badge)
 
 </div>
 
 ---
 
-**Last Updated:** `2026-04-21` | **Version:** 1.0.0
+**Last Updated:** `2026-09-07` | **Version:** 1.1.0
 
 ---
 
@@ -30,7 +30,7 @@ Fabric Git Integration connects a workspace to a **Git repository** (Azure DevOp
 | Capability | Description |
 |-----------|-------------|
 | **Bi-Directional Sync** | Workspace ↔ Git in both directions |
-| **Azure DevOps + GitHub** | Supports both Git providers |
+| **Azure DevOps + GitHub + GitHub Enterprise** | Supports Azure DevOps, GitHub, and GitHub Enterprise (all cloud-based only) |
 | **Branch-Per-Developer** | Each developer works in their own feature branch |
 | **Selective Sync** | Choose which items to include in Git |
 | **Conflict Detection** | Identifies conflicting changes between workspace and Git |
@@ -164,6 +164,18 @@ Workspace Settings → Git Integration
   Branch: dev
   Git folder: /casino-fabric-dev
 ```
+
+**GitHub prerequisites and auth differences:**
+
+| Aspect | Azure DevOps | GitHub / GitHub Enterprise |
+|--------|-------------|---------------------------|
+| **Tenant switch** | "Users can synchronize workspace items with their Git repositories" | That switch **plus** "Users can synchronize workspace items with GitHub repositories" |
+| **Credentials** | Microsoft Entra identity — user principal **or service principal** (OAuth2) | **Personal access token (PAT)** via the "GitHub - Source control" connector |
+| **Commit size limit** | 125 MB (user principal SSO); 25 MB (service principal) | **50 MB** total per commit — split large commits |
+| **Cross-geo** | Tenant admin can enable cross-geo exports | GitHub **can't enforce** cross-geo validations |
+| **Hosting** | Cloud only | Cloud only — GitHub Enterprise Server with custom domain, private-network hosting, or IP allowlists is **not** supported |
+
+> ⚠️ Service principal automation (for unattended CI/CD Git sync) is currently available with the **Azure DevOps** provider. GitHub connections authenticate with a PAT.
 
 > 💡 **Tip**: Use a dedicated branch per workspace. Map `dev` branch to the Dev workspace, and use PRs to promote to `main` (which maps to the Prod workspace or deploys via fabric-cicd).
 
@@ -345,7 +357,7 @@ casino-fabric/
 
 | Limitation | Details | Workaround |
 |-----------|---------|-----------|
-| **Not All Items** | Some items not yet supported (Dataflow Gen2, Reflex) | Track manually or use fabric-cicd |
+| **Not All Items** | Item support expands regularly — Dataflow Gen2, Copy Job, Mirrored DB, Data Agents, Activator, ML models (preview), dbt Job (preview), and more are now supported; check the [supported items list](https://learn.microsoft.com/fabric/cicd/git-integration/intro-to-git-integration#supported-items) | Track unsupported items manually or use fabric-cicd |
 | **Item-Level Diff** | No line-level diff in Fabric portal | Use Git client for detailed diffs |
 | **One Branch** | Workspace connects to one branch at a time | Use Branch-Per-Workspace pattern |
 | **No Partial Sync** | Cannot sync individual items (all or nothing) | Use selective commit instead |
@@ -360,7 +372,9 @@ casino-fabric/
 |----------|-----|
 | Git Integration Overview | https://learn.microsoft.com/fabric/cicd/git-integration/intro-to-git-integration |
 | Connect to Azure DevOps | https://learn.microsoft.com/fabric/cicd/git-integration/git-get-started |
-| Connect to GitHub | https://learn.microsoft.com/fabric/cicd/git-integration/git-integration-with-github |
+| Connect to GitHub | https://learn.microsoft.com/fabric/cicd/git-integration/git-get-started |
+| Service principal automation (Azure DevOps) | https://learn.microsoft.com/fabric/cicd/git-integration/automate-git-integration-with-service-principal |
+| Git integration limitations | https://learn.microsoft.com/fabric/cicd/git-integration/git-integration-process#considerations-and-limitations |
 | Supported Items | https://learn.microsoft.com/fabric/cicd/git-integration/git-integration-process |
 | Conflict Resolution | https://learn.microsoft.com/fabric/cicd/git-integration/conflict-resolution |
 | Best Practices | https://learn.microsoft.com/fabric/cicd/git-integration/git-best-practices |
@@ -380,4 +394,4 @@ casino-fabric/
 > - **Author**: Documentation Team
 > - **Reviewers**: Platform Engineering, DevOps
 > - **Classification**: Internal
-> - **Next Review**: 2026-07-21
+> - **Next Review**: 2026-12-07

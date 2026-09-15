@@ -59,7 +59,7 @@ Previously, securing data in Microsoft Fabric required configuring security in e
 | OneLake Column Security | **Roadmap** | 2027 |
 | Data Access Roles REST API | **Public Preview** | H2 2026 |
 
-> ⚠️ **Warning**: OneLake Security features are in preview. Microsoft may change functionality, APIs, and behavior before general availability. Use in production only after evaluating preview limitations documented in the [Limitations section](#️-limitations-and-preview-status).
+> ⚠️ **Warning**: OneLake Security features are in preview. Microsoft may change functionality, APIs, and behavior before general availability. Use in production only after evaluating preview limitations documented in the [Limitations section](#limitations-and-preview-status).
 
 ### How OneLake Security Fits in the Stack
 
