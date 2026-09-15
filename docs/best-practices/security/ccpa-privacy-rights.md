@@ -127,7 +127,7 @@ Consumers can request correction of inaccurate PI. Business must use **commercia
 
 ### 4. Right to Opt-Out of Sale (CCPA original)
 
-Consumers can direct a business not to "sell" their PI. (See [Do Not Sell or Share](#-do-not-sell-or-share) below — "sell" is broader than money exchange.)
+Consumers can direct a business not to "sell" their PI. (See [Do Not Sell or Share](#do-not-sell-or-share) below — "sell" is broader than money exchange.)
 
 ### 5. Right to Opt-Out of Sharing for Cross-Context Behavioral Advertising (CPRA addition)
 
@@ -135,7 +135,7 @@ CPRA introduced "share" as a separate concept covering data transfers to third p
 
 ### 6. Right to Limit Use of Sensitive Personal Information (CPRA addition)
 
-When a business uses SPI for purposes beyond providing the requested goods/services, consumers can require the business to limit SPI use to the minimum necessary. See [SPI](#-sensitive-personal-information-spi) below.
+When a business uses SPI for purposes beyond providing the requested goods/services, consumers can require the business to limit SPI use to the minimum necessary. See [SPI](#sensitive-personal-information-spi) below.
 
 ### 7. Right to Non-Discrimination (CCPA original)
 
@@ -185,7 +185,7 @@ When a consumer opts out:
 
 ### Pipeline Implications
 
-Bronze ingestion captures opt-out events. Silver and Gold pipelines that produce data feeding ad networks, analytics co-ops, or third-party marketing destinations **must filter on `opt_out_sale = true` and `opt_out_share = true`**. See [Fabric Implementation](#️-fabric-implementation) below.
+Bronze ingestion captures opt-out events. Silver and Gold pipelines that produce data feeding ad networks, analytics co-ops, or third-party marketing destinations **must filter on `opt_out_sale = true` and `opt_out_share = true`**. See [Fabric Implementation](#fabric-implementation) below.
 
 ---
 
@@ -839,4 +839,4 @@ Before declaring CCPA/CPRA-ready:
 
 ---
 
-[⬆️ Back to Top](#️-ccpa--cpra-privacy-rights-implementation-on-microsoft-fabric) | [📚 Security Index](.) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#ccpa-cpra-privacy-rights-implementation-on-microsoft-fabric) | [📚 Security Index](ccpa-privacy-rights.md) | [🏠 Home](../../index.md)

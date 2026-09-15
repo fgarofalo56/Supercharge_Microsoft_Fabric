@@ -594,7 +594,7 @@ SLOs are not set-and-forget. The Fabric platform ships features quarterly; user 
 | Identify SLOs frequently breached (<95% of windows) | Service owners | "Loosen target or invest?" decisions |
 | Review postmortems, map to SLOs | Incident Commanders | New SLIs that should have caught the issue |
 | Survey customers / stakeholders on perceived issues | Product owners | Gap between measured and felt reliability |
-| Update SLO docs in Archon | Service owners | Versioned SLO doc per workspace |
+| Update SLO docs in the project tracker | Service owners | Versioned SLO doc per workspace |
 
 ### When to Recalibrate Outside Cadence
 
@@ -686,7 +686,7 @@ SLO consistently met (>99.9% of windows)?
 
 ## 📋 Sample SLO Document Template
 
-> **Copy this section** into your workspace SLO doc and fill in the brackets. Store at `docs/slos/{workspace-name}.md` and link from your Archon project.
+> **Copy this section** into your workspace SLO doc and fill in the brackets. Store at `docs/slos/{workspace-name}.md` and link from your project tracker.
 
 ```markdown
 # SLO Document — {Workspace Name}
@@ -814,4 +814,4 @@ SLO consistently met (>99.9% of windows)?
 
 ---
 
-[⬆️ Back to Top](#-slosli-definitions-for-fabric-workspaces) | [📚 Best Practices Index](../index.md) | [📖 Runbooks Index](../../runbooks/index.md) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#slosli-definitions-for-fabric-workspaces) | [📚 Best Practices Index](../index.md) | [📖 Runbooks Index](../../runbooks/index.md) | [🏠 Home](../../index.md)

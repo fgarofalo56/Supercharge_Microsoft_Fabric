@@ -3,9 +3,9 @@ hero: assets/heroes/best-practices.svg
 hero_alt: "Best practice — Oracle to Fabric: Gateway & Pipeline Troubleshooting"
 type: deep-dive
 ---
-[Home](../index.md) > [Best Practices](./) > Oracle Gateway Troubleshooting
+[Home](../index.md) > [Best Practices](../best-practices.md) > Oracle Gateway Troubleshooting
 
-# 🔧 Oracle to Fabric: Gateway & Pipeline Troubleshooting
+# 🔧 Oracle to Fabric: Gateway & Pipeline Troubleshooting {#oracle-to-fabric-gateway--pipeline-troubleshooting}
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -280,11 +280,11 @@ Gateway Containers ≥ ForEach batchCount × 2
 
 | Symptom | Likely Cause | Solution Section |
 |---------|--------------|------------------|
-| ForEach not running in parallel | Gateway bottleneck or Sequential=true | [ForEach Parallelism](#-foreach-parallelism-issues) |
-| Slow copy despite high batchCount | Gateway container limits | [Gateway Configuration](#-gateway-configuration) |
-| Throttling errors (429) | Too many concurrent requests | [Oracle Connection Limits](#-oracle-connection-limits) |
-| Gateway memory errors | Insufficient container memory | [Gateway Configuration](#-gateway-configuration) |
-| Single-threaded copy | No partitioning enabled | [Enable Oracle Parallel Copy](#-enable-oracle-parallel-copy) |
+| ForEach not running in parallel | Gateway bottleneck or Sequential=true | [ForEach Parallelism](#foreach-parallelism-issues) |
+| Slow copy despite high batchCount | Gateway container limits | [Gateway Configuration](#gateway-configuration) |
+| Throttling errors (429) | Too many concurrent requests | [Oracle Connection Limits](#oracle-connection-limits) |
+| Gateway memory errors | Insufficient container memory | [Gateway Configuration](#gateway-configuration) |
+| Single-threaded copy | No partitioning enabled | [Enable Oracle Parallel Copy](#enable-oracle-parallel-copy) |
 
 ---
 
@@ -435,7 +435,7 @@ Oracle may limit concurrent connections.
 
 **Diagnosis:** Check Oracle alert log for connection errors.
 
-**Fix:** See [Oracle Connection Limits](#-oracle-connection-limits) section.
+**Fix:** See [Oracle Connection Limits](#oracle-connection-limits) section.
 
 ### ForEach Behavior Deep Dive
 
@@ -849,4 +849,4 @@ Example: 3 nodes × 32 = 96 concurrent operations
 
 ---
 
-[⬆️ Back to Top](#-oracle-to-fabric-gateway--pipeline-troubleshooting) | [📚 Best Practices](./) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#oracle-to-fabric-gateway--pipeline-troubleshooting) | [📚 Best Practices](../best-practices.md) | [🏠 Home](../index.md)

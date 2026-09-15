@@ -3,7 +3,7 @@ hero: assets/heroes/best-practices.svg
 hero_alt: "Best practice — LLM Cost Tracking & FinOps for AI Workloads"
 type: deep-dive
 ---
-# 💸 LLM Cost Tracking & FinOps for AI Workloads
+# 💸 LLM Cost Tracking & FinOps for AI Workloads {#llm-cost-tracking--finops-for-ai-workloads}
 
 <div align="center" markdown>
 
@@ -95,7 +95,7 @@ Reasoning models (`o1`, `o3`, Claude with extended thinking) emit hidden "thinki
 
 ### Model-Tier Pricing Curve
 
-Within a provider family, pricing typically follows a 1×, 5×, 25× curve from small → medium → flagship. This is the foundation of the [fallback strategy](#-fallback-model-strategy): pick the right rung for the task.
+Within a provider family, pricing typically follows a 1×, 5×, 25× curve from small → medium → flagship. This is the foundation of the [fallback strategy](#fallback-model-strategy): pick the right rung for the task.
 
 | Tier | Use For | Typical Cost Multiplier |
 |------|---------|-------------------------|
@@ -107,7 +107,7 @@ Within a provider family, pricing typically follows a 1×, 5×, 25× curve from 
 
 ## 💵 Pricing Snapshot
 
-> ⚠️ **Pricing changes frequently.** All numbers below are USD per 1M tokens, captured **2026-04-27**. **Refresh quarterly** by re-pulling from the provider URLs in [References](#-references). Do not embed these in code; pull live from a config table (`config_llm_pricing`) that your finance team owns.
+> ⚠️ **Pricing changes frequently.** All numbers below are USD per 1M tokens, captured **2026-04-27**. **Refresh quarterly** by re-pulling from the provider URLs in [References](#references). Do not embed these in code; pull live from a config table (`config_llm_pricing`) that your finance team owns.
 
 ### Azure OpenAI (East US, Pay-As-You-Go)
 
@@ -432,7 +432,7 @@ Every record in `llm_usage` carries five mandatory tags. Make them required at a
 |-----|---------|--------|-----|
 | `cost_center` | `casino-data-science` | Org chart / HR system | Finance chargeback |
 | `business_unit` | `gaming-ops` | Org chart | P&L roll-up |
-| `project` | `floor-monitoring` | Project tracker (Archon, Jira) | Feature-level ROI |
+| `project` | `floor-monitoring` | Project tracker (GitHub, Jira) | Feature-level ROI |
 | `workload` | `chat` / `completion` / `embedding` / `agent` / `aifunc` | Caller-declared | Cost-by-pattern analysis |
 | `environment` | `dev` / `staging` / `prod` | `FABRIC_ENV` env var | Prevent dev runaway from blocking prod |
 
@@ -507,7 +507,7 @@ llm_usage
 Wire this query as an **Azure Monitor scheduled query alert** → Action Group → Teams + on-call. Severity:
 - ≥ soft_limit (alert): Sev 3
 - ≥ 90% of hard_limit (warn): Sev 2
-- ≥ hard_limit (block): Sev 1 + automated rate-limiter tightening (see [Rate Limiting](#-rate-limiting-patterns))
+- ≥ hard_limit (block): Sev 1 + automated rate-limiter tightening (see [Rate Limiting](#rate-limiting-patterns))
 
 For cross-references on Action Group wiring, see [monitoring-observability.md](monitoring-observability.md) and [alerting-data-activator.md](alerting-data-activator.md).
 
@@ -820,7 +820,7 @@ batch = client.messages.batches.create(
 
 ## 📈 KQL Cost Library
 
-Five queries that cover 90% of the questions finance and engineering will ask. Save these as **Workspace Monitoring** Saved Queries; pin to the [Cost Dashboard](#️-cost-dashboard).
+Five queries that cover 90% of the questions finance and engineering will ask. Save these as **Workspace Monitoring** Saved Queries; pin to the [Cost Dashboard](#cost-dashboard).
 
 ### 1. Top Spenders by User (last 7 days)
 
@@ -996,7 +996,7 @@ Controls:
 
 ## 📋 Implementation Checklist
 
-Use this before declaring an LLM workload "production-ready". Ties into the broader [MLOps production checklist](mlops-fabric-production.md#-production-readiness-checklist).
+Use this before declaring an LLM workload "production-ready". Ties into the broader [MLOps production checklist](mlops-fabric-production.md#production-readiness-checklist).
 
 **Tracking & attribution**
 - [ ] Every LLM call goes through the `track_llm` decorator (or equivalent)
@@ -1091,4 +1091,4 @@ Use this before declaring an LLM workload "production-ready". Ties into the broa
 
 ---
 
-[⬆️ Back to Top](#-llm-cost-tracking--finops-for-ai-workloads) | [📚 Best Practices Index](index.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#llm-cost-tracking--finops-for-ai-workloads) | [📚 Best Practices Index](index.md) | [🏠 Home](../index.md)

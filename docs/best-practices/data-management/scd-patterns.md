@@ -394,7 +394,7 @@ Causes:
 
 Mitigations:
 - One writer per dim table (single pipeline owns the table)
-- Optimistic-concurrency retry (see [Concurrency](#-concurrency))
+- Optimistic-concurrency retry (see [Concurrency](#concurrency))
 - Daily DQ checkpoint that alerts on `HAVING COUNT(*) > 1`
 - Repair script: keep latest by `effective_from`, close the rest
 
@@ -1049,4 +1049,4 @@ Before promoting a SCD-pattern dim to production:
 
 ---
 
-[⬆️ Back to Top](#️-slowly-changing-dimension-scd-patterns-in-delta-lake) | [📚 Data Management Index](.) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#slowly-changing-dimension-scd-patterns-in-delta-lake) | [📚 Data Management Index](scd-patterns.md) | [🏠 Home](../../index.md)

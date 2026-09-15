@@ -83,7 +83,7 @@ Every change is classified into exactly one of four tiers. The classification dr
 | **Major** | High blast radius or compliance-impacting. Executive approval required. | New workspace tied to capacity; capacity SKU change >2 tiers (F64 → F256); region migration; CMK key rotation; OneLake security policy change; tenant-level setting change; breaking schema change in Silver/Gold | PR + CAB + executive approval (Platform Lead **and** Service Owner) | 3-stage with mandatory rollback test in Staging; **dual-approver** Prod gate | <1 hr (and rollback **must** be rehearsed in Staging before Prod deploy) |
 | **Emergency / Hotfix** | Production-impacting incident requiring immediate fix. Post-hoc CAB review. | Patching a SEV1 Prod data corruption; reverting a bad deploy; emergency capacity scale-up to relieve throttling; revoking a leaked credential | On-call engineer + Incident Commander; CAB reviews **after** the fact at next session | Hotfix path per [Tenant Migration Runbook §Hotfix](../../runbooks/tenant-migration-dev-staging-prod.md#hotfix-procedure) | <15 min (this **is** the rollback for SEV1) |
 
-### Decision Tree — Which Tier Is My Change?
+### Decision Tree — Which Tier Is My Change? {#decision-tree--which-tier-is-my-change}
 
 ```mermaid
 flowchart TD
@@ -209,7 +209,7 @@ A change is approved when **all** of the following hold:
 1. RFC is complete (no missing sections, evidence links resolve)
 2. Risk score and classification match the change content (CAB may re-classify)
 3. Rollback plan is concrete and (for Major) rehearsed in Staging
-4. Deployment window is outside any active [freeze](#-freeze-windows) or has a freeze exemption
+4. Deployment window is outside any active [freeze](#freeze-windows) or has a freeze exemption
 5. No active SEV1/SEV2 incidents on affected systems
 6. Service Owner of the affected domain has signed off
 
@@ -262,7 +262,7 @@ The CAB workflow is implemented entirely with GitHub primitives — no separate 
 
 ## 🧊 Freeze Windows
 
-Freeze windows block **Normal** and **Major** changes from reaching Production. Standard and Emergency changes can still proceed under the rules below. Freeze windows are calendarized at the start of each fiscal year and published in [Change Calendar](#-change-calendar).
+Freeze windows block **Normal** and **Major** changes from reaching Production. Standard and Emergency changes can still proceed under the rules below. Freeze windows are calendarized at the start of each fiscal year and published in [Change Calendar](#change-calendar).
 
 | Freeze | Default Window | Affects | Exemption |
 |--------|----------------|---------|-----------|
@@ -389,7 +389,7 @@ The risk score is the **sum** of the four factors. The mapping below is enforced
 
 | Trigger | Target Rollback Time |
 |---------|----------------------|
-| SEV1 incident caused by a deploy | **15 minutes** to begin rollback (this is the [Failed Change Procedure](#-failed-change-procedure)) |
+| SEV1 incident caused by a deploy | **15 minutes** to begin rollback (this is the [Failed Change Procedure](#failed-change-procedure)) |
 | SEV2 incident caused by a deploy | 30 minutes to begin rollback |
 | Smoke-test failure in Prod | Begin rollback during the same deploy window — do not leave Prod in a broken state |
 | GE checkpoint regression | Within 1 hour, after on-call engineer confirms regression is caused by the deploy |
@@ -546,7 +546,7 @@ The RFC §3.3 Post-Checks section is treated as a literal checklist — the auth
 | High | 2× expected stabilization, minimum 2 hr |
 | Critical | 24 hr with on-call coverage |
 
-During the window the author **must** stay reachable. New alerts in Data Activator or Workspace Monitoring during the window count as a regression and trigger the [Failed Change Procedure](#-failed-change-procedure).
+During the window the author **must** stay reachable. New alerts in Data Activator or Workspace Monitoring during the window count as a regression and trigger the [Failed Change Procedure](#failed-change-procedure).
 
 ---
 
@@ -581,7 +581,7 @@ flowchart LR
 
 1. **Incident record** — per [Incident Response Template](../../runbooks/incident-response-template.md). Link the RFC ID in the incident.
 2. **Rolled-back state confirmation** — smoke tests pass post-rollback.
-3. **Failed-change post-mortem** (Major only, recommended for Normal) — see [Templates Provided](#-templates-provided).
+3. **Failed-change post-mortem** (Major only, recommended for Normal) — see [Templates Provided](#templates-provided).
 4. **CAB notification** — author posts the failure summary in the CAB channel within 1 business hour of detection.
 
 > **Repeat-offender rule:** Any author/team with two failed Major changes in a rolling 90-day window must run their next Major RFC through a pre-CAB technical deep-dive before submission.
@@ -606,7 +606,7 @@ flowchart LR
 **Problem:** routine changes get `emergency-approved` to bypass the 48-hr Normal SLA. **Symptom:** auditors flag emergency abuse. **Fix:** emergency requires a linked active SEV1/SEV2 incident; CAB chair audits emergency usage monthly and revokes the label from abusers.
 
 ### 6. No Monitoring Window
-**Problem:** author merges, deploy turns green, author closes laptop. **Symptom:** users find the regression hours later; on-call inherits a problem they did not ship. **Fix:** author stays reachable for the full monitoring window per [Risk Framework](#️-risk-assessment-framework).
+**Problem:** author merges, deploy turns green, author closes laptop. **Symptom:** users find the regression hours later; on-call inherits a problem they did not ship. **Fix:** author stays reachable for the full monitoring window per [Risk Framework](#risk-assessment-framework).
 
 ### Summary
 
@@ -627,7 +627,7 @@ The following templates live alongside this doc in `docs/best-practices/operatio
 
 ### 1. RFC Template
 
-See [§ RFC Template](#-rfc-template) above. Copy into `docs/rfcs/RFC-YYYYMMDD-NN-short-title.md`.
+See [§ RFC Template](#rfc-template) above. Copy into `docs/rfcs/RFC-YYYYMMDD-NN-short-title.md`.
 
 ### 2. Failed-Change Post-Mortem Template
 

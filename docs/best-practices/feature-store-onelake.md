@@ -126,7 +126,7 @@ erDiagram
 | `_is_current` | BOOLEAN | ✅ | Denormalized current-row flag for fast online lookups. |
 | `feature_*` | typed | ✅ | Business features. Each must be documented in the feature card. |
 | `source_table` | STRING | ✅ | Upstream Delta path (`lh_silver.player_sessions`). For lineage. |
-| `feature_version` | STRING | ✅ | Semver of the **definition** (`1.0.0`). Bumped per the [Versioning Strategy](#-versioning-strategy). |
+| `feature_version` | STRING | ✅ | Semver of the **definition** (`1.0.0`). Bumped per the [Versioning Strategy](#versioning-strategy). |
 | `last_updated` | TIMESTAMP | ✅ | When this row was last written (housekeeping, distinct from `effective_from`). |
 | `computed_by` | STRING | ✅ | Pipeline run ID (`run-20260427-020000-abc123`) for forensic debugging. |
 
@@ -163,7 +163,7 @@ TBLPROPERTIES (
 );
 ```
 
-> The `delta.enableChangeDataFeed = true` setting is required to support [online mirroring](#-offline-vs-online-feature-patterns) without full-table reloads.
+> The `delta.enableChangeDataFeed = true` setting is required to support [online mirroring](#offline-vs-online-feature-patterns) without full-table reloads.
 
 ---
 
@@ -385,7 +385,7 @@ current_features = (
 )
 ```
 
-> 💡 **Tip:** For features that change slowly (player loyalty tier), once-daily sync is fine. For features that change quickly (last-hour activity), use [streaming features](#️-computation-patterns) and mirror via Eventhouse → SQL DB pipeline.
+> 💡 **Tip:** For features that change slowly (player loyalty tier), once-daily sync is fine. For features that change quickly (last-hour activity), use [streaming features](#computation-patterns) and mirror via Eventhouse → SQL DB pipeline.
 
 ---
 
@@ -549,7 +549,7 @@ Distinct sessions in trailing 30 days. NULL → 0 by convention.
 
 ### Purview Cross-Reference
 
-The feature card is registered in Purview as a **glossary term**, with its source tables linked as upstream assets and consumer models linked as downstream. See [Lineage](#-lineage) below.
+The feature card is registered in Purview as a **glossary term**, with its source tables linked as upstream assets and consumer models linked as downstream. See [Lineage](#lineage) below.
 
 ---
 
@@ -951,4 +951,4 @@ Before promoting any feature table to `lh_features` and tagging it `certified` i
 
 ---
 
-[⬆️ Back to Top](#-feature-store-on-onelake) | [📚 Best Practices Index](index.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#feature-store-on-onelake) | [📚 Best Practices Index](index.md) | [🏠 Home](../index.md)

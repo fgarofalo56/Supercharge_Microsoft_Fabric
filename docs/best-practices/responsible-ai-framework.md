@@ -514,7 +514,7 @@ Transparency means stakeholders — affected individuals, regulators, auditors, 
 
 ### Model Cards
 
-A **model card** is a one-page (give or take) document that travels with every production model. The full template is in [Templates](#-templates). It must contain:
+A **model card** is a one-page (give or take) document that travels with every production model. The full template is in [Templates](#templates). It must contain:
 
 1. Model purpose and intended use
 2. Out-of-scope use (what *not* to use it for)
@@ -746,7 +746,7 @@ This section gives concrete Fabric-native implementation patterns — what items
 
 ### Fairness Gate in CI
 
-Wire the fairness audit notebook from [Pillar 1](#️-pillar-1--fairness) into the same `.github/workflows/ml-promotion.yml` pipeline defined in the [MLOps anchor](mlops-fabric-production.md#-model-validation-gates):
+Wire the fairness audit notebook from [Pillar 1](#pillar-1-fairness) into the same `.github/workflows/ml-promotion.yml` pipeline defined in the [MLOps anchor](mlops-fabric-production.md#model-validation-gates):
 
 ```yaml
 - name: Fairness Gate
@@ -805,7 +805,7 @@ Apply sensitivity labels to:
 - The fairness audit results table (Confidential — contains demographic patterns)
 - The training data lineage (matches source data)
 
-See [Data Governance Deep Dive — Sensitivity Labels](data-governance-deep-dive.md#-classification-taxonomy).
+See [Data Governance Deep Dive — Sensitivity Labels](data-governance-deep-dive.md#classification-taxonomy).
 
 ---
 
@@ -875,7 +875,7 @@ The [Tribal Health Analytics](../use-cases/tribal-health-analytics.md) use case 
 
 ## 📋 RAI Review Checklist
 
-A model cannot be promoted to Production until every applicable item is checked. The RAI Lead signs off in Archon as the gate.
+A model cannot be promoted to Production until every applicable item is checked. The RAI Lead signs off in the project tracker as the gate.
 
 ### Design Phase
 
@@ -920,7 +920,7 @@ A model cannot be promoted to Production until every applicable item is checked.
 
 ### Operate Phase
 
-- [ ] Quarterly fairness re-audit scheduled in Archon
+- [ ] Quarterly fairness re-audit scheduled in the project tracker
 - [ ] Annual RAI review board meeting scheduled with named attendees
 - [ ] Postmortem template ready for first incident
 - [ ] Decommission criteria defined (when do we retire this model?)
@@ -1224,4 +1224,4 @@ If 80% rule fails: document the legitimate business necessity for the predictive
 
 ---
 
-[⬆️ Back to Top](#-responsible-ai-framework-for-fabric) | [📚 Best Practices Index](index.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#responsible-ai-framework-for-fabric) | [📚 Best Practices Index](index.md) | [🏠 Home](../index.md)

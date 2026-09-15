@@ -74,7 +74,7 @@ Single region runs the rotation. Primary owns acknowledgment; secondary backs up
 | **Pager fatigue** | Moderate — overnight pages possible, secondary cushions |
 | **Handoff** | Weekly |
 | **Risk** | Burnout if team <4; secondary becomes "shadow primary" without clear takeover triggers |
-| **Comp** | Off-hours premium or comp time required (see [Compensation](#-compensation-policy-template)) |
+| **Comp** | Off-hours premium or comp time required (see [Compensation](#compensation-policy-template)) |
 | **Tooling** | Two paging tiers with auto-escalation after 15 min |
 
 ### Model C — Single-Region Weekly
@@ -261,7 +261,7 @@ Run this checklist on the **Friday before** your Monday shift starts. Catching a
 
 ### Comp time / compensation reminder
 
-Off-hours pages outside business hours accrue comp time per your org policy (see [Compensation Policy Template](#-compensation-policy-template)). Track in your time-tracking tool. **Do not skip this** — undertracked off-hours work is the #1 driver of burnout invisibility.
+Off-hours pages outside business hours accrue comp time per your org policy (see [Compensation Policy Template](#compensation-policy-template)). Track in your time-tracking tool. **Do not skip this** — undertracked off-hours work is the #1 driver of burnout invisibility.
 
 ---
 
@@ -674,4 +674,4 @@ gantt
 
 ---
 
-[⬆️ Back to Top](#-on-call-rotation-handbook) | [📚 Best Practices Index](../index.md) | [🏠 Documentation Home](../../index.md)
+[⬆️ Back to Top](#on-call-rotation-handbook) | [📚 Best Practices Index](../index.md) | [🏠 Documentation Home](../../index.md)

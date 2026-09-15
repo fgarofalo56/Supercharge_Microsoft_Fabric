@@ -3,7 +3,7 @@ hero: assets/heroes/compliance.svg
 hero_alt: "Security best practice — Supply Chain Security: Notebook + Library + Connector Vetting"
 type: compliance
 ---
-# 🔗 Supply Chain Security: Notebook + Library + Connector Vetting
+# 🔗 Supply Chain Security: Notebook + Library + Connector Vetting {#supply-chain-security-notebook--library--connector-vetting}
 
 <div align="center" markdown>
 
@@ -585,7 +585,7 @@ Supply chain security depends on vendor management. SOC 2 [CC9.2](soc2-type2-rea
 | Snowflake | Iceberg interop | Curated | SOC 2 Type II | 2025-Q4 | 2026-Q4 | Data Eng Lead |
 | Anaconda | Conda packages | (none — code only) | (vendor cert) | 2026-Q1 | 2027-Q1 | Platform Eng |
 
-Maintain in Archon as a versioned document.
+Maintain in the project tracker as a versioned document.
 
 ### Annual Review Process
 
@@ -900,4 +900,4 @@ Before declaring "supply chain secure":
 
 ---
 
-[⬆️ Back to Top](#-supply-chain-security-notebook--library--connector-vetting) | [📚 Security Index](.) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#supply-chain-security-notebook--library--connector-vetting) | [📚 Security Index](supply-chain-security.md) | [🏠 Home](../../index.md)

@@ -3,9 +3,9 @@ hero: assets/heroes/best-practices.svg
 hero_alt: "Best practice — Oracle & SQL Server Source Patterns"
 type: deep-dive
 ---
-[Home](../index.md) > [Best Practices](./) > Source-Specific Patterns
+[Home](../index.md) > [Best Practices](../best-practices.md) > Source-Specific Patterns
 
-# 🔌 Oracle & SQL Server Source Patterns
+# 🔌 Oracle & SQL Server Source Patterns {#oracle--sql-server-source-patterns}
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -501,4 +501,4 @@ flowchart TD
 
 ---
 
-[⬆️ Back to Top](#-oracle--sql-server-source-patterns) | [📚 Best Practices](./) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#oracle--sql-server-source-patterns) | [📚 Best Practices](../best-practices.md) | [🏠 Home](../index.md)

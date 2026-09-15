@@ -255,7 +255,7 @@ Every Fabric item emits to:
 
 > ⚠️ **Gotcha:** Default Log Analytics retention is 30 days. Configure at least 12 months for SOC 2 compliance. See `infra/modules/monitoring/log-analytics-workspace.bicep` (Wave 1) — `retentionInDays: 365` minimum.
 
-### CC8.1 — Change Management
+### CC8.1 — Change Management {#cc81--change-management}
 
 **Control statement:** "Changes are evaluated, approved, and tracked."
 
@@ -550,4 +550,4 @@ Before declaring "SOC 2 Type II ready":
 
 ---
 
-[⬆️ Back to Top](#-soc-2-type-ii-readiness-on-microsoft-fabric) | [📚 Security Index](.) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#soc-2-type-ii-readiness-on-microsoft-fabric) | [📚 Security Index](soc2-type2-readiness.md) | [🏠 Home](../../index.md)

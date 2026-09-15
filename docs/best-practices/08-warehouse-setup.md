@@ -3,9 +3,9 @@ hero: assets/heroes/best-practices.svg
 hero_alt: "Best practice — Warehouse Setup & Configuration"
 type: deep-dive
 ---
-[Home](../index.md) > [Best Practices](./) > Warehouse Setup & Configuration
+[Home](../index.md) > [Best Practices](../best-practices.md) > Warehouse Setup & Configuration
 
-# 🏢 Warehouse Setup & Configuration
+# 🏢 Warehouse Setup & Configuration {#warehouse-setup--configuration}
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -505,4 +505,4 @@ Use the Fabric workspace to manage your warehouse. Access settings via the works
 
 ---
 
-[⬆️ Back to Top](#-warehouse-setup--configuration) | [📚 Best Practices](./) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#warehouse-setup--configuration) | [📚 Best Practices](../best-practices.md) | [🏠 Home](../index.md)

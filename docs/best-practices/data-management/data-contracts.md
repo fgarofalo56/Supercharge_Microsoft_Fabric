@@ -864,7 +864,7 @@ Contracts are code artifacts and follow code lifecycle.
 | Retention | 7 years (NIGC MICS §542.17) |
 | PII | `tax_id` hashed; `player_id` not PII (loyalty surrogate) |
 
-The full YAML for this contract is shown in [Contract Specification Format](#-contract-specification-format) above.
+The full YAML for this contract is shown in [Contract Specification Format](#contract-specification-format) above.
 
 Real-time ingestion via Eventstream means contract violations show up in seconds — and so do incidents. The pipeline gate at Bronze blocks downstream propagation; an incident is opened per the [data quality runbook](../../runbooks/data-quality-incident.md).
 
@@ -1104,4 +1104,4 @@ Before declaring a dataset "production":
 
 ---
 
-[⬆️ Back to Top](#-data-contracts-on-microsoft-fabric) | [📚 Data Management Index](.) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#data-contracts-on-microsoft-fabric) | [📚 Data Management Index](data-contracts.md) | [🏠 Home](../../index.md)

@@ -3,7 +3,7 @@ hero: assets/heroes/compliance.svg
 hero_alt: "Security best practice — ISO 27001:2022 Annex A Controls → Fabric Implementation Mapping"
 type: compliance
 ---
-# 🌐 ISO 27001:2022 Annex A Controls → Fabric Implementation Mapping
+# 🌐 ISO 27001:2022 Annex A Controls → Fabric Implementation Mapping {#iso-270012022-annex-a-controls--fabric-implementation-mapping}
 
 <div align="center" markdown>
 
@@ -50,7 +50,7 @@ The 2022 revision (replacing 2013) restructured Annex A from 14 categories with 
 - Risk treatment plan pattern with Fabric-specific risk register
 - 12-18 month certification roadmap
 
-> 📝 **Scope:** This is a Wave 5 companion to [SOC 2 Type II Readiness](soc2-type2-readiness.md). Where the SOC 2 doc focuses on Trust Services Criteria, this doc focuses on Annex A controls. Many Fabric configurations satisfy both standards simultaneously — see [Doing Both](#-doing-iso-27001--soc-2-together).
+> 📝 **Scope:** This is a Wave 5 companion to [SOC 2 Type II Readiness](soc2-type2-readiness.md). Where the SOC 2 doc focuses on Trust Services Criteria, this doc focuses on Annex A controls. Many Fabric configurations satisfy both standards simultaneously — see [Doing Both](#doing-iso-27001--soc-2-together).
 
 ---
 
@@ -673,7 +673,7 @@ A typical first-time ISO 27001 certification takes **12-18 months** from kickoff
 
 ---
 
-## 🔗 Doing ISO 27001 + SOC 2 Together
+## 🔗 Doing ISO 27001 + SOC 2 Together {#doing-iso-27001--soc-2-together}
 
 Most cloud SaaS targeting global enterprise customers ends up doing both. The good news: ~70% of evidence overlaps. Plan for the overlap from day one.
 
@@ -830,4 +830,4 @@ Before declaring "ISO 27001 ready":
 
 ---
 
-[⬆️ Back to Top](#-iso-270012022-annex-a-controls--fabric-implementation-mapping) | [📚 Security Index](.) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#iso-270012022-annex-a-controls--fabric-implementation-mapping) | [📚 Security Index](iso27001-mapping.md) | [🏠 Home](../../index.md)

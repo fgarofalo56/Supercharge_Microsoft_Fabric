@@ -3,7 +3,7 @@ hero: assets/heroes/best-practices.svg
 hero_alt: "Best practice — Model Monitoring & Drift Detection"
 type: deep-dive
 ---
-# 📡 Model Monitoring & Drift Detection
+# 📡 Model Monitoring & Drift Detection {#model-monitoring--drift-detection}
 
 <div align="center" markdown>
 
@@ -45,7 +45,7 @@ Each type has a different signal, test, and remediation. A single "drift detecte
 
 Three native surfaces: **Workspace Monitoring** (built-in endpoint metrics; KQL-queryable), **Eventhouse** (high-cardinality storage for prediction logs, feature snapshots, drift metrics), **Real-Time Dashboards** (trend visualization). Add a Lakehouse-stored **reference distribution** (the training-time feature snapshot) and you have full drift coverage.
 
-> 📝 **Scope:** This doc covers detection. For remediation, see [MLOps for Fabric Production § Retraining Triggers](mlops-fabric-production.md#-retraining-triggers) and [§ Canary, A/B, and Champion-Challenger](mlops-fabric-production.md#-canary-ab-and-champion-challenger).
+> 📝 **Scope:** This doc covers detection. For remediation, see [MLOps for Fabric Production § Retraining Triggers](mlops-fabric-production.md#retraining-triggers) and [§ Canary, A/B, and Champion-Challenger](mlops-fabric-production.md#canary-ab-and-champion-challenger).
 
 ---
 
@@ -76,7 +76,7 @@ Performance dropped?
 
 ### Label Drift — A Special Case
 
-Label drift (P(y) shift) is detectable only when ground truth arrives. In casino fraud detection, labels arrive after investigators close the case — sometimes weeks later. In USDA crop yield, labels arrive at harvest — months later. Label drift detection must operate on the **delayed** label stream and compare to the prior-period label distribution. See [§ Performance Drift Patterns — Proxy Metrics](#-performance-drift-patterns) for what to do while waiting.
+Label drift (P(y) shift) is detectable only when ground truth arrives. In casino fraud detection, labels arrive after investigators close the case — sometimes weeks later. In USDA crop yield, labels arrive at harvest — months later. Label drift detection must operate on the **delayed** label stream and compare to the prior-period label distribution. See [§ Performance Drift Patterns — Proxy Metrics](#performance-drift-patterns) for what to do while waiting.
 
 ---
 
@@ -655,7 +655,7 @@ action_group: ml-oncall-pagerduty   # P1 → PagerDuty; P2 → Teams; trigger �
 
 ## 🔁 Retraining Trigger Patterns
 
-See [MLOps for Fabric Production § Retraining Triggers](mlops-fabric-production.md#-retraining-triggers) for the master list. Drift-specific patterns:
+See [MLOps for Fabric Production § Retraining Triggers](mlops-fabric-production.md#retraining-triggers) for the master list. Drift-specific patterns:
 
 | Pattern | Trigger | Action | Cool-down |
 |---------|---------|--------|-----------|
@@ -823,4 +823,4 @@ Before declaring a model "monitored":
 
 ---
 
-[⬆️ Back to Top](#-model-monitoring--drift-detection) | [📚 Best Practices Index](index.md) | [🏠 Home](../index.md)
+[⬆️ Back to Top](#model-monitoring--drift-detection) | [📚 Best Practices Index](index.md) | [🏠 Home](../index.md)

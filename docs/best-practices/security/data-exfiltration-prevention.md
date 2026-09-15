@@ -69,21 +69,21 @@ The comprehensive list of exfiltration paths a Fabric tenant must consider. Ever
 
 | # | Vector | Description | Primary Mitigation | Reference |
 |---|--------|-------------|--------------------|-----------|
-| 1 | **COPY INTO to external storage** | T-SQL `COPY INTO` from Warehouse / Lakehouse SQL endpoint to attacker-controlled storage account | Workspace-level destination allowlist + OAP | [§ COPY INTO Restrictions](#-copy-into-restrictions) |
-| 2 | **Power BI export to Excel/CSV** | Right-click → Export → Excel from any visual or table | Tenant + sensitivity-label disable | [§ Power BI Export](#-power-bi-export-restrictions) |
-| 3 | **Notebook .ipynb download** | Download notebook with embedded result data; query a Lakehouse, then save and download | Workspace policy: disable export; cell-output redaction | [§ Notebook Download](#-notebook-download-restrictions) |
+| 1 | **COPY INTO to external storage** | T-SQL `COPY INTO` from Warehouse / Lakehouse SQL endpoint to attacker-controlled storage account | Workspace-level destination allowlist + OAP | [§ COPY INTO Restrictions](#copy-into-restrictions) |
+| 2 | **Power BI export to Excel/CSV** | Right-click → Export → Excel from any visual or table | Tenant + sensitivity-label disable | [§ Power BI Export](#power-bi-export-restrictions) |
+| 3 | **Notebook .ipynb download** | Download notebook with embedded result data; query a Lakehouse, then save and download | Workspace policy: disable export; cell-output redaction | [§ Notebook Download](#notebook-download-restrictions) |
 | 4 | **Lakehouse Files download** | Drag-drop or "Download" from Files area in Lakehouse explorer | OneLake security RBAC + workspace policy | [OneLake Security](../../features/onelake-security.md) |
-| 5 | **Cross-tenant sharing misuse** | "Share" button on a report or item to external Entra tenant | Tenant B2B settings + label-based external block | [§ Cross-Tenant Sharing](#-cross-tenant-sharing-controls) |
+| 5 | **Cross-tenant sharing misuse** | "Share" button on a report or item to external Entra tenant | Tenant B2B settings + label-based external block | [§ Cross-Tenant Sharing](#cross-tenant-sharing-controls) |
 | 6 | **OneLake shortcut to external (S3, GCS)** | Create shortcut pointing OUTBOUND to attacker storage; mirroring effect | OAP + connector allowlist | [OAP](../outbound-access-protection.md) |
-| 7 | **Mirroring egress** | Configure mirroring from Fabric *to* external Snowflake/etc. (egress mirror) | Disable outbound mirroring; allowlist destinations | [§ OAP Deep Dive](#-oap--outbound-access-protection-deep-dive) |
+| 7 | **Mirroring egress** | Configure mirroring from Fabric *to* external Snowflake/etc. (egress mirror) | Disable outbound mirroring; allowlist destinations | [§ OAP Deep Dive](#oap--outbound-access-protection-deep-dive) |
 | 8 | **SQL endpoint client tools** | Connect SSMS, Power BI Desktop, Azure Data Studio to Warehouse SQL endpoint and `SELECT *` | Conditional Access + IP firewall + audit | [Network Security](../network-security.md) |
 | 9 | **GraphQL API** | API for GraphQL exposes structured queries; bulk extraction over HTTPS | Throttling + RBAC + query depth limits + audit | [GraphQL feature doc](../../features/api-for-graphql.md) |
-| 10 | **Eventstream output to external** | Eventstream destination set to external Event Hub or Kafka | Destination allowlist + workspace policy | [§ OAP Deep Dive](#-oap--outbound-access-protection-deep-dive) |
+| 10 | **Eventstream output to external** | Eventstream destination set to external Event Hub or Kafka | Destination allowlist + workspace policy | [§ OAP Deep Dive](#oap--outbound-access-protection-deep-dive) |
 | 11 | **SHIR pulling on-prem** | Self-hosted Integration Runtime pulls from on-prem source — same SHIR can write to attacker on-prem | Restrict SHIR sinks; pin to managed VNet | [Network Security](../network-security.md) |
 | 12 | **Pipeline copy to external sink** | Data pipeline Copy activity with external sink (Blob, S3, REST) | Connection allowlist + OAP egress control | [OAP](../outbound-access-protection.md) |
-| 13 | **Email subscriptions** | Power BI subscription to external email with attachment | Tenant-level external email block | [§ Cross-Tenant Sharing](#-cross-tenant-sharing-controls) |
-| 14 | **Screenshot / photo of screen** | Out-of-band; cannot be technically prevented end-to-end | Watermarking + workforce policy + DLP camera detection on managed devices | [§ Sensitivity Labels](#️-sensitivity-label-enforcement) |
-| 15 | **Print to PDF** | Browser print → save as PDF → exfiltrate via email | Sensitivity label "no print" protection action | [§ Sensitivity Labels](#️-sensitivity-label-enforcement) |
+| 13 | **Email subscriptions** | Power BI subscription to external email with attachment | Tenant-level external email block | [§ Cross-Tenant Sharing](#cross-tenant-sharing-controls) |
+| 14 | **Screenshot / photo of screen** | Out-of-band; cannot be technically prevented end-to-end | Watermarking + workforce policy + DLP camera detection on managed devices | [§ Sensitivity Labels](#sensitivity-label-enforcement) |
+| 15 | **Print to PDF** | Browser print → save as PDF → exfiltrate via email | Sensitivity label "no print" protection action | [§ Sensitivity Labels](#sensitivity-label-enforcement) |
 | 16 | **Personal device sync (BYOD)** | Power BI mobile / OneDrive personal | Conditional Access device compliance | [Zero-Trust Blueprint](zero-trust-blueprint.md) |
 
 > ⚠️ **Be honest about scope.** Vectors 14 (camera) and parts of BYOD are organizational/process controls, not technical. Document them in your security awareness training; do not pretend they're solved by a Bicep parameter.
@@ -171,7 +171,7 @@ The unique value of layered defense: **no layer is asked to be perfect**, but th
 
 ---
 
-## 🚧 OAP — Outbound Access Protection (Deep Dive)
+## 🚧 OAP — Outbound Access Protection (Deep Dive) {#oap--outbound-access-protection-deep-dive}
 
 OAP is the single highest-leverage technical control for exfiltration prevention. Reference: existing [OAP doc](../outbound-access-protection.md).
 
@@ -955,4 +955,4 @@ Before declaring "Data Exfiltration Prevention ready":
 
 ---
 
-[⬆️ Back to Top](#-data-exfiltration-prevention-on-microsoft-fabric) | [📚 Security Index](.) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#data-exfiltration-prevention-on-microsoft-fabric) | [📚 Security Index](data-exfiltration-prevention.md) | [🏠 Home](../../index.md)
