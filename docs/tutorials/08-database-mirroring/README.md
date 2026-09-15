@@ -804,4 +804,4 @@ Continue to **[Tutorial 09: Advanced AI/ML](../09-advanced-ai-ml/README.md)** to
 
 ---
 
-[⬆️ Back to Top](#-tutorial-08-database-mirroring) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-08-database-mirroring) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

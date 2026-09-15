@@ -1282,4 +1282,4 @@ Continue your learning journey:
 
 ---
 
-[⬆️ Back to Top](#-tutorial-04-real-time-analytics) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-04-real-time-analytics) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

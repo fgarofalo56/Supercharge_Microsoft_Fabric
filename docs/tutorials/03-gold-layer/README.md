@@ -1588,4 +1588,4 @@ Continue to **[Tutorial 04: Real-Time Analytics](../04-real-time-analytics/READM
 
 ---
 
-[⬆️ Back to Top](#-tutorial-03-gold-layer) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-03-gold-layer) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

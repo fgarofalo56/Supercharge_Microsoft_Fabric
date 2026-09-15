@@ -1,6 +1,6 @@
-[Home](../../index.md) > [Tutorials](../) > SHIR & Data Gateways
+[Home](../../index.md) > [Tutorials](../index.md) > SHIR & Data Gateways
 
-# 🔌 Tutorial 23: Self-Hosted Integration Runtime & Data Gateways
+# 🔌 Tutorial 23: Self-Hosted Integration Runtime & Data Gateways {#tutorial-23-self-hosted-integration-runtime--data-gateways}
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -766,4 +766,4 @@ az keyvault set-policy --name "kv-fabric-gateway" `
 
 ---
 
-[⬆️ Back to Top](#-tutorial-23-self-hosted-integration-runtime--data-gateways) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-23-self-hosted-integration-runtime--data-gateways) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

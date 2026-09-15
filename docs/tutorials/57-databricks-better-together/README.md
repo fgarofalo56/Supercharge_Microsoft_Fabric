@@ -3,7 +3,7 @@
 > **Last Updated**: 2026-05-28 | **Version**: 1.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
 
-> **🏠 [Home](../../README.md)** › **📖 [Tutorials](../index.md)** › **🤝 Databricks Better Together**
+> **🏠 [Home](../index.md)** › **📖 [Tutorials](../index.md)** › **🤝 Databricks Better Together**
 
 ---
 

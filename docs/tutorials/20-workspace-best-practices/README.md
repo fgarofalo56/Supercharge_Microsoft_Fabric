@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Tutorials](../) > Workspace Organization Best Practices
+[Home](../../index.md) > [Tutorials](../index.md) > Workspace Organization Best Practices
 
 # ⚙️ Tutorial 20: Workspace Organization Best Practices
 
@@ -618,4 +618,4 @@ tags = {
 
 ---
 
-[⬆️ Back to Top](#-tutorial-20-workspace-organization-best-practices) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-20-workspace-organization-best-practices) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

@@ -1,6 +1,6 @@
-[Home](../../index.md) > [Tutorials](../) > Data Sharing & OneLake Shortcuts
+[Home](../../index.md) > [Tutorials](../index.md) > Data Sharing & OneLake Shortcuts
 
-# 🔗 Tutorial 18: Data Sharing & OneLake Shortcuts
+# 🔗 Tutorial 18: Data Sharing & OneLake Shortcuts {#tutorial-18-data-sharing--onelake-shortcuts}
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -1613,4 +1613,4 @@ Continue to **[Tutorial 19: Fabric Copilot & AI Features](../19-copilot-ai/READM
 
 ---
 
-[⬆️ Back to Top](#-tutorial-18-data-sharing--onelake-shortcuts) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-18-data-sharing--onelake-shortcuts) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

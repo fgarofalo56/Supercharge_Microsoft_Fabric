@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Tutorials](../) > Federal DOT/FAA
+[Home](../../index.md) > [Tutorials](../index.md) > Federal DOT/FAA
 
 # ✈️ Tutorial 31: Federal DOT/FAA
 
@@ -982,4 +982,4 @@ Congratulations! You have built a complete DOT/FAA aviation analytics pipeline o
 
 ---
 
-[⬆️ Back to Top](#-tutorial-31-federal-dotfaa) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-31-federal-dotfaa) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

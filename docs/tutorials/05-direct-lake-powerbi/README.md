@@ -1,4 +1,4 @@
-# 📊 Tutorial 05: Direct Lake & Power BI
+# 📊 Tutorial 05: Direct Lake & Power BI {#tutorial-05-direct-lake--power-bi}
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -1245,4 +1245,4 @@ Continue your learning journey:
 
 ---
 
-[⬆️ Back to Top](#-tutorial-05-direct-lake--power-bi) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-05-direct-lake--power-bi) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

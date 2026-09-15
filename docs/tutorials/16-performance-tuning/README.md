@@ -1,6 +1,6 @@
-[Home](../../index.md) > [Tutorials](../) > Tutorial 16: Performance Tuning & Optimization
+[Home](../../index.md) > [Tutorials](../index.md) > Tutorial 16: Performance Tuning & Optimization
 
-# ⚡ Tutorial 16: Performance Tuning & Optimization
+# ⚡ Tutorial 16: Performance Tuning & Optimization {#tutorial-16-performance-tuning--optimization}
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -1671,4 +1671,4 @@ Continue to **[Tutorial 17: Monitoring & Alerting](../17-monitoring-alerting/REA
 
 ---
 
-[⬆️ Back to Top](#-tutorial-16-performance-tuning--optimization) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-16-performance-tuning--optimization) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

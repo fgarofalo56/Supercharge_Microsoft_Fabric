@@ -1,6 +1,6 @@
-[Home](../../index.md) > [Tutorials](../) > End-to-End MLOps
+[Home](../../index.md) > [Tutorials](../index.md) > End-to-End MLOps
 
-# 🚀 Tutorial 39: End-to-End MLOps — Train → Register → Deploy → Monitor → Retrain
+# 🚀 Tutorial 39: End-to-End MLOps — Train → Register → Deploy → Monitor → Retrain {#tutorial-39-end-to-end-mlops--train--register--deploy--monitor--retrain}
 
 > **Last Updated**: 2026-04-27 | **Version**: 1.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -390,7 +390,7 @@ Expected output:
 
 ## 🛠️ Step 8: Run Validation Gates
 
-The five gates (defined in [`mlops-fabric-production.md` § Validation Gates](../../best-practices/mlops-fabric-production.md#-model-validation-gates)) must all pass before any model enters Production.
+The five gates (defined in [`mlops-fabric-production.md` § Validation Gates](../../best-practices/mlops-fabric-production.md#model-validation-gates)) must all pass before any model enters Production.
 
 ```bash
 # From repo root
@@ -802,7 +802,7 @@ Build a Power BI cost dashboard with one card per surface and a treemap by `cost
 
 ## 🛠️ Step 20: Production Readiness Checklist
 
-Walk through the canonical checklist from [`mlops-fabric-production.md` § Production Readiness Checklist](../../best-practices/mlops-fabric-production.md#-production-readiness-checklist). At minimum, certify:
+Walk through the canonical checklist from [`mlops-fabric-production.md` § Production Readiness Checklist](../../best-practices/mlops-fabric-production.md#production-readiness-checklist). At minimum, certify:
 
 - [ ] Model in `Production` stage; `Staging` and `None` versions retained for rollback
 - [ ] Source notebook + dependencies under Git, tagged with the deployed commit SHA
@@ -1030,4 +1030,4 @@ Congratulations — you have shipped a production-grade ML model on Microsoft Fa
 
 ---
 
-[⬆️ Back to Top](#-tutorial-39-end-to-end-mlops--train--register--deploy--monitor--retrain) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-39-end-to-end-mlops--train--register--deploy--monitor--retrain) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

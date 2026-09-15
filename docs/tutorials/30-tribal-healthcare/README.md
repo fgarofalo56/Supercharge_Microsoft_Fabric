@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Tutorials](../) > Tribal Healthcare
+[Home](../../index.md) > [Tutorials](../index.md) > Tribal Healthcare
 
 # 🏥 Tutorial 30: Tribal Healthcare
 
@@ -1455,4 +1455,4 @@ Continue your learning journey:
 
 ---
 
-[⬆️ Back to Top](#-tutorial-30-tribal-healthcare) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-30-tribal-healthcare) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

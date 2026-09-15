@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Tutorials](../) > Geolocation Analytics
+[Home](../../index.md) > [Tutorials](../index.md) > Geolocation Analytics
 
 # 📍 Tutorial 29: Geolocation Analytics
 
@@ -1593,4 +1593,4 @@ Continue your learning journey:
 
 ---
 
-[⬆️ Back to Top](#-tutorial-29-geolocation-analytics) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-29-geolocation-analytics) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

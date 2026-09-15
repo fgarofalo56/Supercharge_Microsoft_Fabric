@@ -1,6 +1,6 @@
-[Home](../../index.md) > [Tutorials](../) > Production RAG
+[Home](../../index.md) > [Tutorials](../index.md) > Production RAG
 
-# 🔎 Tutorial 40: Production RAG with Eventhouse Vector + Data Agents + Eval Harness
+# 🔎 Tutorial 40: Production RAG with Eventhouse Vector + Data Agents + Eval Harness {#tutorial-40-production-rag-with-eventhouse-vector--data-agents--eval-harness}
 
 > **Last Updated**: 2026-04-27 | **Version**: 1.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -806,7 +806,7 @@ def rerank(query: str, candidates: list[dict], top_k: int = 5) -> list[dict]:
     return candidates[:top_k]
 ```
 
-If `sentence-transformers` is not installed, the reference notebook falls back to an LLM-as-judge stub (slower, more expensive, but works without GPUs). See [`docs/features/rag-patterns-deep-dive.md#-reranking`](../../features/rag-patterns-deep-dive.md#-reranking) for the comparison matrix.
+If `sentence-transformers` is not installed, the reference notebook falls back to an LLM-as-judge stub (slower, more expensive, but works without GPUs). See [`docs/features/rag-patterns-deep-dive.md#-reranking`](../../features/rag-patterns-deep-dive.md#reranking) for the comparison matrix.
 
 > **💡 Tip — rerank only the top-N, not the whole corpus**
 >
@@ -1455,7 +1455,7 @@ Continue your learning journey:
 | 5 | [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py) §3 | Embedding (3 strategies) |
 | 6 | [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py) §4 | Eventhouse persistence |
 | 7-9 | [`docs/features/rag-patterns-deep-dive.md`](../../features/rag-patterns-deep-dive.md) | Hybrid retrieval patterns |
-| 10 | [`docs/features/rag-patterns-deep-dive.md`](../../features/rag-patterns-deep-dive.md#-reranking) | Reranker comparison |
+| 10 | [`docs/features/rag-patterns-deep-dive.md`](../../features/rag-patterns-deep-dive.md#reranking) | Reranker comparison |
 | 11 | [`notebooks/ml/07_rag_eventhouse_vector.py`](https://github.com/fgarofalo56/Supercharge_Microsoft_Fabric/blob/main/notebooks/ml/07_rag_eventhouse_vector.py) §9-10 | Generation + citations |
 | 12 | [`docs/features/eventhouse-vector-database.md`](../../features/eventhouse-vector-database.md) | Real-Time Dashboard |
 | 13-14 | [`docs/features/eval-harness-llm.md`](../../features/eval-harness-llm.md) | Eval harness reference |
@@ -1521,4 +1521,4 @@ Continue your learning journey:
 
 ---
 
-[⬆️ Back to Top](#-tutorial-40-production-rag-with-eventhouse-vector--data-agents--eval-harness) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-40-production-rag-with-eventhouse-vector--data-agents--eval-harness) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Tutorials](../) > Palantir Foundry to Fabric Migration
+[Home](../../index.md) > [Tutorials](../index.md) > Palantir Foundry to Fabric Migration
 
 # 🟣 Tutorial 55: Palantir Foundry → Microsoft Fabric Migration
 
@@ -30,17 +30,17 @@
 
 ## 📋 Table of Contents
 
-- [Overview](#-overview)
-- [Why migrate](#-why-migrate)
-- [Component mapping](#-component-mapping)
-- [Reference architecture](#-reference-architecture)
-- [Prerequisites](#-prerequisites)
-- [Step-by-step migration](#-step-by-step-migration)
-- [Ontology migration deep dive](#-ontology-migration-deep-dive)
-- [Egress, network, and cost considerations](#-egress-network-and-cost-considerations)
-- [Validation checklist](#-validation-checklist)
-- [Troubleshooting](#-troubleshooting)
-- [References](#-references)
+- [Overview](#overview)
+- [Why migrate](#why-migrate)
+- [Component mapping](#component-mapping)
+- [Reference architecture](#reference-architecture)
+- [Prerequisites](#prerequisites)
+- [Step-by-step migration](#step-by-step-migration)
+- [Ontology migration deep dive](#ontology-migration-deep-dive)
+- [Egress, network, and cost considerations](#egress-network-and-cost-considerations)
+- [Validation checklist](#validation-checklist)
+- [Troubleshooting](#troubleshooting)
+- [References](#references)
 
 ---
 
@@ -392,4 +392,4 @@ This becomes queryable by Data Agents, Power BI semantic models, and Fabric REST
 
 ---
 
-> **Navigation:** [⬅️ 45 — On-Prem SSAS/SSIS/SSRS](../45-onprem-ssas-ssis-ssrs/README.md) | [Tutorials Home](../) | [56 — Informatica → Fabric ➡️](../56-informatica-to-fabric/README.md)
+> **Navigation:** [⬅️ 45 — On-Prem SSAS/SSIS/SSRS](../45-onprem-ssas-ssis-ssrs/README.md) | [Tutorials Home](../index.md) | [56 — Informatica → Fabric ➡️](../56-informatica-to-fabric/README.md)

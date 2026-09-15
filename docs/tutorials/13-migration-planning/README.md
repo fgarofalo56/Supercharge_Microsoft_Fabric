@@ -1,4 +1,4 @@
-# 📋 Tutorial 13: Enterprise Migration Planning & Delivery
+# 📋 Tutorial 13: Enterprise Migration Planning & Delivery {#tutorial-13-enterprise-migration-planning--delivery}
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -1200,4 +1200,4 @@ This comprehensive migration guide provides:
 
 ---
 
-[⬆️ Back to Top](#-tutorial-13-enterprise-migration-planning--delivery) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-13-enterprise-migration-planning--delivery) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

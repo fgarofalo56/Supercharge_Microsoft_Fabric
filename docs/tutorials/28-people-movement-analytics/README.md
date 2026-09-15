@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Tutorials](../) > People Movement Analytics
+[Home](../../index.md) > [Tutorials](../index.md) > People Movement Analytics
 
 # 🚶 Tutorial 28: People Movement Analytics
 
@@ -1159,4 +1159,4 @@ The people movement analytics pipeline gives casino operations a spatial awarene
 
 ---
 
-[⬆️ Back to Top](#-tutorial-28-people-movement-analytics) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-28-people-movement-analytics) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

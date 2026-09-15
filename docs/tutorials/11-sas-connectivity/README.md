@@ -1131,4 +1131,4 @@ This tutorial includes the following supplementary files:
 
 ---
 
-[⬆️ Back to Top](#-tutorial-11-sas-connectivity-to-microsoft-fabric) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-11-sas-connectivity-to-microsoft-fabric) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Tutorials](../) > Informatica to Fabric Migration
+[Home](../../index.md) > [Tutorials](../index.md) > Informatica to Fabric Migration
 
 # 🟧 Tutorial 56: Informatica → Microsoft Fabric Migration
 
@@ -30,18 +30,18 @@
 
 ## 📋 Table of Contents
 
-- [Overview](#-overview)
-- [Why migrate](#-why-migrate)
-- [Component mapping](#-component-mapping)
-- [Reference architecture](#-reference-architecture)
-- [Prerequisites](#-prerequisites)
-- [Step-by-step migration](#-step-by-step-migration)
-- [Mapping translation patterns](#-mapping-translation-patterns)
-- [PowerExchange CDC migration](#-powerexchange-cdc-migration)
-- [License and cost analysis](#-license-and-cost-analysis)
-- [Validation checklist](#-validation-checklist)
-- [Troubleshooting](#-troubleshooting)
-- [References](#-references)
+- [Overview](#overview)
+- [Why migrate](#why-migrate)
+- [Component mapping](#component-mapping)
+- [Reference architecture](#reference-architecture)
+- [Prerequisites](#prerequisites)
+- [Step-by-step migration](#step-by-step-migration)
+- [Mapping translation patterns](#mapping-translation-patterns)
+- [PowerExchange CDC migration](#powerexchange-cdc-migration)
+- [License and cost analysis](#license-and-cost-analysis)
+- [Validation checklist](#validation-checklist)
+- [Troubleshooting](#troubleshooting)
+- [References](#references)
 
 ---
 
@@ -85,7 +85,7 @@ The translation matrix below is based on Informatica's publicly documented compo
 | **PowerCenter Workflow** | **Fabric Data Factory pipeline** | Sequencing and orchestration. |
 | **PowerCenter Session** | Pipeline activity wrapping a Dataflow Gen2 or notebook | One-to-one mental model. |
 | **PowerCenter Repository** | Fabric workspace + Git integration | Source-control native. |
-| **PowerCenter PowerExchange CDC** | **Fabric Mirroring** (preferred) or **Copy Job CDC** | See [PowerExchange CDC section](#-powerexchange-cdc-migration). |
+| **PowerCenter PowerExchange CDC** | **Fabric Mirroring** (preferred) or **Copy Job CDC** | See [PowerExchange CDC section](#powerexchange-cdc-migration). |
 | **PowerCenter Source Qualifier** | Dataflow Gen2 Source / `spark.read` | Same role. |
 | **PowerCenter Aggregator** | Dataflow Gen2 Group-By or PySpark `groupBy().agg()` | Behavior preserved. |
 | **PowerCenter Lookup (cached / un-cached)** | Dataflow Gen2 Merge step or PySpark `join` | Caching strategies map directly. |
@@ -231,7 +231,7 @@ For each Informatica source, decide:
 
 ### Step 5 — Port mappings (wave by wave)
 
-Convert each mapping to its Fabric equivalent. See [Mapping translation patterns](#-mapping-translation-patterns) below for line-by-line examples.
+Convert each mapping to its Fabric equivalent. See [Mapping translation patterns](#mapping-translation-patterns) below for line-by-line examples.
 
 ### Step 6 — Re-orchestrate workflows as Fabric pipelines
 
@@ -445,4 +445,4 @@ Migration year additional costs:
 
 ---
 
-> **Navigation:** [⬅️ 55 — Palantir → Fabric](../55-palantir-to-fabric/README.md) | [Tutorials Home](../) | [Migration Planning ➡️](../13-migration-planning/README.md)
+> **Navigation:** [⬅️ 55 — Palantir → Fabric](../55-palantir-to-fabric/README.md) | [Tutorials Home](../index.md) | [Migration Planning ➡️](../13-migration-planning/README.md)

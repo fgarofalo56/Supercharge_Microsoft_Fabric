@@ -1,6 +1,6 @@
-[Home](../../index.md) > [Tutorials](../) > Amazon Redshift to Fabric Migration
+[Home](../../index.md) > [Tutorials](../index.md) > Amazon Redshift to Fabric Migration
 
-# 🟧 Tutorial 43: Amazon Redshift → Microsoft Fabric Migration
+# 🟧 Tutorial 43: Amazon Redshift → Microsoft Fabric Migration {#tutorial-43-amazon-redshift--microsoft-fabric-migration}
 
 > **Last Updated**: 2026-04-27 | **Phase**: 14 (Wave 4) | **Multi-Cloud Migration**
 > **Status**: ✅ Final | **Maintainer**: Platform Team
@@ -379,7 +379,7 @@ PARALLEL ON;
 > # Confirm file count and total size match Redshift svv_table_info row/byte estimate
 > ```
 
-> ⚠️ **Gotcha**: `UNLOAD` to a public S3 bucket counts as **internet egress** and incurs AWS data-transfer charges. See the [AWS Network Costs](#-aws-network-costs--egress-mitigation) section below for mitigation strategies.
+> ⚠️ **Gotcha**: `UNLOAD` to a public S3 bucket counts as **internet egress** and incurs AWS data-transfer charges. See the [AWS Network Costs](#aws-network-costs--egress-mitigation) section below for mitigation strategies.
 
 ### Step 5 — Bring S3 Data into OneLake
 
@@ -679,7 +679,7 @@ aws redshift delete-cluster \
 
 ---
 
-## 💸 AWS Network Costs — Egress Mitigation
+## 💸 AWS Network Costs — Egress Mitigation {#aws-network-costs--egress-mitigation}
 
 Multi-cloud migration introduces AWS egress charges that single-cloud migrations don't have. Plan for them up front.
 
@@ -839,4 +839,4 @@ aws s3 rm s3://your-fabric-staging-bucket/redshift-export/ --recursive
 
 ---
 
-[⬆️ Back to Top](#-tutorial-43-amazon-redshift--microsoft-fabric-migration) | [📚 Tutorial Index](../index.md) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-43-amazon-redshift--microsoft-fabric-migration) | [📚 Tutorial Index](../index.md) | [🏠 Home](../../index.md)

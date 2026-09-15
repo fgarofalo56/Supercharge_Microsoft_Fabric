@@ -1342,4 +1342,4 @@ Thank you for completing this comprehensive Microsoft Fabric learning journey. W
 
 ---
 
-[⬆️ Back to Top](#-tutorial-09-advanced-aiml) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-09-advanced-aiml) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

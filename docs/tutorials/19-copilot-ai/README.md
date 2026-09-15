@@ -1,6 +1,6 @@
-[Home](../../index.md) > [Tutorials](../) > Copilot & AI-Assisted Development
+[Home](../../index.md) > [Tutorials](../index.md) > Copilot & AI-Assisted Development
 
-# 🤖 Tutorial 19: Copilot & AI-Assisted Development
+# 🤖 Tutorial 19: Copilot & AI-Assisted Development {#tutorial-19-copilot--ai-assisted-development}
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -1231,4 +1231,4 @@ You are now ready to implement Microsoft Fabric in production!
 
 ---
 
-[⬆️ Back to Top](#-tutorial-19-copilot--ai-assisted-development) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-19-copilot--ai-assisted-development) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

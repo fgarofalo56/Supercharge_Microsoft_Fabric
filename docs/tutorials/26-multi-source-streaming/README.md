@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Tutorials](../) > Multi-Source Streaming
+[Home](../../index.md) > [Tutorials](../index.md) > Multi-Source Streaming
 
 # 📡 Tutorial 26: Multi-Source Streaming
 
@@ -1233,4 +1233,4 @@ The unified view from all eight sources gives casino operations unprecedented si
 
 ---
 
-[⬆️ Back to Top](#-tutorial-26-multi-source-streaming) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-26-multi-source-streaming) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

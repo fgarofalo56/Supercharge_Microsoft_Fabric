@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Tutorials](../) > GeoAnalytics & ArcGIS
+[Home](../../index.md) > [Tutorials](../index.md) > GeoAnalytics & ArcGIS
 
 # 🌍 Tutorial 21: GeoAnalytics and ArcGIS for Microsoft Fabric
 
@@ -854,4 +854,4 @@ def generate_global_casinos(count: int = 50) -> List[dict]:
 
 ---
 
-[⬆️ Back to Top](#-tutorial-21-geoanalytics-and-arcgis-for-microsoft-fabric) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-21-geoanalytics-and-arcgis-for-microsoft-fabric) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

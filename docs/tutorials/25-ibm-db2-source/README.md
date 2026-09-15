@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Tutorials](../) > IBM DB2 Source
+[Home](../../index.md) > [Tutorials](../index.md) > IBM DB2 Source
 
 # 🏢 Tutorial 25: IBM DB2 as a Source for Microsoft Fabric
 
@@ -975,4 +975,4 @@ Continue to **[Tutorial 26: Multi-Source Real-Time Intelligence](../26-multi-sou
 
 ---
 
-[⬆️ Back to Top](#-tutorial-25-ibm-db2-as-a-source-for-microsoft-fabric) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-25-ibm-db2-as-a-source-for-microsoft-fabric) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

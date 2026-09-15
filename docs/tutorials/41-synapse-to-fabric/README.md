@@ -1,6 +1,6 @@
-[Home](../../index.md) > [Tutorials](../) > Synapse Analytics to Fabric Migration
+[Home](../../index.md) > [Tutorials](../index.md) > Synapse Analytics to Fabric Migration
 
-# 🔷 Tutorial 41: Azure Synapse Analytics → Microsoft Fabric Migration
+# 🔷 Tutorial 41: Azure Synapse Analytics → Microsoft Fabric Migration {#tutorial-41-azure-synapse-analytics--microsoft-fabric-migration}
 
 > **Last Updated**: 2026-04-27 | **Phase**: 14 (Wave 4) | **Anchor for Wave 4 Migration Tutorials**
 > **Status**: ✅ Final | **Maintainer**: Platform Team
@@ -346,35 +346,19 @@ data = mssparkutils.fs.ls("abfss://...")
 
 ### Step 6 — Migrate Synapse Pipelines → Fabric Data Pipelines
 
-Most activities have direct Fabric equivalents. The conversion script handles the JSON translation.
+Follow the [pipeline migration and cutover guide](03_pipeline_migration.md). This repository does not provide a `03_pipeline_migration.py` conversion script.
 
-```bash
-python 03_pipeline_migration.py \
-    --source-pipeline-folder ./synapse-pipelines/ \
-    --target-workspace "$FABRIC_WS_ID" \
-    --output-dir ./fabric-pipelines/
-```
+Use the [official Synapse pipeline migration experience (preview)](https://learn.microsoft.com/azure/data-factory/how-to-upgrade-your-azure-synapse-analytics-pipelines-to-fabric-data-factory) to assess compatibility before migrating a nonproduction pilot:
 
-#### Activity Compatibility
+1. Migrate dependent notebooks and Spark job definitions first.
+2. Review the assessment's activity-level compatibility findings; do not assume an equivalent activity guarantees identical behavior.
+3. Map and validate Fabric connections, credentials, parameters, expressions, and target items.
+4. Keep triggers disabled while testing outputs, retries, failure paths, and replay behavior.
+5. Enable approved triggers only after reconciliation and cutover sign-off.
 
-| Synapse Activity | Fabric Activity | Notes |
-|------------------|-----------------|-------|
-| Copy data | Copy data | Direct |
-| Notebook (Synapse) | Notebook (Fabric) | Re-point reference |
-| Stored procedure | Stored procedure | Direct (after schema migration) |
-| Lookup | Lookup | Direct |
-| ForEach / Until / If | ForEach / Until / If | Direct |
-| Web | Web | Direct |
-| Wait | Wait | Direct |
-| Execute Pipeline | Execute Pipeline | Direct |
-| Mapping Data Flow | Dataflow Gen2 | **Manual recreation** in Power Query |
-| Spark job definition | Spark job definition | Direct |
-| Set variable | Set variable | Direct |
-| Switch | Switch | Direct |
+Mapping Data Flows require separate assessment; the [mapping-data-flow upgrade documentation](https://learn.microsoft.com/fabric/data-factory/dataflow-gen2-mapping-data-flows-transforms-upgrade) describes the preview migration option and its limitations. Unsupported transformations require redesign.
 
-> ⚠️ **Gotcha**: **Mapping Data Flows** are the hardest part. Plan to recreate them as Dataflow Gen2 in Power Query. Budget 4-8 hours per non-trivial Data Flow.
-
-> 💡 **Tip**: Pipeline parameters become **Variable Library** entries in Fabric — a cleaner pattern. Cleanup opportunity during migration.
+Pipeline parameters do not automatically become variable library entries. Evaluate shared environment configuration separately, and test parameter behavior in each migrated pipeline.
 
 ### Step 7 — Size Fabric Capacity from Synapse Consumption
 
@@ -403,7 +387,7 @@ Output: F-SKU recommendation with rationale.
 
 > ⚠️ **Gotcha**: This is a starting point only. Spark pool consumption + Power BI usage + real-time workloads all draw from the same CU pool in Fabric. Always run a parallel measurement during coexistence.
 
-### Step 8 — Validate Migration
+### Step 8 — Validate Migration {#step-8--validate-migration}
 
 Validation runs three categories of checks: row counts, content hashes, and query parity.
 
@@ -554,4 +538,4 @@ If your assessment ran against a real Synapse workspace, the read-only queries l
 
 ---
 
-[⬆️ Back to Top](#-tutorial-41-azure-synapse-analytics--microsoft-fabric-migration) | [📚 Tutorial Index](../index.md) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-41-azure-synapse-analytics--microsoft-fabric-migration) | [📚 Tutorial Index](../index.md) | [🏠 Home](../../index.md)

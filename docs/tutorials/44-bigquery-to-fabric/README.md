@@ -1,6 +1,6 @@
-[Home](../../index.md) > [Tutorials](../) > Google BigQuery to Fabric Migration
+[Home](../../index.md) > [Tutorials](../index.md) > Google BigQuery to Fabric Migration
 
-# 🔵 Tutorial 44: Google BigQuery → Microsoft Fabric Migration
+# 🔵 Tutorial 44: Google BigQuery → Microsoft Fabric Migration {#tutorial-44-google-bigquery--microsoft-fabric-migration}
 
 > **Last Updated**: 2026-04-27 | **Phase**: 14 (Wave 4) | **Multi-Cloud Migration Track**
 > **Status**: ✅ Final | **Maintainer**: Platform Team
@@ -198,7 +198,7 @@ flowchart LR
 - [ ] `gcloud` CLI ≥ 470, `bq` CLI included
 - [ ] Azure CLI ≥ 2.60 with `fabric` extension
 - [ ] PowerShell 7.x with `Az.Fabric` module
-- [ ] **Egress budget** approved by FinOps — see [GCP Egress section](#-special-section-gcp-network-egress-costs) below
+- [ ] **Egress budget** approved by FinOps — see [GCP Egress section](#special-section-gcp-network-egress-costs) below
 - [ ] Estimated 3-5 hours active time + multi-day coexistence period
 
 > ⚠️ **Gotcha**: Cross-cloud egress charges from GCP to Azure can dwarf Fabric capacity costs if you do this wrong. **Read the egress section before starting any data movement.**
@@ -301,7 +301,7 @@ python 02_sql_translator.py \
     --target fabric-warehouse
 ```
 
-See the [BigQuery Standard SQL → T-SQL dialect table](#-special-section-bigquery-standard-sql--t-sql-dialect-translation) below for the full reference.
+See the [BigQuery Standard SQL → T-SQL dialect table](#special-section-bigquery-standard-sql--t-sql-dialect-translation) below for the full reference.
 
 > ✅ **Verification**:
 > ```bash
@@ -591,7 +591,7 @@ python 01_assessment.py --command capacity-recommendation \
     --target-utilization 0.65
 ```
 
-See the [Slot → CU sizing section](#-special-section-slot-consumption--cu-sizing) below for the rationale.
+See the [Slot → CU sizing section](#special-section-slot-consumption--cu-sizing) below for the rationale.
 
 ### Step 13 — Validate Migration
 
@@ -664,7 +664,7 @@ gsutil rm -r gs://my-fabric-export-bucket/
 
 ---
 
-## 🌐 Special Section: BigQuery Standard SQL → T-SQL Dialect Translation
+## 🌐 Special Section: BigQuery Standard SQL → T-SQL Dialect Translation {#special-section-bigquery-standard-sql--t-sql-dialect-translation}
 
 This is the most useful single table in the tutorial. It's the dialect cheat-sheet you'll come back to dozens of times during translation.
 
@@ -840,7 +840,7 @@ Recommended budget:            $2,500 (includes 20% buffer)
 
 ---
 
-## 📏 Special Section: Slot Consumption → CU Sizing
+## 📏 Special Section: Slot Consumption → CU Sizing {#special-section-slot-consumption--cu-sizing}
 
 BigQuery uses slots; Fabric uses Capacity Units (CUs). They're fundamentally different — but you can use historical slot consumption to make a defensible starting recommendation, then validate empirically during coexistence.
 
@@ -995,4 +995,4 @@ If `EXPORT DATA` was run and you want to abandon the migration, delete the GCS e
 
 ---
 
-[⬆️ Back to Top](#-tutorial-44-google-bigquery--microsoft-fabric-migration) | [📚 Tutorial Index](../index.md) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-44-google-bigquery--microsoft-fabric-migration) | [📚 Tutorial Index](../index.md) | [🏠 Home](../../index.md)

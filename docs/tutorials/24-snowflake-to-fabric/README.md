@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Tutorials](../) > Snowflake to Fabric Migration
+[Home](../../index.md) > [Tutorials](../index.md) > Snowflake to Fabric Migration
 
 # ❄️ Tutorial 24: Snowflake to Microsoft Fabric Migration
 
@@ -1721,4 +1721,4 @@ This tutorial includes the following supplementary files:
 
 ---
 
-[⬆️ Back to Top](#-tutorial-24-snowflake-to-microsoft-fabric-migration) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-24-snowflake-to-microsoft-fabric-migration) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

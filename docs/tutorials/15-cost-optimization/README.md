@@ -1,6 +1,6 @@
-[Home](../../index.md) > [Tutorials](../) > Tutorial 15: Cost Management & Capacity Optimization
+[Home](../../index.md) > [Tutorials](../index.md) > Tutorial 15: Cost Management & Capacity Optimization
 
-# 💰 Tutorial 15: Cost Management & Capacity Optimization
+# 💰 Tutorial 15: Cost Management & Capacity Optimization {#tutorial-15-cost-management--capacity-optimization}
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -23,23 +23,23 @@
 
 ## 📑 Table of Contents
 
-- [📋 Overview](#-overview)
-- [🎯 Learning Objectives](#-learning-objectives)
-- [🏗️ Capacity Architecture](#️-capacity-architecture)
-- [✅ Prerequisites](#-prerequisites)
-- [📊 Step 1: Understand Fabric Capacity SKUs and Pricing](#-step-1-understand-fabric-capacity-skus-and-pricing)
-- [📈 Step 2: Configure Capacity Metrics App](#-step-2-configure-capacity-metrics-app)
-- [⏸️ Step 3: Implement Capacity Pause/Resume Automation](#️-step-3-implement-capacity-pauseresume-automation)
-- [🔔 Step 4: Set Up Cost Monitoring and Budget Alerts](#-step-4-set-up-cost-monitoring-and-budget-alerts)
-- [💳 Step 5: Implement Chargeback and Cost Allocation](#-step-5-implement-chargeback-and-cost-allocation)
-- [⚡ Step 6: Optimization Strategies](#-step-6-optimization-strategies)
-- [🔄 Step 7: Burst Capacity and Smoothing](#-step-7-burst-capacity-and-smoothing)
-- [💵 Step 8: Reserved Capacity vs Pay-As-You-Go](#-step-8-reserved-capacity-vs-pay-as-you-go)
-- [🏢 Step 9: Multi-Workspace Capacity Sharing](#-step-9-multi-workspace-capacity-sharing)
-- [✅ Validation Checklist](#-validation-checklist)
-- [🔧 Troubleshooting](#-troubleshooting)
-- [📌 Best Practices](#-best-practices)
-- [📝 Summary](#-summary)
+- [📋 Overview](#overview)
+- [🎯 Learning Objectives](#learning-objectives)
+- [🏗️ Capacity Architecture](#capacity-architecture)
+- [✅ Prerequisites](#prerequisites)
+- [📊 Step 1: Understand Fabric Capacity SKUs and Pricing](#step-1-understand-fabric-capacity-skus-and-pricing)
+- [📈 Step 2: Configure Capacity Metrics App](#step-2-configure-capacity-metrics-app)
+- [⏸️ Step 3: Implement Capacity Pause/Resume Automation](#step-3-implement-capacity-pauseresume-automation)
+- [🔔 Step 4: Set Up Cost Monitoring and Budget Alerts](#step-4-set-up-cost-monitoring-and-budget-alerts)
+- [💳 Step 5: Implement Chargeback and Cost Allocation](#step-5-implement-chargeback-and-cost-allocation)
+- [⚡ Step 6: Optimization Strategies](#step-6-optimization-strategies)
+- [🔄 Step 7: Burst Capacity and Smoothing](#step-7-burst-capacity-and-smoothing)
+- [💵 Step 8: Reserved Capacity vs Pay-As-You-Go](#step-8-reserved-capacity-vs-pay-as-you-go)
+- [🏢 Step 9: Multi-Workspace Capacity Sharing](#step-9-multi-workspace-capacity-sharing)
+- [✅ Validation Checklist](#validation-checklist)
+- [🔧 Troubleshooting](#troubleshooting)
+- [📌 Best Practices](#best-practices)
+- [📝 Summary](#summary)
 
 ---
 
@@ -1596,4 +1596,4 @@ Continue to **[Tutorial 16: Performance Tuning](../16-performance-tuning/README.
 
 ---
 
-[⬆️ Back to Top](#-tutorial-15-cost-management--capacity-optimization) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-15-cost-management--capacity-optimization) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

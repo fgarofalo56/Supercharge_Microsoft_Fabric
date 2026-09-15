@@ -935,4 +935,4 @@ Continue to **[Tutorial 02: Silver Layer](../02-silver-layer/README.md)** to lea
 
 ---
 
-[⬆️ Back to Top](#-tutorial-01-bronze-layer) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-01-bronze-layer) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

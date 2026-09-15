@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Tutorials](../) > Tutorial 17: Monitoring and Observability
+[Home](../../index.md) > [Tutorials](../index.md) > Tutorial 17: Monitoring and Observability
 
 # 📡 Tutorial 17: Monitoring and Observability for Microsoft Fabric
 

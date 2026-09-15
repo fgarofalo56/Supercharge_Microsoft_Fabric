@@ -1471,4 +1471,4 @@ This tutorial includes the following deployment scripts:
 
 ---
 
-[⬆️ Back to Top](#-tutorial-12-cicd-and-devops-for-microsoft-fabric) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-12-cicd-and-devops-for-microsoft-fabric) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

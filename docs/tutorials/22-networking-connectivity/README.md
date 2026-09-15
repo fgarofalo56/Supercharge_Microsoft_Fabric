@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Tutorials](../) > Networking & Connectivity
+[Home](../../index.md) > [Tutorials](../index.md) > Networking & Connectivity
 
 # 🌐 Tutorial 22: Networking and Connectivity
 
@@ -811,4 +811,4 @@ az network express-route show \
 
 ---
 
-[⬆️ Back to Top](#-tutorial-22-networking-and-connectivity) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-22-networking-and-connectivity) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

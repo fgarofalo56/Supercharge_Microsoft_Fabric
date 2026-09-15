@@ -1313,4 +1313,4 @@ Continue to **[Tutorial 03: Gold Layer](../03-gold-layer/README.md)** to learn:
 
 ---
 
-[⬆️ Back to Top](#-tutorial-02-silver-layer) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-02-silver-layer) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

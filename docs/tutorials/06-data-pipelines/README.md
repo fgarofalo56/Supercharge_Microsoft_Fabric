@@ -941,4 +941,4 @@ Continue to **[Tutorial 07: Governance & Purview](../07-governance-purview/READM
 
 ---
 
-[⬆️ Back to Top](#-tutorial-06-data-pipelines) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-06-data-pipelines) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

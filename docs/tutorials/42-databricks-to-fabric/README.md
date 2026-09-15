@@ -1,6 +1,6 @@
-[Home](../../index.md) > [Tutorials](../) > Databricks to Fabric Migration
+[Home](../../index.md) > [Tutorials](../index.md) > Databricks to Fabric Migration
 
-# 🧱 Tutorial 42: Databricks → Microsoft Fabric Migration
+# 🧱 Tutorial 42: Databricks → Microsoft Fabric Migration {#tutorial-42-databricks--microsoft-fabric-migration}
 
 > **Last Updated**: 2026-04-27 | **Phase**: 14 (Wave 4) | **Companion to Tutorial 41 (Synapse)**
 > **Status**: ✅ Final | **Maintainer**: Platform Team
@@ -872,4 +872,4 @@ If your assessment ran against a real Databricks workspace, the read-only API ca
 
 ---
 
-[⬆️ Back to Top](#-tutorial-42-databricks--microsoft-fabric-migration) | [📚 Tutorial Index](../index.md) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-42-databricks--microsoft-fabric-migration) | [📚 Tutorial Index](../index.md) | [🏠 Home](../../index.md)

@@ -178,7 +178,7 @@ Each Lakehouse will have empty **Tables** and **Files** folders — that's expec
 > | **Cost** | ~$1-3/day (Purview + Storage + KV + LAW) | Fabric capacity only |
 > | **Best for** | Production patterns, governance, security tutorials | Learning medallion flow fast |
 >
-> **Path B users:** Skip this step entirely — proceed to [Step 5](#-step-5-configure-workspace-access). Upload your generated data directly to `lh_bronze/Files/raw/<source>/` via the Fabric UI.
+> **Path B users:** Skip this step entirely — proceed to [Step 5](#step-5-configure-workspace-access). Upload your generated data directly to `lh_bronze/Files/raw/<source>/` via the Fabric UI.
 >
 > **Path A users:** Complete this step to connect your Bicep-provisioned ADLS storage.
 
@@ -369,4 +369,4 @@ Your environment is ready for data ingestion.
 
 ---
 
-[⬆️ Back to Top](#-tutorial-00-environment-setup) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-00-environment-setup) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

@@ -1,4 +1,4 @@
-[Home](../../index.md) > [Tutorials](../) > Video Security Analytics
+[Home](../../index.md) > [Tutorials](../index.md) > Video Security Analytics
 
 # 📹 Tutorial 27: Video Security Analytics
 
@@ -1447,4 +1447,4 @@ Continue your learning journey:
 
 ---
 
-[⬆️ Back to Top](#-tutorial-27-video-security-analytics) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-27-video-security-analytics) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

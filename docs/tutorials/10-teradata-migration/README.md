@@ -2095,4 +2095,4 @@ This tutorial includes the following supplementary files:
 
 ---
 
-[⬆️ Back to Top](#-tutorial-10-teradata-to-microsoft-fabric-migration) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-10-teradata-to-microsoft-fabric-migration) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

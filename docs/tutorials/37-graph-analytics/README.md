@@ -632,6 +632,6 @@ Delete the `Fraud Network Monitor` dashboard from your workspace manually.
 
 <div align="center" markdown>
 
-**[⬅️ Tutorial 36](../36-data-mesh-domains/README.md)** · **[🏠 All Tutorials](../index.md)**
+**[⬅️ Tutorial 36](../36-doi-interior/README.md)** · **[🏠 All Tutorials](../index.md)**
 
 </div>

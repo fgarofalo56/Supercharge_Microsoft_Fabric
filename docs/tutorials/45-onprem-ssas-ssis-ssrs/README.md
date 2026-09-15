@@ -1,6 +1,6 @@
-[Home](../../index.md) > [Tutorials](../) > On-Prem SSAS / SSIS / SSRS to Fabric Migration
+[Home](../../index.md) > [Tutorials](../index.md) > On-Prem SSAS / SSIS / SSRS to Fabric Migration
 
-# 📚 Tutorial 45: On-Prem SSAS / SSIS / SSRS → Microsoft Fabric Migration
+# 📚 Tutorial 45: On-Prem SSAS / SSIS / SSRS → Microsoft Fabric Migration {#tutorial-45-on-prem-ssas--ssis--ssrs--microsoft-fabric-migration}
 
 > **Last Updated**: 2026-04-27 | **Phase**: 14 (Wave 4) | **Feature**: 4.10 — Legacy MSBI Stack Migration
 > **Status**: ✅ Final | **Maintainer**: Platform Team
@@ -989,4 +989,4 @@ If your assessment ran against a real MSBI estate, the read-only queries leave n
 
 ---
 
-[⬆️ Back to Top](#-tutorial-45-on-prem-ssas--ssis--ssrs--microsoft-fabric-migration) | [📚 Tutorial Index](../index.md) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-45-on-prem-ssas--ssis--ssrs--microsoft-fabric-migration) | [📚 Tutorial Index](../index.md) | [🏠 Home](../../index.md)

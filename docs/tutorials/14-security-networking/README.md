@@ -1,4 +1,4 @@
-# 🔐 Tutorial 14: Security & Network Configuration
+# 🔐 Tutorial 14: Security & Network Configuration {#tutorial-14-security--network-configuration}
 
 > **Last Updated**: 2026-04-15 | **Version**: 2.0
 > **Status**: ✅ Final | **Maintainer**: Documentation Team
@@ -2334,4 +2334,4 @@ Continue to **[Tutorial 15: Cost Management](../15-cost-optimization/README.md)*
 
 ---
 
-[⬆️ Back to Top](#-tutorial-14-security--network-configuration) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-14-security--network-configuration) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)

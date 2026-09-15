@@ -1,6 +1,6 @@
-[Home](../../index.md) > [Tutorials](../) > [42 — Databricks → Fabric](./README.md) > Workflow Migration Reference
+[Home](../../index.md) > [Tutorials](../index.md) > [42 — Databricks → Fabric](./README.md) > Workflow Migration Reference
 
-# 🔁 Tutorial 42 — Reference: Databricks Workflows → Fabric Pipelines + Spark Job Definitions
+# 🔁 Tutorial 42 — Reference: Databricks Workflows → Fabric Pipelines + Spark Job Definitions {#tutorial-42--reference-databricks-workflows--fabric-pipelines--spark-job-definitions}
 
 > **Last Updated**: 2026-04-27 | **Phase**: 14 (Wave 4) | **Companion to** [Tutorial 42 — Databricks → Fabric](./README.md)
 > **Status**: ✅ Final | **Maintainer**: Platform Team
@@ -44,7 +44,7 @@ The first decision is *which* Fabric construct each Databricks workflow becomes.
 | **Job cluster (ephemeral)** | **Fabric Spark capacity** (auto-allocated within F-SKU) | No 1:1 cluster object — Fabric autoscales sessions out of CU pool |
 | **All-purpose cluster (interactive)** | **Fabric Spark session** (notebook attached to Lakehouse) | For interactive dev only; not a deploy target |
 | **Job cluster pools** | No direct equivalent | F-SKU CU pool replaces the warm-pool concept |
-| **DLT Pipeline (declarative)** | **Materialized Lake View (MLV)** for SQL DLT, **OR** scheduled notebook chain for Python DLT | See [DLT-Specific Migration](#-dlt-specific-migration) below |
+| **DLT Pipeline (declarative)** | **Materialized Lake View (MLV)** for SQL DLT, **OR** scheduled notebook chain for Python DLT | See [DLT-Specific Migration](#dlt-specific-migration) below |
 | **Continuous (always-on) job** | **Fabric streaming notebook** + **Eventstream** trigger | Not a Pipeline — re-author against Eventstream/Eventhouse |
 | **Webhook-triggered job** | **Pipeline** invoked via REST API + Logic App / Power Automate | Storage event triggers also possible |
 
@@ -68,7 +68,7 @@ Every Databricks task type, with the recommended Fabric construct.
 | `sql_task` (DBSQL alert) | **Pipeline** + **Web** activity (to alerting system) **OR** **Activator** | Alert logic re-authored as expression on Lookup output |
 | `sql_task` (DBSQL dashboard refresh) | Power BI semantic model refresh activity | Dashboards re-authored as Power BI reports |
 | `dbt_task` | **Notebook** with `dbt-fabric` adapter **OR** external dbt runner via Web activity | See [dbt Fabric Integration](../../features/dbt-fabric-integration.md) |
-| `pipeline_task` (DLT) | **Materialized Lake View** (SQL DLT) **OR** scheduled Notebook chain (Python DLT) | See [DLT-Specific Migration](#-dlt-specific-migration) |
+| `pipeline_task` (DLT) | **Materialized Lake View** (SQL DLT) **OR** scheduled Notebook chain (Python DLT) | See [DLT-Specific Migration](#dlt-specific-migration) |
 | `for_each_task` | **ForEach** activity | Direct map; iteration over array parameter |
 | `condition_task` (If/Else, run-if) | **If Condition**, **Switch**, or **Until** activity | If/Else → If Condition; multi-branch → Switch; loop-with-exit → Until |
 | `run_job_task` (sub-job) | **Invoke Pipeline** activity (a.k.a. Execute Pipeline) | Direct map — child pipeline reference |
@@ -192,7 +192,7 @@ env:
 | Default values | `default_value` on parameter | Pipeline parameter `defaultValue` | Direct map |
 | Variable substitution | `{{job.parameters.xyz}}` | `@pipeline().parameters.xyz` | Different syntax — script does the rewrite |
 | Per-environment values | Per-job override or shell injection | **Variable Library** binding | Promote shared values to a Variable Library |
-| Inter-task data passing | `dbutils.jobs.taskValues.get/set(...)` | **Activity output** → expression `@activity('PrevActivity').output.xxx` | Different model — see [Cluster Reuse / Inter-Task Data](#-cluster-reuse--inter-task-data) |
+| Inter-task data passing | `dbutils.jobs.taskValues.get/set(...)` | **Activity output** → expression `@activity('PrevActivity').output.xxx` | Different model — see [Cluster Reuse / Inter-Task Data](#cluster-reuse--inter-task-data) |
 | Dynamic value (date) | `{{start_time.iso_date}}` | `@formatDateTime(utcNow(), 'yyyy-MM-dd')` | Different expression language |
 | Run ID | `{{job.run_id}}` | `@pipeline().RunId` | Direct map |
 
@@ -213,7 +213,7 @@ Promote anything used by ≥ 3 jobs to a Fabric **Variable Library**, with per-s
 
 ---
 
-## 🔄 Cluster Reuse / Inter-Task Data
+## 🔄 Cluster Reuse / Inter-Task Data {#cluster-reuse--inter-task-data}
 
 Databricks workflows reuse a **single cluster** across tasks (cheaper, faster). Fabric autoscales sessions out of a CU pool — there's no "reuse a cluster" knob — but you achieve the same throughput by chaining activities tightly.
 
@@ -313,7 +313,7 @@ A daily notebook that runs at 02:00 UTC, reads yesterday's data, writes Bronze.
 }
 ```
 
-Runtime config (autoscale, spark_version) moves from the cluster spec to the **Environment** attached to the notebook. See [cluster translation](#-cluster-configuration-translation).
+Runtime config (autoscale, spark_version) moves from the cluster spec to the **Environment** attached to the notebook. See [cluster translation](#cluster-configuration-translation).
 
 ---
 
@@ -457,7 +457,7 @@ WHERE event_time IS NOT NULL
   AND coin_in >= 0;        -- DLT EXPECT enforced as filter (drop semantics)
 ```
 
-For the **expect** rule (`ON VIOLATION DROP ROW`), the conversion above embeds the predicate directly. For richer rules use a **Great Expectations checkpoint** in the upstream notebook — see [Wave 3 Data Contract Suite](../../best-practices/testing-strategies.md#data-contract-suites).
+For the **expect** rule (`ON VIOLATION DROP ROW`), the conversion above embeds the predicate directly. For richer rules use a **Great Expectations checkpoint** in the upstream notebook — see [Great Expectations Configuration](../../best-practices/testing-strategies.md#great-expectations-configuration).
 
 > ⚠️ **Gotcha**: DLT `ON VIOLATION FAIL` (block-on-bad-data) has no MLV equivalent. Author it as a **GE checkpoint** on the Bronze table that fails the upstream pipeline run. Don't try to encode it as a `CHECK` constraint — Delta `CHECK` aborts the *write*, not the read.
 
@@ -696,4 +696,4 @@ Use this as the workflow-migration sub-checklist for Step 5 of [Tutorial 42](./R
 
 ---
 
-[⬆️ Back to Top](#-tutorial-42--reference-databricks-workflows--fabric-pipelines--spark-job-definitions) | [⬅️ Back to Tutorial 42](./README.md) | [📚 Tutorial Index](../index.md) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-42--reference-databricks-workflows--fabric-pipelines--spark-job-definitions) | [⬅️ Back to Tutorial 42](./README.md) | [📚 Tutorial Index](../index.md) | [🏠 Home](../../index.md)

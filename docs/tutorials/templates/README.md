@@ -66,5 +66,5 @@ This folder contains templates and reference materials for creating consistent t
 
 ---
 
-[⬆️ Back to Top](#-tutorial-templates) | [📚 Tutorials](../) | [🏠 Home](../../index.md)
+[⬆️ Back to Top](#tutorial-templates) | [📚 Tutorials](../index.md) | [🏠 Home](../../index.md)
 
