@@ -20,6 +20,7 @@ param enablePrivateEndpoints bool = false
 
 @description('Daily ingestion cap in GB. Set 0 for unlimited.')
 @minValue(0)
+@maxValue(1000)
 param dailyQuotaGb int = 10
 
 @description('Tags to apply to resources')
