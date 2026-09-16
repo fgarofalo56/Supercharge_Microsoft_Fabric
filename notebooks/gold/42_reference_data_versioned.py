@@ -54,6 +54,12 @@
 # MAGIC | 11 | Distribution: SQL DB mirror + OneLake shortcut placeholders | Distribution |
 # MAGIC | 12 | Invariant verification (no overlap, non-empty periods) | Verification |
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-modeling-star-schema.md`
+# MAGIC - `docs/best-practices/lakehouse-schema-versioning.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

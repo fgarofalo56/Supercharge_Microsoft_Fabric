@@ -10,6 +10,12 @@
 # MAGIC - Pending filings tracking
 # MAGIC - Structuring detection summary
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-modeling-star-schema.md`
+# MAGIC - `docs/best-practices/sql-audit-logs-compliance.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

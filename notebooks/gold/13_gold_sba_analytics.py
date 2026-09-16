@@ -17,6 +17,12 @@
 # MAGIC - Year-over-year lending growth
 # MAGIC - Lender origination and portfolio health
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-modeling-star-schema.md`
+# MAGIC - `docs/features/federated-fabric-gcc.md`
+# MAGIC
 # COMMAND ----------
 
 # ---------------------------------------------------------------------------

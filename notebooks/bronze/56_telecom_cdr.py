@@ -19,6 +19,11 @@
 # MAGIC - CPNI (47 CFR 64.2001-2009): raw subscriber data, restricted access
 # MAGIC - GDPR: EU roaming records flagged for residency controls
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/features/real-time-intelligence.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

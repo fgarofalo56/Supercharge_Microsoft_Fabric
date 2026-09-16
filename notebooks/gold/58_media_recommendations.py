@@ -11,6 +11,12 @@
 # MAGIC - COPPA: Child users excluded from behavioral segmentation; content-level only
 # MAGIC - GDPR: Pseudonymized user_id; erasure-compatible (DELETE by user_id)
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-modeling-star-schema.md`
+# MAGIC - `docs/features/real-time-intelligence.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

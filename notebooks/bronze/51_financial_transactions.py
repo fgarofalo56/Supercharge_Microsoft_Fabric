@@ -14,6 +14,11 @@
 # MAGIC - **Format:** Delta Lake
 # MAGIC - **Mode:** Append (immutable audit trail)
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/sql-audit-logs-compliance.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

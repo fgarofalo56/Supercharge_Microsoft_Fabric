@@ -15,6 +15,11 @@
 # MAGIC - Indoor/outdoor classification
 # MAGIC - Data quality scoring (0-100)
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/features/maps-in-fabric.md`
+# MAGIC
 # COMMAND ----------
 
 # ---------------------------------------------------------------------------

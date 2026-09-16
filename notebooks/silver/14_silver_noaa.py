@@ -14,6 +14,11 @@
 # MAGIC - Climate station deduplication and completeness scoring
 # MAGIC - Data quality scoring per record
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/features/federated-fabric-gcc.md`
+# MAGIC
 # COMMAND ----------
 
 # ---------------------------------------------------------------------------

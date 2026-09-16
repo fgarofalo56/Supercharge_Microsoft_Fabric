@@ -17,6 +17,12 @@
 # MAGIC - Recall severity-weighted scores, rolling 12-month trends, nationwide distribution rate
 # MAGIC - Food safety index (inverse Class I recall rate), top commodities and recall reasons
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-modeling-star-schema.md`
+# MAGIC - `docs/features/federated-fabric-gcc.md`
+# MAGIC
 # COMMAND ----------
 
 # ---------------------------------------------------------------------------

@@ -18,6 +18,12 @@
 # MAGIC | Sink | `lh_bronze.bronze_cdc_ibm_db2` |
 # MAGIC | Write Mode | Append (Bronze immutable log) |
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/features/real-time-intelligence.md`
+# MAGIC - `docs/features/copy-job-cdc.md`
+# MAGIC - `docs/best-practices/incremental-refresh-cdc.md`
+# MAGIC
 # COMMAND ----------
 # MAGIC %md
 # MAGIC ## 1. Configuration — JDBC URL & Driver

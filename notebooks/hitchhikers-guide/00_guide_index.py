@@ -42,6 +42,10 @@
 # MAGIC
 # MAGIC ## Pre-flight: who am I, where am I?
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC
 # COMMAND ----------
 
 ctx = notebookutils.runtime.context

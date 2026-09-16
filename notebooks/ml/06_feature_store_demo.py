@@ -18,6 +18,11 @@
 # MAGIC
 # MAGIC Related: [`docs/best-practices/feature-store-onelake.md`](../../docs/best-practices/feature-store-onelake.md). Phase 14 Wave 2 feature 2.11.
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/mlops-fabric-production.md`
+# MAGIC - `docs/best-practices/feature-store-onelake.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

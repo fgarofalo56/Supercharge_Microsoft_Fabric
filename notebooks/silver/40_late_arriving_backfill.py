@@ -37,6 +37,11 @@
 # MAGIC `MERGE WHEN MATCHED UPDATE` instead of INSERT, and dedup windows for retry storms (keep
 # MAGIC latest `arrival_ts`).
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/incremental-refresh-cdc.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

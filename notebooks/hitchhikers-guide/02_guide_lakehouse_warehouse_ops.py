@@ -18,6 +18,10 @@
 # MAGIC | J | Time travel & history |
 # MAGIC | K | Materialized Lake Views |
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

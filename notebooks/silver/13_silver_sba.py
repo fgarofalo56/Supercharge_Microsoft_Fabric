@@ -14,6 +14,11 @@
 # MAGIC - Derived: forgiveness_rate (forgiveness_amount / loan_amount)
 # MAGIC - Data quality scoring per record
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/features/federated-fabric-gcc.md`
+# MAGIC
 # COMMAND ----------
 
 # ---------------------------------------------------------------------------

@@ -10,6 +10,12 @@
 # MAGIC - Win Per Unit metrics
 # MAGIC - Player engagement metrics
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-modeling-star-schema.md`
+# MAGIC - `docs/features/real-time-intelligence.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

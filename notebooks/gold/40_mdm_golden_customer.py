@@ -42,6 +42,12 @@
 # MAGIC - **Late arrivals:** `docs/best-practices/data-management/late-arriving-data.md`
 # MAGIC - **Data products:** `docs/best-practices/data-management/data-product-framework.md`
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-modeling-star-schema.md`
+# MAGIC - `docs/best-practices/data-governance-deep-dive.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

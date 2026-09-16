@@ -12,6 +12,11 @@
 # MAGIC - 30-day readmission flag derivation
 # MAGIC - Data quality scoring
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-governance-deep-dive.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

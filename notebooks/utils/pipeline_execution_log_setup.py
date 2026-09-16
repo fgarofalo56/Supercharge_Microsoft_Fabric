@@ -25,6 +25,11 @@
 # MAGIC %run ../utils/pipeline_execution_log_setup
 # MAGIC ```
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/03-pipelines-data-movement.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

@@ -5,6 +5,11 @@
 # MAGIC > Symptom → likely cause → fix. Every fix points at a canonical MS Learn
 # MAGIC > doc so you can read further.
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/error-handling-monitoring.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

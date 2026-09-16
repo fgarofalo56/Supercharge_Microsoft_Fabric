@@ -17,6 +17,11 @@
 # MAGIC - COPPA: age_bucket field for downstream filtering
 # MAGIC - GDPR: pseudonymized user_id only (no PII)
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/features/real-time-intelligence.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

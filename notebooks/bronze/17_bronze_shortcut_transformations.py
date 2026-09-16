@@ -12,6 +12,11 @@
 # MAGIC without requiring pipelines or notebooks. This notebook demonstrates the pattern comparison
 # MAGIC between traditional pipeline ingestion and the new shortcut transformation approach.
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/features/onelake-shortcuts-s3-gcs-dataverse.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

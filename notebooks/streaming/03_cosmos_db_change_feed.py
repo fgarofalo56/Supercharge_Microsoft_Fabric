@@ -18,6 +18,11 @@
 # MAGIC | Sink | `lh_bronze.bronze_cdc_cosmos_db` |
 # MAGIC | Trigger | Continuous micro-batch (5s) |
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/features/real-time-intelligence.md`
+# MAGIC - `docs/features/copy-job-cdc.md`
+# MAGIC
 # COMMAND ----------
 # MAGIC %md
 # MAGIC ## 1. Configuration — Cosmos Connection & Container Setup

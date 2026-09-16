@@ -17,6 +17,11 @@
 # MAGIC | Sink | `lh_bronze.bronze_cdc_azure_sql` |
 # MAGIC | Write Mode | MERGE (upsert) |
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/features/real-time-intelligence.md`
+# MAGIC - `docs/features/copy-job-cdc.md`
+# MAGIC
 # COMMAND ----------
 # MAGIC %md
 # MAGIC ## 1. Configuration — Azure SQL Connection & Change Tracking

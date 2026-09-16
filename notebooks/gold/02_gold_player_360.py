@@ -12,6 +12,12 @@
 # MAGIC - Churn risk assessment
 # MAGIC - Engagement metrics
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-modeling-star-schema.md`
+# MAGIC - `docs/features/onelake-catalog.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

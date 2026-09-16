@@ -12,6 +12,11 @@
 # MAGIC - Heartbeat deduplication (collapse within 15s window)
 # MAGIC - COPPA: child sessions tagged for downstream filtering
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/features/real-time-intelligence.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

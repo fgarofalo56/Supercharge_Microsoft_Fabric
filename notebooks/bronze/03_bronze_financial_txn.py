@@ -21,6 +21,11 @@
 # MAGIC - Partitioned by transaction date
 # MAGIC - Append-only pattern for audit trail
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/sql-audit-logs-compliance.md`
+# MAGIC
 # COMMAND ----------
 
 # ---------------------------------------------------------------------------

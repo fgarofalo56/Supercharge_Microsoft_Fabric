@@ -10,6 +10,11 @@
 # MAGIC - Structuring pattern detection
 # MAGIC - Daily aggregation by player
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/sql-audit-logs-compliance.md`
+# MAGIC
 # COMMAND ----------
 
 # ---------------------------------------------------------------------------

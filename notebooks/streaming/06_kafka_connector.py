@@ -17,6 +17,11 @@
 # MAGIC - **Table:** `bronze_kafka_events` (Delta Lake, append)
 # MAGIC - **Checkpoint:** `Files/checkpoints/kafka_events`
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/features/real-time-intelligence.md`
+# MAGIC - `docs/features/deltaflow-eventstreams.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

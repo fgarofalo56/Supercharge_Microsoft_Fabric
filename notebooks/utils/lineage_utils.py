@@ -43,6 +43,11 @@
 # MAGIC               dq_metrics=metrics, duration_seconds=result["duration_seconds"])
 # MAGIC ```
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/features/onelake-catalog.md`
+# MAGIC
 # COMMAND ----------
 
 # ---------------------------------------------------------------------------

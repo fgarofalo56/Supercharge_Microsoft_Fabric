@@ -16,6 +16,12 @@
 # MAGIC
 # MAGIC ## Compliance: 21 CFR Part 11, GxP, ICH E2B
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-modeling-star-schema.md`
+# MAGIC - `docs/best-practices/data-governance-deep-dive.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

@@ -16,6 +16,11 @@
 # MAGIC - **Mode:** Append
 # MAGIC - **Compliance:** NERC CIP audit trail
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/features/real-time-intelligence.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

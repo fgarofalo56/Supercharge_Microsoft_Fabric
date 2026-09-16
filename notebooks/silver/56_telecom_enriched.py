@@ -20,6 +20,11 @@
 # MAGIC - Calculate session quality metrics
 # MAGIC - Aggregate daily usage per subscriber
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/features/real-time-intelligence.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

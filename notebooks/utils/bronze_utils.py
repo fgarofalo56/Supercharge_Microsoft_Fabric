@@ -14,6 +14,10 @@
 # MAGIC null_counts = basic_null_check(df, ["machine_id", "event_type"])
 # MAGIC ```
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC
 # COMMAND ----------
 
 from __future__ import annotations

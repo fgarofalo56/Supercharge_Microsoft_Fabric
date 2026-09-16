@@ -27,6 +27,13 @@
 # MAGIC | `ai.detect_language()` | Identify language of multilingual correspondence |
 # MAGIC | `ai.translate()` | Translate non-English text to English |
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-modeling-star-schema.md`
+# MAGIC - `docs/best-practices/sql-audit-logs-compliance.md`
+# MAGIC - `docs/features/ai-copilot-configuration.md`
+# MAGIC
 # COMMAND ----------
 
 # ---------------------------------------------------------------------------
