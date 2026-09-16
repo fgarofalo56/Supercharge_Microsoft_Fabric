@@ -130,6 +130,24 @@ jobs:
             echo "✅ No obvious broken internal links found"
           fi
 
+      - name: Check external links (lychee)
+        # Reports broken external links across docs/. Non-blocking while the
+        # backlog of legacy links is triaged; flip to fail once clean.
+        continue-on-error: true
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --verbose
+            --no-progress
+            --timeout 20
+            --retry 2
+            --accept 200,204,301,302,307,308,429
+            --exclude-loopback
+            --exclude 'https?://(www\.)?linkedin\.com/.*'
+            --exclude 'https?://(www\.)?twitter\.com/.*'
+            './docs/**/*.md'
+          fail: false
+
       - name: Build documentation
         run: |
           echo "🏗️ Building documentation with MkDocs..."
