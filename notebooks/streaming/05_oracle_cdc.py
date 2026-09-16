@@ -15,6 +15,13 @@
 # MAGIC - DBA privileges for LogMiner session setup
 # MAGIC - Key Vault secret: `oracle-jdbc-password`
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/features/real-time-intelligence.md`
+# MAGIC - `docs/features/copy-job-cdc.md`
+# MAGIC - `docs/best-practices/incremental-refresh-cdc.md`
+# MAGIC - `docs/best-practices/11-oracle-gateway-troubleshooting.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

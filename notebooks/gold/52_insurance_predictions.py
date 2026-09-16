@@ -17,6 +17,12 @@
 # MAGIC - `gold_insurance_loss_ratios`
 # MAGIC - `gold_insurance_kpis`
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-modeling-star-schema.md`
+# MAGIC - `docs/features/data-mesh-enterprise-patterns.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

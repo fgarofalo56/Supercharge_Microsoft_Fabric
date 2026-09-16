@@ -16,6 +16,11 @@
 # MAGIC | H | Key Vault: get / put secret |
 # MAGIC | I | "Who am I?" — current user + workspace identity |
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/network-security.md`
+# MAGIC - `docs/features/onelake-security.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

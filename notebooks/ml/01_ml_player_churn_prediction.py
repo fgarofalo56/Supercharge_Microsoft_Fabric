@@ -11,6 +11,12 @@
 # MAGIC - MLflow experiment tracking
 # MAGIC - Feature importance analysis
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/mlops-fabric-production.md`
+# MAGIC - `docs/features/onelake-catalog.md`
+# MAGIC - `docs/features/automl-model-endpoints.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

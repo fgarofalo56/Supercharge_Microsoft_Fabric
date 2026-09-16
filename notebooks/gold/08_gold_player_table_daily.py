@@ -10,6 +10,12 @@
 # MAGIC - `gold_player_360[player_id]` 1 -> * `gold_player_table_daily[player_id]`
 # MAGIC - `dim_date[date_key]` 1 -> * `gold_player_table_daily[event_date]`
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-modeling-star-schema.md`
+# MAGIC - `docs/features/onelake-catalog.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

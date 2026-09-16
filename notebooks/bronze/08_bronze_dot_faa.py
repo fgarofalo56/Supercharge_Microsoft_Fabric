@@ -17,6 +17,11 @@
 # MAGIC - **bronze_dot_traffic_stats** - Airport traffic statistics
 # MAGIC - **Format:** Delta Lake (Append)
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/features/federated-fabric-gcc.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

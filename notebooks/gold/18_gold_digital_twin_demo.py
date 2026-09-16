@@ -12,6 +12,12 @@
 # MAGIC creating entity models for a casino floor with zones, slot machines, gaming tables,
 # MAGIC and real-time operational metrics.
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-modeling-star-schema.md`
+# MAGIC - `docs/features/digital-twin-builder.md`
+# MAGIC
 # COMMAND ----------
 
 # ---------------------------------------------------------------------------

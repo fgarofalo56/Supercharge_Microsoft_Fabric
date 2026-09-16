@@ -20,6 +20,11 @@
 # MAGIC - Consent flag validation (hipaa_consent=True required)
 # MAGIC - Full audit trail for all data access
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-governance-deep-dive.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

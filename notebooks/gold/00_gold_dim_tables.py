@@ -17,6 +17,11 @@
 # MAGIC The semantic model's star schema requires these dims. Tutorial 05 cannot
 # MAGIC complete without them.
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-modeling-star-schema.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

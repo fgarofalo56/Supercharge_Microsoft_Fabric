@@ -13,6 +13,11 @@
 # MAGIC - **Grain:** 1 machine x 1 minute
 # MAGIC - **Format:** Delta Lake (merge/upsert)
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/features/digital-twin-builder.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

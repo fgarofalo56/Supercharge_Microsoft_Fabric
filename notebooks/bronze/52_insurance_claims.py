@@ -18,6 +18,11 @@
 # MAGIC - NAIC Model Audit Rule: data lineage and ingestion audit trail
 # MAGIC - PII fields (claimant_name) retained in bronze; masked in silver
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/features/data-mesh-enterprise-patterns.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

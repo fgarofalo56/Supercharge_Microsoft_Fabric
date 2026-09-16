@@ -17,6 +17,11 @@
 # MAGIC - **Format:** Delta Lake
 # MAGIC - **Mode:** Append
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/features/real-time-intelligence.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

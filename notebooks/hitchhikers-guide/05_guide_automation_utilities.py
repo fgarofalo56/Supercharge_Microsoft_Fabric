@@ -19,6 +19,11 @@
 # MAGIC | I | Runtime context inspection |
 # MAGIC | J | Logging from notebooks |
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/fabric-cicd-deployment.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

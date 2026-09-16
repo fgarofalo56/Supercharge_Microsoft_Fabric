@@ -10,6 +10,13 @@
 # MAGIC - Location hotspots
 # MAGIC - Threat trend analysis
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-modeling-star-schema.md`
+# MAGIC - `docs/best-practices/network-security.md`
+# MAGIC - `docs/features/onelake-security.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

@@ -15,6 +15,13 @@
 # MAGIC - CPNI: churn scores reference only subscriber_id (no PII in Gold)
 # MAGIC - Outputs are aggregated / scored -- safe for broader analytics access
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-modeling-star-schema.md`
+# MAGIC - `docs/features/automl-model-endpoints.md`
+# MAGIC - `docs/features/real-time-intelligence.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

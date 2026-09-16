@@ -22,6 +22,11 @@
 # MAGIC - Alert wiring: `docs/best-practices/operations/slo-sli-fabric.md`,
 # MAGIC   `docs/best-practices/operations/observability-stack.md`
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/mlops-fabric-production.md`
+# MAGIC - `docs/best-practices/model-monitoring-drift-detection.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

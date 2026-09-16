@@ -18,6 +18,11 @@
 # MAGIC - **Table:** `bronze_iot_telemetry` partitioned by `device_type`
 # MAGIC - **Checkpoint:** `Files/checkpoints/iot_hub`
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/features/real-time-intelligence.md`
+# MAGIC - `docs/features/deltaflow-eventstreams.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

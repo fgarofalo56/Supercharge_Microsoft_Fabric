@@ -18,6 +18,13 @@
 # MAGIC - BSA/AML: 31 CFR 1010.314 (structuring detection)
 # MAGIC - SOX: Immutable audit trail in all Gold tables
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-modeling-star-schema.md`
+# MAGIC - `docs/best-practices/sql-audit-logs-compliance.md`
+# MAGIC - `docs/features/anomaly-detection-rti.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

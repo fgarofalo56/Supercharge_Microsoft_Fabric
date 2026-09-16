@@ -28,6 +28,10 @@
 # MAGIC - **Destination:** Azure Event Hub (or IoT Hub device endpoint)
 # MAGIC - **Rate:** 50–500 events/second (configurable)
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/features/real-time-intelligence.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

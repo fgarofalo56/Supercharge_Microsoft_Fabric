@@ -13,6 +13,11 @@
 # MAGIC - Park visitation: visitor count >= 0, month 1-12, avg_daily_visitors
 # MAGIC - Data quality scoring per record
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/features/federated-fabric-gcc.md`
+# MAGIC
 # COMMAND ----------
 
 # ---------------------------------------------------------------------------

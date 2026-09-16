@@ -15,6 +15,11 @@
 # MAGIC - **Mode:** Append
 # MAGIC - **Compliance:** IEC 62443 (no PII -- OT telemetry only)
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/features/digital-twin-builder.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

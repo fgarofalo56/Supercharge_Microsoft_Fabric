@@ -20,6 +20,10 @@
 # MAGIC See `docs/best-practices/mlops-fabric-production.md` — sections "Model Registry",
 # MAGIC "Validation Gates", and "Champion-Challenger".
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/mlops-fabric-production.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

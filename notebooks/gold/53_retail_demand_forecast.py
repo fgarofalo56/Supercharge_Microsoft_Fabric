@@ -12,6 +12,12 @@
 # MAGIC ## Source
 # MAGIC - **silver_retail_sales**
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-modeling-star-schema.md`
+# MAGIC - `docs/features/data-mesh-enterprise-patterns.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

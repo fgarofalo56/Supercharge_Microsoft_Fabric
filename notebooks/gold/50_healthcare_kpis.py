@@ -16,6 +16,12 @@
 # MAGIC - `gold_healthcare_kpis` - Aggregated operational metrics
 # MAGIC - `gold_healthcare_readmission_risk` - Patient-level readmission risk
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-modeling-star-schema.md`
+# MAGIC - `docs/best-practices/data-governance-deep-dive.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

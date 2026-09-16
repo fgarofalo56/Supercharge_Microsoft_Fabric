@@ -17,6 +17,12 @@
 # MAGIC - Queue length, wait time, and detection frequency
 # MAGIC - Foot traffic flow direction analysis
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-modeling-star-schema.md`
+# MAGIC - `docs/features/real-time-intelligence.md`
+# MAGIC
 # COMMAND ----------
 
 # ---------------------------------------------------------------------------

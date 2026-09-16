@@ -22,6 +22,10 @@
 # MAGIC - Append-only pattern with date + game_type partitioning
 # MAGIC - Game category classification (CARDS / DICE / WHEEL)
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC
 # COMMAND ----------
 
 # ---------------------------------------------------------------------------

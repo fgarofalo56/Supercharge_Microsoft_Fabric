@@ -14,6 +14,11 @@
 # MAGIC - Future-dated event rejection
 # MAGIC - Invalid denomination default-replace (0.01)
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/features/real-time-intelligence.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

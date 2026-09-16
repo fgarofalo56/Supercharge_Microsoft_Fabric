@@ -20,6 +20,11 @@
 # MAGIC - **SAR**: Suspicious Activity Report (FinCEN) - Structuring, unusual patterns
 # MAGIC - **W-2G**: IRS Form for gambling winnings >= $1,200 (slots), $600 (keno), $5,000 (poker)
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/sql-audit-logs-compliance.md`
+# MAGIC
 # COMMAND ----------
 
 # ---------------------------------------------------------------------------

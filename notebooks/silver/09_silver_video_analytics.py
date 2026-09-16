@@ -14,6 +14,11 @@
 # MAGIC - Bounding box parsing and area calculation
 # MAGIC - Data quality scoring (0-100)
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/features/real-time-intelligence.md`
+# MAGIC
 # COMMAND ----------
 
 # ---------------------------------------------------------------------------

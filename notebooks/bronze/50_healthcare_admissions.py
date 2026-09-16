@@ -19,6 +19,11 @@
 # MAGIC - SSN uses 900-series synthetic values, masked to last 4
 # MAGIC - No real PHI enters the lakehouse
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-governance-deep-dive.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

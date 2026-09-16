@@ -24,6 +24,11 @@
 # MAGIC | O | Cosmos DB mirror |
 # MAGIC | P | PostgreSQL / MySQL mirror |
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/02-data-gateway.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

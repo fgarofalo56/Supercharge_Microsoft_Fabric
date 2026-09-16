@@ -21,6 +21,11 @@
 # MAGIC - Full load pattern for dimension data
 # MAGIC - Loyalty tier validation
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/features/onelake-catalog.md`
+# MAGIC
 # COMMAND ----------
 
 # ---------------------------------------------------------------------------

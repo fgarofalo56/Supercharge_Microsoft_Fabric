@@ -17,6 +17,12 @@
 # MAGIC - Antitrust: merger reviews, market concentration (HHI), penalty amounts
 # MAGIC - Drug enforcement: seizure volumes, street values, arrest counts
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-modeling-star-schema.md`
+# MAGIC - `docs/features/federated-fabric-gcc.md`
+# MAGIC
 # COMMAND ----------
 
 # ---------------------------------------------------------------------------

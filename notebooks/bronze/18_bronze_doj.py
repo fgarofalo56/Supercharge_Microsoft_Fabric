@@ -20,6 +20,11 @@
 # MAGIC - **Format:** Delta Lake (Append)
 # MAGIC - **Partitioned By:** _bronze_load_date
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/features/federated-fabric-gcc.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

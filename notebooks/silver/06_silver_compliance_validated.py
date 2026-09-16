@@ -10,6 +10,11 @@
 # MAGIC - W-2G jackpot threshold validation
 # MAGIC - Filing deadline compliance
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/sql-audit-logs-compliance.md`
+# MAGIC
 # COMMAND ----------
 
 # ---------------------------------------------------------------------------

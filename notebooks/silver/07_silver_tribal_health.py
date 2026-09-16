@@ -13,6 +13,11 @@
 # MAGIC - Data quality checks: null rates, valid enums, date ranges
 # MAGIC - Facility name and area office standardization
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-governance-deep-dive.md`
+# MAGIC
 # COMMAND ----------
 
 # ---------------------------------------------------------------------------

@@ -18,6 +18,11 @@
 # MAGIC - Calculate line_total, apply returns logic
 # MAGIC - PCI-DSS: drop card_token in silver (not needed for analytics)
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/features/data-mesh-enterprise-patterns.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

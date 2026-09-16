@@ -11,6 +11,11 @@
 # MAGIC - Suspicious timing patterns
 # MAGIC - Outlier financial behavior
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/mlops-fabric-production.md`
+# MAGIC - `docs/features/anomaly-detection-rti.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

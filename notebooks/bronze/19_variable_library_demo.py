@@ -19,6 +19,11 @@
 # MAGIC | `lakehouse_name` | `lh_bronze` | Variable Library |
 # MAGIC | `batch_id` | `run-2026-04-27-001` | Pipeline system variable |
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/features/variable-libraries.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

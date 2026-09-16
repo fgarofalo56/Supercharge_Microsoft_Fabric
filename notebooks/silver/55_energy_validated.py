@@ -16,6 +16,11 @@
 # MAGIC - **Target:** lh_silver.silver_energy_consumption
 # MAGIC - **Compliance:** NERC CIP data quality controls
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/features/real-time-intelligence.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

@@ -13,6 +13,10 @@ from datetime import datetime
 # MAGIC - Jackpot alerts
 # MAGIC - Machine health monitoring
 # MAGIC - Live player engagement tracking
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/features/real-time-intelligence.md`
+# MAGIC
 # COMMAND ----------
 # MAGIC %md
 # MAGIC ## Configuration

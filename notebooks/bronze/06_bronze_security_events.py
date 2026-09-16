@@ -22,6 +22,12 @@
 # MAGIC - Player exclusion events (self-exclusion, state-mandated)
 # MAGIC - Threat detection (trespass, weapon detection)
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/network-security.md`
+# MAGIC - `docs/features/onelake-security.md`
+# MAGIC
 # COMMAND ----------
 
 # ---------------------------------------------------------------------------

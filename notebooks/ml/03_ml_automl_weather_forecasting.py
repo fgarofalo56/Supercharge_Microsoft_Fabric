@@ -16,6 +16,11 @@
 # MAGIC 2. **Casino Slot Demand Prediction** — predict daily games played by joining
 # MAGIC    weather data with slot performance, capturing weather-driven demand shifts.
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/mlops-fabric-production.md`
+# MAGIC - `docs/features/automl-model-endpoints.md`
+# MAGIC
 # COMMAND ----------
 
 # ---------------------------------------------------------------------------

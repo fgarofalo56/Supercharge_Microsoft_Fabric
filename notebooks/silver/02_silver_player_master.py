@@ -15,6 +15,11 @@
 # MAGIC - Two-step merge: expire old rows, then insert new versions
 # MAGIC - Row-hash comparison for efficient change detection
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/features/onelake-catalog.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

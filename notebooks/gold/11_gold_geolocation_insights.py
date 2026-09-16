@@ -17,6 +17,12 @@
 # MAGIC - Proximity trigger effectiveness
 # MAGIC - Indoor vs outdoor activity distribution
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-modeling-star-schema.md`
+# MAGIC - `docs/features/maps-in-fabric.md`
+# MAGIC
 # COMMAND ----------
 
 # ---------------------------------------------------------------------------

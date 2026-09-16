@@ -19,6 +19,11 @@
 # MAGIC - **Format:** Delta Lake
 # MAGIC - **Mode:** Overwrite (full refresh per run)
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/sql-audit-logs-compliance.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

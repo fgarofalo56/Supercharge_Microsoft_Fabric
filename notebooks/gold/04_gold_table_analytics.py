@@ -11,6 +11,11 @@
 # MAGIC - Hands per hour
 # MAGIC - Average bet size
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-modeling-star-schema.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

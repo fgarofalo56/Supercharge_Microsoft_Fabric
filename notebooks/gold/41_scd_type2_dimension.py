@@ -29,6 +29,12 @@
 # MAGIC against a real synthetic workload — the "WRONG vs RIGHT" cell at the bottom prints the actual
 # MAGIC dollar discrepancy in tier-attributed revenue.
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-modeling-star-schema.md`
+# MAGIC - `docs/best-practices/incremental-refresh-cdc.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

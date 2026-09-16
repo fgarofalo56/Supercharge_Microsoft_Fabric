@@ -14,6 +14,12 @@
 # MAGIC - **gold_manufacturing_oee** -- OEE metrics per machine per shift
 # MAGIC - **gold_maintenance_predictions** -- Predictive maintenance scores per machine
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC - `docs/best-practices/data-modeling-star-schema.md`
+# MAGIC - `docs/features/digital-twin-builder.md`
+# MAGIC
 # COMMAND ----------
 
 # MAGIC %md

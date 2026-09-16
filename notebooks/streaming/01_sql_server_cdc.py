@@ -15,6 +15,12 @@
 # MAGIC | Sink | `lh_bronze.bronze_cdc_sql_server` |
 # MAGIC | Trigger | Continuous micro-batch (2s) |
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/features/real-time-intelligence.md`
+# MAGIC - `docs/features/copy-job-cdc.md`
+# MAGIC - `docs/best-practices/incremental-refresh-cdc.md`
+# MAGIC
 # COMMAND ----------
 # MAGIC %md
 # MAGIC ## 1. Configuration — SHIR Connection & CDC Tables

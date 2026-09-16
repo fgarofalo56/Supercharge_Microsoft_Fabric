@@ -10,6 +10,10 @@
 # MAGIC - Apply data quality scoring
 # MAGIC - Detect unusual betting patterns
 
+# MAGIC ## Related Docs
+# MAGIC
+# MAGIC - `docs/best-practices/medallion-architecture-deep-dive.md`
+# MAGIC
 # COMMAND ----------
 
 # ---------------------------------------------------------------------------
