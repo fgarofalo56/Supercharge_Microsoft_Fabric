@@ -554,14 +554,23 @@
     }
     searchIndexLoading = true;
     var base = getBaseUrl();
-    fetch(base + "search/search_index.json")
-      .then(function (r) { return r.json(); })
+    // The index is ~10MB; allow a generous window and fail only on a real
+    // error, not on a slow (but successful) download/parse.
+    var idxController = new AbortController();
+    var idxTimeout = setTimeout(function () { idxController.abort(); }, 30000);
+    fetch(base + "search/search_index.json", { signal: idxController.signal })
+      .then(function (r) {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      })
       .then(function (data) {
+        clearTimeout(idxTimeout);
         searchIndex = data;
         searchIndexLoading = false;
         callback(data);
       })
       .catch(function () {
+        clearTimeout(idxTimeout);
         searchIndexLoading = false;
         callback(null);
       });
@@ -714,6 +723,16 @@
     document.getElementById("copilot-btn").addEventListener("click", function () { togglePanel(); });
     document.getElementById("copilot-form").addEventListener("submit", onSubmit);
     document.getElementById("copilot-clear").addEventListener("click", clearChat);
+
+    // Warm the search index in the background so the offline fallback is
+    // instant (and accurate) if the AI backend is ever unreachable. Deferred
+    // to idle time so it never competes with initial page render.
+    var warm = function () { loadSearchIndex(function () {}); };
+    if (window.requestIdleCallback) {
+      window.requestIdleCallback(warm, { timeout: 4000 });
+    } else {
+      setTimeout(warm, 2000);
+    }
 
     // Header menu: request docs topic / report a problem
     document.getElementById("copilot-menu").addEventListener("click", function (e) {
@@ -984,7 +1003,11 @@
       }
 
       var controller = new AbortController();
-      var timeoutId = setTimeout(function () { controller.abort(); }, 5000);
+      // The backend returns a single buffered application/json response (not
+      // ndjson streaming), so the browser must wait for the full LLM round-trip.
+      // Measured cold-start + generation is ~8s; 5s was aborting every real
+      // query and forcing the offline fallback. Allow a realistic LLM window.
+      var timeoutId = setTimeout(function () { controller.abort(); }, 60000);
 
       fetch(CONFIG.apiEndpoint, {
         method: "POST",
