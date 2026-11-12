@@ -10,7 +10,7 @@
 # -----------------------------------------------------------------------------
 # Stage 1: Builder - Install dependencies with build tools
 # -----------------------------------------------------------------------------
-FROM python:3.11-slim AS builder
+FROM python:3.15-slim AS builder
 
 # Set build-time environment variables
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -35,7 +35,7 @@ RUN pip install --upgrade pip && \
 # -----------------------------------------------------------------------------
 # Stage 2: Runtime - Minimal image for execution
 # -----------------------------------------------------------------------------
-FROM python:3.11-slim AS runtime
+FROM python:3.15-slim AS runtime
 
 # Image metadata
 LABEL maintainer="Microsoft Fabric POC Team" \
